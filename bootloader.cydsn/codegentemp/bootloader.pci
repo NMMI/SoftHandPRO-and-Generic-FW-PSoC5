@@ -1,0 +1,9 @@
+# bootloader
+# 2018-04-23 08:36:01Z
+
+set_io "RS485_RX(0)" iocell 12 6
+set_io "RS485_TX(0)" iocell 12 7
+set_io "RS_485_EN(0)" iocell 12 4
+set_io "FTDI_ENABLE(0)" iocell 1 2
+set_io "USB_VDD(0)" iocell 1 4
+set_io "MOTOR_PORT(0)" iocell 3 0

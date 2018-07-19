@@ -1,0 +1,83 @@
+--------------- Rebuild Started: 04/12/2018 13:04:53 Project: bootloader, Configuration: ARM GCC 5.4-2016-q2-update Release ---------------
+Deleting file ".\CortexM3\ARM_GCC_541\Release\main.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\cyfitter_cfg.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\cymetadata.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\UART_RS485.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\UART_RS485_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\UART_RS485_INT.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\UART_RS485_BOOT.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\RS_485_EN.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\Bootloader.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\FTDI_ENABLE.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\RS485_CTS.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\RS485_CTS_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\USB_VDD.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\UART_RS485_IntClock.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\Cm3Start.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\CyBootAsmGnu.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\CyDmac.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\CyFlash.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\CyLib.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\cyPm.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\CySpc.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\cyutils.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\cy_em_eeprom.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\bootloader.hex"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\bootloader.elf"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\bootloader.map"
+Deleting file ".\bootloader.cycdx"
+Deleting file ".\bootloader.svd"
+Deleting file ".\bootloader.rpt"
+Deleting file ".\bootloader_timing.html"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\.deps\SOURCE_C__ARM_GCC_GENERIC.P"
+Deleting file ".\CortexM3\ARM_GCC_541\Release\.deps\SOURCE_ASM__ARM_GCC_GENERIC.P"
+cydsfit.exe -.appdatapath "C:\Users\MattiaCP\AppData\Local\Cypress Semiconductor\PSoC Creator\4.2" -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p C:\Users\MattiaCP\Desktop\PSoC5\bootloader\bootloader.cydsn\bootloader.cyprj -d CY8C5888LTI-LP097 -s C:\Users\MattiaCP\Desktop\PSoC5\bootloader\bootloader.cydsn\Generated_Source\PSoC5 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
+Elaborating Design...
+HDL Generation...
+Synthesis...
+Tech Mapping...
+Analog Placement...
+Analog Routing...
+Analog Code Generation...
+Digital Placement...
+Digital Routing...
+Bitstream Generation...
+Bitstream Verification...
+Static timing analysis...
+API Generation...
+Dependency Generation...
+Cleanup...
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/main.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c main.c -o .\CortexM3\ARM_GCC_541\Release\main.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/cyfitter_cfg.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c Generated_Source\PSoC5\cyfitter_cfg.c -o .\CortexM3\ARM_GCC_541\Release\cyfitter_cfg.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/cymetadata.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c Generated_Source\PSoC5\cymetadata.c -o .\CortexM3\ARM_GCC_541\Release\cymetadata.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/UART_RS485.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c Generated_Source\PSoC5\UART_RS485.c -o .\CortexM3\ARM_GCC_541\Release\UART_RS485.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/UART_RS485_PM.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c Generated_Source\PSoC5\UART_RS485_PM.c -o .\CortexM3\ARM_GCC_541\Release\UART_RS485_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/UART_RS485_INT.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c Generated_Source\PSoC5\UART_RS485_INT.c -o .\CortexM3\ARM_GCC_541\Release\UART_RS485_INT.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/UART_RS485_BOOT.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c Generated_Source\PSoC5\UART_RS485_BOOT.c -o .\CortexM3\ARM_GCC_541\Release\UART_RS485_BOOT.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/RS_485_EN.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c Generated_Source\PSoC5\RS_485_EN.c -o .\CortexM3\ARM_GCC_541\Release\RS_485_EN.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/Bootloader.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c Generated_Source\PSoC5\Bootloader.c -o .\CortexM3\ARM_GCC_541\Release\Bootloader.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/FTDI_ENABLE.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c Generated_Source\PSoC5\FTDI_ENABLE.c -o .\CortexM3\ARM_GCC_541\Release\FTDI_ENABLE.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/RS485_CTS.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c Generated_Source\PSoC5\RS485_CTS.c -o .\CortexM3\ARM_GCC_541\Release\RS485_CTS.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/RS485_CTS_PM.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c Generated_Source\PSoC5\RS485_CTS_PM.c -o .\CortexM3\ARM_GCC_541\Release\RS485_CTS_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/USB_VDD.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c Generated_Source\PSoC5\USB_VDD.c -o .\CortexM3\ARM_GCC_541\Release\USB_VDD.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/UART_RS485_IntClock.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c Generated_Source\PSoC5\UART_RS485_IntClock.c -o .\CortexM3\ARM_GCC_541\Release\UART_RS485_IntClock.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/Cm3Start.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c Generated_Source\PSoC5\Cm3Start.c -o .\CortexM3\ARM_GCC_541\Release\Cm3Start.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/CyDmac.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c Generated_Source\PSoC5\CyDmac.c -o .\CortexM3\ARM_GCC_541\Release\CyDmac.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/CyFlash.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c Generated_Source\PSoC5\CyFlash.c -o .\CortexM3\ARM_GCC_541\Release\CyFlash.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/CyLib.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c Generated_Source\PSoC5\CyLib.c -o .\CortexM3\ARM_GCC_541\Release\CyLib.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/cyPm.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c Generated_Source\PSoC5\cyPm.c -o .\CortexM3\ARM_GCC_541\Release\cyPm.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/CySpc.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c Generated_Source\PSoC5\CySpc.c -o .\CortexM3\ARM_GCC_541\Release\CySpc.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/cyutils.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c Generated_Source\PSoC5\cyutils.c -o .\CortexM3\ARM_GCC_541\Release\cyutils.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Release/cy_em_eeprom.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -c Generated_Source\PSoC5\cy_em_eeprom.c -o .\CortexM3\ARM_GCC_541\Release\cy_em_eeprom.o
+arm-none-eabi-as.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -alh=.\CortexM3\ARM_GCC_541\Release/CyBootAsmGnu.lst -g -W -o .\CortexM3\ARM_GCC_541\Release\CyBootAsmGnu.o Generated_Source\PSoC5\CyBootAsmGnu.s
+arm-none-eabi-ar.exe -rs .\CortexM3\ARM_GCC_541\Release\bootloader.a .\CortexM3\ARM_GCC_541\Release\UART_RS485.o .\CortexM3\ARM_GCC_541\Release\UART_RS485_PM.o .\CortexM3\ARM_GCC_541\Release\UART_RS485_INT.o .\CortexM3\ARM_GCC_541\Release\UART_RS485_BOOT.o .\CortexM3\ARM_GCC_541\Release\RS_485_EN.o .\CortexM3\ARM_GCC_541\Release\Bootloader.o .\CortexM3\ARM_GCC_541\Release\FTDI_ENABLE.o .\CortexM3\ARM_GCC_541\Release\RS485_CTS.o .\CortexM3\ARM_GCC_541\Release\RS485_CTS_PM.o .\CortexM3\ARM_GCC_541\Release\USB_VDD.o .\CortexM3\ARM_GCC_541\Release\UART_RS485_IntClock.o .\CortexM3\ARM_GCC_541\Release\CyDmac.o .\CortexM3\ARM_GCC_541\Release\CyFlash.o .\CortexM3\ARM_GCC_541\Release\CyLib.o .\CortexM3\ARM_GCC_541\Release\cyPm.o .\CortexM3\ARM_GCC_541\Release\CySpc.o .\CortexM3\ARM_GCC_541\Release\cyutils.o .\CortexM3\ARM_GCC_541\Release\cy_em_eeprom.o .\CortexM3\ARM_GCC_541\Release\CyBootAsmGnu.o
+arm-none-eabi-ar.exe: creating .\CortexM3\ARM_GCC_541\Release\bootloader.a
+arm-none-eabi-gcc.exe -Wl,--start-group -o C:\Users\MattiaCP\Desktop\PSoC5\bootloader\bootloader.cydsn\CortexM3\ARM_GCC_541\Release\bootloader.elf .\CortexM3\ARM_GCC_541\Release\main.o .\CortexM3\ARM_GCC_541\Release\cyfitter_cfg.o .\CortexM3\ARM_GCC_541\Release\cymetadata.o .\CortexM3\ARM_GCC_541\Release\Cm3Start.o .\CortexM3\ARM_GCC_541\Release\bootloader.a "C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CortexM3\ARM_GCC_541\Release\CyComponentLibrary.a" -mcpu=cortex-m3 -mthumb -L Generated_Source\PSoC5 -Wl,-Map,.\CortexM3\ARM_GCC_541\Release/bootloader.map -T Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -Wl,--gc-sections -g -ffunction-sections -Os -ffat-lto-objects -Wl,--end-group
+cyelftool.exe -P C:\Users\MattiaCP\Desktop\PSoC5\bootloader\bootloader.cydsn\CortexM3\ARM_GCC_541\Release\bootloader.elf --flash_row_size 256 --flash_size 262144 --flash_offset 0x00000000 --size_var_name Bootloader_SizeBytes --checksum_var_name Bootloader_Checksum
+No ELF section .cychecksum found, creating one
+Application checksum calculated and stored in ELF section .cychecksum
+Checksum calculated and stored in ELF section .cymeta
+cyelftool.exe -S C:\Users\MattiaCP\Desktop\PSoC5\bootloader\bootloader.cydsn\CortexM3\ARM_GCC_541\Release\bootloader.elf
+Flash used: 6517 of 262144 bytes (2.5%). Application: 6261 bytes. Metadata: 256 bytes.
+SRAM used: 2681 of 65536 bytes (4.1%). Stack: 2048 bytes. Heap: 128 bytes.
+--------------- Rebuild Succeeded: 04/12/2018 13:05:30 ---------------

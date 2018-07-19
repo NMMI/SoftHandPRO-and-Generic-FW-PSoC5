@@ -1,0 +1,475 @@
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQ41EOV.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.startup.main,"ax",%progbits
+  20              		.align	2
+  21              		.global	main
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	main, %function
+  25              	main:
+  26              	.LFB63:
+  27              		.file 1 "main.c"
+   1:main.c        **** /* ========================================
+   2:main.c        ****  *
+   3:main.c        ****  * Copyright YOUR COMPANY, THE YEAR
+   4:main.c        ****  * All Rights Reserved
+   5:main.c        ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:main.c        ****  *
+   7:main.c        ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:main.c        ****  * WHICH IS THE PROPERTY OF your company.
+   9:main.c        ****  *
+  10:main.c        ****  * ========================================
+  11:main.c        **** */
+  12:main.c        **** #include <project.h>
+  13:main.c        **** 
+  14:main.c        **** int main()
+  15:main.c        **** {
+  28              		.loc 1 15 0
+  29              		.cfi_startproc
+  30              		@ Volatile: function does not return.
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 08B5     		push	{r3, lr}
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 3, -8
+  36              		.cfi_offset 14, -4
+  16:main.c        ****     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
+  17:main.c        ****     CyBtldr_Start();
+  37              		.loc 1 17 0
+  38 0002 FFF7FEFF 		bl	Bootloader_Start
+  39              	.LVL0:
+  40              	.L2:
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQ41EOV.s 			page 2
+
+
+  41 0006 FEE7     		b	.L2
+  42              		.cfi_endproc
+  43              	.LFE63:
+  44              		.size	main, .-main
+  45              		.text
+  46              	.Letext0:
+  47              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+  48              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+  49              		.file 4 "Generated_Source\\PSoC5/core_cm3.h"
+  50              		.file 5 "Generated_Source\\PSoC5/Bootloader.h"
+  51              		.section	.debug_info,"",%progbits
+  52              	.Ldebug_info0:
+  53 0000 E0000000 		.4byte	0xe0
+  54 0004 0400     		.2byte	0x4
+  55 0006 00000000 		.4byte	.Ldebug_abbrev0
+  56 000a 04       		.byte	0x4
+  57 000b 01       		.uleb128 0x1
+  58 000c 71000000 		.4byte	.LASF16
+  59 0010 0C       		.byte	0xc
+  60 0011 2E000000 		.4byte	.LASF17
+  61 0015 5A010000 		.4byte	.LASF18
+  62 0019 00000000 		.4byte	.Ldebug_ranges0+0
+  63 001d 00000000 		.4byte	0
+  64 0021 00000000 		.4byte	.Ldebug_line0
+  65 0025 02       		.uleb128 0x2
+  66 0026 01       		.byte	0x1
+  67 0027 06       		.byte	0x6
+  68 0028 32010000 		.4byte	.LASF0
+  69 002c 02       		.uleb128 0x2
+  70 002d 01       		.byte	0x1
+  71 002e 08       		.byte	0x8
+  72 002f 63000000 		.4byte	.LASF1
+  73 0033 02       		.uleb128 0x2
+  74 0034 02       		.byte	0x2
+  75 0035 05       		.byte	0x5
+  76 0036 9E010000 		.4byte	.LASF2
+  77 003a 02       		.uleb128 0x2
+  78 003b 02       		.byte	0x2
+  79 003c 07       		.byte	0x7
+  80 003d 0E000000 		.4byte	.LASF3
+  81 0041 03       		.uleb128 0x3
+  82 0042 4A010000 		.4byte	.LASF9
+  83 0046 02       		.byte	0x2
+  84 0047 3F       		.byte	0x3f
+  85 0048 4C000000 		.4byte	0x4c
+  86 004c 02       		.uleb128 0x2
+  87 004d 04       		.byte	0x4
+  88 004e 05       		.byte	0x5
+  89 004f 04010000 		.4byte	.LASF4
+  90 0053 02       		.uleb128 0x2
+  91 0054 04       		.byte	0x4
+  92 0055 07       		.byte	0x7
+  93 0056 3A000000 		.4byte	.LASF5
+  94 005a 02       		.uleb128 0x2
+  95 005b 08       		.byte	0x8
+  96 005c 05       		.byte	0x5
+  97 005d 00000000 		.4byte	.LASF6
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQ41EOV.s 			page 3
+
+
+  98 0061 02       		.uleb128 0x2
+  99 0062 08       		.byte	0x8
+ 100 0063 07       		.byte	0x7
+ 101 0064 4C000000 		.4byte	.LASF7
+ 102 0068 04       		.uleb128 0x4
+ 103 0069 04       		.byte	0x4
+ 104 006a 05       		.byte	0x5
+ 105 006b 696E7400 		.ascii	"int\000"
+ 106 006f 02       		.uleb128 0x2
+ 107 0070 04       		.byte	0x4
+ 108 0071 07       		.byte	0x7
+ 109 0072 21000000 		.4byte	.LASF8
+ 110 0076 03       		.uleb128 0x3
+ 111 0077 A8010000 		.4byte	.LASF10
+ 112 007b 03       		.byte	0x3
+ 113 007c 2C       		.byte	0x2c
+ 114 007d 41000000 		.4byte	0x41
+ 115 0081 02       		.uleb128 0x2
+ 116 0082 04       		.byte	0x4
+ 117 0083 04       		.byte	0x4
+ 118 0084 54010000 		.4byte	.LASF11
+ 119 0088 02       		.uleb128 0x2
+ 120 0089 08       		.byte	0x8
+ 121 008a 04       		.byte	0x4
+ 122 008b 1E010000 		.4byte	.LASF12
+ 123 008f 02       		.uleb128 0x2
+ 124 0090 01       		.byte	0x1
+ 125 0091 08       		.byte	0x8
+ 126 0092 FF000000 		.4byte	.LASF13
+ 127 0096 02       		.uleb128 0x2
+ 128 0097 08       		.byte	0x8
+ 129 0098 04       		.byte	0x4
+ 130 0099 3E010000 		.4byte	.LASF14
+ 131 009d 02       		.uleb128 0x2
+ 132 009e 04       		.byte	0x4
+ 133 009f 07       		.byte	0x7
+ 134 00a0 B0010000 		.4byte	.LASF15
+ 135 00a4 05       		.uleb128 0x5
+ 136 00a5 35000000 		.4byte	.LASF19
+ 137 00a9 01       		.byte	0x1
+ 138 00aa 0E       		.byte	0xe
+ 139 00ab 68000000 		.4byte	0x68
+ 140 00af 00000000 		.4byte	.LFB63
+ 141 00b3 08000000 		.4byte	.LFE63-.LFB63
+ 142 00b7 01       		.uleb128 0x1
+ 143 00b8 9C       		.byte	0x9c
+ 144 00b9 C7000000 		.4byte	0xc7
+ 145 00bd 06       		.uleb128 0x6
+ 146 00be 06000000 		.4byte	.LVL0
+ 147 00c2 D8000000 		.4byte	0xd8
+ 148 00c6 00       		.byte	0
+ 149 00c7 07       		.uleb128 0x7
+ 150 00c8 25010000 		.4byte	.LASF20
+ 151 00cc 04       		.byte	0x4
+ 152 00cd 1207     		.2byte	0x712
+ 153 00cf D3000000 		.4byte	0xd3
+ 154 00d3 08       		.uleb128 0x8
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQ41EOV.s 			page 4
+
+
+ 155 00d4 76000000 		.4byte	0x76
+ 156 00d8 09       		.uleb128 0x9
+ 157 00d9 0D010000 		.4byte	.LASF21
+ 158 00dd 0D010000 		.4byte	.LASF21
+ 159 00e1 05       		.byte	0x5
+ 160 00e2 E6       		.byte	0xe6
+ 161 00e3 00       		.byte	0
+ 162              		.section	.debug_abbrev,"",%progbits
+ 163              	.Ldebug_abbrev0:
+ 164 0000 01       		.uleb128 0x1
+ 165 0001 11       		.uleb128 0x11
+ 166 0002 01       		.byte	0x1
+ 167 0003 25       		.uleb128 0x25
+ 168 0004 0E       		.uleb128 0xe
+ 169 0005 13       		.uleb128 0x13
+ 170 0006 0B       		.uleb128 0xb
+ 171 0007 03       		.uleb128 0x3
+ 172 0008 0E       		.uleb128 0xe
+ 173 0009 1B       		.uleb128 0x1b
+ 174 000a 0E       		.uleb128 0xe
+ 175 000b 55       		.uleb128 0x55
+ 176 000c 17       		.uleb128 0x17
+ 177 000d 11       		.uleb128 0x11
+ 178 000e 01       		.uleb128 0x1
+ 179 000f 10       		.uleb128 0x10
+ 180 0010 17       		.uleb128 0x17
+ 181 0011 00       		.byte	0
+ 182 0012 00       		.byte	0
+ 183 0013 02       		.uleb128 0x2
+ 184 0014 24       		.uleb128 0x24
+ 185 0015 00       		.byte	0
+ 186 0016 0B       		.uleb128 0xb
+ 187 0017 0B       		.uleb128 0xb
+ 188 0018 3E       		.uleb128 0x3e
+ 189 0019 0B       		.uleb128 0xb
+ 190 001a 03       		.uleb128 0x3
+ 191 001b 0E       		.uleb128 0xe
+ 192 001c 00       		.byte	0
+ 193 001d 00       		.byte	0
+ 194 001e 03       		.uleb128 0x3
+ 195 001f 16       		.uleb128 0x16
+ 196 0020 00       		.byte	0
+ 197 0021 03       		.uleb128 0x3
+ 198 0022 0E       		.uleb128 0xe
+ 199 0023 3A       		.uleb128 0x3a
+ 200 0024 0B       		.uleb128 0xb
+ 201 0025 3B       		.uleb128 0x3b
+ 202 0026 0B       		.uleb128 0xb
+ 203 0027 49       		.uleb128 0x49
+ 204 0028 13       		.uleb128 0x13
+ 205 0029 00       		.byte	0
+ 206 002a 00       		.byte	0
+ 207 002b 04       		.uleb128 0x4
+ 208 002c 24       		.uleb128 0x24
+ 209 002d 00       		.byte	0
+ 210 002e 0B       		.uleb128 0xb
+ 211 002f 0B       		.uleb128 0xb
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQ41EOV.s 			page 5
+
+
+ 212 0030 3E       		.uleb128 0x3e
+ 213 0031 0B       		.uleb128 0xb
+ 214 0032 03       		.uleb128 0x3
+ 215 0033 08       		.uleb128 0x8
+ 216 0034 00       		.byte	0
+ 217 0035 00       		.byte	0
+ 218 0036 05       		.uleb128 0x5
+ 219 0037 2E       		.uleb128 0x2e
+ 220 0038 01       		.byte	0x1
+ 221 0039 3F       		.uleb128 0x3f
+ 222 003a 19       		.uleb128 0x19
+ 223 003b 03       		.uleb128 0x3
+ 224 003c 0E       		.uleb128 0xe
+ 225 003d 3A       		.uleb128 0x3a
+ 226 003e 0B       		.uleb128 0xb
+ 227 003f 3B       		.uleb128 0x3b
+ 228 0040 0B       		.uleb128 0xb
+ 229 0041 49       		.uleb128 0x49
+ 230 0042 13       		.uleb128 0x13
+ 231 0043 8701     		.uleb128 0x87
+ 232 0045 19       		.uleb128 0x19
+ 233 0046 11       		.uleb128 0x11
+ 234 0047 01       		.uleb128 0x1
+ 235 0048 12       		.uleb128 0x12
+ 236 0049 06       		.uleb128 0x6
+ 237 004a 40       		.uleb128 0x40
+ 238 004b 18       		.uleb128 0x18
+ 239 004c 9742     		.uleb128 0x2117
+ 240 004e 19       		.uleb128 0x19
+ 241 004f 01       		.uleb128 0x1
+ 242 0050 13       		.uleb128 0x13
+ 243 0051 00       		.byte	0
+ 244 0052 00       		.byte	0
+ 245 0053 06       		.uleb128 0x6
+ 246 0054 898201   		.uleb128 0x4109
+ 247 0057 00       		.byte	0
+ 248 0058 11       		.uleb128 0x11
+ 249 0059 01       		.uleb128 0x1
+ 250 005a 31       		.uleb128 0x31
+ 251 005b 13       		.uleb128 0x13
+ 252 005c 00       		.byte	0
+ 253 005d 00       		.byte	0
+ 254 005e 07       		.uleb128 0x7
+ 255 005f 34       		.uleb128 0x34
+ 256 0060 00       		.byte	0
+ 257 0061 03       		.uleb128 0x3
+ 258 0062 0E       		.uleb128 0xe
+ 259 0063 3A       		.uleb128 0x3a
+ 260 0064 0B       		.uleb128 0xb
+ 261 0065 3B       		.uleb128 0x3b
+ 262 0066 05       		.uleb128 0x5
+ 263 0067 49       		.uleb128 0x49
+ 264 0068 13       		.uleb128 0x13
+ 265 0069 3F       		.uleb128 0x3f
+ 266 006a 19       		.uleb128 0x19
+ 267 006b 3C       		.uleb128 0x3c
+ 268 006c 19       		.uleb128 0x19
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQ41EOV.s 			page 6
+
+
+ 269 006d 00       		.byte	0
+ 270 006e 00       		.byte	0
+ 271 006f 08       		.uleb128 0x8
+ 272 0070 35       		.uleb128 0x35
+ 273 0071 00       		.byte	0
+ 274 0072 49       		.uleb128 0x49
+ 275 0073 13       		.uleb128 0x13
+ 276 0074 00       		.byte	0
+ 277 0075 00       		.byte	0
+ 278 0076 09       		.uleb128 0x9
+ 279 0077 2E       		.uleb128 0x2e
+ 280 0078 00       		.byte	0
+ 281 0079 3F       		.uleb128 0x3f
+ 282 007a 19       		.uleb128 0x19
+ 283 007b 3C       		.uleb128 0x3c
+ 284 007c 19       		.uleb128 0x19
+ 285 007d 6E       		.uleb128 0x6e
+ 286 007e 0E       		.uleb128 0xe
+ 287 007f 03       		.uleb128 0x3
+ 288 0080 0E       		.uleb128 0xe
+ 289 0081 3A       		.uleb128 0x3a
+ 290 0082 0B       		.uleb128 0xb
+ 291 0083 3B       		.uleb128 0x3b
+ 292 0084 0B       		.uleb128 0xb
+ 293 0085 00       		.byte	0
+ 294 0086 00       		.byte	0
+ 295 0087 00       		.byte	0
+ 296              		.section	.debug_aranges,"",%progbits
+ 297 0000 1C000000 		.4byte	0x1c
+ 298 0004 0200     		.2byte	0x2
+ 299 0006 00000000 		.4byte	.Ldebug_info0
+ 300 000a 04       		.byte	0x4
+ 301 000b 00       		.byte	0
+ 302 000c 0000     		.2byte	0
+ 303 000e 0000     		.2byte	0
+ 304 0010 00000000 		.4byte	.LFB63
+ 305 0014 08000000 		.4byte	.LFE63-.LFB63
+ 306 0018 00000000 		.4byte	0
+ 307 001c 00000000 		.4byte	0
+ 308              		.section	.debug_ranges,"",%progbits
+ 309              	.Ldebug_ranges0:
+ 310 0000 00000000 		.4byte	.LFB63
+ 311 0004 08000000 		.4byte	.LFE63
+ 312 0008 00000000 		.4byte	0
+ 313 000c 00000000 		.4byte	0
+ 314              		.section	.debug_line,"",%progbits
+ 315              	.Ldebug_line0:
+ 316 0000 65010000 		.section	.debug_str,"MS",%progbits,1
+ 316      02004F01 
+ 316      00000201 
+ 316      FB0E0D00 
+ 316      01010101 
+ 317              	.LASF6:
+ 318 0000 6C6F6E67 		.ascii	"long long int\000"
+ 318      206C6F6E 
+ 318      6720696E 
+ 318      7400
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQ41EOV.s 			page 7
+
+
+ 319              	.LASF3:
+ 320 000e 73686F72 		.ascii	"short unsigned int\000"
+ 320      7420756E 
+ 320      7369676E 
+ 320      65642069 
+ 320      6E7400
+ 321              	.LASF8:
+ 322 0021 756E7369 		.ascii	"unsigned int\000"
+ 322      676E6564 
+ 322      20696E74 
+ 322      00
+ 323              	.LASF17:
+ 324 002e 6D61696E 		.ascii	"main.c\000"
+ 324      2E6300
+ 325              	.LASF19:
+ 326 0035 6D61696E 		.ascii	"main\000"
+ 326      00
+ 327              	.LASF5:
+ 328 003a 6C6F6E67 		.ascii	"long unsigned int\000"
+ 328      20756E73 
+ 328      69676E65 
+ 328      6420696E 
+ 328      7400
+ 329              	.LASF7:
+ 330 004c 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 330      206C6F6E 
+ 330      6720756E 
+ 330      7369676E 
+ 330      65642069 
+ 331              	.LASF1:
+ 332 0063 756E7369 		.ascii	"unsigned char\000"
+ 332      676E6564 
+ 332      20636861 
+ 332      7200
+ 333              	.LASF16:
+ 334 0071 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 334      43313120 
+ 334      352E342E 
+ 334      31203230 
+ 334      31363036 
+ 335 00a4 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 335      20726576 
+ 335      6973696F 
+ 335      6E203233 
+ 335      37373135 
+ 336 00d7 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects\000"
+ 336      66756E63 
+ 336      74696F6E 
+ 336      2D736563 
+ 336      74696F6E 
+ 337              	.LASF13:
+ 338 00ff 63686172 		.ascii	"char\000"
+ 338      00
+ 339              	.LASF4:
+ 340 0104 6C6F6E67 		.ascii	"long int\000"
+ 340      20696E74 
+ 340      00
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQ41EOV.s 			page 8
+
+
+ 341              	.LASF21:
+ 342 010d 426F6F74 		.ascii	"Bootloader_Start\000"
+ 342      6C6F6164 
+ 342      65725F53 
+ 342      74617274 
+ 342      00
+ 343              	.LASF12:
+ 344 011e 646F7562 		.ascii	"double\000"
+ 344      6C6500
+ 345              	.LASF20:
+ 346 0125 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 346      52784275 
+ 346      66666572 
+ 346      00
+ 347              	.LASF0:
+ 348 0132 7369676E 		.ascii	"signed char\000"
+ 348      65642063 
+ 348      68617200 
+ 349              	.LASF14:
+ 350 013e 6C6F6E67 		.ascii	"long double\000"
+ 350      20646F75 
+ 350      626C6500 
+ 351              	.LASF9:
+ 352 014a 5F5F696E 		.ascii	"__int32_t\000"
+ 352      7433325F 
+ 352      7400
+ 353              	.LASF11:
+ 354 0154 666C6F61 		.ascii	"float\000"
+ 354      7400
+ 355              	.LASF18:
+ 356 015a 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Desktop\\SoftPro firmware (PSo"
+ 356      73657273 
+ 356      5C4D6174 
+ 356      74696143 
+ 356      505C4465 
+ 357 0189 4335295C 		.ascii	"C5)\\bootloader.cydsn\000"
+ 357      626F6F74 
+ 357      6C6F6164 
+ 357      65722E63 
+ 357      7964736E 
+ 358              	.LASF2:
+ 359 019e 73686F72 		.ascii	"short int\000"
+ 359      7420696E 
+ 359      7400
+ 360              	.LASF10:
+ 361 01a8 696E7433 		.ascii	"int32_t\000"
+ 361      325F7400 
+ 362              	.LASF15:
+ 363 01b0 73697A65 		.ascii	"sizetype\000"
+ 363      74797065 
+ 363      00
+ 364              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

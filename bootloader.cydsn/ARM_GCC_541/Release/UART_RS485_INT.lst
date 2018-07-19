@@ -1,0 +1,1145 @@
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccTV2FhT.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"UART_RS485_INT.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.UART_RS485_RXISR,"ax",%progbits
+  20              		.align	2
+  21              		.global	UART_RS485_RXISR
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	UART_RS485_RXISR, %function
+  25              	UART_RS485_RXISR:
+  26              	.LFB0:
+  27              		.file 1 "Generated_Source\\PSoC5\\UART_RS485_INT.c"
+   1:Generated_Source\PSoC5/UART_RS485_INT.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/UART_RS485_INT.c **** * File Name: UART_RS485INT.c
+   3:Generated_Source\PSoC5/UART_RS485_INT.c **** * Version 2.50
+   4:Generated_Source\PSoC5/UART_RS485_INT.c **** *
+   5:Generated_Source\PSoC5/UART_RS485_INT.c **** * Description:
+   6:Generated_Source\PSoC5/UART_RS485_INT.c **** *  This file provides all Interrupt Service functionality of the UART component
+   7:Generated_Source\PSoC5/UART_RS485_INT.c **** *
+   8:Generated_Source\PSoC5/UART_RS485_INT.c **** ********************************************************************************
+   9:Generated_Source\PSoC5/UART_RS485_INT.c **** * Copyright 2008-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  10:Generated_Source\PSoC5/UART_RS485_INT.c **** * You may use this file only in accordance with the license, terms, conditions,
+  11:Generated_Source\PSoC5/UART_RS485_INT.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  12:Generated_Source\PSoC5/UART_RS485_INT.c **** * the software package with which this file was provided.
+  13:Generated_Source\PSoC5/UART_RS485_INT.c **** *******************************************************************************/
+  14:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+  15:Generated_Source\PSoC5/UART_RS485_INT.c **** #include "UART_RS485.h"
+  16:Generated_Source\PSoC5/UART_RS485_INT.c **** #include "cyapicallbacks.h"
+  17:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+  18:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+  19:Generated_Source\PSoC5/UART_RS485_INT.c **** /***************************************
+  20:Generated_Source\PSoC5/UART_RS485_INT.c **** * Custom Declarations
+  21:Generated_Source\PSoC5/UART_RS485_INT.c **** ***************************************/
+  22:Generated_Source\PSoC5/UART_RS485_INT.c **** /* `#START CUSTOM_DECLARATIONS` Place your declaration here */
+  23:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+  24:Generated_Source\PSoC5/UART_RS485_INT.c **** /* `#END` */
+  25:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+  26:Generated_Source\PSoC5/UART_RS485_INT.c **** #if (UART_RS485_RX_INTERRUPT_ENABLED && (UART_RS485_RX_ENABLED || UART_RS485_HD_ENABLED))
+  27:Generated_Source\PSoC5/UART_RS485_INT.c ****     /*******************************************************************************
+  28:Generated_Source\PSoC5/UART_RS485_INT.c ****     * Function Name: UART_RS485_RXISR
+  29:Generated_Source\PSoC5/UART_RS485_INT.c ****     ********************************************************************************
+  30:Generated_Source\PSoC5/UART_RS485_INT.c ****     *
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccTV2FhT.s 			page 2
+
+
+  31:Generated_Source\PSoC5/UART_RS485_INT.c ****     * Summary:
+  32:Generated_Source\PSoC5/UART_RS485_INT.c ****     *  Interrupt Service Routine for RX portion of the UART
+  33:Generated_Source\PSoC5/UART_RS485_INT.c ****     *
+  34:Generated_Source\PSoC5/UART_RS485_INT.c ****     * Parameters:
+  35:Generated_Source\PSoC5/UART_RS485_INT.c ****     *  None.
+  36:Generated_Source\PSoC5/UART_RS485_INT.c ****     *
+  37:Generated_Source\PSoC5/UART_RS485_INT.c ****     * Return:
+  38:Generated_Source\PSoC5/UART_RS485_INT.c ****     *  None.
+  39:Generated_Source\PSoC5/UART_RS485_INT.c ****     *
+  40:Generated_Source\PSoC5/UART_RS485_INT.c ****     * Global Variables:
+  41:Generated_Source\PSoC5/UART_RS485_INT.c ****     *  UART_RS485_rxBuffer - RAM buffer pointer for save received data.
+  42:Generated_Source\PSoC5/UART_RS485_INT.c ****     *  UART_RS485_rxBufferWrite - cyclic index for write to rxBuffer,
+  43:Generated_Source\PSoC5/UART_RS485_INT.c ****     *     increments after each byte saved to buffer.
+  44:Generated_Source\PSoC5/UART_RS485_INT.c ****     *  UART_RS485_rxBufferRead - cyclic index for read from rxBuffer,
+  45:Generated_Source\PSoC5/UART_RS485_INT.c ****     *     checked to detect overflow condition.
+  46:Generated_Source\PSoC5/UART_RS485_INT.c ****     *  UART_RS485_rxBufferOverflow - software overflow flag. Set to one
+  47:Generated_Source\PSoC5/UART_RS485_INT.c ****     *     when UART_RS485_rxBufferWrite index overtakes
+  48:Generated_Source\PSoC5/UART_RS485_INT.c ****     *     UART_RS485_rxBufferRead index.
+  49:Generated_Source\PSoC5/UART_RS485_INT.c ****     *  UART_RS485_rxBufferLoopDetect - additional variable to detect overflow.
+  50:Generated_Source\PSoC5/UART_RS485_INT.c ****     *     Set to one when UART_RS485_rxBufferWrite is equal to
+  51:Generated_Source\PSoC5/UART_RS485_INT.c ****     *    UART_RS485_rxBufferRead
+  52:Generated_Source\PSoC5/UART_RS485_INT.c ****     *  UART_RS485_rxAddressMode - this variable contains the Address mode,
+  53:Generated_Source\PSoC5/UART_RS485_INT.c ****     *     selected in customizer or set by UART_SetRxAddressMode() API.
+  54:Generated_Source\PSoC5/UART_RS485_INT.c ****     *  UART_RS485_rxAddressDetected - set to 1 when correct address received,
+  55:Generated_Source\PSoC5/UART_RS485_INT.c ****     *     and analysed to store following addressed data bytes to the buffer.
+  56:Generated_Source\PSoC5/UART_RS485_INT.c ****     *     When not correct address received, set to 0 to skip following data bytes.
+  57:Generated_Source\PSoC5/UART_RS485_INT.c ****     *
+  58:Generated_Source\PSoC5/UART_RS485_INT.c ****     *******************************************************************************/
+  59:Generated_Source\PSoC5/UART_RS485_INT.c ****     CY_ISR(UART_RS485_RXISR)
+  60:Generated_Source\PSoC5/UART_RS485_INT.c ****     {
+  28              		.loc 1 60 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              	.LVL0:
+  33 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+  34              		.cfi_def_cfa_offset 28
+  35              		.cfi_offset 4, -28
+  36              		.cfi_offset 5, -24
+  37              		.cfi_offset 6, -20
+  38              		.cfi_offset 7, -16
+  39              		.cfi_offset 8, -12
+  40              		.cfi_offset 9, -8
+  41              		.cfi_offset 14, -4
+  61:Generated_Source\PSoC5/UART_RS485_INT.c ****         uint8 readData;
+  62:Generated_Source\PSoC5/UART_RS485_INT.c ****         uint8 readStatus;
+  63:Generated_Source\PSoC5/UART_RS485_INT.c ****         uint8 increment_pointer = 0u;
+  64:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+  65:Generated_Source\PSoC5/UART_RS485_INT.c ****     #if(CY_PSOC3)
+  66:Generated_Source\PSoC5/UART_RS485_INT.c ****         uint8 int_en;
+  67:Generated_Source\PSoC5/UART_RS485_INT.c ****     #endif /* (CY_PSOC3) */
+  68:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+  69:Generated_Source\PSoC5/UART_RS485_INT.c ****     #ifdef UART_RS485_RXISR_ENTRY_CALLBACK
+  70:Generated_Source\PSoC5/UART_RS485_INT.c ****         UART_RS485_RXISR_EntryCallback();
+  71:Generated_Source\PSoC5/UART_RS485_INT.c ****     #endif /* UART_RS485_RXISR_ENTRY_CALLBACK */
+  72:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+  73:Generated_Source\PSoC5/UART_RS485_INT.c ****         /* User code required at start of ISR */
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccTV2FhT.s 			page 3
+
+
+  74:Generated_Source\PSoC5/UART_RS485_INT.c ****         /* `#START UART_RS485_RXISR_START` */
+  75:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+  76:Generated_Source\PSoC5/UART_RS485_INT.c ****         /* `#END` */
+  77:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+  78:Generated_Source\PSoC5/UART_RS485_INT.c ****     #if(CY_PSOC3)   /* Make sure nested interrupt is enabled */
+  79:Generated_Source\PSoC5/UART_RS485_INT.c ****         int_en = EA;
+  80:Generated_Source\PSoC5/UART_RS485_INT.c ****         CyGlobalIntEnable;
+  81:Generated_Source\PSoC5/UART_RS485_INT.c ****     #endif /* (CY_PSOC3) */
+  82:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+  83:Generated_Source\PSoC5/UART_RS485_INT.c ****         do
+  84:Generated_Source\PSoC5/UART_RS485_INT.c ****         {
+  85:Generated_Source\PSoC5/UART_RS485_INT.c ****             /* Read receiver status register */
+  86:Generated_Source\PSoC5/UART_RS485_INT.c ****             readStatus = UART_RS485_RXSTATUS_REG;
+  42              		.loc 1 86 0
+  43 0004 1C48     		ldr	r0, .L17
+  87:Generated_Source\PSoC5/UART_RS485_INT.c ****             /* Copy the same status to readData variable for backward compatibility support 
+  88:Generated_Source\PSoC5/UART_RS485_INT.c ****             *  of the user code in UART_RS485_RXISR_ERROR` section. 
+  89:Generated_Source\PSoC5/UART_RS485_INT.c ****             */
+  90:Generated_Source\PSoC5/UART_RS485_INT.c ****             readData = readStatus;
+  91:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+  92:Generated_Source\PSoC5/UART_RS485_INT.c ****             if((readStatus & (UART_RS485_RX_STS_BREAK | 
+  93:Generated_Source\PSoC5/UART_RS485_INT.c ****                             UART_RS485_RX_STS_PAR_ERROR |
+  94:Generated_Source\PSoC5/UART_RS485_INT.c ****                             UART_RS485_RX_STS_STOP_ERROR | 
+  95:Generated_Source\PSoC5/UART_RS485_INT.c ****                             UART_RS485_RX_STS_OVERRUN)) != 0u)
+  96:Generated_Source\PSoC5/UART_RS485_INT.c ****             {
+  97:Generated_Source\PSoC5/UART_RS485_INT.c ****                 /* ERROR handling. */
+  98:Generated_Source\PSoC5/UART_RS485_INT.c ****                 UART_RS485_errorStatus |= readStatus & ( UART_RS485_RX_STS_BREAK | 
+  44              		.loc 1 98 0
+  45 0006 1D49     		ldr	r1, .L17+4
+  99:Generated_Source\PSoC5/UART_RS485_INT.c ****                                                             UART_RS485_RX_STS_PAR_ERROR | 
+ 100:Generated_Source\PSoC5/UART_RS485_INT.c ****                                                             UART_RS485_RX_STS_STOP_ERROR | 
+ 101:Generated_Source\PSoC5/UART_RS485_INT.c ****                                                             UART_RS485_RX_STS_OVERRUN);
+ 102:Generated_Source\PSoC5/UART_RS485_INT.c ****                 /* `#START UART_RS485_RXISR_ERROR` */
+ 103:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+ 104:Generated_Source\PSoC5/UART_RS485_INT.c ****                 /* `#END` */
+ 105:Generated_Source\PSoC5/UART_RS485_INT.c ****                 
+ 106:Generated_Source\PSoC5/UART_RS485_INT.c ****             #ifdef UART_RS485_RXISR_ERROR_CALLBACK
+ 107:Generated_Source\PSoC5/UART_RS485_INT.c ****                 UART_RS485_RXISR_ERROR_Callback();
+ 108:Generated_Source\PSoC5/UART_RS485_INT.c ****             #endif /* UART_RS485_RXISR_ERROR_CALLBACK */
+ 109:Generated_Source\PSoC5/UART_RS485_INT.c ****             }
+ 110:Generated_Source\PSoC5/UART_RS485_INT.c ****             
+ 111:Generated_Source\PSoC5/UART_RS485_INT.c ****             if((readStatus & UART_RS485_RX_STS_FIFO_NOTEMPTY) != 0u)
+ 112:Generated_Source\PSoC5/UART_RS485_INT.c ****             {
+ 113:Generated_Source\PSoC5/UART_RS485_INT.c ****                 /* Read data from the RX data register */
+ 114:Generated_Source\PSoC5/UART_RS485_INT.c ****                 readData = UART_RS485_RXDATA_REG;
+  46              		.loc 1 114 0
+  47 0008 1D4F     		ldr	r7, .L17+8
+ 115:Generated_Source\PSoC5/UART_RS485_INT.c ****             #if (UART_RS485_RXHW_ADDRESS_ENABLED)
+ 116:Generated_Source\PSoC5/UART_RS485_INT.c ****                 if(UART_RS485_rxAddressMode == (uint8)UART_RS485__B_UART__AM_SW_DETECT_TO_BUFFER)
+ 117:Generated_Source\PSoC5/UART_RS485_INT.c ****                 {
+ 118:Generated_Source\PSoC5/UART_RS485_INT.c ****                     if((readStatus & UART_RS485_RX_STS_MRKSPC) != 0u)
+ 119:Generated_Source\PSoC5/UART_RS485_INT.c ****                     {
+ 120:Generated_Source\PSoC5/UART_RS485_INT.c ****                         if ((readStatus & UART_RS485_RX_STS_ADDR_MATCH) != 0u)
+ 121:Generated_Source\PSoC5/UART_RS485_INT.c ****                         {
+ 122:Generated_Source\PSoC5/UART_RS485_INT.c ****                             UART_RS485_rxAddressDetected = 1u;
+ 123:Generated_Source\PSoC5/UART_RS485_INT.c ****                         }
+ 124:Generated_Source\PSoC5/UART_RS485_INT.c ****                         else
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccTV2FhT.s 			page 4
+
+
+ 125:Generated_Source\PSoC5/UART_RS485_INT.c ****                         {
+ 126:Generated_Source\PSoC5/UART_RS485_INT.c ****                             UART_RS485_rxAddressDetected = 0u;
+ 127:Generated_Source\PSoC5/UART_RS485_INT.c ****                         }
+ 128:Generated_Source\PSoC5/UART_RS485_INT.c ****                     }
+ 129:Generated_Source\PSoC5/UART_RS485_INT.c ****                     if(UART_RS485_rxAddressDetected != 0u)
+ 130:Generated_Source\PSoC5/UART_RS485_INT.c ****                     {   /* Store only addressed data */
+ 131:Generated_Source\PSoC5/UART_RS485_INT.c ****                         UART_RS485_rxBuffer[UART_RS485_rxBufferWrite] = readData;
+ 132:Generated_Source\PSoC5/UART_RS485_INT.c ****                         increment_pointer = 1u;
+ 133:Generated_Source\PSoC5/UART_RS485_INT.c ****                     }
+ 134:Generated_Source\PSoC5/UART_RS485_INT.c ****                 }
+ 135:Generated_Source\PSoC5/UART_RS485_INT.c ****                 else /* Without software addressing */
+ 136:Generated_Source\PSoC5/UART_RS485_INT.c ****                 {
+ 137:Generated_Source\PSoC5/UART_RS485_INT.c ****                     UART_RS485_rxBuffer[UART_RS485_rxBufferWrite] = readData;
+ 138:Generated_Source\PSoC5/UART_RS485_INT.c ****                     increment_pointer = 1u;
+ 139:Generated_Source\PSoC5/UART_RS485_INT.c ****                 }
+ 140:Generated_Source\PSoC5/UART_RS485_INT.c ****             #else  /* Without addressing */
+ 141:Generated_Source\PSoC5/UART_RS485_INT.c ****                 UART_RS485_rxBuffer[UART_RS485_rxBufferWrite] = readData;
+  48              		.loc 1 141 0
+  49 000a 1E4A     		ldr	r2, .L17+12
+  50 000c 1E4E     		ldr	r6, .L17+16
+ 142:Generated_Source\PSoC5/UART_RS485_INT.c ****                 increment_pointer = 1u;
+ 143:Generated_Source\PSoC5/UART_RS485_INT.c ****             #endif /* (UART_RS485_RXHW_ADDRESS_ENABLED) */
+ 144:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+ 145:Generated_Source\PSoC5/UART_RS485_INT.c ****                 /* Do not increment buffer pointer when skip not addressed data */
+ 146:Generated_Source\PSoC5/UART_RS485_INT.c ****                 if(increment_pointer != 0u)
+ 147:Generated_Source\PSoC5/UART_RS485_INT.c ****                 {
+ 148:Generated_Source\PSoC5/UART_RS485_INT.c ****                     if(UART_RS485_rxBufferLoopDetect != 0u)
+  51              		.loc 1 148 0
+  52 000e 1F4C     		ldr	r4, .L17+20
+ 149:Generated_Source\PSoC5/UART_RS485_INT.c ****                     {   /* Set Software Buffer status Overflow */
+ 150:Generated_Source\PSoC5/UART_RS485_INT.c ****                         UART_RS485_rxBufferOverflow = 1u;
+  53              		.loc 1 150 0
+  54 0010 DFF880C0 		ldr	ip, .L17+28
+ 151:Generated_Source\PSoC5/UART_RS485_INT.c ****                     }
+ 152:Generated_Source\PSoC5/UART_RS485_INT.c ****                     /* Set next pointer. */
+ 153:Generated_Source\PSoC5/UART_RS485_INT.c ****                     UART_RS485_rxBufferWrite++;
+ 154:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+ 155:Generated_Source\PSoC5/UART_RS485_INT.c ****                     /* Check pointer for a loop condition */
+ 156:Generated_Source\PSoC5/UART_RS485_INT.c ****                     if(UART_RS485_rxBufferWrite >= UART_RS485_RX_BUFFER_SIZE)
+ 157:Generated_Source\PSoC5/UART_RS485_INT.c ****                     {
+ 158:Generated_Source\PSoC5/UART_RS485_INT.c ****                         UART_RS485_rxBufferWrite = 0u;
+ 159:Generated_Source\PSoC5/UART_RS485_INT.c ****                     }
+ 160:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+ 161:Generated_Source\PSoC5/UART_RS485_INT.c ****                     /* Detect pre-overload condition and set flag */
+ 162:Generated_Source\PSoC5/UART_RS485_INT.c ****                     if(UART_RS485_rxBufferWrite == UART_RS485_rxBufferRead)
+  55              		.loc 1 162 0
+  56 0014 1E4D     		ldr	r5, .L17+24
+ 150:Generated_Source\PSoC5/UART_RS485_INT.c ****                     }
+  57              		.loc 1 150 0
+  58 0016 4FF0010E 		mov	lr, #1
+  59              	.LVL1:
+  60              	.L7:
+  86:Generated_Source\PSoC5/UART_RS485_INT.c ****             /* Copy the same status to readData variable for backward compatibility support 
+  61              		.loc 1 86 0
+  62 001a 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+  63 001c DBB2     		uxtb	r3, r3
+  64              	.LVL2:
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccTV2FhT.s 			page 5
+
+
+  92:Generated_Source\PSoC5/UART_RS485_INT.c ****                             UART_RS485_RX_STS_PAR_ERROR |
+  65              		.loc 1 92 0
+  66 001e 13F01E09 		ands	r9, r3, #30
+  67 0022 05D0     		beq	.L2
+  98:Generated_Source\PSoC5/UART_RS485_INT.c ****                                                             UART_RS485_RX_STS_PAR_ERROR | 
+  68              		.loc 1 98 0
+  69 0024 91F80080 		ldrb	r8, [r1]	@ zero_extendqisi2
+  70 0028 49EA0808 		orr	r8, r9, r8
+  71 002c 81F80080 		strb	r8, [r1]
+  72              	.L2:
+ 111:Generated_Source\PSoC5/UART_RS485_INT.c ****             {
+  73              		.loc 1 111 0
+  74 0030 9B06     		lsls	r3, r3, #26
+  75              	.LVL3:
+  76 0032 01D4     		bmi	.L16
+  77 0034 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+  78              	.L16:
+ 114:Generated_Source\PSoC5/UART_RS485_INT.c ****             #if (UART_RS485_RXHW_ADDRESS_ENABLED)
+  79              		.loc 1 114 0
+  80 0038 97F80080 		ldrb	r8, [r7]	@ zero_extendqisi2
+ 141:Generated_Source\PSoC5/UART_RS485_INT.c ****                 increment_pointer = 1u;
+  81              		.loc 1 141 0
+  82 003c 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 114:Generated_Source\PSoC5/UART_RS485_INT.c ****             #if (UART_RS485_RXHW_ADDRESS_ENABLED)
+  83              		.loc 1 114 0
+  84 003e 5FFA88F8 		uxtb	r8, r8
+  85              	.LVL4:
+ 141:Generated_Source\PSoC5/UART_RS485_INT.c ****                 increment_pointer = 1u;
+  86              		.loc 1 141 0
+  87 0042 DBB2     		uxtb	r3, r3
+  88 0044 06F80380 		strb	r8, [r6, r3]
+  89              	.LVL5:
+ 148:Generated_Source\PSoC5/UART_RS485_INT.c ****                     {   /* Set Software Buffer status Overflow */
+  90              		.loc 1 148 0
+  91 0048 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 158:Generated_Source\PSoC5/UART_RS485_INT.c ****                     }
+  92              		.loc 1 158 0
+  93 004a 4FF00008 		mov	r8, #0
+  94              	.LVL6:
+ 148:Generated_Source\PSoC5/UART_RS485_INT.c ****                     {   /* Set Software Buffer status Overflow */
+  95              		.loc 1 148 0
+  96 004e 0BB1     		cbz	r3, .L4
+ 150:Generated_Source\PSoC5/UART_RS485_INT.c ****                     }
+  97              		.loc 1 150 0
+  98 0050 8CF800E0 		strb	lr, [ip]
+  99              	.L4:
+ 153:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+ 100              		.loc 1 153 0
+ 101 0054 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 102 0056 0133     		adds	r3, r3, #1
+ 103 0058 DBB2     		uxtb	r3, r3
+ 104 005a 1370     		strb	r3, [r2]
+ 156:Generated_Source\PSoC5/UART_RS485_INT.c ****                     {
+ 105              		.loc 1 156 0
+ 106 005c 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 107 005e 3F2B     		cmp	r3, #63
+ 158:Generated_Source\PSoC5/UART_RS485_INT.c ****                     }
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccTV2FhT.s 			page 6
+
+
+ 108              		.loc 1 158 0
+ 109 0060 88BF     		it	hi
+ 110 0062 82F80080 		strbhi	r8, [r2]
+ 111              		.loc 1 162 0
+ 112 0066 92F80080 		ldrb	r8, [r2]	@ zero_extendqisi2
+ 113 006a 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 114 006c 9845     		cmp	r8, r3
+ 115 006e D4D1     		bne	.L7
+ 163:Generated_Source\PSoC5/UART_RS485_INT.c ****                     {
+ 164:Generated_Source\PSoC5/UART_RS485_INT.c ****                         UART_RS485_rxBufferLoopDetect = 1u;
+ 116              		.loc 1 164 0
+ 117 0070 84F800E0 		strb	lr, [r4]
+ 118 0074 D1E7     		b	.L7
+ 119              	.L18:
+ 120 0076 00BF     		.align	2
+ 121              	.L17:
+ 122 0078 69640040 		.word	1073767529
+ 123 007c 00000000 		.word	UART_RS485_errorStatus
+ 124 0080 4A650040 		.word	1073767754
+ 125 0084 00000000 		.word	UART_RS485_rxBufferWrite
+ 126 0088 00000000 		.word	UART_RS485_rxBuffer
+ 127 008c 00000000 		.word	UART_RS485_rxBufferLoopDetect
+ 128 0090 00000000 		.word	UART_RS485_rxBufferRead
+ 129 0094 00000000 		.word	UART_RS485_rxBufferOverflow
+ 130              		.cfi_endproc
+ 131              	.LFE0:
+ 132              		.size	UART_RS485_RXISR, .-UART_RS485_RXISR
+ 133              		.section	.text.UART_RS485_TXISR,"ax",%progbits
+ 134              		.align	2
+ 135              		.global	UART_RS485_TXISR
+ 136              		.thumb
+ 137              		.thumb_func
+ 138              		.type	UART_RS485_TXISR, %function
+ 139              	UART_RS485_TXISR:
+ 140              	.LFB1:
+ 165:Generated_Source\PSoC5/UART_RS485_INT.c ****                         /* When Hardware Flow Control selected */
+ 166:Generated_Source\PSoC5/UART_RS485_INT.c ****                         #if (UART_RS485_FLOW_CONTROL != 0u)
+ 167:Generated_Source\PSoC5/UART_RS485_INT.c ****                             /* Disable RX interrupt mask, it is enabled when user read data from th
+ 168:Generated_Source\PSoC5/UART_RS485_INT.c ****                             UART_RS485_RXSTATUS_MASK_REG  &= (uint8)~UART_RS485_RX_STS_FIFO_NOTEMPT
+ 169:Generated_Source\PSoC5/UART_RS485_INT.c ****                             CyIntClearPending(UART_RS485_RX_VECT_NUM);
+ 170:Generated_Source\PSoC5/UART_RS485_INT.c ****                             break; /* Break the reading of the FIFO loop, leave the data there for 
+ 171:Generated_Source\PSoC5/UART_RS485_INT.c ****                         #endif /* (UART_RS485_FLOW_CONTROL != 0u) */
+ 172:Generated_Source\PSoC5/UART_RS485_INT.c ****                     }
+ 173:Generated_Source\PSoC5/UART_RS485_INT.c ****                 }
+ 174:Generated_Source\PSoC5/UART_RS485_INT.c ****             }
+ 175:Generated_Source\PSoC5/UART_RS485_INT.c ****         }while((readStatus & UART_RS485_RX_STS_FIFO_NOTEMPTY) != 0u);
+ 176:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+ 177:Generated_Source\PSoC5/UART_RS485_INT.c ****         /* User code required at end of ISR (Optional) */
+ 178:Generated_Source\PSoC5/UART_RS485_INT.c ****         /* `#START UART_RS485_RXISR_END` */
+ 179:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+ 180:Generated_Source\PSoC5/UART_RS485_INT.c ****         /* `#END` */
+ 181:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+ 182:Generated_Source\PSoC5/UART_RS485_INT.c ****     #ifdef UART_RS485_RXISR_EXIT_CALLBACK
+ 183:Generated_Source\PSoC5/UART_RS485_INT.c ****         UART_RS485_RXISR_ExitCallback();
+ 184:Generated_Source\PSoC5/UART_RS485_INT.c ****     #endif /* UART_RS485_RXISR_EXIT_CALLBACK */
+ 185:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+ 186:Generated_Source\PSoC5/UART_RS485_INT.c ****     #if(CY_PSOC3)
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccTV2FhT.s 			page 7
+
+
+ 187:Generated_Source\PSoC5/UART_RS485_INT.c ****         EA = int_en;
+ 188:Generated_Source\PSoC5/UART_RS485_INT.c ****     #endif /* (CY_PSOC3) */
+ 189:Generated_Source\PSoC5/UART_RS485_INT.c ****     }
+ 190:Generated_Source\PSoC5/UART_RS485_INT.c ****     
+ 191:Generated_Source\PSoC5/UART_RS485_INT.c **** #endif /* (UART_RS485_RX_INTERRUPT_ENABLED && (UART_RS485_RX_ENABLED || UART_RS485_HD_ENABLED)) */
+ 192:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+ 193:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+ 194:Generated_Source\PSoC5/UART_RS485_INT.c **** #if (UART_RS485_TX_INTERRUPT_ENABLED && UART_RS485_TX_ENABLED)
+ 195:Generated_Source\PSoC5/UART_RS485_INT.c ****     /*******************************************************************************
+ 196:Generated_Source\PSoC5/UART_RS485_INT.c ****     * Function Name: UART_RS485_TXISR
+ 197:Generated_Source\PSoC5/UART_RS485_INT.c ****     ********************************************************************************
+ 198:Generated_Source\PSoC5/UART_RS485_INT.c ****     *
+ 199:Generated_Source\PSoC5/UART_RS485_INT.c ****     * Summary:
+ 200:Generated_Source\PSoC5/UART_RS485_INT.c ****     * Interrupt Service Routine for the TX portion of the UART
+ 201:Generated_Source\PSoC5/UART_RS485_INT.c ****     *
+ 202:Generated_Source\PSoC5/UART_RS485_INT.c ****     * Parameters:
+ 203:Generated_Source\PSoC5/UART_RS485_INT.c ****     *  None.
+ 204:Generated_Source\PSoC5/UART_RS485_INT.c ****     *
+ 205:Generated_Source\PSoC5/UART_RS485_INT.c ****     * Return:
+ 206:Generated_Source\PSoC5/UART_RS485_INT.c ****     *  None.
+ 207:Generated_Source\PSoC5/UART_RS485_INT.c ****     *
+ 208:Generated_Source\PSoC5/UART_RS485_INT.c ****     * Global Variables:
+ 209:Generated_Source\PSoC5/UART_RS485_INT.c ****     *  UART_RS485_txBuffer - RAM buffer pointer for transmit data from.
+ 210:Generated_Source\PSoC5/UART_RS485_INT.c ****     *  UART_RS485_txBufferRead - cyclic index for read and transmit data
+ 211:Generated_Source\PSoC5/UART_RS485_INT.c ****     *     from txBuffer, increments after each transmitted byte.
+ 212:Generated_Source\PSoC5/UART_RS485_INT.c ****     *  UART_RS485_rxBufferWrite - cyclic index for write to txBuffer,
+ 213:Generated_Source\PSoC5/UART_RS485_INT.c ****     *     checked to detect available for transmission bytes.
+ 214:Generated_Source\PSoC5/UART_RS485_INT.c ****     *
+ 215:Generated_Source\PSoC5/UART_RS485_INT.c ****     *******************************************************************************/
+ 216:Generated_Source\PSoC5/UART_RS485_INT.c ****     CY_ISR(UART_RS485_TXISR)
+ 217:Generated_Source\PSoC5/UART_RS485_INT.c ****     {
+ 141              		.loc 1 217 0
+ 142              		.cfi_startproc
+ 143              		@ args = 0, pretend = 0, frame = 0
+ 144              		@ frame_needed = 0, uses_anonymous_args = 0
+ 218:Generated_Source\PSoC5/UART_RS485_INT.c ****     #if(CY_PSOC3)
+ 219:Generated_Source\PSoC5/UART_RS485_INT.c ****         uint8 int_en;
+ 220:Generated_Source\PSoC5/UART_RS485_INT.c ****     #endif /* (CY_PSOC3) */
+ 221:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+ 222:Generated_Source\PSoC5/UART_RS485_INT.c ****     #ifdef UART_RS485_TXISR_ENTRY_CALLBACK
+ 223:Generated_Source\PSoC5/UART_RS485_INT.c ****         UART_RS485_TXISR_EntryCallback();
+ 224:Generated_Source\PSoC5/UART_RS485_INT.c ****     #endif /* UART_RS485_TXISR_ENTRY_CALLBACK */
+ 225:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+ 226:Generated_Source\PSoC5/UART_RS485_INT.c ****         /* User code required at start of ISR */
+ 227:Generated_Source\PSoC5/UART_RS485_INT.c ****         /* `#START UART_RS485_TXISR_START` */
+ 228:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+ 229:Generated_Source\PSoC5/UART_RS485_INT.c ****         /* `#END` */
+ 230:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+ 231:Generated_Source\PSoC5/UART_RS485_INT.c ****     #if(CY_PSOC3)   /* Make sure nested interrupt is enabled */
+ 232:Generated_Source\PSoC5/UART_RS485_INT.c ****         int_en = EA;
+ 233:Generated_Source\PSoC5/UART_RS485_INT.c ****         CyGlobalIntEnable;
+ 234:Generated_Source\PSoC5/UART_RS485_INT.c ****     #endif /* (CY_PSOC3) */
+ 235:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+ 236:Generated_Source\PSoC5/UART_RS485_INT.c ****         while((UART_RS485_txBufferRead != UART_RS485_txBufferWrite) &&
+ 145              		.loc 1 236 0
+ 146 0000 144A     		ldr	r2, .L29
+ 147 0002 1548     		ldr	r0, .L29+4
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccTV2FhT.s 			page 8
+
+
+ 148 0004 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 149 0006 0178     		ldrb	r1, [r0]	@ zero_extendqisi2
+ 150 0008 9942     		cmp	r1, r3
+ 151 000a 21D0     		beq	.L27
+ 217:Generated_Source\PSoC5/UART_RS485_INT.c ****     #if(CY_PSOC3)
+ 152              		.loc 1 217 0
+ 153 000c F0B5     		push	{r4, r5, r6, r7, lr}
+ 154              		.cfi_def_cfa_offset 20
+ 155              		.cfi_offset 4, -20
+ 156              		.cfi_offset 5, -16
+ 157              		.cfi_offset 6, -12
+ 158              		.cfi_offset 7, -8
+ 159              		.cfi_offset 14, -4
+ 237:Generated_Source\PSoC5/UART_RS485_INT.c ****              ((UART_RS485_TXSTATUS_REG & UART_RS485_TX_STS_FIFO_FULL) == 0u))
+ 160              		.loc 1 237 0
+ 161 000e 1349     		ldr	r1, .L29+8
+ 162 0010 0B78     		ldrb	r3, [r1]	@ zero_extendqisi2
+ 236:Generated_Source\PSoC5/UART_RS485_INT.c ****              ((UART_RS485_TXSTATUS_REG & UART_RS485_TX_STS_FIFO_FULL) == 0u))
+ 163              		.loc 1 236 0
+ 164 0012 03F00403 		and	r3, r3, #4
+ 165 0016 03F0FF06 		and	r6, r3, #255
+ 166 001a C3B9     		cbnz	r3, .L19
+ 238:Generated_Source\PSoC5/UART_RS485_INT.c ****         {
+ 239:Generated_Source\PSoC5/UART_RS485_INT.c ****             /* Check pointer wrap around */
+ 240:Generated_Source\PSoC5/UART_RS485_INT.c ****             if(UART_RS485_txBufferRead >= UART_RS485_TX_BUFFER_SIZE)
+ 167              		.loc 1 240 0
+ 168 001c 1746     		mov	r7, r2
+ 169 001e 104D     		ldr	r5, .L29+12
+ 241:Generated_Source\PSoC5/UART_RS485_INT.c ****             {
+ 242:Generated_Source\PSoC5/UART_RS485_INT.c ****                 UART_RS485_txBufferRead = 0u;
+ 243:Generated_Source\PSoC5/UART_RS485_INT.c ****             }
+ 244:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+ 245:Generated_Source\PSoC5/UART_RS485_INT.c ****             UART_RS485_TXDATA_REG = UART_RS485_txBuffer[UART_RS485_txBufferRead];
+ 170              		.loc 1 245 0
+ 171 0020 104C     		ldr	r4, .L29+16
+ 172 0022 02E0     		b	.L23
+ 173              	.L28:
+ 237:Generated_Source\PSoC5/UART_RS485_INT.c ****         {
+ 174              		.loc 1 237 0 discriminator 1
+ 175 0024 0B78     		ldrb	r3, [r1]	@ zero_extendqisi2
+ 236:Generated_Source\PSoC5/UART_RS485_INT.c ****              ((UART_RS485_TXSTATUS_REG & UART_RS485_TX_STS_FIFO_FULL) == 0u))
+ 176              		.loc 1 236 0 discriminator 1
+ 177 0026 5B07     		lsls	r3, r3, #29
+ 178 0028 11D4     		bmi	.L19
+ 179              	.L23:
+ 240:Generated_Source\PSoC5/UART_RS485_INT.c ****             {
+ 180              		.loc 1 240 0
+ 181 002a 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 182 002c 3F2B     		cmp	r3, #63
+ 242:Generated_Source\PSoC5/UART_RS485_INT.c ****             }
+ 183              		.loc 1 242 0
+ 184 002e 88BF     		it	hi
+ 185 0030 3E70     		strbhi	r6, [r7]
+ 186              		.loc 1 245 0
+ 187 0032 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 188 0034 DBB2     		uxtb	r3, r3
+ 189 0036 EB5C     		ldrb	r3, [r5, r3]	@ zero_extendqisi2
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccTV2FhT.s 			page 9
+
+
+ 190 0038 DBB2     		uxtb	r3, r3
+ 191 003a 2370     		strb	r3, [r4]
+ 246:Generated_Source\PSoC5/UART_RS485_INT.c **** 
+ 247:Generated_Source\PSoC5/UART_RS485_INT.c ****             /* Set next pointer */
+ 248:Generated_Source\PSoC5/UART_RS485_INT.c ****             UART_RS485_txBufferRead++;
+ 192              		.loc 1 248 0
+ 193 003c 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 236:Generated_Source\PSoC5/UART_RS485_INT.c ****              ((UART_RS485_TXSTATUS_REG & UART_RS485_TX_STS_FIFO_FULL) == 0u))
+ 194              		.loc 1 236 0
+ 195 003e 90F800E0 		ldrb	lr, [r0]	@ zero_extendqisi2
+ 196              		.loc 1 248 0
+ 197 0042 0133     		adds	r3, r3, #1
+ 198 0044 DBB2     		uxtb	r3, r3
+ 199 0046 1370     		strb	r3, [r2]
+ 236:Generated_Source\PSoC5/UART_RS485_INT.c ****              ((UART_RS485_TXSTATUS_REG & UART_RS485_TX_STS_FIFO_FULL) == 0u))
+ 200              		.loc 1 236 0
+ 201 0048 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 202 004a 9E45     		cmp	lr, r3
+ 203 004c EAD1     		bne	.L28
+ 204              	.L19:
+ 205 004e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 206              	.L27:
+ 207              		.cfi_def_cfa_offset 0
+ 208              		.cfi_restore 4
+ 209              		.cfi_restore 5
+ 210              		.cfi_restore 6
+ 211              		.cfi_restore 7
+ 212              		.cfi_restore 14
+ 213 0050 7047     		bx	lr
+ 214              	.L30:
+ 215 0052 00BF     		.align	2
+ 216              	.L29:
+ 217 0054 00000000 		.word	UART_RS485_txBufferRead
+ 218 0058 00000000 		.word	UART_RS485_txBufferWrite
+ 219 005c 6B650040 		.word	1073767787
+ 220 0060 00000000 		.word	UART_RS485_txBuffer
+ 221 0064 48650040 		.word	1073767752
+ 222              		.cfi_endproc
+ 223              	.LFE1:
+ 224              		.size	UART_RS485_TXISR, .-UART_RS485_TXISR
+ 225              		.text
+ 226              	.Letext0:
+ 227              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 228              		.file 3 "Generated_Source\\PSoC5\\UART_RS485.h"
+ 229              		.section	.debug_info,"",%progbits
+ 230              	.Ldebug_info0:
+ 231 0000 82010000 		.4byte	0x182
+ 232 0004 0400     		.2byte	0x4
+ 233 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 234 000a 04       		.byte	0x4
+ 235 000b 01       		.uleb128 0x1
+ 236 000c 46000000 		.4byte	.LASF28
+ 237 0010 0C       		.byte	0xc
+ 238 0011 1E000000 		.4byte	.LASF29
+ 239 0015 F4010000 		.4byte	.LASF30
+ 240 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 241 001d 00000000 		.4byte	0
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccTV2FhT.s 			page 10
+
+
+ 242 0021 00000000 		.4byte	.Ldebug_line0
+ 243 0025 02       		.uleb128 0x2
+ 244 0026 01       		.byte	0x1
+ 245 0027 06       		.byte	0x6
+ 246 0028 BE020000 		.4byte	.LASF0
+ 247 002c 02       		.uleb128 0x2
+ 248 002d 01       		.byte	0x1
+ 249 002e 08       		.byte	0x8
+ 250 002f 22010000 		.4byte	.LASF1
+ 251 0033 02       		.uleb128 0x2
+ 252 0034 02       		.byte	0x2
+ 253 0035 05       		.byte	0x5
+ 254 0036 54010000 		.4byte	.LASF2
+ 255 003a 02       		.uleb128 0x2
+ 256 003b 02       		.byte	0x2
+ 257 003c 07       		.byte	0x7
+ 258 003d F3000000 		.4byte	.LASF3
+ 259 0041 02       		.uleb128 0x2
+ 260 0042 04       		.byte	0x4
+ 261 0043 05       		.byte	0x5
+ 262 0044 90020000 		.4byte	.LASF4
+ 263 0048 02       		.uleb128 0x2
+ 264 0049 04       		.byte	0x4
+ 265 004a 07       		.byte	0x7
+ 266 004b 35010000 		.4byte	.LASF5
+ 267 004f 02       		.uleb128 0x2
+ 268 0050 08       		.byte	0x8
+ 269 0051 05       		.byte	0x5
+ 270 0052 D4010000 		.4byte	.LASF6
+ 271 0056 02       		.uleb128 0x2
+ 272 0057 08       		.byte	0x8
+ 273 0058 07       		.byte	0x7
+ 274 0059 7F010000 		.4byte	.LASF7
+ 275 005d 03       		.uleb128 0x3
+ 276 005e 04       		.byte	0x4
+ 277 005f 05       		.byte	0x5
+ 278 0060 696E7400 		.ascii	"int\000"
+ 279 0064 02       		.uleb128 0x2
+ 280 0065 04       		.byte	0x4
+ 281 0066 07       		.byte	0x7
+ 282 0067 72010000 		.4byte	.LASF8
+ 283 006b 04       		.uleb128 0x4
+ 284 006c 47010000 		.4byte	.LASF12
+ 285 0070 02       		.byte	0x2
+ 286 0071 E401     		.2byte	0x1e4
+ 287 0073 2C000000 		.4byte	0x2c
+ 288 0077 02       		.uleb128 0x2
+ 289 0078 04       		.byte	0x4
+ 290 0079 04       		.byte	0x4
+ 291 007a D4000000 		.4byte	.LASF9
+ 292 007e 02       		.uleb128 0x2
+ 293 007f 08       		.byte	0x8
+ 294 0080 04       		.byte	0x4
+ 295 0081 4D010000 		.4byte	.LASF10
+ 296 0085 02       		.uleb128 0x2
+ 297 0086 01       		.byte	0x1
+ 298 0087 08       		.byte	0x8
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccTV2FhT.s 			page 11
+
+
+ 299 0088 99020000 		.4byte	.LASF11
+ 300 008c 04       		.uleb128 0x4
+ 301 008d 30010000 		.4byte	.LASF13
+ 302 0091 02       		.byte	0x2
+ 303 0092 8E02     		.2byte	0x28e
+ 304 0094 98000000 		.4byte	0x98
+ 305 0098 05       		.uleb128 0x5
+ 306 0099 6B000000 		.4byte	0x6b
+ 307 009d 02       		.uleb128 0x2
+ 308 009e 08       		.byte	0x8
+ 309 009f 04       		.byte	0x4
+ 310 00a0 9E020000 		.4byte	.LASF14
+ 311 00a4 02       		.uleb128 0x2
+ 312 00a5 04       		.byte	0x4
+ 313 00a6 07       		.byte	0x7
+ 314 00a7 CB010000 		.4byte	.LASF15
+ 315 00ab 06       		.uleb128 0x6
+ 316 00ac 06010000 		.4byte	.LASF31
+ 317 00b0 01       		.byte	0x1
+ 318 00b1 3B       		.byte	0x3b
+ 319 00b2 00000000 		.4byte	.LFB0
+ 320 00b6 98000000 		.4byte	.LFE0-.LFB0
+ 321 00ba 01       		.uleb128 0x1
+ 322 00bb 9C       		.byte	0x9c
+ 323 00bc EE000000 		.4byte	0xee
+ 324 00c0 07       		.uleb128 0x7
+ 325 00c1 CA020000 		.4byte	.LASF16
+ 326 00c5 01       		.byte	0x1
+ 327 00c6 3D       		.byte	0x3d
+ 328 00c7 6B000000 		.4byte	0x6b
+ 329 00cb 00000000 		.4byte	.LLST0
+ 330 00cf 07       		.uleb128 0x7
+ 331 00d0 17010000 		.4byte	.LASF17
+ 332 00d4 01       		.byte	0x1
+ 333 00d5 3E       		.byte	0x3e
+ 334 00d6 6B000000 		.4byte	0x6b
+ 335 00da 1E000000 		.4byte	.LLST1
+ 336 00de 07       		.uleb128 0x7
+ 337 00df E2010000 		.4byte	.LASF18
+ 338 00e3 01       		.byte	0x1
+ 339 00e4 3F       		.byte	0x3f
+ 340 00e5 6B000000 		.4byte	0x6b
+ 341 00e9 31000000 		.4byte	.LLST2
+ 342 00ed 00       		.byte	0
+ 343 00ee 08       		.uleb128 0x8
+ 344 00ef 38020000 		.4byte	.LASF32
+ 345 00f3 01       		.byte	0x1
+ 346 00f4 D8       		.byte	0xd8
+ 347 00f5 00000000 		.4byte	.LFB1
+ 348 00f9 68000000 		.4byte	.LFE1-.LFB1
+ 349 00fd 01       		.uleb128 0x1
+ 350 00fe 9C       		.byte	0x9c
+ 351 00ff 09       		.uleb128 0x9
+ 352 0100 98000000 		.4byte	0x98
+ 353 0104 0F010000 		.4byte	0x10f
+ 354 0108 0A       		.uleb128 0xa
+ 355 0109 A4000000 		.4byte	0xa4
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccTV2FhT.s 			page 12
+
+
+ 356 010d 3F       		.byte	0x3f
+ 357 010e 00       		.byte	0
+ 358 010f 0B       		.uleb128 0xb
+ 359 0110 5E010000 		.4byte	.LASF19
+ 360 0114 03       		.byte	0x3
+ 361 0115 3801     		.2byte	0x138
+ 362 0117 1B010000 		.4byte	0x11b
+ 363 011b 05       		.uleb128 0x5
+ 364 011c FF000000 		.4byte	0xff
+ 365 0120 0B       		.uleb128 0xb
+ 366 0121 49020000 		.4byte	.LASF20
+ 367 0125 03       		.byte	0x3
+ 368 0126 3901     		.2byte	0x139
+ 369 0128 98000000 		.4byte	0x98
+ 370 012c 0B       		.uleb128 0xb
+ 371 012d DA000000 		.4byte	.LASF21
+ 372 0131 03       		.byte	0x3
+ 373 0132 3A01     		.2byte	0x13a
+ 374 0134 6B000000 		.4byte	0x6b
+ 375 0138 0B       		.uleb128 0xb
+ 376 0139 79020000 		.4byte	.LASF22
+ 377 013d 03       		.byte	0x3
+ 378 013e 3D01     		.2byte	0x13d
+ 379 0140 6B000000 		.4byte	0x6b
+ 380 0144 0B       		.uleb128 0xb
+ 381 0145 AA020000 		.4byte	.LASF23
+ 382 0149 03       		.byte	0x3
+ 383 014a 3E01     		.2byte	0x13e
+ 384 014c 50010000 		.4byte	0x150
+ 385 0150 05       		.uleb128 0x5
+ 386 0151 FF000000 		.4byte	0xff
+ 387 0155 0B       		.uleb128 0xb
+ 388 0156 61020000 		.4byte	.LASF24
+ 389 015a 03       		.byte	0x3
+ 390 015b 3F01     		.2byte	0x13f
+ 391 015d 98000000 		.4byte	0x98
+ 392 0161 0B       		.uleb128 0xb
+ 393 0162 96010000 		.4byte	.LASF25
+ 394 0166 03       		.byte	0x3
+ 395 0167 4001     		.2byte	0x140
+ 396 0169 98000000 		.4byte	0x98
+ 397 016d 0B       		.uleb128 0xb
+ 398 016e 00000000 		.4byte	.LASF26
+ 399 0172 03       		.byte	0x3
+ 400 0173 4101     		.2byte	0x141
+ 401 0175 98000000 		.4byte	0x98
+ 402 0179 0B       		.uleb128 0xb
+ 403 017a AF010000 		.4byte	.LASF27
+ 404 017e 03       		.byte	0x3
+ 405 017f 4201     		.2byte	0x142
+ 406 0181 98000000 		.4byte	0x98
+ 407 0185 00       		.byte	0
+ 408              		.section	.debug_abbrev,"",%progbits
+ 409              	.Ldebug_abbrev0:
+ 410 0000 01       		.uleb128 0x1
+ 411 0001 11       		.uleb128 0x11
+ 412 0002 01       		.byte	0x1
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccTV2FhT.s 			page 13
+
+
+ 413 0003 25       		.uleb128 0x25
+ 414 0004 0E       		.uleb128 0xe
+ 415 0005 13       		.uleb128 0x13
+ 416 0006 0B       		.uleb128 0xb
+ 417 0007 03       		.uleb128 0x3
+ 418 0008 0E       		.uleb128 0xe
+ 419 0009 1B       		.uleb128 0x1b
+ 420 000a 0E       		.uleb128 0xe
+ 421 000b 55       		.uleb128 0x55
+ 422 000c 17       		.uleb128 0x17
+ 423 000d 11       		.uleb128 0x11
+ 424 000e 01       		.uleb128 0x1
+ 425 000f 10       		.uleb128 0x10
+ 426 0010 17       		.uleb128 0x17
+ 427 0011 00       		.byte	0
+ 428 0012 00       		.byte	0
+ 429 0013 02       		.uleb128 0x2
+ 430 0014 24       		.uleb128 0x24
+ 431 0015 00       		.byte	0
+ 432 0016 0B       		.uleb128 0xb
+ 433 0017 0B       		.uleb128 0xb
+ 434 0018 3E       		.uleb128 0x3e
+ 435 0019 0B       		.uleb128 0xb
+ 436 001a 03       		.uleb128 0x3
+ 437 001b 0E       		.uleb128 0xe
+ 438 001c 00       		.byte	0
+ 439 001d 00       		.byte	0
+ 440 001e 03       		.uleb128 0x3
+ 441 001f 24       		.uleb128 0x24
+ 442 0020 00       		.byte	0
+ 443 0021 0B       		.uleb128 0xb
+ 444 0022 0B       		.uleb128 0xb
+ 445 0023 3E       		.uleb128 0x3e
+ 446 0024 0B       		.uleb128 0xb
+ 447 0025 03       		.uleb128 0x3
+ 448 0026 08       		.uleb128 0x8
+ 449 0027 00       		.byte	0
+ 450 0028 00       		.byte	0
+ 451 0029 04       		.uleb128 0x4
+ 452 002a 16       		.uleb128 0x16
+ 453 002b 00       		.byte	0
+ 454 002c 03       		.uleb128 0x3
+ 455 002d 0E       		.uleb128 0xe
+ 456 002e 3A       		.uleb128 0x3a
+ 457 002f 0B       		.uleb128 0xb
+ 458 0030 3B       		.uleb128 0x3b
+ 459 0031 05       		.uleb128 0x5
+ 460 0032 49       		.uleb128 0x49
+ 461 0033 13       		.uleb128 0x13
+ 462 0034 00       		.byte	0
+ 463 0035 00       		.byte	0
+ 464 0036 05       		.uleb128 0x5
+ 465 0037 35       		.uleb128 0x35
+ 466 0038 00       		.byte	0
+ 467 0039 49       		.uleb128 0x49
+ 468 003a 13       		.uleb128 0x13
+ 469 003b 00       		.byte	0
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccTV2FhT.s 			page 14
+
+
+ 470 003c 00       		.byte	0
+ 471 003d 06       		.uleb128 0x6
+ 472 003e 2E       		.uleb128 0x2e
+ 473 003f 01       		.byte	0x1
+ 474 0040 3F       		.uleb128 0x3f
+ 475 0041 19       		.uleb128 0x19
+ 476 0042 03       		.uleb128 0x3
+ 477 0043 0E       		.uleb128 0xe
+ 478 0044 3A       		.uleb128 0x3a
+ 479 0045 0B       		.uleb128 0xb
+ 480 0046 3B       		.uleb128 0x3b
+ 481 0047 0B       		.uleb128 0xb
+ 482 0048 27       		.uleb128 0x27
+ 483 0049 19       		.uleb128 0x19
+ 484 004a 11       		.uleb128 0x11
+ 485 004b 01       		.uleb128 0x1
+ 486 004c 12       		.uleb128 0x12
+ 487 004d 06       		.uleb128 0x6
+ 488 004e 40       		.uleb128 0x40
+ 489 004f 18       		.uleb128 0x18
+ 490 0050 9742     		.uleb128 0x2117
+ 491 0052 19       		.uleb128 0x19
+ 492 0053 01       		.uleb128 0x1
+ 493 0054 13       		.uleb128 0x13
+ 494 0055 00       		.byte	0
+ 495 0056 00       		.byte	0
+ 496 0057 07       		.uleb128 0x7
+ 497 0058 34       		.uleb128 0x34
+ 498 0059 00       		.byte	0
+ 499 005a 03       		.uleb128 0x3
+ 500 005b 0E       		.uleb128 0xe
+ 501 005c 3A       		.uleb128 0x3a
+ 502 005d 0B       		.uleb128 0xb
+ 503 005e 3B       		.uleb128 0x3b
+ 504 005f 0B       		.uleb128 0xb
+ 505 0060 49       		.uleb128 0x49
+ 506 0061 13       		.uleb128 0x13
+ 507 0062 02       		.uleb128 0x2
+ 508 0063 17       		.uleb128 0x17
+ 509 0064 00       		.byte	0
+ 510 0065 00       		.byte	0
+ 511 0066 08       		.uleb128 0x8
+ 512 0067 2E       		.uleb128 0x2e
+ 513 0068 00       		.byte	0
+ 514 0069 3F       		.uleb128 0x3f
+ 515 006a 19       		.uleb128 0x19
+ 516 006b 03       		.uleb128 0x3
+ 517 006c 0E       		.uleb128 0xe
+ 518 006d 3A       		.uleb128 0x3a
+ 519 006e 0B       		.uleb128 0xb
+ 520 006f 3B       		.uleb128 0x3b
+ 521 0070 0B       		.uleb128 0xb
+ 522 0071 27       		.uleb128 0x27
+ 523 0072 19       		.uleb128 0x19
+ 524 0073 11       		.uleb128 0x11
+ 525 0074 01       		.uleb128 0x1
+ 526 0075 12       		.uleb128 0x12
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccTV2FhT.s 			page 15
+
+
+ 527 0076 06       		.uleb128 0x6
+ 528 0077 40       		.uleb128 0x40
+ 529 0078 18       		.uleb128 0x18
+ 530 0079 9742     		.uleb128 0x2117
+ 531 007b 19       		.uleb128 0x19
+ 532 007c 00       		.byte	0
+ 533 007d 00       		.byte	0
+ 534 007e 09       		.uleb128 0x9
+ 535 007f 01       		.uleb128 0x1
+ 536 0080 01       		.byte	0x1
+ 537 0081 49       		.uleb128 0x49
+ 538 0082 13       		.uleb128 0x13
+ 539 0083 01       		.uleb128 0x1
+ 540 0084 13       		.uleb128 0x13
+ 541 0085 00       		.byte	0
+ 542 0086 00       		.byte	0
+ 543 0087 0A       		.uleb128 0xa
+ 544 0088 21       		.uleb128 0x21
+ 545 0089 00       		.byte	0
+ 546 008a 49       		.uleb128 0x49
+ 547 008b 13       		.uleb128 0x13
+ 548 008c 2F       		.uleb128 0x2f
+ 549 008d 0B       		.uleb128 0xb
+ 550 008e 00       		.byte	0
+ 551 008f 00       		.byte	0
+ 552 0090 0B       		.uleb128 0xb
+ 553 0091 34       		.uleb128 0x34
+ 554 0092 00       		.byte	0
+ 555 0093 03       		.uleb128 0x3
+ 556 0094 0E       		.uleb128 0xe
+ 557 0095 3A       		.uleb128 0x3a
+ 558 0096 0B       		.uleb128 0xb
+ 559 0097 3B       		.uleb128 0x3b
+ 560 0098 05       		.uleb128 0x5
+ 561 0099 49       		.uleb128 0x49
+ 562 009a 13       		.uleb128 0x13
+ 563 009b 3F       		.uleb128 0x3f
+ 564 009c 19       		.uleb128 0x19
+ 565 009d 3C       		.uleb128 0x3c
+ 566 009e 19       		.uleb128 0x19
+ 567 009f 00       		.byte	0
+ 568 00a0 00       		.byte	0
+ 569 00a1 00       		.byte	0
+ 570              		.section	.debug_loc,"",%progbits
+ 571              	.Ldebug_loc0:
+ 572              	.LLST0:
+ 573 0000 1E000000 		.4byte	.LVL2
+ 574 0004 32000000 		.4byte	.LVL3
+ 575 0008 0100     		.2byte	0x1
+ 576 000a 53       		.byte	0x53
+ 577 000b 42000000 		.4byte	.LVL4
+ 578 000f 4E000000 		.4byte	.LVL6
+ 579 0013 0100     		.2byte	0x1
+ 580 0015 58       		.byte	0x58
+ 581 0016 00000000 		.4byte	0
+ 582 001a 00000000 		.4byte	0
+ 583              	.LLST1:
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccTV2FhT.s 			page 16
+
+
+ 584 001e 1E000000 		.4byte	.LVL2
+ 585 0022 32000000 		.4byte	.LVL3
+ 586 0026 0100     		.2byte	0x1
+ 587 0028 53       		.byte	0x53
+ 588 0029 00000000 		.4byte	0
+ 589 002d 00000000 		.4byte	0
+ 590              	.LLST2:
+ 591 0031 00000000 		.4byte	.LVL0
+ 592 0035 1A000000 		.4byte	.LVL1
+ 593 0039 0200     		.2byte	0x2
+ 594 003b 30       		.byte	0x30
+ 595 003c 9F       		.byte	0x9f
+ 596 003d 48000000 		.4byte	.LVL5
+ 597 0041 98000000 		.4byte	.LFE0
+ 598 0045 0200     		.2byte	0x2
+ 599 0047 31       		.byte	0x31
+ 600 0048 9F       		.byte	0x9f
+ 601 0049 00000000 		.4byte	0
+ 602 004d 00000000 		.4byte	0
+ 603              		.section	.debug_aranges,"",%progbits
+ 604 0000 24000000 		.4byte	0x24
+ 605 0004 0200     		.2byte	0x2
+ 606 0006 00000000 		.4byte	.Ldebug_info0
+ 607 000a 04       		.byte	0x4
+ 608 000b 00       		.byte	0
+ 609 000c 0000     		.2byte	0
+ 610 000e 0000     		.2byte	0
+ 611 0010 00000000 		.4byte	.LFB0
+ 612 0014 98000000 		.4byte	.LFE0-.LFB0
+ 613 0018 00000000 		.4byte	.LFB1
+ 614 001c 68000000 		.4byte	.LFE1-.LFB1
+ 615 0020 00000000 		.4byte	0
+ 616 0024 00000000 		.4byte	0
+ 617              		.section	.debug_ranges,"",%progbits
+ 618              	.Ldebug_ranges0:
+ 619 0000 00000000 		.4byte	.LFB0
+ 620 0004 98000000 		.4byte	.LFE0
+ 621 0008 00000000 		.4byte	.LFB1
+ 622 000c 68000000 		.4byte	.LFE1
+ 623 0010 00000000 		.4byte	0
+ 624 0014 00000000 		.4byte	0
+ 625              		.section	.debug_line,"",%progbits
+ 626              	.Ldebug_line0:
+ 627 0000 D8000000 		.section	.debug_str,"MS",%progbits,1
+ 627      02005B00 
+ 627      00000201 
+ 627      FB0E0D00 
+ 627      01010101 
+ 628              	.LASF26:
+ 629 0000 55415254 		.ascii	"UART_RS485_rxBufferLoopDetect\000"
+ 629      5F525334 
+ 629      38355F72 
+ 629      78427566 
+ 629      6665724C 
+ 630              	.LASF29:
+ 631 001e 47656E65 		.ascii	"Generated_Source\\PSoC5\\UART_RS485_INT.c\000"
+ 631      72617465 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccTV2FhT.s 			page 17
+
+
+ 631      645F536F 
+ 631      75726365 
+ 631      5C50536F 
+ 632              	.LASF28:
+ 633 0046 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 633      43313120 
+ 633      352E342E 
+ 633      31203230 
+ 633      31363036 
+ 634 0079 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 634      20726576 
+ 634      6973696F 
+ 634      6E203233 
+ 634      37373135 
+ 635 00ac 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects\000"
+ 635      66756E63 
+ 635      74696F6E 
+ 635      2D736563 
+ 635      74696F6E 
+ 636              	.LASF9:
+ 637 00d4 666C6F61 		.ascii	"float\000"
+ 637      7400
+ 638              	.LASF21:
+ 639 00da 55415254 		.ascii	"UART_RS485_txBufferWrite\000"
+ 639      5F525334 
+ 639      38355F74 
+ 639      78427566 
+ 639      66657257 
+ 640              	.LASF3:
+ 641 00f3 73686F72 		.ascii	"short unsigned int\000"
+ 641      7420756E 
+ 641      7369676E 
+ 641      65642069 
+ 641      6E7400
+ 642              	.LASF31:
+ 643 0106 55415254 		.ascii	"UART_RS485_RXISR\000"
+ 643      5F525334 
+ 643      38355F52 
+ 643      58495352 
+ 643      00
+ 644              	.LASF17:
+ 645 0117 72656164 		.ascii	"readStatus\000"
+ 645      53746174 
+ 645      757300
+ 646              	.LASF1:
+ 647 0122 756E7369 		.ascii	"unsigned char\000"
+ 647      676E6564 
+ 647      20636861 
+ 647      7200
+ 648              	.LASF13:
+ 649 0130 72656738 		.ascii	"reg8\000"
+ 649      00
+ 650              	.LASF5:
+ 651 0135 6C6F6E67 		.ascii	"long unsigned int\000"
+ 651      20756E73 
+ 651      69676E65 
+ 651      6420696E 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccTV2FhT.s 			page 18
+
+
+ 651      7400
+ 652              	.LASF12:
+ 653 0147 75696E74 		.ascii	"uint8\000"
+ 653      3800
+ 654              	.LASF10:
+ 655 014d 646F7562 		.ascii	"double\000"
+ 655      6C6500
+ 656              	.LASF2:
+ 657 0154 73686F72 		.ascii	"short int\000"
+ 657      7420696E 
+ 657      7400
+ 658              	.LASF19:
+ 659 015e 55415254 		.ascii	"UART_RS485_txBuffer\000"
+ 659      5F525334 
+ 659      38355F74 
+ 659      78427566 
+ 659      66657200 
+ 660              	.LASF8:
+ 661 0172 756E7369 		.ascii	"unsigned int\000"
+ 661      676E6564 
+ 661      20696E74 
+ 661      00
+ 662              	.LASF7:
+ 663 017f 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 663      206C6F6E 
+ 663      6720756E 
+ 663      7369676E 
+ 663      65642069 
+ 664              	.LASF25:
+ 665 0196 55415254 		.ascii	"UART_RS485_rxBufferWrite\000"
+ 665      5F525334 
+ 665      38355F72 
+ 665      78427566 
+ 665      66657257 
+ 666              	.LASF27:
+ 667 01af 55415254 		.ascii	"UART_RS485_rxBufferOverflow\000"
+ 667      5F525334 
+ 667      38355F72 
+ 667      78427566 
+ 667      6665724F 
+ 668              	.LASF15:
+ 669 01cb 73697A65 		.ascii	"sizetype\000"
+ 669      74797065 
+ 669      00
+ 670              	.LASF6:
+ 671 01d4 6C6F6E67 		.ascii	"long long int\000"
+ 671      206C6F6E 
+ 671      6720696E 
+ 671      7400
+ 672              	.LASF18:
+ 673 01e2 696E6372 		.ascii	"increment_pointer\000"
+ 673      656D656E 
+ 673      745F706F 
+ 673      696E7465 
+ 673      7200
+ 674              	.LASF30:
+ 675 01f4 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Desktop\\SoftPro firmware (PSo"
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccTV2FhT.s 			page 19
+
+
+ 675      73657273 
+ 675      5C4D6174 
+ 675      74696143 
+ 675      505C4465 
+ 676 0223 4335295C 		.ascii	"C5)\\bootloader.cydsn\000"
+ 676      626F6F74 
+ 676      6C6F6164 
+ 676      65722E63 
+ 676      7964736E 
+ 677              	.LASF32:
+ 678 0238 55415254 		.ascii	"UART_RS485_TXISR\000"
+ 678      5F525334 
+ 678      38355F54 
+ 678      58495352 
+ 678      00
+ 679              	.LASF20:
+ 680 0249 55415254 		.ascii	"UART_RS485_txBufferRead\000"
+ 680      5F525334 
+ 680      38355F74 
+ 680      78427566 
+ 680      66657252 
+ 681              	.LASF24:
+ 682 0261 55415254 		.ascii	"UART_RS485_rxBufferRead\000"
+ 682      5F525334 
+ 682      38355F72 
+ 682      78427566 
+ 682      66657252 
+ 683              	.LASF22:
+ 684 0279 55415254 		.ascii	"UART_RS485_errorStatus\000"
+ 684      5F525334 
+ 684      38355F65 
+ 684      72726F72 
+ 684      53746174 
+ 685              	.LASF4:
+ 686 0290 6C6F6E67 		.ascii	"long int\000"
+ 686      20696E74 
+ 686      00
+ 687              	.LASF11:
+ 688 0299 63686172 		.ascii	"char\000"
+ 688      00
+ 689              	.LASF14:
+ 690 029e 6C6F6E67 		.ascii	"long double\000"
+ 690      20646F75 
+ 690      626C6500 
+ 691              	.LASF23:
+ 692 02aa 55415254 		.ascii	"UART_RS485_rxBuffer\000"
+ 692      5F525334 
+ 692      38355F72 
+ 692      78427566 
+ 692      66657200 
+ 693              	.LASF0:
+ 694 02be 7369676E 		.ascii	"signed char\000"
+ 694      65642063 
+ 694      68617200 
+ 695              	.LASF16:
+ 696 02ca 72656164 		.ascii	"readData\000"
+ 696      44617461 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccTV2FhT.s 			page 20
+
+
+ 696      00
+ 697              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

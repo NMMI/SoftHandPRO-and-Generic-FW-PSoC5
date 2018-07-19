@@ -1,0 +1,5321 @@
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"utils.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	__aeabi_i2f
+  20              		.global	__aeabi_fmul
+  21              		.global	__aeabi_fadd
+  22              		.global	__aeabi_fdiv
+  23              		.global	__aeabi_f2iz
+  24              		.section	.text.curr_estim,"ax",%progbits
+  25              		.align	2
+  26              		.global	curr_estim
+  27              		.thumb
+  28              		.thumb_func
+  29              		.type	curr_estim, %function
+  30              	curr_estim:
+  31              	.LFB64:
+  32              		.file 1 "..\\src\\utils.c"
+   1:..\src/utils.c **** // ----------------------------------------------------------------------------
+   2:..\src/utils.c **** // BSD 3-Clause License
+   3:..\src/utils.c **** 
+   4:..\src/utils.c **** // Copyright (c) 2016, qbrobotics
+   5:..\src/utils.c **** // Copyright (c) 2017, Centro "E.Piaggio"
+   6:..\src/utils.c **** // All rights reserved.
+   7:..\src/utils.c **** 
+   8:..\src/utils.c **** // Redistribution and use in source and binary forms, with or without
+   9:..\src/utils.c **** // modification, are permitted provided that the following conditions are met:
+  10:..\src/utils.c **** 
+  11:..\src/utils.c **** // * Redistributions of source code must retain the above copyright notice, this
+  12:..\src/utils.c **** //   list of conditions and the following disclaimer.
+  13:..\src/utils.c **** 
+  14:..\src/utils.c **** // * Redistributions in binary form must reproduce the above copyright notice,
+  15:..\src/utils.c **** //   this list of conditions and the following disclaimer in the documentation
+  16:..\src/utils.c **** //   and/or other materials provided with the distribution.
+  17:..\src/utils.c **** 
+  18:..\src/utils.c **** // * Neither the name of the copyright holder nor the names of its
+  19:..\src/utils.c **** //   contributors may be used to endorse or promote products derived from
+  20:..\src/utils.c **** //   this software without specific prior written permission.
+  21:..\src/utils.c **** 
+  22:..\src/utils.c **** // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  23:..\src/utils.c **** // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  24:..\src/utils.c **** // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  25:..\src/utils.c **** // DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 2
+
+
+  26:..\src/utils.c **** // FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  27:..\src/utils.c **** // DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  28:..\src/utils.c **** // SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  29:..\src/utils.c **** // CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  30:..\src/utils.c **** // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  31:..\src/utils.c **** // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  32:..\src/utils.c **** // POSSIBILITY OF SUCH DAMAGE.
+  33:..\src/utils.c **** // ----------------------------------------------------------------------------
+  34:..\src/utils.c **** 
+  35:..\src/utils.c **** /**
+  36:..\src/utils.c **** * \file         utils.c
+  37:..\src/utils.c **** *
+  38:..\src/utils.c **** * \brief        Definition of utility functions.
+  39:..\src/utils.c **** * \date         October 01, 2017
+  40:..\src/utils.c **** * \author       _Centro "E.Piaggio"_
+  41:..\src/utils.c **** * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
+  42:..\src/utils.c **** * \copyright    (C) 2017 Centro "E.Piaggio". All rights reserved.
+  43:..\src/utils.c **** */
+  44:..\src/utils.c **** 
+  45:..\src/utils.c **** #include "utils.h"
+  46:..\src/utils.c **** #include <math.h>
+  47:..\src/utils.c **** 
+  48:..\src/utils.c **** //==============================================================================
+  49:..\src/utils.c **** //                                                            Current Estimation
+  50:..\src/utils.c **** //==============================================================================
+  51:..\src/utils.c **** 
+  52:..\src/utils.c **** int32 curr_estim ( int32 pos, int32 vel, int32 ref ) {
+  33              		.loc 1 52 0
+  34              		.cfi_startproc
+  35              		@ args = 0, pretend = 0, frame = 24
+  36              		@ frame_needed = 1, uses_anonymous_args = 0
+  37 0000 B0B5     		push	{r4, r5, r7, lr}
+  38              		.cfi_def_cfa_offset 16
+  39              		.cfi_offset 4, -16
+  40              		.cfi_offset 5, -12
+  41              		.cfi_offset 7, -8
+  42              		.cfi_offset 14, -4
+  43 0002 86B0     		sub	sp, sp, #24
+  44              		.cfi_def_cfa_offset 40
+  45 0004 00AF     		add	r7, sp, #0
+  46              		.cfi_def_cfa_register 7
+  47 0006 F860     		str	r0, [r7, #12]
+  48 0008 B960     		str	r1, [r7, #8]
+  49 000a 7A60     		str	r2, [r7, #4]
+  53:..\src/utils.c **** 
+  54:..\src/utils.c ****         static int32 virtual_pos_friction; 	// Virtual position used to estimate friction.
+  55:..\src/utils.c ****         static int32 err_pos_dt;			// Temporal evolution of error position.
+  56:..\src/utils.c **** 											// Needed to model the current transients due to reference steps.
+  57:..\src/utils.c ****         int32 curr_estimate;
+  58:..\src/utils.c **** 
+  59:..\src/utils.c ****         if (pos < ZERO_TOL) 
+  50              		.loc 1 59 0
+  51 000c FB68     		ldr	r3, [r7, #12]
+  52 000e 632B     		cmp	r3, #99
+  53 0010 03DC     		bgt	.L2
+  60:..\src/utils.c **** 			virtual_pos_friction = pos;
+  54              		.loc 1 60 0
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 3
+
+
+  55 0012 694A     		ldr	r2, .L9
+  56 0014 FB68     		ldr	r3, [r7, #12]
+  57 0016 1360     		str	r3, [r2]
+  58 0018 15E0     		b	.L3
+  59              	.L2:
+  61:..\src/utils.c ****         else {
+  62:..\src/utils.c **** 			if ((pos - virtual_pos_friction) > ZMAX) 
+  60              		.loc 1 62 0
+  61 001a 674B     		ldr	r3, .L9
+  62 001c 1B68     		ldr	r3, [r3]
+  63 001e FA68     		ldr	r2, [r7, #12]
+  64 0020 D31A     		subs	r3, r2, r3
+  65 0022 052B     		cmp	r3, #5
+  66 0024 04DD     		ble	.L4
+  63:..\src/utils.c **** 				virtual_pos_friction =  pos - ZMAX;
+  67              		.loc 1 63 0
+  68 0026 FB68     		ldr	r3, [r7, #12]
+  69 0028 053B     		subs	r3, r3, #5
+  70 002a 634A     		ldr	r2, .L9
+  71 002c 1360     		str	r3, [r2]
+  72 002e 0AE0     		b	.L3
+  73              	.L4:
+  64:..\src/utils.c ****         	else { 
+  65:..\src/utils.c **** 				if ((pos - virtual_pos_friction) < -ZMAX) 
+  74              		.loc 1 65 0
+  75 0030 614B     		ldr	r3, .L9
+  76 0032 1B68     		ldr	r3, [r3]
+  77 0034 FA68     		ldr	r2, [r7, #12]
+  78 0036 D31A     		subs	r3, r2, r3
+  79 0038 13F1050F 		cmn	r3, #5
+  80 003c 03DA     		bge	.L3
+  66:..\src/utils.c **** 					virtual_pos_friction =  pos + ZMAX;
+  81              		.loc 1 66 0
+  82 003e FB68     		ldr	r3, [r7, #12]
+  83 0040 0533     		adds	r3, r3, #5
+  84 0042 5D4A     		ldr	r2, .L9
+  85 0044 1360     		str	r3, [r2]
+  86              	.L3:
+  67:..\src/utils.c **** 			}
+  68:..\src/utils.c **** 		}        
+  69:..\src/utils.c ****        
+  70:..\src/utils.c ****         curr_estimate = pos * g_mem.curr_lookup[0] * (1 + pos * g_mem.curr_lookup[1]) + (pos - virt
+  87              		.loc 1 70 0
+  88 0046 F868     		ldr	r0, [r7, #12]
+  89 0048 FFF7FEFF 		bl	__aeabi_i2f
+  90 004c 0246     		mov	r2, r0
+  91 004e 5B4B     		ldr	r3, .L9+4
+  92 0050 DB6F     		ldr	r3, [r3, #124]	@ float
+  93 0052 1946     		mov	r1, r3
+  94 0054 1046     		mov	r0, r2
+  95 0056 FFF7FEFF 		bl	__aeabi_fmul
+  96 005a 0346     		mov	r3, r0
+  97 005c 1C46     		mov	r4, r3
+  98 005e F868     		ldr	r0, [r7, #12]
+  99 0060 FFF7FEFF 		bl	__aeabi_i2f
+ 100 0064 0246     		mov	r2, r0
+ 101 0066 554B     		ldr	r3, .L9+4
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 4
+
+
+ 102 0068 D3F88030 		ldr	r3, [r3, #128]	@ float
+ 103 006c 1946     		mov	r1, r3
+ 104 006e 1046     		mov	r0, r2
+ 105 0070 FFF7FEFF 		bl	__aeabi_fmul
+ 106 0074 0346     		mov	r3, r0
+ 107 0076 4FF07E51 		mov	r1, #1065353216
+ 108 007a 1846     		mov	r0, r3
+ 109 007c FFF7FEFF 		bl	__aeabi_fadd
+ 110 0080 0346     		mov	r3, r0
+ 111 0082 1946     		mov	r1, r3
+ 112 0084 2046     		mov	r0, r4
+ 113 0086 FFF7FEFF 		bl	__aeabi_fmul
+ 114 008a 0346     		mov	r3, r0
+ 115 008c 1C46     		mov	r4, r3
+ 116 008e 4A4B     		ldr	r3, .L9
+ 117 0090 1B68     		ldr	r3, [r3]
+ 118 0092 FA68     		ldr	r2, [r7, #12]
+ 119 0094 D31A     		subs	r3, r2, r3
+ 120 0096 1846     		mov	r0, r3
+ 121 0098 FFF7FEFF 		bl	__aeabi_i2f
+ 122 009c 0546     		mov	r5, r0
+ 123 009e 474B     		ldr	r3, .L9+4
+ 124 00a0 D3F88430 		ldr	r3, [r3, #132]	@ float
+ 125 00a4 4649     		ldr	r1, .L9+8
+ 126 00a6 1846     		mov	r0, r3
+ 127 00a8 FFF7FEFF 		bl	__aeabi_fdiv
+ 128 00ac 0346     		mov	r3, r0
+ 129 00ae 1946     		mov	r1, r3
+ 130 00b0 2846     		mov	r0, r5
+ 131 00b2 FFF7FEFF 		bl	__aeabi_fmul
+ 132 00b6 0346     		mov	r3, r0
+ 133 00b8 1946     		mov	r1, r3
+ 134 00ba 2046     		mov	r0, r4
+ 135 00bc FFF7FEFF 		bl	__aeabi_fadd
+ 136 00c0 0346     		mov	r3, r0
+ 137 00c2 1C46     		mov	r4, r3
+ 138 00c4 B868     		ldr	r0, [r7, #8]
+ 139 00c6 FFF7FEFF 		bl	__aeabi_i2f
+ 140 00ca 0246     		mov	r2, r0
+ 141 00cc 3B4B     		ldr	r3, .L9+4
+ 142 00ce D3F88830 		ldr	r3, [r3, #136]	@ float
+ 143 00d2 1946     		mov	r1, r3
+ 144 00d4 1046     		mov	r0, r2
+ 145 00d6 FFF7FEFF 		bl	__aeabi_fmul
+ 146 00da 0346     		mov	r3, r0
+ 147 00dc 1D46     		mov	r5, r3
+ 148 00de BB68     		ldr	r3, [r7, #8]
+ 149 00e0 002B     		cmp	r3, #0
+ 150 00e2 B8BF     		it	lt
+ 151 00e4 5B42     		rsblt	r3, r3, #0
+ 152 00e6 1846     		mov	r0, r3
+ 153 00e8 FFF7FEFF 		bl	__aeabi_i2f
+ 154 00ec 0246     		mov	r2, r0
+ 155 00ee 334B     		ldr	r3, .L9+4
+ 156 00f0 D3F88C30 		ldr	r3, [r3, #140]	@ float
+ 157 00f4 1946     		mov	r1, r3
+ 158 00f6 1046     		mov	r0, r2
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 5
+
+
+ 159 00f8 FFF7FEFF 		bl	__aeabi_fmul
+ 160 00fc 0346     		mov	r3, r0
+ 161 00fe 4FF07E51 		mov	r1, #1065353216
+ 162 0102 1846     		mov	r0, r3
+ 163 0104 FFF7FEFF 		bl	__aeabi_fadd
+ 164 0108 0346     		mov	r3, r0
+ 165 010a 1946     		mov	r1, r3
+ 166 010c 2846     		mov	r0, r5
+ 167 010e FFF7FEFF 		bl	__aeabi_fmul
+ 168 0112 0346     		mov	r3, r0
+ 169 0114 1946     		mov	r1, r3
+ 170 0116 2046     		mov	r0, r4
+ 171 0118 FFF7FEFF 		bl	__aeabi_fadd
+ 172 011c 0346     		mov	r3, r0
+ 173 011e 1C46     		mov	r4, r3
+ 174 0120 284B     		ldr	r3, .L9+12
+ 175 0122 1B68     		ldr	r3, [r3]
+ 176 0124 7A68     		ldr	r2, [r7, #4]
+ 177 0126 D31A     		subs	r3, r2, r3
+ 178 0128 1846     		mov	r0, r3
+ 179 012a FFF7FEFF 		bl	__aeabi_i2f
+ 180 012e 0246     		mov	r2, r0
+ 181 0130 224B     		ldr	r3, .L9+4
+ 182 0132 D3F89030 		ldr	r3, [r3, #144]	@ float
+ 183 0136 1946     		mov	r1, r3
+ 184 0138 1046     		mov	r0, r2
+ 185 013a FFF7FEFF 		bl	__aeabi_fmul
+ 186 013e 0346     		mov	r3, r0
+ 187 0140 1946     		mov	r1, r3
+ 188 0142 2046     		mov	r0, r4
+ 189 0144 FFF7FEFF 		bl	__aeabi_fadd
+ 190 0148 0346     		mov	r3, r0
+ 191 014a 1846     		mov	r0, r3
+ 192 014c FFF7FEFF 		bl	__aeabi_f2iz
+ 193 0150 0346     		mov	r3, r0
+ 194 0152 7B61     		str	r3, [r7, #20]
+  71:..\src/utils.c ****         
+  72:..\src/utils.c ****         if (curr_estimate > c_mem.current_limit) 
+ 195              		.loc 1 72 0
+ 196 0154 1C4B     		ldr	r3, .L9+16
+ 197 0156 B3F96830 		ldrsh	r3, [r3, #104]
+ 198 015a 1A46     		mov	r2, r3
+ 199 015c 7B69     		ldr	r3, [r7, #20]
+ 200 015e 9A42     		cmp	r2, r3
+ 201 0160 04DA     		bge	.L5
+  73:..\src/utils.c ****             curr_estimate = c_mem.current_limit;
+ 202              		.loc 1 73 0
+ 203 0162 194B     		ldr	r3, .L9+16
+ 204 0164 B3F96830 		ldrsh	r3, [r3, #104]
+ 205 0168 7B61     		str	r3, [r7, #20]
+ 206 016a 0BE0     		b	.L6
+ 207              	.L5:
+  74:..\src/utils.c ****         else {
+  75:..\src/utils.c **** 			if (curr_estimate < -c_mem.current_limit)
+ 208              		.loc 1 75 0
+ 209 016c 164B     		ldr	r3, .L9+16
+ 210 016e B3F96830 		ldrsh	r3, [r3, #104]
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 6
+
+
+ 211 0172 5A42     		negs	r2, r3
+ 212 0174 7B69     		ldr	r3, [r7, #20]
+ 213 0176 9A42     		cmp	r2, r3
+ 214 0178 04DD     		ble	.L6
+  76:..\src/utils.c ****             	curr_estimate = -c_mem.current_limit;
+ 215              		.loc 1 76 0
+ 216 017a 134B     		ldr	r3, .L9+16
+ 217 017c B3F96830 		ldrsh	r3, [r3, #104]
+ 218 0180 5B42     		negs	r3, r3
+ 219 0182 7B61     		str	r3, [r7, #20]
+ 220              	.L6:
+  77:..\src/utils.c **** 		}
+  78:..\src/utils.c **** 
+  79:..\src/utils.c ****         err_pos_dt = (REFSPEED * ref + (1024 - REFSPEED) * err_pos_dt) / 1024;         
+ 221              		.loc 1 79 0
+ 222 0184 7A68     		ldr	r2, [r7, #4]
+ 223 0186 1346     		mov	r3, r2
+ 224 0188 9B00     		lsls	r3, r3, #2
+ 225 018a 1344     		add	r3, r3, r2
+ 226 018c 9B00     		lsls	r3, r3, #2
+ 227 018e 1946     		mov	r1, r3
+ 228 0190 0C4B     		ldr	r3, .L9+12
+ 229 0192 1B68     		ldr	r3, [r3]
+ 230 0194 4FF47B72 		mov	r2, #1004
+ 231 0198 02FB03F3 		mul	r3, r2, r3
+ 232 019c 0B44     		add	r3, r3, r1
+ 233 019e 002B     		cmp	r3, #0
+ 234 01a0 01DA     		bge	.L7
+ 235 01a2 03F2FF33 		addw	r3, r3, #1023
+ 236              	.L7:
+ 237 01a6 9B12     		asrs	r3, r3, #10
+ 238 01a8 1A46     		mov	r2, r3
+ 239 01aa 064B     		ldr	r3, .L9+12
+ 240 01ac 1A60     		str	r2, [r3]
+  80:..\src/utils.c ****         
+  81:..\src/utils.c ****         return curr_estimate;        
+ 241              		.loc 1 81 0
+ 242 01ae 7B69     		ldr	r3, [r7, #20]
+  82:..\src/utils.c **** }
+ 243              		.loc 1 82 0
+ 244 01b0 1846     		mov	r0, r3
+ 245 01b2 1837     		adds	r7, r7, #24
+ 246              		.cfi_def_cfa_offset 16
+ 247 01b4 BD46     		mov	sp, r7
+ 248              		.cfi_def_cfa_register 13
+ 249              		@ sp needed
+ 250 01b6 B0BD     		pop	{r4, r5, r7, pc}
+ 251              	.L10:
+ 252              		.align	2
+ 253              	.L9:
+ 254 01b8 00000000 		.word	virtual_pos_friction.9742
+ 255 01bc 00000000 		.word	g_mem
+ 256 01c0 0000A040 		.word	1084227584
+ 257 01c4 04000000 		.word	err_pos_dt.9743
+ 258 01c8 00000000 		.word	c_mem
+ 259              		.cfi_endproc
+ 260              	.LFE64:
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 7
+
+
+ 261              		.size	curr_estim, .-curr_estim
+ 262              		.section	.text.filter,"ax",%progbits
+ 263              		.align	2
+ 264              		.global	filter
+ 265              		.thumb
+ 266              		.thumb_func
+ 267              		.type	filter, %function
+ 268              	filter:
+ 269              	.LFB65:
+  83:..\src/utils.c **** 
+  84:..\src/utils.c **** //==============================================================================
+  85:..\src/utils.c **** //                                                                General filter
+  86:..\src/utils.c **** //==============================================================================
+  87:..\src/utils.c **** int32 filter(int32 new_value, struct st_filter *f) {
+ 270              		.loc 1 87 0
+ 271              		.cfi_startproc
+ 272              		@ args = 0, pretend = 0, frame = 16
+ 273              		@ frame_needed = 1, uses_anonymous_args = 0
+ 274              		@ link register save eliminated.
+ 275 0000 80B4     		push	{r7}
+ 276              		.cfi_def_cfa_offset 4
+ 277              		.cfi_offset 7, -4
+ 278 0002 85B0     		sub	sp, sp, #20
+ 279              		.cfi_def_cfa_offset 24
+ 280 0004 00AF     		add	r7, sp, #0
+ 281              		.cfi_def_cfa_register 7
+ 282 0006 7860     		str	r0, [r7, #4]
+ 283 0008 3960     		str	r1, [r7]
+  88:..\src/utils.c **** 
+  89:..\src/utils.c ****     int32 aux;
+  90:..\src/utils.c **** 
+  91:..\src/utils.c ****     aux = (f->old_value * (1024 - f->gain) + (new_value << 6) * (f->gain)) /1024;
+ 284              		.loc 1 91 0
+ 285 000a 3B68     		ldr	r3, [r7]
+ 286 000c 1B68     		ldr	r3, [r3]
+ 287 000e 3A68     		ldr	r2, [r7]
+ 288 0010 5268     		ldr	r2, [r2, #4]
+ 289 0012 C2F58062 		rsb	r2, r2, #1024
+ 290 0016 02FB03F2 		mul	r2, r2, r3
+ 291 001a 7B68     		ldr	r3, [r7, #4]
+ 292 001c 9B01     		lsls	r3, r3, #6
+ 293 001e 3968     		ldr	r1, [r7]
+ 294 0020 4968     		ldr	r1, [r1, #4]
+ 295 0022 01FB03F3 		mul	r3, r1, r3
+ 296 0026 1344     		add	r3, r3, r2
+ 297 0028 002B     		cmp	r3, #0
+ 298 002a 01DA     		bge	.L12
+ 299 002c 03F2FF33 		addw	r3, r3, #1023
+ 300              	.L12:
+ 301 0030 9B12     		asrs	r3, r3, #10
+ 302 0032 FB60     		str	r3, [r7, #12]
+  92:..\src/utils.c **** 
+  93:..\src/utils.c ****     f->old_value = aux;
+ 303              		.loc 1 93 0
+ 304 0034 3B68     		ldr	r3, [r7]
+ 305 0036 FA68     		ldr	r2, [r7, #12]
+ 306 0038 1A60     		str	r2, [r3]
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 8
+
+
+  94:..\src/utils.c **** 
+  95:..\src/utils.c ****     return (aux / 64);
+ 307              		.loc 1 95 0
+ 308 003a FB68     		ldr	r3, [r7, #12]
+ 309 003c 002B     		cmp	r3, #0
+ 310 003e 00DA     		bge	.L13
+ 311 0040 3F33     		adds	r3, r3, #63
+ 312              	.L13:
+ 313 0042 9B11     		asrs	r3, r3, #6
+  96:..\src/utils.c **** }
+ 314              		.loc 1 96 0
+ 315 0044 1846     		mov	r0, r3
+ 316 0046 1437     		adds	r7, r7, #20
+ 317              		.cfi_def_cfa_offset 4
+ 318 0048 BD46     		mov	sp, r7
+ 319              		.cfi_def_cfa_register 13
+ 320              		@ sp needed
+ 321 004a 80BC     		pop	{r7}
+ 322              		.cfi_restore 7
+ 323              		.cfi_def_cfa_offset 0
+ 324 004c 7047     		bx	lr
+ 325              		.cfi_endproc
+ 326              	.LFE65:
+ 327              		.size	filter, .-filter
+ 328 004e 00BF     		.section	.text.check_enc_data,"ax",%progbits
+ 329              		.align	2
+ 330              		.global	check_enc_data
+ 331              		.thumb
+ 332              		.thumb_func
+ 333              		.type	check_enc_data, %function
+ 334              	check_enc_data:
+ 335              	.LFB66:
+  97:..\src/utils.c **** 
+  98:..\src/utils.c **** //==============================================================================
+  99:..\src/utils.c **** //                                                                CHECK ENC DATA
+ 100:..\src/utils.c **** //==============================================================================
+ 101:..\src/utils.c **** 
+ 102:..\src/utils.c **** // Returns 1 if the encoder data is correct, 0 otherwise
+ 103:..\src/utils.c **** 
+ 104:..\src/utils.c **** CYBIT check_enc_data(const uint32 *value) {
+ 336              		.loc 1 104 0
+ 337              		.cfi_startproc
+ 338              		@ args = 0, pretend = 0, frame = 16
+ 339              		@ frame_needed = 1, uses_anonymous_args = 0
+ 340              		@ link register save eliminated.
+ 341 0000 80B4     		push	{r7}
+ 342              		.cfi_def_cfa_offset 4
+ 343              		.cfi_offset 7, -4
+ 344 0002 85B0     		sub	sp, sp, #20
+ 345              		.cfi_def_cfa_offset 24
+ 346 0004 00AF     		add	r7, sp, #0
+ 347              		.cfi_def_cfa_register 7
+ 348 0006 7860     		str	r0, [r7, #4]
+ 105:..\src/utils.c **** 
+ 106:..\src/utils.c ****     const uint8* CYIDATA p = (const uint8*)value;
+ 349              		.loc 1 106 0
+ 350 0008 7B68     		ldr	r3, [r7, #4]
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 9
+
+
+ 351 000a FB60     		str	r3, [r7, #12]
+ 107:..\src/utils.c ****     uint8 CYDATA a = *p;
+ 352              		.loc 1 107 0
+ 353 000c FB68     		ldr	r3, [r7, #12]
+ 354 000e 1B78     		ldrb	r3, [r3]
+ 355 0010 FB72     		strb	r3, [r7, #11]
+ 108:..\src/utils.c **** 
+ 109:..\src/utils.c ****     a = a ^ *(++p);
+ 356              		.loc 1 109 0
+ 357 0012 FB68     		ldr	r3, [r7, #12]
+ 358 0014 0133     		adds	r3, r3, #1
+ 359 0016 FB60     		str	r3, [r7, #12]
+ 360 0018 FB68     		ldr	r3, [r7, #12]
+ 361 001a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 362 001c FB7A     		ldrb	r3, [r7, #11]
+ 363 001e 5340     		eors	r3, r3, r2
+ 364 0020 FB72     		strb	r3, [r7, #11]
+ 110:..\src/utils.c ****     a = a ^ *(++p);
+ 365              		.loc 1 110 0
+ 366 0022 FB68     		ldr	r3, [r7, #12]
+ 367 0024 0133     		adds	r3, r3, #1
+ 368 0026 FB60     		str	r3, [r7, #12]
+ 369 0028 FB68     		ldr	r3, [r7, #12]
+ 370 002a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 371 002c FB7A     		ldrb	r3, [r7, #11]
+ 372 002e 5340     		eors	r3, r3, r2
+ 373 0030 FB72     		strb	r3, [r7, #11]
+ 111:..\src/utils.c ****     a = a ^ *(++p);
+ 374              		.loc 1 111 0
+ 375 0032 FB68     		ldr	r3, [r7, #12]
+ 376 0034 0133     		adds	r3, r3, #1
+ 377 0036 FB60     		str	r3, [r7, #12]
+ 378 0038 FB68     		ldr	r3, [r7, #12]
+ 379 003a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 380 003c FB7A     		ldrb	r3, [r7, #11]
+ 381 003e 5340     		eors	r3, r3, r2
+ 382 0040 FB72     		strb	r3, [r7, #11]
+ 112:..\src/utils.c ****     a = (a & 0x0F) ^ (a>>4);
+ 383              		.loc 1 112 0
+ 384 0042 97F90B30 		ldrsb	r3, [r7, #11]
+ 385 0046 03F00F03 		and	r3, r3, #15
+ 386 004a 5AB2     		sxtb	r2, r3
+ 387 004c FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 388 004e 1B09     		lsrs	r3, r3, #4
+ 389 0050 DBB2     		uxtb	r3, r3
+ 390 0052 5BB2     		sxtb	r3, r3
+ 391 0054 5340     		eors	r3, r3, r2
+ 392 0056 5BB2     		sxtb	r3, r3
+ 393 0058 FB72     		strb	r3, [r7, #11]
+ 113:..\src/utils.c **** 
+ 114:..\src/utils.c ****     return (0x9669 >> a) & 0x01;
+ 394              		.loc 1 114 0
+ 395 005a FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 396 005c 49F26962 		movw	r2, #38505
+ 397 0060 42FA03F3 		asr	r3, r2, r3
+ 398 0064 DBB2     		uxtb	r3, r3
+ 399 0066 03F00103 		and	r3, r3, #1
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 10
+
+
+ 400 006a DBB2     		uxtb	r3, r3
+ 115:..\src/utils.c ****     //0x9669 is a bit vector representing the !(bitwise XOR) of 4bits
+ 116:..\src/utils.c **** }
+ 401              		.loc 1 116 0
+ 402 006c 1846     		mov	r0, r3
+ 403 006e 1437     		adds	r7, r7, #20
+ 404              		.cfi_def_cfa_offset 4
+ 405 0070 BD46     		mov	sp, r7
+ 406              		.cfi_def_cfa_register 13
+ 407              		@ sp needed
+ 408 0072 80BC     		pop	{r7}
+ 409              		.cfi_restore 7
+ 410              		.cfi_def_cfa_offset 0
+ 411 0074 7047     		bx	lr
+ 412              		.cfi_endproc
+ 413              	.LFE66:
+ 414              		.size	check_enc_data, .-check_enc_data
+ 415 0076 00BF     		.section	.text.my_mod,"ax",%progbits
+ 416              		.align	2
+ 417              		.global	my_mod
+ 418              		.thumb
+ 419              		.thumb_func
+ 420              		.type	my_mod, %function
+ 421              	my_mod:
+ 422              	.LFB67:
+ 117:..\src/utils.c **** 
+ 118:..\src/utils.c **** //==============================================================================
+ 119:..\src/utils.c **** //                                                                        MODULE
+ 120:..\src/utils.c **** //==============================================================================
+ 121:..\src/utils.c **** 
+ 122:..\src/utils.c **** uint32 my_mod(int32 val, int32 divisor) {
+ 423              		.loc 1 122 0
+ 424              		.cfi_startproc
+ 425              		@ args = 0, pretend = 0, frame = 8
+ 426              		@ frame_needed = 1, uses_anonymous_args = 0
+ 427              		@ link register save eliminated.
+ 428 0000 80B4     		push	{r7}
+ 429              		.cfi_def_cfa_offset 4
+ 430              		.cfi_offset 7, -4
+ 431 0002 83B0     		sub	sp, sp, #12
+ 432              		.cfi_def_cfa_offset 16
+ 433 0004 00AF     		add	r7, sp, #0
+ 434              		.cfi_def_cfa_register 7
+ 435 0006 7860     		str	r0, [r7, #4]
+ 436 0008 3960     		str	r1, [r7]
+ 123:..\src/utils.c **** 
+ 124:..\src/utils.c ****     if (val >= 0) {
+ 437              		.loc 1 124 0
+ 438 000a 7B68     		ldr	r3, [r7, #4]
+ 439 000c 002B     		cmp	r3, #0
+ 440 000e 08DB     		blt	.L18
+ 125:..\src/utils.c ****         return (int32)(val % divisor);
+ 441              		.loc 1 125 0
+ 442 0010 7B68     		ldr	r3, [r7, #4]
+ 443 0012 3A68     		ldr	r2, [r7]
+ 444 0014 93FBF2F2 		sdiv	r2, r3, r2
+ 445 0018 3968     		ldr	r1, [r7]
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 11
+
+
+ 446 001a 01FB02F2 		mul	r2, r1, r2
+ 447 001e 9B1A     		subs	r3, r3, r2
+ 448 0020 11E0     		b	.L19
+ 449              	.L18:
+ 126:..\src/utils.c ****     } else {
+ 127:..\src/utils.c ****         return (int32)((divisor - (-val % divisor)) % divisor);
+ 450              		.loc 1 127 0
+ 451 0022 7B68     		ldr	r3, [r7, #4]
+ 452 0024 5B42     		negs	r3, r3
+ 453 0026 3A68     		ldr	r2, [r7]
+ 454 0028 93FBF2F2 		sdiv	r2, r3, r2
+ 455 002c 3968     		ldr	r1, [r7]
+ 456 002e 01FB02F2 		mul	r2, r1, r2
+ 457 0032 9B1A     		subs	r3, r3, r2
+ 458 0034 3A68     		ldr	r2, [r7]
+ 459 0036 D31A     		subs	r3, r2, r3
+ 460 0038 3A68     		ldr	r2, [r7]
+ 461 003a 93FBF2F2 		sdiv	r2, r3, r2
+ 462 003e 3968     		ldr	r1, [r7]
+ 463 0040 01FB02F2 		mul	r2, r1, r2
+ 464 0044 9B1A     		subs	r3, r3, r2
+ 465              	.L19:
+ 128:..\src/utils.c ****     }
+ 129:..\src/utils.c **** }
+ 466              		.loc 1 129 0
+ 467 0046 1846     		mov	r0, r3
+ 468 0048 0C37     		adds	r7, r7, #12
+ 469              		.cfi_def_cfa_offset 4
+ 470 004a BD46     		mov	sp, r7
+ 471              		.cfi_def_cfa_register 13
+ 472              		@ sp needed
+ 473 004c 80BC     		pop	{r7}
+ 474              		.cfi_restore 7
+ 475              		.cfi_def_cfa_offset 0
+ 476 004e 7047     		bx	lr
+ 477              		.cfi_endproc
+ 478              	.LFE67:
+ 479              		.size	my_mod, .-my_mod
+ 480              		.section	.text.calibration,"ax",%progbits
+ 481              		.align	2
+ 482              		.global	calibration
+ 483              		.thumb
+ 484              		.thumb_func
+ 485              		.type	calibration, %function
+ 486              	calibration:
+ 487              	.LFB68:
+ 130:..\src/utils.c **** 
+ 131:..\src/utils.c **** 
+ 132:..\src/utils.c **** //==============================================================================
+ 133:..\src/utils.c **** //                                                                     CALIBRATE
+ 134:..\src/utils.c **** //==============================================================================
+ 135:..\src/utils.c **** 
+ 136:..\src/utils.c **** void calibration(void) {
+ 488              		.loc 1 136 0
+ 489              		.cfi_startproc
+ 490              		@ args = 0, pretend = 0, frame = 0
+ 491              		@ frame_needed = 1, uses_anonymous_args = 0
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 12
+
+
+ 492              		@ link register save eliminated.
+ 493 0000 80B4     		push	{r7}
+ 494              		.cfi_def_cfa_offset 4
+ 495              		.cfi_offset 7, -4
+ 496 0002 00AF     		add	r7, sp, #0
+ 497              		.cfi_def_cfa_register 7
+ 137:..\src/utils.c ****     static uint8 direction;                 //0 closing, 1 opening.
+ 138:..\src/utils.c ****     static uint16 closure_counter;          //Range [0 - 2^16].
+ 139:..\src/utils.c ****     static CYBIT count_one = 1;             //Used to count only one cycle, when inputs are generat
+ 140:..\src/utils.c ****                                             //and pass the threshold, having the condition verified
+ 141:..\src/utils.c **** 
+ 142:..\src/utils.c ****     // closing
+ 143:..\src/utils.c ****     if (direction == 0) {
+ 498              		.loc 1 143 0
+ 499 0004 254B     		ldr	r3, .L25
+ 500 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 501 0008 002B     		cmp	r3, #0
+ 502 000a 17D1     		bne	.L21
+ 144:..\src/utils.c ****         g_refNew.pos += (calib.speed << g_mem.res[0]);
+ 503              		.loc 1 144 0
+ 504 000c 244B     		ldr	r3, .L25+4
+ 505 000e 1A68     		ldr	r2, [r3]
+ 506 0010 244B     		ldr	r3, .L25+8
+ 507 0012 B3F90230 		ldrsh	r3, [r3, #2]
+ 508 0016 1946     		mov	r1, r3
+ 509 0018 234B     		ldr	r3, .L25+12
+ 510 001a 93F83730 		ldrb	r3, [r3, #55]	@ zero_extendqisi2
+ 511 001e 01FA03F3 		lsl	r3, r1, r3
+ 512 0022 1344     		add	r3, r3, r2
+ 513 0024 1E4A     		ldr	r2, .L25+4
+ 514 0026 1360     		str	r3, [r2]
+ 145:..\src/utils.c ****         
+ 146:..\src/utils.c ****         if ((g_refNew.pos) > g_mem.pos_lim_sup) {
+ 515              		.loc 1 146 0
+ 516 0028 1D4B     		ldr	r3, .L25+4
+ 517 002a 1A68     		ldr	r2, [r3]
+ 518 002c 1E4B     		ldr	r3, .L25+12
+ 519 002e DB6D     		ldr	r3, [r3, #92]
+ 520 0030 9A42     		cmp	r2, r3
+ 521 0032 2FDD     		ble	.L24
+ 147:..\src/utils.c ****             direction = 1;
+ 522              		.loc 1 147 0
+ 523 0034 194B     		ldr	r3, .L25
+ 524 0036 0122     		movs	r2, #1
+ 525 0038 1A70     		strb	r2, [r3]
+ 148:..\src/utils.c ****         }
+ 149:..\src/utils.c ****     } else { //opening
+ 150:..\src/utils.c ****         g_refNew.pos -= (calib.speed << g_mem.res[0]);
+ 151:..\src/utils.c ****         if (SIGN(g_refNew.pos) != 1) {
+ 152:..\src/utils.c ****             direction = 0;
+ 153:..\src/utils.c ****             closure_counter++;
+ 154:..\src/utils.c ****             count_one = 1;          // Enables back the cycles counter
+ 155:..\src/utils.c ****             if (closure_counter == calib.repetitions) {
+ 156:..\src/utils.c ****                 closure_counter = 0;
+ 157:..\src/utils.c ****                 calib.enabled = FALSE;
+ 158:..\src/utils.c ****             }
+ 159:..\src/utils.c ****         }
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 13
+
+
+ 160:..\src/utils.c ****     }
+ 161:..\src/utils.c **** }
+ 526              		.loc 1 161 0
+ 527 003a 2BE0     		b	.L24
+ 528              	.L21:
+ 150:..\src/utils.c ****         if (SIGN(g_refNew.pos) != 1) {
+ 529              		.loc 1 150 0
+ 530 003c 184B     		ldr	r3, .L25+4
+ 531 003e 1A68     		ldr	r2, [r3]
+ 532 0040 184B     		ldr	r3, .L25+8
+ 533 0042 B3F90230 		ldrsh	r3, [r3, #2]
+ 534 0046 1946     		mov	r1, r3
+ 535 0048 174B     		ldr	r3, .L25+12
+ 536 004a 93F83730 		ldrb	r3, [r3, #55]	@ zero_extendqisi2
+ 537 004e 01FA03F3 		lsl	r3, r1, r3
+ 538 0052 D31A     		subs	r3, r2, r3
+ 539 0054 124A     		ldr	r2, .L25+4
+ 540 0056 1360     		str	r3, [r2]
+ 151:..\src/utils.c ****             direction = 0;
+ 541              		.loc 1 151 0
+ 542 0058 114B     		ldr	r3, .L25+4
+ 543 005a 1B68     		ldr	r3, [r3]
+ 544 005c 002B     		cmp	r3, #0
+ 545 005e 19DA     		bge	.L24
+ 152:..\src/utils.c ****             closure_counter++;
+ 546              		.loc 1 152 0
+ 547 0060 0E4B     		ldr	r3, .L25
+ 548 0062 0022     		movs	r2, #0
+ 549 0064 1A70     		strb	r2, [r3]
+ 153:..\src/utils.c ****             count_one = 1;          // Enables back the cycles counter
+ 550              		.loc 1 153 0
+ 551 0066 114B     		ldr	r3, .L25+16
+ 552 0068 1B88     		ldrh	r3, [r3]
+ 553 006a 0133     		adds	r3, r3, #1
+ 554 006c 9AB2     		uxth	r2, r3
+ 555 006e 0F4B     		ldr	r3, .L25+16
+ 556 0070 1A80     		strh	r2, [r3]	@ movhi
+ 154:..\src/utils.c ****             if (closure_counter == calib.repetitions) {
+ 557              		.loc 1 154 0
+ 558 0072 0F4B     		ldr	r3, .L25+20
+ 559 0074 0122     		movs	r2, #1
+ 560 0076 1A70     		strb	r2, [r3]
+ 155:..\src/utils.c ****                 closure_counter = 0;
+ 561              		.loc 1 155 0
+ 562 0078 0C4B     		ldr	r3, .L25+16
+ 563 007a 1B88     		ldrh	r3, [r3]
+ 564 007c 1A46     		mov	r2, r3
+ 565 007e 094B     		ldr	r3, .L25+8
+ 566 0080 B3F90430 		ldrsh	r3, [r3, #4]
+ 567 0084 9A42     		cmp	r2, r3
+ 568 0086 05D1     		bne	.L24
+ 156:..\src/utils.c ****                 calib.enabled = FALSE;
+ 569              		.loc 1 156 0
+ 570 0088 084B     		ldr	r3, .L25+16
+ 571 008a 0022     		movs	r2, #0
+ 572 008c 1A80     		strh	r2, [r3]	@ movhi
+ 157:..\src/utils.c ****             }
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 14
+
+
+ 573              		.loc 1 157 0
+ 574 008e 054B     		ldr	r3, .L25+8
+ 575 0090 0022     		movs	r2, #0
+ 576 0092 1A70     		strb	r2, [r3]
+ 577              	.L24:
+ 578              		.loc 1 161 0
+ 579 0094 00BF     		nop
+ 580 0096 BD46     		mov	sp, r7
+ 581              		.cfi_def_cfa_register 13
+ 582              		@ sp needed
+ 583 0098 80BC     		pop	{r7}
+ 584              		.cfi_restore 7
+ 585              		.cfi_def_cfa_offset 0
+ 586 009a 7047     		bx	lr
+ 587              	.L26:
+ 588              		.align	2
+ 589              	.L25:
+ 590 009c 08000000 		.word	direction.9762
+ 591 00a0 00000000 		.word	g_refNew
+ 592 00a4 00000000 		.word	calib
+ 593 00a8 00000000 		.word	g_mem
+ 594 00ac 0A000000 		.word	closure_counter.9763
+ 595 00b0 00000000 		.word	count_one.9764
+ 596              		.cfi_endproc
+ 597              	.LFE68:
+ 598              		.size	calibration, .-calibration
+ 599              		.section	.text.calc_turns_fcn,"ax",%progbits
+ 600              		.align	2
+ 601              		.global	calc_turns_fcn
+ 602              		.thumb
+ 603              		.thumb_func
+ 604              		.type	calc_turns_fcn, %function
+ 605              	calc_turns_fcn:
+ 606              	.LFB69:
+ 162:..\src/utils.c **** 
+ 163:..\src/utils.c **** 
+ 164:..\src/utils.c **** //==============================================================================
+ 165:..\src/utils.c **** //                                                      DOUBLE ENCODER CALC TURN
+ 166:..\src/utils.c **** //==============================================================================
+ 167:..\src/utils.c **** 
+ 168:..\src/utils.c **** // Use this matlab function to calculate I1 and I2
+ 169:..\src/utils.c **** //
+ 170:..\src/utils.c **** // function [inv_a, inv_b] = mod_mul_inv(a, b)
+ 171:..\src/utils.c **** //     a = int32(a);
+ 172:..\src/utils.c **** //     b = int32(b);
+ 173:..\src/utils.c **** //     if b == 0
+ 174:..\src/utils.c **** //         inv_a = 1;
+ 175:..\src/utils.c **** //         inv_b = 0;
+ 176:..\src/utils.c **** //         return
+ 177:..\src/utils.c **** //     else
+ 178:..\src/utils.c **** //         q = idivide(a,b,'floor');
+ 179:..\src/utils.c **** //         r = mod(a,b);
+ 180:..\src/utils.c **** //         [s, t] = mod_mul_inv(b, r);
+ 181:..\src/utils.c **** //     end
+ 182:..\src/utils.c **** //     inv_a = t;
+ 183:..\src/utils.c **** //     inv_b = s - q * t;
+ 184:..\src/utils.c **** // return
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 15
+
+
+ 185:..\src/utils.c **** 
+ 186:..\src/utils.c **** // Number of teeth of the two wheels
+ 187:..\src/utils.c **** #define N1 35           ///< Teeth of the first encoder wheel.
+ 188:..\src/utils.c **** #define N2 3            ///< Teeth of the second encoder wheel.
+ 189:..\src/utils.c **** 
+ 190:..\src/utils.c **** #define I1 -1           ///< First wheel invariant value.
+ 191:..\src/utils.c **** //#define I2 12         ///< Second wheel invariant value.
+ 192:..\src/utils.c **** 
+ 193:..\src/utils.c **** // Number of ticks per turn
+ 194:..\src/utils.c **** #define M 65536          ///< Number of encoder ticks per turn.
+ 195:..\src/utils.c **** 
+ 196:..\src/utils.c **** int calc_turns_fcn(const int32 pos1, const int32 pos2) {
+ 607              		.loc 1 196 0
+ 608              		.cfi_startproc
+ 609              		@ args = 0, pretend = 0, frame = 16
+ 610              		@ frame_needed = 1, uses_anonymous_args = 0
+ 611 0000 80B5     		push	{r7, lr}
+ 612              		.cfi_def_cfa_offset 8
+ 613              		.cfi_offset 7, -8
+ 614              		.cfi_offset 14, -4
+ 615 0002 84B0     		sub	sp, sp, #16
+ 616              		.cfi_def_cfa_offset 24
+ 617 0004 00AF     		add	r7, sp, #0
+ 618              		.cfi_def_cfa_register 7
+ 619 0006 7860     		str	r0, [r7, #4]
+ 620 0008 3960     		str	r1, [r7]
+ 197:..\src/utils.c ****     
+ 198:..\src/utils.c ****     int32 x = (my_mod( - N2*pos2 - N1*pos1, M*N2) + M/2) / 65536;
+ 621              		.loc 1 198 0
+ 622 000a 3B68     		ldr	r3, [r7]
+ 623 000c 1A46     		mov	r2, r3
+ 624 000e 9B00     		lsls	r3, r3, #2
+ 625 0010 D21A     		subs	r2, r2, r3
+ 626 0012 7B68     		ldr	r3, [r7, #4]
+ 627 0014 6FF02201 		mvn	r1, #34
+ 628 0018 01FB03F3 		mul	r3, r1, r3
+ 629 001c 1344     		add	r3, r3, r2
+ 630 001e 4FF44031 		mov	r1, #196608
+ 631 0022 1846     		mov	r0, r3
+ 632 0024 FFF7FEFF 		bl	my_mod
+ 633 0028 0346     		mov	r3, r0
+ 634 002a 03F50043 		add	r3, r3, #32768
+ 635 002e 1B0C     		lsrs	r3, r3, #16
+ 636 0030 FB60     		str	r3, [r7, #12]
+ 199:..\src/utils.c **** 
+ 200:..\src/utils.c ****     int32 aux = my_mod(x*I1, N2);       // Module between x*I1 and N2.
+ 637              		.loc 1 200 0
+ 638 0032 FB68     		ldr	r3, [r7, #12]
+ 639 0034 5B42     		negs	r3, r3
+ 640 0036 0321     		movs	r1, #3
+ 641 0038 1846     		mov	r0, r3
+ 642 003a FFF7FEFF 		bl	my_mod
+ 643 003e 0346     		mov	r3, r0
+ 644 0040 BB60     		str	r3, [r7, #8]
+ 201:..\src/utils.c **** 
+ 202:..\src/utils.c ****     // SoftHand Pro firmware turns computation does not have to take into account turns shift like 
+ 203:..\src/utils.c ****     return aux; 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 16
+
+
+ 645              		.loc 1 203 0
+ 646 0042 BB68     		ldr	r3, [r7, #8]
+ 204:..\src/utils.c ****     
+ 205:..\src/utils.c ****     //return (my_mod(aux + N2/2, N2) - N2/2); //original SoftHand 1.2 firmware
+ 206:..\src/utils.c ****     
+ 207:..\src/utils.c **** }
+ 647              		.loc 1 207 0
+ 648 0044 1846     		mov	r0, r3
+ 649 0046 1037     		adds	r7, r7, #16
+ 650              		.cfi_def_cfa_offset 8
+ 651 0048 BD46     		mov	sp, r7
+ 652              		.cfi_def_cfa_register 13
+ 653              		@ sp needed
+ 654 004a 80BD     		pop	{r7, pc}
+ 655              		.cfi_endproc
+ 656              	.LFE69:
+ 657              		.size	calc_turns_fcn, .-calc_turns_fcn
+ 658              		.global	__aeabi_f2uiz
+ 659              		.section	.text.check_rest_position,"ax",%progbits
+ 660              		.align	2
+ 661              		.global	check_rest_position
+ 662              		.thumb
+ 663              		.thumb_func
+ 664              		.type	check_rest_position, %function
+ 665              	check_rest_position:
+ 666              	.LFB70:
+ 208:..\src/utils.c **** 
+ 209:..\src/utils.c **** //==============================================================================
+ 210:..\src/utils.c **** //                                                                 REST POSITION
+ 211:..\src/utils.c **** //==============================================================================
+ 212:..\src/utils.c **** 
+ 213:..\src/utils.c **** void check_rest_position(void) {     // 100 Hz frequency.
+ 667              		.loc 1 213 0
+ 668              		.cfi_startproc
+ 669              		@ args = 0, pretend = 0, frame = 8
+ 670              		@ frame_needed = 1, uses_anonymous_args = 0
+ 671 0000 90B5     		push	{r4, r7, lr}
+ 672              		.cfi_def_cfa_offset 12
+ 673              		.cfi_offset 4, -12
+ 674              		.cfi_offset 7, -8
+ 675              		.cfi_offset 14, -4
+ 676 0002 83B0     		sub	sp, sp, #12
+ 677              		.cfi_def_cfa_offset 24
+ 678 0004 00AF     		add	r7, sp, #0
+ 679              		.cfi_def_cfa_register 7
+ 214:..\src/utils.c ****     
+ 215:..\src/utils.c ****     static uint32 count = 0;        // Range [0 - 2^31].
+ 216:..\src/utils.c ****     static uint8 flag_count = 1;
+ 217:..\src/utils.c ****     static uint8 first_time = 1;
+ 218:..\src/utils.c ****     static float m = 0;
+ 219:..\src/utils.c ****     static int32 abs_err_thr = 0;
+ 220:..\src/utils.c ****     static int32 delta_inc = 0;
+ 221:..\src/utils.c ****     int32 curr_pos = 0;
+ 680              		.loc 1 221 0
+ 681 0006 0023     		movs	r3, #0
+ 682 0008 3B60     		str	r3, [r7]
+ 222:..\src/utils.c ****     static int32 rest_error;
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 17
+
+
+ 223:..\src/utils.c ****     int32 handle_value = 0;
+ 683              		.loc 1 223 0
+ 684 000a 0023     		movs	r3, #0
+ 685 000c 7B60     		str	r3, [r7, #4]
+ 224:..\src/utils.c ****     
+ 225:..\src/utils.c ****     if (first_time){
+ 686              		.loc 1 225 0
+ 687 000e 964B     		ldr	r3, .L46
+ 688 0010 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 689 0012 002B     		cmp	r3, #0
+ 690 0014 05D0     		beq	.L30
+ 226:..\src/utils.c ****         count = 0;
+ 691              		.loc 1 226 0
+ 692 0016 954B     		ldr	r3, .L46+4
+ 693 0018 0022     		movs	r2, #0
+ 694 001a 1A60     		str	r2, [r3]
+ 227:..\src/utils.c ****         first_time = 0;
+ 695              		.loc 1 227 0
+ 696 001c 924B     		ldr	r3, .L46
+ 697 001e 0022     		movs	r2, #0
+ 698 0020 1A70     		strb	r2, [r3]
+ 699              	.L30:
+ 228:..\src/utils.c ****     }
+ 229:..\src/utils.c ****     
+ 230:..\src/utils.c ****     curr_pos = (int32)(g_meas.pos[0] >> g_mem.res[0]);
+ 700              		.loc 1 230 0
+ 701 0022 934B     		ldr	r3, .L46+8
+ 702 0024 1B68     		ldr	r3, [r3]
+ 703 0026 934A     		ldr	r2, .L46+12
+ 704 0028 92F83720 		ldrb	r2, [r2, #55]	@ zero_extendqisi2
+ 705 002c 1341     		asrs	r3, r3, r2
+ 706 002e 3B60     		str	r3, [r7]
+ 231:..\src/utils.c ****     
+ 232:..\src/utils.c ****     if (c_mem.input_mode == INPUT_MODE_ENCODER3) {
+ 707              		.loc 1 232 0
+ 708 0030 914B     		ldr	r3, .L46+16
+ 709 0032 93F83530 		ldrb	r3, [r3, #53]	@ zero_extendqisi2
+ 710 0036 012B     		cmp	r3, #1
+ 711 0038 0BD1     		bne	.L31
+ 233:..\src/utils.c ****         if (c_mem.double_encoder_on_off == 0)
+ 712              		.loc 1 233 0
+ 713 003a 8F4B     		ldr	r3, .L46+16
+ 714 003c 93F87930 		ldrb	r3, [r3, #121]	@ zero_extendqisi2
+ 715 0040 002B     		cmp	r3, #0
+ 716 0042 03D1     		bne	.L32
+ 234:..\src/utils.c ****             handle_value = g_meas.pos[1];
+ 717              		.loc 1 234 0
+ 718 0044 8A4B     		ldr	r3, .L46+8
+ 719 0046 5B68     		ldr	r3, [r3, #4]
+ 720 0048 7B60     		str	r3, [r7, #4]
+ 721 004a 02E0     		b	.L31
+ 722              	.L32:
+ 235:..\src/utils.c ****         else
+ 236:..\src/utils.c ****             handle_value = g_meas.pos[2];
+ 723              		.loc 1 236 0
+ 724 004c 884B     		ldr	r3, .L46+8
+ 725 004e 9B68     		ldr	r3, [r3, #8]
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 18
+
+
+ 726 0050 7B60     		str	r3, [r7, #4]
+ 727              	.L31:
+ 237:..\src/utils.c ****     }
+ 238:..\src/utils.c ****     
+ 239:..\src/utils.c ****     if ( ( (c_mem.input_mode >= 2 && g_meas.emg[0] < 200 && g_meas.emg[1] < 200) || (c_mem.input_mo
+ 728              		.loc 1 239 0
+ 729 0052 894B     		ldr	r3, .L46+16
+ 730 0054 93F83530 		ldrb	r3, [r3, #53]	@ zero_extendqisi2
+ 731 0058 012B     		cmp	r3, #1
+ 732 005a 07D9     		bls	.L33
+ 733              		.loc 1 239 0 is_stmt 0 discriminator 1
+ 734 005c 844B     		ldr	r3, .L46+8
+ 735 005e 9B69     		ldr	r3, [r3, #24]
+ 736 0060 C72B     		cmp	r3, #199
+ 737 0062 03DC     		bgt	.L33
+ 738              		.loc 1 239 0 discriminator 3
+ 739 0064 824B     		ldr	r3, .L46+8
+ 740 0066 DB69     		ldr	r3, [r3, #28]
+ 741 0068 C72B     		cmp	r3, #199
+ 742 006a 07DD     		ble	.L34
+ 743              	.L33:
+ 744              		.loc 1 239 0 discriminator 6
+ 745 006c 824B     		ldr	r3, .L46+16
+ 746 006e 93F83530 		ldrb	r3, [r3, #53]	@ zero_extendqisi2
+ 747 0072 012B     		cmp	r3, #1
+ 748 0074 11D1     		bne	.L35
+ 749              		.loc 1 239 0 discriminator 7
+ 750 0076 7B68     		ldr	r3, [r7, #4]
+ 751 0078 312B     		cmp	r3, #49
+ 752 007a 0EDC     		bgt	.L35
+ 753              	.L34:
+ 754              		.loc 1 239 0 discriminator 8
+ 755 007c 3B68     		ldr	r3, [r7]
+ 756 007e 42F20F72 		movw	r2, #9999
+ 757 0082 9342     		cmp	r3, r2
+ 758 0084 09DC     		bgt	.L35
+ 240:..\src/utils.c ****         if (flag_count == 1){
+ 759              		.loc 1 240 0 is_stmt 1
+ 760 0086 7D4B     		ldr	r3, .L46+20
+ 761 0088 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 762 008a 012B     		cmp	r3, #1
+ 763 008c 0ED1     		bne	.L37
+ 241:..\src/utils.c ****             count = count + 1;
+ 764              		.loc 1 241 0
+ 765 008e 774B     		ldr	r3, .L46+4
+ 766 0090 1B68     		ldr	r3, [r3]
+ 767 0092 0133     		adds	r3, r3, #1
+ 768 0094 754A     		ldr	r2, .L46+4
+ 769 0096 1360     		str	r3, [r2]
+ 240:..\src/utils.c ****         if (flag_count == 1){
+ 770              		.loc 1 240 0
+ 771 0098 08E0     		b	.L37
+ 772              	.L35:
+ 242:..\src/utils.c ****         }
+ 243:..\src/utils.c ****     }
+ 244:..\src/utils.c ****     else {
+ 245:..\src/utils.c ****         count = 0;
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 19
+
+
+ 773              		.loc 1 245 0
+ 774 009a 744B     		ldr	r3, .L46+4
+ 775 009c 0022     		movs	r2, #0
+ 776 009e 1A60     		str	r2, [r3]
+ 246:..\src/utils.c ****         rest_enabled = 0;
+ 777              		.loc 1 246 0
+ 778 00a0 774B     		ldr	r3, .L46+24
+ 779 00a2 0022     		movs	r2, #0
+ 780 00a4 1A70     		strb	r2, [r3]
+ 247:..\src/utils.c ****         flag_count = 1;
+ 781              		.loc 1 247 0
+ 782 00a6 754B     		ldr	r3, .L46+20
+ 783 00a8 0122     		movs	r2, #1
+ 784 00aa 1A70     		strb	r2, [r3]
+ 785              	.L37:
+ 248:..\src/utils.c ****     }
+ 249:..\src/utils.c ****     
+ 250:..\src/utils.c ****     /********** Velocity closure procedure *************
+ 251:..\src/utils.c ****     * m = error/time
+ 252:..\src/utils.c ****     * m = (g_mem.rest_pos - init_pos)/time
+ 253:..\src/utils.c ****     * time = g_mem.rest_pos/g_mem.rest_vel (g_mem.rest_vel in ticks/msec)
+ 254:..\src/utils.c ****     ***************************************************/
+ 255:..\src/utils.c ****     
+ 256:..\src/utils.c ****     if (count == (uint32)(g_mem.rest_delay/CALIBRATION_DIV)){ //10 seconds 
+ 786              		.loc 1 256 0
+ 787 00ac 714B     		ldr	r3, .L46+12
+ 788 00ae D3F89C30 		ldr	r3, [r3, #156]	@ float
+ 789 00b2 7449     		ldr	r1, .L46+28
+ 790 00b4 1846     		mov	r0, r3
+ 791 00b6 FFF7FEFF 		bl	__aeabi_fdiv
+ 792 00ba 0346     		mov	r3, r0
+ 793 00bc 1846     		mov	r0, r3
+ 794 00be FFF7FEFF 		bl	__aeabi_f2uiz
+ 795 00c2 0246     		mov	r2, r0
+ 796 00c4 694B     		ldr	r3, .L46+4
+ 797 00c6 1B68     		ldr	r3, [r3]
+ 798 00c8 9A42     		cmp	r2, r3
+ 799 00ca 70D1     		bne	.L38
+ 257:..\src/utils.c ****         rest_enabled = 1;
+ 800              		.loc 1 257 0
+ 801 00cc 6C4B     		ldr	r3, .L46+24
+ 802 00ce 0122     		movs	r2, #1
+ 803 00d0 1A70     		strb	r2, [r3]
+ 258:..\src/utils.c ****         rest_pos_curr_ref = g_meas.pos[0];
+ 804              		.loc 1 258 0
+ 805 00d2 674B     		ldr	r3, .L46+8
+ 806 00d4 1B68     		ldr	r3, [r3]
+ 807 00d6 6C4A     		ldr	r2, .L46+32
+ 808 00d8 1360     		str	r3, [r2]
+ 259:..\src/utils.c ****         
+ 260:..\src/utils.c ****         // Ramp angular coefficient
+ 261:..\src/utils.c ****         m = ((float)(g_mem.rest_pos - g_meas.pos[0])/((float)g_mem.rest_pos))*(g_mem.rest_vel);
+ 809              		.loc 1 261 0
+ 810 00da 664B     		ldr	r3, .L46+12
+ 811 00dc D3F89820 		ldr	r2, [r3, #152]
+ 812 00e0 634B     		ldr	r3, .L46+8
+ 813 00e2 1B68     		ldr	r3, [r3]
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 20
+
+
+ 814 00e4 D31A     		subs	r3, r2, r3
+ 815 00e6 1846     		mov	r0, r3
+ 816 00e8 FFF7FEFF 		bl	__aeabi_i2f
+ 817 00ec 0446     		mov	r4, r0
+ 818 00ee 614B     		ldr	r3, .L46+12
+ 819 00f0 D3F89830 		ldr	r3, [r3, #152]
+ 820 00f4 1846     		mov	r0, r3
+ 821 00f6 FFF7FEFF 		bl	__aeabi_i2f
+ 822 00fa 0346     		mov	r3, r0
+ 823 00fc 1946     		mov	r1, r3
+ 824 00fe 2046     		mov	r0, r4
+ 825 0100 FFF7FEFF 		bl	__aeabi_fdiv
+ 826 0104 0346     		mov	r3, r0
+ 827 0106 1A46     		mov	r2, r3
+ 828 0108 5A4B     		ldr	r3, .L46+12
+ 829 010a D3F8A030 		ldr	r3, [r3, #160]	@ float
+ 830 010e 1946     		mov	r1, r3
+ 831 0110 1046     		mov	r0, r2
+ 832 0112 FFF7FEFF 		bl	__aeabi_fmul
+ 833 0116 0346     		mov	r3, r0
+ 834 0118 1A46     		mov	r2, r3
+ 835 011a 5C4B     		ldr	r3, .L46+36
+ 836 011c 1A60     		str	r2, [r3]	@ float
+ 262:..\src/utils.c ****         
+ 263:..\src/utils.c ****         // Stop condition threshold is related to m coefficient by g_mem.rest_ratio value
+ 264:..\src/utils.c ****         abs_err_thr = (int32)( (int32)(g_mem.rest_ratio*m*((float)CALIBRATION_DIV)) << g_mem.res[0]
+ 837              		.loc 1 264 0
+ 838 011e 554B     		ldr	r3, .L46+12
+ 839 0120 D3F8A420 		ldr	r2, [r3, #164]	@ float
+ 840 0124 594B     		ldr	r3, .L46+36
+ 841 0126 1B68     		ldr	r3, [r3]	@ float
+ 842 0128 1946     		mov	r1, r3
+ 843 012a 1046     		mov	r0, r2
+ 844 012c FFF7FEFF 		bl	__aeabi_fmul
+ 845 0130 0346     		mov	r3, r0
+ 846 0132 5449     		ldr	r1, .L46+28
+ 847 0134 1846     		mov	r0, r3
+ 848 0136 FFF7FEFF 		bl	__aeabi_fmul
+ 849 013a 0346     		mov	r3, r0
+ 850 013c 1846     		mov	r0, r3
+ 851 013e FFF7FEFF 		bl	__aeabi_f2iz
+ 852 0142 0246     		mov	r2, r0
+ 853 0144 4B4B     		ldr	r3, .L46+12
+ 854 0146 93F83730 		ldrb	r3, [r3, #55]	@ zero_extendqisi2
+ 855 014a 02FA03F3 		lsl	r3, r2, r3
+ 856 014e 504A     		ldr	r2, .L46+40
+ 857 0150 1360     		str	r3, [r2]
+ 265:..\src/utils.c ****         abs_err_thr = (abs_err_thr>0)?abs_err_thr:(0-abs_err_thr);
+ 858              		.loc 1 265 0
+ 859 0152 4F4B     		ldr	r3, .L46+40
+ 860 0154 1B68     		ldr	r3, [r3]
+ 861 0156 002B     		cmp	r3, #0
+ 862 0158 B8BF     		it	lt
+ 863 015a 5B42     		rsblt	r3, r3, #0
+ 864 015c 4C4A     		ldr	r2, .L46+40
+ 865 015e 1360     		str	r3, [r2]
+ 266:..\src/utils.c ****         
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 21
+
+
+ 267:..\src/utils.c ****         rest_error = g_mem.rest_pos - g_meas.pos[0];    
+ 866              		.loc 1 267 0
+ 867 0160 444B     		ldr	r3, .L46+12
+ 868 0162 D3F89820 		ldr	r2, [r3, #152]
+ 869 0166 424B     		ldr	r3, .L46+8
+ 870 0168 1B68     		ldr	r3, [r3]
+ 871 016a D31A     		subs	r3, r2, r3
+ 872 016c 494A     		ldr	r2, .L46+44
+ 873 016e 1360     		str	r3, [r2]
+ 268:..\src/utils.c ****         
+ 269:..\src/utils.c ****         delta_inc = (int32)( ((int32)(m*(float)CALIBRATION_DIV)) << g_mem.res[0] );
+ 874              		.loc 1 269 0
+ 875 0170 464B     		ldr	r3, .L46+36
+ 876 0172 1B68     		ldr	r3, [r3]	@ float
+ 877 0174 4349     		ldr	r1, .L46+28
+ 878 0176 1846     		mov	r0, r3
+ 879 0178 FFF7FEFF 		bl	__aeabi_fmul
+ 880 017c 0346     		mov	r3, r0
+ 881 017e 1846     		mov	r0, r3
+ 882 0180 FFF7FEFF 		bl	__aeabi_f2iz
+ 883 0184 0246     		mov	r2, r0
+ 884 0186 3B4B     		ldr	r3, .L46+12
+ 885 0188 93F83730 		ldrb	r3, [r3, #55]	@ zero_extendqisi2
+ 886 018c 02FA03F3 		lsl	r3, r2, r3
+ 887 0190 414A     		ldr	r2, .L46+48
+ 888 0192 1360     		str	r3, [r2]
+ 270:..\src/utils.c ****         delta_inc = (delta_inc>0)?delta_inc:(0-delta_inc);
+ 889              		.loc 1 270 0
+ 890 0194 404B     		ldr	r3, .L46+48
+ 891 0196 1B68     		ldr	r3, [r3]
+ 892 0198 002B     		cmp	r3, #0
+ 893 019a B8BF     		it	lt
+ 894 019c 5B42     		rsblt	r3, r3, #0
+ 895 019e 3E4A     		ldr	r2, .L46+48
+ 896 01a0 1360     		str	r3, [r2]
+ 271:..\src/utils.c ****         
+ 272:..\src/utils.c ****         count = 0;
+ 897              		.loc 1 272 0
+ 898 01a2 324B     		ldr	r3, .L46+4
+ 899 01a4 0022     		movs	r2, #0
+ 900 01a6 1A60     		str	r2, [r3]
+ 273:..\src/utils.c ****         flag_count = 0;
+ 901              		.loc 1 273 0
+ 902 01a8 344B     		ldr	r3, .L46+20
+ 903 01aa 0022     		movs	r2, #0
+ 904 01ac 1A70     		strb	r2, [r3]
+ 905              	.L38:
+ 274:..\src/utils.c ****     }
+ 275:..\src/utils.c ****     
+ 276:..\src/utils.c ****     if (rest_enabled){
+ 906              		.loc 1 276 0
+ 907 01ae 344B     		ldr	r3, .L46+24
+ 908 01b0 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 909 01b2 002B     		cmp	r3, #0
+ 910 01b4 3BD0     		beq	.L39
+ 277:..\src/utils.c **** 
+ 278:..\src/utils.c ****         if (rest_error < abs_err_thr && rest_error > -abs_err_thr){
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 22
+
+
+ 911              		.loc 1 278 0
+ 912 01b6 374B     		ldr	r3, .L46+44
+ 913 01b8 1A68     		ldr	r2, [r3]
+ 914 01ba 354B     		ldr	r3, .L46+40
+ 915 01bc 1B68     		ldr	r3, [r3]
+ 916 01be 9A42     		cmp	r2, r3
+ 917 01c0 17DA     		bge	.L40
+ 918              		.loc 1 278 0 is_stmt 0 discriminator 1
+ 919 01c2 334B     		ldr	r3, .L46+40
+ 920 01c4 1B68     		ldr	r3, [r3]
+ 921 01c6 5A42     		negs	r2, r3
+ 922 01c8 324B     		ldr	r3, .L46+44
+ 923 01ca 1B68     		ldr	r3, [r3]
+ 924 01cc 9A42     		cmp	r2, r3
+ 925 01ce 10DA     		bge	.L40
+ 279:..\src/utils.c ****             // Stop condition
+ 280:..\src/utils.c ****             rest_pos_curr_ref = g_mem.rest_pos;
+ 926              		.loc 1 280 0 is_stmt 1
+ 927 01d0 284B     		ldr	r3, .L46+12
+ 928 01d2 D3F89830 		ldr	r3, [r3, #152]
+ 929 01d6 2C4A     		ldr	r2, .L46+32
+ 930 01d8 1360     		str	r3, [r2]
+ 281:..\src/utils.c ****             
+ 282:..\src/utils.c ****             if (c_mem.input_mode >= 2)   // EMG input mode
+ 931              		.loc 1 282 0
+ 932 01da 274B     		ldr	r3, .L46+16
+ 933 01dc 93F83530 		ldrb	r3, [r3, #53]	@ zero_extendqisi2
+ 934 01e0 012B     		cmp	r3, #1
+ 935 01e2 02D9     		bls	.L41
+ 283:..\src/utils.c ****                 forced_open = 1; 
+ 936              		.loc 1 283 0
+ 937 01e4 2D4B     		ldr	r3, .L46+52
+ 938 01e6 0122     		movs	r2, #1
+ 939 01e8 1A70     		strb	r2, [r3]
+ 940              	.L41:
+ 284:..\src/utils.c ****             
+ 285:..\src/utils.c ****             count = 0;
+ 941              		.loc 1 285 0
+ 942 01ea 204B     		ldr	r3, .L46+4
+ 943 01ec 0022     		movs	r2, #0
+ 944 01ee 1A60     		str	r2, [r3]
+ 945 01f0 1DE0     		b	.L39
+ 946              	.L40:
+ 286:..\src/utils.c ****         }
+ 287:..\src/utils.c ****         else {
+ 288:..\src/utils.c ****             rest_error = g_mem.rest_pos - g_meas.pos[0];        
+ 947              		.loc 1 288 0
+ 948 01f2 204B     		ldr	r3, .L46+12
+ 949 01f4 D3F89820 		ldr	r2, [r3, #152]
+ 950 01f8 1D4B     		ldr	r3, .L46+8
+ 951 01fa 1B68     		ldr	r3, [r3]
+ 952 01fc D31A     		subs	r3, r2, r3
+ 953 01fe 254A     		ldr	r2, .L46+44
+ 954 0200 1360     		str	r3, [r2]
+ 289:..\src/utils.c **** 
+ 290:..\src/utils.c ****             if (rest_error > 0){
+ 955              		.loc 1 290 0
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 23
+
+
+ 956 0202 244B     		ldr	r3, .L46+44
+ 957 0204 1B68     		ldr	r3, [r3]
+ 958 0206 002B     		cmp	r3, #0
+ 959 0208 06DD     		ble	.L42
+ 291:..\src/utils.c ****                 rest_pos_curr_ref = rest_pos_curr_ref + delta_inc;
+ 960              		.loc 1 291 0
+ 961 020a 1F4B     		ldr	r3, .L46+32
+ 962 020c 1A68     		ldr	r2, [r3]
+ 963 020e 224B     		ldr	r3, .L46+48
+ 964 0210 1B68     		ldr	r3, [r3]
+ 965 0212 1344     		add	r3, r3, r2
+ 966 0214 1C4A     		ldr	r2, .L46+32
+ 967 0216 1360     		str	r3, [r2]
+ 968              	.L42:
+ 292:..\src/utils.c ****             }
+ 293:..\src/utils.c ****             if (rest_error < 0){
+ 969              		.loc 1 293 0
+ 970 0218 1E4B     		ldr	r3, .L46+44
+ 971 021a 1B68     		ldr	r3, [r3]
+ 972 021c 002B     		cmp	r3, #0
+ 973 021e 06DA     		bge	.L39
+ 294:..\src/utils.c ****                 rest_pos_curr_ref = rest_pos_curr_ref - delta_inc;
+ 974              		.loc 1 294 0
+ 975 0220 194B     		ldr	r3, .L46+32
+ 976 0222 1A68     		ldr	r2, [r3]
+ 977 0224 1C4B     		ldr	r3, .L46+48
+ 978 0226 1B68     		ldr	r3, [r3]
+ 979 0228 D31A     		subs	r3, r2, r3
+ 980 022a 174A     		ldr	r2, .L46+32
+ 981 022c 1360     		str	r3, [r2]
+ 982              	.L39:
+ 295:..\src/utils.c ****             }
+ 296:..\src/utils.c ****         } 
+ 297:..\src/utils.c ****     }
+ 298:..\src/utils.c ****     
+ 299:..\src/utils.c ****     // Position limit saturation
+ 300:..\src/utils.c ****     if (c_mem.pos_lim_flag) {
+ 983              		.loc 1 300 0
+ 984 022e 124B     		ldr	r3, .L46+16
+ 985 0230 93F85430 		ldrb	r3, [r3, #84]	@ zero_extendqisi2
+ 986 0234 002B     		cmp	r3, #0
+ 987 0236 13D0     		beq	.L45
+ 301:..\src/utils.c ****         if (rest_pos_curr_ref < c_mem.pos_lim_inf) 
+ 988              		.loc 1 301 0
+ 989 0238 0F4B     		ldr	r3, .L46+16
+ 990 023a 9A6D     		ldr	r2, [r3, #88]
+ 991 023c 124B     		ldr	r3, .L46+32
+ 992 023e 1B68     		ldr	r3, [r3]
+ 993 0240 9A42     		cmp	r2, r3
+ 994 0242 03DD     		ble	.L44
+ 302:..\src/utils.c ****             rest_pos_curr_ref = c_mem.pos_lim_inf;
+ 995              		.loc 1 302 0
+ 996 0244 0C4B     		ldr	r3, .L46+16
+ 997 0246 9B6D     		ldr	r3, [r3, #88]
+ 998 0248 0F4A     		ldr	r2, .L46+32
+ 999 024a 1360     		str	r3, [r2]
+ 1000              	.L44:
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 24
+
+
+ 303:..\src/utils.c ****         if (rest_pos_curr_ref > c_mem.pos_lim_sup) 
+ 1001              		.loc 1 303 0
+ 1002 024c 0A4B     		ldr	r3, .L46+16
+ 1003 024e DA6D     		ldr	r2, [r3, #92]
+ 1004 0250 0D4B     		ldr	r3, .L46+32
+ 1005 0252 1B68     		ldr	r3, [r3]
+ 1006 0254 9A42     		cmp	r2, r3
+ 1007 0256 03DA     		bge	.L45
+ 304:..\src/utils.c ****             rest_pos_curr_ref = c_mem.pos_lim_sup;
+ 1008              		.loc 1 304 0
+ 1009 0258 074B     		ldr	r3, .L46+16
+ 1010 025a DB6D     		ldr	r3, [r3, #92]
+ 1011 025c 0A4A     		ldr	r2, .L46+32
+ 1012 025e 1360     		str	r3, [r2]
+ 1013              	.L45:
+ 305:..\src/utils.c ****     }
+ 306:..\src/utils.c **** 
+ 307:..\src/utils.c **** }
+ 1014              		.loc 1 307 0
+ 1015 0260 00BF     		nop
+ 1016 0262 0C37     		adds	r7, r7, #12
+ 1017              		.cfi_def_cfa_offset 12
+ 1018 0264 BD46     		mov	sp, r7
+ 1019              		.cfi_def_cfa_register 13
+ 1020              		@ sp needed
+ 1021 0266 90BD     		pop	{r4, r7, pc}
+ 1022              	.L47:
+ 1023              		.align	2
+ 1024              	.L46:
+ 1025 0268 01000000 		.word	first_time.9776
+ 1026 026c 0C000000 		.word	count.9774
+ 1027 0270 00000000 		.word	g_meas
+ 1028 0274 00000000 		.word	g_mem
+ 1029 0278 00000000 		.word	c_mem
+ 1030 027c 02000000 		.word	flag_count.9775
+ 1031 0280 00000000 		.word	rest_enabled
+ 1032 0284 00002041 		.word	1092616192
+ 1033 0288 00000000 		.word	rest_pos_curr_ref
+ 1034 028c 10000000 		.word	m.9777
+ 1035 0290 14000000 		.word	abs_err_thr.9778
+ 1036 0294 18000000 		.word	rest_error.9781
+ 1037 0298 1C000000 		.word	delta_inc.9779
+ 1038 029c 00000000 		.word	forced_open
+ 1039              		.cfi_endproc
+ 1040              	.LFE70:
+ 1041              		.size	check_rest_position, .-check_rest_position
+ 1042              		.section	.text.LED_control,"ax",%progbits
+ 1043              		.align	2
+ 1044              		.global	LED_control
+ 1045              		.thumb
+ 1046              		.thumb_func
+ 1047              		.type	LED_control, %function
+ 1048              	LED_control:
+ 1049              	.LFB71:
+ 308:..\src/utils.c **** 
+ 309:..\src/utils.c **** 
+ 310:..\src/utils.c **** //==============================================================================
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 25
+
+
+ 311:..\src/utils.c **** //                                                                   LED CONTROL
+ 312:..\src/utils.c **** //==============================================================================
+ 313:..\src/utils.c **** 
+ 314:..\src/utils.c **** void LED_control(uint8 mode) {
+ 1050              		.loc 1 314 0
+ 1051              		.cfi_startproc
+ 1052              		@ args = 0, pretend = 0, frame = 8
+ 1053              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1054 0000 80B5     		push	{r7, lr}
+ 1055              		.cfi_def_cfa_offset 8
+ 1056              		.cfi_offset 7, -8
+ 1057              		.cfi_offset 14, -4
+ 1058 0002 82B0     		sub	sp, sp, #8
+ 1059              		.cfi_def_cfa_offset 16
+ 1060 0004 00AF     		add	r7, sp, #0
+ 1061              		.cfi_def_cfa_register 7
+ 1062 0006 0346     		mov	r3, r0
+ 1063 0008 FB71     		strb	r3, [r7, #7]
+ 315:..\src/utils.c ****     
+ 316:..\src/utils.c ****     switch (mode) {
+ 1064              		.loc 1 316 0
+ 1065 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 1066 000c 052B     		cmp	r3, #5
+ 1067 000e 39D8     		bhi	.L58
+ 1068 0010 01A2     		adr	r2, .L51
+ 1069 0012 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 1070 0016 00BF     		.p2align 2
+ 1071              	.L51:
+ 1072 0018 31000000 		.word	.L50+1
+ 1073 001c 3F000000 		.word	.L52+1
+ 1074 0020 4D000000 		.word	.L53+1
+ 1075 0024 5B000000 		.word	.L54+1
+ 1076 0028 69000000 		.word	.L55+1
+ 1077 002c 77000000 		.word	.L56+1
+ 1078              		.p2align 1
+ 1079              	.L50:
+ 317:..\src/utils.c ****         
+ 318:..\src/utils.c ****         case 0:     //All LEDs off
+ 319:..\src/utils.c ****             LED_CTRL_Write(0);
+ 1080              		.loc 1 319 0
+ 1081 0030 0020     		movs	r0, #0
+ 1082 0032 FFF7FEFF 		bl	LED_CTRL_Write
+ 320:..\src/utils.c ****             BLINK_CTRL_EN_Write(0);
+ 1083              		.loc 1 320 0
+ 1084 0036 0020     		movs	r0, #0
+ 1085 0038 FFF7FEFF 		bl	BLINK_CTRL_EN_Write
+ 321:..\src/utils.c ****             break;
+ 1086              		.loc 1 321 0
+ 1087 003c 23E0     		b	.L57
+ 1088              	.L52:
+ 322:..\src/utils.c ****         case 1:     // Green fixed light
+ 323:..\src/utils.c ****             LED_CTRL_Write(2);
+ 1089              		.loc 1 323 0
+ 1090 003e 0220     		movs	r0, #2
+ 1091 0040 FFF7FEFF 		bl	LED_CTRL_Write
+ 324:..\src/utils.c ****             BLINK_CTRL_EN_Write(0);
+ 1092              		.loc 1 324 0
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 26
+
+
+ 1093 0044 0020     		movs	r0, #0
+ 1094 0046 FFF7FEFF 		bl	BLINK_CTRL_EN_Write
+ 325:..\src/utils.c ****             break;
+ 1095              		.loc 1 325 0
+ 1096 004a 1CE0     		b	.L57
+ 1097              	.L53:
+ 326:..\src/utils.c ****             
+ 327:..\src/utils.c ****         case 2:     // Yellow flashing light @ 0.5 Hz
+ 328:..\src/utils.c ****             LED_CTRL_Write(0);
+ 1098              		.loc 1 328 0
+ 1099 004c 0020     		movs	r0, #0
+ 1100 004e FFF7FEFF 		bl	LED_CTRL_Write
+ 329:..\src/utils.c ****             BLINK_CTRL_EN_Write(1);        
+ 1101              		.loc 1 329 0
+ 1102 0052 0120     		movs	r0, #1
+ 1103 0054 FFF7FEFF 		bl	BLINK_CTRL_EN_Write
+ 330:..\src/utils.c ****             break;
+ 1104              		.loc 1 330 0
+ 1105 0058 15E0     		b	.L57
+ 1106              	.L54:
+ 331:..\src/utils.c ****             
+ 332:..\src/utils.c ****         case 3:     // Red flashing light @ 2.5 Hz
+ 333:..\src/utils.c ****             LED_CTRL_Write(0);
+ 1107              		.loc 1 333 0
+ 1108 005a 0020     		movs	r0, #0
+ 1109 005c FFF7FEFF 		bl	LED_CTRL_Write
+ 334:..\src/utils.c ****             BLINK_CTRL_EN_Write(2);        
+ 1110              		.loc 1 334 0
+ 1111 0060 0220     		movs	r0, #2
+ 1112 0062 FFF7FEFF 		bl	BLINK_CTRL_EN_Write
+ 335:..\src/utils.c ****             break;
+ 1113              		.loc 1 335 0
+ 1114 0066 0EE0     		b	.L57
+ 1115              	.L55:
+ 336:..\src/utils.c ****             
+ 337:..\src/utils.c ****         case 4:     // Yellow fixed light - maintenance
+ 338:..\src/utils.c ****             LED_CTRL_Write(3);
+ 1116              		.loc 1 338 0
+ 1117 0068 0320     		movs	r0, #3
+ 1118 006a FFF7FEFF 		bl	LED_CTRL_Write
+ 339:..\src/utils.c ****             BLINK_CTRL_EN_Write(0);        
+ 1119              		.loc 1 339 0
+ 1120 006e 0020     		movs	r0, #0
+ 1121 0070 FFF7FEFF 		bl	BLINK_CTRL_EN_Write
+ 340:..\src/utils.c ****             break;
+ 1122              		.loc 1 340 0
+ 1123 0074 07E0     		b	.L57
+ 1124              	.L56:
+ 341:..\src/utils.c ****         
+ 342:..\src/utils.c ****         case 5:     // Red fixed light - uUSB power
+ 343:..\src/utils.c ****             LED_CTRL_Write(1);
+ 1125              		.loc 1 343 0
+ 1126 0076 0120     		movs	r0, #1
+ 1127 0078 FFF7FEFF 		bl	LED_CTRL_Write
+ 344:..\src/utils.c ****             BLINK_CTRL_EN_Write(0);        
+ 1128              		.loc 1 344 0
+ 1129 007c 0020     		movs	r0, #0
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 27
+
+
+ 1130 007e FFF7FEFF 		bl	BLINK_CTRL_EN_Write
+ 345:..\src/utils.c ****             break; 
+ 1131              		.loc 1 345 0
+ 1132 0082 00E0     		b	.L57
+ 1133              	.L58:
+ 346:..\src/utils.c ****             
+ 347:..\src/utils.c ****         default:
+ 348:..\src/utils.c ****             break;
+ 1134              		.loc 1 348 0
+ 1135 0084 00BF     		nop
+ 1136              	.L57:
+ 349:..\src/utils.c ****     }   
+ 350:..\src/utils.c **** }
+ 1137              		.loc 1 350 0
+ 1138 0086 00BF     		nop
+ 1139 0088 0837     		adds	r7, r7, #8
+ 1140              		.cfi_def_cfa_offset 8
+ 1141 008a BD46     		mov	sp, r7
+ 1142              		.cfi_def_cfa_register 13
+ 1143              		@ sp needed
+ 1144 008c 80BD     		pop	{r7, pc}
+ 1145              		.cfi_endproc
+ 1146              	.LFE71:
+ 1147              		.size	LED_control, .-LED_control
+ 1148              		.global	__aeabi_i2d
+ 1149              		.global	__aeabi_dmul
+ 1150              		.global	__aeabi_dcmpgt
+ 1151 008e 00BF     		.section	.text.battery_management,"ax",%progbits
+ 1152              		.align	2
+ 1153              		.global	battery_management
+ 1154              		.thumb
+ 1155              		.thumb_func
+ 1156              		.type	battery_management, %function
+ 1157              	battery_management:
+ 1158              	.LFB72:
+ 351:..\src/utils.c **** 
+ 352:..\src/utils.c **** 
+ 353:..\src/utils.c **** //==============================================================================
+ 354:..\src/utils.c **** //                                                            BATTERY MANAGEMENT
+ 355:..\src/utils.c **** //==============================================================================
+ 356:..\src/utils.c **** void battery_management() {
+ 1159              		.loc 1 356 0
+ 1160              		.cfi_startproc
+ 1161              		@ args = 0, pretend = 0, frame = 0
+ 1162              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1163 0000 B0B5     		push	{r4, r5, r7, lr}
+ 1164              		.cfi_def_cfa_offset 16
+ 1165              		.cfi_offset 4, -16
+ 1166              		.cfi_offset 5, -12
+ 1167              		.cfi_offset 7, -8
+ 1168              		.cfi_offset 14, -4
+ 1169 0002 00AF     		add	r7, sp, #0
+ 1170              		.cfi_def_cfa_register 7
+ 357:..\src/utils.c ****     static uint32 v_count = 0;
+ 358:..\src/utils.c ****     
+ 359:..\src/utils.c ****     // LED handling procedure
+ 360:..\src/utils.c ****     // The board LED blinks if attached battery is not fully charged
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 28
+
+
+ 361:..\src/utils.c ****     if (battery_low_SoC) {
+ 1171              		.loc 1 361 0
+ 1172 0004 544B     		ldr	r3, .L78+16
+ 1173 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1174 0008 002B     		cmp	r3, #0
+ 1175 000a 1DD0     		beq	.L60
+ 362:..\src/utils.c ****         
+ 363:..\src/utils.c ****         //red light - blink @ 2.5 Hz
+ 364:..\src/utils.c ****         LED_control(3);
+ 1176              		.loc 1 364 0
+ 1177 000c 0320     		movs	r0, #3
+ 1178 000e FFF7FEFF 		bl	LED_control
+ 365:..\src/utils.c ****                 
+ 366:..\src/utils.c ****         rest_enabled = 0;
+ 1179              		.loc 1 366 0
+ 1180 0012 524B     		ldr	r3, .L78+20
+ 1181 0014 0022     		movs	r2, #0
+ 1182 0016 1A70     		strb	r2, [r3]
+ 367:..\src/utils.c ****         if (v_count >= 11000){
+ 1183              		.loc 1 367 0
+ 1184 0018 514B     		ldr	r3, .L78+24
+ 1185 001a 1B68     		ldr	r3, [r3]
+ 1186 001c 42F6F722 		movw	r2, #10999
+ 1187 0020 9342     		cmp	r3, r2
+ 1188 0022 0BD9     		bls	.L61
+ 368:..\src/utils.c ****             // Disable motor because we are sure of not fully charged battery and terminal device h
+ 369:..\src/utils.c ****             g_refNew.onoff = 0x00;
+ 1189              		.loc 1 369 0
+ 1190 0024 4F4B     		ldr	r3, .L78+28
+ 1191 0026 0022     		movs	r2, #0
+ 1192 0028 1A73     		strb	r2, [r3, #12]
+ 370:..\src/utils.c ****             MOTOR_ON_OFF_Write(g_refNew.onoff); // Deactivate motor
+ 1193              		.loc 1 370 0
+ 1194 002a 4E4B     		ldr	r3, .L78+28
+ 1195 002c 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 1196 002e 1846     		mov	r0, r3
+ 1197 0030 FFF7FEFF 		bl	MOTOR_ON_OFF_Write
+ 371:..\src/utils.c ****             v_count = 0;
+ 1198              		.loc 1 371 0
+ 1199 0034 4A4B     		ldr	r3, .L78+24
+ 1200 0036 0022     		movs	r2, #0
+ 1201 0038 1A60     		str	r2, [r3]
+ 372:..\src/utils.c ****         }
+ 373:..\src/utils.c ****         else
+ 374:..\src/utils.c ****             v_count = v_count + 1;
+ 375:..\src/utils.c ****         
+ 376:..\src/utils.c ****     }
+ 377:..\src/utils.c ****     else {
+ 378:..\src/utils.c ****         
+ 379:..\src/utils.c ****         // The board LED is still or blinks depending on attached battery State of Charge
+ 380:..\src/utils.c ****         if (tension_valid == TRUE && emg_1_status == NORMAL && emg_2_status == NORMAL){        
+ 381:..\src/utils.c ****             dev_tension_f = filter(dev_tension, &filt_v);
+ 382:..\src/utils.c ****             // Parrot: 0.9, 0.87
+ 383:..\src/utils.c ****             // ARTS: 0.87, 0.8
+ 384:..\src/utils.c ****             if (dev_tension_f > 0.885 * pow_tension){        // Sometimes pow_tension is not well c
+ 385:..\src/utils.c ****                 //fixed
+ 386:..\src/utils.c ****                 if (!maintenance_flag)
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 29
+
+
+ 387:..\src/utils.c ****                     LED_control(1);     // green light - fixed
+ 388:..\src/utils.c ****                 else
+ 389:..\src/utils.c ****                     LED_control(4);     // yellow light - fixed
+ 390:..\src/utils.c ****             }
+ 391:..\src/utils.c ****             else {
+ 392:..\src/utils.c ****                 if (dev_tension_f > 0.86 * pow_tension) {
+ 393:..\src/utils.c ****                     //yellow light - blink @ 0.5 Hz
+ 394:..\src/utils.c ****                     LED_control(2);   
+ 395:..\src/utils.c ****                     
+ 396:..\src/utils.c ****                     v_count = 0;    // Reset counter whenever battery is not totally out of charge
+ 397:..\src/utils.c ****                 }
+ 398:..\src/utils.c ****                 else {
+ 399:..\src/utils.c ****                     //red light - blink @ 2.5 Hz
+ 400:..\src/utils.c ****                     LED_control(3);
+ 401:..\src/utils.c ****                 
+ 402:..\src/utils.c ****                     if (v_count >= 10000){                    
+ 403:..\src/utils.c ****                         battery_low_SoC = 1;
+ 404:..\src/utils.c ****                         rest_enabled = 0;
+ 405:..\src/utils.c ****                     }
+ 406:..\src/utils.c ****                     else{
+ 407:..\src/utils.c ****                         v_count = v_count + 1;
+ 408:..\src/utils.c ****                     }                
+ 409:..\src/utils.c ****                 }
+ 410:..\src/utils.c ****             }
+ 411:..\src/utils.c ****         }
+ 412:..\src/utils.c ****         else {
+ 413:..\src/utils.c ****             if (emg_1_status == NORMAL && emg_2_status == NORMAL){
+ 414:..\src/utils.c ****                 LED_control(5);     // Default - red light
+ 415:..\src/utils.c ****             }
+ 416:..\src/utils.c ****         }
+ 417:..\src/utils.c ****     }
+ 418:..\src/utils.c **** }
+ 1202              		.loc 1 418 0
+ 1203 003a 83E0     		b	.L77
+ 1204              	.L61:
+ 374:..\src/utils.c ****         
+ 1205              		.loc 1 374 0
+ 1206 003c 484B     		ldr	r3, .L78+24
+ 1207 003e 1B68     		ldr	r3, [r3]
+ 1208 0040 0133     		adds	r3, r3, #1
+ 1209 0042 474A     		ldr	r2, .L78+24
+ 1210 0044 1360     		str	r3, [r2]
+ 1211              		.loc 1 418 0
+ 1212 0046 7DE0     		b	.L77
+ 1213              	.L60:
+ 380:..\src/utils.c ****             dev_tension_f = filter(dev_tension, &filt_v);
+ 1214              		.loc 1 380 0
+ 1215 0048 474B     		ldr	r3, .L78+32
+ 1216 004a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1217 004c 012B     		cmp	r3, #1
+ 1218 004e 6DD1     		bne	.L64
+ 380:..\src/utils.c ****             dev_tension_f = filter(dev_tension, &filt_v);
+ 1219              		.loc 1 380 0 is_stmt 0 discriminator 1
+ 1220 0050 464B     		ldr	r3, .L78+36
+ 1221 0052 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1222 0054 002B     		cmp	r3, #0
+ 1223 0056 69D1     		bne	.L64
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 30
+
+
+ 380:..\src/utils.c ****             dev_tension_f = filter(dev_tension, &filt_v);
+ 1224              		.loc 1 380 0 discriminator 2
+ 1225 0058 454B     		ldr	r3, .L78+40
+ 1226 005a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1227 005c 002B     		cmp	r3, #0
+ 1228 005e 65D1     		bne	.L64
+ 381:..\src/utils.c ****             // Parrot: 0.9, 0.87
+ 1229              		.loc 1 381 0 is_stmt 1
+ 1230 0060 444B     		ldr	r3, .L78+44
+ 1231 0062 1B68     		ldr	r3, [r3]
+ 1232 0064 4449     		ldr	r1, .L78+48
+ 1233 0066 1846     		mov	r0, r3
+ 1234 0068 FFF7FEFF 		bl	filter
+ 1235 006c 0246     		mov	r2, r0
+ 1236 006e 434B     		ldr	r3, .L78+52
+ 1237 0070 1A60     		str	r2, [r3]
+ 384:..\src/utils.c ****                 //fixed
+ 1238              		.loc 1 384 0
+ 1239 0072 424B     		ldr	r3, .L78+52
+ 1240 0074 1B68     		ldr	r3, [r3]
+ 1241 0076 1846     		mov	r0, r3
+ 1242 0078 FFF7FEFF 		bl	__aeabi_i2d
+ 1243 007c 0446     		mov	r4, r0
+ 1244 007e 0D46     		mov	r5, r1
+ 1245 0080 3F4B     		ldr	r3, .L78+56
+ 1246 0082 1B68     		ldr	r3, [r3]
+ 1247 0084 1846     		mov	r0, r3
+ 1248 0086 FFF7FEFF 		bl	__aeabi_i2d
+ 1249 008a 2FA3     		adr	r3, .L78
+ 1250 008c D3E90023 		ldrd	r2, [r3]
+ 1251 0090 FFF7FEFF 		bl	__aeabi_dmul
+ 1252 0094 0246     		mov	r2, r0
+ 1253 0096 0B46     		mov	r3, r1
+ 1254 0098 2046     		mov	r0, r4
+ 1255 009a 2946     		mov	r1, r5
+ 1256 009c FFF7FEFF 		bl	__aeabi_dcmpgt
+ 1257 00a0 0346     		mov	r3, r0
+ 1258 00a2 002B     		cmp	r3, #0
+ 1259 00a4 0BD0     		beq	.L75
+ 386:..\src/utils.c ****                     LED_control(1);     // green light - fixed
+ 1260              		.loc 1 386 0
+ 1261 00a6 374B     		ldr	r3, .L78+60
+ 1262 00a8 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1263 00aa 002B     		cmp	r3, #0
+ 1264 00ac 03D1     		bne	.L67
+ 387:..\src/utils.c ****                 else
+ 1265              		.loc 1 387 0
+ 1266 00ae 0120     		movs	r0, #1
+ 1267 00b0 FFF7FEFF 		bl	LED_control
+ 384:..\src/utils.c ****                 //fixed
+ 1268              		.loc 1 384 0
+ 1269 00b4 46E0     		b	.L63
+ 1270              	.L67:
+ 389:..\src/utils.c ****             }
+ 1271              		.loc 1 389 0
+ 1272 00b6 0420     		movs	r0, #4
+ 1273 00b8 FFF7FEFF 		bl	LED_control
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 31
+
+
+ 384:..\src/utils.c ****                 //fixed
+ 1274              		.loc 1 384 0
+ 1275 00bc 42E0     		b	.L63
+ 1276              	.L75:
+ 392:..\src/utils.c ****                     //yellow light - blink @ 0.5 Hz
+ 1277              		.loc 1 392 0
+ 1278 00be 2F4B     		ldr	r3, .L78+52
+ 1279 00c0 1B68     		ldr	r3, [r3]
+ 1280 00c2 1846     		mov	r0, r3
+ 1281 00c4 FFF7FEFF 		bl	__aeabi_i2d
+ 1282 00c8 0446     		mov	r4, r0
+ 1283 00ca 0D46     		mov	r5, r1
+ 1284 00cc 2C4B     		ldr	r3, .L78+56
+ 1285 00ce 1B68     		ldr	r3, [r3]
+ 1286 00d0 1846     		mov	r0, r3
+ 1287 00d2 FFF7FEFF 		bl	__aeabi_i2d
+ 1288 00d6 1EA3     		adr	r3, .L78+8
+ 1289 00d8 D3E90023 		ldrd	r2, [r3]
+ 1290 00dc FFF7FEFF 		bl	__aeabi_dmul
+ 1291 00e0 0246     		mov	r2, r0
+ 1292 00e2 0B46     		mov	r3, r1
+ 1293 00e4 2046     		mov	r0, r4
+ 1294 00e6 2946     		mov	r1, r5
+ 1295 00e8 FFF7FEFF 		bl	__aeabi_dcmpgt
+ 1296 00ec 0346     		mov	r3, r0
+ 1297 00ee 002B     		cmp	r3, #0
+ 1298 00f0 06D0     		beq	.L76
+ 394:..\src/utils.c ****                     
+ 1299              		.loc 1 394 0
+ 1300 00f2 0220     		movs	r0, #2
+ 1301 00f4 FFF7FEFF 		bl	LED_control
+ 396:..\src/utils.c ****                 }
+ 1302              		.loc 1 396 0
+ 1303 00f8 194B     		ldr	r3, .L78+24
+ 1304 00fa 0022     		movs	r2, #0
+ 1305 00fc 1A60     		str	r2, [r3]
+ 384:..\src/utils.c ****                 //fixed
+ 1306              		.loc 1 384 0
+ 1307 00fe 21E0     		b	.L63
+ 1308              	.L76:
+ 400:..\src/utils.c ****                 
+ 1309              		.loc 1 400 0
+ 1310 0100 0320     		movs	r0, #3
+ 1311 0102 FFF7FEFF 		bl	LED_control
+ 402:..\src/utils.c ****                         battery_low_SoC = 1;
+ 1312              		.loc 1 402 0
+ 1313 0106 164B     		ldr	r3, .L78+24
+ 1314 0108 1B68     		ldr	r3, [r3]
+ 1315 010a 42F20F72 		movw	r2, #9999
+ 1316 010e 9342     		cmp	r3, r2
+ 1317 0110 06D9     		bls	.L72
+ 403:..\src/utils.c ****                         rest_enabled = 0;
+ 1318              		.loc 1 403 0
+ 1319 0112 114B     		ldr	r3, .L78+16
+ 1320 0114 0122     		movs	r2, #1
+ 1321 0116 1A70     		strb	r2, [r3]
+ 404:..\src/utils.c ****                     }
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 32
+
+
+ 1322              		.loc 1 404 0
+ 1323 0118 104B     		ldr	r3, .L78+20
+ 1324 011a 0022     		movs	r2, #0
+ 1325 011c 1A70     		strb	r2, [r3]
+ 384:..\src/utils.c ****                 //fixed
+ 1326              		.loc 1 384 0
+ 1327 011e 11E0     		b	.L63
+ 1328              	.L72:
+ 407:..\src/utils.c ****                     }                
+ 1329              		.loc 1 407 0
+ 1330 0120 0F4B     		ldr	r3, .L78+24
+ 1331 0122 1B68     		ldr	r3, [r3]
+ 1332 0124 0133     		adds	r3, r3, #1
+ 1333 0126 0E4A     		ldr	r2, .L78+24
+ 1334 0128 1360     		str	r3, [r2]
+ 384:..\src/utils.c ****                 //fixed
+ 1335              		.loc 1 384 0
+ 1336 012a 0BE0     		b	.L63
+ 1337              	.L64:
+ 413:..\src/utils.c ****                 LED_control(5);     // Default - red light
+ 1338              		.loc 1 413 0
+ 1339 012c 0F4B     		ldr	r3, .L78+36
+ 1340 012e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1341 0130 002B     		cmp	r3, #0
+ 1342 0132 07D1     		bne	.L77
+ 413:..\src/utils.c ****                 LED_control(5);     // Default - red light
+ 1343              		.loc 1 413 0 is_stmt 0 discriminator 1
+ 1344 0134 0E4B     		ldr	r3, .L78+40
+ 1345 0136 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1346 0138 002B     		cmp	r3, #0
+ 1347 013a 03D1     		bne	.L77
+ 414:..\src/utils.c ****             }
+ 1348              		.loc 1 414 0 is_stmt 1
+ 1349 013c 0520     		movs	r0, #5
+ 1350 013e FFF7FEFF 		bl	LED_control
+ 1351              		.loc 1 418 0
+ 1352 0142 FFE7     		b	.L77
+ 1353              	.L63:
+ 1354              	.L77:
+ 1355 0144 00BF     		nop
+ 1356 0146 B0BD     		pop	{r4, r5, r7, pc}
+ 1357              	.L79:
+ 1358              		.align	3
+ 1359              	.L78:
+ 1360 0148 52B81E85 		.word	-2061584302
+ 1361 014c EB51EC3F 		.word	1072452075
+ 1362 0150 85EB51B8 		.word	-1202590843
+ 1363 0154 1E85EB3F 		.word	1072399646
+ 1364 0158 00000000 		.word	battery_low_SoC
+ 1365 015c 00000000 		.word	rest_enabled
+ 1366 0160 20000000 		.word	v_count.9796
+ 1367 0164 00000000 		.word	g_refNew
+ 1368 0168 00000000 		.word	tension_valid
+ 1369 016c 00000000 		.word	emg_1_status
+ 1370 0170 00000000 		.word	emg_2_status
+ 1371 0174 00000000 		.word	dev_tension
+ 1372 0178 00000000 		.word	filt_v
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 33
+
+
+ 1373 017c 00000000 		.word	dev_tension_f
+ 1374 0180 00000000 		.word	pow_tension
+ 1375 0184 00000000 		.word	maintenance_flag
+ 1376              		.cfi_endproc
+ 1377              	.LFE72:
+ 1378              		.size	battery_management, .-battery_management
+ 1379              		.section	.text.reset_counters,"ax",%progbits
+ 1380              		.align	2
+ 1381              		.global	reset_counters
+ 1382              		.thumb
+ 1383              		.thumb_func
+ 1384              		.type	reset_counters, %function
+ 1385              	reset_counters:
+ 1386              	.LFB73:
+ 419:..\src/utils.c **** 
+ 420:..\src/utils.c **** //==============================================================================
+ 421:..\src/utils.c **** //                                                              RESET COUNTERS
+ 422:..\src/utils.c **** //==============================================================================
+ 423:..\src/utils.c **** void reset_counters() {
+ 1387              		.loc 1 423 0
+ 1388              		.cfi_startproc
+ 1389              		@ args = 0, pretend = 0, frame = 8
+ 1390              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1391              		@ link register save eliminated.
+ 1392 0000 80B4     		push	{r7}
+ 1393              		.cfi_def_cfa_offset 4
+ 1394              		.cfi_offset 7, -4
+ 1395 0002 83B0     		sub	sp, sp, #12
+ 1396              		.cfi_def_cfa_offset 16
+ 1397 0004 00AF     		add	r7, sp, #0
+ 1398              		.cfi_def_cfa_register 7
+ 424:..\src/utils.c ****     uint8 i;
+ 425:..\src/utils.c ****     
+ 426:..\src/utils.c ****     // Initialize counters        
+ 427:..\src/utils.c ****     g_mem.emg_counter[0] = g_mem.emg_counter[1] = 0;
+ 1399              		.loc 1 427 0
+ 1400 0006 1E4B     		ldr	r3, .L85
+ 1401 0008 0022     		movs	r2, #0
+ 1402 000a C3F8C420 		str	r2, [r3, #196]
+ 1403 000e 1C4B     		ldr	r3, .L85
+ 1404 0010 D3F8C430 		ldr	r3, [r3, #196]
+ 1405 0014 1A4A     		ldr	r2, .L85
+ 1406 0016 C2F8C030 		str	r3, [r2, #192]
+ 428:..\src/utils.c ****     for(i = 0; i< 10; i++){
+ 1407              		.loc 1 428 0
+ 1408 001a 0023     		movs	r3, #0
+ 1409 001c FB71     		strb	r3, [r7, #7]
+ 1410 001e 08E0     		b	.L81
+ 1411              	.L82:
+ 429:..\src/utils.c ****         g_mem.position_hist[i] = 0;
+ 1412              		.loc 1 429 0 discriminator 3
+ 1413 0020 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 1414 0022 174A     		ldr	r2, .L85
+ 1415 0024 3233     		adds	r3, r3, #50
+ 1416 0026 0021     		movs	r1, #0
+ 1417 0028 42F82310 		str	r1, [r2, r3, lsl #2]
+ 428:..\src/utils.c ****     for(i = 0; i< 10; i++){
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 34
+
+
+ 1418              		.loc 1 428 0 discriminator 3
+ 1419 002c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 1420 002e 0133     		adds	r3, r3, #1
+ 1421 0030 FB71     		strb	r3, [r7, #7]
+ 1422              	.L81:
+ 428:..\src/utils.c ****     for(i = 0; i< 10; i++){
+ 1423              		.loc 1 428 0 is_stmt 0 discriminator 1
+ 1424 0032 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 1425 0034 092B     		cmp	r3, #9
+ 1426 0036 F3D9     		bls	.L82
+ 430:..\src/utils.c ****     }
+ 431:..\src/utils.c ****     for(i = 0; i< 4; i++){
+ 1427              		.loc 1 431 0 is_stmt 1
+ 1428 0038 0023     		movs	r3, #0
+ 1429 003a FB71     		strb	r3, [r7, #7]
+ 1430 003c 08E0     		b	.L83
+ 1431              	.L84:
+ 432:..\src/utils.c ****         g_mem.current_hist[i] = 0;
+ 1432              		.loc 1 432 0 discriminator 3
+ 1433 003e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 1434 0040 0F4A     		ldr	r2, .L85
+ 1435 0042 3C33     		adds	r3, r3, #60
+ 1436 0044 0021     		movs	r1, #0
+ 1437 0046 42F82310 		str	r1, [r2, r3, lsl #2]
+ 431:..\src/utils.c ****         g_mem.current_hist[i] = 0;
+ 1438              		.loc 1 431 0 discriminator 3
+ 1439 004a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 1440 004c 0133     		adds	r3, r3, #1
+ 1441 004e FB71     		strb	r3, [r7, #7]
+ 1442              	.L83:
+ 431:..\src/utils.c ****         g_mem.current_hist[i] = 0;
+ 1443              		.loc 1 431 0 is_stmt 0 discriminator 1
+ 1444 0050 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 1445 0052 032B     		cmp	r3, #3
+ 1446 0054 F3D9     		bls	.L84
+ 433:..\src/utils.c ****     }
+ 434:..\src/utils.c ****     g_mem.rest_counter = 0;
+ 1447              		.loc 1 434 0 is_stmt 1
+ 1448 0056 0A4B     		ldr	r3, .L85
+ 1449 0058 0022     		movs	r2, #0
+ 1450 005a C3F80021 		str	r2, [r3, #256]
+ 435:..\src/utils.c ****     g_mem.wire_disp = 0;
+ 1451              		.loc 1 435 0
+ 1452 005e 084B     		ldr	r3, .L85
+ 1453 0060 0022     		movs	r2, #0
+ 1454 0062 C3F80421 		str	r2, [r3, #260]
+ 436:..\src/utils.c ****     g_mem.total_time_on = 0;
+ 1455              		.loc 1 436 0
+ 1456 0066 064B     		ldr	r3, .L85
+ 1457 0068 0022     		movs	r2, #0
+ 1458 006a C3F80821 		str	r2, [r3, #264]
+ 437:..\src/utils.c ****     g_mem.total_time_rest = 0; 
+ 1459              		.loc 1 437 0
+ 1460 006e 044B     		ldr	r3, .L85
+ 1461 0070 0022     		movs	r2, #0
+ 1462 0072 C3F80C21 		str	r2, [r3, #268]
+ 438:..\src/utils.c **** }
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 35
+
+
+ 1463              		.loc 1 438 0
+ 1464 0076 00BF     		nop
+ 1465 0078 0C37     		adds	r7, r7, #12
+ 1466              		.cfi_def_cfa_offset 4
+ 1467 007a BD46     		mov	sp, r7
+ 1468              		.cfi_def_cfa_register 13
+ 1469              		@ sp needed
+ 1470 007c 80BC     		pop	{r7}
+ 1471              		.cfi_restore 7
+ 1472              		.cfi_def_cfa_offset 0
+ 1473 007e 7047     		bx	lr
+ 1474              	.L86:
+ 1475              		.align	2
+ 1476              	.L85:
+ 1477 0080 00000000 		.word	g_mem
+ 1478              		.cfi_endproc
+ 1479              	.LFE73:
+ 1480              		.size	reset_counters, .-reset_counters
+ 1481              		.global	__aeabi_fsub
+ 1482              		.section	.text.invSqrt,"ax",%progbits
+ 1483              		.align	2
+ 1484              		.global	invSqrt
+ 1485              		.thumb
+ 1486              		.thumb_func
+ 1487              		.type	invSqrt, %function
+ 1488              	invSqrt:
+ 1489              	.LFB74:
+ 439:..\src/utils.c **** 
+ 440:..\src/utils.c **** 
+ 441:..\src/utils.c **** //==============================================================================
+ 442:..\src/utils.c **** //                                                                       INVSQRT
+ 443:..\src/utils.c **** //==============================================================================
+ 444:..\src/utils.c **** float invSqrt(float x) {
+ 1490              		.loc 1 444 0
+ 1491              		.cfi_startproc
+ 1492              		@ args = 0, pretend = 0, frame = 24
+ 1493              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1494 0000 80B5     		push	{r7, lr}
+ 1495              		.cfi_def_cfa_offset 8
+ 1496              		.cfi_offset 7, -8
+ 1497              		.cfi_offset 14, -4
+ 1498 0002 86B0     		sub	sp, sp, #24
+ 1499              		.cfi_def_cfa_offset 32
+ 1500 0004 00AF     		add	r7, sp, #0
+ 1501              		.cfi_def_cfa_register 7
+ 1502 0006 7860     		str	r0, [r7, #4]	@ float
+ 445:..\src/utils.c **** 	float halfx = 0.5f * x;
+ 1503              		.loc 1 445 0
+ 1504 0008 4FF07C51 		mov	r1, #1056964608
+ 1505 000c 7868     		ldr	r0, [r7, #4]	@ float
+ 1506 000e FFF7FEFF 		bl	__aeabi_fmul
+ 1507 0012 0346     		mov	r3, r0
+ 1508 0014 7B61     		str	r3, [r7, #20]	@ float
+ 446:..\src/utils.c **** 	float y = x;
+ 1509              		.loc 1 446 0
+ 1510 0016 7B68     		ldr	r3, [r7, #4]	@ float
+ 1511 0018 3B61     		str	r3, [r7, #16]	@ float
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 36
+
+
+ 447:..\src/utils.c **** 	long i = *(long*)&y;
+ 1512              		.loc 1 447 0
+ 1513 001a 07F11003 		add	r3, r7, #16
+ 1514 001e 1B68     		ldr	r3, [r3]
+ 1515 0020 FB60     		str	r3, [r7, #12]
+ 448:..\src/utils.c **** 	i = 0x5f3759df - (i>>1);
+ 1516              		.loc 1 448 0
+ 1517 0022 FB68     		ldr	r3, [r7, #12]
+ 1518 0024 5A10     		asrs	r2, r3, #1
+ 1519 0026 134B     		ldr	r3, .L89
+ 1520 0028 9B1A     		subs	r3, r3, r2
+ 1521 002a FB60     		str	r3, [r7, #12]
+ 449:..\src/utils.c **** 	y = *(float*)&i;
+ 1522              		.loc 1 449 0
+ 1523 002c 07F10C03 		add	r3, r7, #12
+ 1524 0030 1B68     		ldr	r3, [r3]	@ float
+ 1525 0032 3B61     		str	r3, [r7, #16]	@ float
+ 450:..\src/utils.c **** 	y = y * (1.5f - (halfx * y * y));
+ 1526              		.loc 1 450 0
+ 1527 0034 3B69     		ldr	r3, [r7, #16]	@ float
+ 1528 0036 7969     		ldr	r1, [r7, #20]	@ float
+ 1529 0038 1846     		mov	r0, r3
+ 1530 003a FFF7FEFF 		bl	__aeabi_fmul
+ 1531 003e 0346     		mov	r3, r0
+ 1532 0040 1A46     		mov	r2, r3
+ 1533 0042 3B69     		ldr	r3, [r7, #16]	@ float
+ 1534 0044 1946     		mov	r1, r3
+ 1535 0046 1046     		mov	r0, r2
+ 1536 0048 FFF7FEFF 		bl	__aeabi_fmul
+ 1537 004c 0346     		mov	r3, r0
+ 1538 004e 1946     		mov	r1, r3
+ 1539 0050 4FF07F50 		mov	r0, #1069547520
+ 1540 0054 FFF7FEFF 		bl	__aeabi_fsub
+ 1541 0058 0346     		mov	r3, r0
+ 1542 005a 1A46     		mov	r2, r3
+ 1543 005c 3B69     		ldr	r3, [r7, #16]	@ float
+ 1544 005e 1946     		mov	r1, r3
+ 1545 0060 1046     		mov	r0, r2
+ 1546 0062 FFF7FEFF 		bl	__aeabi_fmul
+ 1547 0066 0346     		mov	r3, r0
+ 1548 0068 3B61     		str	r3, [r7, #16]	@ float
+ 451:..\src/utils.c **** 	return y;
+ 1549              		.loc 1 451 0
+ 1550 006a 3B69     		ldr	r3, [r7, #16]	@ float
+ 452:..\src/utils.c **** }
+ 1551              		.loc 1 452 0
+ 1552 006c 1846     		mov	r0, r3
+ 1553 006e 1837     		adds	r7, r7, #24
+ 1554              		.cfi_def_cfa_offset 8
+ 1555 0070 BD46     		mov	sp, r7
+ 1556              		.cfi_def_cfa_register 13
+ 1557              		@ sp needed
+ 1558 0072 80BD     		pop	{r7, pc}
+ 1559              	.L90:
+ 1560              		.align	2
+ 1561              	.L89:
+ 1562 0074 DF59375F 		.word	1597463007
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 37
+
+
+ 1563              		.cfi_endproc
+ 1564              	.LFE74:
+ 1565              		.size	invSqrt, .-invSqrt
+ 1566              		.section	.text.v3_normalize,"ax",%progbits
+ 1567              		.align	2
+ 1568              		.global	v3_normalize
+ 1569              		.thumb
+ 1570              		.thumb_func
+ 1571              		.type	v3_normalize, %function
+ 1572              	v3_normalize:
+ 1573              	.LFB75:
+ 453:..\src/utils.c **** 
+ 454:..\src/utils.c **** //==============================================================================
+ 455:..\src/utils.c **** //                                                                  V3_NORMALIZE
+ 456:..\src/utils.c **** //==============================================================================
+ 457:..\src/utils.c **** void v3_normalize(float v3_in[3]){
+ 1574              		.loc 1 457 0
+ 1575              		.cfi_startproc
+ 1576              		@ args = 0, pretend = 0, frame = 16
+ 1577              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1578 0000 90B5     		push	{r4, r7, lr}
+ 1579              		.cfi_def_cfa_offset 12
+ 1580              		.cfi_offset 4, -12
+ 1581              		.cfi_offset 7, -8
+ 1582              		.cfi_offset 14, -4
+ 1583 0002 85B0     		sub	sp, sp, #20
+ 1584              		.cfi_def_cfa_offset 32
+ 1585 0004 00AF     		add	r7, sp, #0
+ 1586              		.cfi_def_cfa_register 7
+ 1587 0006 7860     		str	r0, [r7, #4]
+ 458:..\src/utils.c ****     // Vector 3 normalization
+ 459:..\src/utils.c ****     float norm = invSqrt(v3_in[0] * v3_in[0] + v3_in[1] * v3_in[1] + v3_in[2] * v3_in[2]);
+ 1588              		.loc 1 459 0
+ 1589 0008 7B68     		ldr	r3, [r7, #4]
+ 1590 000a 1A68     		ldr	r2, [r3]	@ float
+ 1591 000c 7B68     		ldr	r3, [r7, #4]
+ 1592 000e 1B68     		ldr	r3, [r3]	@ float
+ 1593 0010 1946     		mov	r1, r3
+ 1594 0012 1046     		mov	r0, r2
+ 1595 0014 FFF7FEFF 		bl	__aeabi_fmul
+ 1596 0018 0346     		mov	r3, r0
+ 1597 001a 1C46     		mov	r4, r3
+ 1598 001c 7B68     		ldr	r3, [r7, #4]
+ 1599 001e 0433     		adds	r3, r3, #4
+ 1600 0020 1A68     		ldr	r2, [r3]	@ float
+ 1601 0022 7B68     		ldr	r3, [r7, #4]
+ 1602 0024 0433     		adds	r3, r3, #4
+ 1603 0026 1B68     		ldr	r3, [r3]	@ float
+ 1604 0028 1946     		mov	r1, r3
+ 1605 002a 1046     		mov	r0, r2
+ 1606 002c FFF7FEFF 		bl	__aeabi_fmul
+ 1607 0030 0346     		mov	r3, r0
+ 1608 0032 1946     		mov	r1, r3
+ 1609 0034 2046     		mov	r0, r4
+ 1610 0036 FFF7FEFF 		bl	__aeabi_fadd
+ 1611 003a 0346     		mov	r3, r0
+ 1612 003c 1C46     		mov	r4, r3
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 38
+
+
+ 1613 003e 7B68     		ldr	r3, [r7, #4]
+ 1614 0040 0833     		adds	r3, r3, #8
+ 1615 0042 1A68     		ldr	r2, [r3]	@ float
+ 1616 0044 7B68     		ldr	r3, [r7, #4]
+ 1617 0046 0833     		adds	r3, r3, #8
+ 1618 0048 1B68     		ldr	r3, [r3]	@ float
+ 1619 004a 1946     		mov	r1, r3
+ 1620 004c 1046     		mov	r0, r2
+ 1621 004e FFF7FEFF 		bl	__aeabi_fmul
+ 1622 0052 0346     		mov	r3, r0
+ 1623 0054 1946     		mov	r1, r3
+ 1624 0056 2046     		mov	r0, r4
+ 1625 0058 FFF7FEFF 		bl	__aeabi_fadd
+ 1626 005c 0346     		mov	r3, r0
+ 1627 005e 1846     		mov	r0, r3
+ 1628 0060 FFF7FEFF 		bl	invSqrt
+ 1629 0064 F860     		str	r0, [r7, #12]	@ float
+ 460:..\src/utils.c ****     
+ 461:..\src/utils.c ****     v3_in[0] = v3_in[0]*norm;
+ 1630              		.loc 1 461 0
+ 1631 0066 7B68     		ldr	r3, [r7, #4]
+ 1632 0068 1B68     		ldr	r3, [r3]	@ float
+ 1633 006a F968     		ldr	r1, [r7, #12]	@ float
+ 1634 006c 1846     		mov	r0, r3
+ 1635 006e FFF7FEFF 		bl	__aeabi_fmul
+ 1636 0072 0346     		mov	r3, r0
+ 1637 0074 1A46     		mov	r2, r3
+ 1638 0076 7B68     		ldr	r3, [r7, #4]
+ 1639 0078 1A60     		str	r2, [r3]	@ float
+ 462:..\src/utils.c ****     v3_in[1] = v3_in[1]*norm;
+ 1640              		.loc 1 462 0
+ 1641 007a 7B68     		ldr	r3, [r7, #4]
+ 1642 007c 1C1D     		adds	r4, r3, #4
+ 1643 007e 7B68     		ldr	r3, [r7, #4]
+ 1644 0080 0433     		adds	r3, r3, #4
+ 1645 0082 1B68     		ldr	r3, [r3]	@ float
+ 1646 0084 F968     		ldr	r1, [r7, #12]	@ float
+ 1647 0086 1846     		mov	r0, r3
+ 1648 0088 FFF7FEFF 		bl	__aeabi_fmul
+ 1649 008c 0346     		mov	r3, r0
+ 1650 008e 2360     		str	r3, [r4]	@ float
+ 463:..\src/utils.c ****     v3_in[2] = v3_in[2]*norm;
+ 1651              		.loc 1 463 0
+ 1652 0090 7B68     		ldr	r3, [r7, #4]
+ 1653 0092 03F10804 		add	r4, r3, #8
+ 1654 0096 7B68     		ldr	r3, [r7, #4]
+ 1655 0098 0833     		adds	r3, r3, #8
+ 1656 009a 1B68     		ldr	r3, [r3]	@ float
+ 1657 009c F968     		ldr	r1, [r7, #12]	@ float
+ 1658 009e 1846     		mov	r0, r3
+ 1659 00a0 FFF7FEFF 		bl	__aeabi_fmul
+ 1660 00a4 0346     		mov	r3, r0
+ 1661 00a6 2360     		str	r3, [r4]	@ float
+ 464:..\src/utils.c **** }
+ 1662              		.loc 1 464 0
+ 1663 00a8 00BF     		nop
+ 1664 00aa 1437     		adds	r7, r7, #20
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 39
+
+
+ 1665              		.cfi_def_cfa_offset 12
+ 1666 00ac BD46     		mov	sp, r7
+ 1667              		.cfi_def_cfa_register 13
+ 1668              		@ sp needed
+ 1669 00ae 90BD     		pop	{r4, r7, pc}
+ 1670              		.cfi_endproc
+ 1671              	.LFE75:
+ 1672              		.size	v3_normalize, .-v3_normalize
+ 1673              		.section	.text.v4_normalize,"ax",%progbits
+ 1674              		.align	2
+ 1675              		.global	v4_normalize
+ 1676              		.thumb
+ 1677              		.thumb_func
+ 1678              		.type	v4_normalize, %function
+ 1679              	v4_normalize:
+ 1680              	.LFB76:
+ 465:..\src/utils.c ****  
+ 466:..\src/utils.c **** //==============================================================================
+ 467:..\src/utils.c **** //                                                                  V4_NORMALIZE
+ 468:..\src/utils.c **** //==============================================================================
+ 469:..\src/utils.c **** void v4_normalize(float v4_in[4]){
+ 1681              		.loc 1 469 0
+ 1682              		.cfi_startproc
+ 1683              		@ args = 0, pretend = 0, frame = 16
+ 1684              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1685 0000 90B5     		push	{r4, r7, lr}
+ 1686              		.cfi_def_cfa_offset 12
+ 1687              		.cfi_offset 4, -12
+ 1688              		.cfi_offset 7, -8
+ 1689              		.cfi_offset 14, -4
+ 1690 0002 85B0     		sub	sp, sp, #20
+ 1691              		.cfi_def_cfa_offset 32
+ 1692 0004 00AF     		add	r7, sp, #0
+ 1693              		.cfi_def_cfa_register 7
+ 1694 0006 7860     		str	r0, [r7, #4]
+ 470:..\src/utils.c ****     // Vector 4 normalization
+ 471:..\src/utils.c ****     float norm = invSqrt(v4_in[0] * v4_in[0] + v4_in[1] * v4_in[1] + v4_in[2] * v4_in[2] + v4_in[3]
+ 1695              		.loc 1 471 0
+ 1696 0008 7B68     		ldr	r3, [r7, #4]
+ 1697 000a 1A68     		ldr	r2, [r3]	@ float
+ 1698 000c 7B68     		ldr	r3, [r7, #4]
+ 1699 000e 1B68     		ldr	r3, [r3]	@ float
+ 1700 0010 1946     		mov	r1, r3
+ 1701 0012 1046     		mov	r0, r2
+ 1702 0014 FFF7FEFF 		bl	__aeabi_fmul
+ 1703 0018 0346     		mov	r3, r0
+ 1704 001a 1C46     		mov	r4, r3
+ 1705 001c 7B68     		ldr	r3, [r7, #4]
+ 1706 001e 0433     		adds	r3, r3, #4
+ 1707 0020 1A68     		ldr	r2, [r3]	@ float
+ 1708 0022 7B68     		ldr	r3, [r7, #4]
+ 1709 0024 0433     		adds	r3, r3, #4
+ 1710 0026 1B68     		ldr	r3, [r3]	@ float
+ 1711 0028 1946     		mov	r1, r3
+ 1712 002a 1046     		mov	r0, r2
+ 1713 002c FFF7FEFF 		bl	__aeabi_fmul
+ 1714 0030 0346     		mov	r3, r0
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 40
+
+
+ 1715 0032 1946     		mov	r1, r3
+ 1716 0034 2046     		mov	r0, r4
+ 1717 0036 FFF7FEFF 		bl	__aeabi_fadd
+ 1718 003a 0346     		mov	r3, r0
+ 1719 003c 1C46     		mov	r4, r3
+ 1720 003e 7B68     		ldr	r3, [r7, #4]
+ 1721 0040 0833     		adds	r3, r3, #8
+ 1722 0042 1A68     		ldr	r2, [r3]	@ float
+ 1723 0044 7B68     		ldr	r3, [r7, #4]
+ 1724 0046 0833     		adds	r3, r3, #8
+ 1725 0048 1B68     		ldr	r3, [r3]	@ float
+ 1726 004a 1946     		mov	r1, r3
+ 1727 004c 1046     		mov	r0, r2
+ 1728 004e FFF7FEFF 		bl	__aeabi_fmul
+ 1729 0052 0346     		mov	r3, r0
+ 1730 0054 1946     		mov	r1, r3
+ 1731 0056 2046     		mov	r0, r4
+ 1732 0058 FFF7FEFF 		bl	__aeabi_fadd
+ 1733 005c 0346     		mov	r3, r0
+ 1734 005e 1C46     		mov	r4, r3
+ 1735 0060 7B68     		ldr	r3, [r7, #4]
+ 1736 0062 0C33     		adds	r3, r3, #12
+ 1737 0064 1A68     		ldr	r2, [r3]	@ float
+ 1738 0066 7B68     		ldr	r3, [r7, #4]
+ 1739 0068 0C33     		adds	r3, r3, #12
+ 1740 006a 1B68     		ldr	r3, [r3]	@ float
+ 1741 006c 1946     		mov	r1, r3
+ 1742 006e 1046     		mov	r0, r2
+ 1743 0070 FFF7FEFF 		bl	__aeabi_fmul
+ 1744 0074 0346     		mov	r3, r0
+ 1745 0076 1946     		mov	r1, r3
+ 1746 0078 2046     		mov	r0, r4
+ 1747 007a FFF7FEFF 		bl	__aeabi_fadd
+ 1748 007e 0346     		mov	r3, r0
+ 1749 0080 1846     		mov	r0, r3
+ 1750 0082 FFF7FEFF 		bl	invSqrt
+ 1751 0086 F860     		str	r0, [r7, #12]	@ float
+ 472:..\src/utils.c ****     
+ 473:..\src/utils.c ****     v4_in[0] = v4_in[0]*norm;
+ 1752              		.loc 1 473 0
+ 1753 0088 7B68     		ldr	r3, [r7, #4]
+ 1754 008a 1B68     		ldr	r3, [r3]	@ float
+ 1755 008c F968     		ldr	r1, [r7, #12]	@ float
+ 1756 008e 1846     		mov	r0, r3
+ 1757 0090 FFF7FEFF 		bl	__aeabi_fmul
+ 1758 0094 0346     		mov	r3, r0
+ 1759 0096 1A46     		mov	r2, r3
+ 1760 0098 7B68     		ldr	r3, [r7, #4]
+ 1761 009a 1A60     		str	r2, [r3]	@ float
+ 474:..\src/utils.c ****     v4_in[1] = v4_in[1]*norm;
+ 1762              		.loc 1 474 0
+ 1763 009c 7B68     		ldr	r3, [r7, #4]
+ 1764 009e 1C1D     		adds	r4, r3, #4
+ 1765 00a0 7B68     		ldr	r3, [r7, #4]
+ 1766 00a2 0433     		adds	r3, r3, #4
+ 1767 00a4 1B68     		ldr	r3, [r3]	@ float
+ 1768 00a6 F968     		ldr	r1, [r7, #12]	@ float
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 41
+
+
+ 1769 00a8 1846     		mov	r0, r3
+ 1770 00aa FFF7FEFF 		bl	__aeabi_fmul
+ 1771 00ae 0346     		mov	r3, r0
+ 1772 00b0 2360     		str	r3, [r4]	@ float
+ 475:..\src/utils.c ****     v4_in[2] = v4_in[2]*norm;
+ 1773              		.loc 1 475 0
+ 1774 00b2 7B68     		ldr	r3, [r7, #4]
+ 1775 00b4 03F10804 		add	r4, r3, #8
+ 1776 00b8 7B68     		ldr	r3, [r7, #4]
+ 1777 00ba 0833     		adds	r3, r3, #8
+ 1778 00bc 1B68     		ldr	r3, [r3]	@ float
+ 1779 00be F968     		ldr	r1, [r7, #12]	@ float
+ 1780 00c0 1846     		mov	r0, r3
+ 1781 00c2 FFF7FEFF 		bl	__aeabi_fmul
+ 1782 00c6 0346     		mov	r3, r0
+ 1783 00c8 2360     		str	r3, [r4]	@ float
+ 476:..\src/utils.c ****     v4_in[3] = v4_in[3]*norm;
+ 1784              		.loc 1 476 0
+ 1785 00ca 7B68     		ldr	r3, [r7, #4]
+ 1786 00cc 03F10C04 		add	r4, r3, #12
+ 1787 00d0 7B68     		ldr	r3, [r7, #4]
+ 1788 00d2 0C33     		adds	r3, r3, #12
+ 1789 00d4 1B68     		ldr	r3, [r3]	@ float
+ 1790 00d6 F968     		ldr	r1, [r7, #12]	@ float
+ 1791 00d8 1846     		mov	r0, r3
+ 1792 00da FFF7FEFF 		bl	__aeabi_fmul
+ 1793 00de 0346     		mov	r3, r0
+ 1794 00e0 2360     		str	r3, [r4]	@ float
+ 477:..\src/utils.c **** }
+ 1795              		.loc 1 477 0
+ 1796 00e2 00BF     		nop
+ 1797 00e4 1437     		adds	r7, r7, #20
+ 1798              		.cfi_def_cfa_offset 12
+ 1799 00e6 BD46     		mov	sp, r7
+ 1800              		.cfi_def_cfa_register 13
+ 1801              		@ sp needed
+ 1802 00e8 90BD     		pop	{r4, r7, pc}
+ 1803              		.cfi_endproc
+ 1804              	.LFE76:
+ 1805              		.size	v4_normalize, .-v4_normalize
+ 1806 00ea 00BF     		.bss
+ 1807              		.align	2
+ 1808              	virtual_pos_friction.9742:
+ 1809 0000 00000000 		.space	4
+ 1810              		.align	2
+ 1811              	err_pos_dt.9743:
+ 1812 0004 00000000 		.space	4
+ 1813              	direction.9762:
+ 1814 0008 00       		.space	1
+ 1815 0009 00       		.align	1
+ 1816              	closure_counter.9763:
+ 1817 000a 0000     		.space	2
+ 1818              		.data
+ 1819              		.type	count_one.9764, %object
+ 1820              		.size	count_one.9764, 1
+ 1821              	count_one.9764:
+ 1822 0000 01       		.byte	1
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 42
+
+
+ 1823              		.type	first_time.9776, %object
+ 1824              		.size	first_time.9776, 1
+ 1825              	first_time.9776:
+ 1826 0001 01       		.byte	1
+ 1827              		.bss
+ 1828              		.align	2
+ 1829              	count.9774:
+ 1830 000c 00000000 		.space	4
+ 1831              		.data
+ 1832              		.type	flag_count.9775, %object
+ 1833              		.size	flag_count.9775, 1
+ 1834              	flag_count.9775:
+ 1835 0002 01       		.byte	1
+ 1836              		.bss
+ 1837              		.align	2
+ 1838              	m.9777:
+ 1839 0010 00000000 		.space	4
+ 1840              		.align	2
+ 1841              	abs_err_thr.9778:
+ 1842 0014 00000000 		.space	4
+ 1843              		.align	2
+ 1844              	rest_error.9781:
+ 1845 0018 00000000 		.space	4
+ 1846              		.align	2
+ 1847              	delta_inc.9779:
+ 1848 001c 00000000 		.space	4
+ 1849              		.align	2
+ 1850              	v_count.9796:
+ 1851 0020 00000000 		.space	4
+ 1852              		.text
+ 1853              	.Letext0:
+ 1854              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1855              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1856              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 1857              		.file 5 "..\\src\\globals.h"
+ 1858              		.file 6 "Generated_Source\\PSoC5/core_cm3.h"
+ 1859              		.file 7 "..\\src\\commands.h"
+ 1860              		.section	.debug_info,"",%progbits
+ 1861              	.Ldebug_info0:
+ 1862 0000 B10A0000 		.4byte	0xab1
+ 1863 0004 0400     		.2byte	0x4
+ 1864 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1865 000a 04       		.byte	0x4
+ 1866 000b 01       		.uleb128 0x1
+ 1867 000c 68000000 		.4byte	.LASF156
+ 1868 0010 0C       		.byte	0xc
+ 1869 0011 81060000 		.4byte	.LASF157
+ 1870 0015 49030000 		.4byte	.LASF158
+ 1871 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 1872 001d 00000000 		.4byte	0
+ 1873 0021 00000000 		.4byte	.Ldebug_line0
+ 1874 0025 02       		.uleb128 0x2
+ 1875 0026 01       		.byte	0x1
+ 1876 0027 06       		.byte	0x6
+ 1877 0028 70010000 		.4byte	.LASF0
+ 1878 002c 02       		.uleb128 0x2
+ 1879 002d 01       		.byte	0x1
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 43
+
+
+ 1880 002e 08       		.byte	0x8
+ 1881 002f BC060000 		.4byte	.LASF1
+ 1882 0033 02       		.uleb128 0x2
+ 1883 0034 02       		.byte	0x2
+ 1884 0035 05       		.byte	0x5
+ 1885 0036 E7010000 		.4byte	.LASF2
+ 1886 003a 02       		.uleb128 0x2
+ 1887 003b 02       		.byte	0x2
+ 1888 003c 07       		.byte	0x7
+ 1889 003d C2030000 		.4byte	.LASF3
+ 1890 0041 03       		.uleb128 0x3
+ 1891 0042 90060000 		.4byte	.LASF9
+ 1892 0046 02       		.byte	0x2
+ 1893 0047 3F       		.byte	0x3f
+ 1894 0048 4C000000 		.4byte	0x4c
+ 1895 004c 02       		.uleb128 0x2
+ 1896 004d 04       		.byte	0x4
+ 1897 004e 05       		.byte	0x5
+ 1898 004f BA010000 		.4byte	.LASF4
+ 1899 0053 02       		.uleb128 0x2
+ 1900 0054 04       		.byte	0x4
+ 1901 0055 07       		.byte	0x7
+ 1902 0056 2C060000 		.4byte	.LASF5
+ 1903 005a 02       		.uleb128 0x2
+ 1904 005b 08       		.byte	0x8
+ 1905 005c 05       		.byte	0x5
+ 1906 005d 62010000 		.4byte	.LASF6
+ 1907 0061 02       		.uleb128 0x2
+ 1908 0062 08       		.byte	0x8
+ 1909 0063 07       		.byte	0x7
+ 1910 0064 06010000 		.4byte	.LASF7
+ 1911 0068 04       		.uleb128 0x4
+ 1912 0069 04       		.byte	0x4
+ 1913 006a 05       		.byte	0x5
+ 1914 006b 696E7400 		.ascii	"int\000"
+ 1915 006f 02       		.uleb128 0x2
+ 1916 0070 04       		.byte	0x4
+ 1917 0071 07       		.byte	0x7
+ 1918 0072 D1020000 		.4byte	.LASF8
+ 1919 0076 03       		.uleb128 0x3
+ 1920 0077 37050000 		.4byte	.LASF10
+ 1921 007b 03       		.byte	0x3
+ 1922 007c 2C       		.byte	0x2c
+ 1923 007d 41000000 		.4byte	0x41
+ 1924 0081 05       		.uleb128 0x5
+ 1925 0082 43030000 		.4byte	.LASF11
+ 1926 0086 04       		.byte	0x4
+ 1927 0087 E401     		.2byte	0x1e4
+ 1928 0089 2C000000 		.4byte	0x2c
+ 1929 008d 05       		.uleb128 0x5
+ 1930 008e 06000000 		.4byte	.LASF12
+ 1931 0092 04       		.byte	0x4
+ 1932 0093 E501     		.2byte	0x1e5
+ 1933 0095 3A000000 		.4byte	0x3a
+ 1934 0099 05       		.uleb128 0x5
+ 1935 009a 54020000 		.4byte	.LASF13
+ 1936 009e 04       		.byte	0x4
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 44
+
+
+ 1937 009f E601     		.2byte	0x1e6
+ 1938 00a1 53000000 		.4byte	0x53
+ 1939 00a5 05       		.uleb128 0x5
+ 1940 00a6 DE030000 		.4byte	.LASF14
+ 1941 00aa 04       		.byte	0x4
+ 1942 00ab E701     		.2byte	0x1e7
+ 1943 00ad 25000000 		.4byte	0x25
+ 1944 00b1 05       		.uleb128 0x5
+ 1945 00b2 DA050000 		.4byte	.LASF15
+ 1946 00b6 04       		.byte	0x4
+ 1947 00b7 E801     		.2byte	0x1e8
+ 1948 00b9 33000000 		.4byte	0x33
+ 1949 00bd 05       		.uleb128 0x5
+ 1950 00be A9010000 		.4byte	.LASF16
+ 1951 00c2 04       		.byte	0x4
+ 1952 00c3 E901     		.2byte	0x1e9
+ 1953 00c5 4C000000 		.4byte	0x4c
+ 1954 00c9 05       		.uleb128 0x5
+ 1955 00ca 74040000 		.4byte	.LASF17
+ 1956 00ce 04       		.byte	0x4
+ 1957 00cf EA01     		.2byte	0x1ea
+ 1958 00d1 D5000000 		.4byte	0xd5
+ 1959 00d5 02       		.uleb128 0x2
+ 1960 00d6 04       		.byte	0x4
+ 1961 00d7 04       		.byte	0x4
+ 1962 00d8 71070000 		.4byte	.LASF18
+ 1963 00dc 02       		.uleb128 0x2
+ 1964 00dd 08       		.byte	0x8
+ 1965 00de 04       		.byte	0x4
+ 1966 00df DD070000 		.4byte	.LASF19
+ 1967 00e3 02       		.uleb128 0x2
+ 1968 00e4 01       		.byte	0x1
+ 1969 00e5 08       		.byte	0x8
+ 1970 00e6 55060000 		.4byte	.LASF20
+ 1971 00ea 02       		.uleb128 0x2
+ 1972 00eb 08       		.byte	0x8
+ 1973 00ec 04       		.byte	0x4
+ 1974 00ed 85040000 		.4byte	.LASF21
+ 1975 00f1 02       		.uleb128 0x2
+ 1976 00f2 04       		.byte	0x4
+ 1977 00f3 07       		.byte	0x7
+ 1978 00f4 7C040000 		.4byte	.LASF22
+ 1979 00f8 06       		.uleb128 0x6
+ 1980 00f9 E3030000 		.4byte	.LASF159
+ 1981 00fd 01       		.byte	0x1
+ 1982 00fe 2C000000 		.4byte	0x2c
+ 1983 0102 07       		.byte	0x7
+ 1984 0103 84       		.byte	0x84
+ 1985 0104 2D010000 		.4byte	0x12d
+ 1986 0108 07       		.uleb128 0x7
+ 1987 0109 66060000 		.4byte	.LASF23
+ 1988 010d 00       		.byte	0
+ 1989 010e 07       		.uleb128 0x7
+ 1990 010f 29040000 		.4byte	.LASF24
+ 1991 0113 01       		.byte	0x1
+ 1992 0114 07       		.uleb128 0x7
+ 1993 0115 6B020000 		.4byte	.LASF25
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 45
+
+
+ 1994 0119 02       		.byte	0x2
+ 1995 011a 07       		.uleb128 0x7
+ 1996 011b 20070000 		.4byte	.LASF26
+ 1997 011f 03       		.byte	0x3
+ 1998 0120 07       		.uleb128 0x7
+ 1999 0121 22030000 		.4byte	.LASF27
+ 2000 0125 04       		.byte	0x4
+ 2001 0126 07       		.uleb128 0x7
+ 2002 0127 D3040000 		.4byte	.LASF28
+ 2003 012b 05       		.byte	0x5
+ 2004 012c 00       		.byte	0
+ 2005 012d 08       		.uleb128 0x8
+ 2006 012e DE020000 		.4byte	.LASF31
+ 2007 0132 10       		.byte	0x10
+ 2008 0133 05       		.byte	0x5
+ 2009 0134 97       		.byte	0x97
+ 2010 0135 6A010000 		.4byte	0x16a
+ 2011 0139 09       		.uleb128 0x9
+ 2012 013a 706F7300 		.ascii	"pos\000"
+ 2013 013e 05       		.byte	0x5
+ 2014 013f 98       		.byte	0x98
+ 2015 0140 BD000000 		.4byte	0xbd
+ 2016 0144 00       		.byte	0
+ 2017 0145 0A       		.uleb128 0xa
+ 2018 0146 4D050000 		.4byte	.LASF29
+ 2019 014a 05       		.byte	0x5
+ 2020 014b 99       		.byte	0x99
+ 2021 014c BD000000 		.4byte	0xbd
+ 2022 0150 04       		.byte	0x4
+ 2023 0151 09       		.uleb128 0x9
+ 2024 0152 70776D00 		.ascii	"pwm\000"
+ 2025 0156 05       		.byte	0x5
+ 2026 0157 9A       		.byte	0x9a
+ 2027 0158 BD000000 		.4byte	0xbd
+ 2028 015c 08       		.byte	0x8
+ 2029 015d 0A       		.uleb128 0xa
+ 2030 015e 27010000 		.4byte	.LASF30
+ 2031 0162 05       		.byte	0x5
+ 2032 0163 9B       		.byte	0x9b
+ 2033 0164 81000000 		.4byte	0x81
+ 2034 0168 0C       		.byte	0xc
+ 2035 0169 00       		.byte	0
+ 2036 016a 08       		.uleb128 0x8
+ 2037 016b 0D000000 		.4byte	.LASF32
+ 2038 016f 38       		.byte	0x38
+ 2039 0170 05       		.byte	0x5
+ 2040 0171 A2       		.byte	0xa2
+ 2041 0172 CB010000 		.4byte	0x1cb
+ 2042 0176 09       		.uleb128 0x9
+ 2043 0177 706F7300 		.ascii	"pos\000"
+ 2044 017b 05       		.byte	0x5
+ 2045 017c A3       		.byte	0xa3
+ 2046 017d CB010000 		.4byte	0x1cb
+ 2047 0181 00       		.byte	0
+ 2048 0182 0A       		.uleb128 0xa
+ 2049 0183 4D050000 		.4byte	.LASF29
+ 2050 0187 05       		.byte	0x5
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 46
+
+
+ 2051 0188 A4       		.byte	0xa4
+ 2052 0189 BD000000 		.4byte	0xbd
+ 2053 018d 0C       		.byte	0xc
+ 2054 018e 0A       		.uleb128 0xa
+ 2055 018f 8C010000 		.4byte	.LASF33
+ 2056 0193 05       		.byte	0x5
+ 2057 0194 A5       		.byte	0xa5
+ 2058 0195 BD000000 		.4byte	0xbd
+ 2059 0199 10       		.byte	0x10
+ 2060 019a 09       		.uleb128 0x9
+ 2061 019b 726F7400 		.ascii	"rot\000"
+ 2062 019f 05       		.byte	0x5
+ 2063 01a0 A6       		.byte	0xa6
+ 2064 01a1 DB010000 		.4byte	0x1db
+ 2065 01a5 14       		.byte	0x14
+ 2066 01a6 09       		.uleb128 0x9
+ 2067 01a7 656D6700 		.ascii	"emg\000"
+ 2068 01ab 05       		.byte	0x5
+ 2069 01ac A8       		.byte	0xa8
+ 2070 01ad EB010000 		.4byte	0x1eb
+ 2071 01b1 18       		.byte	0x18
+ 2072 01b2 09       		.uleb128 0x9
+ 2073 01b3 76656C00 		.ascii	"vel\000"
+ 2074 01b7 05       		.byte	0x5
+ 2075 01b8 A9       		.byte	0xa9
+ 2076 01b9 CB010000 		.4byte	0x1cb
+ 2077 01bd 20       		.byte	0x20
+ 2078 01be 09       		.uleb128 0x9
+ 2079 01bf 61636300 		.ascii	"acc\000"
+ 2080 01c3 05       		.byte	0x5
+ 2081 01c4 AA       		.byte	0xaa
+ 2082 01c5 CB010000 		.4byte	0x1cb
+ 2083 01c9 2C       		.byte	0x2c
+ 2084 01ca 00       		.byte	0
+ 2085 01cb 0B       		.uleb128 0xb
+ 2086 01cc BD000000 		.4byte	0xbd
+ 2087 01d0 DB010000 		.4byte	0x1db
+ 2088 01d4 0C       		.uleb128 0xc
+ 2089 01d5 F1000000 		.4byte	0xf1
+ 2090 01d9 02       		.byte	0x2
+ 2091 01da 00       		.byte	0
+ 2092 01db 0B       		.uleb128 0xb
+ 2093 01dc A5000000 		.4byte	0xa5
+ 2094 01e0 EB010000 		.4byte	0x1eb
+ 2095 01e4 0C       		.uleb128 0xc
+ 2096 01e5 F1000000 		.4byte	0xf1
+ 2097 01e9 02       		.byte	0x2
+ 2098 01ea 00       		.byte	0
+ 2099 01eb 0B       		.uleb128 0xb
+ 2100 01ec BD000000 		.4byte	0xbd
+ 2101 01f0 FB010000 		.4byte	0x1fb
+ 2102 01f4 0C       		.uleb128 0xc
+ 2103 01f5 F1000000 		.4byte	0xf1
+ 2104 01f9 01       		.byte	0x1
+ 2105 01fa 00       		.byte	0
+ 2106 01fb 0D       		.uleb128 0xd
+ 2107 01fc D6070000 		.4byte	.LASF34
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 47
+
+
+ 2108 0200 3001     		.2byte	0x130
+ 2109 0202 05       		.byte	0x5
+ 2110 0203 BD       		.byte	0xbd
+ 2111 0204 B8040000 		.4byte	0x4b8
+ 2112 0208 0A       		.uleb128 0xa
+ 2113 0209 87050000 		.4byte	.LASF35
+ 2114 020d 05       		.byte	0x5
+ 2115 020e BE       		.byte	0xbe
+ 2116 020f 81000000 		.4byte	0x81
+ 2117 0213 00       		.byte	0
+ 2118 0214 09       		.uleb128 0x9
+ 2119 0215 696400   		.ascii	"id\000"
+ 2120 0218 05       		.byte	0x5
+ 2121 0219 BF       		.byte	0xbf
+ 2122 021a 81000000 		.4byte	0x81
+ 2123 021e 01       		.byte	0x1
+ 2124 021f 09       		.uleb128 0x9
+ 2125 0220 6B5F7000 		.ascii	"k_p\000"
+ 2126 0224 05       		.byte	0x5
+ 2127 0225 C1       		.byte	0xc1
+ 2128 0226 BD000000 		.4byte	0xbd
+ 2129 022a 04       		.byte	0x4
+ 2130 022b 09       		.uleb128 0x9
+ 2131 022c 6B5F6900 		.ascii	"k_i\000"
+ 2132 0230 05       		.byte	0x5
+ 2133 0231 C2       		.byte	0xc2
+ 2134 0232 BD000000 		.4byte	0xbd
+ 2135 0236 08       		.byte	0x8
+ 2136 0237 09       		.uleb128 0x9
+ 2137 0238 6B5F6400 		.ascii	"k_d\000"
+ 2138 023c 05       		.byte	0x5
+ 2139 023d C3       		.byte	0xc3
+ 2140 023e BD000000 		.4byte	0xbd
+ 2141 0242 0C       		.byte	0xc
+ 2142 0243 0A       		.uleb128 0xa
+ 2143 0244 B8040000 		.4byte	.LASF36
+ 2144 0248 05       		.byte	0x5
+ 2145 0249 C5       		.byte	0xc5
+ 2146 024a BD000000 		.4byte	0xbd
+ 2147 024e 10       		.byte	0x10
+ 2148 024f 0A       		.uleb128 0xa
+ 2149 0250 B6060000 		.4byte	.LASF37
+ 2150 0254 05       		.byte	0x5
+ 2151 0255 C6       		.byte	0xc6
+ 2152 0256 BD000000 		.4byte	0xbd
+ 2153 025a 14       		.byte	0x14
+ 2154 025b 0A       		.uleb128 0xa
+ 2155 025c EE060000 		.4byte	.LASF38
+ 2156 0260 05       		.byte	0x5
+ 2157 0261 C7       		.byte	0xc7
+ 2158 0262 BD000000 		.4byte	0xbd
+ 2159 0266 18       		.byte	0x18
+ 2160 0267 0A       		.uleb128 0xa
+ 2161 0268 E4070000 		.4byte	.LASF39
+ 2162 026c 05       		.byte	0x5
+ 2163 026d C8       		.byte	0xc8
+ 2164 026e BD000000 		.4byte	0xbd
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 48
+
+
+ 2165 0272 1C       		.byte	0x1c
+ 2166 0273 0A       		.uleb128 0xa
+ 2167 0274 06030000 		.4byte	.LASF40
+ 2168 0278 05       		.byte	0x5
+ 2169 0279 CA       		.byte	0xca
+ 2170 027a BD000000 		.4byte	0xbd
+ 2171 027e 20       		.byte	0x20
+ 2172 027f 0A       		.uleb128 0xa
+ 2173 0280 7A060000 		.4byte	.LASF41
+ 2174 0284 05       		.byte	0x5
+ 2175 0285 CB       		.byte	0xcb
+ 2176 0286 BD000000 		.4byte	0xbd
+ 2177 028a 24       		.byte	0x24
+ 2178 028b 0A       		.uleb128 0xa
+ 2179 028c 87020000 		.4byte	.LASF42
+ 2180 0290 05       		.byte	0x5
+ 2181 0291 CC       		.byte	0xcc
+ 2182 0292 BD000000 		.4byte	0xbd
+ 2183 0296 28       		.byte	0x28
+ 2184 0297 0A       		.uleb128 0xa
+ 2185 0298 9A060000 		.4byte	.LASF43
+ 2186 029c 05       		.byte	0x5
+ 2187 029d CD       		.byte	0xcd
+ 2188 029e BD000000 		.4byte	0xbd
+ 2189 02a2 2C       		.byte	0x2c
+ 2190 02a3 0A       		.uleb128 0xa
+ 2191 02a4 56070000 		.4byte	.LASF44
+ 2192 02a8 05       		.byte	0x5
+ 2193 02a9 CF       		.byte	0xcf
+ 2194 02aa BD000000 		.4byte	0xbd
+ 2195 02ae 30       		.byte	0x30
+ 2196 02af 0A       		.uleb128 0xa
+ 2197 02b0 02050000 		.4byte	.LASF45
+ 2198 02b4 05       		.byte	0x5
+ 2199 02b5 D0       		.byte	0xd0
+ 2200 02b6 81000000 		.4byte	0x81
+ 2201 02ba 34       		.byte	0x34
+ 2202 02bb 0A       		.uleb128 0xa
+ 2203 02bc A7020000 		.4byte	.LASF46
+ 2204 02c0 05       		.byte	0x5
+ 2205 02c1 D1       		.byte	0xd1
+ 2206 02c2 81000000 		.4byte	0x81
+ 2207 02c6 35       		.byte	0x35
+ 2208 02c7 0A       		.uleb128 0xa
+ 2209 02c8 FD010000 		.4byte	.LASF47
+ 2210 02cc 05       		.byte	0x5
+ 2211 02cd D2       		.byte	0xd2
+ 2212 02ce 81000000 		.4byte	0x81
+ 2213 02d2 36       		.byte	0x36
+ 2214 02d3 09       		.uleb128 0x9
+ 2215 02d4 72657300 		.ascii	"res\000"
+ 2216 02d8 05       		.byte	0x5
+ 2217 02d9 D3       		.byte	0xd3
+ 2218 02da B8040000 		.4byte	0x4b8
+ 2219 02de 37       		.byte	0x37
+ 2220 02df 0A       		.uleb128 0xa
+ 2221 02e0 51000000 		.4byte	.LASF48
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 49
+
+
+ 2222 02e4 05       		.byte	0x5
+ 2223 02e5 D5       		.byte	0xd5
+ 2224 02e6 CB010000 		.4byte	0x1cb
+ 2225 02ea 3C       		.byte	0x3c
+ 2226 02eb 0A       		.uleb128 0xa
+ 2227 02ec 52050000 		.4byte	.LASF49
+ 2228 02f0 05       		.byte	0x5
+ 2229 02f1 D7       		.byte	0xd7
+ 2230 02f2 C8040000 		.4byte	0x4c8
+ 2231 02f6 48       		.byte	0x48
+ 2232 02f7 0A       		.uleb128 0xa
+ 2233 02f8 E0050000 		.4byte	.LASF50
+ 2234 02fc 05       		.byte	0x5
+ 2235 02fd D9       		.byte	0xd9
+ 2236 02fe 81000000 		.4byte	0x81
+ 2237 0302 54       		.byte	0x54
+ 2238 0303 0A       		.uleb128 0xa
+ 2239 0304 06040000 		.4byte	.LASF51
+ 2240 0308 05       		.byte	0x5
+ 2241 0309 DB       		.byte	0xdb
+ 2242 030a BD000000 		.4byte	0xbd
+ 2243 030e 58       		.byte	0x58
+ 2244 030f 0A       		.uleb128 0xa
+ 2245 0310 C7040000 		.4byte	.LASF52
+ 2246 0314 05       		.byte	0x5
+ 2247 0315 DC       		.byte	0xdc
+ 2248 0316 BD000000 		.4byte	0xbd
+ 2249 031a 5C       		.byte	0x5c
+ 2250 031b 0A       		.uleb128 0xa
+ 2251 031c 36030000 		.4byte	.LASF53
+ 2252 0320 05       		.byte	0x5
+ 2253 0321 DE       		.byte	0xde
+ 2254 0322 BD000000 		.4byte	0xbd
+ 2255 0326 60       		.byte	0x60
+ 2256 0327 0A       		.uleb128 0xa
+ 2257 0328 FE050000 		.4byte	.LASF54
+ 2258 032c 05       		.byte	0x5
+ 2259 032d DF       		.byte	0xdf
+ 2260 032e BD000000 		.4byte	0xbd
+ 2261 0332 64       		.byte	0x64
+ 2262 0333 0A       		.uleb128 0xa
+ 2263 0334 97050000 		.4byte	.LASF55
+ 2264 0338 05       		.byte	0x5
+ 2265 0339 E0       		.byte	0xe0
+ 2266 033a B1000000 		.4byte	0xb1
+ 2267 033e 68       		.byte	0x68
+ 2268 033f 0A       		.uleb128 0xa
+ 2269 0340 54010000 		.4byte	.LASF56
+ 2270 0344 05       		.byte	0x5
+ 2271 0345 E1       		.byte	0xe1
+ 2272 0346 D8040000 		.4byte	0x4d8
+ 2273 034a 6A       		.byte	0x6a
+ 2274 034b 0A       		.uleb128 0xa
+ 2275 034c D9060000 		.4byte	.LASF57
+ 2276 0350 05       		.byte	0x5
+ 2277 0351 E2       		.byte	0xe2
+ 2278 0352 81000000 		.4byte	0x81
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 50
+
+
+ 2279 0356 6E       		.byte	0x6e
+ 2280 0357 0A       		.uleb128 0xa
+ 2281 0358 08050000 		.4byte	.LASF58
+ 2282 035c 05       		.byte	0x5
+ 2283 035d E5       		.byte	0xe5
+ 2284 035e E8040000 		.4byte	0x4e8
+ 2285 0362 70       		.byte	0x70
+ 2286 0363 0A       		.uleb128 0xa
+ 2287 0364 38070000 		.4byte	.LASF59
+ 2288 0368 05       		.byte	0x5
+ 2289 0369 E6       		.byte	0xe6
+ 2290 036a 81000000 		.4byte	0x81
+ 2291 036e 78       		.byte	0x78
+ 2292 036f 0A       		.uleb128 0xa
+ 2293 0370 A4070000 		.4byte	.LASF60
+ 2294 0374 05       		.byte	0x5
+ 2295 0375 E7       		.byte	0xe7
+ 2296 0376 81000000 		.4byte	0x81
+ 2297 037a 79       		.byte	0x79
+ 2298 037b 0A       		.uleb128 0xa
+ 2299 037c F3020000 		.4byte	.LASF61
+ 2300 0380 05       		.byte	0x5
+ 2301 0381 E8       		.byte	0xe8
+ 2302 0382 A5000000 		.4byte	0xa5
+ 2303 0386 7A       		.byte	0x7a
+ 2304 0387 0A       		.uleb128 0xa
+ 2305 0388 3E060000 		.4byte	.LASF62
+ 2306 038c 05       		.byte	0x5
+ 2307 038d E9       		.byte	0xe9
+ 2308 038e 81000000 		.4byte	0x81
+ 2309 0392 7B       		.byte	0x7b
+ 2310 0393 0A       		.uleb128 0xa
+ 2311 0394 F4060000 		.4byte	.LASF63
+ 2312 0398 05       		.byte	0x5
+ 2313 0399 EA       		.byte	0xea
+ 2314 039a F8040000 		.4byte	0x4f8
+ 2315 039e 7C       		.byte	0x7c
+ 2316 039f 0A       		.uleb128 0xa
+ 2317 03a0 1D010000 		.4byte	.LASF64
+ 2318 03a4 05       		.byte	0x5
+ 2319 03a5 ED       		.byte	0xed
+ 2320 03a6 81000000 		.4byte	0x81
+ 2321 03aa 94       		.byte	0x94
+ 2322 03ab 0A       		.uleb128 0xa
+ 2323 03ac 1F040000 		.4byte	.LASF65
+ 2324 03b0 05       		.byte	0x5
+ 2325 03b1 EE       		.byte	0xee
+ 2326 03b2 81000000 		.4byte	0x81
+ 2327 03b6 95       		.byte	0x95
+ 2328 03b7 0A       		.uleb128 0xa
+ 2329 03b8 77070000 		.4byte	.LASF66
+ 2330 03bc 05       		.byte	0x5
+ 2331 03bd EF       		.byte	0xef
+ 2332 03be 81000000 		.4byte	0x81
+ 2333 03c2 96       		.byte	0x96
+ 2334 03c3 0A       		.uleb128 0xa
+ 2335 03c4 A5050000 		.4byte	.LASF67
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 51
+
+
+ 2336 03c8 05       		.byte	0x5
+ 2337 03c9 F0       		.byte	0xf0
+ 2338 03ca 81000000 		.4byte	0x81
+ 2339 03ce 97       		.byte	0x97
+ 2340 03cf 0A       		.uleb128 0xa
+ 2341 03d0 BE040000 		.4byte	.LASF68
+ 2342 03d4 05       		.byte	0x5
+ 2343 03d5 F1       		.byte	0xf1
+ 2344 03d6 BD000000 		.4byte	0xbd
+ 2345 03da 98       		.byte	0x98
+ 2346 03db 0A       		.uleb128 0xa
+ 2347 03dc 21050000 		.4byte	.LASF69
+ 2348 03e0 05       		.byte	0x5
+ 2349 03e1 F2       		.byte	0xf2
+ 2350 03e2 D5000000 		.4byte	0xd5
+ 2351 03e6 9C       		.byte	0x9c
+ 2352 03e7 0A       		.uleb128 0xa
+ 2353 03e8 4B010000 		.4byte	.LASF70
+ 2354 03ec 05       		.byte	0x5
+ 2355 03ed F4       		.byte	0xf4
+ 2356 03ee D5000000 		.4byte	0xd5
+ 2357 03f2 A0       		.byte	0xa0
+ 2358 03f3 0A       		.uleb128 0xa
+ 2359 03f4 89070000 		.4byte	.LASF71
+ 2360 03f8 05       		.byte	0x5
+ 2361 03f9 F5       		.byte	0xf5
+ 2362 03fa D5000000 		.4byte	0xd5
+ 2363 03fe A4       		.byte	0xa4
+ 2364 03ff 0A       		.uleb128 0xa
+ 2365 0400 A3060000 		.4byte	.LASF72
+ 2366 0404 05       		.byte	0x5
+ 2367 0405 F6       		.byte	0xf6
+ 2368 0406 81000000 		.4byte	0x81
+ 2369 040a A8       		.byte	0xa8
+ 2370 040b 0A       		.uleb128 0xa
+ 2371 040c 9C020000 		.4byte	.LASF73
+ 2372 0410 05       		.byte	0x5
+ 2373 0411 F7       		.byte	0xf7
+ 2374 0412 81000000 		.4byte	0x81
+ 2375 0416 A9       		.byte	0xa9
+ 2376 0417 0A       		.uleb128 0xa
+ 2377 0418 12040000 		.4byte	.LASF74
+ 2378 041c 05       		.byte	0x5
+ 2379 041d F8       		.byte	0xf8
+ 2380 041e 08050000 		.4byte	0x508
+ 2381 0422 AA       		.byte	0xaa
+ 2382 0423 0A       		.uleb128 0xa
+ 2383 0424 CE050000 		.4byte	.LASF75
+ 2384 0428 05       		.byte	0x5
+ 2385 0429 FA       		.byte	0xfa
+ 2386 042a E8040000 		.4byte	0x4e8
+ 2387 042e C0       		.byte	0xc0
+ 2388 042f 0A       		.uleb128 0xa
+ 2389 0430 3D040000 		.4byte	.LASF76
+ 2390 0434 05       		.byte	0x5
+ 2391 0435 FC       		.byte	0xfc
+ 2392 0436 18050000 		.4byte	0x518
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 52
+
+
+ 2393 043a C8       		.byte	0xc8
+ 2394 043b 0A       		.uleb128 0xa
+ 2395 043c EB040000 		.4byte	.LASF77
+ 2396 0440 05       		.byte	0x5
+ 2397 0441 FE       		.byte	0xfe
+ 2398 0442 28050000 		.4byte	0x528
+ 2399 0446 F0       		.byte	0xf0
+ 2400 0447 0E       		.uleb128 0xe
+ 2401 0448 13060000 		.4byte	.LASF78
+ 2402 044c 05       		.byte	0x5
+ 2403 044d 0001     		.2byte	0x100
+ 2404 044f 99000000 		.4byte	0x99
+ 2405 0453 0001     		.2byte	0x100
+ 2406 0455 0E       		.uleb128 0xe
+ 2407 0456 7D050000 		.4byte	.LASF79
+ 2408 045a 05       		.byte	0x5
+ 2409 045b 0101     		.2byte	0x101
+ 2410 045d 99000000 		.4byte	0x99
+ 2411 0461 0401     		.2byte	0x104
+ 2412 0463 0E       		.uleb128 0xe
+ 2413 0464 43000000 		.4byte	.LASF80
+ 2414 0468 05       		.byte	0x5
+ 2415 0469 0201     		.2byte	0x102
+ 2416 046b 99000000 		.4byte	0x99
+ 2417 046f 0801     		.2byte	0x108
+ 2418 0471 0E       		.uleb128 0xe
+ 2419 0472 94070000 		.4byte	.LASF81
+ 2420 0476 05       		.byte	0x5
+ 2421 0477 0301     		.2byte	0x103
+ 2422 0479 99000000 		.4byte	0x99
+ 2423 047d 0C01     		.2byte	0x10c
+ 2424 047f 0E       		.uleb128 0xe
+ 2425 0480 F8040000 		.4byte	.LASF82
+ 2426 0484 05       		.byte	0x5
+ 2427 0485 0501     		.2byte	0x105
+ 2428 0487 38050000 		.4byte	0x538
+ 2429 048b 1001     		.2byte	0x110
+ 2430 048d 0E       		.uleb128 0xe
+ 2431 048e 0A020000 		.4byte	.LASF83
+ 2432 0492 05       		.byte	0x5
+ 2433 0493 0601     		.2byte	0x106
+ 2434 0495 48050000 		.4byte	0x548
+ 2435 0499 1601     		.2byte	0x116
+ 2436 049b 0E       		.uleb128 0xe
+ 2437 049c 3E020000 		.4byte	.LASF84
+ 2438 04a0 05       		.byte	0x5
+ 2439 04a1 0901     		.2byte	0x109
+ 2440 04a3 81000000 		.4byte	0x81
+ 2441 04a7 2001     		.2byte	0x120
+ 2442 04a9 0E       		.uleb128 0xe
+ 2443 04aa 63040000 		.4byte	.LASF85
+ 2444 04ae 05       		.byte	0x5
+ 2445 04af 0A01     		.2byte	0x10a
+ 2446 04b1 58050000 		.4byte	0x558
+ 2447 04b5 2101     		.2byte	0x121
+ 2448 04b7 00       		.byte	0
+ 2449 04b8 0B       		.uleb128 0xb
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 53
+
+
+ 2450 04b9 81000000 		.4byte	0x81
+ 2451 04bd C8040000 		.4byte	0x4c8
+ 2452 04c1 0C       		.uleb128 0xc
+ 2453 04c2 F1000000 		.4byte	0xf1
+ 2454 04c6 02       		.byte	0x2
+ 2455 04c7 00       		.byte	0
+ 2456 04c8 0B       		.uleb128 0xb
+ 2457 04c9 C9000000 		.4byte	0xc9
+ 2458 04cd D8040000 		.4byte	0x4d8
+ 2459 04d1 0C       		.uleb128 0xc
+ 2460 04d2 F1000000 		.4byte	0xf1
+ 2461 04d6 02       		.byte	0x2
+ 2462 04d7 00       		.byte	0
+ 2463 04d8 0B       		.uleb128 0xb
+ 2464 04d9 8D000000 		.4byte	0x8d
+ 2465 04dd E8040000 		.4byte	0x4e8
+ 2466 04e1 0C       		.uleb128 0xc
+ 2467 04e2 F1000000 		.4byte	0xf1
+ 2468 04e6 01       		.byte	0x1
+ 2469 04e7 00       		.byte	0
+ 2470 04e8 0B       		.uleb128 0xb
+ 2471 04e9 99000000 		.4byte	0x99
+ 2472 04ed F8040000 		.4byte	0x4f8
+ 2473 04f1 0C       		.uleb128 0xc
+ 2474 04f2 F1000000 		.4byte	0xf1
+ 2475 04f6 01       		.byte	0x1
+ 2476 04f7 00       		.byte	0
+ 2477 04f8 0B       		.uleb128 0xb
+ 2478 04f9 D5000000 		.4byte	0xd5
+ 2479 04fd 08050000 		.4byte	0x508
+ 2480 0501 0C       		.uleb128 0xc
+ 2481 0502 F1000000 		.4byte	0xf1
+ 2482 0506 05       		.byte	0x5
+ 2483 0507 00       		.byte	0
+ 2484 0508 0B       		.uleb128 0xb
+ 2485 0509 81000000 		.4byte	0x81
+ 2486 050d 18050000 		.4byte	0x518
+ 2487 0511 0C       		.uleb128 0xc
+ 2488 0512 F1000000 		.4byte	0xf1
+ 2489 0516 15       		.byte	0x15
+ 2490 0517 00       		.byte	0
+ 2491 0518 0B       		.uleb128 0xb
+ 2492 0519 99000000 		.4byte	0x99
+ 2493 051d 28050000 		.4byte	0x528
+ 2494 0521 0C       		.uleb128 0xc
+ 2495 0522 F1000000 		.4byte	0xf1
+ 2496 0526 09       		.byte	0x9
+ 2497 0527 00       		.byte	0
+ 2498 0528 0B       		.uleb128 0xb
+ 2499 0529 99000000 		.4byte	0x99
+ 2500 052d 38050000 		.4byte	0x538
+ 2501 0531 0C       		.uleb128 0xc
+ 2502 0532 F1000000 		.4byte	0xf1
+ 2503 0536 03       		.byte	0x3
+ 2504 0537 00       		.byte	0
+ 2505 0538 0B       		.uleb128 0xb
+ 2506 0539 81000000 		.4byte	0x81
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 54
+
+
+ 2507 053d 48050000 		.4byte	0x548
+ 2508 0541 0C       		.uleb128 0xc
+ 2509 0542 F1000000 		.4byte	0xf1
+ 2510 0546 05       		.byte	0x5
+ 2511 0547 00       		.byte	0
+ 2512 0548 0B       		.uleb128 0xb
+ 2513 0549 81000000 		.4byte	0x81
+ 2514 054d 58050000 		.4byte	0x558
+ 2515 0551 0C       		.uleb128 0xc
+ 2516 0552 F1000000 		.4byte	0xf1
+ 2517 0556 09       		.byte	0x9
+ 2518 0557 00       		.byte	0
+ 2519 0558 0B       		.uleb128 0xb
+ 2520 0559 81000000 		.4byte	0x81
+ 2521 055d 6E050000 		.4byte	0x56e
+ 2522 0561 0C       		.uleb128 0xc
+ 2523 0562 F1000000 		.4byte	0xf1
+ 2524 0566 02       		.byte	0x2
+ 2525 0567 0C       		.uleb128 0xc
+ 2526 0568 F1000000 		.4byte	0xf1
+ 2527 056c 04       		.byte	0x4
+ 2528 056d 00       		.byte	0
+ 2529 056e 0F       		.uleb128 0xf
+ 2530 056f 73050000 		.4byte	.LASF86
+ 2531 0573 08       		.byte	0x8
+ 2532 0574 05       		.byte	0x5
+ 2533 0575 1B01     		.2byte	0x11b
+ 2534 0577 96050000 		.4byte	0x596
+ 2535 057b 10       		.uleb128 0x10
+ 2536 057c D1010000 		.4byte	.LASF87
+ 2537 0580 05       		.byte	0x5
+ 2538 0581 1C01     		.2byte	0x11c
+ 2539 0583 BD000000 		.4byte	0xbd
+ 2540 0587 00       		.byte	0
+ 2541 0588 10       		.uleb128 0x10
+ 2542 0589 32050000 		.4byte	.LASF88
+ 2543 058d 05       		.byte	0x5
+ 2544 058e 1D01     		.2byte	0x11d
+ 2545 0590 BD000000 		.4byte	0xbd
+ 2546 0594 04       		.byte	0x4
+ 2547 0595 00       		.byte	0
+ 2548 0596 0F       		.uleb128 0xf
+ 2549 0597 BB050000 		.4byte	.LASF89
+ 2550 059b 06       		.byte	0x6
+ 2551 059c 05       		.byte	0x5
+ 2552 059d 2401     		.2byte	0x124
+ 2553 059f D8050000 		.4byte	0x5d8
+ 2554 05a3 10       		.uleb128 0x10
+ 2555 05a4 0B060000 		.4byte	.LASF90
+ 2556 05a8 05       		.byte	0x5
+ 2557 05a9 2501     		.2byte	0x125
+ 2558 05ab 81000000 		.4byte	0x81
+ 2559 05af 00       		.byte	0
+ 2560 05b0 10       		.uleb128 0x10
+ 2561 05b1 57000000 		.4byte	.LASF91
+ 2562 05b5 05       		.byte	0x5
+ 2563 05b6 2601     		.2byte	0x126
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 55
+
+
+ 2564 05b8 81000000 		.4byte	0x81
+ 2565 05bc 01       		.byte	0x1
+ 2566 05bd 10       		.uleb128 0x10
+ 2567 05be 83070000 		.4byte	.LASF92
+ 2568 05c2 05       		.byte	0x5
+ 2569 05c3 2701     		.2byte	0x127
+ 2570 05c5 B1000000 		.4byte	0xb1
+ 2571 05c9 02       		.byte	0x2
+ 2572 05ca 10       		.uleb128 0x10
+ 2573 05cb 90020000 		.4byte	.LASF93
+ 2574 05cf 05       		.byte	0x5
+ 2575 05d0 2801     		.2byte	0x128
+ 2576 05d2 B1000000 		.4byte	0xb1
+ 2577 05d6 04       		.byte	0x4
+ 2578 05d7 00       		.byte	0
+ 2579 05d8 11       		.uleb128 0x11
+ 2580 05d9 01       		.byte	0x1
+ 2581 05da 2C000000 		.4byte	0x2c
+ 2582 05de 05       		.byte	0x5
+ 2583 05df 2C01     		.2byte	0x12c
+ 2584 05e1 0A060000 		.4byte	0x60a
+ 2585 05e5 07       		.uleb128 0x7
+ 2586 05e6 4D020000 		.4byte	.LASF94
+ 2587 05ea 00       		.byte	0
+ 2588 05eb 07       		.uleb128 0x7
+ 2589 05ec 2C050000 		.4byte	.LASF95
+ 2590 05f0 01       		.byte	0x1
+ 2591 05f1 07       		.uleb128 0x7
+ 2592 05f2 CA060000 		.4byte	.LASF96
+ 2593 05f6 02       		.byte	0x2
+ 2594 05f7 07       		.uleb128 0x7
+ 2595 05f8 31020000 		.4byte	.LASF97
+ 2596 05fc 03       		.byte	0x3
+ 2597 05fd 07       		.uleb128 0x7
+ 2598 05fe 5F070000 		.4byte	.LASF98
+ 2599 0602 04       		.byte	0x4
+ 2600 0603 07       		.uleb128 0x7
+ 2601 0604 17070000 		.4byte	.LASF99
+ 2602 0608 05       		.byte	0x5
+ 2603 0609 00       		.byte	0
+ 2604 060a 05       		.uleb128 0x5
+ 2605 060b 8C050000 		.4byte	.LASF100
+ 2606 060f 05       		.byte	0x5
+ 2607 0610 3401     		.2byte	0x134
+ 2608 0612 D8050000 		.4byte	0x5d8
+ 2609 0616 12       		.uleb128 0x12
+ 2610 0617 7C010000 		.4byte	.LASF104
+ 2611 061b 01       		.byte	0x1
+ 2612 061c 34       		.byte	0x34
+ 2613 061d BD000000 		.4byte	0xbd
+ 2614 0621 00000000 		.4byte	.LFB64
+ 2615 0625 CC010000 		.4byte	.LFE64-.LFB64
+ 2616 0629 01       		.uleb128 0x1
+ 2617 062a 9C       		.byte	0x9c
+ 2618 062b 8A060000 		.4byte	0x68a
+ 2619 062f 13       		.uleb128 0x13
+ 2620 0630 706F7300 		.ascii	"pos\000"
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 56
+
+
+ 2621 0634 01       		.byte	0x1
+ 2622 0635 34       		.byte	0x34
+ 2623 0636 BD000000 		.4byte	0xbd
+ 2624 063a 02       		.uleb128 0x2
+ 2625 063b 91       		.byte	0x91
+ 2626 063c 64       		.sleb128 -28
+ 2627 063d 13       		.uleb128 0x13
+ 2628 063e 76656C00 		.ascii	"vel\000"
+ 2629 0642 01       		.byte	0x1
+ 2630 0643 34       		.byte	0x34
+ 2631 0644 BD000000 		.4byte	0xbd
+ 2632 0648 02       		.uleb128 0x2
+ 2633 0649 91       		.byte	0x91
+ 2634 064a 60       		.sleb128 -32
+ 2635 064b 13       		.uleb128 0x13
+ 2636 064c 72656600 		.ascii	"ref\000"
+ 2637 0650 01       		.byte	0x1
+ 2638 0651 34       		.byte	0x34
+ 2639 0652 BD000000 		.4byte	0xbd
+ 2640 0656 02       		.uleb128 0x2
+ 2641 0657 91       		.byte	0x91
+ 2642 0658 5C       		.sleb128 -36
+ 2643 0659 14       		.uleb128 0x14
+ 2644 065a F1030000 		.4byte	.LASF101
+ 2645 065e 01       		.byte	0x1
+ 2646 065f 36       		.byte	0x36
+ 2647 0660 BD000000 		.4byte	0xbd
+ 2648 0664 05       		.uleb128 0x5
+ 2649 0665 03       		.byte	0x3
+ 2650 0666 00000000 		.4byte	virtual_pos_friction.9742
+ 2651 066a 14       		.uleb128 0x14
+ 2652 066b AF010000 		.4byte	.LASF102
+ 2653 066f 01       		.byte	0x1
+ 2654 0670 37       		.byte	0x37
+ 2655 0671 BD000000 		.4byte	0xbd
+ 2656 0675 05       		.uleb128 0x5
+ 2657 0676 03       		.byte	0x3
+ 2658 0677 04000000 		.4byte	err_pos_dt.9743
+ 2659 067b 14       		.uleb128 0x14
+ 2660 067c 3F050000 		.4byte	.LASF103
+ 2661 0680 01       		.byte	0x1
+ 2662 0681 39       		.byte	0x39
+ 2663 0682 BD000000 		.4byte	0xbd
+ 2664 0686 02       		.uleb128 0x2
+ 2665 0687 91       		.byte	0x91
+ 2666 0688 6C       		.sleb128 -20
+ 2667 0689 00       		.byte	0
+ 2668 068a 15       		.uleb128 0x15
+ 2669 068b D2060000 		.4byte	.LASF105
+ 2670 068f 01       		.byte	0x1
+ 2671 0690 57       		.byte	0x57
+ 2672 0691 BD000000 		.4byte	0xbd
+ 2673 0695 00000000 		.4byte	.LFB65
+ 2674 0699 4E000000 		.4byte	.LFE65-.LFB65
+ 2675 069d 01       		.uleb128 0x1
+ 2676 069e 9C       		.byte	0x9c
+ 2677 069f CC060000 		.4byte	0x6cc
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 57
+
+
+ 2678 06a3 16       		.uleb128 0x16
+ 2679 06a4 61020000 		.4byte	.LASF106
+ 2680 06a8 01       		.byte	0x1
+ 2681 06a9 57       		.byte	0x57
+ 2682 06aa BD000000 		.4byte	0xbd
+ 2683 06ae 02       		.uleb128 0x2
+ 2684 06af 91       		.byte	0x91
+ 2685 06b0 6C       		.sleb128 -20
+ 2686 06b1 13       		.uleb128 0x13
+ 2687 06b2 6600     		.ascii	"f\000"
+ 2688 06b4 01       		.byte	0x1
+ 2689 06b5 57       		.byte	0x57
+ 2690 06b6 CC060000 		.4byte	0x6cc
+ 2691 06ba 02       		.uleb128 0x2
+ 2692 06bb 91       		.byte	0x91
+ 2693 06bc 68       		.sleb128 -24
+ 2694 06bd 17       		.uleb128 0x17
+ 2695 06be 61757800 		.ascii	"aux\000"
+ 2696 06c2 01       		.byte	0x1
+ 2697 06c3 59       		.byte	0x59
+ 2698 06c4 BD000000 		.4byte	0xbd
+ 2699 06c8 02       		.uleb128 0x2
+ 2700 06c9 91       		.byte	0x91
+ 2701 06ca 74       		.sleb128 -12
+ 2702 06cb 00       		.byte	0
+ 2703 06cc 18       		.uleb128 0x18
+ 2704 06cd 04       		.byte	0x4
+ 2705 06ce 6E050000 		.4byte	0x56e
+ 2706 06d2 15       		.uleb128 0x15
+ 2707 06d3 08070000 		.4byte	.LASF107
+ 2708 06d7 01       		.byte	0x1
+ 2709 06d8 68       		.byte	0x68
+ 2710 06d9 81000000 		.4byte	0x81
+ 2711 06dd 00000000 		.4byte	.LFB66
+ 2712 06e1 76000000 		.4byte	.LFE66-.LFB66
+ 2713 06e5 01       		.uleb128 0x1
+ 2714 06e6 9C       		.byte	0x9c
+ 2715 06e7 12070000 		.4byte	0x712
+ 2716 06eb 16       		.uleb128 0x16
+ 2717 06ec BC020000 		.4byte	.LASF108
+ 2718 06f0 01       		.byte	0x1
+ 2719 06f1 68       		.byte	0x68
+ 2720 06f2 12070000 		.4byte	0x712
+ 2721 06f6 02       		.uleb128 0x2
+ 2722 06f7 91       		.byte	0x91
+ 2723 06f8 6C       		.sleb128 -20
+ 2724 06f9 17       		.uleb128 0x17
+ 2725 06fa 7000     		.ascii	"p\000"
+ 2726 06fc 01       		.byte	0x1
+ 2727 06fd 6A       		.byte	0x6a
+ 2728 06fe 1D070000 		.4byte	0x71d
+ 2729 0702 02       		.uleb128 0x2
+ 2730 0703 91       		.byte	0x91
+ 2731 0704 74       		.sleb128 -12
+ 2732 0705 17       		.uleb128 0x17
+ 2733 0706 6100     		.ascii	"a\000"
+ 2734 0708 01       		.byte	0x1
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 58
+
+
+ 2735 0709 6B       		.byte	0x6b
+ 2736 070a 81000000 		.4byte	0x81
+ 2737 070e 02       		.uleb128 0x2
+ 2738 070f 91       		.byte	0x91
+ 2739 0710 73       		.sleb128 -13
+ 2740 0711 00       		.byte	0
+ 2741 0712 18       		.uleb128 0x18
+ 2742 0713 04       		.byte	0x4
+ 2743 0714 18070000 		.4byte	0x718
+ 2744 0718 19       		.uleb128 0x19
+ 2745 0719 99000000 		.4byte	0x99
+ 2746 071d 18       		.uleb128 0x18
+ 2747 071e 04       		.byte	0x4
+ 2748 071f 23070000 		.4byte	0x723
+ 2749 0723 19       		.uleb128 0x19
+ 2750 0724 81000000 		.4byte	0x81
+ 2751 0728 15       		.uleb128 0x15
+ 2752 0729 44010000 		.4byte	.LASF109
+ 2753 072d 01       		.byte	0x1
+ 2754 072e 7A       		.byte	0x7a
+ 2755 072f 99000000 		.4byte	0x99
+ 2756 0733 00000000 		.4byte	.LFB67
+ 2757 0737 50000000 		.4byte	.LFE67-.LFB67
+ 2758 073b 01       		.uleb128 0x1
+ 2759 073c 9C       		.byte	0x9c
+ 2760 073d 5E070000 		.4byte	0x75e
+ 2761 0741 13       		.uleb128 0x13
+ 2762 0742 76616C00 		.ascii	"val\000"
+ 2763 0746 01       		.byte	0x1
+ 2764 0747 7A       		.byte	0x7a
+ 2765 0748 BD000000 		.4byte	0xbd
+ 2766 074c 02       		.uleb128 0x2
+ 2767 074d 91       		.byte	0x91
+ 2768 074e 74       		.sleb128 -12
+ 2769 074f 16       		.uleb128 0x16
+ 2770 0750 9E040000 		.4byte	.LASF110
+ 2771 0754 01       		.byte	0x1
+ 2772 0755 7A       		.byte	0x7a
+ 2773 0756 BD000000 		.4byte	0xbd
+ 2774 075a 02       		.uleb128 0x2
+ 2775 075b 91       		.byte	0x91
+ 2776 075c 70       		.sleb128 -16
+ 2777 075d 00       		.byte	0
+ 2778 075e 1A       		.uleb128 0x1a
+ 2779 075f AC040000 		.4byte	.LASF116
+ 2780 0763 01       		.byte	0x1
+ 2781 0764 88       		.byte	0x88
+ 2782 0765 00000000 		.4byte	.LFB68
+ 2783 0769 B4000000 		.4byte	.LFE68-.LFB68
+ 2784 076d 01       		.uleb128 0x1
+ 2785 076e 9C       		.byte	0x9c
+ 2786 076f A7070000 		.4byte	0x7a7
+ 2787 0773 14       		.uleb128 0x14
+ 2788 0774 57000000 		.4byte	.LASF91
+ 2789 0778 01       		.byte	0x1
+ 2790 0779 89       		.byte	0x89
+ 2791 077a 81000000 		.4byte	0x81
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 59
+
+
+ 2792 077e 05       		.uleb128 0x5
+ 2793 077f 03       		.byte	0x3
+ 2794 0780 08000000 		.4byte	direction.9762
+ 2795 0784 14       		.uleb128 0x14
+ 2796 0785 28000000 		.4byte	.LASF111
+ 2797 0789 01       		.byte	0x1
+ 2798 078a 8A       		.byte	0x8a
+ 2799 078b 8D000000 		.4byte	0x8d
+ 2800 078f 05       		.uleb128 0x5
+ 2801 0790 03       		.byte	0x3
+ 2802 0791 0A000000 		.4byte	closure_counter.9763
+ 2803 0795 14       		.uleb128 0x14
+ 2804 0796 C4050000 		.4byte	.LASF112
+ 2805 079a 01       		.byte	0x1
+ 2806 079b 8B       		.byte	0x8b
+ 2807 079c 81000000 		.4byte	0x81
+ 2808 07a0 05       		.uleb128 0x5
+ 2809 07a1 03       		.byte	0x3
+ 2810 07a2 00000000 		.4byte	count_one.9764
+ 2811 07a6 00       		.byte	0
+ 2812 07a7 12       		.uleb128 0x12
+ 2813 07a8 C7070000 		.4byte	.LASF113
+ 2814 07ac 01       		.byte	0x1
+ 2815 07ad C4       		.byte	0xc4
+ 2816 07ae 68000000 		.4byte	0x68
+ 2817 07b2 00000000 		.4byte	.LFB69
+ 2818 07b6 4C000000 		.4byte	.LFE69-.LFB69
+ 2819 07ba 01       		.uleb128 0x1
+ 2820 07bb 9C       		.byte	0x9c
+ 2821 07bc F7070000 		.4byte	0x7f7
+ 2822 07c0 16       		.uleb128 0x16
+ 2823 07c1 B2020000 		.4byte	.LASF114
+ 2824 07c5 01       		.byte	0x1
+ 2825 07c6 C4       		.byte	0xc4
+ 2826 07c7 F7070000 		.4byte	0x7f7
+ 2827 07cb 02       		.uleb128 0x2
+ 2828 07cc 91       		.byte	0x91
+ 2829 07cd 6C       		.sleb128 -20
+ 2830 07ce 16       		.uleb128 0x16
+ 2831 07cf B7020000 		.4byte	.LASF115
+ 2832 07d3 01       		.byte	0x1
+ 2833 07d4 C4       		.byte	0xc4
+ 2834 07d5 F7070000 		.4byte	0x7f7
+ 2835 07d9 02       		.uleb128 0x2
+ 2836 07da 91       		.byte	0x91
+ 2837 07db 68       		.sleb128 -24
+ 2838 07dc 17       		.uleb128 0x17
+ 2839 07dd 7800     		.ascii	"x\000"
+ 2840 07df 01       		.byte	0x1
+ 2841 07e0 C6       		.byte	0xc6
+ 2842 07e1 BD000000 		.4byte	0xbd
+ 2843 07e5 02       		.uleb128 0x2
+ 2844 07e6 91       		.byte	0x91
+ 2845 07e7 74       		.sleb128 -12
+ 2846 07e8 17       		.uleb128 0x17
+ 2847 07e9 61757800 		.ascii	"aux\000"
+ 2848 07ed 01       		.byte	0x1
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 60
+
+
+ 2849 07ee C8       		.byte	0xc8
+ 2850 07ef BD000000 		.4byte	0xbd
+ 2851 07f3 02       		.uleb128 0x2
+ 2852 07f4 91       		.byte	0x91
+ 2853 07f5 70       		.sleb128 -16
+ 2854 07f6 00       		.byte	0
+ 2855 07f7 19       		.uleb128 0x19
+ 2856 07f8 BD000000 		.4byte	0xbd
+ 2857 07fc 1B       		.uleb128 0x1b
+ 2858 07fd 42070000 		.4byte	.LASF117
+ 2859 0801 01       		.byte	0x1
+ 2860 0802 D5       		.byte	0xd5
+ 2861 0803 00000000 		.4byte	.LFB70
+ 2862 0807 A0020000 		.4byte	.LFE70-.LFB70
+ 2863 080b 01       		.uleb128 0x1
+ 2864 080c 9C       		.byte	0x9c
+ 2865 080d A3080000 		.4byte	0x8a3
+ 2866 0811 14       		.uleb128 0x14
+ 2867 0812 00000000 		.4byte	.LASF118
+ 2868 0816 01       		.byte	0x1
+ 2869 0817 D7       		.byte	0xd7
+ 2870 0818 99000000 		.4byte	0x99
+ 2871 081c 05       		.uleb128 0x5
+ 2872 081d 03       		.byte	0x3
+ 2873 081e 0C000000 		.4byte	count.9774
+ 2874 0822 14       		.uleb128 0x14
+ 2875 0823 16050000 		.4byte	.LASF119
+ 2876 0827 01       		.byte	0x1
+ 2877 0828 D8       		.byte	0xd8
+ 2878 0829 81000000 		.4byte	0x81
+ 2879 082d 05       		.uleb128 0x5
+ 2880 082e 03       		.byte	0x3
+ 2881 082f 02000000 		.4byte	flag_count.9775
+ 2882 0833 14       		.uleb128 0x14
+ 2883 0834 B0050000 		.4byte	.LASF120
+ 2884 0838 01       		.byte	0x1
+ 2885 0839 D9       		.byte	0xd9
+ 2886 083a 81000000 		.4byte	0x81
+ 2887 083e 05       		.uleb128 0x5
+ 2888 083f 03       		.byte	0x3
+ 2889 0840 01000000 		.4byte	first_time.9776
+ 2890 0844 17       		.uleb128 0x17
+ 2891 0845 6D00     		.ascii	"m\000"
+ 2892 0847 01       		.byte	0x1
+ 2893 0848 DA       		.byte	0xda
+ 2894 0849 D5000000 		.4byte	0xd5
+ 2895 084d 05       		.uleb128 0x5
+ 2896 084e 03       		.byte	0x3
+ 2897 084f 10000000 		.4byte	m.9777
+ 2898 0853 14       		.uleb128 0x14
+ 2899 0854 16030000 		.4byte	.LASF121
+ 2900 0858 01       		.byte	0x1
+ 2901 0859 DB       		.byte	0xdb
+ 2902 085a BD000000 		.4byte	0xbd
+ 2903 085e 05       		.uleb128 0x5
+ 2904 085f 03       		.byte	0x3
+ 2905 0860 14000000 		.4byte	abs_err_thr.9778
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 61
+
+
+ 2906 0864 14       		.uleb128 0x14
+ 2907 0865 3A010000 		.4byte	.LASF122
+ 2908 0869 01       		.byte	0x1
+ 2909 086a DC       		.byte	0xdc
+ 2910 086b BD000000 		.4byte	0xbd
+ 2911 086f 05       		.uleb128 0x5
+ 2912 0870 03       		.byte	0x3
+ 2913 0871 1C000000 		.4byte	delta_inc.9779
+ 2914 0875 14       		.uleb128 0x14
+ 2915 0876 0D030000 		.4byte	.LASF123
+ 2916 087a 01       		.byte	0x1
+ 2917 087b DD       		.byte	0xdd
+ 2918 087c BD000000 		.4byte	0xbd
+ 2919 0880 02       		.uleb128 0x2
+ 2920 0881 91       		.byte	0x91
+ 2921 0882 68       		.sleb128 -24
+ 2922 0883 14       		.uleb128 0x14
+ 2923 0884 38000000 		.4byte	.LASF124
+ 2924 0888 01       		.byte	0x1
+ 2925 0889 DE       		.byte	0xde
+ 2926 088a BD000000 		.4byte	0xbd
+ 2927 088e 05       		.uleb128 0x5
+ 2928 088f 03       		.byte	0x3
+ 2929 0890 18000000 		.4byte	rest_error.9781
+ 2930 0894 14       		.uleb128 0x14
+ 2931 0895 1B000000 		.4byte	.LASF125
+ 2932 0899 01       		.byte	0x1
+ 2933 089a DF       		.byte	0xdf
+ 2934 089b BD000000 		.4byte	0xbd
+ 2935 089f 02       		.uleb128 0x2
+ 2936 08a0 91       		.byte	0x91
+ 2937 08a1 6C       		.sleb128 -20
+ 2938 08a2 00       		.byte	0
+ 2939 08a3 1C       		.uleb128 0x1c
+ 2940 08a4 F1010000 		.4byte	.LASF126
+ 2941 08a8 01       		.byte	0x1
+ 2942 08a9 3A01     		.2byte	0x13a
+ 2943 08ab 00000000 		.4byte	.LFB71
+ 2944 08af 8E000000 		.4byte	.LFE71-.LFB71
+ 2945 08b3 01       		.uleb128 0x1
+ 2946 08b4 9C       		.byte	0x9c
+ 2947 08b5 C9080000 		.4byte	0x8c9
+ 2948 08b9 1D       		.uleb128 0x1d
+ 2949 08ba 61060000 		.4byte	.LASF127
+ 2950 08be 01       		.byte	0x1
+ 2951 08bf 3A01     		.2byte	0x13a
+ 2952 08c1 81000000 		.4byte	0x81
+ 2953 08c5 02       		.uleb128 0x2
+ 2954 08c6 91       		.byte	0x91
+ 2955 08c7 77       		.sleb128 -9
+ 2956 08c8 00       		.byte	0
+ 2957 08c9 1E       		.uleb128 0x1e
+ 2958 08ca 1E020000 		.4byte	.LASF129
+ 2959 08ce 01       		.byte	0x1
+ 2960 08cf 6401     		.2byte	0x164
+ 2961 08d1 00000000 		.4byte	.LFB72
+ 2962 08d5 88010000 		.4byte	.LFE72-.LFB72
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 62
+
+
+ 2963 08d9 01       		.uleb128 0x1
+ 2964 08da 9C       		.byte	0x9c
+ 2965 08db F2080000 		.4byte	0x8f2
+ 2966 08df 1F       		.uleb128 0x1f
+ 2967 08e0 00070000 		.4byte	.LASF128
+ 2968 08e4 01       		.byte	0x1
+ 2969 08e5 6501     		.2byte	0x165
+ 2970 08e7 99000000 		.4byte	0x99
+ 2971 08eb 05       		.uleb128 0x5
+ 2972 08ec 03       		.byte	0x3
+ 2973 08ed 20000000 		.4byte	v_count.9796
+ 2974 08f1 00       		.byte	0
+ 2975 08f2 20       		.uleb128 0x20
+ 2976 08f3 C2020000 		.4byte	.LASF130
+ 2977 08f7 01       		.byte	0x1
+ 2978 08f8 A701     		.2byte	0x1a7
+ 2979 08fa 00000000 		.4byte	.LFB73
+ 2980 08fe 84000000 		.4byte	.LFE73-.LFB73
+ 2981 0902 01       		.uleb128 0x1
+ 2982 0903 9C       		.byte	0x9c
+ 2983 0904 16090000 		.4byte	0x916
+ 2984 0908 21       		.uleb128 0x21
+ 2985 0909 6900     		.ascii	"i\000"
+ 2986 090b 01       		.byte	0x1
+ 2987 090c A801     		.2byte	0x1a8
+ 2988 090e 81000000 		.4byte	0x81
+ 2989 0912 02       		.uleb128 0x2
+ 2990 0913 91       		.byte	0x91
+ 2991 0914 77       		.sleb128 -9
+ 2992 0915 00       		.byte	0
+ 2993 0916 22       		.uleb128 0x22
+ 2994 0917 6C040000 		.4byte	.LASF131
+ 2995 091b 01       		.byte	0x1
+ 2996 091c BC01     		.2byte	0x1bc
+ 2997 091e D5000000 		.4byte	0xd5
+ 2998 0922 00000000 		.4byte	.LFB74
+ 2999 0926 78000000 		.4byte	.LFE74-.LFB74
+ 3000 092a 01       		.uleb128 0x1
+ 3001 092b 9C       		.byte	0x9c
+ 3002 092c 67090000 		.4byte	0x967
+ 3003 0930 23       		.uleb128 0x23
+ 3004 0931 7800     		.ascii	"x\000"
+ 3005 0933 01       		.byte	0x1
+ 3006 0934 BC01     		.2byte	0x1bc
+ 3007 0936 D5000000 		.4byte	0xd5
+ 3008 093a 02       		.uleb128 0x2
+ 3009 093b 91       		.byte	0x91
+ 3010 093c 64       		.sleb128 -28
+ 3011 093d 1F       		.uleb128 0x1f
+ 3012 093e 5B020000 		.4byte	.LASF132
+ 3013 0942 01       		.byte	0x1
+ 3014 0943 BD01     		.2byte	0x1bd
+ 3015 0945 D5000000 		.4byte	0xd5
+ 3016 0949 02       		.uleb128 0x2
+ 3017 094a 91       		.byte	0x91
+ 3018 094b 74       		.sleb128 -12
+ 3019 094c 21       		.uleb128 0x21
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 63
+
+
+ 3020 094d 7900     		.ascii	"y\000"
+ 3021 094f 01       		.byte	0x1
+ 3022 0950 BE01     		.2byte	0x1be
+ 3023 0952 D5000000 		.4byte	0xd5
+ 3024 0956 02       		.uleb128 0x2
+ 3025 0957 91       		.byte	0x91
+ 3026 0958 70       		.sleb128 -16
+ 3027 0959 21       		.uleb128 0x21
+ 3028 095a 6900     		.ascii	"i\000"
+ 3029 095c 01       		.byte	0x1
+ 3030 095d BF01     		.2byte	0x1bf
+ 3031 095f 4C000000 		.4byte	0x4c
+ 3032 0963 02       		.uleb128 0x2
+ 3033 0964 91       		.byte	0x91
+ 3034 0965 6C       		.sleb128 -20
+ 3035 0966 00       		.byte	0
+ 3036 0967 1C       		.uleb128 0x1c
+ 3037 0968 64070000 		.4byte	.LASF133
+ 3038 096c 01       		.byte	0x1
+ 3039 096d C901     		.2byte	0x1c9
+ 3040 096f 00000000 		.4byte	.LFB75
+ 3041 0973 B0000000 		.4byte	.LFE75-.LFB75
+ 3042 0977 01       		.uleb128 0x1
+ 3043 0978 9C       		.byte	0x9c
+ 3044 0979 9C090000 		.4byte	0x99c
+ 3045 097d 1D       		.uleb128 0x1d
+ 3046 097e 97010000 		.4byte	.LASF134
+ 3047 0982 01       		.byte	0x1
+ 3048 0983 C901     		.2byte	0x1c9
+ 3049 0985 9C090000 		.4byte	0x99c
+ 3050 0989 02       		.uleb128 0x2
+ 3051 098a 91       		.byte	0x91
+ 3052 098b 64       		.sleb128 -28
+ 3053 098c 1F       		.uleb128 0x1f
+ 3054 098d 87010000 		.4byte	.LASF135
+ 3055 0991 01       		.byte	0x1
+ 3056 0992 CB01     		.2byte	0x1cb
+ 3057 0994 D5000000 		.4byte	0xd5
+ 3058 0998 02       		.uleb128 0x2
+ 3059 0999 91       		.byte	0x91
+ 3060 099a 6C       		.sleb128 -20
+ 3061 099b 00       		.byte	0
+ 3062 099c 18       		.uleb128 0x18
+ 3063 099d 04       		.byte	0x4
+ 3064 099e D5000000 		.4byte	0xd5
+ 3065 09a2 1C       		.uleb128 0x1c
+ 3066 09a3 66050000 		.4byte	.LASF136
+ 3067 09a7 01       		.byte	0x1
+ 3068 09a8 D501     		.2byte	0x1d5
+ 3069 09aa 00000000 		.4byte	.LFB76
+ 3070 09ae EA000000 		.4byte	.LFE76-.LFB76
+ 3071 09b2 01       		.uleb128 0x1
+ 3072 09b3 9C       		.byte	0x9c
+ 3073 09b4 D7090000 		.4byte	0x9d7
+ 3074 09b8 1D       		.uleb128 0x1d
+ 3075 09b9 18020000 		.4byte	.LASF137
+ 3076 09bd 01       		.byte	0x1
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 64
+
+
+ 3077 09be D501     		.2byte	0x1d5
+ 3078 09c0 9C090000 		.4byte	0x99c
+ 3079 09c4 02       		.uleb128 0x2
+ 3080 09c5 91       		.byte	0x91
+ 3081 09c6 64       		.sleb128 -28
+ 3082 09c7 1F       		.uleb128 0x1f
+ 3083 09c8 87010000 		.4byte	.LASF135
+ 3084 09cc 01       		.byte	0x1
+ 3085 09cd D701     		.2byte	0x1d7
+ 3086 09cf D5000000 		.4byte	0xd5
+ 3087 09d3 02       		.uleb128 0x2
+ 3088 09d4 91       		.byte	0x91
+ 3089 09d5 6C       		.sleb128 -20
+ 3090 09d6 00       		.byte	0
+ 3091 09d7 24       		.uleb128 0x24
+ 3092 09d8 2D010000 		.4byte	.LASF138
+ 3093 09dc 06       		.byte	0x6
+ 3094 09dd 1207     		.2byte	0x712
+ 3095 09df E3090000 		.4byte	0x9e3
+ 3096 09e3 25       		.uleb128 0x25
+ 3097 09e4 76000000 		.4byte	0x76
+ 3098 09e8 24       		.uleb128 0x24
+ 3099 09e9 D5030000 		.4byte	.LASF139
+ 3100 09ed 05       		.byte	0x5
+ 3101 09ee 4101     		.2byte	0x141
+ 3102 09f0 2D010000 		.4byte	0x12d
+ 3103 09f4 24       		.uleb128 0x24
+ 3104 09f5 5A060000 		.4byte	.LASF140
+ 3105 09f9 05       		.byte	0x5
+ 3106 09fa 4201     		.2byte	0x142
+ 3107 09fc 6A010000 		.4byte	0x16a
+ 3108 0a00 24       		.uleb128 0x24
+ 3109 0a01 A6040000 		.4byte	.LASF141
+ 3110 0a05 05       		.byte	0x5
+ 3111 0a06 4401     		.2byte	0x144
+ 3112 0a08 FB010000 		.4byte	0x1fb
+ 3113 0a0c 24       		.uleb128 0x24
+ 3114 0a0d 15000000 		.4byte	.LASF142
+ 3115 0a11 05       		.byte	0x5
+ 3116 0a12 4401     		.2byte	0x144
+ 3117 0a14 FB010000 		.4byte	0x1fb
+ 3118 0a18 24       		.uleb128 0x24
+ 3119 0a19 5D040000 		.4byte	.LASF143
+ 3120 0a1d 05       		.byte	0x5
+ 3121 0a1e 4501     		.2byte	0x145
+ 3122 0a20 96050000 		.4byte	0x596
+ 3123 0a24 24       		.uleb128 0x24
+ 3124 0a25 61000000 		.4byte	.LASF144
+ 3125 0a29 05       		.byte	0x5
+ 3126 0a2a 4601     		.2byte	0x146
+ 3127 0a2c 6E050000 		.4byte	0x56e
+ 3128 0a30 24       		.uleb128 0x24
+ 3129 0a31 20060000 		.4byte	.LASF145
+ 3130 0a35 05       		.byte	0x5
+ 3131 0a36 4E01     		.2byte	0x14e
+ 3132 0a38 BD000000 		.4byte	0xbd
+ 3133 0a3c 24       		.uleb128 0x24
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 65
+
+
+ 3134 0a3d E5020000 		.4byte	.LASF146
+ 3135 0a41 05       		.byte	0x5
+ 3136 0a42 5101     		.2byte	0x151
+ 3137 0a44 BD000000 		.4byte	0xbd
+ 3138 0a48 24       		.uleb128 0x24
+ 3139 0a49 DB010000 		.4byte	.LASF147
+ 3140 0a4d 05       		.byte	0x5
+ 3141 0a4e 5201     		.2byte	0x152
+ 3142 0a50 BD000000 		.4byte	0xbd
+ 3143 0a54 24       		.uleb128 0x24
+ 3144 0a55 BA070000 		.4byte	.LASF148
+ 3145 0a59 05       		.byte	0x5
+ 3146 0a5a 5501     		.2byte	0x155
+ 3147 0a5c 0A060000 		.4byte	0x60a
+ 3148 0a60 24       		.uleb128 0x24
+ 3149 0a61 59050000 		.4byte	.LASF149
+ 3150 0a65 05       		.byte	0x5
+ 3151 0a66 5601     		.2byte	0x156
+ 3152 0a68 0A060000 		.4byte	0x60a
+ 3153 0a6c 24       		.uleb128 0x24
+ 3154 0a6d C3010000 		.4byte	.LASF150
+ 3155 0a71 05       		.byte	0x5
+ 3156 0a72 5B01     		.2byte	0x15b
+ 3157 0a74 81000000 		.4byte	0x81
+ 3158 0a78 24       		.uleb128 0x24
+ 3159 0a79 ED050000 		.4byte	.LASF151
+ 3160 0a7d 05       		.byte	0x5
+ 3161 0a7e 5E01     		.2byte	0x15e
+ 3162 0a80 81000000 		.4byte	0x81
+ 3163 0a84 24       		.uleb128 0x24
+ 3164 0a85 91040000 		.4byte	.LASF152
+ 3165 0a89 05       		.byte	0x5
+ 3166 0a8a 6001     		.2byte	0x160
+ 3167 0a8c 81000000 		.4byte	0x81
+ 3168 0a90 24       		.uleb128 0x24
+ 3169 0a91 9D010000 		.4byte	.LASF153
+ 3170 0a95 05       		.byte	0x5
+ 3171 0a96 6101     		.2byte	0x161
+ 3172 0a98 81000000 		.4byte	0x81
+ 3173 0a9c 24       		.uleb128 0x24
+ 3174 0a9d F6000000 		.4byte	.LASF154
+ 3175 0aa1 05       		.byte	0x5
+ 3176 0aa2 6201     		.2byte	0x162
+ 3177 0aa4 81000000 		.4byte	0x81
+ 3178 0aa8 24       		.uleb128 0x24
+ 3179 0aa9 4B040000 		.4byte	.LASF155
+ 3180 0aad 05       		.byte	0x5
+ 3181 0aae 6E01     		.2byte	0x16e
+ 3182 0ab0 BD000000 		.4byte	0xbd
+ 3183 0ab4 00       		.byte	0
+ 3184              		.section	.debug_abbrev,"",%progbits
+ 3185              	.Ldebug_abbrev0:
+ 3186 0000 01       		.uleb128 0x1
+ 3187 0001 11       		.uleb128 0x11
+ 3188 0002 01       		.byte	0x1
+ 3189 0003 25       		.uleb128 0x25
+ 3190 0004 0E       		.uleb128 0xe
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 66
+
+
+ 3191 0005 13       		.uleb128 0x13
+ 3192 0006 0B       		.uleb128 0xb
+ 3193 0007 03       		.uleb128 0x3
+ 3194 0008 0E       		.uleb128 0xe
+ 3195 0009 1B       		.uleb128 0x1b
+ 3196 000a 0E       		.uleb128 0xe
+ 3197 000b 55       		.uleb128 0x55
+ 3198 000c 17       		.uleb128 0x17
+ 3199 000d 11       		.uleb128 0x11
+ 3200 000e 01       		.uleb128 0x1
+ 3201 000f 10       		.uleb128 0x10
+ 3202 0010 17       		.uleb128 0x17
+ 3203 0011 00       		.byte	0
+ 3204 0012 00       		.byte	0
+ 3205 0013 02       		.uleb128 0x2
+ 3206 0014 24       		.uleb128 0x24
+ 3207 0015 00       		.byte	0
+ 3208 0016 0B       		.uleb128 0xb
+ 3209 0017 0B       		.uleb128 0xb
+ 3210 0018 3E       		.uleb128 0x3e
+ 3211 0019 0B       		.uleb128 0xb
+ 3212 001a 03       		.uleb128 0x3
+ 3213 001b 0E       		.uleb128 0xe
+ 3214 001c 00       		.byte	0
+ 3215 001d 00       		.byte	0
+ 3216 001e 03       		.uleb128 0x3
+ 3217 001f 16       		.uleb128 0x16
+ 3218 0020 00       		.byte	0
+ 3219 0021 03       		.uleb128 0x3
+ 3220 0022 0E       		.uleb128 0xe
+ 3221 0023 3A       		.uleb128 0x3a
+ 3222 0024 0B       		.uleb128 0xb
+ 3223 0025 3B       		.uleb128 0x3b
+ 3224 0026 0B       		.uleb128 0xb
+ 3225 0027 49       		.uleb128 0x49
+ 3226 0028 13       		.uleb128 0x13
+ 3227 0029 00       		.byte	0
+ 3228 002a 00       		.byte	0
+ 3229 002b 04       		.uleb128 0x4
+ 3230 002c 24       		.uleb128 0x24
+ 3231 002d 00       		.byte	0
+ 3232 002e 0B       		.uleb128 0xb
+ 3233 002f 0B       		.uleb128 0xb
+ 3234 0030 3E       		.uleb128 0x3e
+ 3235 0031 0B       		.uleb128 0xb
+ 3236 0032 03       		.uleb128 0x3
+ 3237 0033 08       		.uleb128 0x8
+ 3238 0034 00       		.byte	0
+ 3239 0035 00       		.byte	0
+ 3240 0036 05       		.uleb128 0x5
+ 3241 0037 16       		.uleb128 0x16
+ 3242 0038 00       		.byte	0
+ 3243 0039 03       		.uleb128 0x3
+ 3244 003a 0E       		.uleb128 0xe
+ 3245 003b 3A       		.uleb128 0x3a
+ 3246 003c 0B       		.uleb128 0xb
+ 3247 003d 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 67
+
+
+ 3248 003e 05       		.uleb128 0x5
+ 3249 003f 49       		.uleb128 0x49
+ 3250 0040 13       		.uleb128 0x13
+ 3251 0041 00       		.byte	0
+ 3252 0042 00       		.byte	0
+ 3253 0043 06       		.uleb128 0x6
+ 3254 0044 04       		.uleb128 0x4
+ 3255 0045 01       		.byte	0x1
+ 3256 0046 03       		.uleb128 0x3
+ 3257 0047 0E       		.uleb128 0xe
+ 3258 0048 0B       		.uleb128 0xb
+ 3259 0049 0B       		.uleb128 0xb
+ 3260 004a 49       		.uleb128 0x49
+ 3261 004b 13       		.uleb128 0x13
+ 3262 004c 3A       		.uleb128 0x3a
+ 3263 004d 0B       		.uleb128 0xb
+ 3264 004e 3B       		.uleb128 0x3b
+ 3265 004f 0B       		.uleb128 0xb
+ 3266 0050 01       		.uleb128 0x1
+ 3267 0051 13       		.uleb128 0x13
+ 3268 0052 00       		.byte	0
+ 3269 0053 00       		.byte	0
+ 3270 0054 07       		.uleb128 0x7
+ 3271 0055 28       		.uleb128 0x28
+ 3272 0056 00       		.byte	0
+ 3273 0057 03       		.uleb128 0x3
+ 3274 0058 0E       		.uleb128 0xe
+ 3275 0059 1C       		.uleb128 0x1c
+ 3276 005a 0B       		.uleb128 0xb
+ 3277 005b 00       		.byte	0
+ 3278 005c 00       		.byte	0
+ 3279 005d 08       		.uleb128 0x8
+ 3280 005e 13       		.uleb128 0x13
+ 3281 005f 01       		.byte	0x1
+ 3282 0060 03       		.uleb128 0x3
+ 3283 0061 0E       		.uleb128 0xe
+ 3284 0062 0B       		.uleb128 0xb
+ 3285 0063 0B       		.uleb128 0xb
+ 3286 0064 3A       		.uleb128 0x3a
+ 3287 0065 0B       		.uleb128 0xb
+ 3288 0066 3B       		.uleb128 0x3b
+ 3289 0067 0B       		.uleb128 0xb
+ 3290 0068 01       		.uleb128 0x1
+ 3291 0069 13       		.uleb128 0x13
+ 3292 006a 00       		.byte	0
+ 3293 006b 00       		.byte	0
+ 3294 006c 09       		.uleb128 0x9
+ 3295 006d 0D       		.uleb128 0xd
+ 3296 006e 00       		.byte	0
+ 3297 006f 03       		.uleb128 0x3
+ 3298 0070 08       		.uleb128 0x8
+ 3299 0071 3A       		.uleb128 0x3a
+ 3300 0072 0B       		.uleb128 0xb
+ 3301 0073 3B       		.uleb128 0x3b
+ 3302 0074 0B       		.uleb128 0xb
+ 3303 0075 49       		.uleb128 0x49
+ 3304 0076 13       		.uleb128 0x13
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 68
+
+
+ 3305 0077 38       		.uleb128 0x38
+ 3306 0078 0B       		.uleb128 0xb
+ 3307 0079 00       		.byte	0
+ 3308 007a 00       		.byte	0
+ 3309 007b 0A       		.uleb128 0xa
+ 3310 007c 0D       		.uleb128 0xd
+ 3311 007d 00       		.byte	0
+ 3312 007e 03       		.uleb128 0x3
+ 3313 007f 0E       		.uleb128 0xe
+ 3314 0080 3A       		.uleb128 0x3a
+ 3315 0081 0B       		.uleb128 0xb
+ 3316 0082 3B       		.uleb128 0x3b
+ 3317 0083 0B       		.uleb128 0xb
+ 3318 0084 49       		.uleb128 0x49
+ 3319 0085 13       		.uleb128 0x13
+ 3320 0086 38       		.uleb128 0x38
+ 3321 0087 0B       		.uleb128 0xb
+ 3322 0088 00       		.byte	0
+ 3323 0089 00       		.byte	0
+ 3324 008a 0B       		.uleb128 0xb
+ 3325 008b 01       		.uleb128 0x1
+ 3326 008c 01       		.byte	0x1
+ 3327 008d 49       		.uleb128 0x49
+ 3328 008e 13       		.uleb128 0x13
+ 3329 008f 01       		.uleb128 0x1
+ 3330 0090 13       		.uleb128 0x13
+ 3331 0091 00       		.byte	0
+ 3332 0092 00       		.byte	0
+ 3333 0093 0C       		.uleb128 0xc
+ 3334 0094 21       		.uleb128 0x21
+ 3335 0095 00       		.byte	0
+ 3336 0096 49       		.uleb128 0x49
+ 3337 0097 13       		.uleb128 0x13
+ 3338 0098 2F       		.uleb128 0x2f
+ 3339 0099 0B       		.uleb128 0xb
+ 3340 009a 00       		.byte	0
+ 3341 009b 00       		.byte	0
+ 3342 009c 0D       		.uleb128 0xd
+ 3343 009d 13       		.uleb128 0x13
+ 3344 009e 01       		.byte	0x1
+ 3345 009f 03       		.uleb128 0x3
+ 3346 00a0 0E       		.uleb128 0xe
+ 3347 00a1 0B       		.uleb128 0xb
+ 3348 00a2 05       		.uleb128 0x5
+ 3349 00a3 3A       		.uleb128 0x3a
+ 3350 00a4 0B       		.uleb128 0xb
+ 3351 00a5 3B       		.uleb128 0x3b
+ 3352 00a6 0B       		.uleb128 0xb
+ 3353 00a7 01       		.uleb128 0x1
+ 3354 00a8 13       		.uleb128 0x13
+ 3355 00a9 00       		.byte	0
+ 3356 00aa 00       		.byte	0
+ 3357 00ab 0E       		.uleb128 0xe
+ 3358 00ac 0D       		.uleb128 0xd
+ 3359 00ad 00       		.byte	0
+ 3360 00ae 03       		.uleb128 0x3
+ 3361 00af 0E       		.uleb128 0xe
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 69
+
+
+ 3362 00b0 3A       		.uleb128 0x3a
+ 3363 00b1 0B       		.uleb128 0xb
+ 3364 00b2 3B       		.uleb128 0x3b
+ 3365 00b3 05       		.uleb128 0x5
+ 3366 00b4 49       		.uleb128 0x49
+ 3367 00b5 13       		.uleb128 0x13
+ 3368 00b6 38       		.uleb128 0x38
+ 3369 00b7 05       		.uleb128 0x5
+ 3370 00b8 00       		.byte	0
+ 3371 00b9 00       		.byte	0
+ 3372 00ba 0F       		.uleb128 0xf
+ 3373 00bb 13       		.uleb128 0x13
+ 3374 00bc 01       		.byte	0x1
+ 3375 00bd 03       		.uleb128 0x3
+ 3376 00be 0E       		.uleb128 0xe
+ 3377 00bf 0B       		.uleb128 0xb
+ 3378 00c0 0B       		.uleb128 0xb
+ 3379 00c1 3A       		.uleb128 0x3a
+ 3380 00c2 0B       		.uleb128 0xb
+ 3381 00c3 3B       		.uleb128 0x3b
+ 3382 00c4 05       		.uleb128 0x5
+ 3383 00c5 01       		.uleb128 0x1
+ 3384 00c6 13       		.uleb128 0x13
+ 3385 00c7 00       		.byte	0
+ 3386 00c8 00       		.byte	0
+ 3387 00c9 10       		.uleb128 0x10
+ 3388 00ca 0D       		.uleb128 0xd
+ 3389 00cb 00       		.byte	0
+ 3390 00cc 03       		.uleb128 0x3
+ 3391 00cd 0E       		.uleb128 0xe
+ 3392 00ce 3A       		.uleb128 0x3a
+ 3393 00cf 0B       		.uleb128 0xb
+ 3394 00d0 3B       		.uleb128 0x3b
+ 3395 00d1 05       		.uleb128 0x5
+ 3396 00d2 49       		.uleb128 0x49
+ 3397 00d3 13       		.uleb128 0x13
+ 3398 00d4 38       		.uleb128 0x38
+ 3399 00d5 0B       		.uleb128 0xb
+ 3400 00d6 00       		.byte	0
+ 3401 00d7 00       		.byte	0
+ 3402 00d8 11       		.uleb128 0x11
+ 3403 00d9 04       		.uleb128 0x4
+ 3404 00da 01       		.byte	0x1
+ 3405 00db 0B       		.uleb128 0xb
+ 3406 00dc 0B       		.uleb128 0xb
+ 3407 00dd 49       		.uleb128 0x49
+ 3408 00de 13       		.uleb128 0x13
+ 3409 00df 3A       		.uleb128 0x3a
+ 3410 00e0 0B       		.uleb128 0xb
+ 3411 00e1 3B       		.uleb128 0x3b
+ 3412 00e2 05       		.uleb128 0x5
+ 3413 00e3 01       		.uleb128 0x1
+ 3414 00e4 13       		.uleb128 0x13
+ 3415 00e5 00       		.byte	0
+ 3416 00e6 00       		.byte	0
+ 3417 00e7 12       		.uleb128 0x12
+ 3418 00e8 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 70
+
+
+ 3419 00e9 01       		.byte	0x1
+ 3420 00ea 3F       		.uleb128 0x3f
+ 3421 00eb 19       		.uleb128 0x19
+ 3422 00ec 03       		.uleb128 0x3
+ 3423 00ed 0E       		.uleb128 0xe
+ 3424 00ee 3A       		.uleb128 0x3a
+ 3425 00ef 0B       		.uleb128 0xb
+ 3426 00f0 3B       		.uleb128 0x3b
+ 3427 00f1 0B       		.uleb128 0xb
+ 3428 00f2 27       		.uleb128 0x27
+ 3429 00f3 19       		.uleb128 0x19
+ 3430 00f4 49       		.uleb128 0x49
+ 3431 00f5 13       		.uleb128 0x13
+ 3432 00f6 11       		.uleb128 0x11
+ 3433 00f7 01       		.uleb128 0x1
+ 3434 00f8 12       		.uleb128 0x12
+ 3435 00f9 06       		.uleb128 0x6
+ 3436 00fa 40       		.uleb128 0x40
+ 3437 00fb 18       		.uleb128 0x18
+ 3438 00fc 9642     		.uleb128 0x2116
+ 3439 00fe 19       		.uleb128 0x19
+ 3440 00ff 01       		.uleb128 0x1
+ 3441 0100 13       		.uleb128 0x13
+ 3442 0101 00       		.byte	0
+ 3443 0102 00       		.byte	0
+ 3444 0103 13       		.uleb128 0x13
+ 3445 0104 05       		.uleb128 0x5
+ 3446 0105 00       		.byte	0
+ 3447 0106 03       		.uleb128 0x3
+ 3448 0107 08       		.uleb128 0x8
+ 3449 0108 3A       		.uleb128 0x3a
+ 3450 0109 0B       		.uleb128 0xb
+ 3451 010a 3B       		.uleb128 0x3b
+ 3452 010b 0B       		.uleb128 0xb
+ 3453 010c 49       		.uleb128 0x49
+ 3454 010d 13       		.uleb128 0x13
+ 3455 010e 02       		.uleb128 0x2
+ 3456 010f 18       		.uleb128 0x18
+ 3457 0110 00       		.byte	0
+ 3458 0111 00       		.byte	0
+ 3459 0112 14       		.uleb128 0x14
+ 3460 0113 34       		.uleb128 0x34
+ 3461 0114 00       		.byte	0
+ 3462 0115 03       		.uleb128 0x3
+ 3463 0116 0E       		.uleb128 0xe
+ 3464 0117 3A       		.uleb128 0x3a
+ 3465 0118 0B       		.uleb128 0xb
+ 3466 0119 3B       		.uleb128 0x3b
+ 3467 011a 0B       		.uleb128 0xb
+ 3468 011b 49       		.uleb128 0x49
+ 3469 011c 13       		.uleb128 0x13
+ 3470 011d 02       		.uleb128 0x2
+ 3471 011e 18       		.uleb128 0x18
+ 3472 011f 00       		.byte	0
+ 3473 0120 00       		.byte	0
+ 3474 0121 15       		.uleb128 0x15
+ 3475 0122 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 71
+
+
+ 3476 0123 01       		.byte	0x1
+ 3477 0124 3F       		.uleb128 0x3f
+ 3478 0125 19       		.uleb128 0x19
+ 3479 0126 03       		.uleb128 0x3
+ 3480 0127 0E       		.uleb128 0xe
+ 3481 0128 3A       		.uleb128 0x3a
+ 3482 0129 0B       		.uleb128 0xb
+ 3483 012a 3B       		.uleb128 0x3b
+ 3484 012b 0B       		.uleb128 0xb
+ 3485 012c 27       		.uleb128 0x27
+ 3486 012d 19       		.uleb128 0x19
+ 3487 012e 49       		.uleb128 0x49
+ 3488 012f 13       		.uleb128 0x13
+ 3489 0130 11       		.uleb128 0x11
+ 3490 0131 01       		.uleb128 0x1
+ 3491 0132 12       		.uleb128 0x12
+ 3492 0133 06       		.uleb128 0x6
+ 3493 0134 40       		.uleb128 0x40
+ 3494 0135 18       		.uleb128 0x18
+ 3495 0136 9742     		.uleb128 0x2117
+ 3496 0138 19       		.uleb128 0x19
+ 3497 0139 01       		.uleb128 0x1
+ 3498 013a 13       		.uleb128 0x13
+ 3499 013b 00       		.byte	0
+ 3500 013c 00       		.byte	0
+ 3501 013d 16       		.uleb128 0x16
+ 3502 013e 05       		.uleb128 0x5
+ 3503 013f 00       		.byte	0
+ 3504 0140 03       		.uleb128 0x3
+ 3505 0141 0E       		.uleb128 0xe
+ 3506 0142 3A       		.uleb128 0x3a
+ 3507 0143 0B       		.uleb128 0xb
+ 3508 0144 3B       		.uleb128 0x3b
+ 3509 0145 0B       		.uleb128 0xb
+ 3510 0146 49       		.uleb128 0x49
+ 3511 0147 13       		.uleb128 0x13
+ 3512 0148 02       		.uleb128 0x2
+ 3513 0149 18       		.uleb128 0x18
+ 3514 014a 00       		.byte	0
+ 3515 014b 00       		.byte	0
+ 3516 014c 17       		.uleb128 0x17
+ 3517 014d 34       		.uleb128 0x34
+ 3518 014e 00       		.byte	0
+ 3519 014f 03       		.uleb128 0x3
+ 3520 0150 08       		.uleb128 0x8
+ 3521 0151 3A       		.uleb128 0x3a
+ 3522 0152 0B       		.uleb128 0xb
+ 3523 0153 3B       		.uleb128 0x3b
+ 3524 0154 0B       		.uleb128 0xb
+ 3525 0155 49       		.uleb128 0x49
+ 3526 0156 13       		.uleb128 0x13
+ 3527 0157 02       		.uleb128 0x2
+ 3528 0158 18       		.uleb128 0x18
+ 3529 0159 00       		.byte	0
+ 3530 015a 00       		.byte	0
+ 3531 015b 18       		.uleb128 0x18
+ 3532 015c 0F       		.uleb128 0xf
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 72
+
+
+ 3533 015d 00       		.byte	0
+ 3534 015e 0B       		.uleb128 0xb
+ 3535 015f 0B       		.uleb128 0xb
+ 3536 0160 49       		.uleb128 0x49
+ 3537 0161 13       		.uleb128 0x13
+ 3538 0162 00       		.byte	0
+ 3539 0163 00       		.byte	0
+ 3540 0164 19       		.uleb128 0x19
+ 3541 0165 26       		.uleb128 0x26
+ 3542 0166 00       		.byte	0
+ 3543 0167 49       		.uleb128 0x49
+ 3544 0168 13       		.uleb128 0x13
+ 3545 0169 00       		.byte	0
+ 3546 016a 00       		.byte	0
+ 3547 016b 1A       		.uleb128 0x1a
+ 3548 016c 2E       		.uleb128 0x2e
+ 3549 016d 01       		.byte	0x1
+ 3550 016e 3F       		.uleb128 0x3f
+ 3551 016f 19       		.uleb128 0x19
+ 3552 0170 03       		.uleb128 0x3
+ 3553 0171 0E       		.uleb128 0xe
+ 3554 0172 3A       		.uleb128 0x3a
+ 3555 0173 0B       		.uleb128 0xb
+ 3556 0174 3B       		.uleb128 0x3b
+ 3557 0175 0B       		.uleb128 0xb
+ 3558 0176 27       		.uleb128 0x27
+ 3559 0177 19       		.uleb128 0x19
+ 3560 0178 11       		.uleb128 0x11
+ 3561 0179 01       		.uleb128 0x1
+ 3562 017a 12       		.uleb128 0x12
+ 3563 017b 06       		.uleb128 0x6
+ 3564 017c 40       		.uleb128 0x40
+ 3565 017d 18       		.uleb128 0x18
+ 3566 017e 9742     		.uleb128 0x2117
+ 3567 0180 19       		.uleb128 0x19
+ 3568 0181 01       		.uleb128 0x1
+ 3569 0182 13       		.uleb128 0x13
+ 3570 0183 00       		.byte	0
+ 3571 0184 00       		.byte	0
+ 3572 0185 1B       		.uleb128 0x1b
+ 3573 0186 2E       		.uleb128 0x2e
+ 3574 0187 01       		.byte	0x1
+ 3575 0188 3F       		.uleb128 0x3f
+ 3576 0189 19       		.uleb128 0x19
+ 3577 018a 03       		.uleb128 0x3
+ 3578 018b 0E       		.uleb128 0xe
+ 3579 018c 3A       		.uleb128 0x3a
+ 3580 018d 0B       		.uleb128 0xb
+ 3581 018e 3B       		.uleb128 0x3b
+ 3582 018f 0B       		.uleb128 0xb
+ 3583 0190 27       		.uleb128 0x27
+ 3584 0191 19       		.uleb128 0x19
+ 3585 0192 11       		.uleb128 0x11
+ 3586 0193 01       		.uleb128 0x1
+ 3587 0194 12       		.uleb128 0x12
+ 3588 0195 06       		.uleb128 0x6
+ 3589 0196 40       		.uleb128 0x40
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 73
+
+
+ 3590 0197 18       		.uleb128 0x18
+ 3591 0198 9642     		.uleb128 0x2116
+ 3592 019a 19       		.uleb128 0x19
+ 3593 019b 01       		.uleb128 0x1
+ 3594 019c 13       		.uleb128 0x13
+ 3595 019d 00       		.byte	0
+ 3596 019e 00       		.byte	0
+ 3597 019f 1C       		.uleb128 0x1c
+ 3598 01a0 2E       		.uleb128 0x2e
+ 3599 01a1 01       		.byte	0x1
+ 3600 01a2 3F       		.uleb128 0x3f
+ 3601 01a3 19       		.uleb128 0x19
+ 3602 01a4 03       		.uleb128 0x3
+ 3603 01a5 0E       		.uleb128 0xe
+ 3604 01a6 3A       		.uleb128 0x3a
+ 3605 01a7 0B       		.uleb128 0xb
+ 3606 01a8 3B       		.uleb128 0x3b
+ 3607 01a9 05       		.uleb128 0x5
+ 3608 01aa 27       		.uleb128 0x27
+ 3609 01ab 19       		.uleb128 0x19
+ 3610 01ac 11       		.uleb128 0x11
+ 3611 01ad 01       		.uleb128 0x1
+ 3612 01ae 12       		.uleb128 0x12
+ 3613 01af 06       		.uleb128 0x6
+ 3614 01b0 40       		.uleb128 0x40
+ 3615 01b1 18       		.uleb128 0x18
+ 3616 01b2 9642     		.uleb128 0x2116
+ 3617 01b4 19       		.uleb128 0x19
+ 3618 01b5 01       		.uleb128 0x1
+ 3619 01b6 13       		.uleb128 0x13
+ 3620 01b7 00       		.byte	0
+ 3621 01b8 00       		.byte	0
+ 3622 01b9 1D       		.uleb128 0x1d
+ 3623 01ba 05       		.uleb128 0x5
+ 3624 01bb 00       		.byte	0
+ 3625 01bc 03       		.uleb128 0x3
+ 3626 01bd 0E       		.uleb128 0xe
+ 3627 01be 3A       		.uleb128 0x3a
+ 3628 01bf 0B       		.uleb128 0xb
+ 3629 01c0 3B       		.uleb128 0x3b
+ 3630 01c1 05       		.uleb128 0x5
+ 3631 01c2 49       		.uleb128 0x49
+ 3632 01c3 13       		.uleb128 0x13
+ 3633 01c4 02       		.uleb128 0x2
+ 3634 01c5 18       		.uleb128 0x18
+ 3635 01c6 00       		.byte	0
+ 3636 01c7 00       		.byte	0
+ 3637 01c8 1E       		.uleb128 0x1e
+ 3638 01c9 2E       		.uleb128 0x2e
+ 3639 01ca 01       		.byte	0x1
+ 3640 01cb 3F       		.uleb128 0x3f
+ 3641 01cc 19       		.uleb128 0x19
+ 3642 01cd 03       		.uleb128 0x3
+ 3643 01ce 0E       		.uleb128 0xe
+ 3644 01cf 3A       		.uleb128 0x3a
+ 3645 01d0 0B       		.uleb128 0xb
+ 3646 01d1 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 74
+
+
+ 3647 01d2 05       		.uleb128 0x5
+ 3648 01d3 11       		.uleb128 0x11
+ 3649 01d4 01       		.uleb128 0x1
+ 3650 01d5 12       		.uleb128 0x12
+ 3651 01d6 06       		.uleb128 0x6
+ 3652 01d7 40       		.uleb128 0x40
+ 3653 01d8 18       		.uleb128 0x18
+ 3654 01d9 9642     		.uleb128 0x2116
+ 3655 01db 19       		.uleb128 0x19
+ 3656 01dc 01       		.uleb128 0x1
+ 3657 01dd 13       		.uleb128 0x13
+ 3658 01de 00       		.byte	0
+ 3659 01df 00       		.byte	0
+ 3660 01e0 1F       		.uleb128 0x1f
+ 3661 01e1 34       		.uleb128 0x34
+ 3662 01e2 00       		.byte	0
+ 3663 01e3 03       		.uleb128 0x3
+ 3664 01e4 0E       		.uleb128 0xe
+ 3665 01e5 3A       		.uleb128 0x3a
+ 3666 01e6 0B       		.uleb128 0xb
+ 3667 01e7 3B       		.uleb128 0x3b
+ 3668 01e8 05       		.uleb128 0x5
+ 3669 01e9 49       		.uleb128 0x49
+ 3670 01ea 13       		.uleb128 0x13
+ 3671 01eb 02       		.uleb128 0x2
+ 3672 01ec 18       		.uleb128 0x18
+ 3673 01ed 00       		.byte	0
+ 3674 01ee 00       		.byte	0
+ 3675 01ef 20       		.uleb128 0x20
+ 3676 01f0 2E       		.uleb128 0x2e
+ 3677 01f1 01       		.byte	0x1
+ 3678 01f2 3F       		.uleb128 0x3f
+ 3679 01f3 19       		.uleb128 0x19
+ 3680 01f4 03       		.uleb128 0x3
+ 3681 01f5 0E       		.uleb128 0xe
+ 3682 01f6 3A       		.uleb128 0x3a
+ 3683 01f7 0B       		.uleb128 0xb
+ 3684 01f8 3B       		.uleb128 0x3b
+ 3685 01f9 05       		.uleb128 0x5
+ 3686 01fa 11       		.uleb128 0x11
+ 3687 01fb 01       		.uleb128 0x1
+ 3688 01fc 12       		.uleb128 0x12
+ 3689 01fd 06       		.uleb128 0x6
+ 3690 01fe 40       		.uleb128 0x40
+ 3691 01ff 18       		.uleb128 0x18
+ 3692 0200 9742     		.uleb128 0x2117
+ 3693 0202 19       		.uleb128 0x19
+ 3694 0203 01       		.uleb128 0x1
+ 3695 0204 13       		.uleb128 0x13
+ 3696 0205 00       		.byte	0
+ 3697 0206 00       		.byte	0
+ 3698 0207 21       		.uleb128 0x21
+ 3699 0208 34       		.uleb128 0x34
+ 3700 0209 00       		.byte	0
+ 3701 020a 03       		.uleb128 0x3
+ 3702 020b 08       		.uleb128 0x8
+ 3703 020c 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 75
+
+
+ 3704 020d 0B       		.uleb128 0xb
+ 3705 020e 3B       		.uleb128 0x3b
+ 3706 020f 05       		.uleb128 0x5
+ 3707 0210 49       		.uleb128 0x49
+ 3708 0211 13       		.uleb128 0x13
+ 3709 0212 02       		.uleb128 0x2
+ 3710 0213 18       		.uleb128 0x18
+ 3711 0214 00       		.byte	0
+ 3712 0215 00       		.byte	0
+ 3713 0216 22       		.uleb128 0x22
+ 3714 0217 2E       		.uleb128 0x2e
+ 3715 0218 01       		.byte	0x1
+ 3716 0219 3F       		.uleb128 0x3f
+ 3717 021a 19       		.uleb128 0x19
+ 3718 021b 03       		.uleb128 0x3
+ 3719 021c 0E       		.uleb128 0xe
+ 3720 021d 3A       		.uleb128 0x3a
+ 3721 021e 0B       		.uleb128 0xb
+ 3722 021f 3B       		.uleb128 0x3b
+ 3723 0220 05       		.uleb128 0x5
+ 3724 0221 27       		.uleb128 0x27
+ 3725 0222 19       		.uleb128 0x19
+ 3726 0223 49       		.uleb128 0x49
+ 3727 0224 13       		.uleb128 0x13
+ 3728 0225 11       		.uleb128 0x11
+ 3729 0226 01       		.uleb128 0x1
+ 3730 0227 12       		.uleb128 0x12
+ 3731 0228 06       		.uleb128 0x6
+ 3732 0229 40       		.uleb128 0x40
+ 3733 022a 18       		.uleb128 0x18
+ 3734 022b 9642     		.uleb128 0x2116
+ 3735 022d 19       		.uleb128 0x19
+ 3736 022e 01       		.uleb128 0x1
+ 3737 022f 13       		.uleb128 0x13
+ 3738 0230 00       		.byte	0
+ 3739 0231 00       		.byte	0
+ 3740 0232 23       		.uleb128 0x23
+ 3741 0233 05       		.uleb128 0x5
+ 3742 0234 00       		.byte	0
+ 3743 0235 03       		.uleb128 0x3
+ 3744 0236 08       		.uleb128 0x8
+ 3745 0237 3A       		.uleb128 0x3a
+ 3746 0238 0B       		.uleb128 0xb
+ 3747 0239 3B       		.uleb128 0x3b
+ 3748 023a 05       		.uleb128 0x5
+ 3749 023b 49       		.uleb128 0x49
+ 3750 023c 13       		.uleb128 0x13
+ 3751 023d 02       		.uleb128 0x2
+ 3752 023e 18       		.uleb128 0x18
+ 3753 023f 00       		.byte	0
+ 3754 0240 00       		.byte	0
+ 3755 0241 24       		.uleb128 0x24
+ 3756 0242 34       		.uleb128 0x34
+ 3757 0243 00       		.byte	0
+ 3758 0244 03       		.uleb128 0x3
+ 3759 0245 0E       		.uleb128 0xe
+ 3760 0246 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 76
+
+
+ 3761 0247 0B       		.uleb128 0xb
+ 3762 0248 3B       		.uleb128 0x3b
+ 3763 0249 05       		.uleb128 0x5
+ 3764 024a 49       		.uleb128 0x49
+ 3765 024b 13       		.uleb128 0x13
+ 3766 024c 3F       		.uleb128 0x3f
+ 3767 024d 19       		.uleb128 0x19
+ 3768 024e 3C       		.uleb128 0x3c
+ 3769 024f 19       		.uleb128 0x19
+ 3770 0250 00       		.byte	0
+ 3771 0251 00       		.byte	0
+ 3772 0252 25       		.uleb128 0x25
+ 3773 0253 35       		.uleb128 0x35
+ 3774 0254 00       		.byte	0
+ 3775 0255 49       		.uleb128 0x49
+ 3776 0256 13       		.uleb128 0x13
+ 3777 0257 00       		.byte	0
+ 3778 0258 00       		.byte	0
+ 3779 0259 00       		.byte	0
+ 3780              		.section	.debug_aranges,"",%progbits
+ 3781 0000 7C000000 		.4byte	0x7c
+ 3782 0004 0200     		.2byte	0x2
+ 3783 0006 00000000 		.4byte	.Ldebug_info0
+ 3784 000a 04       		.byte	0x4
+ 3785 000b 00       		.byte	0
+ 3786 000c 0000     		.2byte	0
+ 3787 000e 0000     		.2byte	0
+ 3788 0010 00000000 		.4byte	.LFB64
+ 3789 0014 CC010000 		.4byte	.LFE64-.LFB64
+ 3790 0018 00000000 		.4byte	.LFB65
+ 3791 001c 4E000000 		.4byte	.LFE65-.LFB65
+ 3792 0020 00000000 		.4byte	.LFB66
+ 3793 0024 76000000 		.4byte	.LFE66-.LFB66
+ 3794 0028 00000000 		.4byte	.LFB67
+ 3795 002c 50000000 		.4byte	.LFE67-.LFB67
+ 3796 0030 00000000 		.4byte	.LFB68
+ 3797 0034 B4000000 		.4byte	.LFE68-.LFB68
+ 3798 0038 00000000 		.4byte	.LFB69
+ 3799 003c 4C000000 		.4byte	.LFE69-.LFB69
+ 3800 0040 00000000 		.4byte	.LFB70
+ 3801 0044 A0020000 		.4byte	.LFE70-.LFB70
+ 3802 0048 00000000 		.4byte	.LFB71
+ 3803 004c 8E000000 		.4byte	.LFE71-.LFB71
+ 3804 0050 00000000 		.4byte	.LFB72
+ 3805 0054 88010000 		.4byte	.LFE72-.LFB72
+ 3806 0058 00000000 		.4byte	.LFB73
+ 3807 005c 84000000 		.4byte	.LFE73-.LFB73
+ 3808 0060 00000000 		.4byte	.LFB74
+ 3809 0064 78000000 		.4byte	.LFE74-.LFB74
+ 3810 0068 00000000 		.4byte	.LFB75
+ 3811 006c B0000000 		.4byte	.LFE75-.LFB75
+ 3812 0070 00000000 		.4byte	.LFB76
+ 3813 0074 EA000000 		.4byte	.LFE76-.LFB76
+ 3814 0078 00000000 		.4byte	0
+ 3815 007c 00000000 		.4byte	0
+ 3816              		.section	.debug_ranges,"",%progbits
+ 3817              	.Ldebug_ranges0:
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 77
+
+
+ 3818 0000 00000000 		.4byte	.LFB64
+ 3819 0004 CC010000 		.4byte	.LFE64
+ 3820 0008 00000000 		.4byte	.LFB65
+ 3821 000c 4E000000 		.4byte	.LFE65
+ 3822 0010 00000000 		.4byte	.LFB66
+ 3823 0014 76000000 		.4byte	.LFE66
+ 3824 0018 00000000 		.4byte	.LFB67
+ 3825 001c 50000000 		.4byte	.LFE67
+ 3826 0020 00000000 		.4byte	.LFB68
+ 3827 0024 B4000000 		.4byte	.LFE68
+ 3828 0028 00000000 		.4byte	.LFB69
+ 3829 002c 4C000000 		.4byte	.LFE69
+ 3830 0030 00000000 		.4byte	.LFB70
+ 3831 0034 A0020000 		.4byte	.LFE70
+ 3832 0038 00000000 		.4byte	.LFB71
+ 3833 003c 8E000000 		.4byte	.LFE71
+ 3834 0040 00000000 		.4byte	.LFB72
+ 3835 0044 88010000 		.4byte	.LFE72
+ 3836 0048 00000000 		.4byte	.LFB73
+ 3837 004c 84000000 		.4byte	.LFE73
+ 3838 0050 00000000 		.4byte	.LFB74
+ 3839 0054 78000000 		.4byte	.LFE74
+ 3840 0058 00000000 		.4byte	.LFB75
+ 3841 005c B0000000 		.4byte	.LFE75
+ 3842 0060 00000000 		.4byte	.LFB76
+ 3843 0064 EA000000 		.4byte	.LFE76
+ 3844 0068 00000000 		.4byte	0
+ 3845 006c 00000000 		.4byte	0
+ 3846              		.section	.debug_line,"",%progbits
+ 3847              	.Ldebug_line0:
+ 3848 0000 75030000 		.section	.debug_str,"MS",%progbits,1
+ 3848      02006F01 
+ 3848      00000201 
+ 3848      FB0E0D00 
+ 3848      01010101 
+ 3849              	.LASF118:
+ 3850 0000 636F756E 		.ascii	"count\000"
+ 3850      7400
+ 3851              	.LASF12:
+ 3852 0006 75696E74 		.ascii	"uint16\000"
+ 3852      313600
+ 3853              	.LASF32:
+ 3854 000d 73745F6D 		.ascii	"st_meas\000"
+ 3854      65617300 
+ 3855              	.LASF142:
+ 3856 0015 635F6D65 		.ascii	"c_mem\000"
+ 3856      6D00
+ 3857              	.LASF125:
+ 3858 001b 68616E64 		.ascii	"handle_value\000"
+ 3858      6C655F76 
+ 3858      616C7565 
+ 3858      00
+ 3859              	.LASF111:
+ 3860 0028 636C6F73 		.ascii	"closure_counter\000"
+ 3860      7572655F 
+ 3860      636F756E 
+ 3860      74657200 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 78
+
+
+ 3861              	.LASF124:
+ 3862 0038 72657374 		.ascii	"rest_error\000"
+ 3862      5F657272 
+ 3862      6F7200
+ 3863              	.LASF80:
+ 3864 0043 746F7461 		.ascii	"total_time_on\000"
+ 3864      6C5F7469 
+ 3864      6D655F6F 
+ 3864      6E00
+ 3865              	.LASF48:
+ 3866 0051 6D5F6F66 		.ascii	"m_off\000"
+ 3866      6600
+ 3867              	.LASF91:
+ 3868 0057 64697265 		.ascii	"direction\000"
+ 3868      6374696F 
+ 3868      6E00
+ 3869              	.LASF144:
+ 3870 0061 66696C74 		.ascii	"filt_v\000"
+ 3870      5F7600
+ 3871              	.LASF156:
+ 3872 0068 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 3872      43313120 
+ 3872      352E342E 
+ 3872      31203230 
+ 3872      31363036 
+ 3873 009b 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 3873      20726576 
+ 3873      6973696F 
+ 3873      6E203233 
+ 3873      37373135 
+ 3874 00ce 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 3874      66756E63 
+ 3874      74696F6E 
+ 3874      2D736563 
+ 3874      74696F6E 
+ 3875              	.LASF154:
+ 3876 00f6 62617474 		.ascii	"battery_low_SoC\000"
+ 3876      6572795F 
+ 3876      6C6F775F 
+ 3876      536F4300 
+ 3877              	.LASF7:
+ 3878 0106 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 3878      206C6F6E 
+ 3878      6720756E 
+ 3878      7369676E 
+ 3878      65642069 
+ 3879              	.LASF64:
+ 3880 011d 62617564 		.ascii	"baud_rate\000"
+ 3880      5F726174 
+ 3880      6500
+ 3881              	.LASF30:
+ 3882 0127 6F6E6F66 		.ascii	"onoff\000"
+ 3882      6600
+ 3883              	.LASF138:
+ 3884 012d 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 3884      52784275 
+ 3884      66666572 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 79
+
+
+ 3884      00
+ 3885              	.LASF122:
+ 3886 013a 64656C74 		.ascii	"delta_inc\000"
+ 3886      615F696E 
+ 3886      6300
+ 3887              	.LASF109:
+ 3888 0144 6D795F6D 		.ascii	"my_mod\000"
+ 3888      6F6400
+ 3889              	.LASF70:
+ 3890 014b 72657374 		.ascii	"rest_vel\000"
+ 3890      5F76656C 
+ 3890      00
+ 3891              	.LASF56:
+ 3892 0154 656D675F 		.ascii	"emg_threshold\000"
+ 3892      74687265 
+ 3892      73686F6C 
+ 3892      6400
+ 3893              	.LASF6:
+ 3894 0162 6C6F6E67 		.ascii	"long long int\000"
+ 3894      206C6F6E 
+ 3894      6720696E 
+ 3894      7400
+ 3895              	.LASF0:
+ 3896 0170 7369676E 		.ascii	"signed char\000"
+ 3896      65642063 
+ 3896      68617200 
+ 3897              	.LASF104:
+ 3898 017c 63757272 		.ascii	"curr_estim\000"
+ 3898      5F657374 
+ 3898      696D00
+ 3899              	.LASF135:
+ 3900 0187 6E6F726D 		.ascii	"norm\000"
+ 3900      00
+ 3901              	.LASF33:
+ 3902 018c 65737469 		.ascii	"estim_curr\000"
+ 3902      6D5F6375 
+ 3902      727200
+ 3903              	.LASF134:
+ 3904 0197 76335F69 		.ascii	"v3_in\000"
+ 3904      6E00
+ 3905              	.LASF153:
+ 3906 019d 666F7263 		.ascii	"forced_open\000"
+ 3906      65645F6F 
+ 3906      70656E00 
+ 3907              	.LASF16:
+ 3908 01a9 696E7433 		.ascii	"int32\000"
+ 3908      3200
+ 3909              	.LASF102:
+ 3910 01af 6572725F 		.ascii	"err_pos_dt\000"
+ 3910      706F735F 
+ 3910      647400
+ 3911              	.LASF4:
+ 3912 01ba 6C6F6E67 		.ascii	"long int\000"
+ 3912      20696E74 
+ 3912      00
+ 3913              	.LASF150:
+ 3914 01c3 74656E73 		.ascii	"tension_valid\000"
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 80
+
+
+ 3914      696F6E5F 
+ 3914      76616C69 
+ 3914      6400
+ 3915              	.LASF87:
+ 3916 01d1 6F6C645F 		.ascii	"old_value\000"
+ 3916      76616C75 
+ 3916      6500
+ 3917              	.LASF147:
+ 3918 01db 706F775F 		.ascii	"pow_tension\000"
+ 3918      74656E73 
+ 3918      696F6E00 
+ 3919              	.LASF2:
+ 3920 01e7 73686F72 		.ascii	"short int\000"
+ 3920      7420696E 
+ 3920      7400
+ 3921              	.LASF126:
+ 3922 01f1 4C45445F 		.ascii	"LED_control\000"
+ 3922      636F6E74 
+ 3922      726F6C00 
+ 3923              	.LASF47:
+ 3924 01fd 636F6E74 		.ascii	"control_mode\000"
+ 3924      726F6C5F 
+ 3924      6D6F6465 
+ 3924      00
+ 3925              	.LASF83:
+ 3926 020a 756E7573 		.ascii	"unused_bytes1\000"
+ 3926      65645F62 
+ 3926      79746573 
+ 3926      3100
+ 3927              	.LASF137:
+ 3928 0218 76345F69 		.ascii	"v4_in\000"
+ 3928      6E00
+ 3929              	.LASF129:
+ 3930 021e 62617474 		.ascii	"battery_management\000"
+ 3930      6572795F 
+ 3930      6D616E61 
+ 3930      67656D65 
+ 3930      6E7400
+ 3931              	.LASF97:
+ 3932 0231 53554D5F 		.ascii	"SUM_AND_MEAN\000"
+ 3932      414E445F 
+ 3932      4D45414E 
+ 3932      00
+ 3933              	.LASF84:
+ 3934 023e 5350495F 		.ascii	"SPI_read_delay\000"
+ 3934      72656164 
+ 3934      5F64656C 
+ 3934      617900
+ 3935              	.LASF94:
+ 3936 024d 4E4F524D 		.ascii	"NORMAL\000"
+ 3936      414C00
+ 3937              	.LASF13:
+ 3938 0254 75696E74 		.ascii	"uint32\000"
+ 3938      333200
+ 3939              	.LASF132:
+ 3940 025b 68616C66 		.ascii	"halfx\000"
+ 3940      7800
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 81
+
+
+ 3941              	.LASF106:
+ 3942 0261 6E65775F 		.ascii	"new_value\000"
+ 3942      76616C75 
+ 3942      6500
+ 3943              	.LASF25:
+ 3944 026b 494E5055 		.ascii	"INPUT_MODE_EMG_PROPORTIONAL\000"
+ 3944      545F4D4F 
+ 3944      44455F45 
+ 3944      4D475F50 
+ 3944      524F504F 
+ 3945              	.LASF42:
+ 3946 0287 6B5F705F 		.ascii	"k_p_c_dl\000"
+ 3946      635F646C 
+ 3946      00
+ 3947              	.LASF93:
+ 3948 0290 72657065 		.ascii	"repetitions\000"
+ 3948      74697469 
+ 3948      6F6E7300 
+ 3949              	.LASF73:
+ 3950 029c 73776974 		.ascii	"switch_emg\000"
+ 3950      63685F65 
+ 3950      6D6700
+ 3951              	.LASF46:
+ 3952 02a7 696E7075 		.ascii	"input_mode\000"
+ 3952      745F6D6F 
+ 3952      646500
+ 3953              	.LASF114:
+ 3954 02b2 706F7331 		.ascii	"pos1\000"
+ 3954      00
+ 3955              	.LASF115:
+ 3956 02b7 706F7332 		.ascii	"pos2\000"
+ 3956      00
+ 3957              	.LASF108:
+ 3958 02bc 76616C75 		.ascii	"value\000"
+ 3958      6500
+ 3959              	.LASF130:
+ 3960 02c2 72657365 		.ascii	"reset_counters\000"
+ 3960      745F636F 
+ 3960      756E7465 
+ 3960      727300
+ 3961              	.LASF8:
+ 3962 02d1 756E7369 		.ascii	"unsigned int\000"
+ 3962      676E6564 
+ 3962      20696E74 
+ 3962      00
+ 3963              	.LASF31:
+ 3964 02de 73745F72 		.ascii	"st_ref\000"
+ 3964      656600
+ 3965              	.LASF146:
+ 3966 02e5 6465765F 		.ascii	"dev_tension_f\000"
+ 3966      74656E73 
+ 3966      696F6E5F 
+ 3966      6600
+ 3967              	.LASF61:
+ 3968 02f3 6D6F746F 		.ascii	"motor_handle_ratio\000"
+ 3968      725F6861 
+ 3968      6E646C65 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 82
+
+
+ 3968      5F726174 
+ 3968      696F00
+ 3969              	.LASF40:
+ 3970 0306 6B5F695F 		.ascii	"k_i_dl\000"
+ 3970      646C00
+ 3971              	.LASF123:
+ 3972 030d 63757272 		.ascii	"curr_pos\000"
+ 3972      5F706F73 
+ 3972      00
+ 3973              	.LASF121:
+ 3974 0316 6162735F 		.ascii	"abs_err_thr\000"
+ 3974      6572725F 
+ 3974      74687200 
+ 3975              	.LASF27:
+ 3976 0322 494E5055 		.ascii	"INPUT_MODE_EMG_FCFS\000"
+ 3976      545F4D4F 
+ 3976      44455F45 
+ 3976      4D475F46 
+ 3976      43465300 
+ 3977              	.LASF53:
+ 3978 0336 6D61785F 		.ascii	"max_step_neg\000"
+ 3978      73746570 
+ 3978      5F6E6567 
+ 3978      00
+ 3979              	.LASF11:
+ 3980 0343 75696E74 		.ascii	"uint8\000"
+ 3980      3800
+ 3981              	.LASF158:
+ 3982 0349 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Dropbox (workgroup)\\Personal\\"
+ 3982      73657273 
+ 3982      5C4D6174 
+ 3982      74696143 
+ 3982      505C4472 
+ 3983 0378 4D617474 		.ascii	"Mattia Poggiani\\FIRMWARES (local)\\SoftPro firmwar"
+ 3983      69612050 
+ 3983      6F676769 
+ 3983      616E695C 
+ 3983      4649524D 
+ 3984 03a9 65202850 		.ascii	"e (PSoC5)\\firmware.cydsn\000"
+ 3984      536F4335 
+ 3984      295C6669 
+ 3984      726D7761 
+ 3984      72652E63 
+ 3985              	.LASF3:
+ 3986 03c2 73686F72 		.ascii	"short unsigned int\000"
+ 3986      7420756E 
+ 3986      7369676E 
+ 3986      65642069 
+ 3986      6E7400
+ 3987              	.LASF139:
+ 3988 03d5 675F7265 		.ascii	"g_refNew\000"
+ 3988      664E6577 
+ 3988      00
+ 3989              	.LASF14:
+ 3990 03de 696E7438 		.ascii	"int8\000"
+ 3990      00
+ 3991              	.LASF159:
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 83
+
+
+ 3992 03e3 53485F69 		.ascii	"SH_input_mode\000"
+ 3992      6E707574 
+ 3992      5F6D6F64 
+ 3992      6500
+ 3993              	.LASF101:
+ 3994 03f1 76697274 		.ascii	"virtual_pos_friction\000"
+ 3994      75616C5F 
+ 3994      706F735F 
+ 3994      66726963 
+ 3994      74696F6E 
+ 3995              	.LASF51:
+ 3996 0406 706F735F 		.ascii	"pos_lim_inf\000"
+ 3996      6C696D5F 
+ 3996      696E6600 
+ 3997              	.LASF74:
+ 3998 0412 756E7573 		.ascii	"unused_bytes\000"
+ 3998      65645F62 
+ 3998      79746573 
+ 3998      00
+ 3999              	.LASF65:
+ 4000 041f 6D61696E 		.ascii	"maint_day\000"
+ 4000      745F6461 
+ 4000      7900
+ 4001              	.LASF24:
+ 4002 0429 494E5055 		.ascii	"INPUT_MODE_ENCODER3\000"
+ 4002      545F4D4F 
+ 4002      44455F45 
+ 4002      4E434F44 
+ 4002      45523300 
+ 4003              	.LASF76:
+ 4004 043d 706F7369 		.ascii	"position_hist\000"
+ 4004      74696F6E 
+ 4004      5F686973 
+ 4004      7400
+ 4005              	.LASF155:
+ 4006 044b 72657374 		.ascii	"rest_pos_curr_ref\000"
+ 4006      5F706F73 
+ 4006      5F637572 
+ 4006      725F7265 
+ 4006      6600
+ 4007              	.LASF143:
+ 4008 045d 63616C69 		.ascii	"calib\000"
+ 4008      6200
+ 4009              	.LASF85:
+ 4010 0463 494D555F 		.ascii	"IMU_conf\000"
+ 4010      636F6E66 
+ 4010      00
+ 4011              	.LASF131:
+ 4012 046c 696E7653 		.ascii	"invSqrt\000"
+ 4012      71727400 
+ 4013              	.LASF17:
+ 4014 0474 666C6F61 		.ascii	"float32\000"
+ 4014      74333200 
+ 4015              	.LASF22:
+ 4016 047c 73697A65 		.ascii	"sizetype\000"
+ 4016      74797065 
+ 4016      00
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 84
+
+
+ 4017              	.LASF21:
+ 4018 0485 6C6F6E67 		.ascii	"long double\000"
+ 4018      20646F75 
+ 4018      626C6500 
+ 4019              	.LASF152:
+ 4020 0491 72657374 		.ascii	"rest_enabled\000"
+ 4020      5F656E61 
+ 4020      626C6564 
+ 4020      00
+ 4021              	.LASF110:
+ 4022 049e 64697669 		.ascii	"divisor\000"
+ 4022      736F7200 
+ 4023              	.LASF141:
+ 4024 04a6 675F6D65 		.ascii	"g_mem\000"
+ 4024      6D00
+ 4025              	.LASF116:
+ 4026 04ac 63616C69 		.ascii	"calibration\000"
+ 4026      62726174 
+ 4026      696F6E00 
+ 4027              	.LASF36:
+ 4028 04b8 6B5F705F 		.ascii	"k_p_c\000"
+ 4028      6300
+ 4029              	.LASF68:
+ 4030 04be 72657374 		.ascii	"rest_pos\000"
+ 4030      5F706F73 
+ 4030      00
+ 4031              	.LASF52:
+ 4032 04c7 706F735F 		.ascii	"pos_lim_sup\000"
+ 4032      6C696D5F 
+ 4032      73757000 
+ 4033              	.LASF28:
+ 4034 04d3 494E5055 		.ascii	"INPUT_MODE_EMG_FCFS_ADV\000"
+ 4034      545F4D4F 
+ 4034      44455F45 
+ 4034      4D475F46 
+ 4034      4346535F 
+ 4035              	.LASF77:
+ 4036 04eb 63757272 		.ascii	"current_hist\000"
+ 4036      656E745F 
+ 4036      68697374 
+ 4036      00
+ 4037              	.LASF82:
+ 4038 04f8 63757272 		.ascii	"curr_time\000"
+ 4038      5F74696D 
+ 4038      6500
+ 4039              	.LASF45:
+ 4040 0502 61637469 		.ascii	"activ\000"
+ 4040      7600
+ 4041              	.LASF58:
+ 4042 0508 656D675F 		.ascii	"emg_max_value\000"
+ 4042      6D61785F 
+ 4042      76616C75 
+ 4042      6500
+ 4043              	.LASF119:
+ 4044 0516 666C6167 		.ascii	"flag_count\000"
+ 4044      5F636F75 
+ 4044      6E7400
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 85
+
+
+ 4045              	.LASF69:
+ 4046 0521 72657374 		.ascii	"rest_delay\000"
+ 4046      5F64656C 
+ 4046      617900
+ 4047              	.LASF95:
+ 4048 052c 52455345 		.ascii	"RESET\000"
+ 4048      5400
+ 4049              	.LASF88:
+ 4050 0532 6761696E 		.ascii	"gain\000"
+ 4050      00
+ 4051              	.LASF10:
+ 4052 0537 696E7433 		.ascii	"int32_t\000"
+ 4052      325F7400 
+ 4053              	.LASF103:
+ 4054 053f 63757272 		.ascii	"curr_estimate\000"
+ 4054      5F657374 
+ 4054      696D6174 
+ 4054      6500
+ 4055              	.LASF29:
+ 4056 054d 63757272 		.ascii	"curr\000"
+ 4056      00
+ 4057              	.LASF49:
+ 4058 0552 6D5F6D75 		.ascii	"m_mult\000"
+ 4058      6C7400
+ 4059              	.LASF149:
+ 4060 0559 656D675F 		.ascii	"emg_2_status\000"
+ 4060      325F7374 
+ 4060      61747573 
+ 4060      00
+ 4061              	.LASF136:
+ 4062 0566 76345F6E 		.ascii	"v4_normalize\000"
+ 4062      6F726D61 
+ 4062      6C697A65 
+ 4062      00
+ 4063              	.LASF86:
+ 4064 0573 73745F66 		.ascii	"st_filter\000"
+ 4064      696C7465 
+ 4064      7200
+ 4065              	.LASF79:
+ 4066 057d 77697265 		.ascii	"wire_disp\000"
+ 4066      5F646973 
+ 4066      7000
+ 4067              	.LASF35:
+ 4068 0587 666C6167 		.ascii	"flag\000"
+ 4068      00
+ 4069              	.LASF100:
+ 4070 058c 656D675F 		.ascii	"emg_status\000"
+ 4070      73746174 
+ 4070      757300
+ 4071              	.LASF55:
+ 4072 0597 63757272 		.ascii	"current_limit\000"
+ 4072      656E745F 
+ 4072      6C696D69 
+ 4072      7400
+ 4073              	.LASF67:
+ 4074 05a5 6D61696E 		.ascii	"maint_year\000"
+ 4074      745F7965 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 86
+
+
+ 4074      617200
+ 4075              	.LASF120:
+ 4076 05b0 66697273 		.ascii	"first_time\000"
+ 4076      745F7469 
+ 4076      6D6500
+ 4077              	.LASF89:
+ 4078 05bb 73745F63 		.ascii	"st_calib\000"
+ 4078      616C6962 
+ 4078      00
+ 4079              	.LASF112:
+ 4080 05c4 636F756E 		.ascii	"count_one\000"
+ 4080      745F6F6E 
+ 4080      6500
+ 4081              	.LASF75:
+ 4082 05ce 656D675F 		.ascii	"emg_counter\000"
+ 4082      636F756E 
+ 4082      74657200 
+ 4083              	.LASF15:
+ 4084 05da 696E7431 		.ascii	"int16\000"
+ 4084      3600
+ 4085              	.LASF50:
+ 4086 05e0 706F735F 		.ascii	"pos_lim_flag\000"
+ 4086      6C696D5F 
+ 4086      666C6167 
+ 4086      00
+ 4087              	.LASF151:
+ 4088 05ed 6D61696E 		.ascii	"maintenance_flag\000"
+ 4088      74656E61 
+ 4088      6E63655F 
+ 4088      666C6167 
+ 4088      00
+ 4089              	.LASF54:
+ 4090 05fe 6D61785F 		.ascii	"max_step_pos\000"
+ 4090      73746570 
+ 4090      5F706F73 
+ 4090      00
+ 4091              	.LASF90:
+ 4092 060b 656E6162 		.ascii	"enabled\000"
+ 4092      6C656400 
+ 4093              	.LASF78:
+ 4094 0613 72657374 		.ascii	"rest_counter\000"
+ 4094      5F636F75 
+ 4094      6E746572 
+ 4094      00
+ 4095              	.LASF145:
+ 4096 0620 6465765F 		.ascii	"dev_tension\000"
+ 4096      74656E73 
+ 4096      696F6E00 
+ 4097              	.LASF5:
+ 4098 062c 6C6F6E67 		.ascii	"long unsigned int\000"
+ 4098      20756E73 
+ 4098      69676E65 
+ 4098      6420696E 
+ 4098      7400
+ 4099              	.LASF62:
+ 4100 063e 61637469 		.ascii	"activate_pwm_rescaling\000"
+ 4100      76617465 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 87
+
+
+ 4100      5F70776D 
+ 4100      5F726573 
+ 4100      63616C69 
+ 4101              	.LASF20:
+ 4102 0655 63686172 		.ascii	"char\000"
+ 4102      00
+ 4103              	.LASF140:
+ 4104 065a 675F6D65 		.ascii	"g_meas\000"
+ 4104      617300
+ 4105              	.LASF127:
+ 4106 0661 6D6F6465 		.ascii	"mode\000"
+ 4106      00
+ 4107              	.LASF23:
+ 4108 0666 494E5055 		.ascii	"INPUT_MODE_EXTERNAL\000"
+ 4108      545F4D4F 
+ 4108      44455F45 
+ 4108      58544552 
+ 4108      4E414C00 
+ 4109              	.LASF41:
+ 4110 067a 6B5F645F 		.ascii	"k_d_dl\000"
+ 4110      646C00
+ 4111              	.LASF157:
+ 4112 0681 2E2E5C73 		.ascii	"..\\src\\utils.c\000"
+ 4112      72635C75 
+ 4112      74696C73 
+ 4112      2E6300
+ 4113              	.LASF9:
+ 4114 0690 5F5F696E 		.ascii	"__int32_t\000"
+ 4114      7433325F 
+ 4114      7400
+ 4115              	.LASF43:
+ 4116 069a 6B5F695F 		.ascii	"k_i_c_dl\000"
+ 4116      635F646C 
+ 4116      00
+ 4117              	.LASF72:
+ 4118 06a3 72657374 		.ascii	"rest_position_flag\000"
+ 4118      5F706F73 
+ 4118      6974696F 
+ 4118      6E5F666C 
+ 4118      616700
+ 4119              	.LASF37:
+ 4120 06b6 6B5F695F 		.ascii	"k_i_c\000"
+ 4120      6300
+ 4121              	.LASF1:
+ 4122 06bc 756E7369 		.ascii	"unsigned char\000"
+ 4122      676E6564 
+ 4122      20636861 
+ 4122      7200
+ 4123              	.LASF96:
+ 4124 06ca 44495343 		.ascii	"DISCARD\000"
+ 4124      41524400 
+ 4125              	.LASF105:
+ 4126 06d2 66696C74 		.ascii	"filter\000"
+ 4126      657200
+ 4127              	.LASF57:
+ 4128 06d9 656D675F 		.ascii	"emg_calibration_flag\000"
+ 4128      63616C69 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 88
+
+
+ 4128      62726174 
+ 4128      696F6E5F 
+ 4128      666C6167 
+ 4129              	.LASF38:
+ 4130 06ee 6B5F645F 		.ascii	"k_d_c\000"
+ 4130      6300
+ 4131              	.LASF63:
+ 4132 06f4 63757272 		.ascii	"curr_lookup\000"
+ 4132      5F6C6F6F 
+ 4132      6B757000 
+ 4133              	.LASF128:
+ 4134 0700 765F636F 		.ascii	"v_count\000"
+ 4134      756E7400 
+ 4135              	.LASF107:
+ 4136 0708 63686563 		.ascii	"check_enc_data\000"
+ 4136      6B5F656E 
+ 4136      635F6461 
+ 4136      746100
+ 4137              	.LASF99:
+ 4138 0717 57414954 		.ascii	"WAIT_EoC\000"
+ 4138      5F456F43 
+ 4138      00
+ 4139              	.LASF26:
+ 4140 0720 494E5055 		.ascii	"INPUT_MODE_EMG_INTEGRAL\000"
+ 4140      545F4D4F 
+ 4140      44455F45 
+ 4140      4D475F49 
+ 4140      4E544547 
+ 4141              	.LASF59:
+ 4142 0738 656D675F 		.ascii	"emg_speed\000"
+ 4142      73706565 
+ 4142      6400
+ 4143              	.LASF117:
+ 4144 0742 63686563 		.ascii	"check_rest_position\000"
+ 4144      6B5F7265 
+ 4144      73745F70 
+ 4144      6F736974 
+ 4144      696F6E00 
+ 4145              	.LASF44:
+ 4146 0756 6B5F645F 		.ascii	"k_d_c_dl\000"
+ 4146      635F646C 
+ 4146      00
+ 4147              	.LASF98:
+ 4148 075f 57414954 		.ascii	"WAIT\000"
+ 4148      00
+ 4149              	.LASF133:
+ 4150 0764 76335F6E 		.ascii	"v3_normalize\000"
+ 4150      6F726D61 
+ 4150      6C697A65 
+ 4150      00
+ 4151              	.LASF18:
+ 4152 0771 666C6F61 		.ascii	"float\000"
+ 4152      7400
+ 4153              	.LASF66:
+ 4154 0777 6D61696E 		.ascii	"maint_month\000"
+ 4154      745F6D6F 
+ 4154      6E746800 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cczHlDqa.s 			page 89
+
+
+ 4155              	.LASF92:
+ 4156 0783 73706565 		.ascii	"speed\000"
+ 4156      6400
+ 4157              	.LASF71:
+ 4158 0789 72657374 		.ascii	"rest_ratio\000"
+ 4158      5F726174 
+ 4158      696F00
+ 4159              	.LASF81:
+ 4160 0794 746F7461 		.ascii	"total_time_rest\000"
+ 4160      6C5F7469 
+ 4160      6D655F72 
+ 4160      65737400 
+ 4161              	.LASF60:
+ 4162 07a4 646F7562 		.ascii	"double_encoder_on_off\000"
+ 4162      6C655F65 
+ 4162      6E636F64 
+ 4162      65725F6F 
+ 4162      6E5F6F66 
+ 4163              	.LASF148:
+ 4164 07ba 656D675F 		.ascii	"emg_1_status\000"
+ 4164      315F7374 
+ 4164      61747573 
+ 4164      00
+ 4165              	.LASF113:
+ 4166 07c7 63616C63 		.ascii	"calc_turns_fcn\000"
+ 4166      5F747572 
+ 4166      6E735F66 
+ 4166      636E00
+ 4167              	.LASF34:
+ 4168 07d6 73745F6D 		.ascii	"st_mem\000"
+ 4168      656D00
+ 4169              	.LASF19:
+ 4170 07dd 646F7562 		.ascii	"double\000"
+ 4170      6C6500
+ 4171              	.LASF39:
+ 4172 07e4 6B5F705F 		.ascii	"k_p_dl\000"
+ 4172      646C00
+ 4173              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

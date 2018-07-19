@@ -1,0 +1,2997 @@
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"IMU_functions.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.ImusReset,"ax",%progbits
+  20              		.align	2
+  21              		.global	ImusReset
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	ImusReset, %function
+  25              	ImusReset:
+  26              	.LFB64:
+  27              		.file 1 "..\\src\\IMU_functions.c"
+   1:..\src/IMU_functions.c **** // ----------------------------------------------------------------------------
+   2:..\src/IMU_functions.c **** // BSD 3-Clause License
+   3:..\src/IMU_functions.c **** 
+   4:..\src/IMU_functions.c **** // Copyright (c) 2016, qbrobotics
+   5:..\src/IMU_functions.c **** // Copyright (c) 2017-2018, Centro "E.Piaggio"
+   6:..\src/IMU_functions.c **** // All rights reserved.
+   7:..\src/IMU_functions.c **** 
+   8:..\src/IMU_functions.c **** // Redistribution and use in source and binary forms, with or without
+   9:..\src/IMU_functions.c **** // modification, are permitted provided that the following conditions are met:
+  10:..\src/IMU_functions.c **** 
+  11:..\src/IMU_functions.c **** // * Redistributions of source code must retain the above copyright notice, this
+  12:..\src/IMU_functions.c **** //   list of conditions and the following disclaimer.
+  13:..\src/IMU_functions.c **** 
+  14:..\src/IMU_functions.c **** // * Redistributions in binary form must reproduce the above copyright notice,
+  15:..\src/IMU_functions.c **** //   this list of conditions and the following disclaimer in the documentation
+  16:..\src/IMU_functions.c **** //   and/or other materials provided with the distribution.
+  17:..\src/IMU_functions.c **** 
+  18:..\src/IMU_functions.c **** // * Neither the name of the copyright holder nor the names of its
+  19:..\src/IMU_functions.c **** //   contributors may be used to endorse or promote products derived from
+  20:..\src/IMU_functions.c **** //   this software without specific prior written permission.
+  21:..\src/IMU_functions.c **** 
+  22:..\src/IMU_functions.c **** // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  23:..\src/IMU_functions.c **** // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  24:..\src/IMU_functions.c **** // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  25:..\src/IMU_functions.c **** // DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  26:..\src/IMU_functions.c **** // FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  27:..\src/IMU_functions.c **** // DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  28:..\src/IMU_functions.c **** // SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  29:..\src/IMU_functions.c **** // CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  30:..\src/IMU_functions.c **** // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 2
+
+
+  31:..\src/IMU_functions.c **** // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  32:..\src/IMU_functions.c **** // POSSIBILITY OF SUCH DAMAGE.
+  33:..\src/IMU_functions.c **** // ----------------------------------------------------------------------------
+  34:..\src/IMU_functions.c **** 
+  35:..\src/IMU_functions.c **** /**
+  36:..\src/IMU_functions.c **** * \file         IMU_functions.c
+  37:..\src/IMU_functions.c **** *
+  38:..\src/IMU_functions.c **** * \brief        Implementation of IMU module functions.
+  39:..\src/IMU_functions.c **** * \date         February 01, 2018
+  40:..\src/IMU_functions.c **** * \author       _Centro "E.Piaggio"_
+  41:..\src/IMU_functions.c **** * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
+  42:..\src/IMU_functions.c **** * \copyright    (C) 2017-2018 Centro "E.Piaggio". All rights reserved.
+  43:..\src/IMU_functions.c **** */
+  44:..\src/IMU_functions.c **** 
+  45:..\src/IMU_functions.c **** #include "IMU_functions.h"
+  46:..\src/IMU_functions.c **** #include <SPI_IMU.h>
+  47:..\src/IMU_functions.c **** 
+  48:..\src/IMU_functions.c **** extern uint8 Accel[N_IMU_MAX][6];
+  49:..\src/IMU_functions.c **** extern uint8 Gyro[N_IMU_MAX][6];
+  50:..\src/IMU_functions.c **** extern uint8 Mag[N_IMU_MAX][6];
+  51:..\src/IMU_functions.c **** extern uint8 MagCal[N_IMU_MAX][3];
+  52:..\src/IMU_functions.c **** 
+  53:..\src/IMU_functions.c **** /*******************************************************************************
+  54:..\src/IMU_functions.c **** * Function Name: Imus Reset
+  55:..\src/IMU_functions.c **** *********************************************************************************/	
+  56:..\src/IMU_functions.c **** void ImusReset() {
+  28              		.loc 1 56 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              		.cfi_def_cfa_offset 4
+  35              		.cfi_offset 7, -4
+  36 0002 00AF     		add	r7, sp, #0
+  37              		.cfi_def_cfa_register 7
+  57:..\src/IMU_functions.c **** /*
+  58:..\src/IMU_functions.c ****     Opto_Pin_Write(0);
+  59:..\src/IMU_functions.c ****     CyDelay(10);
+  60:..\src/IMU_functions.c ****     Opto_Pin_Write(1);
+  61:..\src/IMU_functions.c ****     CyDelay(10);
+  62:..\src/IMU_functions.c ****     InitIMUgeneral();
+  63:..\src/IMU_functions.c **** 
+  64:..\src/IMU_functions.c ****     CyDelay(10);
+  65:..\src/IMU_functions.c ****     */
+  66:..\src/IMU_functions.c **** }
+  38              		.loc 1 66 0
+  39 0004 00BF     		nop
+  40 0006 BD46     		mov	sp, r7
+  41              		.cfi_def_cfa_register 13
+  42              		@ sp needed
+  43 0008 80BC     		pop	{r7}
+  44              		.cfi_restore 7
+  45              		.cfi_def_cfa_offset 0
+  46 000a 7047     		bx	lr
+  47              		.cfi_endproc
+  48              	.LFE64:
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 3
+
+
+  49              		.size	ImusReset, .-ImusReset
+  50              		.section	.text.InitIMU,"ax",%progbits
+  51              		.align	2
+  52              		.global	InitIMU
+  53              		.thumb
+  54              		.thumb_func
+  55              		.type	InitIMU, %function
+  56              	InitIMU:
+  57              	.LFB65:
+  67:..\src/IMU_functions.c **** 
+  68:..\src/IMU_functions.c **** /*******************************************************************************
+  69:..\src/IMU_functions.c **** * Function Name: IMU Initialization
+  70:..\src/IMU_functions.c **** *********************************************************************************/
+  71:..\src/IMU_functions.c **** void InitIMU(){	
+  58              		.loc 1 71 0
+  59              		.cfi_startproc
+  60              		@ args = 0, pretend = 0, frame = 0
+  61              		@ frame_needed = 1, uses_anonymous_args = 0
+  62              		@ link register save eliminated.
+  63 0000 80B4     		push	{r7}
+  64              		.cfi_def_cfa_offset 4
+  65              		.cfi_offset 7, -4
+  66 0002 00AF     		add	r7, sp, #0
+  67              		.cfi_def_cfa_register 7
+  72:..\src/IMU_functions.c ****   /*  
+  73:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_PWR_MGMT_1, 0x10); 
+  74:..\src/IMU_functions.c **** 	CyDelay(10);	
+  75:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_USER_CTRL, 0x20);  //I2C master enable - disable I2C (prima 0x30)
+  76:..\src/IMU_functions.c **** 	CyDelay(10);
+  77:..\src/IMU_functions.c ****     WriteControlRegister(MPU9250_CONFIG, 0x06); //Gyro & Temp Low Pass Filter 0x01 = 184Hz, 0x02 = 
+  78:..\src/IMU_functions.c ****     CyDelay(10);	
+  79:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_GYRO_CONFIG , GYRO_SF_2000); //Gyro full scale select 0x00=250°/s 0x
+  80:..\src/IMU_functions.c **** 	CyDelay(10);
+  81:..\src/IMU_functions.c ****     WriteControlRegister(MPU9250_ACCEL_CONFIG, ACC_SF_2G); // Acc full scale select 0x00 = 2g 0x08 
+  82:..\src/IMU_functions.c ****     CyDelay(10);
+  83:..\src/IMU_functions.c **** #ifdef SOMA    
+  84:..\src/IMU_functions.c ****     WriteControlRegister(MPU9250_ACCEL_CONFIG2, LP_ACC_FREQ_184);
+  85:..\src/IMU_functions.c **** #else
+  86:..\src/IMU_functions.c ****     WriteControlRegister(MPU9250_ACCEL_CONFIG2, LP_ACC_FREQ_10);
+  87:..\src/IMU_functions.c **** #endif    
+  88:..\src/IMU_functions.c ****     CyDelay(10);
+  89:..\src/IMU_functions.c **** 	//mag register
+  90:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_I2C_MST_CTRL, 0x0D); //set slave I2C speed
+  91:..\src/IMU_functions.c **** 	CyDelay(10);
+  92:..\src/IMU_functions.c **** 	//SLV0 (use to write)
+  93:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_I2C_SLV0_ADDR, 0x0C); //set compass address
+  94:..\src/IMU_functions.c **** 	CyDelay(10);			
+  95:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_I2C_SLV0_REG, AK8936_CNTL); //compass mode register
+  96:..\src/IMU_functions.c **** 	CyDelay(10);	
+  97:..\src/IMU_functions.c **** 	// Istruction used to read Compass
+  98:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_I2C_SLV0_D0, 0x16); //0x12 continuous mode1  0x16 continuous mode2
+  99:..\src/IMU_functions.c **** 	CyDelay(10);
+ 100:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_I2C_SLV0_CTRL, 0x81); //enable data from register + 1 bit to write
+ 101:..\src/IMU_functions.c **** 	CyDelay(10);
+ 102:..\src/IMU_functions.c **** 	//SLV0 (use to read)
+ 103:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_I2C_SLV0_ADDR, 0x8C); // RCR  | AK8963_address (0x0C) 
+ 104:..\src/IMU_functions.c **** 	CyDelay(10);
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 4
+
+
+ 105:..\src/IMU_functions.c **** 	// Istruction used to read Compass
+ 106:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_I2C_SLV0_REG, 0x03); // 0x03:start from Xout Low in case of calibrati
+ 107:..\src/IMU_functions.c **** 	CyDelay(10);
+ 108:..\src/IMU_functions.c **** 	// Istruction used to read Compass
+ 109:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_I2C_SLV0_CTRL, 0x8D); //How many bits read  SEMPRE DISPARI 0x8D era q
+ 110:..\src/IMU_functions.c **** 	CyDelay(10);
+ 111:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_PWR_MGMT_1, 0x00); 
+ 112:..\src/IMU_functions.c **** 	CyDelay(20);*/
+ 113:..\src/IMU_functions.c **** }	
+  68              		.loc 1 113 0
+  69 0004 00BF     		nop
+  70 0006 BD46     		mov	sp, r7
+  71              		.cfi_def_cfa_register 13
+  72              		@ sp needed
+  73 0008 80BC     		pop	{r7}
+  74              		.cfi_restore 7
+  75              		.cfi_def_cfa_offset 0
+  76 000a 7047     		bx	lr
+  77              		.cfi_endproc
+  78              	.LFE65:
+  79              		.size	InitIMU, .-InitIMU
+  80              		.section	.text.InitIMUMagCal,"ax",%progbits
+  81              		.align	2
+  82              		.global	InitIMUMagCal
+  83              		.thumb
+  84              		.thumb_func
+  85              		.type	InitIMUMagCal, %function
+  86              	InitIMUMagCal:
+  87              	.LFB66:
+ 114:..\src/IMU_functions.c **** 
+ 115:..\src/IMU_functions.c **** /*******************************************************************************
+ 116:..\src/IMU_functions.c **** * Function Name: IMU Mag Cal Initialization
+ 117:..\src/IMU_functions.c **** *********************************************************************************/
+ 118:..\src/IMU_functions.c **** void InitIMUMagCal(){	
+  88              		.loc 1 118 0
+  89              		.cfi_startproc
+  90              		@ args = 0, pretend = 0, frame = 0
+  91              		@ frame_needed = 1, uses_anonymous_args = 0
+  92              		@ link register save eliminated.
+  93 0000 80B4     		push	{r7}
+  94              		.cfi_def_cfa_offset 4
+  95              		.cfi_offset 7, -4
+  96 0002 00AF     		add	r7, sp, #0
+  97              		.cfi_def_cfa_register 7
+ 119:..\src/IMU_functions.c ****     /*
+ 120:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_PWR_MGMT_1, 0x10); 
+ 121:..\src/IMU_functions.c **** 	CyDelay(10);	
+ 122:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_USER_CTRL, 0x20);  //I2C master enable - disable I2C (prima 0x30)
+ 123:..\src/IMU_functions.c **** 	CyDelay(10);
+ 124:..\src/IMU_functions.c ****     WriteControlRegister(MPU9250_CONFIG, 0x06); //Gyro & Temp Low Pass Filter 0x01 = 184Hz, 0x02 = 
+ 125:..\src/IMU_functions.c ****     CyDelay(10);	
+ 126:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_GYRO_CONFIG , GYRO_SF_2000); //Gyro full scale select 0x00=250°/s 0x
+ 127:..\src/IMU_functions.c **** 	CyDelay(10);
+ 128:..\src/IMU_functions.c ****     WriteControlRegister(MPU9250_ACCEL_CONFIG, ACC_SF_2G); // Acc full scale select 0x00 = 2g 0x08 
+ 129:..\src/IMU_functions.c ****     CyDelay(10);
+ 130:..\src/IMU_functions.c ****     WriteControlRegister(MPU9250_ACCEL_CONFIG2, 0x05);
+ 131:..\src/IMU_functions.c ****     CyDelay(10);
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 5
+
+
+ 132:..\src/IMU_functions.c **** 	//mag register
+ 133:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_I2C_MST_CTRL, 0x0D); //set slave I2C speed
+ 134:..\src/IMU_functions.c **** 	CyDelay(10);
+ 135:..\src/IMU_functions.c **** 	//SLV0 (use to write)
+ 136:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_I2C_SLV0_ADDR, 0x0C); //set compass address
+ 137:..\src/IMU_functions.c **** 	CyDelay(10);			
+ 138:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_I2C_SLV0_REG, AK8936_CNTL); //compass mode register
+ 139:..\src/IMU_functions.c **** 	CyDelay(10);	
+ 140:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_I2C_SLV0_D0, 0x1F); //0x1F ROM access
+ 141:..\src/IMU_functions.c **** 	CyDelay(10);
+ 142:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_I2C_SLV0_CTRL, 0x81); //enable data from register + 1 bit to write
+ 143:..\src/IMU_functions.c **** 	CyDelay(10);
+ 144:..\src/IMU_functions.c **** 	//SLV0 (use to read)
+ 145:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_I2C_SLV0_ADDR, 0x8C); // RCR  | AK8963_address (0x0C) 
+ 146:..\src/IMU_functions.c **** 	CyDelay(10);
+ 147:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_I2C_SLV0_REG, 0x10); // 0x10:start from ASAX
+ 148:..\src/IMU_functions.c **** 	CyDelay(10);
+ 149:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_I2C_SLV0_CTRL, 0x83);
+ 150:..\src/IMU_functions.c **** 	CyDelay(10);
+ 151:..\src/IMU_functions.c **** 	WriteControlRegister(MPU9250_PWR_MGMT_1, 0x00); 
+ 152:..\src/IMU_functions.c **** 	CyDelay(20);*/
+ 153:..\src/IMU_functions.c **** }
+  98              		.loc 1 153 0
+  99 0004 00BF     		nop
+ 100 0006 BD46     		mov	sp, r7
+ 101              		.cfi_def_cfa_register 13
+ 102              		@ sp needed
+ 103 0008 80BC     		pop	{r7}
+ 104              		.cfi_restore 7
+ 105              		.cfi_def_cfa_offset 0
+ 106 000a 7047     		bx	lr
+ 107              		.cfi_endproc
+ 108              	.LFE66:
+ 109              		.size	InitIMUMagCal, .-InitIMUMagCal
+ 110              		.section	.text.ChipSelector,"ax",%progbits
+ 111              		.align	2
+ 112              		.global	ChipSelector
+ 113              		.thumb
+ 114              		.thumb_func
+ 115              		.type	ChipSelector, %function
+ 116              	ChipSelector:
+ 117              	.LFB67:
+ 154:..\src/IMU_functions.c **** 
+ 155:..\src/IMU_functions.c **** /********************************************************************************
+ 156:..\src/IMU_functions.c **** * Function Name: ChipSelector                                                   *
+ 157:..\src/IMU_functions.c **** *********************************************************************************/
+ 158:..\src/IMU_functions.c **** void ChipSelector(int n)
+ 159:..\src/IMU_functions.c **** {/*
+ 118              		.loc 1 159 0
+ 119              		.cfi_startproc
+ 120              		@ args = 0, pretend = 0, frame = 8
+ 121              		@ frame_needed = 1, uses_anonymous_args = 0
+ 122              		@ link register save eliminated.
+ 123 0000 80B4     		push	{r7}
+ 124              		.cfi_def_cfa_offset 4
+ 125              		.cfi_offset 7, -4
+ 126 0002 83B0     		sub	sp, sp, #12
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 6
+
+
+ 127              		.cfi_def_cfa_offset 16
+ 128 0004 00AF     		add	r7, sp, #0
+ 129              		.cfi_def_cfa_register 7
+ 130 0006 7860     		str	r0, [r7, #4]
+ 160:..\src/IMU_functions.c ****     Chip_Select_A_Write(15);
+ 161:..\src/IMU_functions.c ****     Chip_Select_B_Write(3);
+ 162:..\src/IMU_functions.c ****     
+ 163:..\src/IMU_functions.c ****     if(n<15)
+ 164:..\src/IMU_functions.c ****     	Chip_Select_A_Write(n);
+ 165:..\src/IMU_functions.c ****     if(n==15)
+ 166:..\src/IMU_functions.c ****         Chip_Select_B_Write(0);
+ 167:..\src/IMU_functions.c ****     if(n==16)
+ 168:..\src/IMU_functions.c ****         Chip_Select_B_Write(1);*/
+ 169:..\src/IMU_functions.c **** }
+ 131              		.loc 1 169 0
+ 132 0008 00BF     		nop
+ 133 000a 0C37     		adds	r7, r7, #12
+ 134              		.cfi_def_cfa_offset 4
+ 135 000c BD46     		mov	sp, r7
+ 136              		.cfi_def_cfa_register 13
+ 137              		@ sp needed
+ 138 000e 80BC     		pop	{r7}
+ 139              		.cfi_restore 7
+ 140              		.cfi_def_cfa_offset 0
+ 141 0010 7047     		bx	lr
+ 142              		.cfi_endproc
+ 143              	.LFE67:
+ 144              		.size	ChipSelector, .-ChipSelector
+ 145 0012 00BF     		.section	.text.InitIMUgeneral,"ax",%progbits
+ 146              		.align	2
+ 147              		.global	InitIMUgeneral
+ 148              		.thumb
+ 149              		.thumb_func
+ 150              		.type	InitIMUgeneral, %function
+ 151              	InitIMUgeneral:
+ 152              	.LFB68:
+ 170:..\src/IMU_functions.c **** 
+ 171:..\src/IMU_functions.c **** /********************************************************************************
+ 172:..\src/IMU_functions.c **** * Function Name: InitIMUGeneral                                                 *
+ 173:..\src/IMU_functions.c **** *********************************************************************************/
+ 174:..\src/IMU_functions.c **** void InitIMUgeneral()
+ 175:..\src/IMU_functions.c **** {/*
+ 153              		.loc 1 175 0
+ 154              		.cfi_startproc
+ 155              		@ args = 0, pretend = 0, frame = 0
+ 156              		@ frame_needed = 1, uses_anonymous_args = 0
+ 157              		@ link register save eliminated.
+ 158 0000 80B4     		push	{r7}
+ 159              		.cfi_def_cfa_offset 4
+ 160              		.cfi_offset 7, -4
+ 161 0002 00AF     		add	r7, sp, #0
+ 162              		.cfi_def_cfa_register 7
+ 176:..\src/IMU_functions.c ****     uint8 k_imu;
+ 177:..\src/IMU_functions.c ****     uint8 count = 0;
+ 178:..\src/IMU_functions.c ****     int IMU_ack;
+ 179:..\src/IMU_functions.c ****     int tmp[N_IMU_MAX];
+ 180:..\src/IMU_functions.c **** 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 7
+
+
+ 181:..\src/IMU_functions.c ****     // Initialize Memory Structure 
+ 182:..\src/IMU_functions.c ****     memset(&g_imu, 0, sizeof(struct st_imu));
+ 183:..\src/IMU_functions.c ****     memset(&IMU_connected, 0, sizeof(IMU_connected));
+ 184:..\src/IMU_functions.c **** 
+ 185:..\src/IMU_functions.c ****     // First ping to be sure to wakeup IMUs
+ 186:..\src/IMU_functions.c ****     for (k_imu=0; k_imu < N_IMU_MAX; k_imu++) 
+ 187:..\src/IMU_functions.c ****     {	
+ 188:..\src/IMU_functions.c **** 	    ChipSelector(k_imu);
+ 189:..\src/IMU_functions.c **** 	    CyDelay(10);
+ 190:..\src/IMU_functions.c **** 	    ReadControlRegister(MPU9250_WHO_AM_I);
+ 191:..\src/IMU_functions.c ****     }
+ 192:..\src/IMU_functions.c ****     
+ 193:..\src/IMU_functions.c ****     // Identify IMU connected
+ 194:..\src/IMU_functions.c ****     ChipSelector(0);
+ 195:..\src/IMU_functions.c ****     CyDelay(10);
+ 196:..\src/IMU_functions.c ****     IMU_ack = ReadControlRegister(MPU9250_WHO_AM_I);
+ 197:..\src/IMU_functions.c ****     IMU_ack = 0;
+ 198:..\src/IMU_functions.c ****     N_IMU_Connected = 0;    
+ 199:..\src/IMU_functions.c ****     for (k_imu = 0; k_imu < N_IMU_MAX; k_imu++) 
+ 200:..\src/IMU_functions.c ****     {      
+ 201:..\src/IMU_functions.c ****     	ChipSelector(k_imu);
+ 202:..\src/IMU_functions.c ****         CyDelay(10);
+ 203:..\src/IMU_functions.c ****         IMU_ack = ReadControlRegister(MPU9250_WHO_AM_I);
+ 204:..\src/IMU_functions.c ****         if (IMU_ack == 0x71) 
+ 205:..\src/IMU_functions.c ****         {
+ 206:..\src/IMU_functions.c ****             N_IMU_Connected++;
+ 207:..\src/IMU_functions.c ****             IMU_ack = 0;
+ 208:..\src/IMU_functions.c ****             tmp[k_imu] = 1;
+ 209:..\src/IMU_functions.c ****         }
+ 210:..\src/IMU_functions.c ****         else
+ 211:..\src/IMU_functions.c ****             tmp[k_imu] = 0;
+ 212:..\src/IMU_functions.c ****     }
+ 213:..\src/IMU_functions.c **** 
+ 214:..\src/IMU_functions.c ****     for(k_imu = 0; k_imu < N_IMU_MAX; k_imu++)
+ 215:..\src/IMU_functions.c ****     {
+ 216:..\src/IMU_functions.c ****         if(tmp[k_imu] == 1)
+ 217:..\src/IMU_functions.c ****         {
+ 218:..\src/IMU_functions.c ****             IMU_connected[count] = k_imu;
+ 219:..\src/IMU_functions.c ****             count++;
+ 220:..\src/IMU_functions.c ****         }
+ 221:..\src/IMU_functions.c ****     }
+ 222:..\src/IMU_functions.c ****             
+ 223:..\src/IMU_functions.c ****     // Standard Initialization of the IMU
+ 224:..\src/IMU_functions.c ****     Opto_Pin_Write(0);
+ 225:..\src/IMU_functions.c ****     CyDelay(10);
+ 226:..\src/IMU_functions.c ****     Opto_Pin_Write(1);
+ 227:..\src/IMU_functions.c ****     CyDelay(10);
+ 228:..\src/IMU_functions.c ****     for (k_imu=0; k_imu < N_IMU_MAX; k_imu++) 
+ 229:..\src/IMU_functions.c ****     {	
+ 230:..\src/IMU_functions.c **** 	    ChipSelector(k_imu);
+ 231:..\src/IMU_functions.c **** 	    CyDelay(10);
+ 232:..\src/IMU_functions.c **** 	    InitIMU();
+ 233:..\src/IMU_functions.c **** 	    CyDelay(10); 
+ 234:..\src/IMU_functions.c ****         InitIMUMagCal();      // Initialize IMU to Read MagCal Parameters
+ 235:..\src/IMU_functions.c **** 	    CyDelay(10); 
+ 236:..\src/IMU_functions.c ****     }
+ 237:..\src/IMU_functions.c ****     CyDelay(50);
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 8
+
+
+ 238:..\src/IMU_functions.c ****     
+ 239:..\src/IMU_functions.c ****     // Reading of MagCal Parameters
+ 240:..\src/IMU_functions.c ****     for (k_imu = 0; k_imu < N_IMU_MAX; k_imu++){
+ 241:..\src/IMU_functions.c ****         ChipSelector(k_imu);
+ 242:..\src/IMU_functions.c ****         ReadMagCal(k_imu); 
+ 243:..\src/IMU_functions.c ****     }
+ 244:..\src/IMU_functions.c ****     CyDelay(50);
+ 245:..\src/IMU_functions.c ****     
+ 246:..\src/IMU_functions.c ****     // Set Standard Read for the IMU
+ 247:..\src/IMU_functions.c ****     memset(&single_imu_size, 0, sizeof(single_imu_size));
+ 248:..\src/IMU_functions.c ****     imus_data_size = 1; //header    
+ 249:..\src/IMU_functions.c ****     for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++)
+ 250:..\src/IMU_functions.c ****     {
+ 251:..\src/IMU_functions.c ****         single_imu_size[IMU_connected[k_imu]] = 1 + 6*c_mem.IMU_conf[IMU_connected[k_imu]][0] + 6*c
+ 252:..\src/IMU_functions.c ****         imus_data_size = imus_data_size + single_imu_size[IMU_connected[k_imu]];
+ 253:..\src/IMU_functions.c ****     }
+ 254:..\src/IMU_functions.c ****     imus_data_size = imus_data_size + 1;    //checksum*/
+ 255:..\src/IMU_functions.c **** }
+ 163              		.loc 1 255 0
+ 164 0004 00BF     		nop
+ 165 0006 BD46     		mov	sp, r7
+ 166              		.cfi_def_cfa_register 13
+ 167              		@ sp needed
+ 168 0008 80BC     		pop	{r7}
+ 169              		.cfi_restore 7
+ 170              		.cfi_def_cfa_offset 0
+ 171 000a 7047     		bx	lr
+ 172              		.cfi_endproc
+ 173              	.LFE68:
+ 174              		.size	InitIMUgeneral, .-InitIMUgeneral
+ 175              		.section	.text.ReadIMU,"ax",%progbits
+ 176              		.align	2
+ 177              		.global	ReadIMU
+ 178              		.thumb
+ 179              		.thumb_func
+ 180              		.type	ReadIMU, %function
+ 181              	ReadIMU:
+ 182              	.LFB69:
+ 256:..\src/IMU_functions.c **** 
+ 257:..\src/IMU_functions.c **** /*******************************************************************************
+ 258:..\src/IMU_functions.c **** * Function Name: IMU Read
+ 259:..\src/IMU_functions.c **** *********************************************************************************/	
+ 260:..\src/IMU_functions.c **** void ReadIMU(int n)
+ 261:..\src/IMU_functions.c **** {/*
+ 183              		.loc 1 261 0
+ 184              		.cfi_startproc
+ 185              		@ args = 0, pretend = 0, frame = 8
+ 186              		@ frame_needed = 1, uses_anonymous_args = 0
+ 187              		@ link register save eliminated.
+ 188 0000 80B4     		push	{r7}
+ 189              		.cfi_def_cfa_offset 4
+ 190              		.cfi_offset 7, -4
+ 191 0002 83B0     		sub	sp, sp, #12
+ 192              		.cfi_def_cfa_offset 16
+ 193 0004 00AF     		add	r7, sp, #0
+ 194              		.cfi_def_cfa_register 7
+ 195 0006 7860     		str	r0, [r7, #4]
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 9
+
+
+ 262:..\src/IMU_functions.c ****     if (c_mem.IMU_conf[n][0]) ReadAcc(n);
+ 263:..\src/IMU_functions.c ****     if (c_mem.IMU_conf[n][1]) ReadGyro(n);
+ 264:..\src/IMU_functions.c ****     if (c_mem.IMU_conf[n][2]) ReadMag(n);
+ 265:..\src/IMU_functions.c ****     if (c_mem.IMU_conf[n][3]) ReadQuat(n);
+ 266:..\src/IMU_functions.c ****     if (c_mem.IMU_conf[n][4]) ReadTemp(n);*/
+ 267:..\src/IMU_functions.c **** }
+ 196              		.loc 1 267 0
+ 197 0008 00BF     		nop
+ 198 000a 0C37     		adds	r7, r7, #12
+ 199              		.cfi_def_cfa_offset 4
+ 200 000c BD46     		mov	sp, r7
+ 201              		.cfi_def_cfa_register 13
+ 202              		@ sp needed
+ 203 000e 80BC     		pop	{r7}
+ 204              		.cfi_restore 7
+ 205              		.cfi_def_cfa_offset 0
+ 206 0010 7047     		bx	lr
+ 207              		.cfi_endproc
+ 208              	.LFE69:
+ 209              		.size	ReadIMU, .-ReadIMU
+ 210 0012 00BF     		.section	.text.ReadAcc,"ax",%progbits
+ 211              		.align	2
+ 212              		.global	ReadAcc
+ 213              		.thumb
+ 214              		.thumb_func
+ 215              		.type	ReadAcc, %function
+ 216              	ReadAcc:
+ 217              	.LFB70:
+ 268:..\src/IMU_functions.c **** 
+ 269:..\src/IMU_functions.c **** /*******************************************************************************
+ 270:..\src/IMU_functions.c **** * Function Name: Read Acc's Data of IMU n
+ 271:..\src/IMU_functions.c **** *********************************************************************************/
+ 272:..\src/IMU_functions.c **** void ReadAcc(int n)
+ 273:..\src/IMU_functions.c **** {/*
+ 218              		.loc 1 273 0
+ 219              		.cfi_startproc
+ 220              		@ args = 0, pretend = 0, frame = 8
+ 221              		@ frame_needed = 1, uses_anonymous_args = 0
+ 222              		@ link register save eliminated.
+ 223 0000 80B4     		push	{r7}
+ 224              		.cfi_def_cfa_offset 4
+ 225              		.cfi_offset 7, -4
+ 226 0002 83B0     		sub	sp, sp, #12
+ 227              		.cfi_def_cfa_offset 16
+ 228 0004 00AF     		add	r7, sp, #0
+ 229              		.cfi_def_cfa_register 7
+ 230 0006 7860     		str	r0, [r7, #4]
+ 274:..\src/IMU_functions.c **** 	uint8 low=0, high=0;
+ 275:..\src/IMU_functions.c **** 	
+ 276:..\src/IMU_functions.c **** 	int row = n;
+ 277:..\src/IMU_functions.c **** 	
+ 278:..\src/IMU_functions.c **** 	//read X
+ 279:..\src/IMU_functions.c ****     low=ReadControlRegister(MPU9250_ACCEL_XOUT_L);
+ 280:..\src/IMU_functions.c ****     SPI_delay();
+ 281:..\src/IMU_functions.c ****     high=ReadControlRegister(MPU9250_ACCEL_XOUT_H);
+ 282:..\src/IMU_functions.c ****     SPI_delay();
+ 283:..\src/IMU_functions.c ****     
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 10
+
+
+ 284:..\src/IMU_functions.c **** 	Accel[row][0] = high; 
+ 285:..\src/IMU_functions.c **** 	Accel[row][1] = low; 
+ 286:..\src/IMU_functions.c **** 	low=0, high=0;
+ 287:..\src/IMU_functions.c **** 			
+ 288:..\src/IMU_functions.c **** 	//read Y
+ 289:..\src/IMU_functions.c ****     low=ReadControlRegister(MPU9250_ACCEL_YOUT_L);
+ 290:..\src/IMU_functions.c ****     SPI_delay();
+ 291:..\src/IMU_functions.c **** 	high=ReadControlRegister(MPU9250_ACCEL_YOUT_H);
+ 292:..\src/IMU_functions.c ****     SPI_delay();
+ 293:..\src/IMU_functions.c **** 
+ 294:..\src/IMU_functions.c **** 	Accel[row][2] = high; 
+ 295:..\src/IMU_functions.c **** 	Accel[row][3] = low; 
+ 296:..\src/IMU_functions.c **** 	low=0, high=0;
+ 297:..\src/IMU_functions.c **** 		
+ 298:..\src/IMU_functions.c **** 	//read Z
+ 299:..\src/IMU_functions.c ****     low=ReadControlRegister(MPU9250_ACCEL_ZOUT_L);
+ 300:..\src/IMU_functions.c ****     SPI_delay();
+ 301:..\src/IMU_functions.c ****     high=ReadControlRegister(MPU9250_ACCEL_ZOUT_H);
+ 302:..\src/IMU_functions.c ****     SPI_delay();
+ 303:..\src/IMU_functions.c ****     
+ 304:..\src/IMU_functions.c **** 	Accel[row][4] = high; 
+ 305:..\src/IMU_functions.c **** 	Accel[row][5] = low;
+ 306:..\src/IMU_functions.c **** 	low=0, high=0;*/
+ 307:..\src/IMU_functions.c **** }
+ 231              		.loc 1 307 0
+ 232 0008 00BF     		nop
+ 233 000a 0C37     		adds	r7, r7, #12
+ 234              		.cfi_def_cfa_offset 4
+ 235 000c BD46     		mov	sp, r7
+ 236              		.cfi_def_cfa_register 13
+ 237              		@ sp needed
+ 238 000e 80BC     		pop	{r7}
+ 239              		.cfi_restore 7
+ 240              		.cfi_def_cfa_offset 0
+ 241 0010 7047     		bx	lr
+ 242              		.cfi_endproc
+ 243              	.LFE70:
+ 244              		.size	ReadAcc, .-ReadAcc
+ 245 0012 00BF     		.section	.text.ReadGyro,"ax",%progbits
+ 246              		.align	2
+ 247              		.global	ReadGyro
+ 248              		.thumb
+ 249              		.thumb_func
+ 250              		.type	ReadGyro, %function
+ 251              	ReadGyro:
+ 252              	.LFB71:
+ 308:..\src/IMU_functions.c **** 
+ 309:..\src/IMU_functions.c **** /*******************************************************************************
+ 310:..\src/IMU_functions.c **** * Function Name: Read Gyro's Data of IMU n
+ 311:..\src/IMU_functions.c **** *********************************************************************************/
+ 312:..\src/IMU_functions.c **** void ReadGyro(int n){
+ 253              		.loc 1 312 0
+ 254              		.cfi_startproc
+ 255              		@ args = 0, pretend = 0, frame = 16
+ 256              		@ frame_needed = 1, uses_anonymous_args = 0
+ 257              		@ link register save eliminated.
+ 258 0000 80B4     		push	{r7}
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 11
+
+
+ 259              		.cfi_def_cfa_offset 4
+ 260              		.cfi_offset 7, -4
+ 261 0002 85B0     		sub	sp, sp, #20
+ 262              		.cfi_def_cfa_offset 24
+ 263 0004 00AF     		add	r7, sp, #0
+ 264              		.cfi_def_cfa_register 7
+ 265 0006 7860     		str	r0, [r7, #4]
+ 313:..\src/IMU_functions.c **** 	uint8 low=0, high=0;
+ 266              		.loc 1 313 0
+ 267 0008 0023     		movs	r3, #0
+ 268 000a FB73     		strb	r3, [r7, #15]
+ 269 000c 0023     		movs	r3, #0
+ 270 000e BB73     		strb	r3, [r7, #14]
+ 314:..\src/IMU_functions.c ****     /*
+ 315:..\src/IMU_functions.c **** 	int row = n;
+ 316:..\src/IMU_functions.c **** 	
+ 317:..\src/IMU_functions.c **** 	//read X
+ 318:..\src/IMU_functions.c **** 	low=ReadControlRegister(MPU9250_GYRO_XOUT_L);
+ 319:..\src/IMU_functions.c ****     SPI_delay();
+ 320:..\src/IMU_functions.c **** 	high=ReadControlRegister(MPU9250_GYRO_XOUT_H);
+ 321:..\src/IMU_functions.c ****     SPI_delay();
+ 322:..\src/IMU_functions.c ****     
+ 323:..\src/IMU_functions.c **** 	Gyro[row][0] = high; 
+ 324:..\src/IMU_functions.c **** 	Gyro[row][1] = low;
+ 325:..\src/IMU_functions.c **** 	low=0, high=0;
+ 326:..\src/IMU_functions.c ****     
+ 327:..\src/IMU_functions.c **** 	//read Y
+ 328:..\src/IMU_functions.c **** 	low=ReadControlRegister(MPU9250_GYRO_YOUT_L);
+ 329:..\src/IMU_functions.c ****     SPI_delay();
+ 330:..\src/IMU_functions.c **** 	high=ReadControlRegister(MPU9250_GYRO_YOUT_H);
+ 331:..\src/IMU_functions.c ****     SPI_delay();
+ 332:..\src/IMU_functions.c ****     
+ 333:..\src/IMU_functions.c **** 	Gyro[row][2] = high; 
+ 334:..\src/IMU_functions.c **** 	Gyro[row][3] = low;
+ 335:..\src/IMU_functions.c **** 	low=0, high=0;
+ 336:..\src/IMU_functions.c **** 
+ 337:..\src/IMU_functions.c **** 	//read Z
+ 338:..\src/IMU_functions.c ****     low=ReadControlRegister(MPU9250_GYRO_ZOUT_L);
+ 339:..\src/IMU_functions.c ****     SPI_delay();
+ 340:..\src/IMU_functions.c **** 	high=ReadControlRegister(MPU9250_GYRO_ZOUT_H);
+ 341:..\src/IMU_functions.c ****     SPI_delay();
+ 342:..\src/IMU_functions.c ****     
+ 343:..\src/IMU_functions.c **** 	Gyro[row][4] = high; 
+ 344:..\src/IMU_functions.c **** 	Gyro[row][5] = low;        
+ 345:..\src/IMU_functions.c **** 
+ 346:..\src/IMU_functions.c **** 	low=0, high=0;*/
+ 347:..\src/IMU_functions.c **** }
+ 271              		.loc 1 347 0
+ 272 0010 00BF     		nop
+ 273 0012 1437     		adds	r7, r7, #20
+ 274              		.cfi_def_cfa_offset 4
+ 275 0014 BD46     		mov	sp, r7
+ 276              		.cfi_def_cfa_register 13
+ 277              		@ sp needed
+ 278 0016 80BC     		pop	{r7}
+ 279              		.cfi_restore 7
+ 280              		.cfi_def_cfa_offset 0
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 12
+
+
+ 281 0018 7047     		bx	lr
+ 282              		.cfi_endproc
+ 283              	.LFE71:
+ 284              		.size	ReadGyro, .-ReadGyro
+ 285 001a 00BF     		.section	.text.ReadMag,"ax",%progbits
+ 286              		.align	2
+ 287              		.global	ReadMag
+ 288              		.thumb
+ 289              		.thumb_func
+ 290              		.type	ReadMag, %function
+ 291              	ReadMag:
+ 292              	.LFB72:
+ 348:..\src/IMU_functions.c **** 
+ 349:..\src/IMU_functions.c **** /*******************************************************************************
+ 350:..\src/IMU_functions.c **** * Function Name: Read Compas' Data of IMU n
+ 351:..\src/IMU_functions.c **** *********************************************************************************/
+ 352:..\src/IMU_functions.c **** void ReadMag(int n){
+ 293              		.loc 1 352 0
+ 294              		.cfi_startproc
+ 295              		@ args = 0, pretend = 0, frame = 8
+ 296              		@ frame_needed = 1, uses_anonymous_args = 0
+ 297              		@ link register save eliminated.
+ 298 0000 80B4     		push	{r7}
+ 299              		.cfi_def_cfa_offset 4
+ 300              		.cfi_offset 7, -4
+ 301 0002 83B0     		sub	sp, sp, #12
+ 302              		.cfi_def_cfa_offset 16
+ 303 0004 00AF     		add	r7, sp, #0
+ 304              		.cfi_def_cfa_register 7
+ 305 0006 7860     		str	r0, [r7, #4]
+ 353:..\src/IMU_functions.c **** 	/*
+ 354:..\src/IMU_functions.c **** 	uint8 low, high;
+ 355:..\src/IMU_functions.c **** 	int row = n;	
+ 356:..\src/IMU_functions.c **** 	//read X
+ 357:..\src/IMU_functions.c **** 	low = ReadControlRegister(MPU9250_EXT_SENS_DATA_00);
+ 358:..\src/IMU_functions.c ****     SPI_delay();
+ 359:..\src/IMU_functions.c **** 	high = ReadControlRegister(MPU9250_EXT_SENS_DATA_01);		
+ 360:..\src/IMU_functions.c ****     SPI_delay();
+ 361:..\src/IMU_functions.c ****     
+ 362:..\src/IMU_functions.c **** 	Mag[row][0] = high; 
+ 363:..\src/IMU_functions.c **** 	Mag[row][1] = low;
+ 364:..\src/IMU_functions.c **** 	low=0, high=0;
+ 365:..\src/IMU_functions.c ****     
+ 366:..\src/IMU_functions.c **** 	//read Y
+ 367:..\src/IMU_functions.c **** 	low = ReadControlRegister(MPU9250_EXT_SENS_DATA_02);
+ 368:..\src/IMU_functions.c ****     SPI_delay();
+ 369:..\src/IMU_functions.c **** 	high = ReadControlRegister(MPU9250_EXT_SENS_DATA_03);		
+ 370:..\src/IMU_functions.c ****     SPI_delay();
+ 371:..\src/IMU_functions.c ****     
+ 372:..\src/IMU_functions.c **** 	Mag[row][2] = high; 
+ 373:..\src/IMU_functions.c **** 	Mag[row][3] = low;
+ 374:..\src/IMU_functions.c **** 	low=0, high=0;
+ 375:..\src/IMU_functions.c ****     
+ 376:..\src/IMU_functions.c **** 	//read Z
+ 377:..\src/IMU_functions.c **** 	low = ReadControlRegister(MPU9250_EXT_SENS_DATA_04);
+ 378:..\src/IMU_functions.c ****     SPI_delay();
+ 379:..\src/IMU_functions.c **** 	high = ReadControlRegister(MPU9250_EXT_SENS_DATA_05);
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 13
+
+
+ 380:..\src/IMU_functions.c ****     SPI_delay();
+ 381:..\src/IMU_functions.c **** 		
+ 382:..\src/IMU_functions.c **** 	Mag[row][4] = high; 
+ 383:..\src/IMU_functions.c **** 	Mag[row][5] = low;
+ 384:..\src/IMU_functions.c **** 	low=0, high=0;*/
+ 385:..\src/IMU_functions.c **** }
+ 306              		.loc 1 385 0
+ 307 0008 00BF     		nop
+ 308 000a 0C37     		adds	r7, r7, #12
+ 309              		.cfi_def_cfa_offset 4
+ 310 000c BD46     		mov	sp, r7
+ 311              		.cfi_def_cfa_register 13
+ 312              		@ sp needed
+ 313 000e 80BC     		pop	{r7}
+ 314              		.cfi_restore 7
+ 315              		.cfi_def_cfa_offset 0
+ 316 0010 7047     		bx	lr
+ 317              		.cfi_endproc
+ 318              	.LFE72:
+ 319              		.size	ReadMag, .-ReadMag
+ 320 0012 00BF     		.section	.text.ReadMagCal,"ax",%progbits
+ 321              		.align	2
+ 322              		.global	ReadMagCal
+ 323              		.thumb
+ 324              		.thumb_func
+ 325              		.type	ReadMagCal, %function
+ 326              	ReadMagCal:
+ 327              	.LFB73:
+ 386:..\src/IMU_functions.c **** 
+ 387:..\src/IMU_functions.c **** /********************************************************************************
+ 388:..\src/IMU_functions.c **** * Function Name: ReadMagCal
+ 389:..\src/IMU_functions.c **** *********************************************************************************/
+ 390:..\src/IMU_functions.c **** void ReadMagCal(int n){
+ 328              		.loc 1 390 0
+ 329              		.cfi_startproc
+ 330              		@ args = 0, pretend = 0, frame = 8
+ 331              		@ frame_needed = 1, uses_anonymous_args = 0
+ 332              		@ link register save eliminated.
+ 333 0000 80B4     		push	{r7}
+ 334              		.cfi_def_cfa_offset 4
+ 335              		.cfi_offset 7, -4
+ 336 0002 83B0     		sub	sp, sp, #12
+ 337              		.cfi_def_cfa_offset 16
+ 338 0004 00AF     		add	r7, sp, #0
+ 339              		.cfi_def_cfa_register 7
+ 340 0006 7860     		str	r0, [r7, #4]
+ 391:..\src/IMU_functions.c **** 	/*
+ 392:..\src/IMU_functions.c ****     uint8 read = 0; 
+ 393:..\src/IMU_functions.c **** 	int row = n;	
+ 394:..\src/IMU_functions.c **** 	//read X
+ 395:..\src/IMU_functions.c **** 	read = ReadControlRegister(MPU9250_EXT_SENS_DATA_00);
+ 396:..\src/IMU_functions.c ****     MagCal[row][0] = read; 
+ 397:..\src/IMU_functions.c ****     read = 0;
+ 398:..\src/IMU_functions.c ****     
+ 399:..\src/IMU_functions.c **** 	//read Y
+ 400:..\src/IMU_functions.c **** 	read = ReadControlRegister(MPU9250_EXT_SENS_DATA_01);			
+ 401:..\src/IMU_functions.c **** 	MagCal[row][1] = read; 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 14
+
+
+ 402:..\src/IMU_functions.c **** 	read = 0;
+ 403:..\src/IMU_functions.c ****     
+ 404:..\src/IMU_functions.c **** 	//read Z
+ 405:..\src/IMU_functions.c **** 	read = ReadControlRegister(MPU9250_EXT_SENS_DATA_02);			
+ 406:..\src/IMU_functions.c **** 	MagCal[row][2] = read; 
+ 407:..\src/IMU_functions.c **** 	read = 0;
+ 408:..\src/IMU_functions.c ****     */
+ 409:..\src/IMU_functions.c **** }
+ 341              		.loc 1 409 0
+ 342 0008 00BF     		nop
+ 343 000a 0C37     		adds	r7, r7, #12
+ 344              		.cfi_def_cfa_offset 4
+ 345 000c BD46     		mov	sp, r7
+ 346              		.cfi_def_cfa_register 13
+ 347              		@ sp needed
+ 348 000e 80BC     		pop	{r7}
+ 349              		.cfi_restore 7
+ 350              		.cfi_def_cfa_offset 0
+ 351 0010 7047     		bx	lr
+ 352              		.cfi_endproc
+ 353              	.LFE73:
+ 354              		.size	ReadMagCal, .-ReadMagCal
+ 355 0012 00BF     		.section	.text.ReadQuat,"ax",%progbits
+ 356              		.align	2
+ 357              		.global	ReadQuat
+ 358              		.thumb
+ 359              		.thumb_func
+ 360              		.type	ReadQuat, %function
+ 361              	ReadQuat:
+ 362              	.LFB74:
+ 410:..\src/IMU_functions.c ****     
+ 411:..\src/IMU_functions.c **** /*******************************************************************************
+ 412:..\src/IMU_functions.c **** * Function Name: Read Quaternion of IMU n
+ 413:..\src/IMU_functions.c **** *********************************************************************************/
+ 414:..\src/IMU_functions.c **** void ReadQuat(int n)
+ 415:..\src/IMU_functions.c **** {/*
+ 363              		.loc 1 415 0
+ 364              		.cfi_startproc
+ 365              		@ args = 0, pretend = 0, frame = 8
+ 366              		@ frame_needed = 1, uses_anonymous_args = 0
+ 367              		@ link register save eliminated.
+ 368 0000 80B4     		push	{r7}
+ 369              		.cfi_def_cfa_offset 4
+ 370              		.cfi_offset 7, -4
+ 371 0002 83B0     		sub	sp, sp, #12
+ 372              		.cfi_def_cfa_offset 16
+ 373 0004 00AF     		add	r7, sp, #0
+ 374              		.cfi_def_cfa_register 7
+ 375 0006 7860     		str	r0, [r7, #4]
+ 416:..\src/IMU_functions.c **** 	uint8 i=0;	
+ 417:..\src/IMU_functions.c ****     int16 var_h;
+ 418:..\src/IMU_functions.c ****     float qd0,qd1,qd2,qd3;        
+ 419:..\src/IMU_functions.c ****     float aP[3]; //, fa[3];
+ 420:..\src/IMU_functions.c ****     float Napla[4],g[4],qL[4];
+ 421:..\src/IMU_functions.c ****     float time = 0;
+ 422:..\src/IMU_functions.c ****         
+ 423:..\src/IMU_functions.c ****     if (N_IMU_Connected == 1) {
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 15
+
+
+ 424:..\src/IMU_functions.c ****         // Compute quaternion only if 1 IMU is connected
+ 425:..\src/IMU_functions.c ****         
+ 426:..\src/IMU_functions.c ****         if (!c_mem.IMU_conf[n][0]) ReadAcc(n);
+ 427:..\src/IMU_functions.c ****         if (!c_mem.IMU_conf[n][1]) ReadGyro(n);
+ 428:..\src/IMU_functions.c ****         
+ 429:..\src/IMU_functions.c ****         // assume cycle time is the same of last function_scheduler execution,
+ 430:..\src/IMU_functions.c ****         // without adding another counter
+ 431:..\src/IMU_functions.c ****         time = (float)((uint32)timer_value0 - (uint32)timer_value) / 1000000.0;
+ 432:..\src/IMU_functions.c ****         
+ 433:..\src/IMU_functions.c ****         // how N sees P; N is 'Earth' equivalent, P is for sensor
+ 434:..\src/IMU_functions.c ****         // e.g. N = imu1, P = imu0, how imu1 sees imu0
+ 435:..\src/IMU_functions.c **** 
+ 436:..\src/IMU_functions.c ****         var_h = Accel[n][0];
+ 437:..\src/IMU_functions.c ****         aP[0] = (int16)(var_h << 8 | Accel[n][1]); 
+ 438:..\src/IMU_functions.c ****         var_h = Accel[n][2];
+ 439:..\src/IMU_functions.c ****         aP[1] = (int16)(var_h << 8 | Accel[n][3]); 
+ 440:..\src/IMU_functions.c ****         var_h = Accel[n][4];
+ 441:..\src/IMU_functions.c ****         aP[2] = (int16)(var_h << 8 | Accel[n][5]);
+ 442:..\src/IMU_functions.c ****         
+ 443:..\src/IMU_functions.c ****         g[0] = 0;
+ 444:..\src/IMU_functions.c ****         var_h = Gyro[n][0];
+ 445:..\src/IMU_functions.c ****         g[1] = ((int16)(var_h << 8 | Gyro[n][1]))*TICK2GYRO;
+ 446:..\src/IMU_functions.c ****         if ( fabs(g[1]) < GYRO_THR ) g[1] = 0;
+ 447:..\src/IMU_functions.c ****         var_h = Gyro[n][2];
+ 448:..\src/IMU_functions.c ****         g[2] = ((int16)(var_h << 8 | Gyro[n][3]))*TICK2GYRO; 
+ 449:..\src/IMU_functions.c ****         if ( fabs(g[2]) < GYRO_THR ) g[2] = 0;
+ 450:..\src/IMU_functions.c ****         var_h = Gyro[n][4];
+ 451:..\src/IMU_functions.c ****         g[3] = ((int16)(var_h << 8 | Gyro[n][5]))*TICK2GYRO;
+ 452:..\src/IMU_functions.c ****         if ( fabs(g[3]) < GYRO_THR ) g[3] = 0;
+ 453:..\src/IMU_functions.c ****         
+ 454:..\src/IMU_functions.c ****         // Normalize to 1
+ 455:..\src/IMU_functions.c ****         v3_normalize(aP);
+ 456:..\src/IMU_functions.c ****         
+ 457:..\src/IMU_functions.c ****         // Current quaternion assignment
+ 458:..\src/IMU_functions.c ****         qL[0] = Quat[0];
+ 459:..\src/IMU_functions.c ****         qL[1] = Quat[1];
+ 460:..\src/IMU_functions.c ****         qL[2] = Quat[2];
+ 461:..\src/IMU_functions.c ****         qL[3] = Quat[3];   
+ 462:..\src/IMU_functions.c ****         
+ 463:..\src/IMU_functions.c ****         // Napla computation
+ 464:..\src/IMU_functions.c ****         Napla[0] = (-qL[2]*((2*(qL[1]*qL[3]-qL[0]*qL[2]) - aP[0])) + qL[1]*((2*(qL[0]*qL[1] + qL[2]
+ 465:..\src/IMU_functions.c ****         Napla[1] = (qL[3]*((2*(qL[1]*qL[3]-qL[0]*qL[2]) - aP[0])) + qL[0]*((2*(qL[0]*qL[1] + qL[2]*
+ 466:..\src/IMU_functions.c ****         Napla[2] = (-qL[0]*((2*(qL[1]*qL[3]-qL[0]*qL[2]) - aP[0])) +qL[3]*((2*(qL[0]*qL[1] + qL[2]*
+ 467:..\src/IMU_functions.c ****         Napla[3] = (qL[1]*((2*(qL[1]*qL[3]-qL[0]*qL[2]) - aP[0])) + qL[2]*((2*(qL[0]*qL[1] + qL[2]*
+ 468:..\src/IMU_functions.c ****         
+ 469:..\src/IMU_functions.c ****         qd0 = 0.5*(-(qL[1]*g[1] + qL[2]*g[2] + qL[3]*g[3])) - Napla[0];
+ 470:..\src/IMU_functions.c ****         qd1 = 0.5*(qL[0]*g[1] + (qL[2]*g[3] - qL[3]*g[2])) - Napla[1];
+ 471:..\src/IMU_functions.c ****         qd2 = 0.5*(qL[0]*g[2] + (qL[3]*g[1] - qL[1]*g[3])) - Napla[2];
+ 472:..\src/IMU_functions.c ****         qd3 = 0.5*(qL[0]*g[3] + (qL[1]*g[2] - qL[2]*g[1])) - Napla[3];
+ 473:..\src/IMU_functions.c ****                 
+ 474:..\src/IMU_functions.c ****         qL[0] = qL[0] + qd0*time;
+ 475:..\src/IMU_functions.c ****         qL[1] = qL[1] + qd1*time;
+ 476:..\src/IMU_functions.c ****         qL[2] = qL[2] + qd2*time;
+ 477:..\src/IMU_functions.c ****         qL[3] = qL[3] + qd3*time;
+ 478:..\src/IMU_functions.c ****         v4_normalize(qL);
+ 479:..\src/IMU_functions.c ****         
+ 480:..\src/IMU_functions.c ****         // Quaternion update      
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 16
+
+
+ 481:..\src/IMU_functions.c ****         Quat[0] = qL[0];
+ 482:..\src/IMU_functions.c ****         Quat[1] = qL[1];
+ 483:..\src/IMU_functions.c ****         Quat[2] = qL[2];
+ 484:..\src/IMU_functions.c ****         Quat[3] = qL[3];
+ 485:..\src/IMU_functions.c ****     }
+ 486:..\src/IMU_functions.c ****     else {
+ 487:..\src/IMU_functions.c ****         return;
+ 488:..\src/IMU_functions.c ****     }*/
+ 489:..\src/IMU_functions.c **** }
+ 376              		.loc 1 489 0
+ 377 0008 00BF     		nop
+ 378 000a 0C37     		adds	r7, r7, #12
+ 379              		.cfi_def_cfa_offset 4
+ 380 000c BD46     		mov	sp, r7
+ 381              		.cfi_def_cfa_register 13
+ 382              		@ sp needed
+ 383 000e 80BC     		pop	{r7}
+ 384              		.cfi_restore 7
+ 385              		.cfi_def_cfa_offset 0
+ 386 0010 7047     		bx	lr
+ 387              		.cfi_endproc
+ 388              	.LFE74:
+ 389              		.size	ReadQuat, .-ReadQuat
+ 390 0012 00BF     		.section	.text.ReadAllIMUs,"ax",%progbits
+ 391              		.align	2
+ 392              		.global	ReadAllIMUs
+ 393              		.thumb
+ 394              		.thumb_func
+ 395              		.type	ReadAllIMUs, %function
+ 396              	ReadAllIMUs:
+ 397              	.LFB75:
+ 490:..\src/IMU_functions.c **** 
+ 491:..\src/IMU_functions.c **** /********************************************************************************
+ 492:..\src/IMU_functions.c **** * Function Name: ReadAllIMUs
+ 493:..\src/IMU_functions.c **** *********************************************************************************/
+ 494:..\src/IMU_functions.c **** void ReadAllIMUs(){
+ 398              		.loc 1 494 0
+ 399              		.cfi_startproc
+ 400              		@ args = 0, pretend = 0, frame = 8
+ 401              		@ frame_needed = 1, uses_anonymous_args = 0
+ 402              		@ link register save eliminated.
+ 403 0000 80B4     		push	{r7}
+ 404              		.cfi_def_cfa_offset 4
+ 405              		.cfi_offset 7, -4
+ 406 0002 83B0     		sub	sp, sp, #12
+ 407              		.cfi_def_cfa_offset 16
+ 408 0004 00AF     		add	r7, sp, #0
+ 409              		.cfi_def_cfa_register 7
+ 495:..\src/IMU_functions.c ****     static uint8 k_imu = 0;
+ 496:..\src/IMU_functions.c ****     uint16 tmp = 0, i = 0, j = 0;
+ 410              		.loc 1 496 0
+ 411 0006 0023     		movs	r3, #0
+ 412 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 413 000a 0023     		movs	r3, #0
+ 414 000c BB80     		strh	r3, [r7, #4]	@ movhi
+ 415 000e 0023     		movs	r3, #0
+ 416 0010 7B80     		strh	r3, [r7, #2]	@ movhi
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 17
+
+
+ 497:..\src/IMU_functions.c ****     int16 value = 0;
+ 417              		.loc 1 497 0
+ 418 0012 0023     		movs	r3, #0
+ 419 0014 3B80     		strh	r3, [r7]	@ movhi
+ 498:..\src/IMU_functions.c **** /*
+ 499:..\src/IMU_functions.c ****     for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++){ 
+ 500:..\src/IMU_functions.c ****         // Read k_imu IMU
+ 501:..\src/IMU_functions.c ****         ChipSelector(IMU_connected[k_imu]);
+ 502:..\src/IMU_functions.c ****         ReadIMU(IMU_connected[k_imu]);
+ 503:..\src/IMU_functions.c ****         
+ 504:..\src/IMU_functions.c ****         for (j = 0; j < 3; j++) {
+ 505:..\src/IMU_functions.c ****             tmp = Accel[IMU_connected[k_imu]][2*j];
+ 506:..\src/IMU_functions.c ****             g_imuNew[k_imu].accel_value[j] = (int16)(tmp<<8 | Accel[IMU_connected[k_imu]][2*j + 1])
+ 507:..\src/IMU_functions.c ****         }
+ 508:..\src/IMU_functions.c ****         
+ 509:..\src/IMU_functions.c ****         for (j = 0; j < 3; j++) {
+ 510:..\src/IMU_functions.c ****             tmp = Gyro[IMU_connected[k_imu]][2*j];
+ 511:..\src/IMU_functions.c ****             g_imuNew[k_imu].gyro_value[j] = (int16)(tmp<<8 | Gyro[IMU_connected[k_imu]][2*j + 1]);
+ 512:..\src/IMU_functions.c ****         }
+ 513:..\src/IMU_functions.c ****                 
+ 514:..\src/IMU_functions.c ****         for (j = 0; j < 3; j++) {
+ 515:..\src/IMU_functions.c ****             tmp = Mag[IMU_connected[k_imu]][2*j];
+ 516:..\src/IMU_functions.c ****             g_imuNew[k_imu].mag_value[j] = (int16)(tmp<<8 | Mag[IMU_connected[k_imu]][2*j + 1]);
+ 517:..\src/IMU_functions.c ****         }  
+ 518:..\src/IMU_functions.c ****         
+ 519:..\src/IMU_functions.c ****         // Save quaternion only for first IMU
+ 520:..\src/IMU_functions.c ****         for (j = 0; k_imu == 0 && j < 4; j++) {
+ 521:..\src/IMU_functions.c ****             g_imuNew[k_imu].quat_value[j] = (float)Quat[j];
+ 522:..\src/IMU_functions.c ****         }
+ 523:..\src/IMU_functions.c ****         
+ 524:..\src/IMU_functions.c ****         tmp = Temp[IMU_connected[k_imu]][0];
+ 525:..\src/IMU_functions.c ****         g_imuNew[k_imu].temp_value = (int16)(tmp<<8 | Temp[IMU_connected[k_imu]][1]);
+ 526:..\src/IMU_functions.c ****     }*/
+ 527:..\src/IMU_functions.c **** }
+ 420              		.loc 1 527 0
+ 421 0016 00BF     		nop
+ 422 0018 0C37     		adds	r7, r7, #12
+ 423              		.cfi_def_cfa_offset 4
+ 424 001a BD46     		mov	sp, r7
+ 425              		.cfi_def_cfa_register 13
+ 426              		@ sp needed
+ 427 001c 80BC     		pop	{r7}
+ 428              		.cfi_restore 7
+ 429              		.cfi_def_cfa_offset 0
+ 430 001e 7047     		bx	lr
+ 431              		.cfi_endproc
+ 432              	.LFE75:
+ 433              		.size	ReadAllIMUs, .-ReadAllIMUs
+ 434              		.section	.text.ReadTemp,"ax",%progbits
+ 435              		.align	2
+ 436              		.global	ReadTemp
+ 437              		.thumb
+ 438              		.thumb_func
+ 439              		.type	ReadTemp, %function
+ 440              	ReadTemp:
+ 441              	.LFB76:
+ 528:..\src/IMU_functions.c **** 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 18
+
+
+ 529:..\src/IMU_functions.c **** /*******************************************************************************
+ 530:..\src/IMU_functions.c **** * Function Name: Read Temperature Data of IMU n
+ 531:..\src/IMU_functions.c **** *********************************************************************************/
+ 532:..\src/IMU_functions.c **** void ReadTemp(int n)
+ 533:..\src/IMU_functions.c **** {
+ 442              		.loc 1 533 0
+ 443              		.cfi_startproc
+ 444              		@ args = 0, pretend = 0, frame = 16
+ 445              		@ frame_needed = 1, uses_anonymous_args = 0
+ 446              		@ link register save eliminated.
+ 447 0000 80B4     		push	{r7}
+ 448              		.cfi_def_cfa_offset 4
+ 449              		.cfi_offset 7, -4
+ 450 0002 85B0     		sub	sp, sp, #20
+ 451              		.cfi_def_cfa_offset 24
+ 452 0004 00AF     		add	r7, sp, #0
+ 453              		.cfi_def_cfa_register 7
+ 454 0006 7860     		str	r0, [r7, #4]
+ 534:..\src/IMU_functions.c **** 	uint8 low=0, high=0;	
+ 455              		.loc 1 534 0
+ 456 0008 0023     		movs	r3, #0
+ 457 000a FB73     		strb	r3, [r7, #15]
+ 458 000c 0023     		movs	r3, #0
+ 459 000e BB73     		strb	r3, [r7, #14]
+ 535:..\src/IMU_functions.c **** 	int row = n;
+ 460              		.loc 1 535 0
+ 461 0010 7B68     		ldr	r3, [r7, #4]
+ 462 0012 BB60     		str	r3, [r7, #8]
+ 536:..\src/IMU_functions.c **** 	/*
+ 537:..\src/IMU_functions.c **** 	//read X
+ 538:..\src/IMU_functions.c ****     low=ReadControlRegister(MPU9250_TEMP_OUT_L);
+ 539:..\src/IMU_functions.c ****     SPI_delay();
+ 540:..\src/IMU_functions.c **** 	high=ReadControlRegister(MPU9250_TEMP_OUT_H);
+ 541:..\src/IMU_functions.c ****     SPI_delay();
+ 542:..\src/IMU_functions.c **** 
+ 543:..\src/IMU_functions.c **** 	Temp[row][0] = high; 
+ 544:..\src/IMU_functions.c **** 	Temp[row][1] = low; 
+ 545:..\src/IMU_functions.c **** 	low=0, high=0;*/
+ 546:..\src/IMU_functions.c **** }
+ 463              		.loc 1 546 0
+ 464 0014 00BF     		nop
+ 465 0016 1437     		adds	r7, r7, #20
+ 466              		.cfi_def_cfa_offset 4
+ 467 0018 BD46     		mov	sp, r7
+ 468              		.cfi_def_cfa_register 13
+ 469              		@ sp needed
+ 470 001a 80BC     		pop	{r7}
+ 471              		.cfi_restore 7
+ 472              		.cfi_def_cfa_offset 0
+ 473 001c 7047     		bx	lr
+ 474              		.cfi_endproc
+ 475              	.LFE76:
+ 476              		.size	ReadTemp, .-ReadTemp
+ 477 001e 00BF     		.section	.text.WriteControlRegister,"ax",%progbits
+ 478              		.align	2
+ 479              		.global	WriteControlRegister
+ 480              		.thumb
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 19
+
+
+ 481              		.thumb_func
+ 482              		.type	WriteControlRegister, %function
+ 483              	WriteControlRegister:
+ 484              	.LFB77:
+ 547:..\src/IMU_functions.c **** 
+ 548:..\src/IMU_functions.c **** /********************************** *********************************************
+ 549:..\src/IMU_functions.c **** * Function Name: Write Control Register
+ 550:..\src/IMU_functions.c **** *********************************************************************************/
+ 551:..\src/IMU_functions.c **** void WriteControlRegister(uint8 address, uint8 dta){
+ 485              		.loc 1 551 0
+ 486              		.cfi_startproc
+ 487              		@ args = 0, pretend = 0, frame = 8
+ 488              		@ frame_needed = 1, uses_anonymous_args = 0
+ 489              		@ link register save eliminated.
+ 490 0000 80B4     		push	{r7}
+ 491              		.cfi_def_cfa_offset 4
+ 492              		.cfi_offset 7, -4
+ 493 0002 83B0     		sub	sp, sp, #12
+ 494              		.cfi_def_cfa_offset 16
+ 495 0004 00AF     		add	r7, sp, #0
+ 496              		.cfi_def_cfa_register 7
+ 497 0006 0346     		mov	r3, r0
+ 498 0008 0A46     		mov	r2, r1
+ 499 000a FB71     		strb	r3, [r7, #7]
+ 500 000c 1346     		mov	r3, r2
+ 501 000e BB71     		strb	r3, [r7, #6]
+ 552:..\src/IMU_functions.c **** 	/*
+ 553:..\src/IMU_functions.c **** 	SPI_IMU_ClearRxBuffer();
+ 554:..\src/IMU_functions.c **** 	SPI_IMU_ClearTxBuffer();
+ 555:..\src/IMU_functions.c **** 	SPI_IMU_ClearFIFO();
+ 556:..\src/IMU_functions.c **** 	SPI_IMU_WriteByte(MPU9250_WCR | address);
+ 557:..\src/IMU_functions.c **** 	while(!( SPI_IMU_ReadStatus() & SPI_IMU_STS_TX_FIFO_EMPTY));		
+ 558:..\src/IMU_functions.c **** 	SPI_IMU_WriteByte(dta);
+ 559:..\src/IMU_functions.c **** 	while(!( SPI_IMU_ReadStatus() & SPI_IMU_STS_TX_FIFO_EMPTY));*/
+ 560:..\src/IMU_functions.c **** }
+ 502              		.loc 1 560 0
+ 503 0010 00BF     		nop
+ 504 0012 0C37     		adds	r7, r7, #12
+ 505              		.cfi_def_cfa_offset 4
+ 506 0014 BD46     		mov	sp, r7
+ 507              		.cfi_def_cfa_register 13
+ 508              		@ sp needed
+ 509 0016 80BC     		pop	{r7}
+ 510              		.cfi_restore 7
+ 511              		.cfi_def_cfa_offset 0
+ 512 0018 7047     		bx	lr
+ 513              		.cfi_endproc
+ 514              	.LFE77:
+ 515              		.size	WriteControlRegister, .-WriteControlRegister
+ 516 001a 00BF     		.section	.text.ReadControlRegister,"ax",%progbits
+ 517              		.align	2
+ 518              		.global	ReadControlRegister
+ 519              		.thumb
+ 520              		.thumb_func
+ 521              		.type	ReadControlRegister, %function
+ 522              	ReadControlRegister:
+ 523              	.LFB78:
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 20
+
+
+ 561:..\src/IMU_functions.c **** 
+ 562:..\src/IMU_functions.c **** /*******************************************************************************
+ 563:..\src/IMU_functions.c **** * Function Name: Read Control Register
+ 564:..\src/IMU_functions.c **** *********************************************************************************/
+ 565:..\src/IMU_functions.c **** uint8 ReadControlRegister(uint8 address){
+ 524              		.loc 1 565 0
+ 525              		.cfi_startproc
+ 526              		@ args = 0, pretend = 0, frame = 8
+ 527              		@ frame_needed = 1, uses_anonymous_args = 0
+ 528              		@ link register save eliminated.
+ 529 0000 80B4     		push	{r7}
+ 530              		.cfi_def_cfa_offset 4
+ 531              		.cfi_offset 7, -4
+ 532 0002 83B0     		sub	sp, sp, #12
+ 533              		.cfi_def_cfa_offset 16
+ 534 0004 00AF     		add	r7, sp, #0
+ 535              		.cfi_def_cfa_register 7
+ 536 0006 0346     		mov	r3, r0
+ 537 0008 FB71     		strb	r3, [r7, #7]
+ 566:..\src/IMU_functions.c **** 	uint8 controlreg;
+ 567:..\src/IMU_functions.c **** 	/*
+ 568:..\src/IMU_functions.c **** 	SPI_IMU_WriteByte(MPU9250_RCR | address);
+ 569:..\src/IMU_functions.c ****     SPI_IMU_WriteByte(0x00);
+ 570:..\src/IMU_functions.c **** 	while(!( SPI_IMU_ReadStatus() & SPI_IMU_STS_SPI_DONE));
+ 571:..\src/IMU_functions.c **** 	controlreg = SPI_IMU_ReadByte();        //real data
+ 572:..\src/IMU_functions.c **** 	return controlreg;*/
+ 573:..\src/IMU_functions.c **** }
+ 538              		.loc 1 573 0
+ 539 000a 00BF     		nop
+ 540 000c 1846     		mov	r0, r3
+ 541 000e 0C37     		adds	r7, r7, #12
+ 542              		.cfi_def_cfa_offset 4
+ 543 0010 BD46     		mov	sp, r7
+ 544              		.cfi_def_cfa_register 13
+ 545              		@ sp needed
+ 546 0012 80BC     		pop	{r7}
+ 547              		.cfi_restore 7
+ 548              		.cfi_def_cfa_offset 0
+ 549 0014 7047     		bx	lr
+ 550              		.cfi_endproc
+ 551              	.LFE78:
+ 552              		.size	ReadControlRegister, .-ReadControlRegister
+ 553 0016 00BF     		.section	.text.SPI_delay,"ax",%progbits
+ 554              		.align	2
+ 555              		.global	SPI_delay
+ 556              		.thumb
+ 557              		.thumb_func
+ 558              		.type	SPI_delay, %function
+ 559              	SPI_delay:
+ 560              	.LFB79:
+ 574:..\src/IMU_functions.c **** 
+ 575:..\src/IMU_functions.c **** /*******************************************************************************
+ 576:..\src/IMU_functions.c **** * Function Name: SPI delay
+ 577:..\src/IMU_functions.c **** *********************************************************************************/
+ 578:..\src/IMU_functions.c **** void SPI_delay(){
+ 561              		.loc 1 578 0
+ 562              		.cfi_startproc
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 21
+
+
+ 563              		@ args = 0, pretend = 0, frame = 0
+ 564              		@ frame_needed = 1, uses_anonymous_args = 0
+ 565              		@ link register save eliminated.
+ 566 0000 80B4     		push	{r7}
+ 567              		.cfi_def_cfa_offset 4
+ 568              		.cfi_offset 7, -4
+ 569 0002 00AF     		add	r7, sp, #0
+ 570              		.cfi_def_cfa_register 7
+ 579:..\src/IMU_functions.c ****   /*  switch( c_mem.SPI_read_delay ) {
+ 580:..\src/IMU_functions.c ****         case 1:     // Low
+ 581:..\src/IMU_functions.c ****             CyDelayUs((uint16)SPI_DELAY_LOW);
+ 582:..\src/IMU_functions.c ****             break;
+ 583:..\src/IMU_functions.c ****         case 2:     // High
+ 584:..\src/IMU_functions.c ****             CyDelayUs((uint16)SPI_DELAY_HIGH);
+ 585:..\src/IMU_functions.c ****             break;
+ 586:..\src/IMU_functions.c ****         default:    // None
+ 587:..\src/IMU_functions.c ****             break;
+ 588:..\src/IMU_functions.c ****     }*/
+ 589:..\src/IMU_functions.c **** }
+ 571              		.loc 1 589 0
+ 572 0004 00BF     		nop
+ 573 0006 BD46     		mov	sp, r7
+ 574              		.cfi_def_cfa_register 13
+ 575              		@ sp needed
+ 576 0008 80BC     		pop	{r7}
+ 577              		.cfi_restore 7
+ 578              		.cfi_def_cfa_offset 0
+ 579 000a 7047     		bx	lr
+ 580              		.cfi_endproc
+ 581              	.LFE79:
+ 582              		.size	SPI_delay, .-SPI_delay
+ 583              		.section	.text.DS1302_write,"ax",%progbits
+ 584              		.align	2
+ 585              		.global	DS1302_write
+ 586              		.thumb
+ 587              		.thumb_func
+ 588              		.type	DS1302_write, %function
+ 589              	DS1302_write:
+ 590              	.LFB80:
+ 590:..\src/IMU_functions.c **** 
+ 591:..\src/IMU_functions.c **** 
+ 592:..\src/IMU_functions.c **** // --------------------------------------------------------
+ 593:..\src/IMU_functions.c **** // DS1302_write
+ 594:..\src/IMU_functions.c **** void DS1302_write(uint8 address, uint8 data_wr) {
+ 591              		.loc 1 594 0
+ 592              		.cfi_startproc
+ 593              		@ args = 0, pretend = 0, frame = 8
+ 594              		@ frame_needed = 1, uses_anonymous_args = 0
+ 595 0000 80B5     		push	{r7, lr}
+ 596              		.cfi_def_cfa_offset 8
+ 597              		.cfi_offset 7, -8
+ 598              		.cfi_offset 14, -4
+ 599 0002 82B0     		sub	sp, sp, #8
+ 600              		.cfi_def_cfa_offset 16
+ 601 0004 00AF     		add	r7, sp, #0
+ 602              		.cfi_def_cfa_register 7
+ 603 0006 0346     		mov	r3, r0
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 22
+
+
+ 604 0008 0A46     		mov	r2, r1
+ 605 000a FB71     		strb	r3, [r7, #7]
+ 606 000c 1346     		mov	r3, r2
+ 607 000e BB71     		strb	r3, [r7, #6]
+ 595:..\src/IMU_functions.c **** 
+ 596:..\src/IMU_functions.c ****   RTC_Clock_Write(0);  
+ 608              		.loc 1 596 0
+ 609 0010 0020     		movs	r0, #0
+ 610 0012 FFF7FEFF 		bl	RTC_Clock_Write
+ 597:..\src/IMU_functions.c ****   RTC_CS_Write(1);
+ 611              		.loc 1 597 0
+ 612 0016 0120     		movs	r0, #1
+ 613 0018 FFF7FEFF 		bl	RTC_CS_Write
+ 598:..\src/IMU_functions.c ****   CyDelayUs(5); // [GS] 
+ 614              		.loc 1 598 0
+ 615 001c 0520     		movs	r0, #5
+ 616 001e FFF7FEFF 		bl	CyDelayUs
+ 599:..\src/IMU_functions.c ****   DS1302_writeByte(address);
+ 617              		.loc 1 599 0
+ 618 0022 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 619 0024 1846     		mov	r0, r3
+ 620 0026 FFF7FEFF 		bl	DS1302_writeByte
+ 600:..\src/IMU_functions.c ****   DS1302_writeByte(data_wr);
+ 621              		.loc 1 600 0
+ 622 002a BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 623 002c 1846     		mov	r0, r3
+ 624 002e FFF7FEFF 		bl	DS1302_writeByte
+ 601:..\src/IMU_functions.c ****   
+ 602:..\src/IMU_functions.c ****   RTC_CS_Write(0);
+ 625              		.loc 1 602 0
+ 626 0032 0020     		movs	r0, #0
+ 627 0034 FFF7FEFF 		bl	RTC_CS_Write
+ 603:..\src/IMU_functions.c ****   CyDelayUs(5); // [GS] 
+ 628              		.loc 1 603 0
+ 629 0038 0520     		movs	r0, #5
+ 630 003a FFF7FEFF 		bl	CyDelayUs
+ 604:..\src/IMU_functions.c **** }
+ 631              		.loc 1 604 0
+ 632 003e 00BF     		nop
+ 633 0040 0837     		adds	r7, r7, #8
+ 634              		.cfi_def_cfa_offset 8
+ 635 0042 BD46     		mov	sp, r7
+ 636              		.cfi_def_cfa_register 13
+ 637              		@ sp needed
+ 638 0044 80BD     		pop	{r7, pc}
+ 639              		.cfi_endproc
+ 640              	.LFE80:
+ 641              		.size	DS1302_write, .-DS1302_write
+ 642 0046 00BF     		.section	.text.DS1302_writeByte,"ax",%progbits
+ 643              		.align	2
+ 644              		.global	DS1302_writeByte
+ 645              		.thumb
+ 646              		.thumb_func
+ 647              		.type	DS1302_writeByte, %function
+ 648              	DS1302_writeByte:
+ 649              	.LFB81:
+ 605:..\src/IMU_functions.c **** 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 23
+
+
+ 606:..\src/IMU_functions.c **** void DS1302_writeByte(uint8 data_wr) {
+ 650              		.loc 1 606 0
+ 651              		.cfi_startproc
+ 652              		@ args = 0, pretend = 0, frame = 8
+ 653              		@ frame_needed = 1, uses_anonymous_args = 0
+ 654 0000 80B5     		push	{r7, lr}
+ 655              		.cfi_def_cfa_offset 8
+ 656              		.cfi_offset 7, -8
+ 657              		.cfi_offset 14, -4
+ 658 0002 82B0     		sub	sp, sp, #8
+ 659              		.cfi_def_cfa_offset 16
+ 660 0004 00AF     		add	r7, sp, #0
+ 661              		.cfi_def_cfa_register 7
+ 662 0006 0346     		mov	r3, r0
+ 663 0008 FB71     		strb	r3, [r7, #7]
+ 607:..\src/IMU_functions.c ****   
+ 608:..\src/IMU_functions.c ****   shiftOut_RTC(data_wr);
+ 664              		.loc 1 608 0
+ 665 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 666 000c 1846     		mov	r0, r3
+ 667 000e FFF7FEFF 		bl	shiftOut_RTC
+ 609:..\src/IMU_functions.c **** 
+ 610:..\src/IMU_functions.c **** }
+ 668              		.loc 1 610 0
+ 669 0012 00BF     		nop
+ 670 0014 0837     		adds	r7, r7, #8
+ 671              		.cfi_def_cfa_offset 8
+ 672 0016 BD46     		mov	sp, r7
+ 673              		.cfi_def_cfa_register 13
+ 674              		@ sp needed
+ 675 0018 80BD     		pop	{r7, pc}
+ 676              		.cfi_endproc
+ 677              	.LFE81:
+ 678              		.size	DS1302_writeByte, .-DS1302_writeByte
+ 679 001a 00BF     		.section	.text.DS1302_read,"ax",%progbits
+ 680              		.align	2
+ 681              		.global	DS1302_read
+ 682              		.thumb
+ 683              		.thumb_func
+ 684              		.type	DS1302_read, %function
+ 685              	DS1302_read:
+ 686              	.LFB82:
+ 611:..\src/IMU_functions.c **** 
+ 612:..\src/IMU_functions.c **** uint8 DS1302_read(uint8 address) {
+ 687              		.loc 1 612 0
+ 688              		.cfi_startproc
+ 689              		@ args = 0, pretend = 0, frame = 16
+ 690              		@ frame_needed = 1, uses_anonymous_args = 0
+ 691 0000 80B5     		push	{r7, lr}
+ 692              		.cfi_def_cfa_offset 8
+ 693              		.cfi_offset 7, -8
+ 694              		.cfi_offset 14, -4
+ 695 0002 84B0     		sub	sp, sp, #16
+ 696              		.cfi_def_cfa_offset 24
+ 697 0004 00AF     		add	r7, sp, #0
+ 698              		.cfi_def_cfa_register 7
+ 699 0006 0346     		mov	r3, r0
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 24
+
+
+ 700 0008 FB71     		strb	r3, [r7, #7]
+ 613:..\src/IMU_functions.c **** 
+ 614:..\src/IMU_functions.c ****   uint8 readValue;
+ 615:..\src/IMU_functions.c ****   RTC_Clock_Write(0); 
+ 701              		.loc 1 615 0
+ 702 000a 0020     		movs	r0, #0
+ 703 000c FFF7FEFF 		bl	RTC_Clock_Write
+ 616:..\src/IMU_functions.c ****   RTC_CS_Write(1);
+ 704              		.loc 1 616 0
+ 705 0010 0120     		movs	r0, #1
+ 706 0012 FFF7FEFF 		bl	RTC_CS_Write
+ 617:..\src/IMU_functions.c ****   CyDelayUs(5); // [GS]
+ 707              		.loc 1 617 0
+ 708 0016 0520     		movs	r0, #5
+ 709 0018 FFF7FEFF 		bl	CyDelayUs
+ 618:..\src/IMU_functions.c ****   DS1302_writeByte(address);
+ 710              		.loc 1 618 0
+ 711 001c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 712 001e 1846     		mov	r0, r3
+ 713 0020 FFF7FEFF 		bl	DS1302_writeByte
+ 619:..\src/IMU_functions.c ****   readValue = DS1302_readByte();
+ 714              		.loc 1 619 0
+ 715 0024 FFF7FEFF 		bl	DS1302_readByte
+ 716 0028 0346     		mov	r3, r0
+ 717 002a FB73     		strb	r3, [r7, #15]
+ 620:..\src/IMU_functions.c ****   RTC_CS_Write(0);
+ 718              		.loc 1 620 0
+ 719 002c 0020     		movs	r0, #0
+ 720 002e FFF7FEFF 		bl	RTC_CS_Write
+ 621:..\src/IMU_functions.c ****   CyDelayUs(5); // [GS]
+ 721              		.loc 1 621 0
+ 722 0032 0520     		movs	r0, #5
+ 723 0034 FFF7FEFF 		bl	CyDelayUs
+ 622:..\src/IMU_functions.c ****   return readValue;
+ 724              		.loc 1 622 0
+ 725 0038 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 623:..\src/IMU_functions.c ****   
+ 624:..\src/IMU_functions.c **** }
+ 726              		.loc 1 624 0
+ 727 003a 1846     		mov	r0, r3
+ 728 003c 1037     		adds	r7, r7, #16
+ 729              		.cfi_def_cfa_offset 8
+ 730 003e BD46     		mov	sp, r7
+ 731              		.cfi_def_cfa_register 13
+ 732              		@ sp needed
+ 733 0040 80BD     		pop	{r7, pc}
+ 734              		.cfi_endproc
+ 735              	.LFE82:
+ 736              		.size	DS1302_read, .-DS1302_read
+ 737 0042 00BF     		.section	.text.DS1302_readByte,"ax",%progbits
+ 738              		.align	2
+ 739              		.global	DS1302_readByte
+ 740              		.thumb
+ 741              		.thumb_func
+ 742              		.type	DS1302_readByte, %function
+ 743              	DS1302_readByte:
+ 744              	.LFB83:
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 25
+
+
+ 625:..\src/IMU_functions.c **** 
+ 626:..\src/IMU_functions.c **** uint8 DS1302_readByte() {
+ 745              		.loc 1 626 0
+ 746              		.cfi_startproc
+ 747              		@ args = 0, pretend = 0, frame = 16
+ 748              		@ frame_needed = 1, uses_anonymous_args = 0
+ 749 0000 80B5     		push	{r7, lr}
+ 750              		.cfi_def_cfa_offset 8
+ 751              		.cfi_offset 7, -8
+ 752              		.cfi_offset 14, -4
+ 753 0002 84B0     		sub	sp, sp, #16
+ 754              		.cfi_def_cfa_offset 24
+ 755 0004 00AF     		add	r7, sp, #0
+ 756              		.cfi_def_cfa_register 7
+ 627:..\src/IMU_functions.c **** 
+ 628:..\src/IMU_functions.c ****   uint8 value = 0;
+ 757              		.loc 1 628 0
+ 758 0006 0023     		movs	r3, #0
+ 759 0008 FB73     		strb	r3, [r7, #15]
+ 629:..\src/IMU_functions.c ****   uint8 currentBit = 0;
+ 760              		.loc 1 629 0
+ 761 000a 0023     		movs	r3, #0
+ 762 000c FB71     		strb	r3, [r7, #7]
+ 630:..\src/IMU_functions.c ****   int i=0;
+ 763              		.loc 1 630 0
+ 764 000e 0023     		movs	r3, #0
+ 765 0010 BB60     		str	r3, [r7, #8]
+ 631:..\src/IMU_functions.c ****   for (i = 0; i < 8; ++i)
+ 766              		.loc 1 631 0
+ 767 0012 0023     		movs	r3, #0
+ 768 0014 BB60     		str	r3, [r7, #8]
+ 769 0016 19E0     		b	.L22
+ 770              	.L23:
+ 632:..\src/IMU_functions.c ****   {
+ 633:..\src/IMU_functions.c ****     currentBit = RTC_IN_Read();
+ 771              		.loc 1 633 0 discriminator 3
+ 772 0018 FFF7FEFF 		bl	RTC_IN_Read
+ 773 001c 0346     		mov	r3, r0
+ 774 001e FB71     		strb	r3, [r7, #7]
+ 634:..\src/IMU_functions.c ****     value |= (currentBit << i);
+ 775              		.loc 1 634 0 discriminator 3
+ 776 0020 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 777 0022 BB68     		ldr	r3, [r7, #8]
+ 778 0024 02FA03F3 		lsl	r3, r2, r3
+ 779 0028 5AB2     		sxtb	r2, r3
+ 780 002a 97F90F30 		ldrsb	r3, [r7, #15]
+ 781 002e 1343     		orrs	r3, r3, r2
+ 782 0030 5BB2     		sxtb	r3, r3
+ 783 0032 FB73     		strb	r3, [r7, #15]
+ 635:..\src/IMU_functions.c ****     RTC_Clock_Write(1);
+ 784              		.loc 1 635 0 discriminator 3
+ 785 0034 0120     		movs	r0, #1
+ 786 0036 FFF7FEFF 		bl	RTC_Clock_Write
+ 636:..\src/IMU_functions.c ****     CyDelayUs(1);
+ 787              		.loc 1 636 0 discriminator 3
+ 788 003a 0120     		movs	r0, #1
+ 789 003c FFF7FEFF 		bl	CyDelayUs
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 26
+
+
+ 637:..\src/IMU_functions.c ****     RTC_Clock_Write(0);
+ 790              		.loc 1 637 0 discriminator 3
+ 791 0040 0020     		movs	r0, #0
+ 792 0042 FFF7FEFF 		bl	RTC_Clock_Write
+ 631:..\src/IMU_functions.c ****   {
+ 793              		.loc 1 631 0 discriminator 3
+ 794 0046 BB68     		ldr	r3, [r7, #8]
+ 795 0048 0133     		adds	r3, r3, #1
+ 796 004a BB60     		str	r3, [r7, #8]
+ 797              	.L22:
+ 631:..\src/IMU_functions.c ****   {
+ 798              		.loc 1 631 0 is_stmt 0 discriminator 1
+ 799 004c BB68     		ldr	r3, [r7, #8]
+ 800 004e 072B     		cmp	r3, #7
+ 801 0050 E2DD     		ble	.L23
+ 638:..\src/IMU_functions.c ****   }
+ 639:..\src/IMU_functions.c ****   return value;
+ 802              		.loc 1 639 0 is_stmt 1
+ 803 0052 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 640:..\src/IMU_functions.c **** }
+ 804              		.loc 1 640 0
+ 805 0054 1846     		mov	r0, r3
+ 806 0056 1037     		adds	r7, r7, #16
+ 807              		.cfi_def_cfa_offset 8
+ 808 0058 BD46     		mov	sp, r7
+ 809              		.cfi_def_cfa_register 13
+ 810              		@ sp needed
+ 811 005a 80BD     		pop	{r7, pc}
+ 812              		.cfi_endproc
+ 813              	.LFE83:
+ 814              		.size	DS1302_readByte, .-DS1302_readByte
+ 815              		.section	.text.shiftOut_RTC,"ax",%progbits
+ 816              		.align	2
+ 817              		.global	shiftOut_RTC
+ 818              		.thumb
+ 819              		.thumb_func
+ 820              		.type	shiftOut_RTC, %function
+ 821              	shiftOut_RTC:
+ 822              	.LFB84:
+ 641:..\src/IMU_functions.c **** 
+ 642:..\src/IMU_functions.c **** void shiftOut_RTC(uint8 val)
+ 643:..\src/IMU_functions.c **** {
+ 823              		.loc 1 643 0
+ 824              		.cfi_startproc
+ 825              		@ args = 0, pretend = 0, frame = 16
+ 826              		@ frame_needed = 1, uses_anonymous_args = 0
+ 827 0000 80B5     		push	{r7, lr}
+ 828              		.cfi_def_cfa_offset 8
+ 829              		.cfi_offset 7, -8
+ 830              		.cfi_offset 14, -4
+ 831 0002 84B0     		sub	sp, sp, #16
+ 832              		.cfi_def_cfa_offset 24
+ 833 0004 00AF     		add	r7, sp, #0
+ 834              		.cfi_def_cfa_register 7
+ 835 0006 0346     		mov	r3, r0
+ 836 0008 FB71     		strb	r3, [r7, #7]
+ 644:..\src/IMU_functions.c ****     uint8 i;
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 27
+
+
+ 645:..\src/IMU_functions.c ****     for (i = 0; i < 8; i++)  {
+ 837              		.loc 1 645 0
+ 838 000a 0023     		movs	r3, #0
+ 839 000c FB73     		strb	r3, [r7, #15]
+ 840 000e 16E0     		b	.L26
+ 841              	.L27:
+ 646:..\src/IMU_functions.c ****         RTC_OUT_Write(!!(val & (1 << i)));
+ 842              		.loc 1 646 0 discriminator 3
+ 843 0010 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 844 0012 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 845 0014 42FA03F3 		asr	r3, r2, r3
+ 846 0018 03F00103 		and	r3, r3, #1
+ 847 001c 002B     		cmp	r3, #0
+ 848 001e 14BF     		ite	ne
+ 849 0020 0123     		movne	r3, #1
+ 850 0022 0023     		moveq	r3, #0
+ 851 0024 DBB2     		uxtb	r3, r3
+ 852 0026 1846     		mov	r0, r3
+ 853 0028 FFF7FEFF 		bl	RTC_OUT_Write
+ 647:..\src/IMU_functions.c ****         RTC_Clock_Write(1);
+ 854              		.loc 1 647 0 discriminator 3
+ 855 002c 0120     		movs	r0, #1
+ 856 002e FFF7FEFF 		bl	RTC_Clock_Write
+ 648:..\src/IMU_functions.c ****         RTC_Clock_Write(0);
+ 857              		.loc 1 648 0 discriminator 3
+ 858 0032 0020     		movs	r0, #0
+ 859 0034 FFF7FEFF 		bl	RTC_Clock_Write
+ 645:..\src/IMU_functions.c ****         RTC_OUT_Write(!!(val & (1 << i)));
+ 860              		.loc 1 645 0 discriminator 3
+ 861 0038 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 862 003a 0133     		adds	r3, r3, #1
+ 863 003c FB73     		strb	r3, [r7, #15]
+ 864              	.L26:
+ 645:..\src/IMU_functions.c ****         RTC_OUT_Write(!!(val & (1 << i)));
+ 865              		.loc 1 645 0 is_stmt 0 discriminator 1
+ 866 003e FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 867 0040 072B     		cmp	r3, #7
+ 868 0042 E5D9     		bls	.L27
+ 649:..\src/IMU_functions.c ****     }
+ 650:..\src/IMU_functions.c **** }
+ 869              		.loc 1 650 0 is_stmt 1
+ 870 0044 00BF     		nop
+ 871 0046 1037     		adds	r7, r7, #16
+ 872              		.cfi_def_cfa_offset 8
+ 873 0048 BD46     		mov	sp, r7
+ 874              		.cfi_def_cfa_register 13
+ 875              		@ sp needed
+ 876 004a 80BD     		pop	{r7, pc}
+ 877              		.cfi_endproc
+ 878              	.LFE84:
+ 879              		.size	shiftOut_RTC, .-shiftOut_RTC
+ 880              		.bss
+ 881              	k_imu.8951:
+ 882 0000 00       		.space	1
+ 883              		.text
+ 884              	.Letext0:
+ 885              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 28
+
+
+ 886              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 887              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 888              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 889              		.section	.debug_info,"",%progbits
+ 890              	.Ldebug_info0:
+ 891 0000 6E040000 		.4byte	0x46e
+ 892 0004 0400     		.2byte	0x4
+ 893 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 894 000a 04       		.byte	0x4
+ 895 000b 01       		.uleb128 0x1
+ 896 000c 1E000000 		.4byte	.LASF46
+ 897 0010 0C       		.byte	0xc
+ 898 0011 BE010000 		.4byte	.LASF47
+ 899 0015 5B010000 		.4byte	.LASF48
+ 900 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 901 001d 00000000 		.4byte	0
+ 902 0021 00000000 		.4byte	.Ldebug_line0
+ 903 0025 02       		.uleb128 0x2
+ 904 0026 01       		.byte	0x1
+ 905 0027 06       		.byte	0x6
+ 906 0028 F3020000 		.4byte	.LASF0
+ 907 002c 02       		.uleb128 0x2
+ 908 002d 01       		.byte	0x1
+ 909 002e 08       		.byte	0x8
+ 910 002f 2B010000 		.4byte	.LASF1
+ 911 0033 02       		.uleb128 0x2
+ 912 0034 02       		.byte	0x2
+ 913 0035 05       		.byte	0x5
+ 914 0036 DC010000 		.4byte	.LASF2
+ 915 003a 02       		.uleb128 0x2
+ 916 003b 02       		.byte	0x2
+ 917 003c 07       		.byte	0x7
+ 918 003d E2000000 		.4byte	.LASF3
+ 919 0041 03       		.uleb128 0x3
+ 920 0042 C5000000 		.4byte	.LASF9
+ 921 0046 02       		.byte	0x2
+ 922 0047 3F       		.byte	0x3f
+ 923 0048 4C000000 		.4byte	0x4c
+ 924 004c 02       		.uleb128 0x2
+ 925 004d 04       		.byte	0x4
+ 926 004e 05       		.byte	0x5
+ 927 004f DE020000 		.4byte	.LASF4
+ 928 0053 02       		.uleb128 0x2
+ 929 0054 04       		.byte	0x4
+ 930 0055 07       		.byte	0x7
+ 931 0056 49010000 		.4byte	.LASF5
+ 932 005a 02       		.uleb128 0x2
+ 933 005b 08       		.byte	0x8
+ 934 005c 05       		.byte	0x5
+ 935 005d 69020000 		.4byte	.LASF6
+ 936 0061 02       		.uleb128 0x2
+ 937 0062 08       		.byte	0x8
+ 938 0063 07       		.byte	0x7
+ 939 0064 14010000 		.4byte	.LASF7
+ 940 0068 04       		.uleb128 0x4
+ 941 0069 04       		.byte	0x4
+ 942 006a 05       		.byte	0x5
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 29
+
+
+ 943 006b 696E7400 		.ascii	"int\000"
+ 944 006f 02       		.uleb128 0x2
+ 945 0070 04       		.byte	0x4
+ 946 0071 07       		.byte	0x7
+ 947 0072 F7010000 		.4byte	.LASF8
+ 948 0076 03       		.uleb128 0x3
+ 949 0077 38020000 		.4byte	.LASF10
+ 950 007b 03       		.byte	0x3
+ 951 007c 2C       		.byte	0x2c
+ 952 007d 41000000 		.4byte	0x41
+ 953 0081 05       		.uleb128 0x5
+ 954 0082 C5020000 		.4byte	.LASF11
+ 955 0086 04       		.byte	0x4
+ 956 0087 E401     		.2byte	0x1e4
+ 957 0089 2C000000 		.4byte	0x2c
+ 958 008d 05       		.uleb128 0x5
+ 959 008e E6010000 		.4byte	.LASF12
+ 960 0092 04       		.byte	0x4
+ 961 0093 E501     		.2byte	0x1e5
+ 962 0095 3A000000 		.4byte	0x3a
+ 963 0099 05       		.uleb128 0x5
+ 964 009a 1B020000 		.4byte	.LASF13
+ 965 009e 04       		.byte	0x4
+ 966 009f E801     		.2byte	0x1e8
+ 967 00a1 33000000 		.4byte	0x33
+ 968 00a5 02       		.uleb128 0x2
+ 969 00a6 04       		.byte	0x4
+ 970 00a7 04       		.byte	0x4
+ 971 00a8 06010000 		.4byte	.LASF14
+ 972 00ac 02       		.uleb128 0x2
+ 973 00ad 08       		.byte	0x8
+ 974 00ae 04       		.byte	0x4
+ 975 00af D5010000 		.4byte	.LASF15
+ 976 00b3 02       		.uleb128 0x2
+ 977 00b4 01       		.byte	0x1
+ 978 00b5 08       		.byte	0x8
+ 979 00b6 0C020000 		.4byte	.LASF16
+ 980 00ba 02       		.uleb128 0x2
+ 981 00bb 08       		.byte	0x8
+ 982 00bc 04       		.byte	0x4
+ 983 00bd E7020000 		.4byte	.LASF17
+ 984 00c1 02       		.uleb128 0x2
+ 985 00c2 04       		.byte	0x4
+ 986 00c3 07       		.byte	0x7
+ 987 00c4 40020000 		.4byte	.LASF18
+ 988 00c8 06       		.uleb128 0x6
+ 989 00c9 11020000 		.4byte	.LASF19
+ 990 00cd 01       		.byte	0x1
+ 991 00ce 38       		.byte	0x38
+ 992 00cf 00000000 		.4byte	.LFB64
+ 993 00d3 0C000000 		.4byte	.LFE64-.LFB64
+ 994 00d7 01       		.uleb128 0x1
+ 995 00d8 9C       		.byte	0x9c
+ 996 00d9 06       		.uleb128 0x6
+ 997 00da 0C010000 		.4byte	.LASF20
+ 998 00de 01       		.byte	0x1
+ 999 00df 47       		.byte	0x47
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 30
+
+
+ 1000 00e0 00000000 		.4byte	.LFB65
+ 1001 00e4 0C000000 		.4byte	.LFE65-.LFB65
+ 1002 00e8 01       		.uleb128 0x1
+ 1003 00e9 9C       		.byte	0x9c
+ 1004 00ea 06       		.uleb128 0x6
+ 1005 00eb AC000000 		.4byte	.LASF21
+ 1006 00ef 01       		.byte	0x1
+ 1007 00f0 76       		.byte	0x76
+ 1008 00f1 00000000 		.4byte	.LFB66
+ 1009 00f5 0C000000 		.4byte	.LFE66-.LFB66
+ 1010 00f9 01       		.uleb128 0x1
+ 1011 00fa 9C       		.byte	0x9c
+ 1012 00fb 07       		.uleb128 0x7
+ 1013 00fc 91020000 		.4byte	.LASF23
+ 1014 0100 01       		.byte	0x1
+ 1015 0101 9E       		.byte	0x9e
+ 1016 0102 00000000 		.4byte	.LFB67
+ 1017 0106 12000000 		.4byte	.LFE67-.LFB67
+ 1018 010a 01       		.uleb128 0x1
+ 1019 010b 9C       		.byte	0x9c
+ 1020 010c 1D010000 		.4byte	0x11d
+ 1021 0110 08       		.uleb128 0x8
+ 1022 0111 6E00     		.ascii	"n\000"
+ 1023 0113 01       		.byte	0x1
+ 1024 0114 9E       		.byte	0x9e
+ 1025 0115 68000000 		.4byte	0x68
+ 1026 0119 02       		.uleb128 0x2
+ 1027 011a 91       		.byte	0x91
+ 1028 011b 74       		.sleb128 -12
+ 1029 011c 00       		.byte	0
+ 1030 011d 06       		.uleb128 0x6
+ 1031 011e 49020000 		.4byte	.LASF22
+ 1032 0122 01       		.byte	0x1
+ 1033 0123 AE       		.byte	0xae
+ 1034 0124 00000000 		.4byte	.LFB68
+ 1035 0128 0C000000 		.4byte	.LFE68-.LFB68
+ 1036 012c 01       		.uleb128 0x1
+ 1037 012d 9C       		.byte	0x9c
+ 1038 012e 09       		.uleb128 0x9
+ 1039 012f CB020000 		.4byte	.LASF24
+ 1040 0133 01       		.byte	0x1
+ 1041 0134 0401     		.2byte	0x104
+ 1042 0136 00000000 		.4byte	.LFB69
+ 1043 013a 12000000 		.4byte	.LFE69-.LFB69
+ 1044 013e 01       		.uleb128 0x1
+ 1045 013f 9C       		.byte	0x9c
+ 1046 0140 52010000 		.4byte	0x152
+ 1047 0144 0A       		.uleb128 0xa
+ 1048 0145 6E00     		.ascii	"n\000"
+ 1049 0147 01       		.byte	0x1
+ 1050 0148 0401     		.2byte	0x104
+ 1051 014a 68000000 		.4byte	0x68
+ 1052 014e 02       		.uleb128 0x2
+ 1053 014f 91       		.byte	0x91
+ 1054 0150 74       		.sleb128 -12
+ 1055 0151 00       		.byte	0
+ 1056 0152 09       		.uleb128 0x9
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 31
+
+
+ 1057 0153 9E020000 		.4byte	.LASF25
+ 1058 0157 01       		.byte	0x1
+ 1059 0158 1001     		.2byte	0x110
+ 1060 015a 00000000 		.4byte	.LFB70
+ 1061 015e 12000000 		.4byte	.LFE70-.LFB70
+ 1062 0162 01       		.uleb128 0x1
+ 1063 0163 9C       		.byte	0x9c
+ 1064 0164 76010000 		.4byte	0x176
+ 1065 0168 0A       		.uleb128 0xa
+ 1066 0169 6E00     		.ascii	"n\000"
+ 1067 016b 01       		.byte	0x1
+ 1068 016c 1001     		.2byte	0x110
+ 1069 016e 68000000 		.4byte	0x68
+ 1070 0172 02       		.uleb128 0x2
+ 1071 0173 91       		.byte	0x91
+ 1072 0174 74       		.sleb128 -12
+ 1073 0175 00       		.byte	0
+ 1074 0176 09       		.uleb128 0x9
+ 1075 0177 00000000 		.4byte	.LASF26
+ 1076 017b 01       		.byte	0x1
+ 1077 017c 3801     		.2byte	0x138
+ 1078 017e 00000000 		.4byte	.LFB71
+ 1079 0182 1A000000 		.4byte	.LFE71-.LFB71
+ 1080 0186 01       		.uleb128 0x1
+ 1081 0187 9C       		.byte	0x9c
+ 1082 0188 B8010000 		.4byte	0x1b8
+ 1083 018c 0A       		.uleb128 0xa
+ 1084 018d 6E00     		.ascii	"n\000"
+ 1085 018f 01       		.byte	0x1
+ 1086 0190 3801     		.2byte	0x138
+ 1087 0192 68000000 		.4byte	0x68
+ 1088 0196 02       		.uleb128 0x2
+ 1089 0197 91       		.byte	0x91
+ 1090 0198 6C       		.sleb128 -20
+ 1091 0199 0B       		.uleb128 0xb
+ 1092 019a 6C6F7700 		.ascii	"low\000"
+ 1093 019e 01       		.byte	0x1
+ 1094 019f 3901     		.2byte	0x139
+ 1095 01a1 81000000 		.4byte	0x81
+ 1096 01a5 02       		.uleb128 0x2
+ 1097 01a6 91       		.byte	0x91
+ 1098 01a7 77       		.sleb128 -9
+ 1099 01a8 0C       		.uleb128 0xc
+ 1100 01a9 BA000000 		.4byte	.LASF27
+ 1101 01ad 01       		.byte	0x1
+ 1102 01ae 3901     		.2byte	0x139
+ 1103 01b0 81000000 		.4byte	0x81
+ 1104 01b4 02       		.uleb128 0x2
+ 1105 01b5 91       		.byte	0x91
+ 1106 01b6 76       		.sleb128 -10
+ 1107 01b7 00       		.byte	0
+ 1108 01b8 09       		.uleb128 0x9
+ 1109 01b9 F5000000 		.4byte	.LASF28
+ 1110 01bd 01       		.byte	0x1
+ 1111 01be 6001     		.2byte	0x160
+ 1112 01c0 00000000 		.4byte	.LFB72
+ 1113 01c4 12000000 		.4byte	.LFE72-.LFB72
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 32
+
+
+ 1114 01c8 01       		.uleb128 0x1
+ 1115 01c9 9C       		.byte	0x9c
+ 1116 01ca DC010000 		.4byte	0x1dc
+ 1117 01ce 0A       		.uleb128 0xa
+ 1118 01cf 6E00     		.ascii	"n\000"
+ 1119 01d1 01       		.byte	0x1
+ 1120 01d2 6001     		.2byte	0x160
+ 1121 01d4 68000000 		.4byte	0x68
+ 1122 01d8 02       		.uleb128 0x2
+ 1123 01d9 91       		.byte	0x91
+ 1124 01da 74       		.sleb128 -12
+ 1125 01db 00       		.byte	0
+ 1126 01dc 09       		.uleb128 0x9
+ 1127 01dd D3020000 		.4byte	.LASF29
+ 1128 01e1 01       		.byte	0x1
+ 1129 01e2 8601     		.2byte	0x186
+ 1130 01e4 00000000 		.4byte	.LFB73
+ 1131 01e8 12000000 		.4byte	.LFE73-.LFB73
+ 1132 01ec 01       		.uleb128 0x1
+ 1133 01ed 9C       		.byte	0x9c
+ 1134 01ee 00020000 		.4byte	0x200
+ 1135 01f2 0A       		.uleb128 0xa
+ 1136 01f3 6E00     		.ascii	"n\000"
+ 1137 01f5 01       		.byte	0x1
+ 1138 01f6 8601     		.2byte	0x186
+ 1139 01f8 68000000 		.4byte	0x68
+ 1140 01fc 02       		.uleb128 0x2
+ 1141 01fd 91       		.byte	0x91
+ 1142 01fe 74       		.sleb128 -12
+ 1143 01ff 00       		.byte	0
+ 1144 0200 09       		.uleb128 0x9
+ 1145 0201 BC020000 		.4byte	.LASF30
+ 1146 0205 01       		.byte	0x1
+ 1147 0206 9E01     		.2byte	0x19e
+ 1148 0208 00000000 		.4byte	.LFB74
+ 1149 020c 12000000 		.4byte	.LFE74-.LFB74
+ 1150 0210 01       		.uleb128 0x1
+ 1151 0211 9C       		.byte	0x9c
+ 1152 0212 24020000 		.4byte	0x224
+ 1153 0216 0A       		.uleb128 0xa
+ 1154 0217 6E00     		.ascii	"n\000"
+ 1155 0219 01       		.byte	0x1
+ 1156 021a 9E01     		.2byte	0x19e
+ 1157 021c 68000000 		.4byte	0x68
+ 1158 0220 02       		.uleb128 0x2
+ 1159 0221 91       		.byte	0x91
+ 1160 0222 74       		.sleb128 -12
+ 1161 0223 00       		.byte	0
+ 1162 0224 0D       		.uleb128 0xd
+ 1163 0225 B0020000 		.4byte	.LASF49
+ 1164 0229 01       		.byte	0x1
+ 1165 022a EE01     		.2byte	0x1ee
+ 1166 022c 00000000 		.4byte	.LFB75
+ 1167 0230 20000000 		.4byte	.LFE75-.LFB75
+ 1168 0234 01       		.uleb128 0x1
+ 1169 0235 9C       		.byte	0x9c
+ 1170 0236 85020000 		.4byte	0x285
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 33
+
+
+ 1171 023a 0C       		.uleb128 0xc
+ 1172 023b FF020000 		.4byte	.LASF31
+ 1173 023f 01       		.byte	0x1
+ 1174 0240 EF01     		.2byte	0x1ef
+ 1175 0242 81000000 		.4byte	0x81
+ 1176 0246 05       		.uleb128 0x5
+ 1177 0247 03       		.byte	0x3
+ 1178 0248 00000000 		.4byte	k_imu.8951
+ 1179 024c 0B       		.uleb128 0xb
+ 1180 024d 746D7000 		.ascii	"tmp\000"
+ 1181 0251 01       		.byte	0x1
+ 1182 0252 F001     		.2byte	0x1f0
+ 1183 0254 8D000000 		.4byte	0x8d
+ 1184 0258 02       		.uleb128 0x2
+ 1185 0259 91       		.byte	0x91
+ 1186 025a 76       		.sleb128 -10
+ 1187 025b 0B       		.uleb128 0xb
+ 1188 025c 6900     		.ascii	"i\000"
+ 1189 025e 01       		.byte	0x1
+ 1190 025f F001     		.2byte	0x1f0
+ 1191 0261 8D000000 		.4byte	0x8d
+ 1192 0265 02       		.uleb128 0x2
+ 1193 0266 91       		.byte	0x91
+ 1194 0267 74       		.sleb128 -12
+ 1195 0268 0B       		.uleb128 0xb
+ 1196 0269 6A00     		.ascii	"j\000"
+ 1197 026b 01       		.byte	0x1
+ 1198 026c F001     		.2byte	0x1f0
+ 1199 026e 8D000000 		.4byte	0x8d
+ 1200 0272 02       		.uleb128 0x2
+ 1201 0273 91       		.byte	0x91
+ 1202 0274 72       		.sleb128 -14
+ 1203 0275 0C       		.uleb128 0xc
+ 1204 0276 BF000000 		.4byte	.LASF32
+ 1205 027a 01       		.byte	0x1
+ 1206 027b F101     		.2byte	0x1f1
+ 1207 027d 99000000 		.4byte	0x99
+ 1208 0281 02       		.uleb128 0x2
+ 1209 0282 91       		.byte	0x91
+ 1210 0283 70       		.sleb128 -16
+ 1211 0284 00       		.byte	0
+ 1212 0285 09       		.uleb128 0x9
+ 1213 0286 FD000000 		.4byte	.LASF33
+ 1214 028a 01       		.byte	0x1
+ 1215 028b 1402     		.2byte	0x214
+ 1216 028d 00000000 		.4byte	.LFB76
+ 1217 0291 1E000000 		.4byte	.LFE76-.LFB76
+ 1218 0295 01       		.uleb128 0x1
+ 1219 0296 9C       		.byte	0x9c
+ 1220 0297 D6020000 		.4byte	0x2d6
+ 1221 029b 0A       		.uleb128 0xa
+ 1222 029c 6E00     		.ascii	"n\000"
+ 1223 029e 01       		.byte	0x1
+ 1224 029f 1402     		.2byte	0x214
+ 1225 02a1 68000000 		.4byte	0x68
+ 1226 02a5 02       		.uleb128 0x2
+ 1227 02a6 91       		.byte	0x91
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 34
+
+
+ 1228 02a7 6C       		.sleb128 -20
+ 1229 02a8 0B       		.uleb128 0xb
+ 1230 02a9 6C6F7700 		.ascii	"low\000"
+ 1231 02ad 01       		.byte	0x1
+ 1232 02ae 1602     		.2byte	0x216
+ 1233 02b0 81000000 		.4byte	0x81
+ 1234 02b4 02       		.uleb128 0x2
+ 1235 02b5 91       		.byte	0x91
+ 1236 02b6 77       		.sleb128 -9
+ 1237 02b7 0C       		.uleb128 0xc
+ 1238 02b8 BA000000 		.4byte	.LASF27
+ 1239 02bc 01       		.byte	0x1
+ 1240 02bd 1602     		.2byte	0x216
+ 1241 02bf 81000000 		.4byte	0x81
+ 1242 02c3 02       		.uleb128 0x2
+ 1243 02c4 91       		.byte	0x91
+ 1244 02c5 76       		.sleb128 -10
+ 1245 02c6 0B       		.uleb128 0xb
+ 1246 02c7 726F7700 		.ascii	"row\000"
+ 1247 02cb 01       		.byte	0x1
+ 1248 02cc 1702     		.2byte	0x217
+ 1249 02ce 68000000 		.4byte	0x68
+ 1250 02d2 02       		.uleb128 0x2
+ 1251 02d3 91       		.byte	0x91
+ 1252 02d4 70       		.sleb128 -16
+ 1253 02d5 00       		.byte	0
+ 1254 02d6 09       		.uleb128 0x9
+ 1255 02d7 09000000 		.4byte	.LASF34
+ 1256 02db 01       		.byte	0x1
+ 1257 02dc 2702     		.2byte	0x227
+ 1258 02de 00000000 		.4byte	.LFB77
+ 1259 02e2 1A000000 		.4byte	.LFE77-.LFB77
+ 1260 02e6 01       		.uleb128 0x1
+ 1261 02e7 9C       		.byte	0x9c
+ 1262 02e8 0B030000 		.4byte	0x30b
+ 1263 02ec 0E       		.uleb128 0xe
+ 1264 02ed 04020000 		.4byte	.LASF35
+ 1265 02f1 01       		.byte	0x1
+ 1266 02f2 2702     		.2byte	0x227
+ 1267 02f4 81000000 		.4byte	0x81
+ 1268 02f8 02       		.uleb128 0x2
+ 1269 02f9 91       		.byte	0x91
+ 1270 02fa 77       		.sleb128 -9
+ 1271 02fb 0A       		.uleb128 0xa
+ 1272 02fc 64746100 		.ascii	"dta\000"
+ 1273 0300 01       		.byte	0x1
+ 1274 0301 2702     		.2byte	0x227
+ 1275 0303 81000000 		.4byte	0x81
+ 1276 0307 02       		.uleb128 0x2
+ 1277 0308 91       		.byte	0x91
+ 1278 0309 76       		.sleb128 -10
+ 1279 030a 00       		.byte	0
+ 1280 030b 0F       		.uleb128 0xf
+ 1281 030c 9D010000 		.4byte	.LASF40
+ 1282 0310 01       		.byte	0x1
+ 1283 0311 3502     		.2byte	0x235
+ 1284 0313 81000000 		.4byte	0x81
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 35
+
+
+ 1285 0317 00000000 		.4byte	.LFB78
+ 1286 031b 16000000 		.4byte	.LFE78-.LFB78
+ 1287 031f 01       		.uleb128 0x1
+ 1288 0320 9C       		.byte	0x9c
+ 1289 0321 41030000 		.4byte	0x341
+ 1290 0325 0E       		.uleb128 0xe
+ 1291 0326 04020000 		.4byte	.LASF35
+ 1292 032a 01       		.byte	0x1
+ 1293 032b 3502     		.2byte	0x235
+ 1294 032d 81000000 		.4byte	0x81
+ 1295 0331 02       		.uleb128 0x2
+ 1296 0332 91       		.byte	0x91
+ 1297 0333 77       		.sleb128 -9
+ 1298 0334 10       		.uleb128 0x10
+ 1299 0335 CF000000 		.4byte	.LASF50
+ 1300 0339 01       		.byte	0x1
+ 1301 033a 3602     		.2byte	0x236
+ 1302 033c 81000000 		.4byte	0x81
+ 1303 0340 00       		.byte	0
+ 1304 0341 11       		.uleb128 0x11
+ 1305 0342 A6020000 		.4byte	.LASF36
+ 1306 0346 01       		.byte	0x1
+ 1307 0347 4202     		.2byte	0x242
+ 1308 0349 00000000 		.4byte	.LFB79
+ 1309 034d 0C000000 		.4byte	.LFE79-.LFB79
+ 1310 0351 01       		.uleb128 0x1
+ 1311 0352 9C       		.byte	0x9c
+ 1312 0353 12       		.uleb128 0x12
+ 1313 0354 77020000 		.4byte	.LASF37
+ 1314 0358 01       		.byte	0x1
+ 1315 0359 5202     		.2byte	0x252
+ 1316 035b 00000000 		.4byte	.LFB80
+ 1317 035f 46000000 		.4byte	.LFE80-.LFB80
+ 1318 0363 01       		.uleb128 0x1
+ 1319 0364 9C       		.byte	0x9c
+ 1320 0365 88030000 		.4byte	0x388
+ 1321 0369 0E       		.uleb128 0xe
+ 1322 036a 04020000 		.4byte	.LASF35
+ 1323 036e 01       		.byte	0x1
+ 1324 036f 5202     		.2byte	0x252
+ 1325 0371 81000000 		.4byte	0x81
+ 1326 0375 02       		.uleb128 0x2
+ 1327 0376 91       		.byte	0x91
+ 1328 0377 77       		.sleb128 -9
+ 1329 0378 0E       		.uleb128 0xe
+ 1330 0379 DA000000 		.4byte	.LASF38
+ 1331 037d 01       		.byte	0x1
+ 1332 037e 5202     		.2byte	0x252
+ 1333 0380 81000000 		.4byte	0x81
+ 1334 0384 02       		.uleb128 0x2
+ 1335 0385 91       		.byte	0x91
+ 1336 0386 76       		.sleb128 -10
+ 1337 0387 00       		.byte	0
+ 1338 0388 12       		.uleb128 0x12
+ 1339 0389 58020000 		.4byte	.LASF39
+ 1340 038d 01       		.byte	0x1
+ 1341 038e 5E02     		.2byte	0x25e
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 36
+
+
+ 1342 0390 00000000 		.4byte	.LFB81
+ 1343 0394 1A000000 		.4byte	.LFE81-.LFB81
+ 1344 0398 01       		.uleb128 0x1
+ 1345 0399 9C       		.byte	0x9c
+ 1346 039a AE030000 		.4byte	0x3ae
+ 1347 039e 0E       		.uleb128 0xe
+ 1348 039f DA000000 		.4byte	.LASF38
+ 1349 03a3 01       		.byte	0x1
+ 1350 03a4 5E02     		.2byte	0x25e
+ 1351 03a6 81000000 		.4byte	0x81
+ 1352 03aa 02       		.uleb128 0x2
+ 1353 03ab 91       		.byte	0x91
+ 1354 03ac 77       		.sleb128 -9
+ 1355 03ad 00       		.byte	0
+ 1356 03ae 13       		.uleb128 0x13
+ 1357 03af 21020000 		.4byte	.LASF41
+ 1358 03b3 01       		.byte	0x1
+ 1359 03b4 6402     		.2byte	0x264
+ 1360 03b6 81000000 		.4byte	0x81
+ 1361 03ba 00000000 		.4byte	.LFB82
+ 1362 03be 42000000 		.4byte	.LFE82-.LFB82
+ 1363 03c2 01       		.uleb128 0x1
+ 1364 03c3 9C       		.byte	0x9c
+ 1365 03c4 E7030000 		.4byte	0x3e7
+ 1366 03c8 0E       		.uleb128 0xe
+ 1367 03c9 04020000 		.4byte	.LASF35
+ 1368 03cd 01       		.byte	0x1
+ 1369 03ce 6402     		.2byte	0x264
+ 1370 03d0 81000000 		.4byte	0x81
+ 1371 03d4 02       		.uleb128 0x2
+ 1372 03d5 91       		.byte	0x91
+ 1373 03d6 6F       		.sleb128 -17
+ 1374 03d7 0C       		.uleb128 0xc
+ 1375 03d8 ED010000 		.4byte	.LASF42
+ 1376 03dc 01       		.byte	0x1
+ 1377 03dd 6602     		.2byte	0x266
+ 1378 03df 81000000 		.4byte	0x81
+ 1379 03e3 02       		.uleb128 0x2
+ 1380 03e4 91       		.byte	0x91
+ 1381 03e5 77       		.sleb128 -9
+ 1382 03e6 00       		.byte	0
+ 1383 03e7 14       		.uleb128 0x14
+ 1384 03e8 39010000 		.4byte	.LASF43
+ 1385 03ec 01       		.byte	0x1
+ 1386 03ed 7202     		.2byte	0x272
+ 1387 03ef 81000000 		.4byte	0x81
+ 1388 03f3 00000000 		.4byte	.LFB83
+ 1389 03f7 5C000000 		.4byte	.LFE83-.LFB83
+ 1390 03fb 01       		.uleb128 0x1
+ 1391 03fc 9C       		.byte	0x9c
+ 1392 03fd 2D040000 		.4byte	0x42d
+ 1393 0401 0C       		.uleb128 0xc
+ 1394 0402 BF000000 		.4byte	.LASF32
+ 1395 0406 01       		.byte	0x1
+ 1396 0407 7402     		.2byte	0x274
+ 1397 0409 81000000 		.4byte	0x81
+ 1398 040d 02       		.uleb128 0x2
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 37
+
+
+ 1399 040e 91       		.byte	0x91
+ 1400 040f 77       		.sleb128 -9
+ 1401 0410 0C       		.uleb128 0xc
+ 1402 0411 2D020000 		.4byte	.LASF44
+ 1403 0415 01       		.byte	0x1
+ 1404 0416 7502     		.2byte	0x275
+ 1405 0418 81000000 		.4byte	0x81
+ 1406 041c 02       		.uleb128 0x2
+ 1407 041d 91       		.byte	0x91
+ 1408 041e 6F       		.sleb128 -17
+ 1409 041f 0B       		.uleb128 0xb
+ 1410 0420 6900     		.ascii	"i\000"
+ 1411 0422 01       		.byte	0x1
+ 1412 0423 7602     		.2byte	0x276
+ 1413 0425 68000000 		.4byte	0x68
+ 1414 0429 02       		.uleb128 0x2
+ 1415 042a 91       		.byte	0x91
+ 1416 042b 70       		.sleb128 -16
+ 1417 042c 00       		.byte	0
+ 1418 042d 12       		.uleb128 0x12
+ 1419 042e 84020000 		.4byte	.LASF45
+ 1420 0432 01       		.byte	0x1
+ 1421 0433 8202     		.2byte	0x282
+ 1422 0435 00000000 		.4byte	.LFB84
+ 1423 0439 4C000000 		.4byte	.LFE84-.LFB84
+ 1424 043d 01       		.uleb128 0x1
+ 1425 043e 9C       		.byte	0x9c
+ 1426 043f 60040000 		.4byte	0x460
+ 1427 0443 0A       		.uleb128 0xa
+ 1428 0444 76616C00 		.ascii	"val\000"
+ 1429 0448 01       		.byte	0x1
+ 1430 0449 8202     		.2byte	0x282
+ 1431 044b 81000000 		.4byte	0x81
+ 1432 044f 02       		.uleb128 0x2
+ 1433 0450 91       		.byte	0x91
+ 1434 0451 6F       		.sleb128 -17
+ 1435 0452 0B       		.uleb128 0xb
+ 1436 0453 6900     		.ascii	"i\000"
+ 1437 0455 01       		.byte	0x1
+ 1438 0456 8402     		.2byte	0x284
+ 1439 0458 81000000 		.4byte	0x81
+ 1440 045c 02       		.uleb128 0x2
+ 1441 045d 91       		.byte	0x91
+ 1442 045e 77       		.sleb128 -9
+ 1443 045f 00       		.byte	0
+ 1444 0460 15       		.uleb128 0x15
+ 1445 0461 B1010000 		.4byte	.LASF51
+ 1446 0465 05       		.byte	0x5
+ 1447 0466 1207     		.2byte	0x712
+ 1448 0468 6C040000 		.4byte	0x46c
+ 1449 046c 16       		.uleb128 0x16
+ 1450 046d 76000000 		.4byte	0x76
+ 1451 0471 00       		.byte	0
+ 1452              		.section	.debug_abbrev,"",%progbits
+ 1453              	.Ldebug_abbrev0:
+ 1454 0000 01       		.uleb128 0x1
+ 1455 0001 11       		.uleb128 0x11
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 38
+
+
+ 1456 0002 01       		.byte	0x1
+ 1457 0003 25       		.uleb128 0x25
+ 1458 0004 0E       		.uleb128 0xe
+ 1459 0005 13       		.uleb128 0x13
+ 1460 0006 0B       		.uleb128 0xb
+ 1461 0007 03       		.uleb128 0x3
+ 1462 0008 0E       		.uleb128 0xe
+ 1463 0009 1B       		.uleb128 0x1b
+ 1464 000a 0E       		.uleb128 0xe
+ 1465 000b 55       		.uleb128 0x55
+ 1466 000c 17       		.uleb128 0x17
+ 1467 000d 11       		.uleb128 0x11
+ 1468 000e 01       		.uleb128 0x1
+ 1469 000f 10       		.uleb128 0x10
+ 1470 0010 17       		.uleb128 0x17
+ 1471 0011 00       		.byte	0
+ 1472 0012 00       		.byte	0
+ 1473 0013 02       		.uleb128 0x2
+ 1474 0014 24       		.uleb128 0x24
+ 1475 0015 00       		.byte	0
+ 1476 0016 0B       		.uleb128 0xb
+ 1477 0017 0B       		.uleb128 0xb
+ 1478 0018 3E       		.uleb128 0x3e
+ 1479 0019 0B       		.uleb128 0xb
+ 1480 001a 03       		.uleb128 0x3
+ 1481 001b 0E       		.uleb128 0xe
+ 1482 001c 00       		.byte	0
+ 1483 001d 00       		.byte	0
+ 1484 001e 03       		.uleb128 0x3
+ 1485 001f 16       		.uleb128 0x16
+ 1486 0020 00       		.byte	0
+ 1487 0021 03       		.uleb128 0x3
+ 1488 0022 0E       		.uleb128 0xe
+ 1489 0023 3A       		.uleb128 0x3a
+ 1490 0024 0B       		.uleb128 0xb
+ 1491 0025 3B       		.uleb128 0x3b
+ 1492 0026 0B       		.uleb128 0xb
+ 1493 0027 49       		.uleb128 0x49
+ 1494 0028 13       		.uleb128 0x13
+ 1495 0029 00       		.byte	0
+ 1496 002a 00       		.byte	0
+ 1497 002b 04       		.uleb128 0x4
+ 1498 002c 24       		.uleb128 0x24
+ 1499 002d 00       		.byte	0
+ 1500 002e 0B       		.uleb128 0xb
+ 1501 002f 0B       		.uleb128 0xb
+ 1502 0030 3E       		.uleb128 0x3e
+ 1503 0031 0B       		.uleb128 0xb
+ 1504 0032 03       		.uleb128 0x3
+ 1505 0033 08       		.uleb128 0x8
+ 1506 0034 00       		.byte	0
+ 1507 0035 00       		.byte	0
+ 1508 0036 05       		.uleb128 0x5
+ 1509 0037 16       		.uleb128 0x16
+ 1510 0038 00       		.byte	0
+ 1511 0039 03       		.uleb128 0x3
+ 1512 003a 0E       		.uleb128 0xe
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 39
+
+
+ 1513 003b 3A       		.uleb128 0x3a
+ 1514 003c 0B       		.uleb128 0xb
+ 1515 003d 3B       		.uleb128 0x3b
+ 1516 003e 05       		.uleb128 0x5
+ 1517 003f 49       		.uleb128 0x49
+ 1518 0040 13       		.uleb128 0x13
+ 1519 0041 00       		.byte	0
+ 1520 0042 00       		.byte	0
+ 1521 0043 06       		.uleb128 0x6
+ 1522 0044 2E       		.uleb128 0x2e
+ 1523 0045 00       		.byte	0
+ 1524 0046 3F       		.uleb128 0x3f
+ 1525 0047 19       		.uleb128 0x19
+ 1526 0048 03       		.uleb128 0x3
+ 1527 0049 0E       		.uleb128 0xe
+ 1528 004a 3A       		.uleb128 0x3a
+ 1529 004b 0B       		.uleb128 0xb
+ 1530 004c 3B       		.uleb128 0x3b
+ 1531 004d 0B       		.uleb128 0xb
+ 1532 004e 11       		.uleb128 0x11
+ 1533 004f 01       		.uleb128 0x1
+ 1534 0050 12       		.uleb128 0x12
+ 1535 0051 06       		.uleb128 0x6
+ 1536 0052 40       		.uleb128 0x40
+ 1537 0053 18       		.uleb128 0x18
+ 1538 0054 9742     		.uleb128 0x2117
+ 1539 0056 19       		.uleb128 0x19
+ 1540 0057 00       		.byte	0
+ 1541 0058 00       		.byte	0
+ 1542 0059 07       		.uleb128 0x7
+ 1543 005a 2E       		.uleb128 0x2e
+ 1544 005b 01       		.byte	0x1
+ 1545 005c 3F       		.uleb128 0x3f
+ 1546 005d 19       		.uleb128 0x19
+ 1547 005e 03       		.uleb128 0x3
+ 1548 005f 0E       		.uleb128 0xe
+ 1549 0060 3A       		.uleb128 0x3a
+ 1550 0061 0B       		.uleb128 0xb
+ 1551 0062 3B       		.uleb128 0x3b
+ 1552 0063 0B       		.uleb128 0xb
+ 1553 0064 27       		.uleb128 0x27
+ 1554 0065 19       		.uleb128 0x19
+ 1555 0066 11       		.uleb128 0x11
+ 1556 0067 01       		.uleb128 0x1
+ 1557 0068 12       		.uleb128 0x12
+ 1558 0069 06       		.uleb128 0x6
+ 1559 006a 40       		.uleb128 0x40
+ 1560 006b 18       		.uleb128 0x18
+ 1561 006c 9742     		.uleb128 0x2117
+ 1562 006e 19       		.uleb128 0x19
+ 1563 006f 01       		.uleb128 0x1
+ 1564 0070 13       		.uleb128 0x13
+ 1565 0071 00       		.byte	0
+ 1566 0072 00       		.byte	0
+ 1567 0073 08       		.uleb128 0x8
+ 1568 0074 05       		.uleb128 0x5
+ 1569 0075 00       		.byte	0
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 40
+
+
+ 1570 0076 03       		.uleb128 0x3
+ 1571 0077 08       		.uleb128 0x8
+ 1572 0078 3A       		.uleb128 0x3a
+ 1573 0079 0B       		.uleb128 0xb
+ 1574 007a 3B       		.uleb128 0x3b
+ 1575 007b 0B       		.uleb128 0xb
+ 1576 007c 49       		.uleb128 0x49
+ 1577 007d 13       		.uleb128 0x13
+ 1578 007e 02       		.uleb128 0x2
+ 1579 007f 18       		.uleb128 0x18
+ 1580 0080 00       		.byte	0
+ 1581 0081 00       		.byte	0
+ 1582 0082 09       		.uleb128 0x9
+ 1583 0083 2E       		.uleb128 0x2e
+ 1584 0084 01       		.byte	0x1
+ 1585 0085 3F       		.uleb128 0x3f
+ 1586 0086 19       		.uleb128 0x19
+ 1587 0087 03       		.uleb128 0x3
+ 1588 0088 0E       		.uleb128 0xe
+ 1589 0089 3A       		.uleb128 0x3a
+ 1590 008a 0B       		.uleb128 0xb
+ 1591 008b 3B       		.uleb128 0x3b
+ 1592 008c 05       		.uleb128 0x5
+ 1593 008d 27       		.uleb128 0x27
+ 1594 008e 19       		.uleb128 0x19
+ 1595 008f 11       		.uleb128 0x11
+ 1596 0090 01       		.uleb128 0x1
+ 1597 0091 12       		.uleb128 0x12
+ 1598 0092 06       		.uleb128 0x6
+ 1599 0093 40       		.uleb128 0x40
+ 1600 0094 18       		.uleb128 0x18
+ 1601 0095 9742     		.uleb128 0x2117
+ 1602 0097 19       		.uleb128 0x19
+ 1603 0098 01       		.uleb128 0x1
+ 1604 0099 13       		.uleb128 0x13
+ 1605 009a 00       		.byte	0
+ 1606 009b 00       		.byte	0
+ 1607 009c 0A       		.uleb128 0xa
+ 1608 009d 05       		.uleb128 0x5
+ 1609 009e 00       		.byte	0
+ 1610 009f 03       		.uleb128 0x3
+ 1611 00a0 08       		.uleb128 0x8
+ 1612 00a1 3A       		.uleb128 0x3a
+ 1613 00a2 0B       		.uleb128 0xb
+ 1614 00a3 3B       		.uleb128 0x3b
+ 1615 00a4 05       		.uleb128 0x5
+ 1616 00a5 49       		.uleb128 0x49
+ 1617 00a6 13       		.uleb128 0x13
+ 1618 00a7 02       		.uleb128 0x2
+ 1619 00a8 18       		.uleb128 0x18
+ 1620 00a9 00       		.byte	0
+ 1621 00aa 00       		.byte	0
+ 1622 00ab 0B       		.uleb128 0xb
+ 1623 00ac 34       		.uleb128 0x34
+ 1624 00ad 00       		.byte	0
+ 1625 00ae 03       		.uleb128 0x3
+ 1626 00af 08       		.uleb128 0x8
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 41
+
+
+ 1627 00b0 3A       		.uleb128 0x3a
+ 1628 00b1 0B       		.uleb128 0xb
+ 1629 00b2 3B       		.uleb128 0x3b
+ 1630 00b3 05       		.uleb128 0x5
+ 1631 00b4 49       		.uleb128 0x49
+ 1632 00b5 13       		.uleb128 0x13
+ 1633 00b6 02       		.uleb128 0x2
+ 1634 00b7 18       		.uleb128 0x18
+ 1635 00b8 00       		.byte	0
+ 1636 00b9 00       		.byte	0
+ 1637 00ba 0C       		.uleb128 0xc
+ 1638 00bb 34       		.uleb128 0x34
+ 1639 00bc 00       		.byte	0
+ 1640 00bd 03       		.uleb128 0x3
+ 1641 00be 0E       		.uleb128 0xe
+ 1642 00bf 3A       		.uleb128 0x3a
+ 1643 00c0 0B       		.uleb128 0xb
+ 1644 00c1 3B       		.uleb128 0x3b
+ 1645 00c2 05       		.uleb128 0x5
+ 1646 00c3 49       		.uleb128 0x49
+ 1647 00c4 13       		.uleb128 0x13
+ 1648 00c5 02       		.uleb128 0x2
+ 1649 00c6 18       		.uleb128 0x18
+ 1650 00c7 00       		.byte	0
+ 1651 00c8 00       		.byte	0
+ 1652 00c9 0D       		.uleb128 0xd
+ 1653 00ca 2E       		.uleb128 0x2e
+ 1654 00cb 01       		.byte	0x1
+ 1655 00cc 3F       		.uleb128 0x3f
+ 1656 00cd 19       		.uleb128 0x19
+ 1657 00ce 03       		.uleb128 0x3
+ 1658 00cf 0E       		.uleb128 0xe
+ 1659 00d0 3A       		.uleb128 0x3a
+ 1660 00d1 0B       		.uleb128 0xb
+ 1661 00d2 3B       		.uleb128 0x3b
+ 1662 00d3 05       		.uleb128 0x5
+ 1663 00d4 11       		.uleb128 0x11
+ 1664 00d5 01       		.uleb128 0x1
+ 1665 00d6 12       		.uleb128 0x12
+ 1666 00d7 06       		.uleb128 0x6
+ 1667 00d8 40       		.uleb128 0x40
+ 1668 00d9 18       		.uleb128 0x18
+ 1669 00da 9742     		.uleb128 0x2117
+ 1670 00dc 19       		.uleb128 0x19
+ 1671 00dd 01       		.uleb128 0x1
+ 1672 00de 13       		.uleb128 0x13
+ 1673 00df 00       		.byte	0
+ 1674 00e0 00       		.byte	0
+ 1675 00e1 0E       		.uleb128 0xe
+ 1676 00e2 05       		.uleb128 0x5
+ 1677 00e3 00       		.byte	0
+ 1678 00e4 03       		.uleb128 0x3
+ 1679 00e5 0E       		.uleb128 0xe
+ 1680 00e6 3A       		.uleb128 0x3a
+ 1681 00e7 0B       		.uleb128 0xb
+ 1682 00e8 3B       		.uleb128 0x3b
+ 1683 00e9 05       		.uleb128 0x5
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 42
+
+
+ 1684 00ea 49       		.uleb128 0x49
+ 1685 00eb 13       		.uleb128 0x13
+ 1686 00ec 02       		.uleb128 0x2
+ 1687 00ed 18       		.uleb128 0x18
+ 1688 00ee 00       		.byte	0
+ 1689 00ef 00       		.byte	0
+ 1690 00f0 0F       		.uleb128 0xf
+ 1691 00f1 2E       		.uleb128 0x2e
+ 1692 00f2 01       		.byte	0x1
+ 1693 00f3 3F       		.uleb128 0x3f
+ 1694 00f4 19       		.uleb128 0x19
+ 1695 00f5 03       		.uleb128 0x3
+ 1696 00f6 0E       		.uleb128 0xe
+ 1697 00f7 3A       		.uleb128 0x3a
+ 1698 00f8 0B       		.uleb128 0xb
+ 1699 00f9 3B       		.uleb128 0x3b
+ 1700 00fa 05       		.uleb128 0x5
+ 1701 00fb 27       		.uleb128 0x27
+ 1702 00fc 19       		.uleb128 0x19
+ 1703 00fd 49       		.uleb128 0x49
+ 1704 00fe 13       		.uleb128 0x13
+ 1705 00ff 11       		.uleb128 0x11
+ 1706 0100 01       		.uleb128 0x1
+ 1707 0101 12       		.uleb128 0x12
+ 1708 0102 06       		.uleb128 0x6
+ 1709 0103 40       		.uleb128 0x40
+ 1710 0104 18       		.uleb128 0x18
+ 1711 0105 9742     		.uleb128 0x2117
+ 1712 0107 19       		.uleb128 0x19
+ 1713 0108 01       		.uleb128 0x1
+ 1714 0109 13       		.uleb128 0x13
+ 1715 010a 00       		.byte	0
+ 1716 010b 00       		.byte	0
+ 1717 010c 10       		.uleb128 0x10
+ 1718 010d 34       		.uleb128 0x34
+ 1719 010e 00       		.byte	0
+ 1720 010f 03       		.uleb128 0x3
+ 1721 0110 0E       		.uleb128 0xe
+ 1722 0111 3A       		.uleb128 0x3a
+ 1723 0112 0B       		.uleb128 0xb
+ 1724 0113 3B       		.uleb128 0x3b
+ 1725 0114 05       		.uleb128 0x5
+ 1726 0115 49       		.uleb128 0x49
+ 1727 0116 13       		.uleb128 0x13
+ 1728 0117 00       		.byte	0
+ 1729 0118 00       		.byte	0
+ 1730 0119 11       		.uleb128 0x11
+ 1731 011a 2E       		.uleb128 0x2e
+ 1732 011b 00       		.byte	0
+ 1733 011c 3F       		.uleb128 0x3f
+ 1734 011d 19       		.uleb128 0x19
+ 1735 011e 03       		.uleb128 0x3
+ 1736 011f 0E       		.uleb128 0xe
+ 1737 0120 3A       		.uleb128 0x3a
+ 1738 0121 0B       		.uleb128 0xb
+ 1739 0122 3B       		.uleb128 0x3b
+ 1740 0123 05       		.uleb128 0x5
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 43
+
+
+ 1741 0124 11       		.uleb128 0x11
+ 1742 0125 01       		.uleb128 0x1
+ 1743 0126 12       		.uleb128 0x12
+ 1744 0127 06       		.uleb128 0x6
+ 1745 0128 40       		.uleb128 0x40
+ 1746 0129 18       		.uleb128 0x18
+ 1747 012a 9742     		.uleb128 0x2117
+ 1748 012c 19       		.uleb128 0x19
+ 1749 012d 00       		.byte	0
+ 1750 012e 00       		.byte	0
+ 1751 012f 12       		.uleb128 0x12
+ 1752 0130 2E       		.uleb128 0x2e
+ 1753 0131 01       		.byte	0x1
+ 1754 0132 3F       		.uleb128 0x3f
+ 1755 0133 19       		.uleb128 0x19
+ 1756 0134 03       		.uleb128 0x3
+ 1757 0135 0E       		.uleb128 0xe
+ 1758 0136 3A       		.uleb128 0x3a
+ 1759 0137 0B       		.uleb128 0xb
+ 1760 0138 3B       		.uleb128 0x3b
+ 1761 0139 05       		.uleb128 0x5
+ 1762 013a 27       		.uleb128 0x27
+ 1763 013b 19       		.uleb128 0x19
+ 1764 013c 11       		.uleb128 0x11
+ 1765 013d 01       		.uleb128 0x1
+ 1766 013e 12       		.uleb128 0x12
+ 1767 013f 06       		.uleb128 0x6
+ 1768 0140 40       		.uleb128 0x40
+ 1769 0141 18       		.uleb128 0x18
+ 1770 0142 9642     		.uleb128 0x2116
+ 1771 0144 19       		.uleb128 0x19
+ 1772 0145 01       		.uleb128 0x1
+ 1773 0146 13       		.uleb128 0x13
+ 1774 0147 00       		.byte	0
+ 1775 0148 00       		.byte	0
+ 1776 0149 13       		.uleb128 0x13
+ 1777 014a 2E       		.uleb128 0x2e
+ 1778 014b 01       		.byte	0x1
+ 1779 014c 3F       		.uleb128 0x3f
+ 1780 014d 19       		.uleb128 0x19
+ 1781 014e 03       		.uleb128 0x3
+ 1782 014f 0E       		.uleb128 0xe
+ 1783 0150 3A       		.uleb128 0x3a
+ 1784 0151 0B       		.uleb128 0xb
+ 1785 0152 3B       		.uleb128 0x3b
+ 1786 0153 05       		.uleb128 0x5
+ 1787 0154 27       		.uleb128 0x27
+ 1788 0155 19       		.uleb128 0x19
+ 1789 0156 49       		.uleb128 0x49
+ 1790 0157 13       		.uleb128 0x13
+ 1791 0158 11       		.uleb128 0x11
+ 1792 0159 01       		.uleb128 0x1
+ 1793 015a 12       		.uleb128 0x12
+ 1794 015b 06       		.uleb128 0x6
+ 1795 015c 40       		.uleb128 0x40
+ 1796 015d 18       		.uleb128 0x18
+ 1797 015e 9642     		.uleb128 0x2116
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 44
+
+
+ 1798 0160 19       		.uleb128 0x19
+ 1799 0161 01       		.uleb128 0x1
+ 1800 0162 13       		.uleb128 0x13
+ 1801 0163 00       		.byte	0
+ 1802 0164 00       		.byte	0
+ 1803 0165 14       		.uleb128 0x14
+ 1804 0166 2E       		.uleb128 0x2e
+ 1805 0167 01       		.byte	0x1
+ 1806 0168 3F       		.uleb128 0x3f
+ 1807 0169 19       		.uleb128 0x19
+ 1808 016a 03       		.uleb128 0x3
+ 1809 016b 0E       		.uleb128 0xe
+ 1810 016c 3A       		.uleb128 0x3a
+ 1811 016d 0B       		.uleb128 0xb
+ 1812 016e 3B       		.uleb128 0x3b
+ 1813 016f 05       		.uleb128 0x5
+ 1814 0170 49       		.uleb128 0x49
+ 1815 0171 13       		.uleb128 0x13
+ 1816 0172 11       		.uleb128 0x11
+ 1817 0173 01       		.uleb128 0x1
+ 1818 0174 12       		.uleb128 0x12
+ 1819 0175 06       		.uleb128 0x6
+ 1820 0176 40       		.uleb128 0x40
+ 1821 0177 18       		.uleb128 0x18
+ 1822 0178 9642     		.uleb128 0x2116
+ 1823 017a 19       		.uleb128 0x19
+ 1824 017b 01       		.uleb128 0x1
+ 1825 017c 13       		.uleb128 0x13
+ 1826 017d 00       		.byte	0
+ 1827 017e 00       		.byte	0
+ 1828 017f 15       		.uleb128 0x15
+ 1829 0180 34       		.uleb128 0x34
+ 1830 0181 00       		.byte	0
+ 1831 0182 03       		.uleb128 0x3
+ 1832 0183 0E       		.uleb128 0xe
+ 1833 0184 3A       		.uleb128 0x3a
+ 1834 0185 0B       		.uleb128 0xb
+ 1835 0186 3B       		.uleb128 0x3b
+ 1836 0187 05       		.uleb128 0x5
+ 1837 0188 49       		.uleb128 0x49
+ 1838 0189 13       		.uleb128 0x13
+ 1839 018a 3F       		.uleb128 0x3f
+ 1840 018b 19       		.uleb128 0x19
+ 1841 018c 3C       		.uleb128 0x3c
+ 1842 018d 19       		.uleb128 0x19
+ 1843 018e 00       		.byte	0
+ 1844 018f 00       		.byte	0
+ 1845 0190 16       		.uleb128 0x16
+ 1846 0191 35       		.uleb128 0x35
+ 1847 0192 00       		.byte	0
+ 1848 0193 49       		.uleb128 0x49
+ 1849 0194 13       		.uleb128 0x13
+ 1850 0195 00       		.byte	0
+ 1851 0196 00       		.byte	0
+ 1852 0197 00       		.byte	0
+ 1853              		.section	.debug_aranges,"",%progbits
+ 1854 0000 BC000000 		.4byte	0xbc
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 45
+
+
+ 1855 0004 0200     		.2byte	0x2
+ 1856 0006 00000000 		.4byte	.Ldebug_info0
+ 1857 000a 04       		.byte	0x4
+ 1858 000b 00       		.byte	0
+ 1859 000c 0000     		.2byte	0
+ 1860 000e 0000     		.2byte	0
+ 1861 0010 00000000 		.4byte	.LFB64
+ 1862 0014 0C000000 		.4byte	.LFE64-.LFB64
+ 1863 0018 00000000 		.4byte	.LFB65
+ 1864 001c 0C000000 		.4byte	.LFE65-.LFB65
+ 1865 0020 00000000 		.4byte	.LFB66
+ 1866 0024 0C000000 		.4byte	.LFE66-.LFB66
+ 1867 0028 00000000 		.4byte	.LFB67
+ 1868 002c 12000000 		.4byte	.LFE67-.LFB67
+ 1869 0030 00000000 		.4byte	.LFB68
+ 1870 0034 0C000000 		.4byte	.LFE68-.LFB68
+ 1871 0038 00000000 		.4byte	.LFB69
+ 1872 003c 12000000 		.4byte	.LFE69-.LFB69
+ 1873 0040 00000000 		.4byte	.LFB70
+ 1874 0044 12000000 		.4byte	.LFE70-.LFB70
+ 1875 0048 00000000 		.4byte	.LFB71
+ 1876 004c 1A000000 		.4byte	.LFE71-.LFB71
+ 1877 0050 00000000 		.4byte	.LFB72
+ 1878 0054 12000000 		.4byte	.LFE72-.LFB72
+ 1879 0058 00000000 		.4byte	.LFB73
+ 1880 005c 12000000 		.4byte	.LFE73-.LFB73
+ 1881 0060 00000000 		.4byte	.LFB74
+ 1882 0064 12000000 		.4byte	.LFE74-.LFB74
+ 1883 0068 00000000 		.4byte	.LFB75
+ 1884 006c 20000000 		.4byte	.LFE75-.LFB75
+ 1885 0070 00000000 		.4byte	.LFB76
+ 1886 0074 1E000000 		.4byte	.LFE76-.LFB76
+ 1887 0078 00000000 		.4byte	.LFB77
+ 1888 007c 1A000000 		.4byte	.LFE77-.LFB77
+ 1889 0080 00000000 		.4byte	.LFB78
+ 1890 0084 16000000 		.4byte	.LFE78-.LFB78
+ 1891 0088 00000000 		.4byte	.LFB79
+ 1892 008c 0C000000 		.4byte	.LFE79-.LFB79
+ 1893 0090 00000000 		.4byte	.LFB80
+ 1894 0094 46000000 		.4byte	.LFE80-.LFB80
+ 1895 0098 00000000 		.4byte	.LFB81
+ 1896 009c 1A000000 		.4byte	.LFE81-.LFB81
+ 1897 00a0 00000000 		.4byte	.LFB82
+ 1898 00a4 42000000 		.4byte	.LFE82-.LFB82
+ 1899 00a8 00000000 		.4byte	.LFB83
+ 1900 00ac 5C000000 		.4byte	.LFE83-.LFB83
+ 1901 00b0 00000000 		.4byte	.LFB84
+ 1902 00b4 4C000000 		.4byte	.LFE84-.LFB84
+ 1903 00b8 00000000 		.4byte	0
+ 1904 00bc 00000000 		.4byte	0
+ 1905              		.section	.debug_ranges,"",%progbits
+ 1906              	.Ldebug_ranges0:
+ 1907 0000 00000000 		.4byte	.LFB64
+ 1908 0004 0C000000 		.4byte	.LFE64
+ 1909 0008 00000000 		.4byte	.LFB65
+ 1910 000c 0C000000 		.4byte	.LFE65
+ 1911 0010 00000000 		.4byte	.LFB66
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 46
+
+
+ 1912 0014 0C000000 		.4byte	.LFE66
+ 1913 0018 00000000 		.4byte	.LFB67
+ 1914 001c 12000000 		.4byte	.LFE67
+ 1915 0020 00000000 		.4byte	.LFB68
+ 1916 0024 0C000000 		.4byte	.LFE68
+ 1917 0028 00000000 		.4byte	.LFB69
+ 1918 002c 12000000 		.4byte	.LFE69
+ 1919 0030 00000000 		.4byte	.LFB70
+ 1920 0034 12000000 		.4byte	.LFE70
+ 1921 0038 00000000 		.4byte	.LFB71
+ 1922 003c 1A000000 		.4byte	.LFE71
+ 1923 0040 00000000 		.4byte	.LFB72
+ 1924 0044 12000000 		.4byte	.LFE72
+ 1925 0048 00000000 		.4byte	.LFB73
+ 1926 004c 12000000 		.4byte	.LFE73
+ 1927 0050 00000000 		.4byte	.LFB74
+ 1928 0054 12000000 		.4byte	.LFE74
+ 1929 0058 00000000 		.4byte	.LFB75
+ 1930 005c 20000000 		.4byte	.LFE75
+ 1931 0060 00000000 		.4byte	.LFB76
+ 1932 0064 1E000000 		.4byte	.LFE76
+ 1933 0068 00000000 		.4byte	.LFB77
+ 1934 006c 1A000000 		.4byte	.LFE77
+ 1935 0070 00000000 		.4byte	.LFB78
+ 1936 0074 16000000 		.4byte	.LFE78
+ 1937 0078 00000000 		.4byte	.LFB79
+ 1938 007c 0C000000 		.4byte	.LFE79
+ 1939 0080 00000000 		.4byte	.LFB80
+ 1940 0084 46000000 		.4byte	.LFE80
+ 1941 0088 00000000 		.4byte	.LFB81
+ 1942 008c 1A000000 		.4byte	.LFE81
+ 1943 0090 00000000 		.4byte	.LFB82
+ 1944 0094 42000000 		.4byte	.LFE82
+ 1945 0098 00000000 		.4byte	.LFB83
+ 1946 009c 5C000000 		.4byte	.LFE83
+ 1947 00a0 00000000 		.4byte	.LFB84
+ 1948 00a4 4C000000 		.4byte	.LFE84
+ 1949 00a8 00000000 		.4byte	0
+ 1950 00ac 00000000 		.4byte	0
+ 1951              		.section	.debug_line,"",%progbits
+ 1952              	.Ldebug_line0:
+ 1953 0000 41030000 		.section	.debug_str,"MS",%progbits,1
+ 1953      02005C01 
+ 1953      00000201 
+ 1953      FB0E0D00 
+ 1953      01010101 
+ 1954              	.LASF26:
+ 1955 0000 52656164 		.ascii	"ReadGyro\000"
+ 1955      4779726F 
+ 1955      00
+ 1956              	.LASF34:
+ 1957 0009 57726974 		.ascii	"WriteControlRegister\000"
+ 1957      65436F6E 
+ 1957      74726F6C 
+ 1957      52656769 
+ 1957      73746572 
+ 1958              	.LASF46:
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 47
+
+
+ 1959 001e 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1959      43313120 
+ 1959      352E342E 
+ 1959      31203230 
+ 1959      31363036 
+ 1960 0051 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1960      20726576 
+ 1960      6973696F 
+ 1960      6E203233 
+ 1960      37373135 
+ 1961 0084 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1961      66756E63 
+ 1961      74696F6E 
+ 1961      2D736563 
+ 1961      74696F6E 
+ 1962              	.LASF21:
+ 1963 00ac 496E6974 		.ascii	"InitIMUMagCal\000"
+ 1963      494D554D 
+ 1963      61674361 
+ 1963      6C00
+ 1964              	.LASF27:
+ 1965 00ba 68696768 		.ascii	"high\000"
+ 1965      00
+ 1966              	.LASF32:
+ 1967 00bf 76616C75 		.ascii	"value\000"
+ 1967      6500
+ 1968              	.LASF9:
+ 1969 00c5 5F5F696E 		.ascii	"__int32_t\000"
+ 1969      7433325F 
+ 1969      7400
+ 1970              	.LASF50:
+ 1971 00cf 636F6E74 		.ascii	"controlreg\000"
+ 1971      726F6C72 
+ 1971      656700
+ 1972              	.LASF38:
+ 1973 00da 64617461 		.ascii	"data_wr\000"
+ 1973      5F777200 
+ 1974              	.LASF3:
+ 1975 00e2 73686F72 		.ascii	"short unsigned int\000"
+ 1975      7420756E 
+ 1975      7369676E 
+ 1975      65642069 
+ 1975      6E7400
+ 1976              	.LASF28:
+ 1977 00f5 52656164 		.ascii	"ReadMag\000"
+ 1977      4D616700 
+ 1978              	.LASF33:
+ 1979 00fd 52656164 		.ascii	"ReadTemp\000"
+ 1979      54656D70 
+ 1979      00
+ 1980              	.LASF14:
+ 1981 0106 666C6F61 		.ascii	"float\000"
+ 1981      7400
+ 1982              	.LASF20:
+ 1983 010c 496E6974 		.ascii	"InitIMU\000"
+ 1983      494D5500 
+ 1984              	.LASF7:
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 48
+
+
+ 1985 0114 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1985      206C6F6E 
+ 1985      6720756E 
+ 1985      7369676E 
+ 1985      65642069 
+ 1986              	.LASF1:
+ 1987 012b 756E7369 		.ascii	"unsigned char\000"
+ 1987      676E6564 
+ 1987      20636861 
+ 1987      7200
+ 1988              	.LASF43:
+ 1989 0139 44533133 		.ascii	"DS1302_readByte\000"
+ 1989      30325F72 
+ 1989      65616442 
+ 1989      79746500 
+ 1990              	.LASF5:
+ 1991 0149 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1991      20756E73 
+ 1991      69676E65 
+ 1991      6420696E 
+ 1991      7400
+ 1992              	.LASF48:
+ 1993 015b 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Desktop\\SoftPro firmware (PSo"
+ 1993      73657273 
+ 1993      5C4D6174 
+ 1993      74696143 
+ 1993      505C4465 
+ 1994 018a 4335295C 		.ascii	"C5)\\firmware.cydsn\000"
+ 1994      6669726D 
+ 1994      77617265 
+ 1994      2E637964 
+ 1994      736E00
+ 1995              	.LASF40:
+ 1996 019d 52656164 		.ascii	"ReadControlRegister\000"
+ 1996      436F6E74 
+ 1996      726F6C52 
+ 1996      65676973 
+ 1996      74657200 
+ 1997              	.LASF51:
+ 1998 01b1 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1998      52784275 
+ 1998      66666572 
+ 1998      00
+ 1999              	.LASF47:
+ 2000 01be 2E2E5C73 		.ascii	"..\\src\\IMU_functions.c\000"
+ 2000      72635C49 
+ 2000      4D555F66 
+ 2000      756E6374 
+ 2000      696F6E73 
+ 2001              	.LASF15:
+ 2002 01d5 646F7562 		.ascii	"double\000"
+ 2002      6C6500
+ 2003              	.LASF2:
+ 2004 01dc 73686F72 		.ascii	"short int\000"
+ 2004      7420696E 
+ 2004      7400
+ 2005              	.LASF12:
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 49
+
+
+ 2006 01e6 75696E74 		.ascii	"uint16\000"
+ 2006      313600
+ 2007              	.LASF42:
+ 2008 01ed 72656164 		.ascii	"readValue\000"
+ 2008      56616C75 
+ 2008      6500
+ 2009              	.LASF8:
+ 2010 01f7 756E7369 		.ascii	"unsigned int\000"
+ 2010      676E6564 
+ 2010      20696E74 
+ 2010      00
+ 2011              	.LASF35:
+ 2012 0204 61646472 		.ascii	"address\000"
+ 2012      65737300 
+ 2013              	.LASF16:
+ 2014 020c 63686172 		.ascii	"char\000"
+ 2014      00
+ 2015              	.LASF19:
+ 2016 0211 496D7573 		.ascii	"ImusReset\000"
+ 2016      52657365 
+ 2016      7400
+ 2017              	.LASF13:
+ 2018 021b 696E7431 		.ascii	"int16\000"
+ 2018      3600
+ 2019              	.LASF41:
+ 2020 0221 44533133 		.ascii	"DS1302_read\000"
+ 2020      30325F72 
+ 2020      65616400 
+ 2021              	.LASF44:
+ 2022 022d 63757272 		.ascii	"currentBit\000"
+ 2022      656E7442 
+ 2022      697400
+ 2023              	.LASF10:
+ 2024 0238 696E7433 		.ascii	"int32_t\000"
+ 2024      325F7400 
+ 2025              	.LASF18:
+ 2026 0240 73697A65 		.ascii	"sizetype\000"
+ 2026      74797065 
+ 2026      00
+ 2027              	.LASF22:
+ 2028 0249 496E6974 		.ascii	"InitIMUgeneral\000"
+ 2028      494D5567 
+ 2028      656E6572 
+ 2028      616C00
+ 2029              	.LASF39:
+ 2030 0258 44533133 		.ascii	"DS1302_writeByte\000"
+ 2030      30325F77 
+ 2030      72697465 
+ 2030      42797465 
+ 2030      00
+ 2031              	.LASF6:
+ 2032 0269 6C6F6E67 		.ascii	"long long int\000"
+ 2032      206C6F6E 
+ 2032      6720696E 
+ 2032      7400
+ 2033              	.LASF37:
+ 2034 0277 44533133 		.ascii	"DS1302_write\000"
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc2oS0dM.s 			page 50
+
+
+ 2034      30325F77 
+ 2034      72697465 
+ 2034      00
+ 2035              	.LASF45:
+ 2036 0284 73686966 		.ascii	"shiftOut_RTC\000"
+ 2036      744F7574 
+ 2036      5F525443 
+ 2036      00
+ 2037              	.LASF23:
+ 2038 0291 43686970 		.ascii	"ChipSelector\000"
+ 2038      53656C65 
+ 2038      63746F72 
+ 2038      00
+ 2039              	.LASF25:
+ 2040 029e 52656164 		.ascii	"ReadAcc\000"
+ 2040      41636300 
+ 2041              	.LASF36:
+ 2042 02a6 5350495F 		.ascii	"SPI_delay\000"
+ 2042      64656C61 
+ 2042      7900
+ 2043              	.LASF49:
+ 2044 02b0 52656164 		.ascii	"ReadAllIMUs\000"
+ 2044      416C6C49 
+ 2044      4D557300 
+ 2045              	.LASF30:
+ 2046 02bc 52656164 		.ascii	"ReadQuat\000"
+ 2046      51756174 
+ 2046      00
+ 2047              	.LASF11:
+ 2048 02c5 75696E74 		.ascii	"uint8\000"
+ 2048      3800
+ 2049              	.LASF24:
+ 2050 02cb 52656164 		.ascii	"ReadIMU\000"
+ 2050      494D5500 
+ 2051              	.LASF29:
+ 2052 02d3 52656164 		.ascii	"ReadMagCal\000"
+ 2052      4D616743 
+ 2052      616C00
+ 2053              	.LASF4:
+ 2054 02de 6C6F6E67 		.ascii	"long int\000"
+ 2054      20696E74 
+ 2054      00
+ 2055              	.LASF17:
+ 2056 02e7 6C6F6E67 		.ascii	"long double\000"
+ 2056      20646F75 
+ 2056      626C6500 
+ 2057              	.LASF0:
+ 2058 02f3 7369676E 		.ascii	"signed char\000"
+ 2058      65642063 
+ 2058      68617200 
+ 2059              	.LASF31:
+ 2060 02ff 6B5F696D 		.ascii	"k_imu\000"
+ 2060      7500
+ 2061              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

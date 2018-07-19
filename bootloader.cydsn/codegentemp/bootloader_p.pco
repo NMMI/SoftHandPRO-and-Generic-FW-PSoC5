@@ -1,0 +1,45 @@
+set_location "\UART_RS485:BUART:counter_load_not\" macrocell 1 1 0 3
+set_location "\UART_RS485:BUART:rx_state_2\" macrocell 1 0 0 2
+set_location "\UART_RS485:BUART:rx_status_4\" macrocell 0 2 0 2
+set_location "\UART_RS485:BUART:sTX:sCLOCK:TxBitClkGen\" datapathcell 1 2 2 
+set_location "\UART_RS485:BUART:sTX:TxSts\" statusicell 1 0 4 
+set_location "\UART_RS485:BUART:rx_break_detect\" macrocell 0 1 1 0
+set_location "Net_222" macrocell 1 2 0 2
+set_location "\UART_RS485:BUART:tx_state_0\" macrocell 0 2 1 0
+set_location "\UART_RS485:BUART:rx_status_5\" macrocell 0 2 1 2
+set_location "\UART_RS485:BUART:txn\" macrocell 1 2 1 3
+set_location "\UART_RS485:BUART:rx_bitclk_enable\" macrocell 0 2 0 1
+set_location "Net_2" macrocell 1 2 0 1
+set_location "\UART_RS485:BUART:rx_state_stop1_reg\" macrocell 0 1 0 1
+set_location "\UART_RS485:BUART:rx_state_2_split\" macrocell 0 0 1 0
+set_location "\UART_RS485:BUART:tx_state_1\" macrocell 1 2 1 0
+set_location "\UART_RS485:BUART:sTX:TxShifter:u0\" datapathcell 1 1 2 
+set_location "\UART_RS485:BUART:rx_last\" macrocell 0 2 1 3
+set_location "\UART_RS485:BUART:rx_counter_load\" macrocell 0 1 1 3
+set_location "\UART_RS485:BUART:rx_state_0\" macrocell 0 0 0 0
+set_location "\UART_RS485:BUART:sRX:RxShifter:u0\" datapathcell 0 0 2 
+set_location "\UART_RS485:BUART:tx_state_2\" macrocell 1 2 0 0
+set_location "\UART_RS485:BUART:tx_bitclk\" macrocell 1 1 1 3
+set_location "\UART_RS485:BUART:rx_state_3\" macrocell 0 0 0 2
+set_location "\UART_RS485:BUART:rx_load_fifo\" macrocell 0 0 1 1
+set_location "\UART_RS485:BUART:rx_status_3\" macrocell 0 0 0 1
+set_location "__ONE__" macrocell 3 0 1 1
+set_location "\UART_RS485:BUART:rx_state_1\" macrocell 0 1 0 2
+set_location "\UART_RS485:BUART:tx_status_0\" macrocell 1 2 0 3
+set_location "\UART_RS485:BUART:sRX:RxSts\" statusicell 0 2 4 
+set_location "\UART_RS485:BUART:tx_status_2\" macrocell 1 1 0 0
+set_location "\UART_RS485:BUART:sRX:RxBitCounter\" count7cell 0 1 7 
+set_location "\UART_RS485:BUART:rx_status_1\" macrocell 0 1 1 2
+set_location "\RS485_CTS:Sync:ctrl_reg\" controlcell 0 0 6 
+# Note: port 12 is the logical name for port 7
+set_io "RS485_RX(0)" iocell 12 6
+# Note: port 12 is the logical name for port 7
+set_io "RS_485_EN(0)" iocell 12 4
+set_io "USB_VDD(0)" iocell 1 4
+set_location "ClockBlock" clockblockcell -1 -1 0
+set_io "FTDI_ENABLE(0)" iocell 1 2
+# Note: port 12 is the logical name for port 7
+set_io "RS485_TX(0)" iocell 12 7
+set_location "\UART_RS485:TXInternalInterrupt\" interrupt -1 -1 1
+set_location "\UART_RS485:RXInternalInterrupt\" interrupt -1 -1 0
+set_io "MOTOR_PORT(0)" iocell 3 0

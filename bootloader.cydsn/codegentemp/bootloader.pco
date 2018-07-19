@@ -1,0 +1,45 @@
+# bootloader
+# 2018-04-23 08:36:02Z
+
+set_location "\UART_RS485:BUART:rx_state_2_split\" 0 0 1 0
+set_location "ClockBlock" clockblockcell -1 -1 0
+set_io "RS485_RX(0)" iocell 12 6
+set_io "RS485_TX(0)" iocell 12 7
+set_io "RS_485_EN(0)" iocell 12 4
+set_io "FTDI_ENABLE(0)" iocell 1 2
+set_location "__ONE__" 3 0 1 1
+set_io "USB_VDD(0)" iocell 1 4
+set_io "MOTOR_PORT(0)" iocell 3 0
+set_location "Net_2" 1 2 0 1
+set_location "\UART_RS485:BUART:counter_load_not\" 1 1 0 3
+set_location "\UART_RS485:BUART:tx_status_0\" 1 2 0 3
+set_location "\UART_RS485:BUART:tx_status_2\" 1 1 0 0
+set_location "\UART_RS485:BUART:rx_counter_load\" 0 1 1 3
+set_location "\UART_RS485:BUART:rx_status_4\" 0 2 0 2
+set_location "\UART_RS485:BUART:rx_status_5\" 0 2 1 2
+set_location "\UART_RS485:TXInternalInterrupt\" interrupt -1 -1 1
+set_location "\UART_RS485:RXInternalInterrupt\" interrupt -1 -1 0
+set_location "\UART_RS485:BUART:sTX:TxShifter:u0\" 1 1 2
+set_location "\UART_RS485:BUART:sTX:sCLOCK:TxBitClkGen\" 1 2 2
+set_location "\UART_RS485:BUART:sTX:TxSts\" 1 0 4
+set_location "\UART_RS485:BUART:sRX:RxShifter:u0\" 0 0 2
+set_location "\UART_RS485:BUART:sRX:RxBitCounter\" 0 1 7
+set_location "\UART_RS485:BUART:sRX:RxSts\" 0 2 4
+set_location "\RS485_CTS:Sync:ctrl_reg\" 0 0 6
+set_location "\UART_RS485:BUART:txn\" 1 2 1 3
+set_location "\UART_RS485:BUART:tx_state_1\" 1 2 1 0
+set_location "\UART_RS485:BUART:tx_state_0\" 0 2 1 0
+set_location "\UART_RS485:BUART:tx_state_2\" 1 2 0 0
+set_location "Net_222" 1 2 0 2
+set_location "\UART_RS485:BUART:tx_bitclk\" 1 1 1 3
+set_location "\UART_RS485:BUART:rx_state_1\" 0 1 0 2
+set_location "\UART_RS485:BUART:rx_state_0\" 0 0 0 0
+set_location "\UART_RS485:BUART:rx_load_fifo\" 0 0 1 1
+set_location "\UART_RS485:BUART:rx_state_3\" 0 0 0 2
+set_location "\UART_RS485:BUART:rx_state_2\" 1 0 0 2
+set_location "\UART_RS485:BUART:rx_bitclk_enable\" 0 2 0 1
+set_location "\UART_RS485:BUART:rx_state_stop1_reg\" 0 1 0 1
+set_location "\UART_RS485:BUART:rx_status_1\" 0 1 1 2
+set_location "\UART_RS485:BUART:rx_status_3\" 0 0 0 1
+set_location "\UART_RS485:BUART:rx_break_detect\" 0 1 1 0
+set_location "\UART_RS485:BUART:rx_last\" 0 2 1 3
