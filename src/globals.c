@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017, Centro "E.Piaggio"
+// Copyright (c) 2017-2019, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -39,7 +39,7 @@
 * \date         October 01, 2017
 * \author       _Centro "E.Piaggio"_
 * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
-* \copyright    (C) 2017 Centro "E.Piaggio". All rights reserved.
+* \copyright    (C) 2017-2019 Centro "E.Piaggio". All rights reserved.
 */
 
 //=================================================================     includes
@@ -63,7 +63,6 @@ uint32  timer_value0;
 float   cycle_time;
 
 // Device Data
-
 int32   dev_tension;                        /*!< Power supply tension.*/
 uint8   dev_pwm_limit;                      /*!< Device pwm limit. It may change during execution.*/
 uint8   dev_pwm_sat = 100;                  /*!< Device pwm saturation. By default the saturation value must not exceed 100.*/
@@ -76,7 +75,6 @@ emg_status CYDATA emg_1_status = RESET;         /*!< First EMG sensor status.*/
 emg_status CYDATA emg_2_status = RESET;         /*!< Second EMG sensor status.*/                               
     
 // Bit Flag
-
 CYBIT reset_last_value_flag;                /*!< This flag is set when the encoders last values must be resetted.*/
 CYBIT tension_valid;                        /*!< Tension validation bit.*/
 CYBIT interrupt_flag = FALSE;               /*!< Interrupt flag enabler.*/
@@ -86,17 +84,19 @@ CYBIT can_write = TRUE;                     /*!< Write to EEPROM flag.*/
 uint8 rest_enabled;                         /*!< Rest position flag.*/
 uint8 forced_open;                          /*!< Forced open flag (used in position with rest position control).*/                               
 uint8 battery_low_SoC = FALSE;              /*!< Battery low State of Charge flag (re-open terminal device when active).*/
+uint8 change_ext_ref_flag = FALSE;          /*!< This flag is set when an external reference command is received.*/
 
 // DMA Buffer
-
 int16 ADC_buf[4];                           /*! ADC measurements buffer.*/
+uint32 Enc_buf[N_ENCODERS];
 
 // PWM value
-
 int8 pwm_sign;                               /*!< Sign of pwm driven. Used to obtain current sign.*/
 
-// Rest Position variables
+// Encoder variables
+uint32 data_encoder_raw[NUM_OF_SENSORS];
 
+// Rest Position variables
 int32 rest_pos_curr_ref;                     /*!< Rest position current reference.*/
 
 // SD variables
@@ -118,4 +118,5 @@ uint8 Mag[N_IMU_MAX][6];
 uint8 MagCal[N_IMU_MAX][3];
 uint8 Temp[N_IMU_MAX][2];
 float Quat[4] = {1,0,0,0};
+
 /* END OF FILE */

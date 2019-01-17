@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2018, Centro "E.Piaggio"
+// Copyright (c) 2017-2019, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -39,7 +39,7 @@
 * \date         February 01, 2018
 * \author       _Centro "E.Piaggio"_
 * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
-* \copyright    (C) 2017-2018 Centro "E.Piaggio". All rights reserved.
+* \copyright    (C) 2017-2019 Centro "E.Piaggio". All rights reserved.
 */
 
 #include "SPI_functions.h"
@@ -671,16 +671,20 @@ void encoder_read(int32* currValue) {
     CyDelayUs(1);
     ENC_CS_Write(1); 
          
+    // S = SIGN BIT
+    // X = ENCODER VALUE BIT
+    // 0 = 0 BIT
+    // C = CONTROL BIT
+    
+    // data_encoder =  00000000000000[14] XXXXXXXXXXXX[12] CCCCCC[6]
+    
     for (i=0; i<N_ENCODERS; i++) {
         if (check_enc_data(&data_encoder[i])) {
-            currValue[i] = ((data_encoder[i] & 0x3FFC0) - 0x20000) >> 2;
-                                                // reset last 6 bit 
-                                                // -> |:|:|id|dim|CMD|CHK|(data---
-                                                // subtract half of max value
-                                                // and shift to have 16 bit val
+            currValue[i] = (data_encoder[i] & 0x3FFC0) >> 6;   // 00000000000000[20] XXXXXXXXXXXX[12]    
         }
         else {
             currValue[i] = 0;
         }
+        data_encoder_raw[i] = currValue[i];
     }
 }

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 1
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccaXtV3N.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 1
   28:Generated_Source\PSoC5/RS485_CTS.c **** *  Write a byte to the Control Register.
   29:Generated_Source\PSoC5/RS485_CTS.c **** *
   30:Generated_Source\PSoC5/RS485_CTS.c **** * Parameters:
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 2
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccaXtV3N.s 			page 2
 
 
   31:Generated_Source\PSoC5/RS485_CTS.c **** *  control:  The value to be assigned to the Control Register.
@@ -103,7 +103,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 1
   57              	.L3:
   58 001a 00BF     		.align	2
   59              	.L2:
-  60 001c 78650040 		.word	1073767800
+  60 001c 79650040 		.word	1073767801
   61              		.cfi_endproc
   62              	.LFE0:
   63              		.size	RS485_CTS_Write, .-RS485_CTS_Write
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 1
   41:Generated_Source\PSoC5/RS485_CTS.c **** 
   42:Generated_Source\PSoC5/RS485_CTS.c **** 
   43:Generated_Source\PSoC5/RS485_CTS.c **** /*******************************************************************************
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 3
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccaXtV3N.s 			page 3
 
 
   44:Generated_Source\PSoC5/RS485_CTS.c **** * Function Name: RS485_CTS_Read
@@ -164,7 +164,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 1
   95              	.L7:
   96 0012 00BF     		.align	2
   97              	.L6:
-  98 0014 78650040 		.word	1073767800
+  98 0014 79650040 		.word	1073767801
   99              		.cfi_endproc
  100              	.LFE1:
  101              		.size	RS485_CTS_Read, .-RS485_CTS_Read
@@ -178,20 +178,20 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 1
  109 0006 00000000 		.4byte	.Ldebug_abbrev0
  110 000a 04       		.byte	0x4
  111 000b 01       		.uleb128 0x1
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 4
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccaXtV3N.s 			page 4
 
 
  112 000c 10000000 		.4byte	.LASF14
  113 0010 0C       		.byte	0xc
- 114 0011 9B010000 		.4byte	.LASF15
- 115 0015 0F010000 		.4byte	.LASF16
+ 114 0011 22010000 		.4byte	.LASF15
+ 115 0015 5E010000 		.4byte	.LASF16
  116 0019 00000000 		.4byte	.Ldebug_ranges0+0
  117 001d 00000000 		.4byte	0
  118 0021 00000000 		.4byte	.Ldebug_line0
  119 0025 02       		.uleb128 0x2
  120 0026 01       		.byte	0x1
  121 0027 06       		.byte	0x6
- 122 0028 D7010000 		.4byte	.LASF0
+ 122 0028 A3010000 		.4byte	.LASF0
  123 002c 02       		.uleb128 0x2
  124 002d 01       		.byte	0x1
  125 002e 08       		.byte	0x8
@@ -199,7 +199,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 1
  127 0033 02       		.uleb128 0x2
  128 0034 02       		.byte	0x2
  129 0035 05       		.byte	0x5
- 130 0036 BE010000 		.4byte	.LASF2
+ 130 0036 45010000 		.4byte	.LASF2
  131 003a 02       		.uleb128 0x2
  132 003b 02       		.byte	0x2
  133 003c 07       		.byte	0x7
@@ -207,7 +207,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 1
  135 0041 02       		.uleb128 0x2
  136 0042 04       		.byte	0x4
  137 0043 05       		.byte	0x5
- 138 0044 CE010000 		.4byte	.LASF4
+ 138 0044 55010000 		.4byte	.LASF4
  139 0048 02       		.uleb128 0x2
  140 0049 04       		.byte	0x4
  141 004a 07       		.byte	0x7
@@ -215,7 +215,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 1
  143 004f 02       		.uleb128 0x2
  144 0050 08       		.byte	0x8
  145 0051 05       		.byte	0x5
- 146 0052 88010000 		.4byte	.LASF6
+ 146 0052 0F010000 		.4byte	.LASF6
  147 0056 02       		.uleb128 0x2
  148 0057 08       		.byte	0x8
  149 0058 07       		.byte	0x7
@@ -229,7 +229,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 1
  157 0066 07       		.byte	0x7
  158 0067 EB000000 		.4byte	.LASF8
  159 006b 04       		.uleb128 0x4
- 160 006c C8010000 		.4byte	.LASF12
+ 160 006c 4F010000 		.4byte	.LASF12
  161 0070 02       		.byte	0x2
  162 0071 E401     		.2byte	0x1e4
  163 0073 2C000000 		.4byte	0x2c
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 1
  166 0079 04       		.byte	0x4
  167 007a 9E000000 		.4byte	.LASF9
  168 007e 02       		.uleb128 0x2
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 5
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccaXtV3N.s 			page 5
 
 
  169 007f 08       		.byte	0x8
@@ -247,7 +247,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 1
  172 0085 02       		.uleb128 0x2
  173 0086 01       		.byte	0x1
  174 0087 08       		.byte	0x8
- 175 0088 96010000 		.4byte	.LASF11
+ 175 0088 1D010000 		.4byte	.LASF11
  176 008c 04       		.uleb128 0x4
  177 008d B2000000 		.4byte	.LASF13
  178 0091 02       		.byte	0x2
@@ -274,7 +274,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 1
  199 00bf 77       		.sleb128 -9
  200 00c0 00       		.byte	0
  201 00c1 08       		.uleb128 0x8
- 202 00c2 E3010000 		.4byte	.LASF19
+ 202 00c2 AF010000 		.4byte	.LASF19
  203 00c6 01       		.byte	0x1
  204 00c7 39       		.byte	0x39
  205 00c8 6B000000 		.4byte	0x6b
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 1
  223 000a 0E       		.uleb128 0xe
  224 000b 55       		.uleb128 0x55
  225 000c 17       		.uleb128 0x17
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 6
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccaXtV3N.s 			page 6
 
 
  226 000d 11       		.uleb128 0x11
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 1
  280 0043 0E       		.uleb128 0xe
  281 0044 3A       		.uleb128 0x3a
  282 0045 0B       		.uleb128 0xb
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 7
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccaXtV3N.s 			page 7
 
 
  283 0046 3B       		.uleb128 0x3b
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 1
  337 007e 00       		.byte	0
  338 007f 00       		.byte	0
  339 0080 00       		.byte	0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 8
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccaXtV3N.s 			page 8
 
 
  340              		.section	.debug_aranges,"",%progbits
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 1
  374 00a4 756E7369 		.ascii	"unsigned char\000"
  374      676E6564 
  374      20636861 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 9
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccaXtV3N.s 			page 9
 
 
  374      7200
@@ -514,57 +514,52 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 1
  388      6720756E 
  388      7369676E 
  388      65642069 
- 389              	.LASF16:
- 390 010f 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Dropbox (workgroup)\\Personal\\"
- 390      73657273 
- 390      5C4D6174 
- 390      74696143 
- 390      505C4472 
- 391 013e 4D617474 		.ascii	"Mattia Poggiani\\FIRMWARES (local)\\SoftPro firmwar"
- 391      69612050 
- 391      6F676769 
- 391      616E695C 
- 391      4649524D 
- 392 016f 65202850 		.ascii	"e (PSoC5)\\firmware.cydsn\000"
- 392      536F4335 
- 392      295C6669 
- 392      726D7761 
- 392      72652E63 
- 393              	.LASF6:
- 394 0188 6C6F6E67 		.ascii	"long long int\000"
- 394      206C6F6E 
- 394      6720696E 
- 394      7400
- 395              	.LASF11:
- 396 0196 63686172 		.ascii	"char\000"
- 396      00
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccEVs7q6.s 			page 10
+ 389              	.LASF6:
+ 390 010f 6C6F6E67 		.ascii	"long long int\000"
+ 390      206C6F6E 
+ 390      6720696E 
+ 390      7400
+ 391              	.LASF11:
+ 392 011d 63686172 		.ascii	"char\000"
+ 392      00
+ 393              	.LASF15:
+ 394 0122 47656E65 		.ascii	"Generated_Source\\PSoC5\\RS485_CTS.c\000"
+ 394      72617465 
+ 394      645F536F 
+ 394      75726365 
+ 394      5C50536F 
+ 395              	.LASF2:
+ 396 0145 73686F72 		.ascii	"short int\000"
+ 396      7420696E 
+ 396      7400
+ 397              	.LASF12:
+ 398 014f 75696E74 		.ascii	"uint8\000"
+ 398      3800
+ 399              	.LASF4:
+ 400 0155 6C6F6E67 		.ascii	"long int\000"
+ 400      20696E74 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccaXtV3N.s 			page 10
 
 
- 397              	.LASF15:
- 398 019b 47656E65 		.ascii	"Generated_Source\\PSoC5\\RS485_CTS.c\000"
- 398      72617465 
- 398      645F536F 
- 398      75726365 
- 398      5C50536F 
- 399              	.LASF2:
- 400 01be 73686F72 		.ascii	"short int\000"
- 400      7420696E 
- 400      7400
- 401              	.LASF12:
- 402 01c8 75696E74 		.ascii	"uint8\000"
- 402      3800
- 403              	.LASF4:
- 404 01ce 6C6F6E67 		.ascii	"long int\000"
- 404      20696E74 
- 404      00
- 405              	.LASF0:
- 406 01d7 7369676E 		.ascii	"signed char\000"
- 406      65642063 
- 406      68617200 
- 407              	.LASF19:
- 408 01e3 52533438 		.ascii	"RS485_CTS_Read\000"
- 408      355F4354 
- 408      535F5265 
- 408      616400
- 409              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 400      00
+ 401              	.LASF16:
+ 402 015e 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Documents\\GITHUB\\SoftHand-PR"
+ 402      73657273 
+ 402      5C4D6174 
+ 402      74696143 
+ 402      505C446F 
+ 403 018c 4F2D5053 		.ascii	"O-PSoC5\\firmware.cydsn\000"
+ 403      6F43355C 
+ 403      6669726D 
+ 403      77617265 
+ 403      2E637964 
+ 404              	.LASF0:
+ 405 01a3 7369676E 		.ascii	"signed char\000"
+ 405      65642063 
+ 405      68617200 
+ 406              	.LASF19:
+ 407 01af 52533438 		.ascii	"RS485_CTS_Read\000"
+ 407      355F4354 
+ 407      535F5265 
+ 407      616400
+ 408              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

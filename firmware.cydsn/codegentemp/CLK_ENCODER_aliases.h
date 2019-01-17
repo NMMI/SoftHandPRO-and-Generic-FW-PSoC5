@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: ENC_SCLK.h  
+* File Name: CLK_ENCODER.h  
 * Version 2.20
 *
 * Description:
@@ -15,8 +15,8 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#if !defined(CY_PINS_ENC_SCLK_ALIASES_H) /* Pins ENC_SCLK_ALIASES_H */
-#define CY_PINS_ENC_SCLK_ALIASES_H
+#if !defined(CY_PINS_CLK_ENCODER_ALIASES_H) /* Pins CLK_ENCODER_ALIASES_H */
+#define CY_PINS_CLK_ENCODER_ALIASES_H
 
 #include "cytypes.h"
 #include "cyfitter.h"
@@ -25,12 +25,12 @@
 /***************************************
 *              Constants        
 ***************************************/
-#define ENC_SCLK_0			(ENC_SCLK__0__PC)
-#define ENC_SCLK_0_INTR	((uint16)((uint16)0x0001u << ENC_SCLK__0__SHIFT))
+#define CLK_ENCODER_0			(CLK_ENCODER__0__PC)
+#define CLK_ENCODER_0_INTR	((uint16)((uint16)0x0001u << CLK_ENCODER__0__SHIFT))
 
-#define ENC_SCLK_INTR_ALL	 ((uint16)(ENC_SCLK_0_INTR))
+#define CLK_ENCODER_INTR_ALL	 ((uint16)(CLK_ENCODER_0_INTR))
 
-#endif /* End Pins ENC_SCLK_ALIASES_H */
+#endif /* End Pins CLK_ENCODER_ALIASES_H */
 
 
 /* [] END OF FILE */

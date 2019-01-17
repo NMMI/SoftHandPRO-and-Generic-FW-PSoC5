@@ -28,7 +28,7 @@
 *   Conditional Compilation Parameters
 ***************************************/
 
-#define SPI_IMU_INTERNAL_CLOCK             (1u)
+#define SPI_IMU_INTERNAL_CLOCK             (0u)
 
 #if(0u != SPI_IMU_INTERNAL_CLOCK)
     #include "SPI_IMU_IntClock.h"

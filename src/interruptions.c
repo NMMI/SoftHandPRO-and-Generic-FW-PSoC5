@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017, Centro "E.Piaggio"
+// Copyright (c) 2017-2019, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -39,7 +39,7 @@
 * \date         October 01, 2017
 * \author       _Centro "E.Piaggio"_
 * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
-* \copyright    (C) 2017 Centro "E.Piaggio". All rights reserved.
+* \copyright    (C) 2017-2019 Centro "E.Piaggio". All rights reserved.
 */
 
 
@@ -156,11 +156,9 @@ void interrupt_manager(){
 
     //======================================================     receive routine
     
-    // Get data until buffer is not empty 
-    
     while(UART_RS485_GetRxBufferSize() && (package_count < 6)){
         // 6 - estimated maximum number of packets we can read without blocking firmware execution
-        
+
         // Get next char
         rx_data = UART_RS485_GetChar();
         
@@ -388,25 +386,24 @@ void function_scheduler(void) {
             //Update time variable
             g_mem.total_time_on = g_mem.total_time_on + 120;  // Add 120 seconds.
             
-            rtc_data = DS1302_read(DS1302_DATE_RD);
-            g_mem.curr_time[0] = (rtc_data/16) * 10 + rtc_data%16;
-            rtc_data = DS1302_read(DS1302_MONTH_RD);
-            g_mem.curr_time[1] = (rtc_data/16) * 10 + rtc_data%16;
-            rtc_data = DS1302_read(DS1302_YEAR_RD);
-            g_mem.curr_time[2] = (rtc_data/16) * 10 + rtc_data%16;
+            if (c_mem.read_exp_port_flag == EXP_SD_RTC) {
+                rtc_data = DS1302_read(DS1302_DATE_RD);
+                g_mem.curr_time[0] = (rtc_data/16) * 10 + rtc_data%16;
+                rtc_data = DS1302_read(DS1302_MONTH_RD);
+                g_mem.curr_time[1] = (rtc_data/16) * 10 + rtc_data%16;
+                rtc_data = DS1302_read(DS1302_YEAR_RD);
+                g_mem.curr_time[2] = (rtc_data/16) * 10 + rtc_data%16;
 
-            rtc_data = DS1302_read(DS1302_HOUR_RD);
-            g_mem.curr_time[3] = (rtc_data/16) * 10 + rtc_data%16;
-            rtc_data = DS1302_read(DS1302_MINUTES_RD);
-            g_mem.curr_time[4] = (rtc_data/16) * 10 + rtc_data%16;
-            rtc_data = DS1302_read(DS1302_SECONDS_RD);
-            g_mem.curr_time[5] = (rtc_data/16) * 10 + rtc_data%16;
-            
-            //Write in SD card
-            prepare_counter_info(info_);
-            write_bytes = FS_Write(pFile, info_, strlen(info_));
-            if (write_bytes == 0) {
-                g_refNew.onoff = 0x00;
+                rtc_data = DS1302_read(DS1302_HOUR_RD);
+                g_mem.curr_time[3] = (rtc_data/16) * 10 + rtc_data%16;
+                rtc_data = DS1302_read(DS1302_MINUTES_RD);
+                g_mem.curr_time[4] = (rtc_data/16) * 10 + rtc_data%16;
+                rtc_data = DS1302_read(DS1302_SECONDS_RD);
+                g_mem.curr_time[5] = (rtc_data/16) * 10 + rtc_data%16;
+                
+                //Write in SD card
+                prepare_counter_info(info_);
+                write_bytes = FS_Write(pFile, info_, strlen(info_));
             }
         }
     }
@@ -437,19 +434,22 @@ void function_scheduler(void) {
     }
    
     //---------------------------------- Read IMUs
-    ReadAllIMUs();      // IMU reading is atomic, no RS485 request is handled
+    if (c_mem.read_imu_flag) {
+        ReadAllIMUs();      // IMU reading is atomic, no RS485 request is handled
         
-    if (interrupt_flag){
-        interrupt_flag = FALSE;
-        interrupt_manager();
+        if (interrupt_flag){
+            interrupt_flag = FALSE;
+            interrupt_manager();
+        }
     }
+    
     //---------------------------------- Update States
     
     // Load k-1 state
     memcpy( &g_measOld, &g_meas, sizeof(g_meas) );
     memcpy( &g_refOld, &g_ref, sizeof(g_ref) );
 
-    // Load k+1 state
+    // Load k+1 state        
     memcpy( &g_ref, &g_refNew, sizeof(g_ref) );
     memcpy( &g_imu, &g_imuNew, sizeof(g_imu) );
                 
@@ -459,6 +459,10 @@ void function_scheduler(void) {
         write_cycles = TRUE;
     }
 
+    if (c_mem.input_mode == INPUT_MODE_EXTERNAL) {
+        change_ext_ref_flag = FALSE;
+    }
+    
     timer_value = (uint32)MY_TIMER_ReadCounter();
     cycle_time = (float)((timer_value0 - timer_value)/1000000.0);
     MY_TIMER_WriteCounter(5000000);
@@ -504,28 +508,29 @@ void motor_control() {
     
     static int32 prev_pos_err;      // previous position error for deriv. control
     static int32 prev_curr_err;     // previous current error for deriv. control
+    static int32 prev_pwm;
 
     static CYBIT motor_dir = FALSE;
-
+    static uint32 position_counter = 0;
     static uint8 current_emg = 0;   // 0 NONE
                                     // 1 EMG 1
                                     // 2 EMG 2
                                     // wait for both to get down
+    
 
     err_emg_1 = g_meas.emg[0] - c_mem.emg_threshold[0];
     err_emg_2 = g_meas.emg[1] - c_mem.emg_threshold[1];
 
-    // =========================== POSITION INPUT ==============================
+    // =========================== POSITION INPUT ==============================            
     switch(c_mem.input_mode) {
-
         case INPUT_MODE_ENCODER3:
 
             // Calculate handle value based on position of handle in the
             // sensor chain and multiplication factor between handle and motor position
             if (c_mem.double_encoder_on_off) 
-                handle_value = g_meas.pos[2] * c_mem.motor_handle_ratio;
+                handle_value = (g_meas.pos[2] * c_mem.motor_handle_ratio) + g_mem.pos_lim_inf;
             else
-                handle_value = g_meas.pos[1] * c_mem.motor_handle_ratio;
+                handle_value = (g_meas.pos[1] * c_mem.motor_handle_ratio) + g_mem.pos_lim_inf;
             
 
             // Read handle and use it as reference for the motor
@@ -538,7 +543,7 @@ void motor_control() {
                     g_ref.pos = handle_value;
             }
             break;
-
+            
         case INPUT_MODE_EMG_PROPORTIONAL:
             if (err_emg_1 > 0)
                 g_ref.pos = (err_emg_1 * g_mem.pos_lim_sup) / (1024 - c_mem.emg_threshold[0]);
@@ -561,11 +566,11 @@ void motor_control() {
             switch (current_emg) {
                 case 0:
                     // Look for the first EMG passing the threshold
-                    if (err_emg_1 > 0) {
+                    if (err_emg_1 > 0 && err_emg_1 > err_emg_2) {
                         current_emg = 1;
                         break;
                     }
-                    if (err_emg_2 > 0) {
+                    if (err_emg_2 > 0 && err_emg_2 > err_emg_1) {
                         current_emg = 2;
                         break;
                     }
@@ -577,7 +582,7 @@ void motor_control() {
                         current_emg = 0;
                         break;
                     }
-                    g_ref.pos = g_refOld.pos + (err_emg_1 * g_mem.emg_speed * 2) / (1024 - c_mem.emg_threshold[0]);
+                    g_ref.pos = g_refOld.pos + (err_emg_1 * g_mem.emg_speed << 2) / (1024 - c_mem.emg_threshold[0]);
                     break;
 
                 case 2:
@@ -586,13 +591,12 @@ void motor_control() {
                         current_emg = 0;
                         break;
                     }
-                    g_ref.pos = g_refOld.pos - (err_emg_2 * g_mem.emg_speed * 2) / (1024 - c_mem.emg_threshold[1]);
+                    g_ref.pos = g_refOld.pos - (err_emg_2 * g_mem.emg_speed << 2) / (1024 - c_mem.emg_threshold[1]);
                     break;
 
                 default:
                     break;
             }
-
             break;
 
         case INPUT_MODE_EMG_FCFS_ADV:
@@ -600,11 +604,11 @@ void motor_control() {
             switch (current_emg) {
                 // Look for the first EMG passing the threshold
                 case 0:
-                    if (err_emg_1 > 0) {
+                    if (err_emg_1 > 0 && err_emg_1 > err_emg_2) {
                         current_emg = 1;
                         break;
                     }
-                    if (err_emg_2 > 0) {
+                    if (err_emg_2 > 0 && err_emg_2 > err_emg_1) {
                         current_emg = 2;
                         break;
                     }
@@ -639,6 +643,7 @@ void motor_control() {
                 default:
                     break;
             }
+            break;
 
         default:
             break;
@@ -881,8 +886,41 @@ void motor_control() {
     if (c_mem.control_mode != CONTROL_PWM) 
         pwm_input = (((pwm_input << 10) / PWM_MAX_VALUE) * dev_pwm_limit) >> 10;
  
-    pwm_sign = SIGN(pwm_input);
-
+    //// RATE LIMITER ////
+    if(SIGN(pwm_input-prev_pwm) == SIGN(pos_error))
+    {
+        if((pwm_input-prev_pwm) > PWM_RATE_LIMITER_MAX)
+            pwm_input =  prev_pwm + PWM_RATE_LIMITER_MAX;
+    
+        if((pwm_input-prev_pwm) < -PWM_RATE_LIMITER_MAX)
+            pwm_input =  prev_pwm - PWM_RATE_LIMITER_MAX;
+    }
+    
+    if(pwm_input >  PWM_MAX_VALUE) 
+        pwm_input =  PWM_MAX_VALUE;
+    if(pwm_input < -PWM_MAX_VALUE) 
+        pwm_input = -PWM_MAX_VALUE;
+    
+    prev_pwm = pwm_input;
+	
+    pwm_sign = SIGN(pwm_input);   
+    
+    // Block motor with pwm = 0 to exploit not reversible motor behaviour 
+	if ( c_mem.control_mode != CONTROL_PWM && ((g_measOld.pos[0]-g_meas.pos[0]) < 50 && (g_measOld.pos[0]-g_meas.pos[0]) > -50) && ((g_refOld.pos - g_ref.pos) < 100 && (g_refOld.pos - g_ref.pos) > -100) ) {
+        position_counter++;
+        
+        if (position_counter > 250) { 
+            if (c_mem.input_mode == INPUT_MODE_EXTERNAL && change_ext_ref_flag == FALSE) {
+                g_refNew.pos = g_meas.pos[0];       // Needed only when USB input mode is used, since g_refNew structure is used only with this input
+            }
+            g_ref.pos = g_meas.pos[0];
+            pwm_input = 0;            
+        }
+    }
+    else {
+        position_counter = 0;
+    }
+    
     if (motor_dir)
         MOTOR_DIR_Write(0x01);
     else
@@ -901,19 +939,23 @@ void encoder_reading_SPI() {
     int32 aux_encoders[N_ENCODERS];
     
     // Encoder Variables  
-    int jj = 0;
+    uint8 jj;
+     
+    int16 tmp_value_encoder;
+    int32 tmp_value_encoder_32;
+    int32 value_encoder;
     int32 speed_encoder;
-    static int32 previous_val;
-    int32 aux;
-	int32 init_rot = 0;
+    int32 value_diff;
+	int8 init_rot = 0;
 
-    static int32 last_value_encoder[N_ENCODERS];
-
-    static uint8 error[N_ENCODERS];
+    static int32 last_value_encoder[NUM_OF_SENSORS];
+    static int32 comp_value_encoder[NUM_OF_SENSORS];
+    static uint8 error[NUM_OF_SENSORS];
     
     static CYBIT only_first_time = TRUE;
-
+//    static CYBIT safe_startup_motor_activation = FALSE;
     static uint8 one_time_execute = 0;
+//    static uint32 count_startup_motor = 0;
     static CYBIT pos_reconstruct = FALSE;
 
     static int32 v_value[N_ENCODERS];   //last value for velocity
@@ -932,27 +974,44 @@ void encoder_reading_SPI() {
         aux_encoders[index] = 0;
     }   
     
-    encoder_read(&aux_encoders[0]);
-
+    // encoder_read(&aux_encoders[0]);
+    aux_encoders[0] = (SHIFTREG_ENC_2_ReadData() >> 1) & 0x3FFFF;
+//    aux_encoders[0] = (Enc_buf[0] ) & 0x00FFF;
+    aux_encoders[0] = (aux_encoders[0] & 0x3FFC0) >> 6;   // 00000000000000[20] XXXXXXXXXXXX[12]
+    data_encoder_raw[0] = aux_encoders[0];
+//    aux_encoders[1] = ((uint32)SHIFTREG_ENC_1_ReadData() >> 1) & 0x0FFFF;
+//    aux_encoders[1] = (aux_encoders[1] & 0x3FFC0) >> 6;   // 00000000000000[20] XXXXXXXXXXXX[12]
+//    data_encoder_raw[1] = aux_encoders[1];
+    aux_encoders[1] = (SHIFTREG_ENC_3_ReadData() >> 1) & 0x3FFFF;
+    aux_encoders[1] = (aux_encoders[1] & 0x3FFC0) >> 6;   // 00000000000000[20] XXXXXXXXXXXX[12]
+    data_encoder_raw[1] = aux_encoders[1];
+    aux_encoders[2] = (SHIFTREG_ENC_1_ReadData() >> 1) & 0x3FFFF;
+    aux_encoders[2] = (aux_encoders[2] & 0x3FFC0) >> 6;   // 00000000000000[20] XXXXXXXXXXXX[12]
+    data_encoder_raw[2] = aux_encoders[2];
+        
     for (index = 0; index < N_ENCODERS; index++) {
-        if ( (c_mem.double_encoder_on_off && index == 2) || (!c_mem.double_encoder_on_off && index >= 1) ) {
-            // Handle measures
-            aux_encoders[index] = (int16)aux_encoders[index] + g_mem.m_off[index];
-        } 
-        else {
-            // Encoder measures has to be changed in sign due to mechanical chip positioning on SoftHand Pro
-            aux_encoders[index] = (int16) -(aux_encoders[index]) + g_mem.m_off[index];
-        }
+          
+        tmp_value_encoder = (int16)(aux_encoders[index] - (uint16)g_mem.m_off[index]);
+        if (tmp_value_encoder < 0){
+            tmp_value_encoder = tmp_value_encoder + 4096;   //SSSS[4] XXXXXXXXXXXX[12] worst case range [-4096, 4095]
+        }       // Range [0, 4096]
+
+        if (tmp_value_encoder >= 2048) {
+           tmp_value_encoder = tmp_value_encoder - 4096;    //SSSS[4] XXXXXXXXXXXX[12] range [-2048, 2047]
+        }       // Range [-2048, 2047]
+
+        tmp_value_encoder_32 = (((int32)(tmp_value_encoder)) << 4);     //SSSSSSSSSSSSSSSS[16] XXXXXXXXXXXX[12] 0000[4] range [-32768, 32767]
+        comp_value_encoder[index] = tmp_value_encoder_32;
 
         // Initialize last_value_encoder
         if (only_first_time) {
-            last_value_encoder[index] = aux_encoders[index];
+            last_value_encoder[index] = tmp_value_encoder_32;
             if (index == 2)
                 only_first_time = 0;
         }
 
         // Take care of rotations
-        aux = aux_encoders[index] - last_value_encoder[index];
+        value_diff = tmp_value_encoder_32 - last_value_encoder[index];     // worst case SSSSSSSSSSSSSSS[15] XXXXXXXXXXXXX[13] 0000[4]
 
         // ====================== 1 TURN ======================
         // -32768                    0                    32767 -32768                   0                     32767
@@ -972,14 +1031,15 @@ void encoder_reading_SPI() {
         // to go slower than 1/4 turn every ms -> 1 turn every 4ms
         // equal to 250 turn/s -> 15000 RPM
 
-        if (aux > 49152)
+        if (value_diff > 49152)
             g_meas.rot[index]--;
         else{ 
-            if (aux < -49152)
+            if (value_diff < -49152)
                 g_meas.rot[index]++;
             else{
-                if (abs(aux) > 16384) { // if two measure are too far
+                if (abs(value_diff) > 16384) { // if two measure are too far
                     error[index]++;
+                                
                     if (error[index] < 10)
                         // Discard
                         return;
@@ -988,21 +1048,27 @@ void encoder_reading_SPI() {
         }
 
         error[index] = 0;
+        
+        last_value_encoder[index] = tmp_value_encoder_32;
 
-        last_value_encoder[index] = aux_encoders[index];
+        value_encoder = (int32)tmp_value_encoder_32;   // SSSSSSSSSSSSSSSS[16] XXXXXXXXXXXX[12] 0000[4]
 
-        aux_encoders[index] += (int32)g_meas.rot[index] << 16;
-
+        value_encoder += ((int32)g_meas.rot[index] << 16);    
+        
         if (c_mem.m_mult[index] != 1.0) {
-            aux_encoders[index] *= c_mem.m_mult[index];
+            value_encoder *= c_mem.m_mult[index];
         }
         
-        previous_val = (g_meas.pos[0] >> g_mem.res[0]); 
-
-        g_meas.pos[index] = aux_encoders[index];
-
-
-        speed_encoder = (int16)filter((11*aux_encoders[index] - 18* v_value[index] + 9 * vv_value[index] -2 * vvv_value[index]), &filt_vel[index]);
+        // Right / Left hand turn
+        if (index == 0) {
+            if (c_mem.right_left == RIGHT_HAND){
+                value_encoder *= -1;        
+            }
+        }
+        
+        g_meas.pos[index] = value_encoder;
+    
+        speed_encoder = (int16)filter((11*value_encoder - 18* v_value[index] + 9 * vv_value[index] -2 * vvv_value[index]), &filt_vel[index]);
 
         //Update current speed
         speed_encoder = speed_encoder / (6*cycle_time);
@@ -1011,7 +1077,7 @@ void encoder_reading_SPI() {
         // update old velocity and acceleration values
         vvv_value[index] = vv_value[index];
         vv_value[index] = v_value[index];
-        v_value[index] = aux_encoders[index];
+        v_value[index] = value_encoder;
 
         // wait at least 3 * max_num_of_error (10) + 5 = 35 cycles to reconstruct the right turn
         if (pos_reconstruct == FALSE){
@@ -1020,33 +1086,48 @@ void encoder_reading_SPI() {
             else {
                 //Double encoder translation
                 if (c_mem.double_encoder_on_off){
-
-                    init_rot = calc_turns_fcn(g_meas.pos[0],g_meas.pos[1]);
-                    
+                    init_rot = calc_turns_fcn(comp_value_encoder[0],comp_value_encoder[1]);
                     if (c_mem.m_mult[0] < 0)
                         init_rot = -init_rot;
                     
                     g_meas.rot[0] = (int8)init_rot;
-
-                }
+                }    
 
                 if (c_mem.m_mult[0] != 1.0)
                     g_meas.pos[0] /= c_mem.m_mult[0];
                 
                 g_meas.pos[0] += (int32)(init_rot << 16);
-                
-                if (c_mem.m_mult[0] != 1)
+            
+                if (c_mem.m_mult[0] != 1.0)
                     g_meas.pos[0] *= c_mem.m_mult[0];
-                        
+            
                 g_refNew.pos = g_meas.pos[0];
 
                 // If necessary activate motor
-                MOTOR_ON_OFF_Write(g_ref.onoff);
+    			//safe_startup_motor_activation = TRUE;
+                g_refNew.onoff = c_mem.activ;
+                MOTOR_ON_OFF_Write(g_refNew.onoff);
+                //MOTOR_ON_OFF_Write(g_ref.onoff);
                 
                 pos_reconstruct = TRUE;
             }
         }
-    }    
+    } 
+
+/*	
+	// Wait for 35+SAFE_STARTUP_MOTOR_READINGS cycles before starting motors
+    if (safe_startup_motor_activation){
+        count_startup_motor++;
+        if (count_startup_motor >= (uint32)SAFE_STARTUP_MOTOR_READINGS) {                            
+            g_refNew.pos = 0;
+            
+            g_refNew.onoff = c_mem.activ;
+            MOTOR_ON_OFF_Write(g_refNew.onoff);
+            
+            safe_startup_motor_activation = FALSE;
+        }
+    }
+*/ 
 }
 
 //==============================================================================
@@ -1068,7 +1149,7 @@ void analog_read_end() {
     /   resistor = 18 -> resistor of voltage divider in KOhm 
     /
     /   Real formulation: tradeoff in good performance and accurancy, ADC_buf[] 
-    /   and offset unit of measurment is counts, instead dev_tension and
+    /   and offset unit of measurement is counts, instead dev_tension and
     /   g_meas.curr[] are converted in properly unit.
     /  =========================================================================
     */
@@ -1078,13 +1159,14 @@ void analog_read_end() {
     static uint16 emg_counter_1 = 0;
     static uint16 emg_counter_2 = 0;
 	static uint8 first_tension_valid = TRUE;
-    static int32 pow_tension = 12000;       //12000 mV (12 V)
+    //static int32 pow_tension = 12000;       //12000 mV (12 V)
     static uint16 count = 0;
     static uint32 v_count = 0;
     
     // Wait for conversion end
     
     while(!ADC_STATUS_Read()){
+        
         if (interrupt_flag){
             interrupt_flag = FALSE;
             interrupt_manager();
@@ -1099,7 +1181,13 @@ void analog_read_end() {
         interrupt_manager();
     }
     
-	if (first_tension_valid && tension_valid) {
+    // VOLTAGE READING
+    // Once firmware starts, first_tension_valid flag is set to TRUE while tension_valid status is FALSE
+    // Step 1) Wait for battery voltage stabilization and filter convergence for 1000 cycles (v_count counter), after that tension_valid flag is set to TRUE
+    // Step 2) Wait for another 1000 cycles (count counter) to decide which is full charge power tension, than set first_tension_valid to FALSE
+    // Low voltage condition) Whenever dev_tension ADC value is under 7000 mV, tension_valid flag is set to FALSE and dev_tension assigned to 5000 mV, then Step 1 has to be repeated
+    
+	if (first_tension_valid && tension_valid) {     // Voltage reading (Step 2)
         count = count + 1;
         
         if (count == 1000){
@@ -1120,9 +1208,9 @@ void analog_read_end() {
 
     // Until there is no valid input tension repeat this measurement
 
-    if (dev_tension < 7000) {
+    if (dev_tension < 7000) {       // Voltage reading (Low voltage condition)
         // PSoC is powered through uUSB
-
+        
         tension_valid = FALSE;
             
         if (interrupt_flag){
@@ -1157,14 +1245,17 @@ void analog_read_end() {
         
         // Read ADC sampled value of power source tension and motor current
         
-        if (v_count == 1000 && !tension_valid){
+        if (v_count == 1000 && !tension_valid){     // Voltage reading (Step 1)
             // After 1000 v_count cycles, dev_tension_f is stable
             tension_valid = TRUE;   
             count = 0;
+            v_count = 0;
         }
         else {  
             // wait for battery voltage stabilization
-            v_count = v_count + 1;
+            if (v_count < 1000) {
+                v_count = v_count + 1;
+            }
             dev_tension_f = filter(dev_tension, &filt_v);
         }
 
@@ -1186,7 +1277,6 @@ void analog_read_end() {
 
     }
     
-    
     // Read EMG (if necessary)
     if ((c_mem.input_mode == INPUT_MODE_EMG_PROPORTIONAL) ||
         (c_mem.input_mode == INPUT_MODE_EMG_INTEGRAL) ||
@@ -1204,8 +1294,8 @@ void analog_read_end() {
         // Calibration state machine
         switch(emg_1_status) {
             case NORMAL: // normal execution
-                //i_aux = ((int32)(ADC_buf[2 + c_mem.switch_emg] - 1639) * 87) >> 5;  //map range to 0-4096
-                i_aux = (int32)(ADC_buf[2 + c_mem.switch_emg]);
+                i_aux = ((int32)(ADC_buf[2 + c_mem.switch_emg] - 1639) * 87) >> 5;  //map range to 0-4096
+                //i_aux = (int32)(ADC_buf[2 + c_mem.switch_emg]);
                 if (i_aux < 0) 
                     i_aux = 0;
                 i_aux = filter(i_aux, &filt_emg1);
@@ -1291,25 +1381,25 @@ void analog_read_end() {
         // EMG 2 calibration state machine
         switch(emg_2_status) {
             case NORMAL: // normal execution
-                //i_aux = ((int32)(ADC_buf[3 - c_mem.switch_emg] - 1640) * 87) >> 5;  //map range to 0-4096
-                i_aux = (int32)(ADC_buf[3 - c_mem.switch_emg]);
-                if (i_aux < 0)
-                    i_aux = 0;
-                i_aux = filter(i_aux, &filt_emg2);
-                i_aux = (i_aux << 10) / g_mem.emg_max_value[1];
-    
-                if (interrupt_flag){
-                    interrupt_flag = FALSE;
-                    interrupt_manager();
-                }
-                
-                if (i_aux < 0) 
-                    i_aux = 0;
-                else 
-                    if (i_aux > 1024)
-                        i_aux = 1024;
-                
-                g_meas.emg[1] = i_aux;
+                i_aux = ((int32)(ADC_buf[3 - c_mem.switch_emg] - 1640) * 87) >> 5;  //map range to 0-4096
+                //i_aux = (int32)(ADC_buf[3 - c_mem.switch_emg]);
+                    if (i_aux < 0)
+                        i_aux = 0;
+                    i_aux = filter(i_aux, &filt_emg2);
+                    i_aux = (i_aux << 10) / g_mem.emg_max_value[1];
+        
+                    if (interrupt_flag){
+                        interrupt_flag = FALSE;
+                        interrupt_manager();
+                    }
+                    
+                    if (i_aux < 0) 
+                        i_aux = 0;
+                    else 
+                        if (i_aux > 1024)
+                            i_aux = 1024;
+                    
+                    g_meas.emg[1] = i_aux;
 
                 break;
 
@@ -1459,36 +1549,40 @@ void pwm_limit_search() {
 //==============================================================================
 
 void cycles_counter_update() {
-    static uint8 pos_cycle_status = STATE_INACTIVE;
+	static uint8 pos_cycle_status = STATE_INACTIVE;
     static uint8 emg_cycle_status[2] = {STATE_INACTIVE, STATE_INACTIVE};
     static uint8 rest_cycle_status = STATE_INACTIVE;
     static int32 bin_threshold = 250;
     static int32 thr_pos = 0, max_pos = 0;
     uint8 i, bin_st, bin_max;
-    int32 curr_pos;
+    int32 curr_pos, curr_off;
     int32 step;
     static uint32 timer_value_s, timer_value_e;
-    
+
     curr_pos = (int32)(g_meas.pos[0] >> g_mem.res[0]);
-      
+    
     // State machine - Evaluate position counter update
     switch (pos_cycle_status){
         case STATE_INACTIVE:
             if (pwm_sign == 1){
                 thr_pos = curr_pos; 
-                g_mem.wire_disp = g_mem.wire_disp + abs(max_pos - thr_pos);     //sum opening track
+                curr_off = (max_pos>thr_pos)?(max_pos-thr_pos):(thr_pos-max_pos);
+                g_mem.wire_disp = g_mem.wire_disp + curr_off;     //sum opening track
                 pos_cycle_status = STATE_ACTIVE;
             }
             break;
         case STATE_ACTIVE:
             if (pwm_sign == -1){
                 max_pos = curr_pos;
-                g_mem.wire_disp = g_mem.wire_disp + abs(max_pos - thr_pos);     //sum closure track
+                curr_off = (max_pos>thr_pos)?(max_pos-thr_pos):(thr_pos-max_pos);
+                g_mem.wire_disp = g_mem.wire_disp + curr_off;     //sum closure track
                 pos_cycle_status = COUNTER_INC;
             }
             break;
         case COUNTER_INC:
-            if (abs(max_pos - thr_pos) > bin_threshold){
+
+            curr_off = (max_pos>thr_pos)?(max_pos-thr_pos):(thr_pos-max_pos);
+            if (curr_off > bin_threshold){
                 //update position histogram
                 step = ((int32)(g_mem.pos_lim_sup >> g_mem.res[0]) / 10);
                 bin_st  = (uint8)(thr_pos/step);

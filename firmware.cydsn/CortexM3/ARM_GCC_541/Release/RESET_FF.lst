@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 1
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQnNmxQ.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 1
   28:Generated_Source\PSoC5/RESET_FF.c **** *  Write a byte to the Control Register.
   29:Generated_Source\PSoC5/RESET_FF.c **** *
   30:Generated_Source\PSoC5/RESET_FF.c **** * Parameters:
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 2
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQnNmxQ.s 			page 2
 
 
   31:Generated_Source\PSoC5/RESET_FF.c **** *  control:  The value to be assigned to the Control Register.
@@ -103,7 +103,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 1
   57              	.L3:
   58 001a 00BF     		.align	2
   59              	.L2:
-  60 001c 77650040 		.word	1073767799
+  60 001c 7A640040 		.word	1073767546
   61              		.cfi_endproc
   62              	.LFE0:
   63              		.size	RESET_FF_Write, .-RESET_FF_Write
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 1
   41:Generated_Source\PSoC5/RESET_FF.c **** 
   42:Generated_Source\PSoC5/RESET_FF.c **** 
   43:Generated_Source\PSoC5/RESET_FF.c **** /*******************************************************************************
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 3
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQnNmxQ.s 			page 3
 
 
   44:Generated_Source\PSoC5/RESET_FF.c **** * Function Name: RESET_FF_Read
@@ -164,7 +164,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 1
   95              	.L7:
   96 0012 00BF     		.align	2
   97              	.L6:
-  98 0014 77650040 		.word	1073767799
+  98 0014 7A640040 		.word	1073767546
   99              		.cfi_endproc
  100              	.LFE1:
  101              		.size	RESET_FF_Read, .-RESET_FF_Read
@@ -178,20 +178,20 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 1
  109 0006 00000000 		.4byte	.Ldebug_abbrev0
  110 000a 04       		.byte	0x4
  111 000b 01       		.uleb128 0x1
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 4
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQnNmxQ.s 			page 4
 
 
  112 000c 1D000000 		.4byte	.LASF14
  113 0010 0C       		.byte	0xc
- 114 0011 A8010000 		.4byte	.LASF15
- 115 0015 1C010000 		.4byte	.LASF16
+ 114 0011 2F010000 		.4byte	.LASF15
+ 115 0015 6A010000 		.4byte	.LASF16
  116 0019 00000000 		.4byte	.Ldebug_ranges0+0
  117 001d 00000000 		.4byte	0
  118 0021 00000000 		.4byte	.Ldebug_line0
  119 0025 02       		.uleb128 0x2
  120 0026 01       		.byte	0x1
  121 0027 06       		.byte	0x6
- 122 0028 E3010000 		.4byte	.LASF0
+ 122 0028 AF010000 		.4byte	.LASF0
  123 002c 02       		.uleb128 0x2
  124 002d 01       		.byte	0x1
  125 002e 08       		.byte	0x8
@@ -199,7 +199,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 1
  127 0033 02       		.uleb128 0x2
  128 0034 02       		.byte	0x2
  129 0035 05       		.byte	0x5
- 130 0036 CA010000 		.4byte	.LASF2
+ 130 0036 51010000 		.4byte	.LASF2
  131 003a 02       		.uleb128 0x2
  132 003b 02       		.byte	0x2
  133 003c 07       		.byte	0x7
@@ -207,7 +207,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 1
  135 0041 02       		.uleb128 0x2
  136 0042 04       		.byte	0x4
  137 0043 05       		.byte	0x5
- 138 0044 DA010000 		.4byte	.LASF4
+ 138 0044 61010000 		.4byte	.LASF4
  139 0048 02       		.uleb128 0x2
  140 0049 04       		.byte	0x4
  141 004a 07       		.byte	0x7
@@ -215,7 +215,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 1
  143 004f 02       		.uleb128 0x2
  144 0050 08       		.byte	0x8
  145 0051 05       		.byte	0x5
- 146 0052 95010000 		.4byte	.LASF6
+ 146 0052 1C010000 		.4byte	.LASF6
  147 0056 02       		.uleb128 0x2
  148 0057 08       		.byte	0x8
  149 0058 07       		.byte	0x7
@@ -229,7 +229,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 1
  157 0066 07       		.byte	0x7
  158 0067 F8000000 		.4byte	.LASF8
  159 006b 04       		.uleb128 0x4
- 160 006c D4010000 		.4byte	.LASF12
+ 160 006c 5B010000 		.4byte	.LASF12
  161 0070 02       		.byte	0x2
  162 0071 E401     		.2byte	0x1e4
  163 0073 2C000000 		.4byte	0x2c
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 1
  166 0079 04       		.byte	0x4
  167 007a AB000000 		.4byte	.LASF9
  168 007e 02       		.uleb128 0x2
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 5
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQnNmxQ.s 			page 5
 
 
  169 007f 08       		.byte	0x8
@@ -247,7 +247,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 1
  172 0085 02       		.uleb128 0x2
  173 0086 01       		.byte	0x1
  174 0087 08       		.byte	0x8
- 175 0088 A3010000 		.4byte	.LASF11
+ 175 0088 2A010000 		.4byte	.LASF11
  176 008c 04       		.uleb128 0x4
  177 008d BF000000 		.4byte	.LASF13
  178 0091 02       		.byte	0x2
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 1
  223 000a 0E       		.uleb128 0xe
  224 000b 55       		.uleb128 0x55
  225 000c 17       		.uleb128 0x17
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 6
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQnNmxQ.s 			page 6
 
 
  226 000d 11       		.uleb128 0x11
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 1
  280 0043 0E       		.uleb128 0xe
  281 0044 3A       		.uleb128 0x3a
  282 0045 0B       		.uleb128 0xb
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 7
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQnNmxQ.s 			page 7
 
 
  283 0046 3B       		.uleb128 0x3b
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 1
  337 007e 00       		.byte	0
  338 007f 00       		.byte	0
  339 0080 00       		.byte	0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 8
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQnNmxQ.s 			page 8
 
 
  340              		.section	.debug_aranges,"",%progbits
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 1
  372      74696F6E 
  373              	.LASF9:
  374 00ab 666C6F61 		.ascii	"float\000"
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 9
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQnNmxQ.s 			page 9
 
 
  374      7400
@@ -519,52 +519,47 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 1
  390      6720756E 
  390      7369676E 
  390      65642069 
- 391              	.LASF16:
- 392 011c 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Dropbox (workgroup)\\Personal\\"
- 392      73657273 
- 392      5C4D6174 
- 392      74696143 
- 392      505C4472 
- 393 014b 4D617474 		.ascii	"Mattia Poggiani\\FIRMWARES (local)\\SoftPro firmwar"
- 393      69612050 
- 393      6F676769 
- 393      616E695C 
- 393      4649524D 
- 394 017c 65202850 		.ascii	"e (PSoC5)\\firmware.cydsn\000"
- 394      536F4335 
- 394      295C6669 
- 394      726D7761 
- 394      72652E63 
- 395              	.LASF6:
- 396 0195 6C6F6E67 		.ascii	"long long int\000"
- 396      206C6F6E 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc3BaESa.s 			page 10
+ 391              	.LASF6:
+ 392 011c 6C6F6E67 		.ascii	"long long int\000"
+ 392      206C6F6E 
+ 392      6720696E 
+ 392      7400
+ 393              	.LASF11:
+ 394 012a 63686172 		.ascii	"char\000"
+ 394      00
+ 395              	.LASF15:
+ 396 012f 47656E65 		.ascii	"Generated_Source\\PSoC5\\RESET_FF.c\000"
+ 396      72617465 
+ 396      645F536F 
+ 396      75726365 
+ 396      5C50536F 
+ 397              	.LASF2:
+ 398 0151 73686F72 		.ascii	"short int\000"
+ 398      7420696E 
+ 398      7400
+ 399              	.LASF12:
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQnNmxQ.s 			page 10
 
 
- 396      6720696E 
- 396      7400
- 397              	.LASF11:
- 398 01a3 63686172 		.ascii	"char\000"
- 398      00
- 399              	.LASF15:
- 400 01a8 47656E65 		.ascii	"Generated_Source\\PSoC5\\RESET_FF.c\000"
- 400      72617465 
- 400      645F536F 
- 400      75726365 
- 400      5C50536F 
- 401              	.LASF2:
- 402 01ca 73686F72 		.ascii	"short int\000"
- 402      7420696E 
- 402      7400
- 403              	.LASF12:
- 404 01d4 75696E74 		.ascii	"uint8\000"
- 404      3800
- 405              	.LASF4:
- 406 01da 6C6F6E67 		.ascii	"long int\000"
- 406      20696E74 
- 406      00
- 407              	.LASF0:
- 408 01e3 7369676E 		.ascii	"signed char\000"
- 408      65642063 
- 408      68617200 
- 409              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 400 015b 75696E74 		.ascii	"uint8\000"
+ 400      3800
+ 401              	.LASF4:
+ 402 0161 6C6F6E67 		.ascii	"long int\000"
+ 402      20696E74 
+ 402      00
+ 403              	.LASF16:
+ 404 016a 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Documents\\GITHUB\\SoftHand-PR"
+ 404      73657273 
+ 404      5C4D6174 
+ 404      74696143 
+ 404      505C446F 
+ 405 0198 4F2D5053 		.ascii	"O-PSoC5\\firmware.cydsn\000"
+ 405      6F43355C 
+ 405      6669726D 
+ 405      77617265 
+ 405      2E637964 
+ 406              	.LASF0:
+ 407 01af 7369676E 		.ascii	"signed char\000"
+ 407      65642063 
+ 407      68617200 
+ 408              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

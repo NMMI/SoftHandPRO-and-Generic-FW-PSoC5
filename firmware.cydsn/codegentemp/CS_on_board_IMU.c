@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: ENC_MISO.c  
+* File Name: CS_on_board_IMU.c  
 * Version 2.20
 *
 * Description:
@@ -15,15 +15,15 @@
 *******************************************************************************/
 
 #include "cytypes.h"
-#include "ENC_MISO.h"
+#include "CS_on_board_IMU.h"
 
 /* APIs are not generated for P15[7:6] on PSoC 5 */
 #if !(CY_PSOC5A &&\
-	 ENC_MISO__PORT == 15 && ((ENC_MISO__MASK & 0xC0) != 0))
+	 CS_on_board_IMU__PORT == 15 && ((CS_on_board_IMU__MASK & 0xC0) != 0))
 
 
 /*******************************************************************************
-* Function Name: ENC_MISO_Write
+* Function Name: CS_on_board_IMU_Write
 ****************************************************************************//**
 *
 * \brief Writes the value to the physical port (data output register), masking
@@ -52,17 +52,17 @@
 *  this function.
 *
 * \funcusage
-*  \snippet ENC_MISO_SUT.c usage_ENC_MISO_Write
+*  \snippet CS_on_board_IMU_SUT.c usage_CS_on_board_IMU_Write
 *******************************************************************************/
-void ENC_MISO_Write(uint8 value)
+void CS_on_board_IMU_Write(uint8 value)
 {
-    uint8 staticBits = (ENC_MISO_DR & (uint8)(~ENC_MISO_MASK));
-    ENC_MISO_DR = staticBits | ((uint8)(value << ENC_MISO_SHIFT) & ENC_MISO_MASK);
+    uint8 staticBits = (CS_on_board_IMU_DR & (uint8)(~CS_on_board_IMU_MASK));
+    CS_on_board_IMU_DR = staticBits | ((uint8)(value << CS_on_board_IMU_SHIFT) & CS_on_board_IMU_MASK);
 }
 
 
 /*******************************************************************************
-* Function Name: ENC_MISO_SetDriveMode
+* Function Name: CS_on_board_IMU_SetDriveMode
 ****************************************************************************//**
 *
 * \brief Sets the drive mode for each of the Pins component's pins.
@@ -85,16 +85,16 @@ void ENC_MISO_Write(uint8 value)
 *  APIs (primary method) or disable interrupts around this function.
 *
 * \funcusage
-*  \snippet ENC_MISO_SUT.c usage_ENC_MISO_SetDriveMode
+*  \snippet CS_on_board_IMU_SUT.c usage_CS_on_board_IMU_SetDriveMode
 *******************************************************************************/
-void ENC_MISO_SetDriveMode(uint8 mode)
+void CS_on_board_IMU_SetDriveMode(uint8 mode)
 {
-	CyPins_SetPinDriveMode(ENC_MISO_0, mode);
+	CyPins_SetPinDriveMode(CS_on_board_IMU_0, mode);
 }
 
 
 /*******************************************************************************
-* Function Name: ENC_MISO_Read
+* Function Name: CS_on_board_IMU_Read
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port (pin status register) and masks 
@@ -108,16 +108,16 @@ void ENC_MISO_SetDriveMode(uint8 mode)
 *  The current value for the pins in the component as a right justified number.
 *
 * \funcusage
-*  \snippet ENC_MISO_SUT.c usage_ENC_MISO_Read  
+*  \snippet CS_on_board_IMU_SUT.c usage_CS_on_board_IMU_Read  
 *******************************************************************************/
-uint8 ENC_MISO_Read(void)
+uint8 CS_on_board_IMU_Read(void)
 {
-    return (ENC_MISO_PS & ENC_MISO_MASK) >> ENC_MISO_SHIFT;
+    return (CS_on_board_IMU_PS & CS_on_board_IMU_MASK) >> CS_on_board_IMU_SHIFT;
 }
 
 
 /*******************************************************************************
-* Function Name: ENC_MISO_ReadDataReg
+* Function Name: CS_on_board_IMU_ReadDataReg
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port's data output register and masks 
@@ -126,8 +126,8 @@ uint8 ENC_MISO_Read(void)
 *
 * The data output register controls the signal applied to the physical pin in 
 * conjunction with the drive mode parameter. This is not the same as the 
-* preferred ENC_MISO_Read() API because the 
-* ENC_MISO_ReadDataReg() reads the data register instead of the status 
+* preferred CS_on_board_IMU_Read() API because the 
+* CS_on_board_IMU_ReadDataReg() reads the data register instead of the status 
 * register. For output pins this is a useful function to determine the value 
 * just written to the pin.
 *
@@ -136,19 +136,19 @@ uint8 ENC_MISO_Read(void)
 *  justified number for the component instance.
 *
 * \funcusage
-*  \snippet ENC_MISO_SUT.c usage_ENC_MISO_ReadDataReg 
+*  \snippet CS_on_board_IMU_SUT.c usage_CS_on_board_IMU_ReadDataReg 
 *******************************************************************************/
-uint8 ENC_MISO_ReadDataReg(void)
+uint8 CS_on_board_IMU_ReadDataReg(void)
 {
-    return (ENC_MISO_DR & ENC_MISO_MASK) >> ENC_MISO_SHIFT;
+    return (CS_on_board_IMU_DR & CS_on_board_IMU_MASK) >> CS_on_board_IMU_SHIFT;
 }
 
 
 /* If interrupt is connected for this Pins component */ 
-#if defined(ENC_MISO_INTSTAT) 
+#if defined(CS_on_board_IMU_INTSTAT) 
 
     /*******************************************************************************
-    * Function Name: ENC_MISO_SetInterruptMode
+    * Function Name: CS_on_board_IMU_SetInterruptMode
     ****************************************************************************//**
     *
     * \brief Configures the interrupt mode for each of the Pins component's
@@ -161,12 +161,12 @@ uint8 ENC_MISO_ReadDataReg(void)
     * \param position
     *  The pin position as listed in the Pins component. You may OR these to be 
     *  able to configure the interrupt mode of multiple pins within a Pins 
-    *  component. Or you may use ENC_MISO_INTR_ALL to configure the
+    *  component. Or you may use CS_on_board_IMU_INTR_ALL to configure the
     *  interrupt mode of all the pins in the Pins component.       
-    *  - ENC_MISO_0_INTR       (First pin in the list)
-    *  - ENC_MISO_1_INTR       (Second pin in the list)
+    *  - CS_on_board_IMU_0_INTR       (First pin in the list)
+    *  - CS_on_board_IMU_1_INTR       (Second pin in the list)
     *  - ...
-    *  - ENC_MISO_INTR_ALL     (All pins in Pins component)
+    *  - CS_on_board_IMU_INTR_ALL     (All pins in Pins component)
     *
     * \param mode
     *  Interrupt mode for the selected pins. Valid options are documented in
@@ -182,19 +182,19 @@ uint8 ENC_MISO_ReadDataReg(void)
     *  port.
     *
     * \funcusage
-    *  \snippet ENC_MISO_SUT.c usage_ENC_MISO_SetInterruptMode
+    *  \snippet CS_on_board_IMU_SUT.c usage_CS_on_board_IMU_SetInterruptMode
     *******************************************************************************/
-    void ENC_MISO_SetInterruptMode(uint16 position, uint16 mode)
+    void CS_on_board_IMU_SetInterruptMode(uint16 position, uint16 mode)
     {
-		if((position & ENC_MISO_0_INTR) != 0u) 
+		if((position & CS_on_board_IMU_0_INTR) != 0u) 
 		{ 
-			 ENC_MISO_0_INTTYPE_REG = (uint8)mode; 
+			 CS_on_board_IMU_0_INTTYPE_REG = (uint8)mode; 
 		}
     }
     
     
     /*******************************************************************************
-    * Function Name: ENC_MISO_ClearInterrupt
+    * Function Name: CS_on_board_IMU_ClearInterrupt
     ****************************************************************************//**
     *
     * \brief Clears any active interrupts attached with the component and returns 
@@ -211,11 +211,11 @@ uint8 ENC_MISO_ReadDataReg(void)
     *  those associated with the Pins component.
     *
     * \funcusage
-    *  \snippet ENC_MISO_SUT.c usage_ENC_MISO_ClearInterrupt
+    *  \snippet CS_on_board_IMU_SUT.c usage_CS_on_board_IMU_ClearInterrupt
     *******************************************************************************/
-    uint8 ENC_MISO_ClearInterrupt(void)
+    uint8 CS_on_board_IMU_ClearInterrupt(void)
     {
-        return (ENC_MISO_INTSTAT & ENC_MISO_MASK) >> ENC_MISO_SHIFT;
+        return (CS_on_board_IMU_INTSTAT & CS_on_board_IMU_MASK) >> CS_on_board_IMU_SHIFT;
     }
 
 #endif /* If Interrupts Are Enabled for this Pins component */ 

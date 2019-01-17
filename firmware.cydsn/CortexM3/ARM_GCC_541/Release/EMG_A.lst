@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cci6LT5f.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
   28:Generated_Source\PSoC5/EMG_A.c **** *
   29:Generated_Source\PSoC5/EMG_A.c **** * \brief Writes the value to the physical port (data output register), masking
   30:Generated_Source\PSoC5/EMG_A.c **** *  and shifting the bits appropriately. 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 2
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cci6LT5f.s 			page 2
 
 
   31:Generated_Source\PSoC5/EMG_A.c **** *
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
   52 001c DBB2     		uxtb	r3, r3
   53 001e 03F01003 		and	r3, r3, #16
   54 0022 DAB2     		uxtb	r2, r3
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 3
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cci6LT5f.s 			page 3
 
 
   55 0024 FB7B     		ldrb	r3, [r7, #15]
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
   85:Generated_Source\PSoC5/EMG_A.c **** *  APIs (primary method) or disable interrupts around this function.
   86:Generated_Source\PSoC5/EMG_A.c **** *
   87:Generated_Source\PSoC5/EMG_A.c **** * \funcusage
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 4
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cci6LT5f.s 			page 4
 
 
   88:Generated_Source\PSoC5/EMG_A.c **** *  \snippet EMG_A_SUT.c usage_EMG_A_SetDriveMode
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
  133              		.align	2
  134              		.global	EMG_A_Read
  135              		.thumb
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 5
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cci6LT5f.s 			page 5
 
 
  136              		.thumb_func
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
  167 001a 00BF     		.align	2
  168              	.L9:
  169 001c 01510040 		.word	1073762561
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 6
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cci6LT5f.s 			page 6
 
 
  170              		.cfi_endproc
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
  197 0010 DBB2     		uxtb	r3, r3
  144:Generated_Source\PSoC5/EMG_A.c **** }
  198              		.loc 1 144 0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 7
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cci6LT5f.s 			page 7
 
 
  199 0012 1846     		mov	r0, r3
@@ -389,14 +389,14 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
  224 000c 00000000 		.4byte	.LASF20
  225 0010 0C       		.byte	0xc
  226 0011 14010000 		.4byte	.LASF21
- 227 0015 46010000 		.4byte	.LASF22
+ 227 0015 94010000 		.4byte	.LASF22
  228 0019 00000000 		.4byte	.Ldebug_ranges0+0
  229 001d 00000000 		.4byte	0
  230 0021 00000000 		.4byte	.Ldebug_line0
  231 0025 02       		.uleb128 0x2
  232 0026 01       		.byte	0x1
  233 0027 06       		.byte	0x6
- 234 0028 0D020000 		.4byte	.LASF0
+ 234 0028 D9010000 		.4byte	.LASF0
  235 002c 02       		.uleb128 0x2
  236 002d 01       		.byte	0x1
  237 002e 08       		.byte	0x8
@@ -404,7 +404,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
  239 0033 02       		.uleb128 0x2
  240 0034 02       		.byte	0x2
  241 0035 05       		.byte	0x5
- 242 0036 E9010000 		.4byte	.LASF2
+ 242 0036 70010000 		.4byte	.LASF2
  243 003a 02       		.uleb128 0x2
  244 003b 02       		.byte	0x2
  245 003c 07       		.byte	0x7
@@ -412,18 +412,18 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
  247 0041 02       		.uleb128 0x2
  248 0042 04       		.byte	0x4
  249 0043 05       		.byte	0x5
- 250 0044 04020000 		.4byte	.LASF4
+ 250 0044 8B010000 		.4byte	.LASF4
  251 0048 02       		.uleb128 0x2
  252 0049 04       		.byte	0x4
  253 004a 07       		.byte	0x7
  254 004b CF000000 		.4byte	.LASF5
  255 004f 02       		.uleb128 0x2
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 8
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cci6LT5f.s 			page 8
 
 
  256 0050 08       		.byte	0x8
  257 0051 05       		.byte	0x5
- 258 0052 C4010000 		.4byte	.LASF6
+ 258 0052 4B010000 		.4byte	.LASF6
  259 0056 02       		.uleb128 0x2
  260 0057 08       		.byte	0x8
  261 0058 07       		.byte	0x7
@@ -437,7 +437,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
  269 0066 07       		.byte	0x7
  270 0067 07010000 		.4byte	.LASF8
  271 006b 04       		.uleb128 0x4
- 272 006c F3010000 		.4byte	.LASF12
+ 272 006c 7A010000 		.4byte	.LASF12
  273 0070 02       		.byte	0x2
  274 0071 E401     		.2byte	0x1e4
  275 0073 2C000000 		.4byte	0x2c
@@ -452,7 +452,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
  284 0085 02       		.uleb128 0x2
  285 0086 01       		.byte	0x1
  286 0087 08       		.byte	0x8
- 287 0088 D2010000 		.4byte	.LASF11
+ 287 0088 59010000 		.4byte	.LASF11
  288 008c 04       		.uleb128 0x4
  289 008d CA000000 		.4byte	.LASF13
  290 0091 02       		.byte	0x2
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
  310 00be 91       		.byte	0x91
  311 00bf 6F       		.sleb128 -17
  312 00c0 08       		.uleb128 0x8
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 9
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cci6LT5f.s 			page 9
 
 
  313 00c1 94000000 		.4byte	.LASF23
@@ -499,7 +499,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
  328 00df 9C       		.byte	0x9c
  329 00e0 F3000000 		.4byte	0xf3
  330 00e4 07       		.uleb128 0x7
- 331 00e5 BF010000 		.4byte	.LASF17
+ 331 00e5 46010000 		.4byte	.LASF17
  332 00e9 01       		.byte	0x1
  333 00ea 5A       		.byte	0x5a
  334 00eb 6B000000 		.4byte	0x6b
@@ -508,7 +508,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
  337 00f1 77       		.sleb128 -9
  338 00f2 00       		.byte	0
  339 00f3 09       		.uleb128 0x9
- 340 00f4 F9010000 		.4byte	.LASF18
+ 340 00f4 80010000 		.4byte	.LASF18
  341 00f8 01       		.byte	0x1
  342 00f9 71       		.byte	0x71
  343 00fa 6B000000 		.4byte	0x6b
@@ -517,7 +517,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
  346 0106 01       		.uleb128 0x1
  347 0107 9C       		.byte	0x9c
  348 0108 09       		.uleb128 0x9
- 349 0109 D7010000 		.4byte	.LASF19
+ 349 0109 5E010000 		.4byte	.LASF19
  350 010d 01       		.byte	0x1
  351 010e 8D       		.byte	0x8d
  352 010f 6B000000 		.4byte	0x6b
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
  367 0007 03       		.uleb128 0x3
  368 0008 0E       		.uleb128 0xe
  369 0009 1B       		.uleb128 0x1b
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 10
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cci6LT5f.s 			page 10
 
 
  370 000a 0E       		.uleb128 0xe
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
  424 0040 3F       		.uleb128 0x3f
  425 0041 19       		.uleb128 0x19
  426 0042 03       		.uleb128 0x3
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 11
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cci6LT5f.s 			page 11
 
 
  427 0043 0E       		.uleb128 0xe
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
  481 007a 03       		.uleb128 0x3
  482 007b 0E       		.uleb128 0xe
  483 007c 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 12
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cci6LT5f.s 			page 12
 
 
  484 007d 0B       		.uleb128 0xb
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
  534      01010101 
  535              	.LASF20:
  536 0000 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 13
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cci6LT5f.s 			page 13
 
 
  536      43313120 
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
  558 00fb 454D475F 		.ascii	"EMG_A_Write\000"
  558      415F5772 
  558      69746500 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 14
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cci6LT5f.s 			page 14
 
 
  559              	.LASF8:
@@ -798,59 +798,54 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 1
  564      74447269 
  564      76654D6F 
  564      646500
- 565              	.LASF22:
- 566 0146 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Dropbox (workgroup)\\Personal\\"
- 566      73657273 
- 566      5C4D6174 
- 566      74696143 
- 566      505C4472 
- 567 0175 4D617474 		.ascii	"Mattia Poggiani\\FIRMWARES (local)\\SoftPro firmwar"
- 567      69612050 
- 567      6F676769 
- 567      616E695C 
- 567      4649524D 
- 568 01a6 65202850 		.ascii	"e (PSoC5)\\firmware.cydsn\000"
- 568      536F4335 
- 568      295C6669 
- 568      726D7761 
- 568      72652E63 
- 569              	.LASF17:
- 570 01bf 6D6F6465 		.ascii	"mode\000"
+ 565              	.LASF17:
+ 566 0146 6D6F6465 		.ascii	"mode\000"
+ 566      00
+ 567              	.LASF6:
+ 568 014b 6C6F6E67 		.ascii	"long long int\000"
+ 568      206C6F6E 
+ 568      6720696E 
+ 568      7400
+ 569              	.LASF11:
+ 570 0159 63686172 		.ascii	"char\000"
  570      00
- 571              	.LASF6:
- 572 01c4 6C6F6E67 		.ascii	"long long int\000"
- 572      206C6F6E 
- 572      6720696E 
- 572      7400
- 573              	.LASF11:
- 574 01d2 63686172 		.ascii	"char\000"
- 574      00
- 575              	.LASF19:
- 576 01d7 454D475F 		.ascii	"EMG_A_ReadDataReg\000"
- 576      415F5265 
- 576      61644461 
- 576      74615265 
- 576      6700
- 577              	.LASF2:
- 578 01e9 73686F72 		.ascii	"short int\000"
- 578      7420696E 
- 578      7400
- 579              	.LASF12:
- 580 01f3 75696E74 		.ascii	"uint8\000"
- 580      3800
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccvXEHQA.s 			page 15
+ 571              	.LASF19:
+ 572 015e 454D475F 		.ascii	"EMG_A_ReadDataReg\000"
+ 572      415F5265 
+ 572      61644461 
+ 572      74615265 
+ 572      6700
+ 573              	.LASF2:
+ 574 0170 73686F72 		.ascii	"short int\000"
+ 574      7420696E 
+ 574      7400
+ 575              	.LASF12:
+ 576 017a 75696E74 		.ascii	"uint8\000"
+ 576      3800
+ 577              	.LASF18:
+ 578 0180 454D475F 		.ascii	"EMG_A_Read\000"
+ 578      415F5265 
+ 578      616400
+ 579              	.LASF4:
+ 580 018b 6C6F6E67 		.ascii	"long int\000"
+ 580      20696E74 
+ 580      00
+ 581              	.LASF22:
+ 582 0194 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Documents\\GITHUB\\SoftHand-PR"
+ 582      73657273 
+ 582      5C4D6174 
+ 582      74696143 
+ 582      505C446F 
+ 583 01c2 4F2D5053 		.ascii	"O-PSoC5\\firmware.cydsn\000"
+ 583      6F43355C 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cci6LT5f.s 			page 15
 
 
- 581              	.LASF18:
- 582 01f9 454D475F 		.ascii	"EMG_A_Read\000"
- 582      415F5265 
- 582      616400
- 583              	.LASF4:
- 584 0204 6C6F6E67 		.ascii	"long int\000"
- 584      20696E74 
- 584      00
- 585              	.LASF0:
- 586 020d 7369676E 		.ascii	"signed char\000"
- 586      65642063 
- 586      68617200 
- 587              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 583      6669726D 
+ 583      77617265 
+ 583      2E637964 
+ 584              	.LASF0:
+ 585 01d9 7369676E 		.ascii	"signed char\000"
+ 585      65642063 
+ 585      68617200 
+ 586              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

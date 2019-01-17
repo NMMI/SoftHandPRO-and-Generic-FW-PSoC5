@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017, Centro "E.Piaggio"
+// Copyright (c) 2017-2019, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -39,7 +39,7 @@
 * \date         October 01, 2017
 * \author       _Centro "E.Piaggio"_
 * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
-* \copyright    (C) 2017 Centro "E.Piaggio". All rights reserved.
+* \copyright    (C) 2017-2019 Centro "E.Piaggio". All rights reserved.
 */
 
 #ifndef UTILS_H_INCLUDED
@@ -97,6 +97,12 @@ int32 curr_estim( int32 pos, int32 vel, int32 acc);
  * 	\param divisor	The divisor according to which the module is calculated
 **/
 uint32 my_mod(int32 val, int32 divisor);
+
+
+
+
+
+
 
 /**	This function controls if the read encoder data is correct or not.
  *

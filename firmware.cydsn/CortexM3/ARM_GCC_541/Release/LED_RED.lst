@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 1
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9Djscb.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 1
   28:Generated_Source\PSoC5/LED_RED.c **** *
   29:Generated_Source\PSoC5/LED_RED.c **** * Summary:
   30:Generated_Source\PSoC5/LED_RED.c **** *  Assign a new value to the digital port's data output register.  
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 2
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9Djscb.s 			page 2
 
 
   31:Generated_Source\PSoC5/LED_RED.c **** *
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 1
   69 0032 00BF     		.align	2
   70              	.L2:
   71 0034 C0510040 		.word	1073762752
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 3
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9Djscb.s 			page 3
 
 
   72              		.cfi_endproc
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 1
   98 000a 0B49     		ldr	r1, .L5
   99 000c 0A4B     		ldr	r3, .L5
  100 000e 1B78     		ldrb	r3, [r3]
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 4
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9Djscb.s 			page 4
 
 
  101 0010 DBB2     		uxtb	r3, r3
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 1
   89:Generated_Source\PSoC5/LED_RED.c **** * Note:
   90:Generated_Source\PSoC5/LED_RED.c **** *  Macro LED_RED_ReadPS calls this function. 
   91:Generated_Source\PSoC5/LED_RED.c **** *  
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 5
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9Djscb.s 			page 5
 
 
   92:Generated_Source\PSoC5/LED_RED.c **** *******************************************************************************/
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 1
  106:Generated_Source\PSoC5/LED_RED.c **** * Parameters:  
  107:Generated_Source\PSoC5/LED_RED.c **** *  None 
  108:Generated_Source\PSoC5/LED_RED.c **** *
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 6
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9Djscb.s 			page 6
 
 
  109:Generated_Source\PSoC5/LED_RED.c **** * Return: 
@@ -354,17 +354,17 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 1
  220 000c 00000000 		.4byte	.LASF20
  221 0010 0C       		.byte	0xc
  222 0011 C1000000 		.4byte	.LASF21
- 223 0015 53010000 		.4byte	.LASF22
+ 223 0015 89010000 		.4byte	.LASF22
  224 0019 00000000 		.4byte	.Ldebug_ranges0+0
  225 001d 00000000 		.4byte	0
  226 0021 00000000 		.4byte	.Ldebug_line0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 7
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9Djscb.s 			page 7
 
 
  227 0025 02       		.uleb128 0x2
  228 0026 01       		.byte	0x1
  229 0027 06       		.byte	0x6
- 230 0028 02020000 		.4byte	.LASF0
+ 230 0028 CE010000 		.4byte	.LASF0
  231 002c 02       		.uleb128 0x2
  232 002d 01       		.byte	0x1
  233 002e 08       		.byte	0x8
@@ -372,7 +372,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 1
  235 0033 02       		.uleb128 0x2
  236 0034 02       		.byte	0x2
  237 0035 05       		.byte	0x5
- 238 0036 E9010000 		.4byte	.LASF2
+ 238 0036 70010000 		.4byte	.LASF2
  239 003a 02       		.uleb128 0x2
  240 003b 02       		.byte	0x2
  241 003c 07       		.byte	0x7
@@ -380,7 +380,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 1
  243 0041 02       		.uleb128 0x2
  244 0042 04       		.byte	0x4
  245 0043 05       		.byte	0x5
- 246 0044 F9010000 		.4byte	.LASF4
+ 246 0044 80010000 		.4byte	.LASF4
  247 0048 02       		.uleb128 0x2
  248 0049 04       		.byte	0x4
  249 004a 07       		.byte	0x7
@@ -388,7 +388,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 1
  251 004f 02       		.uleb128 0x2
  252 0050 08       		.byte	0x8
  253 0051 05       		.byte	0x5
- 254 0052 D6010000 		.4byte	.LASF6
+ 254 0052 5D010000 		.4byte	.LASF6
  255 0056 02       		.uleb128 0x2
  256 0057 08       		.byte	0x8
  257 0058 07       		.byte	0x7
@@ -402,7 +402,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 1
  265 0066 07       		.byte	0x7
  266 0067 22010000 		.4byte	.LASF8
  267 006b 04       		.uleb128 0x4
- 268 006c F3010000 		.4byte	.LASF12
+ 268 006c 7A010000 		.4byte	.LASF12
  269 0070 02       		.byte	0x2
  270 0071 E401     		.2byte	0x1e4
  271 0073 2C000000 		.4byte	0x2c
@@ -417,12 +417,12 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 1
  280 0085 02       		.uleb128 0x2
  281 0086 01       		.byte	0x1
  282 0087 08       		.byte	0x8
- 283 0088 E4010000 		.4byte	.LASF11
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 8
+ 283 0088 6B010000 		.4byte	.LASF11
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9Djscb.s 			page 8
 
 
  284 008c 04       		.uleb128 0x4
- 285 008d CC010000 		.4byte	.LASF13
+ 285 008d 58010000 		.4byte	.LASF13
  286 0091 02       		.byte	0x2
  287 0092 8E02     		.2byte	0x28e
  288 0094 98000000 		.4byte	0x98
@@ -455,7 +455,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 1
  315 00cd 77       		.sleb128 -9
  316 00ce 00       		.byte	0
  317 00cf 06       		.uleb128 0x6
- 318 00d0 0E020000 		.4byte	.LASF15
+ 318 00d0 DA010000 		.4byte	.LASF15
  319 00d4 01       		.byte	0x1
  320 00d5 45       		.byte	0x45
  321 00d6 00000000 		.4byte	.LFB1
@@ -464,7 +464,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 1
  324 00df 9C       		.byte	0x9c
  325 00e0 F3000000 		.4byte	0xf3
  326 00e4 07       		.uleb128 0x7
- 327 00e5 D1010000 		.4byte	.LASF17
+ 327 00e5 53010000 		.4byte	.LASF17
  328 00e9 01       		.byte	0x1
  329 00ea 45       		.byte	0x45
  330 00eb 6B000000 		.4byte	0x6b
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 1
  338 00f9 5D       		.byte	0x5d
  339 00fa 6B000000 		.4byte	0x6b
  340 00fe 00000000 		.4byte	.LFB2
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 9
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9Djscb.s 			page 9
 
 
  341 0102 1C000000 		.4byte	.LFE2-.LFB2
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 1
  395 0027 00       		.byte	0
  396 0028 00       		.byte	0
  397 0029 04       		.uleb128 0x4
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 10
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9Djscb.s 			page 10
 
 
  398 002a 16       		.uleb128 0x16
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 1
  452 0061 13       		.uleb128 0x13
  453 0062 02       		.uleb128 0x2
  454 0063 18       		.uleb128 0x18
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 11
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9Djscb.s 			page 11
 
 
  455 0064 00       		.byte	0
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 1
  509 001c 3C000000 		.4byte	.LFE1-.LFB1
  510 0020 00000000 		.4byte	.LFB2
  511 0024 1C000000 		.4byte	.LFE2-.LFB2
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 12
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9Djscb.s 			page 12
 
 
  512 0028 00000000 		.4byte	.LFB3
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 1
  543              	.LASF1:
  544 00b3 756E7369 		.ascii	"unsigned char\000"
  544      676E6564 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 13
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9Djscb.s 			page 13
 
 
  544      20636861 
@@ -766,58 +766,53 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 1
  560      5245445F 
  560      52656164 
  560      00
- 561              	.LASF22:
- 562 0153 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Dropbox (workgroup)\\Personal\\"
- 562      73657273 
- 562      5C4D6174 
- 562      74696143 
- 562      505C4472 
- 563 0182 4D617474 		.ascii	"Mattia Poggiani\\FIRMWARES (local)\\SoftPro firmwar"
- 563      69612050 
- 563      6F676769 
- 563      616E695C 
- 563      4649524D 
- 564 01b3 65202850 		.ascii	"e (PSoC5)\\firmware.cydsn\000"
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccdioFjl.s 			page 14
+ 561              	.LASF17:
+ 562 0153 6D6F6465 		.ascii	"mode\000"
+ 562      00
+ 563              	.LASF13:
+ 564 0158 72656738 		.ascii	"reg8\000"
+ 564      00
+ 565              	.LASF6:
+ 566 015d 6C6F6E67 		.ascii	"long long int\000"
+ 566      206C6F6E 
+ 566      6720696E 
+ 566      7400
+ 567              	.LASF11:
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9Djscb.s 			page 14
 
 
- 564      536F4335 
- 564      295C6669 
- 564      726D7761 
- 564      72652E63 
- 565              	.LASF13:
- 566 01cc 72656738 		.ascii	"reg8\000"
- 566      00
- 567              	.LASF17:
- 568 01d1 6D6F6465 		.ascii	"mode\000"
+ 568 016b 63686172 		.ascii	"char\000"
  568      00
- 569              	.LASF6:
- 570 01d6 6C6F6E67 		.ascii	"long long int\000"
- 570      206C6F6E 
- 570      6720696E 
+ 569              	.LASF2:
+ 570 0170 73686F72 		.ascii	"short int\000"
+ 570      7420696E 
  570      7400
- 571              	.LASF11:
- 572 01e4 63686172 		.ascii	"char\000"
- 572      00
- 573              	.LASF2:
- 574 01e9 73686F72 		.ascii	"short int\000"
- 574      7420696E 
- 574      7400
- 575              	.LASF12:
- 576 01f3 75696E74 		.ascii	"uint8\000"
- 576      3800
- 577              	.LASF4:
- 578 01f9 6C6F6E67 		.ascii	"long int\000"
- 578      20696E74 
- 578      00
- 579              	.LASF0:
- 580 0202 7369676E 		.ascii	"signed char\000"
- 580      65642063 
- 580      68617200 
- 581              	.LASF15:
- 582 020e 4C45445F 		.ascii	"LED_RED_SetDriveMode\000"
- 582      5245445F 
- 582      53657444 
- 582      72697665 
- 582      4D6F6465 
- 583              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 571              	.LASF12:
+ 572 017a 75696E74 		.ascii	"uint8\000"
+ 572      3800
+ 573              	.LASF4:
+ 574 0180 6C6F6E67 		.ascii	"long int\000"
+ 574      20696E74 
+ 574      00
+ 575              	.LASF22:
+ 576 0189 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Documents\\GITHUB\\SoftHand-PR"
+ 576      73657273 
+ 576      5C4D6174 
+ 576      74696143 
+ 576      505C446F 
+ 577 01b7 4F2D5053 		.ascii	"O-PSoC5\\firmware.cydsn\000"
+ 577      6F43355C 
+ 577      6669726D 
+ 577      77617265 
+ 577      2E637964 
+ 578              	.LASF0:
+ 579 01ce 7369676E 		.ascii	"signed char\000"
+ 579      65642063 
+ 579      68617200 
+ 580              	.LASF15:
+ 581 01da 4C45445F 		.ascii	"LED_RED_SetDriveMode\000"
+ 581      5245445F 
+ 581      53657444 
+ 581      72697665 
+ 581      4D6F6465 
+ 582              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

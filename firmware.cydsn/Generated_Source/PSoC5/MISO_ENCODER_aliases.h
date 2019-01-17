@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: ENC_MISO.h  
+* File Name: MISO_ENCODER.h  
 * Version 2.20
 *
 * Description:
@@ -15,8 +15,8 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#if !defined(CY_PINS_ENC_MISO_ALIASES_H) /* Pins ENC_MISO_ALIASES_H */
-#define CY_PINS_ENC_MISO_ALIASES_H
+#if !defined(CY_PINS_MISO_ENCODER_ALIASES_H) /* Pins MISO_ENCODER_ALIASES_H */
+#define CY_PINS_MISO_ENCODER_ALIASES_H
 
 #include "cytypes.h"
 #include "cyfitter.h"
@@ -25,12 +25,12 @@
 /***************************************
 *              Constants        
 ***************************************/
-#define ENC_MISO_0			(ENC_MISO__0__PC)
-#define ENC_MISO_0_INTR	((uint16)((uint16)0x0001u << ENC_MISO__0__SHIFT))
+#define MISO_ENCODER_0			(MISO_ENCODER__0__PC)
+#define MISO_ENCODER_0_INTR	((uint16)((uint16)0x0001u << MISO_ENCODER__0__SHIFT))
 
-#define ENC_MISO_INTR_ALL	 ((uint16)(ENC_MISO_0_INTR))
+#define MISO_ENCODER_INTR_ALL	 ((uint16)(MISO_ENCODER_0_INTR))
 
-#endif /* End Pins ENC_MISO_ALIASES_H */
+#endif /* End Pins MISO_ENCODER_ALIASES_H */
 
 
 /* [] END OF FILE */

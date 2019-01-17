@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
   22:Generated_Source\PSoC5/CYCLES_TIMER.c **** ********************************************************************************/
   23:Generated_Source\PSoC5/CYCLES_TIMER.c **** 
   24:Generated_Source\PSoC5/CYCLES_TIMER.c **** #include "CYCLES_TIMER.h"
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 2
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 2
 
 
   25:Generated_Source\PSoC5/CYCLES_TIMER.c **** 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
   67:Generated_Source\PSoC5/CYCLES_TIMER.c ****         #endif /* One Shot enabled only when RunModeUsed is not Continuous*/
   68:Generated_Source\PSoC5/CYCLES_TIMER.c **** 
   69:Generated_Source\PSoC5/CYCLES_TIMER.c ****         #if (CYCLES_TIMER_RunModeUsed == 2)
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 3
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 3
 
 
   70:Generated_Source\PSoC5/CYCLES_TIMER.c ****             #if (CY_PSOC5A)
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
   50 000e 41F26F70 		movw	r0, #5999
   51 0012 FFF7FEFF 		bl	CYCLES_TIMER_WriteCounter
  120:Generated_Source\PSoC5/CYCLES_TIMER.c **** 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 4
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 4
 
 
  121:Generated_Source\PSoC5/CYCLES_TIMER.c ****     #if (CYCLES_TIMER_UsingHWCaptureCounter)/* Capture counter is enabled */
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  159:Generated_Source\PSoC5/CYCLES_TIMER.c ****         CYCLES_TIMER_ClearFIFO();
   68              		.loc 1 159 0
   69 0036 FFF7FEFF 		bl	CYCLES_TIMER_ClearFIFO
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 5
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 5
 
 
  160:Generated_Source\PSoC5/CYCLES_TIMER.c ****     #endif /* Configure additional features of UDB implementation */
@@ -259,7 +259,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
   81              	.L3:
   82              		.align	2
   83              	.L2:
-  84 0048 9B650040 		.word	1073767835
+  84 0048 92640040 		.word	1073767570
   85              		.cfi_endproc
   86              	.LFE0:
   87              		.size	CYCLES_TIMER_Init, .-CYCLES_TIMER_Init
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  102              		.cfi_def_cfa_offset 4
  103              		.cfi_offset 7, -4
  104 0002 00AF     		add	r7, sp, #0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 6
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 6
 
 
  105              		.cfi_def_cfa_register 7
@@ -333,7 +333,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  123              	.L6:
  124              		.align	2
  125              	.L5:
- 126 001c 7B650040 		.word	1073767803
+ 126 001c 72640040 		.word	1073767538
  127              		.cfi_endproc
  128              	.LFE1:
  129              		.size	CYCLES_TIMER_Enable, .-CYCLES_TIMER_Enable
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  203:Generated_Source\PSoC5/CYCLES_TIMER.c **** *
  204:Generated_Source\PSoC5/CYCLES_TIMER.c **** * Parameters:
  205:Generated_Source\PSoC5/CYCLES_TIMER.c **** *  void
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 7
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 7
 
 
  206:Generated_Source\PSoC5/CYCLES_TIMER.c **** *
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  171              		.size	CYCLES_TIMER_Start, .-CYCLES_TIMER_Start
  172              		.section	.text.CYCLES_TIMER_Stop,"ax",%progbits
  173              		.align	2
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 8
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 8
 
 
  174              		.global	CYCLES_TIMER_Stop
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  257:Generated_Source\PSoC5/CYCLES_TIMER.c ****         CYCLES_TIMER_GLOBAL_STBY_ENABLE &= ((uint8)(~CYCLES_TIMER_BLOCK_STBY_EN_MASK));
  258:Generated_Source\PSoC5/CYCLES_TIMER.c ****     #endif /* Disable global enable for the Timer Fixed function block to stop the Timer*/
  259:Generated_Source\PSoC5/CYCLES_TIMER.c **** }
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 9
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 9
 
 
  198              		.loc 1 259 0
@@ -493,7 +493,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  207              	.L13:
  208              		.align	2
  209              	.L12:
- 210 001c 7B650040 		.word	1073767803
+ 210 001c 72640040 		.word	1073767538
  211              		.cfi_endproc
  212              	.LFE3:
  213              		.size	CYCLES_TIMER_Stop, .-CYCLES_TIMER_Stop
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  231              		.cfi_def_cfa_offset 16
  232 0004 00AF     		add	r7, sp, #0
  233              		.cfi_def_cfa_register 7
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 10
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 10
 
 
  234 0006 0346     		mov	r3, r0
@@ -563,7 +563,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  251              	.L16:
  252 001a 00BF     		.align	2
  253              	.L15:
- 254 001c 8B650040 		.word	1073767819
+ 254 001c 82640040 		.word	1073767554
  255              		.cfi_endproc
  256              	.LFE4:
  257              		.size	CYCLES_TIMER_SetInterruptMode, .-CYCLES_TIMER_SetInterruptMode
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  303:Generated_Source\PSoC5/CYCLES_TIMER.c **** {
  266              		.loc 1 303 0
  267              		.cfi_startproc
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 11
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 11
 
 
  268              		@ args = 0, pretend = 0, frame = 0
@@ -632,7 +632,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  288              	.L19:
  289              		.align	2
  290              	.L18:
- 291 0010 0A650040 		.word	1073767690
+ 291 0010 03640040 		.word	1073767427
  292              		.cfi_endproc
  293              	.LFE5:
  294              		.size	CYCLES_TIMER_SoftwareCapture, .-CYCLES_TIMER_SoftwareCapture
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  323:Generated_Source\PSoC5/CYCLES_TIMER.c **** * Parameters:
  324:Generated_Source\PSoC5/CYCLES_TIMER.c **** *  void
  325:Generated_Source\PSoC5/CYCLES_TIMER.c **** *
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 12
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 12
 
 
  326:Generated_Source\PSoC5/CYCLES_TIMER.c **** * Return:
@@ -698,7 +698,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  326              	.L23:
  327 0012 00BF     		.align	2
  328              	.L22:
- 329 0014 6B650040 		.word	1073767787
+ 329 0014 62640040 		.word	1073767522
  330              		.cfi_endproc
  331              	.LFE6:
  332              		.size	CYCLES_TIMER_ReadStatusRegister, .-CYCLES_TIMER_ReadStatusRegister
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  342:Generated_Source\PSoC5/CYCLES_TIMER.c **** /*******************************************************************************
  343:Generated_Source\PSoC5/CYCLES_TIMER.c **** * Function Name: CYCLES_TIMER_ReadControlRegister
  344:Generated_Source\PSoC5/CYCLES_TIMER.c **** ********************************************************************************
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 13
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 13
 
 
  345:Generated_Source\PSoC5/CYCLES_TIMER.c **** *
@@ -766,7 +766,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  364              	.L27:
  365 0012 00BF     		.align	2
  366              	.L26:
- 367 0014 7B650040 		.word	1073767803
+ 367 0014 72640040 		.word	1073767538
  368              		.cfi_endproc
  369              	.LFE7:
  370              		.size	CYCLES_TIMER_ReadControlRegister, .-CYCLES_TIMER_ReadControlRegister
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  376              		.type	CYCLES_TIMER_WriteControlRegister, %function
  377              	CYCLES_TIMER_WriteControlRegister:
  378              	.LFB8:
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 14
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 14
 
 
  364:Generated_Source\PSoC5/CYCLES_TIMER.c **** 
@@ -836,9 +836,9 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  408              	.L30:
  409 001a 00BF     		.align	2
  410              	.L29:
- 411 001c 7B650040 		.word	1073767803
+ 411 001c 72640040 		.word	1073767538
  412              		.cfi_endproc
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 15
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 15
 
 
  413              	.LFE8:
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  441              		@ sp needed
  442 000e 80BC     		pop	{r7}
  443              		.cfi_restore 7
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 16
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 16
 
 
  444              		.cfi_def_cfa_offset 0
@@ -906,7 +906,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  446              	.L34:
  447 0012 00BF     		.align	2
  448              	.L33:
- 449 0014 546A0040 		.word	1073769044
+ 449 0014 46680040 		.word	1073768518
  450              		.cfi_endproc
  451              	.LFE9:
  452              		.size	CYCLES_TIMER_ReadPeriod, .-CYCLES_TIMER_ReadPeriod
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  436:Generated_Source\PSoC5/CYCLES_TIMER.c ****     #else
  437:Generated_Source\PSoC5/CYCLES_TIMER.c ****         CY_SET_REG16(CYCLES_TIMER_PERIOD_LSB_PTR, period);
  475              		.loc 1 437 0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 17
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 17
 
 
  476 000a 044A     		ldr	r2, .L36
@@ -980,7 +980,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  490              	.L37:
  491 001a 00BF     		.align	2
  492              	.L36:
- 493 001c 546A0040 		.word	1073769044
+ 493 001c 46680040 		.word	1073768518
  494              		.cfi_endproc
  495              	.LFE10:
  496              		.size	CYCLES_TIMER_WritePeriod, .-CYCLES_TIMER_WritePeriod
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  510 0000 80B4     		push	{r7}
  511              		.cfi_def_cfa_offset 4
  512              		.cfi_offset 7, -4
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 18
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 18
 
 
  513 0002 00AF     		add	r7, sp, #0
@@ -1045,7 +1045,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  528              	.L41:
  529 0012 00BF     		.align	2
  530              	.L40:
- 531 0014 946A0040 		.word	1073769108
+ 531 0014 86680040 		.word	1073768582
  532              		.cfi_endproc
  533              	.LFE11:
  534              		.size	CYCLES_TIMER_ReadCapture, .-CYCLES_TIMER_ReadCapture
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  543              		.loc 1 481 0
  544              		.cfi_startproc
  545              		@ args = 0, pretend = 0, frame = 8
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 19
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 19
 
 
  546              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -1120,7 +1120,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  572              	.L44:
  573 001a 00BF     		.align	2
  574              	.L43:
- 575 001c 146A0040 		.word	1073768980
+ 575 001c 06680040 		.word	1073768454
  576              		.cfi_endproc
  577              	.LFE12:
  578              		.size	CYCLES_TIMER_WriteCounter, .-CYCLES_TIMER_WriteCounter
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  495:Generated_Source\PSoC5/CYCLES_TIMER.c **** * Function Name: CYCLES_TIMER_ReadCounter
  496:Generated_Source\PSoC5/CYCLES_TIMER.c **** ********************************************************************************
  497:Generated_Source\PSoC5/CYCLES_TIMER.c **** *
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 20
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 20
 
 
  498:Generated_Source\PSoC5/CYCLES_TIMER.c **** * Summary:
@@ -1198,11 +1198,11 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  613              	.L48:
  614 0016 00BF     		.align	2
  615              	.L47:
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 21
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 21
 
 
- 616 0018 0A650040 		.word	1073767690
- 617 001c 946A0040 		.word	1073769108
+ 616 0018 03640040 		.word	1073767427
+ 617 001c 86680040 		.word	1073768582
  618              		.cfi_endproc
  619              	.LFE13:
  620              		.size	CYCLES_TIMER_ReadCounter, .-CYCLES_TIMER_ReadCounter
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  567:Generated_Source\PSoC5/CYCLES_TIMER.c **** {
  568:Generated_Source\PSoC5/CYCLES_TIMER.c ****     /* This must only set to two bits of the control register associated */
  569:Generated_Source\PSoC5/CYCLES_TIMER.c ****     captureMode = ((uint8)((uint8)captureMode << CYCLES_TIMER_CTRL_CAP_MODE_SHIFT));
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 22
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 22
 
 
  570:Generated_Source\PSoC5/CYCLES_TIMER.c ****     captureMode &= (CYCLES_TIMER_CTRL_CAP_MODE_MASK);
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  624:Generated_Source\PSoC5/CYCLES_TIMER.c **** /*******************************************************************************
  625:Generated_Source\PSoC5/CYCLES_TIMER.c **** * Function Name: CYCLES_TIMER_EnableTrigger
  626:Generated_Source\PSoC5/CYCLES_TIMER.c **** ********************************************************************************
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 23
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 23
 
 
  627:Generated_Source\PSoC5/CYCLES_TIMER.c **** *
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  681:Generated_Source\PSoC5/CYCLES_TIMER.c **** *                   A value of 1 to 3 will cause the interrupt
  682:Generated_Source\PSoC5/CYCLES_TIMER.c **** *                   to delay by the same number of captures.
  683:Generated_Source\PSoC5/CYCLES_TIMER.c **** *
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 24
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 24
 
 
  684:Generated_Source\PSoC5/CYCLES_TIMER.c **** * Return:
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  738:Generated_Source\PSoC5/CYCLES_TIMER.c **** * Return:
  739:Generated_Source\PSoC5/CYCLES_TIMER.c **** *  Returns the Capture Count Setting
  740:Generated_Source\PSoC5/CYCLES_TIMER.c **** *
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 25
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 25
 
 
  741:Generated_Source\PSoC5/CYCLES_TIMER.c **** *******************************************************************************/
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  653 001a 80BD     		pop	{r7, pc}
  654              		.cfi_endproc
  655              	.LFE14:
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 26
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 26
 
 
  656              		.size	CYCLES_TIMER_ClearFIFO, .-CYCLES_TIMER_ClearFIFO
@@ -1515,14 +1515,14 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  667 000c 1D000000 		.4byte	.LASF37
  668 0010 0C       		.byte	0xc
  669 0011 33010000 		.4byte	.LASF38
- 670 0015 40020000 		.4byte	.LASF39
+ 670 0015 00030000 		.4byte	.LASF39
  671 0019 00000000 		.4byte	.Ldebug_ranges0+0
  672 001d 00000000 		.4byte	0
  673 0021 00000000 		.4byte	.Ldebug_line0
  674 0025 02       		.uleb128 0x2
  675 0026 01       		.byte	0x1
  676 0027 06       		.byte	0x6
- 677 0028 79030000 		.4byte	.LASF0
+ 677 0028 45030000 		.4byte	.LASF0
  678 002c 02       		.uleb128 0x2
  679 002d 01       		.byte	0x1
  680 002e 08       		.byte	0x8
@@ -1530,7 +1530,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  682 0033 02       		.uleb128 0x2
  683 0034 02       		.byte	0x2
  684 0035 05       		.byte	0x5
- 685 0036 35030000 		.4byte	.LASF2
+ 685 0036 BC020000 		.4byte	.LASF2
  686 003a 02       		.uleb128 0x2
  687 003b 02       		.byte	0x2
  688 003c 07       		.byte	0x7
@@ -1538,7 +1538,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  690 0041 02       		.uleb128 0x2
  691 0042 04       		.byte	0x4
  692 0043 05       		.byte	0x5
- 693 0044 5F030000 		.4byte	.LASF4
+ 693 0044 E6020000 		.4byte	.LASF4
  694 0048 02       		.uleb128 0x2
  695 0049 04       		.byte	0x4
  696 004a 07       		.byte	0x7
@@ -1546,7 +1546,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  698 004f 02       		.uleb128 0x2
  699 0050 08       		.byte	0x8
  700 0051 05       		.byte	0x5
- 701 0052 FB020000 		.4byte	.LASF6
+ 701 0052 82020000 		.4byte	.LASF6
  702 0056 02       		.uleb128 0x2
  703 0057 08       		.byte	0x8
  704 0058 07       		.byte	0x7
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  710 0064 02       		.uleb128 0x2
  711 0065 04       		.byte	0x4
  712 0066 07       		.byte	0x7
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 27
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 27
 
 
  713 0067 1C020000 		.4byte	.LASF8
@@ -1583,7 +1583,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  732 0091 02       		.uleb128 0x2
  733 0092 01       		.byte	0x1
  734 0093 08       		.byte	0x8
- 735 0094 68030000 		.4byte	.LASF13
+ 735 0094 EF020000 		.4byte	.LASF13
  736 0098 04       		.uleb128 0x4
  737 0099 87010000 		.4byte	.LASF14
  738 009d 02       		.byte	0x2
@@ -1592,7 +1592,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  741 00a4 05       		.uleb128 0x5
  742 00a5 6B000000 		.4byte	0x6b
  743 00a9 04       		.uleb128 0x4
- 744 00aa 3F030000 		.4byte	.LASF15
+ 744 00aa C6020000 		.4byte	.LASF15
  745 00ae 02       		.byte	0x2
  746 00af 8F02     		.2byte	0x28f
  747 00b1 B5000000 		.4byte	0xb5
@@ -1601,13 +1601,13 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  750 00ba 02       		.uleb128 0x2
  751 00bb 08       		.byte	0x8
  752 00bc 04       		.byte	0x4
- 753 00bd 6D030000 		.4byte	.LASF16
+ 753 00bd F4020000 		.4byte	.LASF16
  754 00c1 02       		.uleb128 0x2
  755 00c2 04       		.byte	0x4
  756 00c3 07       		.byte	0x7
- 757 00c4 F2020000 		.4byte	.LASF17
+ 757 00c4 79020000 		.4byte	.LASF17
  758 00c8 06       		.uleb128 0x6
- 759 00c9 9A030000 		.4byte	.LASF21
+ 759 00c9 66030000 		.4byte	.LASF21
  760 00cd 01       		.byte	0x1
  761 00ce 2B       		.byte	0x2b
  762 00cf 00000000 		.4byte	.LFB0
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  767 00dd 07       		.uleb128 0x7
  768 00de C5000000 		.4byte	.LASF40
  769 00e2 01       		.byte	0x1
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 28
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 28
 
 
  770 00e3 2F       		.byte	0x2f
@@ -1652,7 +1652,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  798 011d 01       		.uleb128 0x1
  799 011e 9C       		.byte	0x9c
  800 011f 0A       		.uleb128 0xa
- 801 0120 17030000 		.4byte	.LASF22
+ 801 0120 9E020000 		.4byte	.LASF22
  802 0124 01       		.byte	0x1
  803 0125 1701     		.2byte	0x117
  804 0127 00000000 		.4byte	.LFB4
@@ -1661,7 +1661,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  807 0130 9C       		.byte	0x9c
  808 0131 45010000 		.4byte	0x145
  809 0135 0B       		.uleb128 0xb
- 810 0136 09030000 		.4byte	.LASF27
+ 810 0136 90020000 		.4byte	.LASF27
  811 013a 01       		.byte	0x1
  812 013b 1701     		.2byte	0x117
  813 013d 6B000000 		.4byte	0x6b
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  824 0155 01       		.uleb128 0x1
  825 0156 9C       		.byte	0x9c
  826 0157 0D       		.uleb128 0xd
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 29
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 29
 
 
  827 0158 FA000000 		.4byte	.LASF24
@@ -1690,7 +1690,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  833 016b 01       		.uleb128 0x1
  834 016c 9C       		.byte	0x9c
  835 016d 0D       		.uleb128 0xd
- 836 016e D1020000 		.4byte	.LASF25
+ 836 016e 58020000 		.4byte	.LASF25
  837 0172 01       		.byte	0x1
  838 0173 6401     		.2byte	0x164
  839 0175 6B000000 		.4byte	0x6b
@@ -1717,7 +1717,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  860 01a7 77       		.sleb128 -9
  861 01a8 00       		.byte	0
  862 01a9 0D       		.uleb128 0xd
- 863 01aa B9020000 		.4byte	.LASF29
+ 863 01aa 40020000 		.4byte	.LASF29
  864 01ae 01       		.byte	0x1
  865 01af 9501     		.2byte	0x195
  866 01b1 77000000 		.4byte	0x77
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  881 01d6 AB000000 		.4byte	.LASF31
  882 01da 01       		.byte	0x1
  883 01db AF01     		.2byte	0x1af
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 30
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 30
 
 
  884 01dd 77000000 		.4byte	0x77
@@ -1756,7 +1756,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  896 01f9 01       		.uleb128 0x1
  897 01fa 9C       		.byte	0x9c
  898 01fb 0A       		.uleb128 0xa
- 899 01fc 45030000 		.4byte	.LASF33
+ 899 01fc CC020000 		.4byte	.LASF33
  900 0200 01       		.byte	0x1
  901 0201 E001     		.2byte	0x1e0
  902 0203 00000000 		.4byte	.LFB12
@@ -1783,7 +1783,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  923 0235 01       		.uleb128 0x1
  924 0236 9C       		.byte	0x9c
  925 0237 0E       		.uleb128 0xe
- 926 0238 AC030000 		.4byte	.LASF36
+ 926 0238 78030000 		.4byte	.LASF36
  927 023c 01       		.byte	0x1
  928 023d FB02     		.2byte	0x2fb
  929 023f 00000000 		.4byte	.LFB14
@@ -1791,14 +1791,14 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  931 0247 01       		.uleb128 0x1
  932 0248 9C       		.byte	0x9c
  933 0249 0F       		.uleb128 0xf
- 934 024a 85030000 		.4byte	.LASF41
+ 934 024a 51030000 		.4byte	.LASF41
  935 024e 01       		.byte	0x1
  936 024f 1A       		.byte	0x1a
  937 0250 6B000000 		.4byte	0x6b
  938 0254 05       		.uleb128 0x5
  939 0255 03       		.byte	0x3
  940 0256 00000000 		.4byte	CYCLES_TIMER_initVar
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 31
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 31
 
 
  941 025a 00       		.byte	0
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  995 0033 13       		.uleb128 0x13
  996 0034 00       		.byte	0
  997 0035 00       		.byte	0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 32
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 32
 
 
  998 0036 05       		.uleb128 0x5
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  1052 006d 3A       		.uleb128 0x3a
  1053 006e 0B       		.uleb128 0xb
  1054 006f 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 33
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 33
 
 
  1055 0070 0B       		.uleb128 0xb
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  1109 00a8 18       		.uleb128 0x18
  1110 00a9 9742     		.uleb128 0x2117
  1111 00ab 19       		.uleb128 0x19
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 34
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 34
 
 
  1112 00ac 01       		.uleb128 0x1
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  1166 00e3 19       		.uleb128 0x19
  1167 00e4 49       		.uleb128 0x49
  1168 00e5 13       		.uleb128 0x13
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 35
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 35
 
 
  1169 00e6 11       		.uleb128 0x11
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  1223 0006 00000000 		.4byte	.Ldebug_info0
  1224 000a 04       		.byte	0x4
  1225 000b 00       		.byte	0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 36
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 36
 
 
  1226 000c 0000     		.2byte	0
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  1280 0048 00000000 		.4byte	.LFB9
  1281 004c 18000000 		.4byte	.LFE9
  1282 0050 00000000 		.4byte	.LFB10
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 37
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 37
 
 
  1283 0054 20000000 		.4byte	.LFE10
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  1308      65727275 
  1309              	.LASF30:
  1310 00e1 4359434C 		.ascii	"CYCLES_TIMER_WritePeriod\000"
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 38
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 38
 
 
  1310      45535F54 
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  1331              	.LASF9:
  1332 01c0 75696E74 		.ascii	"uint8\000"
  1332      3800
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 39
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 39
 
 
  1333              	.LASF28:
@@ -2319,104 +2319,99 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 1
  1348      6720756E 
  1348      7369676E 
  1348      65642069 
- 1349              	.LASF39:
- 1350 0240 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Dropbox (workgroup)\\Personal\\"
- 1350      73657273 
- 1350      5C4D6174 
- 1350      74696143 
- 1350      505C4472 
- 1351 026f 4D617474 		.ascii	"Mattia Poggiani\\FIRMWARES (local)\\SoftPro firmwar"
- 1351      69612050 
- 1351      6F676769 
- 1351      616E695C 
- 1351      4649524D 
- 1352 02a0 65202850 		.ascii	"e (PSoC5)\\firmware.cydsn\000"
- 1352      536F4335 
- 1352      295C6669 
- 1352      726D7761 
- 1352      72652E63 
- 1353              	.LASF29:
- 1354 02b9 4359434C 		.ascii	"CYCLES_TIMER_ReadPeriod\000"
- 1354      45535F54 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 40
+ 1349              	.LASF29:
+ 1350 0240 4359434C 		.ascii	"CYCLES_TIMER_ReadPeriod\000"
+ 1350      45535F54 
+ 1350      494D4552 
+ 1350      5F526561 
+ 1350      64506572 
+ 1351              	.LASF25:
+ 1352 0258 4359434C 		.ascii	"CYCLES_TIMER_ReadControlRegister\000"
+ 1352      45535F54 
+ 1352      494D4552 
+ 1352      5F526561 
+ 1352      64436F6E 
+ 1353              	.LASF17:
+ 1354 0279 73697A65 		.ascii	"sizetype\000"
+ 1354      74797065 
+ 1354      00
+ 1355              	.LASF6:
+ 1356 0282 6C6F6E67 		.ascii	"long long int\000"
+ 1356      206C6F6E 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 40
 
 
- 1354      494D4552 
- 1354      5F526561 
- 1354      64506572 
- 1355              	.LASF25:
- 1356 02d1 4359434C 		.ascii	"CYCLES_TIMER_ReadControlRegister\000"
- 1356      45535F54 
- 1356      494D4552 
- 1356      5F526561 
- 1356      64436F6E 
- 1357              	.LASF17:
- 1358 02f2 73697A65 		.ascii	"sizetype\000"
- 1358      74797065 
- 1358      00
- 1359              	.LASF6:
- 1360 02fb 6C6F6E67 		.ascii	"long long int\000"
- 1360      206C6F6E 
- 1360      6720696E 
- 1360      7400
- 1361              	.LASF27:
- 1362 0309 696E7465 		.ascii	"interruptMode\000"
- 1362      72727570 
- 1362      744D6F64 
- 1362      6500
- 1363              	.LASF22:
- 1364 0317 4359434C 		.ascii	"CYCLES_TIMER_SetInterruptMode\000"
- 1364      45535F54 
- 1364      494D4552 
- 1364      5F536574 
- 1364      496E7465 
- 1365              	.LASF2:
- 1366 0335 73686F72 		.ascii	"short int\000"
- 1366      7420696E 
- 1366      7400
- 1367              	.LASF15:
- 1368 033f 72656731 		.ascii	"reg16\000"
- 1368      3600
- 1369              	.LASF33:
- 1370 0345 4359434C 		.ascii	"CYCLES_TIMER_WriteCounter\000"
- 1370      45535F54 
- 1370      494D4552 
- 1370      5F577269 
- 1370      7465436F 
- 1371              	.LASF4:
- 1372 035f 6C6F6E67 		.ascii	"long int\000"
- 1372      20696E74 
- 1372      00
- 1373              	.LASF13:
- 1374 0368 63686172 		.ascii	"char\000"
- 1374      00
- 1375              	.LASF16:
- 1376 036d 6C6F6E67 		.ascii	"long double\000"
- 1376      20646F75 
- 1376      626C6500 
- 1377              	.LASF0:
- 1378 0379 7369676E 		.ascii	"signed char\000"
- 1378      65642063 
- 1378      68617200 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccFaAxC3.s 			page 41
+ 1356      6720696E 
+ 1356      7400
+ 1357              	.LASF27:
+ 1358 0290 696E7465 		.ascii	"interruptMode\000"
+ 1358      72727570 
+ 1358      744D6F64 
+ 1358      6500
+ 1359              	.LASF22:
+ 1360 029e 4359434C 		.ascii	"CYCLES_TIMER_SetInterruptMode\000"
+ 1360      45535F54 
+ 1360      494D4552 
+ 1360      5F536574 
+ 1360      496E7465 
+ 1361              	.LASF2:
+ 1362 02bc 73686F72 		.ascii	"short int\000"
+ 1362      7420696E 
+ 1362      7400
+ 1363              	.LASF15:
+ 1364 02c6 72656731 		.ascii	"reg16\000"
+ 1364      3600
+ 1365              	.LASF33:
+ 1366 02cc 4359434C 		.ascii	"CYCLES_TIMER_WriteCounter\000"
+ 1366      45535F54 
+ 1366      494D4552 
+ 1366      5F577269 
+ 1366      7465436F 
+ 1367              	.LASF4:
+ 1368 02e6 6C6F6E67 		.ascii	"long int\000"
+ 1368      20696E74 
+ 1368      00
+ 1369              	.LASF13:
+ 1370 02ef 63686172 		.ascii	"char\000"
+ 1370      00
+ 1371              	.LASF16:
+ 1372 02f4 6C6F6E67 		.ascii	"long double\000"
+ 1372      20646F75 
+ 1372      626C6500 
+ 1373              	.LASF39:
+ 1374 0300 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Documents\\GITHUB\\SoftHand-PR"
+ 1374      73657273 
+ 1374      5C4D6174 
+ 1374      74696143 
+ 1374      505C446F 
+ 1375 032e 4F2D5053 		.ascii	"O-PSoC5\\firmware.cydsn\000"
+ 1375      6F43355C 
+ 1375      6669726D 
+ 1375      77617265 
+ 1375      2E637964 
+ 1376              	.LASF0:
+ 1377 0345 7369676E 		.ascii	"signed char\000"
+ 1377      65642063 
+ 1377      68617200 
+ 1378              	.LASF41:
+ 1379 0351 4359434C 		.ascii	"CYCLES_TIMER_initVar\000"
+ 1379      45535F54 
+ 1379      494D4552 
+ 1379      5F696E69 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc9JM21T.s 			page 41
 
 
- 1379              	.LASF41:
- 1380 0385 4359434C 		.ascii	"CYCLES_TIMER_initVar\000"
- 1380      45535F54 
- 1380      494D4552 
- 1380      5F696E69 
- 1380      74566172 
- 1381              	.LASF21:
- 1382 039a 4359434C 		.ascii	"CYCLES_TIMER_Init\000"
- 1382      45535F54 
- 1382      494D4552 
- 1382      5F496E69 
- 1382      7400
- 1383              	.LASF36:
- 1384 03ac 4359434C 		.ascii	"CYCLES_TIMER_ClearFIFO\000"
- 1384      45535F54 
- 1384      494D4552 
- 1384      5F436C65 
- 1384      61724649 
- 1385              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 1379      74566172 
+ 1380              	.LASF21:
+ 1381 0366 4359434C 		.ascii	"CYCLES_TIMER_Init\000"
+ 1381      45535F54 
+ 1381      494D4552 
+ 1381      5F496E69 
+ 1381      7400
+ 1382              	.LASF36:
+ 1383 0378 4359434C 		.ascii	"CYCLES_TIMER_ClearFIFO\000"
+ 1383      45535F54 
+ 1383      494D4552 
+ 1383      5F436C65 
+ 1383      61724649 
+ 1384              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -2,7 +2,7 @@
 --	Conversion of firmware.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Mon Jun 11 16:00:40 2018
+--	Fri Jan 11 17:18:20 2019
 --
 
 USE cypress.cypress.all;
@@ -382,21 +382,134 @@ SIGNAL \Chip_Select_A:control_3\ : bit;
 SIGNAL \Chip_Select_A:control_2\ : bit;
 SIGNAL \Chip_Select_A:control_1\ : bit;
 SIGNAL \Chip_Select_A:control_0\ : bit;
-SIGNAL tmpOE__MOTOR_1A_net_0 : bit;
-SIGNAL Net_3022 : bit;
-SIGNAL tmpFB_0__MOTOR_1A_net_0 : bit;
-SIGNAL tmpIO_0__MOTOR_1A_net_0 : bit;
-TERMINAL tmpSIOVREF__MOTOR_1A_net_0 : bit;
-SIGNAL tmpINTERRUPT_0__MOTOR_1A_net_0 : bit;
-SIGNAL tmpOE__MOTOR_EN_net_0 : bit;
 SIGNAL Net_3863 : bit;
-SIGNAL tmpFB_0__MOTOR_EN_net_0 : bit;
-SIGNAL tmpIO_0__MOTOR_EN_net_0 : bit;
-TERMINAL tmpSIOVREF__MOTOR_EN_net_0 : bit;
-SIGNAL tmpINTERRUPT_0__MOTOR_EN_net_0 : bit;
+SIGNAL Net_3034 : bit;
+SIGNAL Net_2640 : bit;
+SIGNAL Net_2982 : bit;
+SIGNAL Net_3024 : bit;
+SIGNAL Net_2993 : bit;
+SIGNAL Net_3022 : bit;
+SIGNAL \MOTOR_ON_OFF:clk\ : bit;
+SIGNAL \MOTOR_ON_OFF:rst\ : bit;
+SIGNAL \MOTOR_ON_OFF:control_out_0\ : bit;
+SIGNAL Net_2631 : bit;
+SIGNAL \MOTOR_ON_OFF:control_out_1\ : bit;
+SIGNAL Net_2632 : bit;
+SIGNAL \MOTOR_ON_OFF:control_out_2\ : bit;
+SIGNAL Net_2633 : bit;
+SIGNAL \MOTOR_ON_OFF:control_out_3\ : bit;
+SIGNAL Net_2634 : bit;
+SIGNAL \MOTOR_ON_OFF:control_out_4\ : bit;
+SIGNAL Net_2635 : bit;
+SIGNAL \MOTOR_ON_OFF:control_out_5\ : bit;
+SIGNAL Net_2636 : bit;
+SIGNAL \MOTOR_ON_OFF:control_out_6\ : bit;
+SIGNAL Net_2637 : bit;
+SIGNAL \MOTOR_ON_OFF:control_out_7\ : bit;
+SIGNAL \MOTOR_ON_OFF:control_7\ : bit;
+SIGNAL \MOTOR_ON_OFF:control_6\ : bit;
+SIGNAL \MOTOR_ON_OFF:control_5\ : bit;
+SIGNAL \MOTOR_ON_OFF:control_4\ : bit;
+SIGNAL \MOTOR_ON_OFF:control_3\ : bit;
+SIGNAL \MOTOR_ON_OFF:control_2\ : bit;
+SIGNAL \MOTOR_ON_OFF:control_1\ : bit;
+SIGNAL \MOTOR_ON_OFF:control_0\ : bit;
+SIGNAL \MOTOR_DIR:clk\ : bit;
+SIGNAL \MOTOR_DIR:rst\ : bit;
+SIGNAL \MOTOR_DIR:control_out_0\ : bit;
+SIGNAL Net_2621 : bit;
+SIGNAL \MOTOR_DIR:control_out_1\ : bit;
+SIGNAL Net_2622 : bit;
+SIGNAL \MOTOR_DIR:control_out_2\ : bit;
+SIGNAL Net_2623 : bit;
+SIGNAL \MOTOR_DIR:control_out_3\ : bit;
+SIGNAL Net_2624 : bit;
+SIGNAL \MOTOR_DIR:control_out_4\ : bit;
+SIGNAL Net_2625 : bit;
+SIGNAL \MOTOR_DIR:control_out_5\ : bit;
+SIGNAL Net_2626 : bit;
+SIGNAL \MOTOR_DIR:control_out_6\ : bit;
+SIGNAL Net_2628 : bit;
+SIGNAL \MOTOR_DIR:control_out_7\ : bit;
+SIGNAL \MOTOR_DIR:control_7\ : bit;
+SIGNAL \MOTOR_DIR:control_6\ : bit;
+SIGNAL \MOTOR_DIR:control_5\ : bit;
+SIGNAL \MOTOR_DIR:control_4\ : bit;
+SIGNAL \MOTOR_DIR:control_3\ : bit;
+SIGNAL \MOTOR_DIR:control_2\ : bit;
+SIGNAL \MOTOR_DIR:control_1\ : bit;
+SIGNAL \MOTOR_DIR:control_0\ : bit;
+SIGNAL tmpOE__MOTOR_1B_net_0 : bit;
+SIGNAL tmpFB_0__MOTOR_1B_net_0 : bit;
+SIGNAL tmpIO_0__MOTOR_1B_net_0 : bit;
+TERMINAL tmpSIOVREF__MOTOR_1B_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__MOTOR_1B_net_0 : bit;
+SIGNAL tmpOE__FTDI_ENABLE_net_0 : bit;
+SIGNAL Net_3196 : bit;
+SIGNAL tmpFB_0__FTDI_ENABLE_net_0 : bit;
+SIGNAL tmpIO_0__FTDI_ENABLE_net_0 : bit;
+TERMINAL tmpSIOVREF__FTDI_ENABLE_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__FTDI_ENABLE_net_0 : bit;
+SIGNAL \RS485_CTS:clk\ : bit;
+SIGNAL \RS485_CTS:rst\ : bit;
+SIGNAL Net_3200 : bit;
+SIGNAL \RS485_CTS:control_out_0\ : bit;
+SIGNAL Net_269 : bit;
+SIGNAL \RS485_CTS:control_out_1\ : bit;
+SIGNAL Net_270 : bit;
+SIGNAL \RS485_CTS:control_out_2\ : bit;
+SIGNAL Net_271 : bit;
+SIGNAL \RS485_CTS:control_out_3\ : bit;
+SIGNAL Net_272 : bit;
+SIGNAL \RS485_CTS:control_out_4\ : bit;
+SIGNAL Net_273 : bit;
+SIGNAL \RS485_CTS:control_out_5\ : bit;
+SIGNAL Net_274 : bit;
+SIGNAL \RS485_CTS:control_out_6\ : bit;
+SIGNAL Net_275 : bit;
+SIGNAL \RS485_CTS:control_out_7\ : bit;
+SIGNAL \RS485_CTS:control_7\ : bit;
+SIGNAL \RS485_CTS:control_6\ : bit;
+SIGNAL \RS485_CTS:control_5\ : bit;
+SIGNAL \RS485_CTS:control_4\ : bit;
+SIGNAL \RS485_CTS:control_3\ : bit;
+SIGNAL \RS485_CTS:control_2\ : bit;
+SIGNAL \RS485_CTS:control_1\ : bit;
+SIGNAL \RS485_CTS:control_0\ : bit;
+SIGNAL tmpOE__USB_VDD_net_0 : bit;
+SIGNAL tmpFB_0__USB_VDD_net_0 : bit;
+SIGNAL tmpIO_0__USB_VDD_net_0 : bit;
+TERMINAL tmpSIOVREF__USB_VDD_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__USB_VDD_net_0 : bit;
+SIGNAL Net_433 : bit;
+SIGNAL \FTDI_ENABLE_REG:clk\ : bit;
+SIGNAL \FTDI_ENABLE_REG:rst\ : bit;
+SIGNAL \FTDI_ENABLE_REG:control_out_0\ : bit;
+SIGNAL Net_287 : bit;
+SIGNAL \FTDI_ENABLE_REG:control_out_1\ : bit;
+SIGNAL Net_288 : bit;
+SIGNAL \FTDI_ENABLE_REG:control_out_2\ : bit;
+SIGNAL Net_289 : bit;
+SIGNAL \FTDI_ENABLE_REG:control_out_3\ : bit;
+SIGNAL Net_290 : bit;
+SIGNAL \FTDI_ENABLE_REG:control_out_4\ : bit;
+SIGNAL Net_291 : bit;
+SIGNAL \FTDI_ENABLE_REG:control_out_5\ : bit;
+SIGNAL Net_292 : bit;
+SIGNAL \FTDI_ENABLE_REG:control_out_6\ : bit;
+SIGNAL Net_293 : bit;
+SIGNAL \FTDI_ENABLE_REG:control_out_7\ : bit;
+SIGNAL \FTDI_ENABLE_REG:control_7\ : bit;
+SIGNAL \FTDI_ENABLE_REG:control_6\ : bit;
+SIGNAL \FTDI_ENABLE_REG:control_5\ : bit;
+SIGNAL \FTDI_ENABLE_REG:control_4\ : bit;
+SIGNAL \FTDI_ENABLE_REG:control_3\ : bit;
+SIGNAL \FTDI_ENABLE_REG:control_2\ : bit;
+SIGNAL \FTDI_ENABLE_REG:control_1\ : bit;
+SIGNAL \FTDI_ENABLE_REG:control_0\ : bit;
+SIGNAL Net_2334 : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:km_run\ : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:min_kill_reg\ : bit;
-SIGNAL Net_2334 : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:ClockOutFromEnBlock\ : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:control_7\ : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:control_6\ : bit;
@@ -424,7 +537,6 @@ SIGNAL \PWM_MOTORS:PWMUDB:trig_fall\ : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:trig_out\ : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:runmode_enable\ : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:runmode_enable\\R\ : bit;
-SIGNAL Net_433 : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:runmode_enable\\S\ : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:final_enable\ : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:sc_kill_tmp\ : bit;
@@ -519,8 +631,8 @@ SIGNAL \PWM_MOTORS:PWMUDB:pwm2_i\ : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:tc_i_reg\ : bit;
 SIGNAL \PWM_MOTORS:Net_101\ : bit;
 SIGNAL \PWM_MOTORS:Net_96\ : bit;
-SIGNAL Net_1372 : bit;
-SIGNAL Net_1373 : bit;
+SIGNAL Net_2742 : bit;
+SIGNAL Net_2743 : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:pwm_temp\ : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:cmp1\ : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:cmp2\ : bit;
@@ -720,134 +832,22 @@ SIGNAL \PWM_MOTORS:PWMUDB:MODULE_2:g2:a0:g1:z1:s0:g1:u0:c_2\ : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:MODULE_2:g2:a0:g1:z1:s0:g1:u0:c_1\ : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:MODULE_2:g2:a0:g1:z1:s0:g1:u0:c_0\ : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:MODULE_2:g2:a0:g1:z1:s0:g1:u0:b_0\ : bit;
-SIGNAL Net_2993 : bit;
-SIGNAL Net_1374 : bit;
+SIGNAL Net_2744 : bit;
 SIGNAL \PWM_MOTORS:Net_55\ : bit;
-SIGNAL Net_1371 : bit;
+SIGNAL Net_2741 : bit;
 SIGNAL \PWM_MOTORS:Net_113\ : bit;
 SIGNAL \PWM_MOTORS:Net_107\ : bit;
 SIGNAL \PWM_MOTORS:Net_114\ : bit;
-SIGNAL tmpOE__MOTOR_1B_net_0 : bit;
-SIGNAL Net_3024 : bit;
-SIGNAL tmpFB_0__MOTOR_1B_net_0 : bit;
-SIGNAL tmpIO_0__MOTOR_1B_net_0 : bit;
-TERMINAL tmpSIOVREF__MOTOR_1B_net_0 : bit;
-SIGNAL tmpINTERRUPT_0__MOTOR_1B_net_0 : bit;
-SIGNAL \MOTOR_DIR:clk\ : bit;
-SIGNAL \MOTOR_DIR:rst\ : bit;
-SIGNAL Net_2982 : bit;
-SIGNAL \MOTOR_DIR:control_out_0\ : bit;
-SIGNAL Net_260 : bit;
-SIGNAL \MOTOR_DIR:control_out_1\ : bit;
-SIGNAL Net_261 : bit;
-SIGNAL \MOTOR_DIR:control_out_2\ : bit;
-SIGNAL Net_262 : bit;
-SIGNAL \MOTOR_DIR:control_out_3\ : bit;
-SIGNAL Net_263 : bit;
-SIGNAL \MOTOR_DIR:control_out_4\ : bit;
-SIGNAL Net_264 : bit;
-SIGNAL \MOTOR_DIR:control_out_5\ : bit;
-SIGNAL Net_265 : bit;
-SIGNAL \MOTOR_DIR:control_out_6\ : bit;
-SIGNAL Net_266 : bit;
-SIGNAL \MOTOR_DIR:control_out_7\ : bit;
-SIGNAL \MOTOR_DIR:control_7\ : bit;
-SIGNAL \MOTOR_DIR:control_6\ : bit;
-SIGNAL \MOTOR_DIR:control_5\ : bit;
-SIGNAL \MOTOR_DIR:control_4\ : bit;
-SIGNAL \MOTOR_DIR:control_3\ : bit;
-SIGNAL \MOTOR_DIR:control_2\ : bit;
-SIGNAL \MOTOR_DIR:control_1\ : bit;
-SIGNAL \MOTOR_DIR:control_0\ : bit;
-SIGNAL tmpOE__FTDI_ENABLE_net_0 : bit;
-SIGNAL Net_3196 : bit;
-SIGNAL tmpFB_0__FTDI_ENABLE_net_0 : bit;
-SIGNAL tmpIO_0__FTDI_ENABLE_net_0 : bit;
-TERMINAL tmpSIOVREF__FTDI_ENABLE_net_0 : bit;
-SIGNAL tmpINTERRUPT_0__FTDI_ENABLE_net_0 : bit;
-SIGNAL \RS485_CTS:clk\ : bit;
-SIGNAL \RS485_CTS:rst\ : bit;
-SIGNAL Net_3200 : bit;
-SIGNAL \RS485_CTS:control_out_0\ : bit;
-SIGNAL Net_269 : bit;
-SIGNAL \RS485_CTS:control_out_1\ : bit;
-SIGNAL Net_270 : bit;
-SIGNAL \RS485_CTS:control_out_2\ : bit;
-SIGNAL Net_271 : bit;
-SIGNAL \RS485_CTS:control_out_3\ : bit;
-SIGNAL Net_272 : bit;
-SIGNAL \RS485_CTS:control_out_4\ : bit;
-SIGNAL Net_273 : bit;
-SIGNAL \RS485_CTS:control_out_5\ : bit;
-SIGNAL Net_274 : bit;
-SIGNAL \RS485_CTS:control_out_6\ : bit;
-SIGNAL Net_275 : bit;
-SIGNAL \RS485_CTS:control_out_7\ : bit;
-SIGNAL \RS485_CTS:control_7\ : bit;
-SIGNAL \RS485_CTS:control_6\ : bit;
-SIGNAL \RS485_CTS:control_5\ : bit;
-SIGNAL \RS485_CTS:control_4\ : bit;
-SIGNAL \RS485_CTS:control_3\ : bit;
-SIGNAL \RS485_CTS:control_2\ : bit;
-SIGNAL \RS485_CTS:control_1\ : bit;
-SIGNAL \RS485_CTS:control_0\ : bit;
-SIGNAL tmpOE__USB_VDD_net_0 : bit;
-SIGNAL tmpFB_0__USB_VDD_net_0 : bit;
-SIGNAL tmpIO_0__USB_VDD_net_0 : bit;
-TERMINAL tmpSIOVREF__USB_VDD_net_0 : bit;
-SIGNAL tmpINTERRUPT_0__USB_VDD_net_0 : bit;
-SIGNAL \MOTOR_ON_OFF:clk\ : bit;
-SIGNAL \MOTOR_ON_OFF:rst\ : bit;
-SIGNAL Net_3034 : bit;
-SIGNAL \MOTOR_ON_OFF:control_out_0\ : bit;
-SIGNAL Net_278 : bit;
-SIGNAL \MOTOR_ON_OFF:control_out_1\ : bit;
-SIGNAL Net_279 : bit;
-SIGNAL \MOTOR_ON_OFF:control_out_2\ : bit;
-SIGNAL Net_280 : bit;
-SIGNAL \MOTOR_ON_OFF:control_out_3\ : bit;
-SIGNAL Net_281 : bit;
-SIGNAL \MOTOR_ON_OFF:control_out_4\ : bit;
-SIGNAL Net_282 : bit;
-SIGNAL \MOTOR_ON_OFF:control_out_5\ : bit;
-SIGNAL Net_283 : bit;
-SIGNAL \MOTOR_ON_OFF:control_out_6\ : bit;
-SIGNAL Net_284 : bit;
-SIGNAL \MOTOR_ON_OFF:control_out_7\ : bit;
-SIGNAL \MOTOR_ON_OFF:control_7\ : bit;
-SIGNAL \MOTOR_ON_OFF:control_6\ : bit;
-SIGNAL \MOTOR_ON_OFF:control_5\ : bit;
-SIGNAL \MOTOR_ON_OFF:control_4\ : bit;
-SIGNAL \MOTOR_ON_OFF:control_3\ : bit;
-SIGNAL \MOTOR_ON_OFF:control_2\ : bit;
-SIGNAL \MOTOR_ON_OFF:control_1\ : bit;
-SIGNAL \MOTOR_ON_OFF:control_0\ : bit;
-SIGNAL \FTDI_ENABLE_REG:clk\ : bit;
-SIGNAL \FTDI_ENABLE_REG:rst\ : bit;
-SIGNAL \FTDI_ENABLE_REG:control_out_0\ : bit;
-SIGNAL Net_287 : bit;
-SIGNAL \FTDI_ENABLE_REG:control_out_1\ : bit;
-SIGNAL Net_288 : bit;
-SIGNAL \FTDI_ENABLE_REG:control_out_2\ : bit;
-SIGNAL Net_289 : bit;
-SIGNAL \FTDI_ENABLE_REG:control_out_3\ : bit;
-SIGNAL Net_290 : bit;
-SIGNAL \FTDI_ENABLE_REG:control_out_4\ : bit;
-SIGNAL Net_291 : bit;
-SIGNAL \FTDI_ENABLE_REG:control_out_5\ : bit;
-SIGNAL Net_292 : bit;
-SIGNAL \FTDI_ENABLE_REG:control_out_6\ : bit;
-SIGNAL Net_293 : bit;
-SIGNAL \FTDI_ENABLE_REG:control_out_7\ : bit;
-SIGNAL \FTDI_ENABLE_REG:control_7\ : bit;
-SIGNAL \FTDI_ENABLE_REG:control_6\ : bit;
-SIGNAL \FTDI_ENABLE_REG:control_5\ : bit;
-SIGNAL \FTDI_ENABLE_REG:control_4\ : bit;
-SIGNAL \FTDI_ENABLE_REG:control_3\ : bit;
-SIGNAL \FTDI_ENABLE_REG:control_2\ : bit;
-SIGNAL \FTDI_ENABLE_REG:control_1\ : bit;
-SIGNAL \FTDI_ENABLE_REG:control_0\ : bit;
-SIGNAL Net_296 : bit;
+SIGNAL tmpOE__MOTOR_EN_net_0 : bit;
+SIGNAL tmpFB_0__MOTOR_EN_net_0 : bit;
+SIGNAL tmpIO_0__MOTOR_EN_net_0 : bit;
+TERMINAL tmpSIOVREF__MOTOR_EN_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__MOTOR_EN_net_0 : bit;
+SIGNAL tmpOE__MOTOR_1A_net_0 : bit;
+SIGNAL tmpFB_0__MOTOR_1A_net_0 : bit;
+SIGNAL tmpIO_0__MOTOR_1A_net_0 : bit;
+TERMINAL tmpSIOVREF__MOTOR_1A_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__MOTOR_1A_net_0 : bit;
 SIGNAL Net_3328 : bit;
 SIGNAL \PACER_TIMER:Net_260\ : bit;
 SIGNAL \PACER_TIMER:Net_266\ : bit;
@@ -900,7 +900,7 @@ SIGNAL Net_322 : bit;
 SIGNAL \MY_TIMER:Net_55\ : bit;
 SIGNAL Net_327 : bit;
 SIGNAL \MY_TIMER:Net_53\ : bit;
-SIGNAL Net_328 : bit;
+SIGNAL Net_2564 : bit;
 SIGNAL \MY_TIMER:TimerUDB:ClockOutFromEnBlock\ : bit;
 SIGNAL \MY_TIMER:TimerUDB:Clk_Ctl_i\ : bit;
 SIGNAL \MY_TIMER:TimerUDB:control_7\ : bit;
@@ -1516,11 +1516,11 @@ SIGNAL tmpIO_0__RS_485_EN_net_0 : bit;
 TERMINAL tmpSIOVREF__RS_485_EN_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__RS_485_EN_net_0 : bit;
 SIGNAL \CYCLES_TIMER:Net_260\ : bit;
-SIGNAL Net_340 : bit;
+SIGNAL Net_2557 : bit;
 SIGNAL \CYCLES_TIMER:Net_55\ : bit;
 SIGNAL Net_345 : bit;
 SIGNAL \CYCLES_TIMER:Net_53\ : bit;
-SIGNAL Net_5159 : bit;
+SIGNAL Net_2711 : bit;
 SIGNAL \CYCLES_TIMER:TimerUDB:ClockOutFromEnBlock\ : bit;
 SIGNAL \CYCLES_TIMER:TimerUDB:Clk_Ctl_i\ : bit;
 SIGNAL \CYCLES_TIMER:TimerUDB:control_7\ : bit;
@@ -1552,7 +1552,7 @@ SIGNAL \CYCLES_TIMER:TimerUDB:tc_i\ : bit;
 SIGNAL \CYCLES_TIMER:TimerUDB:tc_reg_i\ : bit;
 SIGNAL \CYCLES_TIMER:TimerUDB:hwEnable_reg\ : bit;
 SIGNAL \CYCLES_TIMER:TimerUDB:capture_out_reg_i\ : bit;
-SIGNAL Net_344 : bit;
+SIGNAL Net_2561 : bit;
 SIGNAL \CYCLES_TIMER:TimerUDB:capt_fifo_load_int\ : bit;
 SIGNAL \CYCLES_TIMER:TimerUDB:runmode_enable\ : bit;
 SIGNAL \CYCLES_TIMER:TimerUDB:trig_reg\ : bit;
@@ -1707,21 +1707,6 @@ SIGNAL \CYCLES_TIMER:TimerUDB:sT16:timerdp:f1_blk_stat_reg_1\ : bit;
 ATTRIBUTE port_state_att of \CYCLES_TIMER:TimerUDB:sT16:timerdp:f1_blk_stat_reg_1\:SIGNAL IS 2;
 SIGNAL \CYCLES_TIMER:Net_102\ : bit;
 SIGNAL \CYCLES_TIMER:Net_266\ : bit;
-SIGNAL tmpOE__ENC_CS_net_0 : bit;
-SIGNAL tmpFB_0__ENC_CS_net_0 : bit;
-SIGNAL tmpIO_0__ENC_CS_net_0 : bit;
-TERMINAL tmpSIOVREF__ENC_CS_net_0 : bit;
-SIGNAL tmpINTERRUPT_0__ENC_CS_net_0 : bit;
-SIGNAL tmpOE__ENC_SCLK_net_0 : bit;
-SIGNAL tmpFB_0__ENC_SCLK_net_0 : bit;
-SIGNAL tmpIO_0__ENC_SCLK_net_0 : bit;
-TERMINAL tmpSIOVREF__ENC_SCLK_net_0 : bit;
-SIGNAL tmpINTERRUPT_0__ENC_SCLK_net_0 : bit;
-SIGNAL tmpOE__ENC_MISO_net_0 : bit;
-SIGNAL tmpFB_0__ENC_MISO_net_0 : bit;
-SIGNAL tmpIO_0__ENC_MISO_net_0 : bit;
-TERMINAL tmpSIOVREF__ENC_MISO_net_0 : bit;
-SIGNAL tmpINTERRUPT_0__ENC_MISO_net_0 : bit;
 SIGNAL \emFile:SPI0:Net_276\ : bit;
 SIGNAL \emFile:Net_19\ : bit;
 SIGNAL \emFile:SPI0:BSPIM:clk_fin\ : bit;
@@ -1867,12 +1852,12 @@ SIGNAL \emFile:tmpFB_0__SPI0_CS_net_0\ : bit;
 SIGNAL \emFile:tmpIO_0__SPI0_CS_net_0\ : bit;
 TERMINAL \emFile:tmpSIOVREF__SPI0_CS_net_0\ : bit;
 SIGNAL \emFile:tmpINTERRUPT_0__SPI0_CS_net_0\ : bit;
-SIGNAL tmpOE__CS0_net_0 : bit;
+SIGNAL tmpOE__CS_on_board_IMU_net_0 : bit;
 SIGNAL Net_1623 : bit;
-SIGNAL tmpFB_0__CS0_net_0 : bit;
-SIGNAL tmpIO_0__CS0_net_0 : bit;
-TERMINAL tmpSIOVREF__CS0_net_0 : bit;
-SIGNAL tmpINTERRUPT_0__CS0_net_0 : bit;
+SIGNAL tmpFB_0__CS_on_board_IMU_net_0 : bit;
+SIGNAL tmpIO_0__CS_on_board_IMU_net_0 : bit;
+TERMINAL tmpSIOVREF__CS_on_board_IMU_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__CS_on_board_IMU_net_0 : bit;
 SIGNAL tmpOE__MISO_net_0 : bit;
 SIGNAL Net_1469 : bit;
 SIGNAL tmpIO_0__MISO_net_0 : bit;
@@ -1899,7 +1884,6 @@ SIGNAL tmpIO_0__RTC_CS_net_0 : bit;
 TERMINAL tmpSIOVREF__RTC_CS_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__RTC_CS_net_0 : bit;
 SIGNAL \SPI_IMU:Net_276\ : bit;
-SIGNAL \SPI_IMU:Net_288\ : bit;
 SIGNAL \SPI_IMU:BSPIM:clk_fin\ : bit;
 SIGNAL \SPI_IMU:BSPIM:load_rx_data\ : bit;
 SIGNAL \SPI_IMU:BSPIM:dpcounter_one_reg\ : bit;
@@ -2023,11 +2007,11 @@ ATTRIBUTE port_state_att of \SPI_IMU:BSPIM:sR8:Dp:f1_blk_stat_reg\:SIGNAL IS 2;
 SIGNAL \SPI_IMU:Net_289\ : bit;
 SIGNAL Net_1627 : bit;
 SIGNAL Net_1628 : bit;
-SIGNAL tmpOE__CS2_net_0 : bit;
-SIGNAL tmpFB_0__CS2_net_0 : bit;
-SIGNAL tmpIO_0__CS2_net_0 : bit;
-TERMINAL tmpSIOVREF__CS2_net_0 : bit;
-SIGNAL tmpINTERRUPT_0__CS2_net_0 : bit;
+SIGNAL tmpOE__CS1_net_0 : bit;
+SIGNAL tmpFB_0__CS1_net_0 : bit;
+SIGNAL tmpIO_0__CS1_net_0 : bit;
+TERMINAL tmpSIOVREF__CS1_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__CS1_net_0 : bit;
 SIGNAL Net_1630 : bit;
 SIGNAL \demux_2:tmp__demux_2_0_reg\ : bit;
 SIGNAL Net_1616 : bit;
@@ -2035,13 +2019,13 @@ SIGNAL \demux_2:tmp__demux_2_1_reg\ : bit;
 SIGNAL \demux_2:tmp__demux_2_2_reg\ : bit;
 SIGNAL \demux_2:tmp__demux_2_3_reg\ : bit;
 SIGNAL Net_1629 : bit;
-SIGNAL Net_1615 : bit;
-SIGNAL tmpOE__CS1_net_0 : bit;
+SIGNAL Net_2501 : bit;
+SIGNAL tmpOE__CS0_net_0 : bit;
 SIGNAL Net_1618 : bit;
-SIGNAL tmpFB_0__CS1_net_0 : bit;
-SIGNAL tmpIO_0__CS1_net_0 : bit;
-TERMINAL tmpSIOVREF__CS1_net_0 : bit;
-SIGNAL tmpINTERRUPT_0__CS1_net_0 : bit;
+SIGNAL tmpFB_0__CS0_net_0 : bit;
+SIGNAL tmpIO_0__CS0_net_0 : bit;
+TERMINAL tmpSIOVREF__CS0_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__CS0_net_0 : bit;
 SIGNAL \BLINK_05HZ:PWMUDB:km_run\ : bit;
 SIGNAL \BLINK_05HZ:PWMUDB:min_kill_reg\ : bit;
 SIGNAL Net_6987 : bit;
@@ -2873,6 +2857,889 @@ TERMINAL Net_2069 : bit;
 SIGNAL tmpIO_0__EMG_6_net_0 : bit;
 TERMINAL tmpSIOVREF__EMG_6_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__EMG_6_net_0 : bit;
+SIGNAL Net_3510 : bit;
+SIGNAL Net_3511 : bit;
+SIGNAL Net_1287 : bit;
+SIGNAL \RESET_COUNTERS:clk\ : bit;
+SIGNAL \RESET_COUNTERS:rst\ : bit;
+SIGNAL Net_3492 : bit;
+SIGNAL \RESET_COUNTERS:control_out_0\ : bit;
+SIGNAL Net_2141 : bit;
+SIGNAL \RESET_COUNTERS:control_out_1\ : bit;
+SIGNAL Net_2142 : bit;
+SIGNAL \RESET_COUNTERS:control_out_2\ : bit;
+SIGNAL Net_2143 : bit;
+SIGNAL \RESET_COUNTERS:control_out_3\ : bit;
+SIGNAL Net_2144 : bit;
+SIGNAL \RESET_COUNTERS:control_out_4\ : bit;
+SIGNAL Net_2145 : bit;
+SIGNAL \RESET_COUNTERS:control_out_5\ : bit;
+SIGNAL Net_2146 : bit;
+SIGNAL \RESET_COUNTERS:control_out_6\ : bit;
+SIGNAL Net_2147 : bit;
+SIGNAL \RESET_COUNTERS:control_out_7\ : bit;
+SIGNAL \RESET_COUNTERS:control_7\ : bit;
+SIGNAL \RESET_COUNTERS:control_6\ : bit;
+SIGNAL \RESET_COUNTERS:control_5\ : bit;
+SIGNAL \RESET_COUNTERS:control_4\ : bit;
+SIGNAL \RESET_COUNTERS:control_3\ : bit;
+SIGNAL \RESET_COUNTERS:control_2\ : bit;
+SIGNAL \RESET_COUNTERS:control_1\ : bit;
+SIGNAL \RESET_COUNTERS:control_0\ : bit;
+SIGNAL Net_2497 : bit;
+SIGNAL Net_3416 : bit;
+SIGNAL Net_1308 : bit;
+SIGNAL tmpOE__CS_ENCODER0_net_0 : bit;
+SIGNAL Net_2343 : bit;
+SIGNAL tmpFB_0__CS_ENCODER0_net_0 : bit;
+SIGNAL tmpIO_0__CS_ENCODER0_net_0 : bit;
+TERMINAL tmpSIOVREF__CS_ENCODER0_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__CS_ENCODER0_net_0 : bit;
+SIGNAL tmpOE__MISO_ENCODER_net_0 : bit;
+SIGNAL Net_2409 : bit;
+SIGNAL tmpIO_0__MISO_ENCODER_net_0 : bit;
+TERMINAL tmpSIOVREF__MISO_ENCODER_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__MISO_ENCODER_net_0 : bit;
+SIGNAL tmpOE__CLK_ENCODER_net_0 : bit;
+SIGNAL Net_2441 : bit;
+SIGNAL tmpFB_0__CLK_ENCODER_net_0 : bit;
+SIGNAL tmpIO_0__CLK_ENCODER_net_0 : bit;
+TERMINAL tmpSIOVREF__CLK_ENCODER_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__CLK_ENCODER_net_0 : bit;
+SIGNAL Net_3419 : bit;
+SIGNAL cydff_2 : bit;
+SIGNAL Net_1317 : bit;
+SIGNAL cydff_1 : bit;
+SIGNAL Net_2132 : bit;
+SIGNAL \SHIFTREG_ENC_1:Net_350\ : bit;
+SIGNAL \SHIFTREG_ENC_1:Net_1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:Net_2\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:ctrl_clk_enable\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:control_0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:ctrl_f0_full\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:control_1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:clk_fin\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:control_7\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:control_6\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:control_5\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:control_4\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:control_3\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:control_2\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:status_2\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:status_0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:final_load\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:status_1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:status_3\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:f0_blk_stat_final\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:status_4\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:f0_bus_stat_final\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:status_5\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:f1_blk_stat_final\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:status_6\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:f1_bus_stat_final\ : bit;
+SIGNAL Net_2486 : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:load_reg\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:f0_blk_stat_24_2\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:f0_bus_stat_24_2\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:f1_blk_stat_24_2\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:f1_bus_stat_24_2\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce0_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce0_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl0_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl0_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z0_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z0_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff0_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff0_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce1_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce1_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl1_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl1_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z1_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z1_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff1_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff1_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ov_msb_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ov_msb_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:co_msb_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:co_msb_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmsb_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmsb_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:so_24_0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:f0_bus_stat_24_0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:f0_blk_stat_24_0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:f1_bus_stat_24_0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:f1_blk_stat_24_0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce0_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce0_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl0_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl0_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z0_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z0_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff0_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff0_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce1_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce1_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl1_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl1_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z1_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z1_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff1_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff1_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ov_msb_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ov_msb_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:co_msb_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:co_msb_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmsb_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmsb_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:so_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:so_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f0_bus_stat_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f0_bus_stat_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f0_blk_stat_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f0_blk_stat_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f1_bus_stat_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f1_bus_stat_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f1_blk_stat_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f1_blk_stat_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:carry0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:sh_right0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:sh_left0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:msb0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_eq0_1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_eq0_0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_lt0_1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_lt0_0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_zero0_1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_zero0_0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_ff0_1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_ff0_0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cap0_1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cap0_0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cfb0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce0_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce0_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl0_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl0_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z0_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z0_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff0_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff0_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce1_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce1_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl1_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl1_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z1_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z1_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff1_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff1_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ov_msb_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ov_msb_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:co_msb_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:co_msb_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmsb_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmsb_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:so_24_1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:f0_bus_stat_24_1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:f0_blk_stat_24_1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:f1_bus_stat_24_1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:f1_blk_stat_24_1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce0_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce0_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl0_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl0_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z0_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z0_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff0_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff0_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce1_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce1_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl1_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl1_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z1_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z1_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff1_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff1_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ov_msb_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ov_msb_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:co_msb_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:co_msb_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmsb_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmsb_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:so_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:so_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f0_bus_stat_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f0_bus_stat_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f0_blk_stat_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f0_blk_stat_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f1_bus_stat_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f1_bus_stat_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f1_blk_stat_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f1_blk_stat_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:carry1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:sh_right1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:sh_left1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:msb1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_eq1_1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_eq1_0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_lt1_1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_lt1_0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_zero1_1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_zero1_0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_ff1_1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_ff1_0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cap1_1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cap1_0\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cfb1\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce0_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce0_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl0_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl0_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z0_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z0_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff0_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff0_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce1_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce1_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl1_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl1_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z1_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z1_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff1_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff1_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ov_msb_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ov_msb_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:co_msb_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:co_msb_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmsb_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmsb_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:so_24_2\ : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce0_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce0_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl0_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl0_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z0_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z0_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff0_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff0_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce1_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ce1_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl1_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cl1_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z1_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:z1_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff1_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ff1_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ov_msb_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:ov_msb_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:co_msb_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:co_msb_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmsb_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmsb_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:so_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:so_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f0_bus_stat_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f0_bus_stat_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f0_blk_stat_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f0_blk_stat_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f1_bus_stat_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f1_bus_stat_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f1_blk_stat_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:f1_blk_stat_reg_2\:SIGNAL IS 2;
+SIGNAL Net_2467 : bit;
+SIGNAL Net_2253 : bit;
+SIGNAL \COUNTER_ENC:Net_43\ : bit;
+SIGNAL \COUNTER_ENC:Net_49\ : bit;
+SIGNAL \COUNTER_ENC:Net_82\ : bit;
+SIGNAL \COUNTER_ENC:Net_89\ : bit;
+SIGNAL \COUNTER_ENC:Net_95\ : bit;
+SIGNAL \COUNTER_ENC:Net_91\ : bit;
+SIGNAL \COUNTER_ENC:Net_102\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:ClockOutFromEnBlock\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:ctrl_cmod_2\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:ctrl_cmod_1\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:ctrl_cmod_0\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:ctrl_capmode_1\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:ctrl_capmode_0\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:Clk_Ctl_i\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:control_7\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:control_6\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:control_5\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:control_4\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:control_3\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:control_2\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:control_1\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:control_0\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:ctrl_enable\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:prevCapture\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:capt_rising\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:capt_falling\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:capt_either_edge\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:hwCapture\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:reload\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:reload_tc\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:final_enable\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:counter_enable\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:status_0\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:cmp_out_status\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:status_1\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:per_zero\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:status_2\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:overflow_status\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:status_3\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:underflow_status\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:status_4\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:status_5\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:fifo_full\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:status_6\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:fifo_nempty\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:overflow\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:dp_dir\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:per_equal\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:underflow\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:overflow_reg_i\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:underflow_reg_i\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:tc_i\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:tc_reg_i\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:cmp_out_i\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:cmp_equal\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:prevCompare\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:cmp_out_reg_i\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:count_stored_i\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:count_enable\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:cs_addr_2\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:cs_addr_1\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:cs_addr_0\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:nc42\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:per_FF\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:cmp_less\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:z1\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:z1\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:ff1\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:ff1\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:ov_msb\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:ov_msb\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:co_msb\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:co_msb\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:cmsb\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:cmsb\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:so\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:so\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:f1_bus_stat\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:f1_bus_stat\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:f1_blk_stat\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:f1_blk_stat\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:ce0_reg\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:ce0_reg\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:cl0_reg\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:cl0_reg\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:z0_reg\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:z0_reg\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:ff0_reg\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:ff0_reg\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:ce1_reg\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:ce1_reg\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:cl1_reg\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:cl1_reg\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:z1_reg\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:z1_reg\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:ff1_reg\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:ff1_reg\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:ov_msb_reg\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:ov_msb_reg\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:co_msb_reg\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:co_msb_reg\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:cmsb_reg\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:cmsb_reg\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:so_reg\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:so_reg\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:f0_bus_stat_reg\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:f0_bus_stat_reg\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:f0_blk_stat_reg\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:f0_blk_stat_reg\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:f1_bus_stat_reg\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:f1_bus_stat_reg\:SIGNAL IS 2;
+SIGNAL \COUNTER_ENC:CounterUDB:sC8:counterdp:f1_blk_stat_reg\ : bit;
+ATTRIBUTE port_state_att of \COUNTER_ENC:CounterUDB:sC8:counterdp:f1_blk_stat_reg\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:Net_350\ : bit;
+SIGNAL \SHIFTREG_ENC_2:Net_1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:Net_2\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:ctrl_clk_enable\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:control_0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:ctrl_f0_full\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:control_1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:clk_fin\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:control_7\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:control_6\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:control_5\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:control_4\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:control_3\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:control_2\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:status_2\ : bit;
+SIGNAL Net_2474 : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:status_0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:final_load\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:status_1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:status_3\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:f0_blk_stat_final\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:status_4\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:f0_bus_stat_final\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:status_5\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:f1_blk_stat_final\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:status_6\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:f1_bus_stat_final\ : bit;
+SIGNAL Net_2492 : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:load_reg\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:f0_blk_stat_24_2\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:f0_bus_stat_24_2\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:f1_blk_stat_24_2\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:f1_bus_stat_24_2\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce0_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce0_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl0_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl0_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z0_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z0_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff0_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff0_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce1_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce1_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl1_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl1_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z1_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z1_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff1_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff1_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ov_msb_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ov_msb_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:co_msb_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:co_msb_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmsb_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmsb_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:so_24_0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:f0_bus_stat_24_0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:f0_blk_stat_24_0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:f1_bus_stat_24_0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:f1_blk_stat_24_0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce0_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce0_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl0_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl0_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z0_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z0_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff0_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff0_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce1_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce1_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl1_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl1_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z1_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z1_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff1_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff1_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ov_msb_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ov_msb_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:co_msb_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:co_msb_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmsb_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmsb_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:so_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:so_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f0_bus_stat_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f0_bus_stat_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f0_blk_stat_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f0_blk_stat_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f1_bus_stat_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f1_bus_stat_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f1_blk_stat_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f1_blk_stat_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:carry0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:sh_right0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:sh_left0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:msb0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_eq0_1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_eq0_0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_lt0_1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_lt0_0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_zero0_1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_zero0_0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_ff0_1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_ff0_0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cap0_1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cap0_0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cfb0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce0_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce0_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl0_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl0_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z0_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z0_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff0_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff0_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce1_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce1_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl1_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl1_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z1_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z1_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff1_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff1_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ov_msb_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ov_msb_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:co_msb_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:co_msb_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmsb_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmsb_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:so_24_1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:f0_bus_stat_24_1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:f0_blk_stat_24_1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:f1_bus_stat_24_1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:f1_blk_stat_24_1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce0_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce0_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl0_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl0_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z0_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z0_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff0_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff0_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce1_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce1_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl1_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl1_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z1_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z1_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff1_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff1_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ov_msb_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ov_msb_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:co_msb_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:co_msb_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmsb_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmsb_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:so_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:so_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f0_bus_stat_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f0_bus_stat_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f0_blk_stat_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f0_blk_stat_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f1_bus_stat_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f1_bus_stat_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f1_blk_stat_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f1_blk_stat_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:carry1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:sh_right1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:sh_left1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:msb1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_eq1_1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_eq1_0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_lt1_1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_lt1_0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_zero1_1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_zero1_0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_ff1_1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_ff1_0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cap1_1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cap1_0\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cfb1\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce0_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce0_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl0_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl0_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z0_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z0_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff0_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff0_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce1_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce1_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl1_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl1_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z1_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z1_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff1_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff1_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ov_msb_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ov_msb_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:co_msb_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:co_msb_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmsb_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmsb_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:so_24_2\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce0_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce0_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl0_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl0_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z0_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z0_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff0_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff0_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce1_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ce1_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl1_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cl1_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z1_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:z1_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff1_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ff1_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ov_msb_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:ov_msb_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:co_msb_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:co_msb_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmsb_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmsb_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:so_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:so_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f0_bus_stat_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f0_bus_stat_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f0_blk_stat_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f0_blk_stat_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f1_bus_stat_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f1_bus_stat_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f1_blk_stat_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:f1_blk_stat_reg_2\:SIGNAL IS 2;
+SIGNAL Net_2491 : bit;
+SIGNAL \SHIFTREG_ENC_3:Net_350\ : bit;
+SIGNAL \SHIFTREG_ENC_3:Net_1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:Net_2\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:ctrl_clk_enable\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:control_0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:ctrl_f0_full\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:control_1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:clk_fin\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:control_7\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:control_6\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:control_5\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:control_4\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:control_3\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:control_2\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:status_2\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:status_0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:final_load\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:status_1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:status_3\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:f0_blk_stat_final\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:status_4\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:f0_bus_stat_final\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:status_5\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:f1_blk_stat_final\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:status_6\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:f1_bus_stat_final\ : bit;
+SIGNAL Net_2499 : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:load_reg\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:f0_blk_stat_24_2\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:f0_bus_stat_24_2\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:f1_blk_stat_24_2\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:f1_bus_stat_24_2\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce0_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce0_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl0_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl0_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z0_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z0_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff0_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff0_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce1_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce1_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl1_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl1_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z1_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z1_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff1_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff1_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ov_msb_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ov_msb_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:co_msb_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:co_msb_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmsb_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmsb_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:so_24_0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:f0_bus_stat_24_0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:f0_blk_stat_24_0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:f1_bus_stat_24_0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:f1_blk_stat_24_0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce0_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce0_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl0_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl0_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z0_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z0_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff0_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff0_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce1_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce1_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl1_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl1_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z1_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z1_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff1_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff1_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ov_msb_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ov_msb_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:co_msb_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:co_msb_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmsb_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmsb_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:so_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:so_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f0_bus_stat_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f0_bus_stat_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f0_blk_stat_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f0_blk_stat_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f1_bus_stat_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f1_bus_stat_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f1_blk_stat_reg_0\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f1_blk_stat_reg_0\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:carry0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:sh_right0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:sh_left0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:msb0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_eq0_1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_eq0_0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_lt0_1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_lt0_0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_zero0_1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_zero0_0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_ff0_1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_ff0_0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cap0_1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cap0_0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cfb0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce0_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce0_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl0_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl0_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z0_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z0_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff0_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff0_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce1_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce1_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl1_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl1_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z1_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z1_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff1_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff1_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ov_msb_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ov_msb_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:co_msb_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:co_msb_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmsb_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmsb_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:so_24_1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:f0_bus_stat_24_1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:f0_blk_stat_24_1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:f1_bus_stat_24_1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:f1_blk_stat_24_1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce0_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce0_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl0_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl0_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z0_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z0_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff0_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff0_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce1_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce1_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl1_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl1_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z1_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z1_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff1_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff1_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ov_msb_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ov_msb_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:co_msb_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:co_msb_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmsb_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmsb_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:so_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:so_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f0_bus_stat_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f0_bus_stat_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f0_blk_stat_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f0_blk_stat_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f1_bus_stat_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f1_bus_stat_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f1_blk_stat_reg_1\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f1_blk_stat_reg_1\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:carry1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:sh_right1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:sh_left1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:msb1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_eq1_1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_eq1_0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_lt1_1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_lt1_0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_zero1_1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_zero1_0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_ff1_1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_ff1_0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cap1_1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cap1_0\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cfb1\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce0_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce0_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl0_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl0_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z0_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z0_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff0_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff0_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce1_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce1_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl1_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl1_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z1_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z1_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff1_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff1_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ov_msb_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ov_msb_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:co_msb_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:co_msb_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmsb_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmsb_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:so_24_2\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce0_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce0_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl0_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl0_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z0_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z0_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff0_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff0_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce1_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ce1_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl1_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cl1_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z1_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:z1_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff1_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ff1_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ov_msb_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:ov_msb_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:co_msb_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:co_msb_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmsb_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmsb_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:so_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:so_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f0_bus_stat_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f0_bus_stat_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f0_blk_stat_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f0_blk_stat_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f1_bus_stat_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f1_bus_stat_reg_2\:SIGNAL IS 2;
+SIGNAL \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f1_blk_stat_reg_2\ : bit;
+ATTRIBUTE port_state_att of \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:f1_blk_stat_reg_2\:SIGNAL IS 2;
+SIGNAL Net_2498 : bit;
+SIGNAL tmpOE__CS2_net_0 : bit;
+SIGNAL Net_2500 : bit;
+SIGNAL tmpFB_0__CS2_net_0 : bit;
+SIGNAL tmpIO_0__CS2_net_0 : bit;
+TERMINAL tmpSIOVREF__CS2_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__CS2_net_0 : bit;
 SIGNAL \MODULE_8:g1:a0:newa_1\ : bit;
 SIGNAL MODIN7_1 : bit;
 SIGNAL \MODULE_8:g1:a0:newa_0\ : bit;
@@ -3083,6 +3950,18 @@ SIGNAL \BLINK_25HZ:PWMUDB:pwm_i_reg\\D\ : bit;
 SIGNAL \BLINK_25HZ:PWMUDB:pwm1_i_reg\\D\ : bit;
 SIGNAL \BLINK_25HZ:PWMUDB:pwm2_i_reg\\D\ : bit;
 SIGNAL \BLINK_25HZ:PWMUDB:tc_i_reg\\D\ : bit;
+SIGNAL cydff_2D : bit;
+SIGNAL cydff_1D : bit;
+SIGNAL \SHIFTREG_ENC_1:bSR:load_reg\\D\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:prevCapture\\D\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:overflow_reg_i\\D\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:underflow_reg_i\\D\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:tc_reg_i\\D\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:prevCompare\\D\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:cmp_out_reg_i\\D\ : bit;
+SIGNAL \COUNTER_ENC:CounterUDB:count_stored_i\\D\ : bit;
+SIGNAL \SHIFTREG_ENC_2:bSR:load_reg\\D\ : bit;
+SIGNAL \SHIFTREG_ENC_3:bSR:load_reg\\D\ : bit;
 BEGIN
 
 zero <=  ('0') ;
@@ -3111,6 +3990,12 @@ cy_srff_3D <= ((not Net_5190_0 and cy_srff_3)
 	OR (not Net_5190_0 and Net_4627)
 	OR (not Net_5190_1 and Net_4627));
 
+Net_3863 <= (not Net_3034);
+
+Net_3024 <= ((not Net_2982 and Net_2993));
+
+Net_3022 <= ((Net_2982 and Net_2993));
+
 \PWM_MOTORS:PWMUDB:sc_kill_tmp\\D\ <= (not \PWM_MOTORS:PWMUDB:tc_i\);
 
 \PWM_MOTORS:PWMUDB:dith_count_1\\D\ <= ((not \PWM_MOTORS:PWMUDB:dith_count_1\ and \PWM_MOTORS:PWMUDB:tc_i\ and \PWM_MOTORS:PWMUDB:dith_count_0\)
@@ -3124,12 +4009,6 @@ cy_srff_3D <= ((not Net_5190_0 and cy_srff_3)
 
 \PWM_MOTORS:PWMUDB:pwm_i\ <= ((\PWM_MOTORS:PWMUDB:runmode_enable\ and \PWM_MOTORS:PWMUDB:cmp1_less\)
 	OR (\PWM_MOTORS:PWMUDB:runmode_enable\ and \PWM_MOTORS:PWMUDB:cmp1_eq\));
-
-Net_3022 <= ((Net_2993 and Net_2982));
-
-Net_3024 <= ((not Net_2982 and Net_2993));
-
-Net_3863 <= (not Net_3034);
 
 cy_srff_1D <= ((not Net_3334 and cy_srff_1)
 	OR (not Net_3334 and Net_3240));
@@ -3487,6 +4366,26 @@ Net_1854 <= (Net_7694
 Net_1865 <= (Net_7667
 	OR Net_7450
 	OR Net_5579);
+
+Net_3510 <= (Net_1287
+	OR Net_3511);
+
+Net_3416 <= (not Net_1308);
+
+Net_3419 <= (not Net_2441);
+
+\COUNTER_ENC:CounterUDB:reload\ <= (\COUNTER_ENC:CounterUDB:per_equal\
+	OR Net_3492);
+
+\COUNTER_ENC:CounterUDB:status_0\ <= ((not \COUNTER_ENC:CounterUDB:prevCompare\ and \COUNTER_ENC:CounterUDB:cmp_out_i\));
+
+\COUNTER_ENC:CounterUDB:status_2\ <= ((not \COUNTER_ENC:CounterUDB:overflow_reg_i\ and \COUNTER_ENC:CounterUDB:per_equal\));
+
+\COUNTER_ENC:CounterUDB:count_enable\ <= ((not \COUNTER_ENC:CounterUDB:count_stored_i\ and Net_2441 and \COUNTER_ENC:CounterUDB:control_7\));
+
+Net_2500 <= (Net_1619
+	OR not Net_1622_0
+	OR not Net_1622_1);
 
 \ADC:vRef_2\:cy_vref_v1_0
 	GENERIC MAP(guid=>"15B3DB15-B7B3-4d62-A2DF-25EA392A7161",
@@ -4150,266 +5049,26 @@ SCLK:cy_psoc3_pins_v1_10
 		clock=>zero,
 		control=>(\Chip_Select_A:control_7\, \Chip_Select_A:control_6\, \Chip_Select_A:control_5\, \Chip_Select_A:control_4\,
 			\Chip_Select_A:control_3\, \Chip_Select_A:control_2\, Net_1622_1, Net_1622_0));
-MOTOR_1A:cy_psoc3_pins_v1_10
-	GENERIC MAP(id=>"ed092b9b-d398-4703-be89-cebf998501f6",
-		drive_mode=>"110",
-		ibuf_enabled=>"1",
-		init_dr_st=>"0",
-		input_sync=>"1",
-		input_clk_en=>'0',
-		input_sync_mode=>"0",
-		intr_mode=>"00",
-		invert_in_clock=>'0',
-		invert_in_clock_en=>'0',
-		invert_in_reset=>'0',
-		invert_out_clock=>'0',
-		invert_out_clock_en=>'0',
-		invert_out_reset=>'0',
-		io_voltage=>"",
-		layout_mode=>"CONTIGUOUS",
-		output_conn=>"1",
-		output_sync=>"0",
-		output_clk_en=>'0',
-		output_mode=>"0",
-		output_reset=>'0',
-		output_clock_mode=>"0",
-		oe_sync=>"0",
-		oe_conn=>"0",
-		oe_reset=>'0',
-		pin_aliases=>"",
-		pin_mode=>"O",
-		por_state=>2,
-		sio_group_cnt=>0,
-		sio_hifreq=>"00000000",
-		sio_hyst=>"1",
-		sio_ibuf=>"00000000",
-		sio_info=>"00",
-		sio_obuf=>"00000000",
-		sio_refsel=>"00000000",
-		sio_vtrip=>"00000000",
-		sio_vohsel=>"00000000",
-		slew_rate=>"0",
-		spanning=>'0',
-		sw_only=>'0',
-		vtrip=>"10",
-		width=>1,
-		port_alias_required=>'0',
-		port_alias_group=>"",
-		use_annotation=>"0",
-		pa_in_clock=>-1,
-		pa_in_clock_en=>-1,
-		pa_in_reset=>-1,
-		pa_out_clock=>-1,
-		pa_out_clock_en=>-1,
-		pa_out_reset=>-1,
-		ovt_needed=>"0",
-		ovt_slew_control=>"00",
-		ovt_hyst_trim=>"0",
-		input_buffer_sel=>"00")
-	PORT MAP(oe=>(Net_4572_1),
-		y=>Net_3022,
-		fb=>(tmpFB_0__MOTOR_1A_net_0),
-		analog=>(open),
-		io=>(tmpIO_0__MOTOR_1A_net_0),
-		siovref=>(tmpSIOVREF__MOTOR_1A_net_0),
-		annotation=>(open),
-		in_clock=>zero,
-		in_clock_en=>Net_4572_1,
-		in_reset=>zero,
-		out_clock=>zero,
-		out_clock_en=>Net_4572_1,
-		out_reset=>zero,
-		interrupt=>tmpINTERRUPT_0__MOTOR_1A_net_0);
-MOTOR_EN:cy_psoc3_pins_v1_10
-	GENERIC MAP(id=>"671293f7-780f-457c-aa7d-804de8a64965",
-		drive_mode=>"110",
-		ibuf_enabled=>"1",
-		init_dr_st=>"0",
-		input_sync=>"1",
-		input_clk_en=>'0',
-		input_sync_mode=>"0",
-		intr_mode=>"00",
-		invert_in_clock=>'0',
-		invert_in_clock_en=>'0',
-		invert_in_reset=>'0',
-		invert_out_clock=>'0',
-		invert_out_clock_en=>'0',
-		invert_out_reset=>'0',
-		io_voltage=>"2",
-		layout_mode=>"CONTIGUOUS",
-		output_conn=>"1",
-		output_sync=>"0",
-		output_clk_en=>'0',
-		output_mode=>"0",
-		output_reset=>'0',
-		output_clock_mode=>"0",
-		oe_sync=>"0",
-		oe_conn=>"0",
-		oe_reset=>'0',
-		pin_aliases=>"M1",
-		pin_mode=>"O",
-		por_state=>2,
-		sio_group_cnt=>0,
-		sio_hifreq=>"00000000",
-		sio_hyst=>"1",
-		sio_ibuf=>"00000000",
-		sio_info=>"00",
-		sio_obuf=>"00000000",
-		sio_refsel=>"00000000",
-		sio_vtrip=>"00000000",
-		sio_vohsel=>"00000000",
-		slew_rate=>"0",
-		spanning=>'0',
-		sw_only=>'0',
-		vtrip=>"10",
-		width=>1,
-		port_alias_required=>'0',
-		port_alias_group=>"",
-		use_annotation=>"0",
-		pa_in_clock=>-1,
-		pa_in_clock_en=>-1,
-		pa_in_reset=>-1,
-		pa_out_clock=>-1,
-		pa_out_clock_en=>-1,
-		pa_out_reset=>-1,
-		ovt_needed=>"0",
-		ovt_slew_control=>"00",
-		ovt_hyst_trim=>"0",
-		input_buffer_sel=>"00")
-	PORT MAP(oe=>(Net_4572_1),
-		y=>Net_3863,
-		fb=>(tmpFB_0__MOTOR_EN_net_0),
-		analog=>(open),
-		io=>(tmpIO_0__MOTOR_EN_net_0),
-		siovref=>(tmpSIOVREF__MOTOR_EN_net_0),
-		annotation=>(open),
-		in_clock=>zero,
-		in_clock_en=>Net_4572_1,
-		in_reset=>zero,
-		out_clock=>zero,
-		out_clock_en=>Net_4572_1,
-		out_reset=>zero,
-		interrupt=>tmpINTERRUPT_0__MOTOR_EN_net_0);
-\PWM_MOTORS:PWMUDB:clock_enable_block\:cy_psoc3_udb_clock_enable_v1_0
-	GENERIC MAP(sync_mode=>'1')
-	PORT MAP(clock_in=>Net_2334,
-		enable=>Net_4572_1,
-		clock_out=>\PWM_MOTORS:PWMUDB:ClockOutFromEnBlock\);
-\PWM_MOTORS:PWMUDB:genblk1:ctrlreg\:cy_psoc3_control
+\MOTOR_ON_OFF:Sync:ctrl_reg\:cy_psoc3_control
 	GENERIC MAP(cy_init_value=>"00000000",
 		cy_force_order=>'1',
 		cy_ctrl_mode_1=>"00000000",
-		cy_ctrl_mode_0=>"11111111",
+		cy_ctrl_mode_0=>"00000000",
 		cy_ext_reset=>'0')
 	PORT MAP(reset=>zero,
-		clock=>\PWM_MOTORS:PWMUDB:ClockOutFromEnBlock\,
-		control=>(\PWM_MOTORS:PWMUDB:control_7\, \PWM_MOTORS:PWMUDB:control_6\, \PWM_MOTORS:PWMUDB:control_5\, \PWM_MOTORS:PWMUDB:control_4\,
-			\PWM_MOTORS:PWMUDB:control_3\, \PWM_MOTORS:PWMUDB:control_2\, \PWM_MOTORS:PWMUDB:control_1\, \PWM_MOTORS:PWMUDB:control_0\));
-\PWM_MOTORS:PWMUDB:sP8:pwmdp:u0\:cy_psoc3_dp
-	GENERIC MAP(cy_dpconfig=>"0000000001000000000000001100000001000000010000000000000011000000000000001100000000000000110000000000000011000000000000001100000011111111000000001111111111111111101000000000000000000100000000000000000000011000",
-		d0_init=>"00000000",
-		d1_init=>"00000000",
-		a0_init=>"00000000",
-		a1_init=>"00000000",
-		ce0_sync=>'1',
-		cl0_sync=>'1',
-		z0_sync=>'1',
-		ff0_sync=>'1',
-		ce1_sync=>'1',
-		cl1_sync=>'1',
-		z1_sync=>'1',
-		ff1_sync=>'1',
-		ov_msb_sync=>'1',
-		co_msb_sync=>'1',
-		cmsb_sync=>'1',
-		so_sync=>'1',
-		f0_bus_sync=>'1',
-		f0_blk_sync=>'1',
-		f1_bus_sync=>'1',
-		f1_blk_sync=>'1')
+		clock=>zero,
+		control=>(\MOTOR_ON_OFF:control_7\, \MOTOR_ON_OFF:control_6\, \MOTOR_ON_OFF:control_5\, \MOTOR_ON_OFF:control_4\,
+			\MOTOR_ON_OFF:control_3\, \MOTOR_ON_OFF:control_2\, \MOTOR_ON_OFF:control_1\, Net_3034));
+\MOTOR_DIR:Sync:ctrl_reg\:cy_psoc3_control
+	GENERIC MAP(cy_init_value=>"00000000",
+		cy_force_order=>'1',
+		cy_ctrl_mode_1=>"00000000",
+		cy_ctrl_mode_0=>"00000000",
+		cy_ext_reset=>'0')
 	PORT MAP(reset=>zero,
-		clk=>\PWM_MOTORS:PWMUDB:ClockOutFromEnBlock\,
-		cs_addr=>(\PWM_MOTORS:PWMUDB:tc_i\, \PWM_MOTORS:PWMUDB:runmode_enable\, zero),
-		route_si=>zero,
-		route_ci=>zero,
-		f0_load=>zero,
-		f1_load=>zero,
-		d0_load=>zero,
-		d1_load=>zero,
-		ce0=>\PWM_MOTORS:PWMUDB:cmp1_eq\,
-		cl0=>\PWM_MOTORS:PWMUDB:cmp1_less\,
-		z0=>\PWM_MOTORS:PWMUDB:tc_i\,
-		ff0=>open,
-		ce1=>\PWM_MOTORS:PWMUDB:cmp2_eq\,
-		cl1=>\PWM_MOTORS:PWMUDB:cmp2_less\,
-		z1=>open,
-		ff1=>open,
-		ov_msb=>open,
-		co_msb=>open,
-		cmsb=>open,
-		so=>open,
-		f0_bus_stat=>open,
-		f0_blk_stat=>open,
-		f1_bus_stat=>\PWM_MOTORS:PWMUDB:fifo_nempty\,
-		f1_blk_stat=>\PWM_MOTORS:PWMUDB:fifo_full\,
-		ce0_reg=>open,
-		cl0_reg=>open,
-		z0_reg=>open,
-		ff0_reg=>open,
-		ce1_reg=>open,
-		cl1_reg=>open,
-		z1_reg=>open,
-		ff1_reg=>open,
-		ov_msb_reg=>open,
-		co_msb_reg=>open,
-		cmsb_reg=>open,
-		so_reg=>open,
-		f0_bus_stat_reg=>open,
-		f0_blk_stat_reg=>open,
-		f1_bus_stat_reg=>open,
-		f1_blk_stat_reg=>open,
-		ci=>zero,
-		co=>open,
-		sir=>zero,
-		sor=>open,
-		sil=>zero,
-		sol=>open,
-		msbi=>zero,
-		msbo=>open,
-		cei=>(zero, zero),
-		ceo=>open,
-		cli=>(zero, zero),
-		clo=>open,
-		zi=>(zero, zero),
-		zo=>open,
-		fi=>(zero, zero),
-		fo=>open,
-		capi=>(zero, zero),
-		capo=>open,
-		cfbi=>zero,
-		cfbo=>open,
-		pi=>(zero, zero, zero, zero,
-			zero, zero, zero, zero),
-		po=>open);
-\PWM_MOTORS:PWMUDB:MODULE_2:g2:a0:g1:z1:s0:g1:u0:gs(24):g2:g3:ub\:cy_buf
-	PORT MAP(x=>zero,
-		y=>\PWM_MOTORS:PWMUDB:MODULE_2:g2:a0:g1:z1:s0:g1:u0:c_24\);
-\PWM_MOTORS:PWMUDB:MODULE_2:g2:a0:g1:z1:s0:g1:u0:gs(16):g2:g3:ub\:cy_buf
-	PORT MAP(x=>zero,
-		y=>\PWM_MOTORS:PWMUDB:MODULE_2:g2:a0:g1:z1:s0:g1:u0:c_16\);
-\PWM_MOTORS:PWMUDB:MODULE_2:g2:a0:g1:z1:s0:g1:u0:gs(8):g2:g3:ub\:cy_buf
-	PORT MAP(x=>zero,
-		y=>\PWM_MOTORS:PWMUDB:MODULE_2:g2:a0:g1:z1:s0:g1:u0:c_8\);
-CLOCK_PWM:cy_clock_v1_0
-	GENERIC MAP(cy_registers=>"",
-		id=>"f801b4a9-38f2-478d-b30d-81c0e8844af6",
-		source_clock_id=>"CEF43CFB-0213-49b9-B980-2FFAB81C5B47",
-		divisor=>0,
-		period=>"500000000",
-		is_direct=>'0',
-		is_digital=>'1')
-	PORT MAP(clock_out=>Net_2334,
-		dig_domain_out=>open);
+		clock=>zero,
+		control=>(\MOTOR_DIR:control_7\, \MOTOR_DIR:control_6\, \MOTOR_DIR:control_5\, \MOTOR_DIR:control_4\,
+			\MOTOR_DIR:control_3\, \MOTOR_DIR:control_2\, \MOTOR_DIR:control_1\, Net_2982));
 MOTOR_1B:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"653fafc2-0769-4d73-969e-7b60a05feecf",
 		drive_mode=>"110",
@@ -4480,16 +5139,6 @@ MOTOR_1B:cy_psoc3_pins_v1_10
 		out_clock_en=>Net_4572_1,
 		out_reset=>zero,
 		interrupt=>tmpINTERRUPT_0__MOTOR_1B_net_0);
-\MOTOR_DIR:Sync:ctrl_reg\:cy_psoc3_control
-	GENERIC MAP(cy_init_value=>"00000000",
-		cy_force_order=>'1',
-		cy_ctrl_mode_1=>"00000000",
-		cy_ctrl_mode_0=>"00000000",
-		cy_ext_reset=>'0')
-	PORT MAP(reset=>zero,
-		clock=>zero,
-		control=>(\MOTOR_DIR:control_7\, \MOTOR_DIR:control_6\, \MOTOR_DIR:control_5\, \MOTOR_DIR:control_4\,
-			\MOTOR_DIR:control_3\, \MOTOR_DIR:control_2\, \MOTOR_DIR:control_1\, Net_2982));
 FTDI_ENABLE:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"52f31aa9-2f0a-497d-9a1f-1424095e13e6",
 		drive_mode=>"110",
@@ -4640,16 +5289,6 @@ USB_VDD:cy_psoc3_pins_v1_10
 		out_clock_en=>Net_4572_1,
 		out_reset=>zero,
 		interrupt=>tmpINTERRUPT_0__USB_VDD_net_0);
-\MOTOR_ON_OFF:Sync:ctrl_reg\:cy_psoc3_control
-	GENERIC MAP(cy_init_value=>"00000000",
-		cy_force_order=>'1',
-		cy_ctrl_mode_1=>"00000000",
-		cy_ctrl_mode_0=>"00000000",
-		cy_ext_reset=>'0')
-	PORT MAP(reset=>zero,
-		clock=>zero,
-		control=>(\MOTOR_ON_OFF:control_7\, \MOTOR_ON_OFF:control_6\, \MOTOR_ON_OFF:control_5\, \MOTOR_ON_OFF:control_4\,
-			\MOTOR_ON_OFF:control_3\, \MOTOR_ON_OFF:control_2\, \MOTOR_ON_OFF:control_1\, Net_3034));
 \FTDI_ENABLE_REG:Sync:ctrl_reg\:cy_psoc3_control
 	GENERIC MAP(cy_init_value=>"00000000",
 		cy_force_order=>'1',
@@ -4660,6 +5299,266 @@ USB_VDD:cy_psoc3_pins_v1_10
 		clock=>zero,
 		control=>(\FTDI_ENABLE_REG:control_7\, \FTDI_ENABLE_REG:control_6\, \FTDI_ENABLE_REG:control_5\, \FTDI_ENABLE_REG:control_4\,
 			\FTDI_ENABLE_REG:control_3\, \FTDI_ENABLE_REG:control_2\, \FTDI_ENABLE_REG:control_1\, Net_3196));
+CLOCK_PWM:cy_clock_v1_0
+	GENERIC MAP(cy_registers=>"",
+		id=>"f801b4a9-38f2-478d-b30d-81c0e8844af6",
+		source_clock_id=>"CEF43CFB-0213-49b9-B980-2FFAB81C5B47",
+		divisor=>0,
+		period=>"500000000",
+		is_direct=>'0',
+		is_digital=>'1')
+	PORT MAP(clock_out=>Net_2334,
+		dig_domain_out=>open);
+\PWM_MOTORS:PWMUDB:clock_enable_block\:cy_psoc3_udb_clock_enable_v1_0
+	GENERIC MAP(sync_mode=>'1')
+	PORT MAP(clock_in=>Net_2334,
+		enable=>Net_4572_1,
+		clock_out=>\PWM_MOTORS:PWMUDB:ClockOutFromEnBlock\);
+\PWM_MOTORS:PWMUDB:genblk1:ctrlreg\:cy_psoc3_control
+	GENERIC MAP(cy_init_value=>"00000000",
+		cy_force_order=>'1',
+		cy_ctrl_mode_1=>"00000000",
+		cy_ctrl_mode_0=>"11111111",
+		cy_ext_reset=>'0')
+	PORT MAP(reset=>zero,
+		clock=>\PWM_MOTORS:PWMUDB:ClockOutFromEnBlock\,
+		control=>(\PWM_MOTORS:PWMUDB:control_7\, \PWM_MOTORS:PWMUDB:control_6\, \PWM_MOTORS:PWMUDB:control_5\, \PWM_MOTORS:PWMUDB:control_4\,
+			\PWM_MOTORS:PWMUDB:control_3\, \PWM_MOTORS:PWMUDB:control_2\, \PWM_MOTORS:PWMUDB:control_1\, \PWM_MOTORS:PWMUDB:control_0\));
+\PWM_MOTORS:PWMUDB:sP8:pwmdp:u0\:cy_psoc3_dp
+	GENERIC MAP(cy_dpconfig=>"0000000001000000000000001100000001000000010000000000000011000000000000001100000000000000110000000000000011000000000000001100000011111111000000001111111111111111101000000000000000000100000000000000000000011000",
+		d0_init=>"00000000",
+		d1_init=>"00000000",
+		a0_init=>"00000000",
+		a1_init=>"00000000",
+		ce0_sync=>'1',
+		cl0_sync=>'1',
+		z0_sync=>'1',
+		ff0_sync=>'1',
+		ce1_sync=>'1',
+		cl1_sync=>'1',
+		z1_sync=>'1',
+		ff1_sync=>'1',
+		ov_msb_sync=>'1',
+		co_msb_sync=>'1',
+		cmsb_sync=>'1',
+		so_sync=>'1',
+		f0_bus_sync=>'1',
+		f0_blk_sync=>'1',
+		f1_bus_sync=>'1',
+		f1_blk_sync=>'1')
+	PORT MAP(reset=>zero,
+		clk=>\PWM_MOTORS:PWMUDB:ClockOutFromEnBlock\,
+		cs_addr=>(\PWM_MOTORS:PWMUDB:tc_i\, \PWM_MOTORS:PWMUDB:runmode_enable\, zero),
+		route_si=>zero,
+		route_ci=>zero,
+		f0_load=>zero,
+		f1_load=>zero,
+		d0_load=>zero,
+		d1_load=>zero,
+		ce0=>\PWM_MOTORS:PWMUDB:cmp1_eq\,
+		cl0=>\PWM_MOTORS:PWMUDB:cmp1_less\,
+		z0=>\PWM_MOTORS:PWMUDB:tc_i\,
+		ff0=>open,
+		ce1=>\PWM_MOTORS:PWMUDB:cmp2_eq\,
+		cl1=>\PWM_MOTORS:PWMUDB:cmp2_less\,
+		z1=>open,
+		ff1=>open,
+		ov_msb=>open,
+		co_msb=>open,
+		cmsb=>open,
+		so=>open,
+		f0_bus_stat=>open,
+		f0_blk_stat=>open,
+		f1_bus_stat=>\PWM_MOTORS:PWMUDB:fifo_nempty\,
+		f1_blk_stat=>\PWM_MOTORS:PWMUDB:fifo_full\,
+		ce0_reg=>open,
+		cl0_reg=>open,
+		z0_reg=>open,
+		ff0_reg=>open,
+		ce1_reg=>open,
+		cl1_reg=>open,
+		z1_reg=>open,
+		ff1_reg=>open,
+		ov_msb_reg=>open,
+		co_msb_reg=>open,
+		cmsb_reg=>open,
+		so_reg=>open,
+		f0_bus_stat_reg=>open,
+		f0_blk_stat_reg=>open,
+		f1_bus_stat_reg=>open,
+		f1_blk_stat_reg=>open,
+		ci=>zero,
+		co=>open,
+		sir=>zero,
+		sor=>open,
+		sil=>zero,
+		sol=>open,
+		msbi=>zero,
+		msbo=>open,
+		cei=>(zero, zero),
+		ceo=>open,
+		cli=>(zero, zero),
+		clo=>open,
+		zi=>(zero, zero),
+		zo=>open,
+		fi=>(zero, zero),
+		fo=>open,
+		capi=>(zero, zero),
+		capo=>open,
+		cfbi=>zero,
+		cfbo=>open,
+		pi=>(zero, zero, zero, zero,
+			zero, zero, zero, zero),
+		po=>open);
+\PWM_MOTORS:PWMUDB:MODULE_2:g2:a0:g1:z1:s0:g1:u0:gs(24):g2:g3:ub\:cy_buf
+	PORT MAP(x=>zero,
+		y=>\PWM_MOTORS:PWMUDB:MODULE_2:g2:a0:g1:z1:s0:g1:u0:c_24\);
+\PWM_MOTORS:PWMUDB:MODULE_2:g2:a0:g1:z1:s0:g1:u0:gs(16):g2:g3:ub\:cy_buf
+	PORT MAP(x=>zero,
+		y=>\PWM_MOTORS:PWMUDB:MODULE_2:g2:a0:g1:z1:s0:g1:u0:c_16\);
+\PWM_MOTORS:PWMUDB:MODULE_2:g2:a0:g1:z1:s0:g1:u0:gs(8):g2:g3:ub\:cy_buf
+	PORT MAP(x=>zero,
+		y=>\PWM_MOTORS:PWMUDB:MODULE_2:g2:a0:g1:z1:s0:g1:u0:c_8\);
+MOTOR_EN:cy_psoc3_pins_v1_10
+	GENERIC MAP(id=>"671293f7-780f-457c-aa7d-804de8a64965",
+		drive_mode=>"110",
+		ibuf_enabled=>"1",
+		init_dr_st=>"0",
+		input_sync=>"1",
+		input_clk_en=>'0',
+		input_sync_mode=>"0",
+		intr_mode=>"00",
+		invert_in_clock=>'0',
+		invert_in_clock_en=>'0',
+		invert_in_reset=>'0',
+		invert_out_clock=>'0',
+		invert_out_clock_en=>'0',
+		invert_out_reset=>'0',
+		io_voltage=>"2",
+		layout_mode=>"CONTIGUOUS",
+		output_conn=>"1",
+		output_sync=>"0",
+		output_clk_en=>'0',
+		output_mode=>"0",
+		output_reset=>'0',
+		output_clock_mode=>"0",
+		oe_sync=>"0",
+		oe_conn=>"0",
+		oe_reset=>'0',
+		pin_aliases=>"M1",
+		pin_mode=>"O",
+		por_state=>2,
+		sio_group_cnt=>0,
+		sio_hifreq=>"00000000",
+		sio_hyst=>"1",
+		sio_ibuf=>"00000000",
+		sio_info=>"00",
+		sio_obuf=>"00000000",
+		sio_refsel=>"00000000",
+		sio_vtrip=>"00000000",
+		sio_vohsel=>"00000000",
+		slew_rate=>"0",
+		spanning=>'0',
+		sw_only=>'0',
+		vtrip=>"10",
+		width=>1,
+		port_alias_required=>'0',
+		port_alias_group=>"",
+		use_annotation=>"0",
+		pa_in_clock=>-1,
+		pa_in_clock_en=>-1,
+		pa_in_reset=>-1,
+		pa_out_clock=>-1,
+		pa_out_clock_en=>-1,
+		pa_out_reset=>-1,
+		ovt_needed=>"0",
+		ovt_slew_control=>"00",
+		ovt_hyst_trim=>"0",
+		input_buffer_sel=>"00")
+	PORT MAP(oe=>(Net_4572_1),
+		y=>Net_3863,
+		fb=>(tmpFB_0__MOTOR_EN_net_0),
+		analog=>(open),
+		io=>(tmpIO_0__MOTOR_EN_net_0),
+		siovref=>(tmpSIOVREF__MOTOR_EN_net_0),
+		annotation=>(open),
+		in_clock=>zero,
+		in_clock_en=>Net_4572_1,
+		in_reset=>zero,
+		out_clock=>zero,
+		out_clock_en=>Net_4572_1,
+		out_reset=>zero,
+		interrupt=>tmpINTERRUPT_0__MOTOR_EN_net_0);
+MOTOR_1A:cy_psoc3_pins_v1_10
+	GENERIC MAP(id=>"ed092b9b-d398-4703-be89-cebf998501f6",
+		drive_mode=>"110",
+		ibuf_enabled=>"1",
+		init_dr_st=>"0",
+		input_sync=>"1",
+		input_clk_en=>'0',
+		input_sync_mode=>"0",
+		intr_mode=>"00",
+		invert_in_clock=>'0',
+		invert_in_clock_en=>'0',
+		invert_in_reset=>'0',
+		invert_out_clock=>'0',
+		invert_out_clock_en=>'0',
+		invert_out_reset=>'0',
+		io_voltage=>"",
+		layout_mode=>"CONTIGUOUS",
+		output_conn=>"1",
+		output_sync=>"0",
+		output_clk_en=>'0',
+		output_mode=>"0",
+		output_reset=>'0',
+		output_clock_mode=>"0",
+		oe_sync=>"0",
+		oe_conn=>"0",
+		oe_reset=>'0',
+		pin_aliases=>"",
+		pin_mode=>"O",
+		por_state=>2,
+		sio_group_cnt=>0,
+		sio_hifreq=>"00000000",
+		sio_hyst=>"1",
+		sio_ibuf=>"00000000",
+		sio_info=>"00",
+		sio_obuf=>"00000000",
+		sio_refsel=>"00000000",
+		sio_vtrip=>"00000000",
+		sio_vohsel=>"00000000",
+		slew_rate=>"0",
+		spanning=>'0',
+		sw_only=>'0',
+		vtrip=>"10",
+		width=>1,
+		port_alias_required=>'0',
+		port_alias_group=>"",
+		use_annotation=>"0",
+		pa_in_clock=>-1,
+		pa_in_clock_en=>-1,
+		pa_in_reset=>-1,
+		pa_out_clock=>-1,
+		pa_out_clock_en=>-1,
+		pa_out_reset=>-1,
+		ovt_needed=>"0",
+		ovt_slew_control=>"00",
+		ovt_hyst_trim=>"0",
+		input_buffer_sel=>"00")
+	PORT MAP(oe=>(Net_4572_1),
+		y=>Net_3022,
+		fb=>(tmpFB_0__MOTOR_1A_net_0),
+		analog=>(open),
+		io=>(tmpIO_0__MOTOR_1A_net_0),
+		siovref=>(tmpSIOVREF__MOTOR_1A_net_0),
+		annotation=>(open),
+		in_clock=>zero,
+		in_clock_en=>Net_4572_1,
+		in_reset=>zero,
+		out_clock=>zero,
+		out_clock_en=>Net_4572_1,
+		out_reset=>zero,
+		interrupt=>tmpINTERRUPT_0__MOTOR_1A_net_0);
 \PACER_TIMER:TimerHW\:cy_psoc3_timer_v1_0
 	GENERIC MAP(cy_registers=>"")
 	PORT MAP(clock=>Net_3328,
@@ -4699,12 +5598,12 @@ timer_clock_1:cy_clock_v1_0
 			zero, zero, zero, cy_srff_1));
 \MY_TIMER:TimerUDB:clock_enable_block\:cy_psoc3_udb_clock_enable_v1_0
 	GENERIC MAP(sync_mode=>'1')
-	PORT MAP(clock_in=>Net_328,
+	PORT MAP(clock_in=>Net_2564,
 		enable=>Net_4572_1,
 		clock_out=>\MY_TIMER:TimerUDB:ClockOutFromEnBlock\);
 \MY_TIMER:TimerUDB:sCTRLReg:SyncCtl:cy_psoc3_udb_Ctl_Clk_Sync\:cy_psoc3_udb_clock_enable_v1_0
 	GENERIC MAP(sync_mode=>'1')
-	PORT MAP(clock_in=>Net_328,
+	PORT MAP(clock_in=>Net_2564,
 		enable=>Net_4572_1,
 		clock_out=>\MY_TIMER:TimerUDB:Clk_Ctl_i\);
 \MY_TIMER:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\:cy_psoc3_control
@@ -4992,7 +5891,7 @@ timer_clock:cy_clock_v1_0
 		period=>"1000000000",
 		is_direct=>'0',
 		is_digital=>'1')
-	PORT MAP(clock_out=>Net_328,
+	PORT MAP(clock_out=>Net_2564,
 		dig_domain_out=>open);
 \Sync_1:genblk1[0]:INST\:cy_psoc3_sync
 	PORT MAP(clock=>Net_3328,
@@ -5523,12 +6422,12 @@ CLOCK_UART:cy_clock_v1_0
 		dig_domain_out=>open);
 \CYCLES_TIMER:TimerUDB:clock_enable_block\:cy_psoc3_udb_clock_enable_v1_0
 	GENERIC MAP(sync_mode=>'1')
-	PORT MAP(clock_in=>Net_5159,
+	PORT MAP(clock_in=>Net_2711,
 		enable=>Net_4572_1,
 		clock_out=>\CYCLES_TIMER:TimerUDB:ClockOutFromEnBlock\);
 \CYCLES_TIMER:TimerUDB:sCTRLReg:SyncCtl:cy_psoc3_udb_Ctl_Clk_Sync\:cy_psoc3_udb_clock_enable_v1_0
 	GENERIC MAP(sync_mode=>'1')
-	PORT MAP(clock_in=>Net_5159,
+	PORT MAP(clock_in=>Net_2711,
 		enable=>Net_4572_1,
 		clock_out=>\CYCLES_TIMER:TimerUDB:Clk_Ctl_i\);
 \CYCLES_TIMER:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\:cy_psoc3_control
@@ -5730,222 +6629,12 @@ counter_cyc_clk:cy_clock_v1_0
 		period=>"20000000000000",
 		is_direct=>'0',
 		is_digital=>'1')
-	PORT MAP(clock_out=>Net_5159,
+	PORT MAP(clock_out=>Net_2711,
 		dig_domain_out=>open);
 ISR_CYCLES:cy_isr_v1_0
 	GENERIC MAP(int_type=>"10",
 		is_nmi=>'0')
 	PORT MAP(int_signal=>Net_345);
-ENC_CS:cy_psoc3_pins_v1_10
-	GENERIC MAP(id=>"98fdad8b-eec1-45d1-8a81-f61d84aa5faa",
-		drive_mode=>"110",
-		ibuf_enabled=>"1",
-		init_dr_st=>"0",
-		input_sync=>"1",
-		input_clk_en=>'0',
-		input_sync_mode=>"0",
-		intr_mode=>"00",
-		invert_in_clock=>'0',
-		invert_in_clock_en=>'0',
-		invert_in_reset=>'0',
-		invert_out_clock=>'0',
-		invert_out_clock_en=>'0',
-		invert_out_reset=>'0',
-		io_voltage=>"",
-		layout_mode=>"CONTIGUOUS",
-		output_conn=>"0",
-		output_sync=>"0",
-		output_clk_en=>'0',
-		output_mode=>"0",
-		output_reset=>'0',
-		output_clock_mode=>"0",
-		oe_sync=>"0",
-		oe_conn=>"0",
-		oe_reset=>'0',
-		pin_aliases=>"",
-		pin_mode=>"O",
-		por_state=>4,
-		sio_group_cnt=>0,
-		sio_hifreq=>"00000000",
-		sio_hyst=>"1",
-		sio_ibuf=>"00000000",
-		sio_info=>"00",
-		sio_obuf=>"00000000",
-		sio_refsel=>"00000000",
-		sio_vtrip=>"00000000",
-		sio_vohsel=>"00000000",
-		slew_rate=>"0",
-		spanning=>'0',
-		sw_only=>'0',
-		vtrip=>"10",
-		width=>1,
-		port_alias_required=>'0',
-		port_alias_group=>"",
-		use_annotation=>"0",
-		pa_in_clock=>-1,
-		pa_in_clock_en=>-1,
-		pa_in_reset=>-1,
-		pa_out_clock=>-1,
-		pa_out_clock_en=>-1,
-		pa_out_reset=>-1,
-		ovt_needed=>"0",
-		ovt_slew_control=>"00",
-		ovt_hyst_trim=>"0",
-		input_buffer_sel=>"00")
-	PORT MAP(oe=>(Net_4572_1),
-		y=>(zero),
-		fb=>(tmpFB_0__ENC_CS_net_0),
-		analog=>(open),
-		io=>(tmpIO_0__ENC_CS_net_0),
-		siovref=>(tmpSIOVREF__ENC_CS_net_0),
-		annotation=>(open),
-		in_clock=>zero,
-		in_clock_en=>Net_4572_1,
-		in_reset=>zero,
-		out_clock=>zero,
-		out_clock_en=>Net_4572_1,
-		out_reset=>zero,
-		interrupt=>tmpINTERRUPT_0__ENC_CS_net_0);
-ENC_SCLK:cy_psoc3_pins_v1_10
-	GENERIC MAP(id=>"ae7271bf-2110-4f09-9eee-a3750fdc980d",
-		drive_mode=>"110",
-		ibuf_enabled=>"1",
-		init_dr_st=>"0",
-		input_sync=>"1",
-		input_clk_en=>'0',
-		input_sync_mode=>"0",
-		intr_mode=>"00",
-		invert_in_clock=>'0',
-		invert_in_clock_en=>'0',
-		invert_in_reset=>'0',
-		invert_out_clock=>'0',
-		invert_out_clock_en=>'0',
-		invert_out_reset=>'0',
-		io_voltage=>"",
-		layout_mode=>"CONTIGUOUS",
-		output_conn=>"0",
-		output_sync=>"0",
-		output_clk_en=>'0',
-		output_mode=>"0",
-		output_reset=>'0',
-		output_clock_mode=>"0",
-		oe_sync=>"0",
-		oe_conn=>"0",
-		oe_reset=>'0',
-		pin_aliases=>"",
-		pin_mode=>"O",
-		por_state=>4,
-		sio_group_cnt=>0,
-		sio_hifreq=>"00000000",
-		sio_hyst=>"1",
-		sio_ibuf=>"00000000",
-		sio_info=>"00",
-		sio_obuf=>"00000000",
-		sio_refsel=>"00000000",
-		sio_vtrip=>"00000000",
-		sio_vohsel=>"00000000",
-		slew_rate=>"0",
-		spanning=>'0',
-		sw_only=>'0',
-		vtrip=>"10",
-		width=>1,
-		port_alias_required=>'0',
-		port_alias_group=>"",
-		use_annotation=>"0",
-		pa_in_clock=>-1,
-		pa_in_clock_en=>-1,
-		pa_in_reset=>-1,
-		pa_out_clock=>-1,
-		pa_out_clock_en=>-1,
-		pa_out_reset=>-1,
-		ovt_needed=>"0",
-		ovt_slew_control=>"00",
-		ovt_hyst_trim=>"0",
-		input_buffer_sel=>"00")
-	PORT MAP(oe=>(Net_4572_1),
-		y=>(zero),
-		fb=>(tmpFB_0__ENC_SCLK_net_0),
-		analog=>(open),
-		io=>(tmpIO_0__ENC_SCLK_net_0),
-		siovref=>(tmpSIOVREF__ENC_SCLK_net_0),
-		annotation=>(open),
-		in_clock=>zero,
-		in_clock_en=>Net_4572_1,
-		in_reset=>zero,
-		out_clock=>zero,
-		out_clock_en=>Net_4572_1,
-		out_reset=>zero,
-		interrupt=>tmpINTERRUPT_0__ENC_SCLK_net_0);
-ENC_MISO:cy_psoc3_pins_v1_10
-	GENERIC MAP(id=>"27b04626-805a-4058-887c-b83648b33b1c",
-		drive_mode=>"001",
-		ibuf_enabled=>"1",
-		init_dr_st=>"0",
-		input_sync=>"0",
-		input_clk_en=>'0',
-		input_sync_mode=>"0",
-		intr_mode=>"00",
-		invert_in_clock=>'0',
-		invert_in_clock_en=>'0',
-		invert_in_reset=>'0',
-		invert_out_clock=>'0',
-		invert_out_clock_en=>'0',
-		invert_out_reset=>'0',
-		io_voltage=>"",
-		layout_mode=>"CONTIGUOUS",
-		output_conn=>"0",
-		output_sync=>"0",
-		output_clk_en=>'0',
-		output_mode=>"0",
-		output_reset=>'0',
-		output_clock_mode=>"0",
-		oe_sync=>"0",
-		oe_conn=>"0",
-		oe_reset=>'0',
-		pin_aliases=>"",
-		pin_mode=>"I",
-		por_state=>4,
-		sio_group_cnt=>0,
-		sio_hifreq=>"00000000",
-		sio_hyst=>"1",
-		sio_ibuf=>"00000000",
-		sio_info=>"00",
-		sio_obuf=>"00000000",
-		sio_refsel=>"00000000",
-		sio_vtrip=>"00000000",
-		sio_vohsel=>"00000000",
-		slew_rate=>"0",
-		spanning=>'0',
-		sw_only=>'0',
-		vtrip=>"00",
-		width=>1,
-		port_alias_required=>'0',
-		port_alias_group=>"",
-		use_annotation=>"0",
-		pa_in_clock=>-1,
-		pa_in_clock_en=>-1,
-		pa_in_reset=>-1,
-		pa_out_clock=>-1,
-		pa_out_clock_en=>-1,
-		pa_out_reset=>-1,
-		ovt_needed=>"0",
-		ovt_slew_control=>"00",
-		ovt_hyst_trim=>"0",
-		input_buffer_sel=>"00")
-	PORT MAP(oe=>(Net_4572_1),
-		y=>(zero),
-		fb=>(tmpFB_0__ENC_MISO_net_0),
-		analog=>(open),
-		io=>(tmpIO_0__ENC_MISO_net_0),
-		siovref=>(tmpSIOVREF__ENC_MISO_net_0),
-		annotation=>(open),
-		in_clock=>zero,
-		in_clock_en=>Net_4572_1,
-		in_reset=>zero,
-		out_clock=>zero,
-		out_clock_en=>Net_4572_1,
-		out_reset=>zero,
-		interrupt=>tmpINTERRUPT_0__ENC_MISO_net_0);
 \emFile:SPI0:BSPIM:ClkEn\:cy_psoc3_udb_clock_enable_v1_0
 	GENERIC MAP(sync_mode=>'1')
 	PORT MAP(clock_in=>\emFile:Net_19\,
@@ -6358,7 +7047,7 @@ ENC_MISO:cy_psoc3_pins_v1_10
 		out_clock_en=>Net_4572_1,
 		out_reset=>zero,
 		interrupt=>\emFile:tmpINTERRUPT_0__SPI0_CS_net_0\);
-CS0:cy_psoc3_pins_v1_10
+CS_on_board_IMU:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"f79e8a2a-651d-480e-b8cb-b320bd7aaa0c",
 		drive_mode=>"110",
 		ibuf_enabled=>"1",
@@ -6416,10 +7105,10 @@ CS0:cy_psoc3_pins_v1_10
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(Net_4572_1),
 		y=>Net_1623,
-		fb=>(tmpFB_0__CS0_net_0),
+		fb=>(tmpFB_0__CS_on_board_IMU_net_0),
 		analog=>(open),
-		io=>(tmpIO_0__CS0_net_0),
-		siovref=>(tmpSIOVREF__CS0_net_0),
+		io=>(tmpIO_0__CS_on_board_IMU_net_0),
+		siovref=>(tmpSIOVREF__CS_on_board_IMU_net_0),
 		annotation=>(open),
 		in_clock=>zero,
 		in_clock_en=>Net_4572_1,
@@ -6427,7 +7116,7 @@ CS0:cy_psoc3_pins_v1_10
 		out_clock=>zero,
 		out_clock_en=>Net_4572_1,
 		out_reset=>zero,
-		interrupt=>tmpINTERRUPT_0__CS0_net_0);
+		interrupt=>tmpINTERRUPT_0__CS_on_board_IMU_net_0);
 MISO:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"8d318d8b-cf7b-4b6b-b02c-ab1c5c49d0ba",
 		drive_mode=>"001",
@@ -6778,19 +7467,9 @@ RTC_CS:cy_psoc3_pins_v1_10
 		out_clock_en=>Net_4572_1,
 		out_reset=>zero,
 		interrupt=>tmpINTERRUPT_0__RTC_CS_net_0);
-\SPI_IMU:IntClock\:cy_clock_v1_0
-	GENERIC MAP(cy_registers=>"",
-		id=>"9740a3eb-67c6-4d03-851e-c975847209e4/426fcbe0-714d-4404-8fa8-581ff40c30f1",
-		source_clock_id=>"",
-		divisor=>0,
-		period=>"500000000",
-		is_direct=>'0',
-		is_digital=>'1')
-	PORT MAP(clock_out=>\SPI_IMU:Net_276\,
-		dig_domain_out=>open);
 \SPI_IMU:BSPIM:ClkEn\:cy_psoc3_udb_clock_enable_v1_0
 	GENERIC MAP(sync_mode=>'1')
-	PORT MAP(clock_in=>\SPI_IMU:Net_276\,
+	PORT MAP(clock_in=>Net_2334,
 		enable=>Net_4572_1,
 		clock_out=>\SPI_IMU:BSPIM:clk_fin\);
 \SPI_IMU:BSPIM:BitCounter\:cy_psoc3_count7
@@ -6910,7 +7589,7 @@ RTC_CS:cy_psoc3_pins_v1_10
 		pi=>(zero, zero, zero, zero,
 			zero, zero, zero, zero),
 		po=>open);
-CS2:cy_psoc3_pins_v1_10
+CS1:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"7beeb8ec-71a8-40c3-b78c-3448effce33b",
 		drive_mode=>"110",
 		ibuf_enabled=>"1",
@@ -6968,10 +7647,10 @@ CS2:cy_psoc3_pins_v1_10
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(Net_4572_1),
 		y=>Net_1627,
-		fb=>(tmpFB_0__CS2_net_0),
+		fb=>(tmpFB_0__CS1_net_0),
 		analog=>(open),
-		io=>(tmpIO_0__CS2_net_0),
-		siovref=>(tmpSIOVREF__CS2_net_0),
+		io=>(tmpIO_0__CS1_net_0),
+		siovref=>(tmpSIOVREF__CS1_net_0),
 		annotation=>(open),
 		in_clock=>zero,
 		in_clock_en=>Net_4572_1,
@@ -6979,8 +7658,8 @@ CS2:cy_psoc3_pins_v1_10
 		out_clock=>zero,
 		out_clock_en=>Net_4572_1,
 		out_reset=>zero,
-		interrupt=>tmpINTERRUPT_0__CS2_net_0);
-CS1:cy_psoc3_pins_v1_10
+		interrupt=>tmpINTERRUPT_0__CS1_net_0);
+CS0:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"9f508b3f-1a2e-4da5-b3da-20dc60131560",
 		drive_mode=>"110",
 		ibuf_enabled=>"1",
@@ -7038,10 +7717,10 @@ CS1:cy_psoc3_pins_v1_10
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(Net_4572_1),
 		y=>Net_1618,
-		fb=>(tmpFB_0__CS1_net_0),
+		fb=>(tmpFB_0__CS0_net_0),
 		analog=>(open),
-		io=>(tmpIO_0__CS1_net_0),
-		siovref=>(tmpSIOVREF__CS1_net_0),
+		io=>(tmpIO_0__CS0_net_0),
+		siovref=>(tmpSIOVREF__CS0_net_0),
 		annotation=>(open),
 		in_clock=>zero,
 		in_clock_en=>Net_4572_1,
@@ -7049,7 +7728,7 @@ CS1:cy_psoc3_pins_v1_10
 		out_clock=>zero,
 		out_clock_en=>Net_4572_1,
 		out_reset=>zero,
-		interrupt=>tmpINTERRUPT_0__CS1_net_0);
+		interrupt=>tmpINTERRUPT_0__CS0_net_0);
 \BLINK_05HZ:PWMUDB:clock_enable_block\:cy_psoc3_udb_clock_enable_v1_0
 	GENERIC MAP(sync_mode=>'1')
 	PORT MAP(clock_in=>Net_6987,
@@ -7876,6 +8555,1267 @@ EMG_6:cy_psoc3_pins_v1_10
 		out_clock_en=>Net_4572_1,
 		out_reset=>zero,
 		interrupt=>tmpINTERRUPT_0__EMG_6_net_0);
+\RESET_COUNTERS:Sync:ctrl_reg\:cy_psoc3_control
+	GENERIC MAP(cy_init_value=>"00000001",
+		cy_force_order=>'1',
+		cy_ctrl_mode_1=>"00000000",
+		cy_ctrl_mode_0=>"00000000",
+		cy_ext_reset=>'0')
+	PORT MAP(reset=>zero,
+		clock=>zero,
+		control=>(\RESET_COUNTERS:control_7\, \RESET_COUNTERS:control_6\, \RESET_COUNTERS:control_5\, \RESET_COUNTERS:control_4\,
+			\RESET_COUNTERS:control_3\, \RESET_COUNTERS:control_2\, \RESET_COUNTERS:control_1\, Net_3492));
+CS_ENCODER0:cy_psoc3_pins_v1_10
+	GENERIC MAP(id=>"1465fead-f679-4a57-8fc7-887b419aab9e",
+		drive_mode=>"110",
+		ibuf_enabled=>"1",
+		init_dr_st=>"0",
+		input_sync=>"1",
+		input_clk_en=>'0',
+		input_sync_mode=>"0",
+		intr_mode=>"00",
+		invert_in_clock=>'0',
+		invert_in_clock_en=>'0',
+		invert_in_reset=>'0',
+		invert_out_clock=>'0',
+		invert_out_clock_en=>'0',
+		invert_out_reset=>'0',
+		io_voltage=>"",
+		layout_mode=>"CONTIGUOUS",
+		output_conn=>"1",
+		output_sync=>"0",
+		output_clk_en=>'0',
+		output_mode=>"0",
+		output_reset=>'0',
+		output_clock_mode=>"0",
+		oe_sync=>"0",
+		oe_conn=>"0",
+		oe_reset=>'0',
+		pin_aliases=>"",
+		pin_mode=>"O",
+		por_state=>4,
+		sio_group_cnt=>0,
+		sio_hifreq=>"00000000",
+		sio_hyst=>"1",
+		sio_ibuf=>"00000000",
+		sio_info=>"00",
+		sio_obuf=>"00000000",
+		sio_refsel=>"00000000",
+		sio_vtrip=>"00000000",
+		sio_vohsel=>"00000000",
+		slew_rate=>"0",
+		spanning=>'0',
+		sw_only=>'0',
+		vtrip=>"10",
+		width=>1,
+		port_alias_required=>'0',
+		port_alias_group=>"",
+		use_annotation=>"0",
+		pa_in_clock=>-1,
+		pa_in_clock_en=>-1,
+		pa_in_reset=>-1,
+		pa_out_clock=>-1,
+		pa_out_clock_en=>-1,
+		pa_out_reset=>-1,
+		ovt_needed=>"0",
+		ovt_slew_control=>"00",
+		ovt_hyst_trim=>"0",
+		input_buffer_sel=>"00")
+	PORT MAP(oe=>(Net_4572_1),
+		y=>Net_2343,
+		fb=>(tmpFB_0__CS_ENCODER0_net_0),
+		analog=>(open),
+		io=>(tmpIO_0__CS_ENCODER0_net_0),
+		siovref=>(tmpSIOVREF__CS_ENCODER0_net_0),
+		annotation=>(open),
+		in_clock=>zero,
+		in_clock_en=>Net_4572_1,
+		in_reset=>zero,
+		out_clock=>zero,
+		out_clock_en=>Net_4572_1,
+		out_reset=>zero,
+		interrupt=>tmpINTERRUPT_0__CS_ENCODER0_net_0);
+MISO_ENCODER:cy_psoc3_pins_v1_10
+	GENERIC MAP(id=>"9381434d-ab9e-46b9-8147-fd3f5c4d8b7d",
+		drive_mode=>"010",
+		ibuf_enabled=>"1",
+		init_dr_st=>"1",
+		input_sync=>"1",
+		input_clk_en=>'0',
+		input_sync_mode=>"0",
+		intr_mode=>"00",
+		invert_in_clock=>'0',
+		invert_in_clock_en=>'0',
+		invert_in_reset=>'0',
+		invert_out_clock=>'0',
+		invert_out_clock_en=>'0',
+		invert_out_reset=>'0',
+		io_voltage=>"",
+		layout_mode=>"CONTIGUOUS",
+		output_conn=>"0",
+		output_sync=>"0",
+		output_clk_en=>'0',
+		output_mode=>"0",
+		output_reset=>'0',
+		output_clock_mode=>"0",
+		oe_sync=>"0",
+		oe_conn=>"0",
+		oe_reset=>'0',
+		pin_aliases=>"",
+		pin_mode=>"I",
+		por_state=>4,
+		sio_group_cnt=>0,
+		sio_hifreq=>"00000000",
+		sio_hyst=>"1",
+		sio_ibuf=>"00000000",
+		sio_info=>"00",
+		sio_obuf=>"00000000",
+		sio_refsel=>"00000000",
+		sio_vtrip=>"00000000",
+		sio_vohsel=>"00000000",
+		slew_rate=>"0",
+		spanning=>'0',
+		sw_only=>'0',
+		vtrip=>"00",
+		width=>1,
+		port_alias_required=>'0',
+		port_alias_group=>"",
+		use_annotation=>"0",
+		pa_in_clock=>-1,
+		pa_in_clock_en=>-1,
+		pa_in_reset=>-1,
+		pa_out_clock=>-1,
+		pa_out_clock_en=>-1,
+		pa_out_reset=>-1,
+		ovt_needed=>"0",
+		ovt_slew_control=>"00",
+		ovt_hyst_trim=>"0",
+		input_buffer_sel=>"00")
+	PORT MAP(oe=>(Net_4572_1),
+		y=>(zero),
+		fb=>Net_2409,
+		analog=>(open),
+		io=>(tmpIO_0__MISO_ENCODER_net_0),
+		siovref=>(tmpSIOVREF__MISO_ENCODER_net_0),
+		annotation=>(open),
+		in_clock=>zero,
+		in_clock_en=>Net_4572_1,
+		in_reset=>zero,
+		out_clock=>zero,
+		out_clock_en=>Net_4572_1,
+		out_reset=>zero,
+		interrupt=>tmpINTERRUPT_0__MISO_ENCODER_net_0);
+CLK_ENCODER:cy_psoc3_pins_v1_10
+	GENERIC MAP(id=>"cc3bcd7e-5dc0-48ea-9bf6-6aa082be1ada",
+		drive_mode=>"110",
+		ibuf_enabled=>"1",
+		init_dr_st=>"0",
+		input_sync=>"1",
+		input_clk_en=>'0',
+		input_sync_mode=>"0",
+		intr_mode=>"00",
+		invert_in_clock=>'0',
+		invert_in_clock_en=>'0',
+		invert_in_reset=>'0',
+		invert_out_clock=>'0',
+		invert_out_clock_en=>'0',
+		invert_out_reset=>'0',
+		io_voltage=>"",
+		layout_mode=>"NONCONTIGUOUS",
+		output_conn=>"1",
+		output_sync=>"0",
+		output_clk_en=>'0',
+		output_mode=>"0",
+		output_reset=>'0',
+		output_clock_mode=>"0",
+		oe_sync=>"0",
+		oe_conn=>"0",
+		oe_reset=>'0',
+		pin_aliases=>"",
+		pin_mode=>"O",
+		por_state=>4,
+		sio_group_cnt=>0,
+		sio_hifreq=>"00000000",
+		sio_hyst=>"1",
+		sio_ibuf=>"00000000",
+		sio_info=>"00",
+		sio_obuf=>"00000000",
+		sio_refsel=>"00000000",
+		sio_vtrip=>"00000000",
+		sio_vohsel=>"00000000",
+		slew_rate=>"0",
+		spanning=>'1',
+		sw_only=>'0',
+		vtrip=>"10",
+		width=>1,
+		port_alias_required=>'0',
+		port_alias_group=>"",
+		use_annotation=>"0",
+		pa_in_clock=>-1,
+		pa_in_clock_en=>-1,
+		pa_in_reset=>-1,
+		pa_out_clock=>-1,
+		pa_out_clock_en=>-1,
+		pa_out_reset=>-1,
+		ovt_needed=>"0",
+		ovt_slew_control=>"00",
+		ovt_hyst_trim=>"0",
+		input_buffer_sel=>"00")
+	PORT MAP(oe=>(Net_4572_1),
+		y=>Net_2441,
+		fb=>(tmpFB_0__CLK_ENCODER_net_0),
+		analog=>(open),
+		io=>(tmpIO_0__CLK_ENCODER_net_0),
+		siovref=>(tmpSIOVREF__CLK_ENCODER_net_0),
+		annotation=>(open),
+		in_clock=>zero,
+		in_clock_en=>Net_4572_1,
+		in_reset=>zero,
+		out_clock=>zero,
+		out_clock_en=>Net_4572_1,
+		out_reset=>zero,
+		interrupt=>tmpINTERRUPT_0__CLK_ENCODER_net_0);
+\SHIFTREG_ENC_1:bSR:ClkEn\:cy_psoc3_udb_clock_enable_v1_0
+	GENERIC MAP(sync_mode=>'1')
+	PORT MAP(clock_in=>Net_3419,
+		enable=>Net_4572_1,
+		clock_out=>\SHIFTREG_ENC_1:bSR:clk_fin\);
+\SHIFTREG_ENC_1:bSR:SyncCtl:CtrlReg\:cy_psoc3_control
+	GENERIC MAP(cy_init_value=>"00000000",
+		cy_force_order=>'1',
+		cy_ctrl_mode_1=>"00000000",
+		cy_ctrl_mode_0=>"00000001",
+		cy_ext_reset=>'0')
+	PORT MAP(reset=>zero,
+		clock=>\SHIFTREG_ENC_1:bSR:clk_fin\,
+		control=>(\SHIFTREG_ENC_1:bSR:control_7\, \SHIFTREG_ENC_1:bSR:control_6\, \SHIFTREG_ENC_1:bSR:control_5\, \SHIFTREG_ENC_1:bSR:control_4\,
+			\SHIFTREG_ENC_1:bSR:control_3\, \SHIFTREG_ENC_1:bSR:control_2\, \SHIFTREG_ENC_1:bSR:control_1\, \SHIFTREG_ENC_1:bSR:ctrl_clk_enable\));
+\SHIFTREG_ENC_1:bSR:StsReg\:cy_psoc3_statusi
+	GENERIC MAP(cy_force_order=>'1',
+		cy_md_select=>"0000111",
+		cy_int_mask=>"0000111")
+	PORT MAP(reset=>zero,
+		clock=>\SHIFTREG_ENC_1:bSR:clk_fin\,
+		status=>(\SHIFTREG_ENC_1:bSR:status_6\, \SHIFTREG_ENC_1:bSR:status_5\, \SHIFTREG_ENC_1:bSR:status_4\, \SHIFTREG_ENC_1:bSR:status_3\,
+			zero, Net_2343, zero),
+		interrupt=>Net_2486);
+\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0\:cy_psoc3_dp
+	GENERIC MAP(cy_dpconfig=>"0000100000000000000010000000000000001000000000000000100000000000000010010101000010101000010000000000000011000000101010000100000011111111000000001111111111111111010101011110101000001000001000000000000000011100",
+		d0_init=>"00000000",
+		d1_init=>"00000000",
+		a0_init=>"00000000",
+		a1_init=>"00000000",
+		ce0_sync=>'1',
+		cl0_sync=>'1',
+		z0_sync=>'1',
+		ff0_sync=>'1',
+		ce1_sync=>'1',
+		cl1_sync=>'1',
+		z1_sync=>'1',
+		ff1_sync=>'1',
+		ov_msb_sync=>'1',
+		co_msb_sync=>'1',
+		cmsb_sync=>'1',
+		so_sync=>'1',
+		f0_bus_sync=>'1',
+		f0_blk_sync=>'1',
+		f1_bus_sync=>'1',
+		f1_blk_sync=>'1')
+	PORT MAP(reset=>zero,
+		clk=>\SHIFTREG_ENC_1:bSR:clk_fin\,
+		cs_addr=>(\SHIFTREG_ENC_1:bSR:ctrl_clk_enable\, zero, zero),
+		route_si=>Net_2409,
+		route_ci=>zero,
+		f0_load=>zero,
+		f1_load=>Net_2343,
+		d0_load=>zero,
+		d1_load=>zero,
+		ce0=>open,
+		cl0=>open,
+		z0=>open,
+		ff0=>open,
+		ce1=>open,
+		cl1=>open,
+		z1=>open,
+		ff1=>open,
+		ov_msb=>open,
+		co_msb=>open,
+		cmsb=>open,
+		so=>\SHIFTREG_ENC_1:bSR:so_24_0\,
+		f0_bus_stat=>\SHIFTREG_ENC_1:bSR:f0_bus_stat_24_0\,
+		f0_blk_stat=>\SHIFTREG_ENC_1:bSR:f0_blk_stat_24_0\,
+		f1_bus_stat=>\SHIFTREG_ENC_1:bSR:f1_bus_stat_24_0\,
+		f1_blk_stat=>\SHIFTREG_ENC_1:bSR:f1_blk_stat_24_0\,
+		ce0_reg=>open,
+		cl0_reg=>open,
+		z0_reg=>open,
+		ff0_reg=>open,
+		ce1_reg=>open,
+		cl1_reg=>open,
+		z1_reg=>open,
+		ff1_reg=>open,
+		ov_msb_reg=>open,
+		co_msb_reg=>open,
+		cmsb_reg=>open,
+		so_reg=>open,
+		f0_bus_stat_reg=>open,
+		f0_blk_stat_reg=>open,
+		f1_bus_stat_reg=>open,
+		f1_blk_stat_reg=>open,
+		ci=>zero,
+		co=>\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:carry0\,
+		sir=>zero,
+		sor=>open,
+		sil=>\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:sh_right0\,
+		sol=>\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:sh_left0\,
+		msbi=>\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:msb0\,
+		msbo=>open,
+		cei=>(zero, zero),
+		ceo=>(\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_eq0_1\, \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_eq0_0\),
+		cli=>(zero, zero),
+		clo=>(\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_lt0_1\, \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_lt0_0\),
+		zi=>(zero, zero),
+		zo=>(\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_zero0_1\, \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_zero0_0\),
+		fi=>(zero, zero),
+		fo=>(\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_ff0_1\, \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_ff0_0\),
+		capi=>(zero, zero),
+		capo=>(\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cap0_1\, \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cap0_0\),
+		cfbi=>zero,
+		cfbo=>\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cfb0\,
+		pi=>(zero, zero, zero, zero,
+			zero, zero, zero, zero),
+		po=>open);
+\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1\:cy_psoc3_dp
+	GENERIC MAP(cy_dpconfig=>"0000100000000000000010000000000000001000000000000000100000000000000010010101000010101000010000000000000011000000101010000100000011111111000000001111111111111111010101011110111100001000001000100000000000011100",
+		d0_init=>"00000000",
+		d1_init=>"00000000",
+		a0_init=>"00000000",
+		a1_init=>"00000000",
+		ce0_sync=>'1',
+		cl0_sync=>'1',
+		z0_sync=>'1',
+		ff0_sync=>'1',
+		ce1_sync=>'1',
+		cl1_sync=>'1',
+		z1_sync=>'1',
+		ff1_sync=>'1',
+		ov_msb_sync=>'1',
+		co_msb_sync=>'1',
+		cmsb_sync=>'1',
+		so_sync=>'1',
+		f0_bus_sync=>'1',
+		f0_blk_sync=>'1',
+		f1_bus_sync=>'1',
+		f1_blk_sync=>'1')
+	PORT MAP(reset=>zero,
+		clk=>\SHIFTREG_ENC_1:bSR:clk_fin\,
+		cs_addr=>(\SHIFTREG_ENC_1:bSR:ctrl_clk_enable\, zero, zero),
+		route_si=>Net_2409,
+		route_ci=>zero,
+		f0_load=>zero,
+		f1_load=>Net_2343,
+		d0_load=>zero,
+		d1_load=>zero,
+		ce0=>open,
+		cl0=>open,
+		z0=>open,
+		ff0=>open,
+		ce1=>open,
+		cl1=>open,
+		z1=>open,
+		ff1=>open,
+		ov_msb=>open,
+		co_msb=>open,
+		cmsb=>open,
+		so=>\SHIFTREG_ENC_1:bSR:so_24_1\,
+		f0_bus_stat=>\SHIFTREG_ENC_1:bSR:f0_bus_stat_24_1\,
+		f0_blk_stat=>\SHIFTREG_ENC_1:bSR:f0_blk_stat_24_1\,
+		f1_bus_stat=>\SHIFTREG_ENC_1:bSR:f1_bus_stat_24_1\,
+		f1_blk_stat=>\SHIFTREG_ENC_1:bSR:f1_blk_stat_24_1\,
+		ce0_reg=>open,
+		cl0_reg=>open,
+		z0_reg=>open,
+		ff0_reg=>open,
+		ce1_reg=>open,
+		cl1_reg=>open,
+		z1_reg=>open,
+		ff1_reg=>open,
+		ov_msb_reg=>open,
+		co_msb_reg=>open,
+		cmsb_reg=>open,
+		so_reg=>open,
+		f0_bus_stat_reg=>open,
+		f0_blk_stat_reg=>open,
+		f1_bus_stat_reg=>open,
+		f1_blk_stat_reg=>open,
+		ci=>\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:carry0\,
+		co=>\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:carry1\,
+		sir=>\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:sh_left0\,
+		sor=>\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:sh_right0\,
+		sil=>\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:sh_right1\,
+		sol=>\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:sh_left1\,
+		msbi=>\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:msb1\,
+		msbo=>\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:msb0\,
+		cei=>(\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_eq0_1\, \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_eq0_0\),
+		ceo=>(\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_eq1_1\, \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_eq1_0\),
+		cli=>(\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_lt0_1\, \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_lt0_0\),
+		clo=>(\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_lt1_1\, \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_lt1_0\),
+		zi=>(\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_zero0_1\, \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_zero0_0\),
+		zo=>(\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_zero1_1\, \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_zero1_0\),
+		fi=>(\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_ff0_1\, \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_ff0_0\),
+		fo=>(\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_ff1_1\, \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_ff1_0\),
+		capi=>(\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cap0_1\, \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cap0_0\),
+		capo=>(\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cap1_1\, \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cap1_0\),
+		cfbi=>\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cfb0\,
+		cfbo=>\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cfb1\,
+		pi=>(zero, zero, zero, zero,
+			zero, zero, zero, zero),
+		po=>open);
+\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u2\:cy_psoc3_dp
+	GENERIC MAP(cy_dpconfig=>"0000100000000000000010000000000000001000000000000000100000000000000010010101000010101000010000000000000011000000101010000100000011111111000000001111111111111111010101011110111100001000101000100000000000011100",
+		d0_init=>"00000000",
+		d1_init=>"00000000",
+		a0_init=>"00000000",
+		a1_init=>"00000000",
+		ce0_sync=>'1',
+		cl0_sync=>'1',
+		z0_sync=>'1',
+		ff0_sync=>'1',
+		ce1_sync=>'1',
+		cl1_sync=>'1',
+		z1_sync=>'1',
+		ff1_sync=>'1',
+		ov_msb_sync=>'1',
+		co_msb_sync=>'1',
+		cmsb_sync=>'1',
+		so_sync=>'1',
+		f0_bus_sync=>'1',
+		f0_blk_sync=>'1',
+		f1_bus_sync=>'1',
+		f1_blk_sync=>'1')
+	PORT MAP(reset=>zero,
+		clk=>\SHIFTREG_ENC_1:bSR:clk_fin\,
+		cs_addr=>(\SHIFTREG_ENC_1:bSR:ctrl_clk_enable\, zero, zero),
+		route_si=>Net_2409,
+		route_ci=>zero,
+		f0_load=>zero,
+		f1_load=>Net_2343,
+		d0_load=>zero,
+		d1_load=>zero,
+		ce0=>open,
+		cl0=>open,
+		z0=>open,
+		ff0=>open,
+		ce1=>open,
+		cl1=>open,
+		z1=>open,
+		ff1=>open,
+		ov_msb=>open,
+		co_msb=>open,
+		cmsb=>open,
+		so=>Net_2467,
+		f0_bus_stat=>\SHIFTREG_ENC_1:bSR:status_4\,
+		f0_blk_stat=>\SHIFTREG_ENC_1:bSR:status_3\,
+		f1_bus_stat=>\SHIFTREG_ENC_1:bSR:status_6\,
+		f1_blk_stat=>\SHIFTREG_ENC_1:bSR:status_5\,
+		ce0_reg=>open,
+		cl0_reg=>open,
+		z0_reg=>open,
+		ff0_reg=>open,
+		ce1_reg=>open,
+		cl1_reg=>open,
+		z1_reg=>open,
+		ff1_reg=>open,
+		ov_msb_reg=>open,
+		co_msb_reg=>open,
+		cmsb_reg=>open,
+		so_reg=>open,
+		f0_bus_stat_reg=>open,
+		f0_blk_stat_reg=>open,
+		f1_bus_stat_reg=>open,
+		f1_blk_stat_reg=>open,
+		ci=>\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:carry1\,
+		co=>open,
+		sir=>\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:sh_left1\,
+		sor=>\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:sh_right1\,
+		sil=>zero,
+		sol=>open,
+		msbi=>zero,
+		msbo=>\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:msb1\,
+		cei=>(\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_eq1_1\, \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_eq1_0\),
+		ceo=>open,
+		cli=>(\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_lt1_1\, \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_lt1_0\),
+		clo=>open,
+		zi=>(\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_zero1_1\, \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_zero1_0\),
+		zo=>open,
+		fi=>(\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_ff1_1\, \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cmp_ff1_0\),
+		fo=>open,
+		capi=>(\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cap1_1\, \SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cap1_0\),
+		capo=>open,
+		cfbi=>\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:cfb1\,
+		cfbo=>open,
+		pi=>(zero, zero, zero, zero,
+			zero, zero, zero, zero),
+		po=>open);
+CLOCK_ENCODERS:cy_clock_v1_0
+	GENERIC MAP(cy_registers=>"",
+		id=>"99ba9a9c-a669-4486-a720-fd3fc7d5436c",
+		source_clock_id=>"61737EF6-3B74-48f9-8B91-F7473A442AE7",
+		divisor=>0,
+		period=>"5000000000",
+		is_direct=>'0',
+		is_digital=>'1')
+	PORT MAP(clock_out=>Net_1308,
+		dig_domain_out=>open);
+\COUNTER_ENC:CounterUDB:clock_enable_block\:cy_psoc3_udb_clock_enable_v1_0
+	GENERIC MAP(sync_mode=>'1')
+	PORT MAP(clock_in=>Net_1308,
+		enable=>Net_4572_1,
+		clock_out=>\COUNTER_ENC:CounterUDB:ClockOutFromEnBlock\);
+\COUNTER_ENC:CounterUDB:sCTRLReg:cy_psoc3_udb_Ctl_Clk_Sync\:cy_psoc3_udb_clock_enable_v1_0
+	GENERIC MAP(sync_mode=>'1')
+	PORT MAP(clock_in=>Net_1308,
+		enable=>Net_4572_1,
+		clock_out=>\COUNTER_ENC:CounterUDB:Clk_Ctl_i\);
+\COUNTER_ENC:CounterUDB:sCTRLReg:ctrlreg\:cy_psoc3_control
+	GENERIC MAP(cy_init_value=>"00000000",
+		cy_force_order=>'1',
+		cy_ctrl_mode_1=>"00000000",
+		cy_ctrl_mode_0=>"11111111",
+		cy_ext_reset=>'0')
+	PORT MAP(reset=>zero,
+		clock=>\COUNTER_ENC:CounterUDB:Clk_Ctl_i\,
+		control=>(\COUNTER_ENC:CounterUDB:control_7\, \COUNTER_ENC:CounterUDB:control_6\, \COUNTER_ENC:CounterUDB:control_5\, \COUNTER_ENC:CounterUDB:control_4\,
+			\COUNTER_ENC:CounterUDB:control_3\, \COUNTER_ENC:CounterUDB:control_2\, \COUNTER_ENC:CounterUDB:control_1\, \COUNTER_ENC:CounterUDB:control_0\));
+\COUNTER_ENC:CounterUDB:sSTSReg:stsreg\:cy_psoc3_statusi
+	GENERIC MAP(cy_force_order=>'1',
+		cy_md_select=>"0011111",
+		cy_int_mask=>"1111111")
+	PORT MAP(reset=>Net_3492,
+		clock=>\COUNTER_ENC:CounterUDB:ClockOutFromEnBlock\,
+		status=>(\COUNTER_ENC:CounterUDB:status_6\, \COUNTER_ENC:CounterUDB:status_5\, zero, zero,
+			\COUNTER_ENC:CounterUDB:status_2\, \COUNTER_ENC:CounterUDB:status_1\, \COUNTER_ENC:CounterUDB:status_0\),
+		interrupt=>\COUNTER_ENC:Net_43\);
+\COUNTER_ENC:CounterUDB:sC8:counterdp:u0\:cy_psoc3_dp
+	GENERIC MAP(cy_dpconfig=>"0000000001000000000000001000000001000000010000000000000010000000000000000100000010101000010100000010000001000000101010000101000011111111000000001111111111111111101000000000000000000001000000000000000000011000",
+		d0_init=>"00000000",
+		d1_init=>"00000000",
+		a0_init=>"00000000",
+		a1_init=>"00000000",
+		ce0_sync=>'1',
+		cl0_sync=>'1',
+		z0_sync=>'1',
+		ff0_sync=>'1',
+		ce1_sync=>'1',
+		cl1_sync=>'1',
+		z1_sync=>'1',
+		ff1_sync=>'1',
+		ov_msb_sync=>'1',
+		co_msb_sync=>'1',
+		cmsb_sync=>'1',
+		so_sync=>'1',
+		f0_bus_sync=>'1',
+		f0_blk_sync=>'1',
+		f1_bus_sync=>'1',
+		f1_blk_sync=>'1')
+	PORT MAP(reset=>zero,
+		clk=>\COUNTER_ENC:CounterUDB:ClockOutFromEnBlock\,
+		cs_addr=>(Net_4572_1, \COUNTER_ENC:CounterUDB:count_enable\, \COUNTER_ENC:CounterUDB:reload\),
+		route_si=>zero,
+		route_ci=>zero,
+		f0_load=>zero,
+		f1_load=>zero,
+		d0_load=>zero,
+		d1_load=>zero,
+		ce0=>\COUNTER_ENC:CounterUDB:per_equal\,
+		cl0=>\COUNTER_ENC:CounterUDB:nc42\,
+		z0=>\COUNTER_ENC:CounterUDB:status_1\,
+		ff0=>\COUNTER_ENC:CounterUDB:per_FF\,
+		ce1=>\COUNTER_ENC:CounterUDB:cmp_out_i\,
+		cl1=>\COUNTER_ENC:CounterUDB:cmp_less\,
+		z1=>open,
+		ff1=>open,
+		ov_msb=>open,
+		co_msb=>open,
+		cmsb=>open,
+		so=>open,
+		f0_bus_stat=>\COUNTER_ENC:CounterUDB:status_6\,
+		f0_blk_stat=>\COUNTER_ENC:CounterUDB:status_5\,
+		f1_bus_stat=>open,
+		f1_blk_stat=>open,
+		ce0_reg=>open,
+		cl0_reg=>open,
+		z0_reg=>open,
+		ff0_reg=>open,
+		ce1_reg=>open,
+		cl1_reg=>open,
+		z1_reg=>open,
+		ff1_reg=>open,
+		ov_msb_reg=>open,
+		co_msb_reg=>open,
+		cmsb_reg=>open,
+		so_reg=>open,
+		f0_bus_stat_reg=>open,
+		f0_blk_stat_reg=>open,
+		f1_bus_stat_reg=>open,
+		f1_blk_stat_reg=>open,
+		ci=>zero,
+		co=>open,
+		sir=>zero,
+		sor=>open,
+		sil=>zero,
+		sol=>open,
+		msbi=>zero,
+		msbo=>open,
+		cei=>(zero, zero),
+		ceo=>open,
+		cli=>(zero, zero),
+		clo=>open,
+		zi=>(zero, zero),
+		zo=>open,
+		fi=>(zero, zero),
+		fo=>open,
+		capi=>(zero, zero),
+		capo=>open,
+		cfbi=>zero,
+		cfbo=>open,
+		pi=>(zero, zero, zero, zero,
+			zero, zero, zero, zero),
+		po=>open);
+\SHIFTREG_ENC_2:bSR:ClkEn\:cy_psoc3_udb_clock_enable_v1_0
+	GENERIC MAP(sync_mode=>'1')
+	PORT MAP(clock_in=>Net_3419,
+		enable=>Net_4572_1,
+		clock_out=>\SHIFTREG_ENC_2:bSR:clk_fin\);
+\SHIFTREG_ENC_2:bSR:SyncCtl:CtrlReg\:cy_psoc3_control
+	GENERIC MAP(cy_init_value=>"00000000",
+		cy_force_order=>'1',
+		cy_ctrl_mode_1=>"00000000",
+		cy_ctrl_mode_0=>"00000001",
+		cy_ext_reset=>'0')
+	PORT MAP(reset=>zero,
+		clock=>\SHIFTREG_ENC_2:bSR:clk_fin\,
+		control=>(\SHIFTREG_ENC_2:bSR:control_7\, \SHIFTREG_ENC_2:bSR:control_6\, \SHIFTREG_ENC_2:bSR:control_5\, \SHIFTREG_ENC_2:bSR:control_4\,
+			\SHIFTREG_ENC_2:bSR:control_3\, \SHIFTREG_ENC_2:bSR:control_2\, \SHIFTREG_ENC_2:bSR:control_1\, \SHIFTREG_ENC_2:bSR:ctrl_clk_enable\));
+\SHIFTREG_ENC_2:bSR:StsReg\:cy_psoc3_statusi
+	GENERIC MAP(cy_force_order=>'1',
+		cy_md_select=>"0000111",
+		cy_int_mask=>"0000111")
+	PORT MAP(reset=>zero,
+		clock=>\SHIFTREG_ENC_2:bSR:clk_fin\,
+		status=>(\SHIFTREG_ENC_2:bSR:status_6\, \SHIFTREG_ENC_2:bSR:status_5\, \SHIFTREG_ENC_2:bSR:status_4\, \SHIFTREG_ENC_2:bSR:status_3\,
+			zero, Net_2343, zero),
+		interrupt=>Net_2492);
+\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0\:cy_psoc3_dp
+	GENERIC MAP(cy_dpconfig=>"0000100000000000000010000000000000001000000000000000100000000000000010010101000010101000010000000000000011000000101010000100000011111111000000001111111111111111010101011110101000001000001000000000000000011100",
+		d0_init=>"00000000",
+		d1_init=>"00000000",
+		a0_init=>"00000000",
+		a1_init=>"00000000",
+		ce0_sync=>'1',
+		cl0_sync=>'1',
+		z0_sync=>'1',
+		ff0_sync=>'1',
+		ce1_sync=>'1',
+		cl1_sync=>'1',
+		z1_sync=>'1',
+		ff1_sync=>'1',
+		ov_msb_sync=>'1',
+		co_msb_sync=>'1',
+		cmsb_sync=>'1',
+		so_sync=>'1',
+		f0_bus_sync=>'1',
+		f0_blk_sync=>'1',
+		f1_bus_sync=>'1',
+		f1_blk_sync=>'1')
+	PORT MAP(reset=>zero,
+		clk=>\SHIFTREG_ENC_2:bSR:clk_fin\,
+		cs_addr=>(\SHIFTREG_ENC_2:bSR:ctrl_clk_enable\, zero, zero),
+		route_si=>Net_2467,
+		route_ci=>zero,
+		f0_load=>zero,
+		f1_load=>Net_2343,
+		d0_load=>zero,
+		d1_load=>zero,
+		ce0=>open,
+		cl0=>open,
+		z0=>open,
+		ff0=>open,
+		ce1=>open,
+		cl1=>open,
+		z1=>open,
+		ff1=>open,
+		ov_msb=>open,
+		co_msb=>open,
+		cmsb=>open,
+		so=>\SHIFTREG_ENC_2:bSR:so_24_0\,
+		f0_bus_stat=>\SHIFTREG_ENC_2:bSR:f0_bus_stat_24_0\,
+		f0_blk_stat=>\SHIFTREG_ENC_2:bSR:f0_blk_stat_24_0\,
+		f1_bus_stat=>\SHIFTREG_ENC_2:bSR:f1_bus_stat_24_0\,
+		f1_blk_stat=>\SHIFTREG_ENC_2:bSR:f1_blk_stat_24_0\,
+		ce0_reg=>open,
+		cl0_reg=>open,
+		z0_reg=>open,
+		ff0_reg=>open,
+		ce1_reg=>open,
+		cl1_reg=>open,
+		z1_reg=>open,
+		ff1_reg=>open,
+		ov_msb_reg=>open,
+		co_msb_reg=>open,
+		cmsb_reg=>open,
+		so_reg=>open,
+		f0_bus_stat_reg=>open,
+		f0_blk_stat_reg=>open,
+		f1_bus_stat_reg=>open,
+		f1_blk_stat_reg=>open,
+		ci=>zero,
+		co=>\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:carry0\,
+		sir=>zero,
+		sor=>open,
+		sil=>\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:sh_right0\,
+		sol=>\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:sh_left0\,
+		msbi=>\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:msb0\,
+		msbo=>open,
+		cei=>(zero, zero),
+		ceo=>(\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_eq0_1\, \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_eq0_0\),
+		cli=>(zero, zero),
+		clo=>(\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_lt0_1\, \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_lt0_0\),
+		zi=>(zero, zero),
+		zo=>(\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_zero0_1\, \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_zero0_0\),
+		fi=>(zero, zero),
+		fo=>(\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_ff0_1\, \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_ff0_0\),
+		capi=>(zero, zero),
+		capo=>(\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cap0_1\, \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cap0_0\),
+		cfbi=>zero,
+		cfbo=>\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cfb0\,
+		pi=>(zero, zero, zero, zero,
+			zero, zero, zero, zero),
+		po=>open);
+\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1\:cy_psoc3_dp
+	GENERIC MAP(cy_dpconfig=>"0000100000000000000010000000000000001000000000000000100000000000000010010101000010101000010000000000000011000000101010000100000011111111000000001111111111111111010101011110111100001000001000100000000000011100",
+		d0_init=>"00000000",
+		d1_init=>"00000000",
+		a0_init=>"00000000",
+		a1_init=>"00000000",
+		ce0_sync=>'1',
+		cl0_sync=>'1',
+		z0_sync=>'1',
+		ff0_sync=>'1',
+		ce1_sync=>'1',
+		cl1_sync=>'1',
+		z1_sync=>'1',
+		ff1_sync=>'1',
+		ov_msb_sync=>'1',
+		co_msb_sync=>'1',
+		cmsb_sync=>'1',
+		so_sync=>'1',
+		f0_bus_sync=>'1',
+		f0_blk_sync=>'1',
+		f1_bus_sync=>'1',
+		f1_blk_sync=>'1')
+	PORT MAP(reset=>zero,
+		clk=>\SHIFTREG_ENC_2:bSR:clk_fin\,
+		cs_addr=>(\SHIFTREG_ENC_2:bSR:ctrl_clk_enable\, zero, zero),
+		route_si=>Net_2467,
+		route_ci=>zero,
+		f0_load=>zero,
+		f1_load=>Net_2343,
+		d0_load=>zero,
+		d1_load=>zero,
+		ce0=>open,
+		cl0=>open,
+		z0=>open,
+		ff0=>open,
+		ce1=>open,
+		cl1=>open,
+		z1=>open,
+		ff1=>open,
+		ov_msb=>open,
+		co_msb=>open,
+		cmsb=>open,
+		so=>\SHIFTREG_ENC_2:bSR:so_24_1\,
+		f0_bus_stat=>\SHIFTREG_ENC_2:bSR:f0_bus_stat_24_1\,
+		f0_blk_stat=>\SHIFTREG_ENC_2:bSR:f0_blk_stat_24_1\,
+		f1_bus_stat=>\SHIFTREG_ENC_2:bSR:f1_bus_stat_24_1\,
+		f1_blk_stat=>\SHIFTREG_ENC_2:bSR:f1_blk_stat_24_1\,
+		ce0_reg=>open,
+		cl0_reg=>open,
+		z0_reg=>open,
+		ff0_reg=>open,
+		ce1_reg=>open,
+		cl1_reg=>open,
+		z1_reg=>open,
+		ff1_reg=>open,
+		ov_msb_reg=>open,
+		co_msb_reg=>open,
+		cmsb_reg=>open,
+		so_reg=>open,
+		f0_bus_stat_reg=>open,
+		f0_blk_stat_reg=>open,
+		f1_bus_stat_reg=>open,
+		f1_blk_stat_reg=>open,
+		ci=>\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:carry0\,
+		co=>\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:carry1\,
+		sir=>\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:sh_left0\,
+		sor=>\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:sh_right0\,
+		sil=>\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:sh_right1\,
+		sol=>\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:sh_left1\,
+		msbi=>\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:msb1\,
+		msbo=>\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:msb0\,
+		cei=>(\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_eq0_1\, \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_eq0_0\),
+		ceo=>(\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_eq1_1\, \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_eq1_0\),
+		cli=>(\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_lt0_1\, \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_lt0_0\),
+		clo=>(\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_lt1_1\, \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_lt1_0\),
+		zi=>(\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_zero0_1\, \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_zero0_0\),
+		zo=>(\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_zero1_1\, \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_zero1_0\),
+		fi=>(\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_ff0_1\, \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_ff0_0\),
+		fo=>(\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_ff1_1\, \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_ff1_0\),
+		capi=>(\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cap0_1\, \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cap0_0\),
+		capo=>(\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cap1_1\, \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cap1_0\),
+		cfbi=>\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cfb0\,
+		cfbo=>\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cfb1\,
+		pi=>(zero, zero, zero, zero,
+			zero, zero, zero, zero),
+		po=>open);
+\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u2\:cy_psoc3_dp
+	GENERIC MAP(cy_dpconfig=>"0000100000000000000010000000000000001000000000000000100000000000000010010101000010101000010000000000000011000000101010000100000011111111000000001111111111111111010101011110111100001000101000100000000000011100",
+		d0_init=>"00000000",
+		d1_init=>"00000000",
+		a0_init=>"00000000",
+		a1_init=>"00000000",
+		ce0_sync=>'1',
+		cl0_sync=>'1',
+		z0_sync=>'1',
+		ff0_sync=>'1',
+		ce1_sync=>'1',
+		cl1_sync=>'1',
+		z1_sync=>'1',
+		ff1_sync=>'1',
+		ov_msb_sync=>'1',
+		co_msb_sync=>'1',
+		cmsb_sync=>'1',
+		so_sync=>'1',
+		f0_bus_sync=>'1',
+		f0_blk_sync=>'1',
+		f1_bus_sync=>'1',
+		f1_blk_sync=>'1')
+	PORT MAP(reset=>zero,
+		clk=>\SHIFTREG_ENC_2:bSR:clk_fin\,
+		cs_addr=>(\SHIFTREG_ENC_2:bSR:ctrl_clk_enable\, zero, zero),
+		route_si=>Net_2467,
+		route_ci=>zero,
+		f0_load=>zero,
+		f1_load=>Net_2343,
+		d0_load=>zero,
+		d1_load=>zero,
+		ce0=>open,
+		cl0=>open,
+		z0=>open,
+		ff0=>open,
+		ce1=>open,
+		cl1=>open,
+		z1=>open,
+		ff1=>open,
+		ov_msb=>open,
+		co_msb=>open,
+		cmsb=>open,
+		so=>Net_2491,
+		f0_bus_stat=>\SHIFTREG_ENC_2:bSR:status_4\,
+		f0_blk_stat=>\SHIFTREG_ENC_2:bSR:status_3\,
+		f1_bus_stat=>\SHIFTREG_ENC_2:bSR:status_6\,
+		f1_blk_stat=>\SHIFTREG_ENC_2:bSR:status_5\,
+		ce0_reg=>open,
+		cl0_reg=>open,
+		z0_reg=>open,
+		ff0_reg=>open,
+		ce1_reg=>open,
+		cl1_reg=>open,
+		z1_reg=>open,
+		ff1_reg=>open,
+		ov_msb_reg=>open,
+		co_msb_reg=>open,
+		cmsb_reg=>open,
+		so_reg=>open,
+		f0_bus_stat_reg=>open,
+		f0_blk_stat_reg=>open,
+		f1_bus_stat_reg=>open,
+		f1_blk_stat_reg=>open,
+		ci=>\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:carry1\,
+		co=>open,
+		sir=>\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:sh_left1\,
+		sor=>\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:sh_right1\,
+		sil=>zero,
+		sol=>open,
+		msbi=>zero,
+		msbo=>\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:msb1\,
+		cei=>(\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_eq1_1\, \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_eq1_0\),
+		ceo=>open,
+		cli=>(\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_lt1_1\, \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_lt1_0\),
+		clo=>open,
+		zi=>(\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_zero1_1\, \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_zero1_0\),
+		zo=>open,
+		fi=>(\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_ff1_1\, \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cmp_ff1_0\),
+		fo=>open,
+		capi=>(\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cap1_1\, \SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cap1_0\),
+		capo=>open,
+		cfbi=>\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:cfb1\,
+		cfbo=>open,
+		pi=>(zero, zero, zero, zero,
+			zero, zero, zero, zero),
+		po=>open);
+\SHIFTREG_ENC_3:bSR:ClkEn\:cy_psoc3_udb_clock_enable_v1_0
+	GENERIC MAP(sync_mode=>'1')
+	PORT MAP(clock_in=>Net_3419,
+		enable=>Net_4572_1,
+		clock_out=>\SHIFTREG_ENC_3:bSR:clk_fin\);
+\SHIFTREG_ENC_3:bSR:SyncCtl:CtrlReg\:cy_psoc3_control
+	GENERIC MAP(cy_init_value=>"00000000",
+		cy_force_order=>'1',
+		cy_ctrl_mode_1=>"00000000",
+		cy_ctrl_mode_0=>"00000001",
+		cy_ext_reset=>'0')
+	PORT MAP(reset=>zero,
+		clock=>\SHIFTREG_ENC_3:bSR:clk_fin\,
+		control=>(\SHIFTREG_ENC_3:bSR:control_7\, \SHIFTREG_ENC_3:bSR:control_6\, \SHIFTREG_ENC_3:bSR:control_5\, \SHIFTREG_ENC_3:bSR:control_4\,
+			\SHIFTREG_ENC_3:bSR:control_3\, \SHIFTREG_ENC_3:bSR:control_2\, \SHIFTREG_ENC_3:bSR:control_1\, \SHIFTREG_ENC_3:bSR:ctrl_clk_enable\));
+\SHIFTREG_ENC_3:bSR:StsReg\:cy_psoc3_statusi
+	GENERIC MAP(cy_force_order=>'1',
+		cy_md_select=>"0000111",
+		cy_int_mask=>"0000111")
+	PORT MAP(reset=>zero,
+		clock=>\SHIFTREG_ENC_3:bSR:clk_fin\,
+		status=>(\SHIFTREG_ENC_3:bSR:status_6\, \SHIFTREG_ENC_3:bSR:status_5\, \SHIFTREG_ENC_3:bSR:status_4\, \SHIFTREG_ENC_3:bSR:status_3\,
+			zero, Net_2343, zero),
+		interrupt=>Net_2499);
+\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0\:cy_psoc3_dp
+	GENERIC MAP(cy_dpconfig=>"0000100000000000000010000000000000001000000000000000100000000000000010010101000010101000010000000000000011000000101010000100000011111111000000001111111111111111010101011110101000001000001000000000000000011100",
+		d0_init=>"00000000",
+		d1_init=>"00000000",
+		a0_init=>"00000000",
+		a1_init=>"00000000",
+		ce0_sync=>'1',
+		cl0_sync=>'1',
+		z0_sync=>'1',
+		ff0_sync=>'1',
+		ce1_sync=>'1',
+		cl1_sync=>'1',
+		z1_sync=>'1',
+		ff1_sync=>'1',
+		ov_msb_sync=>'1',
+		co_msb_sync=>'1',
+		cmsb_sync=>'1',
+		so_sync=>'1',
+		f0_bus_sync=>'1',
+		f0_blk_sync=>'1',
+		f1_bus_sync=>'1',
+		f1_blk_sync=>'1')
+	PORT MAP(reset=>zero,
+		clk=>\SHIFTREG_ENC_3:bSR:clk_fin\,
+		cs_addr=>(\SHIFTREG_ENC_3:bSR:ctrl_clk_enable\, zero, zero),
+		route_si=>Net_2491,
+		route_ci=>zero,
+		f0_load=>zero,
+		f1_load=>Net_2343,
+		d0_load=>zero,
+		d1_load=>zero,
+		ce0=>open,
+		cl0=>open,
+		z0=>open,
+		ff0=>open,
+		ce1=>open,
+		cl1=>open,
+		z1=>open,
+		ff1=>open,
+		ov_msb=>open,
+		co_msb=>open,
+		cmsb=>open,
+		so=>\SHIFTREG_ENC_3:bSR:so_24_0\,
+		f0_bus_stat=>\SHIFTREG_ENC_3:bSR:f0_bus_stat_24_0\,
+		f0_blk_stat=>\SHIFTREG_ENC_3:bSR:f0_blk_stat_24_0\,
+		f1_bus_stat=>\SHIFTREG_ENC_3:bSR:f1_bus_stat_24_0\,
+		f1_blk_stat=>\SHIFTREG_ENC_3:bSR:f1_blk_stat_24_0\,
+		ce0_reg=>open,
+		cl0_reg=>open,
+		z0_reg=>open,
+		ff0_reg=>open,
+		ce1_reg=>open,
+		cl1_reg=>open,
+		z1_reg=>open,
+		ff1_reg=>open,
+		ov_msb_reg=>open,
+		co_msb_reg=>open,
+		cmsb_reg=>open,
+		so_reg=>open,
+		f0_bus_stat_reg=>open,
+		f0_blk_stat_reg=>open,
+		f1_bus_stat_reg=>open,
+		f1_blk_stat_reg=>open,
+		ci=>zero,
+		co=>\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:carry0\,
+		sir=>zero,
+		sor=>open,
+		sil=>\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:sh_right0\,
+		sol=>\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:sh_left0\,
+		msbi=>\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:msb0\,
+		msbo=>open,
+		cei=>(zero, zero),
+		ceo=>(\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_eq0_1\, \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_eq0_0\),
+		cli=>(zero, zero),
+		clo=>(\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_lt0_1\, \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_lt0_0\),
+		zi=>(zero, zero),
+		zo=>(\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_zero0_1\, \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_zero0_0\),
+		fi=>(zero, zero),
+		fo=>(\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_ff0_1\, \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_ff0_0\),
+		capi=>(zero, zero),
+		capo=>(\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cap0_1\, \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cap0_0\),
+		cfbi=>zero,
+		cfbo=>\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cfb0\,
+		pi=>(zero, zero, zero, zero,
+			zero, zero, zero, zero),
+		po=>open);
+\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1\:cy_psoc3_dp
+	GENERIC MAP(cy_dpconfig=>"0000100000000000000010000000000000001000000000000000100000000000000010010101000010101000010000000000000011000000101010000100000011111111000000001111111111111111010101011110111100001000001000100000000000011100",
+		d0_init=>"00000000",
+		d1_init=>"00000000",
+		a0_init=>"00000000",
+		a1_init=>"00000000",
+		ce0_sync=>'1',
+		cl0_sync=>'1',
+		z0_sync=>'1',
+		ff0_sync=>'1',
+		ce1_sync=>'1',
+		cl1_sync=>'1',
+		z1_sync=>'1',
+		ff1_sync=>'1',
+		ov_msb_sync=>'1',
+		co_msb_sync=>'1',
+		cmsb_sync=>'1',
+		so_sync=>'1',
+		f0_bus_sync=>'1',
+		f0_blk_sync=>'1',
+		f1_bus_sync=>'1',
+		f1_blk_sync=>'1')
+	PORT MAP(reset=>zero,
+		clk=>\SHIFTREG_ENC_3:bSR:clk_fin\,
+		cs_addr=>(\SHIFTREG_ENC_3:bSR:ctrl_clk_enable\, zero, zero),
+		route_si=>Net_2491,
+		route_ci=>zero,
+		f0_load=>zero,
+		f1_load=>Net_2343,
+		d0_load=>zero,
+		d1_load=>zero,
+		ce0=>open,
+		cl0=>open,
+		z0=>open,
+		ff0=>open,
+		ce1=>open,
+		cl1=>open,
+		z1=>open,
+		ff1=>open,
+		ov_msb=>open,
+		co_msb=>open,
+		cmsb=>open,
+		so=>\SHIFTREG_ENC_3:bSR:so_24_1\,
+		f0_bus_stat=>\SHIFTREG_ENC_3:bSR:f0_bus_stat_24_1\,
+		f0_blk_stat=>\SHIFTREG_ENC_3:bSR:f0_blk_stat_24_1\,
+		f1_bus_stat=>\SHIFTREG_ENC_3:bSR:f1_bus_stat_24_1\,
+		f1_blk_stat=>\SHIFTREG_ENC_3:bSR:f1_blk_stat_24_1\,
+		ce0_reg=>open,
+		cl0_reg=>open,
+		z0_reg=>open,
+		ff0_reg=>open,
+		ce1_reg=>open,
+		cl1_reg=>open,
+		z1_reg=>open,
+		ff1_reg=>open,
+		ov_msb_reg=>open,
+		co_msb_reg=>open,
+		cmsb_reg=>open,
+		so_reg=>open,
+		f0_bus_stat_reg=>open,
+		f0_blk_stat_reg=>open,
+		f1_bus_stat_reg=>open,
+		f1_blk_stat_reg=>open,
+		ci=>\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:carry0\,
+		co=>\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:carry1\,
+		sir=>\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:sh_left0\,
+		sor=>\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:sh_right0\,
+		sil=>\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:sh_right1\,
+		sol=>\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:sh_left1\,
+		msbi=>\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:msb1\,
+		msbo=>\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:msb0\,
+		cei=>(\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_eq0_1\, \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_eq0_0\),
+		ceo=>(\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_eq1_1\, \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_eq1_0\),
+		cli=>(\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_lt0_1\, \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_lt0_0\),
+		clo=>(\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_lt1_1\, \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_lt1_0\),
+		zi=>(\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_zero0_1\, \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_zero0_0\),
+		zo=>(\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_zero1_1\, \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_zero1_0\),
+		fi=>(\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_ff0_1\, \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_ff0_0\),
+		fo=>(\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_ff1_1\, \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_ff1_0\),
+		capi=>(\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cap0_1\, \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cap0_0\),
+		capo=>(\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cap1_1\, \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cap1_0\),
+		cfbi=>\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cfb0\,
+		cfbo=>\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cfb1\,
+		pi=>(zero, zero, zero, zero,
+			zero, zero, zero, zero),
+		po=>open);
+\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u2\:cy_psoc3_dp
+	GENERIC MAP(cy_dpconfig=>"0000100000000000000010000000000000001000000000000000100000000000000010010101000010101000010000000000000011000000101010000100000011111111000000001111111111111111010101011110111100001000101000100000000000011100",
+		d0_init=>"00000000",
+		d1_init=>"00000000",
+		a0_init=>"00000000",
+		a1_init=>"00000000",
+		ce0_sync=>'1',
+		cl0_sync=>'1',
+		z0_sync=>'1',
+		ff0_sync=>'1',
+		ce1_sync=>'1',
+		cl1_sync=>'1',
+		z1_sync=>'1',
+		ff1_sync=>'1',
+		ov_msb_sync=>'1',
+		co_msb_sync=>'1',
+		cmsb_sync=>'1',
+		so_sync=>'1',
+		f0_bus_sync=>'1',
+		f0_blk_sync=>'1',
+		f1_bus_sync=>'1',
+		f1_blk_sync=>'1')
+	PORT MAP(reset=>zero,
+		clk=>\SHIFTREG_ENC_3:bSR:clk_fin\,
+		cs_addr=>(\SHIFTREG_ENC_3:bSR:ctrl_clk_enable\, zero, zero),
+		route_si=>Net_2491,
+		route_ci=>zero,
+		f0_load=>zero,
+		f1_load=>Net_2343,
+		d0_load=>zero,
+		d1_load=>zero,
+		ce0=>open,
+		cl0=>open,
+		z0=>open,
+		ff0=>open,
+		ce1=>open,
+		cl1=>open,
+		z1=>open,
+		ff1=>open,
+		ov_msb=>open,
+		co_msb=>open,
+		cmsb=>open,
+		so=>\SHIFTREG_ENC_3:bSR:so_24_2\,
+		f0_bus_stat=>\SHIFTREG_ENC_3:bSR:status_4\,
+		f0_blk_stat=>\SHIFTREG_ENC_3:bSR:status_3\,
+		f1_bus_stat=>\SHIFTREG_ENC_3:bSR:status_6\,
+		f1_blk_stat=>\SHIFTREG_ENC_3:bSR:status_5\,
+		ce0_reg=>open,
+		cl0_reg=>open,
+		z0_reg=>open,
+		ff0_reg=>open,
+		ce1_reg=>open,
+		cl1_reg=>open,
+		z1_reg=>open,
+		ff1_reg=>open,
+		ov_msb_reg=>open,
+		co_msb_reg=>open,
+		cmsb_reg=>open,
+		so_reg=>open,
+		f0_bus_stat_reg=>open,
+		f0_blk_stat_reg=>open,
+		f1_bus_stat_reg=>open,
+		f1_blk_stat_reg=>open,
+		ci=>\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:carry1\,
+		co=>open,
+		sir=>\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:sh_left1\,
+		sor=>\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:sh_right1\,
+		sil=>zero,
+		sol=>open,
+		msbi=>zero,
+		msbo=>\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:msb1\,
+		cei=>(\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_eq1_1\, \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_eq1_0\),
+		ceo=>open,
+		cli=>(\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_lt1_1\, \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_lt1_0\),
+		clo=>open,
+		zi=>(\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_zero1_1\, \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_zero1_0\),
+		zo=>open,
+		fi=>(\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_ff1_1\, \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cmp_ff1_0\),
+		fo=>open,
+		capi=>(\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cap1_1\, \SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cap1_0\),
+		capo=>open,
+		cfbi=>\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:cfb1\,
+		cfbo=>open,
+		pi=>(zero, zero, zero, zero,
+			zero, zero, zero, zero),
+		po=>open);
+CS2:cy_psoc3_pins_v1_10
+	GENERIC MAP(id=>"23e53fc0-d858-4ee5-ba95-451dbd31de38",
+		drive_mode=>"110",
+		ibuf_enabled=>"1",
+		init_dr_st=>"0",
+		input_sync=>"1",
+		input_clk_en=>'0',
+		input_sync_mode=>"0",
+		intr_mode=>"00",
+		invert_in_clock=>'0',
+		invert_in_clock_en=>'0',
+		invert_in_reset=>'0',
+		invert_out_clock=>'0',
+		invert_out_clock_en=>'0',
+		invert_out_reset=>'0',
+		io_voltage=>"",
+		layout_mode=>"CONTIGUOUS",
+		output_conn=>"1",
+		output_sync=>"0",
+		output_clk_en=>'0',
+		output_mode=>"0",
+		output_reset=>'0',
+		output_clock_mode=>"0",
+		oe_sync=>"0",
+		oe_conn=>"0",
+		oe_reset=>'0',
+		pin_aliases=>"",
+		pin_mode=>"O",
+		por_state=>4,
+		sio_group_cnt=>0,
+		sio_hifreq=>"00000000",
+		sio_hyst=>"1",
+		sio_ibuf=>"00000000",
+		sio_info=>"00",
+		sio_obuf=>"00000000",
+		sio_refsel=>"00000000",
+		sio_vtrip=>"00000000",
+		sio_vohsel=>"00000000",
+		slew_rate=>"0",
+		spanning=>'0',
+		sw_only=>'0',
+		vtrip=>"10",
+		width=>1,
+		port_alias_required=>'0',
+		port_alias_group=>"",
+		use_annotation=>"0",
+		pa_in_clock=>-1,
+		pa_in_clock_en=>-1,
+		pa_in_reset=>-1,
+		pa_out_clock=>-1,
+		pa_out_clock_en=>-1,
+		pa_out_reset=>-1,
+		ovt_needed=>"0",
+		ovt_slew_control=>"00",
+		ovt_hyst_trim=>"0",
+		input_buffer_sel=>"00")
+	PORT MAP(oe=>(Net_4572_1),
+		y=>Net_2500,
+		fb=>(tmpFB_0__CS2_net_0),
+		analog=>(open),
+		io=>(tmpIO_0__CS2_net_0),
+		siovref=>(tmpSIOVREF__CS2_net_0),
+		annotation=>(open),
+		in_clock=>zero,
+		in_clock_en=>Net_4572_1,
+		in_reset=>zero,
+		out_clock=>zero,
+		out_clock_en=>Net_4572_1,
+		out_reset=>zero,
+		interrupt=>tmpINTERRUPT_0__CS2_net_0);
 Net_5190_1:cy_dff
 	PORT MAP(d=>Net_5190_1D,
 		clk=>Net_5503,
@@ -8354,5 +10294,53 @@ Net_1619:cy_dff
 	PORT MAP(d=>\BLINK_25HZ:PWMUDB:tc_i_reg\\D\,
 		clk=>\BLINK_25HZ:PWMUDB:ClockOutFromEnBlock\,
 		q=>\BLINK_25HZ:PWMUDB:tc_i_reg\);
+cydff_2:cy_dff
+	PORT MAP(d=>Net_3510,
+		clk=>Net_3416,
+		q=>Net_2343);
+cydff_1:cy_dff
+	PORT MAP(d=>Net_3419,
+		clk=>Net_1308,
+		q=>Net_2441);
+\SHIFTREG_ENC_1:bSR:load_reg\:cy_dff
+	PORT MAP(d=>zero,
+		clk=>\SHIFTREG_ENC_1:bSR:clk_fin\,
+		q=>\SHIFTREG_ENC_1:bSR:load_reg\);
+\COUNTER_ENC:CounterUDB:prevCapture\:cy_dff
+	PORT MAP(d=>zero,
+		clk=>\COUNTER_ENC:CounterUDB:ClockOutFromEnBlock\,
+		q=>\COUNTER_ENC:CounterUDB:prevCapture\);
+\COUNTER_ENC:CounterUDB:overflow_reg_i\:cy_dff
+	PORT MAP(d=>\COUNTER_ENC:CounterUDB:per_equal\,
+		clk=>\COUNTER_ENC:CounterUDB:ClockOutFromEnBlock\,
+		q=>\COUNTER_ENC:CounterUDB:overflow_reg_i\);
+\COUNTER_ENC:CounterUDB:underflow_reg_i\:cy_dff
+	PORT MAP(d=>zero,
+		clk=>\COUNTER_ENC:CounterUDB:ClockOutFromEnBlock\,
+		q=>\COUNTER_ENC:CounterUDB:underflow_reg_i\);
+\COUNTER_ENC:CounterUDB:tc_reg_i\:cy_dff
+	PORT MAP(d=>\COUNTER_ENC:CounterUDB:per_equal\,
+		clk=>\COUNTER_ENC:CounterUDB:ClockOutFromEnBlock\,
+		q=>Net_3511);
+\COUNTER_ENC:CounterUDB:prevCompare\:cy_dff
+	PORT MAP(d=>\COUNTER_ENC:CounterUDB:cmp_out_i\,
+		clk=>\COUNTER_ENC:CounterUDB:ClockOutFromEnBlock\,
+		q=>\COUNTER_ENC:CounterUDB:prevCompare\);
+\COUNTER_ENC:CounterUDB:cmp_out_reg_i\:cy_dff
+	PORT MAP(d=>\COUNTER_ENC:CounterUDB:cmp_out_i\,
+		clk=>\COUNTER_ENC:CounterUDB:ClockOutFromEnBlock\,
+		q=>Net_1287);
+\COUNTER_ENC:CounterUDB:count_stored_i\:cy_dff
+	PORT MAP(d=>Net_2441,
+		clk=>\COUNTER_ENC:CounterUDB:ClockOutFromEnBlock\,
+		q=>\COUNTER_ENC:CounterUDB:count_stored_i\);
+\SHIFTREG_ENC_2:bSR:load_reg\:cy_dff
+	PORT MAP(d=>zero,
+		clk=>\SHIFTREG_ENC_2:bSR:clk_fin\,
+		q=>\SHIFTREG_ENC_2:bSR:load_reg\);
+\SHIFTREG_ENC_3:bSR:load_reg\:cy_dff
+	PORT MAP(d=>zero,
+		clk=>\SHIFTREG_ENC_3:bSR:clk_fin\,
+		q=>\SHIFTREG_ENC_3:bSR:load_reg\);
 
 END R_T_L;

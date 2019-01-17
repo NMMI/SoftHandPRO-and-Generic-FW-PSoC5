@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017, Centro "E.Piaggio"
+// Copyright (c) 2017-2019, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -39,7 +39,7 @@
 * \date         October 01, 2017
 * \author       _Centro "E.Piaggio"_
 * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
-* \copyright    (C) 2017 Centro "E.Piaggio". All rights reserved.
+* \copyright    (C) 2017-2019 Centro "E.Piaggio". All rights reserved.
 */
 
 #include "utils.h"
@@ -193,17 +193,36 @@ void calibration(void) {
 // Number of ticks per turn
 #define M 65536          ///< Number of encoder ticks per turn.
 
-int calc_turns_fcn(const int32 pos1, const int32 pos2) {
+
+int calc_turns_fcn(const int32 pos1, const int32 pos2) { 
     
-    int32 x = (my_mod( - N2*pos2 - N1*pos1, M*N2) + M/2) / 65536;
-
-    int32 aux = my_mod(x*I1, N2);       // Module between x*I1 and N2.
-
+    int32 x;
+    int32 aux;
+    
+    switch (c_mem.right_left){
+        case RIGHT_HAND:
+            x = (my_mod( - N2*(pos2) - N1*pos1, M*N2) + M/2) / M;
+            
+            aux = my_mod(x*I1, N2);       // Module between x*I1 and N2.
+            
+            // Wrap turns
+            aux -= N2;      //N2 (teeth of the second encoder wheel)
+            if (aux == -N2){
+                aux = 0;
+            }
+            
+            break;
+        case LEFT_HAND:
+            x = (my_mod( - N2*(-pos2) - N1*pos1, M*N2) + M/2) / M;
+            
+            aux = my_mod(x*I1, N2);       // Module between x*I1 and N2.
+            
+            break;
+    }
+  
     // SoftHand Pro firmware turns computation does not have to take into account turns shift like previous SoftHand 1.2 firmware
     return aux; 
-    
-    //return (my_mod(aux + N2/2, N2) - N2/2); //original SoftHand 1.2 firmware
-    
+
 }
 
 //==============================================================================
@@ -220,7 +239,7 @@ void check_rest_position(void) {     // 100 Hz frequency.
     static int32 delta_inc = 0;
     int32 curr_pos = 0;
     static int32 rest_error;
-    int32 handle_value = 0;
+    float rest_vel_ticks_ms = ((float)g_mem.rest_vel)/1000.0;    //[ticks/s] -> [ticks/ms]
     
     if (first_time){
         count = 0;
@@ -229,14 +248,7 @@ void check_rest_position(void) {     // 100 Hz frequency.
     
     curr_pos = (int32)(g_meas.pos[0] >> g_mem.res[0]);
     
-    if (c_mem.input_mode == INPUT_MODE_ENCODER3) {
-        if (c_mem.double_encoder_on_off == 0)
-            handle_value = g_meas.pos[1];
-        else
-            handle_value = g_meas.pos[2];
-    }
-    
-    if ( ( (c_mem.input_mode >= 2 && g_meas.emg[0] < 200 && g_meas.emg[1] < 200) || (c_mem.input_mode == INPUT_MODE_ENCODER3 && handle_value < 50) ) && curr_pos < 10000){
+    if ( ( (c_mem.input_mode >= 2 && g_meas.emg[0] < 200 && g_meas.emg[1] < 200) ) && curr_pos < 10000){
         if (flag_count == 1){
             count = count + 1;
         }
@@ -250,18 +262,19 @@ void check_rest_position(void) {     // 100 Hz frequency.
     /********** Velocity closure procedure *************
     * m = error/time
     * m = (g_mem.rest_pos - init_pos)/time
-    * time = g_mem.rest_pos/g_mem.rest_vel (g_mem.rest_vel in ticks/msec)
+    * time = g_mem.rest_pos/rest_vel_ticks_ms (rest_vel_ticks_ms is in [ticks/ms])
     ***************************************************/
     
-    if (count == (uint32)(g_mem.rest_delay/CALIBRATION_DIV)){ //10 seconds 
+    if (count == (uint32)(g_mem.rest_delay/CALIBRATION_DIV)){ 
+        // This routine is executed every 10 firmware cycles -> g_mem.rest_delay must be major than 10 ms
         rest_enabled = 1;
         rest_pos_curr_ref = g_meas.pos[0];
         
         // Ramp angular coefficient
-        m = ((float)(g_mem.rest_pos - g_meas.pos[0])/((float)g_mem.rest_pos))*(g_mem.rest_vel);
+        m = ((float)(g_mem.rest_pos - g_meas.pos[0])/((float)g_mem.rest_pos))*(rest_vel_ticks_ms);
         
-        // Stop condition threshold is related to m coefficient by g_mem.rest_ratio value
-        abs_err_thr = (int32)( (int32)(g_mem.rest_ratio*m*((float)CALIBRATION_DIV)) << g_mem.res[0]);
+        // Stop condition threshold is related to m coefficient by REST_RATIO value
+        abs_err_thr = (int32)( (int32)(((float)REST_POS_ERR_THR_GAIN)*m*((float)CALIBRATION_DIV)) << g_mem.res[0]);
         abs_err_thr = (abs_err_thr>0)?abs_err_thr:(0-abs_err_thr);
         
         rest_error = g_mem.rest_pos - g_meas.pos[0];    
@@ -354,67 +367,83 @@ void LED_control(uint8 mode) {
 //                                                            BATTERY MANAGEMENT
 //==============================================================================
 void battery_management() {
-    static uint32 v_count = 0;
+    static uint32 v_count_lb = 0;
     
     // LED handling procedure
     // The board LED blinks if attached battery is not fully charged
-    if (battery_low_SoC) {
+
+    /*if (battery_low_SoC) {
         
         //red light - blink @ 2.5 Hz
         LED_control(3);
                 
         rest_enabled = 0;
-        if (v_count >= 11000){
+        if (v_count_lb >= 11000){
             // Disable motor because we are sure of not fully charged battery and terminal device has opened
             g_refNew.onoff = 0x00;
             MOTOR_ON_OFF_Write(g_refNew.onoff); // Deactivate motor
-            v_count = 0;
+            v_count_lb = 0;
         }
         else
-            v_count = v_count + 1;
+            v_count_lb = v_count_lb + 1;
         
     }
     else {
-        
+    */   
         // The board LED is still or blinks depending on attached battery State of Charge
-        if (tension_valid == TRUE && emg_1_status == NORMAL && emg_2_status == NORMAL){        
+        if (tension_valid == TRUE && ((c_mem.input_mode <= 1)  ||
+            (c_mem.input_mode > 1 && emg_1_status == NORMAL && emg_2_status == NORMAL)) ){        
             dev_tension_f = filter(dev_tension, &filt_v);
             // Parrot: 0.9, 0.87
             // ARTS: 0.87, 0.8
-            if (dev_tension_f > 0.885 * pow_tension){        // Sometimes pow_tension is not well computed when using power supply
+            if (dev_tension_f > 0.95 * pow_tension){        // Sometimes pow_tension is not well computed when using power supply
                 //fixed
                 if (!maintenance_flag)
-                    LED_control(1);     // green light - fixed
+                    LED_control(0);     // NO LIGHT - all leds off
                 else
                     LED_control(4);     // yellow light - fixed
             }
+            
             else {
-                if (dev_tension_f > 0.86 * pow_tension) {
+                if (dev_tension_f > 0.9 * pow_tension) {
                     //yellow light - blink @ 0.5 Hz
-                    LED_control(2);   
+                    //LED_control(2);   
                     
-                    v_count = 0;    // Reset counter whenever battery is not totally out of charge
+                    if (!maintenance_flag)
+                        LED_control(0);     // NO LIGHT - all leds off
+                    else
+                        LED_control(4);     // yellow light - fixed
+                    
+                    v_count_lb = 0;    // Reset counter whenever battery is not totally out of charge
                 }
                 else {
                     //red light - blink @ 2.5 Hz
-                    LED_control(3);
+                    //LED_control(3);
                 
-                    if (v_count >= 10000){                    
-                        battery_low_SoC = 1;
+                    if (v_count_lb >= 10000){                    
+                        
+                        //battery_low_SoC = 1;
+                        
+                        //red light - blink @ 2.5 Hz
+                        LED_control(3);
+                        
                         rest_enabled = 0;
                     }
                     else{
-                        v_count = v_count + 1;
+                        v_count_lb = v_count_lb + 1;
                     }                
                 }
             }
+            
         }
         else {
-            if (emg_1_status == NORMAL && emg_2_status == NORMAL){
+            if ((c_mem.input_mode <= 1) || (c_mem.input_mode > 1 && emg_1_status == NORMAL && emg_2_status == NORMAL)){
                 LED_control(5);     // Default - red light
             }
         }
+    /*
     }
+    */  
 }
 
 //==============================================================================

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccNtczZA.s 			page 1
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccWJ3LU1.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccNtczZA.s 			page 1
   28:Generated_Source\PSoC5/RESET_COUNTERS.c **** *  Write a byte to the Control Register.
   29:Generated_Source\PSoC5/RESET_COUNTERS.c **** *
   30:Generated_Source\PSoC5/RESET_COUNTERS.c **** * Parameters:
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccNtczZA.s 			page 2
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccWJ3LU1.s 			page 2
 
 
   31:Generated_Source\PSoC5/RESET_COUNTERS.c **** *  control:  The value to be assigned to the Control Register.
@@ -103,7 +103,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccNtczZA.s 			page 1
   57              	.L3:
   58 001a 00BF     		.align	2
   59              	.L2:
-  60 001c 7F640040 		.word	1073767551
+  60 001c 7B650040 		.word	1073767803
   61              		.cfi_endproc
   62              	.LFE0:
   63              		.size	RESET_COUNTERS_Write, .-RESET_COUNTERS_Write
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccNtczZA.s 			page 1
   41:Generated_Source\PSoC5/RESET_COUNTERS.c **** 
   42:Generated_Source\PSoC5/RESET_COUNTERS.c **** 
   43:Generated_Source\PSoC5/RESET_COUNTERS.c **** /*******************************************************************************
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccNtczZA.s 			page 3
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccWJ3LU1.s 			page 3
 
 
   44:Generated_Source\PSoC5/RESET_COUNTERS.c **** * Function Name: RESET_COUNTERS_Read
@@ -164,7 +164,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccNtczZA.s 			page 1
   95              	.L7:
   96 0012 00BF     		.align	2
   97              	.L6:
-  98 0014 7F640040 		.word	1073767551
+  98 0014 7B650040 		.word	1073767803
   99              		.cfi_endproc
  100              	.LFE1:
  101              		.size	RESET_COUNTERS_Read, .-RESET_COUNTERS_Read
@@ -178,48 +178,48 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccNtczZA.s 			page 1
  109 0006 00000000 		.4byte	.Ldebug_abbrev0
  110 000a 04       		.byte	0x4
  111 000b 01       		.uleb128 0x1
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccNtczZA.s 			page 4
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccWJ3LU1.s 			page 4
 
 
  112 000c 14000000 		.4byte	.LASF14
  113 0010 0C       		.byte	0xc
- 114 0011 B5000000 		.4byte	.LASF15
- 115 0015 08010000 		.4byte	.LASF16
+ 114 0011 A2000000 		.4byte	.LASF15
+ 115 0015 7C010000 		.4byte	.LASF16
  116 0019 00000000 		.4byte	.Ldebug_ranges0+0
  117 001d 00000000 		.4byte	0
  118 0021 00000000 		.4byte	.Ldebug_line0
  119 0025 02       		.uleb128 0x2
  120 0026 01       		.byte	0x1
  121 0027 06       		.byte	0x6
- 122 0028 BE010000 		.4byte	.LASF0
+ 122 0028 C1010000 		.4byte	.LASF0
  123 002c 02       		.uleb128 0x2
  124 002d 01       		.byte	0x1
  125 002e 08       		.byte	0x8
- 126 002f E3000000 		.4byte	.LASF1
+ 126 002f D0000000 		.4byte	.LASF1
  127 0033 02       		.uleb128 0x2
  128 0034 02       		.byte	0x2
  129 0035 05       		.byte	0x5
- 130 0036 A5010000 		.4byte	.LASF2
+ 130 0036 63010000 		.4byte	.LASF2
  131 003a 02       		.uleb128 0x2
  132 003b 02       		.byte	0x2
  133 003c 07       		.byte	0x7
- 134 003d A2000000 		.4byte	.LASF3
+ 134 003d F5000000 		.4byte	.LASF3
  135 0041 02       		.uleb128 0x2
  136 0042 04       		.byte	0x4
  137 0043 05       		.byte	0x5
- 138 0044 B5010000 		.4byte	.LASF4
+ 138 0044 73010000 		.4byte	.LASF4
  139 0048 02       		.uleb128 0x2
  140 0049 04       		.byte	0x4
  141 004a 07       		.byte	0x7
- 142 004b F6000000 		.4byte	.LASF5
+ 142 004b E3000000 		.4byte	.LASF5
  143 004f 02       		.uleb128 0x2
  144 0050 08       		.byte	0x8
  145 0051 05       		.byte	0x5
- 146 0052 92010000 		.4byte	.LASF6
+ 146 0052 50010000 		.4byte	.LASF6
  147 0056 02       		.uleb128 0x2
  148 0057 08       		.byte	0x8
  149 0058 07       		.byte	0x7
- 150 0059 66010000 		.4byte	.LASF7
+ 150 0059 24010000 		.4byte	.LASF7
  151 005d 03       		.uleb128 0x3
  152 005e 04       		.byte	0x4
  153 005f 05       		.byte	0x5
@@ -227,36 +227,36 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccNtczZA.s 			page 1
  155 0064 02       		.uleb128 0x2
  156 0065 04       		.byte	0x4
  157 0066 07       		.byte	0x7
- 158 0067 59010000 		.4byte	.LASF8
+ 158 0067 17010000 		.4byte	.LASF8
  159 006b 04       		.uleb128 0x4
- 160 006c AF010000 		.4byte	.LASF12
+ 160 006c 6D010000 		.4byte	.LASF12
  161 0070 02       		.byte	0x2
  162 0071 E401     		.2byte	0x1e4
  163 0073 2C000000 		.4byte	0x2c
  164 0077 02       		.uleb128 0x2
  165 0078 04       		.byte	0x4
  166 0079 04       		.byte	0x4
- 167 007a DD000000 		.4byte	.LASF9
+ 167 007a CA000000 		.4byte	.LASF9
  168 007e 02       		.uleb128 0x2
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccNtczZA.s 			page 5
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccWJ3LU1.s 			page 5
 
 
  169 007f 08       		.byte	0x8
  170 0080 04       		.byte	0x4
- 171 0081 52010000 		.4byte	.LASF10
+ 171 0081 10010000 		.4byte	.LASF10
  172 0085 02       		.uleb128 0x2
  173 0086 01       		.byte	0x1
  174 0087 08       		.byte	0x8
- 175 0088 A0010000 		.4byte	.LASF11
+ 175 0088 5E010000 		.4byte	.LASF11
  176 008c 04       		.uleb128 0x4
- 177 008d F1000000 		.4byte	.LASF13
+ 177 008d DE000000 		.4byte	.LASF13
  178 0091 02       		.byte	0x2
  179 0092 8E02     		.2byte	0x28e
  180 0094 98000000 		.4byte	0x98
  181 0098 05       		.uleb128 0x5
  182 0099 6B000000 		.4byte	0x6b
  183 009d 06       		.uleb128 0x6
- 184 009e 7D010000 		.4byte	.LASF17
+ 184 009e 3B010000 		.4byte	.LASF17
  185 00a2 01       		.byte	0x1
  186 00a3 25       		.byte	0x25
  187 00a4 00000000 		.4byte	.LFB0
@@ -265,7 +265,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccNtczZA.s 			page 1
  190 00ad 9C       		.byte	0x9c
  191 00ae C1000000 		.4byte	0xc1
  192 00b2 07       		.uleb128 0x7
- 193 00b3 4A010000 		.4byte	.LASF18
+ 193 00b3 08010000 		.4byte	.LASF18
  194 00b7 01       		.byte	0x1
  195 00b8 25       		.byte	0x25
  196 00b9 6B000000 		.4byte	0x6b
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccNtczZA.s 			page 1
  223 000a 0E       		.uleb128 0xe
  224 000b 55       		.uleb128 0x55
  225 000c 17       		.uleb128 0x17
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccNtczZA.s 			page 6
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccWJ3LU1.s 			page 6
 
 
  226 000d 11       		.uleb128 0x11
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccNtczZA.s 			page 1
  280 0043 0E       		.uleb128 0xe
  281 0044 3A       		.uleb128 0x3a
  282 0045 0B       		.uleb128 0xb
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccNtczZA.s 			page 7
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccWJ3LU1.s 			page 7
 
 
  283 0046 3B       		.uleb128 0x3b
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccNtczZA.s 			page 1
  337 007e 00       		.byte	0
  338 007f 00       		.byte	0
  339 0080 00       		.byte	0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccNtczZA.s 			page 8
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccWJ3LU1.s 			page 8
 
 
  340              		.section	.debug_aranges,"",%progbits
@@ -472,96 +472,96 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccNtczZA.s 			page 1
  370      74696F6E 
  370      2D736563 
  370      74696F6E 
- 371              	.LASF3:
- 372 00a2 73686F72 		.ascii	"short unsigned int\000"
- 372      7420756E 
- 372      7369676E 
- 372      65642069 
- 372      6E7400
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccNtczZA.s 			page 9
+ 371              	.LASF15:
+ 372 00a2 47656E65 		.ascii	"Generated_Source\\PSoC5\\RESET_COUNTERS.c\000"
+ 372      72617465 
+ 372      645F536F 
+ 372      75726365 
+ 372      5C50536F 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccWJ3LU1.s 			page 9
 
 
- 373              	.LASF15:
- 374 00b5 47656E65 		.ascii	"Generated_Source\\PSoC5\\RESET_COUNTERS.c\000"
- 374      72617465 
- 374      645F536F 
- 374      75726365 
- 374      5C50536F 
- 375              	.LASF9:
- 376 00dd 666C6F61 		.ascii	"float\000"
- 376      7400
- 377              	.LASF1:
- 378 00e3 756E7369 		.ascii	"unsigned char\000"
- 378      676E6564 
- 378      20636861 
- 378      7200
- 379              	.LASF13:
- 380 00f1 72656738 		.ascii	"reg8\000"
- 380      00
- 381              	.LASF5:
- 382 00f6 6C6F6E67 		.ascii	"long unsigned int\000"
- 382      20756E73 
- 382      69676E65 
- 382      6420696E 
- 382      7400
- 383              	.LASF16:
- 384 0108 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Desktop\\SoftPro firmware (PSo"
- 384      73657273 
- 384      5C4D6174 
- 384      74696143 
- 384      505C4465 
- 385 0137 4335295C 		.ascii	"C5)\\firmware.cydsn\000"
- 385      6669726D 
- 385      77617265 
- 385      2E637964 
- 385      736E00
- 386              	.LASF18:
- 387 014a 636F6E74 		.ascii	"control\000"
- 387      726F6C00 
- 388              	.LASF10:
- 389 0152 646F7562 		.ascii	"double\000"
- 389      6C6500
- 390              	.LASF8:
- 391 0159 756E7369 		.ascii	"unsigned int\000"
- 391      676E6564 
- 391      20696E74 
- 391      00
- 392              	.LASF7:
- 393 0166 6C6F6E67 		.ascii	"long long unsigned int\000"
- 393      206C6F6E 
- 393      6720756E 
- 393      7369676E 
- 393      65642069 
- 394              	.LASF17:
- 395 017d 52455345 		.ascii	"RESET_COUNTERS_Write\000"
- 395      545F434F 
- 395      554E5445 
- 395      52535F57 
- 395      72697465 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccNtczZA.s 			page 10
+ 373              	.LASF9:
+ 374 00ca 666C6F61 		.ascii	"float\000"
+ 374      7400
+ 375              	.LASF1:
+ 376 00d0 756E7369 		.ascii	"unsigned char\000"
+ 376      676E6564 
+ 376      20636861 
+ 376      7200
+ 377              	.LASF13:
+ 378 00de 72656738 		.ascii	"reg8\000"
+ 378      00
+ 379              	.LASF5:
+ 380 00e3 6C6F6E67 		.ascii	"long unsigned int\000"
+ 380      20756E73 
+ 380      69676E65 
+ 380      6420696E 
+ 380      7400
+ 381              	.LASF3:
+ 382 00f5 73686F72 		.ascii	"short unsigned int\000"
+ 382      7420756E 
+ 382      7369676E 
+ 382      65642069 
+ 382      6E7400
+ 383              	.LASF18:
+ 384 0108 636F6E74 		.ascii	"control\000"
+ 384      726F6C00 
+ 385              	.LASF10:
+ 386 0110 646F7562 		.ascii	"double\000"
+ 386      6C6500
+ 387              	.LASF8:
+ 388 0117 756E7369 		.ascii	"unsigned int\000"
+ 388      676E6564 
+ 388      20696E74 
+ 388      00
+ 389              	.LASF7:
+ 390 0124 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 390      206C6F6E 
+ 390      6720756E 
+ 390      7369676E 
+ 390      65642069 
+ 391              	.LASF17:
+ 392 013b 52455345 		.ascii	"RESET_COUNTERS_Write\000"
+ 392      545F434F 
+ 392      554E5445 
+ 392      52535F57 
+ 392      72697465 
+ 393              	.LASF6:
+ 394 0150 6C6F6E67 		.ascii	"long long int\000"
+ 394      206C6F6E 
+ 394      6720696E 
+ 394      7400
+ 395              	.LASF11:
+ 396 015e 63686172 		.ascii	"char\000"
+ 396      00
+ 397              	.LASF2:
+ 398 0163 73686F72 		.ascii	"short int\000"
+ 398      7420696E 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccWJ3LU1.s 			page 10
 
 
- 396              	.LASF6:
- 397 0192 6C6F6E67 		.ascii	"long long int\000"
- 397      206C6F6E 
- 397      6720696E 
- 397      7400
- 398              	.LASF11:
- 399 01a0 63686172 		.ascii	"char\000"
- 399      00
- 400              	.LASF2:
- 401 01a5 73686F72 		.ascii	"short int\000"
- 401      7420696E 
- 401      7400
- 402              	.LASF12:
- 403 01af 75696E74 		.ascii	"uint8\000"
- 403      3800
- 404              	.LASF4:
- 405 01b5 6C6F6E67 		.ascii	"long int\000"
- 405      20696E74 
- 405      00
+ 398      7400
+ 399              	.LASF12:
+ 400 016d 75696E74 		.ascii	"uint8\000"
+ 400      3800
+ 401              	.LASF4:
+ 402 0173 6C6F6E67 		.ascii	"long int\000"
+ 402      20696E74 
+ 402      00
+ 403              	.LASF16:
+ 404 017c 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Documents\\GITHUB\\SoftHand-PR"
+ 404      73657273 
+ 404      5C4D6174 
+ 404      74696143 
+ 404      505C446F 
+ 405 01aa 4F2D5053 		.ascii	"O-PSoC5\\firmware.cydsn\000"
+ 405      6F43355C 
+ 405      6669726D 
+ 405      77617265 
+ 405      2E637964 
  406              	.LASF0:
- 407 01be 7369676E 		.ascii	"signed char\000"
+ 407 01c1 7369676E 		.ascii	"signed char\000"
  407      65642063 
  407      68617200 
  408              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

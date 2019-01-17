@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017, Centro "E.Piaggio"
+// Copyright (c) 2017-2019, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -39,7 +39,7 @@
 * \date         February 01, 2018
 * \author       _Centro "E.Piaggio"_
 * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
-* \copyright    (C) 2017-2018 Centro "E.Piaggio". All rights reserved.
+* \copyright    (C) 2017-2019 Centro "E.Piaggio". All rights reserved.
 *
 */
 
@@ -60,12 +60,12 @@
 //                                                                        DEVICE
 //==============================================================================
 
-#define VERSION                 "SoftHand PRO firmware v. 1.2 (PSoC5)"
+#define VERSION                 "SoftHand PRO firmware v. 1.4.1 (PSoC5)"
 
 #define NUM_OF_SENSORS          3       /*!< Number of encoders.*/
 #define NUM_OF_EMGS             2       /*!< Number of emg channels.*/
 #define NUM_OF_ANALOG_INPUTS    4       /*!< Total number of analogic inputs.*/
-#define NUM_OF_PARAMS           29      /*!< Number of parameters saved in the EEPROM.*/
+#define NUM_OF_PARAMS           31      /*!< Number of parameters saved in the EEPROM.*/
 #define N_IMU_MAX               3    
 #define NUM_OF_IMU_DATA         5       // accelerometers, gyroscopes, magnetometers, quaternion and temperature data
     
@@ -110,6 +110,14 @@
 //==============================================================================
 #define SPI_DELAY_LOW       10
 #define SPI_DELAY_HIGH      100
+
+//==============================================================================
+//                                                                EXPANSION PORT
+//==============================================================================
+#define EXP_NONE       0
+#define EXP_SD_RTC     1
+#define EXP_WIFI       2
+#define EXP_OTHER      3    
     
 //==============================================================================
 //                                                                         OTHER
@@ -132,14 +140,17 @@
 #define EMG_SAMPLE_TO_DISCARD   500     /*!< Number of sample to discard before calibration.*/
 #define SAMPLES_FOR_MEAN        100     /*!< Number of samples used to mean current values.*/
 #define SAMPLES_FOR_EMG_MEAN    1000    /*!< Number of samples used to mean emg values.*/
-
+#define REST_POS_ERR_THR_GAIN   10      /*!< Gain related to stop condition threshold in rest position routine.*/
 #define POS_INTEGRAL_SAT_LIMIT  50000000    /*!< Anti windup on position control.*/
 #define CURR_INTEGRAL_SAT_LIMIT 100000      /*!< Anti windup on current control.*/
-
+#define PWM_RATE_LIMITER_MAX	1
+#define SAFE_STARTUP_MOTOR_READINGS 5000    /*!< Number of encoder readings after position reconstruction before activating motor.*/
 #define LOOKUP_DIM              6           /*!< Dimension of the current lookup table.*/
     
 #define PREREVISION_CYCLES      400000      /*!< Number of SoftHand Pro cycles before maintenance.*/    
 
+#define RIGHT_HAND              0
+#define LEFT_HAND               1   
 //==============================================================================
 //                                                        structures definitions
 //==============================================================================
@@ -239,14 +250,16 @@ struct st_mem {
     uint8   maint_month;                /*!< Date of last maintenance.*/                                    //1
     uint8   maint_year;                 /*!< Date of last maintenance.*/                                    //1
     int32   rest_pos;                   /*!< Hand rest position while in EMG mode.*/                        //4
-    float   rest_delay;                 /*!< Hand rest position delay while in EMG mode.*/                  //4
+    int32   rest_delay;                 /*!< Hand rest position delay while in EMG mode.*/                  //4
     // End of row ten.
-    float   rest_vel;                   /*!< Hand velocity closure for rest position reaching.*/             //4
-    float   rest_ratio;                 /*!< Hand rest ratio between vel closure and rest position error.*/  //4
+    int32   rest_vel;                   /*!< Hand velocity closure for rest position reaching.*/             //4
     uint8   rest_position_flag;         /*!< Enable rest position feature.*/                                //1
-    uint8   switch_emg;                 /*!< EMG opening/closure switch.*/                                  //1    
-    uint8   unused_bytes[22];
-    // End of row twelve. unused_bytes[0:5] are on row eleven, while the others in row twelve.
+    uint8   switch_emg;                 /*!< EMG opening/closure switch.*/  
+    uint8   right_left;                 /*!< Right/Left hand.*/   	//1    
+    uint8   read_imu_flag;              /*!< Enable IMU reading feature.*/                                  //1
+    uint8   read_exp_port_flag;         /*!< Enable Expansion Port.*/                                       //1
+    uint8   unused_bytes[23];
+    // End of row twelve. unused_bytes[0:6] are on row eleven, while the others in row twelve.
     uint32  emg_counter[2];             /*!< Counter for EMG activation - both channels.*/                  //8
     //End of row thirteen. position_hist[0] and position_hist[1] are on row thirteen.
     uint32  position_hist[10];          /*!< Positions histogram - 10 zones.*/                              //40
@@ -342,7 +355,6 @@ extern emg_status CYDATA emg_1_status;              /*!< First EMG sensor status
 extern emg_status CYDATA emg_2_status;              /*!< Second EMG sensor status.*/                               
     
 // Bit Flag
-
 extern CYBIT reset_last_value_flag;                 /*!< This flag is set when the encoders last values must be resetted.*/
 extern CYBIT tension_valid;                         /*!< Tension validation bit.*/
 extern CYBIT interrupt_flag;                        /*!< Interrupt flag enabler.*/
@@ -352,17 +364,19 @@ extern CYBIT can_write;                             /*!< Write to EEPROM flag.*/
 extern uint8 rest_enabled;                          /*!< Rest position flag.*/
 extern uint8 forced_open;                           /*!< Forced open flag (used in position with rest position control).*/
 extern uint8 battery_low_SoC;                       /*!< Battery low State of Charge flag (re-open terminal device when active).*/
+extern uint8 change_ext_ref_flag;                   /*!< This flag is set when an external reference command is received.*/
 
 // DMA Buffer
-
 extern int16 ADC_buf[4];                            /*! ADC measurements buffer.*/
+extern uint32 Enc_buf[N_ENCODERS];
 
 // PWM value
-
 extern int8 pwm_sign;                               /*!< Sign of pwm driven. Used to obtain current sign.*/
 
-// Rest Position variables
+// Encoder variables
+extern uint32 data_encoder_raw[NUM_OF_SENSORS];
 
+// Rest Position variables
 extern int32 rest_pos_curr_ref;                     /*!< Rest position current reference.*/
 
 // SD variables
@@ -384,7 +398,6 @@ extern uint8 Temp[N_IMU_MAX][2];
 extern float Quat[4];
 
 // -----------------------------------------------------------------------------
-
 
 #endif
 

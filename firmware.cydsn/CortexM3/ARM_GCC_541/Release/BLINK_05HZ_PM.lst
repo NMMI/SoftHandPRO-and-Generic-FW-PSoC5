@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cce1gswv.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
   23:Generated_Source\PSoC5/BLINK_05HZ_PM.c **** /*******************************************************************************
   24:Generated_Source\PSoC5/BLINK_05HZ_PM.c **** * Function Name: BLINK_05HZ_SaveConfig
   25:Generated_Source\PSoC5/BLINK_05HZ_PM.c **** ********************************************************************************
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 2
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cce1gswv.s 			page 2
 
 
   26:Generated_Source\PSoC5/BLINK_05HZ_PM.c **** *
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
   58:Generated_Source\PSoC5/BLINK_05HZ_PM.c **** 
   59:Generated_Source\PSoC5/BLINK_05HZ_PM.c ****         #if(BLINK_05HZ_KillModeMinTime)
   60:Generated_Source\PSoC5/BLINK_05HZ_PM.c ****              BLINK_05HZ_backup.PWMKillCounterPeriod = BLINK_05HZ_ReadKillTime();
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 3
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cce1gswv.s 			page 3
 
 
   61:Generated_Source\PSoC5/BLINK_05HZ_PM.c ****         #endif /* (BLINK_05HZ_KillModeMinTime) */
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
   79              		.cfi_startproc
   80              		@ args = 0, pretend = 0, frame = 0
   81              		@ frame_needed = 1, uses_anonymous_args = 0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 4
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cce1gswv.s 			page 4
 
 
   82 0000 80B5     		push	{r7, lr}
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
  111              	.LFE1:
  112              		.size	BLINK_05HZ_RestoreConfig, .-BLINK_05HZ_RestoreConfig
  113              		.section	.text.BLINK_05HZ_Sleep,"ax",%progbits
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 5
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cce1gswv.s 			page 5
 
 
  114              		.align	2
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
  140 0012 0122     		movs	r2, #1
  141 0014 1A70     		strb	r2, [r3]
  142 0016 02E0     		b	.L9
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 6
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cce1gswv.s 			page 6
 
 
  143              	.L8:
@@ -331,7 +331,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
  156              	.L11:
  157 002a 00BF     		.align	2
  158              	.L10:
- 159 002c 74650040 		.word	1073767796
+ 159 002c 79640040 		.word	1073767545
  160 0030 00000000 		.word	BLINK_05HZ_backup
  161              		.cfi_endproc
  162              	.LFE2:
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
  168:Generated_Source\PSoC5/BLINK_05HZ_PM.c **** *  None
  169:Generated_Source\PSoC5/BLINK_05HZ_PM.c **** *
  170:Generated_Source\PSoC5/BLINK_05HZ_PM.c **** * Return:
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 7
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cce1gswv.s 			page 7
 
 
  171:Generated_Source\PSoC5/BLINK_05HZ_PM.c **** *  None
@@ -418,23 +418,23 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
  207              	.Ldebug_info0:
  208 0000 4D010000 		.4byte	0x14d
  209 0004 0400     		.2byte	0x4
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 8
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cce1gswv.s 			page 8
 
 
  210 0006 00000000 		.4byte	.Ldebug_abbrev0
  211 000a 04       		.byte	0x4
  212 000b 01       		.uleb128 0x1
- 213 000c 0C020000 		.4byte	.LASF26
+ 213 000c D8010000 		.4byte	.LASF26
  214 0010 0C       		.byte	0xc
  215 0011 CB000000 		.4byte	.LASF27
- 216 0015 16010000 		.4byte	.LASF28
+ 216 0015 87010000 		.4byte	.LASF28
  217 0019 00000000 		.4byte	.Ldebug_ranges0+0
  218 001d 00000000 		.4byte	0
  219 0021 00000000 		.4byte	.Ldebug_line0
  220 0025 02       		.uleb128 0x2
  221 0026 01       		.byte	0x1
  222 0027 06       		.byte	0x6
- 223 0028 00020000 		.4byte	.LASF0
+ 223 0028 CC010000 		.4byte	.LASF0
  224 002c 02       		.uleb128 0x2
  225 002d 01       		.byte	0x1
  226 002e 08       		.byte	0x8
@@ -442,7 +442,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
  228 0033 02       		.uleb128 0x2
  229 0034 02       		.byte	0x2
  230 0035 05       		.byte	0x5
- 231 0036 B0010000 		.4byte	.LASF2
+ 231 0036 37010000 		.4byte	.LASF2
  232 003a 02       		.uleb128 0x2
  233 003b 02       		.byte	0x2
  234 003c 07       		.byte	0x7
@@ -450,7 +450,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
  236 0041 02       		.uleb128 0x2
  237 0042 04       		.byte	0x4
  238 0043 05       		.byte	0x5
- 239 0044 D3010000 		.4byte	.LASF4
+ 239 0044 5A010000 		.4byte	.LASF4
  240 0048 02       		.uleb128 0x2
  241 0049 04       		.byte	0x4
  242 004a 07       		.byte	0x7
@@ -458,7 +458,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
  244 004f 02       		.uleb128 0x2
  245 0050 08       		.byte	0x8
  246 0051 05       		.byte	0x5
- 247 0052 9D010000 		.4byte	.LASF6
+ 247 0052 24010000 		.4byte	.LASF6
  248 0056 02       		.uleb128 0x2
  249 0057 08       		.byte	0x8
  250 0058 07       		.byte	0x7
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
  264 0073 2C000000 		.4byte	0x2c
  265 0077 04       		.uleb128 0x4
  266 0078 C4000000 		.4byte	.LASF10
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 9
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cce1gswv.s 			page 9
 
 
  267 007c 02       		.byte	0x2
@@ -495,9 +495,9 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
  278 0091 02       		.uleb128 0x2
  279 0092 01       		.byte	0x1
  280 0093 08       		.byte	0x8
- 281 0094 AB010000 		.4byte	.LASF13
+ 281 0094 32010000 		.4byte	.LASF13
  282 0098 04       		.uleb128 0x4
- 283 0099 8F010000 		.4byte	.LASF14
+ 283 0099 16010000 		.4byte	.LASF14
  284 009d 02       		.byte	0x2
  285 009e 8E02     		.2byte	0x28e
  286 00a0 A4000000 		.4byte	0xa4
@@ -506,11 +506,11 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
  289 00a9 02       		.uleb128 0x2
  290 00aa 08       		.byte	0x8
  291 00ab 04       		.byte	0x4
- 292 00ac F4010000 		.4byte	.LASF15
+ 292 00ac 7B010000 		.4byte	.LASF15
  293 00b0 02       		.uleb128 0x2
  294 00b1 04       		.byte	0x4
  295 00b2 07       		.byte	0x7
- 296 00b3 94010000 		.4byte	.LASF16
+ 296 00b3 1B010000 		.4byte	.LASF16
  297 00b7 06       		.uleb128 0x6
  298 00b8 08       		.byte	0x8
  299 00b9 03       		.byte	0x3
@@ -538,14 +538,14 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
  321 00e4 99000000 		.4byte	.LASF20
  322 00e8 03       		.byte	0x3
  323 00e9 86       		.byte	0x86
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 10
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cce1gswv.s 			page 10
 
 
  324 00ea 6B000000 		.4byte	0x6b
  325 00ee 06       		.byte	0x6
  326 00ef 00       		.byte	0
  327 00f0 08       		.uleb128 0x8
- 328 00f1 DC010000 		.4byte	.LASF21
+ 328 00f1 63010000 		.4byte	.LASF21
  329 00f5 03       		.byte	0x3
  330 00f6 8B       		.byte	0x8b
  331 00f7 B7000000 		.4byte	0xb7
@@ -558,7 +558,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
  338 010a 01       		.uleb128 0x1
  339 010b 9C       		.byte	0x9c
  340 010c 09       		.uleb128 0x9
- 341 010d BA010000 		.4byte	.LASF23
+ 341 010d 41010000 		.4byte	.LASF23
  342 0111 01       		.byte	0x1
  343 0112 58       		.byte	0x58
  344 0113 00000000 		.4byte	.LFB1
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
  378 0003 25       		.uleb128 0x25
  379 0004 0E       		.uleb128 0xe
  380 0005 13       		.uleb128 0x13
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 11
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cce1gswv.s 			page 11
 
 
  381 0006 0B       		.uleb128 0xb
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
  435 003c 00       		.byte	0
  436 003d 06       		.uleb128 0x6
  437 003e 13       		.uleb128 0x13
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 12
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cce1gswv.s 			page 12
 
 
  438 003f 01       		.byte	0x1
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
  492 0075 12       		.uleb128 0x12
  493 0076 06       		.uleb128 0x6
  494 0077 40       		.uleb128 0x40
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 13
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cce1gswv.s 			page 13
 
 
  495 0078 18       		.uleb128 0x18
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
  548      02005A00 
  548      00000201 
  548      FB0E0D00 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 14
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cce1gswv.s 			page 14
 
 
  548      01010101 
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
  571              	.LASF20:
  572 0099 50574D43 		.ascii	"PWMControlRegister\000"
  572      6F6E7472 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 15
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cce1gswv.s 			page 15
 
 
  572      6F6C5265 
@@ -873,82 +873,77 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 1
  584      6720756E 
  584      7369676E 
  584      65642069 
- 585              	.LASF28:
- 586 0116 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Dropbox (workgroup)\\Personal\\"
- 586      73657273 
- 586      5C4D6174 
- 586      74696143 
- 586      505C4472 
- 587 0145 4D617474 		.ascii	"Mattia Poggiani\\FIRMWARES (local)\\SoftPro firmwar"
- 587      69612050 
- 587      6F676769 
- 587      616E695C 
- 587      4649524D 
- 588 0176 65202850 		.ascii	"e (PSoC5)\\firmware.cydsn\000"
- 588      536F4335 
- 588      295C6669 
- 588      726D7761 
- 588      72652E63 
- 589              	.LASF14:
- 590 018f 72656738 		.ascii	"reg8\000"
- 590      00
- 591              	.LASF16:
- 592 0194 73697A65 		.ascii	"sizetype\000"
- 592      74797065 
+ 585              	.LASF14:
+ 586 0116 72656738 		.ascii	"reg8\000"
+ 586      00
+ 587              	.LASF16:
+ 588 011b 73697A65 		.ascii	"sizetype\000"
+ 588      74797065 
+ 588      00
+ 589              	.LASF6:
+ 590 0124 6C6F6E67 		.ascii	"long long int\000"
+ 590      206C6F6E 
+ 590      6720696E 
+ 590      7400
+ 591              	.LASF13:
+ 592 0132 63686172 		.ascii	"char\000"
  592      00
- 593              	.LASF6:
- 594 019d 6C6F6E67 		.ascii	"long long int\000"
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cc5SZGm7.s 			page 16
-
-
- 594      206C6F6E 
- 594      6720696E 
+ 593              	.LASF2:
+ 594 0137 73686F72 		.ascii	"short int\000"
+ 594      7420696E 
  594      7400
- 595              	.LASF13:
- 596 01ab 63686172 		.ascii	"char\000"
- 596      00
- 597              	.LASF2:
- 598 01b0 73686F72 		.ascii	"short int\000"
- 598      7420696E 
- 598      7400
- 599              	.LASF23:
- 600 01ba 424C494E 		.ascii	"BLINK_05HZ_RestoreConfig\000"
+ 595              	.LASF23:
+ 596 0141 424C494E 		.ascii	"BLINK_05HZ_RestoreConfig\000"
+ 596      4B5F3035 
+ 596      485A5F52 
+ 596      6573746F 
+ 596      7265436F 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\cce1gswv.s 			page 16
+
+
+ 597              	.LASF4:
+ 598 015a 6C6F6E67 		.ascii	"long int\000"
+ 598      20696E74 
+ 598      00
+ 599              	.LASF21:
+ 600 0163 424C494E 		.ascii	"BLINK_05HZ_backupStruct\000"
  600      4B5F3035 
- 600      485A5F52 
- 600      6573746F 
- 600      7265436F 
- 601              	.LASF4:
- 602 01d3 6C6F6E67 		.ascii	"long int\000"
- 602      20696E74 
- 602      00
- 603              	.LASF21:
- 604 01dc 424C494E 		.ascii	"BLINK_05HZ_backupStruct\000"
- 604      4B5F3035 
- 604      485A5F62 
- 604      61636B75 
- 604      70537472 
- 605              	.LASF15:
- 606 01f4 6C6F6E67 		.ascii	"long double\000"
- 606      20646F75 
- 606      626C6500 
- 607              	.LASF0:
- 608 0200 7369676E 		.ascii	"signed char\000"
- 608      65642063 
- 608      68617200 
- 609              	.LASF26:
- 610 020c 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 610      43313120 
- 610      352E342E 
- 610      31203230 
- 610      31363036 
- 611 023f 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 611      20726576 
- 611      6973696F 
- 611      6E203233 
- 611      37373135 
- 612 0272 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
- 612      66756E63 
- 612      74696F6E 
- 612      2D736563 
- 612      74696F6E 
- 613              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 600      485A5F62 
+ 600      61636B75 
+ 600      70537472 
+ 601              	.LASF15:
+ 602 017b 6C6F6E67 		.ascii	"long double\000"
+ 602      20646F75 
+ 602      626C6500 
+ 603              	.LASF28:
+ 604 0187 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Documents\\GITHUB\\SoftHand-PR"
+ 604      73657273 
+ 604      5C4D6174 
+ 604      74696143 
+ 604      505C446F 
+ 605 01b5 4F2D5053 		.ascii	"O-PSoC5\\firmware.cydsn\000"
+ 605      6F43355C 
+ 605      6669726D 
+ 605      77617265 
+ 605      2E637964 
+ 606              	.LASF0:
+ 607 01cc 7369676E 		.ascii	"signed char\000"
+ 607      65642063 
+ 607      68617200 
+ 608              	.LASF26:
+ 609 01d8 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 609      43313120 
+ 609      352E342E 
+ 609      31203230 
+ 609      31363036 
+ 610 020b 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 610      20726576 
+ 610      6973696F 
+ 610      6E203233 
+ 610      37373135 
+ 611 023e 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 611      66756E63 
+ 611      74696F6E 
+ 611      2D736563 
+ 611      74696F6E 
+ 612              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
