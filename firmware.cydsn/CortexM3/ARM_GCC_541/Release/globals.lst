@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 1
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 1
 
 
    1              		.syntax unified
@@ -22,2663 +22,2839 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 1
   19              		.comm	g_ref,16,4
   20              		.comm	g_refNew,16,4
   21              		.comm	g_refOld,16,4
-  22              		.comm	g_meas,56,4
-  23              		.comm	g_measOld,56,4
+  22              		.comm	g_meas,84,4
+  23              		.comm	g_measOld,84,4
   24              		.comm	g_rx,134,4
-  25              		.comm	g_mem,304,4
-  26              		.comm	c_mem,304,4
+  25              		.comm	g_mem,388,4
+  26              		.comm	c_mem,388,4
   27              		.comm	calib,6,4
-  28              		.comm	filt_v,8,4
+  28              		.comm	filt_v,16,4
   29              		.comm	filt_curr_diff,8,4
-  30              		.comm	filt_i,8,4
+  30              		.comm	filt_i,16,4
   31              		.comm	filt_vel,24,4
-  32              		.comm	filt_emg1,8,4
-  33              		.comm	filt_emg2,8,4
-  34              		.comm	timer_value,4,4
-  35              		.comm	timer_value0,4,4
-  36              		.comm	cycle_time,4,4
-  37              		.comm	dev_tension,4,4
-  38              		.comm	dev_pwm_limit,1,1
-  39              		.global	dev_pwm_sat
-  40              		.data
-  41              		.type	dev_pwm_sat, %object
-  42              		.size	dev_pwm_sat, 1
-  43              	dev_pwm_sat:
-  44 0000 64       		.byte	100
-  45              		.comm	dev_tension_f,4,4
-  46              		.comm	pow_tension,4,4
-  47              		.global	cycles_status
-  48              		.type	cycles_status, %object
-  49              		.size	cycles_status, 1
-  50              	cycles_status:
-  51 0001 04       		.byte	4
-  52              		.global	emg_1_status
-  53              		.type	emg_1_status, %object
-  54              		.size	emg_1_status, 1
-  55              	emg_1_status:
-  56 0002 01       		.byte	1
-  57              		.global	emg_2_status
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 2
-
-
-  58              		.type	emg_2_status, %object
-  59              		.size	emg_2_status, 1
-  60              	emg_2_status:
-  61 0003 01       		.byte	1
-  62              		.comm	reset_last_value_flag,1,1
-  63              		.comm	tension_valid,1,1
-  64              		.global	interrupt_flag
-  65              		.bss
-  66              		.type	interrupt_flag, %object
-  67              		.size	interrupt_flag, 1
-  68              	interrupt_flag:
-  69 0000 00       		.space	1
-  70              		.global	cycles_interrupt_flag
-  71              		.type	cycles_interrupt_flag, %object
-  72              		.size	cycles_interrupt_flag, 1
-  73              	cycles_interrupt_flag:
-  74 0001 00       		.space	1
-  75              		.global	maintenance_flag
-  76              		.type	maintenance_flag, %object
-  77              		.size	maintenance_flag, 1
-  78              	maintenance_flag:
-  79 0002 00       		.space	1
-  80              		.global	can_write
-  81              		.data
-  82              		.type	can_write, %object
-  83              		.size	can_write, 1
-  84              	can_write:
-  85 0004 01       		.byte	1
-  86              		.comm	rest_enabled,1,1
-  87              		.comm	forced_open,1,1
-  88              		.global	battery_low_SoC
-  89              		.bss
-  90              		.type	battery_low_SoC, %object
-  91              		.size	battery_low_SoC, 1
-  92              	battery_low_SoC:
-  93 0003 00       		.space	1
-  94              		.global	change_ext_ref_flag
-  95              		.type	change_ext_ref_flag, %object
-  96              		.size	change_ext_ref_flag, 1
-  97              	change_ext_ref_flag:
-  98 0004 00       		.space	1
-  99              		.comm	ADC_buf,8,4
- 100              		.comm	Enc_buf,12,4
- 101              		.comm	pwm_sign,1,1
- 102              		.comm	data_encoder_raw,12,4
- 103              		.comm	rest_pos_curr_ref,4,4
- 104              		.comm	pFile,4,4
- 105              		.global	write_bytes
- 106              		.data
- 107 0005 000000   		.align	2
- 108              		.type	write_bytes, %object
- 109              		.size	write_bytes, 4
- 110              	write_bytes:
- 111 0008 E8030000 		.word	1000
- 112              		.comm	N_IMU_Connected,1,1
- 113              		.comm	IMU_connected,3,4
- 114              		.comm	imus_data_size,4,4
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 3
-
-
- 115              		.comm	single_imu_size,12,4
- 116              		.comm	g_imu,120,4
- 117              		.comm	g_imuNew,120,4
- 118              		.comm	Accel,18,4
- 119              		.comm	Gyro,18,4
- 120              		.comm	Mag,18,4
- 121              		.comm	MagCal,9,4
- 122              		.comm	Temp,6,4
- 123              		.global	Quat
- 124              		.align	2
- 125              		.type	Quat, %object
- 126              		.size	Quat, 16
- 127              	Quat:
- 128 000c 0000803F 		.word	1065353216
- 129 0010 00000000 		.word	0
- 130 0014 00000000 		.word	0
- 131 0018 00000000 		.word	0
- 132              		.text
- 133              	.Letext0:
- 134              		.file 1 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
- 135              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
- 136              		.file 3 "Generated_Source\\PSoC5/cytypes.h"
- 137              		.file 4 "..\\emFile_V322c\\Code\\Include\\PSoC5/FS_Types.h"
- 138              		.file 5 "..\\src\\globals.h"
- 139              		.file 6 "Generated_Source\\PSoC5/core_cm3.h"
- 140              		.file 7 "..\\src\\globals.c"
- 141              		.section	.debug_info,"",%progbits
- 142              	.Ldebug_info0:
- 143 0000 580B0000 		.4byte	0xb58
- 144 0004 0400     		.2byte	0x4
- 145 0006 00000000 		.4byte	.Ldebug_abbrev0
- 146 000a 04       		.byte	0x4
- 147 000b 01       		.uleb128 0x1
- 148 000c 80000000 		.4byte	.LASF170
- 149 0010 0C       		.byte	0xc
- 150 0011 EC040000 		.4byte	.LASF171
- 151 0015 F7020000 		.4byte	.LASF172
- 152 0019 00000000 		.4byte	.Ldebug_line0
- 153 001d 02       		.uleb128 0x2
- 154 001e 01       		.byte	0x1
- 155 001f 06       		.byte	0x6
- 156 0020 55000000 		.4byte	.LASF0
- 157 0024 02       		.uleb128 0x2
- 158 0025 01       		.byte	0x1
- 159 0026 08       		.byte	0x8
- 160 0027 6C050000 		.4byte	.LASF1
- 161 002b 02       		.uleb128 0x2
- 162 002c 02       		.byte	0x2
- 163 002d 05       		.byte	0x5
- 164 002e 8C050000 		.4byte	.LASF2
- 165 0032 02       		.uleb128 0x2
- 166 0033 02       		.byte	0x2
- 167 0034 07       		.byte	0x7
- 168 0035 F4030000 		.4byte	.LASF3
- 169 0039 03       		.uleb128 0x3
- 170 003a 7E040000 		.4byte	.LASF9
- 171 003e 01       		.byte	0x1
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 4
-
-
- 172 003f 3F       		.byte	0x3f
- 173 0040 44000000 		.4byte	0x44
- 174 0044 02       		.uleb128 0x2
- 175 0045 04       		.byte	0x4
- 176 0046 05       		.byte	0x5
- 177 0047 D9010000 		.4byte	.LASF4
- 178 004b 02       		.uleb128 0x2
- 179 004c 04       		.byte	0x4
- 180 004d 07       		.byte	0x7
- 181 004e B1030000 		.4byte	.LASF5
- 182 0052 02       		.uleb128 0x2
- 183 0053 08       		.byte	0x8
- 184 0054 05       		.byte	0x5
- 185 0055 9B010000 		.4byte	.LASF6
- 186 0059 02       		.uleb128 0x2
- 187 005a 08       		.byte	0x8
- 188 005b 07       		.byte	0x7
- 189 005c 31010000 		.4byte	.LASF7
- 190 0060 04       		.uleb128 0x4
- 191 0061 04       		.byte	0x4
- 192 0062 05       		.byte	0x5
- 193 0063 696E7400 		.ascii	"int\000"
- 194 0067 02       		.uleb128 0x2
- 195 0068 04       		.byte	0x4
- 196 0069 07       		.byte	0x7
- 197 006a 97060000 		.4byte	.LASF8
- 198 006e 03       		.uleb128 0x3
- 199 006f 64050000 		.4byte	.LASF10
- 200 0073 02       		.byte	0x2
- 201 0074 2C       		.byte	0x2c
- 202 0075 39000000 		.4byte	0x39
- 203 0079 05       		.uleb128 0x5
- 204 007a E0030000 		.4byte	.LASF11
- 205 007e 03       		.byte	0x3
- 206 007f E401     		.2byte	0x1e4
- 207 0081 24000000 		.4byte	0x24
- 208 0085 05       		.uleb128 0x5
- 209 0086 0B000000 		.4byte	.LASF12
- 210 008a 03       		.byte	0x3
- 211 008b E501     		.2byte	0x1e5
- 212 008d 32000000 		.4byte	0x32
- 213 0091 05       		.uleb128 0x5
- 214 0092 B8020000 		.4byte	.LASF13
- 215 0096 03       		.byte	0x3
- 216 0097 E601     		.2byte	0x1e6
- 217 0099 4B000000 		.4byte	0x4b
- 218 009d 05       		.uleb128 0x5
- 219 009e 20040000 		.4byte	.LASF14
- 220 00a2 03       		.byte	0x3
- 221 00a3 E701     		.2byte	0x1e7
- 222 00a5 1D000000 		.4byte	0x1d
- 223 00a9 05       		.uleb128 0x5
- 224 00aa 07050000 		.4byte	.LASF15
- 225 00ae 03       		.byte	0x3
- 226 00af E801     		.2byte	0x1e8
- 227 00b1 2B000000 		.4byte	0x2b
- 228 00b5 05       		.uleb128 0x5
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 5
-
-
- 229 00b6 60020000 		.4byte	.LASF16
- 230 00ba 03       		.byte	0x3
- 231 00bb E901     		.2byte	0x1e9
- 232 00bd 44000000 		.4byte	0x44
- 233 00c1 05       		.uleb128 0x5
- 234 00c2 C2040000 		.4byte	.LASF17
- 235 00c6 03       		.byte	0x3
- 236 00c7 EA01     		.2byte	0x1ea
- 237 00c9 CD000000 		.4byte	0xcd
- 238 00cd 02       		.uleb128 0x2
- 239 00ce 04       		.byte	0x4
- 240 00cf 04       		.byte	0x4
- 241 00d0 6E060000 		.4byte	.LASF18
- 242 00d4 02       		.uleb128 0x2
- 243 00d5 08       		.byte	0x8
- 244 00d6 04       		.byte	0x4
- 245 00d7 E4070000 		.4byte	.LASF19
- 246 00db 02       		.uleb128 0x2
- 247 00dc 01       		.byte	0x1
- 248 00dd 08       		.byte	0x8
- 249 00de 7B060000 		.4byte	.LASF20
- 250 00e2 02       		.uleb128 0x2
- 251 00e3 08       		.byte	0x8
- 252 00e4 04       		.byte	0x4
- 253 00e5 D3040000 		.4byte	.LASF21
- 254 00e9 02       		.uleb128 0x2
- 255 00ea 04       		.byte	0x4
- 256 00eb 07       		.byte	0x7
- 257 00ec CA040000 		.4byte	.LASF22
- 258 00f0 03       		.uleb128 0x3
- 259 00f1 BF020000 		.4byte	.LASF23
- 260 00f5 04       		.byte	0x4
- 261 00f6 7E       		.byte	0x7e
- 262 00f7 FB000000 		.4byte	0xfb
- 263 00fb 06       		.uleb128 0x6
- 264 00fc BF020000 		.4byte	.LASF23
- 265 0100 07       		.uleb128 0x7
- 266 0101 04       		.byte	0x4
- 267 0102 F0000000 		.4byte	0xf0
- 268 0106 08       		.uleb128 0x8
- 269 0107 81030000 		.4byte	.LASF26
- 270 010b 10       		.byte	0x10
- 271 010c 05       		.byte	0x5
- 272 010d A2       		.byte	0xa2
- 273 010e 43010000 		.4byte	0x143
- 274 0112 09       		.uleb128 0x9
- 275 0113 706F7300 		.ascii	"pos\000"
- 276 0117 05       		.byte	0x5
- 277 0118 A3       		.byte	0xa3
- 278 0119 B5000000 		.4byte	0xb5
- 279 011d 00       		.byte	0
- 280 011e 0A       		.uleb128 0xa
- 281 011f 7A050000 		.4byte	.LASF24
- 282 0123 05       		.byte	0x5
- 283 0124 A4       		.byte	0xa4
- 284 0125 B5000000 		.4byte	0xb5
- 285 0129 04       		.byte	0x4
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 6
-
-
- 286 012a 09       		.uleb128 0x9
- 287 012b 70776D00 		.ascii	"pwm\000"
- 288 012f 05       		.byte	0x5
- 289 0130 A5       		.byte	0xa5
- 290 0131 B5000000 		.4byte	0xb5
- 291 0135 08       		.byte	0x8
- 292 0136 0A       		.uleb128 0xa
- 293 0137 86050000 		.4byte	.LASF25
- 294 013b 05       		.byte	0x5
- 295 013c A6       		.byte	0xa6
- 296 013d 79000000 		.4byte	0x79
- 297 0141 0C       		.byte	0xc
- 298 0142 00       		.byte	0
- 299 0143 08       		.uleb128 0x8
- 300 0144 12000000 		.4byte	.LASF27
- 301 0148 38       		.byte	0x38
- 302 0149 05       		.byte	0x5
- 303 014a AD       		.byte	0xad
- 304 014b A4010000 		.4byte	0x1a4
- 305 014f 09       		.uleb128 0x9
- 306 0150 706F7300 		.ascii	"pos\000"
- 307 0154 05       		.byte	0x5
- 308 0155 AE       		.byte	0xae
- 309 0156 A4010000 		.4byte	0x1a4
- 310 015a 00       		.byte	0
- 311 015b 0A       		.uleb128 0xa
- 312 015c 7A050000 		.4byte	.LASF24
- 313 0160 05       		.byte	0x5
- 314 0161 AF       		.byte	0xaf
- 315 0162 B5000000 		.4byte	0xb5
- 316 0166 0C       		.byte	0xc
- 317 0167 0A       		.uleb128 0xa
- 318 0168 AF010000 		.4byte	.LASF28
- 319 016c 05       		.byte	0x5
- 320 016d B0       		.byte	0xb0
- 321 016e B5000000 		.4byte	0xb5
- 322 0172 10       		.byte	0x10
- 323 0173 09       		.uleb128 0x9
- 324 0174 726F7400 		.ascii	"rot\000"
- 325 0178 05       		.byte	0x5
- 326 0179 B1       		.byte	0xb1
- 327 017a B4010000 		.4byte	0x1b4
- 328 017e 14       		.byte	0x14
- 329 017f 09       		.uleb128 0x9
- 330 0180 656D6700 		.ascii	"emg\000"
- 331 0184 05       		.byte	0x5
- 332 0185 B3       		.byte	0xb3
- 333 0186 C4010000 		.4byte	0x1c4
- 334 018a 18       		.byte	0x18
- 335 018b 09       		.uleb128 0x9
- 336 018c 76656C00 		.ascii	"vel\000"
- 337 0190 05       		.byte	0x5
- 338 0191 B4       		.byte	0xb4
- 339 0192 A4010000 		.4byte	0x1a4
- 340 0196 20       		.byte	0x20
- 341 0197 09       		.uleb128 0x9
- 342 0198 61636300 		.ascii	"acc\000"
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 7
-
-
- 343 019c 05       		.byte	0x5
- 344 019d B5       		.byte	0xb5
- 345 019e A4010000 		.4byte	0x1a4
- 346 01a2 2C       		.byte	0x2c
- 347 01a3 00       		.byte	0
- 348 01a4 0B       		.uleb128 0xb
- 349 01a5 B5000000 		.4byte	0xb5
- 350 01a9 B4010000 		.4byte	0x1b4
- 351 01ad 0C       		.uleb128 0xc
- 352 01ae E9000000 		.4byte	0xe9
- 353 01b2 02       		.byte	0x2
- 354 01b3 00       		.byte	0
- 355 01b4 0B       		.uleb128 0xb
- 356 01b5 9D000000 		.4byte	0x9d
- 357 01b9 C4010000 		.4byte	0x1c4
- 358 01bd 0C       		.uleb128 0xc
- 359 01be E9000000 		.4byte	0xe9
- 360 01c2 02       		.byte	0x2
- 361 01c3 00       		.byte	0
- 362 01c4 0B       		.uleb128 0xb
- 363 01c5 B5000000 		.4byte	0xb5
- 364 01c9 D4010000 		.4byte	0x1d4
- 365 01cd 0C       		.uleb128 0xc
- 366 01ce E9000000 		.4byte	0xe9
- 367 01d2 01       		.byte	0x1
- 368 01d3 00       		.byte	0
- 369 01d4 08       		.uleb128 0x8
- 370 01d5 8F060000 		.4byte	.LASF29
- 371 01d9 86       		.byte	0x86
- 372 01da 05       		.byte	0x5
- 373 01db BC       		.byte	0xbc
- 374 01dc 11020000 		.4byte	0x211
- 375 01e0 0A       		.uleb128 0xa
- 376 01e1 A4060000 		.4byte	.LASF30
- 377 01e5 05       		.byte	0x5
- 378 01e6 BD       		.byte	0xbd
- 379 01e7 11020000 		.4byte	0x211
- 380 01eb 00       		.byte	0
- 381 01ec 0A       		.uleb128 0xa
- 382 01ed 74060000 		.4byte	.LASF31
- 383 01f1 05       		.byte	0x5
- 384 01f2 BE       		.byte	0xbe
- 385 01f3 A9000000 		.4byte	0xa9
- 386 01f7 80       		.byte	0x80
- 387 01f8 09       		.uleb128 0x9
- 388 01f9 696E6400 		.ascii	"ind\000"
- 389 01fd 05       		.byte	0x5
- 390 01fe BF       		.byte	0xbf
- 391 01ff A9000000 		.4byte	0xa9
- 392 0203 82       		.byte	0x82
- 393 0204 0A       		.uleb128 0xa
- 394 0205 A9010000 		.4byte	.LASF32
- 395 0209 05       		.byte	0x5
- 396 020a C0       		.byte	0xc0
- 397 020b 79000000 		.4byte	0x79
- 398 020f 84       		.byte	0x84
- 399 0210 00       		.byte	0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 8
-
-
- 400 0211 0B       		.uleb128 0xb
- 401 0212 79000000 		.4byte	0x79
- 402 0216 21020000 		.4byte	0x221
- 403 021a 0C       		.uleb128 0xc
- 404 021b E9000000 		.4byte	0xe9
- 405 021f 7F       		.byte	0x7f
- 406 0220 00       		.byte	0
- 407 0221 0D       		.uleb128 0xd
- 408 0222 C6050000 		.4byte	.LASF33
- 409 0226 3001     		.2byte	0x130
- 410 0228 05       		.byte	0x5
- 411 0229 C8       		.byte	0xc8
- 412 022a FF040000 		.4byte	0x4ff
- 413 022e 0A       		.uleb128 0xa
- 414 022f C1050000 		.4byte	.LASF34
- 415 0233 05       		.byte	0x5
- 416 0234 C9       		.byte	0xc9
- 417 0235 79000000 		.4byte	0x79
- 418 0239 00       		.byte	0
- 419 023a 09       		.uleb128 0x9
- 420 023b 696400   		.ascii	"id\000"
- 421 023e 05       		.byte	0x5
- 422 023f CA       		.byte	0xca
- 423 0240 79000000 		.4byte	0x79
- 424 0244 01       		.byte	0x1
- 425 0245 09       		.uleb128 0x9
- 426 0246 6B5F7000 		.ascii	"k_p\000"
- 427 024a 05       		.byte	0x5
- 428 024b CC       		.byte	0xcc
- 429 024c B5000000 		.4byte	0xb5
- 430 0250 04       		.byte	0x4
- 431 0251 09       		.uleb128 0x9
- 432 0252 6B5F6900 		.ascii	"k_i\000"
- 433 0256 05       		.byte	0x5
- 434 0257 CD       		.byte	0xcd
- 435 0258 B5000000 		.4byte	0xb5
- 436 025c 08       		.byte	0x8
- 437 025d 09       		.uleb128 0x9
- 438 025e 6B5F6400 		.ascii	"k_d\000"
- 439 0262 05       		.byte	0x5
- 440 0263 CE       		.byte	0xce
- 441 0264 B5000000 		.4byte	0xb5
- 442 0268 0C       		.byte	0xc
- 443 0269 0A       		.uleb128 0xa
- 444 026a CD050000 		.4byte	.LASF35
- 445 026e 05       		.byte	0x5
- 446 026f D0       		.byte	0xd0
- 447 0270 B5000000 		.4byte	0xb5
- 448 0274 10       		.byte	0x10
- 449 0275 0A       		.uleb128 0xa
- 450 0276 C7060000 		.4byte	.LASF36
- 451 027a 05       		.byte	0x5
- 452 027b D1       		.byte	0xd1
- 453 027c B5000000 		.4byte	0xb5
- 454 0280 14       		.byte	0x14
- 455 0281 0A       		.uleb128 0xa
- 456 0282 EA060000 		.4byte	.LASF37
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 9
-
-
- 457 0286 05       		.byte	0x5
- 458 0287 D2       		.byte	0xd2
- 459 0288 B5000000 		.4byte	0xb5
- 460 028c 18       		.byte	0x18
- 461 028d 0A       		.uleb128 0xa
- 462 028e EB070000 		.4byte	.LASF38
- 463 0292 05       		.byte	0x5
- 464 0293 D3       		.byte	0xd3
- 465 0294 B5000000 		.4byte	0xb5
- 466 0298 1C       		.byte	0x1c
- 467 0299 0A       		.uleb128 0xa
- 468 029a 94030000 		.4byte	.LASF39
- 469 029e 05       		.byte	0x5
- 470 029f D5       		.byte	0xd5
- 471 02a0 B5000000 		.4byte	0xb5
- 472 02a4 20       		.byte	0x20
- 473 02a5 0A       		.uleb128 0xa
- 474 02a6 47030000 		.4byte	.LASF40
- 475 02aa 05       		.byte	0x5
- 476 02ab D6       		.byte	0xd6
- 477 02ac B5000000 		.4byte	0xb5
- 478 02b0 24       		.byte	0x24
- 479 02b1 0A       		.uleb128 0xa
- 480 02b2 D6020000 		.4byte	.LASF41
- 481 02b6 05       		.byte	0x5
- 482 02b7 D7       		.byte	0xd7
- 483 02b8 B5000000 		.4byte	0xb5
- 484 02bc 28       		.byte	0x28
- 485 02bd 0A       		.uleb128 0xa
- 486 02be AB060000 		.4byte	.LASF42
- 487 02c2 05       		.byte	0x5
- 488 02c3 D8       		.byte	0xd8
- 489 02c4 B5000000 		.4byte	0xb5
- 490 02c8 2C       		.byte	0x2c
- 491 02c9 0A       		.uleb128 0xa
- 492 02ca 43070000 		.4byte	.LASF43
- 493 02ce 05       		.byte	0x5
- 494 02cf DA       		.byte	0xda
- 495 02d0 B5000000 		.4byte	0xb5
- 496 02d4 30       		.byte	0x30
- 497 02d5 0A       		.uleb128 0xa
- 498 02d6 44050000 		.4byte	.LASF44
- 499 02da 05       		.byte	0x5
- 500 02db DB       		.byte	0xdb
- 501 02dc 79000000 		.4byte	0x79
- 502 02e0 34       		.byte	0x34
- 503 02e1 0A       		.uleb128 0xa
- 504 02e2 3C030000 		.4byte	.LASF45
- 505 02e6 05       		.byte	0x5
- 506 02e7 DC       		.byte	0xdc
- 507 02e8 79000000 		.4byte	0x79
- 508 02ec 35       		.byte	0x35
- 509 02ed 0A       		.uleb128 0xa
- 510 02ee 45020000 		.4byte	.LASF46
- 511 02f2 05       		.byte	0x5
- 512 02f3 DD       		.byte	0xdd
- 513 02f4 79000000 		.4byte	0x79
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 10
-
-
- 514 02f8 36       		.byte	0x36
- 515 02f9 09       		.uleb128 0x9
- 516 02fa 72657300 		.ascii	"res\000"
- 517 02fe 05       		.byte	0x5
- 518 02ff DE       		.byte	0xde
- 519 0300 FF040000 		.4byte	0x4ff
- 520 0304 37       		.byte	0x37
- 521 0305 0A       		.uleb128 0xa
- 522 0306 34050000 		.4byte	.LASF47
- 523 030a 05       		.byte	0x5
- 524 030b E0       		.byte	0xe0
- 525 030c A4010000 		.4byte	0x1a4
- 526 0310 3C       		.byte	0x3c
- 527 0311 0A       		.uleb128 0xa
- 528 0312 7F050000 		.4byte	.LASF48
- 529 0316 05       		.byte	0x5
- 530 0317 E2       		.byte	0xe2
- 531 0318 0F050000 		.4byte	0x50f
- 532 031c 48       		.byte	0x48
- 533 031d 0A       		.uleb128 0xa
- 534 031e 19060000 		.4byte	.LASF49
- 535 0322 05       		.byte	0x5
- 536 0323 E4       		.byte	0xe4
- 537 0324 79000000 		.4byte	0x79
- 538 0328 54       		.byte	0x54
- 539 0329 0A       		.uleb128 0xa
- 540 032a 2A040000 		.4byte	.LASF50
- 541 032e 05       		.byte	0x5
- 542 032f E6       		.byte	0xe6
- 543 0330 B5000000 		.4byte	0xb5
- 544 0334 58       		.byte	0x58
- 545 0335 0A       		.uleb128 0xa
- 546 0336 AA050000 		.4byte	.LASF51
- 547 033a 05       		.byte	0x5
- 548 033b E7       		.byte	0xe7
- 549 033c B5000000 		.4byte	0xb5
- 550 0340 5C       		.byte	0x5c
- 551 0341 0A       		.uleb128 0xa
- 552 0342 C3030000 		.4byte	.LASF52
- 553 0346 05       		.byte	0x5
- 554 0347 E9       		.byte	0xe9
- 555 0348 B5000000 		.4byte	0xb5
- 556 034c 60       		.byte	0x60
- 557 034d 0A       		.uleb128 0xa
- 558 034e 37060000 		.4byte	.LASF53
- 559 0352 05       		.byte	0x5
- 560 0353 EA       		.byte	0xea
- 561 0354 B5000000 		.4byte	0xb5
- 562 0358 64       		.byte	0x64
- 563 0359 0A       		.uleb128 0xa
- 564 035a DE050000 		.4byte	.LASF54
- 565 035e 05       		.byte	0x5
- 566 035f EB       		.byte	0xeb
- 567 0360 A9000000 		.4byte	0xa9
- 568 0364 68       		.byte	0x68
- 569 0365 0A       		.uleb128 0xa
- 570 0366 8D010000 		.4byte	.LASF55
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 11
-
-
- 571 036a 05       		.byte	0x5
- 572 036b EC       		.byte	0xec
- 573 036c 1F050000 		.4byte	0x51f
- 574 0370 6A       		.byte	0x6a
- 575 0371 0A       		.uleb128 0xa
- 576 0372 D5060000 		.4byte	.LASF56
- 577 0376 05       		.byte	0x5
- 578 0377 ED       		.byte	0xed
- 579 0378 79000000 		.4byte	0x79
- 580 037c 6E       		.byte	0x6e
- 581 037d 0A       		.uleb128 0xa
- 582 037e 28070000 		.4byte	.LASF57
- 583 0382 05       		.byte	0x5
- 584 0383 F0       		.byte	0xf0
- 585 0384 2F050000 		.4byte	0x52f
- 586 0388 70       		.byte	0x70
- 587 0389 0A       		.uleb128 0xa
- 588 038a 1E070000 		.4byte	.LASF58
- 589 038e 05       		.byte	0x5
- 590 038f F1       		.byte	0xf1
- 591 0390 79000000 		.4byte	0x79
- 592 0394 78       		.byte	0x78
- 593 0395 0A       		.uleb128 0xa
- 594 0396 A0070000 		.4byte	.LASF59
- 595 039a 05       		.byte	0x5
- 596 039b F2       		.byte	0xf2
- 597 039c 79000000 		.4byte	0x79
- 598 03a0 79       		.byte	0x79
- 599 03a1 0A       		.uleb128 0xa
- 600 03a2 4E030000 		.4byte	.LASF60
- 601 03a6 05       		.byte	0x5
- 602 03a7 F3       		.byte	0xf3
- 603 03a8 9D000000 		.4byte	0x9d
- 604 03ac 7A       		.byte	0x7a
- 605 03ad 0A       		.uleb128 0xa
- 606 03ae 66020000 		.4byte	.LASF61
- 607 03b2 05       		.byte	0x5
- 608 03b3 F4       		.byte	0xf4
- 609 03b4 79000000 		.4byte	0x79
- 610 03b8 7B       		.byte	0x7b
- 611 03b9 0A       		.uleb128 0xa
- 612 03ba FB060000 		.4byte	.LASF62
- 613 03be 05       		.byte	0x5
- 614 03bf F5       		.byte	0xf5
- 615 03c0 3F050000 		.4byte	0x53f
- 616 03c4 7C       		.byte	0x7c
- 617 03c5 0A       		.uleb128 0xa
- 618 03c6 48010000 		.4byte	.LASF63
- 619 03ca 05       		.byte	0x5
- 620 03cb F8       		.byte	0xf8
- 621 03cc 79000000 		.4byte	0x79
- 622 03d0 94       		.byte	0x94
- 623 03d1 0A       		.uleb128 0xa
- 624 03d2 A0050000 		.4byte	.LASF64
- 625 03d6 05       		.byte	0x5
- 626 03d7 F9       		.byte	0xf9
- 627 03d8 79000000 		.4byte	0x79
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 12
-
-
- 628 03dc 95       		.byte	0x95
- 629 03dd 0A       		.uleb128 0xa
- 630 03de 2D000000 		.4byte	.LASF65
- 631 03e2 05       		.byte	0x5
- 632 03e3 FA       		.byte	0xfa
- 633 03e4 79000000 		.4byte	0x79
- 634 03e8 96       		.byte	0x96
- 635 03e9 0A       		.uleb128 0xa
- 636 03ea EC050000 		.4byte	.LASF66
- 637 03ee 05       		.byte	0x5
- 638 03ef FB       		.byte	0xfb
- 639 03f0 79000000 		.4byte	0x79
- 640 03f4 97       		.byte	0x97
- 641 03f5 0A       		.uleb128 0xa
- 642 03f6 DB070000 		.4byte	.LASF67
- 643 03fa 05       		.byte	0x5
- 644 03fb FC       		.byte	0xfc
- 645 03fc B5000000 		.4byte	0xb5
- 646 0400 98       		.byte	0x98
- 647 0401 0A       		.uleb128 0xa
- 648 0402 5B010000 		.4byte	.LASF68
- 649 0406 05       		.byte	0x5
- 650 0407 FD       		.byte	0xfd
- 651 0408 B5000000 		.4byte	0xb5
- 652 040c 9C       		.byte	0x9c
- 653 040d 0A       		.uleb128 0xa
- 654 040e 84010000 		.4byte	.LASF69
- 655 0412 05       		.byte	0x5
- 656 0413 FF       		.byte	0xff
- 657 0414 B5000000 		.4byte	0xb5
- 658 0418 A0       		.byte	0xa0
- 659 0419 0E       		.uleb128 0xe
- 660 041a B4060000 		.4byte	.LASF70
- 661 041e 05       		.byte	0x5
- 662 041f 0001     		.2byte	0x100
- 663 0421 79000000 		.4byte	0x79
- 664 0425 A4       		.byte	0xa4
- 665 0426 0E       		.uleb128 0xe
- 666 0427 F0060000 		.4byte	.LASF71
- 667 042b 05       		.byte	0x5
- 668 042c 0101     		.2byte	0x101
- 669 042e 79000000 		.4byte	0x79
- 670 0432 A5       		.byte	0xa5
- 671 0433 0E       		.uleb128 0xe
- 672 0434 24020000 		.4byte	.LASF72
- 673 0438 05       		.byte	0x5
- 674 0439 0201     		.2byte	0x102
- 675 043b 79000000 		.4byte	0x79
- 676 043f A6       		.byte	0xa6
- 677 0440 0E       		.uleb128 0xe
- 678 0441 07070000 		.4byte	.LASF73
- 679 0445 05       		.byte	0x5
- 680 0446 0301     		.2byte	0x103
- 681 0448 79000000 		.4byte	0x79
- 682 044c A7       		.byte	0xa7
- 683 044d 0E       		.uleb128 0xe
- 684 044e 5D070000 		.4byte	.LASF74
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 13
-
-
- 685 0452 05       		.byte	0x5
- 686 0453 0401     		.2byte	0x104
- 687 0455 79000000 		.4byte	0x79
- 688 0459 A8       		.byte	0xa8
- 689 045a 0E       		.uleb128 0xe
- 690 045b 36040000 		.4byte	.LASF75
- 691 045f 05       		.byte	0x5
- 692 0460 0501     		.2byte	0x105
- 693 0462 4F050000 		.4byte	0x54f
- 694 0466 A9       		.byte	0xa9
- 695 0467 0E       		.uleb128 0xe
- 696 0468 00060000 		.4byte	.LASF76
- 697 046c 05       		.byte	0x5
- 698 046d 0701     		.2byte	0x107
- 699 046f 2F050000 		.4byte	0x52f
- 700 0473 C0       		.byte	0xc0
- 701 0474 0E       		.uleb128 0xe
- 702 0475 70040000 		.4byte	.LASF77
- 703 0479 05       		.byte	0x5
- 704 047a 0901     		.2byte	0x109
- 705 047c 5F050000 		.4byte	0x55f
- 706 0480 C8       		.byte	0xc8
- 707 0481 0E       		.uleb128 0xe
- 708 0482 27050000 		.4byte	.LASF78
- 709 0486 05       		.byte	0x5
- 710 0487 0B01     		.2byte	0x10b
- 711 0489 6F050000 		.4byte	0x56f
- 712 048d F0       		.byte	0xf0
- 713 048e 0F       		.uleb128 0xf
- 714 048f 55060000 		.4byte	.LASF79
- 715 0493 05       		.byte	0x5
- 716 0494 0D01     		.2byte	0x10d
- 717 0496 91000000 		.4byte	0x91
- 718 049a 0001     		.2byte	0x100
- 719 049c 0F       		.uleb128 0xf
- 720 049d 2F020000 		.4byte	.LASF80
- 721 04a1 05       		.byte	0x5
- 722 04a2 0E01     		.2byte	0x10e
- 723 04a4 91000000 		.4byte	0x91
- 724 04a8 0401     		.2byte	0x104
- 725 04aa 0F       		.uleb128 0xf
- 726 04ab 47000000 		.4byte	.LASF81
- 727 04af 05       		.byte	0x5
- 728 04b0 0F01     		.2byte	0x10f
- 729 04b2 91000000 		.4byte	0x91
- 730 04b6 0801     		.2byte	0x108
- 731 04b8 0F       		.uleb128 0xf
- 732 04b9 90070000 		.4byte	.LASF82
- 733 04bd 05       		.byte	0x5
- 734 04be 1001     		.2byte	0x110
- 735 04c0 91000000 		.4byte	0x91
- 736 04c4 0C01     		.2byte	0x10c
- 737 04c6 0F       		.uleb128 0xf
- 738 04c7 3A050000 		.4byte	.LASF83
- 739 04cb 05       		.byte	0x5
- 740 04cc 1201     		.2byte	0x112
- 741 04ce 7F050000 		.4byte	0x57f
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 14
-
-
- 742 04d2 1001     		.2byte	0x110
- 743 04d4 0F       		.uleb128 0xf
- 744 04d5 52020000 		.4byte	.LASF84
- 745 04d9 05       		.byte	0x5
- 746 04da 1301     		.2byte	0x113
- 747 04dc 8F050000 		.4byte	0x58f
- 748 04e0 1601     		.2byte	0x116
- 749 04e2 0F       		.uleb128 0xf
- 750 04e3 8A020000 		.4byte	.LASF85
- 751 04e7 05       		.byte	0x5
- 752 04e8 1601     		.2byte	0x116
- 753 04ea 79000000 		.4byte	0x79
- 754 04ee 2001     		.2byte	0x120
- 755 04f0 0F       		.uleb128 0xf
- 756 04f1 AF040000 		.4byte	.LASF86
- 757 04f5 05       		.byte	0x5
- 758 04f6 1701     		.2byte	0x117
- 759 04f8 9F050000 		.4byte	0x59f
- 760 04fc 2101     		.2byte	0x121
- 761 04fe 00       		.byte	0
- 762 04ff 0B       		.uleb128 0xb
- 763 0500 79000000 		.4byte	0x79
- 764 0504 0F050000 		.4byte	0x50f
- 765 0508 0C       		.uleb128 0xc
- 766 0509 E9000000 		.4byte	0xe9
- 767 050d 02       		.byte	0x2
- 768 050e 00       		.byte	0
- 769 050f 0B       		.uleb128 0xb
- 770 0510 C1000000 		.4byte	0xc1
- 771 0514 1F050000 		.4byte	0x51f
- 772 0518 0C       		.uleb128 0xc
- 773 0519 E9000000 		.4byte	0xe9
- 774 051d 02       		.byte	0x2
- 775 051e 00       		.byte	0
- 776 051f 0B       		.uleb128 0xb
- 777 0520 85000000 		.4byte	0x85
- 778 0524 2F050000 		.4byte	0x52f
- 779 0528 0C       		.uleb128 0xc
- 780 0529 E9000000 		.4byte	0xe9
- 781 052d 01       		.byte	0x1
- 782 052e 00       		.byte	0
- 783 052f 0B       		.uleb128 0xb
- 784 0530 91000000 		.4byte	0x91
- 785 0534 3F050000 		.4byte	0x53f
- 786 0538 0C       		.uleb128 0xc
- 787 0539 E9000000 		.4byte	0xe9
- 788 053d 01       		.byte	0x1
- 789 053e 00       		.byte	0
- 790 053f 0B       		.uleb128 0xb
- 791 0540 CD000000 		.4byte	0xcd
- 792 0544 4F050000 		.4byte	0x54f
- 793 0548 0C       		.uleb128 0xc
- 794 0549 E9000000 		.4byte	0xe9
- 795 054d 05       		.byte	0x5
- 796 054e 00       		.byte	0
- 797 054f 0B       		.uleb128 0xb
- 798 0550 79000000 		.4byte	0x79
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 15
-
-
- 799 0554 5F050000 		.4byte	0x55f
- 800 0558 0C       		.uleb128 0xc
- 801 0559 E9000000 		.4byte	0xe9
- 802 055d 16       		.byte	0x16
- 803 055e 00       		.byte	0
- 804 055f 0B       		.uleb128 0xb
- 805 0560 91000000 		.4byte	0x91
- 806 0564 6F050000 		.4byte	0x56f
- 807 0568 0C       		.uleb128 0xc
- 808 0569 E9000000 		.4byte	0xe9
- 809 056d 09       		.byte	0x9
- 810 056e 00       		.byte	0
- 811 056f 0B       		.uleb128 0xb
- 812 0570 91000000 		.4byte	0x91
- 813 0574 7F050000 		.4byte	0x57f
- 814 0578 0C       		.uleb128 0xc
- 815 0579 E9000000 		.4byte	0xe9
- 816 057d 03       		.byte	0x3
- 817 057e 00       		.byte	0
- 818 057f 0B       		.uleb128 0xb
- 819 0580 79000000 		.4byte	0x79
- 820 0584 8F050000 		.4byte	0x58f
- 821 0588 0C       		.uleb128 0xc
- 822 0589 E9000000 		.4byte	0xe9
- 823 058d 05       		.byte	0x5
- 824 058e 00       		.byte	0
- 825 058f 0B       		.uleb128 0xb
- 826 0590 79000000 		.4byte	0x79
- 827 0594 9F050000 		.4byte	0x59f
- 828 0598 0C       		.uleb128 0xc
- 829 0599 E9000000 		.4byte	0xe9
- 830 059d 09       		.byte	0x9
- 831 059e 00       		.byte	0
- 832 059f 0B       		.uleb128 0xb
- 833 05a0 79000000 		.4byte	0x79
- 834 05a4 B5050000 		.4byte	0x5b5
- 835 05a8 0C       		.uleb128 0xc
- 836 05a9 E9000000 		.4byte	0xe9
- 837 05ad 02       		.byte	0x2
- 838 05ae 0C       		.uleb128 0xc
- 839 05af E9000000 		.4byte	0xe9
- 840 05b3 04       		.byte	0x4
- 841 05b4 00       		.byte	0
- 842 05b5 10       		.uleb128 0x10
- 843 05b6 39000000 		.4byte	.LASF87
- 844 05ba 28       		.byte	0x28
- 845 05bb 05       		.byte	0x5
- 846 05bc 1B01     		.2byte	0x11b
- 847 05be 11060000 		.4byte	0x611
- 848 05c2 0E       		.uleb128 0xe
- 849 05c3 4C070000 		.4byte	.LASF88
- 850 05c7 05       		.byte	0x5
- 851 05c8 1C01     		.2byte	0x11c
- 852 05ca 79000000 		.4byte	0x79
- 853 05ce 00       		.byte	0
- 854 05cf 0E       		.uleb128 0xe
- 855 05d0 39020000 		.4byte	.LASF89
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 16
-
-
- 856 05d4 05       		.byte	0x5
- 857 05d5 1D01     		.2byte	0x11d
- 858 05d7 11060000 		.4byte	0x611
- 859 05db 02       		.byte	0x2
- 860 05dc 0E       		.uleb128 0xe
- 861 05dd 4F040000 		.4byte	.LASF90
- 862 05e1 05       		.byte	0x5
- 863 05e2 1E01     		.2byte	0x11e
- 864 05e4 11060000 		.4byte	0x611
- 865 05e8 08       		.byte	0x8
- 866 05e9 0E       		.uleb128 0xe
- 867 05ea B8040000 		.4byte	.LASF91
- 868 05ee 05       		.byte	0x5
- 869 05ef 1F01     		.2byte	0x11f
- 870 05f1 11060000 		.4byte	0x611
- 871 05f5 0E       		.byte	0xe
- 872 05f6 0E       		.uleb128 0xe
- 873 05f7 B6050000 		.4byte	.LASF92
- 874 05fb 05       		.byte	0x5
- 875 05fc 2001     		.2byte	0x120
- 876 05fe 21060000 		.4byte	0x621
- 877 0602 14       		.byte	0x14
- 878 0603 0E       		.uleb128 0xe
- 879 0604 52070000 		.4byte	.LASF93
- 880 0608 05       		.byte	0x5
- 881 0609 2101     		.2byte	0x121
- 882 060b A9000000 		.4byte	0xa9
- 883 060f 24       		.byte	0x24
- 884 0610 00       		.byte	0
- 885 0611 0B       		.uleb128 0xb
- 886 0612 A9000000 		.4byte	0xa9
- 887 0616 21060000 		.4byte	0x621
- 888 061a 0C       		.uleb128 0xc
- 889 061b E9000000 		.4byte	0xe9
- 890 061f 02       		.byte	0x2
- 891 0620 00       		.byte	0
- 892 0621 0B       		.uleb128 0xb
- 893 0622 CD000000 		.4byte	0xcd
- 894 0626 31060000 		.4byte	0x631
- 895 062a 0C       		.uleb128 0xc
- 896 062b E9000000 		.4byte	0xe9
- 897 062f 03       		.byte	0x3
- 898 0630 00       		.byte	0
- 899 0631 10       		.uleb128 0x10
- 900 0632 96050000 		.4byte	.LASF94
- 901 0636 08       		.byte	0x8
- 902 0637 05       		.byte	0x5
- 903 0638 2801     		.2byte	0x128
- 904 063a 59060000 		.4byte	0x659
- 905 063e 0E       		.uleb128 0xe
- 906 063f 12020000 		.4byte	.LASF95
- 907 0643 05       		.byte	0x5
- 908 0644 2901     		.2byte	0x129
- 909 0646 B5000000 		.4byte	0xb5
- 910 064a 00       		.byte	0
- 911 064b 0E       		.uleb128 0xe
- 912 064c 5F050000 		.4byte	.LASF96
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 17
-
-
- 913 0650 05       		.byte	0x5
- 914 0651 2A01     		.2byte	0x12a
- 915 0653 B5000000 		.4byte	0xb5
- 916 0657 04       		.byte	0x4
- 917 0658 00       		.byte	0
- 918 0659 10       		.uleb128 0x10
- 919 065a F7050000 		.4byte	.LASF97
- 920 065e 06       		.byte	0x6
- 921 065f 05       		.byte	0x5
- 922 0660 3101     		.2byte	0x131
- 923 0662 9B060000 		.4byte	0x69b
- 924 0666 0E       		.uleb128 0xe
- 925 0667 44060000 		.4byte	.LASF98
- 926 066b 05       		.byte	0x5
- 927 066c 3201     		.2byte	0x132
- 928 066e 79000000 		.4byte	0x79
- 929 0672 00       		.byte	0
- 930 0673 0E       		.uleb128 0xe
- 931 0674 6F000000 		.4byte	.LASF99
- 932 0678 05       		.byte	0x5
- 933 0679 3301     		.2byte	0x133
- 934 067b 79000000 		.4byte	0x79
- 935 067f 01       		.byte	0x1
- 936 0680 0E       		.uleb128 0xe
- 937 0681 70070000 		.4byte	.LASF100
- 938 0685 05       		.byte	0x5
- 939 0686 3401     		.2byte	0x134
- 940 0688 A9000000 		.4byte	0xa9
- 941 068c 02       		.byte	0x2
- 942 068d 0E       		.uleb128 0xe
- 943 068e EB020000 		.4byte	.LASF101
- 944 0692 05       		.byte	0x5
- 945 0693 3501     		.2byte	0x135
- 946 0695 A9000000 		.4byte	0xa9
- 947 0699 04       		.byte	0x4
- 948 069a 00       		.byte	0
- 949 069b 11       		.uleb128 0x11
- 950 069c 01       		.byte	0x1
- 951 069d 24000000 		.4byte	0x24
- 952 06a1 05       		.byte	0x5
- 953 06a2 3901     		.2byte	0x139
- 954 06a4 CD060000 		.4byte	0x6cd
- 955 06a8 12       		.uleb128 0x12
- 956 06a9 B1020000 		.4byte	.LASF102
- 957 06ad 00       		.byte	0
- 958 06ae 12       		.uleb128 0x12
- 959 06af 59050000 		.4byte	.LASF103
- 960 06b3 01       		.byte	0x1
- 961 06b4 12       		.uleb128 0x12
- 962 06b5 CD060000 		.4byte	.LASF104
- 963 06b9 02       		.byte	0x2
- 964 06ba 12       		.uleb128 0x12
- 965 06bb 7D020000 		.4byte	.LASF105
- 966 06bf 03       		.byte	0x3
- 967 06c0 12       		.uleb128 0x12
- 968 06c1 FD040000 		.4byte	.LASF106
- 969 06c5 04       		.byte	0x4
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 18
-
-
- 970 06c6 12       		.uleb128 0x12
- 971 06c7 4A050000 		.4byte	.LASF107
- 972 06cb 05       		.byte	0x5
- 973 06cc 00       		.byte	0
- 974 06cd 05       		.uleb128 0x5
- 975 06ce D3050000 		.4byte	.LASF108
- 976 06d2 05       		.byte	0x5
- 977 06d3 4101     		.2byte	0x141
- 978 06d5 9B060000 		.4byte	0x69b
- 979 06d9 11       		.uleb128 0x11
- 980 06da 01       		.byte	0x1
- 981 06db 24000000 		.4byte	0x24
- 982 06df 05       		.byte	0x5
- 983 06e0 4301     		.2byte	0x143
- 984 06e2 05070000 		.4byte	0x705
- 985 06e6 12       		.uleb128 0x12
- 986 06e7 F7010000 		.4byte	.LASF109
- 987 06eb 00       		.byte	0
- 988 06ec 12       		.uleb128 0x12
- 989 06ed 0C060000 		.4byte	.LASF110
- 990 06f1 01       		.byte	0x1
- 991 06f2 12       		.uleb128 0x12
- 992 06f3 CE010000 		.4byte	.LASF111
- 993 06f7 02       		.byte	0x2
- 994 06f8 12       		.uleb128 0x12
- 995 06f9 66010000 		.4byte	.LASF112
- 996 06fd 03       		.byte	0x3
- 997 06fe 12       		.uleb128 0x12
- 998 06ff 25040000 		.4byte	.LASF113
- 999 0703 04       		.byte	0x4
- 1000 0704 00       		.byte	0
- 1001 0705 05       		.uleb128 0x5
- 1002 0706 F2070000 		.4byte	.LASF114
- 1003 070a 05       		.byte	0x5
- 1004 070b 4A01     		.2byte	0x14a
- 1005 070d D9060000 		.4byte	0x6d9
- 1006 0711 13       		.uleb128 0x13
- 1007 0712 70010000 		.4byte	.LASF115
- 1008 0716 06       		.byte	0x6
- 1009 0717 1207     		.2byte	0x712
- 1010 0719 1D070000 		.4byte	0x71d
- 1011 071d 14       		.uleb128 0x14
- 1012 071e 6E000000 		.4byte	0x6e
- 1013 0722 15       		.uleb128 0x15
- 1014 0723 53050000 		.4byte	.LASF116
- 1015 0727 07       		.byte	0x7
- 1016 0728 33       		.byte	0x33
- 1017 0729 06010000 		.4byte	0x106
- 1018 072d 05       		.uleb128 0x5
- 1019 072e 03       		.byte	0x3
- 1020 072f 00000000 		.4byte	g_ref
- 1021 0733 15       		.uleb128 0x15
- 1022 0734 17040000 		.4byte	.LASF117
- 1023 0738 07       		.byte	0x7
- 1024 0739 33       		.byte	0x33
- 1025 073a 06010000 		.4byte	0x106
- 1026 073e 05       		.uleb128 0x5
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 19
-
-
- 1027 073f 03       		.byte	0x3
- 1028 0740 00000000 		.4byte	g_refNew
- 1029 0744 15       		.uleb128 0x15
- 1030 0745 52010000 		.4byte	.LASF118
- 1031 0749 07       		.byte	0x7
- 1032 074a 33       		.byte	0x33
- 1033 074b 06010000 		.4byte	0x106
- 1034 074f 05       		.uleb128 0x5
- 1035 0750 03       		.byte	0x3
- 1036 0751 00000000 		.4byte	g_refOld
- 1037 0755 15       		.uleb128 0x15
- 1038 0756 7D010000 		.4byte	.LASF119
- 1039 075a 07       		.byte	0x7
- 1040 075b 34       		.byte	0x34
- 1041 075c 43010000 		.4byte	0x143
- 1042 0760 05       		.uleb128 0x5
- 1043 0761 03       		.byte	0x3
- 1044 0762 00000000 		.4byte	g_meas
- 1045 0766 15       		.uleb128 0x15
- 1046 0767 A7020000 		.4byte	.LASF120
- 1047 076b 07       		.byte	0x7
- 1048 076c 34       		.byte	0x34
- 1049 076d 43010000 		.4byte	0x143
- 1050 0771 05       		.uleb128 0x5
- 1051 0772 03       		.byte	0x3
- 1052 0773 00000000 		.4byte	g_measOld
- 1053 0777 15       		.uleb128 0x15
- 1054 0778 E2010000 		.4byte	.LASF121
- 1055 077c 07       		.byte	0x7
- 1056 077d 35       		.byte	0x35
- 1057 077e D4010000 		.4byte	0x1d4
- 1058 0782 05       		.uleb128 0x5
- 1059 0783 03       		.byte	0x3
- 1060 0784 00000000 		.4byte	g_rx
- 1061 0788 15       		.uleb128 0x15
- 1062 0789 61030000 		.4byte	.LASF122
- 1063 078d 07       		.byte	0x7
- 1064 078e 36       		.byte	0x36
- 1065 078f 21020000 		.4byte	0x221
- 1066 0793 05       		.uleb128 0x5
- 1067 0794 03       		.byte	0x3
- 1068 0795 00000000 		.4byte	g_mem
- 1069 0799 15       		.uleb128 0x15
- 1070 079a 1A000000 		.4byte	.LASF123
- 1071 079e 07       		.byte	0x7
- 1072 079f 36       		.byte	0x36
- 1073 07a0 21020000 		.4byte	0x221
- 1074 07a4 05       		.uleb128 0x5
- 1075 07a5 03       		.byte	0x3
- 1076 07a6 00000000 		.4byte	c_mem
- 1077 07aa 15       		.uleb128 0x15
- 1078 07ab 9A040000 		.4byte	.LASF124
- 1079 07af 07       		.byte	0x7
- 1080 07b0 37       		.byte	0x37
- 1081 07b1 59060000 		.4byte	0x659
- 1082 07b5 05       		.uleb128 0x5
- 1083 07b6 03       		.byte	0x3
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 20
-
-
- 1084 07b7 00000000 		.4byte	calib
- 1085 07bb 15       		.uleb128 0x15
- 1086 07bc 79000000 		.4byte	.LASF125
- 1087 07c0 07       		.byte	0x7
- 1088 07c1 38       		.byte	0x38
- 1089 07c2 31060000 		.4byte	0x631
- 1090 07c6 05       		.uleb128 0x5
- 1091 07c7 03       		.byte	0x3
- 1092 07c8 00000000 		.4byte	filt_v
- 1093 07cc 15       		.uleb128 0x15
- 1094 07cd A0040000 		.4byte	.LASF126
- 1095 07d1 07       		.byte	0x7
- 1096 07d2 38       		.byte	0x38
- 1097 07d3 31060000 		.4byte	0x631
- 1098 07d7 05       		.uleb128 0x5
- 1099 07d8 03       		.byte	0x3
- 1100 07d9 00000000 		.4byte	filt_curr_diff
- 1101 07dd 15       		.uleb128 0x15
- 1102 07de 40000000 		.4byte	.LASF127
- 1103 07e2 07       		.byte	0x7
- 1104 07e3 38       		.byte	0x38
- 1105 07e4 31060000 		.4byte	0x631
- 1106 07e8 05       		.uleb128 0x5
- 1107 07e9 03       		.byte	0x3
- 1108 07ea 00000000 		.4byte	filt_i
- 1109 07ee 0B       		.uleb128 0xb
- 1110 07ef 31060000 		.4byte	0x631
- 1111 07f3 FE070000 		.4byte	0x7fe
- 1112 07f7 0C       		.uleb128 0xc
- 1113 07f8 E9000000 		.4byte	0xe9
- 1114 07fc 02       		.byte	0x2
- 1115 07fd 00       		.byte	0
- 1116 07fe 15       		.uleb128 0x15
- 1117 07ff 4C060000 		.4byte	.LASF128
- 1118 0803 07       		.byte	0x7
- 1119 0804 39       		.byte	0x39
- 1120 0805 EE070000 		.4byte	0x7ee
- 1121 0809 05       		.uleb128 0x5
- 1122 080a 03       		.byte	0x3
- 1123 080b 00000000 		.4byte	filt_vel
- 1124 080f 15       		.uleb128 0x15
- 1125 0810 0D050000 		.4byte	.LASF129
- 1126 0814 07       		.byte	0x7
- 1127 0815 3A       		.byte	0x3a
- 1128 0816 31060000 		.4byte	0x631
- 1129 081a 05       		.uleb128 0x5
- 1130 081b 03       		.byte	0x3
- 1131 081c 00000000 		.4byte	filt_emg1
- 1132 0820 15       		.uleb128 0x15
- 1133 0821 17050000 		.4byte	.LASF130
- 1134 0825 07       		.byte	0x7
- 1135 0826 3A       		.byte	0x3a
- 1136 0827 31060000 		.4byte	0x631
- 1137 082b 05       		.uleb128 0x5
- 1138 082c 03       		.byte	0x3
- 1139 082d 00000000 		.4byte	filt_emg2
- 1140 0831 15       		.uleb128 0x15
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 21
-
-
- 1141 0832 BA010000 		.4byte	.LASF131
- 1142 0836 07       		.byte	0x7
- 1143 0837 3D       		.byte	0x3d
- 1144 0838 91000000 		.4byte	0x91
- 1145 083c 05       		.uleb128 0x5
- 1146 083d 03       		.byte	0x3
- 1147 083e 00000000 		.4byte	timer_value
- 1148 0842 15       		.uleb128 0x15
- 1149 0843 36070000 		.4byte	.LASF132
- 1150 0847 07       		.byte	0x7
- 1151 0848 3E       		.byte	0x3e
- 1152 0849 91000000 		.4byte	0x91
- 1153 084d 05       		.uleb128 0x5
- 1154 084e 03       		.byte	0x3
- 1155 084f 00000000 		.4byte	timer_value0
- 1156 0853 15       		.uleb128 0x15
- 1157 0854 0C040000 		.4byte	.LASF133
- 1158 0858 07       		.byte	0x7
- 1159 0859 3F       		.byte	0x3f
- 1160 085a CD000000 		.4byte	0xcd
- 1161 085e 05       		.uleb128 0x5
- 1162 085f 03       		.byte	0x3
- 1163 0860 00000000 		.4byte	cycle_time
- 1164 0864 15       		.uleb128 0x15
- 1165 0865 62060000 		.4byte	.LASF134
- 1166 0869 07       		.byte	0x7
- 1167 086a 42       		.byte	0x42
- 1168 086b B5000000 		.4byte	0xb5
- 1169 086f 05       		.uleb128 0x5
- 1170 0870 03       		.byte	0x3
- 1171 0871 00000000 		.4byte	dev_tension
- 1172 0875 15       		.uleb128 0x15
- 1173 0876 99020000 		.4byte	.LASF135
- 1174 087a 07       		.byte	0x7
- 1175 087b 43       		.byte	0x43
- 1176 087c 79000000 		.4byte	0x79
- 1177 0880 05       		.uleb128 0x5
- 1178 0881 03       		.byte	0x3
- 1179 0882 00000000 		.4byte	dev_pwm_limit
- 1180 0886 15       		.uleb128 0x15
- 1181 0887 88030000 		.4byte	.LASF136
- 1182 088b 07       		.byte	0x7
- 1183 088c 44       		.byte	0x44
- 1184 088d 79000000 		.4byte	0x79
- 1185 0891 05       		.uleb128 0x5
- 1186 0892 03       		.byte	0x3
- 1187 0893 00000000 		.4byte	dev_pwm_sat
- 1188 0897 15       		.uleb128 0x15
- 1189 0898 E6030000 		.4byte	.LASF137
- 1190 089c 07       		.byte	0x7
- 1191 089d 45       		.byte	0x45
- 1192 089e B5000000 		.4byte	0xb5
- 1193 08a2 05       		.uleb128 0x5
- 1194 08a3 03       		.byte	0x3
- 1195 08a4 00000000 		.4byte	dev_tension_f
- 1196 08a8 15       		.uleb128 0x15
- 1197 08a9 84070000 		.4byte	.LASF138
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 22
-
-
- 1198 08ad 07       		.byte	0x7
- 1199 08ae 46       		.byte	0x46
- 1200 08af B5000000 		.4byte	0xb5
- 1201 08b3 05       		.uleb128 0x5
- 1202 08b4 03       		.byte	0x3
- 1203 08b5 00000000 		.4byte	pow_tension
- 1204 08b9 15       		.uleb128 0x15
- 1205 08ba 61000000 		.4byte	.LASF139
- 1206 08be 07       		.byte	0x7
- 1207 08bf 49       		.byte	0x49
- 1208 08c0 05070000 		.4byte	0x705
- 1209 08c4 05       		.uleb128 0x5
- 1210 08c5 03       		.byte	0x3
- 1211 08c6 00000000 		.4byte	cycles_status
- 1212 08ca 15       		.uleb128 0x15
- 1213 08cb 20000000 		.4byte	.LASF140
- 1214 08cf 07       		.byte	0x7
- 1215 08d0 4A       		.byte	0x4a
- 1216 08d1 CD060000 		.4byte	0x6cd
- 1217 08d5 05       		.uleb128 0x5
- 1218 08d6 03       		.byte	0x3
- 1219 08d7 00000000 		.4byte	emg_1_status
- 1220 08db 15       		.uleb128 0x15
- 1221 08dc B6070000 		.4byte	.LASF141
- 1222 08e0 07       		.byte	0x7
- 1223 08e1 4B       		.byte	0x4b
- 1224 08e2 CD060000 		.4byte	0x6cd
- 1225 08e6 05       		.uleb128 0x5
- 1226 08e7 03       		.byte	0x3
- 1227 08e8 00000000 		.4byte	emg_2_status
- 1228 08ec 15       		.uleb128 0x15
- 1229 08ed 5A040000 		.4byte	.LASF142
- 1230 08f1 07       		.byte	0x7
- 1231 08f2 4E       		.byte	0x4e
- 1232 08f3 79000000 		.4byte	0x79
- 1233 08f7 05       		.uleb128 0x5
- 1234 08f8 03       		.byte	0x3
- 1235 08f9 00000000 		.4byte	reset_last_value_flag
- 1236 08fd 15       		.uleb128 0x15
- 1237 08fe 04020000 		.4byte	.LASF143
- 1238 0902 07       		.byte	0x7
- 1239 0903 4F       		.byte	0x4f
- 1240 0904 79000000 		.4byte	0x79
- 1241 0908 05       		.uleb128 0x5
- 1242 0909 03       		.byte	0x3
- 1243 090a 00000000 		.4byte	tension_valid
- 1244 090e 15       		.uleb128 0x15
- 1245 090f 80060000 		.4byte	.LASF144
- 1246 0913 07       		.byte	0x7
- 1247 0914 50       		.byte	0x50
- 1248 0915 79000000 		.4byte	0x79
- 1249 0919 05       		.uleb128 0x5
- 1250 091a 03       		.byte	0x3
- 1251 091b 00000000 		.4byte	interrupt_flag
- 1252 091f 15       		.uleb128 0x15
- 1253 0920 9B030000 		.4byte	.LASF145
- 1254 0924 07       		.byte	0x7
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 23
-
-
- 1255 0925 51       		.byte	0x51
- 1256 0926 79000000 		.4byte	0x79
- 1257 092a 05       		.uleb128 0x5
- 1258 092b 03       		.byte	0x3
- 1259 092c 00000000 		.4byte	cycles_interrupt_flag
- 1260 0930 15       		.uleb128 0x15
- 1261 0931 26060000 		.4byte	.LASF146
- 1262 0935 07       		.byte	0x7
- 1263 0936 52       		.byte	0x52
- 1264 0937 79000000 		.4byte	0x79
- 1265 093b 05       		.uleb128 0x5
- 1266 093c 03       		.byte	0x3
- 1267 093d 00000000 		.4byte	maintenance_flag
- 1268 0941 15       		.uleb128 0x15
- 1269 0942 0E010000 		.4byte	.LASF147
- 1270 0946 07       		.byte	0x7
- 1271 0947 53       		.byte	0x53
- 1272 0948 79000000 		.4byte	0x79
- 1273 094c 05       		.uleb128 0x5
- 1274 094d 03       		.byte	0x3
- 1275 094e 00000000 		.4byte	can_write
- 1276 0952 15       		.uleb128 0x15
- 1277 0953 DF040000 		.4byte	.LASF148
- 1278 0957 07       		.byte	0x7
- 1279 0958 54       		.byte	0x54
- 1280 0959 79000000 		.4byte	0x79
- 1281 095d 05       		.uleb128 0x5
- 1282 095e 03       		.byte	0x3
- 1283 095f 00000000 		.4byte	rest_enabled
- 1284 0963 15       		.uleb128 0x15
- 1285 0964 43040000 		.4byte	.LASF149
- 1286 0968 07       		.byte	0x7
- 1287 0969 55       		.byte	0x55
- 1288 096a 79000000 		.4byte	0x79
- 1289 096e 05       		.uleb128 0x5
- 1290 096f 03       		.byte	0x3
- 1291 0970 00000000 		.4byte	forced_open
- 1292 0974 15       		.uleb128 0x15
- 1293 0975 21010000 		.4byte	.LASF150
- 1294 0979 07       		.byte	0x7
- 1295 097a 56       		.byte	0x56
- 1296 097b 79000000 		.4byte	0x79
- 1297 097f 05       		.uleb128 0x5
- 1298 0980 03       		.byte	0x3
- 1299 0981 00000000 		.4byte	battery_low_SoC
- 1300 0985 15       		.uleb128 0x15
- 1301 0986 6D030000 		.4byte	.LASF151
- 1302 098a 07       		.byte	0x7
- 1303 098b 57       		.byte	0x57
- 1304 098c 79000000 		.4byte	0x79
- 1305 0990 05       		.uleb128 0x5
- 1306 0991 03       		.byte	0x3
- 1307 0992 00000000 		.4byte	change_ext_ref_flag
- 1308 0996 0B       		.uleb128 0xb
- 1309 0997 A9000000 		.4byte	0xa9
- 1310 099b A6090000 		.4byte	0x9a6
- 1311 099f 0C       		.uleb128 0xc
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 24
-
-
- 1312 09a0 E9000000 		.4byte	0xe9
- 1313 09a4 03       		.byte	0x3
- 1314 09a5 00       		.byte	0
- 1315 09a6 15       		.uleb128 0x15
- 1316 09a7 1C020000 		.4byte	.LASF152
- 1317 09ab 07       		.byte	0x7
- 1318 09ac 5A       		.byte	0x5a
- 1319 09ad 96090000 		.4byte	0x996
- 1320 09b1 05       		.uleb128 0x5
- 1321 09b2 03       		.byte	0x3
- 1322 09b3 00000000 		.4byte	ADC_buf
- 1323 09b7 0B       		.uleb128 0xb
- 1324 09b8 91000000 		.4byte	0x91
- 1325 09bc C7090000 		.4byte	0x9c7
- 1326 09c0 0C       		.uleb128 0xc
- 1327 09c1 E9000000 		.4byte	0xe9
- 1328 09c5 02       		.byte	0x2
- 1329 09c6 00       		.byte	0
- 1330 09c7 15       		.uleb128 0x15
- 1331 09c8 C6010000 		.4byte	.LASF153
- 1332 09cc 07       		.byte	0x7
- 1333 09cd 5B       		.byte	0x5b
- 1334 09ce B7090000 		.4byte	0x9b7
- 1335 09d2 05       		.uleb128 0x5
- 1336 09d3 03       		.byte	0x3
- 1337 09d4 00000000 		.4byte	Enc_buf
- 1338 09d8 15       		.uleb128 0x15
- 1339 09d9 15070000 		.4byte	.LASF154
- 1340 09dd 07       		.byte	0x7
- 1341 09de 5E       		.byte	0x5e
- 1342 09df 9D000000 		.4byte	0x9d
- 1343 09e3 05       		.uleb128 0x5
- 1344 09e4 03       		.byte	0x3
- 1345 09e5 00000000 		.4byte	pwm_sign
- 1346 09e9 15       		.uleb128 0x15
- 1347 09ea CA070000 		.4byte	.LASF155
- 1348 09ee 07       		.byte	0x7
- 1349 09ef 61       		.byte	0x61
- 1350 09f0 B7090000 		.4byte	0x9b7
- 1351 09f4 05       		.uleb128 0x5
- 1352 09f5 03       		.byte	0x3
- 1353 09f6 00000000 		.4byte	data_encoder_raw
- 1354 09fa 15       		.uleb128 0x15
- 1355 09fb 88040000 		.4byte	.LASF156
- 1356 09ff 07       		.byte	0x7
- 1357 0a00 64       		.byte	0x64
- 1358 0a01 B5000000 		.4byte	0xb5
- 1359 0a05 05       		.uleb128 0x5
- 1360 0a06 03       		.byte	0x3
- 1361 0a07 00000000 		.4byte	rest_pos_curr_ref
- 1362 0a0b 15       		.uleb128 0x15
- 1363 0a0c 21050000 		.4byte	.LASF157
- 1364 0a10 07       		.byte	0x7
- 1365 0a11 67       		.byte	0x67
- 1366 0a12 00010000 		.4byte	0x100
- 1367 0a16 05       		.uleb128 0x5
- 1368 0a17 03       		.byte	0x3
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 25
-
-
- 1369 0a18 00000000 		.4byte	pFile
- 1370 0a1c 15       		.uleb128 0x15
- 1371 0a1d DF020000 		.4byte	.LASF158
- 1372 0a21 07       		.byte	0x7
- 1373 0a22 68       		.byte	0x68
- 1374 0a23 4B000000 		.4byte	0x4b
- 1375 0a27 05       		.uleb128 0x5
- 1376 0a28 03       		.byte	0x3
- 1377 0a29 00000000 		.4byte	write_bytes
- 1378 0a2d 15       		.uleb128 0x15
- 1379 0a2e E7010000 		.4byte	.LASF159
- 1380 0a32 07       		.byte	0x7
- 1381 0a33 6B       		.byte	0x6b
- 1382 0a34 79000000 		.4byte	0x79
- 1383 0a38 05       		.uleb128 0x5
- 1384 0a39 03       		.byte	0x3
- 1385 0a3a 00000000 		.4byte	N_IMU_Connected
- 1386 0a3e 15       		.uleb128 0x15
- 1387 0a3f 76070000 		.4byte	.LASF160
- 1388 0a43 07       		.byte	0x7
- 1389 0a44 6C       		.byte	0x6c
- 1390 0a45 FF040000 		.4byte	0x4ff
- 1391 0a49 05       		.uleb128 0x5
- 1392 0a4a 03       		.byte	0x3
- 1393 0a4b 00000000 		.4byte	IMU_connected
- 1394 0a4f 15       		.uleb128 0x15
- 1395 0a50 C7020000 		.4byte	.LASF161
- 1396 0a54 07       		.byte	0x7
- 1397 0a55 6D       		.byte	0x6d
- 1398 0a56 60000000 		.4byte	0x60
- 1399 0a5a 05       		.uleb128 0x5
- 1400 0a5b 03       		.byte	0x3
- 1401 0a5c 00000000 		.4byte	imus_data_size
- 1402 0a60 0B       		.uleb128 0xb
- 1403 0a61 60000000 		.4byte	0x60
- 1404 0a65 700A0000 		.4byte	0xa70
- 1405 0a69 0C       		.uleb128 0xc
- 1406 0a6a E9000000 		.4byte	0xe9
- 1407 0a6e 02       		.byte	0x2
- 1408 0a6f 00       		.byte	0
- 1409 0a70 15       		.uleb128 0x15
- 1410 0a71 D0030000 		.4byte	.LASF162
- 1411 0a75 07       		.byte	0x7
- 1412 0a76 6E       		.byte	0x6e
- 1413 0a77 600A0000 		.4byte	0xa60
- 1414 0a7b 05       		.uleb128 0x5
- 1415 0a7c 03       		.byte	0x3
- 1416 0a7d 00000000 		.4byte	single_imu_size
- 1417 0a81 0B       		.uleb128 0xb
- 1418 0a82 B5050000 		.4byte	0x5b5
- 1419 0a86 910A0000 		.4byte	0xa91
- 1420 0a8a 0C       		.uleb128 0xc
- 1421 0a8b E9000000 		.4byte	0xe9
- 1422 0a8f 02       		.byte	0x2
- 1423 0a90 00       		.byte	0
- 1424 0a91 15       		.uleb128 0x15
- 1425 0a92 67030000 		.4byte	.LASF163
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 26
-
-
- 1426 0a96 07       		.byte	0x7
- 1427 0a97 70       		.byte	0x70
- 1428 0a98 810A0000 		.4byte	0xa81
- 1429 0a9c 05       		.uleb128 0x5
- 1430 0a9d 03       		.byte	0x3
- 1431 0a9e 00000000 		.4byte	g_imu
- 1432 0aa2 15       		.uleb128 0x15
- 1433 0aa3 18010000 		.4byte	.LASF164
- 1434 0aa7 07       		.byte	0x7
- 1435 0aa8 71       		.byte	0x71
- 1436 0aa9 810A0000 		.4byte	0xa81
- 1437 0aad 05       		.uleb128 0x5
- 1438 0aae 03       		.byte	0x3
- 1439 0aaf 00000000 		.4byte	g_imuNew
- 1440 0ab3 0B       		.uleb128 0xb
- 1441 0ab4 79000000 		.4byte	0x79
- 1442 0ab8 C90A0000 		.4byte	0xac9
- 1443 0abc 0C       		.uleb128 0xc
- 1444 0abd E9000000 		.4byte	0xe9
- 1445 0ac1 02       		.byte	0x2
- 1446 0ac2 0C       		.uleb128 0xc
- 1447 0ac3 E9000000 		.4byte	0xe9
- 1448 0ac7 05       		.byte	0x5
- 1449 0ac8 00       		.byte	0
- 1450 0ac9 15       		.uleb128 0x15
- 1451 0aca 05000000 		.4byte	.LASF165
- 1452 0ace 07       		.byte	0x7
- 1453 0acf 73       		.byte	0x73
- 1454 0ad0 B30A0000 		.4byte	0xab3
- 1455 0ad4 05       		.uleb128 0x5
- 1456 0ad5 03       		.byte	0x3
- 1457 0ad6 00000000 		.4byte	Accel
- 1458 0ada 15       		.uleb128 0x15
- 1459 0adb 00000000 		.4byte	.LASF166
- 1460 0adf 07       		.byte	0x7
- 1461 0ae0 74       		.byte	0x74
- 1462 0ae1 B30A0000 		.4byte	0xab3
- 1463 0ae5 05       		.uleb128 0x5
- 1464 0ae6 03       		.byte	0x3
- 1465 0ae7 00000000 		.4byte	Gyro
- 1466 0aeb 16       		.uleb128 0x16
- 1467 0aec 4D616700 		.ascii	"Mag\000"
- 1468 0af0 07       		.byte	0x7
- 1469 0af1 75       		.byte	0x75
- 1470 0af2 B30A0000 		.4byte	0xab3
- 1471 0af6 05       		.uleb128 0x5
- 1472 0af7 03       		.byte	0x3
- 1473 0af8 00000000 		.4byte	Mag
- 1474 0afc 0B       		.uleb128 0xb
- 1475 0afd 79000000 		.4byte	0x79
- 1476 0b01 120B0000 		.4byte	0xb12
- 1477 0b05 0C       		.uleb128 0xc
- 1478 0b06 E9000000 		.4byte	0xe9
- 1479 0b0a 02       		.byte	0x2
- 1480 0b0b 0C       		.uleb128 0xc
- 1481 0b0c E9000000 		.4byte	0xe9
- 1482 0b10 02       		.byte	0x2
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 27
-
-
- 1483 0b11 00       		.byte	0
- 1484 0b12 15       		.uleb128 0x15
- 1485 0b13 C3070000 		.4byte	.LASF167
- 1486 0b17 07       		.byte	0x7
- 1487 0b18 76       		.byte	0x76
- 1488 0b19 FC0A0000 		.4byte	0xafc
- 1489 0b1d 05       		.uleb128 0x5
- 1490 0b1e 03       		.byte	0x3
- 1491 0b1f 00000000 		.4byte	MagCal
- 1492 0b23 0B       		.uleb128 0xb
- 1493 0b24 79000000 		.4byte	0x79
- 1494 0b28 390B0000 		.4byte	0xb39
- 1495 0b2c 0C       		.uleb128 0xc
- 1496 0b2d E9000000 		.4byte	0xe9
- 1497 0b31 02       		.byte	0x2
- 1498 0b32 0C       		.uleb128 0xc
- 1499 0b33 E9000000 		.4byte	0xe9
- 1500 0b37 01       		.byte	0x1
- 1501 0b38 00       		.byte	0
- 1502 0b39 15       		.uleb128 0x15
- 1503 0b3a 02050000 		.4byte	.LASF168
- 1504 0b3e 07       		.byte	0x7
- 1505 0b3f 77       		.byte	0x77
- 1506 0b40 230B0000 		.4byte	0xb23
- 1507 0b44 05       		.uleb128 0x5
- 1508 0b45 03       		.byte	0x3
- 1509 0b46 00000000 		.4byte	Temp
- 1510 0b4a 15       		.uleb128 0x15
- 1511 0b4b 07040000 		.4byte	.LASF169
- 1512 0b4f 07       		.byte	0x7
- 1513 0b50 78       		.byte	0x78
- 1514 0b51 21060000 		.4byte	0x621
- 1515 0b55 05       		.uleb128 0x5
- 1516 0b56 03       		.byte	0x3
- 1517 0b57 00000000 		.4byte	Quat
- 1518 0b5b 00       		.byte	0
- 1519              		.section	.debug_abbrev,"",%progbits
- 1520              	.Ldebug_abbrev0:
- 1521 0000 01       		.uleb128 0x1
- 1522 0001 11       		.uleb128 0x11
- 1523 0002 01       		.byte	0x1
- 1524 0003 25       		.uleb128 0x25
- 1525 0004 0E       		.uleb128 0xe
- 1526 0005 13       		.uleb128 0x13
- 1527 0006 0B       		.uleb128 0xb
- 1528 0007 03       		.uleb128 0x3
- 1529 0008 0E       		.uleb128 0xe
- 1530 0009 1B       		.uleb128 0x1b
- 1531 000a 0E       		.uleb128 0xe
- 1532 000b 10       		.uleb128 0x10
- 1533 000c 17       		.uleb128 0x17
- 1534 000d 00       		.byte	0
- 1535 000e 00       		.byte	0
- 1536 000f 02       		.uleb128 0x2
- 1537 0010 24       		.uleb128 0x24
- 1538 0011 00       		.byte	0
- 1539 0012 0B       		.uleb128 0xb
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 28
-
-
- 1540 0013 0B       		.uleb128 0xb
- 1541 0014 3E       		.uleb128 0x3e
- 1542 0015 0B       		.uleb128 0xb
- 1543 0016 03       		.uleb128 0x3
- 1544 0017 0E       		.uleb128 0xe
- 1545 0018 00       		.byte	0
- 1546 0019 00       		.byte	0
- 1547 001a 03       		.uleb128 0x3
- 1548 001b 16       		.uleb128 0x16
- 1549 001c 00       		.byte	0
- 1550 001d 03       		.uleb128 0x3
- 1551 001e 0E       		.uleb128 0xe
- 1552 001f 3A       		.uleb128 0x3a
- 1553 0020 0B       		.uleb128 0xb
- 1554 0021 3B       		.uleb128 0x3b
- 1555 0022 0B       		.uleb128 0xb
- 1556 0023 49       		.uleb128 0x49
- 1557 0024 13       		.uleb128 0x13
- 1558 0025 00       		.byte	0
- 1559 0026 00       		.byte	0
- 1560 0027 04       		.uleb128 0x4
- 1561 0028 24       		.uleb128 0x24
- 1562 0029 00       		.byte	0
- 1563 002a 0B       		.uleb128 0xb
- 1564 002b 0B       		.uleb128 0xb
- 1565 002c 3E       		.uleb128 0x3e
- 1566 002d 0B       		.uleb128 0xb
- 1567 002e 03       		.uleb128 0x3
- 1568 002f 08       		.uleb128 0x8
- 1569 0030 00       		.byte	0
- 1570 0031 00       		.byte	0
- 1571 0032 05       		.uleb128 0x5
- 1572 0033 16       		.uleb128 0x16
- 1573 0034 00       		.byte	0
- 1574 0035 03       		.uleb128 0x3
- 1575 0036 0E       		.uleb128 0xe
- 1576 0037 3A       		.uleb128 0x3a
- 1577 0038 0B       		.uleb128 0xb
- 1578 0039 3B       		.uleb128 0x3b
- 1579 003a 05       		.uleb128 0x5
- 1580 003b 49       		.uleb128 0x49
- 1581 003c 13       		.uleb128 0x13
- 1582 003d 00       		.byte	0
- 1583 003e 00       		.byte	0
- 1584 003f 06       		.uleb128 0x6
- 1585 0040 13       		.uleb128 0x13
- 1586 0041 00       		.byte	0
- 1587 0042 03       		.uleb128 0x3
- 1588 0043 0E       		.uleb128 0xe
- 1589 0044 3C       		.uleb128 0x3c
- 1590 0045 19       		.uleb128 0x19
- 1591 0046 00       		.byte	0
- 1592 0047 00       		.byte	0
- 1593 0048 07       		.uleb128 0x7
- 1594 0049 0F       		.uleb128 0xf
- 1595 004a 00       		.byte	0
- 1596 004b 0B       		.uleb128 0xb
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 29
-
-
- 1597 004c 0B       		.uleb128 0xb
- 1598 004d 49       		.uleb128 0x49
- 1599 004e 13       		.uleb128 0x13
- 1600 004f 00       		.byte	0
- 1601 0050 00       		.byte	0
- 1602 0051 08       		.uleb128 0x8
- 1603 0052 13       		.uleb128 0x13
- 1604 0053 01       		.byte	0x1
- 1605 0054 03       		.uleb128 0x3
- 1606 0055 0E       		.uleb128 0xe
- 1607 0056 0B       		.uleb128 0xb
- 1608 0057 0B       		.uleb128 0xb
- 1609 0058 3A       		.uleb128 0x3a
- 1610 0059 0B       		.uleb128 0xb
- 1611 005a 3B       		.uleb128 0x3b
- 1612 005b 0B       		.uleb128 0xb
- 1613 005c 01       		.uleb128 0x1
- 1614 005d 13       		.uleb128 0x13
- 1615 005e 00       		.byte	0
- 1616 005f 00       		.byte	0
- 1617 0060 09       		.uleb128 0x9
- 1618 0061 0D       		.uleb128 0xd
- 1619 0062 00       		.byte	0
- 1620 0063 03       		.uleb128 0x3
- 1621 0064 08       		.uleb128 0x8
- 1622 0065 3A       		.uleb128 0x3a
- 1623 0066 0B       		.uleb128 0xb
- 1624 0067 3B       		.uleb128 0x3b
- 1625 0068 0B       		.uleb128 0xb
- 1626 0069 49       		.uleb128 0x49
- 1627 006a 13       		.uleb128 0x13
- 1628 006b 38       		.uleb128 0x38
- 1629 006c 0B       		.uleb128 0xb
- 1630 006d 00       		.byte	0
- 1631 006e 00       		.byte	0
- 1632 006f 0A       		.uleb128 0xa
- 1633 0070 0D       		.uleb128 0xd
- 1634 0071 00       		.byte	0
- 1635 0072 03       		.uleb128 0x3
- 1636 0073 0E       		.uleb128 0xe
- 1637 0074 3A       		.uleb128 0x3a
- 1638 0075 0B       		.uleb128 0xb
- 1639 0076 3B       		.uleb128 0x3b
- 1640 0077 0B       		.uleb128 0xb
- 1641 0078 49       		.uleb128 0x49
- 1642 0079 13       		.uleb128 0x13
- 1643 007a 38       		.uleb128 0x38
- 1644 007b 0B       		.uleb128 0xb
- 1645 007c 00       		.byte	0
- 1646 007d 00       		.byte	0
- 1647 007e 0B       		.uleb128 0xb
- 1648 007f 01       		.uleb128 0x1
- 1649 0080 01       		.byte	0x1
- 1650 0081 49       		.uleb128 0x49
- 1651 0082 13       		.uleb128 0x13
- 1652 0083 01       		.uleb128 0x1
- 1653 0084 13       		.uleb128 0x13
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 30
-
-
- 1654 0085 00       		.byte	0
- 1655 0086 00       		.byte	0
- 1656 0087 0C       		.uleb128 0xc
- 1657 0088 21       		.uleb128 0x21
- 1658 0089 00       		.byte	0
- 1659 008a 49       		.uleb128 0x49
- 1660 008b 13       		.uleb128 0x13
- 1661 008c 2F       		.uleb128 0x2f
- 1662 008d 0B       		.uleb128 0xb
- 1663 008e 00       		.byte	0
- 1664 008f 00       		.byte	0
- 1665 0090 0D       		.uleb128 0xd
- 1666 0091 13       		.uleb128 0x13
- 1667 0092 01       		.byte	0x1
- 1668 0093 03       		.uleb128 0x3
- 1669 0094 0E       		.uleb128 0xe
- 1670 0095 0B       		.uleb128 0xb
- 1671 0096 05       		.uleb128 0x5
- 1672 0097 3A       		.uleb128 0x3a
- 1673 0098 0B       		.uleb128 0xb
- 1674 0099 3B       		.uleb128 0x3b
- 1675 009a 0B       		.uleb128 0xb
- 1676 009b 01       		.uleb128 0x1
- 1677 009c 13       		.uleb128 0x13
- 1678 009d 00       		.byte	0
- 1679 009e 00       		.byte	0
- 1680 009f 0E       		.uleb128 0xe
- 1681 00a0 0D       		.uleb128 0xd
- 1682 00a1 00       		.byte	0
- 1683 00a2 03       		.uleb128 0x3
- 1684 00a3 0E       		.uleb128 0xe
- 1685 00a4 3A       		.uleb128 0x3a
- 1686 00a5 0B       		.uleb128 0xb
- 1687 00a6 3B       		.uleb128 0x3b
- 1688 00a7 05       		.uleb128 0x5
- 1689 00a8 49       		.uleb128 0x49
- 1690 00a9 13       		.uleb128 0x13
- 1691 00aa 38       		.uleb128 0x38
- 1692 00ab 0B       		.uleb128 0xb
- 1693 00ac 00       		.byte	0
- 1694 00ad 00       		.byte	0
- 1695 00ae 0F       		.uleb128 0xf
- 1696 00af 0D       		.uleb128 0xd
- 1697 00b0 00       		.byte	0
- 1698 00b1 03       		.uleb128 0x3
- 1699 00b2 0E       		.uleb128 0xe
- 1700 00b3 3A       		.uleb128 0x3a
- 1701 00b4 0B       		.uleb128 0xb
- 1702 00b5 3B       		.uleb128 0x3b
- 1703 00b6 05       		.uleb128 0x5
- 1704 00b7 49       		.uleb128 0x49
- 1705 00b8 13       		.uleb128 0x13
- 1706 00b9 38       		.uleb128 0x38
- 1707 00ba 05       		.uleb128 0x5
- 1708 00bb 00       		.byte	0
- 1709 00bc 00       		.byte	0
- 1710 00bd 10       		.uleb128 0x10
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 31
-
-
- 1711 00be 13       		.uleb128 0x13
- 1712 00bf 01       		.byte	0x1
- 1713 00c0 03       		.uleb128 0x3
- 1714 00c1 0E       		.uleb128 0xe
- 1715 00c2 0B       		.uleb128 0xb
- 1716 00c3 0B       		.uleb128 0xb
- 1717 00c4 3A       		.uleb128 0x3a
- 1718 00c5 0B       		.uleb128 0xb
- 1719 00c6 3B       		.uleb128 0x3b
- 1720 00c7 05       		.uleb128 0x5
- 1721 00c8 01       		.uleb128 0x1
- 1722 00c9 13       		.uleb128 0x13
- 1723 00ca 00       		.byte	0
- 1724 00cb 00       		.byte	0
- 1725 00cc 11       		.uleb128 0x11
- 1726 00cd 04       		.uleb128 0x4
- 1727 00ce 01       		.byte	0x1
- 1728 00cf 0B       		.uleb128 0xb
- 1729 00d0 0B       		.uleb128 0xb
- 1730 00d1 49       		.uleb128 0x49
- 1731 00d2 13       		.uleb128 0x13
- 1732 00d3 3A       		.uleb128 0x3a
- 1733 00d4 0B       		.uleb128 0xb
- 1734 00d5 3B       		.uleb128 0x3b
- 1735 00d6 05       		.uleb128 0x5
- 1736 00d7 01       		.uleb128 0x1
- 1737 00d8 13       		.uleb128 0x13
- 1738 00d9 00       		.byte	0
- 1739 00da 00       		.byte	0
- 1740 00db 12       		.uleb128 0x12
- 1741 00dc 28       		.uleb128 0x28
- 1742 00dd 00       		.byte	0
- 1743 00de 03       		.uleb128 0x3
- 1744 00df 0E       		.uleb128 0xe
- 1745 00e0 1C       		.uleb128 0x1c
- 1746 00e1 0B       		.uleb128 0xb
- 1747 00e2 00       		.byte	0
- 1748 00e3 00       		.byte	0
- 1749 00e4 13       		.uleb128 0x13
- 1750 00e5 34       		.uleb128 0x34
- 1751 00e6 00       		.byte	0
- 1752 00e7 03       		.uleb128 0x3
- 1753 00e8 0E       		.uleb128 0xe
- 1754 00e9 3A       		.uleb128 0x3a
- 1755 00ea 0B       		.uleb128 0xb
- 1756 00eb 3B       		.uleb128 0x3b
- 1757 00ec 05       		.uleb128 0x5
- 1758 00ed 49       		.uleb128 0x49
- 1759 00ee 13       		.uleb128 0x13
- 1760 00ef 3F       		.uleb128 0x3f
- 1761 00f0 19       		.uleb128 0x19
- 1762 00f1 3C       		.uleb128 0x3c
- 1763 00f2 19       		.uleb128 0x19
- 1764 00f3 00       		.byte	0
- 1765 00f4 00       		.byte	0
- 1766 00f5 14       		.uleb128 0x14
- 1767 00f6 35       		.uleb128 0x35
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 32
-
-
- 1768 00f7 00       		.byte	0
- 1769 00f8 49       		.uleb128 0x49
- 1770 00f9 13       		.uleb128 0x13
- 1771 00fa 00       		.byte	0
- 1772 00fb 00       		.byte	0
- 1773 00fc 15       		.uleb128 0x15
- 1774 00fd 34       		.uleb128 0x34
- 1775 00fe 00       		.byte	0
- 1776 00ff 03       		.uleb128 0x3
- 1777 0100 0E       		.uleb128 0xe
- 1778 0101 3A       		.uleb128 0x3a
- 1779 0102 0B       		.uleb128 0xb
- 1780 0103 3B       		.uleb128 0x3b
- 1781 0104 0B       		.uleb128 0xb
- 1782 0105 49       		.uleb128 0x49
- 1783 0106 13       		.uleb128 0x13
- 1784 0107 3F       		.uleb128 0x3f
- 1785 0108 19       		.uleb128 0x19
- 1786 0109 02       		.uleb128 0x2
- 1787 010a 18       		.uleb128 0x18
- 1788 010b 00       		.byte	0
- 1789 010c 00       		.byte	0
- 1790 010d 16       		.uleb128 0x16
- 1791 010e 34       		.uleb128 0x34
- 1792 010f 00       		.byte	0
- 1793 0110 03       		.uleb128 0x3
- 1794 0111 08       		.uleb128 0x8
- 1795 0112 3A       		.uleb128 0x3a
- 1796 0113 0B       		.uleb128 0xb
- 1797 0114 3B       		.uleb128 0x3b
- 1798 0115 0B       		.uleb128 0xb
- 1799 0116 49       		.uleb128 0x49
- 1800 0117 13       		.uleb128 0x13
- 1801 0118 3F       		.uleb128 0x3f
- 1802 0119 19       		.uleb128 0x19
- 1803 011a 02       		.uleb128 0x2
- 1804 011b 18       		.uleb128 0x18
- 1805 011c 00       		.byte	0
- 1806 011d 00       		.byte	0
- 1807 011e 00       		.byte	0
- 1808              		.section	.debug_aranges,"",%progbits
- 1809 0000 14000000 		.4byte	0x14
- 1810 0004 0200     		.2byte	0x2
- 1811 0006 00000000 		.4byte	.Ldebug_info0
- 1812 000a 04       		.byte	0x4
- 1813 000b 00       		.byte	0
- 1814 000c 0000     		.2byte	0
- 1815 000e 0000     		.2byte	0
- 1816 0010 00000000 		.4byte	0
- 1817 0014 00000000 		.4byte	0
- 1818              		.section	.debug_line,"",%progbits
- 1819              	.Ldebug_line0:
- 1820 0000 9A010000 		.section	.debug_str,"MS",%progbits,1
- 1820      02009401 
- 1820      00000201 
- 1820      FB0E0D00 
- 1820      01010101 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 33
-
-
- 1821              	.LASF166:
- 1822 0000 4779726F 		.ascii	"Gyro\000"
- 1822      00
- 1823              	.LASF165:
- 1824 0005 41636365 		.ascii	"Accel\000"
- 1824      6C00
- 1825              	.LASF12:
- 1826 000b 75696E74 		.ascii	"uint16\000"
- 1826      313600
- 1827              	.LASF27:
- 1828 0012 73745F6D 		.ascii	"st_meas\000"
- 1828      65617300 
- 1829              	.LASF123:
- 1830 001a 635F6D65 		.ascii	"c_mem\000"
- 1830      6D00
- 1831              	.LASF140:
- 1832 0020 656D675F 		.ascii	"emg_1_status\000"
- 1832      315F7374 
- 1832      61747573 
- 1832      00
- 1833              	.LASF65:
- 1834 002d 6D61696E 		.ascii	"maint_month\000"
- 1834      745F6D6F 
- 1834      6E746800 
- 1835              	.LASF87:
- 1836 0039 73745F69 		.ascii	"st_imu\000"
- 1836      6D7500
- 1837              	.LASF127:
- 1838 0040 66696C74 		.ascii	"filt_i\000"
- 1838      5F6900
- 1839              	.LASF81:
- 1840 0047 746F7461 		.ascii	"total_time_on\000"
- 1840      6C5F7469 
- 1840      6D655F6F 
- 1840      6E00
- 1841              	.LASF0:
- 1842 0055 7369676E 		.ascii	"signed char\000"
- 1842      65642063 
- 1842      68617200 
- 1843              	.LASF139:
- 1844 0061 6379636C 		.ascii	"cycles_status\000"
- 1844      65735F73 
- 1844      74617475 
- 1844      7300
- 1845              	.LASF99:
- 1846 006f 64697265 		.ascii	"direction\000"
- 1846      6374696F 
- 1846      6E00
- 1847              	.LASF125:
- 1848 0079 66696C74 		.ascii	"filt_v\000"
- 1848      5F7600
- 1849              	.LASF170:
- 1850 0080 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 1850      43313120 
- 1850      352E342E 
- 1850      31203230 
- 1850      31363036 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 34
-
-
- 1851 00b3 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 1851      20726576 
- 1851      6973696F 
- 1851      6E203233 
- 1851      37373135 
- 1852 00e6 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
- 1852      66756E63 
- 1852      74696F6E 
- 1852      2D736563 
- 1852      74696F6E 
- 1853              	.LASF147:
- 1854 010e 63616E5F 		.ascii	"can_write\000"
- 1854      77726974 
- 1854      6500
- 1855              	.LASF164:
- 1856 0118 675F696D 		.ascii	"g_imuNew\000"
- 1856      754E6577 
- 1856      00
- 1857              	.LASF150:
- 1858 0121 62617474 		.ascii	"battery_low_SoC\000"
- 1858      6572795F 
- 1858      6C6F775F 
- 1858      536F4300 
- 1859              	.LASF7:
- 1860 0131 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1860      206C6F6E 
- 1860      6720756E 
- 1860      7369676E 
- 1860      65642069 
- 1861              	.LASF63:
- 1862 0148 62617564 		.ascii	"baud_rate\000"
- 1862      5F726174 
- 1862      6500
- 1863              	.LASF118:
- 1864 0152 675F7265 		.ascii	"g_refOld\000"
- 1864      664F6C64 
- 1864      00
- 1865              	.LASF68:
- 1866 015b 72657374 		.ascii	"rest_delay\000"
- 1866      5F64656C 
- 1866      617900
- 1867              	.LASF112:
- 1868 0166 57524954 		.ascii	"WRITE_END\000"
- 1868      455F454E 
- 1868      4400
- 1869              	.LASF115:
- 1870 0170 49544D5F 		.ascii	"ITM_RxBuffer\000"
- 1870      52784275 
- 1870      66666572 
- 1870      00
- 1871              	.LASF119:
- 1872 017d 675F6D65 		.ascii	"g_meas\000"
- 1872      617300
- 1873              	.LASF69:
- 1874 0184 72657374 		.ascii	"rest_vel\000"
- 1874      5F76656C 
- 1874      00
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 35
-
-
- 1875              	.LASF55:
- 1876 018d 656D675F 		.ascii	"emg_threshold\000"
- 1876      74687265 
- 1876      73686F6C 
- 1876      6400
- 1877              	.LASF6:
- 1878 019b 6C6F6E67 		.ascii	"long long int\000"
- 1878      206C6F6E 
- 1878      6720696E 
- 1878      7400
- 1879              	.LASF32:
- 1880 01a9 72656164 		.ascii	"ready\000"
- 1880      7900
- 1881              	.LASF28:
- 1882 01af 65737469 		.ascii	"estim_curr\000"
- 1882      6D5F6375 
- 1882      727200
- 1883              	.LASF131:
- 1884 01ba 74696D65 		.ascii	"timer_value\000"
- 1884      725F7661 
- 1884      6C756500 
- 1885              	.LASF153:
- 1886 01c6 456E635F 		.ascii	"Enc_buf\000"
- 1886      62756600 
- 1887              	.LASF111:
- 1888 01ce 57414954 		.ascii	"WAIT_QUERY\000"
- 1888      5F515545 
- 1888      525900
- 1889              	.LASF4:
- 1890 01d9 6C6F6E67 		.ascii	"long int\000"
- 1890      20696E74 
- 1890      00
- 1891              	.LASF121:
- 1892 01e2 675F7278 		.ascii	"g_rx\000"
- 1892      00
- 1893              	.LASF159:
- 1894 01e7 4E5F494D 		.ascii	"N_IMU_Connected\000"
- 1894      555F436F 
- 1894      6E6E6563 
- 1894      74656400 
- 1895              	.LASF109:
- 1896 01f7 50524550 		.ascii	"PREPARE_DATA\000"
- 1896      4152455F 
- 1896      44415441 
- 1896      00
- 1897              	.LASF143:
- 1898 0204 74656E73 		.ascii	"tension_valid\000"
- 1898      696F6E5F 
- 1898      76616C69 
- 1898      6400
- 1899              	.LASF95:
- 1900 0212 6F6C645F 		.ascii	"old_value\000"
- 1900      76616C75 
- 1900      6500
- 1901              	.LASF152:
- 1902 021c 4144435F 		.ascii	"ADC_buf\000"
- 1902      62756600 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 36
-
-
- 1903              	.LASF72:
- 1904 0224 72696768 		.ascii	"right_left\000"
- 1904      745F6C65 
- 1904      667400
- 1905              	.LASF80:
- 1906 022f 77697265 		.ascii	"wire_disp\000"
- 1906      5F646973 
- 1906      7000
- 1907              	.LASF89:
- 1908 0239 61636365 		.ascii	"accel_value\000"
- 1908      6C5F7661 
- 1908      6C756500 
- 1909              	.LASF46:
- 1910 0245 636F6E74 		.ascii	"control_mode\000"
- 1910      726F6C5F 
- 1910      6D6F6465 
- 1910      00
- 1911              	.LASF84:
- 1912 0252 756E7573 		.ascii	"unused_bytes1\000"
- 1912      65645F62 
- 1912      79746573 
- 1912      3100
- 1913              	.LASF16:
- 1914 0260 696E7433 		.ascii	"int32\000"
- 1914      3200
- 1915              	.LASF61:
- 1916 0266 61637469 		.ascii	"activate_pwm_rescaling\000"
- 1916      76617465 
- 1916      5F70776D 
- 1916      5F726573 
- 1916      63616C69 
- 1917              	.LASF105:
- 1918 027d 53554D5F 		.ascii	"SUM_AND_MEAN\000"
- 1918      414E445F 
- 1918      4D45414E 
- 1918      00
- 1919              	.LASF85:
- 1920 028a 5350495F 		.ascii	"SPI_read_delay\000"
- 1920      72656164 
- 1920      5F64656C 
- 1920      617900
- 1921              	.LASF135:
- 1922 0299 6465765F 		.ascii	"dev_pwm_limit\000"
- 1922      70776D5F 
- 1922      6C696D69 
- 1922      7400
- 1923              	.LASF120:
- 1924 02a7 675F6D65 		.ascii	"g_measOld\000"
- 1924      61734F6C 
- 1924      6400
- 1925              	.LASF102:
- 1926 02b1 4E4F524D 		.ascii	"NORMAL\000"
- 1926      414C00
- 1927              	.LASF13:
- 1928 02b8 75696E74 		.ascii	"uint32\000"
- 1928      333200
- 1929              	.LASF23:
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 37
-
-
- 1930 02bf 46535F46 		.ascii	"FS_FILE\000"
- 1930      494C4500 
- 1931              	.LASF161:
- 1932 02c7 696D7573 		.ascii	"imus_data_size\000"
- 1932      5F646174 
- 1932      615F7369 
- 1932      7A6500
- 1933              	.LASF41:
- 1934 02d6 6B5F705F 		.ascii	"k_p_c_dl\000"
- 1934      635F646C 
- 1934      00
- 1935              	.LASF158:
- 1936 02df 77726974 		.ascii	"write_bytes\000"
- 1936      655F6279 
- 1936      74657300 
- 1937              	.LASF101:
- 1938 02eb 72657065 		.ascii	"repetitions\000"
- 1938      74697469 
- 1938      6F6E7300 
- 1939              	.LASF172:
- 1940 02f7 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Documents\\GITHUB\\SoftHand-PR"
- 1940      73657273 
- 1940      5C4D6174 
- 1940      74696143 
- 1940      505C446F 
- 1941 0325 4F2D5053 		.ascii	"O-PSoC5\\firmware.cydsn\000"
- 1941      6F43355C 
- 1941      6669726D 
- 1941      77617265 
- 1941      2E637964 
- 1942              	.LASF45:
- 1943 033c 696E7075 		.ascii	"input_mode\000"
- 1943      745F6D6F 
- 1943      646500
- 1944              	.LASF40:
- 1945 0347 6B5F645F 		.ascii	"k_d_dl\000"
- 1945      646C00
- 1946              	.LASF60:
- 1947 034e 6D6F746F 		.ascii	"motor_handle_ratio\000"
- 1947      725F6861 
- 1947      6E646C65 
- 1947      5F726174 
- 1947      696F00
- 1948              	.LASF122:
- 1949 0361 675F6D65 		.ascii	"g_mem\000"
- 1949      6D00
- 1950              	.LASF163:
- 1951 0367 675F696D 		.ascii	"g_imu\000"
- 1951      7500
- 1952              	.LASF151:
- 1953 036d 6368616E 		.ascii	"change_ext_ref_flag\000"
- 1953      67655F65 
- 1953      78745F72 
- 1953      65665F66 
- 1953      6C616700 
- 1954              	.LASF26:
- 1955 0381 73745F72 		.ascii	"st_ref\000"
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 38
-
-
- 1955      656600
- 1956              	.LASF136:
- 1957 0388 6465765F 		.ascii	"dev_pwm_sat\000"
- 1957      70776D5F 
- 1957      73617400 
- 1958              	.LASF39:
- 1959 0394 6B5F695F 		.ascii	"k_i_dl\000"
- 1959      646C00
- 1960              	.LASF145:
- 1961 039b 6379636C 		.ascii	"cycles_interrupt_flag\000"
- 1961      65735F69 
- 1961      6E746572 
- 1961      72757074 
- 1961      5F666C61 
- 1962              	.LASF5:
- 1963 03b1 6C6F6E67 		.ascii	"long unsigned int\000"
- 1963      20756E73 
- 1963      69676E65 
- 1963      6420696E 
- 1963      7400
- 1964              	.LASF52:
- 1965 03c3 6D61785F 		.ascii	"max_step_neg\000"
- 1965      73746570 
- 1965      5F6E6567 
- 1965      00
- 1966              	.LASF162:
- 1967 03d0 73696E67 		.ascii	"single_imu_size\000"
- 1967      6C655F69 
- 1967      6D755F73 
- 1967      697A6500 
- 1968              	.LASF11:
- 1969 03e0 75696E74 		.ascii	"uint8\000"
- 1969      3800
- 1970              	.LASF137:
- 1971 03e6 6465765F 		.ascii	"dev_tension_f\000"
- 1971      74656E73 
- 1971      696F6E5F 
- 1971      6600
- 1972              	.LASF3:
- 1973 03f4 73686F72 		.ascii	"short unsigned int\000"
- 1973      7420756E 
- 1973      7369676E 
- 1973      65642069 
- 1973      6E7400
- 1974              	.LASF169:
- 1975 0407 51756174 		.ascii	"Quat\000"
- 1975      00
- 1976              	.LASF133:
- 1977 040c 6379636C 		.ascii	"cycle_time\000"
- 1977      655F7469 
- 1977      6D6500
- 1978              	.LASF117:
- 1979 0417 675F7265 		.ascii	"g_refNew\000"
- 1979      664E6577 
- 1979      00
- 1980              	.LASF14:
- 1981 0420 696E7438 		.ascii	"int8\000"
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 39
-
-
- 1981      00
- 1982              	.LASF113:
- 1983 0425 4E4F4E45 		.ascii	"NONE\000"
- 1983      00
- 1984              	.LASF50:
- 1985 042a 706F735F 		.ascii	"pos_lim_inf\000"
- 1985      6C696D5F 
- 1985      696E6600 
- 1986              	.LASF75:
- 1987 0436 756E7573 		.ascii	"unused_bytes\000"
- 1987      65645F62 
- 1987      79746573 
- 1987      00
- 1988              	.LASF149:
- 1989 0443 666F7263 		.ascii	"forced_open\000"
- 1989      65645F6F 
- 1989      70656E00 
- 1990              	.LASF90:
- 1991 044f 6779726F 		.ascii	"gyro_value\000"
- 1991      5F76616C 
- 1991      756500
- 1992              	.LASF142:
- 1993 045a 72657365 		.ascii	"reset_last_value_flag\000"
- 1993      745F6C61 
- 1993      73745F76 
- 1993      616C7565 
- 1993      5F666C61 
- 1994              	.LASF77:
- 1995 0470 706F7369 		.ascii	"position_hist\000"
- 1995      74696F6E 
- 1995      5F686973 
- 1995      7400
- 1996              	.LASF9:
- 1997 047e 5F5F696E 		.ascii	"__int32_t\000"
- 1997      7433325F 
- 1997      7400
- 1998              	.LASF156:
- 1999 0488 72657374 		.ascii	"rest_pos_curr_ref\000"
- 1999      5F706F73 
- 1999      5F637572 
- 1999      725F7265 
- 1999      6600
- 2000              	.LASF124:
- 2001 049a 63616C69 		.ascii	"calib\000"
- 2001      6200
- 2002              	.LASF126:
- 2003 04a0 66696C74 		.ascii	"filt_curr_diff\000"
- 2003      5F637572 
- 2003      725F6469 
- 2003      666600
- 2004              	.LASF86:
- 2005 04af 494D555F 		.ascii	"IMU_conf\000"
- 2005      636F6E66 
- 2005      00
- 2006              	.LASF91:
- 2007 04b8 6D61675F 		.ascii	"mag_value\000"
- 2007      76616C75 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 40
-
-
- 2007      6500
- 2008              	.LASF17:
- 2009 04c2 666C6F61 		.ascii	"float32\000"
- 2009      74333200 
- 2010              	.LASF22:
- 2011 04ca 73697A65 		.ascii	"sizetype\000"
- 2011      74797065 
+  32              		.comm	filt_emg,64,4
+  33              		.comm	timer_value,2,2
+  34              		.comm	timer_value0,2,2
+  35              		.comm	cycle_time,4,4
+  36              		.comm	dev_tension,8,4
+  37              		.comm	dev_pwm_limit,1,1
+  38              		.global	dev_pwm_sat
+  39              		.data
+  40              		.type	dev_pwm_sat, %object
+  41              		.size	dev_pwm_sat, 1
+  42              	dev_pwm_sat:
+  43 0000 64       		.byte	100
+  44              		.comm	dev_tension_f,8,4
+  45              		.comm	pow_tension,8,4
+  46              		.global	cycles_status
+  47              		.type	cycles_status, %object
+  48              		.size	cycles_status, 1
+  49              	cycles_status:
+  50 0001 04       		.byte	4
+  51              		.global	emg_1_status
+  52              		.type	emg_1_status, %object
+  53              		.size	emg_1_status, 1
+  54              	emg_1_status:
+  55 0002 01       		.byte	1
+  56              		.global	emg_2_status
+  57              		.type	emg_2_status, %object
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 2
+
+
+  58              		.size	emg_2_status, 1
+  59              	emg_2_status:
+  60 0003 01       		.byte	1
+  61              		.comm	reset_last_value_flag,1,1
+  62              		.comm	tension_valid,1,1
+  63              		.global	interrupt_flag
+  64              		.bss
+  65              		.type	interrupt_flag, %object
+  66              		.size	interrupt_flag, 1
+  67              	interrupt_flag:
+  68 0000 00       		.space	1
+  69              		.global	cycles_interrupt_flag
+  70              		.type	cycles_interrupt_flag, %object
+  71              		.size	cycles_interrupt_flag, 1
+  72              	cycles_interrupt_flag:
+  73 0001 00       		.space	1
+  74              		.global	maintenance_flag
+  75              		.type	maintenance_flag, %object
+  76              		.size	maintenance_flag, 1
+  77              	maintenance_flag:
+  78 0002 00       		.space	1
+  79              		.global	can_write
+  80              		.data
+  81              		.type	can_write, %object
+  82              		.size	can_write, 1
+  83              	can_write:
+  84 0004 01       		.byte	1
+  85              		.comm	rest_enabled,1,1
+  86              		.comm	forced_open,1,1
+  87              		.global	battery_low_SoC
+  88              		.bss
+  89              		.type	battery_low_SoC, %object
+  90              		.size	battery_low_SoC, 1
+  91              	battery_low_SoC:
+  92 0003 00       		.space	1
+  93              		.global	change_ext_ref_flag
+  94              		.type	change_ext_ref_flag, %object
+  95              		.size	change_ext_ref_flag, 1
+  96              	change_ext_ref_flag:
+  97 0004 00       		.space	1
+  98              		.global	reset_PSoC_flag
+  99              		.type	reset_PSoC_flag, %object
+ 100              		.size	reset_PSoC_flag, 1
+ 101              	reset_PSoC_flag:
+ 102 0005 00       		.space	1
+ 103              		.comm	ADC_buf,24,4
+ 104              		.global	NUM_OF_ANALOG_INPUTS
+ 105              		.data
+ 106              		.type	NUM_OF_ANALOG_INPUTS, %object
+ 107              		.size	NUM_OF_ANALOG_INPUTS, 1
+ 108              	NUM_OF_ANALOG_INPUTS:
+ 109 0005 04       		.byte	4
+ 110              		.comm	pwm_sign,1,1
+ 111              		.comm	data_encoder_raw,20,4
+ 112              		.comm	N_Encoder_Line_Connected,2,4
+ 113              		.comm	Encoder_Value,20,4
+ 114              		.comm	Encoder_Check,10,4
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 3
+
+
+ 115              		.comm	rest_pos_curr_ref,4,4
+ 116              		.comm	pFile,4,4
+ 117              		.comm	N_IMU_Connected,1,1
+ 118              		.comm	IMU_connected,5,4
+ 119              		.comm	imus_data_size,4,4
+ 120              		.comm	single_imu_size,20,4
+ 121              		.comm	g_imu,200,4
+ 122              		.comm	g_imuNew,200,4
+ 123              		.comm	Accel,30,4
+ 124              		.comm	Gyro,30,4
+ 125              		.comm	Mag,30,4
+ 126              		.comm	MagCal,15,4
+ 127              		.comm	Temp,10,4
+ 128              		.comm	Quat,80,4
+ 129              		.text
+ 130              	.Letext0:
+ 131              		.file 1 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 132              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 133              		.file 3 "Generated_Source\\PSoC5/cytypes.h"
+ 134              		.file 4 "..\\emFile_V322c\\Code\\Include\\PSoC5/FS_Types.h"
+ 135              		.file 5 "..\\src\\globals.h"
+ 136              		.file 6 "Generated_Source\\PSoC5/core_cm3.h"
+ 137              		.file 7 "..\\src\\globals.c"
+ 138              		.section	.debug_info,"",%progbits
+ 139              	.Ldebug_info0:
+ 140 0000 8B0C0000 		.4byte	0xc8b
+ 141 0004 0400     		.2byte	0x4
+ 142 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 143 000a 04       		.byte	0x4
+ 144 000b 01       		.uleb128 0x1
+ 145 000c 8C000000 		.4byte	.LASF178
+ 146 0010 0C       		.byte	0xc
+ 147 0011 1E050000 		.4byte	.LASF179
+ 148 0015 EC020000 		.4byte	.LASF180
+ 149 0019 00000000 		.4byte	.Ldebug_line0
+ 150 001d 02       		.uleb128 0x2
+ 151 001e 01       		.byte	0x1
+ 152 001f 06       		.byte	0x6
+ 153 0020 61000000 		.4byte	.LASF0
+ 154 0024 02       		.uleb128 0x2
+ 155 0025 01       		.byte	0x1
+ 156 0026 08       		.byte	0x8
+ 157 0027 B4050000 		.4byte	.LASF1
+ 158 002b 02       		.uleb128 0x2
+ 159 002c 02       		.byte	0x2
+ 160 002d 05       		.byte	0x5
+ 161 002e DD050000 		.4byte	.LASF2
+ 162 0032 02       		.uleb128 0x2
+ 163 0033 02       		.byte	0x2
+ 164 0034 07       		.byte	0x7
+ 165 0035 1C070000 		.4byte	.LASF3
+ 166 0039 03       		.uleb128 0x3
+ 167 003a A8040000 		.4byte	.LASF9
+ 168 003e 01       		.byte	0x1
+ 169 003f 3F       		.byte	0x3f
+ 170 0040 44000000 		.4byte	0x44
+ 171 0044 02       		.uleb128 0x2
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 4
+
+
+ 172 0045 04       		.byte	0x4
+ 173 0046 05       		.byte	0x5
+ 174 0047 E3010000 		.4byte	.LASF4
+ 175 004b 02       		.uleb128 0x2
+ 176 004c 04       		.byte	0x4
+ 177 004d 07       		.byte	0x7
+ 178 004e A6030000 		.4byte	.LASF5
+ 179 0052 02       		.uleb128 0x2
+ 180 0053 08       		.byte	0x8
+ 181 0054 05       		.byte	0x5
+ 182 0055 A7010000 		.4byte	.LASF6
+ 183 0059 02       		.uleb128 0x2
+ 184 005a 08       		.byte	0x8
+ 185 005b 07       		.byte	0x7
+ 186 005c 3D010000 		.4byte	.LASF7
+ 187 0060 04       		.uleb128 0x4
+ 188 0061 04       		.byte	0x4
+ 189 0062 05       		.byte	0x5
+ 190 0063 696E7400 		.ascii	"int\000"
+ 191 0067 02       		.uleb128 0x2
+ 192 0068 04       		.byte	0x4
+ 193 0069 07       		.byte	0x7
+ 194 006a E6060000 		.4byte	.LASF8
+ 195 006e 03       		.uleb128 0x3
+ 196 006f AC050000 		.4byte	.LASF10
+ 197 0073 02       		.byte	0x2
+ 198 0074 2C       		.byte	0x2c
+ 199 0075 39000000 		.4byte	0x39
+ 200 0079 05       		.uleb128 0x5
+ 201 007a FE030000 		.4byte	.LASF11
+ 202 007e 03       		.byte	0x3
+ 203 007f E401     		.2byte	0x1e4
+ 204 0081 24000000 		.4byte	0x24
+ 205 0085 05       		.uleb128 0x5
+ 206 0086 E5020000 		.4byte	.LASF12
+ 207 008a 03       		.byte	0x3
+ 208 008b E501     		.2byte	0x1e5
+ 209 008d 32000000 		.4byte	0x32
+ 210 0091 05       		.uleb128 0x5
+ 211 0092 B2020000 		.4byte	.LASF13
+ 212 0096 03       		.byte	0x3
+ 213 0097 E601     		.2byte	0x1e6
+ 214 0099 4B000000 		.4byte	0x4b
+ 215 009d 05       		.uleb128 0x5
+ 216 009e 38040000 		.4byte	.LASF14
+ 217 00a2 03       		.byte	0x3
+ 218 00a3 E701     		.2byte	0x1e7
+ 219 00a5 1D000000 		.4byte	0x1d
+ 220 00a9 05       		.uleb128 0x5
+ 221 00aa 39050000 		.4byte	.LASF15
+ 222 00ae 03       		.byte	0x3
+ 223 00af E801     		.2byte	0x1e8
+ 224 00b1 2B000000 		.4byte	0x2b
+ 225 00b5 05       		.uleb128 0x5
+ 226 00b6 D2010000 		.4byte	.LASF16
+ 227 00ba 03       		.byte	0x3
+ 228 00bb E901     		.2byte	0x1e9
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 5
+
+
+ 229 00bd 44000000 		.4byte	0x44
+ 230 00c1 05       		.uleb128 0x5
+ 231 00c2 F4040000 		.4byte	.LASF17
+ 232 00c6 03       		.byte	0x3
+ 233 00c7 EA01     		.2byte	0x1ea
+ 234 00c9 CD000000 		.4byte	0xcd
+ 235 00cd 02       		.uleb128 0x2
+ 236 00ce 04       		.byte	0x4
+ 237 00cf 04       		.byte	0x4
+ 238 00d0 BD060000 		.4byte	.LASF18
+ 239 00d4 02       		.uleb128 0x2
+ 240 00d5 08       		.byte	0x8
+ 241 00d6 04       		.byte	0x4
+ 242 00d7 7D080000 		.4byte	.LASF19
+ 243 00db 02       		.uleb128 0x2
+ 244 00dc 01       		.byte	0x1
+ 245 00dd 08       		.byte	0x8
+ 246 00de CA060000 		.4byte	.LASF20
+ 247 00e2 02       		.uleb128 0x2
+ 248 00e3 08       		.byte	0x8
+ 249 00e4 04       		.byte	0x4
+ 250 00e5 05050000 		.4byte	.LASF21
+ 251 00e9 02       		.uleb128 0x2
+ 252 00ea 04       		.byte	0x4
+ 253 00eb 07       		.byte	0x7
+ 254 00ec FC040000 		.4byte	.LASF22
+ 255 00f0 03       		.uleb128 0x3
+ 256 00f1 B9020000 		.4byte	.LASF23
+ 257 00f5 04       		.byte	0x4
+ 258 00f6 7E       		.byte	0x7e
+ 259 00f7 FB000000 		.4byte	0xfb
+ 260 00fb 06       		.uleb128 0x6
+ 261 00fc B9020000 		.4byte	.LASF23
+ 262 0100 07       		.uleb128 0x7
+ 263 0101 04       		.byte	0x4
+ 264 0102 F0000000 		.4byte	0xf0
+ 265 0106 08       		.uleb128 0x8
+ 266 0107 76030000 		.4byte	.LASF26
+ 267 010b 10       		.byte	0x10
+ 268 010c 05       		.byte	0x5
+ 269 010d A7       		.byte	0xa7
+ 270 010e 43010000 		.4byte	0x143
+ 271 0112 09       		.uleb128 0x9
+ 272 0113 706F7300 		.ascii	"pos\000"
+ 273 0117 05       		.byte	0x5
+ 274 0118 A8       		.byte	0xa8
+ 275 0119 B5000000 		.4byte	0xb5
+ 276 011d 00       		.byte	0
+ 277 011e 0A       		.uleb128 0xa
+ 278 011f C2050000 		.4byte	.LASF24
+ 279 0123 05       		.byte	0x5
+ 280 0124 A9       		.byte	0xa9
+ 281 0125 B5000000 		.4byte	0xb5
+ 282 0129 04       		.byte	0x4
+ 283 012a 09       		.uleb128 0x9
+ 284 012b 70776D00 		.ascii	"pwm\000"
+ 285 012f 05       		.byte	0x5
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 6
+
+
+ 286 0130 AA       		.byte	0xaa
+ 287 0131 B5000000 		.4byte	0xb5
+ 288 0135 08       		.byte	0x8
+ 289 0136 0A       		.uleb128 0xa
+ 290 0137 CE050000 		.4byte	.LASF25
+ 291 013b 05       		.byte	0x5
+ 292 013c AB       		.byte	0xab
+ 293 013d 79000000 		.4byte	0x79
+ 294 0141 0C       		.byte	0xc
+ 295 0142 00       		.byte	0
+ 296 0143 08       		.uleb128 0x8
+ 297 0144 1E000000 		.4byte	.LASF27
+ 298 0148 54       		.byte	0x54
+ 299 0149 05       		.byte	0x5
+ 300 014a B2       		.byte	0xb2
+ 301 014b B0010000 		.4byte	0x1b0
+ 302 014f 09       		.uleb128 0x9
+ 303 0150 706F7300 		.ascii	"pos\000"
+ 304 0154 05       		.byte	0x5
+ 305 0155 B3       		.byte	0xb3
+ 306 0156 B0010000 		.4byte	0x1b0
+ 307 015a 00       		.byte	0
+ 308 015b 0A       		.uleb128 0xa
+ 309 015c C2050000 		.4byte	.LASF24
+ 310 0160 05       		.byte	0x5
+ 311 0161 B4       		.byte	0xb4
+ 312 0162 C0010000 		.4byte	0x1c0
+ 313 0166 0C       		.byte	0xc
+ 314 0167 0A       		.uleb128 0xa
+ 315 0168 BB010000 		.4byte	.LASF28
+ 316 016c 05       		.byte	0x5
+ 317 016d B5       		.byte	0xb5
+ 318 016e B5000000 		.4byte	0xb5
+ 319 0172 14       		.byte	0x14
+ 320 0173 09       		.uleb128 0x9
+ 321 0174 726F7400 		.ascii	"rot\000"
+ 322 0178 05       		.byte	0x5
+ 323 0179 B6       		.byte	0xb6
+ 324 017a D0010000 		.4byte	0x1d0
+ 325 017e 18       		.byte	0x18
+ 326 017f 09       		.uleb128 0x9
+ 327 0180 656D6700 		.ascii	"emg\000"
+ 328 0184 05       		.byte	0x5
+ 329 0185 B8       		.byte	0xb8
+ 330 0186 C0010000 		.4byte	0x1c0
+ 331 018a 1C       		.byte	0x1c
+ 332 018b 09       		.uleb128 0x9
+ 333 018c 76656C00 		.ascii	"vel\000"
+ 334 0190 05       		.byte	0x5
+ 335 0191 B9       		.byte	0xb9
+ 336 0192 B0010000 		.4byte	0x1b0
+ 337 0196 24       		.byte	0x24
+ 338 0197 09       		.uleb128 0x9
+ 339 0198 61636300 		.ascii	"acc\000"
+ 340 019c 05       		.byte	0x5
+ 341 019d BA       		.byte	0xba
+ 342 019e B0010000 		.4byte	0x1b0
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 7
+
+
+ 343 01a2 30       		.byte	0x30
+ 344 01a3 0A       		.uleb128 0xa
+ 345 01a4 CA040000 		.4byte	.LASF29
+ 346 01a8 05       		.byte	0x5
+ 347 01a9 BB       		.byte	0xbb
+ 348 01aa E0010000 		.4byte	0x1e0
+ 349 01ae 3C       		.byte	0x3c
+ 350 01af 00       		.byte	0
+ 351 01b0 0B       		.uleb128 0xb
+ 352 01b1 B5000000 		.4byte	0xb5
+ 353 01b5 C0010000 		.4byte	0x1c0
+ 354 01b9 0C       		.uleb128 0xc
+ 355 01ba E9000000 		.4byte	0xe9
+ 356 01be 02       		.byte	0x2
+ 357 01bf 00       		.byte	0
+ 358 01c0 0B       		.uleb128 0xb
+ 359 01c1 B5000000 		.4byte	0xb5
+ 360 01c5 D0010000 		.4byte	0x1d0
+ 361 01c9 0C       		.uleb128 0xc
+ 362 01ca E9000000 		.4byte	0xe9
+ 363 01ce 01       		.byte	0x1
+ 364 01cf 00       		.byte	0
+ 365 01d0 0B       		.uleb128 0xb
+ 366 01d1 9D000000 		.4byte	0x9d
+ 367 01d5 E0010000 		.4byte	0x1e0
+ 368 01d9 0C       		.uleb128 0xc
+ 369 01da E9000000 		.4byte	0xe9
+ 370 01de 02       		.byte	0x2
+ 371 01df 00       		.byte	0
+ 372 01e0 0B       		.uleb128 0xb
+ 373 01e1 B5000000 		.4byte	0xb5
+ 374 01e5 F0010000 		.4byte	0x1f0
+ 375 01e9 0C       		.uleb128 0xc
+ 376 01ea E9000000 		.4byte	0xe9
+ 377 01ee 05       		.byte	0x5
+ 378 01ef 00       		.byte	0
+ 379 01f0 08       		.uleb128 0x8
+ 380 01f1 DE060000 		.4byte	.LASF30
+ 381 01f5 86       		.byte	0x86
+ 382 01f6 05       		.byte	0x5
+ 383 01f7 C2       		.byte	0xc2
+ 384 01f8 2D020000 		.4byte	0x22d
+ 385 01fc 0A       		.uleb128 0xa
+ 386 01fd F3060000 		.4byte	.LASF31
+ 387 0201 05       		.byte	0x5
+ 388 0202 C3       		.byte	0xc3
+ 389 0203 2D020000 		.4byte	0x22d
+ 390 0207 00       		.byte	0
+ 391 0208 0A       		.uleb128 0xa
+ 392 0209 C3060000 		.4byte	.LASF32
+ 393 020d 05       		.byte	0x5
+ 394 020e C4       		.byte	0xc4
+ 395 020f A9000000 		.4byte	0xa9
+ 396 0213 80       		.byte	0x80
+ 397 0214 09       		.uleb128 0x9
+ 398 0215 696E6400 		.ascii	"ind\000"
+ 399 0219 05       		.byte	0x5
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 8
+
+
+ 400 021a C5       		.byte	0xc5
+ 401 021b A9000000 		.4byte	0xa9
+ 402 021f 82       		.byte	0x82
+ 403 0220 0A       		.uleb128 0xa
+ 404 0221 B5010000 		.4byte	.LASF33
+ 405 0225 05       		.byte	0x5
+ 406 0226 C6       		.byte	0xc6
+ 407 0227 79000000 		.4byte	0x79
+ 408 022b 84       		.byte	0x84
+ 409 022c 00       		.byte	0
+ 410 022d 0B       		.uleb128 0xb
+ 411 022e 79000000 		.4byte	0x79
+ 412 0232 3D020000 		.4byte	0x23d
+ 413 0236 0C       		.uleb128 0xc
+ 414 0237 E9000000 		.4byte	0xe9
+ 415 023b 7F       		.byte	0x7f
+ 416 023c 00       		.byte	0
+ 417 023d 0D       		.uleb128 0xd
+ 418 023e 15060000 		.4byte	.LASF34
+ 419 0242 8401     		.2byte	0x184
+ 420 0244 05       		.byte	0x5
+ 421 0245 CE       		.byte	0xce
+ 422 0246 7E050000 		.4byte	0x57e
+ 423 024a 0A       		.uleb128 0xa
+ 424 024b 4F060000 		.4byte	.LASF35
+ 425 024f 05       		.byte	0x5
+ 426 0250 D2       		.byte	0xd2
+ 427 0251 7E050000 		.4byte	0x57e
+ 428 0255 00       		.byte	0
+ 429 0256 0A       		.uleb128 0xa
+ 430 0257 9A040000 		.4byte	.LASF36
+ 431 025b 05       		.byte	0x5
+ 432 025c D4       		.byte	0xd4
+ 433 025d 8E050000 		.4byte	0x58e
+ 434 0261 08       		.byte	0x8
+ 435 0262 0A       		.uleb128 0xa
+ 436 0263 6F050000 		.4byte	.LASF37
+ 437 0267 05       		.byte	0x5
+ 438 0268 D6       		.byte	0xd6
+ 439 0269 9E050000 		.4byte	0x59e
+ 440 026d 30       		.byte	0x30
+ 441 026e 0A       		.uleb128 0xa
+ 442 026f A4060000 		.4byte	.LASF38
+ 443 0273 05       		.byte	0x5
+ 444 0274 D8       		.byte	0xd8
+ 445 0275 91000000 		.4byte	0x91
+ 446 0279 40       		.byte	0x40
+ 447 027a 0A       		.uleb128 0xa
+ 448 027b FB050000 		.4byte	.LASF39
+ 449 027f 05       		.byte	0x5
+ 450 0280 D9       		.byte	0xd9
+ 451 0281 91000000 		.4byte	0x91
+ 452 0285 44       		.byte	0x44
+ 453 0286 0A       		.uleb128 0xa
+ 454 0287 53000000 		.4byte	.LASF40
+ 455 028b 05       		.byte	0x5
+ 456 028c DA       		.byte	0xda
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 9
+
+
+ 457 028d 91000000 		.4byte	0x91
+ 458 0291 48       		.byte	0x48
+ 459 0292 0A       		.uleb128 0xa
+ 460 0293 24080000 		.4byte	.LASF41
+ 461 0297 05       		.byte	0x5
+ 462 0298 DB       		.byte	0xdb
+ 463 0299 91000000 		.4byte	0x91
+ 464 029d 4C       		.byte	0x4c
+ 465 029e 0A       		.uleb128 0xa
+ 466 029f 82050000 		.4byte	.LASF42
+ 467 02a3 05       		.byte	0x5
+ 468 02a4 DD       		.byte	0xdd
+ 469 02a5 AE050000 		.4byte	0x5ae
+ 470 02a9 50       		.byte	0x50
+ 471 02aa 0A       		.uleb128 0xa
+ 472 02ab 52020000 		.4byte	.LASF43
+ 473 02af 05       		.byte	0x5
+ 474 02b0 DE       		.byte	0xde
+ 475 02b1 BE050000 		.4byte	0x5be
+ 476 02b5 56       		.byte	0x56
+ 477 02b6 0A       		.uleb128 0xa
+ 478 02b7 10060000 		.4byte	.LASF44
+ 479 02bb 05       		.byte	0x5
+ 480 02bc E3       		.byte	0xe3
+ 481 02bd 79000000 		.4byte	0x79
+ 482 02c1 A0       		.byte	0xa0
+ 483 02c2 09       		.uleb128 0x9
+ 484 02c3 696400   		.ascii	"id\000"
+ 485 02c6 05       		.byte	0x5
+ 486 02c7 E4       		.byte	0xe4
+ 487 02c8 79000000 		.4byte	0x79
+ 488 02cc A1       		.byte	0xa1
+ 489 02cd 09       		.uleb128 0x9
+ 490 02ce 6B5F7000 		.ascii	"k_p\000"
+ 491 02d2 05       		.byte	0x5
+ 492 02d3 E6       		.byte	0xe6
+ 493 02d4 B5000000 		.4byte	0xb5
+ 494 02d8 A4       		.byte	0xa4
+ 495 02d9 09       		.uleb128 0x9
+ 496 02da 6B5F6900 		.ascii	"k_i\000"
+ 497 02de 05       		.byte	0x5
+ 498 02df E7       		.byte	0xe7
+ 499 02e0 B5000000 		.4byte	0xb5
+ 500 02e4 A8       		.byte	0xa8
+ 501 02e5 09       		.uleb128 0x9
+ 502 02e6 6B5F6400 		.ascii	"k_d\000"
+ 503 02ea 05       		.byte	0x5
+ 504 02eb E8       		.byte	0xe8
+ 505 02ec B5000000 		.4byte	0xb5
+ 506 02f0 AC       		.byte	0xac
+ 507 02f1 0A       		.uleb128 0xa
+ 508 02f2 1C060000 		.4byte	.LASF45
+ 509 02f6 05       		.byte	0x5
+ 510 02f7 EA       		.byte	0xea
+ 511 02f8 B5000000 		.4byte	0xb5
+ 512 02fc B0       		.byte	0xb0
+ 513 02fd 0A       		.uleb128 0xa
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 10
+
+
+ 514 02fe 16070000 		.4byte	.LASF46
+ 515 0302 05       		.byte	0x5
+ 516 0303 EB       		.byte	0xeb
+ 517 0304 B5000000 		.4byte	0xb5
+ 518 0308 B4       		.byte	0xb4
+ 519 0309 0A       		.uleb128 0xa
+ 520 030a 65070000 		.4byte	.LASF47
+ 521 030e 05       		.byte	0x5
+ 522 030f EC       		.byte	0xec
+ 523 0310 B5000000 		.4byte	0xb5
+ 524 0314 B8       		.byte	0xb8
+ 525 0315 0A       		.uleb128 0xa
+ 526 0316 84080000 		.4byte	.LASF48
+ 527 031a 05       		.byte	0x5
+ 528 031b ED       		.byte	0xed
+ 529 031c B5000000 		.4byte	0xb5
+ 530 0320 BC       		.byte	0xbc
+ 531 0321 0A       		.uleb128 0xa
+ 532 0322 89030000 		.4byte	.LASF49
+ 533 0326 05       		.byte	0x5
+ 534 0327 EF       		.byte	0xef
+ 535 0328 B5000000 		.4byte	0xb5
+ 536 032c C0       		.byte	0xc0
+ 537 032d 0A       		.uleb128 0xa
+ 538 032e 3C030000 		.4byte	.LASF50
+ 539 0332 05       		.byte	0x5
+ 540 0333 F0       		.byte	0xf0
+ 541 0334 B5000000 		.4byte	0xb5
+ 542 0338 C4       		.byte	0xc4
+ 543 0339 0A       		.uleb128 0xa
+ 544 033a D0020000 		.4byte	.LASF51
+ 545 033e 05       		.byte	0x5
+ 546 033f F1       		.byte	0xf1
+ 547 0340 B5000000 		.4byte	0xb5
+ 548 0344 C8       		.byte	0xc8
+ 549 0345 0A       		.uleb128 0xa
+ 550 0346 FA060000 		.4byte	.LASF52
+ 551 034a 05       		.byte	0x5
+ 552 034b F2       		.byte	0xf2
+ 553 034c B5000000 		.4byte	0xb5
+ 554 0350 CC       		.byte	0xcc
+ 555 0351 0A       		.uleb128 0xa
+ 556 0352 D7070000 		.4byte	.LASF53
+ 557 0356 05       		.byte	0x5
+ 558 0357 F4       		.byte	0xf4
+ 559 0358 B5000000 		.4byte	0xb5
+ 560 035c D0       		.byte	0xd0
+ 561 035d 0A       		.uleb128 0xa
+ 562 035e 8C050000 		.4byte	.LASF54
+ 563 0362 05       		.byte	0x5
+ 564 0363 F5       		.byte	0xf5
+ 565 0364 79000000 		.4byte	0x79
+ 566 0368 D4       		.byte	0xd4
+ 567 0369 0A       		.uleb128 0xa
+ 568 036a 31030000 		.4byte	.LASF55
+ 569 036e 05       		.byte	0x5
+ 570 036f F6       		.byte	0xf6
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 11
+
+
+ 571 0370 79000000 		.4byte	0x79
+ 572 0374 D5       		.byte	0xd5
+ 573 0375 0A       		.uleb128 0xa
+ 574 0376 45020000 		.4byte	.LASF56
+ 575 037a 05       		.byte	0x5
+ 576 037b F7       		.byte	0xf7
+ 577 037c 79000000 		.4byte	0x79
+ 578 0380 D6       		.byte	0xd6
+ 579 0381 09       		.uleb128 0x9
+ 580 0382 72657300 		.ascii	"res\000"
+ 581 0386 05       		.byte	0x5
+ 582 0387 F8       		.byte	0xf8
+ 583 0388 CE050000 		.4byte	0x5ce
+ 584 038c D7       		.byte	0xd7
+ 585 038d 0A       		.uleb128 0xa
+ 586 038e 7C050000 		.4byte	.LASF57
+ 587 0392 05       		.byte	0x5
+ 588 0393 FA       		.byte	0xfa
+ 589 0394 B0010000 		.4byte	0x1b0
+ 590 0398 DC       		.byte	0xdc
+ 591 0399 0A       		.uleb128 0xa
+ 592 039a C7050000 		.4byte	.LASF58
+ 593 039e 05       		.byte	0x5
+ 594 039f FC       		.byte	0xfc
+ 595 03a0 DE050000 		.4byte	0x5de
+ 596 03a4 E8       		.byte	0xe8
+ 597 03a5 0A       		.uleb128 0xa
+ 598 03a6 68060000 		.4byte	.LASF59
+ 599 03aa 05       		.byte	0x5
+ 600 03ab FE       		.byte	0xfe
+ 601 03ac 79000000 		.4byte	0x79
+ 602 03b0 F4       		.byte	0xf4
+ 603 03b1 0E       		.uleb128 0xe
+ 604 03b2 54040000 		.4byte	.LASF60
+ 605 03b6 05       		.byte	0x5
+ 606 03b7 0001     		.2byte	0x100
+ 607 03b9 B5000000 		.4byte	0xb5
+ 608 03bd F8       		.byte	0xf8
+ 609 03be 0E       		.uleb128 0xe
+ 610 03bf 5D050000 		.4byte	.LASF61
+ 611 03c3 05       		.byte	0x5
+ 612 03c4 0101     		.2byte	0x101
+ 613 03c6 B5000000 		.4byte	0xb5
+ 614 03ca FC       		.byte	0xfc
+ 615 03cb 0F       		.uleb128 0xf
+ 616 03cc B8030000 		.4byte	.LASF62
+ 617 03d0 05       		.byte	0x5
+ 618 03d1 0301     		.2byte	0x103
+ 619 03d3 B5000000 		.4byte	0xb5
+ 620 03d7 0001     		.2byte	0x100
+ 621 03d9 0F       		.uleb128 0xf
+ 622 03da 86060000 		.4byte	.LASF63
+ 623 03de 05       		.byte	0x5
+ 624 03df 0401     		.2byte	0x104
+ 625 03e1 B5000000 		.4byte	0xb5
+ 626 03e5 0401     		.2byte	0x104
+ 627 03e7 0F       		.uleb128 0xf
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 12
+
+
+ 628 03e8 2D060000 		.4byte	.LASF64
+ 629 03ec 05       		.byte	0x5
+ 630 03ed 0501     		.2byte	0x105
+ 631 03ef A9000000 		.4byte	0xa9
+ 632 03f3 0801     		.2byte	0x108
+ 633 03f5 0F       		.uleb128 0xf
+ 634 03f6 99010000 		.4byte	.LASF65
+ 635 03fa 05       		.byte	0x5
+ 636 03fb 0601     		.2byte	0x106
+ 637 03fd EE050000 		.4byte	0x5ee
+ 638 0401 0A01     		.2byte	0x10a
+ 639 0403 0F       		.uleb128 0xf
+ 640 0404 50070000 		.4byte	.LASF66
+ 641 0408 05       		.byte	0x5
+ 642 0409 0701     		.2byte	0x107
+ 643 040b 79000000 		.4byte	0x79
+ 644 040f 0E01     		.2byte	0x10e
+ 645 0411 0F       		.uleb128 0xf
+ 646 0412 BC070000 		.4byte	.LASF67
+ 647 0416 05       		.byte	0x5
+ 648 0417 0A01     		.2byte	0x10a
+ 649 0419 7E050000 		.4byte	0x57e
+ 650 041d 1001     		.2byte	0x110
+ 651 041f 0F       		.uleb128 0xf
+ 652 0420 B2070000 		.4byte	.LASF68
+ 653 0424 05       		.byte	0x5
+ 654 0425 0B01     		.2byte	0x10b
+ 655 0427 79000000 		.4byte	0x79
+ 656 042b 1801     		.2byte	0x118
+ 657 042d 0F       		.uleb128 0xf
+ 658 042e 34080000 		.4byte	.LASF69
+ 659 0432 05       		.byte	0x5
+ 660 0433 0C01     		.2byte	0x10c
+ 661 0435 79000000 		.4byte	0x79
+ 662 0439 1901     		.2byte	0x119
+ 663 043b 0F       		.uleb128 0xf
+ 664 043c 43030000 		.4byte	.LASF70
+ 665 0440 05       		.byte	0x5
+ 666 0441 0D01     		.2byte	0x10d
+ 667 0443 9D000000 		.4byte	0x9d
+ 668 0447 1A01     		.2byte	0x11a
+ 669 0449 0F       		.uleb128 0xf
+ 670 044a 60020000 		.4byte	.LASF71
+ 671 044e 05       		.byte	0x5
+ 672 044f 0E01     		.2byte	0x10e
+ 673 0451 79000000 		.4byte	0x79
+ 674 0455 1B01     		.2byte	0x11b
+ 675 0457 0F       		.uleb128 0xf
+ 676 0458 76070000 		.4byte	.LASF72
+ 677 045c 05       		.byte	0x5
+ 678 045d 0F01     		.2byte	0x10f
+ 679 045f FE050000 		.4byte	0x5fe
+ 680 0463 1C01     		.2byte	0x11c
+ 681 0465 0F       		.uleb128 0xf
+ 682 0466 54010000 		.4byte	.LASF73
+ 683 046a 05       		.byte	0x5
+ 684 046b 1201     		.2byte	0x112
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 13
+
+
+ 685 046d 79000000 		.4byte	0x79
+ 686 0471 3401     		.2byte	0x134
+ 687 0473 0F       		.uleb128 0xf
+ 688 0474 F1050000 		.4byte	.LASF74
+ 689 0478 05       		.byte	0x5
+ 690 0479 1301     		.2byte	0x113
+ 691 047b 79000000 		.4byte	0x79
+ 692 047f 3501     		.2byte	0x135
+ 693 0481 0F       		.uleb128 0xf
+ 694 0482 39000000 		.4byte	.LASF75
+ 695 0486 05       		.byte	0x5
+ 696 0487 1401     		.2byte	0x114
+ 697 0489 79000000 		.4byte	0x79
+ 698 048d 3601     		.2byte	0x136
+ 699 048f 0F       		.uleb128 0xf
+ 700 0490 3B060000 		.4byte	.LASF76
+ 701 0494 05       		.byte	0x5
+ 702 0495 1501     		.2byte	0x115
+ 703 0497 79000000 		.4byte	0x79
+ 704 049b 3701     		.2byte	0x137
+ 705 049d 0F       		.uleb128 0xf
+ 706 049e 54050000 		.4byte	.LASF77
+ 707 04a2 05       		.byte	0x5
+ 708 04a3 1601     		.2byte	0x116
+ 709 04a5 B5000000 		.4byte	0xb5
+ 710 04a9 3801     		.2byte	0x138
+ 711 04ab 0F       		.uleb128 0xf
+ 712 04ac 67010000 		.4byte	.LASF78
+ 713 04b0 05       		.byte	0x5
+ 714 04b1 1701     		.2byte	0x117
+ 715 04b3 B5000000 		.4byte	0xb5
+ 716 04b7 3C01     		.2byte	0x13c
+ 717 04b9 0F       		.uleb128 0xf
+ 718 04ba 90010000 		.4byte	.LASF79
+ 719 04be 05       		.byte	0x5
+ 720 04bf 1901     		.2byte	0x119
+ 721 04c1 B5000000 		.4byte	0xb5
+ 722 04c5 4001     		.2byte	0x140
+ 723 04c7 0F       		.uleb128 0xf
+ 724 04c8 03070000 		.4byte	.LASF80
+ 725 04cc 05       		.byte	0x5
+ 726 04cd 1A01     		.2byte	0x11a
+ 727 04cf 79000000 		.4byte	0x79
+ 728 04d3 4401     		.2byte	0x144
+ 729 04d5 0F       		.uleb128 0xf
+ 730 04d6 6B070000 		.4byte	.LASF81
+ 731 04da 05       		.byte	0x5
+ 732 04db 1B01     		.2byte	0x11b
+ 733 04dd 79000000 		.4byte	0x79
+ 734 04e1 4501     		.2byte	0x145
+ 735 04e3 0F       		.uleb128 0xf
+ 736 04e4 2E020000 		.4byte	.LASF82
+ 737 04e8 05       		.byte	0x5
+ 738 04e9 1C01     		.2byte	0x11c
+ 739 04eb 79000000 		.4byte	0x79
+ 740 04ef 4601     		.2byte	0x146
+ 741 04f1 0F       		.uleb128 0xf
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 14
+
+
+ 742 04f2 82070000 		.4byte	.LASF83
+ 743 04f6 05       		.byte	0x5
+ 744 04f7 1D01     		.2byte	0x11d
+ 745 04f9 79000000 		.4byte	0x79
+ 746 04fd 4701     		.2byte	0x147
+ 747 04ff 0F       		.uleb128 0xf
+ 748 0500 F1070000 		.4byte	.LASF84
+ 749 0504 05       		.byte	0x5
+ 750 0505 1E01     		.2byte	0x11e
+ 751 0507 79000000 		.4byte	0x79
+ 752 050b 4801     		.2byte	0x148
+ 753 050d 0F       		.uleb128 0xf
+ 754 050e 60040000 		.4byte	.LASF85
+ 755 0512 05       		.byte	0x5
+ 756 0513 1F01     		.2byte	0x11f
+ 757 0515 0E060000 		.4byte	0x60e
+ 758 0519 4901     		.2byte	0x149
+ 759 051b 0F       		.uleb128 0xf
+ 760 051c 84020000 		.4byte	.LASF86
+ 761 0520 05       		.byte	0x5
+ 762 0521 2101     		.2byte	0x121
+ 763 0523 79000000 		.4byte	0x79
+ 764 0527 5001     		.2byte	0x150
+ 765 0529 0F       		.uleb128 0xf
+ 766 052a E1040000 		.4byte	.LASF87
+ 767 052e 05       		.byte	0x5
+ 768 052f 2201     		.2byte	0x122
+ 769 0531 1E060000 		.4byte	0x61e
+ 770 0535 5101     		.2byte	0x151
+ 771 0537 0F       		.uleb128 0xf
+ 772 0538 12040000 		.4byte	.LASF88
+ 773 053c 05       		.byte	0x5
+ 774 053d 2401     		.2byte	0x124
+ 775 053f 34060000 		.4byte	0x634
+ 776 0543 6A01     		.2byte	0x16a
+ 777 0545 0F       		.uleb128 0xf
+ 778 0546 D4050000 		.4byte	.LASF89
+ 779 054a 05       		.byte	0x5
+ 780 054b 2601     		.2byte	0x126
+ 781 054d 4A060000 		.4byte	0x64a
+ 782 0551 7401     		.2byte	0x174
+ 783 0553 0F       		.uleb128 0xf
+ 784 0554 C5030000 		.4byte	.LASF90
+ 785 0558 05       		.byte	0x5
+ 786 0559 2801     		.2byte	0x128
+ 787 055b 79000000 		.4byte	0x79
+ 788 055f 8001     		.2byte	0x180
+ 789 0561 0F       		.uleb128 0xf
+ 790 0562 0B000000 		.4byte	.LASF91
+ 791 0566 05       		.byte	0x5
+ 792 0567 2901     		.2byte	0x129
+ 793 0569 79000000 		.4byte	0x79
+ 794 056d 8101     		.2byte	0x181
+ 795 056f 0F       		.uleb128 0xf
+ 796 0570 42040000 		.4byte	.LASF92
+ 797 0574 05       		.byte	0x5
+ 798 0575 2A01     		.2byte	0x12a
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 15
+
+
+ 799 0577 5A060000 		.4byte	0x65a
+ 800 057b 8201     		.2byte	0x182
+ 801 057d 00       		.byte	0
+ 802 057e 0B       		.uleb128 0xb
+ 803 057f 91000000 		.4byte	0x91
+ 804 0583 8E050000 		.4byte	0x58e
+ 805 0587 0C       		.uleb128 0xc
+ 806 0588 E9000000 		.4byte	0xe9
+ 807 058c 01       		.byte	0x1
+ 808 058d 00       		.byte	0
+ 809 058e 0B       		.uleb128 0xb
+ 810 058f 91000000 		.4byte	0x91
+ 811 0593 9E050000 		.4byte	0x59e
+ 812 0597 0C       		.uleb128 0xc
+ 813 0598 E9000000 		.4byte	0xe9
+ 814 059c 09       		.byte	0x9
+ 815 059d 00       		.byte	0
+ 816 059e 0B       		.uleb128 0xb
+ 817 059f 91000000 		.4byte	0x91
+ 818 05a3 AE050000 		.4byte	0x5ae
+ 819 05a7 0C       		.uleb128 0xc
+ 820 05a8 E9000000 		.4byte	0xe9
+ 821 05ac 03       		.byte	0x3
+ 822 05ad 00       		.byte	0
+ 823 05ae 0B       		.uleb128 0xb
+ 824 05af 79000000 		.4byte	0x79
+ 825 05b3 BE050000 		.4byte	0x5be
+ 826 05b7 0C       		.uleb128 0xc
+ 827 05b8 E9000000 		.4byte	0xe9
+ 828 05bc 05       		.byte	0x5
+ 829 05bd 00       		.byte	0
+ 830 05be 0B       		.uleb128 0xb
+ 831 05bf 79000000 		.4byte	0x79
+ 832 05c3 CE050000 		.4byte	0x5ce
+ 833 05c7 0C       		.uleb128 0xc
+ 834 05c8 E9000000 		.4byte	0xe9
+ 835 05cc 49       		.byte	0x49
+ 836 05cd 00       		.byte	0
+ 837 05ce 0B       		.uleb128 0xb
+ 838 05cf 79000000 		.4byte	0x79
+ 839 05d3 DE050000 		.4byte	0x5de
+ 840 05d7 0C       		.uleb128 0xc
+ 841 05d8 E9000000 		.4byte	0xe9
+ 842 05dc 02       		.byte	0x2
+ 843 05dd 00       		.byte	0
+ 844 05de 0B       		.uleb128 0xb
+ 845 05df C1000000 		.4byte	0xc1
+ 846 05e3 EE050000 		.4byte	0x5ee
+ 847 05e7 0C       		.uleb128 0xc
+ 848 05e8 E9000000 		.4byte	0xe9
+ 849 05ec 02       		.byte	0x2
+ 850 05ed 00       		.byte	0
+ 851 05ee 0B       		.uleb128 0xb
+ 852 05ef 85000000 		.4byte	0x85
+ 853 05f3 FE050000 		.4byte	0x5fe
+ 854 05f7 0C       		.uleb128 0xc
+ 855 05f8 E9000000 		.4byte	0xe9
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 16
+
+
+ 856 05fc 01       		.byte	0x1
+ 857 05fd 00       		.byte	0
+ 858 05fe 0B       		.uleb128 0xb
+ 859 05ff CD000000 		.4byte	0xcd
+ 860 0603 0E060000 		.4byte	0x60e
+ 861 0607 0C       		.uleb128 0xc
+ 862 0608 E9000000 		.4byte	0xe9
+ 863 060c 05       		.byte	0x5
+ 864 060d 00       		.byte	0
+ 865 060e 0B       		.uleb128 0xb
+ 866 060f 79000000 		.4byte	0x79
+ 867 0613 1E060000 		.4byte	0x61e
+ 868 0617 0C       		.uleb128 0xc
+ 869 0618 E9000000 		.4byte	0xe9
+ 870 061c 06       		.byte	0x6
+ 871 061d 00       		.byte	0
+ 872 061e 0B       		.uleb128 0xb
+ 873 061f 79000000 		.4byte	0x79
+ 874 0623 34060000 		.4byte	0x634
+ 875 0627 0C       		.uleb128 0xc
+ 876 0628 E9000000 		.4byte	0xe9
+ 877 062c 04       		.byte	0x4
+ 878 062d 0C       		.uleb128 0xc
+ 879 062e E9000000 		.4byte	0xe9
+ 880 0632 04       		.byte	0x4
+ 881 0633 00       		.byte	0
+ 882 0634 0B       		.uleb128 0xb
+ 883 0635 79000000 		.4byte	0x79
+ 884 0639 4A060000 		.4byte	0x64a
+ 885 063d 0C       		.uleb128 0xc
+ 886 063e E9000000 		.4byte	0xe9
+ 887 0642 01       		.byte	0x1
+ 888 0643 0C       		.uleb128 0xc
+ 889 0644 E9000000 		.4byte	0xe9
+ 890 0648 04       		.byte	0x4
+ 891 0649 00       		.byte	0
+ 892 064a 0B       		.uleb128 0xb
+ 893 064b 79000000 		.4byte	0x79
+ 894 064f 5A060000 		.4byte	0x65a
+ 895 0653 0C       		.uleb128 0xc
+ 896 0654 E9000000 		.4byte	0xe9
+ 897 0658 0B       		.byte	0xb
+ 898 0659 00       		.byte	0
+ 899 065a 0B       		.uleb128 0xb
+ 900 065b 79000000 		.4byte	0x79
+ 901 065f 6A060000 		.4byte	0x66a
+ 902 0663 0C       		.uleb128 0xc
+ 903 0664 E9000000 		.4byte	0xe9
+ 904 0668 01       		.byte	0x1
+ 905 0669 00       		.byte	0
+ 906 066a 10       		.uleb128 0x10
+ 907 066b 45000000 		.4byte	.LASF93
+ 908 066f 28       		.byte	0x28
+ 909 0670 05       		.byte	0x5
+ 910 0671 2E01     		.2byte	0x12e
+ 911 0673 C6060000 		.4byte	0x6c6
+ 912 0677 0E       		.uleb128 0xe
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 17
+
+
+ 913 0678 E0070000 		.4byte	.LASF94
+ 914 067c 05       		.byte	0x5
+ 915 067d 2F01     		.2byte	0x12f
+ 916 067f 79000000 		.4byte	0x79
+ 917 0683 00       		.byte	0
+ 918 0684 0E       		.uleb128 0xe
+ 919 0685 39020000 		.4byte	.LASF95
+ 920 0689 05       		.byte	0x5
+ 921 068a 3001     		.2byte	0x130
+ 922 068c C6060000 		.4byte	0x6c6
+ 923 0690 02       		.byte	0x2
+ 924 0691 0E       		.uleb128 0xe
+ 925 0692 79040000 		.4byte	.LASF96
+ 926 0696 05       		.byte	0x5
+ 927 0697 3101     		.2byte	0x131
+ 928 0699 C6060000 		.4byte	0x6c6
+ 929 069d 08       		.byte	0x8
+ 930 069e 0E       		.uleb128 0xe
+ 931 069f EA040000 		.4byte	.LASF97
+ 932 06a3 05       		.byte	0x5
+ 933 06a4 3201     		.2byte	0x132
+ 934 06a6 C6060000 		.4byte	0x6c6
+ 935 06aa 0E       		.byte	0xe
+ 936 06ab 0E       		.uleb128 0xe
+ 937 06ac 05060000 		.4byte	.LASF98
+ 938 06b0 05       		.byte	0x5
+ 939 06b1 3301     		.2byte	0x133
+ 940 06b3 D6060000 		.4byte	0x6d6
+ 941 06b7 14       		.byte	0x14
+ 942 06b8 0E       		.uleb128 0xe
+ 943 06b9 E6070000 		.4byte	.LASF99
+ 944 06bd 05       		.byte	0x5
+ 945 06be 3401     		.2byte	0x134
+ 946 06c0 A9000000 		.4byte	0xa9
+ 947 06c4 24       		.byte	0x24
+ 948 06c5 00       		.byte	0
+ 949 06c6 0B       		.uleb128 0xb
+ 950 06c7 A9000000 		.4byte	0xa9
+ 951 06cb D6060000 		.4byte	0x6d6
+ 952 06cf 0C       		.uleb128 0xc
+ 953 06d0 E9000000 		.4byte	0xe9
+ 954 06d4 02       		.byte	0x2
+ 955 06d5 00       		.byte	0
+ 956 06d6 0B       		.uleb128 0xb
+ 957 06d7 CD000000 		.4byte	0xcd
+ 958 06db E6060000 		.4byte	0x6e6
+ 959 06df 0C       		.uleb128 0xc
+ 960 06e0 E9000000 		.4byte	0xe9
+ 961 06e4 03       		.byte	0x3
+ 962 06e5 00       		.byte	0
+ 963 06e6 10       		.uleb128 0x10
+ 964 06e7 E7050000 		.4byte	.LASF100
+ 965 06eb 08       		.byte	0x8
+ 966 06ec 05       		.byte	0x5
+ 967 06ed 3B01     		.2byte	0x13b
+ 968 06ef 0E070000 		.4byte	0x70e
+ 969 06f3 0E       		.uleb128 0xe
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 18
+
+
+ 970 06f4 1C020000 		.4byte	.LASF101
+ 971 06f8 05       		.byte	0x5
+ 972 06f9 3C01     		.2byte	0x13c
+ 973 06fb B5000000 		.4byte	0xb5
+ 974 06ff 00       		.byte	0
+ 975 0700 0E       		.uleb128 0xe
+ 976 0701 A7050000 		.4byte	.LASF102
+ 977 0705 05       		.byte	0x5
+ 978 0706 3D01     		.2byte	0x13d
+ 979 0708 B5000000 		.4byte	0xb5
+ 980 070c 04       		.byte	0x4
+ 981 070d 00       		.byte	0
+ 982 070e 10       		.uleb128 0x10
+ 983 070f 46060000 		.4byte	.LASF103
+ 984 0713 06       		.byte	0x6
+ 985 0714 05       		.byte	0x5
+ 986 0715 4401     		.2byte	0x144
+ 987 0717 50070000 		.4byte	0x750
+ 988 071b 0E       		.uleb128 0xe
+ 989 071c 93060000 		.4byte	.LASF104
+ 990 0720 05       		.byte	0x5
+ 991 0721 4501     		.2byte	0x145
+ 992 0723 79000000 		.4byte	0x79
+ 993 0727 00       		.byte	0
+ 994 0728 0E       		.uleb128 0xe
+ 995 0729 7B000000 		.4byte	.LASF105
+ 996 072d 05       		.byte	0x5
+ 997 072e 4601     		.2byte	0x146
+ 998 0730 79000000 		.4byte	0x79
+ 999 0734 01       		.byte	0x1
+ 1000 0735 0E       		.uleb128 0xe
+ 1001 0736 04080000 		.4byte	.LASF106
+ 1002 073a 05       		.byte	0x5
+ 1003 073b 4701     		.2byte	0x147
+ 1004 073d A9000000 		.4byte	0xa9
+ 1005 0741 02       		.byte	0x2
+ 1006 0742 0E       		.uleb128 0xe
+ 1007 0743 D9020000 		.4byte	.LASF107
+ 1008 0747 05       		.byte	0x5
+ 1009 0748 4801     		.2byte	0x148
+ 1010 074a A9000000 		.4byte	0xa9
+ 1011 074e 04       		.byte	0x4
+ 1012 074f 00       		.byte	0
+ 1013 0750 11       		.uleb128 0x11
+ 1014 0751 01       		.byte	0x1
+ 1015 0752 24000000 		.4byte	0x24
+ 1016 0756 05       		.byte	0x5
+ 1017 0757 4C01     		.2byte	0x14c
+ 1018 0759 82070000 		.4byte	0x782
+ 1019 075d 12       		.uleb128 0x12
+ 1020 075e AB020000 		.4byte	.LASF108
+ 1021 0762 00       		.byte	0
+ 1022 0763 12       		.uleb128 0x12
+ 1023 0764 A1050000 		.4byte	.LASF109
+ 1024 0768 01       		.byte	0x1
+ 1025 0769 12       		.uleb128 0x12
+ 1026 076a 2F070000 		.4byte	.LASF110
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 19
+
+
+ 1027 076e 02       		.byte	0x2
+ 1028 076f 12       		.uleb128 0x12
+ 1029 0770 77020000 		.4byte	.LASF111
+ 1030 0774 03       		.byte	0x3
+ 1031 0775 12       		.uleb128 0x12
+ 1032 0776 2F050000 		.4byte	.LASF112
+ 1033 077a 04       		.byte	0x4
+ 1034 077b 12       		.uleb128 0x12
+ 1035 077c 92050000 		.4byte	.LASF113
+ 1036 0780 05       		.byte	0x5
+ 1037 0781 00       		.byte	0
+ 1038 0782 05       		.uleb128 0x5
+ 1039 0783 22060000 		.4byte	.LASF114
+ 1040 0787 05       		.byte	0x5
+ 1041 0788 5401     		.2byte	0x154
+ 1042 078a 50070000 		.4byte	0x750
+ 1043 078e 11       		.uleb128 0x11
+ 1044 078f 01       		.byte	0x1
+ 1045 0790 24000000 		.4byte	0x24
+ 1046 0794 05       		.byte	0x5
+ 1047 0795 5601     		.2byte	0x156
+ 1048 0797 BA070000 		.4byte	0x7ba
+ 1049 079b 12       		.uleb128 0x12
+ 1050 079c 01020000 		.4byte	.LASF115
+ 1051 07a0 00       		.byte	0
+ 1052 07a1 12       		.uleb128 0x12
+ 1053 07a2 5B060000 		.4byte	.LASF116
+ 1054 07a6 01       		.byte	0x1
+ 1055 07a7 12       		.uleb128 0x12
+ 1056 07a8 D8010000 		.4byte	.LASF117
+ 1057 07ac 02       		.byte	0x2
+ 1058 07ad 12       		.uleb128 0x12
+ 1059 07ae 72010000 		.4byte	.LASF118
+ 1060 07b2 03       		.byte	0x3
+ 1061 07b3 12       		.uleb128 0x12
+ 1062 07b4 3D040000 		.4byte	.LASF119
+ 1063 07b8 04       		.byte	0x4
+ 1064 07b9 00       		.byte	0
+ 1065 07ba 05       		.uleb128 0x5
+ 1066 07bb 8B080000 		.4byte	.LASF120
+ 1067 07bf 05       		.byte	0x5
+ 1068 07c0 5D01     		.2byte	0x15d
+ 1069 07c2 8E070000 		.4byte	0x78e
+ 1070 07c6 13       		.uleb128 0x13
+ 1071 07c7 7C010000 		.4byte	.LASF121
+ 1072 07cb 06       		.byte	0x6
+ 1073 07cc 1207     		.2byte	0x712
+ 1074 07ce D2070000 		.4byte	0x7d2
+ 1075 07d2 14       		.uleb128 0x14
+ 1076 07d3 6E000000 		.4byte	0x6e
+ 1077 07d7 15       		.uleb128 0x15
+ 1078 07d8 9B050000 		.4byte	.LASF122
+ 1079 07dc 07       		.byte	0x7
+ 1080 07dd 32       		.byte	0x32
+ 1081 07de 06010000 		.4byte	0x106
+ 1082 07e2 05       		.uleb128 0x5
+ 1083 07e3 03       		.byte	0x3
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 20
+
+
+ 1084 07e4 00000000 		.4byte	g_ref
+ 1085 07e8 15       		.uleb128 0x15
+ 1086 07e9 2F040000 		.4byte	.LASF123
+ 1087 07ed 07       		.byte	0x7
+ 1088 07ee 32       		.byte	0x32
+ 1089 07ef 06010000 		.4byte	0x106
+ 1090 07f3 05       		.uleb128 0x5
+ 1091 07f4 03       		.byte	0x3
+ 1092 07f5 00000000 		.4byte	g_refNew
+ 1093 07f9 15       		.uleb128 0x15
+ 1094 07fa 5E010000 		.4byte	.LASF124
+ 1095 07fe 07       		.byte	0x7
+ 1096 07ff 32       		.byte	0x32
+ 1097 0800 06010000 		.4byte	0x106
+ 1098 0804 05       		.uleb128 0x5
+ 1099 0805 03       		.byte	0x3
+ 1100 0806 00000000 		.4byte	g_refOld
+ 1101 080a 15       		.uleb128 0x15
+ 1102 080b 89010000 		.4byte	.LASF125
+ 1103 080f 07       		.byte	0x7
+ 1104 0810 33       		.byte	0x33
+ 1105 0811 43010000 		.4byte	0x143
+ 1106 0815 05       		.uleb128 0x5
+ 1107 0816 03       		.byte	0x3
+ 1108 0817 00000000 		.4byte	g_meas
+ 1109 081b 15       		.uleb128 0x15
+ 1110 081c A1020000 		.4byte	.LASF126
+ 1111 0820 07       		.byte	0x7
+ 1112 0821 33       		.byte	0x33
+ 1113 0822 43010000 		.4byte	0x143
+ 1114 0826 05       		.uleb128 0x5
+ 1115 0827 03       		.byte	0x3
+ 1116 0828 00000000 		.4byte	g_measOld
+ 1117 082c 15       		.uleb128 0x15
+ 1118 082d EC010000 		.4byte	.LASF127
+ 1119 0831 07       		.byte	0x7
+ 1120 0832 34       		.byte	0x34
+ 1121 0833 F0010000 		.4byte	0x1f0
+ 1122 0837 05       		.uleb128 0x5
+ 1123 0838 03       		.byte	0x3
+ 1124 0839 00000000 		.4byte	g_rx
+ 1125 083d 15       		.uleb128 0x15
+ 1126 083e 56030000 		.4byte	.LASF128
+ 1127 0842 07       		.byte	0x7
+ 1128 0843 35       		.byte	0x35
+ 1129 0844 3D020000 		.4byte	0x23d
+ 1130 0848 05       		.uleb128 0x5
+ 1131 0849 03       		.byte	0x3
+ 1132 084a 00000000 		.4byte	g_mem
+ 1133 084e 15       		.uleb128 0x15
+ 1134 084f 26000000 		.4byte	.LASF129
+ 1135 0853 07       		.byte	0x7
+ 1136 0854 35       		.byte	0x35
+ 1137 0855 3D020000 		.4byte	0x23d
+ 1138 0859 05       		.uleb128 0x5
+ 1139 085a 03       		.byte	0x3
+ 1140 085b 00000000 		.4byte	c_mem
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 21
+
+
+ 1141 085f 15       		.uleb128 0x15
+ 1142 0860 C4040000 		.4byte	.LASF130
+ 1143 0864 07       		.byte	0x7
+ 1144 0865 36       		.byte	0x36
+ 1145 0866 0E070000 		.4byte	0x70e
+ 1146 086a 05       		.uleb128 0x5
+ 1147 086b 03       		.byte	0x3
+ 1148 086c 00000000 		.4byte	calib
+ 1149 0870 0B       		.uleb128 0xb
+ 1150 0871 E6060000 		.4byte	0x6e6
+ 1151 0875 80080000 		.4byte	0x880
+ 1152 0879 0C       		.uleb128 0xc
+ 1153 087a E9000000 		.4byte	0xe9
+ 1154 087e 01       		.byte	0x1
+ 1155 087f 00       		.byte	0
+ 1156 0880 15       		.uleb128 0x15
+ 1157 0881 85000000 		.4byte	.LASF131
+ 1158 0885 07       		.byte	0x7
+ 1159 0886 37       		.byte	0x37
+ 1160 0887 70080000 		.4byte	0x870
+ 1161 088b 05       		.uleb128 0x5
+ 1162 088c 03       		.byte	0x3
+ 1163 088d 00000000 		.4byte	filt_v
+ 1164 0891 15       		.uleb128 0x15
+ 1165 0892 D2040000 		.4byte	.LASF132
+ 1166 0896 07       		.byte	0x7
+ 1167 0897 37       		.byte	0x37
+ 1168 0898 E6060000 		.4byte	0x6e6
+ 1169 089c 05       		.uleb128 0x5
+ 1170 089d 03       		.byte	0x3
+ 1171 089e 00000000 		.4byte	filt_curr_diff
+ 1172 08a2 15       		.uleb128 0x15
+ 1173 08a3 4C000000 		.4byte	.LASF133
+ 1174 08a7 07       		.byte	0x7
+ 1175 08a8 37       		.byte	0x37
+ 1176 08a9 70080000 		.4byte	0x870
+ 1177 08ad 05       		.uleb128 0x5
+ 1178 08ae 03       		.byte	0x3
+ 1179 08af 00000000 		.4byte	filt_i
+ 1180 08b3 0B       		.uleb128 0xb
+ 1181 08b4 E6060000 		.4byte	0x6e6
+ 1182 08b8 C3080000 		.4byte	0x8c3
+ 1183 08bc 0C       		.uleb128 0xc
+ 1184 08bd E9000000 		.4byte	0xe9
+ 1185 08c1 02       		.byte	0x2
+ 1186 08c2 00       		.byte	0
+ 1187 08c3 15       		.uleb128 0x15
+ 1188 08c4 9B060000 		.4byte	.LASF134
+ 1189 08c8 07       		.byte	0x7
+ 1190 08c9 38       		.byte	0x38
+ 1191 08ca B3080000 		.4byte	0x8b3
+ 1192 08ce 05       		.uleb128 0x5
+ 1193 08cf 03       		.byte	0x3
+ 1194 08d0 00000000 		.4byte	filt_vel
+ 1195 08d4 0B       		.uleb128 0xb
+ 1196 08d5 E6060000 		.4byte	0x6e6
+ 1197 08d9 E4080000 		.4byte	0x8e4
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 22
+
+
+ 1198 08dd 0C       		.uleb128 0xc
+ 1199 08de E9000000 		.4byte	0xe9
+ 1200 08e2 07       		.byte	0x7
+ 1201 08e3 00       		.byte	0
+ 1202 08e4 15       		.uleb128 0x15
+ 1203 08e5 90070000 		.4byte	.LASF135
+ 1204 08e9 07       		.byte	0x7
+ 1205 08ea 39       		.byte	0x39
+ 1206 08eb D4080000 		.4byte	0x8d4
+ 1207 08ef 05       		.uleb128 0x5
+ 1208 08f0 03       		.byte	0x3
+ 1209 08f1 00000000 		.4byte	filt_emg
+ 1210 08f5 15       		.uleb128 0x15
+ 1211 08f6 C6010000 		.4byte	.LASF136
+ 1212 08fa 07       		.byte	0x7
+ 1213 08fb 3C       		.byte	0x3c
+ 1214 08fc 85000000 		.4byte	0x85
+ 1215 0900 05       		.uleb128 0x5
+ 1216 0901 03       		.byte	0x3
+ 1217 0902 00000000 		.4byte	timer_value
+ 1218 0906 15       		.uleb128 0x15
+ 1219 0907 CA070000 		.4byte	.LASF137
+ 1220 090b 07       		.byte	0x7
+ 1221 090c 3D       		.byte	0x3d
+ 1222 090d 85000000 		.4byte	0x85
+ 1223 0911 05       		.uleb128 0x5
+ 1224 0912 03       		.byte	0x3
+ 1225 0913 00000000 		.4byte	timer_value0
+ 1226 0917 15       		.uleb128 0x15
+ 1227 0918 24040000 		.4byte	.LASF138
+ 1228 091c 07       		.byte	0x7
+ 1229 091d 3E       		.byte	0x3e
+ 1230 091e CD000000 		.4byte	0xcd
+ 1231 0922 05       		.uleb128 0x5
+ 1232 0923 03       		.byte	0x3
+ 1233 0924 00000000 		.4byte	cycle_time
+ 1234 0928 15       		.uleb128 0x15
+ 1235 0929 B1060000 		.4byte	.LASF139
+ 1236 092d 07       		.byte	0x7
+ 1237 092e 41       		.byte	0x41
+ 1238 092f C0010000 		.4byte	0x1c0
+ 1239 0933 05       		.uleb128 0x5
+ 1240 0934 03       		.byte	0x3
+ 1241 0935 00000000 		.4byte	dev_tension
+ 1242 0939 15       		.uleb128 0x15
+ 1243 093a 93020000 		.4byte	.LASF140
+ 1244 093e 07       		.byte	0x7
+ 1245 093f 42       		.byte	0x42
+ 1246 0940 79000000 		.4byte	0x79
+ 1247 0944 05       		.uleb128 0x5
+ 1248 0945 03       		.byte	0x3
+ 1249 0946 00000000 		.4byte	dev_pwm_limit
+ 1250 094a 15       		.uleb128 0x15
+ 1251 094b 7D030000 		.4byte	.LASF141
+ 1252 094f 07       		.byte	0x7
+ 1253 0950 43       		.byte	0x43
+ 1254 0951 79000000 		.4byte	0x79
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 23
+
+
+ 1255 0955 05       		.uleb128 0x5
+ 1256 0956 03       		.byte	0x3
+ 1257 0957 00000000 		.4byte	dev_pwm_sat
+ 1258 095b 15       		.uleb128 0x15
+ 1259 095c 04040000 		.4byte	.LASF142
+ 1260 0960 07       		.byte	0x7
+ 1261 0961 44       		.byte	0x44
+ 1262 0962 C0010000 		.4byte	0x1c0
+ 1263 0966 05       		.uleb128 0x5
+ 1264 0967 03       		.byte	0x3
+ 1265 0968 00000000 		.4byte	dev_tension_f
+ 1266 096c 15       		.uleb128 0x15
+ 1267 096d 18080000 		.4byte	.LASF143
+ 1268 0971 07       		.byte	0x7
+ 1269 0972 45       		.byte	0x45
+ 1270 0973 C0010000 		.4byte	0x1c0
+ 1271 0977 05       		.uleb128 0x5
+ 1272 0978 03       		.byte	0x3
+ 1273 0979 00000000 		.4byte	pow_tension
+ 1274 097d 15       		.uleb128 0x15
+ 1275 097e 6D000000 		.4byte	.LASF144
+ 1276 0982 07       		.byte	0x7
+ 1277 0983 47       		.byte	0x47
+ 1278 0984 BA070000 		.4byte	0x7ba
+ 1279 0988 05       		.uleb128 0x5
+ 1280 0989 03       		.byte	0x3
+ 1281 098a 00000000 		.4byte	cycles_status
+ 1282 098e 15       		.uleb128 0x15
+ 1283 098f 2C000000 		.4byte	.LASF145
+ 1284 0993 07       		.byte	0x7
+ 1285 0994 48       		.byte	0x48
+ 1286 0995 82070000 		.4byte	0x782
+ 1287 0999 05       		.uleb128 0x5
+ 1288 099a 03       		.byte	0x3
+ 1289 099b 00000000 		.4byte	emg_1_status
+ 1290 099f 15       		.uleb128 0x15
+ 1291 09a0 4A080000 		.4byte	.LASF146
+ 1292 09a4 07       		.byte	0x7
+ 1293 09a5 49       		.byte	0x49
+ 1294 09a6 82070000 		.4byte	0x782
+ 1295 09aa 05       		.uleb128 0x5
+ 1296 09ab 03       		.byte	0x3
+ 1297 09ac 00000000 		.4byte	emg_2_status
+ 1298 09b0 15       		.uleb128 0x15
+ 1299 09b1 84040000 		.4byte	.LASF147
+ 1300 09b5 07       		.byte	0x7
+ 1301 09b6 4C       		.byte	0x4c
+ 1302 09b7 79000000 		.4byte	0x79
+ 1303 09bb 05       		.uleb128 0x5
+ 1304 09bc 03       		.byte	0x3
+ 1305 09bd 00000000 		.4byte	reset_last_value_flag
+ 1306 09c1 15       		.uleb128 0x15
+ 1307 09c2 0E020000 		.4byte	.LASF148
+ 1308 09c6 07       		.byte	0x7
+ 1309 09c7 4D       		.byte	0x4d
+ 1310 09c8 79000000 		.4byte	0x79
+ 1311 09cc 05       		.uleb128 0x5
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 24
+
+
+ 1312 09cd 03       		.byte	0x3
+ 1313 09ce 00000000 		.4byte	tension_valid
+ 1314 09d2 15       		.uleb128 0x15
+ 1315 09d3 CF060000 		.4byte	.LASF149
+ 1316 09d7 07       		.byte	0x7
+ 1317 09d8 4E       		.byte	0x4e
+ 1318 09d9 79000000 		.4byte	0x79
+ 1319 09dd 05       		.uleb128 0x5
+ 1320 09de 03       		.byte	0x3
+ 1321 09df 00000000 		.4byte	interrupt_flag
+ 1322 09e3 15       		.uleb128 0x15
+ 1323 09e4 90030000 		.4byte	.LASF150
+ 1324 09e8 07       		.byte	0x7
+ 1325 09e9 4F       		.byte	0x4f
+ 1326 09ea 79000000 		.4byte	0x79
+ 1327 09ee 05       		.uleb128 0x5
+ 1328 09ef 03       		.byte	0x3
+ 1329 09f0 00000000 		.4byte	cycles_interrupt_flag
+ 1330 09f4 15       		.uleb128 0x15
+ 1331 09f5 75060000 		.4byte	.LASF151
+ 1332 09f9 07       		.byte	0x7
+ 1333 09fa 50       		.byte	0x50
+ 1334 09fb 79000000 		.4byte	0x79
+ 1335 09ff 05       		.uleb128 0x5
+ 1336 0a00 03       		.byte	0x3
+ 1337 0a01 00000000 		.4byte	maintenance_flag
+ 1338 0a05 15       		.uleb128 0x15
+ 1339 0a06 1A010000 		.4byte	.LASF152
+ 1340 0a0a 07       		.byte	0x7
+ 1341 0a0b 51       		.byte	0x51
+ 1342 0a0c 79000000 		.4byte	0x79
+ 1343 0a10 05       		.uleb128 0x5
+ 1344 0a11 03       		.byte	0x3
+ 1345 0a12 00000000 		.4byte	can_write
+ 1346 0a16 15       		.uleb128 0x15
+ 1347 0a17 11050000 		.4byte	.LASF153
+ 1348 0a1b 07       		.byte	0x7
+ 1349 0a1c 52       		.byte	0x52
+ 1350 0a1d 79000000 		.4byte	0x79
+ 1351 0a21 05       		.uleb128 0x5
+ 1352 0a22 03       		.byte	0x3
+ 1353 0a23 00000000 		.4byte	rest_enabled
+ 1354 0a27 15       		.uleb128 0x15
+ 1355 0a28 6D040000 		.4byte	.LASF154
+ 1356 0a2c 07       		.byte	0x7
+ 1357 0a2d 53       		.byte	0x53
+ 1358 0a2e 79000000 		.4byte	0x79
+ 1359 0a32 05       		.uleb128 0x5
+ 1360 0a33 03       		.byte	0x3
+ 1361 0a34 00000000 		.4byte	forced_open
+ 1362 0a38 15       		.uleb128 0x15
+ 1363 0a39 2D010000 		.4byte	.LASF155
+ 1364 0a3d 07       		.byte	0x7
+ 1365 0a3e 54       		.byte	0x54
+ 1366 0a3f 79000000 		.4byte	0x79
+ 1367 0a43 05       		.uleb128 0x5
+ 1368 0a44 03       		.byte	0x3
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 25
+
+
+ 1369 0a45 00000000 		.4byte	battery_low_SoC
+ 1370 0a49 15       		.uleb128 0x15
+ 1371 0a4a 62030000 		.4byte	.LASF156
+ 1372 0a4e 07       		.byte	0x7
+ 1373 0a4f 55       		.byte	0x55
+ 1374 0a50 79000000 		.4byte	0x79
+ 1375 0a54 05       		.uleb128 0x5
+ 1376 0a55 03       		.byte	0x3
+ 1377 0a56 00000000 		.4byte	change_ext_ref_flag
+ 1378 0a5a 15       		.uleb128 0x15
+ 1379 0a5b 99070000 		.4byte	.LASF157
+ 1380 0a5f 07       		.byte	0x7
+ 1381 0a60 56       		.byte	0x56
+ 1382 0a61 79000000 		.4byte	0x79
+ 1383 0a65 05       		.uleb128 0x5
+ 1384 0a66 03       		.byte	0x3
+ 1385 0a67 00000000 		.4byte	reset_PSoC_flag
+ 1386 0a6b 0B       		.uleb128 0xb
+ 1387 0a6c A9000000 		.4byte	0xa9
+ 1388 0a70 7B0A0000 		.4byte	0xa7b
+ 1389 0a74 0C       		.uleb128 0xc
+ 1390 0a75 E9000000 		.4byte	0xe9
+ 1391 0a79 0B       		.byte	0xb
+ 1392 0a7a 00       		.byte	0
+ 1393 0a7b 15       		.uleb128 0x15
+ 1394 0a7c 26020000 		.4byte	.LASF158
+ 1395 0a80 07       		.byte	0x7
+ 1396 0a81 59       		.byte	0x59
+ 1397 0a82 6B0A0000 		.4byte	0xa6b
+ 1398 0a86 05       		.uleb128 0x5
+ 1399 0a87 03       		.byte	0x3
+ 1400 0a88 00000000 		.4byte	ADC_buf
+ 1401 0a8c 15       		.uleb128 0x15
+ 1402 0a8d 3F050000 		.4byte	.LASF159
+ 1403 0a91 07       		.byte	0x7
+ 1404 0a92 5A       		.byte	0x5a
+ 1405 0a93 79000000 		.4byte	0x79
+ 1406 0a97 05       		.uleb128 0x5
+ 1407 0a98 03       		.byte	0x3
+ 1408 0a99 00000000 		.4byte	NUM_OF_ANALOG_INPUTS
+ 1409 0a9d 15       		.uleb128 0x15
+ 1410 0a9e A9070000 		.4byte	.LASF160
+ 1411 0aa2 07       		.byte	0x7
+ 1412 0aa3 5D       		.byte	0x5d
+ 1413 0aa4 9D000000 		.4byte	0x9d
+ 1414 0aa8 05       		.uleb128 0x5
+ 1415 0aa9 03       		.byte	0x3
+ 1416 0aaa 00000000 		.4byte	pwm_sign
+ 1417 0aae 0B       		.uleb128 0xb
+ 1418 0aaf 91000000 		.4byte	0x91
+ 1419 0ab3 BE0A0000 		.4byte	0xabe
+ 1420 0ab7 0C       		.uleb128 0xc
+ 1421 0ab8 E9000000 		.4byte	0xe9
+ 1422 0abc 04       		.byte	0x4
+ 1423 0abd 00       		.byte	0
+ 1424 0abe 15       		.uleb128 0x15
+ 1425 0abf 6C080000 		.4byte	.LASF161
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 26
+
+
+ 1426 0ac3 07       		.byte	0x7
+ 1427 0ac4 60       		.byte	0x60
+ 1428 0ac5 AE0A0000 		.4byte	0xaae
+ 1429 0ac9 05       		.uleb128 0x5
+ 1430 0aca 03       		.byte	0x3
+ 1431 0acb 00000000 		.4byte	data_encoder_raw
+ 1432 0acf 15       		.uleb128 0x15
+ 1433 0ad0 37070000 		.4byte	.LASF162
+ 1434 0ad4 07       		.byte	0x7
+ 1435 0ad5 61       		.byte	0x61
+ 1436 0ad6 5A060000 		.4byte	0x65a
+ 1437 0ada 05       		.uleb128 0x5
+ 1438 0adb 03       		.byte	0x3
+ 1439 0adc 00000000 		.4byte	N_Encoder_Line_Connected
+ 1440 0ae0 0B       		.uleb128 0xb
+ 1441 0ae1 85000000 		.4byte	0x85
+ 1442 0ae5 F60A0000 		.4byte	0xaf6
+ 1443 0ae9 0C       		.uleb128 0xc
+ 1444 0aea E9000000 		.4byte	0xe9
+ 1445 0aee 01       		.byte	0x1
+ 1446 0aef 0C       		.uleb128 0xc
+ 1447 0af0 E9000000 		.4byte	0xe9
+ 1448 0af4 04       		.byte	0x4
+ 1449 0af5 00       		.byte	0
+ 1450 0af6 15       		.uleb128 0x15
+ 1451 0af7 E0030000 		.4byte	.LASF163
+ 1452 0afb 07       		.byte	0x7
+ 1453 0afc 62       		.byte	0x62
+ 1454 0afd E00A0000 		.4byte	0xae0
+ 1455 0b01 05       		.uleb128 0x5
+ 1456 0b02 03       		.byte	0x3
+ 1457 0b03 00000000 		.4byte	Encoder_Value
+ 1458 0b07 15       		.uleb128 0x15
+ 1459 0b08 57080000 		.4byte	.LASF164
+ 1460 0b0c 07       		.byte	0x7
+ 1461 0b0d 63       		.byte	0x63
+ 1462 0b0e 34060000 		.4byte	0x634
+ 1463 0b12 05       		.uleb128 0x5
+ 1464 0b13 03       		.byte	0x3
+ 1465 0b14 00000000 		.4byte	Encoder_Check
+ 1466 0b18 15       		.uleb128 0x15
+ 1467 0b19 B2040000 		.4byte	.LASF165
+ 1468 0b1d 07       		.byte	0x7
+ 1469 0b1e 66       		.byte	0x66
+ 1470 0b1f B5000000 		.4byte	0xb5
+ 1471 0b23 05       		.uleb128 0x5
+ 1472 0b24 03       		.byte	0x3
+ 1473 0b25 00000000 		.4byte	rest_pos_curr_ref
+ 1474 0b29 15       		.uleb128 0x15
+ 1475 0b2a 69050000 		.4byte	.LASF166
+ 1476 0b2e 07       		.byte	0x7
+ 1477 0b2f 69       		.byte	0x69
+ 1478 0b30 00010000 		.4byte	0x100
+ 1479 0b34 05       		.uleb128 0x5
+ 1480 0b35 03       		.byte	0x3
+ 1481 0b36 00000000 		.4byte	pFile
+ 1482 0b3a 15       		.uleb128 0x15
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 27
+
+
+ 1483 0b3b F1010000 		.4byte	.LASF167
+ 1484 0b3f 07       		.byte	0x7
+ 1485 0b40 6C       		.byte	0x6c
+ 1486 0b41 79000000 		.4byte	0x79
+ 1487 0b45 05       		.uleb128 0x5
+ 1488 0b46 03       		.byte	0x3
+ 1489 0b47 00000000 		.4byte	N_IMU_Connected
+ 1490 0b4b 0B       		.uleb128 0xb
+ 1491 0b4c 79000000 		.4byte	0x79
+ 1492 0b50 5B0B0000 		.4byte	0xb5b
+ 1493 0b54 0C       		.uleb128 0xc
+ 1494 0b55 E9000000 		.4byte	0xe9
+ 1495 0b59 04       		.byte	0x4
+ 1496 0b5a 00       		.byte	0
+ 1497 0b5b 15       		.uleb128 0x15
+ 1498 0b5c 0A080000 		.4byte	.LASF168
+ 1499 0b60 07       		.byte	0x7
+ 1500 0b61 6D       		.byte	0x6d
+ 1501 0b62 4B0B0000 		.4byte	0xb4b
+ 1502 0b66 05       		.uleb128 0x5
+ 1503 0b67 03       		.byte	0x3
+ 1504 0b68 00000000 		.4byte	IMU_connected
+ 1505 0b6c 15       		.uleb128 0x15
+ 1506 0b6d C1020000 		.4byte	.LASF169
+ 1507 0b71 07       		.byte	0x7
+ 1508 0b72 6E       		.byte	0x6e
+ 1509 0b73 60000000 		.4byte	0x60
+ 1510 0b77 05       		.uleb128 0x5
+ 1511 0b78 03       		.byte	0x3
+ 1512 0b79 00000000 		.4byte	imus_data_size
+ 1513 0b7d 0B       		.uleb128 0xb
+ 1514 0b7e 60000000 		.4byte	0x60
+ 1515 0b82 8D0B0000 		.4byte	0xb8d
+ 1516 0b86 0C       		.uleb128 0xc
+ 1517 0b87 E9000000 		.4byte	0xe9
+ 1518 0b8b 04       		.byte	0x4
+ 1519 0b8c 00       		.byte	0
+ 1520 0b8d 15       		.uleb128 0x15
+ 1521 0b8e EE030000 		.4byte	.LASF170
+ 1522 0b92 07       		.byte	0x7
+ 1523 0b93 6F       		.byte	0x6f
+ 1524 0b94 7D0B0000 		.4byte	0xb7d
+ 1525 0b98 05       		.uleb128 0x5
+ 1526 0b99 03       		.byte	0x3
+ 1527 0b9a 00000000 		.4byte	single_imu_size
+ 1528 0b9e 0B       		.uleb128 0xb
+ 1529 0b9f 6A060000 		.4byte	0x66a
+ 1530 0ba3 AE0B0000 		.4byte	0xbae
+ 1531 0ba7 0C       		.uleb128 0xc
+ 1532 0ba8 E9000000 		.4byte	0xe9
+ 1533 0bac 04       		.byte	0x4
+ 1534 0bad 00       		.byte	0
+ 1535 0bae 15       		.uleb128 0x15
+ 1536 0baf 5C030000 		.4byte	.LASF171
+ 1537 0bb3 07       		.byte	0x7
+ 1538 0bb4 70       		.byte	0x70
+ 1539 0bb5 9E0B0000 		.4byte	0xb9e
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 28
+
+
+ 1540 0bb9 05       		.uleb128 0x5
+ 1541 0bba 03       		.byte	0x3
+ 1542 0bbb 00000000 		.4byte	g_imu
+ 1543 0bbf 15       		.uleb128 0x15
+ 1544 0bc0 24010000 		.4byte	.LASF172
+ 1545 0bc4 07       		.byte	0x7
+ 1546 0bc5 71       		.byte	0x71
+ 1547 0bc6 9E0B0000 		.4byte	0xb9e
+ 1548 0bca 05       		.uleb128 0x5
+ 1549 0bcb 03       		.byte	0x3
+ 1550 0bcc 00000000 		.4byte	g_imuNew
+ 1551 0bd0 0B       		.uleb128 0xb
+ 1552 0bd1 79000000 		.4byte	0x79
+ 1553 0bd5 E60B0000 		.4byte	0xbe6
+ 1554 0bd9 0C       		.uleb128 0xc
+ 1555 0bda E9000000 		.4byte	0xe9
+ 1556 0bde 04       		.byte	0x4
+ 1557 0bdf 0C       		.uleb128 0xc
+ 1558 0be0 E9000000 		.4byte	0xe9
+ 1559 0be4 05       		.byte	0x5
+ 1560 0be5 00       		.byte	0
+ 1561 0be6 15       		.uleb128 0x15
+ 1562 0be7 05000000 		.4byte	.LASF173
+ 1563 0beb 07       		.byte	0x7
+ 1564 0bec 72       		.byte	0x72
+ 1565 0bed D00B0000 		.4byte	0xbd0
+ 1566 0bf1 05       		.uleb128 0x5
+ 1567 0bf2 03       		.byte	0x3
+ 1568 0bf3 00000000 		.4byte	Accel
+ 1569 0bf7 15       		.uleb128 0x15
+ 1570 0bf8 00000000 		.4byte	.LASF174
+ 1571 0bfc 07       		.byte	0x7
+ 1572 0bfd 73       		.byte	0x73
+ 1573 0bfe D00B0000 		.4byte	0xbd0
+ 1574 0c02 05       		.uleb128 0x5
+ 1575 0c03 03       		.byte	0x3
+ 1576 0c04 00000000 		.4byte	Gyro
+ 1577 0c08 16       		.uleb128 0x16
+ 1578 0c09 4D616700 		.ascii	"Mag\000"
+ 1579 0c0d 07       		.byte	0x7
+ 1580 0c0e 74       		.byte	0x74
+ 1581 0c0f D00B0000 		.4byte	0xbd0
+ 1582 0c13 05       		.uleb128 0x5
+ 1583 0c14 03       		.byte	0x3
+ 1584 0c15 00000000 		.4byte	Mag
+ 1585 0c19 0B       		.uleb128 0xb
+ 1586 0c1a 79000000 		.4byte	0x79
+ 1587 0c1e 2F0C0000 		.4byte	0xc2f
+ 1588 0c22 0C       		.uleb128 0xc
+ 1589 0c23 E9000000 		.4byte	0xe9
+ 1590 0c27 04       		.byte	0x4
+ 1591 0c28 0C       		.uleb128 0xc
+ 1592 0c29 E9000000 		.4byte	0xe9
+ 1593 0c2d 02       		.byte	0x2
+ 1594 0c2e 00       		.byte	0
+ 1595 0c2f 15       		.uleb128 0x15
+ 1596 0c30 65080000 		.4byte	.LASF175
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 29
+
+
+ 1597 0c34 07       		.byte	0x7
+ 1598 0c35 75       		.byte	0x75
+ 1599 0c36 190C0000 		.4byte	0xc19
+ 1600 0c3a 05       		.uleb128 0x5
+ 1601 0c3b 03       		.byte	0x3
+ 1602 0c3c 00000000 		.4byte	MagCal
+ 1603 0c40 0B       		.uleb128 0xb
+ 1604 0c41 79000000 		.4byte	0x79
+ 1605 0c45 560C0000 		.4byte	0xc56
+ 1606 0c49 0C       		.uleb128 0xc
+ 1607 0c4a E9000000 		.4byte	0xe9
+ 1608 0c4e 04       		.byte	0x4
+ 1609 0c4f 0C       		.uleb128 0xc
+ 1610 0c50 E9000000 		.4byte	0xe9
+ 1611 0c54 01       		.byte	0x1
+ 1612 0c55 00       		.byte	0
+ 1613 0c56 15       		.uleb128 0x15
+ 1614 0c57 34050000 		.4byte	.LASF176
+ 1615 0c5b 07       		.byte	0x7
+ 1616 0c5c 76       		.byte	0x76
+ 1617 0c5d 400C0000 		.4byte	0xc40
+ 1618 0c61 05       		.uleb128 0x5
+ 1619 0c62 03       		.byte	0x3
+ 1620 0c63 00000000 		.4byte	Temp
+ 1621 0c67 0B       		.uleb128 0xb
+ 1622 0c68 CD000000 		.4byte	0xcd
+ 1623 0c6c 7D0C0000 		.4byte	0xc7d
+ 1624 0c70 0C       		.uleb128 0xc
+ 1625 0c71 E9000000 		.4byte	0xe9
+ 1626 0c75 04       		.byte	0x4
+ 1627 0c76 0C       		.uleb128 0xc
+ 1628 0c77 E9000000 		.4byte	0xe9
+ 1629 0c7b 03       		.byte	0x3
+ 1630 0c7c 00       		.byte	0
+ 1631 0c7d 15       		.uleb128 0x15
+ 1632 0c7e 1F040000 		.4byte	.LASF177
+ 1633 0c82 07       		.byte	0x7
+ 1634 0c83 77       		.byte	0x77
+ 1635 0c84 670C0000 		.4byte	0xc67
+ 1636 0c88 05       		.uleb128 0x5
+ 1637 0c89 03       		.byte	0x3
+ 1638 0c8a 00000000 		.4byte	Quat
+ 1639 0c8e 00       		.byte	0
+ 1640              		.section	.debug_abbrev,"",%progbits
+ 1641              	.Ldebug_abbrev0:
+ 1642 0000 01       		.uleb128 0x1
+ 1643 0001 11       		.uleb128 0x11
+ 1644 0002 01       		.byte	0x1
+ 1645 0003 25       		.uleb128 0x25
+ 1646 0004 0E       		.uleb128 0xe
+ 1647 0005 13       		.uleb128 0x13
+ 1648 0006 0B       		.uleb128 0xb
+ 1649 0007 03       		.uleb128 0x3
+ 1650 0008 0E       		.uleb128 0xe
+ 1651 0009 1B       		.uleb128 0x1b
+ 1652 000a 0E       		.uleb128 0xe
+ 1653 000b 10       		.uleb128 0x10
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 30
+
+
+ 1654 000c 17       		.uleb128 0x17
+ 1655 000d 00       		.byte	0
+ 1656 000e 00       		.byte	0
+ 1657 000f 02       		.uleb128 0x2
+ 1658 0010 24       		.uleb128 0x24
+ 1659 0011 00       		.byte	0
+ 1660 0012 0B       		.uleb128 0xb
+ 1661 0013 0B       		.uleb128 0xb
+ 1662 0014 3E       		.uleb128 0x3e
+ 1663 0015 0B       		.uleb128 0xb
+ 1664 0016 03       		.uleb128 0x3
+ 1665 0017 0E       		.uleb128 0xe
+ 1666 0018 00       		.byte	0
+ 1667 0019 00       		.byte	0
+ 1668 001a 03       		.uleb128 0x3
+ 1669 001b 16       		.uleb128 0x16
+ 1670 001c 00       		.byte	0
+ 1671 001d 03       		.uleb128 0x3
+ 1672 001e 0E       		.uleb128 0xe
+ 1673 001f 3A       		.uleb128 0x3a
+ 1674 0020 0B       		.uleb128 0xb
+ 1675 0021 3B       		.uleb128 0x3b
+ 1676 0022 0B       		.uleb128 0xb
+ 1677 0023 49       		.uleb128 0x49
+ 1678 0024 13       		.uleb128 0x13
+ 1679 0025 00       		.byte	0
+ 1680 0026 00       		.byte	0
+ 1681 0027 04       		.uleb128 0x4
+ 1682 0028 24       		.uleb128 0x24
+ 1683 0029 00       		.byte	0
+ 1684 002a 0B       		.uleb128 0xb
+ 1685 002b 0B       		.uleb128 0xb
+ 1686 002c 3E       		.uleb128 0x3e
+ 1687 002d 0B       		.uleb128 0xb
+ 1688 002e 03       		.uleb128 0x3
+ 1689 002f 08       		.uleb128 0x8
+ 1690 0030 00       		.byte	0
+ 1691 0031 00       		.byte	0
+ 1692 0032 05       		.uleb128 0x5
+ 1693 0033 16       		.uleb128 0x16
+ 1694 0034 00       		.byte	0
+ 1695 0035 03       		.uleb128 0x3
+ 1696 0036 0E       		.uleb128 0xe
+ 1697 0037 3A       		.uleb128 0x3a
+ 1698 0038 0B       		.uleb128 0xb
+ 1699 0039 3B       		.uleb128 0x3b
+ 1700 003a 05       		.uleb128 0x5
+ 1701 003b 49       		.uleb128 0x49
+ 1702 003c 13       		.uleb128 0x13
+ 1703 003d 00       		.byte	0
+ 1704 003e 00       		.byte	0
+ 1705 003f 06       		.uleb128 0x6
+ 1706 0040 13       		.uleb128 0x13
+ 1707 0041 00       		.byte	0
+ 1708 0042 03       		.uleb128 0x3
+ 1709 0043 0E       		.uleb128 0xe
+ 1710 0044 3C       		.uleb128 0x3c
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 31
+
+
+ 1711 0045 19       		.uleb128 0x19
+ 1712 0046 00       		.byte	0
+ 1713 0047 00       		.byte	0
+ 1714 0048 07       		.uleb128 0x7
+ 1715 0049 0F       		.uleb128 0xf
+ 1716 004a 00       		.byte	0
+ 1717 004b 0B       		.uleb128 0xb
+ 1718 004c 0B       		.uleb128 0xb
+ 1719 004d 49       		.uleb128 0x49
+ 1720 004e 13       		.uleb128 0x13
+ 1721 004f 00       		.byte	0
+ 1722 0050 00       		.byte	0
+ 1723 0051 08       		.uleb128 0x8
+ 1724 0052 13       		.uleb128 0x13
+ 1725 0053 01       		.byte	0x1
+ 1726 0054 03       		.uleb128 0x3
+ 1727 0055 0E       		.uleb128 0xe
+ 1728 0056 0B       		.uleb128 0xb
+ 1729 0057 0B       		.uleb128 0xb
+ 1730 0058 3A       		.uleb128 0x3a
+ 1731 0059 0B       		.uleb128 0xb
+ 1732 005a 3B       		.uleb128 0x3b
+ 1733 005b 0B       		.uleb128 0xb
+ 1734 005c 01       		.uleb128 0x1
+ 1735 005d 13       		.uleb128 0x13
+ 1736 005e 00       		.byte	0
+ 1737 005f 00       		.byte	0
+ 1738 0060 09       		.uleb128 0x9
+ 1739 0061 0D       		.uleb128 0xd
+ 1740 0062 00       		.byte	0
+ 1741 0063 03       		.uleb128 0x3
+ 1742 0064 08       		.uleb128 0x8
+ 1743 0065 3A       		.uleb128 0x3a
+ 1744 0066 0B       		.uleb128 0xb
+ 1745 0067 3B       		.uleb128 0x3b
+ 1746 0068 0B       		.uleb128 0xb
+ 1747 0069 49       		.uleb128 0x49
+ 1748 006a 13       		.uleb128 0x13
+ 1749 006b 38       		.uleb128 0x38
+ 1750 006c 0B       		.uleb128 0xb
+ 1751 006d 00       		.byte	0
+ 1752 006e 00       		.byte	0
+ 1753 006f 0A       		.uleb128 0xa
+ 1754 0070 0D       		.uleb128 0xd
+ 1755 0071 00       		.byte	0
+ 1756 0072 03       		.uleb128 0x3
+ 1757 0073 0E       		.uleb128 0xe
+ 1758 0074 3A       		.uleb128 0x3a
+ 1759 0075 0B       		.uleb128 0xb
+ 1760 0076 3B       		.uleb128 0x3b
+ 1761 0077 0B       		.uleb128 0xb
+ 1762 0078 49       		.uleb128 0x49
+ 1763 0079 13       		.uleb128 0x13
+ 1764 007a 38       		.uleb128 0x38
+ 1765 007b 0B       		.uleb128 0xb
+ 1766 007c 00       		.byte	0
+ 1767 007d 00       		.byte	0
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 32
+
+
+ 1768 007e 0B       		.uleb128 0xb
+ 1769 007f 01       		.uleb128 0x1
+ 1770 0080 01       		.byte	0x1
+ 1771 0081 49       		.uleb128 0x49
+ 1772 0082 13       		.uleb128 0x13
+ 1773 0083 01       		.uleb128 0x1
+ 1774 0084 13       		.uleb128 0x13
+ 1775 0085 00       		.byte	0
+ 1776 0086 00       		.byte	0
+ 1777 0087 0C       		.uleb128 0xc
+ 1778 0088 21       		.uleb128 0x21
+ 1779 0089 00       		.byte	0
+ 1780 008a 49       		.uleb128 0x49
+ 1781 008b 13       		.uleb128 0x13
+ 1782 008c 2F       		.uleb128 0x2f
+ 1783 008d 0B       		.uleb128 0xb
+ 1784 008e 00       		.byte	0
+ 1785 008f 00       		.byte	0
+ 1786 0090 0D       		.uleb128 0xd
+ 1787 0091 13       		.uleb128 0x13
+ 1788 0092 01       		.byte	0x1
+ 1789 0093 03       		.uleb128 0x3
+ 1790 0094 0E       		.uleb128 0xe
+ 1791 0095 0B       		.uleb128 0xb
+ 1792 0096 05       		.uleb128 0x5
+ 1793 0097 3A       		.uleb128 0x3a
+ 1794 0098 0B       		.uleb128 0xb
+ 1795 0099 3B       		.uleb128 0x3b
+ 1796 009a 0B       		.uleb128 0xb
+ 1797 009b 01       		.uleb128 0x1
+ 1798 009c 13       		.uleb128 0x13
+ 1799 009d 00       		.byte	0
+ 1800 009e 00       		.byte	0
+ 1801 009f 0E       		.uleb128 0xe
+ 1802 00a0 0D       		.uleb128 0xd
+ 1803 00a1 00       		.byte	0
+ 1804 00a2 03       		.uleb128 0x3
+ 1805 00a3 0E       		.uleb128 0xe
+ 1806 00a4 3A       		.uleb128 0x3a
+ 1807 00a5 0B       		.uleb128 0xb
+ 1808 00a6 3B       		.uleb128 0x3b
+ 1809 00a7 05       		.uleb128 0x5
+ 1810 00a8 49       		.uleb128 0x49
+ 1811 00a9 13       		.uleb128 0x13
+ 1812 00aa 38       		.uleb128 0x38
+ 1813 00ab 0B       		.uleb128 0xb
+ 1814 00ac 00       		.byte	0
+ 1815 00ad 00       		.byte	0
+ 1816 00ae 0F       		.uleb128 0xf
+ 1817 00af 0D       		.uleb128 0xd
+ 1818 00b0 00       		.byte	0
+ 1819 00b1 03       		.uleb128 0x3
+ 1820 00b2 0E       		.uleb128 0xe
+ 1821 00b3 3A       		.uleb128 0x3a
+ 1822 00b4 0B       		.uleb128 0xb
+ 1823 00b5 3B       		.uleb128 0x3b
+ 1824 00b6 05       		.uleb128 0x5
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 33
+
+
+ 1825 00b7 49       		.uleb128 0x49
+ 1826 00b8 13       		.uleb128 0x13
+ 1827 00b9 38       		.uleb128 0x38
+ 1828 00ba 05       		.uleb128 0x5
+ 1829 00bb 00       		.byte	0
+ 1830 00bc 00       		.byte	0
+ 1831 00bd 10       		.uleb128 0x10
+ 1832 00be 13       		.uleb128 0x13
+ 1833 00bf 01       		.byte	0x1
+ 1834 00c0 03       		.uleb128 0x3
+ 1835 00c1 0E       		.uleb128 0xe
+ 1836 00c2 0B       		.uleb128 0xb
+ 1837 00c3 0B       		.uleb128 0xb
+ 1838 00c4 3A       		.uleb128 0x3a
+ 1839 00c5 0B       		.uleb128 0xb
+ 1840 00c6 3B       		.uleb128 0x3b
+ 1841 00c7 05       		.uleb128 0x5
+ 1842 00c8 01       		.uleb128 0x1
+ 1843 00c9 13       		.uleb128 0x13
+ 1844 00ca 00       		.byte	0
+ 1845 00cb 00       		.byte	0
+ 1846 00cc 11       		.uleb128 0x11
+ 1847 00cd 04       		.uleb128 0x4
+ 1848 00ce 01       		.byte	0x1
+ 1849 00cf 0B       		.uleb128 0xb
+ 1850 00d0 0B       		.uleb128 0xb
+ 1851 00d1 49       		.uleb128 0x49
+ 1852 00d2 13       		.uleb128 0x13
+ 1853 00d3 3A       		.uleb128 0x3a
+ 1854 00d4 0B       		.uleb128 0xb
+ 1855 00d5 3B       		.uleb128 0x3b
+ 1856 00d6 05       		.uleb128 0x5
+ 1857 00d7 01       		.uleb128 0x1
+ 1858 00d8 13       		.uleb128 0x13
+ 1859 00d9 00       		.byte	0
+ 1860 00da 00       		.byte	0
+ 1861 00db 12       		.uleb128 0x12
+ 1862 00dc 28       		.uleb128 0x28
+ 1863 00dd 00       		.byte	0
+ 1864 00de 03       		.uleb128 0x3
+ 1865 00df 0E       		.uleb128 0xe
+ 1866 00e0 1C       		.uleb128 0x1c
+ 1867 00e1 0B       		.uleb128 0xb
+ 1868 00e2 00       		.byte	0
+ 1869 00e3 00       		.byte	0
+ 1870 00e4 13       		.uleb128 0x13
+ 1871 00e5 34       		.uleb128 0x34
+ 1872 00e6 00       		.byte	0
+ 1873 00e7 03       		.uleb128 0x3
+ 1874 00e8 0E       		.uleb128 0xe
+ 1875 00e9 3A       		.uleb128 0x3a
+ 1876 00ea 0B       		.uleb128 0xb
+ 1877 00eb 3B       		.uleb128 0x3b
+ 1878 00ec 05       		.uleb128 0x5
+ 1879 00ed 49       		.uleb128 0x49
+ 1880 00ee 13       		.uleb128 0x13
+ 1881 00ef 3F       		.uleb128 0x3f
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 34
+
+
+ 1882 00f0 19       		.uleb128 0x19
+ 1883 00f1 3C       		.uleb128 0x3c
+ 1884 00f2 19       		.uleb128 0x19
+ 1885 00f3 00       		.byte	0
+ 1886 00f4 00       		.byte	0
+ 1887 00f5 14       		.uleb128 0x14
+ 1888 00f6 35       		.uleb128 0x35
+ 1889 00f7 00       		.byte	0
+ 1890 00f8 49       		.uleb128 0x49
+ 1891 00f9 13       		.uleb128 0x13
+ 1892 00fa 00       		.byte	0
+ 1893 00fb 00       		.byte	0
+ 1894 00fc 15       		.uleb128 0x15
+ 1895 00fd 34       		.uleb128 0x34
+ 1896 00fe 00       		.byte	0
+ 1897 00ff 03       		.uleb128 0x3
+ 1898 0100 0E       		.uleb128 0xe
+ 1899 0101 3A       		.uleb128 0x3a
+ 1900 0102 0B       		.uleb128 0xb
+ 1901 0103 3B       		.uleb128 0x3b
+ 1902 0104 0B       		.uleb128 0xb
+ 1903 0105 49       		.uleb128 0x49
+ 1904 0106 13       		.uleb128 0x13
+ 1905 0107 3F       		.uleb128 0x3f
+ 1906 0108 19       		.uleb128 0x19
+ 1907 0109 02       		.uleb128 0x2
+ 1908 010a 18       		.uleb128 0x18
+ 1909 010b 00       		.byte	0
+ 1910 010c 00       		.byte	0
+ 1911 010d 16       		.uleb128 0x16
+ 1912 010e 34       		.uleb128 0x34
+ 1913 010f 00       		.byte	0
+ 1914 0110 03       		.uleb128 0x3
+ 1915 0111 08       		.uleb128 0x8
+ 1916 0112 3A       		.uleb128 0x3a
+ 1917 0113 0B       		.uleb128 0xb
+ 1918 0114 3B       		.uleb128 0x3b
+ 1919 0115 0B       		.uleb128 0xb
+ 1920 0116 49       		.uleb128 0x49
+ 1921 0117 13       		.uleb128 0x13
+ 1922 0118 3F       		.uleb128 0x3f
+ 1923 0119 19       		.uleb128 0x19
+ 1924 011a 02       		.uleb128 0x2
+ 1925 011b 18       		.uleb128 0x18
+ 1926 011c 00       		.byte	0
+ 1927 011d 00       		.byte	0
+ 1928 011e 00       		.byte	0
+ 1929              		.section	.debug_aranges,"",%progbits
+ 1930 0000 14000000 		.4byte	0x14
+ 1931 0004 0200     		.2byte	0x2
+ 1932 0006 00000000 		.4byte	.Ldebug_info0
+ 1933 000a 04       		.byte	0x4
+ 1934 000b 00       		.byte	0
+ 1935 000c 0000     		.2byte	0
+ 1936 000e 0000     		.2byte	0
+ 1937 0010 00000000 		.4byte	0
+ 1938 0014 00000000 		.4byte	0
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 35
+
+
+ 1939              		.section	.debug_line,"",%progbits
+ 1940              	.Ldebug_line0:
+ 1941 0000 9A010000 		.section	.debug_str,"MS",%progbits,1
+ 1941      02009401 
+ 1941      00000201 
+ 1941      FB0E0D00 
+ 1941      01010101 
+ 1942              	.LASF174:
+ 1943 0000 4779726F 		.ascii	"Gyro\000"
+ 1943      00
+ 1944              	.LASF173:
+ 1945 0005 41636365 		.ascii	"Accel\000"
+ 1945      6C00
+ 1946              	.LASF91:
+ 1947 000b 7573655F 		.ascii	"use_2nd_motor_flag\000"
+ 1947      326E645F 
+ 1947      6D6F746F 
+ 1947      725F666C 
+ 1947      616700
+ 1948              	.LASF27:
+ 1949 001e 73745F6D 		.ascii	"st_meas\000"
+ 1949      65617300 
+ 1950              	.LASF129:
+ 1951 0026 635F6D65 		.ascii	"c_mem\000"
+ 1951      6D00
+ 1952              	.LASF145:
+ 1953 002c 656D675F 		.ascii	"emg_1_status\000"
+ 1953      315F7374 
+ 1953      61747573 
+ 1953      00
+ 1954              	.LASF75:
+ 1955 0039 6D61696E 		.ascii	"maint_month\000"
+ 1955      745F6D6F 
+ 1955      6E746800 
+ 1956              	.LASF93:
+ 1957 0045 73745F69 		.ascii	"st_imu\000"
+ 1957      6D7500
+ 1958              	.LASF133:
+ 1959 004c 66696C74 		.ascii	"filt_i\000"
+ 1959      5F6900
+ 1960              	.LASF40:
+ 1961 0053 746F7461 		.ascii	"total_time_on\000"
+ 1961      6C5F7469 
+ 1961      6D655F6F 
+ 1961      6E00
+ 1962              	.LASF0:
+ 1963 0061 7369676E 		.ascii	"signed char\000"
+ 1963      65642063 
+ 1963      68617200 
+ 1964              	.LASF144:
+ 1965 006d 6379636C 		.ascii	"cycles_status\000"
+ 1965      65735F73 
+ 1965      74617475 
+ 1965      7300
+ 1966              	.LASF105:
+ 1967 007b 64697265 		.ascii	"direction\000"
+ 1967      6374696F 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 36
+
+
+ 1967      6E00
+ 1968              	.LASF131:
+ 1969 0085 66696C74 		.ascii	"filt_v\000"
+ 1969      5F7600
+ 1970              	.LASF178:
+ 1971 008c 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1971      43313120 
+ 1971      352E342E 
+ 1971      31203230 
+ 1971      31363036 
+ 1972 00bf 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1972      20726576 
+ 1972      6973696F 
+ 1972      6E203233 
+ 1972      37373135 
+ 1973 00f2 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1973      66756E63 
+ 1973      74696F6E 
+ 1973      2D736563 
+ 1973      74696F6E 
+ 1974              	.LASF152:
+ 1975 011a 63616E5F 		.ascii	"can_write\000"
+ 1975      77726974 
+ 1975      6500
+ 1976              	.LASF172:
+ 1977 0124 675F696D 		.ascii	"g_imuNew\000"
+ 1977      754E6577 
+ 1977      00
+ 1978              	.LASF155:
+ 1979 012d 62617474 		.ascii	"battery_low_SoC\000"
+ 1979      6572795F 
+ 1979      6C6F775F 
+ 1979      536F4300 
+ 1980              	.LASF7:
+ 1981 013d 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1981      206C6F6E 
+ 1981      6720756E 
+ 1981      7369676E 
+ 1981      65642069 
+ 1982              	.LASF73:
+ 1983 0154 62617564 		.ascii	"baud_rate\000"
+ 1983      5F726174 
+ 1983      6500
+ 1984              	.LASF124:
+ 1985 015e 675F7265 		.ascii	"g_refOld\000"
+ 1985      664F6C64 
+ 1985      00
+ 1986              	.LASF78:
+ 1987 0167 72657374 		.ascii	"rest_delay\000"
+ 1987      5F64656C 
+ 1987      617900
+ 1988              	.LASF118:
+ 1989 0172 57524954 		.ascii	"WRITE_END\000"
+ 1989      455F454E 
+ 1989      4400
+ 1990              	.LASF121:
+ 1991 017c 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 37
+
+
+ 1991      52784275 
+ 1991      66666572 
+ 1991      00
+ 1992              	.LASF125:
+ 1993 0189 675F6D65 		.ascii	"g_meas\000"
+ 1993      617300
+ 1994              	.LASF79:
+ 1995 0190 72657374 		.ascii	"rest_vel\000"
+ 1995      5F76656C 
+ 1995      00
+ 1996              	.LASF65:
+ 1997 0199 656D675F 		.ascii	"emg_threshold\000"
+ 1997      74687265 
+ 1997      73686F6C 
+ 1997      6400
+ 1998              	.LASF6:
+ 1999 01a7 6C6F6E67 		.ascii	"long long int\000"
+ 1999      206C6F6E 
+ 1999      6720696E 
+ 1999      7400
+ 2000              	.LASF33:
+ 2001 01b5 72656164 		.ascii	"ready\000"
+ 2001      7900
+ 2002              	.LASF28:
+ 2003 01bb 65737469 		.ascii	"estim_curr\000"
+ 2003      6D5F6375 
+ 2003      727200
+ 2004              	.LASF136:
+ 2005 01c6 74696D65 		.ascii	"timer_value\000"
+ 2005      725F7661 
+ 2005      6C756500 
+ 2006              	.LASF16:
+ 2007 01d2 696E7433 		.ascii	"int32\000"
+ 2007      3200
+ 2008              	.LASF117:
+ 2009 01d8 57414954 		.ascii	"WAIT_QUERY\000"
+ 2009      5F515545 
+ 2009      525900
+ 2010              	.LASF4:
+ 2011 01e3 6C6F6E67 		.ascii	"long int\000"
+ 2011      20696E74 
  2011      00
- 2012              	.LASF21:
- 2013 04d3 6C6F6E67 		.ascii	"long double\000"
- 2013      20646F75 
- 2013      626C6500 
- 2014              	.LASF148:
- 2015 04df 72657374 		.ascii	"rest_enabled\000"
- 2015      5F656E61 
- 2015      626C6564 
- 2015      00
- 2016              	.LASF171:
- 2017 04ec 2E2E5C73 		.ascii	"..\\src\\globals.c\000"
- 2017      72635C67 
- 2017      6C6F6261 
- 2017      6C732E63 
+ 2012              	.LASF127:
+ 2013 01ec 675F7278 		.ascii	"g_rx\000"
+ 2013      00
+ 2014              	.LASF167:
+ 2015 01f1 4E5F494D 		.ascii	"N_IMU_Connected\000"
+ 2015      555F436F 
+ 2015      6E6E6563 
+ 2015      74656400 
+ 2016              	.LASF115:
+ 2017 0201 50524550 		.ascii	"PREPARE_DATA\000"
+ 2017      4152455F 
+ 2017      44415441 
  2017      00
- 2018              	.LASF106:
- 2019 04fd 57414954 		.ascii	"WAIT\000"
- 2019      00
- 2020              	.LASF168:
- 2021 0502 54656D70 		.ascii	"Temp\000"
- 2021      00
- 2022              	.LASF15:
- 2023 0507 696E7431 		.ascii	"int16\000"
- 2023      3600
- 2024              	.LASF129:
- 2025 050d 66696C74 		.ascii	"filt_emg1\000"
- 2025      5F656D67 
- 2025      3100
- 2026              	.LASF130:
- 2027 0517 66696C74 		.ascii	"filt_emg2\000"
- 2027      5F656D67 
- 2027      3200
- 2028              	.LASF157:
- 2029 0521 7046696C 		.ascii	"pFile\000"
- 2029      6500
- 2030              	.LASF78:
- 2031 0527 63757272 		.ascii	"current_hist\000"
- 2031      656E745F 
- 2031      68697374 
- 2031      00
- 2032              	.LASF47:
- 2033 0534 6D5F6F66 		.ascii	"m_off\000"
- 2033      6600
- 2034              	.LASF83:
- 2035 053a 63757272 		.ascii	"curr_time\000"
- 2035      5F74696D 
- 2035      6500
- 2036              	.LASF44:
- 2037 0544 61637469 		.ascii	"activ\000"
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 41
+ 2018              	.LASF148:
+ 2019 020e 74656E73 		.ascii	"tension_valid\000"
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 38
 
 
- 2037      7600
- 2038              	.LASF107:
- 2039 054a 57414954 		.ascii	"WAIT_EoC\000"
- 2039      5F456F43 
- 2039      00
- 2040              	.LASF116:
- 2041 0553 675F7265 		.ascii	"g_ref\000"
- 2041      6600
- 2042              	.LASF103:
- 2043 0559 52455345 		.ascii	"RESET\000"
- 2043      5400
- 2044              	.LASF96:
- 2045 055f 6761696E 		.ascii	"gain\000"
- 2045      00
- 2046              	.LASF10:
- 2047 0564 696E7433 		.ascii	"int32_t\000"
- 2047      325F7400 
- 2048              	.LASF1:
- 2049 056c 756E7369 		.ascii	"unsigned char\000"
- 2049      676E6564 
- 2049      20636861 
- 2049      7200
- 2050              	.LASF24:
- 2051 057a 63757272 		.ascii	"curr\000"
+ 2019      696F6E5F 
+ 2019      76616C69 
+ 2019      6400
+ 2020              	.LASF101:
+ 2021 021c 6F6C645F 		.ascii	"old_value\000"
+ 2021      76616C75 
+ 2021      6500
+ 2022              	.LASF158:
+ 2023 0226 4144435F 		.ascii	"ADC_buf\000"
+ 2023      62756600 
+ 2024              	.LASF82:
+ 2025 022e 72696768 		.ascii	"right_left\000"
+ 2025      745F6C65 
+ 2025      667400
+ 2026              	.LASF95:
+ 2027 0239 61636365 		.ascii	"accel_value\000"
+ 2027      6C5F7661 
+ 2027      6C756500 
+ 2028              	.LASF56:
+ 2029 0245 636F6E74 		.ascii	"control_mode\000"
+ 2029      726F6C5F 
+ 2029      6D6F6465 
+ 2029      00
+ 2030              	.LASF43:
+ 2031 0252 756E7573 		.ascii	"unused_bytes1\000"
+ 2031      65645F62 
+ 2031      79746573 
+ 2031      3100
+ 2032              	.LASF71:
+ 2033 0260 61637469 		.ascii	"activate_pwm_rescaling\000"
+ 2033      76617465 
+ 2033      5F70776D 
+ 2033      5F726573 
+ 2033      63616C69 
+ 2034              	.LASF111:
+ 2035 0277 53554D5F 		.ascii	"SUM_AND_MEAN\000"
+ 2035      414E445F 
+ 2035      4D45414E 
+ 2035      00
+ 2036              	.LASF86:
+ 2037 0284 5350495F 		.ascii	"SPI_read_delay\000"
+ 2037      72656164 
+ 2037      5F64656C 
+ 2037      617900
+ 2038              	.LASF140:
+ 2039 0293 6465765F 		.ascii	"dev_pwm_limit\000"
+ 2039      70776D5F 
+ 2039      6C696D69 
+ 2039      7400
+ 2040              	.LASF126:
+ 2041 02a1 675F6D65 		.ascii	"g_measOld\000"
+ 2041      61734F6C 
+ 2041      6400
+ 2042              	.LASF108:
+ 2043 02ab 4E4F524D 		.ascii	"NORMAL\000"
+ 2043      414C00
+ 2044              	.LASF13:
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 39
+
+
+ 2045 02b2 75696E74 		.ascii	"uint32\000"
+ 2045      333200
+ 2046              	.LASF23:
+ 2047 02b9 46535F46 		.ascii	"FS_FILE\000"
+ 2047      494C4500 
+ 2048              	.LASF169:
+ 2049 02c1 696D7573 		.ascii	"imus_data_size\000"
+ 2049      5F646174 
+ 2049      615F7369 
+ 2049      7A6500
+ 2050              	.LASF51:
+ 2051 02d0 6B5F705F 		.ascii	"k_p_c_dl\000"
+ 2051      635F646C 
  2051      00
- 2052              	.LASF48:
- 2053 057f 6D5F6D75 		.ascii	"m_mult\000"
- 2053      6C7400
- 2054              	.LASF25:
- 2055 0586 6F6E6F66 		.ascii	"onoff\000"
- 2055      6600
- 2056              	.LASF2:
- 2057 058c 73686F72 		.ascii	"short int\000"
- 2057      7420696E 
- 2057      7400
- 2058              	.LASF94:
- 2059 0596 73745F66 		.ascii	"st_filter\000"
- 2059      696C7465 
- 2059      7200
- 2060              	.LASF64:
- 2061 05a0 6D61696E 		.ascii	"maint_day\000"
- 2061      745F6461 
- 2061      7900
- 2062              	.LASF51:
- 2063 05aa 706F735F 		.ascii	"pos_lim_sup\000"
- 2063      6C696D5F 
- 2063      73757000 
- 2064              	.LASF92:
- 2065 05b6 71756174 		.ascii	"quat_value\000"
- 2065      5F76616C 
- 2065      756500
- 2066              	.LASF34:
- 2067 05c1 666C6167 		.ascii	"flag\000"
- 2067      00
- 2068              	.LASF33:
- 2069 05c6 73745F6D 		.ascii	"st_mem\000"
- 2069      656D00
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 42
+ 2052              	.LASF107:
+ 2053 02d9 72657065 		.ascii	"repetitions\000"
+ 2053      74697469 
+ 2053      6F6E7300 
+ 2054              	.LASF12:
+ 2055 02e5 75696E74 		.ascii	"uint16\000"
+ 2055      313600
+ 2056              	.LASF180:
+ 2057 02ec 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Documents\\GITHUB\\SoftHand-PR"
+ 2057      73657273 
+ 2057      5C4D6174 
+ 2057      74696143 
+ 2057      505C446F 
+ 2058 031a 4F2D5053 		.ascii	"O-PSoC5\\firmware.cydsn\000"
+ 2058      6F43355C 
+ 2058      6669726D 
+ 2058      77617265 
+ 2058      2E637964 
+ 2059              	.LASF55:
+ 2060 0331 696E7075 		.ascii	"input_mode\000"
+ 2060      745F6D6F 
+ 2060      646500
+ 2061              	.LASF50:
+ 2062 033c 6B5F645F 		.ascii	"k_d_dl\000"
+ 2062      646C00
+ 2063              	.LASF70:
+ 2064 0343 6D6F746F 		.ascii	"motor_handle_ratio\000"
+ 2064      725F6861 
+ 2064      6E646C65 
+ 2064      5F726174 
+ 2064      696F00
+ 2065              	.LASF128:
+ 2066 0356 675F6D65 		.ascii	"g_mem\000"
+ 2066      6D00
+ 2067              	.LASF171:
+ 2068 035c 675F696D 		.ascii	"g_imu\000"
+ 2068      7500
+ 2069              	.LASF156:
+ 2070 0362 6368616E 		.ascii	"change_ext_ref_flag\000"
+ 2070      67655F65 
+ 2070      78745F72 
+ 2070      65665F66 
+ 2070      6C616700 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 40
 
 
- 2070              	.LASF35:
- 2071 05cd 6B5F705F 		.ascii	"k_p_c\000"
- 2071      6300
- 2072              	.LASF108:
- 2073 05d3 656D675F 		.ascii	"emg_status\000"
- 2073      73746174 
- 2073      757300
- 2074              	.LASF54:
- 2075 05de 63757272 		.ascii	"current_limit\000"
- 2075      656E745F 
- 2075      6C696D69 
- 2075      7400
- 2076              	.LASF66:
- 2077 05ec 6D61696E 		.ascii	"maint_year\000"
- 2077      745F7965 
- 2077      617200
- 2078              	.LASF97:
- 2079 05f7 73745F63 		.ascii	"st_calib\000"
- 2079      616C6962 
- 2079      00
- 2080              	.LASF76:
- 2081 0600 656D675F 		.ascii	"emg_counter\000"
- 2081      636F756E 
- 2081      74657200 
- 2082              	.LASF110:
- 2083 060c 57524954 		.ascii	"WRITE_CYCLES\000"
- 2083      455F4359 
- 2083      434C4553 
- 2083      00
- 2084              	.LASF49:
- 2085 0619 706F735F 		.ascii	"pos_lim_flag\000"
- 2085      6C696D5F 
- 2085      666C6167 
- 2085      00
- 2086              	.LASF146:
- 2087 0626 6D61696E 		.ascii	"maintenance_flag\000"
- 2087      74656E61 
- 2087      6E63655F 
- 2087      666C6167 
- 2087      00
- 2088              	.LASF53:
- 2089 0637 6D61785F 		.ascii	"max_step_pos\000"
- 2089      73746570 
- 2089      5F706F73 
- 2089      00
- 2090              	.LASF98:
- 2091 0644 656E6162 		.ascii	"enabled\000"
- 2091      6C656400 
- 2092              	.LASF128:
- 2093 064c 66696C74 		.ascii	"filt_vel\000"
- 2093      5F76656C 
- 2093      00
- 2094              	.LASF79:
- 2095 0655 72657374 		.ascii	"rest_counter\000"
- 2095      5F636F75 
- 2095      6E746572 
- 2095      00
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 43
+ 2071              	.LASF26:
+ 2072 0376 73745F72 		.ascii	"st_ref\000"
+ 2072      656600
+ 2073              	.LASF141:
+ 2074 037d 6465765F 		.ascii	"dev_pwm_sat\000"
+ 2074      70776D5F 
+ 2074      73617400 
+ 2075              	.LASF49:
+ 2076 0389 6B5F695F 		.ascii	"k_i_dl\000"
+ 2076      646C00
+ 2077              	.LASF150:
+ 2078 0390 6379636C 		.ascii	"cycles_interrupt_flag\000"
+ 2078      65735F69 
+ 2078      6E746572 
+ 2078      72757074 
+ 2078      5F666C61 
+ 2079              	.LASF5:
+ 2080 03a6 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2080      20756E73 
+ 2080      69676E65 
+ 2080      6420696E 
+ 2080      7400
+ 2081              	.LASF62:
+ 2082 03b8 6D61785F 		.ascii	"max_step_neg\000"
+ 2082      73746570 
+ 2082      5F6E6567 
+ 2082      00
+ 2083              	.LASF90:
+ 2084 03c5 72656164 		.ascii	"read_emg_sensors_port_flag\000"
+ 2084      5F656D67 
+ 2084      5F73656E 
+ 2084      736F7273 
+ 2084      5F706F72 
+ 2085              	.LASF163:
+ 2086 03e0 456E636F 		.ascii	"Encoder_Value\000"
+ 2086      6465725F 
+ 2086      56616C75 
+ 2086      6500
+ 2087              	.LASF170:
+ 2088 03ee 73696E67 		.ascii	"single_imu_size\000"
+ 2088      6C655F69 
+ 2088      6D755F73 
+ 2088      697A6500 
+ 2089              	.LASF11:
+ 2090 03fe 75696E74 		.ascii	"uint8\000"
+ 2090      3800
+ 2091              	.LASF142:
+ 2092 0404 6465765F 		.ascii	"dev_tension_f\000"
+ 2092      74656E73 
+ 2092      696F6E5F 
+ 2092      6600
+ 2093              	.LASF88:
+ 2094 0412 456E636F 		.ascii	"Encoder_conf\000"
+ 2094      6465725F 
+ 2094      636F6E66 
+ 2094      00
+ 2095              	.LASF177:
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 41
 
 
- 2096              	.LASF134:
- 2097 0662 6465765F 		.ascii	"dev_tension\000"
- 2097      74656E73 
- 2097      696F6E00 
- 2098              	.LASF18:
- 2099 066e 666C6F61 		.ascii	"float\000"
- 2099      7400
- 2100              	.LASF31:
- 2101 0674 6C656E67 		.ascii	"length\000"
- 2101      746800
- 2102              	.LASF20:
- 2103 067b 63686172 		.ascii	"char\000"
- 2103      00
- 2104              	.LASF144:
- 2105 0680 696E7465 		.ascii	"interrupt_flag\000"
- 2105      72727570 
- 2105      745F666C 
- 2105      616700
- 2106              	.LASF29:
- 2107 068f 73745F64 		.ascii	"st_data\000"
- 2107      61746100 
- 2108              	.LASF8:
- 2109 0697 756E7369 		.ascii	"unsigned int\000"
- 2109      676E6564 
- 2109      20696E74 
- 2109      00
- 2110              	.LASF30:
- 2111 06a4 62756666 		.ascii	"buffer\000"
- 2111      657200
- 2112              	.LASF42:
- 2113 06ab 6B5F695F 		.ascii	"k_i_c_dl\000"
- 2113      635F646C 
- 2113      00
- 2114              	.LASF70:
- 2115 06b4 72657374 		.ascii	"rest_position_flag\000"
- 2115      5F706F73 
- 2115      6974696F 
- 2115      6E5F666C 
- 2115      616700
- 2116              	.LASF36:
- 2117 06c7 6B5F695F 		.ascii	"k_i_c\000"
- 2117      6300
- 2118              	.LASF104:
- 2119 06cd 44495343 		.ascii	"DISCARD\000"
- 2119      41524400 
- 2120              	.LASF56:
- 2121 06d5 656D675F 		.ascii	"emg_calibration_flag\000"
- 2121      63616C69 
- 2121      62726174 
- 2121      696F6E5F 
- 2121      666C6167 
- 2122              	.LASF37:
- 2123 06ea 6B5F645F 		.ascii	"k_d_c\000"
- 2123      6300
- 2124              	.LASF71:
- 2125 06f0 73776974 		.ascii	"switch_emg\000"
- 2125      63685F65 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 44
+ 2096 041f 51756174 		.ascii	"Quat\000"
+ 2096      00
+ 2097              	.LASF138:
+ 2098 0424 6379636C 		.ascii	"cycle_time\000"
+ 2098      655F7469 
+ 2098      6D6500
+ 2099              	.LASF123:
+ 2100 042f 675F7265 		.ascii	"g_refNew\000"
+ 2100      664E6577 
+ 2100      00
+ 2101              	.LASF14:
+ 2102 0438 696E7438 		.ascii	"int8\000"
+ 2102      00
+ 2103              	.LASF119:
+ 2104 043d 4E4F4E45 		.ascii	"NONE\000"
+ 2104      00
+ 2105              	.LASF92:
+ 2106 0442 6D6F746F 		.ascii	"motor_driver_type\000"
+ 2106      725F6472 
+ 2106      69766572 
+ 2106      5F747970 
+ 2106      6500
+ 2107              	.LASF60:
+ 2108 0454 706F735F 		.ascii	"pos_lim_inf\000"
+ 2108      6C696D5F 
+ 2108      696E6600 
+ 2109              	.LASF85:
+ 2110 0460 756E7573 		.ascii	"unused_bytes\000"
+ 2110      65645F62 
+ 2110      79746573 
+ 2110      00
+ 2111              	.LASF154:
+ 2112 046d 666F7263 		.ascii	"forced_open\000"
+ 2112      65645F6F 
+ 2112      70656E00 
+ 2113              	.LASF96:
+ 2114 0479 6779726F 		.ascii	"gyro_value\000"
+ 2114      5F76616C 
+ 2114      756500
+ 2115              	.LASF147:
+ 2116 0484 72657365 		.ascii	"reset_last_value_flag\000"
+ 2116      745F6C61 
+ 2116      73745F76 
+ 2116      616C7565 
+ 2116      5F666C61 
+ 2117              	.LASF36:
+ 2118 049a 706F7369 		.ascii	"position_hist\000"
+ 2118      74696F6E 
+ 2118      5F686973 
+ 2118      7400
+ 2119              	.LASF9:
+ 2120 04a8 5F5F696E 		.ascii	"__int32_t\000"
+ 2120      7433325F 
+ 2120      7400
+ 2121              	.LASF165:
+ 2122 04b2 72657374 		.ascii	"rest_pos_curr_ref\000"
+ 2122      5F706F73 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 42
 
 
- 2125      6D6700
- 2126              	.LASF62:
- 2127 06fb 63757272 		.ascii	"curr_lookup\000"
- 2127      5F6C6F6F 
- 2127      6B757000 
- 2128              	.LASF73:
- 2129 0707 72656164 		.ascii	"read_imu_flag\000"
- 2129      5F696D75 
- 2129      5F666C61 
- 2129      6700
- 2130              	.LASF154:
- 2131 0715 70776D5F 		.ascii	"pwm_sign\000"
- 2131      7369676E 
- 2131      00
- 2132              	.LASF58:
- 2133 071e 656D675F 		.ascii	"emg_speed\000"
- 2133      73706565 
- 2133      6400
- 2134              	.LASF57:
- 2135 0728 656D675F 		.ascii	"emg_max_value\000"
- 2135      6D61785F 
- 2135      76616C75 
- 2135      6500
- 2136              	.LASF132:
- 2137 0736 74696D65 		.ascii	"timer_value0\000"
- 2137      725F7661 
- 2137      6C756530 
- 2137      00
- 2138              	.LASF43:
- 2139 0743 6B5F645F 		.ascii	"k_d_c_dl\000"
- 2139      635F646C 
- 2139      00
- 2140              	.LASF88:
- 2141 074c 666C6167 		.ascii	"flags\000"
- 2141      7300
- 2142              	.LASF93:
- 2143 0752 74656D70 		.ascii	"temp_value\000"
- 2143      5F76616C 
- 2143      756500
- 2144              	.LASF74:
- 2145 075d 72656164 		.ascii	"read_exp_port_flag\000"
- 2145      5F657870 
- 2145      5F706F72 
- 2145      745F666C 
- 2145      616700
- 2146              	.LASF100:
- 2147 0770 73706565 		.ascii	"speed\000"
- 2147      6400
- 2148              	.LASF160:
- 2149 0776 494D555F 		.ascii	"IMU_connected\000"
- 2149      636F6E6E 
- 2149      65637465 
- 2149      6400
- 2150              	.LASF138:
- 2151 0784 706F775F 		.ascii	"pow_tension\000"
- 2151      74656E73 
- 2151      696F6E00 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccmLu5SF.s 			page 45
+ 2122      5F637572 
+ 2122      725F7265 
+ 2122      6600
+ 2123              	.LASF130:
+ 2124 04c4 63616C69 		.ascii	"calib\000"
+ 2124      6200
+ 2125              	.LASF29:
+ 2126 04ca 6164645F 		.ascii	"add_emg\000"
+ 2126      656D6700 
+ 2127              	.LASF132:
+ 2128 04d2 66696C74 		.ascii	"filt_curr_diff\000"
+ 2128      5F637572 
+ 2128      725F6469 
+ 2128      666600
+ 2129              	.LASF87:
+ 2130 04e1 494D555F 		.ascii	"IMU_conf\000"
+ 2130      636F6E66 
+ 2130      00
+ 2131              	.LASF97:
+ 2132 04ea 6D61675F 		.ascii	"mag_value\000"
+ 2132      76616C75 
+ 2132      6500
+ 2133              	.LASF17:
+ 2134 04f4 666C6F61 		.ascii	"float32\000"
+ 2134      74333200 
+ 2135              	.LASF22:
+ 2136 04fc 73697A65 		.ascii	"sizetype\000"
+ 2136      74797065 
+ 2136      00
+ 2137              	.LASF21:
+ 2138 0505 6C6F6E67 		.ascii	"long double\000"
+ 2138      20646F75 
+ 2138      626C6500 
+ 2139              	.LASF153:
+ 2140 0511 72657374 		.ascii	"rest_enabled\000"
+ 2140      5F656E61 
+ 2140      626C6564 
+ 2140      00
+ 2141              	.LASF179:
+ 2142 051e 2E2E5C73 		.ascii	"..\\src\\globals.c\000"
+ 2142      72635C67 
+ 2142      6C6F6261 
+ 2142      6C732E63 
+ 2142      00
+ 2143              	.LASF112:
+ 2144 052f 57414954 		.ascii	"WAIT\000"
+ 2144      00
+ 2145              	.LASF176:
+ 2146 0534 54656D70 		.ascii	"Temp\000"
+ 2146      00
+ 2147              	.LASF15:
+ 2148 0539 696E7431 		.ascii	"int16\000"
+ 2148      3600
+ 2149              	.LASF159:
+ 2150 053f 4E554D5F 		.ascii	"NUM_OF_ANALOG_INPUTS\000"
+ 2150      4F465F41 
+ 2150      4E414C4F 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 43
 
 
- 2152              	.LASF82:
- 2153 0790 746F7461 		.ascii	"total_time_rest\000"
- 2153      6C5F7469 
- 2153      6D655F72 
- 2153      65737400 
- 2154              	.LASF59:
- 2155 07a0 646F7562 		.ascii	"double_encoder_on_off\000"
- 2155      6C655F65 
- 2155      6E636F64 
- 2155      65725F6F 
- 2155      6E5F6F66 
- 2156              	.LASF141:
- 2157 07b6 656D675F 		.ascii	"emg_2_status\000"
- 2157      325F7374 
- 2157      61747573 
- 2157      00
- 2158              	.LASF167:
- 2159 07c3 4D616743 		.ascii	"MagCal\000"
- 2159      616C00
- 2160              	.LASF155:
- 2161 07ca 64617461 		.ascii	"data_encoder_raw\000"
- 2161      5F656E63 
- 2161      6F646572 
- 2161      5F726177 
- 2161      00
- 2162              	.LASF67:
- 2163 07db 72657374 		.ascii	"rest_pos\000"
- 2163      5F706F73 
- 2163      00
- 2164              	.LASF19:
- 2165 07e4 646F7562 		.ascii	"double\000"
- 2165      6C6500
- 2166              	.LASF38:
- 2167 07eb 6B5F705F 		.ascii	"k_p_dl\000"
- 2167      646C00
- 2168              	.LASF114:
- 2169 07f2 636F756E 		.ascii	"counter_status\000"
- 2169      7465725F 
- 2169      73746174 
- 2169      757300
- 2170              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 2150      475F494E 
+ 2150      50555453 
+ 2151              	.LASF77:
+ 2152 0554 72657374 		.ascii	"rest_pos\000"
+ 2152      5F706F73 
+ 2152      00
+ 2153              	.LASF61:
+ 2154 055d 706F735F 		.ascii	"pos_lim_sup\000"
+ 2154      6C696D5F 
+ 2154      73757000 
+ 2155              	.LASF166:
+ 2156 0569 7046696C 		.ascii	"pFile\000"
+ 2156      6500
+ 2157              	.LASF37:
+ 2158 056f 63757272 		.ascii	"current_hist\000"
+ 2158      656E745F 
+ 2158      68697374 
+ 2158      00
+ 2159              	.LASF57:
+ 2160 057c 6D5F6F66 		.ascii	"m_off\000"
+ 2160      6600
+ 2161              	.LASF42:
+ 2162 0582 63757272 		.ascii	"curr_time\000"
+ 2162      5F74696D 
+ 2162      6500
+ 2163              	.LASF54:
+ 2164 058c 61637469 		.ascii	"activ\000"
+ 2164      7600
+ 2165              	.LASF113:
+ 2166 0592 57414954 		.ascii	"WAIT_EoC\000"
+ 2166      5F456F43 
+ 2166      00
+ 2167              	.LASF122:
+ 2168 059b 675F7265 		.ascii	"g_ref\000"
+ 2168      6600
+ 2169              	.LASF109:
+ 2170 05a1 52455345 		.ascii	"RESET\000"
+ 2170      5400
+ 2171              	.LASF102:
+ 2172 05a7 6761696E 		.ascii	"gain\000"
+ 2172      00
+ 2173              	.LASF10:
+ 2174 05ac 696E7433 		.ascii	"int32_t\000"
+ 2174      325F7400 
+ 2175              	.LASF1:
+ 2176 05b4 756E7369 		.ascii	"unsigned char\000"
+ 2176      676E6564 
+ 2176      20636861 
+ 2176      7200
+ 2177              	.LASF24:
+ 2178 05c2 63757272 		.ascii	"curr\000"
+ 2178      00
+ 2179              	.LASF58:
+ 2180 05c7 6D5F6D75 		.ascii	"m_mult\000"
+ 2180      6C7400
+ 2181              	.LASF25:
+ 2182 05ce 6F6E6F66 		.ascii	"onoff\000"
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 44
+
+
+ 2182      6600
+ 2183              	.LASF89:
+ 2184 05d4 4144435F 		.ascii	"ADC_conf\000"
+ 2184      636F6E66 
+ 2184      00
+ 2185              	.LASF2:
+ 2186 05dd 73686F72 		.ascii	"short int\000"
+ 2186      7420696E 
+ 2186      7400
+ 2187              	.LASF100:
+ 2188 05e7 73745F66 		.ascii	"st_filter\000"
+ 2188      696C7465 
+ 2188      7200
+ 2189              	.LASF74:
+ 2190 05f1 6D61696E 		.ascii	"maint_day\000"
+ 2190      745F6461 
+ 2190      7900
+ 2191              	.LASF39:
+ 2192 05fb 77697265 		.ascii	"wire_disp\000"
+ 2192      5F646973 
+ 2192      7000
+ 2193              	.LASF98:
+ 2194 0605 71756174 		.ascii	"quat_value\000"
+ 2194      5F76616C 
+ 2194      756500
+ 2195              	.LASF44:
+ 2196 0610 666C6167 		.ascii	"flag\000"
+ 2196      00
+ 2197              	.LASF34:
+ 2198 0615 73745F6D 		.ascii	"st_mem\000"
+ 2198      656D00
+ 2199              	.LASF45:
+ 2200 061c 6B5F705F 		.ascii	"k_p_c\000"
+ 2200      6300
+ 2201              	.LASF114:
+ 2202 0622 656D675F 		.ascii	"emg_status\000"
+ 2202      73746174 
+ 2202      757300
+ 2203              	.LASF64:
+ 2204 062d 63757272 		.ascii	"current_limit\000"
+ 2204      656E745F 
+ 2204      6C696D69 
+ 2204      7400
+ 2205              	.LASF76:
+ 2206 063b 6D61696E 		.ascii	"maint_year\000"
+ 2206      745F7965 
+ 2206      617200
+ 2207              	.LASF103:
+ 2208 0646 73745F63 		.ascii	"st_calib\000"
+ 2208      616C6962 
+ 2208      00
+ 2209              	.LASF35:
+ 2210 064f 656D675F 		.ascii	"emg_counter\000"
+ 2210      636F756E 
+ 2210      74657200 
+ 2211              	.LASF116:
+ 2212 065b 57524954 		.ascii	"WRITE_CYCLES\000"
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 45
+
+
+ 2212      455F4359 
+ 2212      434C4553 
+ 2212      00
+ 2213              	.LASF59:
+ 2214 0668 706F735F 		.ascii	"pos_lim_flag\000"
+ 2214      6C696D5F 
+ 2214      666C6167 
+ 2214      00
+ 2215              	.LASF151:
+ 2216 0675 6D61696E 		.ascii	"maintenance_flag\000"
+ 2216      74656E61 
+ 2216      6E63655F 
+ 2216      666C6167 
+ 2216      00
+ 2217              	.LASF63:
+ 2218 0686 6D61785F 		.ascii	"max_step_pos\000"
+ 2218      73746570 
+ 2218      5F706F73 
+ 2218      00
+ 2219              	.LASF104:
+ 2220 0693 656E6162 		.ascii	"enabled\000"
+ 2220      6C656400 
+ 2221              	.LASF134:
+ 2222 069b 66696C74 		.ascii	"filt_vel\000"
+ 2222      5F76656C 
+ 2222      00
+ 2223              	.LASF38:
+ 2224 06a4 72657374 		.ascii	"rest_counter\000"
+ 2224      5F636F75 
+ 2224      6E746572 
+ 2224      00
+ 2225              	.LASF139:
+ 2226 06b1 6465765F 		.ascii	"dev_tension\000"
+ 2226      74656E73 
+ 2226      696F6E00 
+ 2227              	.LASF18:
+ 2228 06bd 666C6F61 		.ascii	"float\000"
+ 2228      7400
+ 2229              	.LASF32:
+ 2230 06c3 6C656E67 		.ascii	"length\000"
+ 2230      746800
+ 2231              	.LASF20:
+ 2232 06ca 63686172 		.ascii	"char\000"
+ 2232      00
+ 2233              	.LASF149:
+ 2234 06cf 696E7465 		.ascii	"interrupt_flag\000"
+ 2234      72727570 
+ 2234      745F666C 
+ 2234      616700
+ 2235              	.LASF30:
+ 2236 06de 73745F64 		.ascii	"st_data\000"
+ 2236      61746100 
+ 2237              	.LASF8:
+ 2238 06e6 756E7369 		.ascii	"unsigned int\000"
+ 2238      676E6564 
+ 2238      20696E74 
+ 2238      00
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 46
+
+
+ 2239              	.LASF31:
+ 2240 06f3 62756666 		.ascii	"buffer\000"
+ 2240      657200
+ 2241              	.LASF52:
+ 2242 06fa 6B5F695F 		.ascii	"k_i_c_dl\000"
+ 2242      635F646C 
+ 2242      00
+ 2243              	.LASF80:
+ 2244 0703 72657374 		.ascii	"rest_position_flag\000"
+ 2244      5F706F73 
+ 2244      6974696F 
+ 2244      6E5F666C 
+ 2244      616700
+ 2245              	.LASF46:
+ 2246 0716 6B5F695F 		.ascii	"k_i_c\000"
+ 2246      6300
+ 2247              	.LASF3:
+ 2248 071c 73686F72 		.ascii	"short unsigned int\000"
+ 2248      7420756E 
+ 2248      7369676E 
+ 2248      65642069 
+ 2248      6E7400
+ 2249              	.LASF110:
+ 2250 072f 44495343 		.ascii	"DISCARD\000"
+ 2250      41524400 
+ 2251              	.LASF162:
+ 2252 0737 4E5F456E 		.ascii	"N_Encoder_Line_Connected\000"
+ 2252      636F6465 
+ 2252      725F4C69 
+ 2252      6E655F43 
+ 2252      6F6E6E65 
+ 2253              	.LASF66:
+ 2254 0750 656D675F 		.ascii	"emg_calibration_flag\000"
+ 2254      63616C69 
+ 2254      62726174 
+ 2254      696F6E5F 
+ 2254      666C6167 
+ 2255              	.LASF47:
+ 2256 0765 6B5F645F 		.ascii	"k_d_c\000"
+ 2256      6300
+ 2257              	.LASF81:
+ 2258 076b 73776974 		.ascii	"switch_emg\000"
+ 2258      63685F65 
+ 2258      6D6700
+ 2259              	.LASF72:
+ 2260 0776 63757272 		.ascii	"curr_lookup\000"
+ 2260      5F6C6F6F 
+ 2260      6B757000 
+ 2261              	.LASF83:
+ 2262 0782 72656164 		.ascii	"read_imu_flag\000"
+ 2262      5F696D75 
+ 2262      5F666C61 
+ 2262      6700
+ 2263              	.LASF135:
+ 2264 0790 66696C74 		.ascii	"filt_emg\000"
+ 2264      5F656D67 
+ 2264      00
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 47
+
+
+ 2265              	.LASF157:
+ 2266 0799 72657365 		.ascii	"reset_PSoC_flag\000"
+ 2266      745F5053 
+ 2266      6F435F66 
+ 2266      6C616700 
+ 2267              	.LASF160:
+ 2268 07a9 70776D5F 		.ascii	"pwm_sign\000"
+ 2268      7369676E 
+ 2268      00
+ 2269              	.LASF68:
+ 2270 07b2 656D675F 		.ascii	"emg_speed\000"
+ 2270      73706565 
+ 2270      6400
+ 2271              	.LASF67:
+ 2272 07bc 656D675F 		.ascii	"emg_max_value\000"
+ 2272      6D61785F 
+ 2272      76616C75 
+ 2272      6500
+ 2273              	.LASF137:
+ 2274 07ca 74696D65 		.ascii	"timer_value0\000"
+ 2274      725F7661 
+ 2274      6C756530 
+ 2274      00
+ 2275              	.LASF53:
+ 2276 07d7 6B5F645F 		.ascii	"k_d_c_dl\000"
+ 2276      635F646C 
+ 2276      00
+ 2277              	.LASF94:
+ 2278 07e0 666C6167 		.ascii	"flags\000"
+ 2278      7300
+ 2279              	.LASF99:
+ 2280 07e6 74656D70 		.ascii	"temp_value\000"
+ 2280      5F76616C 
+ 2280      756500
+ 2281              	.LASF84:
+ 2282 07f1 72656164 		.ascii	"read_exp_port_flag\000"
+ 2282      5F657870 
+ 2282      5F706F72 
+ 2282      745F666C 
+ 2282      616700
+ 2283              	.LASF106:
+ 2284 0804 73706565 		.ascii	"speed\000"
+ 2284      6400
+ 2285              	.LASF168:
+ 2286 080a 494D555F 		.ascii	"IMU_connected\000"
+ 2286      636F6E6E 
+ 2286      65637465 
+ 2286      6400
+ 2287              	.LASF143:
+ 2288 0818 706F775F 		.ascii	"pow_tension\000"
+ 2288      74656E73 
+ 2288      696F6E00 
+ 2289              	.LASF41:
+ 2290 0824 746F7461 		.ascii	"total_time_rest\000"
+ 2290      6C5F7469 
+ 2290      6D655F72 
+ 2290      65737400 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccwUbMXh.s 			page 48
+
+
+ 2291              	.LASF69:
+ 2292 0834 646F7562 		.ascii	"double_encoder_on_off\000"
+ 2292      6C655F65 
+ 2292      6E636F64 
+ 2292      65725F6F 
+ 2292      6E5F6F66 
+ 2293              	.LASF146:
+ 2294 084a 656D675F 		.ascii	"emg_2_status\000"
+ 2294      325F7374 
+ 2294      61747573 
+ 2294      00
+ 2295              	.LASF164:
+ 2296 0857 456E636F 		.ascii	"Encoder_Check\000"
+ 2296      6465725F 
+ 2296      43686563 
+ 2296      6B00
+ 2297              	.LASF175:
+ 2298 0865 4D616743 		.ascii	"MagCal\000"
+ 2298      616C00
+ 2299              	.LASF161:
+ 2300 086c 64617461 		.ascii	"data_encoder_raw\000"
+ 2300      5F656E63 
+ 2300      6F646572 
+ 2300      5F726177 
+ 2300      00
+ 2301              	.LASF19:
+ 2302 087d 646F7562 		.ascii	"double\000"
+ 2302      6C6500
+ 2303              	.LASF48:
+ 2304 0884 6B5F705F 		.ascii	"k_p_dl\000"
+ 2304      646C00
+ 2305              	.LASF120:
+ 2306 088b 636F756E 		.ascii	"counter_status\000"
+ 2306      7465725F 
+ 2306      73746174 
+ 2306      757300
+ 2307              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

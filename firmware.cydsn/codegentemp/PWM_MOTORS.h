@@ -33,7 +33,7 @@ extern uint8 PWM_MOTORS_initVar;
 #define PWM_MOTORS_DeadBandMode                   (0u)
 #define PWM_MOTORS_KillModeMinTime                (0u)
 #define PWM_MOTORS_KillMode                       (0u)
-#define PWM_MOTORS_PWMMode                        (0u)
+#define PWM_MOTORS_PWMMode                        (1u)
 #define PWM_MOTORS_PWMModeIsCenterAligned         (0u)
 #define PWM_MOTORS_DeadBandUsed                   (0u)
 #define PWM_MOTORS_DeadBand2_4                    (0u)
@@ -50,7 +50,7 @@ extern uint8 PWM_MOTORS_initVar;
     #define PWM_MOTORS_UseControl                 (0u)
 #endif /* !defined(PWM_MOTORS_PWMUDB_genblk1_ctrlreg__REMOVED) */
 
-#define PWM_MOTORS_UseOneCompareMode              (1u)
+#define PWM_MOTORS_UseOneCompareMode              (0u)
 #define PWM_MOTORS_MinimumKillTime                (1u)
 #define PWM_MOTORS_EnableMode                     (0u)
 

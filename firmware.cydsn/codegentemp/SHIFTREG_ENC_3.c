@@ -302,7 +302,7 @@ uint8 SHIFTREG_ENC_3_GetIntStatus(void)
 void SHIFTREG_ENC_3_WriteRegValue(uint32 shiftData)
                                                                      
 {
-    CY_SET_REG24(SHIFTREG_ENC_3_SHIFT_REG_LSB_PTR, shiftData);
+    CY_SET_REG32(SHIFTREG_ENC_3_SHIFT_REG_LSB_PTR, shiftData);
 }
 
 
@@ -336,7 +336,7 @@ void SHIFTREG_ENC_3_WriteRegValue(uint32 shiftData)
         /* Writes data into the input FIFO if it is not FULL */
         if(SHIFTREG_ENC_3_RET_FIFO_FULL != (SHIFTREG_ENC_3_GetFIFOStatus(SHIFTREG_ENC_3_IN_FIFO)))
         {
-            CY_SET_REG24(SHIFTREG_ENC_3_IN_FIFO_VAL_LSB_PTR, shiftData);
+            CY_SET_REG32(SHIFTREG_ENC_3_IN_FIFO_VAL_LSB_PTR, shiftData);
             result = CYRET_SUCCESS;
         }
 
@@ -365,7 +365,7 @@ void SHIFTREG_ENC_3_WriteRegValue(uint32 shiftData)
     *******************************************************************************/
     uint32 SHIFTREG_ENC_3_ReadData(void) 
     {
-        return(CY_GET_REG24(SHIFTREG_ENC_3_OUT_FIFO_VAL_LSB_PTR));
+        return(CY_GET_REG32(SHIFTREG_ENC_3_OUT_FIFO_VAL_LSB_PTR));
     }
 #endif /* (0u != SHIFTREG_ENC_3_USE_OUTPUT_FIFO) */
 
@@ -395,14 +395,14 @@ uint32 SHIFTREG_ENC_3_ReadRegValue(void)
     /* Clear FIFO before software capture */
     while(SHIFTREG_ENC_3_RET_FIFO_EMPTY != SHIFTREG_ENC_3_GetFIFOStatus(SHIFTREG_ENC_3_OUT_FIFO))
     {
-        (void) CY_GET_REG24(SHIFTREG_ENC_3_OUT_FIFO_VAL_LSB_PTR);
+        (void) CY_GET_REG32(SHIFTREG_ENC_3_OUT_FIFO_VAL_LSB_PTR);
     }
 
     /* Read of 8 bits from A1 causes capture to output FIFO */
     (void) CY_GET_REG8(SHIFTREG_ENC_3_SHIFT_REG_CAPTURE_PTR);
 
     /* Read output FIFO */
-    result  = CY_GET_REG24(SHIFTREG_ENC_3_OUT_FIFO_VAL_LSB_PTR);
+    result  = CY_GET_REG32(SHIFTREG_ENC_3_OUT_FIFO_VAL_LSB_PTR);
     
     #if(0u != (SHIFTREG_ENC_3_SR_SIZE % 8u))
         result &= ((uint32) SHIFTREG_ENC_3_SR_MASK);

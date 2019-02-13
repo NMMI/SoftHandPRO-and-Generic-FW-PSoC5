@@ -31,7 +31,7 @@
 #define SHIFTREG_ENC_1_FIFO_SIZE          (4u)
 #define SHIFTREG_ENC_1_USE_INPUT_FIFO     (0u)
 #define SHIFTREG_ENC_1_USE_OUTPUT_FIFO    (1u)
-#define SHIFTREG_ENC_1_SR_SIZE            (19u)
+#define SHIFTREG_ENC_1_SR_SIZE            (32u)
 
 
 /***************************************
@@ -125,7 +125,7 @@ extern uint8 SHIFTREG_ENC_1_initVar;
 *    Initial Parameter Constants
 ***************************************/
 
-#define SHIFTREG_ENC_1_SR_MASK    (0x7FFFFu) /* Unsigned is added to parameter */
+#define SHIFTREG_ENC_1_SR_MASK    (0xFFFFFFFFu) /* Unsigned is added to parameter */
 #define SHIFTREG_ENC_1_INT_SRC    (2u)
 #define SHIFTREG_ENC_1_DIRECTION  (0u)
 
@@ -154,74 +154,74 @@ extern uint8 SHIFTREG_ENC_1_initVar;
 
 /* A1 register: only used to implement capture function */
 #define SHIFTREG_ENC_1_SHIFT_REG_CAPTURE_PTR    ( (reg8 *) \
-                                        SHIFTREG_ENC_1_bSR_sC24_BShiftRegDp_u0__A1_REG )
+                                        SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__A1_REG )
 
 #if(CY_PSOC3 || CY_PSOC5)
     #define SHIFTREG_ENC_1_IN_FIFO_VAL_LSB_PTR        ( (reg32 *) \
-                                        SHIFTREG_ENC_1_bSR_sC24_BShiftRegDp_u0__F0_REG )
+                                        SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__F0_REG )
 
     #define SHIFTREG_ENC_1_SHIFT_REG_LSB_PTR          ( (reg32 *) \
-                                        SHIFTREG_ENC_1_bSR_sC24_BShiftRegDp_u0__A0_REG )
+                                        SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__A0_REG )
 
     #define SHIFTREG_ENC_1_SHIFT_REG_VALUE_LSB_PTR    ( (reg32 *) \
-                                        SHIFTREG_ENC_1_bSR_sC24_BShiftRegDp_u0__A1_REG )
+                                        SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__A1_REG )
 
     #define SHIFTREG_ENC_1_OUT_FIFO_VAL_LSB_PTR       ( (reg32 *) \
-                                        SHIFTREG_ENC_1_bSR_sC24_BShiftRegDp_u0__F1_REG )
+                                        SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__F1_REG )
 
 #else
     #if(SHIFTREG_ENC_1_SR_SIZE <= 8u) /* 8bit - ShiftReg */
         #define SHIFTREG_ENC_1_IN_FIFO_VAL_LSB_PTR        ( (reg8 *) \
-                                        SHIFTREG_ENC_1_bSR_sC24_BShiftRegDp_u0__F0_REG )
+                                        SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__F0_REG )
 
         #define SHIFTREG_ENC_1_SHIFT_REG_LSB_PTR          ( (reg8 *) \
-                                        SHIFTREG_ENC_1_bSR_sC24_BShiftRegDp_u0__A0_REG )
+                                        SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__A0_REG )
 
         #define SHIFTREG_ENC_1_SHIFT_REG_VALUE_LSB_PTR    ( (reg8 *) \
-                                        SHIFTREG_ENC_1_bSR_sC24_BShiftRegDp_u0__A1_REG )
+                                        SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__A1_REG )
 
         #define SHIFTREG_ENC_1_OUT_FIFO_VAL_LSB_PTR       ( (reg8 *) \
-                                        SHIFTREG_ENC_1_bSR_sC24_BShiftRegDp_u0__F1_REG )
+                                        SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__F1_REG )
 
     #elif(SHIFTREG_ENC_1_SR_SIZE <= 16u) /* 16bit - ShiftReg */
         #define SHIFTREG_ENC_1_IN_FIFO_VAL_LSB_PTR        ( (reg16 *) \
-                                  SHIFTREG_ENC_1_bSR_sC24_BShiftRegDp_u0__16BIT_F0_REG )
+                                  SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__16BIT_F0_REG )
 
         #define SHIFTREG_ENC_1_SHIFT_REG_LSB_PTR          ( (reg16 *) \
-                                  SHIFTREG_ENC_1_bSR_sC24_BShiftRegDp_u0__16BIT_A0_REG )
+                                  SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__16BIT_A0_REG )
 
         #define SHIFTREG_ENC_1_SHIFT_REG_VALUE_LSB_PTR    ( (reg16 *) \
-                                  SHIFTREG_ENC_1_bSR_sC24_BShiftRegDp_u0__16BIT_A1_REG )
+                                  SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__16BIT_A1_REG )
 
         #define SHIFTREG_ENC_1_OUT_FIFO_VAL_LSB_PTR       ( (reg16 *) \
-                                  SHIFTREG_ENC_1_bSR_sC24_BShiftRegDp_u0__16BIT_F1_REG )
+                                  SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__16BIT_F1_REG )
 
 
     #elif(SHIFTREG_ENC_1_SR_SIZE <= 24u) /* 24bit - ShiftReg */
         #define SHIFTREG_ENC_1_IN_FIFO_VAL_LSB_PTR        ( (reg32 *) \
-                                        SHIFTREG_ENC_1_bSR_sC24_BShiftRegDp_u0__F0_REG )
+                                        SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__F0_REG )
 
         #define SHIFTREG_ENC_1_SHIFT_REG_LSB_PTR          ( (reg32 *) \
-                                        SHIFTREG_ENC_1_bSR_sC24_BShiftRegDp_u0__A0_REG )
+                                        SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__A0_REG )
 
         #define SHIFTREG_ENC_1_SHIFT_REG_VALUE_LSB_PTR    ( (reg32 *) \
-                                        SHIFTREG_ENC_1_bSR_sC24_BShiftRegDp_u0__A1_REG )
+                                        SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__A1_REG )
 
         #define SHIFTREG_ENC_1_OUT_FIFO_VAL_LSB_PTR       ( (reg32 *) \
-                                        SHIFTREG_ENC_1_bSR_sC24_BShiftRegDp_u0__F1_REG )
+                                        SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__F1_REG )
 
     #else /* 32bit - ShiftReg */
         #define SHIFTREG_ENC_1_IN_FIFO_VAL_LSB_PTR        ( (reg32 *) \
-                                  SHIFTREG_ENC_1_bSR_sC24_BShiftRegDp_u0__32BIT_F0_REG )
+                                  SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__32BIT_F0_REG )
 
         #define SHIFTREG_ENC_1_SHIFT_REG_LSB_PTR          ( (reg32 *) \
-                                  SHIFTREG_ENC_1_bSR_sC24_BShiftRegDp_u0__32BIT_A0_REG )
+                                  SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__32BIT_A0_REG )
 
         #define SHIFTREG_ENC_1_SHIFT_REG_VALUE_LSB_PTR    ( (reg32 *) \
-                                  SHIFTREG_ENC_1_bSR_sC24_BShiftRegDp_u0__32BIT_A1_REG )
+                                  SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__32BIT_A1_REG )
 
         #define SHIFTREG_ENC_1_OUT_FIFO_VAL_LSB_PTR       ( (reg32 *) \
-                                  SHIFTREG_ENC_1_bSR_sC24_BShiftRegDp_u0__32BIT_F1_REG )
+                                  SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__32BIT_F1_REG )
 
     #endif  /* (SHIFTREG_ENC_1_SR_SIZE <= 8u) */
 #endif      /* (CY_PSOC3 || CY_PSOC5) */

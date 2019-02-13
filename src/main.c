@@ -62,7 +62,9 @@
 #include "globals.h"
 #include "interruptions.h"
 #include "command_processing.h"
-#include "SPI_functions.h"
+#include "IMU_functions.h"
+#include "Encoder_functions.h"
+#include "SD_RTC_functions.h"
 #include "utils.h"
 #include "project.h"
 #include "FS.h"
@@ -73,45 +75,31 @@
 
 int main()
 {
-    // Iterator
-
-
+    // Iterator    
     uint8 i;
     
-    // Variable declarations for DMA 
-
-    
+    // Variable declarations for DMA     
     uint8 DMA_Chan;
     uint8 DMA_TD[1];
-    uint8 DMA_Enc_Chan;
-    uint8 DMA_Enc_TD[1];
-
-    uint8 rtc_data;
-    char sdFile[9] = "File.txt";
-    char info_[2500] = "";
+    
     //================================     initializations - psoc and components
 
     // EEPROM
-
     EEPROM_Start();
     memRecall();                                        // Recall configuration.
 
     // FTDI chip enable
-
     CyDelay(100);
-    FTDI_ENABLE_REG_Write(0x01);
+    FTDI_ENABLE_Write(0x01);
     
-	// LED Enable
-    
-    LED_CTRL_Write(2);
-    BLINK_CTRL_EN_Write(0);
+	// LED Enable   
+    LED_control(1);     // Green fixed light
     BLINK_05HZ_Start();
     BLINK_25HZ_Start();
     BLINK_05HZ_WriteCompare(499);
     BLINK_25HZ_WriteCompare(99);
     
     // RS485
-
     UART_RS485_Stop();
     UART_RS485_Start();
     UART_RS485_Init();
@@ -119,74 +107,47 @@ int main()
     UART_RS485_ClearTxBuffer();
     ISR_RS485_RX_StartEx(ISR_RS485_RX_ExInterrupt);
     
-    // CYCLES TIMER
-    
+    // CYCLES TIMER   
     CYCLES_TIMER_Start();
     ISR_CYCLES_StartEx(ISR_CYCLES_Handler);
     
     // PWM
-
     PWM_MOTORS_Start();
-    PWM_MOTORS_WriteCompare(0);
-    MOTOR_DIR_Write(0);
-    MOTOR_ON_OFF_Write(0x00);
-    
-    // SSI encoder initializations
-
+    PWM_MOTORS_WriteCompare1(0);
+    MOTOR_DIR_1_Write(0);
+    MOTOR_ON_OFF_1_Write(0x00);
+     
+    // Init AS5045 devices  
     COUNTER_ENC_Start();
-//    COUNTER_ENC_WritePeriod( 19/*(N_BITS_ENCODER+1)*1*/ + 1 );  //2 enc -> 39, 3 enc -> 58
     SHIFTREG_ENC_1_Start();
     SHIFTREG_ENC_2_Start();
     SHIFTREG_ENC_3_Start();
-    
-    // Encoder DMA (only 16 bit data transfer are allowed between DMA and a SHIFT REGISTER (UDB))
-/*    DMA_Enc_Chan = DMA_1_DmaInitialize(2, DMA_REQUEST_PER_BURST, HI16(DMA_SRC_BASE), HI16(DMA_DST_BASE));
-    DMA_Enc_TD[0] = CyDmaTdAllocate();                                                                          // Allocate TD. 
-    CyDmaTdSetConfiguration(DMA_Enc_TD[0], 2*1, DMA_Enc_TD[0], TD_INC_DST_ADR); // DMA Configurations.
-    CyDmaTdSetAddress(DMA_Enc_TD[0], LO16((uint32)SHIFTREG_ENC_1_bSR_sC16_BShiftRegDp_u0__A0_A1_REG), LO16((uint32)Enc_buf));                    // Set Register Address.                                                              // Initialize Channel.
-    CyDmaChSetInitialTd(DMA_Enc_Chan, DMA_Enc_TD[0]); 
-    CyDmaChEnable(DMA_Enc_Chan, 1); 
-    
-    DMA_Enc_Check_Chan = DMA_2_DmaInitialize(1, DMA_REQUEST_PER_BURST, HI16(DMA_SRC_BASE), HI16(DMA_DST_BASE));
-    DMA_Enc_TD[0] = CyDmaTdAllocate();                                                                          // Allocate TD. 
-    CyDmaTdSetConfiguration(DMA_Enc_TD[0], 1*1, DMA_Enc_TD[0], TD_INC_DST_ADR); // DMA Configurations.
-    CyDmaTdSetAddress(DMA_Enc_TD[0], LO16((uint32)SHIFTREG_ENC_2_bSR_sC8_BShiftRegDp_u0__A0_REG), LO16((uint8)Enc_Check_buf));                    // Set Register Address.                                                               // Initialize Channel.
-    CyDmaChSetInitialTd(DMA_Enc_Check_Chan, DMA_Enc_TD[0]); 
-    CyDmaChEnable(DMA_Enc_Check_Chan, 1); 
-*/    
-//SHIFTREG_ENC_1_bSR_sC32_BShiftRegDp_u0__A0_A1_REG    
-    // ADC
 
+    // ADC
+    ADC_Set_N_Channels();           // Set right number of ADC channels to sample
     ADC_Start();
     ADC_SOC_Write(0x01);            // Force first read cycle.
-   
-    // DMA
-    
+
+    // ADC DMA    
     DMA_Chan = DMA_DmaInitialize(DMA_BYTES_PER_BURST, DMA_REQUEST_PER_BURST, HI16(DMA_SRC_BASE), HI16(DMA_DST_BASE));
     DMA_TD[0] = CyDmaTdAllocate();                                                                          // Allocate TD.
-// NO DMA SWAP ANYMORE WITH PSOC5    
     CyDmaTdSetConfiguration(DMA_TD[0], 2 * NUM_OF_ANALOG_INPUTS, DMA_TD[0], DMA__TD_TERMOUT_EN | TD_INC_DST_ADR); // DMA Configurations.
     CyDmaTdSetAddress(DMA_TD[0], LO16((uint32)ADC_DEC_SAMP_PTR), LO16((uint32)ADC_buf));                    // Set Register Address.
     CyDmaChSetInitialTd(DMA_Chan, DMA_TD[0]);                                                               // Initialize Channel.
     CyDmaChEnable(DMA_Chan, 1);                                                                             // Enable DMA.
-
-    RS485_CTS_Write(0);             // Clear To Send on RS485.
-
+    
     // TIMER
-
     MY_TIMER_Start();           
     PACER_TIMER_Start();    
     
     CYGlobalIntEnable;              // Enable interrupts.
 
-    // SSI ENCODERS
-    RESET_COUNTERS_Write(0x00);     // Activate encoder counters. Must be made before initializing measurements to zero.
-    CyDelay(10);                    // Wait for encoders to have a valid value.
+    // Init AS5045 devices
+    InitEncoderGeneral();
 
-    //========================================     initializations - clean variables
-
+    //SPI IMU module
     if (c_mem.read_imu_flag) {
-        //SPI module
+
     	SPI_IMU_Start();
     	SPI_IMU_Init();
     	SPI_IMU_Enable();
@@ -197,20 +158,33 @@ int main()
         
         // Init MPU9250 devices
         InitIMUgeneral();
+        
+        // Initialize quaternion
+        for (i = 0; i<N_IMU_MAX; i++) {
+            Quat[i][0] = 0.999;
+            Quat[i][1] = 0.01;
+            Quat[i][2] = 0.01;
+            Quat[i][3] = 0.01;
+        }
     }
-    //---------------------------------------------------  Initialize filters structure 
     
-    filt_i.gain = 32;           // Current filter constant.
-    for(i=0;i<3;i++) {
+    //========================================     initializations - clean variables
+    
+    //---------------------------------------------------  Initialize filters structure 
+    for(i=0;i<NUM_OF_MOTORS;i++) {
+        filt_i[i].gain = 32;    // Current filter constant.
+            
+        filt_v[i].old_value    = 12000;// Initial voltage filter value.
+        filt_v[i].gain         = 2;    // Voltage filter constant.
+    }
+    for(i=0;i<NUM_OF_SENSORS;i++) {
         filt_vel[i].gain = 128; // Velocity filters constant.
     }
     filt_curr_diff.gain = 16;   // Current residual filter constant.
     
-    filt_v.old_value    = 12000;// Initial voltage filter value.
-    filt_v.gain         = 2;    // Voltage filter constant.
-    
-    filt_emg1.gain      = 50;   // Emg channel 1 filter constant.
-    filt_emg2.gain      = 50;   // Emg channel 2 filter constant.
+    for(i=0;i<NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS;i++) {
+        filt_emg[i].gain      = 50;   // Emg channels filter constant.
+    }
     
     //---------------------------------------------------  Initialize reference structure 
     g_ref.pos = 0;
@@ -240,16 +214,19 @@ int main()
         g_ref.onoff = c_mem.activ;
 
     if (!g_mem.double_encoder_on_off) {
-        g_ref.onoff = c_mem.activ;                          // Initalize Activation.
+        g_ref.onoff = c_mem.activ;                          // Initialize Activation.
     } 
     else {
         // Do not activate motor until position reconstruction has finished
         g_ref.onoff = 0x00;
     }
-    MOTOR_ON_OFF_Write(g_ref.onoff);                    // Activate motor in case.
+    MOTOR_ON_OFF_1_Write(g_ref.onoff);                  // Activate motor in case.
 
     dev_pwm_limit = dev_pwm_sat;                        // Init PWM limit.
-	pow_tension = 12000;                                // 12000 mV (12 V)
+	
+    for(i=0;i<NUM_OF_MOTORS;i++){
+        pow_tension[i] = 12000;                         // 12000 mV (12 V)
+    }
     tension_valid = FALSE;                              // Init tension_valid BIT.
 
     reset_last_value_flag = 0;                          // Do not reset encoder last value.
@@ -263,40 +240,25 @@ int main()
     forced_open = 0;
     
     LED_control(5);     // Default - red light
-    
+
     //============================================================    check if maintenance is due
 
     if ( (g_mem.wire_disp/(((g_mem.pos_lim_sup>>g_mem.res[0]) - (g_mem.pos_lim_inf>>g_mem.res[0]))*2)) > (uint32)(PREREVISION_CYCLES/2) )   // 50 %
         maintenance_flag = TRUE;    
 
-    if (c_mem.read_exp_port_flag == EXP_SD_RTC) {
-        // Update current time
-        rtc_data = DS1302_read(DS1302_DATE_RD);
-        g_mem.curr_time[0] = (rtc_data/16) * 10 + rtc_data%16;
-        rtc_data = DS1302_read(DS1302_MONTH_RD);
-        g_mem.curr_time[1] = (rtc_data/16) * 10 + rtc_data%16;
-        rtc_data = DS1302_read(DS1302_YEAR_RD);
-        g_mem.curr_time[2] = (rtc_data/16) * 10 + rtc_data%16;
-
-
-        rtc_data = DS1302_read(DS1302_HOUR_RD);
-        g_mem.curr_time[3] = (rtc_data/16) * 10 + rtc_data%16;
-        rtc_data = DS1302_read(DS1302_MINUTES_RD);
-        g_mem.curr_time[4] = (rtc_data/16) * 10 + rtc_data%16;
-        rtc_data = DS1302_read(DS1302_SECONDS_RD);
-        g_mem.curr_time[5] = (rtc_data/16) * 10 + rtc_data%16;
+    if (g_mem.read_exp_port_flag == EXP_SD_RTC) {
+        
+        store_RTC_current_time();
         
         // SD file
-        FS_Init();
-        pFile = FS_FOpen(sdFile, "a");
-        //FS_FClose(pFile);    
-
-        //Write in SD card
-        prepare_counter_info(info_);
-        write_bytes = FS_Write(pFile, info_, strlen(info_));
+        InitSD_FS();
     }
+    
     //============================================================     main loop
     
+    // All peripherals has started, now it is ok to start communication
+    RS485_CTS_Write(0);             // Clear To Send on RS485.
+
     for(;;)
 
     {             

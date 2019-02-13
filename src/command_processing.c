@@ -45,11 +45,6 @@
 */
 //=================================================================     includes
 #include "command_processing.h"
-#include "interruptions.h"
-#include "SPI_functions.h"
-#include <STDIO.H>
-#include "utils.h"
-#include "commands.h"
 
 //================================================================     variables
 
@@ -165,7 +160,6 @@ void commProcess(void){
 
         case CMD_GET_PARAM_LIST:
             manage_param_list( __REV16(*((uint16 *) &g_rx.buffer[1])) );
-            //get_IMU_param_list( __REV16(*((uint16 *) &g_rx.buffer[1])) );
             break;
 
 //=================================================================     CMD_PING
@@ -200,7 +194,7 @@ void commProcess(void){
 
 //=============================================================     CMD_INIT_MEM
 
-        case CMD_INIT_MEM:
+        case CMD_INIT_MEM:            
             if(memInit())
                 sendAcknowledgment(ACK_OK);
             else
@@ -213,7 +207,7 @@ void commProcess(void){
             //Not sure if ACK_OK is correct, should check
             sendAcknowledgment(ACK_OK);
             CyDelay(1000);
-            FTDI_ENABLE_REG_Write(0x00);
+            FTDI_ENABLE_Write(0x00);
             CyDelay(1000);
             Bootloadable_Load();
             break;
@@ -254,15 +248,44 @@ void commProcess(void){
 
         case CMD_GET_IMU_READINGS:
             cmd_get_imu_readings();
-            break;    
+            break; 
+            
+//=====================================================     CMD_GET_IMU_PARAM
+
+        case CMD_GET_IMU_PARAM:
+            get_IMU_param_list( __REV16(*((uint16 *) &g_rx.buffer[1])) );
+            break;             
+            
+//=====================================================     CMD_GET_ENCODER_CONF
+
+        case CMD_GET_ENCODER_CONF:
+            cmd_get_encoder_map();
+            break; 
+
+//=====================================================     CMD_GET_ENCODER_RAW
+
+        case CMD_GET_ENCODER_RAW:
+            cmd_get_encoder_raw();
+            break; 
+
+//=====================================================     CMD_GET_ADC_CONF
+
+        case CMD_GET_ADC_CONF:
+            cmd_get_ADC_map();
+            break; 
+            
+//=====================================================     CMD_GET_ADC_RAW
+
+        case CMD_GET_ADC_RAW:
+            cmd_get_ADC_raw();
+            break; 
             
 //=========================================================== ALL OTHER COMMANDS
         default:
             break;
 
     }
-}
-
+}  
 
 //==============================================================================
 //                                                                     INFO SEND
@@ -309,8 +332,8 @@ void infoGet(uint16 info_type) {
 void get_param_list() {
     
     //Package to be sent variables
-    uint8 packet_data[PARAM_BYTE_SLOT*NUM_OF_PARAMS + PARAM_MENU_SLOT*7 + PARAM_BYTE_SLOT] = "";      //50*NUM_OF_PARAMS + 150*NUM_DIFFERENT_MENUS
-    uint16 packet_lenght = PARAM_BYTE_SLOT*NUM_OF_PARAMS + PARAM_MENU_SLOT*7 + PARAM_BYTE_SLOT;
+    uint8 packet_data[PARAM_BYTE_SLOT*NUM_OF_DEV_PARAMS + PARAM_MENU_SLOT*8 + PARAM_BYTE_SLOT] = "";      //50*NUM_OF_DEV_PARAMS + 150*NUM_DIFFERENT_MENUS
+    uint16 packet_lenght = PARAM_BYTE_SLOT*NUM_OF_DEV_PARAMS + PARAM_MENU_SLOT*8 + PARAM_BYTE_SLOT;
 
     //Auxiliary variables
     uint8 CYDATA i, j;
@@ -331,18 +354,22 @@ void get_param_list() {
     const uint8 TYPES[NUM_OF_PARAMS] = {
         TYPE_UINT8, TYPE_FLOAT, TYPE_FLOAT, TYPE_FLAG, TYPE_FLAG, TYPE_FLAG, TYPE_UINT8, TYPE_INT16, 
         TYPE_FLOAT, TYPE_FLAG, TYPE_INT32, TYPE_INT32, TYPE_INT16, TYPE_UINT16, TYPE_FLAG, TYPE_UINT32, 
-        TYPE_UINT8, TYPE_FLAG, TYPE_INT8, TYPE_FLAG, TYPE_FLOAT, TYPE_INT32, TYPE_INT32, TYPE_INT32,
-        TYPE_FLAG, TYPE_FLAG, TYPE_FLAG, TYPE_FLAG, TYPE_FLAG, TYPE_FLAG, TYPE_UINT8
+        TYPE_UINT8, TYPE_FLAG, TYPE_INT8, TYPE_FLAG, TYPE_FLOAT, TYPE_UINT8, TYPE_INT32, TYPE_INT32,
+        TYPE_INT32, TYPE_FLAG, TYPE_FLAG, TYPE_FLAG, TYPE_FLAG, TYPE_FLAG, TYPE_FLAG, TYPE_UINT8, 
+        TYPE_FLAG, TYPE_UINT8, TYPE_UINT8, TYPE_UINT8, TYPE_UINT8, TYPE_UINT8, TYPE_FLAG, TYPE_FLAG,
+        TYPE_FLAG, TYPE_FLAG
     };
 
     const uint8 NUM_ITEMS[NUM_OF_PARAMS] = {
         1, 3, 3, 1, 1, 1, 3, 3,
         3, 1, 2, 2, 1, 2, 1, 2,
-        1, 1, 1, 1, 6, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 6
+        1, 1, 1, 1, 6, 3, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 6,
+        1, 5, N_Encoder_Line_Connected[0], N_Encoder_Line_Connected[1], 6, 6, 1, 1,
+        1, 1
     };
 
-    const uint8 NUM_MENU[13] = {3, 1, 2, 3, 3, 3, 3, 3, 3, 4, 5, 6, 3};
+    const uint8 NUM_MENU[18] = {3, 1, 2, 3, 3, 3, 3, 3, 3, 4, 5, 6, 3, 7, 5, 5, 8, 8};
     
     const char* PARAMS_STR[NUM_OF_PARAMS] = {
         "1 - Device ID:", "2 - Position PID [P, I, D]:", "3 - Current PID [P, I, D]:", "4 - Startup Activation:",
@@ -350,9 +377,12 @@ void get_param_list() {
         "9 - Multipliers:", "10 - Pos. limit active:", "11 - Pos. limits [inf, sup]:", "12 - Max steps [neg, pos]:",
         "13 - Current limit:", "14 - EMG thresholds:", "15 - EMG calibration on startup:", "16 - EMG max values:",
         "17 - EMG max speed:", "18 - Absolute encoder position:", "19 - Motor handle ratio:", "20 - PWM rescaling:",
-        "21 - Current lookup:", "22 - Rest position:", "23 - Rest position time delay (ms):", "24 - Rest vel closure (ticks/sec):", 
-        "25 - Rest position enabled:", "26 - EMG inversion:",  "27 - Hand side:", "28 - Read all IMUs:", 
-        "29 - Read Expansion port:", "30 - Reset counters:", "31 - Current Time [DD/MM/YY HH:MM:SS]:"
+        "21 - Current lookup:", "22 - Date of maintenance [D/M/Y]:", "23 - Rest position:", "24 - Rest position time delay (ms):", 
+        "25 - Rest vel closure (ticks/sec):", "26 - Rest position enabled:", "27 - EMG inversion:",  "28 - Hand side:",
+        "29 - Read IMUs:", "30 - Read Expansion port:", "31 - Reset counters:", "32 - Last checked Time [D/M/Y H:M:S]:", 
+        "33 - SPI read delay (IMU):", "34 - On board IMU conf. [a,g,m,q,t]:", "35 - Encoder line 0:", "36 - Encoder line 1:", 
+        "37 - ADC channel [1-6]:", "38 - ADC channel [7-12]:", "39 - Read additional ADC port:", "40 - Use second motor:", 
+        "41 - Motor 1 driver type:", "42 - Motor 2 driver type:"
     };
 
     //Parameters menu
@@ -360,16 +390,16 @@ void get_param_list() {
     const char control_mode_menu[64] = "0 -> Position\n1 -> PWM\n2 -> Current\n3 -> Position and Current\n";
     const char yes_no_menu[42] = "0 -> Deactivate [NO]\n1 -> Activate [YES]\n";
     const char right_left_menu[22] = "0 -> Right\n1 -> Left\n";
-    const char on_off_menu[51] = "0 -> OFF\n1 -> ON\nYou must restart the board now\n";
-    const char exp_port_menu[87] = "0 -> None\n1 -> SD/RTC board\n2 -> WiFi board\n3 -> Other\nYou must restart the board now\n";
-    char spi_delay_menu[118] = " ";
-    
+    const char on_off_menu[42] = "0 -> OFF\n1 -> ON\nThe board will reset\n";
+    const char exp_port_menu[90] = "0 -> None\n1 -> SD/RTC board\n2 -> WiFi board [N/A]\n3 -> Other [N/A]\nThe board will reset\n";
+    char spi_delay_menu[118]    = ""; 
     sprintf(spi_delay_menu, "0 -> None\n1 -> Low (%u us delay for each 8-bit register read)\n2 -> High (%u us delay for each 8-bit register read)\n", (int)SPI_DELAY_LOW, (int)SPI_DELAY_HIGH);
+    const char motor_driver_type_menu[72] = "0 -> MC33887 (Standard)\n1 -> VNH5019 (High power)\nThe board will reset\n";
     
     packet_data[0] = CMD_GET_PARAM_LIST;
-    packet_data[1] = NUM_OF_PARAMS;
+    packet_data[1] = NUM_OF_DEV_PARAMS;
     
-    for (idx = 0; idx < NUM_OF_PARAMS; idx++) {
+    for (idx = 0; idx < NUM_OF_DEV_PARAMS; idx++) {
         
         // Add parameter type and size to packet
         packet_data[2 + PARAM_BYTE_SLOT*idx] = TYPES[idx];
@@ -443,7 +473,7 @@ void get_param_list() {
                             //*((int32 *)( packet_data + (4 + PARAM_BYTE_SLOT*idx))) = (c_mem.pos_lim_inf >> c_mem.res[0]);
                             //*((int32 *)( packet_data + (4 + PARAM_BYTE_SLOT*idx) + sod)) = (c_mem.pos_lim_sup >> c_mem.res[0]);
                             break;
-                        case 21:    // REST POSITION (param 22)
+                        case 22:    // REST POSITION (param 22)
                             aux_int32 = (c_mem.rest_pos >> c_mem.res[0]);
                             for(j = 0; j < sod; j++) {
                                 packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - j -1] = ((char*)(&aux_int32))[j];
@@ -644,10 +674,10 @@ void get_param_list() {
                             strcat(aux_str, " SD/RTC board\0");
                             break;
                         case EXP_WIFI:
-        					strcat(aux_str, " WiFi board\0");
+        					strcat(aux_str, " WiFi board [N/A]\0");
         					break;
                         case EXP_OTHER:
-        					strcat(aux_str, " Other\0");
+        					strcat(aux_str, " Other [N/A]\0");
         					break;
                     }
                     break;
@@ -663,8 +693,17 @@ void get_param_list() {
                             strcat(aux_str, " High\0");
                             break;
                         default:
-        					strcat(aux_str, " Undefined\0");
                             break;
+                    } 
+                    break;
+                case 8:
+                    switch(*m_addr){
+                        case 0:
+                            strcat(aux_str, " MC33887 (Standard)\0");
+                        break;
+                        case 1:
+                            strcat(aux_str, " VNH5019 (High power)\0");
+                        break;
                     }
                     break;
             }
@@ -713,14 +752,29 @@ void get_param_list() {
                 break;
             case 20:
                 //(increment after LOOKUP TABLE parameter)
-                //m_addr = m_addr + NUM_ITEMS[idx]*sod + 1 + 3;   //1 = baudrate, 3 = maintenance date
-                m_addr = (uint8*)&c_mem.rest_pos;
+                //m_addr = m_addr + NUM_ITEMS[idx]*sod + 1 + 3;   //1 = baudrate
+                m_addr = (uint8*)&c_mem.maint_day;
                 break;
-            case 29:
+            case 30:
                 //(increment after RESET COUNTERS parameter)
-                //m_addr = m_addr + NUM_ITEMS[idx]*sod + 25 + 80;   //25 = unused bytes, 80 = 20*4 counters
+                //m_addr goes to c_mem.curr_time[0] (row 6)
                 m_addr = (uint8*)&c_mem.curr_time[0];
+                break;  
+            case 31:
+                //(increment after CURR TIME parameter)
+                //m_addr goes to c_mem.SPI_read_delay (row 22)
+                m_addr = (uint8*)&c_mem.SPI_read_delay;
                 break;                
+            case 33:
+                //(increment after LAST CHECKED TIME parameter)
+                //m_addr = m_addr + NUM_ITEMS[idx]*sod + 10 + 26;   //10 = unused bytes_1, 1 = SPI delay, 25 = 5*4 IMU conf
+                m_addr = (uint8*)&c_mem.Encoder_conf[0][0];
+                break; 
+            case 35:
+                //(increment after Encoder_conf parameter)
+                //m_addr = m_addr + N_ENCODER_LINE_MAX*N_ENCODERS_PER_LINE_MAX;       //2*5
+                m_addr = (uint8*)&c_mem.ADC_conf[0];
+                break;                 
             default:
                 m_addr = m_addr + NUM_ITEMS[idx]*sod;
                 break;
@@ -731,32 +785,36 @@ void get_param_list() {
 
     string_lenght = strlen((char*)input_mode_menu);
     for(i = string_lenght; i != 0; i--)
-        packet_data[PARAM_BYTE_SLOT*NUM_OF_PARAMS + 2 + string_lenght - i] = input_mode_menu[string_lenght - i];
+        packet_data[PARAM_BYTE_SLOT*NUM_OF_DEV_PARAMS + 2 + string_lenght - i] = input_mode_menu[string_lenght - i];
 
     string_lenght = strlen((char*)control_mode_menu);
     for(i = string_lenght; i != 0; i--)
-        packet_data[PARAM_BYTE_SLOT*NUM_OF_PARAMS + 2 + PARAM_MENU_SLOT + string_lenght - i] = control_mode_menu[string_lenght - i];
+        packet_data[PARAM_BYTE_SLOT*NUM_OF_DEV_PARAMS + 2 + PARAM_MENU_SLOT + string_lenght - i] = control_mode_menu[string_lenght - i];
 
     string_lenght = strlen((char*)yes_no_menu);
     for(i = string_lenght; i!= 0; i--)
-        packet_data[PARAM_BYTE_SLOT*NUM_OF_PARAMS + 2 + 2*PARAM_MENU_SLOT + string_lenght - i] = yes_no_menu[string_lenght - i];
+        packet_data[PARAM_BYTE_SLOT*NUM_OF_DEV_PARAMS + 2 + 2*PARAM_MENU_SLOT + string_lenght - i] = yes_no_menu[string_lenght - i];
 
     string_lenght = strlen((char*)right_left_menu);
     for(i = string_lenght; i!= 0; i--)
-        packet_data[PARAM_BYTE_SLOT*NUM_OF_PARAMS + 2 + 3*PARAM_MENU_SLOT + string_lenght - i] = right_left_menu[string_lenght - i];
+        packet_data[PARAM_BYTE_SLOT*NUM_OF_DEV_PARAMS + 2 + 3*PARAM_MENU_SLOT + string_lenght - i] = right_left_menu[string_lenght - i];
 
     string_lenght = strlen((char*)on_off_menu);
     for(i = string_lenght; i!= 0; i--)
-        packet_data[PARAM_BYTE_SLOT*NUM_OF_PARAMS + 2 + 4*PARAM_MENU_SLOT + string_lenght - i] = on_off_menu[string_lenght - i];
+        packet_data[PARAM_BYTE_SLOT*NUM_OF_DEV_PARAMS + 2 + 4*PARAM_MENU_SLOT + string_lenght - i] = on_off_menu[string_lenght - i];
 
     string_lenght = strlen((char*)exp_port_menu);
     for(i = string_lenght; i!= 0; i--)
-        packet_data[PARAM_BYTE_SLOT*NUM_OF_PARAMS + 2 + 5*PARAM_MENU_SLOT + string_lenght - i] = exp_port_menu[string_lenght - i];
+        packet_data[PARAM_BYTE_SLOT*NUM_OF_DEV_PARAMS + 2 + 5*PARAM_MENU_SLOT + string_lenght - i] = exp_port_menu[string_lenght - i];
 
     string_lenght = strlen((char*)spi_delay_menu);
     for(i = string_lenght; i!= 0; i--)
-        packet_data[PARAM_BYTE_SLOT*NUM_OF_PARAMS + 2 + 6*PARAM_MENU_SLOT + string_lenght - i] = spi_delay_menu[string_lenght - i];
-                
+        packet_data[PARAM_BYTE_SLOT*NUM_OF_DEV_PARAMS + 2 + 6*PARAM_MENU_SLOT + string_lenght - i] = spi_delay_menu[string_lenght - i];
+
+    string_lenght = strlen((char*)motor_driver_type_menu);
+    for(i = string_lenght; i!= 0; i--)
+        packet_data[PARAM_BYTE_SLOT*NUM_OF_DEV_PARAMS + 2 + 7*PARAM_MENU_SLOT + string_lenght - i] = motor_driver_type_menu[string_lenght - i];
+        
     packet_data[packet_lenght - 1] = LCRChecksum(packet_data,packet_lenght - 1);
     commWrite(packet_data, packet_lenght);
 }
@@ -1021,30 +1079,37 @@ void manage_param_list(uint16 index) {
                 //g_mem.curr_lookup[i] = *((float *) &g_rx.buffer[3 + i*4]);
             }
         break;
+ 
+//========================================================    set_maintenance_date
+        case 22:         //Maintenance date - uint8[3]
+            g_mem.maint_day     = g_rx.buffer[3];
+            g_mem.maint_month   = g_rx.buffer[4];
+            g_mem.maint_year    = g_rx.buffer[5];
+        break; 
             
 //============================================================     set_rest_pos
-        case 22:        //Rest Position - int32
+        case 23:        //Rest Position - int32
             g_mem.rest_pos = (int32)(g_rx.buffer[3]<<24 | g_rx.buffer[4]<<16 | g_rx.buffer[5]<<8 | g_rx.buffer[6]);
             //g_mem.rest_pos = *((int32 *) &g_rx.buffer[3]);
             g_mem.rest_pos = g_mem.rest_pos << g_mem.res[0];
         break; 
             
 //============================================================     set_rest_delay_pos
-        case 23:        //Rest Position Time Delay - int32
+        case 24:        //Rest Position Time Delay - int32
            g_mem.rest_delay = (int32)(g_rx.buffer[3]<<24 | g_rx.buffer[4]<<16 | g_rx.buffer[5]<<8 | g_rx.buffer[6]);
            //g_mem.rest_delay = *((float *) &g_rx.buffer[3]);
 		   if (g_mem.rest_delay < 10) g_mem.rest_delay = 10;
         break; 
             
 //============================================================     set_rest_vel
-        case 24:        //Rest Position Velocity - int32
+        case 25:        //Rest Position Velocity - int32
             g_mem.rest_vel = (int32)(g_rx.buffer[3]<<24 | g_rx.buffer[4]<<16 | g_rx.buffer[5]<<8 | g_rx.buffer[6]);
 			//g_mem.rest_vel = *((float *) &g_rx.buffer[3]);
         break;  
             
             
 //================================================     set_rest_position_flag
-        case 25:        //Rest position flag - uint8
+        case 26:        //Rest position flag - uint8
             aux_uchar = *((uint8*) &g_rx.buffer[3]);
             if (aux_uchar) {
                 g_mem.rest_position_flag = TRUE;
@@ -1054,11 +1119,11 @@ void manage_param_list(uint16 index) {
         break; 
             
 //===================================================     set_switch_emg
-        case 26:        //EMG inversion - uint8
+        case 27:        //EMG inversion - uint8
             g_mem.switch_emg = g_rx.buffer[3];
         break; 
 //================================================     set_right_left_flag
-        case 27:        //Right/Left hand flag - uint8
+        case 28:        //Right/Left hand flag - uint8
             aux_uchar = *((uint8*) &g_rx.buffer[3]);
             if (aux_uchar) {    // 1
                 g_mem.right_left = LEFT_HAND;
@@ -1069,17 +1134,19 @@ void manage_param_list(uint16 index) {
         break; 
             
 //===================================================     set_read_imu_flag
-        case 28:        //Read IMU flag - uint8
+        case 29:        //Read IMU flag - uint8
             g_mem.read_imu_flag = g_rx.buffer[3];
+            reset_PSoC_flag = TRUE;
         break; 
             
-//===================================================     set_read_exp_port
-        case 29:        //Read Expansion Port - uint8
+//===================================================     set_read_exp_port_flag
+        case 30:        //Read Expansion Port - uint8
             g_mem.read_exp_port_flag = g_rx.buffer[3];
-        break; 
-            
+            reset_PSoC_flag = TRUE;
+        break;  
+
 //===================================================     reset_counters
-        case 30:        //Reset counters - uint8
+        case 31:        //Reset counters - uint8
             aux_uchar = *((uint8*) &g_rx.buffer[3]);
             if (aux_uchar) {
                 reset_counters();
@@ -1097,20 +1164,76 @@ void manage_param_list(uint16 index) {
         break;             
             
 //==================================================    set_current_time
-        case 31:         //Current Time - uint8[3]
+        case 32:         //Current Time - uint8[3]
             for (i=0; i<6; i++){
                 g_mem.curr_time[i] = g_rx.buffer[3 + i];
             }
             
             if (c_mem.read_exp_port_flag == EXP_SD_RTC) {
-                DS1302_write(DS1302_DATE_WR, (((g_mem.curr_time[0] / 10)*16) + (g_mem.curr_time[0] % 10)));
-                DS1302_write(DS1302_MONTH_WR, (((g_mem.curr_time[1] / 10)*16) + (g_mem.curr_time[1] % 10)));
-                DS1302_write(DS1302_YEAR_WR, (((g_mem.curr_time[2] / 10)*16) + (g_mem.curr_time[2] % 10)));
-                DS1302_write(DS1302_HOUR_WR, (((g_mem.curr_time[3] / 10)*16) + (g_mem.curr_time[3] % 10)));
-                DS1302_write(DS1302_MINUTES_WR, (((g_mem.curr_time[4] / 10)*16) + (g_mem.curr_time[4] % 10)));
-                DS1302_write(DS1302_SECONDS_WR, (((g_mem.curr_time[5] / 10)*16) + (g_mem.curr_time[5] % 10)));
+                set_RTC_time();
             }
-        break;  
+        break;
+                
+//==================================================    set_SPI_read_delay
+        case 33:         //SPI read delay - uint8
+            g_mem.SPI_read_delay = g_rx.buffer[3];  
+        break;
+                
+//==================================================    set_IMU_0_conf
+        case 34:         //On board IMU configuration flags - uint8[5]            
+            //Set Imu table (On board IMU)
+            g_mem.IMU_conf[IMU_connected[0]][0] = g_rx.buffer[3];
+            g_mem.IMU_conf[IMU_connected[0]][1] = g_rx.buffer[4];
+            g_mem.IMU_conf[IMU_connected[0]][2] = g_rx.buffer[5];
+            g_mem.IMU_conf[IMU_connected[0]][3] = g_rx.buffer[6];
+            g_mem.IMU_conf[IMU_connected[0]][4] = g_rx.buffer[7];
+        break;        
+                
+//==================================================    set_Encoder_conf
+        case 35:         //Encoder configuration flags - uint8[10]
+            for (i=0; i < N_Encoder_Line_Connected[0]; i++){
+                g_mem.Encoder_conf[0][i] = g_rx.buffer[3 + i];
+            }
+        break;
+//==================================================    set_Encoder_conf
+        case 36:         //Encoder configuration flags - uint8[10]
+            for (i=0; i < N_Encoder_Line_Connected[1]; i++){
+                g_mem.Encoder_conf[1][i] = g_rx.buffer[3 + i];
+            }
+        break;
+//==================================================    set_ADC_conf
+        case 37:        //ADC configuration flags - uint8[12]
+            for (i=0; i < 6; i++){
+                g_mem.ADC_conf[i] = g_rx.buffer[3 + i];
+            }
+        break;
+//==================================================    set_ADC_conf
+        case 38:        //ADC configuration flags - uint8[12]
+            for (i=0; i < 6; i++){
+                g_mem.ADC_conf[6+i] = g_rx.buffer[3 + i];
+            }
+        break; 
+//===================================================     set_emg_sensors_port_flag
+        case 39:        //Read EMG additional sensors port - uint8
+            g_mem.read_emg_sensors_port_flag = g_rx.buffer[3];
+            reset_PSoC_flag = TRUE;
+        break;
+
+//===================================================     use_2nd_motor_flag
+        case 40:        //Use 2nd motor flag - uint8
+            g_mem.use_2nd_motor_flag = g_rx.buffer[3];
+            reset_PSoC_flag = TRUE;
+        break;     
+//===================================================     driver_motor_type_1
+        case 41:        //Driver motor type - Motor 1 - uint8
+            g_mem.motor_driver_type[0] = g_rx.buffer[3];
+            reset_PSoC_flag = TRUE;
+        break;   
+//===================================================     driver_motor_type_2
+        case 42:        //Driver motor type - Motor 2 - uint8
+            g_mem.motor_driver_type[1] = g_rx.buffer[3];
+            reset_PSoC_flag = TRUE;
+        break;               
     }                
 }
 
@@ -1123,13 +1246,13 @@ void get_IMU_param_list(uint16 index)
 {
     //Package to be sent variables
     uint8 packet_data[  PARAM_BYTE_SLOT   +     // Number of connected IMUs
-                        6*PARAM_BYTE_SLOT +     // IMUs ID  (1 port instead of 6)
+                        7*PARAM_BYTE_SLOT +     // IMUs ID  (1 port instead of 7)
                         9*PARAM_BYTE_SLOT +     // Mag cal parameters (1 row instead of 9)
                         PARAM_BYTE_SLOT   +     // 1 - Device ID
                         PARAM_BYTE_SLOT*N_IMU_MAX + // IMU configurations
                         PARAM_BYTE_SLOT   +     // SPI read delay
                         PARAM_MENU_SLOT   + PARAM_BYTE_SLOT + 1 ] = "";
-    uint16 num_imus_id_params = 6;      //(1 port instead of 6)
+    uint16 num_imus_id_params = 7;      //(1 port instead of 7)
     uint16 num_mag_cal_params = 0;
     uint16 first_imu_parameter = 2;
     uint16 packet_length = PARAM_BYTE_SLOT +
@@ -1178,7 +1301,7 @@ void get_IMU_param_list(uint16 index)
                     PARAM_MENU_SLOT + PARAM_BYTE_SLOT + 1;
 
     first_imu_parameter = 1 + num_imus_id_params + num_mag_cal_params + 2;
-    packet_data[0] = CMD_GET_PARAM_LIST;
+    packet_data[0] = CMD_GET_IMU_PARAM;
     packet_data[1] = 1 + num_imus_id_params + num_mag_cal_params + 1 + (uint8)N_IMU_Connected + 1;        // NUM_PARAMS
 
     switch(index) {
@@ -1454,18 +1577,32 @@ void prepare_generic_info(char *info_string)
             strcat(info_string, "\r\n");
         }
 
-        sprintf(str, "Battery Voltage (mV): %ld", (int32) dev_tension );
+        sprintf(str, "Battery Voltage (mV): %ld", (int32) dev_tension[0] );
         strcat(info_string, str);
         strcat(info_string, "\r\n");
         
-        sprintf(str, "Full charge power tension (mV): %ld", (int32) pow_tension );
+        sprintf(str, "Full charge power tension (mV): %ld", (int32) pow_tension[0] );
         strcat(info_string, str);
         strcat(info_string, "\r\n");
 
-        sprintf(str, "Current (mA): %ld", (int32) g_meas.curr );
+        sprintf(str, "Current (mA): %ld", (int32) g_meas.curr[0] );
         strcat(info_string, str);
         strcat(info_string, "\r\n");
 
+        if (c_mem.use_2nd_motor_flag == TRUE) {
+            sprintf(str, "Battery Voltage 2 (mV): %ld", (int32) dev_tension[1] );
+            strcat(info_string, str);
+            strcat(info_string, "\r\n");
+            
+            sprintf(str, "Full charge power tension 2 (mV): %ld", (int32) pow_tension[1] );
+            strcat(info_string, str);
+            strcat(info_string, "\r\n");
+
+            sprintf(str, "Current 2 (mA): %ld", (int32) g_meas.curr[1] );
+            strcat(info_string, str);
+            strcat(info_string, "\r\n");
+        }
+        
         strcat(info_string, "\r\nDEVICE PARAMETERS\r\n");
 
         strcat(info_string, "PID Controller:\r\n");
@@ -1624,6 +1761,20 @@ void prepare_generic_info(char *info_string)
             strcat(info_string, str);
             strcat(info_string, "\r\n");
         }
+            
+        if (c_mem.read_emg_sensors_port_flag == TRUE){
+            strcat(info_string, "Additional EMG sensors value:\r\n");
+            for (i = 0; i < NUM_OF_ADDITIONAL_EMGS; ++i) {
+                sprintf(str,"EMG %d -> %d", (int)(i + 1), (int) g_meas.add_emg[i]);
+                strcat(info_string, str);
+                strcat(info_string,"\r\n");
+            }
+            for (i = 0; i < NUM_OF_INPUT_EMGS; ++i) {
+                sprintf(str,"EMG input %d -> %d", (int)(i + 1), (int) g_meas.emg[i]);
+                strcat(info_string, str);
+                strcat(info_string,"\r\n");
+            }
+        }
         
         if (c_mem.rest_position_flag) {
     		sprintf(str, "Rest time delay (ms): %d", (int)g_mem.rest_delay);
@@ -1639,7 +1790,7 @@ void prepare_generic_info(char *info_string)
             strcat(info_string, "\r\n");  
         }
 
-        prepare_counter_info(info_string);
+        //prepare_counter_info(info_string);
 
         if (c_mem.read_imu_flag) {
             sprintf(str, "IMU Connected: %d\r\n", (int) N_IMU_Connected);
@@ -1686,11 +1837,33 @@ void prepare_generic_info(char *info_string)
             IMU_reading_info(info_string);
         }
         
-        sprintf(str, "debug: %ld\r\n", (uint32)timer_value0 - (uint32)timer_value);
-        strcat(info_string, str);
-      
         strcat(info_string, "\r\n");
-        
+
+#ifdef GENERIC_FW   
+        int j;
+        strcat(info_string, "ENCODER CONFIGURATION\r\n");
+        for (i = 0; i < N_ENCODER_LINE_MAX; i++) {
+            sprintf(str, "Encoder Connected Line %d: %d", (int) i, (int) N_Encoder_Line_Connected[i]);   
+            strcat(info_string, str);
+            if (c_mem.right_left == i) {
+                sprintf(str, " [%s HAND main encoder line]", (c_mem.right_left?"LEFT":"RIGHT"));
+                strcat(info_string, str);
+            }
+            strcat(info_string, "\r\n");
+            if (N_Encoder_Line_Connected[i] > 0) {
+                strcat(info_string, "Raw value [status]:\r\n");
+                for (j = 0; j < N_Encoder_Line_Connected[i]; j++) {
+                    sprintf(str, "%d\t[%s]\r\n", (uint16) Encoder_Value[i][j], (Encoder_Check[i][j]==16?"OK":"X"));
+                    strcat(info_string, str);
+                }
+                strcat(info_string, "\r\n");
+            }
+        }
+#endif        
+        sprintf(str, "Last FW cycle time: %u us\r\n", (uint16)timer_value0 - (uint16)timer_value);
+        strcat(info_string, str);
+  
+        strcat(info_string, "\r\n\0");      // End of info_string
     }
 }
 
@@ -1707,10 +1880,10 @@ void prepare_counter_info(char *info_string)
     strcat(info_string, "\r\nUSAGE STATISTICS\r\n");
     strcat(info_string, "\r\n");
     
-    sprintf(str, "Date of maintenance: %d/%d/20%d\r\n", (int)g_mem.maint_day, (int)g_mem.maint_month, (int)g_mem.maint_year);
+    sprintf(str, "Date of maintenance: %02d/%02d/20%02d\r\n", (int)g_mem.maint_day, (int)g_mem.maint_month, (int)g_mem.maint_year);
     strcat(info_string, str);
             
-    sprintf(str, "Last save Time: %d/%d/20%d %d:%d:%d\r\n", (int)g_mem.curr_time[0], (int)g_mem.curr_time[1], (int)g_mem.curr_time[2], (int)g_mem.curr_time[3], (int)g_mem.curr_time[4], (int)g_mem.curr_time[5]);
+    sprintf(str, "Last checked Time: %02d/%02d/20%02d %02d:%02d:%02d\r\n", (int)g_mem.curr_time[0], (int)g_mem.curr_time[1], (int)g_mem.curr_time[2], (int)g_mem.curr_time[3], (int)g_mem.curr_time[4], (int)g_mem.curr_time[5]);
     strcat(info_string, str);
     
     sprintf(str, "Positions histogram (ticks):\r\n");
@@ -1751,6 +1924,230 @@ void prepare_counter_info(char *info_string)
     strcat(info_string, str);
     strcat(info_string, "\r\n");
 
+}
+
+//==============================================================================
+//                                                    PREPARE SD CARD PARAM INFO
+//==============================================================================
+
+void prepare_SD_param_info(char *info_string)
+{
+    char str[100];  
+    int i;
+           
+    // NOTE: use g_mem structure instead of c_mem because when changing parameters c_mem struct is not updated yet
+    sprintf(info_string, "Firmware version: %s\r\n", VERSION);
+    
+    sprintf(str, "ID: %d\r\n", (int) c_mem.id);
+    strcat(info_string, str);
+    switch(g_mem.right_left){
+        case RIGHT_HAND:
+            strcat(info_string, "Hand side: RIGHT\r\n");
+            break;
+        case LEFT_HAND:
+            strcat(info_string, "Hand side: LEFT\r\n");
+            break;
+    }
+
+    sprintf(str, "Date of maintenance: %02d/%02d/20%02d\r\n", (int)g_mem.maint_day, (int)g_mem.maint_month, (int)g_mem.maint_year);
+    strcat(info_string, str);
+    
+    strcat(info_string, "Position PID: "); 
+    if(g_mem.control_mode != CURR_AND_POS_CONTROL) {
+        sprintf(str, "P -> %f  ", ((double) g_mem.k_p / 65536));
+        strcat(info_string, str);
+        sprintf(str, "I -> %f  ", ((double) g_mem.k_i / 65536));
+        strcat(info_string, str);
+        sprintf(str, "D -> %f\r\n", ((double) g_mem.k_d / 65536));
+        strcat(info_string, str);
+    }
+    else { 
+        sprintf(str, "P -> %f  ", ((double) g_mem.k_p_dl / 65536));
+        strcat(info_string, str);
+        sprintf(str, "I -> %f  ", ((double) g_mem.k_i_dl / 65536));
+        strcat(info_string, str);
+        sprintf(str, "D -> %f\r\n", ((double) g_mem.k_d_dl / 65536));
+        strcat(info_string, str);
+    }
+
+    strcat(info_string, "Current PID: ");
+    if(g_mem.control_mode != CURR_AND_POS_CONTROL) {
+        sprintf(str, "P -> %f  ", ((double) g_mem.k_p_c / 65536));
+        strcat(info_string, str);
+        sprintf(str, "I -> %f  ", ((double) g_mem.k_i_c / 65536));
+        strcat(info_string, str);
+        sprintf(str, "D -> %f\r\n", ((double) g_mem.k_d_c / 65536));
+        strcat(info_string, str);
+
+    }
+    else {
+        sprintf(str, "P -> %f  ", ((double) g_mem.k_p_c_dl / 65536));
+        strcat(info_string, str);
+        sprintf(str, "I -> %f  ", ((double) g_mem.k_i_c_dl / 65536));
+        strcat(info_string, str);
+        sprintf(str, "D -> %f\r\n", ((double) g_mem.k_d_c_dl / 65536));
+        strcat(info_string, str);
+    }
+    
+    switch(g_mem.input_mode) {
+        case INPUT_MODE_EXTERNAL:
+            strcat(info_string, "Input mode: USB\r\n");
+            break;
+        case INPUT_MODE_ENCODER3:
+            strcat(info_string, "Input mode: Handle\r\n");
+            break;
+        case INPUT_MODE_EMG_PROPORTIONAL:
+            strcat(info_string, "Input mode: EMG proportional\r\n");
+            break;
+        case INPUT_MODE_EMG_INTEGRAL:
+            strcat(info_string, "Input mode: EMG integral\r\n");
+            break;
+        case INPUT_MODE_EMG_FCFS:
+            strcat(info_string, "Input mode: EMG FCFS\r\n");
+            break;
+        case INPUT_MODE_EMG_FCFS_ADV:
+            strcat(info_string, "Input mode: EMG FCFS ADV\r\n");
+            break;
+    }
+
+    switch(g_mem.control_mode) {
+        case CONTROL_ANGLE:
+            strcat(info_string, "Control mode: Position\r\n");
+            break;
+        case CONTROL_PWM:
+            strcat(info_string, "Control mode: PWM\r\n");
+            break;
+        case CONTROL_CURRENT:
+            strcat(info_string, "Control mode: Current\r\n");
+            break;
+        case CURR_AND_POS_CONTROL:
+            strcat(info_string, "Control mode: Position and Current\r\n");
+            break;
+        default:
+            break;
+    }
+     
+    strcat(info_string, "Resolutions:");
+    for (i = 0; i < NUM_OF_SENSORS; ++i) {
+        sprintf(str, "%d\t", (int) g_mem.res[i]);
+        strcat(info_string, str);
+    }
+    strcat(info_string, "\r\n");
+
+    strcat(info_string, "Offsets:");
+    for (i = 0; i < NUM_OF_SENSORS; ++i) {
+        sprintf(str, "%ld\t", (int32) g_mem.m_off[i] >> g_mem.res[i]);
+        strcat(info_string, str);
+    }
+    strcat(info_string, "\r\n");
+        
+    strcat(info_string, "Multipliers:");
+    for (i = 0; i < NUM_OF_SENSORS; ++i) {
+        sprintf(str,"%f\t",(float) g_mem.m_mult[i]);
+        strcat(info_string, str);
+    }
+    strcat(info_string,"\r\n");        
+    
+    sprintf(str, "Position limits: inf -> %ld, sup -> %ld\r\n", (int32)g_mem.pos_lim_inf >> g_mem.res[0], (int32)g_mem.pos_lim_sup >> g_mem.res[0]);
+    strcat(info_string, str);
+    
+    if ((g_mem.input_mode == INPUT_MODE_EMG_PROPORTIONAL) ||
+        (g_mem.input_mode == INPUT_MODE_EMG_INTEGRAL) ||
+        (g_mem.input_mode == INPUT_MODE_EMG_FCFS) ||
+        (g_mem.input_mode == INPUT_MODE_EMG_FCFS_ADV)) {
+        sprintf(str, "EMG thresholds [0 - 1024]: %u, %u", g_mem.emg_threshold[0], g_mem.emg_threshold[1]);
+        strcat(info_string, str);
+        strcat(info_string, "\r\n");
+
+        sprintf(str, "EMG max values [0 - 4096]: %lu, %lu", g_mem.emg_max_value[0], g_mem.emg_max_value[1]);
+        strcat(info_string, str);
+        strcat(info_string, "\r\n");
+
+        if (g_mem.emg_calibration_flag)
+            strcat(info_string, "Calibration enabled: YES\r\n");
+        else
+            strcat(info_string, "Calibration enabled: NO\r\n");
+
+        sprintf(str, "EMG max speed: %d", (int)g_mem.emg_speed);
+        strcat(info_string, str);
+        strcat(info_string, "\r\n");
+    }
+                 
+    if (g_mem.rest_position_flag) {
+		sprintf(str, "Rest time delay (ms): %d", (int)g_mem.rest_delay);
+        strcat(info_string, str);
+        strcat(info_string, "\r\n");
+        
+        sprintf(str, "Rest velocity closure (ticks/sec): %d", (int)g_mem.rest_vel);
+        strcat(info_string, str);
+        strcat(info_string, "\r\n");
+        
+        sprintf(str, "Rest position: %d", (int)(g_mem.rest_pos >> g_mem.res[0]));
+        strcat(info_string, str);
+        strcat(info_string, "\r\n");  
+    }
+}
+
+
+//==============================================================================
+//                                                        PREPARE SD CARD LEGEND
+//==============================================================================
+void prepare_SD_legend(char *info_string)
+{
+    char str[100];  
+    int i;
+        
+    // Legend
+    strcpy(info_string, "Hour\tMin\tSec\t");
+    for (i=1; i<=10;i++){       // Position bins
+        sprintf(str, "Bin_%d_Pos\t", i); 
+        strcat(info_string, str);
+    }
+    for (i=1; i<=4;i++){        // Current bins
+        sprintf(str, "Bin_%d_Curr\t", i); 
+        strcat(info_string, str);
+    }
+    sprintf(str, "EMG_1_act\tEMG_2_act\tRest_times\tWire_disp\tTotal_power_on_time\tTotal_rest_time");
+    strcat(info_string, str);
+    strcat(info_string, "\r\n");
+}
+
+//==============================================================================
+//                                                          PREPARE SD CARD INFO
+//==============================================================================
+void prepare_SD_info(char *info_string)
+{
+    char str[100];  
+    int i;
+            
+    strcpy(info_string, "");
+    
+    // Time
+    strcat(info_string, "");
+    sprintf(str, "%02d\t%02d\t%02d\t", (int)g_mem.curr_time[3], (int)g_mem.curr_time[4], (int)g_mem.curr_time[5]);
+    strcat(info_string, str);
+
+    // Pos_Bin
+    for (i=1; i<=10;i++){
+        sprintf(str, "%lu\t", g_mem.position_hist[i-1]); 
+        strcat(info_string, str);
+    }
+    
+    // Curr_Bin
+    for (i=1; i<=4;i++){
+        sprintf(str, "%lu\t", g_mem.current_hist[i-1]); 
+        strcat(info_string, str);
+    }
+       
+    // EMG_1, EMG_2
+    sprintf(str, "%lu\t%lu\t", g_mem.emg_counter[0], g_mem.emg_counter[1]);
+    strcat(info_string, str);
+    
+    // Rest_times, Wire_disp, Total_power_on_time, Total_rest_time
+    sprintf(str, "%lu\t%lu\t%lu\t%lu", g_mem.rest_counter, g_mem.wire_disp, g_mem.total_time_on, g_mem.total_time_rest);
+    strcat(info_string, str);
+    
+    strcat(info_string, "\r\n");
 }
 
 //==============================================================================
@@ -1920,7 +2317,7 @@ uint8 memStore(int displacement)
     ISR_RS485_RX_Disable();
 
     // Stop motor
-    PWM_MOTORS_WriteCompare(0);
+    PWM_MOTORS_WriteCompare1(0);
 
     // Retrieve temperature for better writing performance
     CySetTemp();
@@ -1930,7 +2327,7 @@ uint8 memStore(int displacement)
     pages = sizeof(g_mem) / 16 + (sizeof(g_mem) % 16 > 0);
 
     for(i = 0; i < pages; ++i) {
-        writeStatus = EEPROM_Write(&g_mem.flag + 16 * i, i + displacement);
+        writeStatus = EEPROM_Write((uint8*)&g_mem.emg_counter[0] + 16 * i, i + displacement);
         if(writeStatus != CYRET_SUCCESS) {
             ret_val = 0;
             break;
@@ -1956,7 +2353,7 @@ void memRecall(void)
     uint16 i;
 
     for (i = 0; i < sizeof(g_mem); i++) {
-        ((reg8 *) &g_mem.flag)[i] = EEPROM_ADDR[i];
+        ((reg8 *) &g_mem.emg_counter[0])[i] = EEPROM_ADDR[i];
     }
 
     //check for initialization
@@ -1977,7 +2374,7 @@ uint8 memRestore(void) {
     uint16 i;
 
     for (i = 0; i < sizeof(g_mem); i++) {
-        ((reg8 *) &g_mem.flag)[i] = EEPROM_ADDR[i + (DEFAULT_EEPROM_DISPLACEMENT * 16)];
+        ((reg8 *) (uint8*)&g_mem.emg_counter[0])[i] = EEPROM_ADDR[i + (DEFAULT_EEPROM_DISPLACEMENT * 16)];
     }
 
     //check for initialization
@@ -1985,7 +2382,7 @@ uint8 memRestore(void) {
         return memInit();
     } else {
         return memStore(0);
-    }
+    }  
 }
 
 //==============================================================================
@@ -1994,7 +2391,7 @@ uint8 memRestore(void) {
 
 uint8 memInit(void)
 {
-    uint8 i;
+    uint8 i, j;
 
     //initialize memory settings
     g_mem.id            = 1;
@@ -2022,7 +2419,7 @@ uint8 memInit(void)
     g_mem.activate_pwm_rescaling = MAXON_24V;           //rescaling active for 12V motor
 
     g_mem.pos_lim_inf = 0;
-    g_mem.pos_lim_sup = (int32)22000 << g_mem.res[0];
+    g_mem.pos_lim_sup = (int32)19000 << g_mem.res[0];
 
     for(i = 0; i < NUM_OF_SENSORS; ++i)
     {
@@ -2036,7 +2433,7 @@ uint8 memInit(void)
 
     g_mem.current_limit = DEFAULT_CURRENT_LIMIT;
 
-    // EMG calibration enabled by default
+    // EMG calibration disabled by default
     g_mem.emg_calibration_flag = 0;
 
     g_mem.emg_max_value[0] = 1024;
@@ -2047,44 +2444,44 @@ uint8 memInit(void)
 
     g_mem.emg_speed = 100;
 
-    g_mem.double_encoder_on_off = 0;
+    g_mem.double_encoder_on_off = FALSE;
     g_mem.motor_handle_ratio = 22;
     
     for(i = 0; i < LOOKUP_DIM; i++) {
         g_mem.curr_lookup[i] = 0;
     }
 
-    //Initialize rest position parameters        
+    //Initialize rest position parameters 
+    g_mem.rest_position_flag = FALSE;
     g_mem.rest_pos = (int32)7000 << g_mem.res[0]; // 56000
 	g_mem.rest_delay = 10;
     g_mem.rest_vel = 10000;
     g_mem.switch_emg = 0;
 	
     g_mem.right_left = RIGHT_HAND;
-    g_mem.read_imu_flag = FALSE;
     g_mem.read_exp_port_flag = EXP_NONE;       // 0 - None
     
-    for (i=0; i<23; i++){
+    for (i=0; i<7; i++){
         g_mem.unused_bytes[i] = 0;
     }
 
     //Initialize counters        
     reset_counters();
-    for (i=0; i<10; i++){
+    for (i=0; i<74; i++){
         g_mem.unused_bytes1[i] = 0;
     }
     
     if (g_mem.read_exp_port_flag == EXP_SD_RTC) {
         // Set date of maintenance from RTC
-        i = DS1302_read(DS1302_DATE_RD);
-        g_mem.maint_day = (i/16) * 10 + i%16;
-        i = DS1302_read(DS1302_MONTH_RD);
-        g_mem.maint_month = (i/16) * 10 + i%16;
-        i = DS1302_read(DS1302_YEAR_RD);
-        g_mem.maint_year = (i/16) * 10 + i%16;
+        store_RTC_current_time();
+        
+        g_mem.maint_day = g_mem.curr_time[0];
+        g_mem.maint_month = g_mem.curr_time[1];
+        g_mem.maint_year = g_mem.curr_time[2];
     }
     
     // IMU Default value
+    g_mem.read_imu_flag = FALSE;
     for (i = 0; i< N_IMU_MAX; i++){
         g_mem.IMU_conf[i][0] = 1;
         g_mem.IMU_conf[i][1] = 1;
@@ -2095,12 +2492,68 @@ uint8 memInit(void)
         //    g_mem.IMU_conf[i][j] = 0;
         //}
     }
+    g_mem.SPI_read_delay = 0;       // 0 - None
+    
+    for (i = 0; i<N_ENCODER_LINE_MAX; i++) {
+        for (j = 0; j<N_ENCODERS_PER_LINE_MAX; j++) {
+            g_mem.Encoder_conf[i][j] = 0;
+        }
+    }
+    
+    for (i = 0; i < NUM_OF_ADC_CHANNELS_MAX; i++) {
+        g_mem.ADC_conf[i] = 0;
+    }
+    
+    g_mem.read_emg_sensors_port_flag = FALSE;
+    g_mem.use_2nd_motor_flag = FALSE;
+    
+    for (i = 0; i< NUM_OF_MOTORS; i++){
+        g_mem.motor_driver_type[i] = DRIVER_MC33887;    //SoftHand standard driver
+    }
+
+#ifdef SOFTHAND_FW
+    // Override memory values with specific ones for SoftHand Pro device
+    memInit_SoftHand();
+#endif    
     
     // set the initialized flag to show EEPROM has been populated
     g_mem.flag = TRUE;
     
     //write that configuration to EEPROM
     return ( memStore(0) && memStore(DEFAULT_EEPROM_DISPLACEMENT) );
+}
+
+//==============================================================================
+//                                                          MEMORY INIT SOFTHAND
+//==============================================================================
+
+void memInit_SoftHand(void)
+{
+
+    //initialize memory settings ( Specific for SoftHand Pro device )    
+    g_mem.activ         = 1;
+    g_mem.input_mode    = INPUT_MODE_EMG_FCFS;
+    g_mem.control_mode  = CONTROL_ANGLE;
+
+    g_mem.emg_calibration_flag = 0;
+    g_mem.emg_max_value[0] = 1024;
+    g_mem.emg_max_value[1] = 1024;
+    g_mem.emg_threshold[0] = 200;
+    g_mem.emg_threshold[1] = 200;
+    g_mem.emg_speed = 100;
+    
+    g_mem.double_encoder_on_off = TRUE;
+
+    //Initialize rest position parameters  
+    g_mem.rest_position_flag = FALSE;
+    g_mem.rest_pos = (int32)7000 << g_mem.res[0]; // 56000
+	g_mem.rest_delay = 10;
+    g_mem.rest_vel = 10000;
+    g_mem.switch_emg = 0;
+	
+    g_mem.right_left = RIGHT_HAND;
+    g_mem.read_imu_flag = FALSE;
+    g_mem.read_exp_port_flag = EXP_NONE;       // 0 - None
 }
 
 //==============================================================================
@@ -2233,7 +2686,7 @@ void cmd_activate(){
     }
 
     // Activate/Disactivate motor
-    MOTOR_ON_OFF_Write(g_refNew.onoff);
+    MOTOR_ON_OFF_1_Write(g_refNew.onoff);
 }
 
 void cmd_get_activate(){
@@ -2267,12 +2720,17 @@ void cmd_get_curr_and_meas(){
     packet_data[0] = CMD_GET_CURR_AND_MEAS;
 
     // Currents
-    aux_int16 = (int16) g_measOld.curr; //Real current
+    aux_int16 = (int16) g_measOld.curr[0]; //Real current motor1
     packet_data[2] = ((char*)(&aux_int16))[0];
     packet_data[1] = ((char*)(&aux_int16))[1];
     //*((int16 *) &packet_data[1]) = (int16) g_measOld.curr; //Real current
     
-    aux_int16 = (int16) g_measOld.estim_curr; //Estimated current
+    if (c_mem.use_2nd_motor_flag == TRUE) {
+        aux_int16 = (int16) g_measOld.curr[1]; //Real current motor 2
+    }
+    else {
+        aux_int16 = (int16) g_measOld.estim_curr; //Estimated current
+    }
     packet_data[4] = ((char*)(&aux_int16))[0];
     packet_data[3] = ((char*)(&aux_int16))[1];
     //*((int16 *) &packet_data[3]) = (int16) g_measOld.estim_curr; //Estimated current
@@ -2303,12 +2761,17 @@ void cmd_get_currents(){
     packet_data[0] = CMD_GET_CURRENTS;
 
     // Currents
-    aux_int16 = (int16) g_measOld.curr; //Real current
+    aux_int16 = (int16) g_measOld.curr[0]; //Real current
     packet_data[2] = ((char*)(&aux_int16))[0];
     packet_data[1] = ((char*)(&aux_int16))[1];
     //*((int16 *) &packet_data[1]) = (int16) g_measOld.curr; //Real current
     
-    aux_int16 = (int16) g_measOld.estim_curr; //Estimated current
+    if (c_mem.use_2nd_motor_flag == TRUE) {
+        aux_int16 = (int16) g_measOld.curr[1]; //Real current motor 2
+    }
+    else {
+        aux_int16 = (int16) g_measOld.estim_curr; //Estimated current
+    }
     packet_data[4] = ((char*)(&aux_int16))[0];
     packet_data[3] = ((char*)(&aux_int16))[1];
     //*((int16 *) &packet_data[3]) = (int16) g_measOld.estim_curr; //Estimated current
@@ -2423,6 +2886,14 @@ void cmd_store_params(){
                 g_refNew.pos = c_mem.pos_lim_sup;
         }
     }
+    
+    // If SD is used, create new param and data file
+    if (c_mem.read_exp_port_flag == EXP_SD_RTC) {
+        FS_FClose(pFile);
+        
+        InitSD_FS();
+    }
+    
     // Store params 
 
     if (c_mem.id != g_mem.id) {     //If a new id is going to be set we will lose communication 
@@ -2443,6 +2914,11 @@ void cmd_store_params(){
             sendAcknowledgment(ACK_OK);
         else
             sendAcknowledgment(ACK_ERROR);
+    }
+    
+    // FW reset (if necessary)
+    if (reset_PSoC_flag == TRUE) {
+        CySoftwareReset();
     }
 }
 
@@ -2470,20 +2946,19 @@ void cmd_get_emg(){
 
 }
 
-
 void cmd_get_imu_readings(){
-    //Retrieve accelerometers, gyroscopes and magnetometers readings
+    //Retrieve accelerometers, gyroscopes, magnetometers, quaternions and temperatures readings
     
     uint8 k_imu;
-    uint8 c = 1;
+    uint16 c = 1;
     uint8 k = 0;
-    uint8 gl_c = 1;
+    uint16 gl_c = 1;
     int16 aux_int16;
     float aux_float;
     
     // Packet: header + imu id(uint8) + imu flags(uint8) + crc  
     uint8 packet_data[350];
-    uint8 single_packet[22];
+    uint8 single_packet[32];
     
     //Header package 
     packet_data[0] = CMD_GET_IMU_READINGS;
@@ -2545,17 +3020,17 @@ void cmd_get_imu_readings(){
             //*((float *) &single_packet[c])   = (float) g_imu[k_imu].quat_value[0];
             aux_float = (float) g_imu[k_imu].quat_value[1];
             for(k = 0; k < 4; k++) {
-                single_packet[c + 4 - k -1] = ((char*)(&aux_float))[k];
+                single_packet[c + 8 - k -1] = ((char*)(&aux_float))[k];
             }
             //*((float *) &single_packet[c+4]) = (float) g_imu[k_imu].quat_value[1];
             aux_float = (float) g_imu[k_imu].quat_value[2];
             for(k = 0; k < 4; k++) {
-                single_packet[c + 4 - k -1] = ((char*)(&aux_float))[k];
+                single_packet[c + 12 - k -1] = ((char*)(&aux_float))[k];
             }
             //*((float *) &single_packet[c+8]) = (float) g_imu[k_imu].quat_value[2];
             aux_float = (float) g_imu[k_imu].quat_value[3];
             for(k = 0; k < 4; k++) {
-                single_packet[c + 4 - k -1] = ((char*)(&aux_float))[k];
+                single_packet[c + 16 - k -1] = ((char*)(&aux_float))[k];
             }
             //*((float *) &single_packet[c+12]) = (float) g_imu[k_imu].quat_value[3];
             c = c + 16;
@@ -2582,6 +3057,112 @@ void cmd_get_imu_readings(){
     // Calculate Checksum and send message to UART 
     packet_data[imus_data_size-1] = LCRChecksum (packet_data, imus_data_size-1);
     commWrite(packet_data, imus_data_size);
+}
+
+void cmd_get_encoder_map(){
+    //Retrieve Encoder map
+    
+    uint8 packet_data[4+N_ENCODER_LINE_MAX*N_ENCODERS_PER_LINE_MAX];
+    uint8 CYDATA i, j;
+    
+    // Header        
+    packet_data[0] = CMD_GET_ENCODER_CONF;
+    
+    // Fill payload
+    packet_data[1] = N_ENCODER_LINE_MAX;
+    packet_data[2] = N_ENCODERS_PER_LINE_MAX;
+    for (i=0; i<N_ENCODER_LINE_MAX; i++) {
+        for (j=0; j < N_ENCODERS_PER_LINE_MAX; j++) {
+            packet_data[3 + i*N_ENCODERS_PER_LINE_MAX + j] = c_mem.Encoder_conf[i][j];
+        }
+    }
+    
+    // Calculate checksum
+    packet_data[3+N_ENCODER_LINE_MAX*N_ENCODERS_PER_LINE_MAX] = LCRChecksum(packet_data, 3+N_ENCODER_LINE_MAX*N_ENCODERS_PER_LINE_MAX);
+    
+    // Send package to UART
+    commWrite(packet_data, 4+N_ENCODER_LINE_MAX*N_ENCODERS_PER_LINE_MAX);
+}
+
+void cmd_get_encoder_raw(){
+    //Retrieve all Encoders raw values
+    
+    uint8 packet_data[2+2*N_ENCODER_LINE_MAX*N_ENCODERS_PER_LINE_MAX];
+    uint8 i, j, idx;
+    uint16 aux_uint16;
+    
+    //Header package 
+    packet_data[0] = CMD_GET_ENCODER_RAW;
+ 
+    // Fill payload
+    idx = 0;
+    for (i=0; i<N_ENCODER_LINE_MAX; i++) {
+        for (j=0; j < N_Encoder_Line_Connected[i]; j++) {
+            if (c_mem.Encoder_conf[i][j] == 1) {
+                aux_uint16 = (uint16)Encoder_Value[i][j];
+                packet_data[(idx << 1) + 2] = ((char*)(&aux_uint16))[0];
+                packet_data[(idx << 1) + 1] = ((char*)(&aux_uint16))[1];
+                idx++;
+            }
+        }
+    }
+
+    // Calculate checksum
+    packet_data[1+2*idx] = LCRChecksum(packet_data, 1+2*idx);
+    
+    // Send package to UART
+    commWrite(packet_data, 2+2*idx);
+}
+
+void cmd_get_ADC_map(){
+    //Retrieve Encoder map
+    
+    uint8 packet_data[3+NUM_OF_ADC_CHANNELS_MAX];
+    uint8 CYDATA i;
+    
+    // Header        
+    packet_data[0] = CMD_GET_ADC_CONF;
+    
+    // Fill payload
+    packet_data[1] = NUM_OF_ADC_CHANNELS_MAX;
+    for (i=0; i<NUM_OF_ADC_CHANNELS_MAX; i++) {
+        packet_data[2 + i] = c_mem.ADC_conf[i];
+    }
+    
+    // Calculate checksum
+    packet_data[2+NUM_OF_ADC_CHANNELS_MAX] = LCRChecksum(packet_data, 2+NUM_OF_ADC_CHANNELS_MAX);
+    
+    // Send package to UART
+    commWrite(packet_data, 3+NUM_OF_ADC_CHANNELS_MAX);
+    
+}
+
+void cmd_get_ADC_raw(){
+    //Retrieve Additional EMG port raw values
+    
+    uint8 packet_data[2+2*NUM_OF_ADC_CHANNELS_MAX];
+    uint8 CYDATA i, idx = 0;
+    int16 aux_int16;
+    
+    // Header        
+    packet_data[0] = CMD_GET_ADC_RAW;
+    
+    // Fill payload
+    for (i = 0; i < NUM_OF_ANALOG_INPUTS; i++) {       
+        if (c_mem.ADC_conf[i] == 1) {
+            aux_int16 = (int16) ADC_buf[i];
+            packet_data[(idx << 1) + 2] = ((char*)(&aux_int16))[0];
+            packet_data[(idx << 1) + 1] = ((char*)(&aux_int16))[1];
+            //*((int16 *) &packet_data[(idx << 1) + 1]) = (int16) (g_measOld.add_emg[i]);
+            idx++;
+        }
+    }
+
+    // Calculate checksum
+    packet_data[1+2*idx] = LCRChecksum(packet_data, 1+2*idx);
+    
+    // Send package to UART
+    commWrite(packet_data, 2+2*idx);
 }
 
 /* [] END OF FILE */

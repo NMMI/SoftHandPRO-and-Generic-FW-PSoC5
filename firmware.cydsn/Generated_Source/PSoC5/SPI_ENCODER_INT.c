@@ -88,7 +88,7 @@ CY_ISR(SPI_ENCODER_TX_ISR)
                 }
 
                 /* Put data element into the TX FIFO */
-                CY_SET_REG8(SPI_ENCODER_TXDATA_PTR, 
+                CY_SET_REG16(SPI_ENCODER_TXDATA_PTR, 
                                              SPI_ENCODER_txBuffer[SPI_ENCODER_txBufferRead]);
             }
             else
@@ -144,7 +144,7 @@ CY_ISR(SPI_ENCODER_RX_ISR)
 {
     #if(SPI_ENCODER_RX_SOFTWARE_BUF_ENABLED)
         uint8 tmpStatus;
-        uint8 rxData;
+        uint16 rxData;
     #endif /* (SPI_ENCODER_RX_SOFTWARE_BUF_ENABLED) */
 
     #ifdef SPI_ENCODER_RX_ISR_ENTRY_CALLBACK
@@ -164,7 +164,7 @@ CY_ISR(SPI_ENCODER_RX_ISR)
         /* Check if RX data FIFO has some data to be moved into the RX Buffer */
         while(0u != (SPI_ENCODER_swStatusRx & SPI_ENCODER_STS_RX_FIFO_NOT_EMPTY))
         {
-            rxData = CY_GET_REG8(SPI_ENCODER_RXDATA_PTR);
+            rxData = CY_GET_REG16(SPI_ENCODER_RXDATA_PTR);
 
             /* Set next pointer. */
             SPI_ENCODER_rxBufferWrite++;

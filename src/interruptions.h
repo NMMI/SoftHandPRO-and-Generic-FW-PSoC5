@@ -46,8 +46,14 @@
 #define INTERRUPTIONS_H_INCLUDED
 
 //==================================================================     include
-#include "device.h"
-
+#include "device.h"   
+#include "command_processing.h"
+#include "IMU_functions.h"
+#include "Encoder_functions.h"
+#include "SD_RTC_functions.h"
+#include "globals.h"
+#include "utils.h"
+    
 //=====================================================        Interrupt Declaration
  
 /** \name Interruptions */
@@ -88,17 +94,24 @@ void function_scheduler(void);
 //=====================================================     encoder_reading_SPI
 /** This functions reads the value from all the connected encoders.
 **/
-void encoder_reading_SPI();
+void encoder_reading_SPI(uint8 n_line);
 /** \} */
 
 
 /** \name Motor control function */
 /** \{ */
-//=====================================================     motor_control
+//=====================================================     motor_control_SH
 /** This function controls the motor direction and velocity, depending on 
  * 	the input and control modality set. 
 **/
-void motor_control();
+void motor_control_SH();
+/** \} */
+
+//=====================================================     motor_control_generic
+/** This function controls the motor direction and velocity, depending on 
+ * 	the input and control modality set. 
+**/
+void motor_control_generic(uint8 index);
 /** \} */
 
 /** \name Analog readings */

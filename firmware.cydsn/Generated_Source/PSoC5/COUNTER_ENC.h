@@ -156,7 +156,7 @@ void COUNTER_ENC_Wakeup(void)        ;
  *  Initialization Values
  **************************************/
 #define COUNTER_ENC_CAPTURE_MODE_CONF       0u
-#define COUNTER_ENC_INIT_PERIOD_VALUE       58u
+#define COUNTER_ENC_INIT_PERIOD_VALUE       96u
 #define COUNTER_ENC_INIT_COUNTER_VALUE      0u
 #if (COUNTER_ENC_UsingFixedFunction)
 #define COUNTER_ENC_INIT_INTERRUPTS_MASK    ((uint8)((uint8)0u << COUNTER_ENC_STATUS_ZERO_INT_EN_MASK_SHIFT))

@@ -34,16 +34,16 @@
     #include "SPI_ENCODER_IntClock.h"
 #endif /* (0u != SPI_ENCODER_INTERNAL_CLOCK) */
 
-#define SPI_ENCODER_MODE                       (2u)
-#define SPI_ENCODER_DATA_WIDTH                 (8u)
+#define SPI_ENCODER_MODE                       (4u)
+#define SPI_ENCODER_DATA_WIDTH                 (16u)
 #define SPI_ENCODER_MODE_USE_ZERO              (0u)
 #define SPI_ENCODER_BIDIRECTIONAL_MODE         (0u)
 
 /* Internal interrupt handling */
 #define SPI_ENCODER_TX_BUFFER_SIZE             (4u)
-#define SPI_ENCODER_RX_BUFFER_SIZE             (4u)
+#define SPI_ENCODER_RX_BUFFER_SIZE             (10u)
 #define SPI_ENCODER_INTERNAL_TX_INT_ENABLED    (0u)
-#define SPI_ENCODER_INTERNAL_RX_INT_ENABLED    (0u)
+#define SPI_ENCODER_INTERNAL_RX_INT_ENABLED    (1u)
 
 #define SPI_ENCODER_SINGLE_REG_SIZE            (8u)
 #define SPI_ENCODER_USE_SECOND_DATAPATH        (SPI_ENCODER_DATA_WIDTH > SPI_ENCODER_SINGLE_REG_SIZE)
@@ -91,16 +91,16 @@ void  SPI_ENCODER_SetTxInterruptMode(uint8 intSrc)     ;
 void  SPI_ENCODER_SetRxInterruptMode(uint8 intSrc)     ;
 uint8 SPI_ENCODER_ReadTxStatus(void)                   ;
 uint8 SPI_ENCODER_ReadRxStatus(void)                   ;
-void  SPI_ENCODER_WriteTxData(uint8 txData)  \
+void  SPI_ENCODER_WriteTxData(uint16 txData)  \
                                                             ;
-uint8 SPI_ENCODER_ReadRxData(void) \
+uint16 SPI_ENCODER_ReadRxData(void) \
                                                             ;
 uint8 SPI_ENCODER_GetRxBufferSize(void)                ;
 uint8 SPI_ENCODER_GetTxBufferSize(void)                ;
 void  SPI_ENCODER_ClearRxBuffer(void)                  ;
 void  SPI_ENCODER_ClearTxBuffer(void)                  ;
 void  SPI_ENCODER_ClearFIFO(void)                              ;
-void  SPI_ENCODER_PutArray(const uint8 buffer[], uint8 byteCount) \
+void  SPI_ENCODER_PutArray(const uint16 buffer[], uint8 byteCount) \
                                                             ;
 
 #if(0u != SPI_ENCODER_BIDIRECTIONAL_MODE)
@@ -171,46 +171,46 @@ extern uint8 SPI_ENCODER_initVar;
 *             Registers
 ***************************************/
 #if(CY_PSOC3 || CY_PSOC5)
-    #define SPI_ENCODER_TXDATA_REG (* (reg8 *) \
-                                                SPI_ENCODER_BSPIM_sR8_Dp_u0__F0_REG)
-    #define SPI_ENCODER_TXDATA_PTR (  (reg8 *) \
-                                                SPI_ENCODER_BSPIM_sR8_Dp_u0__F0_REG)
-    #define SPI_ENCODER_RXDATA_REG (* (reg8 *) \
-                                                SPI_ENCODER_BSPIM_sR8_Dp_u0__F1_REG)
-    #define SPI_ENCODER_RXDATA_PTR (  (reg8 *) \
-                                                SPI_ENCODER_BSPIM_sR8_Dp_u0__F1_REG)
+    #define SPI_ENCODER_TXDATA_REG (* (reg16 *) \
+                                                SPI_ENCODER_BSPIM_sR16_Dp_u0__F0_REG)
+    #define SPI_ENCODER_TXDATA_PTR (  (reg16 *) \
+                                                SPI_ENCODER_BSPIM_sR16_Dp_u0__F0_REG)
+    #define SPI_ENCODER_RXDATA_REG (* (reg16 *) \
+                                                SPI_ENCODER_BSPIM_sR16_Dp_u0__F1_REG)
+    #define SPI_ENCODER_RXDATA_PTR (  (reg16 *) \
+                                                SPI_ENCODER_BSPIM_sR16_Dp_u0__F1_REG)
 #else   /* PSOC4 */
     #if(SPI_ENCODER_USE_SECOND_DATAPATH)
         #define SPI_ENCODER_TXDATA_REG (* (reg16 *) \
-                                          SPI_ENCODER_BSPIM_sR8_Dp_u0__16BIT_F0_REG)
+                                          SPI_ENCODER_BSPIM_sR16_Dp_u0__16BIT_F0_REG)
         #define SPI_ENCODER_TXDATA_PTR (  (reg16 *) \
-                                          SPI_ENCODER_BSPIM_sR8_Dp_u0__16BIT_F0_REG)
+                                          SPI_ENCODER_BSPIM_sR16_Dp_u0__16BIT_F0_REG)
         #define SPI_ENCODER_RXDATA_REG (* (reg16 *) \
-                                          SPI_ENCODER_BSPIM_sR8_Dp_u0__16BIT_F1_REG)
+                                          SPI_ENCODER_BSPIM_sR16_Dp_u0__16BIT_F1_REG)
         #define SPI_ENCODER_RXDATA_PTR (  (reg16 *) \
-                                          SPI_ENCODER_BSPIM_sR8_Dp_u0__16BIT_F1_REG)
+                                          SPI_ENCODER_BSPIM_sR16_Dp_u0__16BIT_F1_REG)
     #else
         #define SPI_ENCODER_TXDATA_REG (* (reg8 *) \
-                                                SPI_ENCODER_BSPIM_sR8_Dp_u0__F0_REG)
+                                                SPI_ENCODER_BSPIM_sR16_Dp_u0__F0_REG)
         #define SPI_ENCODER_TXDATA_PTR (  (reg8 *) \
-                                                SPI_ENCODER_BSPIM_sR8_Dp_u0__F0_REG)
+                                                SPI_ENCODER_BSPIM_sR16_Dp_u0__F0_REG)
         #define SPI_ENCODER_RXDATA_REG (* (reg8 *) \
-                                                SPI_ENCODER_BSPIM_sR8_Dp_u0__F1_REG)
+                                                SPI_ENCODER_BSPIM_sR16_Dp_u0__F1_REG)
         #define SPI_ENCODER_RXDATA_PTR (  (reg8 *) \
-                                                SPI_ENCODER_BSPIM_sR8_Dp_u0__F1_REG)
+                                                SPI_ENCODER_BSPIM_sR16_Dp_u0__F1_REG)
     #endif /* (SPI_ENCODER_USE_SECOND_DATAPATH) */
 #endif     /* (CY_PSOC3 || CY_PSOC5) */
 
 #define SPI_ENCODER_AUX_CONTROL_DP0_REG (* (reg8 *) \
-                                        SPI_ENCODER_BSPIM_sR8_Dp_u0__DP_AUX_CTL_REG)
+                                        SPI_ENCODER_BSPIM_sR16_Dp_u0__DP_AUX_CTL_REG)
 #define SPI_ENCODER_AUX_CONTROL_DP0_PTR (  (reg8 *) \
-                                        SPI_ENCODER_BSPIM_sR8_Dp_u0__DP_AUX_CTL_REG)
+                                        SPI_ENCODER_BSPIM_sR16_Dp_u0__DP_AUX_CTL_REG)
 
 #if(SPI_ENCODER_USE_SECOND_DATAPATH)
     #define SPI_ENCODER_AUX_CONTROL_DP1_REG  (* (reg8 *) \
-                                        SPI_ENCODER_BSPIM_sR8_Dp_u1__DP_AUX_CTL_REG)
+                                        SPI_ENCODER_BSPIM_sR16_Dp_u1__DP_AUX_CTL_REG)
     #define SPI_ENCODER_AUX_CONTROL_DP1_PTR  (  (reg8 *) \
-                                        SPI_ENCODER_BSPIM_sR8_Dp_u1__DP_AUX_CTL_REG)
+                                        SPI_ENCODER_BSPIM_sR16_Dp_u1__DP_AUX_CTL_REG)
 #endif /* (SPI_ENCODER_USE_SECOND_DATAPATH) */
 
 #define SPI_ENCODER_COUNTER_PERIOD_REG     (* (reg8 *) SPI_ENCODER_BSPIM_BitCounter__PERIOD_REG)

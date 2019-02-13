@@ -4,9 +4,125 @@ UDB 0
 ------------------------------------------------------
 	PLD 0:
 		 Instances:
+			Net_3376
+			\COUNTER_ENC:CounterUDB:count_stored_i\
+			\COUNTER_ENC:CounterUDB:count_enable\
+			Net_7983
+
+		 Clock net: Net_1308
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			Net_3376
+			Net_3426
+			Net_7981
+			\COUNTER_ENC:CounterUDB:control_7\
+			\COUNTER_ENC:CounterUDB:count_stored_i\
+
+		 Output nets:
+			Net_3376
+			Net_7983
+			\COUNTER_ENC:CounterUDB:count_enable\
+			\COUNTER_ENC:CounterUDB:count_stored_i\
+
+		 Product terms:
+			!Net_3426 * !Net_7981
+			!\COUNTER_ENC:CounterUDB:count_stored_i\ * Net_3376 * \COUNTER_ENC:CounterUDB:control_7\
+			Net_3376
+
+	PLD 1:
+		 Instances:
+			\COUNTER_ENC:CounterUDB:status_0\
+			Net_7985
+			\COUNTER_ENC:CounterUDB:status_2\
+			Net_3426
+
+		 Clock net: Net_1308
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			Net_3426
+			Net_7981
+			\COUNTER_ENC:CounterUDB:cmp_out_i\
+			\COUNTER_ENC:CounterUDB:overflow_reg_i\
+			\COUNTER_ENC:CounterUDB:per_equal\
+			\COUNTER_ENC:CounterUDB:prevCompare\
+
+		 Output nets:
+			Net_3426
+			Net_7985
+			\COUNTER_ENC:CounterUDB:status_0\
+			\COUNTER_ENC:CounterUDB:status_2\
+
+		 Product terms:
+			!Net_3426 * Net_7981
+			!\COUNTER_ENC:CounterUDB:overflow_reg_i\ * !\COUNTER_ENC:CounterUDB:prevCompare\
+			!\COUNTER_ENC:CounterUDB:overflow_reg_i\ * \COUNTER_ENC:CounterUDB:per_equal\
+			!\COUNTER_ENC:CounterUDB:prevCompare\ * \COUNTER_ENC:CounterUDB:cmp_out_i\
+
+	Datapath:
+		 Instances:
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0\
+
+		 Clock net: Net_1308
+		 Set/Reset net: 
+		 Enable net: Net_3376
+
+		 Input nets:
+			ClockBlock_BUS_CLK
+			Net_3426
+			Net_3505
+			\SHIFTREG_ENC_1:bSR:ctrl_clk_enable\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.cmsbo__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.sor__sig\
+
+		 Output nets:
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.ce0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.ce1__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.cfbo__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.cl0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.cl1__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.co_msb__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.ff0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.ff1__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.sol_msb__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.z0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.z1__sig\
+
+	Control, status and sync:
+		 Instances:
+			\COUNTER_ENC:CounterUDB:sCTRLReg:ctrlreg\ : controlcell
+			\COUNTER_ENC:CounterUDB:sSTSReg:stsreg\ : statusicell
+
+		 Clock net: Net_1308
+		 Set/Reset net: Net_8907
+		 Enable net: 
+
+		 Input nets:
+			ClockBlock_BUS_CLK
+			\COUNTER_ENC:CounterUDB:status_0\
+			\COUNTER_ENC:CounterUDB:status_1\
+			\COUNTER_ENC:CounterUDB:status_2\
+			\COUNTER_ENC:CounterUDB:status_5\
+			\COUNTER_ENC:CounterUDB:status_6\
+
+		 Output nets:
+			\COUNTER_ENC:CounterUDB:control_7\
+
+	Local clock and reset nets:
+			Net_3376
+			Net_8907
+
+======================================================
+UDB 1
+------------------------------------------------------
+	PLD 0:
+		 Instances:
+			\UART_RS485:BUART:tx_bitclk\
 			\UART_RS485:BUART:tx_state_0\
 			\UART_RS485:BUART:counter_load_not\
-			\MY_TIMER:TimerUDB:status_tc\
 			Net_6020
 
 		 Clock net: Net_124
@@ -14,8 +130,6 @@ UDB 0
 		 Enable net: 
 
 		 Input nets:
-			\MY_TIMER:TimerUDB:control_7\
-			\MY_TIMER:TimerUDB:per_zero\
 			\UART_RS485:BUART:tx_bitclk\
 			\UART_RS485:BUART:tx_bitclk_enable_pre\
 			\UART_RS485:BUART:tx_fifo_empty\
@@ -25,34 +139,36 @@ UDB 0
 
 		 Output nets:
 			Net_6020
-			\MY_TIMER:TimerUDB:status_tc\
 			\UART_RS485:BUART:counter_load_not\
+			\UART_RS485:BUART:tx_bitclk\
 			\UART_RS485:BUART:tx_state_0\
 
 		 Product terms:
+			!\UART_RS485:BUART:tx_bitclk_enable_pre\
 			!\UART_RS485:BUART:tx_fifo_empty\ * !\UART_RS485:BUART:tx_state_0\ * !\UART_RS485:BUART:tx_state_1\ * !\UART_RS485:BUART:tx_state_2\
 			!\UART_RS485:BUART:tx_fifo_empty\ * !\UART_RS485:BUART:tx_state_0\ * !\UART_RS485:BUART:tx_state_1\ * \UART_RS485:BUART:tx_bitclk_enable_pre\
 			!\UART_RS485:BUART:tx_state_0\ * !\UART_RS485:BUART:tx_state_1\ * !\UART_RS485:BUART:tx_state_2\
 			!\UART_RS485:BUART:tx_state_0\ * !\UART_RS485:BUART:tx_state_1\ * \UART_RS485:BUART:tx_bitclk_enable_pre\
+			!\UART_RS485:BUART:tx_state_0\ * !\UART_RS485:BUART:tx_state_1\ * \UART_RS485:BUART:tx_state_2\
 			!\UART_RS485:BUART:tx_state_2\ * \UART_RS485:BUART:tx_bitclk\ * \UART_RS485:BUART:tx_state_0\
-			\MY_TIMER:TimerUDB:control_7\ * \MY_TIMER:TimerUDB:per_zero\
 			\UART_RS485:BUART:tx_bitclk_enable_pre\ * \UART_RS485:BUART:tx_fifo_empty\ * \UART_RS485:BUART:tx_state_0\ * \UART_RS485:BUART:tx_state_1\ * \UART_RS485:BUART:tx_state_2\
 
 	PLD 1:
 		 Instances:
 			\UART_RS485:BUART:tx_state_2\
-			\UART_RS485:BUART:tx_bitclk\
 			\UART_RS485:BUART:tx_status_0\
-			\UART_RS485:BUART:rx_bitclk_enable\
+			\SD:Net_10\
 
 		 Clock net: Net_124
 		 Set/Reset net: 
 		 Enable net: 
 
 		 Input nets:
-			\UART_RS485:BUART:rx_count_0\
-			\UART_RS485:BUART:rx_count_1\
-			\UART_RS485:BUART:rx_count_2\
+			\SD:Net_1\
+			\SD:SPI0:BSPIM:mosi_hs_reg\
+			\SD:SPI0:BSPIM:state_0\
+			\SD:SPI0:BSPIM:state_1\
+			\SD:SPI0:BSPIM:state_2\
 			\UART_RS485:BUART:tx_bitclk\
 			\UART_RS485:BUART:tx_bitclk_enable_pre\
 			\UART_RS485:BUART:tx_counter_dp\
@@ -62,197 +178,84 @@ UDB 0
 			\UART_RS485:BUART:tx_state_2\
 
 		 Output nets:
-			\UART_RS485:BUART:rx_bitclk_enable\
-			\UART_RS485:BUART:tx_bitclk\
+			\SD:Net_10\
 			\UART_RS485:BUART:tx_state_2\
 			\UART_RS485:BUART:tx_status_0\
 
 		 Product terms:
-			!\UART_RS485:BUART:rx_count_0\ * !\UART_RS485:BUART:rx_count_1\ * !\UART_RS485:BUART:rx_count_2\
-			!\UART_RS485:BUART:tx_bitclk_enable_pre\
+			!\SD:Net_1\ * !\SD:SPI0:BSPIM:state_0\ * \SD:SPI0:BSPIM:mosi_hs_reg\
+			!\SD:Net_1\ * !\SD:SPI0:BSPIM:state_2\ * \SD:SPI0:BSPIM:mosi_hs_reg\
+			!\SD:Net_1\ * \SD:SPI0:BSPIM:mosi_hs_reg\ * \SD:SPI0:BSPIM:state_1\
 			!\UART_RS485:BUART:tx_state_0\ * !\UART_RS485:BUART:tx_state_1\ * \UART_RS485:BUART:tx_bitclk_enable_pre\ * \UART_RS485:BUART:tx_fifo_empty\ * \UART_RS485:BUART:tx_state_2\
 			!\UART_RS485:BUART:tx_state_0\ * !\UART_RS485:BUART:tx_state_1\ * \UART_RS485:BUART:tx_bitclk_enable_pre\ * \UART_RS485:BUART:tx_state_2\
-			!\UART_RS485:BUART:tx_state_0\ * !\UART_RS485:BUART:tx_state_1\ * \UART_RS485:BUART:tx_state_2\
 			!\UART_RS485:BUART:tx_state_2\ * \UART_RS485:BUART:tx_bitclk\ * \UART_RS485:BUART:tx_counter_dp\ * \UART_RS485:BUART:tx_state_1\
 			!\UART_RS485:BUART:tx_state_2\ * \UART_RS485:BUART:tx_bitclk\ * \UART_RS485:BUART:tx_state_0\ * \UART_RS485:BUART:tx_state_1\
 			\UART_RS485:BUART:tx_bitclk_enable_pre\ * \UART_RS485:BUART:tx_state_0\ * \UART_RS485:BUART:tx_state_1\ * \UART_RS485:BUART:tx_state_2\
 
 	Datapath:
 		 Instances:
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1\
 
-		 Clock net: Net_2564
+		 Clock net: Net_1308
 		 Set/Reset net: 
-		 Enable net: 
+		 Enable net: Net_3376
 
 		 Input nets:
 			ClockBlock_BUS_CLK
-			\MY_TIMER:TimerUDB:control_7\
-			\MY_TIMER:TimerUDB:per_zero\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.cmsbo__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.sor__sig\
+			Net_3426
+			Net_3505
+			\SHIFTREG_ENC_1:bSR:ctrl_clk_enable\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.ce0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.ce1__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.cfbo__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.cl0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.cl1__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.co_msb__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.ff0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.ff1__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.sol_msb__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.z0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0.z1__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.cmsbo__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.sor__sig\
 
 		 Output nets:
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.ce0__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.ce1__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.cfbo__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.cl0__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.cl1__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.co_msb__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.ff0__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.ff1__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.sol_msb__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.z0__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.z1__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.ce0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.ce1__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.cfbo__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.cl0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.cl1__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.cmsbo__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.co_msb__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.ff0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.ff1__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.sol_msb__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.sor__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.z0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.z1__sig\
 
 	Control, status and sync:
 		 Instances:
-			\MY_TIMER:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : controlcell
-			\MY_TIMER:TimerUDB:rstSts:stsreg\ : statusicell
+			\SHIFTREG_ENC_1:bSR:SyncCtl:CtrlReg\ : controlcell
+			\SHIFTREG_ENC_1:bSR:StsReg\ : statusicell
 
-		 Clock net: Net_2564
+		 Clock net: Net_1308
 		 Set/Reset net: 
-		 Enable net: 
+		 Enable net: Net_3376
 
 		 Input nets:
 			ClockBlock_BUS_CLK
-			\MY_TIMER:TimerUDB:status_2\
-			\MY_TIMER:TimerUDB:status_3\
-			\MY_TIMER:TimerUDB:status_tc\
+			Net_3426
+			\SHIFTREG_ENC_1:bSR:status_3\
+			\SHIFTREG_ENC_1:bSR:status_4\
+			\SHIFTREG_ENC_1:bSR:status_5\
+			\SHIFTREG_ENC_1:bSR:status_6\
 
 		 Output nets:
-			\MY_TIMER:TimerUDB:control_7\
+			\SHIFTREG_ENC_1:bSR:ctrl_clk_enable\
 
 	Local clock and reset nets:
-
-======================================================
-UDB 1
-------------------------------------------------------
-	PLD 0:
-		 Instances:
-			\SPI_IMU:BSPIM:rx_status_6\
-			AMuxHw_Decoder_old_id_1
-			\emFile:Net_10\
-
-		 Clock net: ClockBlock_BUS_CLK
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			Net_5190_1
-			\SPI_IMU:BSPIM:count_0\
-			\SPI_IMU:BSPIM:count_1\
-			\SPI_IMU:BSPIM:count_2\
-			\SPI_IMU:BSPIM:count_3\
-			\SPI_IMU:BSPIM:count_4\
-			\SPI_IMU:BSPIM:rx_status_4\
-			\emFile:Net_1\
-			\emFile:SPI0:BSPIM:mosi_hs_reg\
-			\emFile:SPI0:BSPIM:state_0\
-			\emFile:SPI0:BSPIM:state_1\
-			\emFile:SPI0:BSPIM:state_2\
-
-		 Output nets:
-			AMuxHw_Decoder_old_id_1
-			\SPI_IMU:BSPIM:rx_status_6\
-			\emFile:Net_10\
-
-		 Product terms:
-			!\SPI_IMU:BSPIM:count_1\ * !\SPI_IMU:BSPIM:count_2\ * !\SPI_IMU:BSPIM:count_3\ * !\SPI_IMU:BSPIM:count_4\ * \SPI_IMU:BSPIM:count_0\ * \SPI_IMU:BSPIM:rx_status_4\
-			!\emFile:Net_1\ * !\emFile:SPI0:BSPIM:state_0\ * \emFile:SPI0:BSPIM:mosi_hs_reg\
-			!\emFile:Net_1\ * !\emFile:SPI0:BSPIM:state_2\ * \emFile:SPI0:BSPIM:mosi_hs_reg\
-			!\emFile:Net_1\ * \emFile:SPI0:BSPIM:mosi_hs_reg\ * \emFile:SPI0:BSPIM:state_1\
-			Net_5190_1
-
-	PLD 1:
-		 Instances:
-			AMuxHw_Decoder_one_hot_2
-			AMuxHw_Decoder_one_hot_0
-			AMuxHw_Decoder_one_hot_1
-			AMuxHw_Decoder_one_hot_3
-
-		 Clock net: ClockBlock_BUS_CLK
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			AMuxHw_Decoder_old_id_0
-			AMuxHw_Decoder_old_id_1
-			Net_5190_0
-			Net_5190_1
-
-		 Output nets:
-			AMuxHw_Decoder_one_hot_0
-			AMuxHw_Decoder_one_hot_1
-			AMuxHw_Decoder_one_hot_2
-			AMuxHw_Decoder_one_hot_3
-
-		 Product terms:
-			!AMuxHw_Decoder_old_id_0 * !AMuxHw_Decoder_old_id_1 * !Net_5190_0 * !Net_5190_1
-			!AMuxHw_Decoder_old_id_0 * !Net_5190_0 * AMuxHw_Decoder_old_id_1 * Net_5190_1
-			!AMuxHw_Decoder_old_id_1 * !Net_5190_1 * AMuxHw_Decoder_old_id_0 * Net_5190_0
-			AMuxHw_Decoder_old_id_0 * AMuxHw_Decoder_old_id_1 * Net_5190_0 * Net_5190_1
-
-	Datapath:
-		 Instances:
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1\
-
-		 Clock net: Net_2564
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			ClockBlock_BUS_CLK
-			\MY_TIMER:TimerUDB:control_7\
-			\MY_TIMER:TimerUDB:per_zero\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.ce0__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.ce1__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.cfbo__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.cl0__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.cl1__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.co_msb__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.ff0__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.ff1__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.sol_msb__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.z0__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u0.z1__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u2.cmsbo__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u2.sor__sig\
-
-		 Output nets:
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.ce0__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.ce1__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.cfbo__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.cl0__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.cl1__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.cmsbo__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.co_msb__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.ff0__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.ff1__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.sol_msb__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.sor__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.z0__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.z1__sig\
-
-	Control, status and sync:
-		 Instances:
-			\RS485_CTS:Sync:ctrl_reg\ : controlcell
-			\SPI_IMU:BSPIM:RxStsReg\ : statusicell
-
-		 Clock net: Net_2334
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			ClockBlock_BUS_CLK
-			\SPI_IMU:BSPIM:rx_status_4\
-			\SPI_IMU:BSPIM:rx_status_5\
-			\SPI_IMU:BSPIM:rx_status_6\
-
-		 Output nets:
-			Net_3200
-
-	Local clock and reset nets:
+			Net_3376
 
 ======================================================
 UDB 10
@@ -263,72 +266,62 @@ UDB 10
 
 	Datapath:
 		 Instances:
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2\
 
 		 Clock net: Net_1308
 		 Set/Reset net: 
-		 Enable net: Net_2441
+		 Enable net: Net_3376
 
 		 Input nets:
 			ClockBlock_BUS_CLK
-			Net_2343
-			Net_2491
+			Net_1060_SYNCOUT
+			Net_3426
 			\SHIFTREG_ENC_3:bSR:ctrl_clk_enable\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.ce0__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.ce1__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.cfbo__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.cl0__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.cl1__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.co_msb__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.ff0__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.ff1__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.sol_msb__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.z0__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.z1__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u2.cmsbo__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u2.sor__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ce0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ce1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cfbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cl0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cl1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.co_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ff0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ff1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.sol_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.z0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.z1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u3.cmsbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u3.sor__sig\
 
 		 Output nets:
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.ce0__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.ce1__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.cfbo__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.cl0__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.cl1__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.cmsbo__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.co_msb__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.ff0__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.ff1__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.sol_msb__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.sor__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.z0__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.z1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ce0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ce1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cfbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cl0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cl1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cmsbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.co_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ff0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ff1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.sol_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.sor__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.z0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.z1__sig\
 
 	Control, status and sync:
 		 Instances:
-			\Chip_Select_A:Sync:ctrl_reg\ : controlcell
-			RS485_RX(0)_SYNC : synccell
-			\Sync_1:genblk1[0]:INST\ : synccell
-			\Sync_ADC:genblk1[0]:INST\ : synccell
+			\BLINK_25HZ:PWMUDB:genblk1:ctrlreg\ : controlcell
 
-		 Clock net: ClockBlock_BUS_CLK
+		 Clock net: Net_6987
 		 Set/Reset net: 
 		 Enable net: 
 
 		 Input nets:
 			ClockBlock_BUS_CLK
-			Net_3264
-			Net_5118
-			Net_6196
 
 		 Output nets:
-			Net_1622_0
-			Net_1622_1
-			Net_3240
-			Net_5503
-			Net_6196_SYNCOUT
+			\BLINK_25HZ:PWMUDB:control_7\
 
 	Local clock and reset nets:
-			Net_2441
+			Net_3376
 
 ======================================================
 UDB 11
@@ -339,32 +332,33 @@ UDB 11
 
 	Datapath:
 		 Instances:
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u2\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u3\
 
 		 Clock net: Net_1308
 		 Set/Reset net: 
-		 Enable net: Net_2441
+		 Enable net: Net_3376
 
 		 Input nets:
 			ClockBlock_BUS_CLK
-			Net_2343
-			Net_2491
+			Net_1060_SYNCOUT
+			Net_3426
 			\SHIFTREG_ENC_3:bSR:ctrl_clk_enable\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.ce0__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.ce1__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.cfbo__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.cl0__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.cl1__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.co_msb__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.ff0__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.ff1__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.sol_msb__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.z0__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.z1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ce0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ce1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cfbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cl0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cl1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.co_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ff0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ff1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.sol_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.z0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.z1__sig\
 
 		 Output nets:
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u2.cmsbo__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u2.sor__sig\
+			Net_3506
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u3.cmsbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u3.sor__sig\
 			\SHIFTREG_ENC_3:bSR:status_3\
 			\SHIFTREG_ENC_3:bSR:status_4\
 			\SHIFTREG_ENC_3:bSR:status_5\
@@ -372,7 +366,7 @@ UDB 11
 
 	Control, status and sync:
 		 Instances:
-			\MOTOR_DIR:Sync:ctrl_reg\ : controlcell
+			\RESET_FF:Sync:ctrl_reg\ : controlcell
 
 		 Clock net: 
 		 Set/Reset net: 
@@ -382,20 +376,20 @@ UDB 11
 			ClockBlock_BUS_CLK
 
 		 Output nets:
-			Net_2982
+			Net_3334
 
 	Local clock and reset nets:
-			Net_2441
+			Net_3376
 
 ======================================================
 UDB 12
 ------------------------------------------------------
 	PLD 0:
 		 Instances:
-			Net_1865
-			Net_5579
-			Net_1854
+			Net_7325
 			\BLINK_05HZ:PWMUDB:runmode_enable\
+			Net_7353
+			Net_5579
 
 		 Clock net: Net_6987
 		 Set/Reset net: 
@@ -413,9 +407,9 @@ UDB 12
 			\BLINK_05HZ:PWMUDB:runmode_enable\
 
 		 Output nets:
-			Net_1854
-			Net_1865
 			Net_5579
+			Net_7325
+			Net_7353
 			\BLINK_05HZ:PWMUDB:runmode_enable\
 
 		 Product terms:
@@ -535,9 +529,9 @@ UDB 13
 
 	Control, status and sync:
 		 Instances:
-			\PWM_MOTORS:PWMUDB:genblk1:ctrlreg\ : controlcell
+			\MOTOR_DIR_2:Sync:ctrl_reg\ : controlcell
 
-		 Clock net: Net_2334
+		 Clock net: 
 		 Set/Reset net: 
 		 Enable net: 
 
@@ -545,139 +539,12 @@ UDB 13
 			ClockBlock_BUS_CLK
 
 		 Output nets:
-			\PWM_MOTORS:PWMUDB:control_7\
+			Net_3021
 
 	Local clock and reset nets:
 
 ======================================================
 UDB 14
-------------------------------------------------------
-	PLD 0:
-		 Instances:
-			Net_345
-			\CYCLES_TIMER:TimerUDB:status_tc\
-
-		 Clock net: Net_2711
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			\CYCLES_TIMER:TimerUDB:control_7\
-			\CYCLES_TIMER:TimerUDB:per_zero\
-
-		 Output nets:
-			Net_345
-			\CYCLES_TIMER:TimerUDB:status_tc\
-
-		 Product terms:
-			\CYCLES_TIMER:TimerUDB:control_7\ * \CYCLES_TIMER:TimerUDB:per_zero\
-
-	PLD 1:
-
-	Datapath:
-		 Instances:
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0\
-
-		 Clock net: Net_2711
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			ClockBlock_BUS_CLK
-			\CYCLES_TIMER:TimerUDB:control_7\
-			\CYCLES_TIMER:TimerUDB:per_zero\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u1.cmsbo__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u1.sor__sig\
-
-		 Output nets:
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.ce0__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.ce1__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.cfbo__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.cl0__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.cl1__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.co_msb__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.ff0__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.ff1__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.sol_msb__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.z0__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.z1__sig\
-
-	Control, status and sync:
-		 Instances:
-			\CYCLES_TIMER:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : controlcell
-			\CYCLES_TIMER:TimerUDB:rstSts:stsreg\ : statusicell
-
-		 Clock net: Net_2711
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			ClockBlock_BUS_CLK
-			\CYCLES_TIMER:TimerUDB:status_2\
-			\CYCLES_TIMER:TimerUDB:status_3\
-			\CYCLES_TIMER:TimerUDB:status_tc\
-
-		 Output nets:
-			\CYCLES_TIMER:TimerUDB:control_7\
-
-	Local clock and reset nets:
-
-======================================================
-UDB 15
-------------------------------------------------------
-	PLD 0:
-
-	PLD 1:
-
-	Datapath:
-		 Instances:
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u1\
-
-		 Clock net: Net_2711
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			ClockBlock_BUS_CLK
-			\CYCLES_TIMER:TimerUDB:control_7\
-			\CYCLES_TIMER:TimerUDB:per_zero\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.ce0__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.ce1__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.cfbo__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.cl0__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.cl1__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.co_msb__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.ff0__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.ff1__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.sol_msb__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.z0__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u0.z1__sig\
-
-		 Output nets:
-			\CYCLES_TIMER:TimerUDB:per_zero\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u1.cmsbo__sig\
-			\CYCLES_TIMER:TimerUDB:sT16:timerdp:u1.sor__sig\
-			\CYCLES_TIMER:TimerUDB:status_2\
-			\CYCLES_TIMER:TimerUDB:status_3\
-
-	Control, status and sync:
-		 Instances:
-			\BLINK_25HZ:PWMUDB:genblk1:ctrlreg\ : controlcell
-
-		 Clock net: Net_6987
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			ClockBlock_BUS_CLK
-
-		 Output nets:
-			\BLINK_25HZ:PWMUDB:control_7\
-
-	Local clock and reset nets:
-
-======================================================
-UDB 16
 ------------------------------------------------------
 	PLD 0:
 		 Instances:
@@ -795,7 +662,7 @@ UDB 16
 	Local clock and reset nets:
 
 ======================================================
-UDB 17
+UDB 15
 ------------------------------------------------------
 	PLD 0:
 		 Instances:
@@ -891,7 +758,7 @@ UDB 17
 
 	Control, status and sync:
 		 Instances:
-			\RESET_FF:Sync:ctrl_reg\ : controlcell
+			\Chip_Select_ENCODER_LINE:Sync:ctrl_reg\ : controlcell
 			\UART_RS485:BUART:sRX:RxSts\ : statusicell
 
 		 Clock net: Net_124
@@ -906,376 +773,252 @@ UDB 17
 			\UART_RS485:BUART:rx_status_5\
 
 		 Output nets:
-			Net_3334
 			Net_6117
+			Net_7981
+
+	Local clock and reset nets:
+
+======================================================
+UDB 16
+------------------------------------------------------
+	PLD 0:
+		 Instances:
+			\SD:SPI0:BSPIM:mosi_pre_reg_split\
+
+		 Clock net: 
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			\SD:SPI0:BSPIM:count_0\
+			\SD:SPI0:BSPIM:count_1\
+			\SD:SPI0:BSPIM:count_2\
+			\SD:SPI0:BSPIM:count_3\
+			\SD:SPI0:BSPIM:count_4\
+			\SD:SPI0:BSPIM:ld_ident\
+			\SD:SPI0:BSPIM:mosi_from_dp\
+			\SD:SPI0:BSPIM:mosi_pre_reg\
+			\SD:SPI0:BSPIM:state_0\
+			\SD:SPI0:BSPIM:state_1\
+			\SD:SPI0:BSPIM:state_2\
+
+		 Output nets:
+			\SD:SPI0:BSPIM:mosi_pre_reg_split\
+
+		 Product terms:
+			!\SD:SPI0:BSPIM:count_0\ * !\SD:SPI0:BSPIM:count_1\ * !\SD:SPI0:BSPIM:count_2\ * !\SD:SPI0:BSPIM:count_3\ * !\SD:SPI0:BSPIM:count_4\ * !\SD:SPI0:BSPIM:ld_ident\ * \SD:SPI0:BSPIM:mosi_from_dp\ * \SD:SPI0:BSPIM:state_0\ * \SD:SPI0:BSPIM:state_1\
+			!\SD:SPI0:BSPIM:count_0\ * !\SD:SPI0:BSPIM:state_0\ * !\SD:SPI0:BSPIM:state_2\ * \SD:SPI0:BSPIM:mosi_from_dp\ * \SD:SPI0:BSPIM:state_1\
+			!\SD:SPI0:BSPIM:count_1\ * !\SD:SPI0:BSPIM:count_2\ * !\SD:SPI0:BSPIM:count_3\ * !\SD:SPI0:BSPIM:count_4\ * !\SD:SPI0:BSPIM:state_0\ * \SD:SPI0:BSPIM:count_0\ * \SD:SPI0:BSPIM:mosi_pre_reg\ * \SD:SPI0:BSPIM:state_1\
+			!\SD:SPI0:BSPIM:state_0\ * !\SD:SPI0:BSPIM:state_2\ * \SD:SPI0:BSPIM:count_1\ * \SD:SPI0:BSPIM:mosi_from_dp\ * \SD:SPI0:BSPIM:state_1\
+			!\SD:SPI0:BSPIM:state_0\ * !\SD:SPI0:BSPIM:state_2\ * \SD:SPI0:BSPIM:count_2\ * \SD:SPI0:BSPIM:mosi_from_dp\ * \SD:SPI0:BSPIM:state_1\
+			!\SD:SPI0:BSPIM:state_0\ * !\SD:SPI0:BSPIM:state_2\ * \SD:SPI0:BSPIM:count_3\ * \SD:SPI0:BSPIM:mosi_from_dp\ * \SD:SPI0:BSPIM:state_1\
+			!\SD:SPI0:BSPIM:state_0\ * !\SD:SPI0:BSPIM:state_2\ * \SD:SPI0:BSPIM:count_4\ * \SD:SPI0:BSPIM:mosi_from_dp\ * \SD:SPI0:BSPIM:state_1\
+			!\SD:SPI0:BSPIM:state_0\ * \SD:SPI0:BSPIM:mosi_pre_reg\ * \SD:SPI0:BSPIM:state_1\ * \SD:SPI0:BSPIM:state_2\
+
+	PLD 1:
+		 Instances:
+			\SD:SPI0:BSPIM:load_rx_data\
+			\SD:SPI0:BSPIM:mosi_pre_reg\
+			\SD:SPI0:BSPIM:state_0\
+			\SD:SPI0:BSPIM:state_2\
+
+		 Clock net: \SD:Net_19\
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			\SD:SPI0:BSPIM:count_0\
+			\SD:SPI0:BSPIM:count_1\
+			\SD:SPI0:BSPIM:count_2\
+			\SD:SPI0:BSPIM:count_3\
+			\SD:SPI0:BSPIM:count_4\
+			\SD:SPI0:BSPIM:ld_ident\
+			\SD:SPI0:BSPIM:mosi_pre_reg_split\
+			\SD:SPI0:BSPIM:mosi_pre_reg_split_1\
+			\SD:SPI0:BSPIM:state_0\
+			\SD:SPI0:BSPIM:state_1\
+			\SD:SPI0:BSPIM:state_2\
+			\SD:SPI0:BSPIM:tx_status_1\
+
+		 Output nets:
+			\SD:SPI0:BSPIM:load_rx_data\
+			\SD:SPI0:BSPIM:mosi_pre_reg\
+			\SD:SPI0:BSPIM:state_0\
+			\SD:SPI0:BSPIM:state_2\
+
+		 Product terms:
+			!\SD:SPI0:BSPIM:count_0\ * !\SD:SPI0:BSPIM:count_2\ * !\SD:SPI0:BSPIM:count_3\ * !\SD:SPI0:BSPIM:count_4\ * !\SD:SPI0:BSPIM:ld_ident\ * !\SD:SPI0:BSPIM:state_2\ * \SD:SPI0:BSPIM:count_1\ * \SD:SPI0:BSPIM:state_0\
+			!\SD:SPI0:BSPIM:count_0\ * !\SD:SPI0:BSPIM:count_2\ * !\SD:SPI0:BSPIM:count_3\ * !\SD:SPI0:BSPIM:count_4\ * !\SD:SPI0:BSPIM:ld_ident\ * \SD:SPI0:BSPIM:count_1\ * \SD:SPI0:BSPIM:state_0\ * \SD:SPI0:BSPIM:state_1\
+			!\SD:SPI0:BSPIM:count_0\ * !\SD:SPI0:BSPIM:count_3\ * !\SD:SPI0:BSPIM:count_4\ * !\SD:SPI0:BSPIM:tx_status_1\ * \SD:SPI0:BSPIM:count_1\ * \SD:SPI0:BSPIM:count_2\ * \SD:SPI0:BSPIM:state_0\ * \SD:SPI0:BSPIM:state_1\
+			!\SD:SPI0:BSPIM:count_1\ * !\SD:SPI0:BSPIM:count_2\ * !\SD:SPI0:BSPIM:count_3\ * !\SD:SPI0:BSPIM:count_4\ * \SD:SPI0:BSPIM:count_0\
+			!\SD:SPI0:BSPIM:mosi_pre_reg_split\ * !\SD:SPI0:BSPIM:mosi_pre_reg_split_1\
+			!\SD:SPI0:BSPIM:state_1\ * !\SD:SPI0:BSPIM:state_2\ * \SD:SPI0:BSPIM:state_0\
+			!\SD:SPI0:BSPIM:state_1\ * !\SD:SPI0:BSPIM:state_2\ * \SD:SPI0:BSPIM:tx_status_1\
+			\SD:SPI0:BSPIM:state_0\ * \SD:SPI0:BSPIM:state_1\ * \SD:SPI0:BSPIM:state_2\
+
+	Datapath:
+		 Instances:
+			\SD:SPI0:BSPIM:sR8:Dp:u0\
+
+		 Clock net: \SD:Net_19\
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			ClockBlock_BUS_CLK
+			\SD:Net_16\
+			\SD:SPI0:BSPIM:load_rx_data\
+			\SD:SPI0:BSPIM:state_0\
+			\SD:SPI0:BSPIM:state_1\
+			\SD:SPI0:BSPIM:state_2\
+
+		 Output nets:
+			\SD:SPI0:BSPIM:mosi_from_dp\
+			\SD:SPI0:BSPIM:rx_status_4\
+			\SD:SPI0:BSPIM:rx_status_5\
+			\SD:SPI0:BSPIM:tx_status_1\
+			\SD:SPI0:BSPIM:tx_status_2\
+
+	Control, status and sync:
+		 Instances:
+			\SD:SPI0:BSPIM:BitCounter\ : count7cell
+
+		 Clock net: \SD:Net_19\
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			\SD:SPI0:BSPIM:cnt_enable\
+
+		 Output nets:
+			\SD:SPI0:BSPIM:count_0\
+			\SD:SPI0:BSPIM:count_1\
+			\SD:SPI0:BSPIM:count_2\
+			\SD:SPI0:BSPIM:count_3\
+			\SD:SPI0:BSPIM:count_4\
+
+	Local clock and reset nets:
+
+======================================================
+UDB 17
+------------------------------------------------------
+	PLD 0:
+		 Instances:
+			\SD:SPI0:BSPIM:ld_ident\
+			\SD:SPI0:BSPIM:state_1\
+			\SD:SPI0:BSPIM:tx_status_0\
+			\SD:SPI0:BSPIM:rx_status_6\
+
+		 Clock net: \SD:Net_19\
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			\SD:SPI0:BSPIM:count_0\
+			\SD:SPI0:BSPIM:count_1\
+			\SD:SPI0:BSPIM:count_2\
+			\SD:SPI0:BSPIM:count_3\
+			\SD:SPI0:BSPIM:count_4\
+			\SD:SPI0:BSPIM:ld_ident\
+			\SD:SPI0:BSPIM:rx_status_4\
+			\SD:SPI0:BSPIM:state_0\
+			\SD:SPI0:BSPIM:state_1\
+			\SD:SPI0:BSPIM:state_2\
+			\SD:SPI0:BSPIM:tx_status_1\
+
+		 Output nets:
+			\SD:SPI0:BSPIM:ld_ident\
+			\SD:SPI0:BSPIM:rx_status_6\
+			\SD:SPI0:BSPIM:state_1\
+			\SD:SPI0:BSPIM:tx_status_0\
+
+		 Product terms:
+			!\SD:SPI0:BSPIM:count_0\ * !\SD:SPI0:BSPIM:count_2\ * !\SD:SPI0:BSPIM:count_3\ * !\SD:SPI0:BSPIM:count_4\ * !\SD:SPI0:BSPIM:ld_ident\ * !\SD:SPI0:BSPIM:state_2\ * \SD:SPI0:BSPIM:count_1\ * \SD:SPI0:BSPIM:state_0\ * \SD:SPI0:BSPIM:state_1\
+			!\SD:SPI0:BSPIM:count_0\ * !\SD:SPI0:BSPIM:count_3\ * !\SD:SPI0:BSPIM:count_4\ * !\SD:SPI0:BSPIM:state_2\ * !\SD:SPI0:BSPIM:tx_status_1\ * \SD:SPI0:BSPIM:count_1\ * \SD:SPI0:BSPIM:count_2\ * \SD:SPI0:BSPIM:state_0\ * \SD:SPI0:BSPIM:state_1\
+			!\SD:SPI0:BSPIM:count_1\ * !\SD:SPI0:BSPIM:count_2\ * !\SD:SPI0:BSPIM:count_3\ * !\SD:SPI0:BSPIM:count_4\ * !\SD:SPI0:BSPIM:state_0\ * !\SD:SPI0:BSPIM:state_2\ * \SD:SPI0:BSPIM:count_0\ * \SD:SPI0:BSPIM:ld_ident\ * \SD:SPI0:BSPIM:state_1\
+			!\SD:SPI0:BSPIM:count_1\ * !\SD:SPI0:BSPIM:count_2\ * !\SD:SPI0:BSPIM:count_3\ * !\SD:SPI0:BSPIM:count_4\ * \SD:SPI0:BSPIM:count_0\ * \SD:SPI0:BSPIM:rx_status_4\
+			!\SD:SPI0:BSPIM:ld_ident\ * !\SD:SPI0:BSPIM:state_0\ * !\SD:SPI0:BSPIM:state_1\ * \SD:SPI0:BSPIM:state_2\
+			!\SD:SPI0:BSPIM:state_0\ * !\SD:SPI0:BSPIM:state_1\ * !\SD:SPI0:BSPIM:state_2\
+			!\SD:SPI0:BSPIM:state_1\ * \SD:SPI0:BSPIM:state_0\ * \SD:SPI0:BSPIM:state_2\
+
+	PLD 1:
+		 Instances:
+			\SD:SPI0:BSPIM:mosi_pre_reg_split_1\
+			\SD:Net_22\
+
+		 Clock net: \SD:Net_19\
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			\SD:Net_22\
+			\SD:SPI0:BSPIM:count_0\
+			\SD:SPI0:BSPIM:count_2\
+			\SD:SPI0:BSPIM:count_3\
+			\SD:SPI0:BSPIM:count_4\
+			\SD:SPI0:BSPIM:ld_ident\
+			\SD:SPI0:BSPIM:mosi_from_dp\
+			\SD:SPI0:BSPIM:mosi_pre_reg\
+			\SD:SPI0:BSPIM:state_0\
+			\SD:SPI0:BSPIM:state_1\
+			\SD:SPI0:BSPIM:state_2\
+
+		 Output nets:
+			\SD:Net_22\
+			\SD:SPI0:BSPIM:mosi_pre_reg_split_1\
+
+		 Product terms:
+			!\SD:SPI0:BSPIM:count_0\ * !\SD:SPI0:BSPIM:count_2\ * !\SD:SPI0:BSPIM:count_3\ * !\SD:SPI0:BSPIM:count_4\ * !\SD:SPI0:BSPIM:ld_ident\ * !\SD:SPI0:BSPIM:state_2\ * \SD:SPI0:BSPIM:state_1\
+			!\SD:SPI0:BSPIM:mosi_from_dp\ * \SD:SPI0:BSPIM:state_2\
+			!\SD:SPI0:BSPIM:mosi_pre_reg\ * !\SD:SPI0:BSPIM:state_2\
+			!\SD:SPI0:BSPIM:state_0\ * !\SD:SPI0:BSPIM:state_2\
+			!\SD:SPI0:BSPIM:state_0\ * \SD:SPI0:BSPIM:state_1\
+			!\SD:SPI0:BSPIM:state_0\ * \SD:SPI0:BSPIM:state_2\
+			!\SD:SPI0:BSPIM:state_1\ * \SD:SPI0:BSPIM:state_0\ * \SD:SPI0:BSPIM:state_2\
+			\SD:Net_22\ * \SD:SPI0:BSPIM:state_1\ * \SD:SPI0:BSPIM:state_2\
+
+	Datapath:
+		 Instances:
+			\PWM_MOTORS:PWMUDB:sP8:pwmdp:u0\
+
+		 Clock net: Net_2334
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			ClockBlock_BUS_CLK
+			\PWM_MOTORS:PWMUDB:runmode_enable\
+			\PWM_MOTORS:PWMUDB:tc_i\
+
+		 Output nets:
+			\PWM_MOTORS:PWMUDB:cmp1_eq\
+			\PWM_MOTORS:PWMUDB:cmp1_less\
+			\PWM_MOTORS:PWMUDB:cmp2_eq\
+			\PWM_MOTORS:PWMUDB:cmp2_less\
+			\PWM_MOTORS:PWMUDB:tc_i\
+
+	Control, status and sync:
+		 Instances:
+			\MY_TIMER_REG:Sync:ctrl_reg\ : controlcell
+			\SD:SPI0:BSPIM:RxStsReg\ : statusicell
+
+		 Clock net: \SD:Net_19\
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			ClockBlock_BUS_CLK
+			\SD:SPI0:BSPIM:rx_status_4\
+			\SD:SPI0:BSPIM:rx_status_5\
+			\SD:SPI0:BSPIM:rx_status_6\
+
+		 Output nets:
+			Net_4386
 
 	Local clock and reset nets:
 
 ======================================================
 UDB 18
-------------------------------------------------------
-	PLD 0:
-		 Instances:
-			\emFile:SPI0:BSPIM:mosi_pre_reg_split\
-
-		 Clock net: 
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			\emFile:SPI0:BSPIM:count_0\
-			\emFile:SPI0:BSPIM:count_1\
-			\emFile:SPI0:BSPIM:count_2\
-			\emFile:SPI0:BSPIM:count_3\
-			\emFile:SPI0:BSPIM:count_4\
-			\emFile:SPI0:BSPIM:ld_ident\
-			\emFile:SPI0:BSPIM:mosi_from_dp\
-			\emFile:SPI0:BSPIM:mosi_pre_reg\
-			\emFile:SPI0:BSPIM:state_0\
-			\emFile:SPI0:BSPIM:state_1\
-			\emFile:SPI0:BSPIM:state_2\
-
-		 Output nets:
-			\emFile:SPI0:BSPIM:mosi_pre_reg_split\
-
-		 Product terms:
-			!\emFile:SPI0:BSPIM:count_0\ * !\emFile:SPI0:BSPIM:count_1\ * !\emFile:SPI0:BSPIM:count_2\ * !\emFile:SPI0:BSPIM:count_3\ * !\emFile:SPI0:BSPIM:count_4\ * !\emFile:SPI0:BSPIM:ld_ident\ * \emFile:SPI0:BSPIM:mosi_from_dp\ * \emFile:SPI0:BSPIM:state_0\ * \emFile:SPI0:BSPIM:state_1\
-			!\emFile:SPI0:BSPIM:count_0\ * !\emFile:SPI0:BSPIM:state_0\ * !\emFile:SPI0:BSPIM:state_2\ * \emFile:SPI0:BSPIM:mosi_from_dp\ * \emFile:SPI0:BSPIM:state_1\
-			!\emFile:SPI0:BSPIM:count_1\ * !\emFile:SPI0:BSPIM:count_2\ * !\emFile:SPI0:BSPIM:count_3\ * !\emFile:SPI0:BSPIM:count_4\ * !\emFile:SPI0:BSPIM:state_0\ * \emFile:SPI0:BSPIM:count_0\ * \emFile:SPI0:BSPIM:mosi_pre_reg\ * \emFile:SPI0:BSPIM:state_1\
-			!\emFile:SPI0:BSPIM:state_0\ * !\emFile:SPI0:BSPIM:state_2\ * \emFile:SPI0:BSPIM:count_1\ * \emFile:SPI0:BSPIM:mosi_from_dp\ * \emFile:SPI0:BSPIM:state_1\
-			!\emFile:SPI0:BSPIM:state_0\ * !\emFile:SPI0:BSPIM:state_2\ * \emFile:SPI0:BSPIM:count_2\ * \emFile:SPI0:BSPIM:mosi_from_dp\ * \emFile:SPI0:BSPIM:state_1\
-			!\emFile:SPI0:BSPIM:state_0\ * !\emFile:SPI0:BSPIM:state_2\ * \emFile:SPI0:BSPIM:count_3\ * \emFile:SPI0:BSPIM:mosi_from_dp\ * \emFile:SPI0:BSPIM:state_1\
-			!\emFile:SPI0:BSPIM:state_0\ * !\emFile:SPI0:BSPIM:state_2\ * \emFile:SPI0:BSPIM:count_4\ * \emFile:SPI0:BSPIM:mosi_from_dp\ * \emFile:SPI0:BSPIM:state_1\
-			!\emFile:SPI0:BSPIM:state_0\ * \emFile:SPI0:BSPIM:mosi_pre_reg\ * \emFile:SPI0:BSPIM:state_1\ * \emFile:SPI0:BSPIM:state_2\
-
-	PLD 1:
-		 Instances:
-			\emFile:SPI0:BSPIM:load_rx_data\
-			\emFile:SPI0:BSPIM:mosi_pre_reg\
-			\emFile:SPI0:BSPIM:state_0\
-			\emFile:SPI0:BSPIM:state_2\
-
-		 Clock net: \emFile:Net_19\
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			\emFile:SPI0:BSPIM:count_0\
-			\emFile:SPI0:BSPIM:count_1\
-			\emFile:SPI0:BSPIM:count_2\
-			\emFile:SPI0:BSPIM:count_3\
-			\emFile:SPI0:BSPIM:count_4\
-			\emFile:SPI0:BSPIM:ld_ident\
-			\emFile:SPI0:BSPIM:mosi_pre_reg_split\
-			\emFile:SPI0:BSPIM:mosi_pre_reg_split_1\
-			\emFile:SPI0:BSPIM:state_0\
-			\emFile:SPI0:BSPIM:state_1\
-			\emFile:SPI0:BSPIM:state_2\
-			\emFile:SPI0:BSPIM:tx_status_1\
-
-		 Output nets:
-			\emFile:SPI0:BSPIM:load_rx_data\
-			\emFile:SPI0:BSPIM:mosi_pre_reg\
-			\emFile:SPI0:BSPIM:state_0\
-			\emFile:SPI0:BSPIM:state_2\
-
-		 Product terms:
-			!\emFile:SPI0:BSPIM:count_0\ * !\emFile:SPI0:BSPIM:count_2\ * !\emFile:SPI0:BSPIM:count_3\ * !\emFile:SPI0:BSPIM:count_4\ * !\emFile:SPI0:BSPIM:ld_ident\ * !\emFile:SPI0:BSPIM:state_2\ * \emFile:SPI0:BSPIM:count_1\ * \emFile:SPI0:BSPIM:state_0\
-			!\emFile:SPI0:BSPIM:count_0\ * !\emFile:SPI0:BSPIM:count_2\ * !\emFile:SPI0:BSPIM:count_3\ * !\emFile:SPI0:BSPIM:count_4\ * !\emFile:SPI0:BSPIM:ld_ident\ * \emFile:SPI0:BSPIM:count_1\ * \emFile:SPI0:BSPIM:state_0\ * \emFile:SPI0:BSPIM:state_1\
-			!\emFile:SPI0:BSPIM:count_0\ * !\emFile:SPI0:BSPIM:count_3\ * !\emFile:SPI0:BSPIM:count_4\ * !\emFile:SPI0:BSPIM:tx_status_1\ * \emFile:SPI0:BSPIM:count_1\ * \emFile:SPI0:BSPIM:count_2\ * \emFile:SPI0:BSPIM:state_0\ * \emFile:SPI0:BSPIM:state_1\
-			!\emFile:SPI0:BSPIM:count_1\ * !\emFile:SPI0:BSPIM:count_2\ * !\emFile:SPI0:BSPIM:count_3\ * !\emFile:SPI0:BSPIM:count_4\ * \emFile:SPI0:BSPIM:count_0\
-			!\emFile:SPI0:BSPIM:mosi_pre_reg_split\ * !\emFile:SPI0:BSPIM:mosi_pre_reg_split_1\
-			!\emFile:SPI0:BSPIM:state_1\ * !\emFile:SPI0:BSPIM:state_2\ * \emFile:SPI0:BSPIM:state_0\
-			!\emFile:SPI0:BSPIM:state_1\ * !\emFile:SPI0:BSPIM:state_2\ * \emFile:SPI0:BSPIM:tx_status_1\
-			\emFile:SPI0:BSPIM:state_0\ * \emFile:SPI0:BSPIM:state_1\ * \emFile:SPI0:BSPIM:state_2\
-
-	Datapath:
-		 Instances:
-			\emFile:SPI0:BSPIM:sR8:Dp:u0\
-
-		 Clock net: \emFile:Net_19\
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			ClockBlock_BUS_CLK
-			\emFile:Net_16\
-			\emFile:SPI0:BSPIM:load_rx_data\
-			\emFile:SPI0:BSPIM:state_0\
-			\emFile:SPI0:BSPIM:state_1\
-			\emFile:SPI0:BSPIM:state_2\
-
-		 Output nets:
-			\emFile:SPI0:BSPIM:mosi_from_dp\
-			\emFile:SPI0:BSPIM:rx_status_4\
-			\emFile:SPI0:BSPIM:rx_status_5\
-			\emFile:SPI0:BSPIM:tx_status_1\
-			\emFile:SPI0:BSPIM:tx_status_2\
-
-	Control, status and sync:
-		 Instances:
-			\emFile:SPI0:BSPIM:BitCounter\ : count7cell
-
-		 Clock net: \emFile:Net_19\
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			\emFile:SPI0:BSPIM:cnt_enable\
-
-		 Output nets:
-			\emFile:SPI0:BSPIM:count_0\
-			\emFile:SPI0:BSPIM:count_1\
-			\emFile:SPI0:BSPIM:count_2\
-			\emFile:SPI0:BSPIM:count_3\
-			\emFile:SPI0:BSPIM:count_4\
-
-	Local clock and reset nets:
-
-======================================================
-UDB 19
-------------------------------------------------------
-	PLD 0:
-		 Instances:
-			\emFile:SPI0:BSPIM:ld_ident\
-			\emFile:SPI0:BSPIM:state_1\
-			\emFile:SPI0:BSPIM:tx_status_0\
-			\emFile:SPI0:BSPIM:rx_status_6\
-
-		 Clock net: \emFile:Net_19\
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			\emFile:SPI0:BSPIM:count_0\
-			\emFile:SPI0:BSPIM:count_1\
-			\emFile:SPI0:BSPIM:count_2\
-			\emFile:SPI0:BSPIM:count_3\
-			\emFile:SPI0:BSPIM:count_4\
-			\emFile:SPI0:BSPIM:ld_ident\
-			\emFile:SPI0:BSPIM:rx_status_4\
-			\emFile:SPI0:BSPIM:state_0\
-			\emFile:SPI0:BSPIM:state_1\
-			\emFile:SPI0:BSPIM:state_2\
-			\emFile:SPI0:BSPIM:tx_status_1\
-
-		 Output nets:
-			\emFile:SPI0:BSPIM:ld_ident\
-			\emFile:SPI0:BSPIM:rx_status_6\
-			\emFile:SPI0:BSPIM:state_1\
-			\emFile:SPI0:BSPIM:tx_status_0\
-
-		 Product terms:
-			!\emFile:SPI0:BSPIM:count_0\ * !\emFile:SPI0:BSPIM:count_2\ * !\emFile:SPI0:BSPIM:count_3\ * !\emFile:SPI0:BSPIM:count_4\ * !\emFile:SPI0:BSPIM:ld_ident\ * !\emFile:SPI0:BSPIM:state_2\ * \emFile:SPI0:BSPIM:count_1\ * \emFile:SPI0:BSPIM:state_0\ * \emFile:SPI0:BSPIM:state_1\
-			!\emFile:SPI0:BSPIM:count_0\ * !\emFile:SPI0:BSPIM:count_3\ * !\emFile:SPI0:BSPIM:count_4\ * !\emFile:SPI0:BSPIM:state_2\ * !\emFile:SPI0:BSPIM:tx_status_1\ * \emFile:SPI0:BSPIM:count_1\ * \emFile:SPI0:BSPIM:count_2\ * \emFile:SPI0:BSPIM:state_0\ * \emFile:SPI0:BSPIM:state_1\
-			!\emFile:SPI0:BSPIM:count_1\ * !\emFile:SPI0:BSPIM:count_2\ * !\emFile:SPI0:BSPIM:count_3\ * !\emFile:SPI0:BSPIM:count_4\ * !\emFile:SPI0:BSPIM:state_0\ * !\emFile:SPI0:BSPIM:state_2\ * \emFile:SPI0:BSPIM:count_0\ * \emFile:SPI0:BSPIM:ld_ident\ * \emFile:SPI0:BSPIM:state_1\
-			!\emFile:SPI0:BSPIM:count_1\ * !\emFile:SPI0:BSPIM:count_2\ * !\emFile:SPI0:BSPIM:count_3\ * !\emFile:SPI0:BSPIM:count_4\ * \emFile:SPI0:BSPIM:count_0\ * \emFile:SPI0:BSPIM:rx_status_4\
-			!\emFile:SPI0:BSPIM:ld_ident\ * !\emFile:SPI0:BSPIM:state_0\ * !\emFile:SPI0:BSPIM:state_1\ * \emFile:SPI0:BSPIM:state_2\
-			!\emFile:SPI0:BSPIM:state_0\ * !\emFile:SPI0:BSPIM:state_1\ * !\emFile:SPI0:BSPIM:state_2\
-			!\emFile:SPI0:BSPIM:state_1\ * \emFile:SPI0:BSPIM:state_0\ * \emFile:SPI0:BSPIM:state_2\
-
-	PLD 1:
-		 Instances:
-			\emFile:SPI0:BSPIM:mosi_pre_reg_split_1\
-			\emFile:Net_22\
-
-		 Clock net: \emFile:Net_19\
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			\emFile:Net_22\
-			\emFile:SPI0:BSPIM:count_0\
-			\emFile:SPI0:BSPIM:count_2\
-			\emFile:SPI0:BSPIM:count_3\
-			\emFile:SPI0:BSPIM:count_4\
-			\emFile:SPI0:BSPIM:ld_ident\
-			\emFile:SPI0:BSPIM:mosi_from_dp\
-			\emFile:SPI0:BSPIM:mosi_pre_reg\
-			\emFile:SPI0:BSPIM:state_0\
-			\emFile:SPI0:BSPIM:state_1\
-			\emFile:SPI0:BSPIM:state_2\
-
-		 Output nets:
-			\emFile:Net_22\
-			\emFile:SPI0:BSPIM:mosi_pre_reg_split_1\
-
-		 Product terms:
-			!\emFile:SPI0:BSPIM:count_0\ * !\emFile:SPI0:BSPIM:count_2\ * !\emFile:SPI0:BSPIM:count_3\ * !\emFile:SPI0:BSPIM:count_4\ * !\emFile:SPI0:BSPIM:ld_ident\ * !\emFile:SPI0:BSPIM:state_2\ * \emFile:SPI0:BSPIM:state_1\
-			!\emFile:SPI0:BSPIM:mosi_from_dp\ * \emFile:SPI0:BSPIM:state_2\
-			!\emFile:SPI0:BSPIM:mosi_pre_reg\ * !\emFile:SPI0:BSPIM:state_2\
-			!\emFile:SPI0:BSPIM:state_0\ * !\emFile:SPI0:BSPIM:state_2\
-			!\emFile:SPI0:BSPIM:state_0\ * \emFile:SPI0:BSPIM:state_1\
-			!\emFile:SPI0:BSPIM:state_0\ * \emFile:SPI0:BSPIM:state_2\
-			!\emFile:SPI0:BSPIM:state_1\ * \emFile:SPI0:BSPIM:state_0\ * \emFile:SPI0:BSPIM:state_2\
-			\emFile:Net_22\ * \emFile:SPI0:BSPIM:state_1\ * \emFile:SPI0:BSPIM:state_2\
-
-	Datapath:
-		 Instances:
-			\COUNTER_ENC:CounterUDB:sC8:counterdp:u0\
-
-		 Clock net: Net_1308
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			ClockBlock_BUS_CLK
-			\COUNTER_ENC:CounterUDB:count_enable\
-			\COUNTER_ENC:CounterUDB:reload\
-			__ONE__
-
-		 Output nets:
-			\COUNTER_ENC:CounterUDB:cmp_out_i\
-			\COUNTER_ENC:CounterUDB:per_equal\
-			\COUNTER_ENC:CounterUDB:status_1\
-			\COUNTER_ENC:CounterUDB:status_5\
-			\COUNTER_ENC:CounterUDB:status_6\
-
-	Control, status and sync:
-		 Instances:
-			\MOTOR_ON_OFF:Sync:ctrl_reg\ : controlcell
-			\emFile:SPI0:BSPIM:RxStsReg\ : statusicell
-
-		 Clock net: \emFile:Net_19\
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			ClockBlock_BUS_CLK
-			\emFile:SPI0:BSPIM:rx_status_4\
-			\emFile:SPI0:BSPIM:rx_status_5\
-			\emFile:SPI0:BSPIM:rx_status_6\
-
-		 Output nets:
-			Net_3034
-
-	Local clock and reset nets:
-
-======================================================
-UDB 2
-------------------------------------------------------
-	PLD 0:
-		 Instances:
-			AMuxHw_Decoder_old_id_0
-			cy_srff_3
-			cy_srff_1
-			Net_5507
-
-		 Clock net: ClockBlock_BUS_CLK
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			Net_3240
-			Net_3334
-			Net_4627
-			Net_5190_0
-			Net_5190_1
-			Net_5503
-			Net_5507
-			cy_srff_1
-			cy_srff_3
-
-		 Output nets:
-			AMuxHw_Decoder_old_id_0
-			Net_5507
-			cy_srff_1
-			cy_srff_3
-
-		 Product terms:
-			!Net_3334 * Net_3240
-			!Net_3334 * cy_srff_1
-			!Net_4627 * !cy_srff_3
-			!Net_5503 * Net_4627
-			!Net_5503 * Net_5507
-			Net_5190_0
-			Net_5190_0 * Net_5190_1
-
-	PLD 1:
-		 Instances:
-			Net_5190_1
-			Net_1618
-			Net_5190_0
-			Net_2500
-
-		 Clock net: ClockBlock_BUS_CLK
-		 Set/Reset net: 
-		 Enable net: Net_5503
-
-		 Input nets:
-			Net_1619
-			Net_1622_0
-			Net_1622_1
-			Net_5190_0
-			Net_5190_1
-			Net_5503
-
-		 Output nets:
-			Net_1618
-			Net_2500
-			Net_5190_0
-			Net_5190_1
-
-		 Product terms:
-			!Net_1619 * !Net_1622_1 * Net_1622_0
-			!Net_1619 * Net_1622_0 * Net_1622_1
-			!Net_5190_0 * Net_5190_1
-			!Net_5190_0 * Net_5503
-			!Net_5190_1 * !Net_5503 * Net_5190_0
-			!Net_5190_1 * Net_5190_0 * Net_5503
-
-	Datapath:
-		 Instances:
-			\MY_TIMER:TimerUDB:sT24:timerdp:u2\
-
-		 Clock net: Net_2564
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			ClockBlock_BUS_CLK
-			\MY_TIMER:TimerUDB:control_7\
-			\MY_TIMER:TimerUDB:per_zero\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.ce0__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.ce1__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.cfbo__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.cl0__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.cl1__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.co_msb__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.ff0__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.ff1__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.sol_msb__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.z0__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u1.z1__sig\
-
-		 Output nets:
-			\MY_TIMER:TimerUDB:per_zero\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u2.cmsbo__sig\
-			\MY_TIMER:TimerUDB:sT24:timerdp:u2.sor__sig\
-			\MY_TIMER:TimerUDB:status_2\
-			\MY_TIMER:TimerUDB:status_3\
-
-	Control, status and sync:
-		 Instances:
-			\ADC_SOC:Sync:ctrl_reg\ : controlcell
-			\FF_STATUS:sts:sts_reg\ : statuscell
-
-		 Clock net: 
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			ClockBlock_BUS_CLK
-			cy_srff_1
-
-		 Output nets:
-			Net_4627
-
-	Local clock and reset nets:
-			Net_5503
-
-======================================================
-UDB 20
 ------------------------------------------------------
 	PLD 0:
 		 Instances:
@@ -1398,44 +1141,44 @@ UDB 20
 	Local clock and reset nets:
 
 ======================================================
-UDB 21
+UDB 19
 ------------------------------------------------------
 	PLD 0:
 		 Instances:
-			\emFile:SPI0:BSPIM:tx_status_4\
-			\emFile:Net_1\
-			\emFile:SPI0:BSPIM:load_cond\
+			\SD:SPI0:BSPIM:tx_status_4\
+			\SD:Net_1\
+			\SD:SPI0:BSPIM:load_cond\
 
-		 Clock net: \emFile:Net_19\
+		 Clock net: \SD:Net_19\
 		 Set/Reset net: 
 		 Enable net: 
 
 		 Input nets:
-			\emFile:Net_1\
-			\emFile:SPI0:BSPIM:count_0\
-			\emFile:SPI0:BSPIM:count_1\
-			\emFile:SPI0:BSPIM:count_2\
-			\emFile:SPI0:BSPIM:count_3\
-			\emFile:SPI0:BSPIM:count_4\
-			\emFile:SPI0:BSPIM:load_cond\
-			\emFile:SPI0:BSPIM:state_0\
-			\emFile:SPI0:BSPIM:state_1\
-			\emFile:SPI0:BSPIM:state_2\
+			\SD:Net_1\
+			\SD:SPI0:BSPIM:count_0\
+			\SD:SPI0:BSPIM:count_1\
+			\SD:SPI0:BSPIM:count_2\
+			\SD:SPI0:BSPIM:count_3\
+			\SD:SPI0:BSPIM:count_4\
+			\SD:SPI0:BSPIM:load_cond\
+			\SD:SPI0:BSPIM:state_0\
+			\SD:SPI0:BSPIM:state_1\
+			\SD:SPI0:BSPIM:state_2\
 
 		 Output nets:
-			\emFile:Net_1\
-			\emFile:SPI0:BSPIM:load_cond\
-			\emFile:SPI0:BSPIM:tx_status_4\
+			\SD:Net_1\
+			\SD:SPI0:BSPIM:load_cond\
+			\SD:SPI0:BSPIM:tx_status_4\
 
 		 Product terms:
-			!\emFile:Net_1\ * !\emFile:SPI0:BSPIM:state_0\ * \emFile:SPI0:BSPIM:state_2\
-			!\emFile:Net_1\ * \emFile:SPI0:BSPIM:state_1\
-			!\emFile:SPI0:BSPIM:count_0\ * !\emFile:SPI0:BSPIM:count_1\ * !\emFile:SPI0:BSPIM:count_2\ * !\emFile:SPI0:BSPIM:count_3\ * !\emFile:SPI0:BSPIM:count_4\ * !\emFile:SPI0:BSPIM:state_2\ * \emFile:SPI0:BSPIM:load_cond\
-			!\emFile:SPI0:BSPIM:count_0\ * !\emFile:SPI0:BSPIM:count_1\ * !\emFile:SPI0:BSPIM:count_2\ * !\emFile:SPI0:BSPIM:count_3\ * !\emFile:SPI0:BSPIM:count_4\ * \emFile:SPI0:BSPIM:load_cond\ * \emFile:SPI0:BSPIM:state_0\
-			!\emFile:SPI0:BSPIM:count_0\ * !\emFile:SPI0:BSPIM:count_1\ * !\emFile:SPI0:BSPIM:count_2\ * !\emFile:SPI0:BSPIM:count_3\ * !\emFile:SPI0:BSPIM:count_4\ * \emFile:SPI0:BSPIM:load_cond\ * \emFile:SPI0:BSPIM:state_1\
-			!\emFile:SPI0:BSPIM:load_cond\ * !\emFile:SPI0:BSPIM:state_0\ * !\emFile:SPI0:BSPIM:state_1\ * \emFile:SPI0:BSPIM:state_2\
-			!\emFile:SPI0:BSPIM:state_0\ * !\emFile:SPI0:BSPIM:state_1\ * !\emFile:SPI0:BSPIM:state_2\
-			!\emFile:SPI0:BSPIM:state_1\ * !\emFile:SPI0:BSPIM:state_2\ * \emFile:SPI0:BSPIM:state_0\
+			!\SD:Net_1\ * !\SD:SPI0:BSPIM:state_0\ * \SD:SPI0:BSPIM:state_2\
+			!\SD:Net_1\ * \SD:SPI0:BSPIM:state_1\
+			!\SD:SPI0:BSPIM:count_0\ * !\SD:SPI0:BSPIM:count_1\ * !\SD:SPI0:BSPIM:count_2\ * !\SD:SPI0:BSPIM:count_3\ * !\SD:SPI0:BSPIM:count_4\ * !\SD:SPI0:BSPIM:state_2\ * \SD:SPI0:BSPIM:load_cond\
+			!\SD:SPI0:BSPIM:count_0\ * !\SD:SPI0:BSPIM:count_1\ * !\SD:SPI0:BSPIM:count_2\ * !\SD:SPI0:BSPIM:count_3\ * !\SD:SPI0:BSPIM:count_4\ * \SD:SPI0:BSPIM:load_cond\ * \SD:SPI0:BSPIM:state_0\
+			!\SD:SPI0:BSPIM:count_0\ * !\SD:SPI0:BSPIM:count_1\ * !\SD:SPI0:BSPIM:count_2\ * !\SD:SPI0:BSPIM:count_3\ * !\SD:SPI0:BSPIM:count_4\ * \SD:SPI0:BSPIM:load_cond\ * \SD:SPI0:BSPIM:state_1\
+			!\SD:SPI0:BSPIM:load_cond\ * !\SD:SPI0:BSPIM:state_0\ * !\SD:SPI0:BSPIM:state_1\ * \SD:SPI0:BSPIM:state_2\
+			!\SD:SPI0:BSPIM:state_0\ * !\SD:SPI0:BSPIM:state_1\ * !\SD:SPI0:BSPIM:state_2\
+			!\SD:SPI0:BSPIM:state_1\ * !\SD:SPI0:BSPIM:state_2\ * \SD:SPI0:BSPIM:state_0\
 
 	PLD 1:
 		 Instances:
@@ -1477,43 +1220,284 @@ UDB 21
 
 	Datapath:
 		 Instances:
-			\PWM_MOTORS:PWMUDB:sP8:pwmdp:u0\
+			\COUNTER_ENC:CounterUDB:sC8:counterdp:u0\
 
-		 Clock net: Net_2334
+		 Clock net: Net_1308
 		 Set/Reset net: 
 		 Enable net: 
 
 		 Input nets:
 			ClockBlock_BUS_CLK
-			\PWM_MOTORS:PWMUDB:runmode_enable\
-			\PWM_MOTORS:PWMUDB:tc_i\
+			\COUNTER_ENC:CounterUDB:count_enable\
+			\COUNTER_ENC:CounterUDB:reload\
+			__ONE__
 
 		 Output nets:
-			\PWM_MOTORS:PWMUDB:cmp1_eq\
-			\PWM_MOTORS:PWMUDB:cmp1_less\
-			\PWM_MOTORS:PWMUDB:tc_i\
+			\COUNTER_ENC:CounterUDB:cmp_out_i\
+			\COUNTER_ENC:CounterUDB:per_equal\
+			\COUNTER_ENC:CounterUDB:status_1\
+			\COUNTER_ENC:CounterUDB:status_5\
+			\COUNTER_ENC:CounterUDB:status_6\
 
 	Control, status and sync:
 		 Instances:
-			\emFile:SPI0:BSPIM:TxStsReg\ : statusicell
+			\MOTOR_ON_OFF_1:Sync:ctrl_reg\ : controlcell
+			\SD:SPI0:BSPIM:TxStsReg\ : statusicell
 
-		 Clock net: \emFile:Net_19\
+		 Clock net: \SD:Net_19\
 		 Set/Reset net: 
 		 Enable net: 
 
 		 Input nets:
-			\emFile:SPI0:BSPIM:load_rx_data\
-			\emFile:SPI0:BSPIM:tx_status_0\
-			\emFile:SPI0:BSPIM:tx_status_1\
-			\emFile:SPI0:BSPIM:tx_status_2\
-			\emFile:SPI0:BSPIM:tx_status_4\
+			ClockBlock_BUS_CLK
+			\SD:SPI0:BSPIM:load_rx_data\
+			\SD:SPI0:BSPIM:tx_status_0\
+			\SD:SPI0:BSPIM:tx_status_1\
+			\SD:SPI0:BSPIM:tx_status_2\
+			\SD:SPI0:BSPIM:tx_status_4\
 
 		 Output nets:
+			Net_2761
 
 	Local clock and reset nets:
 
 ======================================================
-UDB 22
+UDB 2
+------------------------------------------------------
+	PLD 0:
+		 Instances:
+			\SPI_IMU:BSPIM:rx_status_6\
+			AMuxHw_Decoder_one_hot_0
+			AMuxHw_Decoder_old_id_0
+			AMuxHw_Decoder_one_hot_9
+
+		 Clock net: ClockBlock_BUS_CLK
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			AMuxHw_Decoder_is_active
+			AMuxHw_Decoder_old_id_0
+			AMuxHw_Decoder_old_id_1
+			AMuxHw_Decoder_old_id_2
+			AMuxHw_Decoder_old_id_3
+			Net_5190_0
+			\SPI_IMU:BSPIM:count_0\
+			\SPI_IMU:BSPIM:count_1\
+			\SPI_IMU:BSPIM:count_2\
+			\SPI_IMU:BSPIM:count_3\
+			\SPI_IMU:BSPIM:count_4\
+			\SPI_IMU:BSPIM:rx_status_4\
+
+		 Output nets:
+			AMuxHw_Decoder_old_id_0
+			AMuxHw_Decoder_one_hot_0
+			AMuxHw_Decoder_one_hot_9
+			\SPI_IMU:BSPIM:rx_status_6\
+
+		 Product terms:
+			!AMuxHw_Decoder_old_id_0 * !AMuxHw_Decoder_old_id_1 * !AMuxHw_Decoder_old_id_2 * !AMuxHw_Decoder_old_id_3 * AMuxHw_Decoder_is_active
+			!AMuxHw_Decoder_old_id_1 * !AMuxHw_Decoder_old_id_2 * AMuxHw_Decoder_is_active * AMuxHw_Decoder_old_id_0 * AMuxHw_Decoder_old_id_3
+			!\SPI_IMU:BSPIM:count_1\ * !\SPI_IMU:BSPIM:count_2\ * !\SPI_IMU:BSPIM:count_3\ * !\SPI_IMU:BSPIM:count_4\ * \SPI_IMU:BSPIM:count_0\ * \SPI_IMU:BSPIM:rx_status_4\
+			Net_5190_0
+
+	PLD 1:
+		 Instances:
+			AMuxHw_Decoder_one_hot_11
+			AMuxHw_Decoder_one_hot_2
+			AMuxHw_Decoder_one_hot_1
+			AMuxHw_Decoder_one_hot_10
+
+		 Clock net: ClockBlock_BUS_CLK
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			AMuxHw_Decoder_is_active
+			AMuxHw_Decoder_old_id_0
+			AMuxHw_Decoder_old_id_1
+			AMuxHw_Decoder_old_id_2
+			AMuxHw_Decoder_old_id_3
+
+		 Output nets:
+			AMuxHw_Decoder_one_hot_1
+			AMuxHw_Decoder_one_hot_10
+			AMuxHw_Decoder_one_hot_11
+			AMuxHw_Decoder_one_hot_2
+
+		 Product terms:
+			!AMuxHw_Decoder_old_id_0 * !AMuxHw_Decoder_old_id_2 * !AMuxHw_Decoder_old_id_3 * AMuxHw_Decoder_is_active * AMuxHw_Decoder_old_id_1
+			!AMuxHw_Decoder_old_id_0 * !AMuxHw_Decoder_old_id_2 * AMuxHw_Decoder_is_active * AMuxHw_Decoder_old_id_1 * AMuxHw_Decoder_old_id_3
+			!AMuxHw_Decoder_old_id_1 * !AMuxHw_Decoder_old_id_2 * !AMuxHw_Decoder_old_id_3 * AMuxHw_Decoder_is_active * AMuxHw_Decoder_old_id_0
+			!AMuxHw_Decoder_old_id_2 * AMuxHw_Decoder_is_active * AMuxHw_Decoder_old_id_0 * AMuxHw_Decoder_old_id_1 * AMuxHw_Decoder_old_id_3
+
+	Datapath:
+		 Instances:
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2\
+
+		 Clock net: Net_1308
+		 Set/Reset net: 
+		 Enable net: Net_3376
+
+		 Input nets:
+			ClockBlock_BUS_CLK
+			Net_3426
+			Net_3505
+			\SHIFTREG_ENC_1:bSR:ctrl_clk_enable\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.ce0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.ce1__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.cfbo__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.cl0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.cl1__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.co_msb__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.ff0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.ff1__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.sol_msb__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.z0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1.z1__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u3.cmsbo__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u3.sor__sig\
+
+		 Output nets:
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.ce0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.ce1__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.cfbo__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.cl0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.cl1__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.cmsbo__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.co_msb__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.ff0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.ff1__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.sol_msb__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.sor__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.z0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.z1__sig\
+
+	Control, status and sync:
+		 Instances:
+			\SHIFTREG_ENC_2:bSR:SyncCtl:CtrlReg\ : controlcell
+			\SHIFTREG_ENC_2:bSR:StsReg\ : statusicell
+
+		 Clock net: Net_1308
+		 Set/Reset net: 
+		 Enable net: Net_3376
+
+		 Input nets:
+			ClockBlock_BUS_CLK
+			Net_3426
+			\SHIFTREG_ENC_2:bSR:status_3\
+			\SHIFTREG_ENC_2:bSR:status_4\
+			\SHIFTREG_ENC_2:bSR:status_5\
+			\SHIFTREG_ENC_2:bSR:status_6\
+
+		 Output nets:
+			\SHIFTREG_ENC_2:bSR:ctrl_clk_enable\
+
+	Local clock and reset nets:
+			Net_3376
+
+======================================================
+UDB 20
+------------------------------------------------------
+	PLD 0:
+		 Instances:
+			AMuxHw_Decoder_is_active
+
+		 Clock net: 
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			AMuxHw_Decoder_old_id_0
+			AMuxHw_Decoder_old_id_1
+			AMuxHw_Decoder_old_id_2
+			AMuxHw_Decoder_old_id_3
+			Net_5190_0
+			Net_5190_1
+			Net_5190_2
+			Net_5190_3
+
+		 Output nets:
+			AMuxHw_Decoder_is_active
+
+		 Product terms:
+			!AMuxHw_Decoder_old_id_0 * Net_5190_0
+			!AMuxHw_Decoder_old_id_1 * Net_5190_1
+			!AMuxHw_Decoder_old_id_2 * Net_5190_2
+			!AMuxHw_Decoder_old_id_3 * Net_5190_3
+			!Net_5190_0 * AMuxHw_Decoder_old_id_0
+			!Net_5190_1 * AMuxHw_Decoder_old_id_1
+			!Net_5190_2 * AMuxHw_Decoder_old_id_2
+			!Net_5190_3 * AMuxHw_Decoder_old_id_3
+
+	PLD 1:
+		 Instances:
+			Net_5460
+
+		 Clock net: 
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			Net_5190_0
+			Net_5190_1
+			Net_5190_2
+			Net_5190_3
+			Net_7046_0
+			Net_7046_1
+			Net_7046_2
+			Net_7046_3
+
+		 Output nets:
+			Net_5460
+
+		 Product terms:
+			!Net_5190_0 * Net_7046_0
+			!Net_5190_1 * Net_7046_1
+			!Net_5190_2 * Net_7046_2
+			!Net_5190_3 * Net_7046_3
+			!Net_7046_0 * Net_5190_0
+			!Net_7046_1 * Net_5190_1
+			!Net_7046_2 * Net_5190_2
+			!Net_7046_3 * Net_5190_3
+
+	Datapath:
+		 Instances:
+			\UART_RS485:BUART:sTX:sCLOCK:TxBitClkGen\
+
+		 Clock net: Net_124
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			ClockBlock_BUS_CLK
+			\UART_RS485:BUART:counter_load_not\
+
+		 Output nets:
+			\UART_RS485:BUART:tx_bitclk_enable_pre\
+			\UART_RS485:BUART:tx_counter_dp\
+
+	Control, status and sync:
+		 Instances:
+			\ADC_N_CHANNELS_USED:Sync:ctrl_reg\ : controlcell
+
+		 Clock net: 
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			ClockBlock_BUS_CLK
+
+		 Output nets:
+			Net_7046_0
+			Net_7046_1
+			Net_7046_2
+			Net_7046_3
+
+	Local clock and reset nets:
+
+======================================================
+UDB 21
 ------------------------------------------------------
 	PLD 0:
 		 Instances:
@@ -1550,37 +1534,38 @@ UDB 22
 
 	PLD 1:
 		 Instances:
-			\emFile:SPI0:BSPIM:mosi_hs_reg\
-			\emFile:SPI0:BSPIM:mosi_from_dp_reg\
-			\emFile:SPI0:BSPIM:cnt_enable\
+			Net_5190_1
+			Net_5190_0
+			Net_5190_2
+			Net_5190_3
 
-		 Clock net: \emFile:Net_19\
+		 Clock net: ClockBlock_BUS_CLK
 		 Set/Reset net: 
-		 Enable net: 
+		 Enable net: Net_2835
 
 		 Input nets:
-			\emFile:SPI0:BSPIM:cnt_enable\
-			\emFile:SPI0:BSPIM:mosi_from_dp\
-			\emFile:SPI0:BSPIM:mosi_from_dp_reg\
-			\emFile:SPI0:BSPIM:mosi_hs_reg\
-			\emFile:SPI0:BSPIM:state_0\
-			\emFile:SPI0:BSPIM:state_1\
-			\emFile:SPI0:BSPIM:state_2\
+			Net_2835
+			Net_5190_0
+			Net_5190_1
+			Net_5190_2
+			Net_5190_3
+			Net_5460
 
 		 Output nets:
-			\emFile:SPI0:BSPIM:cnt_enable\
-			\emFile:SPI0:BSPIM:mosi_from_dp_reg\
-			\emFile:SPI0:BSPIM:mosi_hs_reg\
+			Net_5190_0
+			Net_5190_1
+			Net_5190_2
+			Net_5190_3
 
 		 Product terms:
-			!\emFile:SPI0:BSPIM:cnt_enable\ * !\emFile:SPI0:BSPIM:state_0\ * \emFile:SPI0:BSPIM:state_1\ * \emFile:SPI0:BSPIM:state_2\
-			!\emFile:SPI0:BSPIM:state_0\ * !\emFile:SPI0:BSPIM:state_1\ * !\emFile:SPI0:BSPIM:state_2\ * \emFile:SPI0:BSPIM:cnt_enable\
-			!\emFile:SPI0:BSPIM:state_0\ * \emFile:SPI0:BSPIM:mosi_hs_reg\
-			!\emFile:SPI0:BSPIM:state_1\ * \emFile:SPI0:BSPIM:cnt_enable\ * \emFile:SPI0:BSPIM:state_0\ * \emFile:SPI0:BSPIM:state_2\
-			!\emFile:SPI0:BSPIM:state_1\ * \emFile:SPI0:BSPIM:mosi_hs_reg\
-			!\emFile:SPI0:BSPIM:state_2\ * \emFile:SPI0:BSPIM:mosi_from_dp_reg\ * \emFile:SPI0:BSPIM:state_0\ * \emFile:SPI0:BSPIM:state_1\
-			\emFile:SPI0:BSPIM:mosi_from_dp\
-			\emFile:SPI0:BSPIM:mosi_from_dp\ * \emFile:SPI0:BSPIM:state_0\ * \emFile:SPI0:BSPIM:state_1\ * \emFile:SPI0:BSPIM:state_2\
+			!Net_2835 * !Net_5460 * Net_5190_0
+			!Net_5190_0 * !Net_5460 * Net_2835
+			!Net_5460 * Net_2835 * Net_5190_0
+			!Net_5460 * Net_2835 * Net_5190_0 * Net_5190_1
+			!Net_5460 * Net_2835 * Net_5190_0 * Net_5190_1 * Net_5190_2
+			Net_5190_1 * Net_5460
+			Net_5190_2 * Net_5460
+			Net_5190_3 * Net_5460
 
 	Datapath:
 		 Instances:
@@ -1603,6 +1588,7 @@ UDB 22
 
 	Control, status and sync:
 		 Instances:
+			\MOTOR_ON_OFF_2:Sync:ctrl_reg\ : controlcell
 			\UART_RS485:BUART:sTX:TxSts\ : statusicell
 
 		 Clock net: Net_124
@@ -1610,23 +1596,60 @@ UDB 22
 		 Enable net: 
 
 		 Input nets:
+			ClockBlock_BUS_CLK
 			\UART_RS485:BUART:tx_fifo_empty\
 			\UART_RS485:BUART:tx_fifo_notfull\
 			\UART_RS485:BUART:tx_status_0\
 			\UART_RS485:BUART:tx_status_2\
 
 		 Output nets:
+			Net_7913
 
 	Local clock and reset nets:
+			Net_2835
 
 ======================================================
-UDB 23
+UDB 22
 ------------------------------------------------------
 	PLD 0:
 		 Instances:
+			\SD:SPI0:BSPIM:mosi_hs_reg\
+			\SD:SPI0:BSPIM:cnt_enable\
+			\SD:SPI0:BSPIM:mosi_from_dp_reg\
+
+		 Clock net: \SD:Net_19\
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			\SD:SPI0:BSPIM:cnt_enable\
+			\SD:SPI0:BSPIM:mosi_from_dp\
+			\SD:SPI0:BSPIM:mosi_from_dp_reg\
+			\SD:SPI0:BSPIM:mosi_hs_reg\
+			\SD:SPI0:BSPIM:state_0\
+			\SD:SPI0:BSPIM:state_1\
+			\SD:SPI0:BSPIM:state_2\
+
+		 Output nets:
+			\SD:SPI0:BSPIM:cnt_enable\
+			\SD:SPI0:BSPIM:mosi_from_dp_reg\
+			\SD:SPI0:BSPIM:mosi_hs_reg\
+
+		 Product terms:
+			!\SD:SPI0:BSPIM:cnt_enable\ * !\SD:SPI0:BSPIM:state_0\ * \SD:SPI0:BSPIM:state_1\ * \SD:SPI0:BSPIM:state_2\
+			!\SD:SPI0:BSPIM:state_0\ * !\SD:SPI0:BSPIM:state_1\ * !\SD:SPI0:BSPIM:state_2\ * \SD:SPI0:BSPIM:cnt_enable\
+			!\SD:SPI0:BSPIM:state_0\ * \SD:SPI0:BSPIM:mosi_hs_reg\
+			!\SD:SPI0:BSPIM:state_1\ * \SD:SPI0:BSPIM:cnt_enable\ * \SD:SPI0:BSPIM:state_0\ * \SD:SPI0:BSPIM:state_2\
+			!\SD:SPI0:BSPIM:state_1\ * \SD:SPI0:BSPIM:mosi_hs_reg\
+			!\SD:SPI0:BSPIM:state_2\ * \SD:SPI0:BSPIM:mosi_from_dp_reg\ * \SD:SPI0:BSPIM:state_0\ * \SD:SPI0:BSPIM:state_1\
+			\SD:SPI0:BSPIM:mosi_from_dp\
+			\SD:SPI0:BSPIM:mosi_from_dp\ * \SD:SPI0:BSPIM:state_0\ * \SD:SPI0:BSPIM:state_1\ * \SD:SPI0:BSPIM:state_2\
+
+	PLD 1:
+		 Instances:
 			\SPI_IMU:BSPIM:mosi_hs_reg\
-			\SPI_IMU:BSPIM:mosi_from_dp_reg\
 			\SPI_IMU:BSPIM:tx_status_4\
+			\SPI_IMU:BSPIM:mosi_from_dp_reg\
 
 		 Clock net: Net_2334
 		 Set/Reset net: 
@@ -1655,54 +1678,7 @@ UDB 23
 			\SPI_IMU:BSPIM:mosi_from_dp\
 			\SPI_IMU:BSPIM:mosi_hs_reg\ * \SPI_IMU:BSPIM:state_0\ * \SPI_IMU:BSPIM:state_2\
 
-	PLD 1:
-		 Instances:
-			\UART_RS485:BUART:rx_state_stop1_reg\
-			\UART_RS485:BUART:rx_counter_load\
-			\UART_RS485:BUART:rx_state_2\
-			\UART_RS485:BUART:rx_status_3\
-
-		 Clock net: Net_124
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			Net_6196_SYNCOUT
-			\UART_RS485:BUART:rx_bitclk_enable\
-			\UART_RS485:BUART:rx_state_0\
-			\UART_RS485:BUART:rx_state_1\
-			\UART_RS485:BUART:rx_state_2\
-			\UART_RS485:BUART:rx_state_2_split\
-			\UART_RS485:BUART:rx_state_3\
-
-		 Output nets:
-			\UART_RS485:BUART:rx_counter_load\
-			\UART_RS485:BUART:rx_state_2\
-			\UART_RS485:BUART:rx_state_stop1_reg\
-			\UART_RS485:BUART:rx_status_3\
-
-		 Product terms:
-			!Net_6196_SYNCOUT * !\UART_RS485:BUART:rx_state_0\ * !\UART_RS485:BUART:rx_state_1\ * \UART_RS485:BUART:rx_bitclk_enable\ * \UART_RS485:BUART:rx_state_2\ * \UART_RS485:BUART:rx_state_3\
-			!\UART_RS485:BUART:rx_state_0\ * !\UART_RS485:BUART:rx_state_1\ * !\UART_RS485:BUART:rx_state_2\ * !\UART_RS485:BUART:rx_state_3\
-			!\UART_RS485:BUART:rx_state_0\ * !\UART_RS485:BUART:rx_state_1\ * !\UART_RS485:BUART:rx_state_3\ * \UART_RS485:BUART:rx_bitclk_enable\ * \UART_RS485:BUART:rx_state_2\
-			!\UART_RS485:BUART:rx_state_0\ * !\UART_RS485:BUART:rx_state_1\ * \UART_RS485:BUART:rx_state_2\ * \UART_RS485:BUART:rx_state_3\
-			\UART_RS485:BUART:rx_state_2_split\
-
 	Datapath:
-		 Instances:
-			\UART_RS485:BUART:sTX:sCLOCK:TxBitClkGen\
-
-		 Clock net: Net_124
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			ClockBlock_BUS_CLK
-			\UART_RS485:BUART:counter_load_not\
-
-		 Output nets:
-			\UART_RS485:BUART:tx_bitclk_enable_pre\
-			\UART_RS485:BUART:tx_counter_dp\
 
 	Control, status and sync:
 		 Instances:
@@ -1720,6 +1696,91 @@ UDB 23
 			\SPI_IMU:BSPIM:tx_status_4\
 
 		 Output nets:
+
+	Local clock and reset nets:
+
+======================================================
+UDB 23
+------------------------------------------------------
+	PLD 0:
+		 Instances:
+			\UART_RS485:BUART:rx_state_stop1_reg\
+			\UART_RS485:BUART:rx_last\
+			\UART_RS485:BUART:rx_state_2\
+			\UART_RS485:BUART:rx_status_3\
+
+		 Clock net: Net_124
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			Net_6196_SYNCOUT
+			\UART_RS485:BUART:rx_bitclk_enable\
+			\UART_RS485:BUART:rx_state_0\
+			\UART_RS485:BUART:rx_state_1\
+			\UART_RS485:BUART:rx_state_2\
+			\UART_RS485:BUART:rx_state_2_split\
+			\UART_RS485:BUART:rx_state_3\
+
+		 Output nets:
+			\UART_RS485:BUART:rx_last\
+			\UART_RS485:BUART:rx_state_2\
+			\UART_RS485:BUART:rx_state_stop1_reg\
+			\UART_RS485:BUART:rx_status_3\
+
+		 Product terms:
+			!Net_6196_SYNCOUT * !\UART_RS485:BUART:rx_state_0\ * !\UART_RS485:BUART:rx_state_1\ * \UART_RS485:BUART:rx_bitclk_enable\ * \UART_RS485:BUART:rx_state_2\ * \UART_RS485:BUART:rx_state_3\
+			!\UART_RS485:BUART:rx_state_0\ * !\UART_RS485:BUART:rx_state_1\ * !\UART_RS485:BUART:rx_state_3\ * \UART_RS485:BUART:rx_bitclk_enable\ * \UART_RS485:BUART:rx_state_2\
+			!\UART_RS485:BUART:rx_state_0\ * !\UART_RS485:BUART:rx_state_1\ * \UART_RS485:BUART:rx_state_2\ * \UART_RS485:BUART:rx_state_3\
+			Net_6196_SYNCOUT
+			\UART_RS485:BUART:rx_state_2_split\
+
+	PLD 1:
+		 Instances:
+			\UART_RS485:BUART:rx_status_5\
+			\UART_RS485:BUART:rx_counter_load\
+			\UART_RS485:BUART:rx_bitclk_enable\
+
+		 Clock net: Net_124
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			\UART_RS485:BUART:rx_count_0\
+			\UART_RS485:BUART:rx_count_1\
+			\UART_RS485:BUART:rx_count_2\
+			\UART_RS485:BUART:rx_fifonotempty\
+			\UART_RS485:BUART:rx_state_0\
+			\UART_RS485:BUART:rx_state_1\
+			\UART_RS485:BUART:rx_state_2\
+			\UART_RS485:BUART:rx_state_3\
+			\UART_RS485:BUART:rx_state_stop1_reg\
+
+		 Output nets:
+			\UART_RS485:BUART:rx_bitclk_enable\
+			\UART_RS485:BUART:rx_counter_load\
+			\UART_RS485:BUART:rx_status_5\
+
+		 Product terms:
+			!\UART_RS485:BUART:rx_count_0\ * !\UART_RS485:BUART:rx_count_1\ * !\UART_RS485:BUART:rx_count_2\
+			!\UART_RS485:BUART:rx_state_0\ * !\UART_RS485:BUART:rx_state_1\ * !\UART_RS485:BUART:rx_state_2\ * !\UART_RS485:BUART:rx_state_3\
+			\UART_RS485:BUART:rx_fifonotempty\ * \UART_RS485:BUART:rx_state_stop1_reg\
+
+	Datapath:
+
+	Control, status and sync:
+		 Instances:
+			RS485_RX(0)_SYNC : synccell
+
+		 Clock net: ClockBlock_BUS_CLK
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			Net_6196
+
+		 Output nets:
+			Net_6196_SYNCOUT
 
 	Local clock and reset nets:
 
@@ -1753,474 +1814,98 @@ UDB 3
 ------------------------------------------------------
 	PLD 0:
 		 Instances:
-			Net_2441
-			\COUNTER_ENC:CounterUDB:count_stored_i\
-			\COUNTER_ENC:CounterUDB:count_enable\
-			Net_1623
+			AMuxHw_Decoder_old_id_1
+			AMuxHw_Decoder_one_hot_4
+			AMuxHw_Decoder_one_hot_3
+			AMuxHw_Decoder_one_hot_6
 
-		 Clock net: Net_1308
+		 Clock net: ClockBlock_BUS_CLK
 		 Set/Reset net: 
 		 Enable net: 
 
 		 Input nets:
-			Net_1619
-			Net_1622_0
-			Net_1622_1
-			Net_2441
-			\COUNTER_ENC:CounterUDB:control_7\
-			\COUNTER_ENC:CounterUDB:count_stored_i\
+			AMuxHw_Decoder_is_active
+			AMuxHw_Decoder_old_id_0
+			AMuxHw_Decoder_old_id_1
+			AMuxHw_Decoder_old_id_2
+			AMuxHw_Decoder_old_id_3
+			Net_5190_1
 
 		 Output nets:
-			Net_1623
-			Net_2441
-			\COUNTER_ENC:CounterUDB:count_enable\
-			\COUNTER_ENC:CounterUDB:count_stored_i\
+			AMuxHw_Decoder_old_id_1
+			AMuxHw_Decoder_one_hot_3
+			AMuxHw_Decoder_one_hot_4
+			AMuxHw_Decoder_one_hot_6
 
 		 Product terms:
-			!Net_1619 * !Net_1622_0 * !Net_1622_1
-			!\COUNTER_ENC:CounterUDB:count_stored_i\ * Net_2441 * \COUNTER_ENC:CounterUDB:control_7\
-			Net_2441
+			!AMuxHw_Decoder_old_id_0 * !AMuxHw_Decoder_old_id_1 * !AMuxHw_Decoder_old_id_3 * AMuxHw_Decoder_is_active * AMuxHw_Decoder_old_id_2
+			!AMuxHw_Decoder_old_id_0 * !AMuxHw_Decoder_old_id_3 * AMuxHw_Decoder_is_active * AMuxHw_Decoder_old_id_1 * AMuxHw_Decoder_old_id_2
+			!AMuxHw_Decoder_old_id_2 * !AMuxHw_Decoder_old_id_3 * AMuxHw_Decoder_is_active * AMuxHw_Decoder_old_id_0 * AMuxHw_Decoder_old_id_1
+			Net_5190_1
 
 	PLD 1:
 		 Instances:
-			\SPI_IMU:BSPIM:ld_ident\
-			Net_1619
-			Net_1627
-			Net_1458
+			AMuxHw_Decoder_old_id_2
+			AMuxHw_Decoder_one_hot_5
+			AMuxHw_Decoder_one_hot_7
+			AMuxHw_Decoder_one_hot_8
 
-		 Clock net: Net_2334
+		 Clock net: ClockBlock_BUS_CLK
 		 Set/Reset net: 
 		 Enable net: 
 
 		 Input nets:
-			Net_1619
-			Net_1622_0
-			Net_1622_1
-			\SPI_IMU:BSPIM:ld_ident\
-			\SPI_IMU:BSPIM:mosi_hs_reg\
-			\SPI_IMU:BSPIM:state_0\
-			\SPI_IMU:BSPIM:state_1\
-			\SPI_IMU:BSPIM:state_2\
+			AMuxHw_Decoder_is_active
+			AMuxHw_Decoder_old_id_0
+			AMuxHw_Decoder_old_id_1
+			AMuxHw_Decoder_old_id_2
+			AMuxHw_Decoder_old_id_3
+			Net_5190_2
 
 		 Output nets:
-			Net_1458
-			Net_1619
-			Net_1627
-			\SPI_IMU:BSPIM:ld_ident\
+			AMuxHw_Decoder_old_id_2
+			AMuxHw_Decoder_one_hot_5
+			AMuxHw_Decoder_one_hot_7
+			AMuxHw_Decoder_one_hot_8
 
 		 Product terms:
-			!Net_1619 * !Net_1622_0 * Net_1622_1
-			!Net_1619 * !\SPI_IMU:BSPIM:state_0\ * !\SPI_IMU:BSPIM:state_1\ * !\SPI_IMU:BSPIM:state_2\
-			!Net_1619 * \SPI_IMU:BSPIM:mosi_hs_reg\
-			!Net_1619 * \SPI_IMU:BSPIM:state_0\ * \SPI_IMU:BSPIM:state_1\ * \SPI_IMU:BSPIM:state_2\
-			!\SPI_IMU:BSPIM:ld_ident\ * !\SPI_IMU:BSPIM:state_0\ * !\SPI_IMU:BSPIM:state_1\ * \SPI_IMU:BSPIM:state_2\
-			!\SPI_IMU:BSPIM:state_1\ * !\SPI_IMU:BSPIM:state_2\ * Net_1619 * \SPI_IMU:BSPIM:state_0\
-			\SPI_IMU:BSPIM:ld_ident\ * \SPI_IMU:BSPIM:state_0\ * \SPI_IMU:BSPIM:state_1\ * \SPI_IMU:BSPIM:state_2\
+			!AMuxHw_Decoder_old_id_0 * !AMuxHw_Decoder_old_id_1 * !AMuxHw_Decoder_old_id_2 * AMuxHw_Decoder_is_active * AMuxHw_Decoder_old_id_3
+			!AMuxHw_Decoder_old_id_1 * !AMuxHw_Decoder_old_id_3 * AMuxHw_Decoder_is_active * AMuxHw_Decoder_old_id_0 * AMuxHw_Decoder_old_id_2
+			!AMuxHw_Decoder_old_id_3 * AMuxHw_Decoder_is_active * AMuxHw_Decoder_old_id_0 * AMuxHw_Decoder_old_id_1 * AMuxHw_Decoder_old_id_2
+			Net_5190_2
 
 	Datapath:
 		 Instances:
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u3\
 
 		 Clock net: Net_1308
 		 Set/Reset net: 
-		 Enable net: Net_2441
+		 Enable net: Net_3376
 
 		 Input nets:
 			ClockBlock_BUS_CLK
-			Net_2343
-			Net_2467
-			\SHIFTREG_ENC_2:bSR:ctrl_clk_enable\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.cmsbo__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.sor__sig\
-
-		 Output nets:
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.ce0__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.ce1__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.cfbo__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.cl0__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.cl1__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.co_msb__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.ff0__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.ff1__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.sol_msb__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.z0__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.z1__sig\
-
-	Control, status and sync:
-		 Instances:
-			\COUNTER_ENC:CounterUDB:sCTRLReg:ctrlreg\ : controlcell
-
-		 Clock net: Net_1308
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			ClockBlock_BUS_CLK
-
-		 Output nets:
-			\COUNTER_ENC:CounterUDB:control_7\
-
-	Local clock and reset nets:
-			Net_2441
-
-======================================================
-UDB 4
-------------------------------------------------------
-	PLD 0:
-		 Instances:
-			\COUNTER_ENC:CounterUDB:status_2\
-			\COUNTER_ENC:CounterUDB:reload\
-			\COUNTER_ENC:CounterUDB:status_0\
-			Net_2343
-
-		 Clock net: Net_1308
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			Net_3492
-			\COUNTER_ENC:CounterUDB:cmp_out_i\
-			\COUNTER_ENC:CounterUDB:overflow_reg_i\
-			\COUNTER_ENC:CounterUDB:per_equal\
-			\COUNTER_ENC:CounterUDB:prevCompare\
-
-		 Output nets:
-			Net_2343
-			\COUNTER_ENC:CounterUDB:reload\
-			\COUNTER_ENC:CounterUDB:status_0\
-			\COUNTER_ENC:CounterUDB:status_2\
-
-		 Product terms:
-			!Net_3492 * !\COUNTER_ENC:CounterUDB:per_equal\
-			!\COUNTER_ENC:CounterUDB:overflow_reg_i\ * !\COUNTER_ENC:CounterUDB:prevCompare\
-			!\COUNTER_ENC:CounterUDB:overflow_reg_i\ * \COUNTER_ENC:CounterUDB:per_equal\
-			!\COUNTER_ENC:CounterUDB:prevCompare\ * \COUNTER_ENC:CounterUDB:cmp_out_i\
-
-	PLD 1:
-		 Instances:
-			\COUNTER_ENC:CounterUDB:prevCompare\
-			\COUNTER_ENC:CounterUDB:overflow_reg_i\
-			Net_3024
-			Net_3022
-
-		 Clock net: Net_1308
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			Net_2982
-			Net_2993
-			\COUNTER_ENC:CounterUDB:cmp_out_i\
-			\COUNTER_ENC:CounterUDB:per_equal\
-
-		 Output nets:
-			Net_3022
-			Net_3024
-			\COUNTER_ENC:CounterUDB:overflow_reg_i\
-			\COUNTER_ENC:CounterUDB:prevCompare\
-
-		 Product terms:
-			!Net_2982 * Net_2993
-			Net_2982 * Net_2993
-			\COUNTER_ENC:CounterUDB:cmp_out_i\
-			\COUNTER_ENC:CounterUDB:per_equal\
-
-	Datapath:
-		 Instances:
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1\
-
-		 Clock net: Net_1308
-		 Set/Reset net: 
-		 Enable net: Net_2441
-
-		 Input nets:
-			ClockBlock_BUS_CLK
-			Net_2343
-			Net_2467
-			\SHIFTREG_ENC_2:bSR:ctrl_clk_enable\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.ce0__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.ce1__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.cfbo__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.cl0__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.cl1__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.co_msb__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.ff0__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.ff1__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.sol_msb__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.z0__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u0.z1__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u2.cmsbo__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u2.sor__sig\
-
-		 Output nets:
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.ce0__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.ce1__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.cfbo__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.cl0__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.cl1__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.cmsbo__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.co_msb__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.ff0__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.ff1__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.sol_msb__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.sor__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.z0__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.z1__sig\
-
-	Control, status and sync:
-		 Instances:
-			\RESET_COUNTERS:Sync:ctrl_reg\ : controlcell
-			\COUNTER_ENC:CounterUDB:sSTSReg:stsreg\ : statusicell
-
-		 Clock net: Net_1308
-		 Set/Reset net: Net_3492
-		 Enable net: 
-
-		 Input nets:
-			ClockBlock_BUS_CLK
-			\COUNTER_ENC:CounterUDB:status_0\
-			\COUNTER_ENC:CounterUDB:status_1\
-			\COUNTER_ENC:CounterUDB:status_2\
-			\COUNTER_ENC:CounterUDB:status_5\
-			\COUNTER_ENC:CounterUDB:status_6\
-
-		 Output nets:
-			Net_3492
-
-	Local clock and reset nets:
-			Net_2441
-			Net_3492
-
-======================================================
-UDB 5
-------------------------------------------------------
-	PLD 0:
-		 Instances:
-			\UART_RS485:BUART:rx_status_4\
-			Net_2993
-			\PWM_MOTORS:PWMUDB:runmode_enable\
-			\UART_RS485:BUART:rx_status_5\
-
-		 Clock net: Net_2334
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			\PWM_MOTORS:PWMUDB:cmp1_eq\
-			\PWM_MOTORS:PWMUDB:cmp1_less\
-			\PWM_MOTORS:PWMUDB:control_7\
-			\PWM_MOTORS:PWMUDB:runmode_enable\
-			\UART_RS485:BUART:rx_fifofull\
-			\UART_RS485:BUART:rx_fifonotempty\
-			\UART_RS485:BUART:rx_load_fifo\
-			\UART_RS485:BUART:rx_state_stop1_reg\
-
-		 Output nets:
-			Net_2993
-			\PWM_MOTORS:PWMUDB:runmode_enable\
-			\UART_RS485:BUART:rx_status_4\
-			\UART_RS485:BUART:rx_status_5\
-
-		 Product terms:
-			\PWM_MOTORS:PWMUDB:cmp1_eq\ * \PWM_MOTORS:PWMUDB:runmode_enable\
-			\PWM_MOTORS:PWMUDB:cmp1_less\ * \PWM_MOTORS:PWMUDB:runmode_enable\
-			\PWM_MOTORS:PWMUDB:control_7\
-			\UART_RS485:BUART:rx_fifofull\ * \UART_RS485:BUART:rx_load_fifo\
-			\UART_RS485:BUART:rx_fifonotempty\ * \UART_RS485:BUART:rx_state_stop1_reg\
-
-	PLD 1:
-		 Instances:
-			Net_3863
-			\UART_RS485:BUART:rx_last\
-			Net_2627
-			\UART_RS485:BUART:tx_status_2\
-
-		 Clock net: Net_124
-		 Set/Reset net: 
-		 Enable net: 
-
-		 Input nets:
-			Net_3034
-			Net_6196_SYNCOUT
-			\UART_RS485:BUART:tx_fifo_notfull\
-			\UART_RS485:BUART:txn\
-
-		 Output nets:
-			Net_2627
-			Net_3863
-			\UART_RS485:BUART:rx_last\
-			\UART_RS485:BUART:tx_status_2\
-
-		 Product terms:
-			!Net_3034
-			!\UART_RS485:BUART:tx_fifo_notfull\
-			!\UART_RS485:BUART:txn\
-			Net_6196_SYNCOUT
-
-	Datapath:
-		 Instances:
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u2\
-
-		 Clock net: Net_1308
-		 Set/Reset net: 
-		 Enable net: Net_2441
-
-		 Input nets:
-			ClockBlock_BUS_CLK
-			Net_2343
-			Net_2467
-			\SHIFTREG_ENC_2:bSR:ctrl_clk_enable\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.ce0__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.ce1__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.cfbo__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.cl0__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.cl1__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.co_msb__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.ff0__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.ff1__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.sol_msb__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.z0__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u1.z1__sig\
-
-		 Output nets:
-			Net_2491
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u2.cmsbo__sig\
-			\SHIFTREG_ENC_2:bSR:sC24:BShiftRegDp:u2.sor__sig\
-			\SHIFTREG_ENC_2:bSR:status_3\
-			\SHIFTREG_ENC_2:bSR:status_4\
-			\SHIFTREG_ENC_2:bSR:status_5\
-			\SHIFTREG_ENC_2:bSR:status_6\
-
-	Control, status and sync:
-		 Instances:
-			\SHIFTREG_ENC_2:bSR:SyncCtl:CtrlReg\ : controlcell
-			\SHIFTREG_ENC_2:bSR:StsReg\ : statusicell
-
-		 Clock net: Net_1308
-		 Set/Reset net: 
-		 Enable net: Net_2441
-
-		 Input nets:
-			ClockBlock_BUS_CLK
-			Net_2343
-			\SHIFTREG_ENC_2:bSR:status_3\
-			\SHIFTREG_ENC_2:bSR:status_4\
-			\SHIFTREG_ENC_2:bSR:status_5\
-			\SHIFTREG_ENC_2:bSR:status_6\
-
-		 Output nets:
-			\SHIFTREG_ENC_2:bSR:ctrl_clk_enable\
-
-	Local clock and reset nets:
-			Net_2441
-
-======================================================
-UDB 6
-------------------------------------------------------
-	PLD 0:
-
-	PLD 1:
-
-	Datapath:
-		 Instances:
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0\
-
-		 Clock net: Net_1308
-		 Set/Reset net: 
-		 Enable net: Net_2441
-
-		 Input nets:
-			ClockBlock_BUS_CLK
-			Net_2343
-			Net_2409_SYNCOUT
+			Net_3426
+			Net_3505
 			\SHIFTREG_ENC_1:bSR:ctrl_clk_enable\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.cmsbo__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.sor__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.ce0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.ce1__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.cfbo__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.cl0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.cl1__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.co_msb__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.ff0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.ff1__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.sol_msb__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.z0__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2.z1__sig\
 
 		 Output nets:
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.ce0__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.ce1__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.cfbo__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.cl0__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.cl1__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.co_msb__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.ff0__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.ff1__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.sol_msb__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.z0__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.z1__sig\
-
-	Control, status and sync:
-		 Instances:
-			\SHIFTREG_ENC_1:bSR:SyncCtl:CtrlReg\ : controlcell
-			\SHIFTREG_ENC_1:bSR:StsReg\ : statusicell
-
-		 Clock net: Net_1308
-		 Set/Reset net: 
-		 Enable net: Net_2441
-
-		 Input nets:
-			ClockBlock_BUS_CLK
-			Net_2343
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u3.cmsbo__sig\
+			\SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u3.sor__sig\
 			\SHIFTREG_ENC_1:bSR:status_3\
 			\SHIFTREG_ENC_1:bSR:status_4\
 			\SHIFTREG_ENC_1:bSR:status_5\
 			\SHIFTREG_ENC_1:bSR:status_6\
-
-		 Output nets:
-			\SHIFTREG_ENC_1:bSR:ctrl_clk_enable\
-
-	Local clock and reset nets:
-			Net_2441
-
-======================================================
-UDB 7
-------------------------------------------------------
-	PLD 0:
-
-	PLD 1:
-
-	Datapath:
-		 Instances:
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1\
-
-		 Clock net: Net_1308
-		 Set/Reset net: 
-		 Enable net: Net_2441
-
-		 Input nets:
-			ClockBlock_BUS_CLK
-			Net_2343
-			Net_2409_SYNCOUT
-			\SHIFTREG_ENC_1:bSR:ctrl_clk_enable\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.ce0__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.ce1__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.cfbo__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.cl0__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.cl1__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.co_msb__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.ff0__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.ff1__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.sol_msb__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.z0__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u0.z1__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u2.cmsbo__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u2.sor__sig\
-
-		 Output nets:
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.ce0__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.ce1__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.cfbo__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.cl0__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.cl1__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.cmsbo__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.co_msb__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.ff0__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.ff1__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.sol_msb__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.sor__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.z0__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.z1__sig\
 
 	Control, status and sync:
 		 Instances:
@@ -2229,11 +1914,11 @@ UDB 7
 
 		 Clock net: Net_1308
 		 Set/Reset net: 
-		 Enable net: Net_2441
+		 Enable net: Net_3376
 
 		 Input nets:
 			ClockBlock_BUS_CLK
-			Net_2343
+			Net_3426
 			\SHIFTREG_ENC_3:bSR:status_3\
 			\SHIFTREG_ENC_3:bSR:status_4\
 			\SHIFTREG_ENC_3:bSR:status_5\
@@ -2243,7 +1928,478 @@ UDB 7
 			\SHIFTREG_ENC_3:bSR:ctrl_clk_enable\
 
 	Local clock and reset nets:
-			Net_2441
+			Net_3376
+
+======================================================
+UDB 4
+------------------------------------------------------
+	PLD 0:
+		 Instances:
+			\SPI_IMU:BSPIM:ld_ident\
+			Net_1458
+			Net_3044
+			Net_1628
+
+		 Clock net: Net_2334
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			Net_3044
+			Net_3063_0
+			Net_3063_1
+			Net_3063_2
+			\SPI_IMU:BSPIM:ld_ident\
+			\SPI_IMU:BSPIM:mosi_hs_reg\
+			\SPI_IMU:BSPIM:state_0\
+			\SPI_IMU:BSPIM:state_1\
+			\SPI_IMU:BSPIM:state_2\
+
+		 Output nets:
+			Net_1458
+			Net_1628
+			Net_3044
+			\SPI_IMU:BSPIM:ld_ident\
+
+		 Product terms:
+			!Net_3044 * !Net_3063_0 * !Net_3063_2 * Net_3063_1
+			!Net_3044 * !\SPI_IMU:BSPIM:state_0\ * !\SPI_IMU:BSPIM:state_1\ * !\SPI_IMU:BSPIM:state_2\
+			!Net_3044 * \SPI_IMU:BSPIM:mosi_hs_reg\
+			!Net_3044 * \SPI_IMU:BSPIM:state_0\ * \SPI_IMU:BSPIM:state_1\ * \SPI_IMU:BSPIM:state_2\
+			!\SPI_IMU:BSPIM:ld_ident\ * !\SPI_IMU:BSPIM:state_0\ * !\SPI_IMU:BSPIM:state_1\ * \SPI_IMU:BSPIM:state_2\
+			!\SPI_IMU:BSPIM:state_1\ * !\SPI_IMU:BSPIM:state_2\ * Net_3044 * \SPI_IMU:BSPIM:state_0\
+			\SPI_IMU:BSPIM:ld_ident\ * \SPI_IMU:BSPIM:state_0\ * \SPI_IMU:BSPIM:state_1\ * \SPI_IMU:BSPIM:state_2\
+
+	PLD 1:
+		 Instances:
+			Net_3065
+			Net_3039
+			Net_2501
+			Net_1630
+
+		 Clock net: 
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			Net_3044
+			Net_3063_0
+			Net_3063_1
+			Net_3063_2
+
+		 Output nets:
+			Net_1630
+			Net_2501
+			Net_3039
+			Net_3065
+
+		 Product terms:
+			!Net_3044 * !Net_3063_0 * !Net_3063_1 * !Net_3063_2
+			!Net_3044 * !Net_3063_0 * !Net_3063_1 * Net_3063_2
+			!Net_3044 * !Net_3063_1 * !Net_3063_2 * Net_3063_0
+			!Net_3044 * !Net_3063_2 * Net_3063_0 * Net_3063_1
+
+	Datapath:
+		 Instances:
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0\
+
+		 Clock net: Net_1308
+		 Set/Reset net: 
+		 Enable net: Net_3376
+
+		 Input nets:
+			ClockBlock_BUS_CLK
+			Net_3426
+			Net_3506
+			\SHIFTREG_ENC_2:bSR:ctrl_clk_enable\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cmsbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.sor__sig\
+
+		 Output nets:
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ce0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ce1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.cfbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.cl0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.cl1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.co_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ff0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ff1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.sol_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.z0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.z1__sig\
+
+	Control, status and sync:
+		 Instances:
+			\Chip_Select_IMU:Sync:ctrl_reg\ : controlcell
+			\SPI_IMU:BSPIM:RxStsReg\ : statusicell
+
+		 Clock net: Net_2334
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			ClockBlock_BUS_CLK
+			\SPI_IMU:BSPIM:rx_status_4\
+			\SPI_IMU:BSPIM:rx_status_5\
+			\SPI_IMU:BSPIM:rx_status_6\
+
+		 Output nets:
+			Net_3063_0
+			Net_3063_1
+			Net_3063_2
+
+	Local clock and reset nets:
+			Net_3376
+
+======================================================
+UDB 5
+------------------------------------------------------
+	PLD 0:
+		 Instances:
+			Net_3017
+			Net_3040
+			\PWM_MOTORS:PWMUDB:runmode_enable\
+			Net_3022
+
+		 Clock net: Net_2334
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			Net_2982
+			Net_3017
+			\PWM_MOTORS:PWMUDB:cmp1_eq\
+			\PWM_MOTORS:PWMUDB:cmp1_less\
+			\PWM_MOTORS:PWMUDB:cmp2_eq\
+			\PWM_MOTORS:PWMUDB:cmp2_less\
+			\PWM_MOTORS:PWMUDB:control_7\
+			\PWM_MOTORS:PWMUDB:runmode_enable\
+
+		 Output nets:
+			Net_3017
+			Net_3022
+			Net_3040
+			\PWM_MOTORS:PWMUDB:runmode_enable\
+
+		 Product terms:
+			Net_2982 * Net_3017
+			\PWM_MOTORS:PWMUDB:cmp1_eq\ * \PWM_MOTORS:PWMUDB:runmode_enable\
+			\PWM_MOTORS:PWMUDB:cmp1_less\ * \PWM_MOTORS:PWMUDB:runmode_enable\
+			\PWM_MOTORS:PWMUDB:cmp2_eq\ * \PWM_MOTORS:PWMUDB:runmode_enable\
+			\PWM_MOTORS:PWMUDB:cmp2_less\ * \PWM_MOTORS:PWMUDB:runmode_enable\
+			\PWM_MOTORS:PWMUDB:control_7\
+
+	PLD 1:
+		 Instances:
+			Net_3023
+			Net_3026
+			Net_3024
+			Net_5205
+
+		 Clock net: ClockBlock_BUS_CLK
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			Net_2982
+			Net_3017
+			Net_3021
+			Net_3040
+			Net_4627
+			Net_5205
+			Net_5460
+
+		 Output nets:
+			Net_3023
+			Net_3024
+			Net_3026
+			Net_5205
+
+		 Product terms:
+			!Net_2982 * Net_3017
+			!Net_3021 * Net_3040
+			!Net_5460 * Net_4627
+			!Net_5460 * Net_5205
+			Net_3021 * Net_3040
+
+	Datapath:
+		 Instances:
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1\
+
+		 Clock net: Net_1308
+		 Set/Reset net: 
+		 Enable net: Net_3376
+
+		 Input nets:
+			ClockBlock_BUS_CLK
+			Net_3426
+			Net_3506
+			\SHIFTREG_ENC_2:bSR:ctrl_clk_enable\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ce0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ce1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.cfbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.cl0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.cl1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.co_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ff0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ff1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.sol_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.z0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.z1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cmsbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.sor__sig\
+
+		 Output nets:
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ce0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ce1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cfbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cl0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cl1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cmsbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.co_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ff0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ff1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.sol_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.sor__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.z0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.z1__sig\
+
+	Control, status and sync:
+		 Instances:
+			\ADC_SOC:Sync:ctrl_reg\ : controlcell
+			\FF_STATUS:sts:sts_reg\ : statuscell
+
+		 Clock net: 
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			ClockBlock_BUS_CLK
+			cy_srff_1
+
+		 Output nets:
+			Net_4627
+
+	Local clock and reset nets:
+			Net_3376
+
+======================================================
+UDB 6
+------------------------------------------------------
+	PLD 0:
+		 Instances:
+			cy_srff_2
+			cy_srff_1
+			\UART_RS485:BUART:rx_status_4\
+			\COUNTER_ENC:CounterUDB:reload\
+
+		 Clock net: ClockBlock_BUS_CLK
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			Net_2835
+			Net_3240
+			Net_3334
+			Net_4627
+			Net_8907
+			\COUNTER_ENC:CounterUDB:per_equal\
+			\UART_RS485:BUART:rx_fifofull\
+			\UART_RS485:BUART:rx_load_fifo\
+			cy_srff_1
+			cy_srff_2
+
+		 Output nets:
+			\COUNTER_ENC:CounterUDB:reload\
+			\UART_RS485:BUART:rx_status_4\
+			cy_srff_1
+			cy_srff_2
+
+		 Product terms:
+			!Net_2835 * Net_4627
+			!Net_2835 * cy_srff_2
+			!Net_3334 * Net_3240
+			!Net_3334 * cy_srff_1
+			!Net_8907 * !\COUNTER_ENC:CounterUDB:per_equal\
+			\UART_RS485:BUART:rx_fifofull\ * \UART_RS485:BUART:rx_load_fifo\
+
+	PLD 1:
+		 Instances:
+			\COUNTER_ENC:CounterUDB:overflow_reg_i\
+			Net_2780
+			Net_2790
+			\COUNTER_ENC:CounterUDB:prevCompare\
+
+		 Clock net: Net_1308
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			Net_2761
+			Net_7913
+			\COUNTER_ENC:CounterUDB:cmp_out_i\
+			\COUNTER_ENC:CounterUDB:per_equal\
+
+		 Output nets:
+			Net_2780
+			Net_2790
+			\COUNTER_ENC:CounterUDB:overflow_reg_i\
+			\COUNTER_ENC:CounterUDB:prevCompare\
+
+		 Product terms:
+			!Net_2761
+			!Net_7913
+			\COUNTER_ENC:CounterUDB:cmp_out_i\
+			\COUNTER_ENC:CounterUDB:per_equal\
+
+	Datapath:
+		 Instances:
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2\
+
+		 Clock net: Net_1308
+		 Set/Reset net: 
+		 Enable net: Net_3376
+
+		 Input nets:
+			ClockBlock_BUS_CLK
+			Net_3426
+			Net_3506
+			\SHIFTREG_ENC_2:bSR:ctrl_clk_enable\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ce0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ce1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cfbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cl0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cl1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.co_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ff0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ff1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.sol_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.z0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.z1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u3.cmsbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u3.sor__sig\
+
+		 Output nets:
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ce0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ce1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cfbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cl0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cl1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cmsbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.co_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ff0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ff1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.sol_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.sor__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.z0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.z1__sig\
+
+	Control, status and sync:
+		 Instances:
+			\RESET_COUNTERS:Sync:ctrl_reg\ : controlcell
+			\ADC_STATUS:sts:sts_reg\ : statuscell
+
+		 Clock net: ClockBlock_BUS_CLK
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			ClockBlock_BUS_CLK
+			Net_5290
+
+		 Output nets:
+			Net_8907
+
+	Local clock and reset nets:
+			Net_3376
+
+======================================================
+UDB 7
+------------------------------------------------------
+	PLD 0:
+		 Instances:
+			\UART_RS485:BUART:tx_status_2\
+			Net_2627
+			AMuxHw_Decoder_old_id_3
+
+		 Clock net: ClockBlock_BUS_CLK
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			Net_5190_3
+			\UART_RS485:BUART:tx_fifo_notfull\
+			\UART_RS485:BUART:txn\
+
+		 Output nets:
+			AMuxHw_Decoder_old_id_3
+			Net_2627
+			\UART_RS485:BUART:tx_status_2\
+
+		 Product terms:
+			!\UART_RS485:BUART:tx_fifo_notfull\
+			!\UART_RS485:BUART:txn\
+			Net_5190_3
+
+	PLD 1:
+
+	Datapath:
+		 Instances:
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u3\
+
+		 Clock net: Net_1308
+		 Set/Reset net: 
+		 Enable net: Net_3376
+
+		 Input nets:
+			ClockBlock_BUS_CLK
+			Net_3426
+			Net_3506
+			\SHIFTREG_ENC_2:bSR:ctrl_clk_enable\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ce0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ce1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cfbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cl0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cl1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.co_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ff0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ff1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.sol_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.z0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.z1__sig\
+
+		 Output nets:
+			Net_3505
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u3.cmsbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u3.sor__sig\
+			\SHIFTREG_ENC_2:bSR:status_3\
+			\SHIFTREG_ENC_2:bSR:status_4\
+			\SHIFTREG_ENC_2:bSR:status_5\
+			\SHIFTREG_ENC_2:bSR:status_6\
+
+	Control, status and sync:
+		 Instances:
+			\LED_CTRL:Sync:ctrl_reg\ : controlcell
+			\Sync_ADC:genblk1[0]:INST\ : synccell
+			\Sync_1:genblk1[0]:INST\ : synccell
+
+		 Clock net: ClockBlock_BUS_CLK
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			ClockBlock_BUS_CLK
+			Net_3264
+			Net_5118
+
+		 Output nets:
+			Net_2835
+			Net_3240
+			Net_7450
+			Net_7694
+
+	Local clock and reset nets:
+			Net_3376
 
 ======================================================
 UDB 8
@@ -2254,41 +2410,36 @@ UDB 8
 
 	Datapath:
 		 Instances:
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u2\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0\
 
 		 Clock net: Net_1308
 		 Set/Reset net: 
-		 Enable net: Net_2441
+		 Enable net: Net_3376
 
 		 Input nets:
 			ClockBlock_BUS_CLK
-			Net_2343
-			Net_2409_SYNCOUT
-			\SHIFTREG_ENC_1:bSR:ctrl_clk_enable\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.ce0__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.ce1__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.cfbo__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.cl0__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.cl1__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.co_msb__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.ff0__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.ff1__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.sol_msb__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.z0__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u1.z1__sig\
+			Net_1060_SYNCOUT
+			Net_3426
+			\SHIFTREG_ENC_3:bSR:ctrl_clk_enable\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cmsbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.sor__sig\
 
 		 Output nets:
-			Net_2467
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u2.cmsbo__sig\
-			\SHIFTREG_ENC_1:bSR:sC24:BShiftRegDp:u2.sor__sig\
-			\SHIFTREG_ENC_1:bSR:status_3\
-			\SHIFTREG_ENC_1:bSR:status_4\
-			\SHIFTREG_ENC_1:bSR:status_5\
-			\SHIFTREG_ENC_1:bSR:status_6\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ce0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ce1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.cfbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.cl0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.cl1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.co_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ff0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ff1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.sol_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.z0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.z1__sig\
 
 	Control, status and sync:
 		 Instances:
-			\FTDI_ENABLE_REG:Sync:ctrl_reg\ : controlcell
+			\MOTOR_DIR_1:Sync:ctrl_reg\ : controlcell
 			MISO_ENCODER(0)_SYNC : synccell
 
 		 Clock net: ClockBlock_BUS_CLK
@@ -2297,14 +2448,14 @@ UDB 8
 
 		 Input nets:
 			ClockBlock_BUS_CLK
-			Net_2409
+			Net_1060
 
 		 Output nets:
-			Net_2409_SYNCOUT
-			Net_3196
+			Net_1060_SYNCOUT
+			Net_2982
 
 	Local clock and reset nets:
-			Net_2441
+			Net_3376
 
 ======================================================
 UDB 9
@@ -2315,49 +2466,59 @@ UDB 9
 
 	Datapath:
 		 Instances:
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1\
 
 		 Clock net: Net_1308
 		 Set/Reset net: 
-		 Enable net: Net_2441
+		 Enable net: Net_3376
 
 		 Input nets:
 			ClockBlock_BUS_CLK
-			Net_2343
-			Net_2491
+			Net_1060_SYNCOUT
+			Net_3426
 			\SHIFTREG_ENC_3:bSR:ctrl_clk_enable\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.cmsbo__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u1.sor__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ce0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ce1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.cfbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.cl0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.cl1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.co_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ff0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ff1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.sol_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.z0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.z1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cmsbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.sor__sig\
 
 		 Output nets:
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.ce0__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.ce1__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.cfbo__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.cl0__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.cl1__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.co_msb__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.ff0__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.ff1__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.sol_msb__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.z0__sig\
-			\SHIFTREG_ENC_3:bSR:sC24:BShiftRegDp:u0.z1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ce0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ce1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cfbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cl0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cl1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cmsbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.co_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ff0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ff1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.sol_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.sor__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.z0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.z1__sig\
 
 	Control, status and sync:
 		 Instances:
-			\LED_CTRL:Sync:ctrl_reg\ : controlcell
-			\ADC_STATUS:sts:sts_reg\ : statuscell
+			\PWM_MOTORS:PWMUDB:genblk1:ctrlreg\ : controlcell
 
-		 Clock net: ClockBlock_BUS_CLK
+		 Clock net: Net_2334
 		 Set/Reset net: 
 		 Enable net: 
 
 		 Input nets:
 			ClockBlock_BUS_CLK
-			Net_4716
 
 		 Output nets:
-			Net_7450
-			Net_7694
+			\PWM_MOTORS:PWMUDB:control_7\
 
 	Local clock and reset nets:
-			Net_2441
+			Net_3376

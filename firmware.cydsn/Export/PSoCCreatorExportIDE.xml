@@ -42,7 +42,9 @@
           <File BuildType="BUILD" Toolchain="">..\src\utils.c</File>
           <File BuildType="BUILD" Toolchain="">..\src\main.c</File>
           <File BuildType="BUILD" Toolchain="">..\emFile_V322c\Code\Source\PSoC5\FS_ConfigIO.c</File>
-          <File BuildType="BUILD" Toolchain="">..\src\SPI_functions.c</File>
+          <File BuildType="BUILD" Toolchain="">..\src\Encoder_functions.c</File>
+          <File BuildType="BUILD" Toolchain="">..\src\SD_RTC_functions.c</File>
+          <File BuildType="BUILD" Toolchain="">..\src\IMU_functions.c</File>
           <File BuildType="BUILD" Toolchain="">cyapicallbacks.h</File>
           <File BuildType="BUILD" Toolchain="">..\src\command_processing.h</File>
           <File BuildType="BUILD" Toolchain="">..\src\commands.h</File>
@@ -51,7 +53,10 @@
           <File BuildType="BUILD" Toolchain="">..\src\utils.h</File>
           <File BuildType="BUILD" Toolchain="">..\src\device.h</File>
           <File BuildType="BUILD" Toolchain="">..\emFile_V322c\Code\Include\PSoC5\FS.h</File>
-          <File BuildType="BUILD" Toolchain="">..\src\SPI_functions.h</File>
+          <File BuildType="BUILD" Toolchain="">..\src\FIRMWARE_CONFIGURATION.h</File>
+          <File BuildType="BUILD" Toolchain="">..\src\Encoder_functions.h</File>
+          <File BuildType="BUILD" Toolchain="">..\src\SD_RTC_functions.h</File>
+          <File BuildType="BUILD" Toolchain="">..\src\IMU_functions.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\MattiaCP\Documents\GITHUB\SoftHand-PRO-PSoC5\firmware.cydsn\Generated_Source\PSoC5">
@@ -83,9 +88,6 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_SOC.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_SOC.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_SOC_PM.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VOLTAGE_SENSE_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VOLTAGE_SENSE.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VOLTAGE_SENSE.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CURRENT_SENSE_1_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CURRENT_SENSE_1.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CURRENT_SENSE_1.h</File>
@@ -118,9 +120,6 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_1A_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_1A.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_1A.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_EN_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_EN.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_EN.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\PWM_MOTORS.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\PWM_MOTORS.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\PWM_MOTORS_PM.c</File>
@@ -129,9 +128,6 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_1B_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_1B.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_1B.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_DIR.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_DIR.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_DIR_PM.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\EEPROM.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\EEPROM.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\FTDI_ENABLE_aliases.h</File>
@@ -139,16 +135,7 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\FTDI_ENABLE.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RS485_CTS.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RS485_CTS.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RS485_CTS_PM.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\USB_VDD_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\USB_VDD.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\USB_VDD.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_ON_OFF.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_ON_OFF.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_ON_OFF_PM.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\FTDI_ENABLE_REG.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\FTDI_ENABLE_REG.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\FTDI_ENABLE_REG_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RS485_CTS_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\PACER_TIMER.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\PACER_TIMER.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\PACER_TIMER_PM.c</File>
@@ -198,10 +185,6 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RESET_COUNTERS.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RESET_COUNTERS.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RESET_COUNTERS_PM.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_ConfigMMC_SPI.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_MMC_HW_SPI.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_PM.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_AMux.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_AMux.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_Ext_CP_Clk.c</File>
@@ -210,25 +193,6 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_IRQ.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_theACLK.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_theACLK.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_SPI0.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_SPI0.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_SPI0_PM.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_SPI0_INT.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_SPI0_PVT.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_mosi0_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_mosi0.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_mosi0.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_Clock_1.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_Clock_1.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_miso0_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_miso0.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_miso0.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_sclk0_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_sclk0.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_sclk0.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_SPI0_CS_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_SPI0_CS.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_SPI0_CS.h</File>
           <File BuildType="BUILD" Toolchain="ARM GCC Generic">Generated_Source\PSoC5\cm3gcc.ld</File>
           <File BuildType="BUILD" Toolchain="ARM MDK Generic">Generated_Source\PSoC5\Cm3RealView.scat</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Cm3Start.c</File>
@@ -271,9 +235,6 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CS1_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CS1.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CS1.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Chip_Select_A.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Chip_Select_A.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Chip_Select_A_PM.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SCLK_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SCLK.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SCLK.h</File>
@@ -285,18 +246,6 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SPI_IMU_PM.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SPI_IMU_INT.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SPI_IMU_PVT.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RTC_CS_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RTC_CS.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RTC_CS.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RTC_Clock_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RTC_Clock.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RTC_Clock.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RTC_OUT_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RTC_OUT.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RTC_OUT.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RTC_IN_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RTC_IN.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RTC_IN.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\cybootloader.icf</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\cybootloader.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Bootloadable.c</File>
@@ -334,6 +283,92 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CS_on_board_IMU_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CS_on_board_IMU.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CS_on_board_IMU.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_2A_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_2A.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_2A.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_2B_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_2B.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_2B.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_EN_1_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_EN_1.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_EN_1.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_ON_OFF_1.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_ON_OFF_1.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_ON_OFF_1_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_EN_2_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_EN_2.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_EN_2.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VOLTAGE_SENSE_1_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VOLTAGE_SENSE_1.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VOLTAGE_SENSE_1.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VOLTAGE_SENSE_2_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VOLTAGE_SENSE_2.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VOLTAGE_SENSE_2.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CURRENT_SENSE_2_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CURRENT_SENSE_2.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CURRENT_SENSE_2.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CS3_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CS3.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CS3.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MISO_RTC_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MISO_RTC.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MISO_RTC.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOSI_RTC_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOSI_RTC.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOSI_RTC.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CLK_RTC_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CLK_RTC.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CLK_RTC.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CS_RTC_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CS_RTC.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CS_RTC.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Chip_Select_ENCODER_LINE.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Chip_Select_ENCODER_LINE.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Chip_Select_ENCODER_LINE_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CS_ENCODER1_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CS_ENCODER1.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CS_ENCODER1.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_DIR_1.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_DIR_1.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_DIR_1_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Chip_Select_IMU.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Chip_Select_IMU.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Chip_Select_IMU_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_DIR_2.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_DIR_2.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_DIR_2_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_ON_OFF_2.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_ON_OFF_2.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MOTOR_ON_OFF_2_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_N_CHANNELS_USED.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_N_CHANNELS_USED.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_N_CHANNELS_USED_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MY_TIMER_REG.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MY_TIMER_REG.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\MY_TIMER_REG_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_ConfigMMC_SPI.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_MMC_HW_SPI.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_SPI0.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_SPI0.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_SPI0_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_SPI0_INT.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_SPI0_PVT.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_mosi0_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_mosi0.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_mosi0.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_Clock_1.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_Clock_1.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_miso0_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_miso0.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_miso0.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_sclk0_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_sclk0.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_sclk0.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_SPI0_CS_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_SPI0_CS.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\SD_SPI0_CS.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\MattiaCP\Documents\GITHUB\SoftHand-PRO-PSoC5\firmware.cydsn\Export\ARM_GCC_Generic">

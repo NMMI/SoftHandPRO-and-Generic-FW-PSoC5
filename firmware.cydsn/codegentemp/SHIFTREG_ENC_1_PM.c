@@ -50,8 +50,8 @@ static SHIFTREG_ENC_1_BACKUP_STRUCT SHIFTREG_ENC_1_backup =
 void SHIFTREG_ENC_1_SaveConfig(void) 
 {
     /* Store working registers A0 and A1 */
-    SHIFTREG_ENC_1_backup.saveSrA0Reg   = CY_GET_REG24(SHIFTREG_ENC_1_SHIFT_REG_LSB_PTR);
-    SHIFTREG_ENC_1_backup.saveSrA1Reg   = CY_GET_REG24(SHIFTREG_ENC_1_SHIFT_REG_VALUE_LSB_PTR);
+    SHIFTREG_ENC_1_backup.saveSrA0Reg   = CY_GET_REG32(SHIFTREG_ENC_1_SHIFT_REG_LSB_PTR);
+    SHIFTREG_ENC_1_backup.saveSrA1Reg   = CY_GET_REG32(SHIFTREG_ENC_1_SHIFT_REG_VALUE_LSB_PTR);
 
     #if(CY_UDB_V0)
         SHIFTREG_ENC_1_backup.saveSrIntMask = SHIFTREG_ENC_1_SR_STATUS_MASK;
@@ -76,8 +76,8 @@ void SHIFTREG_ENC_1_SaveConfig(void)
 void SHIFTREG_ENC_1_RestoreConfig(void) 
 {
     /* Restore working registers A0 and A1 */
-    CY_SET_REG24(SHIFTREG_ENC_1_SHIFT_REG_LSB_PTR, SHIFTREG_ENC_1_backup.saveSrA0Reg);
-    CY_SET_REG24(SHIFTREG_ENC_1_SHIFT_REG_VALUE_LSB_PTR, SHIFTREG_ENC_1_backup.saveSrA1Reg);
+    CY_SET_REG32(SHIFTREG_ENC_1_SHIFT_REG_LSB_PTR, SHIFTREG_ENC_1_backup.saveSrA0Reg);
+    CY_SET_REG32(SHIFTREG_ENC_1_SHIFT_REG_VALUE_LSB_PTR, SHIFTREG_ENC_1_backup.saveSrA1Reg);
 
     #if(CY_UDB_V0)
         SHIFTREG_ENC_1_SR_STATUS_MASK = ((uint8) SHIFTREG_ENC_1_backup.saveSrIntMask);

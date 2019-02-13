@@ -45,11 +45,6 @@
 
 //=================================================================     includes
 #include "interruptions.h"
-#include "command_processing.h"
-#include "SPI_functions.h"
-#include "globals.h"
-#include "utils.h"
-
 
 //==============================================================================
 //                                                            RS485 RX INTERRUPT
@@ -268,10 +263,10 @@ void function_scheduler(void) {
  
     static uint16 counter_calibration = DIV_INIT_VALUE;
     static uint16 counter_tension_func = DIV_INIT_VALUE;
-    CYBIT write_cycles = FALSE;
-    timer_value0 = (uint32)MY_TIMER_ReadCounter();
-    uint8 rtc_data;
     char info_[2500] = "";
+    
+    MY_TIMER_REG_Write(0x00);
+    timer_value0 = (uint32)MY_TIMER_ReadCounter();
 
     // Start ADC Conversion, SOC = 1
 
@@ -282,32 +277,81 @@ void function_scheduler(void) {
     if (interrupt_flag){
         interrupt_flag = FALSE;
         interrupt_manager();
-        write_cycles = TRUE;
     }
 
     //---------------------------------- Get Encoders
+    
+    // Get CS0 encoder line for RIGHT HAND and CS1 line for LEFT HAND
+    if (N_Encoder_Line_Connected[c_mem.right_left] > 0) {
+        // Change CS only if there are attached encoders on the line
+        Change_CS_EncoderLine(c_mem.right_left);
+        
+        encoder_reading_SPI(c_mem.right_left); 
 
-    encoder_reading_SPI(); 
-    
-    // Check Interrupt     
-    
-    if (interrupt_flag){
-        interrupt_flag = FALSE;
-        interrupt_manager();
-        write_cycles = TRUE;
+        // Check Interrupt     
+        
+        if (interrupt_flag){
+            interrupt_flag = FALSE;
+            interrupt_manager();
+        }
     }
 
+#ifdef GENERIC_FW    
+    // Get 2nd line encoders
+    if (N_Encoder_Line_Connected[!(c_mem.right_left)] > 0) {
+        // Change CS only if there are attached encoders on the line 
+        Change_CS_EncoderLine(!(c_mem.right_left));
+        
+        ReadEncoderLine(N_Encoder_Line_Connected[!(c_mem.right_left)], !(c_mem.right_left));
+        
+        // [MP] now values are in Encoder_Value[!(c_mem.right_left)] vector
+        
+        // Check Interrupt     
+        
+        if (interrupt_flag){
+            interrupt_flag = FALSE;
+            interrupt_manager();
+        }
+    }
+#endif    
+
     //---------------------------------- Control Motor
-   
-    motor_control();
+
+#ifdef SOFTHAND_FW   
+    motor_control_SH();
 
     // Check Interrupt 
 
     if (interrupt_flag){
         interrupt_flag = FALSE;
         interrupt_manager();
-        write_cycles = TRUE;
     }
+    
+#else
+    // GENERIC_FW
+
+    // Control 1st motor (always active) according to motor driver type
+    motor_control_generic(0);
+    
+    // Check Interrupt 
+
+    if (interrupt_flag){
+        interrupt_flag = FALSE;
+        interrupt_manager();
+    }
+    
+    // Control 2nd motor (if necessary) according to motor driver type
+    if (c_mem.use_2nd_motor_flag == TRUE){
+        motor_control_generic(1);
+        
+        // Check Interrupt 
+
+        if (interrupt_flag){
+            interrupt_flag = FALSE;
+            interrupt_manager();
+        }
+    }  
+#endif
 
     //---------------------------------- Read conversion buffer - LOCK function
 
@@ -316,7 +360,6 @@ void function_scheduler(void) {
     if (interrupt_flag){
         interrupt_flag = FALSE;
         interrupt_manager();
-        write_cycles = TRUE;
     }
 
     //---------------------------------- Control Overcurrent
@@ -328,7 +371,6 @@ void function_scheduler(void) {
     if (interrupt_flag){
         interrupt_flag = FALSE;
         interrupt_manager();
-        write_cycles = TRUE;
     }
 
     //---------------------------------- Calibration 
@@ -347,7 +389,6 @@ void function_scheduler(void) {
     if (interrupt_flag){
         interrupt_flag = FALSE;
         interrupt_manager();
-        write_cycles = TRUE;
     }
     
      
@@ -365,7 +406,6 @@ void function_scheduler(void) {
         if (interrupt_flag){
             interrupt_flag = FALSE;
             interrupt_manager();
-			write_cycles = TRUE;
         }
     }
     
@@ -387,23 +427,12 @@ void function_scheduler(void) {
             g_mem.total_time_on = g_mem.total_time_on + 120;  // Add 120 seconds.
             
             if (c_mem.read_exp_port_flag == EXP_SD_RTC) {
-                rtc_data = DS1302_read(DS1302_DATE_RD);
-                g_mem.curr_time[0] = (rtc_data/16) * 10 + rtc_data%16;
-                rtc_data = DS1302_read(DS1302_MONTH_RD);
-                g_mem.curr_time[1] = (rtc_data/16) * 10 + rtc_data%16;
-                rtc_data = DS1302_read(DS1302_YEAR_RD);
-                g_mem.curr_time[2] = (rtc_data/16) * 10 + rtc_data%16;
-
-                rtc_data = DS1302_read(DS1302_HOUR_RD);
-                g_mem.curr_time[3] = (rtc_data/16) * 10 + rtc_data%16;
-                rtc_data = DS1302_read(DS1302_MINUTES_RD);
-                g_mem.curr_time[4] = (rtc_data/16) * 10 + rtc_data%16;
-                rtc_data = DS1302_read(DS1302_SECONDS_RD);
-                g_mem.curr_time[5] = (rtc_data/16) * 10 + rtc_data%16;
+                
+                store_RTC_current_time();
                 
                 //Write in SD card
-                prepare_counter_info(info_);
-                write_bytes = FS_Write(pFile, info_, strlen(info_));
+                prepare_SD_info(info_);
+                FS_Write(pFile, info_, strlen(info_));
             }
         }
     }
@@ -430,7 +459,6 @@ void function_scheduler(void) {
     if (interrupt_flag){
         interrupt_flag = FALSE;
         interrupt_manager();
-        write_cycles = TRUE;
     }
    
     //---------------------------------- Read IMUs
@@ -456,24 +484,23 @@ void function_scheduler(void) {
     if (interrupt_flag){
         interrupt_flag = FALSE;
         interrupt_manager();
-        write_cycles = TRUE;
     }
 
     if (c_mem.input_mode == INPUT_MODE_EXTERNAL) {
         change_ext_ref_flag = FALSE;
     }
     
-    timer_value = (uint32)MY_TIMER_ReadCounter();
-    cycle_time = (float)((timer_value0 - timer_value)/1000000.0);
-    MY_TIMER_WriteCounter(5000000);
+    timer_value = (uint16)MY_TIMER_ReadCounter();
+    cycle_time = ((float)(timer_value0 - timer_value)/1000000.0);
+    MY_TIMER_REG_Write(0x01);   // reset timer
 
 }
 
 //==============================================================================
-//                                                                 MOTOR CONTROL
+//                                                        MOTOR CONTROL SOFTHAND
 //==============================================================================
 
-void motor_control() {
+void motor_control_SH() {
 
     int32 CYDATA pwm_input = 0;
 
@@ -728,7 +755,7 @@ void motor_control() {
         	}
 
             // current error and curr error sum
-            curr_error = i_ref - g_meas.curr;
+            curr_error = i_ref - g_meas.curr[0];
             curr_error_sum += curr_error;
             
             if (curr_error_sum > CURR_INTEGRAL_SAT_LIMIT)
@@ -820,7 +847,7 @@ void motor_control() {
                 }
                 
                 // current error
-                curr_error = i_ref - g_meas.curr;            
+                curr_error = i_ref - g_meas.curr[0];            
                 curr_error_sum += curr_error;
                 
                 if (curr_error_sum > CURR_INTEGRAL_SAT_LIMIT)
@@ -922,25 +949,461 @@ void motor_control() {
     }
     
     if (motor_dir)
-        MOTOR_DIR_Write(0x01);
+        MOTOR_DIR_1_Write(0x01);
     else
-        MOTOR_DIR_Write(0x00);
+        MOTOR_DIR_1_Write(0x00);
 
-    PWM_MOTORS_WriteCompare(abs(pwm_input));
+    PWM_MOTORS_WriteCompare1(abs(pwm_input));
+}
+
+//==============================================================================
+//                                                         MOTOR CONTROL GENERIC
+//==============================================================================
+
+void motor_control_generic(uint8 index) {
+/*
+    int32 CYDATA pwm_input = 0;
+
+    int32 CYDATA pos_error;         // position error
+    int32 CYDATA curr_error;        // current error
+
+    int32 CYDATA i_ref;             // current reference
+    int32 CYDATA handle_value;
+
+    int32 CYDATA err_emg_1, err_emg_2;
+
+    int32 CYDATA k_p = c_mem.k_p;  
+    int32 CYDATA k_i = c_mem.k_i; 
+    int32 CYDATA k_d = c_mem.k_d; 
+
+    int32 CYDATA k_p_c = c_mem.k_p_c;  
+    int32 CYDATA k_i_c = c_mem.k_i_c; 
+    int32 CYDATA k_d_c = c_mem.k_d_c;   
+
+    int32 CYDATA k_p_dl = c_mem.k_p_dl;  
+    int32 CYDATA k_i_dl = c_mem.k_i_dl; 
+    int32 CYDATA k_d_dl = c_mem.k_d_dl;
+    
+    int32 CYDATA k_p_c_dl = c_mem.k_p_c_dl;  
+    int32 CYDATA k_i_c_dl = c_mem.k_i_c_dl; 
+    int32 CYDATA k_d_c_dl = c_mem.k_d_c_dl;   
+
+    // Static Variables
+
+    static int32 pos_error_sum;     // position error sum for integral
+    static int32 curr_error_sum;    // current error sum for integral
+    
+    static int32 prev_pos_err;      // previous position error for deriv. control
+    static int32 prev_curr_err;     // previous current error for deriv. control
+    static int32 prev_pwm;
+
+    static CYBIT motor_dir = FALSE;
+    static uint32 position_counter = 0;
+    static uint8 current_emg = 0;   // 0 NONE
+                                    // 1 EMG 1
+                                    // 2 EMG 2
+                                    // wait for both to get down
+    
+
+    err_emg_1 = g_meas.emg[0] - c_mem.emg_threshold[0];
+    err_emg_2 = g_meas.emg[1] - c_mem.emg_threshold[1];
+*/
+    // =========================== POSITION INPUT ==============================            
+    switch(c_mem.input_mode) {
+/*        case INPUT_MODE_ENCODER3:
+
+            // Calculate handle value based on position of handle in the
+            // sensor chain and multiplication factor between handle and motor position
+            if (c_mem.double_encoder_on_off) 
+                handle_value = (g_meas.pos[2] * c_mem.motor_handle_ratio) + g_mem.pos_lim_inf;
+            else
+                handle_value = (g_meas.pos[1] * c_mem.motor_handle_ratio) + g_mem.pos_lim_inf;
+            
+
+            // Read handle and use it as reference for the motor
+            if (((handle_value - g_refOld.pos) > c_mem.max_step_pos) && (c_mem.max_step_pos != 0))
+                g_ref.pos += c_mem.max_step_pos;
+            else {
+                if (((handle_value - g_refOld.pos) < c_mem.max_step_neg) && (c_mem.max_step_neg != 0))
+                    g_ref.pos += c_mem.max_step_neg;
+                else
+                    g_ref.pos = handle_value;
+            }
+            break;
+            
+        case INPUT_MODE_EMG_PROPORTIONAL:
+            if (err_emg_1 > 0)
+                g_ref.pos = (err_emg_1 * g_mem.pos_lim_sup) / (1024 - c_mem.emg_threshold[0]);
+            else
+                g_ref.pos = 0;
+            break;
+
+        case INPUT_MODE_EMG_INTEGRAL:
+            g_ref.pos = g_refOld.pos;
+            if (err_emg_1 > 0) {
+                g_ref.pos = g_refOld.pos + (err_emg_1 * (int)g_mem.emg_speed * 2) / (1024 - c_mem.emg_threshold[0]);
+            }
+            if (err_emg_2 > 0) {
+                g_ref.pos = g_refOld.pos - (err_emg_2 * (int)g_mem.emg_speed * 2) / (1024 - c_mem.emg_threshold[1]);
+            }
+            break;
+
+        case INPUT_MODE_EMG_FCFS:
+            g_ref.pos = g_refOld.pos;
+            switch (current_emg) {
+                case 0:
+                    // Look for the first EMG passing the threshold
+                    if (err_emg_1 > 0 && err_emg_1 > err_emg_2) {
+                        current_emg = 1;
+                        break;
+                    }
+                    if (err_emg_2 > 0 && err_emg_2 > err_emg_1) {
+                        current_emg = 2;
+                        break;
+                    }
+                    break;
+
+                case 1:
+                    // EMG 1 is first
+                    if (err_emg_1 < 0) {
+                        current_emg = 0;
+                        break;
+                    }
+                    g_ref.pos = g_refOld.pos + (err_emg_1 * g_mem.emg_speed << 2) / (1024 - c_mem.emg_threshold[0]);
+                    break;
+
+                case 2:
+                    // EMG 2 is first
+                    if (err_emg_2 < 0) {
+                        current_emg = 0;
+                        break;
+                    }
+                    g_ref.pos = g_refOld.pos - (err_emg_2 * g_mem.emg_speed << 2) / (1024 - c_mem.emg_threshold[1]);
+                    break;
+
+                default:
+                    break;
+            }
+            break;
+
+        case INPUT_MODE_EMG_FCFS_ADV:
+            g_ref.pos = g_refOld.pos;
+            switch (current_emg) {
+                // Look for the first EMG passing the threshold
+                case 0:
+                    if (err_emg_1 > 0 && err_emg_1 > err_emg_2) {
+                        current_emg = 1;
+                        break;
+                    }
+                    if (err_emg_2 > 0 && err_emg_2 > err_emg_1) {
+                        current_emg = 2;
+                        break;
+                    }
+                    break;
+
+                // EMG 1 is first
+                case 1:
+                    // If both signals are under threshold go back to status 0
+                    if ((err_emg_1 < 0) && (err_emg_2 < 0)) {
+                        current_emg = 0;
+                        break;
+                    }
+                    // but if the current signal come back over threshold, continue using it
+                    if (err_emg_1 > 0) 
+                        g_ref.pos = g_refOld.pos + (err_emg_1 * g_mem.emg_speed << 2) / (1024 - c_mem.emg_threshold[0]);
+                    
+                    break;
+
+                // EMG 2 is first
+                case 2:
+                    // If both signals are under threshold go back to status 0
+                    if ((err_emg_1 < 0) && (err_emg_2 < 0)) {
+                        current_emg = 0;
+                        break;
+                    }
+                    // but if the current signal come back over threshold, continue using it
+                    if (err_emg_2 > 0) {
+                        g_ref.pos = g_refOld.pos - (err_emg_2 * c_mem.emg_speed << 2) / (1024 - c_mem.emg_threshold[1]);
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+            break;
+
+        default:
+            break;
+*/    
+    }
+
+    // Position limit saturation
+/*    if (c_mem.pos_lim_flag) {
+        if (g_ref.pos < c_mem.pos_lim_inf) 
+            g_ref.pos = c_mem.pos_lim_inf;
+        if (g_ref.pos > c_mem.pos_lim_sup) 
+            g_ref.pos = c_mem.pos_lim_sup;
+    }
+*/    
+    if (battery_low_SoC == 1) {
+        //Reopen the terminal device before disabling motor
+        g_ref.pos = 0;
+    }
+
+    switch(c_mem.control_mode) {
+        // ======================= CURRENT AND POSITION CONTROL =======================
+/*        case CURR_AND_POS_CONTROL:
+            pos_error = g_ref.pos - g_meas.pos[0];
+
+            pos_error_sum += pos_error;
+
+            // error_sum saturation
+            if (pos_error_sum > POS_INTEGRAL_SAT_LIMIT)
+                pos_error_sum = POS_INTEGRAL_SAT_LIMIT;
+            else {
+                if (pos_error_sum < -POS_INTEGRAL_SAT_LIMIT) 
+                    pos_error_sum = -POS_INTEGRAL_SAT_LIMIT;
+            }
+            
+            // ------ position PID control ------
+
+            i_ref = 0;
+            
+            // Proportional
+            if (k_p_dl != 0)
+                i_ref += (int32)(k_p_dl * pos_error) >> 16;
+
+            // Integral
+            if (k_i_dl != 0)
+                i_ref += (int32)(k_i_dl * pos_error_sum) >> 16;
+
+            // Derivative
+            if (k_d_dl != 0)
+                i_ref += (int32)(k_d_dl * (pos_error - prev_pos_err)) >> 16;
+                        
+            // Update previous position
+            prev_pos_err = pos_error;
+
+            // motor direction depends on i_ref
+            if (i_ref >= 0)
+                motor_dir = TRUE;
+            else
+                motor_dir = FALSE;
+
+            // saturate max current
+            if (i_ref > c_mem.current_limit)
+                i_ref = c_mem.current_limit;
+            else {
+                if (i_ref < -c_mem.current_limit)
+                    i_ref = -c_mem.current_limit;
+        	}
+
+            // current error and curr error sum
+            curr_error = i_ref - g_meas.curr[0];
+            curr_error_sum += curr_error;
+            
+            if (curr_error_sum > CURR_INTEGRAL_SAT_LIMIT)
+                curr_error_sum = CURR_INTEGRAL_SAT_LIMIT;
+            else {
+                if (curr_error_sum < -CURR_INTEGRAL_SAT_LIMIT)
+                    curr_error_sum = -CURR_INTEGRAL_SAT_LIMIT;
+            }
+
+            // ----- current PID control -----
+
+            pwm_input = 0;
+
+            // Proportional
+            if (k_p_c_dl != 0)
+                pwm_input += (int32)(k_p_c_dl * curr_error) >> 16;
+
+            // Integral
+            if (k_i_c_dl != 0)
+                pwm_input += (int32)(k_i_c_dl * curr_error_sum) >> 16;
+
+            // Derivative
+            if (k_d_c_dl != 0)
+                pwm_input += (int32)(k_d_c_dl * (curr_error - prev_curr_err)) >> 16;
+
+            // pwm_input saturation
+            if (pwm_input < -PWM_MAX_VALUE) 
+                pwm_input = -PWM_MAX_VALUE;
+            else {
+                if (pwm_input > PWM_MAX_VALUE)
+                    pwm_input = PWM_MAX_VALUE;
+            }
+
+            // Update previous current
+            prev_curr_err = curr_error;
+
+        break;
+
+        // ============================== POSITION CONTROL =====================
+        case CONTROL_ANGLE:
+            pos_error = g_ref.pos - g_meas.pos[0];
+
+            pos_error_sum += pos_error;
+
+            // anti-windup (for integral control)
+            if (pos_error_sum > ANTI_WINDUP)
+                pos_error_sum = ANTI_WINDUP;
+            else {
+				if (pos_error_sum < -ANTI_WINDUP)
+                	pos_error_sum = -ANTI_WINDUP;
+            }
+
+            // Proportional
+            if (k_p != 0) 
+                pwm_input = (int32)(k_p * pos_error) >> 16;
+            
+
+            // Integral
+            if (k_i != 0) 
+                pwm_input += (int32)(k_i * pos_error_sum) >> 16;
+            
+
+            // Derivative
+            if (k_d != 0) 
+                pwm_input += (int32)(k_d * (pos_error - prev_pos_err)) >> 16;
+            
+
+            // Update measure
+            prev_pos_err = pos_error;
+
+            if (pwm_input > 0)
+                motor_dir = TRUE;
+            else
+                motor_dir = FALSE;
+
+        break;
+
+        // ========================== CURRENT CONTROL ==========================
+        case CONTROL_CURRENT:
+            if(g_ref.onoff && tension_valid) {
+                
+                i_ref = g_ref.curr;
+
+                if (i_ref > c_mem.current_limit) 
+                    i_ref = c_mem.current_limit;
+                else {
+                    if (i_ref < -c_mem.current_limit)
+                        i_ref = -c_mem.current_limit;
+                }
+                
+                // current error
+                curr_error = i_ref - g_meas.curr[0];            
+                curr_error_sum += curr_error;
+                
+                if (curr_error_sum > CURR_INTEGRAL_SAT_LIMIT)
+                    curr_error_sum = CURR_INTEGRAL_SAT_LIMIT;
+                else {
+                    if (curr_error_sum < -CURR_INTEGRAL_SAT_LIMIT) 
+                        curr_error_sum = -CURR_INTEGRAL_SAT_LIMIT;
+                }
+
+                pwm_input = 0;
+
+                // Proportional
+                if (k_p_c != 0)
+                    pwm_input += (int32)(k_p_c * curr_error) >> 16;
+
+                // Integral
+                if (k_i_c != 0)
+                    pwm_input += (int32)(k_i_c * curr_error_sum) >> 16;
+
+                // Derivative
+                if (k_d_c != 0)
+                    pwm_input += (int32)(k_d_c * (curr_error - prev_curr_err)) >> 16;
+                
+                prev_curr_err = curr_error;
+                
+                if (pwm_input >= 0) 
+                    motor_dir = TRUE;
+                else
+                    motor_dir = FALSE;
+            }
+        break;
+*/        
+        // ================= DIRECT PWM CONTROL ================================
+        case CONTROL_PWM:
+/*
+            pwm_input = g_ref.pwm;
+
+            if (pwm_input > 0) 
+                motor_dir = TRUE;
+            else 
+                motor_dir = FALSE;
+            
+
+            // pwm_input saturation
+            if (pwm_input < -PWM_MAX_VALUE) 
+                pwm_input = -PWM_MAX_VALUE;
+            else {
+				if (pwm_input > PWM_MAX_VALUE) 
+                	pwm_input = PWM_MAX_VALUE;
+        	}
+*/
+        break;
+            
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    
+    if (c_mem.motor_driver_type[index] == DRIVER_MC33887) {
+/*
+    if(pwm_input >  PWM_MAX_VALUE) 
+        pwm_input =  PWM_MAX_VALUE;
+    if(pwm_input < -PWM_MAX_VALUE) 
+        pwm_input = -PWM_MAX_VALUE;
+
+    if (c_mem.control_mode != CONTROL_PWM) 
+        pwm_input = (((pwm_input << 10) / PWM_MAX_VALUE) * dev_pwm_limit) >> 10;
+ 
+    pwm_sign = SIGN(pwm_input);   
+    
+    if (motor_dir)
+        MOTOR_DIR_1_Write(0x01);
+    else
+        MOTOR_DIR_1_Write(0x00);
+
+    PWM_MOTORS_WriteCompare1(abs(pwm_input));
+*/
+    }
+    else {  // DRIVER_VNH5019
+/*
+    if(pwm_input >  PWM_MAX_VALUE) 
+        pwm_input =  PWM_MAX_VALUE;
+    if(pwm_input < -PWM_MAX_VALUE) 
+        pwm_input = -PWM_MAX_VALUE;
+
+    if (c_mem.control_mode != CONTROL_PWM) 
+        pwm_input = (((pwm_input << 10) / PWM_MAX_VALUE) * dev_pwm_limit) >> 10;
+ 
+    pwm_sign = SIGN(pwm_input);   
+    
+    if (motor_dir)
+        MOTOR_DIR_1_Write(0x01);
+    else
+        MOTOR_DIR_1_Write(0x00);
+
+    PWM_MOTORS_WriteCompare1(abs(pwm_input));
+*/        
+    }
+    
 }
 
 //==============================================================================
 //                                                           ENCODER READING SPI
 //==============================================================================
 
-void encoder_reading_SPI() {
+void encoder_reading_SPI(uint8 n_line) {
 
     uint8 CYDATA index = 0;
-    int32 aux_encoders[N_ENCODERS];
     
     // Encoder Variables  
     uint8 jj;
      
+    uint32 aux_encoder[NUM_OF_SENSORS];
     int16 tmp_value_encoder;
     int32 tmp_value_encoder_32;
     int32 value_encoder;
@@ -953,9 +1416,9 @@ void encoder_reading_SPI() {
     static uint8 error[NUM_OF_SENSORS];
     
     static CYBIT only_first_time = TRUE;
-//    static CYBIT safe_startup_motor_activation = FALSE;
+    static CYBIT safe_startup_motor_activation = FALSE;
     static uint8 one_time_execute = 0;
-//    static uint32 count_startup_motor = 0;
+    static uint32 count_startup_motor = 0;
     static CYBIT pos_reconstruct = FALSE;
 
     static int32 v_value[N_ENCODERS];   //last value for velocity
@@ -971,27 +1434,36 @@ void encoder_reading_SPI() {
 
     //======================================================     reading sensors
     for (index = 0; index < N_ENCODERS; index++) {
-        aux_encoders[index] = 0;
+        aux_encoder[index] = 0;
     }   
     
-    // encoder_read(&aux_encoders[0]);
-    aux_encoders[0] = (SHIFTREG_ENC_2_ReadData() >> 1) & 0x3FFFF;
-//    aux_encoders[0] = (Enc_buf[0] ) & 0x00FFF;
-    aux_encoders[0] = (aux_encoders[0] & 0x3FFC0) >> 6;   // 00000000000000[20] XXXXXXXXXXXX[12]
-    data_encoder_raw[0] = aux_encoders[0];
-//    aux_encoders[1] = ((uint32)SHIFTREG_ENC_1_ReadData() >> 1) & 0x0FFFF;
-//    aux_encoders[1] = (aux_encoders[1] & 0x3FFC0) >> 6;   // 00000000000000[20] XXXXXXXXXXXX[12]
-//    data_encoder_raw[1] = aux_encoders[1];
-    aux_encoders[1] = (SHIFTREG_ENC_3_ReadData() >> 1) & 0x3FFFF;
-    aux_encoders[1] = (aux_encoders[1] & 0x3FFC0) >> 6;   // 00000000000000[20] XXXXXXXXXXXX[12]
-    data_encoder_raw[1] = aux_encoders[1];
-    aux_encoders[2] = (SHIFTREG_ENC_1_ReadData() >> 1) & 0x3FFFF;
-    aux_encoders[2] = (aux_encoders[2] & 0x3FFC0) >> 6;   // 00000000000000[20] XXXXXXXXXXXX[12]
-    data_encoder_raw[2] = aux_encoders[2];
-        
+    ReadEncoderLine(N_Encoder_Line_Connected[n_line] , n_line);         //CS0 for right hand
+                                                                        //CS1 for left hand
+    for (index = 0; index < N_ENCODERS; index++) {        
+        if (Encoder_Check[n_line][index] > 15){  // check on encoder data
+            aux_encoder[index] = (uint32)Encoder_Value[n_line][index];     // 00000000000000[20] XXXXXXXXXXXX[12]
+        }
+    }
+    
+    // S = SIGN BIT
+    // X = ENCODER VALUE BIT
+    // 0 = 0 BIT
+    // C = CONTROL BIT
+    
+    /*
+    // index=0 reads SoftHand Pro encoder positioned on gear, while index=1 has to read encoder positioned on screw
+    int aux;
+    aux = aux_encoder[0];
+    aux_encoder[0] = aux_encoder[1];
+    aux_encoder[1] = aux;
+    */
+    
+    // index=0 reads SoftHand Pro encoder positioned on screw, while index=1 reads encoder positioned on gear
     for (index = 0; index < N_ENCODERS; index++) {
-          
-        tmp_value_encoder = (int16)(aux_encoders[index] - (uint16)g_mem.m_off[index]);
+        
+        data_encoder_raw[index] = aux_encoder[index];
+        
+        tmp_value_encoder = (int16)(aux_encoder[index] - (uint16)g_mem.m_off[index]);
         if (tmp_value_encoder < 0){
             tmp_value_encoder = tmp_value_encoder + 4096;   //SSSS[4] XXXXXXXXXXXX[12] worst case range [-4096, 4095]
         }       // Range [0, 4096]
@@ -1104,17 +1576,16 @@ void encoder_reading_SPI() {
                 g_refNew.pos = g_meas.pos[0];
 
                 // If necessary activate motor
-    			//safe_startup_motor_activation = TRUE;
+    			safe_startup_motor_activation = TRUE;
                 g_refNew.onoff = c_mem.activ;
-                MOTOR_ON_OFF_Write(g_refNew.onoff);
-                //MOTOR_ON_OFF_Write(g_ref.onoff);
+                MOTOR_ON_OFF_1_Write(g_refNew.onoff);
                 
                 pos_reconstruct = TRUE;
             }
         }
     } 
 
-/*	
+	
 	// Wait for 35+SAFE_STARTUP_MOTOR_READINGS cycles before starting motors
     if (safe_startup_motor_activation){
         count_startup_motor++;
@@ -1122,12 +1593,12 @@ void encoder_reading_SPI() {
             g_refNew.pos = 0;
             
             g_refNew.onoff = c_mem.activ;
-            MOTOR_ON_OFF_Write(g_refNew.onoff);
+            MOTOR_ON_OFF_1_Write(g_refNew.onoff);
             
             safe_startup_motor_activation = FALSE;
         }
     }
-*/ 
+ 
 }
 
 //==============================================================================
@@ -1162,6 +1633,7 @@ void analog_read_end() {
     //static int32 pow_tension = 12000;       //12000 mV (12 V)
     static uint16 count = 0;
     static uint32 v_count = 0;
+    static uint8 idx = 0;
     
     // Wait for conversion end
     
@@ -1174,7 +1646,12 @@ void analog_read_end() {
     }
     
     // Convert tension read
-    dev_tension = ((int32)(ADC_buf[0] - 1621) * 1990) >> 7;
+    dev_tension[0] = ((int32)(ADC_buf[0] - 1621) * 1990) >> 7;
+    
+    // Read also 2nd power tension (if necessary)
+    if (NUM_OF_ANALOG_INPUTS > 4) {
+        dev_tension[1] = ((int32)(ADC_buf[4] - 1621) * 1990) >> 7;
+    }
     
     if (interrupt_flag){
         interrupt_flag = FALSE;                                                                                                                                                                                                                                                                                                                                                                                                                                                 
@@ -1191,24 +1668,25 @@ void analog_read_end() {
         count = count + 1;
         
         if (count == 1000){
-            if (dev_tension < 9000) {   // 8 V case
-                pow_tension = 8000;
-            }
-            else {      // 12 V - 24 V cases
-                if (dev_tension < 13000) {
-                    pow_tension = 12000;
+            for (idx = 0; idx < NUM_OF_MOTORS; idx++) {
+                if (dev_tension[idx] < 9000) {   // 8 V case
+                    pow_tension[idx] = 8000;
                 }
-                else
-                    pow_tension = 24000;
+                else {      // 12 V - 24 V cases
+                    if (dev_tension[idx] < 13000) {
+                        pow_tension[idx] = 12000;
+                    }
+                    else
+                        pow_tension[idx] = 24000;
+                }
             }
-
             first_tension_valid = FALSE;
         }
     }
 
     // Until there is no valid input tension repeat this measurement
 
-    if (dev_tension < 7000) {       // Voltage reading (Low voltage condition)
+    if (dev_tension[0] < 7000 && (NUM_OF_ANALOG_INPUTS<=4 || dev_tension[1] < 7000)) {       // Voltage reading (Low voltage condition)
         // PSoC is powered through uUSB
         
         tension_valid = FALSE;
@@ -1224,19 +1702,23 @@ void analog_read_end() {
                 (c_mem.input_mode == INPUT_MODE_EMG_FCFS) ||
                 (c_mem.input_mode == INPUT_MODE_EMG_FCFS_ADV)) {
                 g_ref.onoff = 0x00;
-                MOTOR_ON_OFF_Write(g_ref.onoff);
+                MOTOR_ON_OFF_1_Write(g_ref.onoff);
             }
         }
+
+        // Assign dev_tension and reset current
+        for (idx = 0; idx < NUM_OF_MOTORS; idx++){
+            dev_tension[idx] = 5000;
+            g_meas.curr[idx] = 0;
+        }
         
-        // Assign dev_tension     
-        dev_tension = 5000;
-
-        // Reset current
-        g_meas.curr = 0;
-
         // Reset emg
-        g_meas.emg[0] = 0;
-        g_meas.emg[1] = 0;
+        for (idx = 0; idx < NUM_OF_INPUT_EMGS; idx++){
+            g_meas.emg[idx] = 0;
+        }
+        for (idx = 0; c_mem.read_emg_sensors_port_flag && idx < NUM_OF_ADDITIONAL_EMGS; idx++){
+            g_meas.add_emg[idx] = 0;
+        }
         
     }
     else {
@@ -1256,15 +1738,23 @@ void analog_read_end() {
             if (v_count < 1000) {
                 v_count = v_count + 1;
             }
-            dev_tension_f = filter(dev_tension, &filt_v);
+            for(idx = 0; idx < NUM_OF_MOTORS; idx++) {
+                dev_tension_f[idx] = filter(dev_tension[idx], &filt_v[idx]);
+            }
         }
 
         if(g_mem.activate_pwm_rescaling)        //pwm rescaling is activated
             pwm_limit_search();                 //only for 12V motor
 
         // Filter and Set currents
-        g_meas.curr = filter((int16) (((int32)(ADC_buf[1] - 1648) * 22634) >> 13) * pwm_sign, &filt_i);
+        g_meas.curr[0] = filter((int16) (((int32)(ADC_buf[1] - 1648) * 22634) >> 13) * pwm_sign, &filt_i[0]);
         
+        // Read also 2nd power current (if necessary)
+        if (NUM_OF_ANALOG_INPUTS > 4) {
+            // Filter and Set currents
+            g_meas.curr[1] = filter((int16) (((int32)(ADC_buf[5] - 1648) * 22634) >> 13) * pwm_sign, &filt_i[1]);
+        }
+    
 		// Calculate current estimation and put it in the second part of the current measurement array;
 		g_meas.estim_curr = (int16) filter(((int32) g_meas.curr) - curr_estim(g_meas.pos[0] >> g_mem.res[0], g_meas.vel[0] >> g_mem.res[0], g_ref.pos >> g_mem.res[0]), &filt_curr_diff);
 
@@ -1279,9 +1769,9 @@ void analog_read_end() {
     
     // Read EMG (if necessary)
     if ((c_mem.input_mode == INPUT_MODE_EMG_PROPORTIONAL) ||
-        (c_mem.input_mode == INPUT_MODE_EMG_INTEGRAL) ||
-        (c_mem.input_mode == INPUT_MODE_EMG_FCFS) ||
-        (c_mem.input_mode == INPUT_MODE_EMG_FCFS_ADV)) {
+            (c_mem.input_mode == INPUT_MODE_EMG_INTEGRAL) ||
+            (c_mem.input_mode == INPUT_MODE_EMG_FCFS) ||
+            (c_mem.input_mode == INPUT_MODE_EMG_FCFS_ADV)) {
         
         // if calibration is not needed go to "normal execution"
         if (!c_mem.emg_calibration_flag){
@@ -1298,7 +1788,7 @@ void analog_read_end() {
                 //i_aux = (int32)(ADC_buf[2 + c_mem.switch_emg]);
                 if (i_aux < 0) 
                     i_aux = 0;
-                i_aux = filter(i_aux, &filt_emg1);
+                i_aux = filter(i_aux, &filt_emg[0]);
                 i_aux = (i_aux << 10) / g_mem.emg_max_value[0];
     
                 if (interrupt_flag){
@@ -1347,7 +1837,7 @@ void analog_read_end() {
                 emg_counter_1++;
                 if (ADC_buf[2 + c_mem.switch_emg] < 0) 
                     ADC_buf[2 + c_mem.switch_emg] = 0;
-                g_mem.emg_max_value[0] += filter((int32)ADC_buf[2 + c_mem.switch_emg], &filt_emg1);
+                g_mem.emg_max_value[0] += filter((int32)ADC_buf[2 + c_mem.switch_emg], &filt_emg[0]);
                 
                 if (interrupt_flag){
                     interrupt_flag = FALSE;
@@ -1385,7 +1875,7 @@ void analog_read_end() {
                 //i_aux = (int32)(ADC_buf[3 - c_mem.switch_emg]);
                     if (i_aux < 0)
                         i_aux = 0;
-                    i_aux = filter(i_aux, &filt_emg2);
+                    i_aux = filter(i_aux, &filt_emg[1]);
                     i_aux = (i_aux << 10) / g_mem.emg_max_value[1];
         
                     if (interrupt_flag){
@@ -1435,7 +1925,7 @@ void analog_read_end() {
                 emg_counter_2++;
                 if (ADC_buf[3 - c_mem.switch_emg] < 0)
                     ADC_buf[3 - c_mem.switch_emg] = 0;
-                g_mem.emg_max_value[1] += filter((int32)ADC_buf[3 - c_mem.switch_emg], &filt_emg2);
+                g_mem.emg_max_value[1] += filter((int32)ADC_buf[3 - c_mem.switch_emg], &filt_emg[1]);
     
                 if (interrupt_flag){
                     interrupt_flag = FALSE;
@@ -1480,7 +1970,7 @@ void analog_read_end() {
                             g_ref.pos = g_meas.pos[0];
                         }
                         g_ref.onoff = c_mem.activ;
-                        MOTOR_ON_OFF_Write(g_ref.onoff);
+                        MOTOR_ON_OFF_1_Write(g_ref.onoff);
                     }
                         
                     memStore(0);        // Store emg_max_value
@@ -1497,6 +1987,37 @@ void analog_read_end() {
             interrupt_manager();
         }
     }
+    
+    // Read also EMG additional sensors port
+    if (NUM_OF_ANALOG_INPUTS > 6) {
+        
+        for (idx = 0; idx < NUM_OF_ADDITIONAL_EMGS; idx++){
+            
+            i_aux = (int32)(ADC_buf[6 + idx]);
+            if (i_aux < 0) 
+                i_aux = 0;
+            i_aux = filter(i_aux, &filt_emg[2+idx]);
+            i_aux = (i_aux << 10) / 1024;
+
+            if (interrupt_flag){
+                interrupt_flag = FALSE;
+                interrupt_manager();
+            }
+            //Saturation
+            if (i_aux < 0)
+                i_aux = 0;
+            else 
+                if (i_aux > 1024) 
+                    i_aux = 1024;
+            
+            g_meas.add_emg[idx] = i_aux;
+
+            if (interrupt_flag){
+                interrupt_flag = FALSE;
+                interrupt_manager();
+            }
+        }
+    }
 }
 
 //==============================================================================
@@ -1506,11 +2027,11 @@ void analog_read_end() {
 void overcurrent_control() {
     if (c_mem.current_limit != 0) {
         // if the current is over the limit
-        if (g_meas.curr > c_mem.current_limit) {
+        if (g_meas.curr[0] > c_mem.current_limit) {
             //decrease pwm_limit
             dev_pwm_limit--;
         // if the current is in the safe zone
-        } else if (g_meas.curr < (c_mem.current_limit - CURRENT_HYSTERESIS)) {
+        } else if (g_meas.curr[0] < (c_mem.current_limit - CURRENT_HYSTERESIS)) {
             //increase pwm_limit
             dev_pwm_limit++;
         }
@@ -1534,12 +2055,12 @@ void pwm_limit_search() {
     uint16 CYDATA max_tension = 25500;
     uint16 CYDATA min_tension = 11500;
     
-    if (dev_tension > max_tension) {
+    if (dev_tension[0] > max_tension) {
         dev_pwm_sat = 0;
-    } else if (dev_tension < min_tension) {
+    } else if (dev_tension[0] < min_tension) {
         dev_pwm_sat = 100;
     } else {
-        index = (uint8)((dev_tension - min_tension) >> 9);
+        index = (uint8)((dev_tension[0] - min_tension) >> 9);
         dev_pwm_sat = pwm_preload_values[index];
     }
 }
@@ -1594,10 +2115,10 @@ void cycles_counter_update() {
                 
                 //update current histogram
                 step = ((int32)(g_mem.current_limit) / 4);
-                if (g_meas.curr > g_mem.current_limit)
+                if (g_meas.curr[0] > g_mem.current_limit)
                     g_mem.current_hist[3] = g_mem.current_hist[3] + 1; 
                 else
-                    g_mem.current_hist[(uint8)(g_meas.curr/step)] = g_mem.current_hist[(uint8)(g_meas.curr/step)] + 1;
+                    g_mem.current_hist[(uint8)(g_meas.curr[0]/step)] = g_mem.current_hist[(uint8)(g_meas.curr[0]/step)] + 1;
             }
             pos_cycle_status = STATE_INACTIVE;
             break;
@@ -1659,8 +2180,8 @@ void save_cycles_eeprom() {
 
     cystatus status;
     static uint8 row_number;
-    uint8 row_start = 12;
-    uint8* addr_start   = (uint8*)&g_mem.emg_counter[0];    //Data at beginning of the row 12
+    uint8 row_start = 0;
+    uint8* addr_start   = (uint8*)&g_mem.emg_counter[0];    //Data at beginning of the row 0
     uint8* addr_start_c = (uint8*)&c_mem.emg_counter[0];
     uint8 row_end   = row_start + EEPROM_COUNTERS_ROWS - 1;
     static uint8* m_addr = NULL; 

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 1
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQGtcVs.s 			page 1
 
 
    1              		.syntax unified
@@ -25,7 +25,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 1
   22              		.size	SPI_ENCODER_backup, 2
   23              	SPI_ENCODER_backup:
   24 0000 00       		.byte	0
-  25 0001 0F       		.byte	15
+  25 0001 1F       		.byte	31
   26              		.section	.text.SPI_ENCODER_SaveConfig,"ax",%progbits
   27              		.align	2
   28              		.global	SPI_ENCODER_SaveConfig
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 1
   21:Generated_Source\PSoC5/SPI_ENCODER_PM.c **** {
   22:Generated_Source\PSoC5/SPI_ENCODER_PM.c ****     SPI_ENCODER_DISABLED,
   23:Generated_Source\PSoC5/SPI_ENCODER_PM.c ****     SPI_ENCODER_BITCTR_INIT,
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 2
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQGtcVs.s 			page 2
 
 
   24:Generated_Source\PSoC5/SPI_ENCODER_PM.c **** };
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 1
   48:Generated_Source\PSoC5/SPI_ENCODER_PM.c **** * Function Name: SPI_ENCODER_RestoreConfig
   49:Generated_Source\PSoC5/SPI_ENCODER_PM.c **** ********************************************************************************
   50:Generated_Source\PSoC5/SPI_ENCODER_PM.c **** *
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 3
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQGtcVs.s 			page 3
 
 
   51:Generated_Source\PSoC5/SPI_ENCODER_PM.c **** * Summary:
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 1
   75:Generated_Source\PSoC5/SPI_ENCODER_PM.c **** *  None.
   76:Generated_Source\PSoC5/SPI_ENCODER_PM.c **** *
   77:Generated_Source\PSoC5/SPI_ENCODER_PM.c **** * Return:
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 4
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQGtcVs.s 			page 4
 
 
   78:Generated_Source\PSoC5/SPI_ENCODER_PM.c **** *  None.
@@ -228,7 +228,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 1
  123              	.L5:
  124 0026 00BF     		.align	2
  125              	.L4:
- 126 0028 9B650040 		.word	1073767835
+ 126 0028 9F640040 		.word	1073767583
  127 002c 00000000 		.word	SPI_ENCODER_backup
  128              		.cfi_endproc
  129              	.LFE2:
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 1
  133              		.global	SPI_ENCODER_Wakeup
  134              		.thumb
  135              		.thumb_func
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 5
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQGtcVs.s 			page 5
 
 
  136              		.type	SPI_ENCODER_Wakeup, %function
@@ -288,8 +288,23 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 1
  148              		.cfi_def_cfa_register 7
  126:Generated_Source\PSoC5/SPI_ENCODER_PM.c ****     #if(SPI_ENCODER_RX_SOFTWARE_BUF_ENABLED)
  127:Generated_Source\PSoC5/SPI_ENCODER_PM.c ****         SPI_ENCODER_rxBufferFull  = 0u;
+ 149              		.loc 1 127 0
+ 150 0004 094B     		ldr	r3, .L9
+ 151 0006 0022     		movs	r2, #0
+ 152 0008 1A70     		strb	r2, [r3]
  128:Generated_Source\PSoC5/SPI_ENCODER_PM.c ****         SPI_ENCODER_rxBufferRead  = 0u;
+ 153              		.loc 1 128 0
+ 154 000a 094B     		ldr	r3, .L9+4
+ 155 000c 0022     		movs	r2, #0
+ 156 000e 1A70     		strb	r2, [r3]
  129:Generated_Source\PSoC5/SPI_ENCODER_PM.c ****         SPI_ENCODER_rxBufferWrite = 0u;
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQGtcVs.s 			page 6
+
+
+ 157              		.loc 1 129 0
+ 158 0010 084B     		ldr	r3, .L9+8
+ 159 0012 0022     		movs	r2, #0
+ 160 0014 1A70     		strb	r2, [r3]
  130:Generated_Source\PSoC5/SPI_ENCODER_PM.c ****     #endif /* (SPI_ENCODER_RX_SOFTWARE_BUF_ENABLED) */
  131:Generated_Source\PSoC5/SPI_ENCODER_PM.c **** 
  132:Generated_Source\PSoC5/SPI_ENCODER_PM.c ****     #if(SPI_ENCODER_TX_SOFTWARE_BUF_ENABLED)
@@ -298,565 +313,619 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 1
  135:Generated_Source\PSoC5/SPI_ENCODER_PM.c ****         SPI_ENCODER_txBufferWrite = 0u;
  136:Generated_Source\PSoC5/SPI_ENCODER_PM.c ****     #endif /* (SPI_ENCODER_TX_SOFTWARE_BUF_ENABLED) */
  137:Generated_Source\PSoC5/SPI_ENCODER_PM.c **** 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 6
-
-
  138:Generated_Source\PSoC5/SPI_ENCODER_PM.c ****     /* Clear any data from the RX and TX FIFO */
  139:Generated_Source\PSoC5/SPI_ENCODER_PM.c ****     SPI_ENCODER_ClearFIFO();
- 149              		.loc 1 139 0
- 150 0004 FFF7FEFF 		bl	SPI_ENCODER_ClearFIFO
+ 161              		.loc 1 139 0
+ 162 0016 FFF7FEFF 		bl	SPI_ENCODER_ClearFIFO
  140:Generated_Source\PSoC5/SPI_ENCODER_PM.c **** 
  141:Generated_Source\PSoC5/SPI_ENCODER_PM.c ****     /* Restore components block enable state */
  142:Generated_Source\PSoC5/SPI_ENCODER_PM.c ****     if(0u != SPI_ENCODER_backup.enableState)
- 151              		.loc 1 142 0
- 152 0008 034B     		ldr	r3, .L9
- 153 000a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 154 000c 002B     		cmp	r3, #0
- 155 000e 01D0     		beq	.L8
+ 163              		.loc 1 142 0
+ 164 001a 074B     		ldr	r3, .L9+12
+ 165 001c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 166 001e 002B     		cmp	r3, #0
+ 167 0020 01D0     		beq	.L8
  143:Generated_Source\PSoC5/SPI_ENCODER_PM.c ****     {
  144:Generated_Source\PSoC5/SPI_ENCODER_PM.c ****         SPI_ENCODER_Enable();
- 156              		.loc 1 144 0
- 157 0010 FFF7FEFF 		bl	SPI_ENCODER_Enable
- 158              	.L8:
+ 168              		.loc 1 144 0
+ 169 0022 FFF7FEFF 		bl	SPI_ENCODER_Enable
+ 170              	.L8:
  145:Generated_Source\PSoC5/SPI_ENCODER_PM.c ****     }
  146:Generated_Source\PSoC5/SPI_ENCODER_PM.c **** }
- 159              		.loc 1 146 0
- 160 0014 00BF     		nop
- 161 0016 80BD     		pop	{r7, pc}
- 162              	.L10:
- 163              		.align	2
- 164              	.L9:
- 165 0018 00000000 		.word	SPI_ENCODER_backup
- 166              		.cfi_endproc
- 167              	.LFE3:
- 168              		.size	SPI_ENCODER_Wakeup, .-SPI_ENCODER_Wakeup
- 169              		.text
- 170              	.Letext0:
- 171              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
- 172              		.file 3 "Generated_Source\\PSoC5\\SPI_ENCODER.h"
- 173              		.section	.debug_info,"",%progbits
- 174              	.Ldebug_info0:
- 175 0000 29010000 		.4byte	0x129
- 176 0004 0400     		.2byte	0x4
- 177 0006 00000000 		.4byte	.Ldebug_abbrev0
- 178 000a 04       		.byte	0x4
- 179 000b 01       		.uleb128 0x1
- 180 000c E7000000 		.4byte	.LASF23
- 181 0010 0C       		.byte	0xc
- 182 0011 BF000000 		.4byte	.LASF24
- 183 0015 7D000000 		.4byte	.LASF25
- 184 0019 00000000 		.4byte	.Ldebug_ranges0+0
- 185 001d 00000000 		.4byte	0
- 186 0021 00000000 		.4byte	.Ldebug_line0
- 187 0025 02       		.uleb128 0x2
- 188 0026 01       		.byte	0x1
- 189 0027 06       		.byte	0x6
- 190 0028 06020000 		.4byte	.LASF0
- 191 002c 02       		.uleb128 0x2
- 192 002d 01       		.byte	0x1
- 193 002e 08       		.byte	0x8
- 194 002f 27000000 		.4byte	.LASF1
- 195 0033 02       		.uleb128 0x2
- 196 0034 02       		.byte	0x2
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 7
+ 171              		.loc 1 146 0
+ 172 0026 00BF     		nop
+ 173 0028 80BD     		pop	{r7, pc}
+ 174              	.L10:
+ 175 002a 00BF     		.align	2
+ 176              	.L9:
+ 177 002c 00000000 		.word	SPI_ENCODER_rxBufferFull
+ 178 0030 00000000 		.word	SPI_ENCODER_rxBufferRead
+ 179 0034 00000000 		.word	SPI_ENCODER_rxBufferWrite
+ 180 0038 00000000 		.word	SPI_ENCODER_backup
+ 181              		.cfi_endproc
+ 182              	.LFE3:
+ 183              		.size	SPI_ENCODER_Wakeup, .-SPI_ENCODER_Wakeup
+ 184              		.text
+ 185              	.Letext0:
+ 186              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 187              		.file 3 "Generated_Source\\PSoC5\\SPI_ENCODER.h"
+ 188              		.file 4 "Generated_Source\\PSoC5\\SPI_ENCODER_PVT.h"
+ 189              		.section	.debug_info,"",%progbits
+ 190              	.Ldebug_info0:
+ 191 0000 4A010000 		.4byte	0x14a
+ 192 0004 0400     		.2byte	0x4
+ 193 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 194 000a 04       		.byte	0x4
+ 195 000b 01       		.uleb128 0x1
+ 196 000c 00000000 		.4byte	.LASF26
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQGtcVs.s 			page 7
 
 
- 197 0035 05       		.byte	0x5
- 198 0036 30020000 		.4byte	.LASF2
- 199 003a 02       		.uleb128 0x2
- 200 003b 02       		.byte	0x2
- 201 003c 07       		.byte	0x7
- 202 003d F3010000 		.4byte	.LASF3
- 203 0041 02       		.uleb128 0x2
- 204 0042 04       		.byte	0x4
- 205 0043 05       		.byte	0x5
- 206 0044 BE010000 		.4byte	.LASF4
- 207 0048 02       		.uleb128 0x2
- 208 0049 04       		.byte	0x4
- 209 004a 07       		.byte	0x7
- 210 004b 4E000000 		.4byte	.LASF5
- 211 004f 02       		.uleb128 0x2
- 212 0050 08       		.byte	0x8
- 213 0051 05       		.byte	0x5
- 214 0052 00000000 		.4byte	.LASF6
- 215 0056 02       		.uleb128 0x2
- 216 0057 08       		.byte	0x8
- 217 0058 07       		.byte	0x7
- 218 0059 60000000 		.4byte	.LASF7
- 219 005d 03       		.uleb128 0x3
- 220 005e 04       		.byte	0x4
- 221 005f 05       		.byte	0x5
- 222 0060 696E7400 		.ascii	"int\000"
- 223 0064 02       		.uleb128 0x2
- 224 0065 04       		.byte	0x4
- 225 0066 07       		.byte	0x7
- 226 0067 1A000000 		.4byte	.LASF8
- 227 006b 04       		.uleb128 0x4
- 228 006c 48000000 		.4byte	.LASF12
- 229 0070 02       		.byte	0x2
- 230 0071 E401     		.2byte	0x1e4
- 231 0073 2C000000 		.4byte	0x2c
- 232 0077 02       		.uleb128 0x2
- 233 0078 04       		.byte	0x4
- 234 0079 04       		.byte	0x4
- 235 007a 77000000 		.4byte	.LASF9
- 236 007e 02       		.uleb128 0x2
- 237 007f 08       		.byte	0x8
- 238 0080 04       		.byte	0x4
- 239 0081 E1010000 		.4byte	.LASF10
- 240 0085 02       		.uleb128 0x2
- 241 0086 01       		.byte	0x1
- 242 0087 08       		.byte	0x8
- 243 0088 A2010000 		.4byte	.LASF11
- 244 008c 04       		.uleb128 0x4
- 245 008d 3A020000 		.4byte	.LASF13
- 246 0091 02       		.byte	0x2
- 247 0092 8E02     		.2byte	0x28e
- 248 0094 98000000 		.4byte	0x98
- 249 0098 05       		.uleb128 0x5
- 250 0099 6B000000 		.4byte	0x6b
- 251 009d 02       		.uleb128 0x2
- 252 009e 08       		.byte	0x8
- 253 009f 04       		.byte	0x4
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 8
+ 197 0010 0C       		.byte	0xc
+ 198 0011 6F020000 		.4byte	.LASF27
+ 199 0015 1E020000 		.4byte	.LASF28
+ 200 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 201 001d 00000000 		.4byte	0
+ 202 0021 00000000 		.4byte	.Ldebug_line0
+ 203 0025 02       		.uleb128 0x2
+ 204 0026 01       		.byte	0x1
+ 205 0027 06       		.byte	0x6
+ 206 0028 63020000 		.4byte	.LASF0
+ 207 002c 02       		.uleb128 0x2
+ 208 002d 01       		.byte	0x1
+ 209 002e 08       		.byte	0x8
+ 210 002f 0B010000 		.4byte	.LASF1
+ 211 0033 02       		.uleb128 0x2
+ 212 0034 02       		.byte	0x2
+ 213 0035 05       		.byte	0x5
+ 214 0036 E1010000 		.4byte	.LASF2
+ 215 003a 02       		.uleb128 0x2
+ 216 003b 02       		.byte	0x2
+ 217 003c 07       		.byte	0x7
+ 218 003d A8000000 		.4byte	.LASF3
+ 219 0041 02       		.uleb128 0x2
+ 220 0042 04       		.byte	0x4
+ 221 0043 05       		.byte	0x5
+ 222 0044 FD010000 		.4byte	.LASF4
+ 223 0048 02       		.uleb128 0x2
+ 224 0049 04       		.byte	0x4
+ 225 004a 07       		.byte	0x7
+ 226 004b 1E010000 		.4byte	.LASF5
+ 227 004f 02       		.uleb128 0x2
+ 228 0050 08       		.byte	0x8
+ 229 0051 05       		.byte	0x5
+ 230 0052 BB010000 		.4byte	.LASF6
+ 231 0056 02       		.uleb128 0x2
+ 232 0057 08       		.byte	0x8
+ 233 0058 07       		.byte	0x7
+ 234 0059 6E010000 		.4byte	.LASF7
+ 235 005d 03       		.uleb128 0x3
+ 236 005e 04       		.byte	0x4
+ 237 005f 05       		.byte	0x5
+ 238 0060 696E7400 		.ascii	"int\000"
+ 239 0064 02       		.uleb128 0x2
+ 240 0065 04       		.byte	0x4
+ 241 0066 07       		.byte	0x7
+ 242 0067 61010000 		.4byte	.LASF8
+ 243 006b 04       		.uleb128 0x4
+ 244 006c 30010000 		.4byte	.LASF12
+ 245 0070 02       		.byte	0x2
+ 246 0071 E401     		.2byte	0x1e4
+ 247 0073 2C000000 		.4byte	0x2c
+ 248 0077 02       		.uleb128 0x2
+ 249 0078 04       		.byte	0x4
+ 250 0079 04       		.byte	0x4
+ 251 007a EC000000 		.4byte	.LASF9
+ 252 007e 02       		.uleb128 0x2
+ 253 007f 08       		.byte	0x8
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQGtcVs.s 			page 8
 
 
- 254 00a0 12020000 		.4byte	.LASF14
- 255 00a4 02       		.uleb128 0x2
- 256 00a5 04       		.byte	0x4
- 257 00a6 07       		.byte	0x7
- 258 00a7 3F020000 		.4byte	.LASF15
- 259 00ab 06       		.uleb128 0x6
- 260 00ac 02       		.byte	0x2
- 261 00ad 03       		.byte	0x3
- 262 00ae 40       		.byte	0x40
- 263 00af CC000000 		.4byte	0xcc
- 264 00b3 07       		.uleb128 0x7
- 265 00b4 0E000000 		.4byte	.LASF16
- 266 00b8 03       		.byte	0x3
- 267 00b9 42       		.byte	0x42
- 268 00ba 6B000000 		.4byte	0x6b
- 269 00be 00       		.byte	0
- 270 00bf 07       		.uleb128 0x7
- 271 00c0 E8010000 		.4byte	.LASF17
- 272 00c4 03       		.byte	0x3
- 273 00c5 43       		.byte	0x43
- 274 00c6 6B000000 		.4byte	0x6b
- 275 00ca 01       		.byte	0x1
- 276 00cb 00       		.byte	0
- 277 00cc 08       		.uleb128 0x8
- 278 00cd C7010000 		.4byte	.LASF18
- 279 00d1 03       		.byte	0x3
- 280 00d2 44       		.byte	0x44
- 281 00d3 AB000000 		.4byte	0xab
- 282 00d7 09       		.uleb128 0x9
- 283 00d8 A7010000 		.4byte	.LASF19
- 284 00dc 01       		.byte	0x1
- 285 00dd 29       		.byte	0x29
- 286 00de 00000000 		.4byte	.LFB0
- 287 00e2 0C000000 		.4byte	.LFE0-.LFB0
- 288 00e6 01       		.uleb128 0x1
- 289 00e7 9C       		.byte	0x9c
- 290 00e8 09       		.uleb128 0x9
- 291 00e9 75010000 		.4byte	.LASF20
- 292 00ed 01       		.byte	0x1
- 293 00ee 3D       		.byte	0x3d
- 294 00ef 00000000 		.4byte	.LFB1
- 295 00f3 0C000000 		.4byte	.LFE1-.LFB1
- 296 00f7 01       		.uleb128 0x1
- 297 00f8 9C       		.byte	0x9c
- 298 00f9 0A       		.uleb128 0xa
- 299 00fa 1E020000 		.4byte	.LASF21
- 300 00fe 01       		.byte	0x1
- 301 00ff 57       		.byte	0x57
- 302 0100 00000000 		.4byte	.LFB2
- 303 0104 30000000 		.4byte	.LFE2-.LFB2
- 304 0108 01       		.uleb128 0x1
- 305 0109 9C       		.byte	0x9c
- 306 010a 0A       		.uleb128 0xa
- 307 010b 8F010000 		.4byte	.LASF22
- 308 010f 01       		.byte	0x1
- 309 0110 7C       		.byte	0x7c
- 310 0111 00000000 		.4byte	.LFB3
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 9
+ 254 0080 04       		.byte	0x4
+ 255 0081 4F010000 		.4byte	.LASF10
+ 256 0085 02       		.uleb128 0x2
+ 257 0086 01       		.byte	0x1
+ 258 0087 08       		.byte	0x8
+ 259 0088 C9010000 		.4byte	.LASF11
+ 260 008c 04       		.uleb128 0x4
+ 261 008d 19010000 		.4byte	.LASF13
+ 262 0091 02       		.byte	0x2
+ 263 0092 8E02     		.2byte	0x28e
+ 264 0094 98000000 		.4byte	0x98
+ 265 0098 05       		.uleb128 0x5
+ 266 0099 6B000000 		.4byte	0x6b
+ 267 009d 02       		.uleb128 0x2
+ 268 009e 08       		.byte	0x8
+ 269 009f 04       		.byte	0x4
+ 270 00a0 12020000 		.4byte	.LASF14
+ 271 00a4 02       		.uleb128 0x2
+ 272 00a5 04       		.byte	0x4
+ 273 00a6 07       		.byte	0x7
+ 274 00a7 98010000 		.4byte	.LASF15
+ 275 00ab 06       		.uleb128 0x6
+ 276 00ac 02       		.byte	0x2
+ 277 00ad 03       		.byte	0x3
+ 278 00ae 40       		.byte	0x40
+ 279 00af CC000000 		.4byte	0xcc
+ 280 00b3 07       		.uleb128 0x7
+ 281 00b4 06020000 		.4byte	.LASF16
+ 282 00b8 03       		.byte	0x3
+ 283 00b9 42       		.byte	0x42
+ 284 00ba 6B000000 		.4byte	0x6b
+ 285 00be 00       		.byte	0
+ 286 00bf 07       		.uleb128 0x7
+ 287 00c0 56010000 		.4byte	.LASF17
+ 288 00c4 03       		.byte	0x3
+ 289 00c5 43       		.byte	0x43
+ 290 00c6 6B000000 		.4byte	0x6b
+ 291 00ca 01       		.byte	0x1
+ 292 00cb 00       		.byte	0
+ 293 00cc 08       		.uleb128 0x8
+ 294 00cd 8E000000 		.4byte	.LASF18
+ 295 00d1 03       		.byte	0x3
+ 296 00d2 44       		.byte	0x44
+ 297 00d3 AB000000 		.4byte	0xab
+ 298 00d7 09       		.uleb128 0x9
+ 299 00d8 D5000000 		.4byte	.LASF19
+ 300 00dc 01       		.byte	0x1
+ 301 00dd 29       		.byte	0x29
+ 302 00de 00000000 		.4byte	.LFB0
+ 303 00e2 0C000000 		.4byte	.LFE0-.LFB0
+ 304 00e6 01       		.uleb128 0x1
+ 305 00e7 9C       		.byte	0x9c
+ 306 00e8 09       		.uleb128 0x9
+ 307 00e9 BB000000 		.4byte	.LASF20
+ 308 00ed 01       		.byte	0x1
+ 309 00ee 3D       		.byte	0x3d
+ 310 00ef 00000000 		.4byte	.LFB1
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQGtcVs.s 			page 9
 
 
- 311 0115 1C000000 		.4byte	.LFE3-.LFB3
- 312 0119 01       		.uleb128 0x1
- 313 011a 9C       		.byte	0x9c
- 314 011b 0B       		.uleb128 0xb
- 315 011c 35000000 		.4byte	.LASF26
- 316 0120 01       		.byte	0x1
- 317 0121 14       		.byte	0x14
- 318 0122 CC000000 		.4byte	0xcc
- 319 0126 05       		.uleb128 0x5
- 320 0127 03       		.byte	0x3
- 321 0128 00000000 		.4byte	SPI_ENCODER_backup
- 322 012c 00       		.byte	0
- 323              		.section	.debug_abbrev,"",%progbits
- 324              	.Ldebug_abbrev0:
- 325 0000 01       		.uleb128 0x1
- 326 0001 11       		.uleb128 0x11
- 327 0002 01       		.byte	0x1
- 328 0003 25       		.uleb128 0x25
- 329 0004 0E       		.uleb128 0xe
- 330 0005 13       		.uleb128 0x13
- 331 0006 0B       		.uleb128 0xb
- 332 0007 03       		.uleb128 0x3
- 333 0008 0E       		.uleb128 0xe
- 334 0009 1B       		.uleb128 0x1b
- 335 000a 0E       		.uleb128 0xe
- 336 000b 55       		.uleb128 0x55
- 337 000c 17       		.uleb128 0x17
- 338 000d 11       		.uleb128 0x11
- 339 000e 01       		.uleb128 0x1
- 340 000f 10       		.uleb128 0x10
- 341 0010 17       		.uleb128 0x17
- 342 0011 00       		.byte	0
- 343 0012 00       		.byte	0
- 344 0013 02       		.uleb128 0x2
- 345 0014 24       		.uleb128 0x24
- 346 0015 00       		.byte	0
- 347 0016 0B       		.uleb128 0xb
- 348 0017 0B       		.uleb128 0xb
- 349 0018 3E       		.uleb128 0x3e
- 350 0019 0B       		.uleb128 0xb
- 351 001a 03       		.uleb128 0x3
- 352 001b 0E       		.uleb128 0xe
- 353 001c 00       		.byte	0
- 354 001d 00       		.byte	0
- 355 001e 03       		.uleb128 0x3
- 356 001f 24       		.uleb128 0x24
- 357 0020 00       		.byte	0
- 358 0021 0B       		.uleb128 0xb
- 359 0022 0B       		.uleb128 0xb
- 360 0023 3E       		.uleb128 0x3e
- 361 0024 0B       		.uleb128 0xb
- 362 0025 03       		.uleb128 0x3
- 363 0026 08       		.uleb128 0x8
- 364 0027 00       		.byte	0
- 365 0028 00       		.byte	0
- 366 0029 04       		.uleb128 0x4
- 367 002a 16       		.uleb128 0x16
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 10
+ 311 00f3 0C000000 		.4byte	.LFE1-.LFB1
+ 312 00f7 01       		.uleb128 0x1
+ 313 00f8 9C       		.byte	0x9c
+ 314 00f9 0A       		.uleb128 0xa
+ 315 00fa EB010000 		.4byte	.LASF21
+ 316 00fe 01       		.byte	0x1
+ 317 00ff 57       		.byte	0x57
+ 318 0100 00000000 		.4byte	.LFB2
+ 319 0104 30000000 		.4byte	.LFE2-.LFB2
+ 320 0108 01       		.uleb128 0x1
+ 321 0109 9C       		.byte	0x9c
+ 322 010a 0A       		.uleb128 0xa
+ 323 010b CE010000 		.4byte	.LASF22
+ 324 010f 01       		.byte	0x1
+ 325 0110 7C       		.byte	0x7c
+ 326 0111 00000000 		.4byte	.LFB3
+ 327 0115 3C000000 		.4byte	.LFE3-.LFB3
+ 328 0119 01       		.uleb128 0x1
+ 329 011a 9C       		.byte	0x9c
+ 330 011b 0B       		.uleb128 0xb
+ 331 011c 85010000 		.4byte	.LASF29
+ 332 0120 01       		.byte	0x1
+ 333 0121 14       		.byte	0x14
+ 334 0122 CC000000 		.4byte	0xcc
+ 335 0126 05       		.uleb128 0x5
+ 336 0127 03       		.byte	0x3
+ 337 0128 00000000 		.4byte	SPI_ENCODER_backup
+ 338 012c 0C       		.uleb128 0xc
+ 339 012d F2000000 		.4byte	.LASF23
+ 340 0131 04       		.byte	0x4
+ 341 0132 2D       		.byte	0x2d
+ 342 0133 98000000 		.4byte	0x98
+ 343 0137 0C       		.uleb128 0xc
+ 344 0138 A1010000 		.4byte	.LASF24
+ 345 013c 04       		.byte	0x4
+ 346 013d 2E       		.byte	0x2e
+ 347 013e 98000000 		.4byte	0x98
+ 348 0142 0C       		.uleb128 0xc
+ 349 0143 36010000 		.4byte	.LASF25
+ 350 0147 04       		.byte	0x4
+ 351 0148 2F       		.byte	0x2f
+ 352 0149 98000000 		.4byte	0x98
+ 353 014d 00       		.byte	0
+ 354              		.section	.debug_abbrev,"",%progbits
+ 355              	.Ldebug_abbrev0:
+ 356 0000 01       		.uleb128 0x1
+ 357 0001 11       		.uleb128 0x11
+ 358 0002 01       		.byte	0x1
+ 359 0003 25       		.uleb128 0x25
+ 360 0004 0E       		.uleb128 0xe
+ 361 0005 13       		.uleb128 0x13
+ 362 0006 0B       		.uleb128 0xb
+ 363 0007 03       		.uleb128 0x3
+ 364 0008 0E       		.uleb128 0xe
+ 365 0009 1B       		.uleb128 0x1b
+ 366 000a 0E       		.uleb128 0xe
+ 367 000b 55       		.uleb128 0x55
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQGtcVs.s 			page 10
 
 
- 368 002b 00       		.byte	0
- 369 002c 03       		.uleb128 0x3
- 370 002d 0E       		.uleb128 0xe
- 371 002e 3A       		.uleb128 0x3a
- 372 002f 0B       		.uleb128 0xb
- 373 0030 3B       		.uleb128 0x3b
- 374 0031 05       		.uleb128 0x5
- 375 0032 49       		.uleb128 0x49
- 376 0033 13       		.uleb128 0x13
- 377 0034 00       		.byte	0
- 378 0035 00       		.byte	0
- 379 0036 05       		.uleb128 0x5
- 380 0037 35       		.uleb128 0x35
- 381 0038 00       		.byte	0
- 382 0039 49       		.uleb128 0x49
- 383 003a 13       		.uleb128 0x13
- 384 003b 00       		.byte	0
- 385 003c 00       		.byte	0
- 386 003d 06       		.uleb128 0x6
- 387 003e 13       		.uleb128 0x13
- 388 003f 01       		.byte	0x1
- 389 0040 0B       		.uleb128 0xb
- 390 0041 0B       		.uleb128 0xb
- 391 0042 3A       		.uleb128 0x3a
- 392 0043 0B       		.uleb128 0xb
- 393 0044 3B       		.uleb128 0x3b
- 394 0045 0B       		.uleb128 0xb
- 395 0046 01       		.uleb128 0x1
- 396 0047 13       		.uleb128 0x13
- 397 0048 00       		.byte	0
- 398 0049 00       		.byte	0
- 399 004a 07       		.uleb128 0x7
- 400 004b 0D       		.uleb128 0xd
- 401 004c 00       		.byte	0
- 402 004d 03       		.uleb128 0x3
- 403 004e 0E       		.uleb128 0xe
- 404 004f 3A       		.uleb128 0x3a
- 405 0050 0B       		.uleb128 0xb
- 406 0051 3B       		.uleb128 0x3b
- 407 0052 0B       		.uleb128 0xb
- 408 0053 49       		.uleb128 0x49
- 409 0054 13       		.uleb128 0x13
- 410 0055 38       		.uleb128 0x38
- 411 0056 0B       		.uleb128 0xb
- 412 0057 00       		.byte	0
- 413 0058 00       		.byte	0
- 414 0059 08       		.uleb128 0x8
- 415 005a 16       		.uleb128 0x16
- 416 005b 00       		.byte	0
- 417 005c 03       		.uleb128 0x3
- 418 005d 0E       		.uleb128 0xe
- 419 005e 3A       		.uleb128 0x3a
- 420 005f 0B       		.uleb128 0xb
- 421 0060 3B       		.uleb128 0x3b
- 422 0061 0B       		.uleb128 0xb
- 423 0062 49       		.uleb128 0x49
- 424 0063 13       		.uleb128 0x13
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 11
+ 368 000c 17       		.uleb128 0x17
+ 369 000d 11       		.uleb128 0x11
+ 370 000e 01       		.uleb128 0x1
+ 371 000f 10       		.uleb128 0x10
+ 372 0010 17       		.uleb128 0x17
+ 373 0011 00       		.byte	0
+ 374 0012 00       		.byte	0
+ 375 0013 02       		.uleb128 0x2
+ 376 0014 24       		.uleb128 0x24
+ 377 0015 00       		.byte	0
+ 378 0016 0B       		.uleb128 0xb
+ 379 0017 0B       		.uleb128 0xb
+ 380 0018 3E       		.uleb128 0x3e
+ 381 0019 0B       		.uleb128 0xb
+ 382 001a 03       		.uleb128 0x3
+ 383 001b 0E       		.uleb128 0xe
+ 384 001c 00       		.byte	0
+ 385 001d 00       		.byte	0
+ 386 001e 03       		.uleb128 0x3
+ 387 001f 24       		.uleb128 0x24
+ 388 0020 00       		.byte	0
+ 389 0021 0B       		.uleb128 0xb
+ 390 0022 0B       		.uleb128 0xb
+ 391 0023 3E       		.uleb128 0x3e
+ 392 0024 0B       		.uleb128 0xb
+ 393 0025 03       		.uleb128 0x3
+ 394 0026 08       		.uleb128 0x8
+ 395 0027 00       		.byte	0
+ 396 0028 00       		.byte	0
+ 397 0029 04       		.uleb128 0x4
+ 398 002a 16       		.uleb128 0x16
+ 399 002b 00       		.byte	0
+ 400 002c 03       		.uleb128 0x3
+ 401 002d 0E       		.uleb128 0xe
+ 402 002e 3A       		.uleb128 0x3a
+ 403 002f 0B       		.uleb128 0xb
+ 404 0030 3B       		.uleb128 0x3b
+ 405 0031 05       		.uleb128 0x5
+ 406 0032 49       		.uleb128 0x49
+ 407 0033 13       		.uleb128 0x13
+ 408 0034 00       		.byte	0
+ 409 0035 00       		.byte	0
+ 410 0036 05       		.uleb128 0x5
+ 411 0037 35       		.uleb128 0x35
+ 412 0038 00       		.byte	0
+ 413 0039 49       		.uleb128 0x49
+ 414 003a 13       		.uleb128 0x13
+ 415 003b 00       		.byte	0
+ 416 003c 00       		.byte	0
+ 417 003d 06       		.uleb128 0x6
+ 418 003e 13       		.uleb128 0x13
+ 419 003f 01       		.byte	0x1
+ 420 0040 0B       		.uleb128 0xb
+ 421 0041 0B       		.uleb128 0xb
+ 422 0042 3A       		.uleb128 0x3a
+ 423 0043 0B       		.uleb128 0xb
+ 424 0044 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQGtcVs.s 			page 11
 
 
- 425 0064 00       		.byte	0
- 426 0065 00       		.byte	0
- 427 0066 09       		.uleb128 0x9
- 428 0067 2E       		.uleb128 0x2e
- 429 0068 00       		.byte	0
- 430 0069 3F       		.uleb128 0x3f
- 431 006a 19       		.uleb128 0x19
- 432 006b 03       		.uleb128 0x3
- 433 006c 0E       		.uleb128 0xe
- 434 006d 3A       		.uleb128 0x3a
- 435 006e 0B       		.uleb128 0xb
- 436 006f 3B       		.uleb128 0x3b
- 437 0070 0B       		.uleb128 0xb
- 438 0071 27       		.uleb128 0x27
- 439 0072 19       		.uleb128 0x19
- 440 0073 11       		.uleb128 0x11
- 441 0074 01       		.uleb128 0x1
- 442 0075 12       		.uleb128 0x12
- 443 0076 06       		.uleb128 0x6
- 444 0077 40       		.uleb128 0x40
- 445 0078 18       		.uleb128 0x18
- 446 0079 9742     		.uleb128 0x2117
- 447 007b 19       		.uleb128 0x19
- 448 007c 00       		.byte	0
- 449 007d 00       		.byte	0
- 450 007e 0A       		.uleb128 0xa
- 451 007f 2E       		.uleb128 0x2e
- 452 0080 00       		.byte	0
- 453 0081 3F       		.uleb128 0x3f
- 454 0082 19       		.uleb128 0x19
- 455 0083 03       		.uleb128 0x3
- 456 0084 0E       		.uleb128 0xe
- 457 0085 3A       		.uleb128 0x3a
- 458 0086 0B       		.uleb128 0xb
- 459 0087 3B       		.uleb128 0x3b
- 460 0088 0B       		.uleb128 0xb
- 461 0089 27       		.uleb128 0x27
- 462 008a 19       		.uleb128 0x19
- 463 008b 11       		.uleb128 0x11
- 464 008c 01       		.uleb128 0x1
- 465 008d 12       		.uleb128 0x12
- 466 008e 06       		.uleb128 0x6
- 467 008f 40       		.uleb128 0x40
- 468 0090 18       		.uleb128 0x18
- 469 0091 9642     		.uleb128 0x2116
- 470 0093 19       		.uleb128 0x19
- 471 0094 00       		.byte	0
- 472 0095 00       		.byte	0
- 473 0096 0B       		.uleb128 0xb
- 474 0097 34       		.uleb128 0x34
- 475 0098 00       		.byte	0
- 476 0099 03       		.uleb128 0x3
- 477 009a 0E       		.uleb128 0xe
- 478 009b 3A       		.uleb128 0x3a
- 479 009c 0B       		.uleb128 0xb
- 480 009d 3B       		.uleb128 0x3b
- 481 009e 0B       		.uleb128 0xb
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 12
+ 425 0045 0B       		.uleb128 0xb
+ 426 0046 01       		.uleb128 0x1
+ 427 0047 13       		.uleb128 0x13
+ 428 0048 00       		.byte	0
+ 429 0049 00       		.byte	0
+ 430 004a 07       		.uleb128 0x7
+ 431 004b 0D       		.uleb128 0xd
+ 432 004c 00       		.byte	0
+ 433 004d 03       		.uleb128 0x3
+ 434 004e 0E       		.uleb128 0xe
+ 435 004f 3A       		.uleb128 0x3a
+ 436 0050 0B       		.uleb128 0xb
+ 437 0051 3B       		.uleb128 0x3b
+ 438 0052 0B       		.uleb128 0xb
+ 439 0053 49       		.uleb128 0x49
+ 440 0054 13       		.uleb128 0x13
+ 441 0055 38       		.uleb128 0x38
+ 442 0056 0B       		.uleb128 0xb
+ 443 0057 00       		.byte	0
+ 444 0058 00       		.byte	0
+ 445 0059 08       		.uleb128 0x8
+ 446 005a 16       		.uleb128 0x16
+ 447 005b 00       		.byte	0
+ 448 005c 03       		.uleb128 0x3
+ 449 005d 0E       		.uleb128 0xe
+ 450 005e 3A       		.uleb128 0x3a
+ 451 005f 0B       		.uleb128 0xb
+ 452 0060 3B       		.uleb128 0x3b
+ 453 0061 0B       		.uleb128 0xb
+ 454 0062 49       		.uleb128 0x49
+ 455 0063 13       		.uleb128 0x13
+ 456 0064 00       		.byte	0
+ 457 0065 00       		.byte	0
+ 458 0066 09       		.uleb128 0x9
+ 459 0067 2E       		.uleb128 0x2e
+ 460 0068 00       		.byte	0
+ 461 0069 3F       		.uleb128 0x3f
+ 462 006a 19       		.uleb128 0x19
+ 463 006b 03       		.uleb128 0x3
+ 464 006c 0E       		.uleb128 0xe
+ 465 006d 3A       		.uleb128 0x3a
+ 466 006e 0B       		.uleb128 0xb
+ 467 006f 3B       		.uleb128 0x3b
+ 468 0070 0B       		.uleb128 0xb
+ 469 0071 27       		.uleb128 0x27
+ 470 0072 19       		.uleb128 0x19
+ 471 0073 11       		.uleb128 0x11
+ 472 0074 01       		.uleb128 0x1
+ 473 0075 12       		.uleb128 0x12
+ 474 0076 06       		.uleb128 0x6
+ 475 0077 40       		.uleb128 0x40
+ 476 0078 18       		.uleb128 0x18
+ 477 0079 9742     		.uleb128 0x2117
+ 478 007b 19       		.uleb128 0x19
+ 479 007c 00       		.byte	0
+ 480 007d 00       		.byte	0
+ 481 007e 0A       		.uleb128 0xa
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQGtcVs.s 			page 12
 
 
- 482 009f 49       		.uleb128 0x49
- 483 00a0 13       		.uleb128 0x13
- 484 00a1 02       		.uleb128 0x2
- 485 00a2 18       		.uleb128 0x18
- 486 00a3 00       		.byte	0
- 487 00a4 00       		.byte	0
- 488 00a5 00       		.byte	0
- 489              		.section	.debug_aranges,"",%progbits
- 490 0000 34000000 		.4byte	0x34
- 491 0004 0200     		.2byte	0x2
- 492 0006 00000000 		.4byte	.Ldebug_info0
- 493 000a 04       		.byte	0x4
- 494 000b 00       		.byte	0
- 495 000c 0000     		.2byte	0
- 496 000e 0000     		.2byte	0
- 497 0010 00000000 		.4byte	.LFB0
- 498 0014 0C000000 		.4byte	.LFE0-.LFB0
- 499 0018 00000000 		.4byte	.LFB1
- 500 001c 0C000000 		.4byte	.LFE1-.LFB1
- 501 0020 00000000 		.4byte	.LFB2
- 502 0024 30000000 		.4byte	.LFE2-.LFB2
- 503 0028 00000000 		.4byte	.LFB3
- 504 002c 1C000000 		.4byte	.LFE3-.LFB3
- 505 0030 00000000 		.4byte	0
- 506 0034 00000000 		.4byte	0
- 507              		.section	.debug_ranges,"",%progbits
- 508              	.Ldebug_ranges0:
- 509 0000 00000000 		.4byte	.LFB0
- 510 0004 0C000000 		.4byte	.LFE0
- 511 0008 00000000 		.4byte	.LFB1
- 512 000c 0C000000 		.4byte	.LFE1
- 513 0010 00000000 		.4byte	.LFB2
- 514 0014 30000000 		.4byte	.LFE2
- 515 0018 00000000 		.4byte	.LFB3
- 516 001c 1C000000 		.4byte	.LFE3
- 517 0020 00000000 		.4byte	0
- 518 0024 00000000 		.4byte	0
- 519              		.section	.debug_line,"",%progbits
- 520              	.Ldebug_line0:
- 521 0000 AB000000 		.section	.debug_str,"MS",%progbits,1
- 521      02005C00 
- 521      00000201 
- 521      FB0E0D00 
- 521      01010101 
- 522              	.LASF6:
- 523 0000 6C6F6E67 		.ascii	"long long int\000"
- 523      206C6F6E 
- 523      6720696E 
- 523      7400
- 524              	.LASF16:
- 525 000e 656E6162 		.ascii	"enableState\000"
- 525      6C655374 
- 525      61746500 
- 526              	.LASF8:
- 527 001a 756E7369 		.ascii	"unsigned int\000"
- 527      676E6564 
- 527      20696E74 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 13
+ 482 007f 2E       		.uleb128 0x2e
+ 483 0080 00       		.byte	0
+ 484 0081 3F       		.uleb128 0x3f
+ 485 0082 19       		.uleb128 0x19
+ 486 0083 03       		.uleb128 0x3
+ 487 0084 0E       		.uleb128 0xe
+ 488 0085 3A       		.uleb128 0x3a
+ 489 0086 0B       		.uleb128 0xb
+ 490 0087 3B       		.uleb128 0x3b
+ 491 0088 0B       		.uleb128 0xb
+ 492 0089 27       		.uleb128 0x27
+ 493 008a 19       		.uleb128 0x19
+ 494 008b 11       		.uleb128 0x11
+ 495 008c 01       		.uleb128 0x1
+ 496 008d 12       		.uleb128 0x12
+ 497 008e 06       		.uleb128 0x6
+ 498 008f 40       		.uleb128 0x40
+ 499 0090 18       		.uleb128 0x18
+ 500 0091 9642     		.uleb128 0x2116
+ 501 0093 19       		.uleb128 0x19
+ 502 0094 00       		.byte	0
+ 503 0095 00       		.byte	0
+ 504 0096 0B       		.uleb128 0xb
+ 505 0097 34       		.uleb128 0x34
+ 506 0098 00       		.byte	0
+ 507 0099 03       		.uleb128 0x3
+ 508 009a 0E       		.uleb128 0xe
+ 509 009b 3A       		.uleb128 0x3a
+ 510 009c 0B       		.uleb128 0xb
+ 511 009d 3B       		.uleb128 0x3b
+ 512 009e 0B       		.uleb128 0xb
+ 513 009f 49       		.uleb128 0x49
+ 514 00a0 13       		.uleb128 0x13
+ 515 00a1 02       		.uleb128 0x2
+ 516 00a2 18       		.uleb128 0x18
+ 517 00a3 00       		.byte	0
+ 518 00a4 00       		.byte	0
+ 519 00a5 0C       		.uleb128 0xc
+ 520 00a6 34       		.uleb128 0x34
+ 521 00a7 00       		.byte	0
+ 522 00a8 03       		.uleb128 0x3
+ 523 00a9 0E       		.uleb128 0xe
+ 524 00aa 3A       		.uleb128 0x3a
+ 525 00ab 0B       		.uleb128 0xb
+ 526 00ac 3B       		.uleb128 0x3b
+ 527 00ad 0B       		.uleb128 0xb
+ 528 00ae 49       		.uleb128 0x49
+ 529 00af 13       		.uleb128 0x13
+ 530 00b0 3F       		.uleb128 0x3f
+ 531 00b1 19       		.uleb128 0x19
+ 532 00b2 3C       		.uleb128 0x3c
+ 533 00b3 19       		.uleb128 0x19
+ 534 00b4 00       		.byte	0
+ 535 00b5 00       		.byte	0
+ 536 00b6 00       		.byte	0
+ 537              		.section	.debug_aranges,"",%progbits
+ 538 0000 34000000 		.4byte	0x34
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQGtcVs.s 			page 13
 
 
- 527      00
- 528              	.LASF1:
- 529 0027 756E7369 		.ascii	"unsigned char\000"
- 529      676E6564 
- 529      20636861 
- 529      7200
- 530              	.LASF26:
- 531 0035 5350495F 		.ascii	"SPI_ENCODER_backup\000"
- 531      454E434F 
- 531      4445525F 
- 531      6261636B 
- 531      757000
- 532              	.LASF12:
- 533 0048 75696E74 		.ascii	"uint8\000"
- 533      3800
- 534              	.LASF5:
- 535 004e 6C6F6E67 		.ascii	"long unsigned int\000"
- 535      20756E73 
- 535      69676E65 
- 535      6420696E 
- 535      7400
- 536              	.LASF7:
- 537 0060 6C6F6E67 		.ascii	"long long unsigned int\000"
- 537      206C6F6E 
- 537      6720756E 
- 537      7369676E 
- 537      65642069 
- 538              	.LASF9:
- 539 0077 666C6F61 		.ascii	"float\000"
- 539      7400
- 540              	.LASF25:
- 541 007d 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Desktop\\SoftPro firmware (PSo"
- 541      73657273 
- 541      5C4D6174 
- 541      74696143 
- 541      505C4465 
- 542 00ac 4335295C 		.ascii	"C5)\\firmware.cydsn\000"
- 542      6669726D 
- 542      77617265 
- 542      2E637964 
- 542      736E00
- 543              	.LASF24:
- 544 00bf 47656E65 		.ascii	"Generated_Source\\PSoC5\\SPI_ENCODER_PM.c\000"
- 544      72617465 
- 544      645F536F 
- 544      75726365 
- 544      5C50536F 
- 545              	.LASF23:
- 546 00e7 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 546      43313120 
- 546      352E342E 
- 546      31203230 
- 546      31363036 
- 547 011a 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 547      20726576 
- 547      6973696F 
- 547      6E203233 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 14
+ 539 0004 0200     		.2byte	0x2
+ 540 0006 00000000 		.4byte	.Ldebug_info0
+ 541 000a 04       		.byte	0x4
+ 542 000b 00       		.byte	0
+ 543 000c 0000     		.2byte	0
+ 544 000e 0000     		.2byte	0
+ 545 0010 00000000 		.4byte	.LFB0
+ 546 0014 0C000000 		.4byte	.LFE0-.LFB0
+ 547 0018 00000000 		.4byte	.LFB1
+ 548 001c 0C000000 		.4byte	.LFE1-.LFB1
+ 549 0020 00000000 		.4byte	.LFB2
+ 550 0024 30000000 		.4byte	.LFE2-.LFB2
+ 551 0028 00000000 		.4byte	.LFB3
+ 552 002c 3C000000 		.4byte	.LFE3-.LFB3
+ 553 0030 00000000 		.4byte	0
+ 554 0034 00000000 		.4byte	0
+ 555              		.section	.debug_ranges,"",%progbits
+ 556              	.Ldebug_ranges0:
+ 557 0000 00000000 		.4byte	.LFB0
+ 558 0004 0C000000 		.4byte	.LFE0
+ 559 0008 00000000 		.4byte	.LFB1
+ 560 000c 0C000000 		.4byte	.LFE1
+ 561 0010 00000000 		.4byte	.LFB2
+ 562 0014 30000000 		.4byte	.LFE2
+ 563 0018 00000000 		.4byte	.LFB3
+ 564 001c 3C000000 		.4byte	.LFE3
+ 565 0020 00000000 		.4byte	0
+ 566 0024 00000000 		.4byte	0
+ 567              		.section	.debug_line,"",%progbits
+ 568              	.Ldebug_line0:
+ 569 0000 C3000000 		.section	.debug_str,"MS",%progbits,1
+ 569      02007100 
+ 569      00000201 
+ 569      FB0E0D00 
+ 569      01010101 
+ 570              	.LASF26:
+ 571 0000 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 571      43313120 
+ 571      352E342E 
+ 571      31203230 
+ 571      31363036 
+ 572 0033 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 572      20726576 
+ 572      6973696F 
+ 572      6E203233 
+ 572      37373135 
+ 573 0066 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 573      66756E63 
+ 573      74696F6E 
+ 573      2D736563 
+ 573      74696F6E 
+ 574              	.LASF18:
+ 575 008e 5350495F 		.ascii	"SPI_ENCODER_BACKUP_STRUCT\000"
+ 575      454E434F 
+ 575      4445525F 
+ 575      4241434B 
+ 575      55505F53 
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQGtcVs.s 			page 14
 
 
- 547      37373135 
- 548 014d 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
- 548      66756E63 
- 548      74696F6E 
- 548      2D736563 
- 548      74696F6E 
- 549              	.LASF20:
- 550 0175 5350495F 		.ascii	"SPI_ENCODER_RestoreConfig\000"
- 550      454E434F 
- 550      4445525F 
- 550      52657374 
- 550      6F726543 
- 551              	.LASF22:
- 552 018f 5350495F 		.ascii	"SPI_ENCODER_Wakeup\000"
- 552      454E434F 
- 552      4445525F 
- 552      57616B65 
- 552      757000
- 553              	.LASF11:
- 554 01a2 63686172 		.ascii	"char\000"
- 554      00
- 555              	.LASF19:
- 556 01a7 5350495F 		.ascii	"SPI_ENCODER_SaveConfig\000"
- 556      454E434F 
- 556      4445525F 
- 556      53617665 
- 556      436F6E66 
- 557              	.LASF4:
- 558 01be 6C6F6E67 		.ascii	"long int\000"
- 558      20696E74 
- 558      00
- 559              	.LASF18:
- 560 01c7 5350495F 		.ascii	"SPI_ENCODER_BACKUP_STRUCT\000"
- 560      454E434F 
- 560      4445525F 
- 560      4241434B 
- 560      55505F53 
- 561              	.LASF10:
- 562 01e1 646F7562 		.ascii	"double\000"
- 562      6C6500
- 563              	.LASF17:
- 564 01e8 636E7472 		.ascii	"cntrPeriod\000"
- 564      50657269 
- 564      6F6400
- 565              	.LASF3:
- 566 01f3 73686F72 		.ascii	"short unsigned int\000"
- 566      7420756E 
- 566      7369676E 
- 566      65642069 
- 566      6E7400
- 567              	.LASF0:
- 568 0206 7369676E 		.ascii	"signed char\000"
- 568      65642063 
- 568      68617200 
- 569              	.LASF14:
- 570 0212 6C6F6E67 		.ascii	"long double\000"
- 570      20646F75 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccrt5xUM.s 			page 15
+ 576              	.LASF3:
+ 577 00a8 73686F72 		.ascii	"short unsigned int\000"
+ 577      7420756E 
+ 577      7369676E 
+ 577      65642069 
+ 577      6E7400
+ 578              	.LASF20:
+ 579 00bb 5350495F 		.ascii	"SPI_ENCODER_RestoreConfig\000"
+ 579      454E434F 
+ 579      4445525F 
+ 579      52657374 
+ 579      6F726543 
+ 580              	.LASF19:
+ 581 00d5 5350495F 		.ascii	"SPI_ENCODER_SaveConfig\000"
+ 581      454E434F 
+ 581      4445525F 
+ 581      53617665 
+ 581      436F6E66 
+ 582              	.LASF9:
+ 583 00ec 666C6F61 		.ascii	"float\000"
+ 583      7400
+ 584              	.LASF23:
+ 585 00f2 5350495F 		.ascii	"SPI_ENCODER_rxBufferRead\000"
+ 585      454E434F 
+ 585      4445525F 
+ 585      72784275 
+ 585      66666572 
+ 586              	.LASF1:
+ 587 010b 756E7369 		.ascii	"unsigned char\000"
+ 587      676E6564 
+ 587      20636861 
+ 587      7200
+ 588              	.LASF13:
+ 589 0119 72656738 		.ascii	"reg8\000"
+ 589      00
+ 590              	.LASF5:
+ 591 011e 6C6F6E67 		.ascii	"long unsigned int\000"
+ 591      20756E73 
+ 591      69676E65 
+ 591      6420696E 
+ 591      7400
+ 592              	.LASF12:
+ 593 0130 75696E74 		.ascii	"uint8\000"
+ 593      3800
+ 594              	.LASF25:
+ 595 0136 5350495F 		.ascii	"SPI_ENCODER_rxBufferFull\000"
+ 595      454E434F 
+ 595      4445525F 
+ 595      72784275 
+ 595      66666572 
+ 596              	.LASF10:
+ 597 014f 646F7562 		.ascii	"double\000"
+ 597      6C6500
+ 598              	.LASF17:
+ 599 0156 636E7472 		.ascii	"cntrPeriod\000"
+ 599      50657269 
+ 599      6F6400
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQGtcVs.s 			page 15
 
 
- 570      626C6500 
- 571              	.LASF21:
- 572 021e 5350495F 		.ascii	"SPI_ENCODER_Sleep\000"
- 572      454E434F 
- 572      4445525F 
- 572      536C6565 
- 572      7000
- 573              	.LASF2:
- 574 0230 73686F72 		.ascii	"short int\000"
- 574      7420696E 
- 574      7400
- 575              	.LASF13:
- 576 023a 72656738 		.ascii	"reg8\000"
- 576      00
- 577              	.LASF15:
- 578 023f 73697A65 		.ascii	"sizetype\000"
- 578      74797065 
- 578      00
- 579              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 600              	.LASF8:
+ 601 0161 756E7369 		.ascii	"unsigned int\000"
+ 601      676E6564 
+ 601      20696E74 
+ 601      00
+ 602              	.LASF7:
+ 603 016e 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 603      206C6F6E 
+ 603      6720756E 
+ 603      7369676E 
+ 603      65642069 
+ 604              	.LASF29:
+ 605 0185 5350495F 		.ascii	"SPI_ENCODER_backup\000"
+ 605      454E434F 
+ 605      4445525F 
+ 605      6261636B 
+ 605      757000
+ 606              	.LASF15:
+ 607 0198 73697A65 		.ascii	"sizetype\000"
+ 607      74797065 
+ 607      00
+ 608              	.LASF24:
+ 609 01a1 5350495F 		.ascii	"SPI_ENCODER_rxBufferWrite\000"
+ 609      454E434F 
+ 609      4445525F 
+ 609      72784275 
+ 609      66666572 
+ 610              	.LASF6:
+ 611 01bb 6C6F6E67 		.ascii	"long long int\000"
+ 611      206C6F6E 
+ 611      6720696E 
+ 611      7400
+ 612              	.LASF11:
+ 613 01c9 63686172 		.ascii	"char\000"
+ 613      00
+ 614              	.LASF22:
+ 615 01ce 5350495F 		.ascii	"SPI_ENCODER_Wakeup\000"
+ 615      454E434F 
+ 615      4445525F 
+ 615      57616B65 
+ 615      757000
+ 616              	.LASF2:
+ 617 01e1 73686F72 		.ascii	"short int\000"
+ 617      7420696E 
+ 617      7400
+ 618              	.LASF21:
+ 619 01eb 5350495F 		.ascii	"SPI_ENCODER_Sleep\000"
+ 619      454E434F 
+ 619      4445525F 
+ 619      536C6565 
+ 619      7000
+ 620              	.LASF4:
+ 621 01fd 6C6F6E67 		.ascii	"long int\000"
+ 621      20696E74 
+ 621      00
+ 622              	.LASF16:
+ 623 0206 656E6162 		.ascii	"enableState\000"
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccQGtcVs.s 			page 16
+
+
+ 623      6C655374 
+ 623      61746500 
+ 624              	.LASF14:
+ 625 0212 6C6F6E67 		.ascii	"long double\000"
+ 625      20646F75 
+ 625      626C6500 
+ 626              	.LASF28:
+ 627 021e 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Documents\\GITHUB\\SoftHand-PR"
+ 627      73657273 
+ 627      5C4D6174 
+ 627      74696143 
+ 627      505C446F 
+ 628 024c 4F2D5053 		.ascii	"O-PSoC5\\firmware.cydsn\000"
+ 628      6F43355C 
+ 628      6669726D 
+ 628      77617265 
+ 628      2E637964 
+ 629              	.LASF0:
+ 630 0263 7369676E 		.ascii	"signed char\000"
+ 630      65642063 
+ 630      68617200 
+ 631              	.LASF27:
+ 632 026f 47656E65 		.ascii	"Generated_Source\\PSoC5\\SPI_ENCODER_PM.c\000"
+ 632      72617465 
+ 632      645F536F 
+ 632      75726365 
+ 632      5C50536F 
+ 633              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

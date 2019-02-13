@@ -18,14 +18,14 @@
 #include "SPI_ENCODER_PVT.h"
 
 #if(SPI_ENCODER_TX_SOFTWARE_BUF_ENABLED)
-    volatile uint8 SPI_ENCODER_txBuffer[SPI_ENCODER_TX_BUFFER_SIZE];
+    volatile uint16 SPI_ENCODER_txBuffer[SPI_ENCODER_TX_BUFFER_SIZE];
     volatile uint8 SPI_ENCODER_txBufferFull;
     volatile uint8 SPI_ENCODER_txBufferRead;
     volatile uint8 SPI_ENCODER_txBufferWrite;
 #endif /* (SPI_ENCODER_TX_SOFTWARE_BUF_ENABLED) */
 
 #if(SPI_ENCODER_RX_SOFTWARE_BUF_ENABLED)
-    volatile uint8 SPI_ENCODER_rxBuffer[SPI_ENCODER_RX_BUFFER_SIZE];
+    volatile uint16 SPI_ENCODER_rxBuffer[SPI_ENCODER_RX_BUFFER_SIZE];
     volatile uint8 SPI_ENCODER_rxBufferFull;
     volatile uint8 SPI_ENCODER_rxBufferRead;
     volatile uint8 SPI_ENCODER_rxBufferWrite;
@@ -491,7 +491,7 @@ uint8 SPI_ENCODER_ReadRxStatus(void)
 *  No.
 *
 *******************************************************************************/
-void SPI_ENCODER_WriteTxData(uint8 txData) 
+void SPI_ENCODER_WriteTxData(uint16 txData) 
 {
     #if(SPI_ENCODER_TX_SOFTWARE_BUF_ENABLED)
 
@@ -524,7 +524,7 @@ void SPI_ENCODER_WriteTxData(uint8 txData)
            (0u != (SPI_ENCODER_swStatusTx & SPI_ENCODER_STS_TX_FIFO_NOT_FULL)))
         {
             /* Put data element into the TX FIFO */
-            CY_SET_REG8(SPI_ENCODER_TXDATA_PTR, txData);
+            CY_SET_REG16(SPI_ENCODER_TXDATA_PTR, txData);
         }
         else
         {
@@ -559,7 +559,7 @@ void SPI_ENCODER_WriteTxData(uint8 txData)
         }
 
         /* Put data element into the TX FIFO */
-        CY_SET_REG8(SPI_ENCODER_TXDATA_PTR, txData);
+        CY_SET_REG16(SPI_ENCODER_TXDATA_PTR, txData);
 
     #endif /* (SPI_ENCODER_TX_SOFTWARE_BUF_ENABLED) */
 }
@@ -599,9 +599,9 @@ void SPI_ENCODER_WriteTxData(uint8 txData)
 *  No.
 *
 *******************************************************************************/
-uint8 SPI_ENCODER_ReadRxData(void) 
+uint16 SPI_ENCODER_ReadRxData(void) 
 {
-    uint8 rxData;
+    uint16 rxData;
 
     #if(SPI_ENCODER_RX_SOFTWARE_BUF_ENABLED)
 
@@ -630,7 +630,7 @@ uint8 SPI_ENCODER_ReadRxData(void)
 
     #else
 
-        rxData = CY_GET_REG8(SPI_ENCODER_RXDATA_PTR);
+        rxData = CY_GET_REG16(SPI_ENCODER_RXDATA_PTR);
 
     #endif /* (SPI_ENCODER_RX_SOFTWARE_BUF_ENABLED) */
 
@@ -808,7 +808,7 @@ void SPI_ENCODER_ClearRxBuffer(void)
     /* Clear Hardware RX FIFO */
     while(0u !=(SPI_ENCODER_RX_STATUS_REG & SPI_ENCODER_STS_RX_FIFO_NOT_EMPTY))
     {
-        (void) CY_GET_REG8(SPI_ENCODER_RXDATA_PTR);
+        (void) CY_GET_REG16(SPI_ENCODER_RXDATA_PTR);
     }
 
     #if(SPI_ENCODER_RX_SOFTWARE_BUF_ENABLED)
@@ -959,7 +959,7 @@ void SPI_ENCODER_ClearTxBuffer(void)
 *  No.
 *
 *******************************************************************************/
-void SPI_ENCODER_PutArray(const uint8 buffer[], uint8 byteCount)
+void SPI_ENCODER_PutArray(const uint16 buffer[], uint8 byteCount)
                                                                           
 {
     uint8 bufIndex;
@@ -999,7 +999,7 @@ void SPI_ENCODER_ClearFIFO(void)
     /* Clear Hardware RX FIFO */
     while(0u !=(SPI_ENCODER_RX_STATUS_REG & SPI_ENCODER_STS_RX_FIFO_NOT_EMPTY))
     {
-        (void) CY_GET_REG8(SPI_ENCODER_RXDATA_PTR);
+        (void) CY_GET_REG16(SPI_ENCODER_RXDATA_PTR);
     }
 
     enableInterrupts = CyEnterCriticalSection();

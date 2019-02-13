@@ -47,28 +47,26 @@
 
 //=============================================      global variables definition
 
-
 struct st_ref       g_ref, g_refNew, g_refOld;  // Motor reference variables.
 struct st_meas      g_meas, g_measOld;          // Measurements.
 struct st_data      g_rx;                       // Income data.
 struct st_mem       g_mem, c_mem;               // Memory variables.
 struct st_calib     calib;                      // Calibration variables.
-struct st_filter    filt_v, filt_curr_diff, filt_i;     // Voltage and current filter variables.
-struct st_filter    filt_vel[3];               // Velocity filter variables.
-struct st_filter    filt_emg1, filt_emg2;      // EMG filter variables.
+struct st_filter    filt_v[NUM_OF_MOTORS], filt_curr_diff, filt_i[NUM_OF_MOTORS];     // Voltage and current filter variables.
+struct st_filter    filt_vel[NUM_OF_SENSORS];                // Velocity filter variables.
+struct st_filter    filt_emg[NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS];                // EMG filter variables.
 
 // Timer value for debug field
-uint32  timer_value;
-uint32  timer_value0;
+uint16  timer_value;
+uint16  timer_value0;
 float   cycle_time;
 
 // Device Data
-int32   dev_tension;                        /*!< Power supply tension.*/
+int32   dev_tension[NUM_OF_MOTORS];         /*!< Power supply tension.*/
 uint8   dev_pwm_limit;                      /*!< Device pwm limit. It may change during execution.*/
 uint8   dev_pwm_sat = 100;                  /*!< Device pwm saturation. By default the saturation value must not exceed 100.*/
-int32   dev_tension_f;                      /*!< Filtered power supply tension.*/
-int32   pow_tension;                        /*!< Computed power supply tension.*/
-
+int32   dev_tension_f[NUM_OF_MOTORS];       /*!< Filtered power supply tension.*/
+int32   pow_tension[NUM_OF_MOTORS];         /*!< Computed power supply tension.*/
 
 counter_status CYDATA cycles_status = NONE;     /*!< Cycles counter state machine status.*/
 emg_status CYDATA emg_1_status = RESET;         /*!< First EMG sensor status.*/
@@ -85,38 +83,39 @@ uint8 rest_enabled;                         /*!< Rest position flag.*/
 uint8 forced_open;                          /*!< Forced open flag (used in position with rest position control).*/                               
 uint8 battery_low_SoC = FALSE;              /*!< Battery low State of Charge flag (re-open terminal device when active).*/
 uint8 change_ext_ref_flag = FALSE;          /*!< This flag is set when an external reference command is received.*/
+CYBIT reset_PSoC_flag = FALSE;              /*!< This flag is set when a board fw reset is necessary.*/
 
-// DMA Buffer
-int16 ADC_buf[4];                           /*! ADC measurements buffer.*/
-uint32 Enc_buf[N_ENCODERS];
+// ADC Buffer
+int16 ADC_buf[NUM_OF_ADC_CHANNELS_MAX];     /*! ADC measurements buffer.*/
+uint8 NUM_OF_ANALOG_INPUTS = 4;             /*! ADC currently configured channels.*/
 
 // PWM value
 int8 pwm_sign;                               /*!< Sign of pwm driven. Used to obtain current sign.*/
 
 // Encoder variables
-uint32 data_encoder_raw[NUM_OF_SENSORS];
+uint32 data_encoder_raw[N_ENCODERS_PER_LINE_MAX];
+uint8 N_Encoder_Line_Connected[N_ENCODER_LINE_MAX]; // Used to map how many encoders are connected to each CS pin, there are N_ENCODER_LINE_MAX CS on the board and each of them can contain N_ENCODERS_PER_LINE_MAX encoders
+uint16 Encoder_Value[N_ENCODER_LINE_MAX][N_ENCODERS_PER_LINE_MAX];
+uint8 Encoder_Check[N_ENCODER_LINE_MAX][N_ENCODERS_PER_LINE_MAX];
 
 // Rest Position variables
 int32 rest_pos_curr_ref;                     /*!< Rest position current reference.*/
 
 // SD variables
 FS_FILE * pFile;
-unsigned long write_bytes = 1000;
 
 // IMU variables
 uint8 N_IMU_Connected;
 uint8 IMU_connected[N_IMU_MAX];
 int imus_data_size;
 int single_imu_size[N_IMU_MAX];
-
 struct st_imu g_imu[N_IMU_MAX];
 struct st_imu g_imuNew[N_IMU_MAX];
-
 uint8 Accel[N_IMU_MAX][6];
 uint8 Gyro[N_IMU_MAX][6];
 uint8 Mag[N_IMU_MAX][6];
 uint8 MagCal[N_IMU_MAX][3];
 uint8 Temp[N_IMU_MAX][2];
-float Quat[4] = {1,0,0,0};
+float Quat[N_IMU_MAX][4];
 
 /* END OF FILE */

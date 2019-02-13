@@ -46,7 +46,8 @@
 #define UTILS_H_INCLUDED
 
 #include "globals.h"
-
+#include <math.h>
+    
 //------------------------------------------------------------------     DEFINES
 #define ZMAX 5				/*!< Constant useful for current estimation procedure.*/
 #define ZERO_TOL 100		/*!< Deadband used to put to zero the virtual position
@@ -98,20 +99,6 @@ int32 curr_estim( int32 pos, int32 vel, int32 acc);
 **/
 uint32 my_mod(int32 val, int32 divisor);
 
-
-
-
-
-
-
-/**	This function controls if the read encoder data is correct or not.
- *
- * \param value 	A pointer to the encoder data read 
- *
- * \return Returns 1 if the read data is correct, 0 otherwise	
-**/
-CYBIT check_enc_data(const uint32* value);
-
 /**	This function is used at startup to reconstruct the correct turn of the shaft
  *  connected to the motor. It need two encoders to work.
  *
@@ -138,6 +125,8 @@ void check_rest_position();
 void LED_control(uint8 mode);
 
 void battery_management();
+
+void ADC_Set_N_Channels();
 
 /** This function reset statistics counters **/
 void reset_counters();

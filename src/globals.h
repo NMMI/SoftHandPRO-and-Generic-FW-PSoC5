@@ -48,6 +48,7 @@
 // -----------------------------------------------------------------------------
 
 //=================================================================     includes
+#include "FIRMWARE_CONFIGURATION.h"
 #include "device.h"
 #include "stdlib.h"
 #include "string.h"
@@ -60,17 +61,17 @@
 //                                                                        DEVICE
 //==============================================================================
 
-#define VERSION                 "SoftHand PRO firmware v. 1.4.1 (PSoC5)"
-
+#define NUM_OF_MOTORS           2       /*!< Number of motors.*/
 #define NUM_OF_SENSORS          3       /*!< Number of encoders.*/
-#define NUM_OF_EMGS             2       /*!< Number of emg channels.*/
-#define NUM_OF_ANALOG_INPUTS    4       /*!< Total number of analogic inputs.*/
-#define NUM_OF_PARAMS           31      /*!< Number of parameters saved in the EEPROM.*/
-#define N_IMU_MAX               3    
+#define NUM_OF_INPUT_EMGS       2       /*!< Number of emg channels.*/
+#define NUM_OF_ADDITIONAL_EMGS  6       /*!< Number of additional emg channels.*/
+#define NUM_OF_ADC_CHANNELS_MAX (4+NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS)    
+#define NUM_OF_PARAMS           42      /*!< Number of parameters saved in the EEPROM.*/
+#define N_IMU_MAX               5    
 #define NUM_OF_IMU_DATA         5       // accelerometers, gyroscopes, magnetometers, quaternion and temperature data
-    
+#define N_ENCODER_LINE_MAX      2       /*!< Max number of CS lines which can contain encoders.*/
+#define N_ENCODERS_PER_LINE_MAX 5       /*!< Max number of encoders per line.*/
 #define N_ENCODERS              NUM_OF_SENSORS
-#define N_BITS_ENCODER          18
 //==============================================================================
 //                                                               SYNCHRONIZATION
 //==============================================================================
@@ -118,6 +119,18 @@
 #define EXP_SD_RTC     1
 #define EXP_WIFI       2
 #define EXP_OTHER      3    
+
+//==============================================================================
+//                                                             MOTOR DRIVER TYPE
+//==============================================================================
+#define DRIVER_MC33887  0       // Standard motor driver
+#define DRIVER_VNH5019  1       // High power motor driver
+ 
+//==============================================================================
+//                                                                     HAND SIDE
+//==============================================================================
+#define RIGHT_HAND              0
+#define LEFT_HAND               1   
     
 //==============================================================================
 //                                                                         OTHER
@@ -125,18 +138,13 @@
 
 #define FALSE                   0
 #define TRUE                    1
-
 #define DEFAULT_EEPROM_DISPLACEMENT 50  /*!< Number of pages occupied by the EEPROM.*/
 #define EEPROM_BYTES_ROW        16      /*!< EEPROM number of bytes per row.*/
 #define EEPROM_COUNTERS_ROWS    6       /*!< EEPROM number of rows dedicated to store counters.*/
-
 #define PWM_MAX_VALUE           100     /*!< Maximum value of the PWM signal.*/
-
 #define ANTI_WINDUP             1000    /*!< Anti windup saturation.*/ 
 #define DEFAULT_CURRENT_LIMIT   1500    /*!< Default Current limit, 0 stands for unlimited.*/
-
 #define CURRENT_HYSTERESIS      10      /*!< milliAmperes of hysteresis for current control.*/
-
 #define EMG_SAMPLE_TO_DISCARD   500     /*!< Number of sample to discard before calibration.*/
 #define SAMPLES_FOR_MEAN        100     /*!< Number of samples used to mean current values.*/
 #define SAMPLES_FOR_EMG_MEAN    1000    /*!< Number of samples used to mean emg values.*/
@@ -144,13 +152,10 @@
 #define POS_INTEGRAL_SAT_LIMIT  50000000    /*!< Anti windup on position control.*/
 #define CURR_INTEGRAL_SAT_LIMIT 100000      /*!< Anti windup on current control.*/
 #define PWM_RATE_LIMITER_MAX	1
-#define SAFE_STARTUP_MOTOR_READINGS 5000    /*!< Number of encoder readings after position reconstruction before activating motor.*/
+#define SAFE_STARTUP_MOTOR_READINGS 8000    /*!< Number of encoder readings after position reconstruction before activating motor.*/
 #define LOOKUP_DIM              6           /*!< Dimension of the current lookup table.*/
-    
 #define PREREVISION_CYCLES      400000      /*!< Number of SoftHand Pro cycles before maintenance.*/    
 
-#define RIGHT_HAND              0
-#define LEFT_HAND               1   
 //==============================================================================
 //                                                        structures definitions
 //==============================================================================
@@ -172,13 +177,14 @@ struct st_ref {
 **/
 struct st_meas {
     int32 pos[NUM_OF_SENSORS];      /*!< Encoder sensor position.*/
-    int32 curr;                     /*!< Motor current.*/
+    int32 curr[NUM_OF_MOTORS];      /*!< Motor current.*/
     int32 estim_curr;               /*!< Current estimation.*/
     int8 rot[NUM_OF_SENSORS];       /*!< Encoder sensor rotations.*/
 
-    int32 emg[NUM_OF_EMGS];         /*!< EMG sensors values.*/
-    int32 vel[NUM_OF_SENSORS];      /*!< Encoder rotational velocity.*/
-    int32 acc[NUM_OF_SENSORS];      /*!< Encoder rotational acceleration.*/
+    int32 emg[NUM_OF_INPUT_EMGS];           /*!< EMG sensors values.*/
+    int32 vel[NUM_OF_SENSORS];              /*!< Encoder rotational velocity.*/
+    int32 acc[NUM_OF_SENSORS];              /*!< Encoder rotational acceleration.*/
+    int32 add_emg[NUM_OF_ADDITIONAL_EMGS];  /*!< Additional EMG sensors values.*/
 };
 
 //==============================================================     data packet
@@ -198,23 +204,43 @@ struct st_data {
 **/
 // Since PSOC5 ARM memory is 4-bytes aligned, st_mem structure variables are not contiguous
 struct st_mem {
+    
+//------------------------------------------------ COUNTERS -------------------------------------------------//    
+    
+    uint32  emg_counter[2];             /*!< Counter for EMG activation - both channels.*/                  //8
+    //End of row one. position_hist[0] and position_hist[1] are on row one.
+    uint32  position_hist[10];          /*!< Positions histogram - 10 zones.*/                              //40
+    //End of row three.
+    uint32  current_hist[4];            /*!< Current histogram - 4 zones.*/                                 //16
+    //End of row four.
+    uint32  rest_counter;               /*!< Counter for rest position occurrences.*/                       //4
+    uint32  wire_disp;                  /*!< Counter for total wire displacement measurement.*/             //4
+    uint32  total_time_on;              /*!< Total time of system power (in seconds).*/                     //4
+    uint32  total_time_rest;            /*!< Total time of system while rest position is maintained.*/      //4
+    //End of row five.
+    uint8   curr_time[6];               /*!< Current time from RTC (DD/MM/YY HH:MM:SS).*/                   //6 
+    uint8   unused_bytes1[74];
+    // End of row ten.
+
+//-------------------------------------------- MEMORY VARIABLES ---------------------------------------------// 
+    
     uint8   flag;                       /*!< If checked the device has been configured.*/                   //1
     uint8   id;                         /*!< Device id.*/                                                   //1
                                                                                                             //2 bytes free (word-aligned)
     int32   k_p;                        /*!< Position controller proportional constant.*/                   //4
     int32   k_i;                        /*!< Position controller integrative constant.*/                    //4
     int32   k_d;                        /*!< Position controller derivative constant.*/                     //4
-    // End of row one.
+    // End of row eleven.
     int32   k_p_c;                      /*!< Current controller proportional constant.*/                    //4
     int32   k_i_c;                      /*!< Current controller integrative constant.*/                     //4
     int32   k_d_c;                      /*!< Current controller derivative constant.*/                      //4 
     int32   k_p_dl;                     /*!< Double loop position controller prop. constant.*/              //4
-    // End of row two.
+    // End of row twelve.
     int32   k_i_dl;                     /*!< Double loop position controller integr. constant.*/            //4     
     int32   k_d_dl;                     /*!< Double loop position controller deriv. constant.*/             //4
     int32   k_p_c_dl;                   /*!< Double loop current controller prop. constant.*/               //4
     int32   k_i_c_dl;                   /*!< Double loop current controller integr. constant.*/             //4
-    // End of row three.
+    // End of row thirteen.
     int32   k_d_c_dl;                   /*!< Double loop current controller deriv. constant.*/              //4     
     uint8   activ;                      /*!< Startup activation.*/                                          //1
     uint8   input_mode;                 /*!< Motor Input mode.*/                                            //1 
@@ -222,66 +248,59 @@ struct st_mem {
     uint8   res[NUM_OF_SENSORS];        /*!< Angle resolution.*/                                            //3
                                                                                                             //2 bytes free (word-aligned)
     int32   m_off[NUM_OF_SENSORS];      /*!< Measurement offset.*/                                          //12
-    //End of row four. Second and third offset is on row five.  
-    float32   m_mult[NUM_OF_SENSORS];     /*!< Measurement multiplier.*/                                    //12
-    //End of row five. Third multiplier is on row six.
+    //End of row fourteen. Second and third offset is on row fifteen.  
+    float32 m_mult[NUM_OF_SENSORS];     /*!< Measurement multiplier.*/                                    //12
+    //End of row fifteen. Third multiplier is on row sixteen.
     uint8   pos_lim_flag;               /*!< Position limit active/inactive.*/                              //1
                                                                                                             //3 bytes free (word-aligned)
     int32   pos_lim_inf;                /*!< Inferior position limit for motor.*/                           //4     
     int32   pos_lim_sup;                /*!< Superior position limit for motor.*/                           //4
-    // End of row six.
+    // End of row sixteen.
     int32   max_step_neg;               /*!< Maximum number of steps per cycle for negative positions.*/    //4
     int32   max_step_pos;               /*!< Maximum number of steps per cycle for positive positions.*/    //4          
     int16   current_limit;              /*!< Limit for absorbed current.*/                                  //2
-    uint16  emg_threshold[NUM_OF_EMGS]; /*!< Minimum value for activation of EMG control.*/                 //4
+    uint16  emg_threshold[NUM_OF_INPUT_EMGS]; /*!< Minimum value for activation of EMG control.*/                 //4
     uint8   emg_calibration_flag;       /*!< Enable emg calibration on startup.*/                           //1  
                                                                                                             //1 bytes free (word-aligned)    
-    // End of row seven.
-    uint32  emg_max_value[NUM_OF_EMGS]; /*!< Maximum value for EMG.*/                                       //8     
+    // End of row seventeen.
+    uint32  emg_max_value[NUM_OF_INPUT_EMGS]; /*!< Maximum value for EMG.*/                                       //8     
     uint8   emg_speed;                  /*!< Maximum closure speed when using EMG.*/                        //1
     uint8   double_encoder_on_off;      /*!< Double encoder ON/OFF.*/                                       //1
     int8    motor_handle_ratio;         /*!< Discrete multiplier for handle device.*/                       //1 
     uint8   activate_pwm_rescaling;     /*!< Activation of PWM rescaling for 12V motor.*/                   //1
     float   curr_lookup[LOOKUP_DIM];    /*!< Table of values to get estimated curr.*/                       //24
-    // End of row eight. curr_lookup[0] is on row eight but curr_lookup[1:4] is on row nine. 
-    // End of row nine. curr_lookup[5] is on row ten. 
+    // End of row eighteen. curr_lookup[0] is on row eighteen but curr_lookup[1:4] is on row nineteen. 
+    // End of row nineteen. curr_lookup[5] is on row twenty. 
     uint8   baud_rate;                  /*!< Baud Rate setted.*/                                            //1
     uint8   maint_day;                  /*!< Date of last maintenance.*/                                    //1
     uint8   maint_month;                /*!< Date of last maintenance.*/                                    //1
     uint8   maint_year;                 /*!< Date of last maintenance.*/                                    //1
     int32   rest_pos;                   /*!< Hand rest position while in EMG mode.*/                        //4
     int32   rest_delay;                 /*!< Hand rest position delay while in EMG mode.*/                  //4
-    // End of row ten.
+    // End of row twenty.
     int32   rest_vel;                   /*!< Hand velocity closure for rest position reaching.*/             //4
     uint8   rest_position_flag;         /*!< Enable rest position feature.*/                                //1
     uint8   switch_emg;                 /*!< EMG opening/closure switch.*/  
     uint8   right_left;                 /*!< Right/Left hand.*/   	//1    
     uint8   read_imu_flag;              /*!< Enable IMU reading feature.*/                                  //1
     uint8   read_exp_port_flag;         /*!< Enable Expansion Port.*/                                       //1
-    uint8   unused_bytes[23];
-    // End of row twelve. unused_bytes[0:6] are on row eleven, while the others in row twelve.
-    uint32  emg_counter[2];             /*!< Counter for EMG activation - both channels.*/                  //8
-    //End of row thirteen. position_hist[0] and position_hist[1] are on row thirteen.
-    uint32  position_hist[10];          /*!< Positions histogram - 10 zones.*/                              //40
-    //End of row fifteen.
-    uint32  current_hist[4];            /*!< Current histogram - 4 zones.*/                                 //16
-    //End of row sixteen.
-    uint32  rest_counter;               /*!< Counter for rest position occurrences.*/                       //4
-    uint32  wire_disp;                  /*!< Counter for total wire displacement measurement.*/             //4
-    uint32  total_time_on;              /*!< Total time of system power (in seconds).*/                     //4
-    uint32  total_time_rest;            /*!< Total time of system while rest position is maintained.*/      //4
-    //End of row seventeen.
-    uint8   curr_time[6];               /*!< Current time from RTC (DD/MM/YY HH:MM:SS).*/                   //6 
-    uint8   unused_bytes1[10];
-    // End of row eighteen.
-    // IMU
-    uint8   SPI_read_delay;             // delay on SPI reading
-    uint8   IMU_conf[N_IMU_MAX][NUM_OF_IMU_DATA];     // IMU default configuration               85
+    uint8   unused_bytes[7];
+    // End of row twenty-one.   
+    uint8   SPI_read_delay;             /*!< Delay on SPI reading.*/                                        //1
+    uint8   IMU_conf[N_IMU_MAX][NUM_OF_IMU_DATA];        /*!< IMUs configuration flags.*/                   //25
+    // End of row twenty-two. IMU_conf[3][] and IMU_conf[4][] are on row twenty-three.
+    uint8   Encoder_conf[N_ENCODER_LINE_MAX][N_ENCODERS_PER_LINE_MAX]; /*!< Encoder configuration flags.*/  //10
+    // End of row twenty-three. Encoder_conf[1][1..4] are on row twenty-four.
+    uint8   ADC_conf[NUM_OF_ADC_CHANNELS_MAX];          /*!< ADC configuration flags.*/                     //12
+    // End of row twenty-four.
+    uint8   read_emg_sensors_port_flag; /*!< Enable EMG sensors Port.*/                                     //1
+    uint8   use_2nd_motor_flag;         /*!< Use 2nd motor (2 powers).*/                                    //1
+    uint8   motor_driver_type[NUM_OF_MOTORS];           /*!< Specify motor type.*/                          //2
 };
 
 //=================================================     IMU variables
 struct st_imu {
-    uint8 flags;        // Flags to know what we are reading (0/1) from each imu [ accel | gyro | magn ]
+    uint8 flags;        // Flags to know what we are reading (0/1) from each imu [ accel | gyro | magn | quat | temp ]
     int16 accel_value[3];
     int16 gyro_value[3];
     int16 mag_value[3];
@@ -336,19 +355,19 @@ extern struct st_meas   g_meas, g_measOld;          /*!< Measurements.*/
 extern struct st_data   g_rx;                       /*!< Incoming/Outcoming data.*/
 extern struct st_mem    g_mem, c_mem;               /*!< Memory parameters.*/
 extern struct st_calib  calib;                      /*!< Calibration variables.*/
-extern struct st_filter filt_v, filt_curr_diff, filt_i;     /*!< Voltage and current filter variables.*/
-extern struct st_filter filt_vel[3];                /*!< Velocity filter variables.*/
-extern struct st_filter filt_emg1, filt_emg2;       /*!< EMG filter variables.*/
+extern struct st_filter filt_v[NUM_OF_MOTORS], filt_curr_diff, filt_i[NUM_OF_MOTORS];     /*!< Voltage and current filter variables.*/
+extern struct st_filter filt_vel[NUM_OF_SENSORS];                /*!< Velocity filter variables.*/
+extern struct st_filter filt_emg[NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS]; /*!< EMG filter variables.*/
 
-extern uint32 timer_value;                          /*!< End time of the firmware main loop.*/
-extern uint32 timer_value0;                         /*!< Start time of the firmware main loop.*/
+extern uint16 timer_value;                          /*!< End time of the firmware main loop.*/
+extern uint16 timer_value0;                         /*!< Start time of the firmware main loop.*/
 extern float cycle_time;							/*!< Variable used to calculate how much time a cycle takes.*/
 
-extern int32    dev_tension;                        /*!< Power supply tension.*/
+extern int32    dev_tension[NUM_OF_MOTORS];         /*!< Power supply tension.*/
 extern uint8    dev_pwm_limit;                      /*!< Device pwm limit. It may change during execution.*/
 extern uint8    dev_pwm_sat;                        /*!< Device pwm saturation.*/
-extern int32    dev_tension_f;                      /*!< Filtered power supply tension.*/
-extern int32    pow_tension;                        /*!< Computed power supply tension.*/
+extern int32    dev_tension_f[NUM_OF_MOTORS];       /*!< Filtered power supply tension.*/
+extern int32    pow_tension[NUM_OF_MOTORS];         /*!< Computed power supply tension.*/
 
 extern counter_status CYDATA cycles_status;         /*!< Cycles counter state machine status.*/
 extern emg_status CYDATA emg_1_status;              /*!< First EMG sensor status.*/
@@ -365,23 +384,26 @@ extern uint8 rest_enabled;                          /*!< Rest position flag.*/
 extern uint8 forced_open;                           /*!< Forced open flag (used in position with rest position control).*/
 extern uint8 battery_low_SoC;                       /*!< Battery low State of Charge flag (re-open terminal device when active).*/
 extern uint8 change_ext_ref_flag;                   /*!< This flag is set when an external reference command is received.*/
+extern CYBIT reset_PSoC_flag;                       /*!< This flag is set when a board fw reset is necessary.*/
 
-// DMA Buffer
-extern int16 ADC_buf[4];                            /*! ADC measurements buffer.*/
-extern uint32 Enc_buf[N_ENCODERS];
+// ADC Buffer
+extern int16 ADC_buf[NUM_OF_ADC_CHANNELS_MAX];      /*! ADC measurements buffer (sizeof buffer equal to maximum number of ADC channels).*/
+extern uint8 NUM_OF_ANALOG_INPUTS;                  /*! ADC currently configured channels.*/
 
 // PWM value
 extern int8 pwm_sign;                               /*!< Sign of pwm driven. Used to obtain current sign.*/
 
 // Encoder variables
-extern uint32 data_encoder_raw[NUM_OF_SENSORS];
+extern uint32 data_encoder_raw[N_ENCODERS_PER_LINE_MAX];
+extern uint8 N_Encoder_Line_Connected[N_ENCODER_LINE_MAX]; // Used to map how many encoders are connected to each CS pin, there are N_ENCODER_LINE_MAX CS on the board and each of them can contain N_ENCODERS_PER_LINE_MAX encoders
+extern uint16 Encoder_Value[N_ENCODER_LINE_MAX][N_ENCODERS_PER_LINE_MAX];
+extern uint8 Encoder_Check[N_ENCODER_LINE_MAX][N_ENCODERS_PER_LINE_MAX];
 
 // Rest Position variables
 extern int32 rest_pos_curr_ref;                     /*!< Rest position current reference.*/
 
 // SD variables
 extern FS_FILE * pFile;
-extern unsigned long write_bytes;
 
 // IMU variables
 extern uint8 N_IMU_Connected;
@@ -389,13 +411,12 @@ extern uint8 IMU_connected[N_IMU_MAX];
 extern int imus_data_size;
 extern int single_imu_size[N_IMU_MAX];
 extern struct st_imu g_imu[N_IMU_MAX], g_imuNew[N_IMU_MAX];
-
 extern uint8 Accel[N_IMU_MAX][6];
 extern uint8 Gyro[N_IMU_MAX][6];
 extern uint8 Mag[N_IMU_MAX][6];
 extern uint8 MagCal[N_IMU_MAX][3];
 extern uint8 Temp[N_IMU_MAX][2];
-extern float Quat[4];
+extern float Quat[N_IMU_MAX][4];
 
 // -----------------------------------------------------------------------------
 

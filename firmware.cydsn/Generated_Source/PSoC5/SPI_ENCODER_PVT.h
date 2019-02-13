@@ -34,14 +34,14 @@ extern volatile uint8 SPI_ENCODER_swStatusTx;
 extern volatile uint8 SPI_ENCODER_swStatusRx;
 
 #if(SPI_ENCODER_TX_SOFTWARE_BUF_ENABLED)
-    extern volatile uint8 SPI_ENCODER_txBuffer[SPI_ENCODER_TX_BUFFER_SIZE];
+    extern volatile uint16 SPI_ENCODER_txBuffer[SPI_ENCODER_TX_BUFFER_SIZE];
     extern volatile uint8 SPI_ENCODER_txBufferRead;
     extern volatile uint8 SPI_ENCODER_txBufferWrite;
     extern volatile uint8 SPI_ENCODER_txBufferFull;
 #endif /* (SPI_ENCODER_TX_SOFTWARE_BUF_ENABLED) */
 
 #if(SPI_ENCODER_RX_SOFTWARE_BUF_ENABLED)
-    extern volatile uint8 SPI_ENCODER_rxBuffer[SPI_ENCODER_RX_BUFFER_SIZE];
+    extern volatile uint16 SPI_ENCODER_rxBuffer[SPI_ENCODER_RX_BUFFER_SIZE];
     extern volatile uint8 SPI_ENCODER_rxBufferRead;
     extern volatile uint8 SPI_ENCODER_rxBufferWrite;
     extern volatile uint8 SPI_ENCODER_rxBufferFull;

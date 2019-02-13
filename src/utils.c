@@ -43,7 +43,6 @@
 */
 
 #include "utils.h"
-#include <math.h>
 
 //==============================================================================
 //                                                            Current Estimation
@@ -96,26 +95,6 @@ int32 filter(int32 new_value, struct st_filter *f) {
 }
 
 //==============================================================================
-//                                                                CHECK ENC DATA
-//==============================================================================
-
-// Returns 1 if the encoder data is correct, 0 otherwise
-
-CYBIT check_enc_data(const uint32 *value) {
-
-    const uint8* CYIDATA p = (const uint8*)value;
-    uint8 CYDATA a = *p;
-
-    a = a ^ *(++p);
-    a = a ^ *(++p);
-    a = a ^ *(++p);
-    a = (a & 0x0F) ^ (a>>4);
-
-    return (0x9669 >> a) & 0x01;
-    //0x9669 is a bit vector representing the !(bitwise XOR) of 4bits
-}
-
-//==============================================================================
 //                                                                        MODULE
 //==============================================================================
 
@@ -135,8 +114,8 @@ uint32 my_mod(int32 val, int32 divisor) {
 
 void calibration(void) {
     static uint8 direction;                 //0 closing, 1 opening.
-    static uint16 closure_counter;          //Range [0 - 2^16].
-    static CYBIT count_one = 1;             //Used to count only one cycle, when inputs are generated
+    static uint16 closure_counter = 0;          //Range [0 - 2^16].
+    //static CYBIT count_one = 1;             //Used to count only one cycle, when inputs are generated
                                             //and pass the threshold, having the condition verified.
 
     // closing
@@ -151,7 +130,7 @@ void calibration(void) {
         if (SIGN(g_refNew.pos) != 1) {
             direction = 0;
             closure_counter++;
-            count_one = 1;          // Enables back the cycles counter
+//            count_one = 1;          // Enables back the cycles counter
             if (closure_counter == calib.repetitions) {
                 closure_counter = 0;
                 calib.enabled = FALSE;
@@ -381,7 +360,7 @@ void battery_management() {
         if (v_count_lb >= 11000){
             // Disable motor because we are sure of not fully charged battery and terminal device has opened
             g_refNew.onoff = 0x00;
-            MOTOR_ON_OFF_Write(g_refNew.onoff); // Deactivate motor
+            MOTOR_ON_OFF_1_Write(g_refNew.onoff); // Deactivate motor
             v_count_lb = 0;
         }
         else
@@ -392,11 +371,16 @@ void battery_management() {
     */   
         // The board LED is still or blinks depending on attached battery State of Charge
         if (tension_valid == TRUE && ((c_mem.input_mode <= 1)  ||
-            (c_mem.input_mode > 1 && emg_1_status == NORMAL && emg_2_status == NORMAL)) ){        
-            dev_tension_f = filter(dev_tension, &filt_v);
-            // Parrot: 0.9, 0.87
+            (c_mem.input_mode > 1 && emg_1_status == NORMAL && emg_2_status == NORMAL)) ){ 
+            dev_tension_f[0] = filter(dev_tension[0], &filt_v[0]);            
+            if (c_mem.use_2nd_motor_flag == TRUE) {
+                dev_tension_f[1] = filter(dev_tension[1], &filt_v[1]);
+            }
+            
+            // Note: Sometimes pow_tension is not well computed when using power supply
+            // Parrot/Renata: 0.9, 0.87
             // ARTS: 0.87, 0.8
-            if (dev_tension_f > 0.95 * pow_tension){        // Sometimes pow_tension is not well computed when using power supply
+            if (dev_tension_f[0] > 0.95 * pow_tension[0] && (c_mem.use_2nd_motor_flag == FALSE || dev_tension_f[1] > 0.95 * pow_tension[1])){
                 //fixed
                 if (!maintenance_flag)
                     LED_control(0);     // NO LIGHT - all leds off
@@ -405,7 +389,7 @@ void battery_management() {
             }
             
             else {
-                if (dev_tension_f > 0.9 * pow_tension) {
+                if (dev_tension_f[0] > 0.9 * pow_tension[0] && (c_mem.use_2nd_motor_flag == FALSE || dev_tension_f[1] > 0.9 * pow_tension[1])) {
                     //yellow light - blink @ 0.5 Hz
                     //LED_control(2);   
                     
@@ -444,6 +428,39 @@ void battery_management() {
     /*
     }
     */  
+}
+
+//==============================================================================
+//                                                         ADC SET CHANNELS USED
+//==============================================================================
+void ADC_Set_N_Channels() {
+    // Set right number of ADC channels to sample according to chosen flags
+    
+    NUM_OF_ANALOG_INPUTS = 4;       // Voltage_Sense_1
+                                    // Current_Sense_1
+                                    // EMG_A
+                                    // EMG_B
+
+#ifdef GENERIC_FW    
+    if (c_mem.use_2nd_motor_flag == TRUE){
+        // add 2nd power
+        NUM_OF_ANALOG_INPUTS = 6;   // Voltage_Sense_2
+                                    // Current_Sense_2
+    }
+    
+    if (c_mem.read_emg_sensors_port_flag == TRUE){
+        // add all emg channels
+        NUM_OF_ANALOG_INPUTS = 12;  // EMG_1
+                                    // EMG_2
+                                    // EMG_3
+                                    // EMG_4
+                                    // EMG_5
+                                    // EMG_6
+    }
+#endif
+
+    ADC_N_CHANNELS_USED_Write(NUM_OF_ANALOG_INPUTS - 1);
+    
 }
 
 //==============================================================================
@@ -504,4 +521,5 @@ void v4_normalize(float v4_in[4]){
     v4_in[2] = v4_in[2]*norm;
     v4_in[3] = v4_in[3]*norm;
 }
+
 /* [] END OF FILE */

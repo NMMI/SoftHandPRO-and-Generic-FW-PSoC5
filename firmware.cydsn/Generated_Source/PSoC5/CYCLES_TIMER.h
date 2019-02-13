@@ -37,7 +37,7 @@ extern uint8 CYCLES_TIMER_initVar;
 **************************************/
 
 #define CYCLES_TIMER_Resolution                 16u
-#define CYCLES_TIMER_UsingFixedFunction         0u
+#define CYCLES_TIMER_UsingFixedFunction         1u
 #define CYCLES_TIMER_UsingHWCaptureCounter      0u
 #define CYCLES_TIMER_SoftwareCaptureMode        0u
 #define CYCLES_TIMER_SoftwareTriggerMode        0u

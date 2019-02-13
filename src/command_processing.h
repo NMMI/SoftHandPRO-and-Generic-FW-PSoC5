@@ -53,6 +53,13 @@
 
 //=================================================================     includes
 #include "globals.h" // ALL GLOBAL DEFINITIONS, STRUCTURES AND MACROS HERE
+#include "IMU_functions.h"
+#include "Encoder_functions.h"
+#include "SD_RTC_functions.h"
+#include "interruptions.h"
+#include "utils.h"
+#include "commands.h"
+#include <stdio.h>
 
 //==============================================================================
 //                                                          function definitions
@@ -76,6 +83,27 @@ void    prepare_generic_info(char *info_string);
  * \param 	info_string 	An array of chars containing the requested information.
 **/
 void    prepare_counter_info(char *info_string);
+
+//============================================================  prepare_SD_info
+/** This function is used to prepare an information string to be on a SD card
+ *
+ * \param 	info_string 	An array of chars containing the requested information.
+**/
+void    prepare_SD_info(char *info_string);
+
+//============================================================  prepare_SD_param_info
+/** This function is used to prepare an information string to be on a SD card
+ *
+ * \param 	info_string 	An array of chars containing the requested information.
+**/
+void    prepare_SD_param_info(char *info_string);
+
+//============================================================  prepare_SD_legend
+/** This function is used to prepare an information string to be on a SD card
+ *
+ * \param 	info_string 	An array of chars containing the requested information.
+**/
+void    prepare_SD_legend(char *info_string);
 
 //============================================================  IMU_reading_info
 /** This function is used to prepare an information string about the IMU sensors
@@ -212,6 +240,13 @@ uint8   memRestore         ();
 **/
 uint8   memInit            ();
 
+//============================================================  memInitSoftHand
+/** This functions initializes the memory. It is used also to restore the
+ * 	the parameters to their default values. Specific for SoftHand firmware
+ *
+**/
+void   memInit_SoftHand            ();
+
 /** \} */
 
 
@@ -329,6 +364,26 @@ void cmd_ping();
 /** This function gets IMU readings
 **/
 void cmd_get_imu_readings();
+
+//============================================================  cmd_get_encoder_map
+/** This function gets Encoder map
+**/
+void cmd_get_encoder_map();
+
+//============================================================  cmd_get_encoder_raw
+/** This function gets Encoder raw values
+**/
+void cmd_get_encoder_raw();
+
+//============================================================  cmd_get_ADC_map
+/** This function gets ADC map
+**/
+void cmd_get_ADC_map();
+
+//============================================================  cmd_get_ADC_raw
+/** This function gets Additional emg raw values
+**/
+void cmd_get_ADC_raw();
 
 #endif
 
