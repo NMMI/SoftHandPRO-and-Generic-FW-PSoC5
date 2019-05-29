@@ -48,20 +48,20 @@ set_location_hint "Net_1628" 1 1 0 3
 set_location_hint "Net_1630" 1 1 1 0
 set_location_hint "Net_2501" 1 1 1 1
 set_location_hint "Net_3039" 1 1 1 2
-set_location_hint "Net_3065" 1 1 1 3
-set_location_hint "\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0\" 1 1 2 
-set_location_hint "\SPI_IMU:BSPIM:RxStsReg\" 1 1 4 
+set_location_hint "Net_3064" 1 1 1 3
+set_location_hint "\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0\" 1 1 2 
 set_location_hint "\Chip_Select_IMU:Sync:ctrl_reg\" 1 1 6
-set_location_hint "Net_3040" 0 1 0 0
+set_location_hint "MISO_ENCODER(0)_SYNC" 1 1 5 -1
+set_location_hint "Net_9969" 0 1 0 0
 set_location_hint "\PWM_MOTORS:PWMUDB:runmode_enable\" 0 1 0 1
-set_location_hint "Net_3017" 0 1 0 2
-set_location_hint "Net_3022" 0 1 0 3
-set_location_hint "Net_3024" 0 1 1 0
-set_location_hint "Net_3023" 0 1 1 1
-set_location_hint "Net_3026" 0 1 1 2
+set_location_hint "Net_9990" 0 1 0 2
+set_location_hint "Net_9749" 0 1 0 3
+set_location_hint "Net_9759" 0 1 1 0
+set_location_hint "Net_9767" 0 1 1 1
+set_location_hint "Net_9772" 0 1 1 2
 set_location_hint "Net_5205" 0 1 1 3
-set_location_hint "\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1\" 0 1 2 
-set_location_hint "\FF_STATUS:sts:sts_reg\" 0 1 4 
+set_location_hint "\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1\" 0 1 2 
+set_location_hint "\SPI_IMU:BSPIM:RxStsReg\" 0 1 4 
 set_location_hint "\ADC_SOC:Sync:ctrl_reg\" 0 1 6
 set_location_hint "cy_srff_1" 0 0 0 0
 set_location_hint "cy_srff_2" 0 0 0 1
@@ -69,26 +69,26 @@ set_location_hint "\COUNTER_ENC:CounterUDB:reload\" 0 0 0 2
 set_location_hint "\UART_RS485:BUART:rx_status_4\" 0 0 0 3
 set_location_hint "\COUNTER_ENC:CounterUDB:overflow_reg_i\" 0 0 1 0
 set_location_hint "\COUNTER_ENC:CounterUDB:prevCompare\" 0 0 1 1
-set_location_hint "Net_2790" 0 0 1 2
-set_location_hint "Net_2780" 0 0 1 3
-set_location_hint "\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2\" 0 0 2 
-set_location_hint "\ADC_STATUS:sts:sts_reg\" 0 0 4 
+set_location_hint "Net_9776" 0 0 1 2
+set_location_hint "Net_9774" 0 0 1 3
+set_location_hint "\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2\" 0 0 2 
+set_location_hint "\FF_STATUS:sts:sts_reg\" 0 0 4 
 set_location_hint "\RESET_COUNTERS:Sync:ctrl_reg\" 0 0 6
 set_location_hint "AMuxHw_Decoder_old_id_3" 1 0 0 0
 set_location_hint "Net_2627" 1 0 0 1
 set_location_hint "\UART_RS485:BUART:tx_status_2\" 1 0 0 2
-set_location_hint "\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u3\" 1 0 2 
+set_location_hint "\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u3\" 1 0 2 
+set_location_hint "\ADC_STATUS:sts:sts_reg\" 1 0 4 
 set_location_hint "\LED_CTRL:Sync:ctrl_reg\" 1 0 6
-set_location_hint "\Sync_ADC:genblk1[0]:INST\" 1 0 5 -1
-set_location_hint "\Sync_1:genblk1[0]:INST\" 1 0 5 -1
-set_location_hint "\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0\" 2 5 2 
+set_location_hint "\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0\" 2 5 2 
 set_location_hint "\MOTOR_DIR_1:Sync:ctrl_reg\" 2 5 6
-set_location_hint "MISO_ENCODER(0)_SYNC" 2 5 5 -1
-set_location_hint "\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1\" 3 5 2 
+set_location_hint "\Sync_ADC:genblk1[0]:INST\" 2 5 5 -1
+set_location_hint "\Sync_1:genblk1[0]:INST\" 2 5 5 -1
+set_location_hint "\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1\" 3 5 2 
 set_location_hint "\PWM_MOTORS:PWMUDB:genblk1:ctrlreg\" 3 5 6
-set_location_hint "\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2\" 3 4 2 
+set_location_hint "\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2\" 3 4 2 
 set_location_hint "\BLINK_25HZ:PWMUDB:genblk1:ctrlreg\" 3 4 6
-set_location_hint "\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u3\" 2 4 2 
+set_location_hint "\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u3\" 2 4 2 
 set_location_hint "\RESET_FF:Sync:ctrl_reg\" 2 4 6
 set_location_hint "\BLINK_05HZ:PWMUDB:runmode_enable\" 2 3 0 0
 set_location_hint "Net_5579" 2 3 0 1
@@ -147,7 +147,7 @@ set_location_hint "\SPI_IMU:BSPIM:state_0\" 1 3 1 1
 set_location_hint "Net_1459" 1 3 1 2
 set_location_hint "\COUNTER_ENC:CounterUDB:sC8:counterdp:u0\" 1 3 2 
 set_location_hint "\SD:SPI0:BSPIM:TxStsReg\" 1 3 4 
-set_location_hint "\MOTOR_ON_OFF_1:Sync:ctrl_reg\" 1 3 6
+set_location_hint "\MOTOR_DRIVER_TYPE:Sync:ctrl_reg\" 1 3 6
 set_location_hint "AMuxHw_Decoder_is_active" 1 4 0 0
 set_location_hint "Net_5460" 1 4 1 0
 set_location_hint "\UART_RS485:BUART:sTX:sCLOCK:TxBitClkGen\" 1 4 2 
@@ -160,7 +160,7 @@ set_location_hint "Net_5190_1" 0 4 1 2
 set_location_hint "Net_5190_0" 0 4 1 3
 set_location_hint "\UART_RS485:BUART:sTX:TxShifter:u0\" 0 4 2 
 set_location_hint "\UART_RS485:BUART:sTX:TxSts\" 0 4 4 
-set_location_hint "\MOTOR_ON_OFF_2:Sync:ctrl_reg\" 0 4 6
+set_location_hint "\MOTOR_ON_OFF_1:Sync:ctrl_reg\" 0 4 6
 set_location_hint "\SD:SPI0:BSPIM:mosi_hs_reg\" 0 5 0 0
 set_location_hint "\SD:SPI0:BSPIM:mosi_from_dp_reg\" 0 5 0 1
 set_location_hint "\SD:SPI0:BSPIM:cnt_enable\" 0 5 0 2
@@ -168,6 +168,7 @@ set_location_hint "\SPI_IMU:BSPIM:mosi_hs_reg\" 0 5 1 0
 set_location_hint "\SPI_IMU:BSPIM:mosi_from_dp_reg\" 0 5 1 1
 set_location_hint "\SPI_IMU:BSPIM:tx_status_4\" 0 5 1 2
 set_location_hint "\SPI_IMU:BSPIM:TxStsReg\" 0 5 4 
+set_location_hint "\MOTOR_ON_OFF_2:Sync:ctrl_reg\" 0 5 6
 set_location_hint "\UART_RS485:BUART:rx_status_3\" 1 5 0 0
 set_location_hint "\UART_RS485:BUART:rx_state_2\" 1 5 0 1
 set_location_hint "\UART_RS485:BUART:rx_state_stop1_reg\" 1 5 0 2

@@ -94,7 +94,7 @@ void function_scheduler(void);
 //=====================================================     encoder_reading_SPI
 /** This functions reads the value from all the connected encoders.
 **/
-void encoder_reading_SPI(uint8 n_line);
+void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor);
 /** \} */
 
 
@@ -137,7 +137,7 @@ void interrupt_manager();
 /** This function scales the pwm value of the motor, depending on the power 
  * 	supply voltage, in order to not make the motor wind too fast.
 **/
-void pwm_limit_search();
+void pwm_limit_search(uint8 mot_idx);
 
 //=====================================================     overcurrent_control
 /** This function increases or decreases the pwm maximum value, depending on the current

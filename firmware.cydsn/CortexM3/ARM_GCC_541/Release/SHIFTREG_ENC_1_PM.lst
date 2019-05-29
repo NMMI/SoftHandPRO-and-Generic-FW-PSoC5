@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 1
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccM0Gz4l.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 1
   22:Generated_Source\PSoC5/SHIFTREG_ENC_1_PM.c ****     SHIFTREG_ENC_1_DISABLED,
   23:Generated_Source\PSoC5/SHIFTREG_ENC_1_PM.c **** 
   24:Generated_Source\PSoC5/SHIFTREG_ENC_1_PM.c ****     ((uint32) SHIFTREG_ENC_1_DEFAULT_A0),
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 2
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccM0Gz4l.s 			page 2
 
 
   25:Generated_Source\PSoC5/SHIFTREG_ENC_1_PM.c ****     ((uint32) SHIFTREG_ENC_1_DEFAULT_A1),
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 1
   59:Generated_Source\PSoC5/SHIFTREG_ENC_1_PM.c **** }
   52              		.loc 1 59 0
   53 0014 00BF     		nop
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 3
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccM0Gz4l.s 			page 3
 
 
   54 0016 BD46     		mov	sp, r7
@@ -131,9 +131,9 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 1
   61              	.L3:
   62              		.align	2
   63              	.L2:
-  64 001c 0A640040 		.word	1073767434
+  64 001c 02640040 		.word	1073767426
   65 0020 00000000 		.word	SHIFTREG_ENC_1_backup
-  66 0024 1A640040 		.word	1073767450
+  66 0024 12640040 		.word	1073767442
   67              		.cfi_endproc
   68              	.LFE0:
   69              		.size	SHIFTREG_ENC_1_SaveConfig, .-SHIFTREG_ENC_1_SaveConfig
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 1
   88              		.loc 1 79 0
   89 0004 054A     		ldr	r2, .L5
   90 0006 064B     		ldr	r3, .L5+4
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 4
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccM0Gz4l.s 			page 4
 
 
   91 0008 5B68     		ldr	r3, [r3, #4]
@@ -206,9 +206,9 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 1
  107              	.L6:
  108              		.align	2
  109              	.L5:
- 110 001c 0A640040 		.word	1073767434
+ 110 001c 02640040 		.word	1073767426
  111 0020 00000000 		.word	SHIFTREG_ENC_1_backup
- 112 0024 1A640040 		.word	1073767450
+ 112 0024 12640040 		.word	1073767442
  113              		.cfi_endproc
  114              	.LFE1:
  115              		.size	SHIFTREG_ENC_1_RestoreConfig, .-SHIFTREG_ENC_1_RestoreConfig
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 1
  101:Generated_Source\PSoC5/SHIFTREG_ENC_1_PM.c **** * Reentrant:
  102:Generated_Source\PSoC5/SHIFTREG_ENC_1_PM.c **** *  No.
  103:Generated_Source\PSoC5/SHIFTREG_ENC_1_PM.c **** *
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 5
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccM0Gz4l.s 			page 5
 
 
  104:Generated_Source\PSoC5/SHIFTREG_ENC_1_PM.c **** *******************************************************************************/
@@ -282,7 +282,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 1
  154              	.L9:
  155 002a 00BF     		.align	2
  156              	.L8:
- 157 002c 78640040 		.word	1073767544
+ 157 002c 74640040 		.word	1073767540
  158 0030 00000000 		.word	SHIFTREG_ENC_1_backup
  159              		.cfi_endproc
  160              	.LFE2:
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 1
  112:Generated_Source\PSoC5/SHIFTREG_ENC_1_PM.c **** 
  113:Generated_Source\PSoC5/SHIFTREG_ENC_1_PM.c **** 
  114:Generated_Source\PSoC5/SHIFTREG_ENC_1_PM.c **** /*******************************************************************************
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 6
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccM0Gz4l.s 			page 6
 
 
  115:Generated_Source\PSoC5/SHIFTREG_ENC_1_PM.c **** * Function Name: SHIFTREG_ENC_1_Wakeup
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 1
  202              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
  203              		.file 3 "Generated_Source\\PSoC5\\SHIFTREG_ENC_1.h"
  204              		.section	.debug_info,"",%progbits
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 7
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccM0Gz4l.s 			page 7
 
 
  205              	.Ldebug_info0:
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 1
  259 006c 05010000 		.4byte	.LASF9
  260 0070 02       		.byte	0x2
  261 0071 E401     		.2byte	0x1e4
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 8
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccM0Gz4l.s 			page 8
 
 
  262 0073 2C000000 		.4byte	0x2c
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 1
  316 00e2 2E       		.byte	0x2e
  317 00e3 77000000 		.4byte	0x77
  318 00e7 04       		.byte	0x4
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 9
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccM0Gz4l.s 			page 9
 
 
  319 00e8 07       		.uleb128 0x7
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 1
  373              	.Ldebug_abbrev0:
  374 0000 01       		.uleb128 0x1
  375 0001 11       		.uleb128 0x11
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 10
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccM0Gz4l.s 			page 10
 
 
  376 0002 01       		.byte	0x1
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 1
  430 0038 00       		.byte	0
  431 0039 49       		.uleb128 0x49
  432 003a 13       		.uleb128 0x13
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 11
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccM0Gz4l.s 			page 11
 
 
  433 003b 00       		.byte	0
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 1
  487 0071 27       		.uleb128 0x27
  488 0072 19       		.uleb128 0x19
  489 0073 11       		.uleb128 0x11
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 12
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccM0Gz4l.s 			page 12
 
 
  490 0074 01       		.uleb128 0x1
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 1
  544 000c 0000     		.2byte	0
  545 000e 0000     		.2byte	0
  546 0010 00000000 		.4byte	.LFB0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 13
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccM0Gz4l.s 			page 13
 
 
  547 0014 28000000 		.4byte	.LFE0-.LFB0
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 1
  580 00aa 73686F72 		.ascii	"short unsigned int\000"
  580      7420756E 
  580      7369676E 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 14
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccM0Gz4l.s 			page 14
 
 
  580      65642069 
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 1
  604      54524547 
  604      5F454E43 
  604      5F315F42 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 15
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccM0Gz4l.s 			page 15
 
 
  604      41434B55 
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 1
  629 0229 47656E65 		.ascii	"Generated_Source\\PSoC5\\SHIFTREG_ENC_1_PM.c\000"
  629      72617465 
  629      645F536F 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccqTGcy2.s 			page 16
+ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccM0Gz4l.s 			page 16
 
 
  629      75726365 

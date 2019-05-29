@@ -68,12 +68,13 @@
     
     
     
+#define CYBATHLON_EXT    
     
-    
-    
-    
-    
-    
+#ifdef CYBATHLON_EXT
+    #define OTHER   0
+    #define MARIA   1
+    #define ROZA    2
+#endif    
     
     
 //==============================================================================
@@ -85,18 +86,27 @@
 
     
 // Macro related to different firmware configurations
-    
-#ifdef SOFTHAND_FW
-    #define VERSION                 "SoftHand PRO firmware v. 1.5 (PSoC5)"
+#ifdef CYBATHLON_EXT
+    #define VERSION                 "SoftHand PRO firmware v. 1.6 (PSoC5) [CYBATHLON 2019]"
+#elif defined(SOFTHAND_FW)
+    #define VERSION                 "SoftHand PRO firmware v. 1.6 (PSoC5)"
 #else
-    #define VERSION                 "Generic firmware v. 1.5 (PSoC5)"
+    #define VERSION                 "Generic firmware v. 1.6 (PSoC5)"
 #endif      
-  
-#ifdef SOFTHAND_FW
-    #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - 8)  // Number of parameters saved in the EEPROM for SOFTHAND FIRMWARE
-                                                             // All parameters except: Encoder configuration (2), ADC configuration (2), Read additional ADC port, Use 2nd motor   
+
+#ifdef CYBATHLON_EXT
+    #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - 13)   // Number of parameters saved in the EEPROM for SOFTHAND FIRMWARE
+                                                              // All parameters except: Encoder configuration (2), ADC configuration (2), Read additional ADC port, Use 2nd motor, PWM rate limiter, Not reversible motor
+    #define NUM_OF_DEV_PARAM_MENUS      (NUM_OF_PARAMS_MENU - 1) // Number of parameters menu for SOFTHAND FIRMWARE
+                                                                 // All menus except: Motor driver type 
+#elif defined(SOFTHAND_FW)
+    #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - 10)  // Number of parameters saved in the EEPROM for SOFTHAND FIRMWARE
+                                                              // All parameters except: Encoder configuration (2), ADC configuration (2), Read additional ADC port, Use 2nd motor, PWM rate limiter, Not reversible motor
+    #define NUM_OF_DEV_PARAM_MENUS      (NUM_OF_PARAMS_MENU - 1) // Number of parameters menu for SOFTHAND FIRMWARE
+                                                                 // All menus except: Motor driver type 
 #else
     #define NUM_OF_DEV_PARAMS           NUM_OF_PARAMS        // Number of parameters saved in the EEPROM
+    #define NUM_OF_DEV_PARAM_MENUS      NUM_OF_PARAMS_MENU   // Number of parameters menu
 #endif
 
 #ifdef SOFTHAND_FW

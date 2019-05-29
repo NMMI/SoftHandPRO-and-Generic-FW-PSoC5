@@ -1,6 +1,6 @@
 // ======================================================================
 // firmware.v generated from TopDesign.cysch
-// 02/01/2019 at 18:25
+// 02/19/2019 at 09:50
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -1971,9 +1971,39 @@ module ShiftReg_v2_30_14 (
 
 endmodule
 
+// Component: mux_v1_10
+`ifdef CY_BLK_DIR
+`undef CY_BLK_DIR
+`endif
+
+`ifdef WARP
+`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\mux_v1_10"
+`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\mux_v1_10\mux_v1_10.v"
+`else
+`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\mux_v1_10"
+`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\mux_v1_10\mux_v1_10.v"
+`endif
+
 // top
 module top ;
 
+          wire  Net_10332;
+          wire  Net_10331;
+          wire  Net_10330;
+          wire  Net_10329;
+          wire  Net_10328;
+          wire  Net_10327;
+          wire  Net_10325;
+          wire  Net_10324;
+          wire  Net_10323;
+          wire  Net_10191;
+          wire  Net_10190;
+          wire  Net_10189;
+          wire  Net_10188;
+          wire  Net_10187;
+          wire  Net_10186;
+          wire  Net_10185;
+          wire  Net_10184;
           wire  Net_8144;
           wire  Net_8143;
           wire  Net_8142;
@@ -2030,16 +2060,7 @@ module top ;
           wire  Net_7038;
           wire  Net_7037;
           wire  Net_7036;
-          wire  Net_2780;
-          wire  Net_2808;
-          wire  Net_2807;
-          wire  Net_2806;
-          wire  Net_2805;
-          wire  Net_2804;
-          wire  Net_2803;
-          wire  Net_2802;
-          wire  Net_2801;
-          wire  Net_2800;
+          wire  Net_9776;
           wire  Net_2799;
           wire  Net_2798;
           wire  Net_2797;
@@ -2048,8 +2069,10 @@ module top ;
           wire  Net_2794;
           wire  Net_2793;
           wire  Net_2792;
-          wire  Net_2791;
-          wire  Net_2790;
+          wire  Net_10322;
+          wire  Net_9774;
+          wire  Net_9749;
+          wire  Net_9759;
           wire  Net_2501;
           wire  Net_7947;
           wire  Net_6754;
@@ -2181,18 +2204,21 @@ module top ;
           wire  Net_299;
           wire  Net_298;
           wire  Net_297;
-          wire  Net_3065;
-          wire  Net_2751;
-          wire  Net_2750;
-          wire  Net_2993;
-          wire  Net_2749;
-          wire  Net_2748;
-          wire  Net_2747;
-          wire  Net_2746;
-          wire  Net_2745;
-          wire  Net_2744;
-          wire  Net_2741;
+          wire  Net_9772;
+          wire  Net_3064;
+          wire  Net_10294;
+          wire  Net_10293;
+          wire  Net_10292;
+          wire  Net_10291;
+          wire  Net_10290;
+          wire  Net_10289;
+          wire  Net_10288;
+          wire  Net_10287;
+          wire  Net_10286;
+          wire  Net_10285;
           wire  Net_7001;
+          wire  Net_9919;
+          wire  Net_9767;
           wire  Net_2630;
           wire  Net_2629;
           wire  Net_2628;
@@ -2231,6 +2257,16 @@ module top ;
     electrical  Net_6722;
     electrical  Net_6721;
     electrical  Net_6720;
+          wire  Net_10313;
+          wire  Net_10337;
+          wire  Net_2334;
+          wire  Net_10233;
+          wire  Net_9770;
+          wire  Net_9765;
+          wire  Net_9761;
+          wire  Net_10264;
+          wire  Net_9745;
+          wire [2:0] Net_3063;
           wire  Net_4387;
           wire  Net_7969;
           wire  Net_7958;
@@ -2271,23 +2307,14 @@ module top ;
           wire  Net_3249;
           wire  Net_345;
           wire  Net_2711;
-          wire  Net_2334;
           wire  Net_3058;
-          wire  Net_3064;
-          wire [2:0] Net_3063;
+          wire  Net_9687;
           wire  Net_3062;
           wire  Net_3044;
           wire  Net_3061;
-          wire  Net_3026;
-          wire  Net_3023;
-          wire  Net_3040;
           wire  Net_3021;
-          wire  Net_3022;
-          wire  Net_3024;
-          wire  Net_2761;
-          wire  Net_7913;
-          wire  Net_3017;
-          wire  Net_433;
+          wire  Net_9990;
+          wire  Net_9969;
           wire  Net_2982;
           wire  Net_3060;
           wire  Net_3059;
@@ -3489,10 +3516,10 @@ module top ;
     assign Net_2640 = ~Net_2982;
 
 
-    assign Net_3024 = Net_3017 & Net_2640;
+    assign Net_9765 = Net_9969 & Net_2640;
 
 
-    assign Net_3022 = Net_3017 & Net_2982;
+    assign Net_9770 = Net_9969 & Net_2982;
 
     CyControlReg_v1_80 MOTOR_DIR_1 (
         .control_1(Net_2621),
@@ -3579,7 +3606,7 @@ module top ;
 		  .input_buffer_sel(2'b00))
 		MOTOR_1B
 		 (.oe(tmpOE__MOTOR_1B_net),
-		  .y({Net_3024}),
+		  .y({Net_9767}),
 		  .fb({tmpFB_0__MOTOR_1B_net[0:0]}),
 		  .io({tmpIO_0__MOTOR_1B_net[0:0]}),
 		  .siovref(tmpSIOVREF__MOTOR_1B_net),
@@ -3744,7 +3771,7 @@ module top ;
 	assign tmpOE__RS485_CTS_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
 
     ZeroTerminal ZeroTerminal_1 (
-        .z(Net_433));
+        .z(Net_9919));
 
 
 	cy_clock_v1_0
@@ -3759,20 +3786,20 @@ module top ;
 
 
     PWM_v3_30_0 PWM_MOTORS (
-        .reset(Net_433),
+        .reset(Net_9919),
         .clock(Net_2334),
-        .tc(Net_2741),
-        .pwm1(Net_3017),
-        .pwm2(Net_3040),
-        .interrupt(Net_2744),
+        .tc(Net_10285),
+        .pwm1(Net_9969),
+        .pwm2(Net_9990),
+        .interrupt(Net_10286),
         .capture(1'b0),
         .kill(1'b1),
         .enable(1'b1),
         .trigger(1'b0),
         .cmp_sel(1'b0),
-        .pwm(Net_2993),
-        .ph1(Net_2750),
-        .ph2(Net_2751));
+        .pwm(Net_10292),
+        .ph1(Net_10293),
+        .ph2(Net_10294));
     defparam PWM_MOTORS.Resolution = 8;
 
 	wire [0:0] tmpOE__CS3_net;
@@ -3836,7 +3863,7 @@ module top ;
 		  .input_buffer_sel(2'b00))
 		CS3
 		 (.oe(tmpOE__CS3_net),
-		  .y({Net_3065}),
+		  .y({Net_3064}),
 		  .fb({tmpFB_0__CS3_net[0:0]}),
 		  .io({tmpIO_0__CS3_net[0:0]}),
 		  .siovref(tmpSIOVREF__CS3_net),
@@ -3911,7 +3938,7 @@ module top ;
 		  .input_buffer_sel(2'b00))
 		MOTOR_1A
 		 (.oe(tmpOE__MOTOR_1A_net),
-		  .y({Net_3022}),
+		  .y({Net_9772}),
 		  .fb({tmpFB_0__MOTOR_1A_net[0:0]}),
 		  .io({tmpIO_0__MOTOR_1A_net[0:0]}),
 		  .siovref(tmpSIOVREF__MOTOR_1A_net),
@@ -4829,7 +4856,7 @@ module top ;
     defparam SPI_IMU.ShiftDir = 0;
 
 
-    assign Net_3026 = Net_3040 & Net_3025;
+    assign Net_9745 = Net_9990 & Net_3025;
 
 	wire [0:0] tmpOE__CS1_net;
 	wire [0:0] tmpFB_0__CS1_net;
@@ -5038,7 +5065,7 @@ module top ;
         assign Net_3059 = tmp__demux_2_1_reg;
         assign Net_3060 = tmp__demux_2_2_reg;
         assign Net_3061 = tmp__demux_2_3_reg;
-        assign Net_3064 = tmp__demux_2_4_reg;
+        assign Net_9687 = tmp__demux_2_4_reg;
         assign Net_3057 = tmp__demux_2_5_reg;
         assign Net_3056 = tmp__demux_2_6_reg;
         assign Net_3052 = tmp__demux_2_7_reg;
@@ -5537,7 +5564,7 @@ module top ;
 	assign tmpOE__CS2_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
 
 
-    assign Net_3023 = Net_3040 & Net_3021;
+    assign Net_9761 = Net_9990 & Net_3021;
 
 	wire [0:0] tmpOE__MOTOR_2A_net;
 	wire [0:0] tmpFB_0__MOTOR_2A_net;
@@ -5600,7 +5627,7 @@ module top ;
 		  .input_buffer_sel(2'b00))
 		MOTOR_2A
 		 (.oe(tmpOE__MOTOR_2A_net),
-		  .y({Net_3023}),
+		  .y({Net_9759}),
 		  .fb({tmpFB_0__MOTOR_2A_net[0:0]}),
 		  .io({tmpIO_0__MOTOR_2A_net[0:0]}),
 		  .siovref(tmpSIOVREF__MOTOR_2A_net),
@@ -5675,7 +5702,7 @@ module top ;
 		  .input_buffer_sel(2'b00))
 		MOTOR_2B
 		 (.oe(tmpOE__MOTOR_2B_net),
-		  .y({Net_3026}),
+		  .y({Net_9749}),
 		  .fb({tmpFB_0__MOTOR_2B_net[0:0]}),
 		  .io({tmpIO_0__MOTOR_2B_net[0:0]}),
 		  .siovref(tmpSIOVREF__MOTOR_2B_net),
@@ -5750,7 +5777,7 @@ module top ;
 		  .input_buffer_sel(2'b00))
 		MOTOR_EN_1
 		 (.oe(tmpOE__MOTOR_EN_1_net),
-		  .y({Net_2790}),
+		  .y({Net_9774}),
 		  .fb({tmpFB_0__MOTOR_EN_1_net[0:0]}),
 		  .io({tmpIO_0__MOTOR_EN_1_net[0:0]}),
 		  .siovref(tmpSIOVREF__MOTOR_EN_1_net),
@@ -5765,10 +5792,10 @@ module top ;
 	assign tmpOE__MOTOR_EN_1_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
 
     CyControlReg_v1_80 MOTOR_ON_OFF_1 (
-        .control_1(Net_2791),
+        .control_1(Net_10322),
         .control_2(Net_2792),
         .control_3(Net_2793),
-        .control_0(Net_2761),
+        .control_0(Net_10337),
         .control_4(Net_2794),
         .control_5(Net_2795),
         .control_6(Net_2796),
@@ -5789,34 +5816,10 @@ module top ;
     defparam MOTOR_ON_OFF_1.NumOutputs = 1;
 
 
-    assign Net_2790 = ~Net_2761;
-
-    CyControlReg_v1_80 MOTOR_ON_OFF_2 (
-        .control_1(Net_2800),
-        .control_2(Net_2801),
-        .control_3(Net_2802),
-        .control_0(Net_7913),
-        .control_4(Net_2803),
-        .control_5(Net_2804),
-        .control_6(Net_2805),
-        .control_7(Net_2806),
-        .clock(1'b0),
-        .reset(1'b0));
-    defparam MOTOR_ON_OFF_2.Bit0Mode = 0;
-    defparam MOTOR_ON_OFF_2.Bit1Mode = 0;
-    defparam MOTOR_ON_OFF_2.Bit2Mode = 0;
-    defparam MOTOR_ON_OFF_2.Bit3Mode = 0;
-    defparam MOTOR_ON_OFF_2.Bit4Mode = 0;
-    defparam MOTOR_ON_OFF_2.Bit5Mode = 0;
-    defparam MOTOR_ON_OFF_2.Bit6Mode = 0;
-    defparam MOTOR_ON_OFF_2.Bit7Mode = 0;
-    defparam MOTOR_ON_OFF_2.BitValue = 0;
-    defparam MOTOR_ON_OFF_2.BusDisplay = 0;
-    defparam MOTOR_ON_OFF_2.ExtrReset = 0;
-    defparam MOTOR_ON_OFF_2.NumOutputs = 1;
+    assign Net_9774 = ~Net_10337;
 
 
-    assign Net_2780 = ~Net_7913;
+    assign Net_9776 = ~Net_10313;
 
 	wire [0:0] tmpOE__MOTOR_EN_2_net;
 	wire [0:0] tmpFB_0__MOTOR_EN_2_net;
@@ -5879,7 +5882,7 @@ module top ;
 		  .input_buffer_sel(2'b00))
 		MOTOR_EN_2
 		 (.oe(tmpOE__MOTOR_EN_2_net),
-		  .y({Net_2780}),
+		  .y({Net_9776}),
 		  .fb({tmpFB_0__MOTOR_EN_2_net[0:0]}),
 		  .io({tmpIO_0__MOTOR_EN_2_net[0:0]}),
 		  .siovref(tmpSIOVREF__MOTOR_EN_2_net),
@@ -5909,7 +5912,7 @@ module top ;
     assign Net_2501 = ~Net_3061;
 
 
-    assign Net_3065 = ~Net_3064;
+    assign Net_3064 = ~Net_9687;
 
     CyControlReg_v1_80 ADC_N_CHANNELS_USED (
         .control_1(Net_7036),
@@ -6452,6 +6455,114 @@ module top ;
     defparam MY_TIMER_REG.BusDisplay = 0;
     defparam MY_TIMER_REG.ExtrReset = 0;
     defparam MY_TIMER_REG.NumOutputs = 1;
+
+    // -- Mux start --
+    if (1)
+    begin : mux_3
+        reg  tmp__mux_3_reg;
+        always @(Net_9765 or Net_2982 or Net_10233)
+        begin
+            case (Net_10233)
+                1'b0 :  tmp__mux_3_reg = Net_9765;
+                1'b1 :  tmp__mux_3_reg = Net_2982;
+            endcase
+        end
+        assign Net_9767 = tmp__mux_3_reg;
+    end
+    // -- Mux end --
+
+    CyControlReg_v1_80 MOTOR_DRIVER_TYPE (
+        .control_1(Net_10264),
+        .control_2(Net_10184),
+        .control_3(Net_10185),
+        .control_0(Net_10233),
+        .control_4(Net_10186),
+        .control_5(Net_10187),
+        .control_6(Net_10188),
+        .control_7(Net_10189),
+        .clock(1'b0),
+        .reset(1'b0));
+    defparam MOTOR_DRIVER_TYPE.Bit0Mode = 0;
+    defparam MOTOR_DRIVER_TYPE.Bit1Mode = 0;
+    defparam MOTOR_DRIVER_TYPE.Bit2Mode = 0;
+    defparam MOTOR_DRIVER_TYPE.Bit3Mode = 0;
+    defparam MOTOR_DRIVER_TYPE.Bit4Mode = 0;
+    defparam MOTOR_DRIVER_TYPE.Bit5Mode = 0;
+    defparam MOTOR_DRIVER_TYPE.Bit6Mode = 0;
+    defparam MOTOR_DRIVER_TYPE.Bit7Mode = 0;
+    defparam MOTOR_DRIVER_TYPE.BitValue = 0;
+    defparam MOTOR_DRIVER_TYPE.BusDisplay = 0;
+    defparam MOTOR_DRIVER_TYPE.ExtrReset = 0;
+    defparam MOTOR_DRIVER_TYPE.NumOutputs = 2;
+
+    // -- Mux start --
+    if (1)
+    begin : mux_2
+        reg  tmp__mux_2_reg;
+        always @(Net_9761 or Net_9990 or Net_10264)
+        begin
+            case (Net_10264)
+                1'b0 :  tmp__mux_2_reg = Net_9761;
+                1'b1 :  tmp__mux_2_reg = Net_9990;
+            endcase
+        end
+        assign Net_9759 = tmp__mux_2_reg;
+    end
+    // -- Mux end --
+
+    // -- Mux start --
+    if (1)
+    begin : mux_4
+        reg  tmp__mux_4_reg;
+        always @(Net_9770 or Net_9969 or Net_10233)
+        begin
+            case (Net_10233)
+                1'b0 :  tmp__mux_4_reg = Net_9770;
+                1'b1 :  tmp__mux_4_reg = Net_9969;
+            endcase
+        end
+        assign Net_9772 = tmp__mux_4_reg;
+    end
+    // -- Mux end --
+
+    // -- Mux start --
+    if (1)
+    begin : mux_1
+        reg  tmp__mux_1_reg;
+        always @(Net_9745 or Net_3021 or Net_10264)
+        begin
+            case (Net_10264)
+                1'b0 :  tmp__mux_1_reg = Net_9745;
+                1'b1 :  tmp__mux_1_reg = Net_3021;
+            endcase
+        end
+        assign Net_9749 = tmp__mux_1_reg;
+    end
+    // -- Mux end --
+
+    CyControlReg_v1_80 MOTOR_ON_OFF_2 (
+        .control_1(Net_10323),
+        .control_2(Net_10324),
+        .control_3(Net_10325),
+        .control_0(Net_10313),
+        .control_4(Net_10327),
+        .control_5(Net_10328),
+        .control_6(Net_10329),
+        .control_7(Net_10330),
+        .clock(1'b0),
+        .reset(1'b0));
+    defparam MOTOR_ON_OFF_2.Bit0Mode = 0;
+    defparam MOTOR_ON_OFF_2.Bit1Mode = 0;
+    defparam MOTOR_ON_OFF_2.Bit2Mode = 0;
+    defparam MOTOR_ON_OFF_2.Bit3Mode = 0;
+    defparam MOTOR_ON_OFF_2.Bit4Mode = 0;
+    defparam MOTOR_ON_OFF_2.Bit5Mode = 0;
+    defparam MOTOR_ON_OFF_2.Bit6Mode = 0;
+    defparam MOTOR_ON_OFF_2.Bit7Mode = 0;
+    defparam MOTOR_ON_OFF_2.BitValue = 0;
+    defparam MOTOR_ON_OFF_2.BusDisplay = 0;
+    defparam MOTOR_ON_OFF_2.ExtrReset = 0;
+    defparam MOTOR_ON_OFF_2.NumOutputs = 1;
 
 
 

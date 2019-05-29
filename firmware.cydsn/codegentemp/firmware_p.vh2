@@ -1,5 +1,5 @@
 -- Project:   firmware
--- Generated: 02/01/2019 18:25:18
+-- Generated: 02/19/2019 09:51:01
 -- PSoC Creator  4.2
 
 ENTITY firmware IS
@@ -112,6 +112,10 @@ ARCHITECTURE __DEFAULT__ OF firmware IS
     SIGNAL MOTOR_2B(0)__PA : bit;
     SIGNAL MOTOR_EN_1(0)__PA : bit;
     SIGNAL MOTOR_EN_2(0)__PA : bit;
+    SIGNAL Net_10233 : bit;
+    SIGNAL Net_10264 : bit;
+    SIGNAL Net_10313 : bit;
+    SIGNAL Net_10337 : bit;
     SIGNAL Net_1060 : bit;
     SIGNAL Net_1060_SYNCOUT : bit;
     SIGNAL Net_124 : bit;
@@ -136,24 +140,15 @@ ARCHITECTURE __DEFAULT__ OF firmware IS
     SIGNAL Net_2711 : bit;
     ATTRIBUTE global_signal OF Net_2711 : SIGNAL IS true;
     SIGNAL Net_2711_local : bit;
-    SIGNAL Net_2761 : bit;
-    SIGNAL Net_2780 : bit;
-    SIGNAL Net_2790 : bit;
     SIGNAL Net_2835 : bit;
     SIGNAL Net_2982 : bit;
-    SIGNAL Net_3017 : bit;
     SIGNAL Net_3021 : bit;
-    SIGNAL Net_3022 : bit;
-    SIGNAL Net_3023 : bit;
-    SIGNAL Net_3024 : bit;
-    SIGNAL Net_3026 : bit;
     SIGNAL Net_3039 : bit;
-    SIGNAL Net_3040 : bit;
     SIGNAL Net_3044 : bit;
     SIGNAL Net_3063_0 : bit;
     SIGNAL Net_3063_1 : bit;
     SIGNAL Net_3063_2 : bit;
-    SIGNAL Net_3065 : bit;
+    SIGNAL Net_3064 : bit;
     SIGNAL Net_3240 : bit;
     SIGNAL Net_3264 : bit;
     SIGNAL Net_3334 : bit;
@@ -196,11 +191,18 @@ ARCHITECTURE __DEFAULT__ OF firmware IS
     SIGNAL Net_7450 : bit;
     SIGNAL Net_7667 : bit;
     SIGNAL Net_7694 : bit;
-    SIGNAL Net_7913 : bit;
     SIGNAL Net_7981 : bit;
     SIGNAL Net_7983 : bit;
     SIGNAL Net_7985 : bit;
     SIGNAL Net_8907 : bit;
+    SIGNAL Net_9749 : bit;
+    SIGNAL Net_9759 : bit;
+    SIGNAL Net_9767 : bit;
+    SIGNAL Net_9772 : bit;
+    SIGNAL Net_9774 : bit;
+    SIGNAL Net_9776 : bit;
+    SIGNAL Net_9969 : bit;
+    SIGNAL Net_9990 : bit;
     SIGNAL RS485_CTS(0)__PA : bit;
     SIGNAL RS485_RX(0)__PA : bit;
     SIGNAL RS485_TX(0)__PA : bit;
@@ -326,6 +328,12 @@ ARCHITECTURE __DEFAULT__ OF firmware IS
     SIGNAL \MOTOR_DIR_2:control_5\ : bit;
     SIGNAL \MOTOR_DIR_2:control_6\ : bit;
     SIGNAL \MOTOR_DIR_2:control_7\ : bit;
+    SIGNAL \MOTOR_DRIVER_TYPE:control_2\ : bit;
+    SIGNAL \MOTOR_DRIVER_TYPE:control_3\ : bit;
+    SIGNAL \MOTOR_DRIVER_TYPE:control_4\ : bit;
+    SIGNAL \MOTOR_DRIVER_TYPE:control_5\ : bit;
+    SIGNAL \MOTOR_DRIVER_TYPE:control_6\ : bit;
+    SIGNAL \MOTOR_DRIVER_TYPE:control_7\ : bit;
     SIGNAL \MOTOR_ON_OFF_1:control_1\ : bit;
     SIGNAL \MOTOR_ON_OFF_1:control_2\ : bit;
     SIGNAL \MOTOR_ON_OFF_1:control_3\ : bit;
@@ -758,42 +766,42 @@ ARCHITECTURE __DEFAULT__ OF firmware IS
     ATTRIBUTE Location OF CS_ENCODER0(0) : LABEL IS "P1[5]";
     ATTRIBUTE lib_model OF AMuxHw_Decoder_is_active : LABEL IS "macrocell2";
     ATTRIBUTE lib_model OF Net_5460 : LABEL IS "macrocell3";
-    ATTRIBUTE lib_model OF Net_3024 : LABEL IS "macrocell4";
-    ATTRIBUTE lib_model OF Net_3022 : LABEL IS "macrocell5";
-    ATTRIBUTE lib_model OF Net_2627 : LABEL IS "macrocell6";
-    ATTRIBUTE lib_model OF \UART_RS485:BUART:counter_load_not\ : LABEL IS "macrocell7";
-    ATTRIBUTE lib_model OF \UART_RS485:BUART:tx_status_0\ : LABEL IS "macrocell8";
-    ATTRIBUTE lib_model OF \UART_RS485:BUART:tx_status_2\ : LABEL IS "macrocell9";
-    ATTRIBUTE lib_model OF \UART_RS485:BUART:rx_counter_load\ : LABEL IS "macrocell10";
-    ATTRIBUTE lib_model OF \UART_RS485:BUART:rx_status_4\ : LABEL IS "macrocell11";
-    ATTRIBUTE lib_model OF \UART_RS485:BUART:rx_status_5\ : LABEL IS "macrocell12";
-    ATTRIBUTE lib_model OF \SD:SPI0:BSPIM:load_rx_data\ : LABEL IS "macrocell13";
-    ATTRIBUTE lib_model OF \SD:Net_10\ : LABEL IS "macrocell14";
-    ATTRIBUTE lib_model OF \SD:SPI0:BSPIM:tx_status_0\ : LABEL IS "macrocell15";
-    ATTRIBUTE lib_model OF \SD:SPI0:BSPIM:tx_status_4\ : LABEL IS "macrocell16";
-    ATTRIBUTE lib_model OF \SD:SPI0:BSPIM:rx_status_6\ : LABEL IS "macrocell17";
-    ATTRIBUTE lib_model OF Net_1458 : LABEL IS "macrocell18";
-    ATTRIBUTE lib_model OF \SPI_IMU:BSPIM:dpcounter_one\ : LABEL IS "macrocell19";
-    ATTRIBUTE lib_model OF \SPI_IMU:BSPIM:tx_status_0\ : LABEL IS "macrocell20";
-    ATTRIBUTE lib_model OF \SPI_IMU:BSPIM:tx_status_4\ : LABEL IS "macrocell21";
-    ATTRIBUTE lib_model OF \SPI_IMU:BSPIM:rx_status_6\ : LABEL IS "macrocell22";
-    ATTRIBUTE lib_model OF Net_3026 : LABEL IS "macrocell23";
-    ATTRIBUTE lib_model OF Net_7353 : LABEL IS "macrocell24";
-    ATTRIBUTE lib_model OF Net_7325 : LABEL IS "macrocell25";
-    ATTRIBUTE lib_model OF Net_3023 : LABEL IS "macrocell26";
-    ATTRIBUTE lib_model OF Net_2790 : LABEL IS "macrocell27";
-    ATTRIBUTE lib_model OF Net_2780 : LABEL IS "macrocell28";
-    ATTRIBUTE lib_model OF Net_1630 : LABEL IS "macrocell29";
-    ATTRIBUTE lib_model OF Net_3039 : LABEL IS "macrocell30";
-    ATTRIBUTE lib_model OF Net_1628 : LABEL IS "macrocell31";
-    ATTRIBUTE lib_model OF Net_2501 : LABEL IS "macrocell32";
-    ATTRIBUTE lib_model OF Net_3065 : LABEL IS "macrocell33";
-    ATTRIBUTE lib_model OF \COUNTER_ENC:CounterUDB:reload\ : LABEL IS "macrocell34";
-    ATTRIBUTE lib_model OF \COUNTER_ENC:CounterUDB:status_0\ : LABEL IS "macrocell35";
-    ATTRIBUTE lib_model OF \COUNTER_ENC:CounterUDB:status_2\ : LABEL IS "macrocell36";
-    ATTRIBUTE lib_model OF \COUNTER_ENC:CounterUDB:count_enable\ : LABEL IS "macrocell37";
-    ATTRIBUTE lib_model OF Net_7983 : LABEL IS "macrocell38";
-    ATTRIBUTE lib_model OF Net_7985 : LABEL IS "macrocell39";
+    ATTRIBUTE lib_model OF Net_2627 : LABEL IS "macrocell4";
+    ATTRIBUTE lib_model OF \UART_RS485:BUART:counter_load_not\ : LABEL IS "macrocell5";
+    ATTRIBUTE lib_model OF \UART_RS485:BUART:tx_status_0\ : LABEL IS "macrocell6";
+    ATTRIBUTE lib_model OF \UART_RS485:BUART:tx_status_2\ : LABEL IS "macrocell7";
+    ATTRIBUTE lib_model OF \UART_RS485:BUART:rx_counter_load\ : LABEL IS "macrocell8";
+    ATTRIBUTE lib_model OF \UART_RS485:BUART:rx_status_4\ : LABEL IS "macrocell9";
+    ATTRIBUTE lib_model OF \UART_RS485:BUART:rx_status_5\ : LABEL IS "macrocell10";
+    ATTRIBUTE lib_model OF \SD:SPI0:BSPIM:load_rx_data\ : LABEL IS "macrocell11";
+    ATTRIBUTE lib_model OF \SD:Net_10\ : LABEL IS "macrocell12";
+    ATTRIBUTE lib_model OF \SD:SPI0:BSPIM:tx_status_0\ : LABEL IS "macrocell13";
+    ATTRIBUTE lib_model OF \SD:SPI0:BSPIM:tx_status_4\ : LABEL IS "macrocell14";
+    ATTRIBUTE lib_model OF \SD:SPI0:BSPIM:rx_status_6\ : LABEL IS "macrocell15";
+    ATTRIBUTE lib_model OF Net_1458 : LABEL IS "macrocell16";
+    ATTRIBUTE lib_model OF \SPI_IMU:BSPIM:dpcounter_one\ : LABEL IS "macrocell17";
+    ATTRIBUTE lib_model OF \SPI_IMU:BSPIM:tx_status_0\ : LABEL IS "macrocell18";
+    ATTRIBUTE lib_model OF \SPI_IMU:BSPIM:tx_status_4\ : LABEL IS "macrocell19";
+    ATTRIBUTE lib_model OF \SPI_IMU:BSPIM:rx_status_6\ : LABEL IS "macrocell20";
+    ATTRIBUTE lib_model OF Net_7353 : LABEL IS "macrocell21";
+    ATTRIBUTE lib_model OF Net_7325 : LABEL IS "macrocell22";
+    ATTRIBUTE lib_model OF Net_9774 : LABEL IS "macrocell23";
+    ATTRIBUTE lib_model OF Net_9776 : LABEL IS "macrocell24";
+    ATTRIBUTE lib_model OF Net_1630 : LABEL IS "macrocell25";
+    ATTRIBUTE lib_model OF Net_3039 : LABEL IS "macrocell26";
+    ATTRIBUTE lib_model OF Net_1628 : LABEL IS "macrocell27";
+    ATTRIBUTE lib_model OF Net_2501 : LABEL IS "macrocell28";
+    ATTRIBUTE lib_model OF Net_3064 : LABEL IS "macrocell29";
+    ATTRIBUTE lib_model OF \COUNTER_ENC:CounterUDB:reload\ : LABEL IS "macrocell30";
+    ATTRIBUTE lib_model OF \COUNTER_ENC:CounterUDB:status_0\ : LABEL IS "macrocell31";
+    ATTRIBUTE lib_model OF \COUNTER_ENC:CounterUDB:status_2\ : LABEL IS "macrocell32";
+    ATTRIBUTE lib_model OF \COUNTER_ENC:CounterUDB:count_enable\ : LABEL IS "macrocell33";
+    ATTRIBUTE lib_model OF Net_7983 : LABEL IS "macrocell34";
+    ATTRIBUTE lib_model OF Net_7985 : LABEL IS "macrocell35";
+    ATTRIBUTE lib_model OF Net_9767 : LABEL IS "macrocell36";
+    ATTRIBUTE lib_model OF Net_9759 : LABEL IS "macrocell37";
+    ATTRIBUTE lib_model OF Net_9772 : LABEL IS "macrocell38";
+    ATTRIBUTE lib_model OF Net_9749 : LABEL IS "macrocell39";
     ATTRIBUTE lib_model OF \Chip_Select_IMU:Sync:ctrl_reg\ : LABEL IS "controlcell1";
     ATTRIBUTE lib_model OF \MOTOR_DIR_1:Sync:ctrl_reg\ : LABEL IS "controlcell2";
     ATTRIBUTE lib_model OF __ONE__ : LABEL IS "macrocell40";
@@ -825,32 +833,33 @@ ARCHITECTURE __DEFAULT__ OF firmware IS
     ATTRIBUTE lib_model OF \ADC_STATUS:sts:sts_reg\ : LABEL IS "statuscell2";
     ATTRIBUTE Location OF \ADC:DSM\ : LABEL IS "F(DSM,0)";
     ATTRIBUTE lib_model OF \MOTOR_ON_OFF_1:Sync:ctrl_reg\ : LABEL IS "controlcell11";
-    ATTRIBUTE lib_model OF \MOTOR_ON_OFF_2:Sync:ctrl_reg\ : LABEL IS "controlcell12";
-    ATTRIBUTE lib_model OF \ADC_N_CHANNELS_USED:Sync:ctrl_reg\ : LABEL IS "controlcell13";
-    ATTRIBUTE lib_model OF \COUNTER_ENC:CounterUDB:sCTRLReg:ctrlreg\ : LABEL IS "controlcell14";
+    ATTRIBUTE lib_model OF \ADC_N_CHANNELS_USED:Sync:ctrl_reg\ : LABEL IS "controlcell12";
+    ATTRIBUTE lib_model OF \COUNTER_ENC:CounterUDB:sCTRLReg:ctrlreg\ : LABEL IS "controlcell13";
     ATTRIBUTE lib_model OF \COUNTER_ENC:CounterUDB:sSTSReg:stsreg\ : LABEL IS "statusicell7";
     ATTRIBUTE lib_model OF \COUNTER_ENC:CounterUDB:sC8:counterdp:u0\ : LABEL IS "datapathcell10";
-    ATTRIBUTE lib_model OF \SHIFTREG_ENC_3:bSR:SyncCtl:CtrlReg\ : LABEL IS "controlcell15";
+    ATTRIBUTE lib_model OF \SHIFTREG_ENC_3:bSR:SyncCtl:CtrlReg\ : LABEL IS "controlcell14";
     ATTRIBUTE lib_model OF \SHIFTREG_ENC_3:bSR:StsReg\ : LABEL IS "statusicell8";
     ATTRIBUTE lib_model OF \SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0\ : LABEL IS "datapathcell11";
     ATTRIBUTE lib_model OF \SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1\ : LABEL IS "datapathcell12";
     ATTRIBUTE lib_model OF \SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2\ : LABEL IS "datapathcell13";
     ATTRIBUTE lib_model OF \SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u3\ : LABEL IS "datapathcell14";
-    ATTRIBUTE lib_model OF \SHIFTREG_ENC_2:bSR:SyncCtl:CtrlReg\ : LABEL IS "controlcell16";
+    ATTRIBUTE lib_model OF \SHIFTREG_ENC_2:bSR:SyncCtl:CtrlReg\ : LABEL IS "controlcell15";
     ATTRIBUTE lib_model OF \SHIFTREG_ENC_2:bSR:StsReg\ : LABEL IS "statusicell9";
     ATTRIBUTE lib_model OF \SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0\ : LABEL IS "datapathcell15";
     ATTRIBUTE lib_model OF \SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1\ : LABEL IS "datapathcell16";
     ATTRIBUTE lib_model OF \SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2\ : LABEL IS "datapathcell17";
     ATTRIBUTE lib_model OF \SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u3\ : LABEL IS "datapathcell18";
-    ATTRIBUTE lib_model OF \SHIFTREG_ENC_1:bSR:SyncCtl:CtrlReg\ : LABEL IS "controlcell17";
+    ATTRIBUTE lib_model OF \SHIFTREG_ENC_1:bSR:SyncCtl:CtrlReg\ : LABEL IS "controlcell16";
     ATTRIBUTE lib_model OF \SHIFTREG_ENC_1:bSR:StsReg\ : LABEL IS "statusicell10";
     ATTRIBUTE lib_model OF \SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u0\ : LABEL IS "datapathcell19";
     ATTRIBUTE lib_model OF \SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u1\ : LABEL IS "datapathcell20";
     ATTRIBUTE lib_model OF \SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u2\ : LABEL IS "datapathcell21";
     ATTRIBUTE lib_model OF \SHIFTREG_ENC_1:bSR:sC32:BShiftRegDp:u3\ : LABEL IS "datapathcell22";
-    ATTRIBUTE lib_model OF \RESET_COUNTERS:Sync:ctrl_reg\ : LABEL IS "controlcell18";
-    ATTRIBUTE lib_model OF \Chip_Select_ENCODER_LINE:Sync:ctrl_reg\ : LABEL IS "controlcell19";
-    ATTRIBUTE lib_model OF \MY_TIMER_REG:Sync:ctrl_reg\ : LABEL IS "controlcell20";
+    ATTRIBUTE lib_model OF \RESET_COUNTERS:Sync:ctrl_reg\ : LABEL IS "controlcell17";
+    ATTRIBUTE lib_model OF \Chip_Select_ENCODER_LINE:Sync:ctrl_reg\ : LABEL IS "controlcell18";
+    ATTRIBUTE lib_model OF \MY_TIMER_REG:Sync:ctrl_reg\ : LABEL IS "controlcell19";
+    ATTRIBUTE lib_model OF \MOTOR_DRIVER_TYPE:Sync:ctrl_reg\ : LABEL IS "controlcell20";
+    ATTRIBUTE lib_model OF \MOTOR_ON_OFF_2:Sync:ctrl_reg\ : LABEL IS "controlcell21";
     ATTRIBUTE lib_model OF Net_5205 : LABEL IS "macrocell41";
     ATTRIBUTE lib_model OF cy_srff_2 : LABEL IS "macrocell42";
     ATTRIBUTE lib_model OF AMuxHw_Decoder_old_id_3 : LABEL IS "macrocell43";
@@ -875,8 +884,8 @@ ARCHITECTURE __DEFAULT__ OF firmware IS
     ATTRIBUTE lib_model OF AMuxHw_Decoder_one_hot_11 : LABEL IS "macrocell62";
     ATTRIBUTE lib_model OF Net_1459 : LABEL IS "macrocell63";
     ATTRIBUTE lib_model OF \PWM_MOTORS:PWMUDB:runmode_enable\ : LABEL IS "macrocell64";
-    ATTRIBUTE lib_model OF Net_3017 : LABEL IS "macrocell65";
-    ATTRIBUTE lib_model OF Net_3040 : LABEL IS "macrocell66";
+    ATTRIBUTE lib_model OF Net_9969 : LABEL IS "macrocell65";
+    ATTRIBUTE lib_model OF Net_9990 : LABEL IS "macrocell66";
     ATTRIBUTE lib_model OF cy_srff_1 : LABEL IS "macrocell67";
     ATTRIBUTE lib_model OF \UART_RS485:BUART:txn\ : LABEL IS "macrocell68";
     ATTRIBUTE lib_model OF \UART_RS485:BUART:tx_state_1\ : LABEL IS "macrocell69";
@@ -2740,7 +2749,7 @@ BEGIN
         PORT MAP(
             pa_out => MOTOR_1B(0)__PA,
             oe => open,
-            pin_input => Net_3024,
+            pin_input => Net_9767,
             pad_out => MOTOR_1B(0)_PAD,
             pad_in => MOTOR_1B(0)_PAD,
             in_clock => open,
@@ -3012,7 +3021,7 @@ BEGIN
         PORT MAP(
             pa_out => CS3(0)__PA,
             oe => open,
-            pin_input => Net_3065,
+            pin_input => Net_3064,
             pad_out => CS3(0)_PAD,
             pad_in => CS3(0)_PAD,
             in_clock => open,
@@ -3104,7 +3113,7 @@ BEGIN
         PORT MAP(
             pa_out => MOTOR_1A(0)__PA,
             oe => open,
-            pin_input => Net_3022,
+            pin_input => Net_9772,
             pad_out => MOTOR_1A(0)_PAD,
             pad_in => MOTOR_1A(0)_PAD,
             in_clock => open,
@@ -4840,7 +4849,7 @@ BEGIN
         PORT MAP(
             pa_out => MOTOR_2A(0)__PA,
             oe => open,
-            pin_input => Net_3023,
+            pin_input => Net_9759,
             pad_out => MOTOR_2A(0)_PAD,
             pad_in => MOTOR_2A(0)_PAD,
             in_clock => open,
@@ -4932,7 +4941,7 @@ BEGIN
         PORT MAP(
             pa_out => MOTOR_2B(0)__PA,
             oe => open,
-            pin_input => Net_3026,
+            pin_input => Net_9749,
             pad_out => MOTOR_2B(0)_PAD,
             pad_in => MOTOR_2B(0)_PAD,
             in_clock => open,
@@ -5024,7 +5033,7 @@ BEGIN
         PORT MAP(
             pa_out => MOTOR_EN_1(0)__PA,
             oe => open,
-            pin_input => Net_2790,
+            pin_input => Net_9774,
             pad_out => MOTOR_EN_1(0)_PAD,
             pad_in => MOTOR_EN_1(0)_PAD,
             in_clock => open,
@@ -5116,7 +5125,7 @@ BEGIN
         PORT MAP(
             pa_out => MOTOR_EN_2(0)__PA,
             oe => open,
-            pin_input => Net_2780,
+            pin_input => Net_9776,
             pad_out => MOTOR_EN_2(0)_PAD,
             pad_in => MOTOR_EN_2(0)_PAD,
             in_clock => open,
@@ -5528,26 +5537,6 @@ BEGIN
             main_6 => Net_7046_1,
             main_7 => Net_7046_0);
 
-    Net_3024:macrocell
-        GENERIC MAP(
-            eqn_main => "(!main_0 * main_1)",
-            regmode => 0,
-            clken_mode => 1)
-        PORT MAP(
-            q => Net_3024,
-            main_0 => Net_2982,
-            main_1 => Net_3017);
-
-    Net_3022:macrocell
-        GENERIC MAP(
-            eqn_main => "(main_0 * main_1)",
-            regmode => 0,
-            clken_mode => 1)
-        PORT MAP(
-            q => Net_3022,
-            main_0 => Net_2982,
-            main_1 => Net_3017);
-
     Net_2627:macrocell
         GENERIC MAP(
             eqn_main => "(!main_0)",
@@ -5744,16 +5733,6 @@ BEGIN
             main_4 => \SPI_IMU:BSPIM:count_0\,
             main_5 => \SPI_IMU:BSPIM:rx_status_4\);
 
-    Net_3026:macrocell
-        GENERIC MAP(
-            eqn_main => "(main_0 * !main_1)",
-            regmode => 0,
-            clken_mode => 1)
-        PORT MAP(
-            q => Net_3026,
-            main_0 => Net_3040,
-            main_1 => Net_3021);
-
     MISO_ENCODER(0)_SYNC:synccell
         GENERIC MAP(
             clk_inv => '0',
@@ -5793,33 +5772,23 @@ BEGIN
             main_1 => Net_7450,
             main_2 => Net_7667);
 
-    Net_3023:macrocell
-        GENERIC MAP(
-            eqn_main => "(main_0 * main_1)",
-            regmode => 0,
-            clken_mode => 1)
-        PORT MAP(
-            q => Net_3023,
-            main_0 => Net_3040,
-            main_1 => Net_3021);
-
-    Net_2790:macrocell
+    Net_9774:macrocell
         GENERIC MAP(
             eqn_main => "(!main_0)",
             regmode => 0,
             clken_mode => 1)
         PORT MAP(
-            q => Net_2790,
-            main_0 => Net_2761);
+            q => Net_9774,
+            main_0 => Net_10337);
 
-    Net_2780:macrocell
+    Net_9776:macrocell
         GENERIC MAP(
             eqn_main => "(!main_0)",
             regmode => 0,
             clken_mode => 1)
         PORT MAP(
-            q => Net_2780,
-            main_0 => Net_7913);
+            q => Net_9776,
+            main_0 => Net_10313);
 
     Net_1630:macrocell
         GENERIC MAP(
@@ -5869,13 +5838,13 @@ BEGIN
             main_2 => Net_3063_0,
             main_3 => Net_3044);
 
-    Net_3065:macrocell
+    Net_3064:macrocell
         GENERIC MAP(
             eqn_main => "(main_0 * !main_1 * !main_2 * !main_3)",
             regmode => 0,
             clken_mode => 1)
         PORT MAP(
-            q => Net_3065,
+            q => Net_3064,
             main_0 => Net_3063_2,
             main_1 => Net_3063_1,
             main_2 => Net_3063_0,
@@ -5941,6 +5910,50 @@ BEGIN
             q => Net_7985,
             main_0 => Net_3426,
             main_1 => Net_7981);
+
+    Net_9767:macrocell
+        GENERIC MAP(
+            eqn_main => "(!main_0 * main_1 * !main_2) + (main_0 * main_2)",
+            regmode => 0,
+            clken_mode => 1)
+        PORT MAP(
+            q => Net_9767,
+            main_0 => Net_2982,
+            main_1 => Net_9969,
+            main_2 => Net_10233);
+
+    Net_9759:macrocell
+        GENERIC MAP(
+            eqn_main => "(main_0 * main_1) + (main_0 * main_2)",
+            regmode => 0,
+            clken_mode => 1)
+        PORT MAP(
+            q => Net_9759,
+            main_0 => Net_9990,
+            main_1 => Net_3021,
+            main_2 => Net_10264);
+
+    Net_9772:macrocell
+        GENERIC MAP(
+            eqn_main => "(main_0 * main_1) + (main_1 * main_2)",
+            regmode => 0,
+            clken_mode => 1)
+        PORT MAP(
+            q => Net_9772,
+            main_0 => Net_2982,
+            main_1 => Net_9969,
+            main_2 => Net_10233);
+
+    Net_9749:macrocell
+        GENERIC MAP(
+            eqn_main => "(main_0 * !main_1 * !main_2) + (main_1 * main_2)",
+            regmode => 0,
+            clken_mode => 1)
+        PORT MAP(
+            q => Net_9749,
+            main_0 => Net_9990,
+            main_1 => Net_3021,
+            main_2 => Net_10264);
 
     \Sync_ADC:genblk1[0]:INST\:synccell
         GENERIC MAP(
@@ -6866,26 +6879,7 @@ BEGIN
             control_3 => \MOTOR_ON_OFF_1:control_3\,
             control_2 => \MOTOR_ON_OFF_1:control_2\,
             control_1 => \MOTOR_ON_OFF_1:control_1\,
-            control_0 => Net_2761,
-            busclk => ClockBlock_BUS_CLK);
-
-    \MOTOR_ON_OFF_2:Sync:ctrl_reg\:controlcell
-        GENERIC MAP(
-            cy_ctrl_mode_0 => "00000000",
-            cy_ctrl_mode_1 => "00000000",
-            cy_ext_reset => 0,
-            cy_force_order => 1,
-            cy_init_value => "00000000",
-            clken_mode => 1)
-        PORT MAP(
-            control_7 => \MOTOR_ON_OFF_2:control_7\,
-            control_6 => \MOTOR_ON_OFF_2:control_6\,
-            control_5 => \MOTOR_ON_OFF_2:control_5\,
-            control_4 => \MOTOR_ON_OFF_2:control_4\,
-            control_3 => \MOTOR_ON_OFF_2:control_3\,
-            control_2 => \MOTOR_ON_OFF_2:control_2\,
-            control_1 => \MOTOR_ON_OFF_2:control_1\,
-            control_0 => Net_7913,
+            control_0 => Net_10337,
             busclk => ClockBlock_BUS_CLK);
 
     \ADC_N_CHANNELS_USED:Sync:ctrl_reg\:controlcell
@@ -7849,6 +7843,44 @@ BEGIN
             control_0 => Net_4386,
             busclk => ClockBlock_BUS_CLK);
 
+    \MOTOR_DRIVER_TYPE:Sync:ctrl_reg\:controlcell
+        GENERIC MAP(
+            cy_ctrl_mode_0 => "00000000",
+            cy_ctrl_mode_1 => "00000000",
+            cy_ext_reset => 0,
+            cy_force_order => 1,
+            cy_init_value => "00000000",
+            clken_mode => 1)
+        PORT MAP(
+            control_7 => \MOTOR_DRIVER_TYPE:control_7\,
+            control_6 => \MOTOR_DRIVER_TYPE:control_6\,
+            control_5 => \MOTOR_DRIVER_TYPE:control_5\,
+            control_4 => \MOTOR_DRIVER_TYPE:control_4\,
+            control_3 => \MOTOR_DRIVER_TYPE:control_3\,
+            control_2 => \MOTOR_DRIVER_TYPE:control_2\,
+            control_1 => Net_10264,
+            control_0 => Net_10233,
+            busclk => ClockBlock_BUS_CLK);
+
+    \MOTOR_ON_OFF_2:Sync:ctrl_reg\:controlcell
+        GENERIC MAP(
+            cy_ctrl_mode_0 => "00000000",
+            cy_ctrl_mode_1 => "00000000",
+            cy_ext_reset => 0,
+            cy_force_order => 1,
+            cy_init_value => "00000000",
+            clken_mode => 1)
+        PORT MAP(
+            control_7 => \MOTOR_ON_OFF_2:control_7\,
+            control_6 => \MOTOR_ON_OFF_2:control_6\,
+            control_5 => \MOTOR_ON_OFF_2:control_5\,
+            control_4 => \MOTOR_ON_OFF_2:control_4\,
+            control_3 => \MOTOR_ON_OFF_2:control_3\,
+            control_2 => \MOTOR_ON_OFF_2:control_2\,
+            control_1 => \MOTOR_ON_OFF_2:control_1\,
+            control_0 => Net_10313,
+            busclk => ClockBlock_BUS_CLK);
+
     Net_5205:macrocell
         GENERIC MAP(
             eqn_main => "(main_0 * !main_2) + (main_1 * !main_2)",
@@ -8190,27 +8222,27 @@ BEGIN
             clock_0 => Net_2334,
             main_0 => \PWM_MOTORS:PWMUDB:control_7\);
 
-    Net_3017:macrocell
+    Net_9969:macrocell
         GENERIC MAP(
             eqn_main => "(main_0 * main_1) + (main_0 * main_2)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
-            q => Net_3017,
+            q => Net_9969,
             clock_0 => Net_2334,
             main_0 => \PWM_MOTORS:PWMUDB:runmode_enable\,
             main_1 => \PWM_MOTORS:PWMUDB:cmp1_eq\,
             main_2 => \PWM_MOTORS:PWMUDB:cmp1_less\);
 
-    Net_3040:macrocell
+    Net_9990:macrocell
         GENERIC MAP(
             eqn_main => "(main_0 * main_1) + (main_0 * main_2)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
-            q => Net_3040,
+            q => Net_9990,
             clock_0 => Net_2334,
             main_0 => \PWM_MOTORS:PWMUDB:runmode_enable\,
             main_1 => \PWM_MOTORS:PWMUDB:cmp2_eq\,

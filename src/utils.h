@@ -78,6 +78,7 @@ int32 filter(int32 value, struct st_filter *f);
 
 /** Function used to obtain current estimation through current lookup table.
  *
+ * 	\param idx 			Index of motor.
  * 	\param pos 			Position of the encoder in ticks.
  *	\param vel 			Speed of the encoder.
  *	\param accel 		Acceleration of the encoder
@@ -85,7 +86,7 @@ int32 filter(int32 value, struct st_filter *f);
  * 	\return Returns an estimation of the motor current, depending on its position, velocity
  * 			and acceleration.
 **/
-int32 curr_estim( int32 pos, int32 vel, int32 acc);
+int32 curr_estim( uint8 idx, int32 pos, int32 vel, int32 acc);
 
 
 /** \name Utility functions */
@@ -127,6 +128,8 @@ void LED_control(uint8 mode);
 void battery_management();
 
 void ADC_Set_N_Channels();
+
+void enable_motor(uint8 idx, uint8 val);
 
 /** This function reset statistics counters **/
 void reset_counters();

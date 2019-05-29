@@ -76,7 +76,7 @@
 int main()
 {
     // Iterator    
-    uint8 i;
+    uint8 i, j;
     
     // Variable declarations for DMA     
     uint8 DMA_Chan;
@@ -86,8 +86,8 @@ int main()
 
     // EEPROM
     EEPROM_Start();
-    memRecall();                                        // Recall configuration.
-
+    memRecall();                                        // Recall configuration.  
+    
     // FTDI chip enable
     CyDelay(100);
     FTDI_ENABLE_Write(0x01);
@@ -115,7 +115,9 @@ int main()
     PWM_MOTORS_Start();
     PWM_MOTORS_WriteCompare1(0);
     MOTOR_DIR_1_Write(0);
-    MOTOR_ON_OFF_1_Write(0x00);
+    enable_motor(0, 0x00);
+    MOTOR_DIR_2_Write(0);
+    enable_motor(1, 0x00);
      
     // Init AS5045 devices  
     COUNTER_ENC_Start();
@@ -146,7 +148,7 @@ int main()
     InitEncoderGeneral();
 
     //SPI IMU module
-    if (c_mem.read_imu_flag) {
+    if (c_mem.imu.read_imu_flag) {
 
     	SPI_IMU_Start();
     	SPI_IMU_Init();
@@ -173,60 +175,67 @@ int main()
     //---------------------------------------------------  Initialize filters structure 
     for(i=0;i<NUM_OF_MOTORS;i++) {
         filt_i[i].gain = 32;    // Current filter constant.
-            
+        filt_curr_diff[i].gain = 16;   // Current residual filter constant.       
         filt_v[i].old_value    = 12000;// Initial voltage filter value.
         filt_v[i].gain         = 2;    // Voltage filter constant.
     }
     for(i=0;i<NUM_OF_SENSORS;i++) {
         filt_vel[i].gain = 128; // Velocity filters constant.
     }
-    filt_curr_diff.gain = 16;   // Current residual filter constant.
     
     for(i=0;i<NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS;i++) {
         filt_emg[i].gain      = 50;   // Emg channels filter constant.
     }
     
     //---------------------------------------------------  Initialize reference structure 
-    g_ref.pos = 0;
-
+    for (i = 0; i< NUM_OF_MOTORS; i++) {
+        g_ref[i].pos = 0;
+    }
+    
     //---------------------------------------------------  Initialize measurement structure
-    for (i = NUM_OF_SENSORS; i--;) { 
-        g_meas.pos[i] = 0;
-        g_meas.rot[i] = 0;
+    for (j = 0; j< N_ENCODER_LINE_MAX; j++) { 
+        for (i = 0; i < NUM_OF_SENSORS; i++) { 
+            g_meas[j].pos[i] = 0;
+            g_meas[j].rot[i] = 0;
+        }
     }
 
-    g_refNew = g_ref;                                   // Initialize k+1 measurements structure.
+    for (i = 0; i< NUM_OF_MOTORS; i++) {
+        g_refNew[i] = g_ref[i];                         // Initialize k+1 measurements structure.
+    }
     
     //---------------------------------------------------  Initialize emg structure
-    g_meas.emg[0] = 0;
-    g_meas.emg[1] = 0;
+    g_emg_meas.emg[0] = 0;
+    g_emg_meas.emg[1] = 0;
     
-    if (c_mem.emg_calibration_flag) {
-        if ((c_mem.input_mode == INPUT_MODE_EMG_PROPORTIONAL) ||
-            (c_mem.input_mode == INPUT_MODE_EMG_INTEGRAL) ||
-            (c_mem.input_mode == INPUT_MODE_EMG_FCFS) ||
-            (c_mem.input_mode == INPUT_MODE_EMG_FCFS_ADV))
-            g_ref.onoff = 0x00;
+    MOTOR_DRIVER_TYPE_Write((g_mem.motor[1].motor_driver_type << 1) | g_mem.motor[0].motor_driver_type);
+    for (i = 0; i< NUM_OF_MOTORS; i++) {
+        if (c_mem.emg.emg_calibration_flag) {
+            if ((c_mem.motor[i].input_mode == INPUT_MODE_EMG_PROPORTIONAL) ||
+                (c_mem.motor[i].input_mode == INPUT_MODE_EMG_INTEGRAL) ||
+                (c_mem.motor[i].input_mode == INPUT_MODE_EMG_FCFS) ||
+                (c_mem.motor[i].input_mode == INPUT_MODE_EMG_FCFS_ADV))
+                g_ref[i].onoff = 0x00;
+            else
+                g_ref[i].onoff = c_mem.motor[i].activ;
+        } 
         else
-            g_ref.onoff = c_mem.activ;
-    } 
-    else
-        g_ref.onoff = c_mem.activ;
+            g_ref[i].onoff = c_mem.motor[i].activ;
 
-    if (!g_mem.double_encoder_on_off) {
-        g_ref.onoff = c_mem.activ;                          // Initialize Activation.
-    } 
-    else {
-        // Do not activate motor until position reconstruction has finished
-        g_ref.onoff = 0x00;
-    }
-    MOTOR_ON_OFF_1_Write(g_ref.onoff);                  // Activate motor in case.
-
-    dev_pwm_limit = dev_pwm_sat;                        // Init PWM limit.
+        if (!g_mem.enc[g_mem.motor[i].encoder_line].double_encoder_on_off) {
+            g_ref[i].onoff = c_mem.motor[i].activ;                          // Initialize Activation.
+        } 
+        else {
+            // Do not activate motor until position reconstruction has finished
+            g_ref[i].onoff = 0x00;
+        }
+        enable_motor(i, g_ref[i].onoff); 
+        
+        dev_pwm_limit[i] = dev_pwm_sat[i];              // Init PWM limit.
 	
-    for(i=0;i<NUM_OF_MOTORS;i++){
         pow_tension[i] = 12000;                         // 12000 mV (12 V)
     }
+    
     tension_valid = FALSE;                              // Init tension_valid BIT.
 
     reset_last_value_flag = 0;                          // Do not reset encoder last value.
@@ -243,10 +252,10 @@ int main()
 
     //============================================================    check if maintenance is due
 
-    if ( (g_mem.wire_disp/(((g_mem.pos_lim_sup>>g_mem.res[0]) - (g_mem.pos_lim_inf>>g_mem.res[0]))*2)) > (uint32)(PREREVISION_CYCLES/2) )   // 50 %
+    if ( (g_mem.cnt.wire_disp/(((g_mem.motor[0].pos_lim_sup>>g_mem.enc[0].res[0]) - (g_mem.motor[0].pos_lim_inf>>g_mem.enc[0].res[0]))*2)) > (uint32)(PREREVISION_CYCLES/2) )   // 50 %
         maintenance_flag = TRUE;    
 
-    if (g_mem.read_exp_port_flag == EXP_SD_RTC) {
+    if (g_mem.exp.read_exp_port_flag == EXP_SD_RTC) {
         
         store_RTC_current_time();
         

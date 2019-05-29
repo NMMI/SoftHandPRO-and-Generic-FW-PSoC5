@@ -66,7 +66,8 @@
 #define NUM_OF_INPUT_EMGS       2       /*!< Number of emg channels.*/
 #define NUM_OF_ADDITIONAL_EMGS  6       /*!< Number of additional emg channels.*/
 #define NUM_OF_ADC_CHANNELS_MAX (4+NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS)    
-#define NUM_OF_PARAMS           42      /*!< Number of parameters saved in the EEPROM.*/
+#define NUM_OF_PARAMS           48      /*!< Number of parameters saved in the EEPROM.*/
+#define NUM_OF_PARAMS_MENU      9       /*!< Number of parameters menu.*/    
 #define N_IMU_MAX               5    
 #define NUM_OF_IMU_DATA         5       // accelerometers, gyroscopes, magnetometers, quaternion and temperature data
 #define N_ENCODER_LINE_MAX      2       /*!< Max number of CS lines which can contain encoders.*/
@@ -140,7 +141,7 @@
 #define TRUE                    1
 #define DEFAULT_EEPROM_DISPLACEMENT 50  /*!< Number of pages occupied by the EEPROM.*/
 #define EEPROM_BYTES_ROW        16      /*!< EEPROM number of bytes per row.*/
-#define EEPROM_COUNTERS_ROWS    6       /*!< EEPROM number of rows dedicated to store counters.*/
+#define EEPROM_COUNTERS_ROWS    5       /*!< EEPROM number of rows dedicated to store counters.*/
 #define PWM_MAX_VALUE           100     /*!< Maximum value of the PWM signal.*/
 #define ANTI_WINDUP             1000    /*!< Anti windup saturation.*/ 
 #define DEFAULT_CURRENT_LIMIT   1500    /*!< Default Current limit, 0 stands for unlimited.*/
@@ -177,13 +178,15 @@ struct st_ref {
 **/
 struct st_meas {
     int32 pos[NUM_OF_SENSORS];      /*!< Encoder sensor position.*/
-    int32 curr[NUM_OF_MOTORS];      /*!< Motor current.*/
+    int32 curr;                     /*!< Motor current.*/
     int32 estim_curr;               /*!< Current estimation.*/
     int8 rot[NUM_OF_SENSORS];       /*!< Encoder sensor rotations.*/
-
-    int32 emg[NUM_OF_INPUT_EMGS];           /*!< EMG sensors values.*/
     int32 vel[NUM_OF_SENSORS];              /*!< Encoder rotational velocity.*/
     int32 acc[NUM_OF_SENSORS];              /*!< Encoder rotational acceleration.*/
+};
+
+struct st_emg_meas {
+    int32 emg[NUM_OF_INPUT_EMGS];           /*!< EMG sensors values.*/
     int32 add_emg[NUM_OF_ADDITIONAL_EMGS];  /*!< Additional EMG sensors values.*/
 };
 
@@ -191,7 +194,7 @@ struct st_meas {
 /** \brief Data sent/received structure
  *
 **/
-struct st_data {
+struct st_data{
     uint8   buffer[128];            /*!< Data buffer [CMD | DATA | CHECKSUM].*/
     int16   length;                 /*!< Data buffer length.*/
     int16   ind;                    /*!< Data buffer index.*/
@@ -199,107 +202,138 @@ struct st_data {
 };
 
 //============================================     settings stored on the memory
-/** \brief EEPROM stored structure
+/** \brief EEPROM stored structures
  * 
 **/
-// Since PSOC5 ARM memory is 4-bytes aligned, st_mem structure variables are not contiguous
-struct st_mem {
-    
-//------------------------------------------------ COUNTERS -------------------------------------------------//    
-    
+
+struct st_counters{
     uint32  emg_counter[2];             /*!< Counter for EMG activation - both channels.*/                  //8
-    //End of row one. position_hist[0] and position_hist[1] are on row one.
     uint32  position_hist[10];          /*!< Positions histogram - 10 zones.*/                              //40
-    //End of row three.
     uint32  current_hist[4];            /*!< Current histogram - 4 zones.*/                                 //16
-    //End of row four.
     uint32  rest_counter;               /*!< Counter for rest position occurrences.*/                       //4
     uint32  wire_disp;                  /*!< Counter for total wire displacement measurement.*/             //4
     uint32  total_time_on;              /*!< Total time of system power (in seconds).*/                     //4
     uint32  total_time_rest;            /*!< Total time of system while rest position is maintained.*/      //4
-    //End of row five.
-    uint8   curr_time[6];               /*!< Current time from RTC (DD/MM/YY HH:MM:SS).*/                   //6 
-    uint8   unused_bytes1[74];
-    // End of row ten.
+};                                                                                                          // TOTAL: 80 bytes
 
-//-------------------------------------------- MEMORY VARIABLES ---------------------------------------------// 
-    
-    uint8   flag;                       /*!< If checked the device has been configured.*/                   //1
-    uint8   id;                         /*!< Device id.*/                                                   //1
-                                                                                                            //2 bytes free (word-aligned)
+struct st_device{
+    uint8   id;                         /*!< Device id.*/                                                   //1    
+    uint8   hw_maint_date[3];           /*!< Date of last hardware maintenance.*/                           //3
+    uint8   stats_period_begin_date[3]; /*!< Date of begin of usage statistics period.*/                    //3
+    uint8   right_left;                 /*!< Right/Left hand.*/   	                                        //1
+    uint8   reset_counters;             /*!< Reset counters flag.*/                                         //1
+    uint8   use_2nd_motor_flag;         /*!< Use 2nd motor (2 powers).*/                                    //1
+    uint8   baud_rate;                  /*!< Baud Rate setted.*/                                            //1
+    uint8   unused_bytes[5];            /*!< Unused bytes to fill row.*/                                    //8
+};                                                                                                          // TOTAL: 16 BYTES
+
+struct st_motor{
     int32   k_p;                        /*!< Position controller proportional constant.*/                   //4
     int32   k_i;                        /*!< Position controller integrative constant.*/                    //4
     int32   k_d;                        /*!< Position controller derivative constant.*/                     //4
-    // End of row eleven.
     int32   k_p_c;                      /*!< Current controller proportional constant.*/                    //4
     int32   k_i_c;                      /*!< Current controller integrative constant.*/                     //4
     int32   k_d_c;                      /*!< Current controller derivative constant.*/                      //4 
     int32   k_p_dl;                     /*!< Double loop position controller prop. constant.*/              //4
-    // End of row twelve.
     int32   k_i_dl;                     /*!< Double loop position controller integr. constant.*/            //4     
     int32   k_d_dl;                     /*!< Double loop position controller deriv. constant.*/             //4
     int32   k_p_c_dl;                   /*!< Double loop current controller prop. constant.*/               //4
     int32   k_i_c_dl;                   /*!< Double loop current controller integr. constant.*/             //4
-    // End of row thirteen.
     int32   k_d_c_dl;                   /*!< Double loop current controller deriv. constant.*/              //4     
     uint8   activ;                      /*!< Startup activation.*/                                          //1
-    uint8   input_mode;                 /*!< Motor Input mode.*/                                            //1 
-    uint8   control_mode;               /*!< Motor Control mode.*/                                          //1
-    uint8   res[NUM_OF_SENSORS];        /*!< Angle resolution.*/                                            //3
-                                                                                                            //2 bytes free (word-aligned)
-    int32   m_off[NUM_OF_SENSORS];      /*!< Measurement offset.*/                                          //12
-    //End of row fourteen. Second and third offset is on row fifteen.  
-    float32 m_mult[NUM_OF_SENSORS];     /*!< Measurement multiplier.*/                                    //12
-    //End of row fifteen. Third multiplier is on row sixteen.
+    uint8   activate_pwm_rescaling;     /*!< Activation of PWM rescaling for 12V motor.*/                   //1
+    uint8   motor_driver_type;          /*!< Specify motor type.*/                                          //1
     uint8   pos_lim_flag;               /*!< Position limit active/inactive.*/                              //1
-                                                                                                            //3 bytes free (word-aligned)
     int32   pos_lim_inf;                /*!< Inferior position limit for motor.*/                           //4     
-    int32   pos_lim_sup;                /*!< Superior position limit for motor.*/                           //4
-    // End of row sixteen.
+    int32   pos_lim_sup;                /*!< Superior position limit for motor[0].*/                           //4
     int32   max_step_neg;               /*!< Maximum number of steps per cycle for negative positions.*/    //4
     int32   max_step_pos;               /*!< Maximum number of steps per cycle for positive positions.*/    //4          
-    int16   current_limit;              /*!< Limit for absorbed current.*/                                  //2
-    uint16  emg_threshold[NUM_OF_INPUT_EMGS]; /*!< Minimum value for activation of EMG control.*/                 //4
-    uint8   emg_calibration_flag;       /*!< Enable emg calibration on startup.*/                           //1  
-                                                                                                            //1 bytes free (word-aligned)    
-    // End of row seventeen.
-    uint32  emg_max_value[NUM_OF_INPUT_EMGS]; /*!< Maximum value for EMG.*/                                       //8     
-    uint8   emg_speed;                  /*!< Maximum closure speed when using EMG.*/                        //1
-    uint8   double_encoder_on_off;      /*!< Double encoder ON/OFF.*/                                       //1
-    int8    motor_handle_ratio;         /*!< Discrete multiplier for handle device.*/                       //1 
-    uint8   activate_pwm_rescaling;     /*!< Activation of PWM rescaling for 12V motor.*/                   //1
     float   curr_lookup[LOOKUP_DIM];    /*!< Table of values to get estimated curr.*/                       //24
-    // End of row eighteen. curr_lookup[0] is on row eighteen but curr_lookup[1:4] is on row nineteen. 
-    // End of row nineteen. curr_lookup[5] is on row twenty. 
-    uint8   baud_rate;                  /*!< Baud Rate setted.*/                                            //1
-    uint8   maint_day;                  /*!< Date of last maintenance.*/                                    //1
-    uint8   maint_month;                /*!< Date of last maintenance.*/                                    //1
-    uint8   maint_year;                 /*!< Date of last maintenance.*/                                    //1
+    int16   current_limit;              /*!< Limit for absorbed current.*/                                  //2
+    uint8   input_mode;                 /*!< Motor Input mode.*/                                            //1 
+    uint8   control_mode;               /*!< Motor Control mode.*/                                          //1
+    uint8   encoder_line;               /*!< Encoder line associated to the motor control.*/                //1
+    uint8   pwm_rate_limiter;           /*!< PWM rate limiter max asscoaited to the motor.*/                //1
+    uint8   not_revers_motor_flag;      /*!< Flag to know if the motor is reversible or not.*/              //1 
+    uint8   unused_bytes[13];           /*!< Unused bytes to fill row.*/                                    //13
+};                                                                                                          // TOTAL: 112 BYTES
+
+struct st_encoder{
+    uint8   Encoder_conf[N_ENCODERS_PER_LINE_MAX]; /*!< Encoder configuration flags.*/                      //5
+    uint8   res[NUM_OF_SENSORS];        /*!< Angle resolution.*/                                            //3
+    int32   m_off[NUM_OF_SENSORS];      /*!< Measurement offset.*/                                          //12 
+    float32 m_mult[NUM_OF_SENSORS];     /*!< Measurement multiplier.*/                                      //12
+    uint8   double_encoder_on_off;      /*!< Double encoder ON/OFF.*/                                       //1
+    int8    motor_handle_ratio;         /*!< Discrete multiplier for handle device.*/                       //1
+    uint8   unused_bytes[14];           /*!< Unused bytes to fill row.*/                                    //14
+};                                                                                                          // TOTAL: 48 BYTES
+
+struct st_emg{
+    uint16  emg_threshold[NUM_OF_INPUT_EMGS]; /*!< Minimum value for activation of EMG control.*/           //4
+    uint32  emg_max_value[NUM_OF_INPUT_EMGS]; /*!< Maximum value for EMG.*/                                 //8     
+    uint8   emg_speed;                  /*!< Maximum closure speed when using EMG.*/                        //1    
+    uint8   emg_calibration_flag;       /*!< Enable emg calibration on startup.*/                           //1  
+    uint8   switch_emg;                 /*!< EMG opening/closure switch.*/                                  //1
+    uint8   unused_bytes[1];            /*!< Unused bytes to fill row.*/                                    //1
+};                                                                                                          // TOTAL: 16 BYTES                                                                                                         // TOTAL: 32 BYTES
+
+struct st_imu{
+    uint8   read_imu_flag;              /*!< Enable IMU reading feature.*/                                  //1
+    uint8   SPI_read_delay;             /*!< Delay on SPI reading.*/                                        //1
+    uint8   IMU_conf[N_IMU_MAX][NUM_OF_IMU_DATA];   /*!< IMUs configuration flags.*/                        //25
+    uint8   unused_bytes[5];            /*!< Unused bytes to fill row.*/                                    //5
+};                                                                                                          // TOTAL: 32 BYTES
+
+struct st_expansion{
+    uint8   curr_time[6];               /*!< Current time from RTC (DD/MM/YY HH:MM:SS).*/                   //6 
+    char    user_code_string[8];        /*!< User code.*/                                                   //8
+    uint8   read_exp_port_flag;         /*!< Enable Expansion Port.*/                                       //1
+    uint8   read_ADC_sensors_port_flag; /*!< Enable ADC sensors Port.*/                                     //1
+    uint8   ADC_conf[NUM_OF_ADC_CHANNELS_MAX];  /*!< ADC configuration flags.*/                             //12
+    uint8   unused_bytes[4];           /*!< Unused bytes to fill row.*/                                    //4
+};                                                                                                          // TOTAL: 32 BYTES
+
+struct st_SH_spec{
     int32   rest_pos;                   /*!< Hand rest position while in EMG mode.*/                        //4
     int32   rest_delay;                 /*!< Hand rest position delay while in EMG mode.*/                  //4
-    // End of row twenty.
-    int32   rest_vel;                   /*!< Hand velocity closure for rest position reaching.*/             //4
+    int32   rest_vel;                   /*!< Hand velocity closure for rest position reaching.*/            //4
     uint8   rest_position_flag;         /*!< Enable rest position feature.*/                                //1
-    uint8   switch_emg;                 /*!< EMG opening/closure switch.*/  
-    uint8   right_left;                 /*!< Right/Left hand.*/   	//1    
-    uint8   read_imu_flag;              /*!< Enable IMU reading feature.*/                                  //1
-    uint8   read_exp_port_flag;         /*!< Enable Expansion Port.*/                                       //1
-    uint8   unused_bytes[7];
-    // End of row twenty-one.   
-    uint8   SPI_read_delay;             /*!< Delay on SPI reading.*/                                        //1
-    uint8   IMU_conf[N_IMU_MAX][NUM_OF_IMU_DATA];        /*!< IMUs configuration flags.*/                   //25
-    // End of row twenty-two. IMU_conf[3][] and IMU_conf[4][] are on row twenty-three.
-    uint8   Encoder_conf[N_ENCODER_LINE_MAX][N_ENCODERS_PER_LINE_MAX]; /*!< Encoder configuration flags.*/  //10
-    // End of row twenty-three. Encoder_conf[1][1..4] are on row twenty-four.
-    uint8   ADC_conf[NUM_OF_ADC_CHANNELS_MAX];          /*!< ADC configuration flags.*/                     //12
-    // End of row twenty-four.
-    uint8   read_emg_sensors_port_flag; /*!< Enable EMG sensors Port.*/                                     //1
-    uint8   use_2nd_motor_flag;         /*!< Use 2nd motor (2 powers).*/                                    //1
-    uint8   motor_driver_type[NUM_OF_MOTORS];           /*!< Specify motor type.*/                          //2
+    uint8   unused_bytes[3];            /*!< Unused bytes to fill row.*/                                    //3
+};                                                                                                          // TOTAL: 16 BYTES                                                                                                         // TOTAL: 80 BYTES
+
+//-------------------------------------------- MEMORY VARIABLES ---------------------------------------------// 
+// Since PSOC5 ARM memory is 4-bytes aligned, st_mem structure variables are not contiguous
+struct st_eeprom {
+    
+    uint8  flag;                        /*!< If checked the device has been configured.*/                   //1 byte
+    uint8  unused_bytes[15];            /*!< Leave bytes to align structures to memory rows.*/              //1 row     (End of row 1)
+    struct st_counters cnt;             /*!< Statistics Counters.*/                                         //5 rows    (End of row 6)
+    uint8  unused_bytes1[EEPROM_BYTES_ROW*4]; /*!< Leave for rows free for further uses.*/                  //4 rows    (End of row 10)
+    struct st_device dev;               /*!< Device information.*/                                          //1 row     (End of row 11)
+    struct st_motor motor[NUM_OF_MOTORS];       /*!< Motor variables.*/                                     //7*2 rows  (End of row 25)
+    struct st_encoder enc[N_ENCODER_LINE_MAX];  /*!< Encoder variables (1 line).*/                          //3*2 rows  (End of row 31)
+    struct st_emg emg;                  /*!< EMG variables.*/                                               //1 row     (End of row 32)
+    struct st_imu imu;                  /*!< IMU general variables.*/                                       //2 rows    (End of row 34)
+    struct st_expansion exp;            /*!< SD and ADC variables.*/                                        //2 rows    (End of row 36)  
+
+//#ifdef SOFTHAND_FW
+    struct st_SH_spec SH;               /*!< SoftHand specific variables.*/                                 //1 row     (End of row 37)
+//#endif
+
+//#ifdef CYBATHLON_EXT
+    uint8 pilot_id;
+    struct st_emg pilot_emg[3];
+//#endif    
+
+#ifdef GENERIC_FW
+    //struct st_CUFF_spec CUFF_spec;
+    //struct st_JOY_spec JOY_spec;
+    //struct st_MASTER_spec MASTER_spec;
+#endif    
 };
 
 //=================================================     IMU variables
-struct st_imu {
+struct st_imu_data {
     uint8 flags;        // Flags to know what we are reading (0/1) from each imu [ accel | gyro | magn | quat | temp ]
     int16 accel_value[3];
     int16 gyro_value[3];
@@ -350,12 +384,13 @@ typedef enum {
 
 //====================================      external global variables definition
 
-extern struct st_ref    g_ref, g_refNew, g_refOld;  /*!< Reference variables.*/
-extern struct st_meas   g_meas, g_measOld;          /*!< Measurements.*/
+extern struct st_ref    g_ref[NUM_OF_MOTORS], g_refNew[NUM_OF_MOTORS], g_refOld[NUM_OF_MOTORS]; /*!< Reference variables.*/
+extern struct st_meas   g_meas[N_ENCODER_LINE_MAX], g_measOld[N_ENCODER_LINE_MAX];              /*!< Measurements.*/
+extern struct st_emg_meas g_emg_meas, g_emg_measOld;/*!< EMG Measurements.*/
 extern struct st_data   g_rx;                       /*!< Incoming/Outcoming data.*/
-extern struct st_mem    g_mem, c_mem;               /*!< Memory parameters.*/
+extern struct st_eeprom g_mem, c_mem;               /*!< Memory parameters.*/
 extern struct st_calib  calib;                      /*!< Calibration variables.*/
-extern struct st_filter filt_v[NUM_OF_MOTORS], filt_curr_diff, filt_i[NUM_OF_MOTORS];     /*!< Voltage and current filter variables.*/
+extern struct st_filter filt_v[NUM_OF_MOTORS], filt_curr_diff[NUM_OF_MOTORS], filt_i[NUM_OF_MOTORS];     /*!< Voltage and current filter variables.*/
 extern struct st_filter filt_vel[NUM_OF_SENSORS];                /*!< Velocity filter variables.*/
 extern struct st_filter filt_emg[NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS]; /*!< EMG filter variables.*/
 
@@ -364,8 +399,8 @@ extern uint16 timer_value0;                         /*!< Start time of the firmw
 extern float cycle_time;							/*!< Variable used to calculate how much time a cycle takes.*/
 
 extern int32    dev_tension[NUM_OF_MOTORS];         /*!< Power supply tension.*/
-extern uint8    dev_pwm_limit;                      /*!< Device pwm limit. It may change during execution.*/
-extern uint8    dev_pwm_sat;                        /*!< Device pwm saturation.*/
+extern uint8    dev_pwm_limit[NUM_OF_MOTORS];       /*!< Device pwm limit. It may change during execution.*/
+extern uint8    dev_pwm_sat[NUM_OF_MOTORS];         /*!< Device pwm saturation.*/
 extern int32    dev_tension_f[NUM_OF_MOTORS];       /*!< Filtered power supply tension.*/
 extern int32    pow_tension[NUM_OF_MOTORS];         /*!< Computed power supply tension.*/
 
@@ -410,7 +445,7 @@ extern uint8 N_IMU_Connected;
 extern uint8 IMU_connected[N_IMU_MAX];
 extern int imus_data_size;
 extern int single_imu_size[N_IMU_MAX];
-extern struct st_imu g_imu[N_IMU_MAX], g_imuNew[N_IMU_MAX];
+extern struct st_imu_data g_imu[N_IMU_MAX], g_imuNew[N_IMU_MAX];
 extern uint8 Accel[N_IMU_MAX][6];
 extern uint8 Gyro[N_IMU_MAX][6];
 extern uint8 Mag[N_IMU_MAX][6];

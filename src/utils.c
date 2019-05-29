@@ -48,36 +48,37 @@
 //                                                            Current Estimation
 //==============================================================================
 
-int32 curr_estim ( int32 pos, int32 vel, int32 ref ) {
+int32 curr_estim ( uint8 idx, int32 pos, int32 vel, int32 ref ) {
 
-        static int32 virtual_pos_friction; 	// Virtual position used to estimate friction.
-        static int32 err_pos_dt;			// Temporal evolution of error position.
+        static int32 virtual_pos_friction[NUM_OF_MOTORS]; 	// Virtual position used to estimate friction.
+        static int32 err_pos_dt[NUM_OF_MOTORS];			    // Temporal evolution of error position.
 											// Needed to model the current transients due to reference steps.
         int32 curr_estimate;
 
         if (pos < ZERO_TOL) 
-			virtual_pos_friction = pos;
+			virtual_pos_friction[idx] = pos;
         else {
-			if ((pos - virtual_pos_friction) > ZMAX) 
-				virtual_pos_friction =  pos - ZMAX;
+			if ((pos - virtual_pos_friction[idx]) > ZMAX) 
+				virtual_pos_friction[idx] =  pos - ZMAX;
         	else { 
-				if ((pos - virtual_pos_friction) < -ZMAX) 
-					virtual_pos_friction =  pos + ZMAX;
+				if ((pos - virtual_pos_friction[idx]) < -ZMAX) 
+					virtual_pos_friction[idx] =  pos + ZMAX;
 			}
 		}        
        
-        curr_estimate = pos * g_mem.curr_lookup[0] * (1 + pos * g_mem.curr_lookup[1]) + (pos - virtual_pos_friction) * (g_mem.curr_lookup[2] / ZMAX) + vel * g_mem.curr_lookup[3] * (1 + abs(vel) * g_mem.curr_lookup[4]) + (ref - err_pos_dt) * g_mem.curr_lookup[5];
+        curr_estimate = pos * g_mem.motor[idx].curr_lookup[0] * (1 + pos * g_mem.motor[idx].curr_lookup[1]) + (pos - virtual_pos_friction[idx]) * (g_mem.motor[idx].curr_lookup[2] / ZMAX) + vel * g_mem.motor[idx].curr_lookup[3] * (1 + abs(vel) * g_mem.motor[idx].curr_lookup[4]) + (ref - err_pos_dt[idx]) * g_mem.motor[idx].curr_lookup[5];
         
-        if (curr_estimate > c_mem.current_limit) 
-            curr_estimate = c_mem.current_limit;
+        if (curr_estimate > c_mem.motor[idx].current_limit) 
+            curr_estimate = c_mem.motor[idx].current_limit;
         else {
-			if (curr_estimate < -c_mem.current_limit)
-            	curr_estimate = -c_mem.current_limit;
+			if (curr_estimate < -c_mem.motor[idx].current_limit)
+            	curr_estimate = -c_mem.motor[idx].current_limit;
 		}
 
-        err_pos_dt = (REFSPEED * ref + (1024 - REFSPEED) * err_pos_dt) / 1024;         
+        err_pos_dt[idx] = (REFSPEED * ref + (1024 - REFSPEED) * err_pos_dt[idx]) / 1024;         
         
-        return curr_estimate;        
+        return curr_estimate; 
+    
 }
 
 //==============================================================================
@@ -120,14 +121,14 @@ void calibration(void) {
 
     // closing
     if (direction == 0) {
-        g_refNew.pos += (calib.speed << g_mem.res[0]);
+        g_refNew[0].pos += (calib.speed << g_mem.enc[g_mem.motor[0].encoder_line].res[0]);
         
-        if ((g_refNew.pos) > g_mem.pos_lim_sup) {
+        if ((g_refNew[0].pos) > g_mem.motor[0].pos_lim_sup) {
             direction = 1;
         }
     } else { //opening
-        g_refNew.pos -= (calib.speed << g_mem.res[0]);
-        if (SIGN(g_refNew.pos) != 1) {
+        g_refNew[0].pos -= (calib.speed << g_mem.enc[g_mem.motor[0].encoder_line].res[0]);
+        if (SIGN(g_refNew[0].pos) != 1) {
             direction = 0;
             closure_counter++;
 //            count_one = 1;          // Enables back the cycles counter
@@ -178,7 +179,7 @@ int calc_turns_fcn(const int32 pos1, const int32 pos2) {
     int32 x;
     int32 aux;
     
-    switch (c_mem.right_left){
+    switch (c_mem.dev.right_left){
         case RIGHT_HAND:
             x = (my_mod( - N2*(pos2) - N1*pos1, M*N2) + M/2) / M;
             
@@ -207,7 +208,7 @@ int calc_turns_fcn(const int32 pos1, const int32 pos2) {
 //==============================================================================
 //                                                                 REST POSITION
 //==============================================================================
-
+#ifdef SOFTHAND_FW
 void check_rest_position(void) {     // 100 Hz frequency.
     
     static uint32 count = 0;        // Range [0 - 2^31].
@@ -218,16 +219,16 @@ void check_rest_position(void) {     // 100 Hz frequency.
     static int32 delta_inc = 0;
     int32 curr_pos = 0;
     static int32 rest_error;
-    float rest_vel_ticks_ms = ((float)g_mem.rest_vel)/1000.0;    //[ticks/s] -> [ticks/ms]
+    float rest_vel_ticks_ms = ((float)g_mem.SH.rest_vel)/1000.0;    //[ticks/s] -> [ticks/ms]
     
     if (first_time){
         count = 0;
         first_time = 0;
     }
     
-    curr_pos = (int32)(g_meas.pos[0] >> g_mem.res[0]);
+    curr_pos = (int32)(g_meas[g_mem.motor[0].encoder_line].pos[0] >> g_mem.enc[g_mem.motor[0].encoder_line].res[0]);
     
-    if ( ( (c_mem.input_mode >= 2 && g_meas.emg[0] < 200 && g_meas.emg[1] < 200) ) && curr_pos < 10000){
+    if ( ( (c_mem.motor[0].input_mode >= 2 && g_emg_meas.emg[0] < 200 && g_emg_meas.emg[1] < 200) ) && curr_pos < 10000){
         if (flag_count == 1){
             count = count + 1;
         }
@@ -237,28 +238,28 @@ void check_rest_position(void) {     // 100 Hz frequency.
         rest_enabled = 0;
         flag_count = 1;
     }
-    
+  
     /********** Velocity closure procedure *************
     * m = error/time
     * m = (g_mem.rest_pos - init_pos)/time
     * time = g_mem.rest_pos/rest_vel_ticks_ms (rest_vel_ticks_ms is in [ticks/ms])
     ***************************************************/
-    
-    if (count == (uint32)(g_mem.rest_delay/CALIBRATION_DIV)){ 
+
+    if (count == (uint32)(g_mem.SH.rest_delay/CALIBRATION_DIV)){ 
         // This routine is executed every 10 firmware cycles -> g_mem.rest_delay must be major than 10 ms
         rest_enabled = 1;
-        rest_pos_curr_ref = g_meas.pos[0];
+        rest_pos_curr_ref = g_meas[g_mem.motor[0].encoder_line].pos[0];
         
         // Ramp angular coefficient
-        m = ((float)(g_mem.rest_pos - g_meas.pos[0])/((float)g_mem.rest_pos))*(rest_vel_ticks_ms);
+        m = ((float)(g_mem.SH.rest_pos - g_meas[g_mem.motor[0].encoder_line].pos[0])/((float)g_mem.SH.rest_pos))*(rest_vel_ticks_ms);
         
         // Stop condition threshold is related to m coefficient by REST_RATIO value
-        abs_err_thr = (int32)( (int32)(((float)REST_POS_ERR_THR_GAIN)*m*((float)CALIBRATION_DIV)) << g_mem.res[0]);
+        abs_err_thr = (int32)( (int32)(((float)REST_POS_ERR_THR_GAIN)*m*((float)CALIBRATION_DIV)) << g_mem.enc[g_mem.motor[0].encoder_line].res[0]);
         abs_err_thr = (abs_err_thr>0)?abs_err_thr:(0-abs_err_thr);
         
-        rest_error = g_mem.rest_pos - g_meas.pos[0];    
+        rest_error = g_mem.SH.rest_pos - g_meas[g_mem.motor[0].encoder_line].pos[0];    
         
-        delta_inc = (int32)( ((int32)(m*(float)CALIBRATION_DIV)) << g_mem.res[0] );
+        delta_inc = (int32)( ((int32)(m*(float)CALIBRATION_DIV)) << g_mem.enc[g_mem.motor[0].encoder_line].res[0] );
         delta_inc = (delta_inc>0)?delta_inc:(0-delta_inc);
         
         count = 0;
@@ -269,15 +270,15 @@ void check_rest_position(void) {     // 100 Hz frequency.
 
         if (rest_error < abs_err_thr && rest_error > -abs_err_thr){
             // Stop condition
-            rest_pos_curr_ref = g_mem.rest_pos;
+            rest_pos_curr_ref = g_mem.SH.rest_pos;
             
-            if (c_mem.input_mode >= 2)   // EMG input mode
+            if (c_mem.motor[0].input_mode >= 2)   // EMG input mode
                 forced_open = 1; 
             
             count = 0;
         }
         else {
-            rest_error = g_mem.rest_pos - g_meas.pos[0];        
+            rest_error = g_mem.SH.rest_pos - g_meas[g_mem.motor[0].encoder_line].pos[0];        
 
             if (rest_error > 0){
                 rest_pos_curr_ref = rest_pos_curr_ref + delta_inc;
@@ -289,15 +290,15 @@ void check_rest_position(void) {     // 100 Hz frequency.
     }
     
     // Position limit saturation
-    if (c_mem.pos_lim_flag) {
-        if (rest_pos_curr_ref < c_mem.pos_lim_inf) 
-            rest_pos_curr_ref = c_mem.pos_lim_inf;
-        if (rest_pos_curr_ref > c_mem.pos_lim_sup) 
-            rest_pos_curr_ref = c_mem.pos_lim_sup;
+    if (c_mem.motor[0].pos_lim_flag) {
+        if (rest_pos_curr_ref < c_mem.motor[0].pos_lim_inf) 
+            rest_pos_curr_ref = c_mem.motor[0].pos_lim_inf;
+        if (rest_pos_curr_ref > c_mem.motor[0].pos_lim_sup) 
+            rest_pos_curr_ref = c_mem.motor[0].pos_lim_sup;
     }
 
 }
-
+#endif
 
 //==============================================================================
 //                                                                   LED CONTROL
@@ -351,7 +352,7 @@ void battery_management() {
     // LED handling procedure
     // The board LED blinks if attached battery is not fully charged
 
-    /*if (battery_low_SoC) {
+    if (battery_low_SoC) {
         
         //red light - blink @ 2.5 Hz
         LED_control(3);
@@ -359,8 +360,10 @@ void battery_management() {
         rest_enabled = 0;
         if (v_count_lb >= 11000){
             // Disable motor because we are sure of not fully charged battery and terminal device has opened
-            g_refNew.onoff = 0x00;
-            MOTOR_ON_OFF_1_Write(g_refNew.onoff); // Deactivate motor
+            g_refNew[0].onoff = 0x00;
+            enable_motor(0, g_refNew[0].onoff);
+            g_refNew[1].onoff = 0x00;
+            enable_motor(1, g_refNew[1].onoff);     // Deactivate motor
             v_count_lb = 0;
         }
         else
@@ -368,19 +371,19 @@ void battery_management() {
         
     }
     else {
-    */   
+
         // The board LED is still or blinks depending on attached battery State of Charge
-        if (tension_valid == TRUE && ((c_mem.input_mode <= 1)  ||
-            (c_mem.input_mode > 1 && emg_1_status == NORMAL && emg_2_status == NORMAL)) ){ 
+        if (tension_valid == TRUE && ((c_mem.motor[0].input_mode <= 1)  ||
+            (c_mem.motor[0].input_mode > 1 && emg_1_status == NORMAL && emg_2_status == NORMAL)) ){ 
             dev_tension_f[0] = filter(dev_tension[0], &filt_v[0]);            
-            if (c_mem.use_2nd_motor_flag == TRUE) {
+            if (c_mem.dev.use_2nd_motor_flag == TRUE) {
                 dev_tension_f[1] = filter(dev_tension[1], &filt_v[1]);
             }
             
             // Note: Sometimes pow_tension is not well computed when using power supply
             // Parrot/Renata: 0.9, 0.87
             // ARTS: 0.87, 0.8
-            if (dev_tension_f[0] > 0.95 * pow_tension[0] && (c_mem.use_2nd_motor_flag == FALSE || dev_tension_f[1] > 0.95 * pow_tension[1])){
+            if (dev_tension_f[0] > 0.95 * pow_tension[0] && (c_mem.dev.use_2nd_motor_flag == FALSE || dev_tension_f[1] > 0.95 * pow_tension[1])){
                 //fixed
                 if (!maintenance_flag)
                     LED_control(0);     // NO LIGHT - all leds off
@@ -389,7 +392,7 @@ void battery_management() {
             }
             
             else {
-                if (dev_tension_f[0] > 0.9 * pow_tension[0] && (c_mem.use_2nd_motor_flag == FALSE || dev_tension_f[1] > 0.9 * pow_tension[1])) {
+                if (dev_tension_f[0] > 0.9 * pow_tension[0] && (c_mem.dev.use_2nd_motor_flag == FALSE || dev_tension_f[1] > 0.9 * pow_tension[1])) {
                     //yellow light - blink @ 0.5 Hz
                     //LED_control(2);   
                     
@@ -421,13 +424,11 @@ void battery_management() {
             
         }
         else {
-            if ((c_mem.input_mode <= 1) || (c_mem.input_mode > 1 && emg_1_status == NORMAL && emg_2_status == NORMAL)){
+            if ((c_mem.motor[0].input_mode <= 1) || (c_mem.motor[0].input_mode > 1 && emg_1_status == NORMAL && emg_2_status == NORMAL)){
                 LED_control(5);     // Default - red light
             }
         }
-    /*
-    }
-    */  
+    }  
 }
 
 //==============================================================================
@@ -442,13 +443,13 @@ void ADC_Set_N_Channels() {
                                     // EMG_B
 
 #ifdef GENERIC_FW    
-    if (c_mem.use_2nd_motor_flag == TRUE){
+    if (c_mem.dev.use_2nd_motor_flag == TRUE){
         // add 2nd power
         NUM_OF_ANALOG_INPUTS = 6;   // Voltage_Sense_2
                                     // Current_Sense_2
     }
     
-    if (c_mem.read_emg_sensors_port_flag == TRUE){
+    if (c_mem.exp.read_ADC_sensors_port_flag == TRUE){
         // add all emg channels
         NUM_OF_ANALOG_INPUTS = 12;  // EMG_1
                                     // EMG_2
@@ -464,23 +465,38 @@ void ADC_Set_N_Channels() {
 }
 
 //==============================================================================
+//                                                                  ENABLE MOTOR
+//==============================================================================
+void enable_motor(uint8 idx, uint8 val){
+    // Enables motor idx, according to val value
+    if (idx == 0) {
+        MOTOR_ON_OFF_1_Write(val);
+    }   
+    if (idx == 1) {
+        MOTOR_ON_OFF_2_Write(val);
+    }
+}
+
+
+
+//==============================================================================
 //                                                              RESET COUNTERS
 //==============================================================================
 void reset_counters() {
     uint8 i;
     
     // Initialize counters        
-    g_mem.emg_counter[0] = g_mem.emg_counter[1] = 0;
+    g_mem.cnt.emg_counter[0] = g_mem.cnt.emg_counter[1] = 0;
     for(i = 0; i< 10; i++){
-        g_mem.position_hist[i] = 0;
+        g_mem.cnt.position_hist[i] = 0;
     }
     for(i = 0; i< 4; i++){
-        g_mem.current_hist[i] = 0;
+        g_mem.cnt.current_hist[i] = 0;
     }
-    g_mem.rest_counter = 0;
-    g_mem.wire_disp = 0;
-    g_mem.total_time_on = 0;
-    g_mem.total_time_rest = 0; 
+    g_mem.cnt.rest_counter = 0;
+    g_mem.cnt.wire_disp = 0;
+    g_mem.cnt.total_time_on = 0;
+    g_mem.cnt.total_time_rest = 0; 
 }
 
 

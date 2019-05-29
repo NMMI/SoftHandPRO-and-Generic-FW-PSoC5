@@ -186,7 +186,8 @@ enum data_types {
     TYPE_INT32   = 5,
     TYPE_UINT32  = 6,
     TYPE_FLOAT   = 7,
-    TYPE_DOUBLE  = 8
+    TYPE_DOUBLE  = 8,
+    TYPE_STRING  = 9            // Custom data type (uint8 but with string meaning)
 };
 
 #define PARAM_BYTE_SLOT     50      ///< Number of bytes reserved to a param information.

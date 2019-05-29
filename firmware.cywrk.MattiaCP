@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="firmware\firmware\TopDesign">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="firmware\firmware\Source Files\IMU_functions.c">
 <ExpandedNodeIds>
 <v>firmware</v>
 <v>firmware\firmware</v>
@@ -210,6 +210,8 @@
 <v>firmware\firmware\CortexM3\ARM_GCC_541\Release\Listing Files\MOTOR_DIR_1_PM.lst</v>
 <v>firmware\firmware\CortexM3\ARM_GCC_541\Release\Listing Files\MOTOR_DIR_2.lst</v>
 <v>firmware\firmware\CortexM3\ARM_GCC_541\Release\Listing Files\MOTOR_DIR_2_PM.lst</v>
+<v>firmware\firmware\CortexM3\ARM_GCC_541\Release\Listing Files\MOTOR_DRIVER_TYPE.lst</v>
+<v>firmware\firmware\CortexM3\ARM_GCC_541\Release\Listing Files\MOTOR_DRIVER_TYPE_PM.lst</v>
 <v>firmware\firmware\CortexM3\ARM_GCC_541\Release\Listing Files\MOTOR_EN_1.lst</v>
 <v>firmware\firmware\CortexM3\ARM_GCC_541\Release\Listing Files\MOTOR_EN_2.lst</v>
 <v>firmware\firmware\CortexM3\ARM_GCC_541\Release\Listing Files\MOTOR_ON_OFF_1.lst</v>
@@ -331,6 +333,55 @@
 <v>firmware\firmware\PSoC 5LP Architecture TRM</v>
 <v>firmware\firmware\CY8C58LP Family Datasheet</v>
 <v>firmware\firmware\System Reference Guides</v>
+<v>firmware\firmware\System Reference Guides\cy_boot_v5_70</v>
+<v>firmware\firmware\ADC_DelSig_v3_20.pdf</v>
+<v>firmware\firmware\AMuxHw_v1_50.pdf</v>
+<v>firmware\firmware\and_v1_0</v>
+<v>firmware\firmware\and_v1_0\and_v1_0.pdf</v>
+<v>firmware\firmware\BasicCounter_v1_0.pdf</v>
+<v>firmware\firmware\Bootloadable_v1_60.pdf</v>
+<v>firmware\firmware\Counter_v3_0.pdf</v>
+<v>firmware\firmware\cy_clock_v2_20</v>
+<v>firmware\firmware\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
+<v>firmware\firmware\cy_constant_v1_0.pdf</v>
+<v>firmware\firmware\cy_dma_v1_70.pdf</v>
+<v>firmware\firmware\cy_isr_v1_70</v>
+<v>firmware\firmware\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
+<v>firmware\firmware\cy_pins_v2_10</v>
+<v>firmware\firmware\cy_pins_v2_10\cy_pins_v2_10.pdf</v>
+<v>firmware\firmware\cy_pins_v2_20</v>
+<v>firmware\firmware\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>firmware\firmware\cy_srff_v1_0</v>
+<v>firmware\firmware\cy_srff_v1_0\cy_srff_v1_0.pdf</v>
+<v>firmware\firmware\cy_sync_v1_0</v>
+<v>firmware\firmware\cy_sync_v1_0\cy_sync_v1_0.pdf</v>
+<v>firmware\firmware\CyControlReg_v1_80</v>
+<v>firmware\firmware\CyControlReg_v1_80\CyControlReg_v1_80.pdf</v>
+<v>firmware\firmware\cydff_v1_30</v>
+<v>firmware\firmware\cydff_v1_30\cydff_v1_30.pdf</v>
+<v>firmware\firmware\CyStatusReg_v1_90</v>
+<v>firmware\firmware\CyStatusReg_v1_90\CyStatusReg_v1_90.pdf</v>
+<v>firmware\firmware\demux_v1_10</v>
+<v>firmware\firmware\demux_v1_10\demux_v1_10.pdf</v>
+<v>firmware\firmware\DigitalComp_v1_0.pdf</v>
+<v>firmware\firmware\EEPROM_v3_0.pdf</v>
+<v>firmware\firmware\emFile_v1_20.pdf</v>
+<v>firmware\firmware\mux_v1_10</v>
+<v>firmware\firmware\mux_v1_10\mux_v1_10.pdf</v>
+<v>firmware\firmware\not_v1_0</v>
+<v>firmware\firmware\not_v1_0\not_v1_0.pdf</v>
+<v>firmware\firmware\or_v1_0</v>
+<v>firmware\firmware\or_v1_0\or_v1_0.pdf</v>
+<v>firmware\firmware\PWM_v3_30</v>
+<v>firmware\firmware\PWM_v3_30\PWM_v3_30.pdf</v>
+<v>firmware\firmware\ShiftReg_v2_30</v>
+<v>firmware\firmware\ShiftReg_v2_30\ShiftReg_v2_30.pdf</v>
+<v>firmware\firmware\SPI_Master_v2_50.pdf</v>
+<v>firmware\firmware\Timer_v2_70</v>
+<v>firmware\firmware\Timer_v2_70\Timer_v2_70.pdf</v>
+<v>firmware\firmware\UART_v2_50.pdf</v>
+<v>firmware\firmware\ZeroTerminal</v>
+<v>firmware\firmware\ZeroTerminal\ZeroTerminal.pdf</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
 <v>firmware</v>
@@ -338,6 +389,49 @@
 <v>firmware\firmware\PSoC 5LP Architecture TRM</v>
 <v>firmware\firmware\CY8C58LP Family Datasheet</v>
 <v>firmware\firmware\System Reference Guides</v>
+<v>firmware\firmware\System Reference Guides\cy_boot_v5_70</v>
+<v>firmware\firmware\ADC_DelSig_v3_20.pdf</v>
+<v>firmware\firmware\AMuxHw_v1_50.pdf</v>
+<v>firmware\firmware\and_v1_0</v>
+<v>firmware\firmware\and_v1_0\and_v1_0.pdf</v>
+<v>firmware\firmware\BasicCounter_v1_0.pdf</v>
+<v>firmware\firmware\Bootloadable_v1_60.pdf</v>
+<v>firmware\firmware\Counter_v3_0.pdf</v>
+<v>firmware\firmware\cy_clock_v2_20</v>
+<v>firmware\firmware\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
+<v>firmware\firmware\cy_constant_v1_0.pdf</v>
+<v>firmware\firmware\cy_dma_v1_70.pdf</v>
+<v>firmware\firmware\cy_isr_v1_70</v>
+<v>firmware\firmware\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
+<v>firmware\firmware\cy_pins_v2_10</v>
+<v>firmware\firmware\cy_pins_v2_10\cy_pins_v2_10.pdf</v>
+<v>firmware\firmware\cy_pins_v2_20</v>
+<v>firmware\firmware\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>firmware\firmware\cy_srff_v1_0</v>
+<v>firmware\firmware\cy_srff_v1_0\cy_srff_v1_0.pdf</v>
+<v>firmware\firmware\cy_sync_v1_0</v>
+<v>firmware\firmware\cy_sync_v1_0\cy_sync_v1_0.pdf</v>
+<v>firmware\firmware\CyControlReg_v1_80</v>
+<v>firmware\firmware\CyControlReg_v1_80\CyControlReg_v1_80.pdf</v>
+<v>firmware\firmware\cydff_v1_30</v>
+<v>firmware\firmware\cydff_v1_30\cydff_v1_30.pdf</v>
+<v>firmware\firmware\CyStatusReg_v1_90</v>
+<v>firmware\firmware\CyStatusReg_v1_90\CyStatusReg_v1_90.pdf</v>
+<v>firmware\firmware\demux_v1_10</v>
+<v>firmware\firmware\demux_v1_10\demux_v1_10.pdf</v>
+<v>firmware\firmware\DigitalComp_v1_0.pdf</v>
+<v>firmware\firmware\EEPROM_v3_0.pdf</v>
+<v>firmware\firmware\emFile_v1_20.pdf</v>
+<v>firmware\firmware\mux_v1_10</v>
+<v>firmware\firmware\mux_v1_10\mux_v1_10.pdf</v>
+<v>firmware\firmware\not_v1_0</v>
+<v>firmware\firmware\not_v1_0\not_v1_0.pdf</v>
+<v>firmware\firmware\or_v1_0</v>
+<v>firmware\firmware\or_v1_0\or_v1_0.pdf</v>
+<v>firmware\firmware\PWM_v3_30</v>
+<v>firmware\firmware\PWM_v3_30\PWM_v3_30.pdf</v>
+<v>firmware\firmware\ShiftReg_v2_30</v>
+<v>firmware\firmware\ShiftReg_v2_30\ShiftReg_v2_30.pdf</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStatesV2>
@@ -360,17 +454,12 @@
 <Unloaded />
 <OpenDocs>
 <name v=".\src\FIRMWARE_CONFIGURATION.h" />
-<name v=".\src\interruptions.c" />
 <name v=".\src\main.c" />
+<name v=".\src\interruptions.c" />
 <name v=".\src\command_processing.h" />
 <name v=".\src\command_processing.c" />
-<name v=".\src\utils.c" />
-<name v=".\src\interruptions.h" />
 <name v=".\src\globals.h" />
-<name v=".\src\utils.h" />
 <name v=".\src\globals.c" />
-<name v=".\src\SD_RTC_functions.c" />
-<name v=".\firmware.cydsn\TopDesign\TopDesign.cysch" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -378,7 +467,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="1607, 692" SelectedTabbedMdiWindow="18b5b9ac-ff7d-495e-8f8f-b7f56a9b53ff"><DocumentWindow Key="C:\Users\MattiaCP\Documents\GITHUB\SoftHand-PRO-PSoC5\src\FIRMWARE_CONFIGURATION.h" Guid="f92a87bb-8d6a-446f-953c-c93d3cf6f873" /><DocumentWindow Key="C:\Users\MattiaCP\Documents\GITHUB\SoftHand-PRO-PSoC5\src\interruptions.c" Guid="18b5b9ac-ff7d-495e-8f8f-b7f56a9b53ff" /><DocumentWindow Key="C:\Users\MattiaCP\Documents\GITHUB\SoftHand-PRO-PSoC5\src\main.c" Guid="3c12985f-f4f1-45bb-b381-22c6ab9d6e9f" /><DocumentWindow Key="C:\Users\MattiaCP\Documents\GITHUB\SoftHand-PRO-PSoC5\src\command_processing.h" Guid="a7a291e8-0a1f-4ee3-95fe-4006a69f3426" /><DocumentWindow Key="C:\Users\MattiaCP\Documents\GITHUB\SoftHand-PRO-PSoC5\src\command_processing.c" Guid="465b8532-2ff9-4a6f-b435-b6dc423222b6" /><DocumentWindow Key="C:\Users\MattiaCP\Documents\GITHUB\SoftHand-PRO-PSoC5\src\utils.c" Guid="2f917785-95ad-434b-9766-d70c1d20c7b3" /><DocumentWindow Key="C:\Users\MattiaCP\Documents\GITHUB\SoftHand-PRO-PSoC5\src\interruptions.h" Guid="ce5c0149-6048-49e0-99bd-35a61726799d" /><DocumentWindow Key="C:\Users\MattiaCP\Documents\GITHUB\SoftHand-PRO-PSoC5\src\globals.h" Guid="bd017ace-2c78-43ba-afac-ce9a91b01c2c" /><DocumentWindow Key="C:\Users\MattiaCP\Documents\GITHUB\SoftHand-PRO-PSoC5\src\utils.h" Guid="e9e11c07-499e-4a6b-8002-1defc7749de8" /><DocumentWindow Key="C:\Users\MattiaCP\Documents\GITHUB\SoftHand-PRO-PSoC5\src\globals.c" Guid="b524ca7f-074c-4dec-b64c-2094de2674de" /><DocumentWindow Key="C:\Users\MattiaCP\Documents\GITHUB\SoftHand-PRO-PSoC5\src\SD_RTC_functions.c" Guid="5fa6a846-f6dd-49fc-845d-0a20ef5587d4" /><DocumentWindow Key="C:\Users\MattiaCP\Documents\GITHUB\SoftHand-PRO-PSoC5\firmware.cydsn\TopDesign\TopDesign.cysch" Guid="11804819-3a53-4cd4-a499-af14f026769a" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="1607, 702" SelectedTabbedMdiWindow="3c12985f-f4f1-45bb-b381-22c6ab9d6e9f"><DocumentWindow Key="C:\Users\MattiaCP\Documents\GITHUB\SoftHand-PRO-PSoC5\src\FIRMWARE_CONFIGURATION.h" Guid="f92a87bb-8d6a-446f-953c-c93d3cf6f873" /><DocumentWindow Key="C:\Users\MattiaCP\Documents\GITHUB\SoftHand-PRO-PSoC5\src\main.c" Guid="3c12985f-f4f1-45bb-b381-22c6ab9d6e9f" /><DocumentWindow Key="C:\Users\MattiaCP\Documents\GITHUB\SoftHand-PRO-PSoC5\src\interruptions.c" Guid="18b5b9ac-ff7d-495e-8f8f-b7f56a9b53ff" /><DocumentWindow Key="C:\Users\MattiaCP\Documents\GITHUB\SoftHand-PRO-PSoC5\src\command_processing.h" Guid="a7a291e8-0a1f-4ee3-95fe-4006a69f3426" /><DocumentWindow Key="C:\Users\MattiaCP\Documents\GITHUB\SoftHand-PRO-PSoC5\src\command_processing.c" Guid="465b8532-2ff9-4a6f-b435-b6dc423222b6" /><DocumentWindow Key="C:\Users\MattiaCP\Documents\GITHUB\SoftHand-PRO-PSoC5\src\globals.h" Guid="bd017ace-2c78-43ba-afac-ce9a91b01c2c" /><DocumentWindow Key="C:\Users\MattiaCP\Documents\GITHUB\SoftHand-PRO-PSoC5\src\globals.c" Guid="b524ca7f-074c-4dec-b64c-2094de2674de" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="Release" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

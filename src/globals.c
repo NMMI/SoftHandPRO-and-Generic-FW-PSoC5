@@ -47,12 +47,13 @@
 
 //=============================================      global variables definition
 
-struct st_ref       g_ref, g_refNew, g_refOld;  // Motor reference variables.
-struct st_meas      g_meas, g_measOld;          // Measurements.
+struct st_ref       g_ref[NUM_OF_MOTORS], g_refNew[NUM_OF_MOTORS], g_refOld[NUM_OF_MOTORS];  // Motor reference variables.
+struct st_meas      g_meas[N_ENCODER_LINE_MAX], g_measOld[N_ENCODER_LINE_MAX];          // Measurements.
+struct st_emg_meas  g_emg_meas, g_emg_measOld;  // EMG Measurements.
 struct st_data      g_rx;                       // Income data.
-struct st_mem       g_mem, c_mem;               // Memory variables.
+struct st_eeprom    g_mem, c_mem;               // Memory variables.
 struct st_calib     calib;                      // Calibration variables.
-struct st_filter    filt_v[NUM_OF_MOTORS], filt_curr_diff, filt_i[NUM_OF_MOTORS];     // Voltage and current filter variables.
+struct st_filter    filt_v[NUM_OF_MOTORS], filt_curr_diff[NUM_OF_MOTORS], filt_i[NUM_OF_MOTORS];     // Voltage and current filter variables.
 struct st_filter    filt_vel[NUM_OF_SENSORS];                // Velocity filter variables.
 struct st_filter    filt_emg[NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS];                // EMG filter variables.
 
@@ -63,8 +64,8 @@ float   cycle_time;
 
 // Device Data
 int32   dev_tension[NUM_OF_MOTORS];         /*!< Power supply tension.*/
-uint8   dev_pwm_limit;                      /*!< Device pwm limit. It may change during execution.*/
-uint8   dev_pwm_sat = 100;                  /*!< Device pwm saturation. By default the saturation value must not exceed 100.*/
+uint8   dev_pwm_limit[NUM_OF_MOTORS];       /*!< Device pwm limit. It may change during execution.*/
+uint8   dev_pwm_sat[NUM_OF_MOTORS] = {100,100};  /*!< Device pwm saturation. By default the saturation value must not exceed 100.*/
 int32   dev_tension_f[NUM_OF_MOTORS];       /*!< Filtered power supply tension.*/
 int32   pow_tension[NUM_OF_MOTORS];         /*!< Computed power supply tension.*/
 
@@ -109,8 +110,8 @@ uint8 N_IMU_Connected;
 uint8 IMU_connected[N_IMU_MAX];
 int imus_data_size;
 int single_imu_size[N_IMU_MAX];
-struct st_imu g_imu[N_IMU_MAX];
-struct st_imu g_imuNew[N_IMU_MAX];
+struct st_imu_data g_imu[N_IMU_MAX];
+struct st_imu_data g_imuNew[N_IMU_MAX];
 uint8 Accel[N_IMU_MAX][6];
 uint8 Gyro[N_IMU_MAX][6];
 uint8 Mag[N_IMU_MAX][6];

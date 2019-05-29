@@ -253,7 +253,7 @@ void InitIMUgeneral()
     imus_data_size = 1; //header    
     for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++)
     {
-        single_imu_size[IMU_connected[k_imu]] = 1 + 6*c_mem.IMU_conf[IMU_connected[k_imu]][0] + 6*c_mem.IMU_conf[IMU_connected[k_imu]][1] + 6*c_mem.IMU_conf[IMU_connected[k_imu]][2]+ 16*c_mem.IMU_conf[IMU_connected[k_imu]][3] + 2*c_mem.IMU_conf[IMU_connected[k_imu]][4]+ 1;
+        single_imu_size[IMU_connected[k_imu]] = 1 + 6*c_mem.imu.IMU_conf[IMU_connected[k_imu]][0] + 6*c_mem.imu.IMU_conf[IMU_connected[k_imu]][1] + 6*c_mem.imu.IMU_conf[IMU_connected[k_imu]][2]+ 16*c_mem.imu.IMU_conf[IMU_connected[k_imu]][3] + 2*c_mem.imu.IMU_conf[IMU_connected[k_imu]][4]+ 1;
         imus_data_size = imus_data_size + single_imu_size[IMU_connected[k_imu]];
     }
     imus_data_size = imus_data_size + 1;    //checksum*/
@@ -264,11 +264,11 @@ void InitIMUgeneral()
 *********************************************************************************/	
 void ReadIMU(int n)
 {
-    if (c_mem.IMU_conf[n][0]) ReadAcc(n);
-    if (c_mem.IMU_conf[n][1]) ReadGyro(n);
-    if (c_mem.IMU_conf[n][2]) ReadMag(n);
-    if (c_mem.IMU_conf[n][3]) ReadQuat(n);
-    if (c_mem.IMU_conf[n][4]) ReadTemp(n);
+    if (c_mem.imu.IMU_conf[n][0]) ReadAcc(n);
+    if (c_mem.imu.IMU_conf[n][1]) ReadGyro(n);
+    if (c_mem.imu.IMU_conf[n][2]) ReadMag(n);
+    if (c_mem.imu.IMU_conf[n][3]) ReadQuat(n);
+    if (c_mem.imu.IMU_conf[n][4]) ReadTemp(n);
 }
 
 /*******************************************************************************
@@ -423,8 +423,8 @@ void ReadQuat(int n)
     float aP[3]; //, fa[3];
     float Napla[4],g[4],qL[4];
 
-    if (!c_mem.IMU_conf[n][0]) ReadAcc(n);
-    if (!c_mem.IMU_conf[n][1]) ReadGyro(n);
+    if (!c_mem.imu.IMU_conf[n][0]) ReadAcc(n);
+    if (!c_mem.imu.IMU_conf[n][1]) ReadGyro(n);
     
     // assume cycle time is the same of last function_scheduler execution,
     // without adding another counter
@@ -578,7 +578,7 @@ uint8 ReadControlRegisterIMU(uint8 address){
 * Function Name: SPI delay
 *********************************************************************************/
 void SPI_delay(){
-    switch( c_mem.SPI_read_delay ) {
+    switch( c_mem.imu.SPI_read_delay ) {
         case 1:     // Low
             CyDelayUs((uint16)SPI_DELAY_LOW);
             break;

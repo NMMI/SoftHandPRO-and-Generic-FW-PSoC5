@@ -118,7 +118,6 @@
 #include "MOTOR_EN_1_aliases.h"
 #include "MOTOR_EN_1.h"
 #include "MOTOR_ON_OFF_1.h"
-#include "MOTOR_ON_OFF_2.h"
 #include "MOTOR_EN_2_aliases.h"
 #include "MOTOR_EN_2.h"
 #include "ADC_N_CHANNELS_USED.h"
@@ -138,6 +137,8 @@
 #include "RESET_COUNTERS.h"
 #include "Chip_Select_ENCODER_LINE.h"
 #include "MY_TIMER_REG.h"
+#include "MOTOR_DRIVER_TYPE.h"
+#include "MOTOR_ON_OFF_2.h"
 #include "SD_SPI0.h"
 #include "SD_SPI0_PVT.h"
 #include "SD_mosi0_aliases.h"
@@ -153,6 +154,7 @@
 #include "ADC_Ext_CP_Clk.h"
 #include "ADC_IRQ.h"
 #include "ADC_theACLK.h"
+#include "cy_em_eeprom.h"
 #include "core_cm3_psoc5.h"
 #include "CyDmac.h"
 #include "CyFlash.h"
@@ -161,7 +163,6 @@
 #include "cyPm.h"
 #include "CySpc.h"
 #include "cytypes.h"
-#include "cy_em_eeprom.h"
 
 /*[]*/
 

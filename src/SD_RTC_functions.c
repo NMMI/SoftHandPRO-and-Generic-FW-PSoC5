@@ -109,28 +109,28 @@ void store_RTC_current_time(){
     
     // Update current time
     rtc_data = DS1302_read(DS1302_DATE_RD);
-    g_mem.curr_time[0] = (rtc_data/16) * 10 + rtc_data%16;
+    g_mem.exp.curr_time[0] = (rtc_data/16) * 10 + rtc_data%16;
     rtc_data = DS1302_read(DS1302_MONTH_RD);
-    g_mem.curr_time[1] = (rtc_data/16) * 10 + rtc_data%16;
+    g_mem.exp.curr_time[1] = (rtc_data/16) * 10 + rtc_data%16;
     rtc_data = DS1302_read(DS1302_YEAR_RD);
-    g_mem.curr_time[2] = (rtc_data/16) * 10 + rtc_data%16;
+    g_mem.exp.curr_time[2] = (rtc_data/16) * 10 + rtc_data%16;
 
 
     rtc_data = DS1302_read(DS1302_HOUR_RD);
-    g_mem.curr_time[3] = (rtc_data/16) * 10 + rtc_data%16;
+    g_mem.exp.curr_time[3] = (rtc_data/16) * 10 + rtc_data%16;
     rtc_data = DS1302_read(DS1302_MINUTES_RD);
-    g_mem.curr_time[4] = (rtc_data/16) * 10 + rtc_data%16;
+    g_mem.exp.curr_time[4] = (rtc_data/16) * 10 + rtc_data%16;
     rtc_data = DS1302_read(DS1302_SECONDS_RD);
-    g_mem.curr_time[5] = (rtc_data/16) * 10 + rtc_data%16;
+    g_mem.exp.curr_time[5] = (rtc_data/16) * 10 + rtc_data%16;
 }
 
 void set_RTC_time(){
-    DS1302_write(DS1302_DATE_WR, (((g_mem.curr_time[0] / 10)*16) + (g_mem.curr_time[0] % 10)));
-    DS1302_write(DS1302_MONTH_WR, (((g_mem.curr_time[1] / 10)*16) + (g_mem.curr_time[1] % 10)));
-    DS1302_write(DS1302_YEAR_WR, (((g_mem.curr_time[2] / 10)*16) + (g_mem.curr_time[2] % 10)));
-    DS1302_write(DS1302_HOUR_WR, (((g_mem.curr_time[3] / 10)*16) + (g_mem.curr_time[3] % 10)));
-    DS1302_write(DS1302_MINUTES_WR, (((g_mem.curr_time[4] / 10)*16) + (g_mem.curr_time[4] % 10)));
-    DS1302_write(DS1302_SECONDS_WR, (((g_mem.curr_time[5] / 10)*16) + (g_mem.curr_time[5] % 10)));
+    DS1302_write(DS1302_DATE_WR, (((g_mem.exp.curr_time[0] / 10)*16) + (g_mem.exp.curr_time[0] % 10)));
+    DS1302_write(DS1302_MONTH_WR, (((g_mem.exp.curr_time[1] / 10)*16) + (g_mem.exp.curr_time[1] % 10)));
+    DS1302_write(DS1302_YEAR_WR, (((g_mem.exp.curr_time[2] / 10)*16) + (g_mem.exp.curr_time[2] % 10)));
+    DS1302_write(DS1302_HOUR_WR, (((g_mem.exp.curr_time[3] / 10)*16) + (g_mem.exp.curr_time[3] % 10)));
+    DS1302_write(DS1302_MINUTES_WR, (((g_mem.exp.curr_time[4] / 10)*16) + (g_mem.exp.curr_time[4] % 10)));
+    DS1302_write(DS1302_SECONDS_WR, (((g_mem.exp.curr_time[5] / 10)*16) + (g_mem.exp.curr_time[5] % 10)));
 }
 
 /*******************************************************************************
@@ -143,8 +143,8 @@ void InitSD_FS()
     char sdParam[100] = "";
     char sdDir[100] = "";
     char lastsdParam[100] = "";
-    char info_[500] = "";
-    char info_read_[500] = "";
+    char info_[2500] = "";
+    char info_read_[2500] = "";
     char Data_filename[10] = "UseStats";
     char Param_filename[7] = "Param";
     uint8 Write_new_info = TRUE;
@@ -157,10 +157,14 @@ void InitSD_FS()
     FS_Init();
     FS_FAT_SupportLFN();
         
-    // Create Filesystem with MM_YYYY\DD folder
-    sprintf(sdDir, "\\%02d_20%02d", g_mem.curr_time[1], g_mem.curr_time[2]); 
+    // Create Filesystem with USER\YYYY\MM\DD folder
+    sprintf(sdDir, "\\%s", g_mem.exp.user_code_string); 
     FS_MkDir(sdDir);
-    sprintf(sdDir, "%s\\%02d", sdDir, g_mem.curr_time[0]);
+    sprintf(sdDir, "%s\\20%02d", sdDir, g_mem.exp.curr_time[2]); 
+    FS_MkDir(sdDir);
+    sprintf(sdDir, "%s\\%02d", sdDir, g_mem.exp.curr_time[1]);
+    FS_MkDir(sdDir);
+    sprintf(sdDir, "%s\\%02d", sdDir, g_mem.exp.curr_time[0]);
     FS_MkDir(sdDir);
     
     // Create param info
@@ -176,7 +180,7 @@ void InitSD_FS()
         // The directory is not empty
          
         // Decide whether to create new param and data files or not
-        sprintf(lastsdParam, "%s\\%s_%d.txt", sdDir, Param_filename, (num_files/2) - 1);
+        sprintf(lastsdParam, "%s\\%s_%d.csv", sdDir, Param_filename, (num_files/2) - 1);
 
         pFile_read = FS_FOpen(lastsdParam, "r"); 
         if (pFile_read != 0) {
@@ -184,12 +188,12 @@ void InitSD_FS()
             info_read_[i] = 0;
             if (strcmp(info_, info_read_)) {    // if different
                 Write_new_info = TRUE;
-                sprintf(sdParam, "%s\\%s_%d.txt", sdDir, Param_filename, num_files/2);  // new param filename
-                sprintf(sdFile, "%s\\%s_%d.txt", sdDir, Data_filename, num_files/2);    // new data filename
+                sprintf(sdParam, "%s\\%s_%d.csv", sdDir, Param_filename, num_files/2);  // new param filename
+                sprintf(sdFile, "%s\\%s_%d.csv", sdDir, Data_filename, num_files/2);    // new data filename
             }
             else {
-                sprintf(sdParam, "%s\\%s_%d.txt", sdDir, Param_filename, (num_files/2)-1);  // last param filename
-                sprintf(sdFile, "%s\\%s_%d.txt", sdDir, Data_filename, (num_files/2)-1);    // last data filename
+                sprintf(sdParam, "%s\\%s_%d.csv", sdDir, Param_filename, (num_files/2)-1);  // last param filename
+                sprintf(sdFile, "%s\\%s_%d.csv", sdDir, Data_filename, (num_files/2)-1);    // last data filename
                 Write_new_info = FALSE;
             }
         }
@@ -197,8 +201,8 @@ void InitSD_FS()
     } 
     else {
         // The directory is empty
-        sprintf(sdParam, "%s\\%s_%d.txt", sdDir, Param_filename, 0);  // first param filename
-        sprintf(sdFile, "%s\\%s_%d.txt", sdDir, Data_filename, 0);    //first data filename
+        sprintf(sdParam, "%s\\%s_%d.csv", sdDir, Param_filename, 0);  // first param filename
+        sprintf(sdFile, "%s\\%s_%d.csv", sdDir, Data_filename, 0);    //first data filename
         Write_new_info = TRUE;
     } 
     FS_CloseDir(pDir);
@@ -225,7 +229,7 @@ void InitSD_FS()
 * Function Name: Write SD Param File
 *********************************************************************************/
 void Write_SD_Param_file(){
-    char info_[500] = "";
+    char info_[2500] = "";
     
     prepare_SD_param_info(info_);
     FS_Write(pFile, info_, strlen(info_));

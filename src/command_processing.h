@@ -194,7 +194,20 @@ void manage_param_list 		(uint16 index);
  *  parameters with their values.
  *
 **/
-void get_param_list 		();
+void get_param_list 		(uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS], 
+                             uint8 NUM_ITEMS[NUM_OF_PARAMS], uint8* NUM_MENU, 
+                             const char* PARAMS_STR[NUM_OF_PARAMS], uint8 CUSTOM_PARAM_SET[NUM_OF_PARAMS], 
+                             const char* MENU_STR[NUM_OF_PARAMS_MENU]);
+
+//============================================================  set_custom_param
+/** This function, depending on the \ref index received, sets the specific
+ *  parameters with their values and sends them to user or sets a parameter
+ *  from all the parameters of the device.
+ *
+ *	\param index 			The index of the parameters to be setted.
+ *
+**/
+void set_custom_param 		(uint16 index);
 
 //============================================================  get_IMU_param_list
 /** This function, depending on the \ref index received, gets the list of

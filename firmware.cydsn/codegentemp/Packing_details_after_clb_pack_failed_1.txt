@@ -4,10 +4,10 @@ UDB 0
 ------------------------------------------------------
 	PLD 0:
 		 Instances:
+			Net_7983
 			Net_3376
 			\COUNTER_ENC:CounterUDB:count_stored_i\
 			\COUNTER_ENC:CounterUDB:count_enable\
-			Net_7983
 
 		 Clock net: Net_1308
 		 Set/Reset net: 
@@ -33,10 +33,10 @@ UDB 0
 
 	PLD 1:
 		 Instances:
-			\COUNTER_ENC:CounterUDB:status_0\
-			Net_7985
 			\COUNTER_ENC:CounterUDB:status_2\
 			Net_3426
+			Net_7985
+			\COUNTER_ENC:CounterUDB:status_0\
 
 		 Clock net: Net_1308
 		 Set/Reset net: 
@@ -266,7 +266,7 @@ UDB 10
 
 	Datapath:
 		 Instances:
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2\
 
 		 Clock net: Net_1308
 		 Set/Reset net: 
@@ -274,37 +274,37 @@ UDB 10
 
 		 Input nets:
 			ClockBlock_BUS_CLK
-			Net_1060_SYNCOUT
 			Net_3426
-			\SHIFTREG_ENC_3:bSR:ctrl_clk_enable\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ce0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ce1__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cfbo__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cl0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cl1__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.co_msb__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ff0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ff1__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.sol_msb__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.z0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.z1__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u3.cmsbo__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u3.sor__sig\
+			Net_3506
+			\SHIFTREG_ENC_2:bSR:ctrl_clk_enable\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ce0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ce1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cfbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cl0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cl1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.co_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ff0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ff1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.sol_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.z0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.z1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u3.cmsbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u3.sor__sig\
 
 		 Output nets:
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ce0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ce1__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cfbo__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cl0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cl1__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cmsbo__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.co_msb__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ff0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ff1__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.sol_msb__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.sor__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.z0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.z1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ce0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ce1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cfbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cl0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cl1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cmsbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.co_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ff0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ff1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.sol_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.sor__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.z0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.z1__sig\
 
 	Control, status and sync:
 		 Instances:
@@ -332,7 +332,7 @@ UDB 11
 
 	Datapath:
 		 Instances:
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u3\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u3\
 
 		 Clock net: Net_1308
 		 Set/Reset net: 
@@ -340,29 +340,29 @@ UDB 11
 
 		 Input nets:
 			ClockBlock_BUS_CLK
-			Net_1060_SYNCOUT
 			Net_3426
-			\SHIFTREG_ENC_3:bSR:ctrl_clk_enable\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ce0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ce1__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cfbo__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cl0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cl1__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.co_msb__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ff0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ff1__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.sol_msb__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.z0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.z1__sig\
+			Net_3506
+			\SHIFTREG_ENC_2:bSR:ctrl_clk_enable\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ce0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ce1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cfbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cl0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cl1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.co_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ff0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ff1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.sol_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.z0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.z1__sig\
 
 		 Output nets:
-			Net_3506
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u3.cmsbo__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u3.sor__sig\
-			\SHIFTREG_ENC_3:bSR:status_3\
-			\SHIFTREG_ENC_3:bSR:status_4\
-			\SHIFTREG_ENC_3:bSR:status_5\
-			\SHIFTREG_ENC_3:bSR:status_6\
+			Net_3505
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u3.cmsbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u3.sor__sig\
+			\SHIFTREG_ENC_2:bSR:status_3\
+			\SHIFTREG_ENC_2:bSR:status_4\
+			\SHIFTREG_ENC_2:bSR:status_5\
+			\SHIFTREG_ENC_2:bSR:status_6\
 
 	Control, status and sync:
 		 Instances:
@@ -386,10 +386,10 @@ UDB 12
 ------------------------------------------------------
 	PLD 0:
 		 Instances:
-			Net_7325
-			\BLINK_05HZ:PWMUDB:runmode_enable\
 			Net_7353
+			\BLINK_05HZ:PWMUDB:runmode_enable\
 			Net_5579
+			Net_7325
 
 		 Clock net: Net_6987
 		 Set/Reset net: 
@@ -1241,7 +1241,7 @@ UDB 19
 
 	Control, status and sync:
 		 Instances:
-			\MOTOR_ON_OFF_1:Sync:ctrl_reg\ : controlcell
+			\MOTOR_DRIVER_TYPE:Sync:ctrl_reg\ : controlcell
 			\SD:SPI0:BSPIM:TxStsReg\ : statusicell
 
 		 Clock net: \SD:Net_19\
@@ -1257,7 +1257,8 @@ UDB 19
 			\SD:SPI0:BSPIM:tx_status_4\
 
 		 Output nets:
-			Net_2761
+			Net_10233
+			Net_10264
 
 	Local clock and reset nets:
 
@@ -1588,7 +1589,7 @@ UDB 21
 
 	Control, status and sync:
 		 Instances:
-			\MOTOR_ON_OFF_2:Sync:ctrl_reg\ : controlcell
+			\MOTOR_ON_OFF_1:Sync:ctrl_reg\ : controlcell
 			\UART_RS485:BUART:sTX:TxSts\ : statusicell
 
 		 Clock net: Net_124
@@ -1603,7 +1604,7 @@ UDB 21
 			\UART_RS485:BUART:tx_status_2\
 
 		 Output nets:
-			Net_7913
+			Net_10337
 
 	Local clock and reset nets:
 			Net_2835
@@ -1682,6 +1683,7 @@ UDB 22
 
 	Control, status and sync:
 		 Instances:
+			\MOTOR_ON_OFF_2:Sync:ctrl_reg\ : controlcell
 			\SPI_IMU:BSPIM:TxStsReg\ : statusicell
 
 		 Clock net: Net_2334
@@ -1689,6 +1691,7 @@ UDB 22
 		 Enable net: 
 
 		 Input nets:
+			ClockBlock_BUS_CLK
 			\SPI_IMU:BSPIM:dpcounter_one\
 			\SPI_IMU:BSPIM:tx_status_0\
 			\SPI_IMU:BSPIM:tx_status_1\
@@ -1696,6 +1699,7 @@ UDB 22
 			\SPI_IMU:BSPIM:tx_status_4\
 
 		 Output nets:
+			Net_10313
 
 	Local clock and reset nets:
 
@@ -1972,7 +1976,7 @@ UDB 4
 
 	PLD 1:
 		 Instances:
-			Net_3065
+			Net_3064
 			Net_3039
 			Net_2501
 			Net_1630
@@ -1991,7 +1995,7 @@ UDB 4
 			Net_1630
 			Net_2501
 			Net_3039
-			Net_3065
+			Net_3064
 
 		 Product terms:
 			!Net_3044 * !Net_3063_0 * !Net_3063_1 * !Net_3063_2
@@ -2001,7 +2005,7 @@ UDB 4
 
 	Datapath:
 		 Instances:
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0\
 
 		 Clock net: Net_1308
 		 Set/Reset net: 
@@ -2009,41 +2013,40 @@ UDB 4
 
 		 Input nets:
 			ClockBlock_BUS_CLK
+			Net_1060_SYNCOUT
 			Net_3426
-			Net_3506
-			\SHIFTREG_ENC_2:bSR:ctrl_clk_enable\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cmsbo__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.sor__sig\
+			\SHIFTREG_ENC_3:bSR:ctrl_clk_enable\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cmsbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.sor__sig\
 
 		 Output nets:
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ce0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ce1__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.cfbo__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.cl0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.cl1__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.co_msb__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ff0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ff1__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.sol_msb__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.z0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.z1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ce0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ce1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.cfbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.cl0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.cl1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.co_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ff0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ff1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.sol_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.z0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.z1__sig\
 
 	Control, status and sync:
 		 Instances:
 			\Chip_Select_IMU:Sync:ctrl_reg\ : controlcell
-			\SPI_IMU:BSPIM:RxStsReg\ : statusicell
+			MISO_ENCODER(0)_SYNC : synccell
 
-		 Clock net: Net_2334
+		 Clock net: ClockBlock_BUS_CLK
 		 Set/Reset net: 
 		 Enable net: 
 
 		 Input nets:
 			ClockBlock_BUS_CLK
-			\SPI_IMU:BSPIM:rx_status_4\
-			\SPI_IMU:BSPIM:rx_status_5\
-			\SPI_IMU:BSPIM:rx_status_6\
+			Net_1060
 
 		 Output nets:
+			Net_1060_SYNCOUT
 			Net_3063_0
 			Net_3063_1
 			Net_3063_2
@@ -2056,18 +2059,19 @@ UDB 5
 ------------------------------------------------------
 	PLD 0:
 		 Instances:
-			Net_3017
-			Net_3040
 			\PWM_MOTORS:PWMUDB:runmode_enable\
-			Net_3022
+			Net_9990
+			Net_9749
+			Net_9969
 
 		 Clock net: Net_2334
 		 Set/Reset net: 
 		 Enable net: 
 
 		 Input nets:
-			Net_2982
-			Net_3017
+			Net_10264
+			Net_3021
+			Net_9990
 			\PWM_MOTORS:PWMUDB:cmp1_eq\
 			\PWM_MOTORS:PWMUDB:cmp1_less\
 			\PWM_MOTORS:PWMUDB:cmp2_eq\
@@ -2076,13 +2080,14 @@ UDB 5
 			\PWM_MOTORS:PWMUDB:runmode_enable\
 
 		 Output nets:
-			Net_3017
-			Net_3022
-			Net_3040
+			Net_9749
+			Net_9969
+			Net_9990
 			\PWM_MOTORS:PWMUDB:runmode_enable\
 
 		 Product terms:
-			Net_2982 * Net_3017
+			!Net_10264 * !Net_3021 * Net_9990
+			Net_10264 * Net_3021
 			\PWM_MOTORS:PWMUDB:cmp1_eq\ * \PWM_MOTORS:PWMUDB:runmode_enable\
 			\PWM_MOTORS:PWMUDB:cmp1_less\ * \PWM_MOTORS:PWMUDB:runmode_enable\
 			\PWM_MOTORS:PWMUDB:cmp2_eq\ * \PWM_MOTORS:PWMUDB:runmode_enable\
@@ -2091,40 +2096,45 @@ UDB 5
 
 	PLD 1:
 		 Instances:
-			Net_3023
-			Net_3026
-			Net_3024
+			Net_9767
 			Net_5205
+			Net_9759
+			Net_9772
 
 		 Clock net: ClockBlock_BUS_CLK
 		 Set/Reset net: 
 		 Enable net: 
 
 		 Input nets:
+			Net_10233
+			Net_10264
 			Net_2982
-			Net_3017
 			Net_3021
-			Net_3040
 			Net_4627
 			Net_5205
 			Net_5460
+			Net_9969
+			Net_9990
 
 		 Output nets:
-			Net_3023
-			Net_3024
-			Net_3026
 			Net_5205
+			Net_9759
+			Net_9767
+			Net_9772
 
 		 Product terms:
-			!Net_2982 * Net_3017
-			!Net_3021 * Net_3040
+			!Net_10233 * !Net_2982 * Net_9969
 			!Net_5460 * Net_4627
 			!Net_5460 * Net_5205
-			Net_3021 * Net_3040
+			Net_10233 * Net_2982
+			Net_10233 * Net_9969
+			Net_10264 * Net_9990
+			Net_2982 * Net_9969
+			Net_3021 * Net_9990
 
 	Datapath:
 		 Instances:
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1\
 
 		 Clock net: Net_1308
 		 Set/Reset net: 
@@ -2132,50 +2142,52 @@ UDB 5
 
 		 Input nets:
 			ClockBlock_BUS_CLK
+			Net_1060_SYNCOUT
 			Net_3426
-			Net_3506
-			\SHIFTREG_ENC_2:bSR:ctrl_clk_enable\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ce0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ce1__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.cfbo__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.cl0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.cl1__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.co_msb__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ff0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ff1__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.sol_msb__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.z0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.z1__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cmsbo__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.sor__sig\
+			\SHIFTREG_ENC_3:bSR:ctrl_clk_enable\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ce0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ce1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.cfbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.cl0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.cl1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.co_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ff0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ff1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.sol_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.z0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.z1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cmsbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.sor__sig\
 
 		 Output nets:
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ce0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ce1__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cfbo__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cl0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cl1__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cmsbo__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.co_msb__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ff0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ff1__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.sol_msb__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.sor__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.z0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.z1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ce0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ce1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cfbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cl0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cl1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cmsbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.co_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ff0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ff1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.sol_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.sor__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.z0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.z1__sig\
 
 	Control, status and sync:
 		 Instances:
 			\ADC_SOC:Sync:ctrl_reg\ : controlcell
-			\FF_STATUS:sts:sts_reg\ : statuscell
+			\SPI_IMU:BSPIM:RxStsReg\ : statusicell
 
-		 Clock net: 
+		 Clock net: Net_2334
 		 Set/Reset net: 
 		 Enable net: 
 
 		 Input nets:
 			ClockBlock_BUS_CLK
-			cy_srff_1
+			\SPI_IMU:BSPIM:rx_status_4\
+			\SPI_IMU:BSPIM:rx_status_5\
+			\SPI_IMU:BSPIM:rx_status_6\
 
 		 Output nets:
 			Net_4627
@@ -2226,8 +2238,8 @@ UDB 6
 	PLD 1:
 		 Instances:
 			\COUNTER_ENC:CounterUDB:overflow_reg_i\
-			Net_2780
-			Net_2790
+			Net_9774
+			Net_9776
 			\COUNTER_ENC:CounterUDB:prevCompare\
 
 		 Clock net: Net_1308
@@ -2235,26 +2247,26 @@ UDB 6
 		 Enable net: 
 
 		 Input nets:
-			Net_2761
-			Net_7913
+			Net_10313
+			Net_10337
 			\COUNTER_ENC:CounterUDB:cmp_out_i\
 			\COUNTER_ENC:CounterUDB:per_equal\
 
 		 Output nets:
-			Net_2780
-			Net_2790
+			Net_9774
+			Net_9776
 			\COUNTER_ENC:CounterUDB:overflow_reg_i\
 			\COUNTER_ENC:CounterUDB:prevCompare\
 
 		 Product terms:
-			!Net_2761
-			!Net_7913
+			!Net_10313
+			!Net_10337
 			\COUNTER_ENC:CounterUDB:cmp_out_i\
 			\COUNTER_ENC:CounterUDB:per_equal\
 
 	Datapath:
 		 Instances:
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2\
 
 		 Clock net: Net_1308
 		 Set/Reset net: 
@@ -2262,50 +2274,50 @@ UDB 6
 
 		 Input nets:
 			ClockBlock_BUS_CLK
+			Net_1060_SYNCOUT
 			Net_3426
-			Net_3506
-			\SHIFTREG_ENC_2:bSR:ctrl_clk_enable\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ce0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ce1__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cfbo__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cl0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cl1__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.co_msb__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ff0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ff1__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.sol_msb__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.z0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.z1__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u3.cmsbo__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u3.sor__sig\
+			\SHIFTREG_ENC_3:bSR:ctrl_clk_enable\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ce0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ce1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cfbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cl0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cl1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.co_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ff0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ff1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.sol_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.z0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.z1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u3.cmsbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u3.sor__sig\
 
 		 Output nets:
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ce0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ce1__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cfbo__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cl0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cl1__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cmsbo__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.co_msb__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ff0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ff1__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.sol_msb__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.sor__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.z0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.z1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ce0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ce1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cfbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cl0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cl1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cmsbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.co_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ff0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ff1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.sol_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.sor__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.z0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.z1__sig\
 
 	Control, status and sync:
 		 Instances:
 			\RESET_COUNTERS:Sync:ctrl_reg\ : controlcell
-			\ADC_STATUS:sts:sts_reg\ : statuscell
+			\FF_STATUS:sts:sts_reg\ : statuscell
 
-		 Clock net: ClockBlock_BUS_CLK
+		 Clock net: 
 		 Set/Reset net: 
 		 Enable net: 
 
 		 Input nets:
 			ClockBlock_BUS_CLK
-			Net_5290
+			cy_srff_1
 
 		 Output nets:
 			Net_8907
@@ -2345,7 +2357,7 @@ UDB 7
 
 	Datapath:
 		 Instances:
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u3\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u3\
 
 		 Clock net: Net_1308
 		 Set/Reset net: 
@@ -2353,35 +2365,34 @@ UDB 7
 
 		 Input nets:
 			ClockBlock_BUS_CLK
+			Net_1060_SYNCOUT
 			Net_3426
-			Net_3506
-			\SHIFTREG_ENC_2:bSR:ctrl_clk_enable\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ce0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ce1__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cfbo__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cl0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cl1__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.co_msb__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ff0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.ff1__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.sol_msb__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.z0__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.z1__sig\
+			\SHIFTREG_ENC_3:bSR:ctrl_clk_enable\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ce0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ce1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cfbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cl0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cl1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.co_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ff0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.ff1__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.sol_msb__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.z0__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.z1__sig\
 
 		 Output nets:
-			Net_3505
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u3.cmsbo__sig\
-			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u3.sor__sig\
-			\SHIFTREG_ENC_2:bSR:status_3\
-			\SHIFTREG_ENC_2:bSR:status_4\
-			\SHIFTREG_ENC_2:bSR:status_5\
-			\SHIFTREG_ENC_2:bSR:status_6\
+			Net_3506
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u3.cmsbo__sig\
+			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u3.sor__sig\
+			\SHIFTREG_ENC_3:bSR:status_3\
+			\SHIFTREG_ENC_3:bSR:status_4\
+			\SHIFTREG_ENC_3:bSR:status_5\
+			\SHIFTREG_ENC_3:bSR:status_6\
 
 	Control, status and sync:
 		 Instances:
 			\LED_CTRL:Sync:ctrl_reg\ : controlcell
-			\Sync_ADC:genblk1[0]:INST\ : synccell
-			\Sync_1:genblk1[0]:INST\ : synccell
+			\ADC_STATUS:sts:sts_reg\ : statuscell
 
 		 Clock net: ClockBlock_BUS_CLK
 		 Set/Reset net: 
@@ -2389,12 +2400,9 @@ UDB 7
 
 		 Input nets:
 			ClockBlock_BUS_CLK
-			Net_3264
-			Net_5118
+			Net_5290
 
 		 Output nets:
-			Net_2835
-			Net_3240
 			Net_7450
 			Net_7694
 
@@ -2410,7 +2418,7 @@ UDB 8
 
 	Datapath:
 		 Instances:
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0\
 
 		 Clock net: Net_1308
 		 Set/Reset net: 
@@ -2418,29 +2426,30 @@ UDB 8
 
 		 Input nets:
 			ClockBlock_BUS_CLK
-			Net_1060_SYNCOUT
 			Net_3426
-			\SHIFTREG_ENC_3:bSR:ctrl_clk_enable\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cmsbo__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.sor__sig\
+			Net_3506
+			\SHIFTREG_ENC_2:bSR:ctrl_clk_enable\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cmsbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.sor__sig\
 
 		 Output nets:
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ce0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ce1__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.cfbo__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.cl0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.cl1__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.co_msb__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ff0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ff1__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.sol_msb__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.z0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.z1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ce0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ce1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.cfbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.cl0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.cl1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.co_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ff0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ff1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.sol_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.z0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.z1__sig\
 
 	Control, status and sync:
 		 Instances:
 			\MOTOR_DIR_1:Sync:ctrl_reg\ : controlcell
-			MISO_ENCODER(0)_SYNC : synccell
+			\Sync_ADC:genblk1[0]:INST\ : synccell
+			\Sync_1:genblk1[0]:INST\ : synccell
 
 		 Clock net: ClockBlock_BUS_CLK
 		 Set/Reset net: 
@@ -2448,11 +2457,13 @@ UDB 8
 
 		 Input nets:
 			ClockBlock_BUS_CLK
-			Net_1060
+			Net_3264
+			Net_5118
 
 		 Output nets:
-			Net_1060_SYNCOUT
+			Net_2835
 			Net_2982
+			Net_3240
 
 	Local clock and reset nets:
 			Net_3376
@@ -2466,7 +2477,7 @@ UDB 9
 
 	Datapath:
 		 Instances:
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1\
 
 		 Clock net: Net_1308
 		 Set/Reset net: 
@@ -2474,37 +2485,37 @@ UDB 9
 
 		 Input nets:
 			ClockBlock_BUS_CLK
-			Net_1060_SYNCOUT
 			Net_3426
-			\SHIFTREG_ENC_3:bSR:ctrl_clk_enable\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ce0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ce1__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.cfbo__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.cl0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.cl1__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.co_msb__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ff0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.ff1__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.sol_msb__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.z0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u0.z1__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.cmsbo__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u2.sor__sig\
+			Net_3506
+			\SHIFTREG_ENC_2:bSR:ctrl_clk_enable\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ce0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ce1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.cfbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.cl0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.cl1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.co_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ff0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.ff1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.sol_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.z0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u0.z1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.cmsbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u2.sor__sig\
 
 		 Output nets:
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ce0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ce1__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cfbo__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cl0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cl1__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.cmsbo__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.co_msb__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ff0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.ff1__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.sol_msb__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.sor__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.z0__sig\
-			\SHIFTREG_ENC_3:bSR:sC32:BShiftRegDp:u1.z1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ce0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ce1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cfbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cl0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cl1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.cmsbo__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.co_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ff0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.ff1__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.sol_msb__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.sor__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.z0__sig\
+			\SHIFTREG_ENC_2:bSR:sC32:BShiftRegDp:u1.z1__sig\
 
 	Control, status and sync:
 		 Instances:

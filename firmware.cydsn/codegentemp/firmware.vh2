@@ -2,7 +2,7 @@
 --	Conversion of firmware.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Fri Feb 01 18:25:17 2019
+--	Tue Feb 19 09:50:59 2019
 --
 
 USE cypress.cypress.all;
@@ -170,9 +170,9 @@ SIGNAL \Chip_Select_IMU:control_0\ : bit;
 SIGNAL cmp_vv_vv_MODGEN_2 : bit;
 SIGNAL Net_2640 : bit;
 SIGNAL Net_2982 : bit;
-SIGNAL Net_3024 : bit;
-SIGNAL Net_3017 : bit;
-SIGNAL Net_3022 : bit;
+SIGNAL Net_9765 : bit;
+SIGNAL Net_9969 : bit;
+SIGNAL Net_9770 : bit;
 SIGNAL \MOTOR_DIR_1:clk\ : bit;
 SIGNAL \MOTOR_DIR_1:rst\ : bit;
 SIGNAL \MOTOR_DIR_1:control_out_0\ : bit;
@@ -199,6 +199,7 @@ SIGNAL \MOTOR_DIR_1:control_2\ : bit;
 SIGNAL \MOTOR_DIR_1:control_1\ : bit;
 SIGNAL \MOTOR_DIR_1:control_0\ : bit;
 SIGNAL tmpOE__MOTOR_1B_net_0 : bit;
+SIGNAL Net_9767 : bit;
 SIGNAL tmpFB_0__MOTOR_1B_net_0 : bit;
 SIGNAL tmpIO_0__MOTOR_1B_net_0 : bit;
 TERMINAL tmpSIOVREF__MOTOR_1B_net_0 : bit;
@@ -213,7 +214,7 @@ SIGNAL tmpFB_0__RS485_CTS_net_0 : bit;
 SIGNAL tmpIO_0__RS485_CTS_net_0 : bit;
 TERMINAL tmpSIOVREF__RS485_CTS_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__RS485_CTS_net_0 : bit;
-SIGNAL Net_433 : bit;
+SIGNAL Net_9919 : bit;
 SIGNAL Net_2334 : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:km_run\ : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:min_kill_reg\ : bit;
@@ -338,7 +339,7 @@ SIGNAL \PWM_MOTORS:PWMUDB:pwm2_i\ : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:tc_i_reg\ : bit;
 SIGNAL \PWM_MOTORS:Net_101\ : bit;
 SIGNAL \PWM_MOTORS:Net_96\ : bit;
-SIGNAL Net_3040 : bit;
+SIGNAL Net_9990 : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:pwm_temp\ : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:cmp1\ : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:cmp2\ : bit;
@@ -538,20 +539,21 @@ SIGNAL \PWM_MOTORS:PWMUDB:MODULE_1:g2:a0:g1:z1:s0:g1:u0:c_2\ : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:MODULE_1:g2:a0:g1:z1:s0:g1:u0:c_1\ : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:MODULE_1:g2:a0:g1:z1:s0:g1:u0:c_0\ : bit;
 SIGNAL \PWM_MOTORS:PWMUDB:MODULE_1:g2:a0:g1:z1:s0:g1:u0:b_0\ : bit;
-SIGNAL Net_2993 : bit;
-SIGNAL Net_2744 : bit;
+SIGNAL Net_10292 : bit;
+SIGNAL Net_10286 : bit;
 SIGNAL \PWM_MOTORS:Net_55\ : bit;
-SIGNAL Net_2741 : bit;
+SIGNAL Net_10285 : bit;
 SIGNAL \PWM_MOTORS:Net_113\ : bit;
 SIGNAL \PWM_MOTORS:Net_107\ : bit;
 SIGNAL \PWM_MOTORS:Net_114\ : bit;
 SIGNAL tmpOE__CS3_net_0 : bit;
-SIGNAL Net_3065 : bit;
+SIGNAL Net_3064 : bit;
 SIGNAL tmpFB_0__CS3_net_0 : bit;
 SIGNAL tmpIO_0__CS3_net_0 : bit;
 TERMINAL tmpSIOVREF__CS3_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__CS3_net_0 : bit;
 SIGNAL tmpOE__MOTOR_1A_net_0 : bit;
+SIGNAL Net_9772 : bit;
 SIGNAL tmpFB_0__MOTOR_1A_net_0 : bit;
 SIGNAL tmpIO_0__MOTOR_1A_net_0 : bit;
 TERMINAL tmpSIOVREF__MOTOR_1A_net_0 : bit;
@@ -1274,7 +1276,7 @@ ATTRIBUTE port_state_att of \SPI_IMU:BSPIM:sR8:Dp:f1_bus_stat_reg\:SIGNAL IS 2;
 SIGNAL \SPI_IMU:BSPIM:sR8:Dp:f1_blk_stat_reg\ : bit;
 ATTRIBUTE port_state_att of \SPI_IMU:BSPIM:sR8:Dp:f1_blk_stat_reg\:SIGNAL IS 2;
 SIGNAL \SPI_IMU:Net_289\ : bit;
-SIGNAL Net_3026 : bit;
+SIGNAL Net_9745 : bit;
 SIGNAL Net_3025 : bit;
 SIGNAL tmpOE__CS1_net_0 : bit;
 SIGNAL Net_1628 : bit;
@@ -1321,7 +1323,7 @@ SIGNAL Net_3058 : bit;
 SIGNAL Net_3059 : bit;
 SIGNAL Net_3060 : bit;
 SIGNAL Net_3061 : bit;
-SIGNAL Net_3064 : bit;
+SIGNAL Net_9687 : bit;
 SIGNAL Net_3057 : bit;
 SIGNAL Net_3056 : bit;
 SIGNAL Net_3052 : bit;
@@ -2407,28 +2409,30 @@ SIGNAL tmpFB_0__CS2_net_0 : bit;
 SIGNAL tmpIO_0__CS2_net_0 : bit;
 TERMINAL tmpSIOVREF__CS2_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__CS2_net_0 : bit;
-SIGNAL Net_3023 : bit;
+SIGNAL Net_9761 : bit;
 SIGNAL tmpOE__MOTOR_2A_net_0 : bit;
+SIGNAL Net_9759 : bit;
 SIGNAL tmpFB_0__MOTOR_2A_net_0 : bit;
 SIGNAL tmpIO_0__MOTOR_2A_net_0 : bit;
 TERMINAL tmpSIOVREF__MOTOR_2A_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__MOTOR_2A_net_0 : bit;
 SIGNAL tmpOE__MOTOR_2B_net_0 : bit;
+SIGNAL Net_9749 : bit;
 SIGNAL tmpFB_0__MOTOR_2B_net_0 : bit;
 SIGNAL tmpIO_0__MOTOR_2B_net_0 : bit;
 TERMINAL tmpSIOVREF__MOTOR_2B_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__MOTOR_2B_net_0 : bit;
 SIGNAL tmpOE__MOTOR_EN_1_net_0 : bit;
-SIGNAL Net_2790 : bit;
+SIGNAL Net_9774 : bit;
 SIGNAL tmpFB_0__MOTOR_EN_1_net_0 : bit;
 SIGNAL tmpIO_0__MOTOR_EN_1_net_0 : bit;
 TERMINAL tmpSIOVREF__MOTOR_EN_1_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__MOTOR_EN_1_net_0 : bit;
 SIGNAL \MOTOR_ON_OFF_1:clk\ : bit;
 SIGNAL \MOTOR_ON_OFF_1:rst\ : bit;
-SIGNAL Net_2761 : bit;
+SIGNAL Net_10337 : bit;
 SIGNAL \MOTOR_ON_OFF_1:control_out_0\ : bit;
-SIGNAL Net_2791 : bit;
+SIGNAL Net_10322 : bit;
 SIGNAL \MOTOR_ON_OFF_1:control_out_1\ : bit;
 SIGNAL Net_2792 : bit;
 SIGNAL \MOTOR_ON_OFF_1:control_out_2\ : bit;
@@ -2450,33 +2454,8 @@ SIGNAL \MOTOR_ON_OFF_1:control_3\ : bit;
 SIGNAL \MOTOR_ON_OFF_1:control_2\ : bit;
 SIGNAL \MOTOR_ON_OFF_1:control_1\ : bit;
 SIGNAL \MOTOR_ON_OFF_1:control_0\ : bit;
-SIGNAL \MOTOR_ON_OFF_2:clk\ : bit;
-SIGNAL \MOTOR_ON_OFF_2:rst\ : bit;
-SIGNAL Net_7913 : bit;
-SIGNAL \MOTOR_ON_OFF_2:control_out_0\ : bit;
-SIGNAL Net_2800 : bit;
-SIGNAL \MOTOR_ON_OFF_2:control_out_1\ : bit;
-SIGNAL Net_2801 : bit;
-SIGNAL \MOTOR_ON_OFF_2:control_out_2\ : bit;
-SIGNAL Net_2802 : bit;
-SIGNAL \MOTOR_ON_OFF_2:control_out_3\ : bit;
-SIGNAL Net_2803 : bit;
-SIGNAL \MOTOR_ON_OFF_2:control_out_4\ : bit;
-SIGNAL Net_2804 : bit;
-SIGNAL \MOTOR_ON_OFF_2:control_out_5\ : bit;
-SIGNAL Net_2805 : bit;
-SIGNAL \MOTOR_ON_OFF_2:control_out_6\ : bit;
-SIGNAL Net_2806 : bit;
-SIGNAL \MOTOR_ON_OFF_2:control_out_7\ : bit;
-SIGNAL \MOTOR_ON_OFF_2:control_7\ : bit;
-SIGNAL \MOTOR_ON_OFF_2:control_6\ : bit;
-SIGNAL \MOTOR_ON_OFF_2:control_5\ : bit;
-SIGNAL \MOTOR_ON_OFF_2:control_4\ : bit;
-SIGNAL \MOTOR_ON_OFF_2:control_3\ : bit;
-SIGNAL \MOTOR_ON_OFF_2:control_2\ : bit;
-SIGNAL \MOTOR_ON_OFF_2:control_1\ : bit;
-SIGNAL \MOTOR_ON_OFF_2:control_0\ : bit;
-SIGNAL Net_2780 : bit;
+SIGNAL Net_9776 : bit;
+SIGNAL Net_10313 : bit;
 SIGNAL tmpOE__MOTOR_EN_2_net_0 : bit;
 SIGNAL tmpFB_0__MOTOR_EN_2_net_0 : bit;
 SIGNAL tmpIO_0__MOTOR_EN_2_net_0 : bit;
@@ -3674,6 +3653,61 @@ SIGNAL \MY_TIMER_REG:control_3\ : bit;
 SIGNAL \MY_TIMER_REG:control_2\ : bit;
 SIGNAL \MY_TIMER_REG:control_1\ : bit;
 SIGNAL \MY_TIMER_REG:control_0\ : bit;
+SIGNAL \mux_3:tmp__mux_3_reg\ : bit;
+SIGNAL Net_10233 : bit;
+SIGNAL \MOTOR_DRIVER_TYPE:clk\ : bit;
+SIGNAL \MOTOR_DRIVER_TYPE:rst\ : bit;
+SIGNAL \MOTOR_DRIVER_TYPE:control_out_0\ : bit;
+SIGNAL Net_10264 : bit;
+SIGNAL \MOTOR_DRIVER_TYPE:control_out_1\ : bit;
+SIGNAL Net_10184 : bit;
+SIGNAL \MOTOR_DRIVER_TYPE:control_out_2\ : bit;
+SIGNAL Net_10185 : bit;
+SIGNAL \MOTOR_DRIVER_TYPE:control_out_3\ : bit;
+SIGNAL Net_10186 : bit;
+SIGNAL \MOTOR_DRIVER_TYPE:control_out_4\ : bit;
+SIGNAL Net_10187 : bit;
+SIGNAL \MOTOR_DRIVER_TYPE:control_out_5\ : bit;
+SIGNAL Net_10188 : bit;
+SIGNAL \MOTOR_DRIVER_TYPE:control_out_6\ : bit;
+SIGNAL Net_10189 : bit;
+SIGNAL \MOTOR_DRIVER_TYPE:control_out_7\ : bit;
+SIGNAL \MOTOR_DRIVER_TYPE:control_7\ : bit;
+SIGNAL \MOTOR_DRIVER_TYPE:control_6\ : bit;
+SIGNAL \MOTOR_DRIVER_TYPE:control_5\ : bit;
+SIGNAL \MOTOR_DRIVER_TYPE:control_4\ : bit;
+SIGNAL \MOTOR_DRIVER_TYPE:control_3\ : bit;
+SIGNAL \MOTOR_DRIVER_TYPE:control_2\ : bit;
+SIGNAL \MOTOR_DRIVER_TYPE:control_1\ : bit;
+SIGNAL \MOTOR_DRIVER_TYPE:control_0\ : bit;
+SIGNAL \mux_2:tmp__mux_2_reg\ : bit;
+SIGNAL \mux_4:tmp__mux_4_reg\ : bit;
+SIGNAL \mux_1:tmp__mux_1_reg\ : bit;
+SIGNAL \MOTOR_ON_OFF_2:clk\ : bit;
+SIGNAL \MOTOR_ON_OFF_2:rst\ : bit;
+SIGNAL \MOTOR_ON_OFF_2:control_out_0\ : bit;
+SIGNAL Net_10323 : bit;
+SIGNAL \MOTOR_ON_OFF_2:control_out_1\ : bit;
+SIGNAL Net_10324 : bit;
+SIGNAL \MOTOR_ON_OFF_2:control_out_2\ : bit;
+SIGNAL Net_10325 : bit;
+SIGNAL \MOTOR_ON_OFF_2:control_out_3\ : bit;
+SIGNAL Net_10327 : bit;
+SIGNAL \MOTOR_ON_OFF_2:control_out_4\ : bit;
+SIGNAL Net_10328 : bit;
+SIGNAL \MOTOR_ON_OFF_2:control_out_5\ : bit;
+SIGNAL Net_10329 : bit;
+SIGNAL \MOTOR_ON_OFF_2:control_out_6\ : bit;
+SIGNAL Net_10330 : bit;
+SIGNAL \MOTOR_ON_OFF_2:control_out_7\ : bit;
+SIGNAL \MOTOR_ON_OFF_2:control_7\ : bit;
+SIGNAL \MOTOR_ON_OFF_2:control_6\ : bit;
+SIGNAL \MOTOR_ON_OFF_2:control_5\ : bit;
+SIGNAL \MOTOR_ON_OFF_2:control_4\ : bit;
+SIGNAL \MOTOR_ON_OFF_2:control_3\ : bit;
+SIGNAL \MOTOR_ON_OFF_2:control_2\ : bit;
+SIGNAL \MOTOR_ON_OFF_2:control_1\ : bit;
+SIGNAL \MOTOR_ON_OFF_2:control_0\ : bit;
 SIGNAL \MODULE_8:g1:a0:newa_3\ : bit;
 SIGNAL MODIN7_3 : bit;
 SIGNAL \MODULE_8:g1:a0:newa_2\ : bit;
@@ -4026,10 +4060,6 @@ Net_5460 <= ((not Net_5190_3 and not Net_5190_2 and not Net_5190_1 and not Net_5
 	OR (not Net_5190_3 and not Net_7046_3 and Net_5190_2 and Net_5190_1 and Net_5190_0 and Net_7046_2 and Net_7046_1 and Net_7046_0)
 	OR (Net_5190_3 and Net_5190_2 and Net_5190_1 and Net_5190_0 and Net_7046_3 and Net_7046_2 and Net_7046_1 and Net_7046_0));
 
-Net_3024 <= ((not Net_2982 and Net_3017));
-
-Net_3022 <= ((Net_2982 and Net_3017));
-
 \PWM_MOTORS:PWMUDB:sc_kill_tmp\\D\ <= (not \PWM_MOTORS:PWMUDB:tc_i\);
 
 \PWM_MOTORS:PWMUDB:dith_count_1\\D\ <= ((not \PWM_MOTORS:PWMUDB:dith_count_1\ and \PWM_MOTORS:PWMUDB:tc_i\ and \PWM_MOTORS:PWMUDB:dith_count_0\)
@@ -4349,8 +4379,6 @@ Net_1459D <= ((not \SPI_IMU:BSPIM:state_1\ and not \SPI_IMU:BSPIM:state_0\)
 	OR (not \SPI_IMU:BSPIM:state_0\ and \SPI_IMU:BSPIM:ld_ident\)
 	OR (not \SPI_IMU:BSPIM:state_1\ and \SPI_IMU:BSPIM:ld_ident\));
 
-Net_3026 <= ((not Net_3021 and Net_3040));
-
 \BLINK_05HZ:PWMUDB:runmode_enable\\D\ <= ((\BLINK_05HZ:PWMUDB:control_7\ and Net_3925));
 
 \BLINK_05HZ:PWMUDB:sc_kill_tmp\\D\ <= (not \BLINK_05HZ:PWMUDB:tc_i\);
@@ -4408,11 +4436,9 @@ Net_7325 <= (Net_7667
 	OR Net_7450
 	OR Net_5579);
 
-Net_3023 <= ((Net_3040 and Net_3021));
+Net_9774 <= (not Net_10337);
 
-Net_2790 <= (not Net_2761);
-
-Net_2780 <= (not Net_7913);
+Net_9776 <= (not Net_10313);
 
 Net_1630 <= (Net_3044
 	OR Net_3063_0
@@ -4434,7 +4460,7 @@ Net_2501 <= (Net_3044
 	OR not Net_3063_1
 	OR Net_3063_2);
 
-Net_3065 <= (Net_3044
+Net_3064 <= (Net_3044
 	OR Net_3063_0
 	OR Net_3063_1
 	OR not Net_3063_2);
@@ -4460,6 +4486,18 @@ Net_7983 <= (Net_7981
 
 Net_7985 <= (not Net_7981
 	OR Net_3426);
+
+Net_9767 <= ((not Net_2982 and not Net_10233 and Net_9969)
+	OR (Net_2982 and Net_10233));
+
+Net_9759 <= ((Net_9990 and Net_10264)
+	OR (Net_9990 and Net_3021));
+
+Net_9772 <= ((Net_9969 and Net_10233)
+	OR (Net_2982 and Net_9969));
+
+Net_9749 <= ((not Net_3021 and not Net_10264 and Net_9990)
+	OR (Net_3021 and Net_10264));
 
 \MODULE_8:g1:a0:gx:u0:lt_2\ <= ((not Net_5190_2 and not Net_5190_1 and not Net_5190_0 and AMuxHw_Decoder_old_id_0)
 	OR (not Net_5190_1 and not Net_5190_0 and AMuxHw_Decoder_old_id_2 and AMuxHw_Decoder_old_id_0)
@@ -5569,7 +5607,7 @@ MOTOR_1B:cy_psoc3_pins_v1_10
 		ovt_hyst_trim=>"0",
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(tmpOE__CURRENT_SENSE_2_net_0),
-		y=>Net_3024,
+		y=>Net_9767,
 		fb=>(tmpFB_0__MOTOR_1B_net_0),
 		analog=>(open),
 		io=>(tmpIO_0__MOTOR_1B_net_0),
@@ -5899,7 +5937,7 @@ CS3:cy_psoc3_pins_v1_10
 		ovt_hyst_trim=>"0",
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(tmpOE__CURRENT_SENSE_2_net_0),
-		y=>Net_3065,
+		y=>Net_3064,
 		fb=>(tmpFB_0__CS3_net_0),
 		analog=>(open),
 		io=>(tmpIO_0__CS3_net_0),
@@ -5969,7 +6007,7 @@ MOTOR_1A:cy_psoc3_pins_v1_10
 		ovt_hyst_trim=>"0",
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(tmpOE__CURRENT_SENSE_2_net_0),
-		y=>Net_3022,
+		y=>Net_9772,
 		fb=>(tmpFB_0__MOTOR_1A_net_0),
 		analog=>(open),
 		io=>(tmpIO_0__MOTOR_1A_net_0),
@@ -8444,7 +8482,7 @@ MOTOR_2A:cy_psoc3_pins_v1_10
 		ovt_hyst_trim=>"0",
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(tmpOE__CURRENT_SENSE_2_net_0),
-		y=>Net_3023,
+		y=>Net_9759,
 		fb=>(tmpFB_0__MOTOR_2A_net_0),
 		analog=>(open),
 		io=>(tmpIO_0__MOTOR_2A_net_0),
@@ -8514,7 +8552,7 @@ MOTOR_2B:cy_psoc3_pins_v1_10
 		ovt_hyst_trim=>"0",
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(tmpOE__CURRENT_SENSE_2_net_0),
-		y=>Net_3026,
+		y=>Net_9749,
 		fb=>(tmpFB_0__MOTOR_2B_net_0),
 		analog=>(open),
 		io=>(tmpIO_0__MOTOR_2B_net_0),
@@ -8584,7 +8622,7 @@ MOTOR_EN_1:cy_psoc3_pins_v1_10
 		ovt_hyst_trim=>"0",
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(tmpOE__CURRENT_SENSE_2_net_0),
-		y=>Net_2790,
+		y=>Net_9774,
 		fb=>(tmpFB_0__MOTOR_EN_1_net_0),
 		analog=>(open),
 		io=>(tmpIO_0__MOTOR_EN_1_net_0),
@@ -8606,17 +8644,7 @@ MOTOR_EN_1:cy_psoc3_pins_v1_10
 	PORT MAP(reset=>zero,
 		clock=>zero,
 		control=>(\MOTOR_ON_OFF_1:control_7\, \MOTOR_ON_OFF_1:control_6\, \MOTOR_ON_OFF_1:control_5\, \MOTOR_ON_OFF_1:control_4\,
-			\MOTOR_ON_OFF_1:control_3\, \MOTOR_ON_OFF_1:control_2\, \MOTOR_ON_OFF_1:control_1\, Net_2761));
-\MOTOR_ON_OFF_2:Sync:ctrl_reg\:cy_psoc3_control
-	GENERIC MAP(cy_init_value=>"00000000",
-		cy_force_order=>'1',
-		cy_ctrl_mode_1=>"00000000",
-		cy_ctrl_mode_0=>"00000000",
-		cy_ext_reset=>'0')
-	PORT MAP(reset=>zero,
-		clock=>zero,
-		control=>(\MOTOR_ON_OFF_2:control_7\, \MOTOR_ON_OFF_2:control_6\, \MOTOR_ON_OFF_2:control_5\, \MOTOR_ON_OFF_2:control_4\,
-			\MOTOR_ON_OFF_2:control_3\, \MOTOR_ON_OFF_2:control_2\, \MOTOR_ON_OFF_2:control_1\, Net_7913));
+			\MOTOR_ON_OFF_1:control_3\, \MOTOR_ON_OFF_1:control_2\, \MOTOR_ON_OFF_1:control_1\, Net_10337));
 MOTOR_EN_2:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"f1224875-b991-4103-8489-a48d67847102",
 		drive_mode=>"110",
@@ -8674,7 +8702,7 @@ MOTOR_EN_2:cy_psoc3_pins_v1_10
 		ovt_hyst_trim=>"0",
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(tmpOE__CURRENT_SENSE_2_net_0),
-		y=>Net_2780,
+		y=>Net_9776,
 		fb=>(tmpFB_0__MOTOR_EN_2_net_0),
 		analog=>(open),
 		io=>(tmpIO_0__MOTOR_EN_2_net_0),
@@ -10236,6 +10264,26 @@ CS_ENCODER0:cy_psoc3_pins_v1_10
 		clock=>zero,
 		control=>(\MY_TIMER_REG:control_7\, \MY_TIMER_REG:control_6\, \MY_TIMER_REG:control_5\, \MY_TIMER_REG:control_4\,
 			\MY_TIMER_REG:control_3\, \MY_TIMER_REG:control_2\, \MY_TIMER_REG:control_1\, Net_4386));
+\MOTOR_DRIVER_TYPE:Sync:ctrl_reg\:cy_psoc3_control
+	GENERIC MAP(cy_init_value=>"00000000",
+		cy_force_order=>'1',
+		cy_ctrl_mode_1=>"00000000",
+		cy_ctrl_mode_0=>"00000000",
+		cy_ext_reset=>'0')
+	PORT MAP(reset=>zero,
+		clock=>zero,
+		control=>(\MOTOR_DRIVER_TYPE:control_7\, \MOTOR_DRIVER_TYPE:control_6\, \MOTOR_DRIVER_TYPE:control_5\, \MOTOR_DRIVER_TYPE:control_4\,
+			\MOTOR_DRIVER_TYPE:control_3\, \MOTOR_DRIVER_TYPE:control_2\, Net_10264, Net_10233));
+\MOTOR_ON_OFF_2:Sync:ctrl_reg\:cy_psoc3_control
+	GENERIC MAP(cy_init_value=>"00000000",
+		cy_force_order=>'1',
+		cy_ctrl_mode_1=>"00000000",
+		cy_ctrl_mode_0=>"00000000",
+		cy_ext_reset=>'0')
+	PORT MAP(reset=>zero,
+		clock=>zero,
+		control=>(\MOTOR_ON_OFF_2:control_7\, \MOTOR_ON_OFF_2:control_6\, \MOTOR_ON_OFF_2:control_5\, \MOTOR_ON_OFF_2:control_4\,
+			\MOTOR_ON_OFF_2:control_3\, \MOTOR_ON_OFF_2:control_2\, \MOTOR_ON_OFF_2:control_1\, Net_10313));
 \MODULE_8:g1:a0:gx:u0:gne(0):c3:u1\:cy_buf
 	PORT MAP(x=>\MODULE_8:g1:a0:gx:u0:lt_2\,
 		y=>\MODULE_8:g1:a0:gx:u0:lti_0\);
@@ -10389,11 +10437,11 @@ Net_1459:cy_dff
 \PWM_MOTORS:PWMUDB:pwm1_i_reg\:cy_dff
 	PORT MAP(d=>\PWM_MOTORS:PWMUDB:pwm1_i\,
 		clk=>\PWM_MOTORS:PWMUDB:ClockOutFromEnBlock\,
-		q=>Net_3017);
+		q=>Net_9969);
 \PWM_MOTORS:PWMUDB:pwm2_i_reg\:cy_dff
 	PORT MAP(d=>\PWM_MOTORS:PWMUDB:pwm2_i\,
 		clk=>\PWM_MOTORS:PWMUDB:ClockOutFromEnBlock\,
-		q=>Net_3040);
+		q=>Net_9990);
 \PWM_MOTORS:PWMUDB:tc_i_reg\:cy_dff
 	PORT MAP(d=>\PWM_MOTORS:PWMUDB:tc_i_reg\\D\,
 		clk=>\PWM_MOTORS:PWMUDB:ClockOutFromEnBlock\,
