@@ -1,0 +1,117 @@
+\section{S\+D\+\_\+\+R\+T\+C\+\_\+functions.\+h File Reference}
+\label{_s_d___r_t_c__functions_8h}\index{S\+D\+\_\+\+R\+T\+C\+\_\+functions.\+h@{S\+D\+\_\+\+R\+T\+C\+\_\+functions.\+h}}
+
+
+Definition of SD and R\+TC module functions.  
+
+
+{\ttfamily \#include $<$project.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}globals.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}command\+\_\+processing.\+h\char`\"{}}\newline
+Include dependency graph for S\+D\+\_\+\+R\+T\+C\+\_\+functions.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_s_d___r_t_c__functions_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_s_d___r_t_c__functions_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_ac0bf5d4ed56463032c8735fdfd200da0}} 
+\#define {\bfseries D\+S1302\+\_\+\+S\+E\+C\+O\+N\+D\+S\+\_\+\+WR}~0x80
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_a83a504aca68d28a23ceb03b38384a509}} 
+\#define {\bfseries D\+S1302\+\_\+\+S\+E\+C\+O\+N\+D\+S\+\_\+\+RD}~0x81
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_a6afbe79491082889b12adc4d0f5edf2f}} 
+\#define {\bfseries D\+S1302\+\_\+\+M\+I\+N\+U\+T\+E\+S\+\_\+\+WR}~0x82
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_aef49f9b406cc8cbf23066e20382a17b9}} 
+\#define {\bfseries D\+S1302\+\_\+\+M\+I\+N\+U\+T\+E\+S\+\_\+\+RD}~0x83
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_a66cba43eaecb1e047f73265c11fe2aac}} 
+\#define {\bfseries D\+S1302\+\_\+\+H\+O\+U\+R\+\_\+\+WR}~0x84
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_a66a5375fea0bd8f39ccce55262571c87}} 
+\#define {\bfseries D\+S1302\+\_\+\+H\+O\+U\+R\+\_\+\+RD}~0x85
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_ab53e4481fe7704a79f469d7ae81d7ba8}} 
+\#define {\bfseries D\+S1302\+\_\+\+D\+A\+T\+E\+\_\+\+WR}~0x86
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_aa1076dbea29ed93a566866146adf87d3}} 
+\#define {\bfseries D\+S1302\+\_\+\+D\+A\+T\+E\+\_\+\+RD}~0x87
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_a5f4f20e5d9f7c19a35bee8823a2eecf8}} 
+\#define {\bfseries D\+S1302\+\_\+\+M\+O\+N\+T\+H\+\_\+\+WR}~0x88
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_acd933e6f2acf25bfae4c60b88c99292f}} 
+\#define {\bfseries D\+S1302\+\_\+\+M\+O\+N\+T\+H\+\_\+\+RD}~0x89
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_ab516547df86ac771c599ad840d806b69}} 
+\#define {\bfseries D\+S1302\+\_\+\+Y\+E\+A\+R\+\_\+\+WR}~0x8C
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_a37e2286ca2d3b25fa17400b5cdba8e43}} 
+\#define {\bfseries D\+S1302\+\_\+\+Y\+E\+A\+R\+\_\+\+RD}~0x8D
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_ae916e48139e2369b4295bc32b754cb09}} 
+void {\bfseries D\+S1302\+\_\+write} (uint8 address, uint8 data\+\_\+wr)
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_abf7dafb7cb2decd885c06cfd0d508a86}} 
+void {\bfseries D\+S1302\+\_\+write\+Byte} (uint8 data\+\_\+wr)
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_a648ecf3d4f3a92e6390945b156d5c98a}} 
+uint8 {\bfseries D\+S1302\+\_\+read} (uint8 address)
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_a961280caa20d802239a974419c19437e}} 
+uint8 {\bfseries D\+S1302\+\_\+read\+Byte} ()
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_a1f5533e91998b92926173f479322c7d9}} 
+void {\bfseries shift\+Out\+\_\+\+R\+TC} (uint8 val)
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_a262170705e582875a383a9f5c9b137a7}} 
+void {\bfseries store\+\_\+\+R\+T\+C\+\_\+current\+\_\+time} ()
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_ad0181162f59bf423c6d1dc1556afb6fc}} 
+void {\bfseries set\+\_\+\+R\+T\+C\+\_\+time} ()
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_a56466454f41dc875787a75f0d78b5602}} 
+void {\bfseries Init\+S\+D\+\_\+\+FS} ()
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_a5072914b0c92c6825bb196ba84b332c4}} 
+void {\bfseries Write\+\_\+\+S\+D\+\_\+\+Param\+\_\+file} ()
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_ab859160c1aaa93a7acab54f21be69c1c}} 
+void {\bfseries Read\+\_\+\+S\+D\+\_\+\+Param} (char $\ast$, int)
+\item 
+\mbox{\label{_s_d___r_t_c__functions_8h_a629e87adeb558dd2c752a3b5712af3ed}} 
+void {\bfseries Read\+\_\+\+S\+D\+\_\+\+Data} (char $\ast$, int)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Definition of SD and R\+TC module functions. 
+
+\begin{DoxyDate}{Date}
+February 13, 2019 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+{\itshape Centro \char`\"{}\+E.\+Piaggio\char`\"{}} 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+(C) 2012-\/2016 qbrobotics. All rights reserved. 
+
+(C) 2017-\/2019 Centro \char`\"{}\+E.\+Piaggio\char`\"{}. All rights reserved. 
+\end{DoxyCopyright}

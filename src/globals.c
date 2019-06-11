@@ -104,6 +104,8 @@ int32 rest_pos_curr_ref;                     /*!< Rest position current referenc
 
 // SD variables
 FS_FILE * pFile;
+char sdFile[100] = "";
+char sdParam[100] = "";
 
 // IMU variables
 uint8 N_IMU_Connected;

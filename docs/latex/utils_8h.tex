@@ -1,0 +1,245 @@
+\section{utils.\+h File Reference}
+\label{utils_8h}\index{utils.\+h@{utils.\+h}}
+
+
+Utility functions declaration.  
+
+
+{\ttfamily \#include \char`\"{}globals.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+Include dependency graph for utils.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{utils_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{utils_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ Z\+M\+AX}~5
+\item 
+\#define \textbf{ Z\+E\+R\+O\+\_\+\+T\+OL}~100
+\item 
+\#define \textbf{ R\+E\+F\+S\+P\+E\+ED}~20
+\item 
+\#define \textbf{ S\+I\+GN}(A)~(((A) $>$=0) ? (1) \+: (-\/1))
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{Indent}\textbf{ Filters}\par
+\begin{DoxyCompactItemize}
+\item 
+int32 \textbf{ filter} (int32 value, struct \textbf{ st\+\_\+filter} $\ast$f)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Estimating current and difference}\par
+\begin{DoxyCompactItemize}
+\item 
+int32 \textbf{ curr\+\_\+estim} (uint8 idx, int32 pos, int32 vel, int32 acc)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Utility functions}\par
+\begin{DoxyCompactItemize}
+\item 
+uint32 \textbf{ my\+\_\+mod} (int32 val, int32 divisor)
+\item 
+int \textbf{ calc\+\_\+turns\+\_\+fcn\+\_\+\+SH} (const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1)
+\item 
+int \textbf{ calc\+\_\+turns\+\_\+fcn} (const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1)
+\item 
+void \textbf{ calibration} ()
+\item 
+void \textbf{ check\+\_\+rest\+\_\+position} ()
+\item 
+void \textbf{ L\+E\+D\+\_\+control} (uint8 mode)
+\item 
+\mbox{\label{utils_8h_ae7eac41344d5679b9f7624357a88119d}} 
+void {\bfseries battery\+\_\+management} ()
+\item 
+\mbox{\label{utils_8h_a1bea2981fd56850186356ea344e07e42}} 
+void {\bfseries A\+D\+C\+\_\+\+Set\+\_\+\+N\+\_\+\+Channels} ()
+\item 
+\mbox{\label{utils_8h_a60ad0d7249bf56336e0908eaeec604e8}} 
+void {\bfseries enable\+\_\+motor} (uint8 idx, uint8 val)
+\item 
+void \textbf{ reset\+\_\+counters} ()
+\item 
+\mbox{\label{utils_8h_a5e5346796220b271615a52428f6ec6ca}} 
+float {\bfseries inv\+Sqrt} (float x)
+\item 
+\mbox{\label{utils_8h_a88d150c696b69e576a1dfb193266ae6a}} 
+void {\bfseries v3\+\_\+normalize} (float v3\+\_\+in[3])
+\item 
+\mbox{\label{utils_8h_a2965058da02ba33e26af00cff2fcfec2}} 
+void {\bfseries v4\+\_\+normalize} (float v4\+\_\+in[4])
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+Utility functions declaration. 
+
+\begin{DoxyDate}{Date}
+October 01, 2017 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+{\itshape Centro \char`\"{}\+E.\+Piaggio\char`\"{}} 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+(C) 2012-\/2016 qbrobotics. All rights reserved. 
+
+(C) 2017-\/2019 Centro \char`\"{}\+E.\+Piaggio\char`\"{}. All rights reserved. 
+\end{DoxyCopyright}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\label{utils_8h_a398d0c26e6af88fbdc96f871b7c3495e}} 
+\index{utils.\+h@{utils.\+h}!R\+E\+F\+S\+P\+E\+ED@{R\+E\+F\+S\+P\+E\+ED}}
+\index{R\+E\+F\+S\+P\+E\+ED@{R\+E\+F\+S\+P\+E\+ED}!utils.\+h@{utils.\+h}}
+\subsubsection{R\+E\+F\+S\+P\+E\+ED}
+{\footnotesize\ttfamily \#define R\+E\+F\+S\+P\+E\+ED~20}
+
+Constant depending on P\+ID values. \mbox{\label{utils_8h_a8c7db0cde6d591a5abad279ba92ef021}} 
+\index{utils.\+h@{utils.\+h}!S\+I\+GN@{S\+I\+GN}}
+\index{S\+I\+GN@{S\+I\+GN}!utils.\+h@{utils.\+h}}
+\subsubsection{S\+I\+GN}
+{\footnotesize\ttfamily \#define S\+I\+GN(\begin{DoxyParamCaption}\item[{}]{A }\end{DoxyParamCaption})~(((A) $>$=0) ? (1) \+: (-\/1))}
+
+Sign calculation function. \mbox{\label{utils_8h_a2d55df83bcb11e53743ff6732e4bf7c1}} 
+\index{utils.\+h@{utils.\+h}!Z\+E\+R\+O\+\_\+\+T\+OL@{Z\+E\+R\+O\+\_\+\+T\+OL}}
+\index{Z\+E\+R\+O\+\_\+\+T\+OL@{Z\+E\+R\+O\+\_\+\+T\+OL}!utils.\+h@{utils.\+h}}
+\subsubsection{Z\+E\+R\+O\+\_\+\+T\+OL}
+{\footnotesize\ttfamily \#define Z\+E\+R\+O\+\_\+\+T\+OL~100}
+
+Deadband used to put to zero the virtual position due to the fact that the friction model has errors when the position is near to zero. \mbox{\label{utils_8h_a131010b0d7e64a592f782aec28c6a4d8}} 
+\index{utils.\+h@{utils.\+h}!Z\+M\+AX@{Z\+M\+AX}}
+\index{Z\+M\+AX@{Z\+M\+AX}!utils.\+h@{utils.\+h}}
+\subsubsection{Z\+M\+AX}
+{\footnotesize\ttfamily \#define Z\+M\+AX~5}
+
+Constant useful for current estimation procedure. 
+
+\subsection{Function Documentation}
+\mbox{\label{utils_8h_ae7dc9eeaef91416fa3a148612ed75bf7}} 
+\index{utils.\+h@{utils.\+h}!calc\+\_\+turns\+\_\+fcn@{calc\+\_\+turns\+\_\+fcn}}
+\index{calc\+\_\+turns\+\_\+fcn@{calc\+\_\+turns\+\_\+fcn}!utils.\+h@{utils.\+h}}
+\subsubsection{calc\+\_\+turns\+\_\+fcn()}
+{\footnotesize\ttfamily int calc\+\_\+turns\+\_\+fcn (\begin{DoxyParamCaption}\item[{const int32}]{pos1,  }\item[{const int32}]{pos2,  }\item[{const int}]{N1,  }\item[{const int}]{N2,  }\item[{const int}]{I1 }\end{DoxyParamCaption})}
+
+This function is used at startup to reconstruct the correct turn of the shaft connected to the motor. Generic. It need two encoders to work.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos1} & First encoder position \\
+\hline
+{\em pos2} & Second encoder position\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the number of turns of motor pulley at startup 
+\end{DoxyReturn}
+\mbox{\label{utils_8h_a73109b827d86a6936e0ca361d82d6328}} 
+\index{utils.\+h@{utils.\+h}!calc\+\_\+turns\+\_\+fcn\+\_\+\+SH@{calc\+\_\+turns\+\_\+fcn\+\_\+\+SH}}
+\index{calc\+\_\+turns\+\_\+fcn\+\_\+\+SH@{calc\+\_\+turns\+\_\+fcn\+\_\+\+SH}!utils.\+h@{utils.\+h}}
+\subsubsection{calc\+\_\+turns\+\_\+fcn\+\_\+\+S\+H()}
+{\footnotesize\ttfamily int calc\+\_\+turns\+\_\+fcn\+\_\+\+SH (\begin{DoxyParamCaption}\item[{const int32}]{pos1,  }\item[{const int32}]{pos2,  }\item[{const int}]{N1,  }\item[{const int}]{N2,  }\item[{const int}]{I1 }\end{DoxyParamCaption})}
+
+This function is used at startup to reconstruct the correct turn of the shaft connected to the motor. Only for Soft\+Hand 3.\+0. It need two encoders to work.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos1} & First encoder position \\
+\hline
+{\em pos2} & Second encoder position\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the number of turns of motor pulley at startup 
+\end{DoxyReturn}
+\mbox{\label{utils_8h_a6d9dc88d64cd1f74a30fd0e404a3bb31}} 
+\index{utils.\+h@{utils.\+h}!calibration@{calibration}}
+\index{calibration@{calibration}!utils.\+h@{utils.\+h}}
+\subsubsection{calibration()}
+{\footnotesize\ttfamily void calibration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This function counts a series of hand opening and closing used to execute a calibration of the device. \mbox{\label{utils_8h_a2cb024aea0170c085d18670f5a851df8}} 
+\index{utils.\+h@{utils.\+h}!check\+\_\+rest\+\_\+position@{check\+\_\+rest\+\_\+position}}
+\index{check\+\_\+rest\+\_\+position@{check\+\_\+rest\+\_\+position}!utils.\+h@{utils.\+h}}
+\subsubsection{check\+\_\+rest\+\_\+position()}
+{\footnotesize\ttfamily void check\+\_\+rest\+\_\+position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This function checks for rest position and, in case, gives a position reference to Soft\+Hand. \mbox{\label{utils_8h_a284a90898751a15b0303f688f19948b9}} 
+\index{utils.\+h@{utils.\+h}!curr\+\_\+estim@{curr\+\_\+estim}}
+\index{curr\+\_\+estim@{curr\+\_\+estim}!utils.\+h@{utils.\+h}}
+\subsubsection{curr\+\_\+estim()}
+{\footnotesize\ttfamily int32 curr\+\_\+estim (\begin{DoxyParamCaption}\item[{uint8}]{idx,  }\item[{int32}]{pos,  }\item[{int32}]{vel,  }\item[{int32}]{acc }\end{DoxyParamCaption})}
+
+Function used to obtain current estimation through current lookup table.
+
+
+\begin{DoxyParams}{Parameters}
+{\em idx} & Index of motor. \\
+\hline
+{\em pos} & Position of the encoder in ticks. \\
+\hline
+{\em vel} & Speed of the encoder. \\
+\hline
+{\em accel} & Acceleration of the encoder\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns an estimation of the motor current, depending on its position, velocity and acceleration. 
+\end{DoxyReturn}
+\mbox{\label{utils_8h_aa404d0e01f2ab2318d323c7ef8fa6c5a}} 
+\index{utils.\+h@{utils.\+h}!filter@{filter}}
+\index{filter@{filter}!utils.\+h@{utils.\+h}}
+\subsubsection{filter()}
+{\footnotesize\ttfamily int32 filter (\begin{DoxyParamCaption}\item[{int32}]{value,  }\item[{struct \textbf{ st\+\_\+filter} $\ast$}]{f }\end{DoxyParamCaption})}
+
+Generic low pass filter. The weighted average between the old value and the new one is executed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & New value of the filter. \\
+\hline
+{\em f} & Pointer to specific struct of type \doxyref{st\+\_\+filter}{p.}{structst__filter}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the filtered current value 
+\end{DoxyReturn}
+\mbox{\label{utils_8h_a4443e9a681f8c13d317110b8017136c8}} 
+\index{utils.\+h@{utils.\+h}!L\+E\+D\+\_\+control@{L\+E\+D\+\_\+control}}
+\index{L\+E\+D\+\_\+control@{L\+E\+D\+\_\+control}!utils.\+h@{utils.\+h}}
+\subsubsection{L\+E\+D\+\_\+control()}
+{\footnotesize\ttfamily void L\+E\+D\+\_\+control (\begin{DoxyParamCaption}\item[{uint8}]{mode }\end{DoxyParamCaption})}
+
+This function switches between different L\+E\+Ds condition depending on battery level of charge or needed maintenance. \mbox{\label{utils_8h_a01d3bb6c1fd469a6c530fb296e4fe0fe}} 
+\index{utils.\+h@{utils.\+h}!my\+\_\+mod@{my\+\_\+mod}}
+\index{my\+\_\+mod@{my\+\_\+mod}!utils.\+h@{utils.\+h}}
+\subsubsection{my\+\_\+mod()}
+{\footnotesize\ttfamily uint32 my\+\_\+mod (\begin{DoxyParamCaption}\item[{int32}]{val,  }\item[{int32}]{divisor }\end{DoxyParamCaption})}
+
+This function computes the module function, returning positive values regardless of wheter the value passed is negative
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & The value of which the module needs to be calculated \\
+\hline
+{\em divisor} & The divisor according to which the module is calculated \\
+\hline
+\end{DoxyParams}
+\mbox{\label{utils_8h_a2640efff1e7b6f9c11615048ba43b0fd}} 
+\index{utils.\+h@{utils.\+h}!reset\+\_\+counters@{reset\+\_\+counters}}
+\index{reset\+\_\+counters@{reset\+\_\+counters}!utils.\+h@{utils.\+h}}
+\subsubsection{reset\+\_\+counters()}
+{\footnotesize\ttfamily void reset\+\_\+counters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This function reset statistics counters 

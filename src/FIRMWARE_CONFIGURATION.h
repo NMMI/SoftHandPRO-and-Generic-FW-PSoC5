@@ -1,8 +1,7 @@
 // ----------------------------------------------------------------------------
 // BSD 3-Clause License
 
-// Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2019, Centro "E.Piaggio"
+// Copyright (c) 2019, Centro "E.Piaggio"
 // All rights reserved.
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -38,8 +37,7 @@
  *
  *  \date         January 30, 2019
  *  \author       _Centro "E.Piaggio"_
- *  \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
- *  \copyright    (C) 2017-2019 Centro "E.Piaggio". All rights reserved.
+ *  \copyright    (C) 2019 Centro "E.Piaggio". All rights reserved.
  *  \details
  *  This file is included in the firmware, in its libraries and
  *  applications. It contains all definitions that are necessary to discriminate the right firmware.
@@ -49,61 +47,29 @@
 #ifndef FIRMWARE_CONFIGURATION_H_INCLUDED
 #define FIRMWARE_CONFIGURATION_H_INCLUDED
 
-//==============================================================================
-//==============================================================================
-// COMMENT AND UNCOMMENT PREPROCESSOR DEFINE IN ORDER TO COMPILE CUSTOM FIRMWARE
-//==============================================================================
-//==============================================================================
-
-    
-        
-//==============================================================================
-//                                                        SOFTHAND CONFIGURATION
-//==============================================================================
-
-#define SOFTHAND_FW
-// Uncomment this definition to have a generic firmware
-
-    
-    
-    
-    
-#define CYBATHLON_EXT    
-    
-#ifdef CYBATHLON_EXT
-    #define OTHER   0
-    #define MARIA   1
-    #define ROZA    2
-#endif    
-    
-    
-//==============================================================================
-//                                                         GENERIC CONFIGURATION
-//==============================================================================
-#ifndef SOFTHAND_FW
-    #define GENERIC_FW
-#endif
-
+//====================================================================================
+//====================================================================================
+// SOFTHAND OR GENERIC CONFIGURATION IS HARDCODED IN BUILD OPTIONS USING 
+// PREPROCESSOR DEFINES (SOURCE AND HEADERS FILES ARE SHARED BETWEEN THE TWO PROJECTS)
+//    
+// SOFTHAND FW: #define SOFTHAND_FW
+// GENERIC FW:  #define GENERIC_FW    
+//====================================================================================
+//====================================================================================
     
 // Macro related to different firmware configurations
-#ifdef CYBATHLON_EXT
-    #define VERSION                 "SoftHand PRO firmware v. 1.6 (PSoC5) [CYBATHLON 2019]"
-#elif defined(SOFTHAND_FW)
-    #define VERSION                 "SoftHand PRO firmware v. 1.6 (PSoC5)"
+#ifdef SOFTHAND_FW
+    #define VERSION                 "SoftHand PRO firmware v. 1.7 (PSoC5)"
 #else
-    #define VERSION                 "Generic firmware v. 1.6 (PSoC5)"
+    #define VERSION                 "Generic firmware v. 1.7 (PSoC5)"
 #endif      
 
-#ifdef CYBATHLON_EXT
-    #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - 13)   // Number of parameters saved in the EEPROM for SOFTHAND FIRMWARE
-                                                              // All parameters except: Encoder configuration (2), ADC configuration (2), Read additional ADC port, Use 2nd motor, PWM rate limiter, Not reversible motor
-    #define NUM_OF_DEV_PARAM_MENUS      (NUM_OF_PARAMS_MENU - 1) // Number of parameters menu for SOFTHAND FIRMWARE
-                                                                 // All menus except: Motor driver type 
-#elif defined(SOFTHAND_FW)
-    #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - 10)  // Number of parameters saved in the EEPROM for SOFTHAND FIRMWARE
-                                                              // All parameters except: Encoder configuration (2), ADC configuration (2), Read additional ADC port, Use 2nd motor, PWM rate limiter, Not reversible motor
-    #define NUM_OF_DEV_PARAM_MENUS      (NUM_OF_PARAMS_MENU - 1) // Number of parameters menu for SOFTHAND FIRMWARE
-                                                                 // All menus except: Motor driver type 
+#ifdef SOFTHAND_FW
+    #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - 35)  // Number of parameters saved in the EEPROM for SOFTHAND FIRMWARE
+                                                              // All parameters except: additional first motor parameters (4), second motor configuration and parameters (21),
+                                                              // Encoder configuration (2), ADC configuration (2), Read additional ADC port, Device type, Gear parameters, Encoders used for control
+    #define NUM_OF_DEV_PARAM_MENUS      (NUM_OF_PARAMS_MENU - 2) // Number of parameters menu for SOFTHAND FIRMWARE
+                                                                 // All menus except: Motor driver type, Device type
 #else
     #define NUM_OF_DEV_PARAMS           NUM_OF_PARAMS        // Number of parameters saved in the EEPROM
     #define NUM_OF_DEV_PARAM_MENUS      NUM_OF_PARAMS_MENU   // Number of parameters menu

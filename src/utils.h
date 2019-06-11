@@ -101,14 +101,24 @@ int32 curr_estim( uint8 idx, int32 pos, int32 vel, int32 acc);
 uint32 my_mod(int32 val, int32 divisor);
 
 /**	This function is used at startup to reconstruct the correct turn of the shaft
- *  connected to the motor. It need two encoders to work.
+ *  connected to the motor. Only for SoftHand 3.0. It need two encoders to work.
  *
  * \param pos1		First encoder position
  * \param pos2		Second encoder position
  * 
  * \return Returns the number of turns of motor pulley at startup
 **/
-int calc_turns_fcn(const int32 pos1,const int32 pos2);
+int calc_turns_fcn_SH(const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1);
+
+/**	This function is used at startup to reconstruct the correct turn of the shaft
+ *  connected to the motor. Generic. It need two encoders to work.
+ *
+ * \param pos1		First encoder position
+ * \param pos2		Second encoder position
+ * 
+ * \return Returns the number of turns of motor pulley at startup
+**/
+int calc_turns_fcn(const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1);
 
 /** This function counts a series of hand opening and closing used to execute a 
  * calibration of the device.

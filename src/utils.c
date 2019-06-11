@@ -163,18 +163,10 @@ void calibration(void) {
 //     inv_b = s - q * t;
 // return
 
-// Number of teeth of the two wheels
-#define N1 35           ///< Teeth of the first encoder wheel.
-#define N2 3            ///< Teeth of the second encoder wheel.
-
-#define I1 -1           ///< First wheel invariant value.
-//#define I2 12         ///< Second wheel invariant value.
-
 // Number of ticks per turn
 #define M 65536          ///< Number of encoder ticks per turn.
 
-
-int calc_turns_fcn(const int32 pos1, const int32 pos2) { 
+int calc_turns_fcn_SH(const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1) { 
     
     int32 x;
     int32 aux;
@@ -205,10 +197,24 @@ int calc_turns_fcn(const int32 pos1, const int32 pos2) {
 
 }
 
+int calc_turns_fcn(const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1) { 
+
+    if (c_mem.dev.dev_type == SOFTHAND_PRO) {
+        return calc_turns_fcn_SH(pos1, pos2, N1, N2, I1);   
+    }
+    else {
+        // This is the same computation and formulas used in previous firmwares
+        int32 x = (my_mod( - N2*pos2 - N1*pos1, M*N2) + M/2) / M;
+
+        int32 aux = my_mod(x*I1, N2);
+
+        return (my_mod(aux + N2/2, N2) - N2/2);
+    }
+}
+
 //==============================================================================
 //                                                                 REST POSITION
 //==============================================================================
-#ifdef SOFTHAND_FW
 void check_rest_position(void) {     // 100 Hz frequency.
     
     static uint32 count = 0;        // Range [0 - 2^31].
@@ -298,7 +304,6 @@ void check_rest_position(void) {     // 100 Hz frequency.
     }
 
 }
-#endif
 
 //==============================================================================
 //                                                                   LED CONTROL

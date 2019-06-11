@@ -1,0 +1,169 @@
+\section{interruptions.\+c File Reference}
+\label{interruptions_8c}\index{interruptions.\+c@{interruptions.\+c}}
+
+
+Interruption handling and firmware core functions.  
+
+
+{\ttfamily \#include \char`\"{}interruptions.\+h\char`\"{}}\newline
+Include dependency graph for interruptions.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{interruptions_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{interruptions_8c_a7692d8c3185943c5bdfaa6de0a172ad3}} 
+{\bfseries C\+Y\+\_\+\+I\+SR} (I\+S\+R\+\_\+\+R\+S485\+\_\+\+R\+X\+\_\+\+Ex\+Interrupt)
+\item 
+\mbox{\label{interruptions_8c_a2347671848e5c23aa5df4ce2f2fd869d}} 
+{\bfseries C\+Y\+\_\+\+I\+SR} (I\+S\+R\+\_\+\+C\+Y\+C\+L\+E\+S\+\_\+\+Handler)
+\item 
+void \textbf{ interrupt\+\_\+manager} ()
+\item 
+void \textbf{ function\+\_\+scheduler} (void)
+\item 
+void \textbf{ motor\+\_\+control\+\_\+\+SH} ()
+\item 
+void \textbf{ motor\+\_\+control\+\_\+generic} (uint8 idx)
+\item 
+void \textbf{ encoder\+\_\+reading\+\_\+\+S\+PI} (uint8 n\+\_\+line, uint8 assoc\+\_\+motor)
+\item 
+void \textbf{ analog\+\_\+read\+\_\+end} ()
+\item 
+void \textbf{ overcurrent\+\_\+control} ()
+\item 
+void \textbf{ pwm\+\_\+limit\+\_\+search} (uint8 mot\+\_\+idx)
+\item 
+void \textbf{ cycles\+\_\+counter\+\_\+update} ()
+\item 
+void \textbf{ save\+\_\+cycles\+\_\+eeprom} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const uint8 {\bfseries pwm\+\_\+preload\+\_\+values} [29]
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interruption handling and firmware core functions. 
+
+\begin{DoxyDate}{Date}
+October 01, 2017 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+{\itshape Centro \char`\"{}\+E.\+Piaggio\char`\"{}} 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+(C) 2012-\/2016 qbrobotics. All rights reserved. 
+
+(C) 2017-\/2019 Centro \char`\"{}\+E.\+Piaggio\char`\"{}. All rights reserved. 
+\end{DoxyCopyright}
+
+
+\subsection{Function Documentation}
+\mbox{\label{interruptions_8c_a00a8d34962a63161405e5d7785b9625e}} 
+\index{interruptions.\+c@{interruptions.\+c}!analog\+\_\+read\+\_\+end@{analog\+\_\+read\+\_\+end}}
+\index{analog\+\_\+read\+\_\+end@{analog\+\_\+read\+\_\+end}!interruptions.\+c@{interruptions.\+c}}
+\subsubsection{analog\+\_\+read\+\_\+end()}
+{\footnotesize\ttfamily void analog\+\_\+read\+\_\+end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This function executes and terminates the analog readings. \mbox{\label{interruptions_8c_a77877c16b42f6f384f7c80d3002aed22}} 
+\index{interruptions.\+c@{interruptions.\+c}!cycles\+\_\+counter\+\_\+update@{cycles\+\_\+counter\+\_\+update}}
+\index{cycles\+\_\+counter\+\_\+update@{cycles\+\_\+counter\+\_\+update}!interruptions.\+c@{interruptions.\+c}}
+\subsubsection{cycles\+\_\+counter\+\_\+update()}
+{\footnotesize\ttfamily void cycles\+\_\+counter\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This function increases the cycles counters variables, depending on Soft\+Hand position and the current absorbed by the motor. \mbox{\label{interruptions_8c_a6eeedfdf03dd87bd2922b7005fd8c691}} 
+\index{interruptions.\+c@{interruptions.\+c}!encoder\+\_\+reading\+\_\+\+S\+PI@{encoder\+\_\+reading\+\_\+\+S\+PI}}
+\index{encoder\+\_\+reading\+\_\+\+S\+PI@{encoder\+\_\+reading\+\_\+\+S\+PI}!interruptions.\+c@{interruptions.\+c}}
+\subsubsection{encoder\+\_\+reading\+\_\+\+S\+P\+I()}
+{\footnotesize\ttfamily void encoder\+\_\+reading\+\_\+\+S\+PI (\begin{DoxyParamCaption}\item[{uint8}]{n\+\_\+line,  }\item[{uint8}]{assoc\+\_\+motor }\end{DoxyParamCaption})}
+
+This functions reads the value from all the connected encoders. \mbox{\label{interruptions_8c_a39df971c4e9f194be50c54dfd7aeabfe}} 
+\index{interruptions.\+c@{interruptions.\+c}!function\+\_\+scheduler@{function\+\_\+scheduler}}
+\index{function\+\_\+scheduler@{function\+\_\+scheduler}!interruptions.\+c@{interruptions.\+c}}
+\subsubsection{function\+\_\+scheduler()}
+{\footnotesize\ttfamily void function\+\_\+scheduler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+This function schedules the other functions in an order that optimizes the controller usage. \mbox{\label{interruptions_8c_a9790811526002d99b25a814afd02cbae}} 
+\index{interruptions.\+c@{interruptions.\+c}!interrupt\+\_\+manager@{interrupt\+\_\+manager}}
+\index{interrupt\+\_\+manager@{interrupt\+\_\+manager}!interruptions.\+c@{interruptions.\+c}}
+\subsubsection{interrupt\+\_\+manager()}
+{\footnotesize\ttfamily void interrupt\+\_\+manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This function is called in predefined moments during firmware execution in order to unpack the received package. \mbox{\label{interruptions_8c_a4f06bfe4da34859932258358e6a9bbd2}} 
+\index{interruptions.\+c@{interruptions.\+c}!motor\+\_\+control\+\_\+generic@{motor\+\_\+control\+\_\+generic}}
+\index{motor\+\_\+control\+\_\+generic@{motor\+\_\+control\+\_\+generic}!interruptions.\+c@{interruptions.\+c}}
+\subsubsection{motor\+\_\+control\+\_\+generic()}
+{\footnotesize\ttfamily void motor\+\_\+control\+\_\+generic (\begin{DoxyParamCaption}\item[{uint8}]{index }\end{DoxyParamCaption})}
+
+This function controls the motor direction and velocity, depending on the input and control modality set. \mbox{\label{interruptions_8c_a17436ec2a3bf0398e965c63c8e1a089d}} 
+\index{interruptions.\+c@{interruptions.\+c}!motor\+\_\+control\+\_\+\+SH@{motor\+\_\+control\+\_\+\+SH}}
+\index{motor\+\_\+control\+\_\+\+SH@{motor\+\_\+control\+\_\+\+SH}!interruptions.\+c@{interruptions.\+c}}
+\subsubsection{motor\+\_\+control\+\_\+\+S\+H()}
+{\footnotesize\ttfamily void motor\+\_\+control\+\_\+\+SH (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This function controls the motor direction and velocity, depending on the input and control modality set. \mbox{\label{interruptions_8c_a4e92908805632dc8cab2936d89bb3ba1}} 
+\index{interruptions.\+c@{interruptions.\+c}!overcurrent\+\_\+control@{overcurrent\+\_\+control}}
+\index{overcurrent\+\_\+control@{overcurrent\+\_\+control}!interruptions.\+c@{interruptions.\+c}}
+\subsubsection{overcurrent\+\_\+control()}
+{\footnotesize\ttfamily void overcurrent\+\_\+control (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This function increases or decreases the pwm maximum value, depending on the current absorbed by the motor. \mbox{\label{interruptions_8c_ac7305eeb40ebfb2c0d67725aa2e88f78}} 
+\index{interruptions.\+c@{interruptions.\+c}!pwm\+\_\+limit\+\_\+search@{pwm\+\_\+limit\+\_\+search}}
+\index{pwm\+\_\+limit\+\_\+search@{pwm\+\_\+limit\+\_\+search}!interruptions.\+c@{interruptions.\+c}}
+\subsubsection{pwm\+\_\+limit\+\_\+search()}
+{\footnotesize\ttfamily void pwm\+\_\+limit\+\_\+search (\begin{DoxyParamCaption}\item[{uint8}]{mot\+\_\+idx }\end{DoxyParamCaption})}
+
+This function scales the pwm value of the motor, depending on the power supply voltage, in order to not make the motor wind too fast. \mbox{\label{interruptions_8c_ad86170580c30277d97216739e8508a13}} 
+\index{interruptions.\+c@{interruptions.\+c}!save\+\_\+cycles\+\_\+eeprom@{save\+\_\+cycles\+\_\+eeprom}}
+\index{save\+\_\+cycles\+\_\+eeprom@{save\+\_\+cycles\+\_\+eeprom}!interruptions.\+c@{interruptions.\+c}}
+\subsubsection{save\+\_\+cycles\+\_\+eeprom()}
+{\footnotesize\ttfamily void save\+\_\+cycles\+\_\+eeprom (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This function saves cycles counters variables into E\+E\+P\+R\+OM memory. 
+
+\subsection{Variable Documentation}
+\mbox{\label{interruptions_8c_aee1865719263cf20251f918e8825703d}} 
+\index{interruptions.\+c@{interruptions.\+c}!pwm\+\_\+preload\+\_\+values@{pwm\+\_\+preload\+\_\+values}}
+\index{pwm\+\_\+preload\+\_\+values@{pwm\+\_\+preload\+\_\+values}!interruptions.\+c@{interruptions.\+c}}
+\subsubsection{pwm\+\_\+preload\+\_\+values}
+{\footnotesize\ttfamily const uint8 pwm\+\_\+preload\+\_\+values[29]\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{100,    
+                                              83,
+                                              78,
+                                              76,
+                                              74,
+                                              72,    
+                                              70,
+                                              68,
+                                              67,
+                                              65,
+                                              64,    
+                                              63,
+                                              62,
+                                              61,
+                                              60,
+                                              59,    
+                                              58,
+                                              57,
+                                              56,
+                                              56,
+                                              55,    
+                                              54,
+                                              54,
+                                              53,
+                                              52,
+                                              52,    
+                                              52,
+                                              51,
+                                              51\}
+\end{DoxyCode}

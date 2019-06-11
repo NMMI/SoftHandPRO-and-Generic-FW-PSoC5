@@ -1,0 +1,237 @@
+\section{st\+\_\+motor Struct Reference}
+\label{structst__motor}\index{st\+\_\+motor@{st\+\_\+motor}}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+int32 \textbf{ k\+\_\+p}
+\item 
+int32 \textbf{ k\+\_\+i}
+\item 
+int32 \textbf{ k\+\_\+d}
+\item 
+int32 \textbf{ k\+\_\+p\+\_\+c}
+\item 
+int32 \textbf{ k\+\_\+i\+\_\+c}
+\item 
+int32 \textbf{ k\+\_\+d\+\_\+c}
+\item 
+int32 \textbf{ k\+\_\+p\+\_\+dl}
+\item 
+int32 \textbf{ k\+\_\+i\+\_\+dl}
+\item 
+int32 \textbf{ k\+\_\+d\+\_\+dl}
+\item 
+int32 \textbf{ k\+\_\+p\+\_\+c\+\_\+dl}
+\item 
+int32 \textbf{ k\+\_\+i\+\_\+c\+\_\+dl}
+\item 
+int32 \textbf{ k\+\_\+d\+\_\+c\+\_\+dl}
+\item 
+uint8 \textbf{ activ}
+\item 
+uint8 \textbf{ activate\+\_\+pwm\+\_\+rescaling}
+\item 
+uint8 \textbf{ motor\+\_\+driver\+\_\+type}
+\item 
+uint8 \textbf{ pos\+\_\+lim\+\_\+flag}
+\item 
+int32 \textbf{ pos\+\_\+lim\+\_\+inf}
+\item 
+int32 \textbf{ pos\+\_\+lim\+\_\+sup}
+\item 
+int32 \textbf{ max\+\_\+step\+\_\+neg}
+\item 
+int32 \textbf{ max\+\_\+step\+\_\+pos}
+\item 
+float \textbf{ curr\+\_\+lookup} [\textbf{ L\+O\+O\+K\+U\+P\+\_\+\+D\+IM}]
+\item 
+int16 \textbf{ current\+\_\+limit}
+\item 
+uint8 \textbf{ input\+\_\+mode}
+\item 
+uint8 \textbf{ control\+\_\+mode}
+\item 
+uint8 \textbf{ encoder\+\_\+line}
+\item 
+uint8 \textbf{ pwm\+\_\+rate\+\_\+limiter}
+\item 
+uint8 \textbf{ not\+\_\+revers\+\_\+motor\+\_\+flag}
+\item 
+uint8 \textbf{ unused\+\_\+bytes} [13]
+\end{DoxyCompactItemize}
+
+
+\subsection{Field Documentation}
+\mbox{\label{structst__motor_a63bbebc1db55f43e0571006597a3488b}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!activ@{activ}}
+\index{activ@{activ}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{activ}
+{\footnotesize\ttfamily uint8 activ}
+
+Startup activation. \mbox{\label{structst__motor_a53d9d645351f4020826ab8c56c91b244}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!activate\+\_\+pwm\+\_\+rescaling@{activate\+\_\+pwm\+\_\+rescaling}}
+\index{activate\+\_\+pwm\+\_\+rescaling@{activate\+\_\+pwm\+\_\+rescaling}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{activate\+\_\+pwm\+\_\+rescaling}
+{\footnotesize\ttfamily uint8 activate\+\_\+pwm\+\_\+rescaling}
+
+Activation of P\+WM rescaling for 12V motor. \mbox{\label{structst__motor_af0c55b7d870673f2f6e9521c215d4b51}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!control\+\_\+mode@{control\+\_\+mode}}
+\index{control\+\_\+mode@{control\+\_\+mode}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{control\+\_\+mode}
+{\footnotesize\ttfamily uint8 control\+\_\+mode}
+
+Motor Control mode. \mbox{\label{structst__motor_a29cec4cab946141aae2509b04e2f5097}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!curr\+\_\+lookup@{curr\+\_\+lookup}}
+\index{curr\+\_\+lookup@{curr\+\_\+lookup}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{curr\+\_\+lookup}
+{\footnotesize\ttfamily float curr\+\_\+lookup[\textbf{ L\+O\+O\+K\+U\+P\+\_\+\+D\+IM}]}
+
+Table of values to get estimated curr. \mbox{\label{structst__motor_a96f2aec80e40c1bbe82186a4261ab7ac}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!current\+\_\+limit@{current\+\_\+limit}}
+\index{current\+\_\+limit@{current\+\_\+limit}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{current\+\_\+limit}
+{\footnotesize\ttfamily int16 current\+\_\+limit}
+
+Limit for absorbed current. \mbox{\label{structst__motor_af1ace45d6367665a8e871afe5617feb1}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!encoder\+\_\+line@{encoder\+\_\+line}}
+\index{encoder\+\_\+line@{encoder\+\_\+line}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{encoder\+\_\+line}
+{\footnotesize\ttfamily uint8 encoder\+\_\+line}
+
+Encoder line associated to the motor control. \mbox{\label{structst__motor_ae5cc8b2ae06016f1fcf5b2f964618a12}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!input\+\_\+mode@{input\+\_\+mode}}
+\index{input\+\_\+mode@{input\+\_\+mode}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{input\+\_\+mode}
+{\footnotesize\ttfamily uint8 input\+\_\+mode}
+
+Motor Input mode. \mbox{\label{structst__motor_ab9d15eaa4612dd1c5597e5634cd1d66c}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!k\+\_\+d@{k\+\_\+d}}
+\index{k\+\_\+d@{k\+\_\+d}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{k\+\_\+d}
+{\footnotesize\ttfamily int32 k\+\_\+d}
+
+Position controller derivative constant. \mbox{\label{structst__motor_af32cf4ebfb30ad068ea530d03ff9a96f}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!k\+\_\+d\+\_\+c@{k\+\_\+d\+\_\+c}}
+\index{k\+\_\+d\+\_\+c@{k\+\_\+d\+\_\+c}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{k\+\_\+d\+\_\+c}
+{\footnotesize\ttfamily int32 k\+\_\+d\+\_\+c}
+
+Current controller derivative constant. \mbox{\label{structst__motor_af8bfba55a00d54c9c2a9e4bb11484158}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!k\+\_\+d\+\_\+c\+\_\+dl@{k\+\_\+d\+\_\+c\+\_\+dl}}
+\index{k\+\_\+d\+\_\+c\+\_\+dl@{k\+\_\+d\+\_\+c\+\_\+dl}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{k\+\_\+d\+\_\+c\+\_\+dl}
+{\footnotesize\ttfamily int32 k\+\_\+d\+\_\+c\+\_\+dl}
+
+Double loop current controller deriv. constant. \mbox{\label{structst__motor_adc3d57142df06bc753d1982fa409ffea}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!k\+\_\+d\+\_\+dl@{k\+\_\+d\+\_\+dl}}
+\index{k\+\_\+d\+\_\+dl@{k\+\_\+d\+\_\+dl}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{k\+\_\+d\+\_\+dl}
+{\footnotesize\ttfamily int32 k\+\_\+d\+\_\+dl}
+
+Double loop position controller deriv. constant. \mbox{\label{structst__motor_ad62fb8a39e2de160e14be47e3ff08014}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!k\+\_\+i@{k\+\_\+i}}
+\index{k\+\_\+i@{k\+\_\+i}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{k\+\_\+i}
+{\footnotesize\ttfamily int32 k\+\_\+i}
+
+Position controller integrative constant. \mbox{\label{structst__motor_a942ea80eb197a70dd0ba3da33d1e6c6e}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!k\+\_\+i\+\_\+c@{k\+\_\+i\+\_\+c}}
+\index{k\+\_\+i\+\_\+c@{k\+\_\+i\+\_\+c}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{k\+\_\+i\+\_\+c}
+{\footnotesize\ttfamily int32 k\+\_\+i\+\_\+c}
+
+Current controller integrative constant. \mbox{\label{structst__motor_afc912f90d6ba2f39046a0daf0207f116}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!k\+\_\+i\+\_\+c\+\_\+dl@{k\+\_\+i\+\_\+c\+\_\+dl}}
+\index{k\+\_\+i\+\_\+c\+\_\+dl@{k\+\_\+i\+\_\+c\+\_\+dl}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{k\+\_\+i\+\_\+c\+\_\+dl}
+{\footnotesize\ttfamily int32 k\+\_\+i\+\_\+c\+\_\+dl}
+
+Double loop current controller integr. constant. \mbox{\label{structst__motor_ab5c86695ff730d3387a8c6b089945a7e}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!k\+\_\+i\+\_\+dl@{k\+\_\+i\+\_\+dl}}
+\index{k\+\_\+i\+\_\+dl@{k\+\_\+i\+\_\+dl}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{k\+\_\+i\+\_\+dl}
+{\footnotesize\ttfamily int32 k\+\_\+i\+\_\+dl}
+
+Double loop position controller integr. constant. \mbox{\label{structst__motor_ad1bc394122aa9760c3fc2887a1891cd8}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!k\+\_\+p@{k\+\_\+p}}
+\index{k\+\_\+p@{k\+\_\+p}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{k\+\_\+p}
+{\footnotesize\ttfamily int32 k\+\_\+p}
+
+Position controller proportional constant. \mbox{\label{structst__motor_ac3311db4a733f35aa5ed2672cb162f96}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!k\+\_\+p\+\_\+c@{k\+\_\+p\+\_\+c}}
+\index{k\+\_\+p\+\_\+c@{k\+\_\+p\+\_\+c}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{k\+\_\+p\+\_\+c}
+{\footnotesize\ttfamily int32 k\+\_\+p\+\_\+c}
+
+Current controller proportional constant. \mbox{\label{structst__motor_a63c3f3c01d6757cafdb40043adce404e}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!k\+\_\+p\+\_\+c\+\_\+dl@{k\+\_\+p\+\_\+c\+\_\+dl}}
+\index{k\+\_\+p\+\_\+c\+\_\+dl@{k\+\_\+p\+\_\+c\+\_\+dl}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{k\+\_\+p\+\_\+c\+\_\+dl}
+{\footnotesize\ttfamily int32 k\+\_\+p\+\_\+c\+\_\+dl}
+
+Double loop current controller prop. constant. \mbox{\label{structst__motor_a047226f308f4365d9d0036d71b6ed910}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!k\+\_\+p\+\_\+dl@{k\+\_\+p\+\_\+dl}}
+\index{k\+\_\+p\+\_\+dl@{k\+\_\+p\+\_\+dl}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{k\+\_\+p\+\_\+dl}
+{\footnotesize\ttfamily int32 k\+\_\+p\+\_\+dl}
+
+Double loop position controller prop. constant. \mbox{\label{structst__motor_a14fe3ed96d232dced2d33efc493a0667}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!max\+\_\+step\+\_\+neg@{max\+\_\+step\+\_\+neg}}
+\index{max\+\_\+step\+\_\+neg@{max\+\_\+step\+\_\+neg}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{max\+\_\+step\+\_\+neg}
+{\footnotesize\ttfamily int32 max\+\_\+step\+\_\+neg}
+
+Maximum number of steps per cycle for negative positions. \mbox{\label{structst__motor_a9be5987152b8c6bb28c1d311bc94e5e3}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!max\+\_\+step\+\_\+pos@{max\+\_\+step\+\_\+pos}}
+\index{max\+\_\+step\+\_\+pos@{max\+\_\+step\+\_\+pos}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{max\+\_\+step\+\_\+pos}
+{\footnotesize\ttfamily int32 max\+\_\+step\+\_\+pos}
+
+Maximum number of steps per cycle for positive positions. \mbox{\label{structst__motor_ad7083e21e3e766d7e9cc5858b2e659cf}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!motor\+\_\+driver\+\_\+type@{motor\+\_\+driver\+\_\+type}}
+\index{motor\+\_\+driver\+\_\+type@{motor\+\_\+driver\+\_\+type}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{motor\+\_\+driver\+\_\+type}
+{\footnotesize\ttfamily uint8 motor\+\_\+driver\+\_\+type}
+
+Specify motor type. \mbox{\label{structst__motor_a6525eb3c16595104c1d0fbcf0a8d1de4}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!not\+\_\+revers\+\_\+motor\+\_\+flag@{not\+\_\+revers\+\_\+motor\+\_\+flag}}
+\index{not\+\_\+revers\+\_\+motor\+\_\+flag@{not\+\_\+revers\+\_\+motor\+\_\+flag}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{not\+\_\+revers\+\_\+motor\+\_\+flag}
+{\footnotesize\ttfamily uint8 not\+\_\+revers\+\_\+motor\+\_\+flag}
+
+Flag to know if the motor is reversible or not. \mbox{\label{structst__motor_aa2ceebf7546e978c8b0393ce8035532d}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!pos\+\_\+lim\+\_\+flag@{pos\+\_\+lim\+\_\+flag}}
+\index{pos\+\_\+lim\+\_\+flag@{pos\+\_\+lim\+\_\+flag}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{pos\+\_\+lim\+\_\+flag}
+{\footnotesize\ttfamily uint8 pos\+\_\+lim\+\_\+flag}
+
+Position limit active/inactive. \mbox{\label{structst__motor_a09aaaa265df5ea6cba5a3f216f1dc2c8}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!pos\+\_\+lim\+\_\+inf@{pos\+\_\+lim\+\_\+inf}}
+\index{pos\+\_\+lim\+\_\+inf@{pos\+\_\+lim\+\_\+inf}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{pos\+\_\+lim\+\_\+inf}
+{\footnotesize\ttfamily int32 pos\+\_\+lim\+\_\+inf}
+
+Inferior position limit for motor. \mbox{\label{structst__motor_a981b8ec7db1222b3afbd4f1fd5da983d}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!pos\+\_\+lim\+\_\+sup@{pos\+\_\+lim\+\_\+sup}}
+\index{pos\+\_\+lim\+\_\+sup@{pos\+\_\+lim\+\_\+sup}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{pos\+\_\+lim\+\_\+sup}
+{\footnotesize\ttfamily int32 pos\+\_\+lim\+\_\+sup}
+
+Superior position limit for motor[0]. \mbox{\label{structst__motor_a1230396f2894c516a42a418ec34a60a1}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!pwm\+\_\+rate\+\_\+limiter@{pwm\+\_\+rate\+\_\+limiter}}
+\index{pwm\+\_\+rate\+\_\+limiter@{pwm\+\_\+rate\+\_\+limiter}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{pwm\+\_\+rate\+\_\+limiter}
+{\footnotesize\ttfamily uint8 pwm\+\_\+rate\+\_\+limiter}
+
+P\+WM rate limiter max asscoaited to the motor. \mbox{\label{structst__motor_a4e06ed17adfb7c69cda82526f3b6def1}} 
+\index{st\+\_\+motor@{st\+\_\+motor}!unused\+\_\+bytes@{unused\+\_\+bytes}}
+\index{unused\+\_\+bytes@{unused\+\_\+bytes}!st\+\_\+motor@{st\+\_\+motor}}
+\subsubsection{unused\+\_\+bytes}
+{\footnotesize\ttfamily uint8 unused\+\_\+bytes[13]}
+
+Unused bytes to fill row. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\textbf{ globals.\+h}\end{DoxyCompactItemize}

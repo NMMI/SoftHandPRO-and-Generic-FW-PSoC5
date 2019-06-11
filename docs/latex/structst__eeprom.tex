@@ -1,0 +1,118 @@
+\section{st\+\_\+eeprom Struct Reference}
+\label{structst__eeprom}\index{st\+\_\+eeprom@{st\+\_\+eeprom}}
+
+
+Collaboration diagram for st\+\_\+eeprom\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structst__eeprom__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+uint8 \textbf{ flag}
+\item 
+uint8 \textbf{ unused\+\_\+bytes} [15]
+\item 
+struct \textbf{ st\+\_\+counters} \textbf{ cnt}
+\item 
+uint8 \textbf{ unused\+\_\+bytes1} [\textbf{ E\+E\+P\+R\+O\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+R\+OW} $\ast$4]
+\item 
+struct \textbf{ st\+\_\+device} \textbf{ dev}
+\item 
+struct \textbf{ st\+\_\+motor} \textbf{ motor} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]
+\item 
+struct \textbf{ st\+\_\+encoder} \textbf{ enc} [\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}]
+\item 
+struct \textbf{ st\+\_\+emg} \textbf{ emg}
+\item 
+struct \textbf{ st\+\_\+imu} \textbf{ imu}
+\item 
+struct \textbf{ st\+\_\+expansion} \textbf{ exp}
+\item 
+struct \textbf{ st\+\_\+user} \textbf{ user} [N\+U\+M\+\_\+\+O\+F\+\_\+\+U\+S\+E\+RS]
+\item 
+struct \textbf{ st\+\_\+\+S\+H\+\_\+spec} \textbf{ SH}
+\end{DoxyCompactItemize}
+
+
+\subsection{Field Documentation}
+\mbox{\label{structst__eeprom_a0ffc8a85c87e768e5f0f4682ad738f47}} 
+\index{st\+\_\+eeprom@{st\+\_\+eeprom}!cnt@{cnt}}
+\index{cnt@{cnt}!st\+\_\+eeprom@{st\+\_\+eeprom}}
+\subsubsection{cnt}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+counters} cnt}
+
+Statistics Counters. \mbox{\label{structst__eeprom_a0d9bfa887343b9469fc02391208359ff}} 
+\index{st\+\_\+eeprom@{st\+\_\+eeprom}!dev@{dev}}
+\index{dev@{dev}!st\+\_\+eeprom@{st\+\_\+eeprom}}
+\subsubsection{dev}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+device} dev}
+
+Device information. \mbox{\label{structst__eeprom_a423333afbc7d0ab697d1f8e12ef8271f}} 
+\index{st\+\_\+eeprom@{st\+\_\+eeprom}!emg@{emg}}
+\index{emg@{emg}!st\+\_\+eeprom@{st\+\_\+eeprom}}
+\subsubsection{emg}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+emg} emg}
+
+E\+MG variables. \mbox{\label{structst__eeprom_aa275bd5d24411d272636769852d7ccdc}} 
+\index{st\+\_\+eeprom@{st\+\_\+eeprom}!enc@{enc}}
+\index{enc@{enc}!st\+\_\+eeprom@{st\+\_\+eeprom}}
+\subsubsection{enc}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+encoder} enc[\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}]}
+
+Encoder variables (1 line). \mbox{\label{structst__eeprom_a928bf130fc931f6623a2ae15be1f7b18}} 
+\index{st\+\_\+eeprom@{st\+\_\+eeprom}!exp@{exp}}
+\index{exp@{exp}!st\+\_\+eeprom@{st\+\_\+eeprom}}
+\subsubsection{exp}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+expansion} exp}
+
+SD and A\+DC variables. \mbox{\label{structst__eeprom_af11e40d15a1361229a78e772af5b3c94}} 
+\index{st\+\_\+eeprom@{st\+\_\+eeprom}!flag@{flag}}
+\index{flag@{flag}!st\+\_\+eeprom@{st\+\_\+eeprom}}
+\subsubsection{flag}
+{\footnotesize\ttfamily uint8 flag}
+
+If checked the device has been configured. \mbox{\label{structst__eeprom_a5587b913fbf50df4c3a5148dd8aab649}} 
+\index{st\+\_\+eeprom@{st\+\_\+eeprom}!imu@{imu}}
+\index{imu@{imu}!st\+\_\+eeprom@{st\+\_\+eeprom}}
+\subsubsection{imu}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+imu} imu}
+
+I\+MU general variables. \mbox{\label{structst__eeprom_abe01764856595b55e98fe187ae4c9b54}} 
+\index{st\+\_\+eeprom@{st\+\_\+eeprom}!motor@{motor}}
+\index{motor@{motor}!st\+\_\+eeprom@{st\+\_\+eeprom}}
+\subsubsection{motor}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+motor} motor[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]}
+
+Motor variables. \mbox{\label{structst__eeprom_a48c2a3988657edd4d6b92f84a0d9d2d0}} 
+\index{st\+\_\+eeprom@{st\+\_\+eeprom}!SH@{SH}}
+\index{SH@{SH}!st\+\_\+eeprom@{st\+\_\+eeprom}}
+\subsubsection{SH}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+\+S\+H\+\_\+spec} SH}
+
+Soft\+Hand specific variables. \mbox{\label{structst__eeprom_a23db079f0c6d3e264be3fb547f32403c}} 
+\index{st\+\_\+eeprom@{st\+\_\+eeprom}!unused\+\_\+bytes@{unused\+\_\+bytes}}
+\index{unused\+\_\+bytes@{unused\+\_\+bytes}!st\+\_\+eeprom@{st\+\_\+eeprom}}
+\subsubsection{unused\+\_\+bytes}
+{\footnotesize\ttfamily uint8 unused\+\_\+bytes[15]}
+
+Leave bytes to align structures to memory rows. \mbox{\label{structst__eeprom_a0299e605ae8eb46c7aa7886e6b302a0f}} 
+\index{st\+\_\+eeprom@{st\+\_\+eeprom}!unused\+\_\+bytes1@{unused\+\_\+bytes1}}
+\index{unused\+\_\+bytes1@{unused\+\_\+bytes1}!st\+\_\+eeprom@{st\+\_\+eeprom}}
+\subsubsection{unused\+\_\+bytes1}
+{\footnotesize\ttfamily uint8 unused\+\_\+bytes1[\textbf{ E\+E\+P\+R\+O\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+R\+OW} $\ast$4]}
+
+Leave for rows free for further uses. \mbox{\label{structst__eeprom_a59282a1a28a7fc333cd680c9a8988b93}} 
+\index{st\+\_\+eeprom@{st\+\_\+eeprom}!user@{user}}
+\index{user@{user}!st\+\_\+eeprom@{st\+\_\+eeprom}}
+\subsubsection{user}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+user} user[N\+U\+M\+\_\+\+O\+F\+\_\+\+U\+S\+E\+RS]}
+
+User variables. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\textbf{ globals.\+h}\end{DoxyCompactItemize}

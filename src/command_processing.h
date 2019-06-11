@@ -195,9 +195,9 @@ void manage_param_list 		(uint16 index);
  *
 **/
 void get_param_list 		(uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS], 
-                             uint8 NUM_ITEMS[NUM_OF_PARAMS], uint8* NUM_MENU, 
-                             const char* PARAMS_STR[NUM_OF_PARAMS], uint8 CUSTOM_PARAM_SET[NUM_OF_PARAMS], 
-                             const char* MENU_STR[NUM_OF_PARAMS_MENU]);
+                             uint8 NUM_ITEMS[NUM_OF_PARAMS], uint8 NUM_STRUCT[NUM_OF_PARAMS],
+                             uint8* NUM_MENU, const char* PARAMS_STR[NUM_OF_PARAMS], 
+                             uint8 CUSTOM_PARAM_SET[NUM_OF_PARAMS], const char* MENU_STR[NUM_OF_PARAMS_MENU]);
 
 //============================================================  set_custom_param
 /** This function, depending on the \ref index received, sets the specific
@@ -253,12 +253,12 @@ uint8   memRestore         ();
 **/
 uint8   memInit            ();
 
-//============================================================  memInitSoftHand
+//============================================================  memInitSoftHandPro
 /** This functions initializes the memory. It is used also to restore the
  * 	the parameters to their default values. Specific for SoftHand firmware
  *
 **/
-void   memInit_SoftHand            ();
+void   memInit_SoftHandPro ();
 
 /** \} */
 
@@ -397,6 +397,11 @@ void cmd_get_ADC_map();
 /** This function gets Additional emg raw values
 **/
 void cmd_get_ADC_raw();
+
+//============================================================  cmd_get_SD_files
+/** This function gets both SD parameters and data files
+**/
+void cmd_get_SD_files();
 
 #endif
 

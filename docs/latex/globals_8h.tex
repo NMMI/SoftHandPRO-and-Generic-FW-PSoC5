@@ -1,0 +1,935 @@
+\section{globals.\+h File Reference}
+\label{globals_8h}\index{globals.\+h@{globals.\+h}}
+
+
+Global definitions and macros are set in this file.  
+
+
+{\ttfamily \#include \char`\"{}F\+I\+R\+M\+W\+A\+R\+E\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+A\+T\+I\+O\+N.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}device.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stdlib.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}string.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stdio.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}math.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}commands.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}F\+S.\+h\char`\"{}}\newline
+Include dependency graph for globals.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{globals_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{globals_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ st\+\_\+ref}
+\begin{DoxyCompactList}\small\item\em Motor Reference structure. \end{DoxyCompactList}\item 
+struct \textbf{ st\+\_\+meas}
+\begin{DoxyCompactList}\small\item\em Measurements structure. \end{DoxyCompactList}\item 
+struct \textbf{ st\+\_\+emg\+\_\+meas}
+\item 
+struct \textbf{ st\+\_\+data}
+\begin{DoxyCompactList}\small\item\em Data sent/received structure. \end{DoxyCompactList}\item 
+struct \textbf{ st\+\_\+counters}
+\begin{DoxyCompactList}\small\item\em E\+E\+P\+R\+OM stored structures. \end{DoxyCompactList}\item 
+struct \textbf{ st\+\_\+device}
+\item 
+struct \textbf{ st\+\_\+motor}
+\item 
+struct \textbf{ st\+\_\+encoder}
+\item 
+struct \textbf{ st\+\_\+emg}
+\item 
+struct \textbf{ st\+\_\+imu}
+\item 
+struct \textbf{ st\+\_\+expansion}
+\item 
+struct \textbf{ st\+\_\+user}
+\item 
+struct \textbf{ st\+\_\+\+S\+H\+\_\+spec}
+\item 
+struct \textbf{ st\+\_\+eeprom}
+\item 
+struct \textbf{ st\+\_\+imu\+\_\+data}
+\item 
+struct \textbf{ st\+\_\+filter}
+\begin{DoxyCompactList}\small\item\em Filter structure. \end{DoxyCompactList}\item 
+struct \textbf{ st\+\_\+calib}
+\begin{DoxyCompactList}\small\item\em Hand calibration structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}~2
+\item 
+\#define \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS}~3
+\item 
+\#define \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS}~2
+\item 
+\#define \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+D\+D\+I\+T\+I\+O\+N\+A\+L\+\_\+\+E\+M\+GS}~6
+\item 
+\mbox{\label{globals_8h_a94a49570e3bc73b67084f1a9ae90d89a}} 
+\#define {\bfseries N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+D\+C\+\_\+\+C\+H\+A\+N\+N\+E\+L\+S\+\_\+\+M\+AX}~(4+\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS}+\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+D\+D\+I\+T\+I\+O\+N\+A\+L\+\_\+\+E\+M\+GS})
+\item 
+\#define \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS}~71
+\item 
+\#define \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+M\+E\+NU}~10
+\item 
+\mbox{\label{globals_8h_a8e4d7a571850d3268c9b780b171474e6}} 
+\#define {\bfseries N\+\_\+\+I\+M\+U\+\_\+\+M\+AX}~5
+\item 
+\mbox{\label{globals_8h_a7016adad486a9166338f1667813d8b5c}} 
+\#define {\bfseries N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+M\+U\+\_\+\+D\+A\+TA}~5
+\item 
+\#define \textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}~2
+\item 
+\#define \textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+P\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}~5
+\item 
+\mbox{\label{globals_8h_a3b87e4129f51a9ee36bdfb06ea0a9268}} 
+\#define {\bfseries N\+\_\+\+E\+N\+C\+O\+D\+E\+RS}~\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS}
+\item 
+\#define \textbf{ C\+A\+L\+I\+B\+R\+A\+T\+I\+O\+N\+\_\+\+D\+IV}~10
+\item 
+\#define \textbf{ D\+I\+V\+\_\+\+I\+N\+I\+T\+\_\+\+V\+A\+L\+UE}~1
+\item 
+\mbox{\label{globals_8h_abf6c9afec04b86961e177e0646401ace}} 
+\#define {\bfseries D\+M\+A\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+P\+E\+R\+\_\+\+B\+U\+R\+ST}~2
+\item 
+\mbox{\label{globals_8h_ab4613f8bee68bc68fa6fe94a3ae6d568}} 
+\#define {\bfseries D\+M\+A\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+\+P\+E\+R\+\_\+\+B\+U\+R\+ST}~1
+\item 
+\mbox{\label{globals_8h_a3cc2eedb40809a1f15ad841c8abbcebf}} 
+\#define {\bfseries D\+M\+A\+\_\+\+S\+R\+C\+\_\+\+B\+A\+SE}~(C\+Y\+D\+E\+V\+\_\+\+P\+E\+R\+I\+P\+H\+\_\+\+B\+A\+SE)
+\item 
+\mbox{\label{globals_8h_aa54e301f446a66cbf8c943d920c8e967}} 
+\#define {\bfseries D\+M\+A\+\_\+\+D\+S\+T\+\_\+\+B\+A\+SE}~(C\+Y\+D\+E\+V\+\_\+\+S\+R\+A\+M\+\_\+\+B\+A\+SE)
+\item 
+\#define \textbf{ W\+A\+I\+T\+\_\+\+S\+T\+A\+RT}~0
+\item 
+\#define \textbf{ W\+A\+I\+T\+\_\+\+ID}~1
+\item 
+\#define \textbf{ W\+A\+I\+T\+\_\+\+L\+E\+N\+G\+TH}~2
+\item 
+\#define \textbf{ R\+E\+C\+E\+I\+VE}~3
+\item 
+\#define \textbf{ U\+N\+L\+O\+AD}~4
+\item 
+\#define \textbf{ S\+T\+A\+T\+E\+\_\+\+I\+N\+A\+C\+T\+I\+VE}~0
+\item 
+\#define \textbf{ S\+T\+A\+T\+E\+\_\+\+A\+C\+T\+I\+VE}~1
+\item 
+\#define \textbf{ C\+O\+U\+N\+T\+E\+R\+\_\+\+I\+NC}~2
+\item 
+\mbox{\label{globals_8h_a42c6406a75a89d50c9f1b9c86388565c}} 
+\#define {\bfseries S\+P\+I\+\_\+\+D\+E\+L\+A\+Y\+\_\+\+L\+OW}~10
+\item 
+\mbox{\label{globals_8h_a054002df34537a2a4ff6f520b65f1ba4}} 
+\#define {\bfseries S\+P\+I\+\_\+\+D\+E\+L\+A\+Y\+\_\+\+H\+I\+GH}~100
+\item 
+\mbox{\label{globals_8h_a963cfc2155941aff08c02b451042c295}} 
+\#define {\bfseries E\+X\+P\+\_\+\+N\+O\+NE}~0
+\item 
+\mbox{\label{globals_8h_a6a936c7ef5908ffabf8be42833a3daee}} 
+\#define {\bfseries E\+X\+P\+\_\+\+S\+D\+\_\+\+R\+TC}~1
+\item 
+\mbox{\label{globals_8h_a25767403f2ad21cf275206135269647e}} 
+\#define {\bfseries E\+X\+P\+\_\+\+W\+I\+FI}~2
+\item 
+\mbox{\label{globals_8h_a265e7aabffe2182cd632b15dd02a9efb}} 
+\#define {\bfseries E\+X\+P\+\_\+\+O\+T\+H\+ER}~3
+\item 
+\mbox{\label{globals_8h_a20e659d92cc540a195717f8cc2dd4b42}} 
+\#define {\bfseries D\+R\+I\+V\+E\+R\+\_\+\+M\+C33887}~0
+\item 
+\mbox{\label{globals_8h_a2e6a13011f6123a8f0c064e37b116880}} 
+\#define {\bfseries D\+R\+I\+V\+E\+R\+\_\+\+V\+N\+H5019}~1
+\item 
+\mbox{\label{globals_8h_a5d1d275cfec76197e014fe4d58f2e569}} 
+\#define {\bfseries R\+I\+G\+H\+T\+\_\+\+H\+A\+ND}~0
+\item 
+\mbox{\label{globals_8h_a2eff09387fb5d20d8af4fa186ae37c4d}} 
+\#define {\bfseries L\+E\+F\+T\+\_\+\+H\+A\+ND}~1
+\item 
+\mbox{\label{globals_8h_aa518fecbba4980ebda2090f02ceb5e52}} 
+\#define {\bfseries N\+U\+M\+\_\+\+O\+F\+\_\+\+U\+S\+E\+RS}~3
+\item 
+\mbox{\label{globals_8h_ac524d0f906498efbd1182856cd8c80de}} 
+\#define {\bfseries G\+E\+N\+E\+R\+I\+C\+\_\+\+U\+S\+ER}~0
+\item 
+\mbox{\label{globals_8h_a8595fed7fe248547047c468802057a0d}} 
+\#define {\bfseries M\+A\+R\+IA}~1
+\item 
+\mbox{\label{globals_8h_a7617063d52fc2d1ba6d0276770aec732}} 
+\#define {\bfseries R\+O\+ZA}~2
+\item 
+\mbox{\label{globals_8h_a47a1fa8e1e5435f664749ab44e163bae}} 
+\#define {\bfseries S\+O\+F\+T\+H\+A\+N\+D\+\_\+\+P\+RO}~0
+\item 
+\mbox{\label{globals_8h_a577f879b1a05acd55b1d56412a17e13f}} 
+\#define {\bfseries G\+E\+N\+E\+R\+I\+C\+\_\+2\+\_\+\+M\+O\+T\+O\+RS}~1
+\item 
+\mbox{\label{globals_8h_ac5a0bd9be15f1dcd0ba86f27d3dbda50}} 
+\#define {\bfseries C\+U\+FF}~2
+\item 
+\#define \textbf{ S\+H\+\_\+\+N1}~35
+\item 
+\#define \textbf{ S\+H\+\_\+\+N2}~3
+\item 
+\#define \textbf{ S\+H\+\_\+\+I1}~-\/1
+\item 
+\mbox{\label{globals_8h_a5f8f4a24628c7191c9adde97ae751bf2}} 
+\#define {\bfseries S\+T\+\_\+\+D\+E\+V\+I\+CE}~0
+\item 
+\mbox{\label{globals_8h_a911881bfa4a82a79f351f7a8a8ea40d1}} 
+\#define {\bfseries S\+T\+\_\+\+M\+O\+T\+OR}~10
+\item 
+\mbox{\label{globals_8h_a642639720f787f90dab85f94d4be660c}} 
+\#define {\bfseries S\+T\+\_\+\+E\+N\+C\+O\+D\+ER}~20
+\item 
+\mbox{\label{globals_8h_afca454140c3233621eaa719a25a1c4b5}} 
+\#define {\bfseries S\+T\+\_\+\+E\+MG}~30
+\item 
+\mbox{\label{globals_8h_a6f71b4081fa44d0458fa27e891527315}} 
+\#define {\bfseries S\+T\+\_\+\+I\+MU}~40
+\item 
+\mbox{\label{globals_8h_a3aacefdd9f8dddbb7b55bcd39bf22792}} 
+\#define {\bfseries S\+T\+\_\+\+E\+X\+P\+A\+N\+S\+I\+ON}~50
+\item 
+\mbox{\label{globals_8h_a16d74d98ce4fcdfb20501e89e37ff053}} 
+\#define {\bfseries S\+T\+\_\+\+U\+S\+ER}~60
+\item 
+\mbox{\label{globals_8h_a788bae111bb48b9aa005ecf765ce1e94}} 
+\#define {\bfseries S\+T\+\_\+\+S\+H\+\_\+\+S\+P\+EC}~70
+\item 
+\mbox{\label{globals_8h_aa93f0eb578d23995850d61f7d61c55c1}} 
+\#define {\bfseries F\+A\+L\+SE}~0
+\item 
+\mbox{\label{globals_8h_aa8cecfc5c5c054d2875c03e77b7be15d}} 
+\#define {\bfseries T\+R\+UE}~1
+\item 
+\#define \textbf{ D\+E\+F\+A\+U\+L\+T\+\_\+\+E\+E\+P\+R\+O\+M\+\_\+\+D\+I\+S\+P\+L\+A\+C\+E\+M\+E\+NT}~50
+\item 
+\#define \textbf{ E\+E\+P\+R\+O\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+R\+OW}~16
+\item 
+\#define \textbf{ E\+E\+P\+R\+O\+M\+\_\+\+C\+O\+U\+N\+T\+E\+R\+S\+\_\+\+R\+O\+WS}~5
+\item 
+\#define \textbf{ P\+W\+M\+\_\+\+M\+A\+X\+\_\+\+V\+A\+L\+UE}~100
+\item 
+\#define \textbf{ A\+N\+T\+I\+\_\+\+W\+I\+N\+D\+UP}~1000
+\item 
+\#define \textbf{ D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+L\+I\+M\+IT}~1500
+\item 
+\#define \textbf{ C\+U\+R\+R\+E\+N\+T\+\_\+\+H\+Y\+S\+T\+E\+R\+E\+S\+IS}~10
+\item 
+\#define \textbf{ E\+M\+G\+\_\+\+S\+A\+M\+P\+L\+E\+\_\+\+T\+O\+\_\+\+D\+I\+S\+C\+A\+RD}~500
+\item 
+\#define \textbf{ S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+M\+E\+AN}~100
+\item 
+\#define \textbf{ S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+E\+M\+G\+\_\+\+M\+E\+AN}~1000
+\item 
+\#define \textbf{ R\+E\+S\+T\+\_\+\+P\+O\+S\+\_\+\+E\+R\+R\+\_\+\+T\+H\+R\+\_\+\+G\+A\+IN}~10
+\item 
+\#define \textbf{ P\+O\+S\+\_\+\+I\+N\+T\+E\+G\+R\+A\+L\+\_\+\+S\+A\+T\+\_\+\+L\+I\+M\+IT}~50000000
+\item 
+\#define \textbf{ C\+U\+R\+R\+\_\+\+I\+N\+T\+E\+G\+R\+A\+L\+\_\+\+S\+A\+T\+\_\+\+L\+I\+M\+IT}~100000
+\item 
+\mbox{\label{globals_8h_adf1a94447aeafa5087c7190375b7ccd9}} 
+\#define {\bfseries P\+W\+M\+\_\+\+R\+A\+T\+E\+\_\+\+L\+I\+M\+I\+T\+E\+R\+\_\+\+M\+AX}~1
+\item 
+\#define \textbf{ S\+A\+F\+E\+\_\+\+S\+T\+A\+R\+T\+U\+P\+\_\+\+M\+O\+T\+O\+R\+\_\+\+R\+E\+A\+D\+I\+N\+GS}~8000
+\item 
+\#define \textbf{ L\+O\+O\+K\+U\+P\+\_\+\+D\+IM}~6
+\item 
+\#define \textbf{ P\+R\+E\+R\+E\+V\+I\+S\+I\+O\+N\+\_\+\+C\+Y\+C\+L\+ES}~400000
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \textbf{ emg\+\_\+status} \{ \newline
+\textbf{ N\+O\+R\+M\+AL} = 0, 
+\textbf{ R\+E\+S\+ET} = 1, 
+\textbf{ D\+I\+S\+C\+A\+RD} = 2, 
+\textbf{ S\+U\+M\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AN} = 3, 
+\newline
+\textbf{ W\+A\+IT} = 4, 
+\textbf{ W\+A\+I\+T\+\_\+\+EoC} = 5
+ \}
+\item 
+enum \textbf{ counter\+\_\+status} \{ \newline
+\textbf{ P\+R\+E\+P\+A\+R\+E\+\_\+\+D\+A\+TA} = 0, 
+\textbf{ W\+R\+I\+T\+E\+\_\+\+C\+Y\+C\+L\+ES} = 1, 
+\textbf{ W\+A\+I\+T\+\_\+\+Q\+U\+E\+RY} = 2, 
+\textbf{ W\+R\+I\+T\+E\+\_\+\+E\+ND} = 3, 
+\newline
+\textbf{ N\+O\+NE} = 4
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{globals_8h_a975e5cde4f157d8bbdbde3c03227f3de}} 
+struct \textbf{ st\+\_\+ref} {\bfseries g\+\_\+ref} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]
+\item 
+\mbox{\label{globals_8h_ab40c607c340b011a96046994f4b2229c}} 
+struct \textbf{ st\+\_\+ref} {\bfseries g\+\_\+ref\+New} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]
+\item 
+struct \textbf{ st\+\_\+ref} \textbf{ g\+\_\+ref\+Old} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]
+\item 
+\mbox{\label{globals_8h_a6f0c00c1300c30d398231d1e76f3f780}} 
+struct \textbf{ st\+\_\+meas} {\bfseries g\+\_\+meas} [\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}]
+\item 
+struct \textbf{ st\+\_\+meas} \textbf{ g\+\_\+meas\+Old} [\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}]
+\item 
+struct \textbf{ st\+\_\+emg\+\_\+meas} g\+\_\+emg\+\_\+meas \textbf{ g\+\_\+emg\+\_\+meas\+Old}
+\item 
+struct \textbf{ st\+\_\+data} \textbf{ g\+\_\+rx}
+\item 
+struct \textbf{ st\+\_\+eeprom} g\+\_\+mem \textbf{ c\+\_\+mem}
+\item 
+struct \textbf{ st\+\_\+calib} \textbf{ calib}
+\item 
+\mbox{\label{globals_8h_a0e9a576515332f8bd83ae6a2fe0164aa}} 
+struct \textbf{ st\+\_\+filter} {\bfseries filt\+\_\+v} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]
+\item 
+\mbox{\label{globals_8h_a503852d956ef1e03f4a9d8b91db248fc}} 
+struct \textbf{ st\+\_\+filter} {\bfseries filt\+\_\+curr\+\_\+diff} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]
+\item 
+struct \textbf{ st\+\_\+filter} \textbf{ filt\+\_\+i} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]
+\item 
+struct \textbf{ st\+\_\+filter} \textbf{ filt\+\_\+vel} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS}]
+\item 
+struct \textbf{ st\+\_\+filter} \textbf{ filt\+\_\+emg} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS}+\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+D\+D\+I\+T\+I\+O\+N\+A\+L\+\_\+\+E\+M\+GS}]
+\item 
+uint16 \textbf{ timer\+\_\+value}
+\item 
+uint16 \textbf{ timer\+\_\+value0}
+\item 
+float \textbf{ cycle\+\_\+time}
+\item 
+int32 \textbf{ dev\+\_\+tension} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]
+\item 
+uint8 \textbf{ dev\+\_\+pwm\+\_\+limit} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]
+\item 
+uint8 \textbf{ dev\+\_\+pwm\+\_\+sat} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]
+\item 
+int32 \textbf{ dev\+\_\+tension\+\_\+f} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]
+\item 
+int32 \textbf{ pow\+\_\+tension} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]
+\item 
+\textbf{ counter\+\_\+status} C\+Y\+D\+A\+TA \textbf{ cycles\+\_\+status}
+\item 
+\textbf{ emg\+\_\+status} C\+Y\+D\+A\+TA \textbf{ emg\+\_\+1\+\_\+status}
+\item 
+\textbf{ emg\+\_\+status} C\+Y\+D\+A\+TA \textbf{ emg\+\_\+2\+\_\+status}
+\item 
+C\+Y\+B\+IT \textbf{ reset\+\_\+last\+\_\+value\+\_\+flag}
+\item 
+C\+Y\+B\+IT \textbf{ tension\+\_\+valid}
+\item 
+C\+Y\+B\+IT \textbf{ interrupt\+\_\+flag}
+\item 
+C\+Y\+B\+IT \textbf{ cycles\+\_\+interrupt\+\_\+flag}
+\item 
+uint8 \textbf{ maintenance\+\_\+flag}
+\item 
+C\+Y\+B\+IT \textbf{ can\+\_\+write}
+\item 
+uint8 \textbf{ rest\+\_\+enabled}
+\item 
+uint8 \textbf{ forced\+\_\+open}
+\item 
+uint8 \textbf{ battery\+\_\+low\+\_\+\+SoC}
+\item 
+uint8 \textbf{ change\+\_\+ext\+\_\+ref\+\_\+flag}
+\item 
+C\+Y\+B\+IT \textbf{ reset\+\_\+\+P\+So\+C\+\_\+flag}
+\item 
+\mbox{\label{globals_8h_a2fbad668712e226379890e1debdc9ff2}} 
+int16 {\bfseries A\+D\+C\+\_\+buf} [N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+D\+C\+\_\+\+C\+H\+A\+N\+N\+E\+L\+S\+\_\+\+M\+AX]
+\item 
+uint8 \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+N\+A\+L\+O\+G\+\_\+\+I\+N\+P\+U\+TS}
+\item 
+int8 \textbf{ pwm\+\_\+sign}
+\item 
+\mbox{\label{globals_8h_a5190337b2d433e192edc68cf3d603ede}} 
+uint32 {\bfseries data\+\_\+encoder\+\_\+raw} [\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+P\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}]
+\item 
+\mbox{\label{globals_8h_ae62a59fe712aba1b45a5358ece0b3d35}} 
+uint8 {\bfseries N\+\_\+\+Encoder\+\_\+\+Line\+\_\+\+Connected} [\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}]
+\item 
+\mbox{\label{globals_8h_a7bf300fb19b8dd8db6783ef124605540}} 
+uint16 {\bfseries Encoder\+\_\+\+Value} [\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}][\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+P\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}]
+\item 
+\mbox{\label{globals_8h_a269cff8427d6a8902a38dc258d649f06}} 
+uint8 {\bfseries Encoder\+\_\+\+Check} [\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}][\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+P\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}]
+\item 
+int32 \textbf{ rest\+\_\+pos\+\_\+curr\+\_\+ref}
+\item 
+\mbox{\label{globals_8h_a28568209e5c79332f574608aafcd14ec}} 
+F\+S\+\_\+\+F\+I\+LE $\ast$ {\bfseries p\+File}
+\item 
+\mbox{\label{globals_8h_a93ea3c816e507e10c5a48cb79d624863}} 
+char {\bfseries sd\+File} [100]
+\item 
+\mbox{\label{globals_8h_ad49779e5c549cf4cb332a929eacc6b71}} 
+char {\bfseries sd\+Param} [100]
+\item 
+\mbox{\label{globals_8h_a47118db87acd24ae6dac18b036f360ec}} 
+uint8 {\bfseries N\+\_\+\+I\+M\+U\+\_\+\+Connected}
+\item 
+\mbox{\label{globals_8h_a99668f3210aba0be3baec19486621bce}} 
+uint8 {\bfseries I\+M\+U\+\_\+connected} [N\+\_\+\+I\+M\+U\+\_\+\+M\+AX]
+\item 
+\mbox{\label{globals_8h_a86272fcfcab512d38a11824196df4bbc}} 
+int {\bfseries imus\+\_\+data\+\_\+size}
+\item 
+\mbox{\label{globals_8h_aca96c483c3e269e3805aa861ced0aef5}} 
+int {\bfseries single\+\_\+imu\+\_\+size} [N\+\_\+\+I\+M\+U\+\_\+\+M\+AX]
+\item 
+\mbox{\label{globals_8h_ab72cce926a6439eda41315f45a9c379c}} 
+struct \textbf{ st\+\_\+imu\+\_\+data} {\bfseries g\+\_\+imu} [N\+\_\+\+I\+M\+U\+\_\+\+M\+AX]
+\item 
+\mbox{\label{globals_8h_abb00fd907d732c0691940f718e231178}} 
+struct \textbf{ st\+\_\+imu\+\_\+data} {\bfseries g\+\_\+imu\+New} [N\+\_\+\+I\+M\+U\+\_\+\+M\+AX]
+\item 
+\mbox{\label{globals_8h_a187c605f3898cf11e09f6f469c265920}} 
+uint8 {\bfseries Accel} [N\+\_\+\+I\+M\+U\+\_\+\+M\+AX][6]
+\item 
+\mbox{\label{globals_8h_a49dba88a31d1b3b4190065b9ef1649fe}} 
+uint8 {\bfseries Gyro} [N\+\_\+\+I\+M\+U\+\_\+\+M\+AX][6]
+\item 
+\mbox{\label{globals_8h_a5d88408ccb73729f049a52b4d1daaadf}} 
+uint8 {\bfseries Mag} [N\+\_\+\+I\+M\+U\+\_\+\+M\+AX][6]
+\item 
+\mbox{\label{globals_8h_a1e598e1bdae5fe927fbd1f396161f3a6}} 
+uint8 {\bfseries Mag\+Cal} [N\+\_\+\+I\+M\+U\+\_\+\+M\+AX][3]
+\item 
+\mbox{\label{globals_8h_af5f2d49e123a057d358297a34194ebdc}} 
+uint8 {\bfseries Temp} [N\+\_\+\+I\+M\+U\+\_\+\+M\+AX][2]
+\item 
+\mbox{\label{globals_8h_a79179edea7394e7176f8768b1b0f6f92}} 
+float {\bfseries Quat} [N\+\_\+\+I\+M\+U\+\_\+\+M\+AX][4]
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Global definitions and macros are set in this file. 
+
+\begin{DoxyDate}{Date}
+February 01, 2018 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+{\itshape Centro \char`\"{}\+E.\+Piaggio\char`\"{}} 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+(C) 2012-\/2016 qbrobotics. All rights reserved. 
+
+(C) 2017-\/2019 Centro \char`\"{}\+E.\+Piaggio\char`\"{}. All rights reserved. 
+\end{DoxyCopyright}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\label{globals_8h_a66edaed675ab232f06a4e5b3c30d101a}} 
+\index{globals.\+h@{globals.\+h}!A\+N\+T\+I\+\_\+\+W\+I\+N\+D\+UP@{A\+N\+T\+I\+\_\+\+W\+I\+N\+D\+UP}}
+\index{A\+N\+T\+I\+\_\+\+W\+I\+N\+D\+UP@{A\+N\+T\+I\+\_\+\+W\+I\+N\+D\+UP}!globals.\+h@{globals.\+h}}
+\subsubsection{A\+N\+T\+I\+\_\+\+W\+I\+N\+D\+UP}
+{\footnotesize\ttfamily \#define A\+N\+T\+I\+\_\+\+W\+I\+N\+D\+UP~1000}
+
+Anti windup saturation. \mbox{\label{globals_8h_a80db2dce057c92400a7fb1678bc0b0a8}} 
+\index{globals.\+h@{globals.\+h}!C\+A\+L\+I\+B\+R\+A\+T\+I\+O\+N\+\_\+\+D\+IV@{C\+A\+L\+I\+B\+R\+A\+T\+I\+O\+N\+\_\+\+D\+IV}}
+\index{C\+A\+L\+I\+B\+R\+A\+T\+I\+O\+N\+\_\+\+D\+IV@{C\+A\+L\+I\+B\+R\+A\+T\+I\+O\+N\+\_\+\+D\+IV}!globals.\+h@{globals.\+h}}
+\subsubsection{C\+A\+L\+I\+B\+R\+A\+T\+I\+O\+N\+\_\+\+D\+IV}
+{\footnotesize\ttfamily \#define C\+A\+L\+I\+B\+R\+A\+T\+I\+O\+N\+\_\+\+D\+IV~10}
+
+Frequency divisor for hand calibration (100\+Hz). \mbox{\label{globals_8h_a8b3493add1a9aac8207ec34774237928}} 
+\index{globals.\+h@{globals.\+h}!C\+O\+U\+N\+T\+E\+R\+\_\+\+I\+NC@{C\+O\+U\+N\+T\+E\+R\+\_\+\+I\+NC}}
+\index{C\+O\+U\+N\+T\+E\+R\+\_\+\+I\+NC@{C\+O\+U\+N\+T\+E\+R\+\_\+\+I\+NC}!globals.\+h@{globals.\+h}}
+\subsubsection{C\+O\+U\+N\+T\+E\+R\+\_\+\+I\+NC}
+{\footnotesize\ttfamily \#define C\+O\+U\+N\+T\+E\+R\+\_\+\+I\+NC~2}
+
+Counter cycle increment. \mbox{\label{globals_8h_a94ec4e208ccec9fc13d0f57094f6de35}} 
+\index{globals.\+h@{globals.\+h}!C\+U\+R\+R\+\_\+\+I\+N\+T\+E\+G\+R\+A\+L\+\_\+\+S\+A\+T\+\_\+\+L\+I\+M\+IT@{C\+U\+R\+R\+\_\+\+I\+N\+T\+E\+G\+R\+A\+L\+\_\+\+S\+A\+T\+\_\+\+L\+I\+M\+IT}}
+\index{C\+U\+R\+R\+\_\+\+I\+N\+T\+E\+G\+R\+A\+L\+\_\+\+S\+A\+T\+\_\+\+L\+I\+M\+IT@{C\+U\+R\+R\+\_\+\+I\+N\+T\+E\+G\+R\+A\+L\+\_\+\+S\+A\+T\+\_\+\+L\+I\+M\+IT}!globals.\+h@{globals.\+h}}
+\subsubsection{C\+U\+R\+R\+\_\+\+I\+N\+T\+E\+G\+R\+A\+L\+\_\+\+S\+A\+T\+\_\+\+L\+I\+M\+IT}
+{\footnotesize\ttfamily \#define C\+U\+R\+R\+\_\+\+I\+N\+T\+E\+G\+R\+A\+L\+\_\+\+S\+A\+T\+\_\+\+L\+I\+M\+IT~100000}
+
+Anti windup on current control. \mbox{\label{globals_8h_ad03b1f5576bd45568413662f28b88d4e}} 
+\index{globals.\+h@{globals.\+h}!C\+U\+R\+R\+E\+N\+T\+\_\+\+H\+Y\+S\+T\+E\+R\+E\+S\+IS@{C\+U\+R\+R\+E\+N\+T\+\_\+\+H\+Y\+S\+T\+E\+R\+E\+S\+IS}}
+\index{C\+U\+R\+R\+E\+N\+T\+\_\+\+H\+Y\+S\+T\+E\+R\+E\+S\+IS@{C\+U\+R\+R\+E\+N\+T\+\_\+\+H\+Y\+S\+T\+E\+R\+E\+S\+IS}!globals.\+h@{globals.\+h}}
+\subsubsection{C\+U\+R\+R\+E\+N\+T\+\_\+\+H\+Y\+S\+T\+E\+R\+E\+S\+IS}
+{\footnotesize\ttfamily \#define C\+U\+R\+R\+E\+N\+T\+\_\+\+H\+Y\+S\+T\+E\+R\+E\+S\+IS~10}
+
+milli\+Amperes of hysteresis for current control. \mbox{\label{globals_8h_ae0001cc59fb1ba0290c6ef8c2c5692d7}} 
+\index{globals.\+h@{globals.\+h}!D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+L\+I\+M\+IT@{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+L\+I\+M\+IT}}
+\index{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+L\+I\+M\+IT@{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+L\+I\+M\+IT}!globals.\+h@{globals.\+h}}
+\subsubsection{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+L\+I\+M\+IT}
+{\footnotesize\ttfamily \#define D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+L\+I\+M\+IT~1500}
+
+Default Current limit, 0 stands for unlimited. \mbox{\label{globals_8h_a0f5a7e2ead9cd507bf8fc9a6f785f012}} 
+\index{globals.\+h@{globals.\+h}!D\+E\+F\+A\+U\+L\+T\+\_\+\+E\+E\+P\+R\+O\+M\+\_\+\+D\+I\+S\+P\+L\+A\+C\+E\+M\+E\+NT@{D\+E\+F\+A\+U\+L\+T\+\_\+\+E\+E\+P\+R\+O\+M\+\_\+\+D\+I\+S\+P\+L\+A\+C\+E\+M\+E\+NT}}
+\index{D\+E\+F\+A\+U\+L\+T\+\_\+\+E\+E\+P\+R\+O\+M\+\_\+\+D\+I\+S\+P\+L\+A\+C\+E\+M\+E\+NT@{D\+E\+F\+A\+U\+L\+T\+\_\+\+E\+E\+P\+R\+O\+M\+\_\+\+D\+I\+S\+P\+L\+A\+C\+E\+M\+E\+NT}!globals.\+h@{globals.\+h}}
+\subsubsection{D\+E\+F\+A\+U\+L\+T\+\_\+\+E\+E\+P\+R\+O\+M\+\_\+\+D\+I\+S\+P\+L\+A\+C\+E\+M\+E\+NT}
+{\footnotesize\ttfamily \#define D\+E\+F\+A\+U\+L\+T\+\_\+\+E\+E\+P\+R\+O\+M\+\_\+\+D\+I\+S\+P\+L\+A\+C\+E\+M\+E\+NT~50}
+
+Number of pages occupied by the E\+E\+P\+R\+OM. \mbox{\label{globals_8h_a14df76a41da04070ee775565e8d67e81}} 
+\index{globals.\+h@{globals.\+h}!D\+I\+V\+\_\+\+I\+N\+I\+T\+\_\+\+V\+A\+L\+UE@{D\+I\+V\+\_\+\+I\+N\+I\+T\+\_\+\+V\+A\+L\+UE}}
+\index{D\+I\+V\+\_\+\+I\+N\+I\+T\+\_\+\+V\+A\+L\+UE@{D\+I\+V\+\_\+\+I\+N\+I\+T\+\_\+\+V\+A\+L\+UE}!globals.\+h@{globals.\+h}}
+\subsubsection{D\+I\+V\+\_\+\+I\+N\+I\+T\+\_\+\+V\+A\+L\+UE}
+{\footnotesize\ttfamily \#define D\+I\+V\+\_\+\+I\+N\+I\+T\+\_\+\+V\+A\+L\+UE~1}
+
+Initial value for hand counter calibration. \mbox{\label{globals_8h_a274846d1eb987c974c6d376a6fdfb115}} 
+\index{globals.\+h@{globals.\+h}!E\+E\+P\+R\+O\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+R\+OW@{E\+E\+P\+R\+O\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+R\+OW}}
+\index{E\+E\+P\+R\+O\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+R\+OW@{E\+E\+P\+R\+O\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+R\+OW}!globals.\+h@{globals.\+h}}
+\subsubsection{E\+E\+P\+R\+O\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+R\+OW}
+{\footnotesize\ttfamily \#define E\+E\+P\+R\+O\+M\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+R\+OW~16}
+
+E\+E\+P\+R\+OM number of bytes per row. \mbox{\label{globals_8h_ac021dd483fdadbb57011fee41281bce4}} 
+\index{globals.\+h@{globals.\+h}!E\+E\+P\+R\+O\+M\+\_\+\+C\+O\+U\+N\+T\+E\+R\+S\+\_\+\+R\+O\+WS@{E\+E\+P\+R\+O\+M\+\_\+\+C\+O\+U\+N\+T\+E\+R\+S\+\_\+\+R\+O\+WS}}
+\index{E\+E\+P\+R\+O\+M\+\_\+\+C\+O\+U\+N\+T\+E\+R\+S\+\_\+\+R\+O\+WS@{E\+E\+P\+R\+O\+M\+\_\+\+C\+O\+U\+N\+T\+E\+R\+S\+\_\+\+R\+O\+WS}!globals.\+h@{globals.\+h}}
+\subsubsection{E\+E\+P\+R\+O\+M\+\_\+\+C\+O\+U\+N\+T\+E\+R\+S\+\_\+\+R\+O\+WS}
+{\footnotesize\ttfamily \#define E\+E\+P\+R\+O\+M\+\_\+\+C\+O\+U\+N\+T\+E\+R\+S\+\_\+\+R\+O\+WS~5}
+
+E\+E\+P\+R\+OM number of rows dedicated to store counters. \mbox{\label{globals_8h_a39897c457550afc048d5a251ba50c979}} 
+\index{globals.\+h@{globals.\+h}!E\+M\+G\+\_\+\+S\+A\+M\+P\+L\+E\+\_\+\+T\+O\+\_\+\+D\+I\+S\+C\+A\+RD@{E\+M\+G\+\_\+\+S\+A\+M\+P\+L\+E\+\_\+\+T\+O\+\_\+\+D\+I\+S\+C\+A\+RD}}
+\index{E\+M\+G\+\_\+\+S\+A\+M\+P\+L\+E\+\_\+\+T\+O\+\_\+\+D\+I\+S\+C\+A\+RD@{E\+M\+G\+\_\+\+S\+A\+M\+P\+L\+E\+\_\+\+T\+O\+\_\+\+D\+I\+S\+C\+A\+RD}!globals.\+h@{globals.\+h}}
+\subsubsection{E\+M\+G\+\_\+\+S\+A\+M\+P\+L\+E\+\_\+\+T\+O\+\_\+\+D\+I\+S\+C\+A\+RD}
+{\footnotesize\ttfamily \#define E\+M\+G\+\_\+\+S\+A\+M\+P\+L\+E\+\_\+\+T\+O\+\_\+\+D\+I\+S\+C\+A\+RD~500}
+
+Number of sample to discard before calibration. \mbox{\label{globals_8h_a4f18d105a8fc18f649a92d96fb933eb3}} 
+\index{globals.\+h@{globals.\+h}!L\+O\+O\+K\+U\+P\+\_\+\+D\+IM@{L\+O\+O\+K\+U\+P\+\_\+\+D\+IM}}
+\index{L\+O\+O\+K\+U\+P\+\_\+\+D\+IM@{L\+O\+O\+K\+U\+P\+\_\+\+D\+IM}!globals.\+h@{globals.\+h}}
+\subsubsection{L\+O\+O\+K\+U\+P\+\_\+\+D\+IM}
+{\footnotesize\ttfamily \#define L\+O\+O\+K\+U\+P\+\_\+\+D\+IM~6}
+
+Dimension of the current lookup table. \mbox{\label{globals_8h_a3f7f07f40f51532ee7cb93e5d0c7d16d}} 
+\index{globals.\+h@{globals.\+h}!N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX@{N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}}
+\index{N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX@{N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}!globals.\+h@{globals.\+h}}
+\subsubsection{N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}
+{\footnotesize\ttfamily \#define N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX~2}
+
+Max number of CS lines which can contain encoders. \mbox{\label{globals_8h_ab1fe8195c284dcb0c168d095f5fb8806}} 
+\index{globals.\+h@{globals.\+h}!N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+P\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX@{N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+P\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}}
+\index{N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+P\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX@{N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+P\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}!globals.\+h@{globals.\+h}}
+\subsubsection{N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+P\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}
+{\footnotesize\ttfamily \#define N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+P\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX~5}
+
+Max number of encoders per line. \mbox{\label{globals_8h_acfef2d9600a7535f4ad258c2370dd9fa}} 
+\index{globals.\+h@{globals.\+h}!N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+D\+D\+I\+T\+I\+O\+N\+A\+L\+\_\+\+E\+M\+GS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+D\+D\+I\+T\+I\+O\+N\+A\+L\+\_\+\+E\+M\+GS}}
+\index{N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+D\+D\+I\+T\+I\+O\+N\+A\+L\+\_\+\+E\+M\+GS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+D\+D\+I\+T\+I\+O\+N\+A\+L\+\_\+\+E\+M\+GS}!globals.\+h@{globals.\+h}}
+\subsubsection{N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+D\+D\+I\+T\+I\+O\+N\+A\+L\+\_\+\+E\+M\+GS}
+{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+D\+D\+I\+T\+I\+O\+N\+A\+L\+\_\+\+E\+M\+GS~6}
+
+Number of additional emg channels. \mbox{\label{globals_8h_a21ab5f0a6e4cb48bd320177c4f7aa078}} 
+\index{globals.\+h@{globals.\+h}!N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS}}
+\index{N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS}!globals.\+h@{globals.\+h}}
+\subsubsection{N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS}
+{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS~2}
+
+Number of emg channels. \mbox{\label{globals_8h_a39ac50737c1ee7d5b723b2597fdf6f26}} 
+\index{globals.\+h@{globals.\+h}!N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}}
+\index{N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}!globals.\+h@{globals.\+h}}
+\subsubsection{N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}
+{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS~2}
+
+Number of motors. \mbox{\label{globals_8h_aab4f4a0ece20c4bc27152bd72926d89c}} 
+\index{globals.\+h@{globals.\+h}!N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS}}
+\index{N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS}!globals.\+h@{globals.\+h}}
+\subsubsection{N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS}
+{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS~71}
+
+Number of parameters saved in the E\+E\+P\+R\+OM. \mbox{\label{globals_8h_aa19d88ac3e94a34d9a9f1c37bea9a271}} 
+\index{globals.\+h@{globals.\+h}!N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+M\+E\+NU@{N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+M\+E\+NU}}
+\index{N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+M\+E\+NU@{N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+M\+E\+NU}!globals.\+h@{globals.\+h}}
+\subsubsection{N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+M\+E\+NU}
+{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+M\+E\+NU~10}
+
+Number of parameters menu. \mbox{\label{globals_8h_af48a6b6fcdc5f5019fb108d03b07a727}} 
+\index{globals.\+h@{globals.\+h}!N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS}}
+\index{N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS}!globals.\+h@{globals.\+h}}
+\subsubsection{N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS}
+{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS~3}
+
+Number of encoders. \mbox{\label{globals_8h_ad252b8b0421e545cce8ba0548a6ca4ed}} 
+\index{globals.\+h@{globals.\+h}!P\+O\+S\+\_\+\+I\+N\+T\+E\+G\+R\+A\+L\+\_\+\+S\+A\+T\+\_\+\+L\+I\+M\+IT@{P\+O\+S\+\_\+\+I\+N\+T\+E\+G\+R\+A\+L\+\_\+\+S\+A\+T\+\_\+\+L\+I\+M\+IT}}
+\index{P\+O\+S\+\_\+\+I\+N\+T\+E\+G\+R\+A\+L\+\_\+\+S\+A\+T\+\_\+\+L\+I\+M\+IT@{P\+O\+S\+\_\+\+I\+N\+T\+E\+G\+R\+A\+L\+\_\+\+S\+A\+T\+\_\+\+L\+I\+M\+IT}!globals.\+h@{globals.\+h}}
+\subsubsection{P\+O\+S\+\_\+\+I\+N\+T\+E\+G\+R\+A\+L\+\_\+\+S\+A\+T\+\_\+\+L\+I\+M\+IT}
+{\footnotesize\ttfamily \#define P\+O\+S\+\_\+\+I\+N\+T\+E\+G\+R\+A\+L\+\_\+\+S\+A\+T\+\_\+\+L\+I\+M\+IT~50000000}
+
+Anti windup on position control. \mbox{\label{globals_8h_a427b23fb922c3976be904d128f8dbdd5}} 
+\index{globals.\+h@{globals.\+h}!P\+R\+E\+R\+E\+V\+I\+S\+I\+O\+N\+\_\+\+C\+Y\+C\+L\+ES@{P\+R\+E\+R\+E\+V\+I\+S\+I\+O\+N\+\_\+\+C\+Y\+C\+L\+ES}}
+\index{P\+R\+E\+R\+E\+V\+I\+S\+I\+O\+N\+\_\+\+C\+Y\+C\+L\+ES@{P\+R\+E\+R\+E\+V\+I\+S\+I\+O\+N\+\_\+\+C\+Y\+C\+L\+ES}!globals.\+h@{globals.\+h}}
+\subsubsection{P\+R\+E\+R\+E\+V\+I\+S\+I\+O\+N\+\_\+\+C\+Y\+C\+L\+ES}
+{\footnotesize\ttfamily \#define P\+R\+E\+R\+E\+V\+I\+S\+I\+O\+N\+\_\+\+C\+Y\+C\+L\+ES~400000}
+
+Number of Soft\+Hand Pro cycles before maintenance. \mbox{\label{globals_8h_aafe0521fa22763b7afc50e12d31b450d}} 
+\index{globals.\+h@{globals.\+h}!P\+W\+M\+\_\+\+M\+A\+X\+\_\+\+V\+A\+L\+UE@{P\+W\+M\+\_\+\+M\+A\+X\+\_\+\+V\+A\+L\+UE}}
+\index{P\+W\+M\+\_\+\+M\+A\+X\+\_\+\+V\+A\+L\+UE@{P\+W\+M\+\_\+\+M\+A\+X\+\_\+\+V\+A\+L\+UE}!globals.\+h@{globals.\+h}}
+\subsubsection{P\+W\+M\+\_\+\+M\+A\+X\+\_\+\+V\+A\+L\+UE}
+{\footnotesize\ttfamily \#define P\+W\+M\+\_\+\+M\+A\+X\+\_\+\+V\+A\+L\+UE~100}
+
+Maximum value of the P\+WM signal. \mbox{\label{globals_8h_a3b4d8a5e259fa47a909adefcda3bfb80}} 
+\index{globals.\+h@{globals.\+h}!R\+E\+C\+E\+I\+VE@{R\+E\+C\+E\+I\+VE}}
+\index{R\+E\+C\+E\+I\+VE@{R\+E\+C\+E\+I\+VE}!globals.\+h@{globals.\+h}}
+\subsubsection{R\+E\+C\+E\+I\+VE}
+{\footnotesize\ttfamily \#define R\+E\+C\+E\+I\+VE~3}
+
+Package data receiving status. \mbox{\label{globals_8h_ab62e9d96ce028279a3e544ca34ad9109}} 
+\index{globals.\+h@{globals.\+h}!R\+E\+S\+T\+\_\+\+P\+O\+S\+\_\+\+E\+R\+R\+\_\+\+T\+H\+R\+\_\+\+G\+A\+IN@{R\+E\+S\+T\+\_\+\+P\+O\+S\+\_\+\+E\+R\+R\+\_\+\+T\+H\+R\+\_\+\+G\+A\+IN}}
+\index{R\+E\+S\+T\+\_\+\+P\+O\+S\+\_\+\+E\+R\+R\+\_\+\+T\+H\+R\+\_\+\+G\+A\+IN@{R\+E\+S\+T\+\_\+\+P\+O\+S\+\_\+\+E\+R\+R\+\_\+\+T\+H\+R\+\_\+\+G\+A\+IN}!globals.\+h@{globals.\+h}}
+\subsubsection{R\+E\+S\+T\+\_\+\+P\+O\+S\+\_\+\+E\+R\+R\+\_\+\+T\+H\+R\+\_\+\+G\+A\+IN}
+{\footnotesize\ttfamily \#define R\+E\+S\+T\+\_\+\+P\+O\+S\+\_\+\+E\+R\+R\+\_\+\+T\+H\+R\+\_\+\+G\+A\+IN~10}
+
+Gain related to stop condition threshold in rest position routine. \mbox{\label{globals_8h_a88f62eb5c7bdf3bf868790ce194a2bf0}} 
+\index{globals.\+h@{globals.\+h}!S\+A\+F\+E\+\_\+\+S\+T\+A\+R\+T\+U\+P\+\_\+\+M\+O\+T\+O\+R\+\_\+\+R\+E\+A\+D\+I\+N\+GS@{S\+A\+F\+E\+\_\+\+S\+T\+A\+R\+T\+U\+P\+\_\+\+M\+O\+T\+O\+R\+\_\+\+R\+E\+A\+D\+I\+N\+GS}}
+\index{S\+A\+F\+E\+\_\+\+S\+T\+A\+R\+T\+U\+P\+\_\+\+M\+O\+T\+O\+R\+\_\+\+R\+E\+A\+D\+I\+N\+GS@{S\+A\+F\+E\+\_\+\+S\+T\+A\+R\+T\+U\+P\+\_\+\+M\+O\+T\+O\+R\+\_\+\+R\+E\+A\+D\+I\+N\+GS}!globals.\+h@{globals.\+h}}
+\subsubsection{S\+A\+F\+E\+\_\+\+S\+T\+A\+R\+T\+U\+P\+\_\+\+M\+O\+T\+O\+R\+\_\+\+R\+E\+A\+D\+I\+N\+GS}
+{\footnotesize\ttfamily \#define S\+A\+F\+E\+\_\+\+S\+T\+A\+R\+T\+U\+P\+\_\+\+M\+O\+T\+O\+R\+\_\+\+R\+E\+A\+D\+I\+N\+GS~8000}
+
+Number of encoder readings after position reconstruction before activating motor. \mbox{\label{globals_8h_a31532371c5c48fd2551639ed09afe4fb}} 
+\index{globals.\+h@{globals.\+h}!S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+E\+M\+G\+\_\+\+M\+E\+AN@{S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+E\+M\+G\+\_\+\+M\+E\+AN}}
+\index{S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+E\+M\+G\+\_\+\+M\+E\+AN@{S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+E\+M\+G\+\_\+\+M\+E\+AN}!globals.\+h@{globals.\+h}}
+\subsubsection{S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+E\+M\+G\+\_\+\+M\+E\+AN}
+{\footnotesize\ttfamily \#define S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+E\+M\+G\+\_\+\+M\+E\+AN~1000}
+
+Number of samples used to mean emg values. \mbox{\label{globals_8h_a1f15a178b37117a29361e7ec20f77cc4}} 
+\index{globals.\+h@{globals.\+h}!S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+M\+E\+AN@{S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+M\+E\+AN}}
+\index{S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+M\+E\+AN@{S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+M\+E\+AN}!globals.\+h@{globals.\+h}}
+\subsubsection{S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+M\+E\+AN}
+{\footnotesize\ttfamily \#define S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+M\+E\+AN~100}
+
+Number of samples used to mean current values. \mbox{\label{globals_8h_ac7c2aa0be1a1453f2a25e75f1c7bff16}} 
+\index{globals.\+h@{globals.\+h}!S\+H\+\_\+\+I1@{S\+H\+\_\+\+I1}}
+\index{S\+H\+\_\+\+I1@{S\+H\+\_\+\+I1}!globals.\+h@{globals.\+h}}
+\subsubsection{S\+H\+\_\+\+I1}
+{\footnotesize\ttfamily \#define S\+H\+\_\+\+I1~-\/1}
+
+First gear invariant value in Soft\+Hand\+Pro device. \mbox{\label{globals_8h_af550b25a7e09356fe9fac2773725fa53}} 
+\index{globals.\+h@{globals.\+h}!S\+H\+\_\+\+N1@{S\+H\+\_\+\+N1}}
+\index{S\+H\+\_\+\+N1@{S\+H\+\_\+\+N1}!globals.\+h@{globals.\+h}}
+\subsubsection{S\+H\+\_\+\+N1}
+{\footnotesize\ttfamily \#define S\+H\+\_\+\+N1~35}
+
+Number of teeth of the first encoder gear in Soft\+Hand\+Pro device. \mbox{\label{globals_8h_a20594cbd96a48f93b6b3e0bb8590d15e}} 
+\index{globals.\+h@{globals.\+h}!S\+H\+\_\+\+N2@{S\+H\+\_\+\+N2}}
+\index{S\+H\+\_\+\+N2@{S\+H\+\_\+\+N2}!globals.\+h@{globals.\+h}}
+\subsubsection{S\+H\+\_\+\+N2}
+{\footnotesize\ttfamily \#define S\+H\+\_\+\+N2~3}
+
+Number of teeth of the second encoder gear in Soft\+Hand\+Pro device. \mbox{\label{globals_8h_a695dd637b37252af2a517ba8bae8d2c4}} 
+\index{globals.\+h@{globals.\+h}!S\+T\+A\+T\+E\+\_\+\+A\+C\+T\+I\+VE@{S\+T\+A\+T\+E\+\_\+\+A\+C\+T\+I\+VE}}
+\index{S\+T\+A\+T\+E\+\_\+\+A\+C\+T\+I\+VE@{S\+T\+A\+T\+E\+\_\+\+A\+C\+T\+I\+VE}!globals.\+h@{globals.\+h}}
+\subsubsection{S\+T\+A\+T\+E\+\_\+\+A\+C\+T\+I\+VE}
+{\footnotesize\ttfamily \#define S\+T\+A\+T\+E\+\_\+\+A\+C\+T\+I\+VE~1}
+
+Closed Soft\+Hand position / E\+MG Active. \mbox{\label{globals_8h_a5dcbfcad8d6ba73bbf6fe2d08f3e3ae4}} 
+\index{globals.\+h@{globals.\+h}!S\+T\+A\+T\+E\+\_\+\+I\+N\+A\+C\+T\+I\+VE@{S\+T\+A\+T\+E\+\_\+\+I\+N\+A\+C\+T\+I\+VE}}
+\index{S\+T\+A\+T\+E\+\_\+\+I\+N\+A\+C\+T\+I\+VE@{S\+T\+A\+T\+E\+\_\+\+I\+N\+A\+C\+T\+I\+VE}!globals.\+h@{globals.\+h}}
+\subsubsection{S\+T\+A\+T\+E\+\_\+\+I\+N\+A\+C\+T\+I\+VE}
+{\footnotesize\ttfamily \#define S\+T\+A\+T\+E\+\_\+\+I\+N\+A\+C\+T\+I\+VE~0}
+
+Open Soft\+Hand position / E\+MG Inactive. \mbox{\label{globals_8h_abf4aedd34d31b63b63061c975d872580}} 
+\index{globals.\+h@{globals.\+h}!U\+N\+L\+O\+AD@{U\+N\+L\+O\+AD}}
+\index{U\+N\+L\+O\+AD@{U\+N\+L\+O\+AD}!globals.\+h@{globals.\+h}}
+\subsubsection{U\+N\+L\+O\+AD}
+{\footnotesize\ttfamily \#define U\+N\+L\+O\+AD~4}
+
+Package data flush status. \mbox{\label{globals_8h_a6a6a0bb02e515a094c3e7ea1bcb66fcc}} 
+\index{globals.\+h@{globals.\+h}!W\+A\+I\+T\+\_\+\+ID@{W\+A\+I\+T\+\_\+\+ID}}
+\index{W\+A\+I\+T\+\_\+\+ID@{W\+A\+I\+T\+\_\+\+ID}!globals.\+h@{globals.\+h}}
+\subsubsection{W\+A\+I\+T\+\_\+\+ID}
+{\footnotesize\ttfamily \#define W\+A\+I\+T\+\_\+\+ID~1}
+
+Package ID waiting status. \mbox{\label{globals_8h_a235d2d0eac7e9af190ebafb84df37fd9}} 
+\index{globals.\+h@{globals.\+h}!W\+A\+I\+T\+\_\+\+L\+E\+N\+G\+TH@{W\+A\+I\+T\+\_\+\+L\+E\+N\+G\+TH}}
+\index{W\+A\+I\+T\+\_\+\+L\+E\+N\+G\+TH@{W\+A\+I\+T\+\_\+\+L\+E\+N\+G\+TH}!globals.\+h@{globals.\+h}}
+\subsubsection{W\+A\+I\+T\+\_\+\+L\+E\+N\+G\+TH}
+{\footnotesize\ttfamily \#define W\+A\+I\+T\+\_\+\+L\+E\+N\+G\+TH~2}
+
+Package lenght waiting status. \mbox{\label{globals_8h_aea55597952638136c7c929b238904c82}} 
+\index{globals.\+h@{globals.\+h}!W\+A\+I\+T\+\_\+\+S\+T\+A\+RT@{W\+A\+I\+T\+\_\+\+S\+T\+A\+RT}}
+\index{W\+A\+I\+T\+\_\+\+S\+T\+A\+RT@{W\+A\+I\+T\+\_\+\+S\+T\+A\+RT}!globals.\+h@{globals.\+h}}
+\subsubsection{W\+A\+I\+T\+\_\+\+S\+T\+A\+RT}
+{\footnotesize\ttfamily \#define W\+A\+I\+T\+\_\+\+S\+T\+A\+RT~0}
+
+Package start waiting status. 
+
+\subsection{Enumeration Type Documentation}
+\mbox{\label{globals_8h_a368077232a067805e98c61f28948abee}} 
+\index{globals.\+h@{globals.\+h}!counter\+\_\+status@{counter\+\_\+status}}
+\index{counter\+\_\+status@{counter\+\_\+status}!globals.\+h@{globals.\+h}}
+\subsubsection{counter\+\_\+status}
+{\footnotesize\ttfamily enum \textbf{ counter\+\_\+status}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+R\+E\+P\+A\+R\+E\+\_\+\+D\+A\+TA@{P\+R\+E\+P\+A\+R\+E\+\_\+\+D\+A\+TA}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!P\+R\+E\+P\+A\+R\+E\+\_\+\+D\+A\+TA@{P\+R\+E\+P\+A\+R\+E\+\_\+\+D\+A\+TA}}}\mbox{\label{globals_8h_a368077232a067805e98c61f28948abeea94da702fc1c8e3bfb2db7c95e6395035}} 
+P\+R\+E\+P\+A\+R\+E\+\_\+\+D\+A\+TA&Prepare data to be written on E\+E\+P\+R\+OM. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{W\+R\+I\+T\+E\+\_\+\+C\+Y\+C\+L\+ES@{W\+R\+I\+T\+E\+\_\+\+C\+Y\+C\+L\+ES}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!W\+R\+I\+T\+E\+\_\+\+C\+Y\+C\+L\+ES@{W\+R\+I\+T\+E\+\_\+\+C\+Y\+C\+L\+ES}}}\mbox{\label{globals_8h_a368077232a067805e98c61f28948abeea751d143496d301804356ada5c906871e}} 
+W\+R\+I\+T\+E\+\_\+\+C\+Y\+C\+L\+ES&Cycles writing on E\+E\+P\+R\+OM is enabled and control is passed to query. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{W\+A\+I\+T\+\_\+\+Q\+U\+E\+RY@{W\+A\+I\+T\+\_\+\+Q\+U\+E\+RY}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!W\+A\+I\+T\+\_\+\+Q\+U\+E\+RY@{W\+A\+I\+T\+\_\+\+Q\+U\+E\+RY}}}\mbox{\label{globals_8h_a368077232a067805e98c61f28948abeea895e439d774b51b527cf336c4cc757a3}} 
+W\+A\+I\+T\+\_\+\+Q\+U\+E\+RY&Wait until E\+E\+P\+R\+O\+M\+\_\+\+Query() has finished writing on E\+E\+P\+R\+OM and then disable cycles writing. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{W\+R\+I\+T\+E\+\_\+\+E\+ND@{W\+R\+I\+T\+E\+\_\+\+E\+ND}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!W\+R\+I\+T\+E\+\_\+\+E\+ND@{W\+R\+I\+T\+E\+\_\+\+E\+ND}}}\mbox{\label{globals_8h_a368077232a067805e98c61f28948abeea1e202690fa9bb7863b5a37cbf92eb6a7}} 
+W\+R\+I\+T\+E\+\_\+\+E\+ND&End of E\+E\+P\+R\+OM writing. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{N\+O\+NE@{N\+O\+NE}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!N\+O\+NE@{N\+O\+NE}}}\mbox{\label{globals_8h_a368077232a067805e98c61f28948abeeac157bdf0b85a40d2619cbc8bc1ae5fe2}} 
+N\+O\+NE&Cycles writing on E\+E\+P\+R\+OM is disabled. \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\label{globals_8h_a723f289c2be966c5e6c8dfe3d0b46f1e}} 
+\index{globals.\+h@{globals.\+h}!emg\+\_\+status@{emg\+\_\+status}}
+\index{emg\+\_\+status@{emg\+\_\+status}!globals.\+h@{globals.\+h}}
+\subsubsection{emg\+\_\+status}
+{\footnotesize\ttfamily enum \textbf{ emg\+\_\+status}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{N\+O\+R\+M\+AL@{N\+O\+R\+M\+AL}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!N\+O\+R\+M\+AL@{N\+O\+R\+M\+AL}}}\mbox{\label{globals_8h_a723f289c2be966c5e6c8dfe3d0b46f1ea50d1448013c6f17125caee18aa418af7}} 
+N\+O\+R\+M\+AL&Normal execution. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+E\+S\+ET@{R\+E\+S\+ET}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!R\+E\+S\+ET@{R\+E\+S\+ET}}}\mbox{\label{globals_8h_a723f289c2be966c5e6c8dfe3d0b46f1ea589b7d94a3d91d145720e2fed0eb3a05}} 
+R\+E\+S\+ET&Reset analog measurements. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+I\+S\+C\+A\+RD@{D\+I\+S\+C\+A\+RD}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!D\+I\+S\+C\+A\+RD@{D\+I\+S\+C\+A\+RD}}}\mbox{\label{globals_8h_a723f289c2be966c5e6c8dfe3d0b46f1ea2c65e1f3e87da84f74b4fc2a908bf69d}} 
+D\+I\+S\+C\+A\+RD&Discard first samples to obtain a correct value. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+U\+M\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AN@{S\+U\+M\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AN}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!S\+U\+M\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AN@{S\+U\+M\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AN}}}\mbox{\label{globals_8h_a723f289c2be966c5e6c8dfe3d0b46f1ea5bd42edcea28ad65a046391d8af6dfd8}} 
+S\+U\+M\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AN&Sum and mean a definite value of samples. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{W\+A\+IT@{W\+A\+IT}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!W\+A\+IT@{W\+A\+IT}}}\mbox{\label{globals_8h_a723f289c2be966c5e6c8dfe3d0b46f1ea79a322ccb4b29b85b3cab52dbccefd17}} 
+W\+A\+IT&The second emg waits until the first emg has a valid value. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{W\+A\+I\+T\+\_\+\+EoC@{W\+A\+I\+T\+\_\+\+EoC}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!W\+A\+I\+T\+\_\+\+EoC@{W\+A\+I\+T\+\_\+\+EoC}}}\mbox{\label{globals_8h_a723f289c2be966c5e6c8dfe3d0b46f1ea81de86f7e28eb45b782fe4f79470575b}} 
+W\+A\+I\+T\+\_\+\+EoC&The second emg waits for end of calibration. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Variable Documentation}
+\mbox{\label{globals_8h_ab4765549a3f6990d35f3d0740263b254}} 
+\index{globals.\+h@{globals.\+h}!battery\+\_\+low\+\_\+\+SoC@{battery\+\_\+low\+\_\+\+SoC}}
+\index{battery\+\_\+low\+\_\+\+SoC@{battery\+\_\+low\+\_\+\+SoC}!globals.\+h@{globals.\+h}}
+\subsubsection{battery\+\_\+low\+\_\+\+SoC}
+{\footnotesize\ttfamily uint8 battery\+\_\+low\+\_\+\+SoC}
+
+Battery low State of Charge flag (re-\/open terminal device when active). \mbox{\label{globals_8h_a3ad3057028e3ab399e1d1549a8d67ab9}} 
+\index{globals.\+h@{globals.\+h}!c\+\_\+mem@{c\+\_\+mem}}
+\index{c\+\_\+mem@{c\+\_\+mem}!globals.\+h@{globals.\+h}}
+\subsubsection{c\+\_\+mem}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+eeprom} g\+\_\+mem c\+\_\+mem}
+
+Memory parameters. \mbox{\label{globals_8h_aed96fdd8308fe2c4fc07c3b5db1c7bbb}} 
+\index{globals.\+h@{globals.\+h}!calib@{calib}}
+\index{calib@{calib}!globals.\+h@{globals.\+h}}
+\subsubsection{calib}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+calib} calib}
+
+Calibration variables. \mbox{\label{globals_8h_acd57396ca1b2a02a76877acecd29ddb0}} 
+\index{globals.\+h@{globals.\+h}!can\+\_\+write@{can\+\_\+write}}
+\index{can\+\_\+write@{can\+\_\+write}!globals.\+h@{globals.\+h}}
+\subsubsection{can\+\_\+write}
+{\footnotesize\ttfamily C\+Y\+B\+IT can\+\_\+write}
+
+Write to E\+E\+P\+R\+OM flag. \mbox{\label{globals_8h_a55787e40db60be586171023875f15130}} 
+\index{globals.\+h@{globals.\+h}!change\+\_\+ext\+\_\+ref\+\_\+flag@{change\+\_\+ext\+\_\+ref\+\_\+flag}}
+\index{change\+\_\+ext\+\_\+ref\+\_\+flag@{change\+\_\+ext\+\_\+ref\+\_\+flag}!globals.\+h@{globals.\+h}}
+\subsubsection{change\+\_\+ext\+\_\+ref\+\_\+flag}
+{\footnotesize\ttfamily uint8 change\+\_\+ext\+\_\+ref\+\_\+flag}
+
+This flag is set when an external reference command is received. \mbox{\label{globals_8h_a910e6d34a0bb2e8dbaf576e06bdf56f5}} 
+\index{globals.\+h@{globals.\+h}!cycle\+\_\+time@{cycle\+\_\+time}}
+\index{cycle\+\_\+time@{cycle\+\_\+time}!globals.\+h@{globals.\+h}}
+\subsubsection{cycle\+\_\+time}
+{\footnotesize\ttfamily float cycle\+\_\+time}
+
+Variable used to calculate how much time a cycle takes. \mbox{\label{globals_8h_a9c58c534e60c7991a92a13d012e7ef86}} 
+\index{globals.\+h@{globals.\+h}!cycles\+\_\+interrupt\+\_\+flag@{cycles\+\_\+interrupt\+\_\+flag}}
+\index{cycles\+\_\+interrupt\+\_\+flag@{cycles\+\_\+interrupt\+\_\+flag}!globals.\+h@{globals.\+h}}
+\subsubsection{cycles\+\_\+interrupt\+\_\+flag}
+{\footnotesize\ttfamily C\+Y\+B\+IT cycles\+\_\+interrupt\+\_\+flag}
+
+Cycles timer interrupt flag enabler. \mbox{\label{globals_8h_a9087b28d15f17c6475922ba6943b14f3}} 
+\index{globals.\+h@{globals.\+h}!cycles\+\_\+status@{cycles\+\_\+status}}
+\index{cycles\+\_\+status@{cycles\+\_\+status}!globals.\+h@{globals.\+h}}
+\subsubsection{cycles\+\_\+status}
+{\footnotesize\ttfamily \textbf{ counter\+\_\+status} C\+Y\+D\+A\+TA cycles\+\_\+status}
+
+Cycles counter state machine status. \mbox{\label{globals_8h_ac7fdc35fc8e87ead9b45028d6034fb1b}} 
+\index{globals.\+h@{globals.\+h}!dev\+\_\+pwm\+\_\+limit@{dev\+\_\+pwm\+\_\+limit}}
+\index{dev\+\_\+pwm\+\_\+limit@{dev\+\_\+pwm\+\_\+limit}!globals.\+h@{globals.\+h}}
+\subsubsection{dev\+\_\+pwm\+\_\+limit}
+{\footnotesize\ttfamily uint8 dev\+\_\+pwm\+\_\+limit[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]}
+
+Device pwm limit. It may change during execution. \mbox{\label{globals_8h_a2e254e60f92958e2fdec99dde626dca6}} 
+\index{globals.\+h@{globals.\+h}!dev\+\_\+pwm\+\_\+sat@{dev\+\_\+pwm\+\_\+sat}}
+\index{dev\+\_\+pwm\+\_\+sat@{dev\+\_\+pwm\+\_\+sat}!globals.\+h@{globals.\+h}}
+\subsubsection{dev\+\_\+pwm\+\_\+sat}
+{\footnotesize\ttfamily uint8 dev\+\_\+pwm\+\_\+sat[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]}
+
+Device pwm saturation.
+
+Device pwm saturation. By default the saturation value must not exceed 100. \mbox{\label{globals_8h_aada869b6650bdd87ca481109ae08231c}} 
+\index{globals.\+h@{globals.\+h}!dev\+\_\+tension@{dev\+\_\+tension}}
+\index{dev\+\_\+tension@{dev\+\_\+tension}!globals.\+h@{globals.\+h}}
+\subsubsection{dev\+\_\+tension}
+{\footnotesize\ttfamily int32 dev\+\_\+tension[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]}
+
+Power supply tension. \mbox{\label{globals_8h_aa2494c7cd8f096ca7f2ead0a1430a597}} 
+\index{globals.\+h@{globals.\+h}!dev\+\_\+tension\+\_\+f@{dev\+\_\+tension\+\_\+f}}
+\index{dev\+\_\+tension\+\_\+f@{dev\+\_\+tension\+\_\+f}!globals.\+h@{globals.\+h}}
+\subsubsection{dev\+\_\+tension\+\_\+f}
+{\footnotesize\ttfamily int32 dev\+\_\+tension\+\_\+f[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]}
+
+Filtered power supply tension. \mbox{\label{globals_8h_a433230c4343adf14967e6f4f9082b199}} 
+\index{globals.\+h@{globals.\+h}!emg\+\_\+1\+\_\+status@{emg\+\_\+1\+\_\+status}}
+\index{emg\+\_\+1\+\_\+status@{emg\+\_\+1\+\_\+status}!globals.\+h@{globals.\+h}}
+\subsubsection{emg\+\_\+1\+\_\+status}
+{\footnotesize\ttfamily \textbf{ emg\+\_\+status} C\+Y\+D\+A\+TA emg\+\_\+1\+\_\+status}
+
+First E\+MG sensor status. \mbox{\label{globals_8h_a7eef8180f636a73854d52b58e2be4e51}} 
+\index{globals.\+h@{globals.\+h}!emg\+\_\+2\+\_\+status@{emg\+\_\+2\+\_\+status}}
+\index{emg\+\_\+2\+\_\+status@{emg\+\_\+2\+\_\+status}!globals.\+h@{globals.\+h}}
+\subsubsection{emg\+\_\+2\+\_\+status}
+{\footnotesize\ttfamily \textbf{ emg\+\_\+status} C\+Y\+D\+A\+TA emg\+\_\+2\+\_\+status}
+
+Second E\+MG sensor status. \mbox{\label{globals_8h_aad3d2663356b48553e2b22e0a9fd917e}} 
+\index{globals.\+h@{globals.\+h}!filt\+\_\+emg@{filt\+\_\+emg}}
+\index{filt\+\_\+emg@{filt\+\_\+emg}!globals.\+h@{globals.\+h}}
+\subsubsection{filt\+\_\+emg}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+filter} filt\+\_\+emg[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS}+\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+D\+D\+I\+T\+I\+O\+N\+A\+L\+\_\+\+E\+M\+GS}]}
+
+E\+MG filter variables. \mbox{\label{globals_8h_ad09553d6780c43066a9ac4385658bcf1}} 
+\index{globals.\+h@{globals.\+h}!filt\+\_\+i@{filt\+\_\+i}}
+\index{filt\+\_\+i@{filt\+\_\+i}!globals.\+h@{globals.\+h}}
+\subsubsection{filt\+\_\+i}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+filter} filt\+\_\+i[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]}
+
+Voltage and current filter variables. \mbox{\label{globals_8h_af2dc9b0614aeaf7a377d209416bee61c}} 
+\index{globals.\+h@{globals.\+h}!filt\+\_\+vel@{filt\+\_\+vel}}
+\index{filt\+\_\+vel@{filt\+\_\+vel}!globals.\+h@{globals.\+h}}
+\subsubsection{filt\+\_\+vel}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+filter} filt\+\_\+vel[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS}]}
+
+Velocity filter variables. \mbox{\label{globals_8h_a0f13b80a0c329fa3176eb1e72ef36fb8}} 
+\index{globals.\+h@{globals.\+h}!forced\+\_\+open@{forced\+\_\+open}}
+\index{forced\+\_\+open@{forced\+\_\+open}!globals.\+h@{globals.\+h}}
+\subsubsection{forced\+\_\+open}
+{\footnotesize\ttfamily uint8 forced\+\_\+open}
+
+Forced open flag (used in position with rest position control). \mbox{\label{globals_8h_a85e15a194417ebcd15f662bd9bcfdded}} 
+\index{globals.\+h@{globals.\+h}!g\+\_\+emg\+\_\+meas\+Old@{g\+\_\+emg\+\_\+meas\+Old}}
+\index{g\+\_\+emg\+\_\+meas\+Old@{g\+\_\+emg\+\_\+meas\+Old}!globals.\+h@{globals.\+h}}
+\subsubsection{g\+\_\+emg\+\_\+meas\+Old}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+emg\+\_\+meas} g\+\_\+emg\+\_\+meas g\+\_\+emg\+\_\+meas\+Old}
+
+E\+MG Measurements. \mbox{\label{globals_8h_a7b175385b2b9418fa7159c72d0f470fd}} 
+\index{globals.\+h@{globals.\+h}!g\+\_\+meas\+Old@{g\+\_\+meas\+Old}}
+\index{g\+\_\+meas\+Old@{g\+\_\+meas\+Old}!globals.\+h@{globals.\+h}}
+\subsubsection{g\+\_\+meas\+Old}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+meas} g\+\_\+meas\+Old[\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}]}
+
+Measurements. \mbox{\label{globals_8h_aab927f8d9bc1a835daed821aa97b9335}} 
+\index{globals.\+h@{globals.\+h}!g\+\_\+ref\+Old@{g\+\_\+ref\+Old}}
+\index{g\+\_\+ref\+Old@{g\+\_\+ref\+Old}!globals.\+h@{globals.\+h}}
+\subsubsection{g\+\_\+ref\+Old}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+ref} g\+\_\+ref\+Old[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]}
+
+Reference variables. \mbox{\label{globals_8h_aa963ce8fafc11e104eb7ee22982d0345}} 
+\index{globals.\+h@{globals.\+h}!g\+\_\+rx@{g\+\_\+rx}}
+\index{g\+\_\+rx@{g\+\_\+rx}!globals.\+h@{globals.\+h}}
+\subsubsection{g\+\_\+rx}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+data} g\+\_\+rx}
+
+Incoming/\+Outcoming data. \mbox{\label{globals_8h_a1e6fda88dfdabc63859f8907eb702920}} 
+\index{globals.\+h@{globals.\+h}!interrupt\+\_\+flag@{interrupt\+\_\+flag}}
+\index{interrupt\+\_\+flag@{interrupt\+\_\+flag}!globals.\+h@{globals.\+h}}
+\subsubsection{interrupt\+\_\+flag}
+{\footnotesize\ttfamily C\+Y\+B\+IT interrupt\+\_\+flag}
+
+Interrupt flag enabler. \mbox{\label{globals_8h_a7bdd0aaa2a8c38bd61f34d76d3a69dbf}} 
+\index{globals.\+h@{globals.\+h}!maintenance\+\_\+flag@{maintenance\+\_\+flag}}
+\index{maintenance\+\_\+flag@{maintenance\+\_\+flag}!globals.\+h@{globals.\+h}}
+\subsubsection{maintenance\+\_\+flag}
+{\footnotesize\ttfamily uint8 maintenance\+\_\+flag}
+
+Maintenance flag. \mbox{\label{globals_8h_ab302ef69391ec5a0b59dadb9c7d2a3ef}} 
+\index{globals.\+h@{globals.\+h}!N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+N\+A\+L\+O\+G\+\_\+\+I\+N\+P\+U\+TS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+N\+A\+L\+O\+G\+\_\+\+I\+N\+P\+U\+TS}}
+\index{N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+N\+A\+L\+O\+G\+\_\+\+I\+N\+P\+U\+TS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+N\+A\+L\+O\+G\+\_\+\+I\+N\+P\+U\+TS}!globals.\+h@{globals.\+h}}
+\subsubsection{N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+N\+A\+L\+O\+G\+\_\+\+I\+N\+P\+U\+TS}
+{\footnotesize\ttfamily uint8 N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+N\+A\+L\+O\+G\+\_\+\+I\+N\+P\+U\+TS}
+
+A\+DC measurements buffer (sizeof buffer equal to maximum number of A\+DC channels).
+
+A\+DC measurements buffer. \mbox{\label{globals_8h_a1c717f431f1d1ea4a500f6027102d001}} 
+\index{globals.\+h@{globals.\+h}!pow\+\_\+tension@{pow\+\_\+tension}}
+\index{pow\+\_\+tension@{pow\+\_\+tension}!globals.\+h@{globals.\+h}}
+\subsubsection{pow\+\_\+tension}
+{\footnotesize\ttfamily int32 pow\+\_\+tension[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]}
+
+Computed power supply tension. \mbox{\label{globals_8h_a8ac7ad7c894db750e93bc745818e26ca}} 
+\index{globals.\+h@{globals.\+h}!pwm\+\_\+sign@{pwm\+\_\+sign}}
+\index{pwm\+\_\+sign@{pwm\+\_\+sign}!globals.\+h@{globals.\+h}}
+\subsubsection{pwm\+\_\+sign}
+{\footnotesize\ttfamily int8 pwm\+\_\+sign}
+
+A\+DC currently configured channels. Sign of pwm driven. Used to obtain current sign. \mbox{\label{globals_8h_aa89a782cfe75ce7970236babd308fe69}} 
+\index{globals.\+h@{globals.\+h}!reset\+\_\+last\+\_\+value\+\_\+flag@{reset\+\_\+last\+\_\+value\+\_\+flag}}
+\index{reset\+\_\+last\+\_\+value\+\_\+flag@{reset\+\_\+last\+\_\+value\+\_\+flag}!globals.\+h@{globals.\+h}}
+\subsubsection{reset\+\_\+last\+\_\+value\+\_\+flag}
+{\footnotesize\ttfamily C\+Y\+B\+IT reset\+\_\+last\+\_\+value\+\_\+flag}
+
+This flag is set when the encoders last values must be resetted. \mbox{\label{globals_8h_a7f81d1d66186b1c7cd358ea7cfff2caf}} 
+\index{globals.\+h@{globals.\+h}!reset\+\_\+\+P\+So\+C\+\_\+flag@{reset\+\_\+\+P\+So\+C\+\_\+flag}}
+\index{reset\+\_\+\+P\+So\+C\+\_\+flag@{reset\+\_\+\+P\+So\+C\+\_\+flag}!globals.\+h@{globals.\+h}}
+\subsubsection{reset\+\_\+\+P\+So\+C\+\_\+flag}
+{\footnotesize\ttfamily C\+Y\+B\+IT reset\+\_\+\+P\+So\+C\+\_\+flag}
+
+This flag is set when a board fw reset is necessary. \mbox{\label{globals_8h_a1f8839fadee52a47a0042eaa695c3f3a}} 
+\index{globals.\+h@{globals.\+h}!rest\+\_\+enabled@{rest\+\_\+enabled}}
+\index{rest\+\_\+enabled@{rest\+\_\+enabled}!globals.\+h@{globals.\+h}}
+\subsubsection{rest\+\_\+enabled}
+{\footnotesize\ttfamily uint8 rest\+\_\+enabled}
+
+Rest position flag. \mbox{\label{globals_8h_a485e5b90bbfb79aa97f874873cd6c93a}} 
+\index{globals.\+h@{globals.\+h}!rest\+\_\+pos\+\_\+curr\+\_\+ref@{rest\+\_\+pos\+\_\+curr\+\_\+ref}}
+\index{rest\+\_\+pos\+\_\+curr\+\_\+ref@{rest\+\_\+pos\+\_\+curr\+\_\+ref}!globals.\+h@{globals.\+h}}
+\subsubsection{rest\+\_\+pos\+\_\+curr\+\_\+ref}
+{\footnotesize\ttfamily int32 rest\+\_\+pos\+\_\+curr\+\_\+ref}
+
+Rest position current reference. \mbox{\label{globals_8h_ac42fa606610c2600210d9b7b2c1d0882}} 
+\index{globals.\+h@{globals.\+h}!tension\+\_\+valid@{tension\+\_\+valid}}
+\index{tension\+\_\+valid@{tension\+\_\+valid}!globals.\+h@{globals.\+h}}
+\subsubsection{tension\+\_\+valid}
+{\footnotesize\ttfamily C\+Y\+B\+IT tension\+\_\+valid}
+
+Tension validation bit. \mbox{\label{globals_8h_a2c95347784600e4a45d481b37eeeef4b}} 
+\index{globals.\+h@{globals.\+h}!timer\+\_\+value@{timer\+\_\+value}}
+\index{timer\+\_\+value@{timer\+\_\+value}!globals.\+h@{globals.\+h}}
+\subsubsection{timer\+\_\+value}
+{\footnotesize\ttfamily uint16 timer\+\_\+value}
+
+End time of the firmware main loop. \mbox{\label{globals_8h_a82c5883d1d4a600a1073686f917a812d}} 
+\index{globals.\+h@{globals.\+h}!timer\+\_\+value0@{timer\+\_\+value0}}
+\index{timer\+\_\+value0@{timer\+\_\+value0}!globals.\+h@{globals.\+h}}
+\subsubsection{timer\+\_\+value0}
+{\footnotesize\ttfamily uint16 timer\+\_\+value0}
+
+Start time of the firmware main loop. 

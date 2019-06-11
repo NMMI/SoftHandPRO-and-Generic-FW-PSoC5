@@ -36,17 +36,16 @@
 * \file         main.c
 *
 * \brief        Firmware main file.
-* \date         October 01, 2017
+* \date         May 31, 2019
 * \author       _Centro "E.Piaggio"_
-* \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
-* \copyright    (C) 2017-2019 Centro "E.Piaggio". All rights reserved.
+* \copyright    (C) 2019 Centro "E.Piaggio". All rights reserved.
 * \mainpage     Firmware
-* \brief        This is the firmware of the SoftHand Pro board.
+* \brief        This is the firmware of PSoC5 logic board.
 * \version      1.0
 *
-* \details      This is the firmware of the SoftHand Pro board. It can control a motor and
-*               read its encoder. Also can read and convert analog measurements
-*               connected to the PSoC microcontroller.                
+* \details      This is the firmware of PSoC5 logic board. Depending on the configuration, 
+*               it can control up to two motors and read its encoders. Also can read and
+*               convert analog measurements connected to the PSoC microcontroller.                
 *
 */
 

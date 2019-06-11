@@ -73,5 +73,7 @@ void set_RTC_time();
 // SD functions
 void InitSD_FS();
 void Write_SD_Param_file();
+void Read_SD_Param(char*, int);
+void Read_SD_Data(char*, int);
 
 /* [] END OF FILE */

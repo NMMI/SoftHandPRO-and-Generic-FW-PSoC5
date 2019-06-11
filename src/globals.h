@@ -66,8 +66,8 @@
 #define NUM_OF_INPUT_EMGS       2       /*!< Number of emg channels.*/
 #define NUM_OF_ADDITIONAL_EMGS  6       /*!< Number of additional emg channels.*/
 #define NUM_OF_ADC_CHANNELS_MAX (4+NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS)    
-#define NUM_OF_PARAMS           48      /*!< Number of parameters saved in the EEPROM.*/
-#define NUM_OF_PARAMS_MENU      9       /*!< Number of parameters menu.*/    
+#define NUM_OF_PARAMS           71      /*!< Number of parameters saved in the EEPROM.*/
+#define NUM_OF_PARAMS_MENU      10      /*!< Number of parameters menu.*/    
 #define N_IMU_MAX               5    
 #define NUM_OF_IMU_DATA         5       // accelerometers, gyroscopes, magnetometers, quaternion and temperature data
 #define N_ENCODER_LINE_MAX      2       /*!< Max number of CS lines which can contain encoders.*/
@@ -132,6 +132,44 @@
 //==============================================================================
 #define RIGHT_HAND              0
 #define LEFT_HAND               1   
+    
+//==============================================================================
+//                                                                          USER
+//==============================================================================
+#define NUM_OF_USERS    3
+#define GENERIC_USER    0
+#define MARIA           1
+#define ROZA            2   
+    
+//==============================================================================
+//                                                                   DEVICE TYPE
+//==============================================================================
+#define SOFTHAND_PRO        0
+#define GENERIC_2_MOTORS    1
+#define CUFF                2
+
+//==============================================================================
+//                                                                   MOTOR GEARS
+//==============================================================================
+    
+// Number of teeth of the two gears
+#define SH_N1 35           /*!< Number of teeth of the first encoder gear in SoftHandPro device.*/
+#define SH_N2 3            /*!< Number of teeth of the second encoder gear in SoftHandPro device.*/
+#define SH_I1 -1           /*!< First gear invariant value in SoftHandPro device.*/
+//#define SH_I2 12         /*!< Second gear invariant value in SoftHandPro device.*/
+    
+//==============================================================================
+//                                                              STRUCTURES INDEX
+//==============================================================================
+// First digit: struct, Second digit: index, e.g. ST_MOTOR_0 10, ST_MOTOR_1 11    
+#define ST_DEVICE       0
+#define ST_MOTOR        10          
+#define ST_ENCODER      20
+#define ST_EMG          30
+#define ST_IMU          40
+#define ST_EXPANSION    50
+#define ST_USER         60
+#define ST_SH_SPEC      70   
     
 //==============================================================================
 //                                                                         OTHER
@@ -224,7 +262,9 @@ struct st_device{
     uint8   reset_counters;             /*!< Reset counters flag.*/                                         //1
     uint8   use_2nd_motor_flag;         /*!< Use 2nd motor (2 powers).*/                                    //1
     uint8   baud_rate;                  /*!< Baud Rate setted.*/                                            //1
-    uint8   unused_bytes[5];            /*!< Unused bytes to fill row.*/                                    //8
+    uint8   user_id;                    /*!< User identificator (if usual user).*/                          //1
+    uint8   dev_type;                   /*!< Device type identificator.*/                                   //1
+    uint8   unused_bytes[3];            /*!< Unused bytes to fill row.*/                                    //3
 };                                                                                                          // TOTAL: 16 BYTES
 
 struct st_motor{
@@ -259,13 +299,15 @@ struct st_motor{
 };                                                                                                          // TOTAL: 112 BYTES
 
 struct st_encoder{
-    uint8   Encoder_conf[N_ENCODERS_PER_LINE_MAX]; /*!< Encoder configuration flags.*/                      //5
+    uint8   Enc_raw_read_conf[N_ENCODERS_PER_LINE_MAX]; /*!< Encoder configuration flags for raw reading.*/ //5
     uint8   res[NUM_OF_SENSORS];        /*!< Angle resolution.*/                                            //3
     int32   m_off[NUM_OF_SENSORS];      /*!< Measurement offset.*/                                          //12 
     float32 m_mult[NUM_OF_SENSORS];     /*!< Measurement multiplier.*/                                      //12
     uint8   double_encoder_on_off;      /*!< Double encoder ON/OFF.*/                                       //1
+    uint8   Enc_idx_use_for_control[NUM_OF_SENSORS]; /*!< Indices of encoder used for motor control.*/      //3
     int8    motor_handle_ratio;         /*!< Discrete multiplier for handle device.*/                       //1
-    uint8   unused_bytes[14];           /*!< Unused bytes to fill row.*/                                    //14
+    int8    gears_params[3];            /*!< Number of teeth of first and second gear and related invariant.*/  //3
+    uint8   unused_bytes[8];            /*!< Unused bytes to fill row.*/                                    //8
 };                                                                                                          // TOTAL: 48 BYTES
 
 struct st_emg{
@@ -286,11 +328,16 @@ struct st_imu{
 
 struct st_expansion{
     uint8   curr_time[6];               /*!< Current time from RTC (DD/MM/YY HH:MM:SS).*/                   //6 
-    char    user_code_string[8];        /*!< User code.*/                                                   //8
     uint8   read_exp_port_flag;         /*!< Enable Expansion Port.*/                                       //1
     uint8   read_ADC_sensors_port_flag; /*!< Enable ADC sensors Port.*/                                     //1
     uint8   ADC_conf[NUM_OF_ADC_CHANNELS_MAX];  /*!< ADC configuration flags.*/                             //12
-    uint8   unused_bytes[4];           /*!< Unused bytes to fill row.*/                                    //4
+    uint8   unused_bytes[12];           /*!< Unused bytes to fill row.*/                                    //12
+};                                                                                                          // TOTAL: 32 BYTES
+
+struct st_user{
+    char    user_code_string[8];        /*!< User code string.*/                                            //8
+    struct  st_emg user_emg;            /*!< st_emg structure to store user emg values.*/                   //16
+    uint8   unused_bytes[8];            /*!< Unused bytes to fill row.*/                                    //8
 };                                                                                                          // TOTAL: 32 BYTES
 
 struct st_SH_spec{
@@ -315,15 +362,10 @@ struct st_eeprom {
     struct st_emg emg;                  /*!< EMG variables.*/                                               //1 row     (End of row 32)
     struct st_imu imu;                  /*!< IMU general variables.*/                                       //2 rows    (End of row 34)
     struct st_expansion exp;            /*!< SD and ADC variables.*/                                        //2 rows    (End of row 36)  
-
-//#ifdef SOFTHAND_FW
-    struct st_SH_spec SH;               /*!< SoftHand specific variables.*/                                 //1 row     (End of row 37)
-//#endif
-
-//#ifdef CYBATHLON_EXT
-    uint8 pilot_id;
-    struct st_emg pilot_emg[3];
-//#endif    
+    struct st_user user[NUM_OF_USERS];  /*!< User variables.*/                                              //2*3 rows  (End of row 42)
+    
+    struct st_SH_spec SH;               /*!< SoftHand specific variables.*/                                 //1 row     (End of row 43)
+ 
 
 #ifdef GENERIC_FW
     //struct st_CUFF_spec CUFF_spec;
@@ -439,6 +481,8 @@ extern int32 rest_pos_curr_ref;                     /*!< Rest position current r
 
 // SD variables
 extern FS_FILE * pFile;
+extern char sdFile[100];
+extern char sdParam[100];
 
 // IMU variables
 extern uint8 N_IMU_Connected;

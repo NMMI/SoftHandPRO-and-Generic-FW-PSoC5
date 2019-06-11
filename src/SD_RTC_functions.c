@@ -139,8 +139,7 @@ void set_RTC_time(){
 void InitSD_FS()
 {
     //char sdFile[12] = "";              // No long file name (LFN) support enabled. Max 12 chars for file name
-    char sdFile[100] = "";
-    char sdParam[100] = "";
+
     char sdDir[100] = "";
     char lastsdParam[100] = "";
     char info_[2500] = "";
@@ -158,7 +157,7 @@ void InitSD_FS()
     FS_FAT_SupportLFN();
         
     // Create Filesystem with USER\YYYY\MM\DD folder
-    sprintf(sdDir, "\\%s", g_mem.exp.user_code_string); 
+    sprintf(sdDir, "\\%s", g_mem.user[g_mem.dev.user_id].user_code_string); 
     FS_MkDir(sdDir);
     sprintf(sdDir, "%s\\20%02d", sdDir, g_mem.exp.curr_time[2]); 
     FS_MkDir(sdDir);
@@ -233,4 +232,41 @@ void Write_SD_Param_file(){
     
     prepare_SD_param_info(info_);
     FS_Write(pFile, info_, strlen(info_));
+}
+
+/*******************************************************************************
+* Function Name: Read SD Param File
+*********************************************************************************/
+void Read_SD_Param(char* info_param, int n_p){
+    int i;
+    FS_FILE* pParam;
+    
+    // Open param file in read mode
+    pParam = FS_FOpen(sdParam, "r");
+    if (pParam != 0) {
+        i = FS_FRead(info_param, 1, n_p, pParam);
+        info_param[i] = 0;
+    }
+    FS_FClose(pParam);
+}
+
+/*******************************************************************************
+* Function Name: Read SD Data File
+*********************************************************************************/
+void Read_SD_Data(char* info_data, int n_d){
+    int i;
+    FS_FILE* pData;
+    
+    FS_FClose(pFile);
+    
+    // Open data file in read mode    
+    pData = FS_FOpen(sdFile, "r");
+    if (pData != 0) {
+        i = FS_FRead(info_data, 1, n_d, pFile);
+        info_data[i] = 0;  
+    }
+    FS_FClose(pData);
+    
+    // Before exiting, reopen data file in append mode
+    pFile = FS_FOpen(sdFile, "a");
 }

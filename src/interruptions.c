@@ -265,6 +265,9 @@ void function_scheduler(void) {
     static uint16 counter_tension_func = DIV_INIT_VALUE;
     char info_[2500] = "";
     
+    uint8 MOTOR_IDX = 0;
+    uint8 SECOND_MOTOR_IDX = 1;
+    
     MY_TIMER_REG_Write(0x00);
     timer_value0 = (uint32)MY_TIMER_ReadCounter();
 
@@ -279,62 +282,16 @@ void function_scheduler(void) {
         interrupt_manager();
     }
     
-
-#ifdef SOFTHAND_FW  
-       
-    //---------------------------------- Get Encoders
-    
-    // Get CS0 encoder line for RIGHT HAND and CS1 line for LEFT HAND
-    if (N_Encoder_Line_Connected[c_mem.motor[0].encoder_line] > 0) {
-        // Change CS only if there are attached encoders on the line
-        Change_CS_EncoderLine(c_mem.motor[0].encoder_line);
+    if (c_mem.dev.dev_type == SOFTHAND_PRO){
         
-        encoder_reading_SPI(c_mem.motor[0].encoder_line, 0);    // assoc_motor = 0 for SoftHand
-
-        // Check Interrupt     
+        //---------------------------------- Get Encoders
         
-        if (interrupt_flag){
-            interrupt_flag = FALSE;
-            interrupt_manager();
-        }
-    }
-    
-    //---------------------------------- Control SH Motor
-    
-    motor_control_SH();
-
-    // Check Interrupt 
-
-    if (interrupt_flag){
-        interrupt_flag = FALSE;
-        interrupt_manager();
-    }
-    
-#else
-    // GENERIC_FW
-
-    //---------------------------------- Get Encoders
-
-    for (uint8 i = 0; i < N_ENCODER_LINE_MAX; i++) {
-        if (N_Encoder_Line_Connected[i] > 0) {
+        // Get CS0 encoder line for RIGHT HAND and CS1 line for LEFT HAND
+        if (N_Encoder_Line_Connected[c_mem.motor[MOTOR_IDX].encoder_line] > 0) {
             // Change CS only if there are attached encoders on the line
-            Change_CS_EncoderLine(i);
-                      
-            if (c_mem.motor[0].encoder_line == i) {
-                // Check if the line is used to control motor or not
-                encoder_reading_SPI(i, 0); 
-            }
-            else {
-                if (c_mem.motor[1].encoder_line == i) {
-                    // Check if the line is used to control motor or not
-                    encoder_reading_SPI(i, 1); 
-                }
-                else {
-                    // Get only raw encoder value
-                    ReadEncoderLine(N_Encoder_Line_Connected[i], i);
-                    // Values are stored in Encoder_Value[i] vector
-                }
-            }
+            Change_CS_EncoderLine(c_mem.motor[MOTOR_IDX].encoder_line);
+            
+            encoder_reading_SPI(c_mem.motor[MOTOR_IDX].encoder_line, 0);    // assoc_motor = 0 for SoftHand
 
             // Check Interrupt     
             
@@ -343,23 +300,56 @@ void function_scheduler(void) {
                 interrupt_manager();
             }
         }
-    } 
-    
-    //---------------------------------- Control Motor
-    
-    // Control 1st motor (always active) according to motor driver type
-    motor_control_generic(0);
-    
-    // Check Interrupt 
+        
+        //---------------------------------- Control SH Motor
+        
+        motor_control_SH();
 
-    if (interrupt_flag){
-        interrupt_flag = FALSE;
-        interrupt_manager();
+        // Check Interrupt 
+
+        if (interrupt_flag){
+            interrupt_flag = FALSE;
+            interrupt_manager();
+        }  
     }
-    
-    // Control 2nd motor (if necessary) according to motor driver type
-    if (c_mem.dev.use_2nd_motor_flag == TRUE){
-        motor_control_generic(1);
+    else {      // GENERIC device
+
+        //---------------------------------- Get Encoders
+
+        for (uint8 i = 0; i < N_ENCODER_LINE_MAX; i++) {
+            if (N_Encoder_Line_Connected[i] > 0) {
+                // Change CS only if there are attached encoders on the line
+                Change_CS_EncoderLine(i);
+                          
+                if (c_mem.motor[MOTOR_IDX].encoder_line == i) {
+                    // Check if the line is used to control motor or not
+                    encoder_reading_SPI(i, MOTOR_IDX); 
+                }
+                else {
+                    if (c_mem.motor[SECOND_MOTOR_IDX].encoder_line == i) {
+                        // Check if the line is used to control motor or not
+                        encoder_reading_SPI(i, SECOND_MOTOR_IDX); 
+                    }
+                    else {
+                        // Get only raw encoder value
+                        ReadEncoderLine(N_Encoder_Line_Connected[i], i);
+                        // Values are stored in Encoder_Value[i] vector
+                    }
+                }
+
+                // Check Interrupt     
+                
+                if (interrupt_flag){
+                    interrupt_flag = FALSE;
+                    interrupt_manager();
+                }
+            }
+        } 
+        
+        //---------------------------------- Control Motor
+        
+        // Control MOTOR_IDX motor (always active) according to motor driver type
+        motor_control_generic(MOTOR_IDX);
         
         // Check Interrupt 
 
@@ -367,8 +357,19 @@ void function_scheduler(void) {
             interrupt_flag = FALSE;
             interrupt_manager();
         }
-    }  
-#endif
+        
+        // Control 2nd motor (if necessary) according to motor driver type
+        if (c_mem.dev.use_2nd_motor_flag == TRUE){
+            motor_control_generic(SECOND_MOTOR_IDX);
+            
+            // Check Interrupt 
+
+            if (interrupt_flag){
+                interrupt_flag = FALSE;
+                interrupt_manager();
+            }
+        }  
+    }
 
     //---------------------------------- Read conversion buffer - LOCK function
 
@@ -408,26 +409,26 @@ void function_scheduler(void) {
         interrupt_manager();
     }
     
-#ifdef SOFTHAND_FW    
+    if (c_mem.dev.dev_type == SOFTHAND_PRO){   
     
-    //---------------------------------- Rest position check
+        //---------------------------------- Rest position check
 
-    // Divider 10, freq = 500 Hz
-    if (c_mem.SH.rest_position_flag == TRUE){
-        if (counter_calibration == CALIBRATION_DIV) {
-                check_rest_position();
-                counter_calibration = 0;
-        }
-        counter_calibration++;
+        // Divider 10, freq = 500 Hz
+        if (c_mem.SH.rest_position_flag == TRUE){
+            if (counter_calibration == CALIBRATION_DIV) {
+                    check_rest_position();
+                    counter_calibration = 0;
+            }
+            counter_calibration++;
 
-        // Check Interrupt     
-        if (interrupt_flag){
-            interrupt_flag = FALSE;
-            interrupt_manager();
+            // Check Interrupt     
+            if (interrupt_flag){
+                interrupt_flag = FALSE;
+                interrupt_manager();
+            }
         }
+        
     }
-    
-#endif    
     //---------------------------------- Control Cycles Counter
 
     cycles_counter_update();
@@ -506,11 +507,11 @@ void function_scheduler(void) {
         interrupt_manager();
     }
 
-#ifdef SOFTHAND_FW
-    if (c_mem.motor[0].input_mode == INPUT_MODE_EXTERNAL) {
-        change_ext_ref_flag = FALSE;
-    }   
-#endif
+    if (c_mem.dev.dev_type == SOFTHAND_PRO) {
+        if (c_mem.motor[MOTOR_IDX].input_mode == INPUT_MODE_EXTERNAL) {
+            change_ext_ref_flag = FALSE;
+        }   
+    }
 
     timer_value = (uint16)MY_TIMER_ReadCounter();
     cycle_time = ((float)(timer_value0 - timer_value)/1000000.0);
@@ -521,8 +522,6 @@ void function_scheduler(void) {
 //==============================================================================
 //                                                        MOTOR CONTROL SOFTHAND
 //==============================================================================
-#ifdef SOFTHAND_FW
-    
 void motor_control_SH() {
 
     int32 CYDATA pwm_input = 0;
@@ -532,7 +531,9 @@ void motor_control_SH() {
     int32 CYDATA handle_value;
     int32 CYDATA err_emg_1, err_emg_2;
 
-    struct st_motor* SH_MOT = &c_mem.motor[0];      // SoftHand default motor
+    uint8 MOTOR_IDX = 0;
+    
+    struct st_motor* SH_MOT = &c_mem.motor[MOTOR_IDX];      // SoftHand default motor
     uint8 SH_ENC_L = SH_MOT->encoder_line;          // Associated encoder line
     
     int32 CYDATA k_p = SH_MOT->k_p;  
@@ -982,7 +983,7 @@ void motor_control_SH() {
 
     PWM_MOTORS_WriteCompare1(abs(pwm_input));
 }
-#endif
+
 //==============================================================================
 //                                                         MOTOR CONTROL GENERIC
 //==============================================================================
@@ -1506,9 +1507,13 @@ void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor) {
     
     ReadEncoderLine(N_Encoder_Line_Connected[n_line] , n_line);         //CS0 for right hand
                                                                         //CS1 for left hand
-    for (index = 0; index < N_ENCODERS; index++) {        
+    for (int j = 0; j < N_ENCODERS; j++) {    
+        
+        // As default, index=0 reads SoftHand Pro encoder positioned on screw, while index=1 reads encoder positioned on gear    
+        index = c_mem.enc[n_line].Enc_idx_use_for_control[j];       // take encoder idx used for motor control
+        
         if (Encoder_Check[n_line][index] > 15){  // check on encoder data
-            aux_encoder[index] = (uint32)Encoder_Value[n_line][index];     // 00000000000000[20] XXXXXXXXXXXX[12]
+            aux_encoder[j] = (uint32)Encoder_Value[n_line][index];     // 00000000000000[20] XXXXXXXXXXXX[12]
         }
     }
     
@@ -1517,7 +1522,6 @@ void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor) {
     // 0 = 0 BIT
     // C = CONTROL BIT
     
-    // index=0 reads SoftHand Pro encoder positioned on screw, while index=1 reads encoder positioned on gear
     for (index = 0; index < N_ENCODERS; index++) {
         
         data_encoder_raw[index] = aux_encoder[index];
@@ -1590,14 +1594,15 @@ void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor) {
             value_encoder *= c_mem.enc[n_line].m_mult[index];
         }
 
-#ifdef SOFTHAND_FW        
-        // Right / Left hand turn
-        if (index == 0) {
-            if (c_mem.dev.right_left == RIGHT_HAND){
-                value_encoder *= -1;        
+        if (c_mem.dev.dev_type == SOFTHAND_PRO) {
+            // Right / Left hand turn
+            if (index == 0) {
+                if (c_mem.dev.right_left == RIGHT_HAND){
+                    value_encoder *= -1;        
+                }
             }
         }
-#endif        
+ 
 
         g_meas[n_line].pos[index] = value_encoder;
     
@@ -1619,7 +1624,9 @@ void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor) {
             else {
                 //Double encoder translation
                 if (c_mem.enc[n_line].double_encoder_on_off){
-                    init_rot = calc_turns_fcn(comp_value_encoder[n_line][0],comp_value_encoder[n_line][1]);
+                    init_rot = calc_turns_fcn(comp_value_encoder[n_line][0],comp_value_encoder[n_line][1], 
+                                c_mem.enc[n_line].gears_params[0], c_mem.enc[n_line].gears_params[1], c_mem.enc[n_line].gears_params[2]);
+
                     if (c_mem.enc[n_line].m_mult[0] < 0)
                         init_rot = -init_rot;
                     
