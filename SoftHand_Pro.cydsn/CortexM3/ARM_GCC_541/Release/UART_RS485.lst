@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
   55              		.thumb_func
   56              		.type	UART_RS485_Start, %function
   57              	UART_RS485_Start:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 2
 
 
   58              	.LFB0:
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
   53:Generated_Source\PSoC5/UART_RS485.c **** * Summary:
   54:Generated_Source\PSoC5/UART_RS485.c **** *  This is the preferred method to begin component operation.
   55:Generated_Source\PSoC5/UART_RS485.c **** *  UART_RS485_Start() sets the initVar variable, calls the
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 3
 
 
   56:Generated_Source\PSoC5/UART_RS485.c **** *  UART_RS485_Init() function, and then calls the
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
   86:Generated_Source\PSoC5/UART_RS485.c **** }
   84              		.loc 1 86 0
   85 001a 00BF     		nop
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 4
 
 
   86 001c 80BD     		pop	{r7, pc}
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  114 0006 0220     		movs	r0, #2
  115 0008 FFF7FEFF 		bl	CyIntSetVector
  113:Generated_Source\PSoC5/UART_RS485.c ****             CyIntSetPriority(UART_RS485_RX_VECT_NUM, UART_RS485_RX_PRIOR_NUM);
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 5
 
 
  116              		.loc 1 113 0
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  144:Generated_Source\PSoC5/UART_RS485.c ****         #endif /* End UART_RS485_TXCLKGEN_DP */
  145:Generated_Source\PSoC5/UART_RS485.c **** 
  146:Generated_Source\PSoC5/UART_RS485.c ****         /* Configure the Initial TX interrupt mask */
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 6
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 6
 
 
  147:Generated_Source\PSoC5/UART_RS485.c ****         #if (UART_RS485_TX_INTERRUPT_ENABLED)
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  173:Generated_Source\PSoC5/UART_RS485.c **** * Parameters:
  174:Generated_Source\PSoC5/UART_RS485.c **** *  None.
  175:Generated_Source\PSoC5/UART_RS485.c **** *
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 7
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 7
 
 
  176:Generated_Source\PSoC5/UART_RS485.c **** * Return:
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  201 002e 0B4B     		ldr	r3, .L9+8
  202 0030 0422     		movs	r2, #4
  203 0032 1A60     		str	r2, [r3]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 8
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 8
 
 
  197:Generated_Source\PSoC5/UART_RS485.c **** 
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  231              		.cfi_endproc
  232              	.LFE2:
  233              		.size	UART_RS485_Enable, .-UART_RS485_Enable
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 9
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 9
 
 
  234              		.section	.text.UART_RS485_Stop,"ax",%progbits
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  264 001a DBB2     		uxtb	r3, r3
  265 001c 1370     		strb	r3, [r2]
  248:Generated_Source\PSoC5/UART_RS485.c ****     #endif /* (UART_RS485_RX_ENABLED || UART_RS485_HD_ENABLED) */
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 10
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 10
 
 
  249:Generated_Source\PSoC5/UART_RS485.c **** 
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  290              		.loc 1 278 0
  291 004c 00BF     		nop
  292 004e 0837     		adds	r7, r7, #8
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 11
 
 
  293              		.cfi_def_cfa_offset 8
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  327 0004 0023     		movs	r3, #0
  299:Generated_Source\PSoC5/UART_RS485.c ****     #else
  300:Generated_Source\PSoC5/UART_RS485.c ****         return(UART_RS485_CONTROL_REG);
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 12
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 12
 
 
  301:Generated_Source\PSoC5/UART_RS485.c ****     #endif /* (UART_RS485_CONTROL_REG_REMOVED) */
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  321:Generated_Source\PSoC5/UART_RS485.c ****     #if (UART_RS485_CONTROL_REG_REMOVED)
  322:Generated_Source\PSoC5/UART_RS485.c ****         if(0u != control)
  323:Generated_Source\PSoC5/UART_RS485.c ****         {
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 13
 
 
  324:Generated_Source\PSoC5/UART_RS485.c ****             /* Suppress compiler warning */
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  356:Generated_Source\PSoC5/UART_RS485.c ****     *  Enables the output of specific status bits to the interrupt controller
  357:Generated_Source\PSoC5/UART_RS485.c ****     *
  358:Generated_Source\PSoC5/UART_RS485.c ****     *******************************************************************************/
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 14
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 14
 
 
  359:Generated_Source\PSoC5/UART_RS485.c ****     void UART_RS485_SetRxInterruptMode(uint8 intSrc) 
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  369:Generated_Source\PSoC5/UART_RS485.c ****     * Summary:
  370:Generated_Source\PSoC5/UART_RS485.c ****     *  Returns the next byte of received data. This function returns data without
  371:Generated_Source\PSoC5/UART_RS485.c ****     *  checking the status. You must check the status separately.
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 15
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 15
 
 
  372:Generated_Source\PSoC5/UART_RS485.c ****     *
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  448              		.loc 1 405 0
  449 0012 1A4B     		ldr	r3, .L27+8
  450 0014 1B78     		ldrb	r3, [r3]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 16
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 16
 
 
  451 0016 7B71     		strb	r3, [r7, #5]
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  420:Generated_Source\PSoC5/UART_RS485.c ****             {
  421:Generated_Source\PSoC5/UART_RS485.c ****                 UART_RS485_rxBufferLoopDetect = 0u;
  491              		.loc 1 421 0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 17
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 17
 
 
  492 0052 0B4B     		ldr	r3, .L27+12
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  513 006c BD46     		mov	sp, r7
  514              		.cfi_def_cfa_register 13
  515              		@ sp needed
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 18
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 18
 
 
  516 006e 80BC     		pop	{r7}
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  483:Generated_Source\PSoC5/UART_RS485.c ****     *
  484:Generated_Source\PSoC5/UART_RS485.c ****     *******************************************************************************/
  485:Generated_Source\PSoC5/UART_RS485.c ****     uint8 UART_RS485_ReadRxStatus(void) 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 19
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 19
 
 
  486:Generated_Source\PSoC5/UART_RS485.c ****     {
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  580 0030 BD46     		mov	sp, r7
  581              		.cfi_def_cfa_register 13
  582              		@ sp needed
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 20
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 20
 
 
  583 0032 80BC     		pop	{r7}
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  604              		.cfi_startproc
  605              		@ args = 0, pretend = 0, frame = 8
  606              		@ frame_needed = 1, uses_anonymous_args = 0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 21
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 21
 
 
  607              		@ link register save eliminated.
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  645 0032 D35C     		ldrb	r3, [r2, r3]
  646 0034 FB71     		strb	r3, [r7, #7]
  550:Generated_Source\PSoC5/UART_RS485.c ****             locRxBufferRead++;
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 22
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 22
 
 
  647              		.loc 1 550 0
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  575:Generated_Source\PSoC5/UART_RS485.c ****             }
  576:Generated_Source\PSoC5/UART_RS485.c **** 
  577:Generated_Source\PSoC5/UART_RS485.c ****         }
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 23
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 23
 
 
  578:Generated_Source\PSoC5/UART_RS485.c ****         else
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  604:Generated_Source\PSoC5/UART_RS485.c ****                             UART_RS485_RX_STS_STOP_ERROR | UART_RS485_RX_STS_OVERRUN)) != 0u)
  605:Generated_Source\PSoC5/UART_RS485.c ****             {
  606:Generated_Source\PSoC5/UART_RS485.c ****                 rxData = 0u;
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 24
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 24
 
 
  607:Generated_Source\PSoC5/UART_RS485.c ****             }
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  626:Generated_Source\PSoC5/UART_RS485.c ****     * Return:
  627:Generated_Source\PSoC5/UART_RS485.c ****     *  MSB contains status and LSB contains UART RX data. If the MSB is nonzero,
  628:Generated_Source\PSoC5/UART_RS485.c ****     *  an error has occurred.
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 25
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 25
 
 
  629:Generated_Source\PSoC5/UART_RS485.c ****     *
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  645:Generated_Source\PSoC5/UART_RS485.c ****     #else
  646:Generated_Source\PSoC5/UART_RS485.c ****         return ( ((uint16)UART_RS485_ReadRxStatus() << 8u) | UART_RS485_ReadRxData() );
  647:Generated_Source\PSoC5/UART_RS485.c ****     #endif /* UART_RS485_RX_INTERRUPT_ENABLED */
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 26
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 26
 
 
  648:Generated_Source\PSoC5/UART_RS485.c ****         
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  677:Generated_Source\PSoC5/UART_RS485.c ****     *  No.
  678:Generated_Source\PSoC5/UART_RS485.c ****     *
  679:Generated_Source\PSoC5/UART_RS485.c ****     * Theory:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 27
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 27
 
 
  680:Generated_Source\PSoC5/UART_RS485.c ****     *  Allows the user to find out how full the RX Buffer is.
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  698:Generated_Source\PSoC5/UART_RS485.c ****             }
  699:Generated_Source\PSoC5/UART_RS485.c ****             else
  700:Generated_Source\PSoC5/UART_RS485.c ****             {
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 28
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 28
 
 
  701:Generated_Source\PSoC5/UART_RS485.c ****                 size = 0u;
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  714:Generated_Source\PSoC5/UART_RS485.c **** 
  715:Generated_Source\PSoC5/UART_RS485.c ****     #else
  716:Generated_Source\PSoC5/UART_RS485.c **** 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 29
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 29
 
 
  717:Generated_Source\PSoC5/UART_RS485.c ****         /* We can only know if there is data in the fifo. */
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  739:Generated_Source\PSoC5/UART_RS485.c ****     * Global Variables:
  740:Generated_Source\PSoC5/UART_RS485.c ****     *  UART_RS485_rxBufferWrite - cleared to zero.
  741:Generated_Source\PSoC5/UART_RS485.c ****     *  UART_RS485_rxBufferRead - cleared to zero.
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 30
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 30
 
 
  742:Generated_Source\PSoC5/UART_RS485.c ****     *  UART_RS485_rxBufferLoopDetect - cleared to zero.
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  941 002c 1370     		strb	r3, [r2]
  765:Generated_Source\PSoC5/UART_RS485.c ****         CyExitCriticalSection(enableInterrupts);
  942              		.loc 1 765 0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 31
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 31
 
 
  943 002e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  981 0064 91640040 		.word	1073767569
  982 0068 80E100E0 		.word	-536813184
  983 006c 00000000 		.word	UART_RS485_rxBufferRead
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 32
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 32
 
 
  984 0070 00000000 		.word	UART_RS485_rxBufferWrite
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1004 0000 80B4     		push	{r7}
  1005              		.cfi_def_cfa_offset 4
  1006              		.cfi_offset 7, -4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 33
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 33
 
 
  1007 0002 83B0     		sub	sp, sp, #12
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  842:Generated_Source\PSoC5/UART_RS485.c **** 
  843:Generated_Source\PSoC5/UART_RS485.c ****     /*******************************************************************************
  844:Generated_Source\PSoC5/UART_RS485.c ****     * Function Name: UART_RS485_SetRxAddress1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 34
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 34
 
 
  845:Generated_Source\PSoC5/UART_RS485.c ****     ********************************************************************************
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1073              		.global	UART_RS485_SetRxAddress2
  1074              		.thumb
  1075              		.thumb_func
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 35
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 35
 
 
  1076              		.type	UART_RS485_SetRxAddress2, %function
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1110              	.L64:
  1111 001c 31640040 		.word	1073767473
  1112              		.cfi_endproc
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 36
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 36
 
 
  1113              	.LFE15:
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1137              		.loc 1 910 0
  1138 000a 044A     		ldr	r2, .L67
  1139 000c FB79     		ldrb	r3, [r7, #7]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 37
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 37
 
 
  1140 000e 1370     		strb	r3, [r2]
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  938:Generated_Source\PSoC5/UART_RS485.c ****     * Reentrant:
  939:Generated_Source\PSoC5/UART_RS485.c ****     *  No.
  940:Generated_Source\PSoC5/UART_RS485.c ****     *
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 38
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 38
 
 
  941:Generated_Source\PSoC5/UART_RS485.c ****     *******************************************************************************/
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  976:Generated_Source\PSoC5/UART_RS485.c ****             UART_RS485_TXDATA_REG = txDataByte;
  1186              		.loc 1 976 0
  1187 0012 054A     		ldr	r2, .L72+4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 39
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 39
 
 
  1188 0014 FB79     		ldrb	r3, [r7, #7]
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
 1001:Generated_Source\PSoC5/UART_RS485.c ****     *
 1002:Generated_Source\PSoC5/UART_RS485.c ****     *******************************************************************************/
 1003:Generated_Source\PSoC5/UART_RS485.c ****     uint8 UART_RS485_ReadTxStatus(void) 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 40
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 40
 
 
 1004:Generated_Source\PSoC5/UART_RS485.c ****     {
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
 1020:Generated_Source\PSoC5/UART_RS485.c ****     *
 1021:Generated_Source\PSoC5/UART_RS485.c ****     * Return:
 1022:Generated_Source\PSoC5/UART_RS485.c ****     *  None.
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 41
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 41
 
 
 1023:Generated_Source\PSoC5/UART_RS485.c ****     *
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
 1063:Generated_Source\PSoC5/UART_RS485.c ****             /* Enable interrupt to continue transmission */
 1064:Generated_Source\PSoC5/UART_RS485.c ****             UART_RS485_EnableTxInt();
 1065:Generated_Source\PSoC5/UART_RS485.c ****         #endif /* (UART_RS485_TX_BUFFER_SIZE > UART_RS485_MAX_BYTE_VALUE) && (CY_PSOC3) */
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 42
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 42
 
 
 1066:Generated_Source\PSoC5/UART_RS485.c ****         }
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
 1110:Generated_Source\PSoC5/UART_RS485.c ****         }
 1111:Generated_Source\PSoC5/UART_RS485.c **** 
 1112:Generated_Source\PSoC5/UART_RS485.c ****         /* Add directly to the FIFO */
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 43
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 43
 
 
 1113:Generated_Source\PSoC5/UART_RS485.c ****         UART_RS485_TXDATA_REG = txDataByte;
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
 1136:Generated_Source\PSoC5/UART_RS485.c ****     * Reentrant:
 1137:Generated_Source\PSoC5/UART_RS485.c ****     *  No.
 1138:Generated_Source\PSoC5/UART_RS485.c ****     *
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 44
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 44
 
 
 1139:Generated_Source\PSoC5/UART_RS485.c ****     * Theory:
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
 1153:Generated_Source\PSoC5/UART_RS485.c ****             {
  1347              		.loc 1 1153 0
  1348 002a FB89     		ldrh	r3, [r7, #14]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 45
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 45
 
 
  1349 002c 7A68     		ldr	r2, [r7, #4]
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
 1182:Generated_Source\PSoC5/UART_RS485.c ****     * Reentrant:
 1183:Generated_Source\PSoC5/UART_RS485.c ****     *  No.
 1184:Generated_Source\PSoC5/UART_RS485.c ****     *
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 46
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 46
 
 
 1185:Generated_Source\PSoC5/UART_RS485.c ****     * Theory:
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1414 002c FB73     		strb	r3, [r7, #15]
  1415              	.L91:
 1199:Generated_Source\PSoC5/UART_RS485.c ****             {
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 47
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 47
 
 
  1416              		.loc 1 1199 0
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
 1228:Generated_Source\PSoC5/UART_RS485.c ****     *
 1229:Generated_Source\PSoC5/UART_RS485.c ****     *******************************************************************************/
 1230:Generated_Source\PSoC5/UART_RS485.c ****     void UART_RS485_PutCRLF(uint8 txDataByte) 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 48
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 48
 
 
 1231:Generated_Source\PSoC5/UART_RS485.c ****     {
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1490              		.section	.text.UART_RS485_GetTxBufferSize,"ax",%progbits
  1491              		.align	2
  1492              		.global	UART_RS485_GetTxBufferSize
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 49
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 49
 
 
  1493              		.thumb
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
 1277:Generated_Source\PSoC5/UART_RS485.c **** 
 1278:Generated_Source\PSoC5/UART_RS485.c ****     #if (UART_RS485_TX_INTERRUPT_ENABLED)
 1279:Generated_Source\PSoC5/UART_RS485.c **** 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 50
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 50
 
 
 1280:Generated_Source\PSoC5/UART_RS485.c ****         /* Protect variables that could change on interrupt. */
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1533              	.L104:
 1311:Generated_Source\PSoC5/UART_RS485.c ****         }
 1312:Generated_Source\PSoC5/UART_RS485.c ****         else
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 51
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 51
 
 
 1313:Generated_Source\PSoC5/UART_RS485.c ****         {
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
 1335:Generated_Source\PSoC5/UART_RS485.c ****     *  None.
 1336:Generated_Source\PSoC5/UART_RS485.c ****     *
 1337:Generated_Source\PSoC5/UART_RS485.c ****     * Global Variables:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 52
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 52
 
 
 1338:Generated_Source\PSoC5/UART_RS485.c ****     *  UART_RS485_txBufferWrite - cleared to zero.
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1596 002a DBB2     		uxtb	r3, r3
  1597 002c 1370     		strb	r3, [r2]
 1362:Generated_Source\PSoC5/UART_RS485.c ****         CyExitCriticalSection(enableInterrupts);
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 53
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 53
 
 
  1598              		.loc 1 1362 0
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
 1390:Generated_Source\PSoC5/UART_RS485.c ****     *   UART_RS485_WAIT_FOR_COMPLETE_REINIT - Wait until break transmission is
 1391:Generated_Source\PSoC5/UART_RS485.c ****     *       complete, reinitialize registers to normal transmission mode then return
 1392:Generated_Source\PSoC5/UART_RS485.c ****     *   UART_RS485_REINIT - Reinitialize registers to normal transmission mode
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 54
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 54
 
 
 1393:Generated_Source\PSoC5/UART_RS485.c ****     *       then return.
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1630 0000 80B4     		push	{r7}
  1631              		.cfi_def_cfa_offset 4
  1632              		.cfi_offset 7, -4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 55
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 55
 
 
  1633 0002 85B0     		sub	sp, sp, #20
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
 1484:Generated_Source\PSoC5/UART_RS485.c ****             }
 1485:Generated_Source\PSoC5/UART_RS485.c **** 
 1486:Generated_Source\PSoC5/UART_RS485.c ****         #else /* UART_RS485_HD_ENABLED Full Duplex mode */
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 56
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 56
 
 
 1487:Generated_Source\PSoC5/UART_RS485.c **** 
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1672 0038 FB73     		strb	r3, [r7, #15]
 1514:Generated_Source\PSoC5/UART_RS485.c ****                 }
 1515:Generated_Source\PSoC5/UART_RS485.c ****                 while((tmpStat & UART_RS485_TX_STS_FIFO_EMPTY) != 0u);
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 57
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 57
 
 
  1673              		.loc 1 1515 0 discriminator 1
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
 1530:Generated_Source\PSoC5/UART_RS485.c ****                 (retMode == UART_RS485_SEND_WAIT_REINIT) )
 1531:Generated_Source\PSoC5/UART_RS485.c ****             {
 1532:Generated_Source\PSoC5/UART_RS485.c **** 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 58
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 58
 
 
 1533:Generated_Source\PSoC5/UART_RS485.c ****             #if(UART_RS485_TXCLKGEN_DP)
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
 1550:Generated_Source\PSoC5/UART_RS485.c ****     /*******************************************************************************
 1551:Generated_Source\PSoC5/UART_RS485.c ****     * Function Name: UART_RS485_SetTxAddressMode
 1552:Generated_Source\PSoC5/UART_RS485.c ****     ********************************************************************************
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 59
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 59
 
 
 1553:Generated_Source\PSoC5/UART_RS485.c ****     *
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1767              		.cfi_def_cfa_offset 4
  1768 000e BD46     		mov	sp, r7
  1769              		.cfi_def_cfa_register 13
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 60
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 60
 
 
  1770              		@ sp needed
@@ -3564,41 +3564,41 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1790 000b 01       		.uleb128 0x1
  1791 000c 35000000 		.4byte	.LASF73
  1792 0010 0C       		.byte	0xc
- 1793 0011 56050000 		.4byte	.LASF74
- 1794 0015 19020000 		.4byte	.LASF75
+ 1793 0011 64050000 		.4byte	.LASF74
+ 1794 0015 C0010000 		.4byte	.LASF75
  1795 0019 00000000 		.4byte	.Ldebug_ranges0+0
  1796 001d 00000000 		.4byte	0
  1797 0021 00000000 		.4byte	.Ldebug_line0
  1798 0025 02       		.uleb128 0x2
  1799 0026 01       		.byte	0x1
  1800 0027 06       		.byte	0x6
- 1801 0028 4F010000 		.4byte	.LASF0
+ 1801 0028 47010000 		.4byte	.LASF0
  1802 002c 02       		.uleb128 0x2
  1803 002d 01       		.byte	0x1
  1804 002e 08       		.byte	0x8
- 1805 002f 4B040000 		.4byte	.LASF1
+ 1805 002f 59040000 		.4byte	.LASF1
  1806 0033 02       		.uleb128 0x2
  1807 0034 02       		.byte	0x2
  1808 0035 05       		.byte	0x5
- 1809 0036 59040000 		.4byte	.LASF2
+ 1809 0036 67040000 		.4byte	.LASF2
  1810 003a 02       		.uleb128 0x2
  1811 003b 02       		.byte	0x2
  1812 003c 07       		.byte	0x7
- 1813 003d EE020000 		.4byte	.LASF3
+ 1813 003d FC020000 		.4byte	.LASF3
  1814 0041 02       		.uleb128 0x2
  1815 0042 04       		.byte	0x4
  1816 0043 05       		.byte	0x5
- 1817 0044 77010000 		.4byte	.LASF4
+ 1817 0044 6F010000 		.4byte	.LASF4
  1818 0048 02       		.uleb128 0x2
  1819 0049 04       		.byte	0x4
  1820 004a 07       		.byte	0x7
- 1821 004b 93020000 		.4byte	.LASF5
+ 1821 004b A1020000 		.4byte	.LASF5
  1822 004f 02       		.uleb128 0x2
  1823 0050 08       		.byte	0x8
  1824 0051 05       		.byte	0x5
- 1825 0052 41010000 		.4byte	.LASF6
+ 1825 0052 39010000 		.4byte	.LASF6
  1826 0056 02       		.uleb128 0x2
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 61
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 61
 
 
  1827 0057 08       		.byte	0x8
@@ -3611,9 +3611,9 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1834 0064 02       		.uleb128 0x2
  1835 0065 04       		.byte	0x4
  1836 0066 07       		.byte	0x7
- 1837 0067 60020000 		.4byte	.LASF8
+ 1837 0067 6E020000 		.4byte	.LASF8
  1838 006b 04       		.uleb128 0x4
- 1839 006c 93010000 		.4byte	.LASF9
+ 1839 006c 8B010000 		.4byte	.LASF9
  1840 0070 02       		.byte	0x2
  1841 0071 E401     		.2byte	0x1e4
  1842 0073 2C000000 		.4byte	0x2c
@@ -3623,54 +3623,54 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1846 007d E501     		.2byte	0x1e5
  1847 007f 3A000000 		.4byte	0x3a
  1848 0083 04       		.uleb128 0x4
- 1849 0084 C1010000 		.4byte	.LASF11
+ 1849 0084 B9010000 		.4byte	.LASF11
  1850 0088 02       		.byte	0x2
  1851 0089 E601     		.2byte	0x1e6
  1852 008b 48000000 		.4byte	0x48
  1853 008f 02       		.uleb128 0x2
  1854 0090 04       		.byte	0x4
  1855 0091 04       		.byte	0x4
- 1856 0092 28040000 		.4byte	.LASF12
+ 1856 0092 36040000 		.4byte	.LASF12
  1857 0096 02       		.uleb128 0x2
  1858 0097 08       		.byte	0x8
  1859 0098 04       		.byte	0x4
- 1860 0099 99010000 		.4byte	.LASF13
+ 1860 0099 91010000 		.4byte	.LASF13
  1861 009d 04       		.uleb128 0x4
- 1862 009e ED040000 		.4byte	.LASF14
+ 1862 009e FB040000 		.4byte	.LASF14
  1863 00a2 02       		.byte	0x2
  1864 00a3 F501     		.2byte	0x1f5
  1865 00a5 A9000000 		.4byte	0xa9
  1866 00a9 02       		.uleb128 0x2
  1867 00aa 01       		.byte	0x1
  1868 00ab 08       		.byte	0x8
- 1869 00ac D8040000 		.4byte	.LASF15
+ 1869 00ac E6040000 		.4byte	.LASF15
  1870 00b0 04       		.uleb128 0x4
- 1871 00b1 46040000 		.4byte	.LASF16
+ 1871 00b1 54040000 		.4byte	.LASF16
  1872 00b5 02       		.byte	0x2
  1873 00b6 8E02     		.2byte	0x28e
  1874 00b8 BC000000 		.4byte	0xbc
  1875 00bc 05       		.uleb128 0x5
  1876 00bd 6B000000 		.4byte	0x6b
  1877 00c1 04       		.uleb128 0x4
- 1878 00c2 5C030000 		.4byte	.LASF17
+ 1878 00c2 6A030000 		.4byte	.LASF17
  1879 00c6 02       		.byte	0x2
  1880 00c7 9002     		.2byte	0x290
  1881 00c9 CD000000 		.4byte	0xcd
  1882 00cd 05       		.uleb128 0x5
  1883 00ce 83000000 		.4byte	0x83
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 62
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 62
 
 
  1884 00d2 02       		.uleb128 0x2
  1885 00d3 08       		.byte	0x8
  1886 00d4 04       		.byte	0x4
- 1887 00d5 A4030000 		.4byte	.LASF18
+ 1887 00d5 B2030000 		.4byte	.LASF18
  1888 00d9 02       		.uleb128 0x2
  1889 00da 04       		.byte	0x4
  1890 00db 07       		.byte	0x7
- 1891 00dc 7F030000 		.4byte	.LASF19
+ 1891 00dc 8D030000 		.4byte	.LASF19
  1892 00e0 06       		.uleb128 0x6
- 1893 00e1 17040000 		.4byte	.LASF20
+ 1893 00e1 25040000 		.4byte	.LASF20
  1894 00e5 01       		.byte	0x1
  1895 00e6 4C       		.byte	0x4c
  1896 00e7 00000000 		.4byte	.LFB0
@@ -3678,7 +3678,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1898 00ef 01       		.uleb128 0x1
  1899 00f0 9C       		.byte	0x9c
  1900 00f1 06       		.uleb128 0x6
- 1901 00f2 DD040000 		.4byte	.LASF21
+ 1901 00f2 EB040000 		.4byte	.LASF21
  1902 00f6 01       		.byte	0x1
  1903 00f7 6A       		.byte	0x6a
  1904 00f8 00000000 		.4byte	.LFB1
@@ -3695,7 +3695,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1915 0112 9C       		.byte	0x9c
  1916 0113 26010000 		.4byte	0x126
  1917 0117 08       		.uleb128 0x8
- 1918 0118 3E050000 		.4byte	.LASF24
+ 1918 0118 4C050000 		.4byte	.LASF24
  1919 011c 01       		.byte	0x1
  1920 011d B9       		.byte	0xb9
  1921 011e 6B000000 		.4byte	0x6b
@@ -3704,7 +3704,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1924 0124 77       		.sleb128 -9
  1925 0125 00       		.byte	0
  1926 0126 07       		.uleb128 0x7
- 1927 0127 D9020000 		.4byte	.LASF23
+ 1927 0127 E7020000 		.4byte	.LASF23
  1928 012b 01       		.byte	0x1
  1929 012c F0       		.byte	0xf0
  1930 012d 00000000 		.4byte	.LFB3
@@ -3713,19 +3713,19 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1933 0136 9C       		.byte	0x9c
  1934 0137 4A010000 		.4byte	0x14a
  1935 013b 08       		.uleb128 0x8
- 1936 013c 3E050000 		.4byte	.LASF24
+ 1936 013c 4C050000 		.4byte	.LASF24
  1937 0140 01       		.byte	0x1
  1938 0141 F2       		.byte	0xf2
  1939 0142 6B000000 		.4byte	0x6b
  1940 0146 02       		.uleb128 0x2
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 63
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 63
 
 
  1941 0147 91       		.byte	0x91
  1942 0148 77       		.sleb128 -9
  1943 0149 00       		.byte	0
  1944 014a 09       		.uleb128 0x9
- 1945 014b 0F050000 		.4byte	.LASF50
+ 1945 014b 1D050000 		.4byte	.LASF50
  1946 014f 01       		.byte	0x1
  1947 0150 2701     		.2byte	0x127
  1948 0152 6B000000 		.4byte	0x6b
@@ -3734,7 +3734,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1951 015e 01       		.uleb128 0x1
  1952 015f 9C       		.byte	0x9c
  1953 0160 0A       		.uleb128 0xa
- 1954 0161 B1040000 		.4byte	.LASF25
+ 1954 0161 BF040000 		.4byte	.LASF25
  1955 0165 01       		.byte	0x1
  1956 0166 3F01     		.2byte	0x13f
  1957 0168 00000000 		.4byte	.LFB5
@@ -3743,7 +3743,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1960 0171 9C       		.byte	0x9c
  1961 0172 86010000 		.4byte	0x186
  1962 0176 0B       		.uleb128 0xb
- 1963 0177 C8010000 		.4byte	.LASF27
+ 1963 0177 15020000 		.4byte	.LASF27
  1964 017b 01       		.byte	0x1
  1965 017c 3F01     		.2byte	0x13f
  1966 017e 6B000000 		.4byte	0x6b
@@ -3752,7 +3752,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1969 0184 77       		.sleb128 -9
  1970 0185 00       		.byte	0
  1971 0186 0A       		.uleb128 0xa
- 1972 0187 23010000 		.4byte	.LASF26
+ 1972 0187 1B010000 		.4byte	.LASF26
  1973 018b 01       		.byte	0x1
  1974 018c 6701     		.2byte	0x167
  1975 018e 00000000 		.4byte	.LFB6
@@ -3761,7 +3761,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1978 0197 9C       		.byte	0x9c
  1979 0198 AC010000 		.4byte	0x1ac
  1980 019c 0B       		.uleb128 0xb
- 1981 019d 55030000 		.4byte	.LASF28
+ 1981 019d 63030000 		.4byte	.LASF28
  1982 01a1 01       		.byte	0x1
  1983 01a2 6701     		.2byte	0x167
  1984 01a4 6B000000 		.4byte	0x6b
@@ -3770,7 +3770,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1987 01aa 77       		.sleb128 -9
  1988 01ab 00       		.byte	0
  1989 01ac 0C       		.uleb128 0xc
- 1990 01ad 21030000 		.4byte	.LASF32
+ 1990 01ad 2F030000 		.4byte	.LASF32
  1991 01b1 01       		.byte	0x1
  1992 01b2 8801     		.2byte	0x188
  1993 01b4 6B000000 		.4byte	0x6b
@@ -3778,12 +3778,12 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  1995 01bc 90000000 		.4byte	.LFE7-.LFB7
  1996 01c0 01       		.uleb128 0x1
  1997 01c1 9C       		.byte	0x9c
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 64
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 64
 
 
  1998 01c2 F4010000 		.4byte	0x1f4
  1999 01c6 0D       		.uleb128 0xd
- 2000 01c7 D1040000 		.4byte	.LASF29
+ 2000 01c7 DF040000 		.4byte	.LASF29
  2001 01cb 01       		.byte	0x1
  2002 01cc 8A01     		.2byte	0x18a
  2003 01ce 6B000000 		.4byte	0x6b
@@ -3791,7 +3791,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2005 01d3 91       		.byte	0x91
  2006 01d4 77       		.sleb128 -9
  2007 01d5 0D       		.uleb128 0xd
- 2008 01d6 2E050000 		.4byte	.LASF30
+ 2008 01d6 3C050000 		.4byte	.LASF30
  2009 01da 01       		.byte	0x1
  2010 01db 8E01     		.2byte	0x18e
  2011 01dd 6B000000 		.4byte	0x6b
@@ -3799,7 +3799,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2013 01e2 91       		.byte	0x91
  2014 01e3 76       		.sleb128 -10
  2015 01e4 0D       		.uleb128 0xd
- 2016 01e5 FD030000 		.4byte	.LASF31
+ 2016 01e5 0B040000 		.4byte	.LASF31
  2017 01e9 01       		.byte	0x1
  2018 01ea 8F01     		.2byte	0x18f
  2019 01ec 6B000000 		.4byte	0x6b
@@ -3808,7 +3808,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2022 01f2 75       		.sleb128 -11
  2023 01f3 00       		.byte	0
  2024 01f4 0C       		.uleb128 0xc
- 2025 01f5 2E040000 		.4byte	.LASF33
+ 2025 01f5 3C040000 		.4byte	.LASF33
  2026 01f9 01       		.byte	0x1
  2027 01fa E501     		.2byte	0x1e5
  2028 01fc 6B000000 		.4byte	0x6b
@@ -3818,7 +3818,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2032 0209 9C       		.byte	0x9c
  2033 020a 1E020000 		.4byte	0x21e
  2034 020e 0D       		.uleb128 0xd
- 2035 020f 4F050000 		.4byte	.LASF34
+ 2035 020f 5D050000 		.4byte	.LASF34
  2036 0213 01       		.byte	0x1
  2037 0214 E701     		.2byte	0x1e7
  2038 0216 6B000000 		.4byte	0x6b
@@ -3827,7 +3827,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2041 021c 77       		.sleb128 -9
  2042 021d 00       		.byte	0
  2043 021e 0C       		.uleb128 0xc
- 2044 021f 64010000 		.4byte	.LASF35
+ 2044 021f 5C010000 		.4byte	.LASF35
  2045 0223 01       		.byte	0x1
  2046 0224 1402     		.2byte	0x214
  2047 0226 6B000000 		.4byte	0x6b
@@ -3837,8 +3837,8 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2051 0233 9C       		.byte	0x9c
  2052 0234 75020000 		.4byte	0x275
  2053 0238 0D       		.uleb128 0xd
- 2054 0239 D1040000 		.4byte	.LASF29
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 65
+ 2054 0239 DF040000 		.4byte	.LASF29
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 65
 
 
  2055 023d 01       		.byte	0x1
@@ -3848,7 +3848,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2059 0245 91       		.byte	0x91
  2060 0246 77       		.sleb128 -9
  2061 0247 0D       		.uleb128 0xd
- 2062 0248 0E040000 		.4byte	.LASF36
+ 2062 0248 1C040000 		.4byte	.LASF36
  2063 024c 01       		.byte	0x1
  2064 024d 1702     		.2byte	0x217
  2065 024f 6B000000 		.4byte	0x6b
@@ -3856,7 +3856,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2067 0254 91       		.byte	0x91
  2068 0255 74       		.sleb128 -12
  2069 0256 0D       		.uleb128 0xd
- 2070 0257 2E050000 		.4byte	.LASF30
+ 2070 0257 3C050000 		.4byte	.LASF30
  2071 025b 01       		.byte	0x1
  2072 025c 1A02     		.2byte	0x21a
  2073 025e 6B000000 		.4byte	0x6b
@@ -3864,7 +3864,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2075 0263 91       		.byte	0x91
  2076 0264 76       		.sleb128 -10
  2077 0265 0D       		.uleb128 0xd
- 2078 0266 FD030000 		.4byte	.LASF31
+ 2078 0266 0B040000 		.4byte	.LASF31
  2079 026a 01       		.byte	0x1
  2080 026b 1B02     		.2byte	0x21b
  2081 026d 6B000000 		.4byte	0x6b
@@ -3873,7 +3873,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2084 0273 75       		.sleb128 -11
  2085 0274 00       		.byte	0
  2086 0275 0E       		.uleb128 0xe
- 2087 0276 63040000 		.4byte	.LASF37
+ 2087 0276 71040000 		.4byte	.LASF37
  2088 027a 01       		.byte	0x1
  2089 027b 7A02     		.2byte	0x27a
  2090 027d 77000000 		.4byte	0x77
@@ -3883,7 +3883,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2094 028a 9C       		.byte	0x9c
  2095 028b 9F020000 		.4byte	0x29f
  2096 028f 0D       		.uleb128 0xd
- 2097 0290 84020000 		.4byte	.LASF38
+ 2097 0290 92020000 		.4byte	.LASF38
  2098 0294 01       		.byte	0x1
  2099 0295 7E02     		.2byte	0x27e
  2100 0297 77000000 		.4byte	0x77
@@ -3892,20 +3892,20 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2103 029d 6E       		.sleb128 -18
  2104 029e 00       		.byte	0
  2105 029f 0C       		.uleb128 0xc
- 2106 02a0 BE020000 		.4byte	.LASF39
+ 2106 02a0 CC020000 		.4byte	.LASF39
  2107 02a4 01       		.byte	0x1
  2108 02a5 AB02     		.2byte	0x2ab
  2109 02a7 6B000000 		.4byte	0x6b
  2110 02ab 00000000 		.4byte	.LFB11
  2111 02af 90000000 		.4byte	.LFE11-.LFB11
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 66
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 66
 
 
  2112 02b3 01       		.uleb128 0x1
  2113 02b4 9C       		.byte	0x9c
  2114 02b5 C9020000 		.4byte	0x2c9
  2115 02b9 0D       		.uleb128 0xd
- 2116 02ba E9020000 		.4byte	.LASF40
+ 2116 02ba F7020000 		.4byte	.LASF40
  2117 02be 01       		.byte	0x1
  2118 02bf AE02     		.2byte	0x2ae
  2119 02c1 6B000000 		.4byte	0x6b
@@ -3914,7 +3914,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2122 02c7 77       		.sleb128 -9
  2123 02c8 00       		.byte	0
  2124 02c9 0F       		.uleb128 0xf
- 2125 02ca 8E050000 		.4byte	.LASF41
+ 2125 02ca 9C050000 		.4byte	.LASF41
  2126 02ce 01       		.byte	0x1
  2127 02cf F502     		.2byte	0x2f5
  2128 02d1 00000000 		.4byte	.LFB12
@@ -3923,7 +3923,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2131 02da 9C       		.byte	0x9c
  2132 02db EF020000 		.4byte	0x2ef
  2133 02df 0D       		.uleb128 0xd
- 2134 02e0 3E050000 		.4byte	.LASF24
+ 2134 02e0 4C050000 		.4byte	.LASF24
  2135 02e4 01       		.byte	0x1
  2136 02e5 F702     		.2byte	0x2f7
  2137 02e7 6B000000 		.4byte	0x6b
@@ -3941,7 +3941,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2149 0300 9C       		.byte	0x9c
  2150 0301 15030000 		.4byte	0x315
  2151 0305 0B       		.uleb128 0xb
- 2152 0306 A0010000 		.4byte	.LASF43
+ 2152 0306 98010000 		.4byte	.LASF43
  2153 030a 01       		.byte	0x1
  2154 030b 2D03     		.2byte	0x32d
  2155 030d 6B000000 		.4byte	0x6b
@@ -3950,7 +3950,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2158 0313 77       		.sleb128 -9
  2159 0314 00       		.byte	0
  2160 0315 0A       		.uleb128 0xa
- 2161 0316 B8030000 		.4byte	.LASF44
+ 2161 0316 C6030000 		.4byte	.LASF44
  2162 031a 01       		.byte	0x1
  2163 031b 5903     		.2byte	0x359
  2164 031d 00000000 		.4byte	.LFB14
@@ -3958,11 +3958,11 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2166 0325 01       		.uleb128 0x1
  2167 0326 9C       		.byte	0x9c
  2168 0327 3B030000 		.4byte	0x33b
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 67
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 67
 
 
  2169 032b 0B       		.uleb128 0xb
- 2170 032c B0030000 		.4byte	.LASF45
+ 2170 032c BE030000 		.4byte	.LASF45
  2171 0330 01       		.byte	0x1
  2172 0331 5903     		.2byte	0x359
  2173 0333 6B000000 		.4byte	0x6b
@@ -3971,7 +3971,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2176 0339 77       		.sleb128 -9
  2177 033a 00       		.byte	0
  2178 033b 0A       		.uleb128 0xa
- 2179 033c D1030000 		.4byte	.LASF46
+ 2179 033c DF030000 		.4byte	.LASF46
  2180 0340 01       		.byte	0x1
  2181 0341 6D03     		.2byte	0x36d
  2182 0343 00000000 		.4byte	.LFB15
@@ -3980,7 +3980,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2185 034c 9C       		.byte	0x9c
  2186 034d 61030000 		.4byte	0x361
  2187 0351 0B       		.uleb128 0xb
- 2188 0352 B0030000 		.4byte	.LASF45
+ 2188 0352 BE030000 		.4byte	.LASF45
  2189 0356 01       		.byte	0x1
  2190 0357 6D03     		.2byte	0x36d
  2191 0359 6B000000 		.4byte	0x6b
@@ -3989,7 +3989,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2194 035f 77       		.sleb128 -9
  2195 0360 00       		.byte	0
  2196 0361 0A       		.uleb128 0xa
- 2197 0362 37030000 		.4byte	.LASF47
+ 2197 0362 45030000 		.4byte	.LASF47
  2198 0366 01       		.byte	0x1
  2199 0367 8C03     		.2byte	0x38c
  2200 0369 00000000 		.4byte	.LFB16
@@ -3998,7 +3998,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2203 0372 9C       		.byte	0x9c
  2204 0373 87030000 		.4byte	0x387
  2205 0377 0B       		.uleb128 0xb
- 2206 0378 55030000 		.4byte	.LASF28
+ 2206 0378 63030000 		.4byte	.LASF28
  2207 037c 01       		.byte	0x1
  2208 037d 8C03     		.2byte	0x38c
  2209 037f 6B000000 		.4byte	0x6b
@@ -4007,7 +4007,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2212 0385 77       		.sleb128 -9
  2213 0386 00       		.byte	0
  2214 0387 0A       		.uleb128 0xa
- 2215 0388 01030000 		.4byte	.LASF48
+ 2215 0388 0F030000 		.4byte	.LASF48
  2216 038c 01       		.byte	0x1
  2217 038d AE03     		.2byte	0x3ae
  2218 038f 00000000 		.4byte	.LFB17
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2223 039d 0B       		.uleb128 0xb
  2224 039e 23000000 		.4byte	.LASF49
  2225 03a2 01       		.byte	0x1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 68
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 68
 
 
  2226 03a3 AE03     		.2byte	0x3ae
@@ -4028,7 +4028,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2230 03ab 77       		.sleb128 -9
  2231 03ac 00       		.byte	0
  2232 03ad 09       		.uleb128 0x9
- 2233 03ae 01020000 		.4byte	.LASF51
+ 2233 03ae 4E020000 		.4byte	.LASF51
  2234 03b2 01       		.byte	0x1
  2235 03b3 EB03     		.2byte	0x3eb
  2236 03b5 6B000000 		.4byte	0x6b
@@ -4037,7 +4037,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2239 03c1 01       		.uleb128 0x1
  2240 03c2 9C       		.byte	0x9c
  2241 03c3 0A       		.uleb128 0xa
- 2242 03c4 EA030000 		.4byte	.LASF52
+ 2242 03c4 F8030000 		.4byte	.LASF52
  2243 03c8 01       		.byte	0x1
  2244 03c9 1104     		.2byte	0x411
  2245 03cb 00000000 		.4byte	.LFB19
@@ -4055,7 +4055,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2257 03e7 77       		.sleb128 -9
  2258 03e8 00       		.byte	0
  2259 03e9 0F       		.uleb128 0xf
- 2260 03ea 6A030000 		.4byte	.LASF53
+ 2260 03ea 78030000 		.4byte	.LASF53
  2261 03ee 01       		.byte	0x1
  2262 03ef 7904     		.2byte	0x479
  2263 03f1 00000000 		.4byte	.LFB20
@@ -4072,13 +4072,13 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2274 040c 91       		.byte	0x91
  2275 040d 6C       		.sleb128 -20
  2276 040e 0D       		.uleb128 0xd
- 2277 040f 18030000 		.4byte	.LASF55
+ 2277 040f 26030000 		.4byte	.LASF55
  2278 0413 01       		.byte	0x1
  2279 0414 7B04     		.2byte	0x47b
  2280 0416 77000000 		.4byte	0x77
  2281 041a 02       		.uleb128 0x2
  2282 041b 91       		.byte	0x91
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 69
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 69
 
 
  2283 041c 76       		.sleb128 -10
@@ -4089,7 +4089,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2288 0424 11       		.uleb128 0x11
  2289 0425 9D000000 		.4byte	0x9d
  2290 0429 0F       		.uleb128 0xf
- 2291 042a 7A050000 		.4byte	.LASF56
+ 2291 042a 88050000 		.4byte	.LASF56
  2292 042e 01       		.byte	0x1
  2293 042f A704     		.2byte	0x4a7
  2294 0431 00000000 		.4byte	.LFB21
@@ -4106,7 +4106,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2305 044c 91       		.byte	0x91
  2306 044d 6C       		.sleb128 -20
  2307 044e 0B       		.uleb128 0xb
- 2308 044f A7040000 		.4byte	.LASF57
+ 2308 044f B5040000 		.4byte	.LASF57
  2309 0453 01       		.byte	0x1
  2310 0454 A704     		.2byte	0x4a7
  2311 0456 6B000000 		.4byte	0x6b
@@ -4114,7 +4114,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2313 045b 91       		.byte	0x91
  2314 045c 6B       		.sleb128 -21
  2315 045d 0D       		.uleb128 0xd
- 2316 045e 18030000 		.4byte	.LASF55
+ 2316 045e 26030000 		.4byte	.LASF55
  2317 0462 01       		.byte	0x1
  2318 0463 AA04     		.2byte	0x4aa
  2319 0465 6B000000 		.4byte	0x6b
@@ -4128,7 +4128,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2327 0473 11       		.uleb128 0x11
  2328 0474 6B000000 		.4byte	0x6b
  2329 0478 0F       		.uleb128 0xf
- 2330 0479 76040000 		.4byte	.LASF58
+ 2330 0479 84040000 		.4byte	.LASF58
  2331 047d 01       		.byte	0x1
  2332 047e CE04     		.2byte	0x4ce
  2333 0480 00000000 		.4byte	.LFB22
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2337 048a 9E040000 		.4byte	0x49e
  2338 048e 0B       		.uleb128 0xb
  2339 048f 23000000 		.4byte	.LASF49
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 70
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 70
 
 
  2340 0493 01       		.byte	0x1
@@ -4149,7 +4149,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2345 049c 77       		.sleb128 -9
  2346 049d 00       		.byte	0
  2347 049e 0C       		.uleb128 0xc
- 2348 049f F4000000 		.4byte	.LASF59
+ 2348 049f EC000000 		.4byte	.LASF59
  2349 04a3 01       		.byte	0x1
  2350 04a4 F904     		.2byte	0x4f9
  2351 04a6 6B000000 		.4byte	0x6b
@@ -4159,7 +4159,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2355 04b3 9C       		.byte	0x9c
  2356 04b4 C8040000 		.4byte	0x4c8
  2357 04b8 0D       		.uleb128 0xd
- 2358 04b9 E9020000 		.4byte	.LASF40
+ 2358 04b9 F7020000 		.4byte	.LASF40
  2359 04bd 01       		.byte	0x1
  2360 04be FC04     		.2byte	0x4fc
  2361 04c0 6B000000 		.4byte	0x6b
@@ -4168,7 +4168,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2364 04c6 77       		.sleb128 -9
  2365 04c7 00       		.byte	0
  2366 04c8 0F       		.uleb128 0xf
- 2367 04c9 A5020000 		.4byte	.LASF60
+ 2367 04c9 B3020000 		.4byte	.LASF60
  2368 04cd 01       		.byte	0x1
  2369 04ce 4A05     		.2byte	0x54a
  2370 04d0 00000000 		.4byte	.LFB24
@@ -4177,7 +4177,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2373 04d9 9C       		.byte	0x9c
  2374 04da EE040000 		.4byte	0x4ee
  2375 04de 0D       		.uleb128 0xd
- 2376 04df 3E050000 		.4byte	.LASF24
+ 2376 04df 4C050000 		.4byte	.LASF24
  2377 04e3 01       		.byte	0x1
  2378 04e4 4C05     		.2byte	0x54c
  2379 04e6 6B000000 		.4byte	0x6b
@@ -4186,7 +4186,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2382 04ec 77       		.sleb128 -9
  2383 04ed 00       		.byte	0
  2384 04ee 0A       		.uleb128 0xa
- 2385 04ef AC010000 		.4byte	.LASF61
+ 2385 04ef A4010000 		.4byte	.LASF61
  2386 04f3 01       		.byte	0x1
  2387 04f4 A005     		.2byte	0x5a0
  2388 04f6 00000000 		.4byte	.LFB25
@@ -4195,10 +4195,10 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2391 04ff 9C       		.byte	0x9c
  2392 0500 3F050000 		.4byte	0x53f
  2393 0504 0B       		.uleb128 0xb
- 2394 0505 EC000000 		.4byte	.LASF62
+ 2394 0505 66020000 		.4byte	.LASF62
  2395 0509 01       		.byte	0x1
  2396 050a A005     		.2byte	0x5a0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 71
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 71
 
 
  2397 050c 6B000000 		.4byte	0x6b
@@ -4209,7 +4209,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2402 0514 12000000 		.4byte	.LBB2
  2403 0518 6C000000 		.4byte	.LBE2-.LBB2
  2404 051c 0D       		.uleb128 0xd
- 2405 051d 62030000 		.4byte	.LASF63
+ 2405 051d 70030000 		.4byte	.LASF63
  2406 0521 01       		.byte	0x1
  2407 0522 A805     		.2byte	0x5a8
  2408 0524 6B000000 		.4byte	0x6b
@@ -4217,7 +4217,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2410 0529 91       		.byte	0x91
  2411 052a 77       		.sleb128 -9
  2412 052b 0D       		.uleb128 0xd
- 2413 052c 5B010000 		.4byte	.LASF64
+ 2413 052c 53010000 		.4byte	.LASF64
  2414 0530 01       		.byte	0x1
  2415 0531 D005     		.2byte	0x5d0
  2416 0533 6B000000 		.4byte	0x6b
@@ -4227,7 +4227,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2420 053d 00       		.byte	0
  2421 053e 00       		.byte	0
  2422 053f 0A       		.uleb128 0xa
- 2423 0540 F3040000 		.4byte	.LASF65
+ 2423 0540 01050000 		.4byte	.LASF65
  2424 0544 01       		.byte	0x1
  2425 0545 2406     		.2byte	0x624
  2426 0547 00000000 		.4byte	.LFB26
@@ -4236,7 +4236,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2429 0550 9C       		.byte	0x9c
  2430 0551 65050000 		.4byte	0x565
  2431 0555 0B       		.uleb128 0xb
- 2432 0556 A0010000 		.4byte	.LASF43
+ 2432 0556 98010000 		.4byte	.LASF43
  2433 055a 01       		.byte	0x1
  2434 055b 2406     		.2byte	0x624
  2435 055d 6B000000 		.4byte	0x6b
@@ -4245,7 +4245,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2438 0563 77       		.sleb128 -9
  2439 0564 00       		.byte	0
  2440 0565 13       		.uleb128 0x13
- 2441 0566 80010000 		.4byte	.LASF66
+ 2441 0566 78010000 		.4byte	.LASF66
  2442 056a 01       		.byte	0x1
  2443 056b 1B       		.byte	0x1b
  2444 056c 6B000000 		.4byte	0x6b
@@ -4253,12 +4253,12 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2446 0571 03       		.byte	0x3
  2447 0572 00000000 		.4byte	UART_RS485_initVar
  2448 0576 13       		.uleb128 0x13
- 2449 0577 6D020000 		.4byte	.LASF67
+ 2449 0577 7B020000 		.4byte	.LASF67
  2450 057b 01       		.byte	0x1
  2451 057c 24       		.byte	0x24
  2452 057d 6B000000 		.4byte	0x6b
  2453 0581 05       		.uleb128 0x5
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 72
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 72
 
 
  2454 0582 03       		.byte	0x3
@@ -4271,7 +4271,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2461 0595 1F       		.byte	0x1f
  2462 0596 00       		.byte	0
  2463 0597 13       		.uleb128 0x13
- 2464 0598 0F010000 		.4byte	.LASF68
+ 2464 0598 07010000 		.4byte	.LASF68
  2465 059c 01       		.byte	0x1
  2466 059d 25       		.byte	0x25
  2467 059e A8050000 		.4byte	0x5a8
@@ -4281,7 +4281,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2471 05a8 05       		.uleb128 0x5
  2472 05a9 87050000 		.4byte	0x587
  2473 05ad 13       		.uleb128 0x13
- 2474 05ae E9010000 		.4byte	.LASF69
+ 2474 05ae 36020000 		.4byte	.LASF69
  2475 05b2 01       		.byte	0x1
  2476 05b3 26       		.byte	0x26
  2477 05b4 BC000000 		.4byte	0xbc
@@ -4289,7 +4289,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2479 05b9 03       		.byte	0x3
  2480 05ba 00000000 		.4byte	UART_RS485_rxBufferRead
  2481 05be 13       		.uleb128 0x13
- 2482 05bf D0010000 		.4byte	.LASF70
+ 2482 05bf 1D020000 		.4byte	.LASF70
  2483 05c3 01       		.byte	0x1
  2484 05c4 27       		.byte	0x27
  2485 05c5 BC000000 		.4byte	0xbc
@@ -4297,7 +4297,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2487 05ca 03       		.byte	0x3
  2488 05cb 00000000 		.4byte	UART_RS485_rxBufferWrite
  2489 05cf 13       		.uleb128 0x13
- 2490 05d0 89040000 		.4byte	.LASF71
+ 2490 05d0 97040000 		.4byte	.LASF71
  2491 05d4 01       		.byte	0x1
  2492 05d5 28       		.byte	0x28
  2493 05d6 BC000000 		.4byte	0xbc
@@ -4305,7 +4305,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2495 05db 03       		.byte	0x3
  2496 05dc 00000000 		.4byte	UART_RS485_rxBufferLoopDetect
  2497 05e0 13       		.uleb128 0x13
- 2498 05e1 88030000 		.4byte	.LASF72
+ 2498 05e1 96030000 		.4byte	.LASF72
  2499 05e5 01       		.byte	0x1
  2500 05e6 29       		.byte	0x29
  2501 05e7 BC000000 		.4byte	0xbc
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2508 0000 01       		.uleb128 0x1
  2509 0001 11       		.uleb128 0x11
  2510 0002 01       		.byte	0x1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 73
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 73
 
 
  2511 0003 25       		.uleb128 0x25
@@ -4378,7 +4378,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2565 0039 49       		.uleb128 0x49
  2566 003a 13       		.uleb128 0x13
  2567 003b 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 74
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 74
 
 
  2568 003c 00       		.byte	0
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2622 0074 3A       		.uleb128 0x3a
  2623 0075 0B       		.uleb128 0xb
  2624 0076 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 75
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 75
 
 
  2625 0077 0B       		.uleb128 0xb
@@ -4498,7 +4498,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2679 00af 13       		.uleb128 0x13
  2680 00b0 00       		.byte	0
  2681 00b1 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 76
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 76
 
 
  2682 00b2 0B       		.uleb128 0xb
@@ -4558,7 +4558,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2736 00e9 18       		.uleb128 0x18
  2737 00ea 00       		.byte	0
  2738 00eb 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 77
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 77
 
 
  2739 00ec 0E       		.uleb128 0xe
@@ -4618,7 +4618,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2793 0124 00       		.byte	0
  2794 0125 0B       		.uleb128 0xb
  2795 0126 0B       		.uleb128 0xb
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 78
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 78
 
 
  2796 0127 49       		.uleb128 0x49
@@ -4678,7 +4678,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2850 015d 00       		.byte	0
  2851 015e 00       		.byte	0
  2852              		.section	.debug_aranges,"",%progbits
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 79
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 79
 
 
  2853 0000 EC000000 		.4byte	0xec
@@ -4738,7 +4738,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2907 00cc 40000000 		.4byte	.LFE23-.LFB23
  2908 00d0 00000000 		.4byte	.LFB24
  2909 00d4 44000000 		.4byte	.LFE24-.LFB24
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 80
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 80
 
 
  2910 00d8 00000000 		.4byte	.LFB25
@@ -4798,7 +4798,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2964 00b8 00000000 		.4byte	.LFB23
  2965 00bc 40000000 		.4byte	.LFE23
  2966 00c0 00000000 		.4byte	.LFB24
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 81
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 81
 
 
  2967 00c4 44000000 		.4byte	.LFE24
@@ -4858,367 +4858,367 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 1
  2992      206C6F6E 
  2992      6720756E 
  2992      7369676E 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 82
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 82
 
 
  2992      65642069 
- 2993              	.LASF62:
- 2994 00ec 7265744D 		.ascii	"retMode\000"
- 2994      6F646500 
- 2995              	.LASF59:
- 2996 00f4 55415254 		.ascii	"UART_RS485_GetTxBufferSize\000"
+ 2993              	.LASF59:
+ 2994 00ec 55415254 		.ascii	"UART_RS485_GetTxBufferSize\000"
+ 2994      5F525334 
+ 2994      38355F47 
+ 2994      65745478 
+ 2994      42756666 
+ 2995              	.LASF68:
+ 2996 0107 55415254 		.ascii	"UART_RS485_rxBuffer\000"
  2996      5F525334 
- 2996      38355F47 
- 2996      65745478 
- 2996      42756666 
- 2997              	.LASF68:
- 2998 010f 55415254 		.ascii	"UART_RS485_rxBuffer\000"
+ 2996      38355F72 
+ 2996      78427566 
+ 2996      66657200 
+ 2997              	.LASF26:
+ 2998 011b 55415254 		.ascii	"UART_RS485_SetRxInterruptMode\000"
  2998      5F525334 
- 2998      38355F72 
- 2998      78427566 
- 2998      66657200 
- 2999              	.LASF26:
- 3000 0123 55415254 		.ascii	"UART_RS485_SetRxInterruptMode\000"
- 3000      5F525334 
- 3000      38355F53 
- 3000      65745278 
- 3000      496E7465 
- 3001              	.LASF6:
- 3002 0141 6C6F6E67 		.ascii	"long long int\000"
- 3002      206C6F6E 
- 3002      6720696E 
- 3002      7400
- 3003              	.LASF0:
- 3004 014f 7369676E 		.ascii	"signed char\000"
- 3004      65642063 
- 3004      68617200 
- 3005              	.LASF64:
- 3006 015b 74785065 		.ascii	"txPeriod\000"
- 3006      72696F64 
- 3006      00
- 3007              	.LASF35:
- 3008 0164 55415254 		.ascii	"UART_RS485_GetChar\000"
- 3008      5F525334 
- 3008      38355F47 
- 3008      65744368 
- 3008      617200
- 3009              	.LASF4:
- 3010 0177 6C6F6E67 		.ascii	"long int\000"
- 3010      20696E74 
- 3010      00
- 3011              	.LASF66:
- 3012 0180 55415254 		.ascii	"UART_RS485_initVar\000"
- 3012      5F525334 
- 3012      38355F69 
- 3012      6E697456 
- 3012      617200
- 3013              	.LASF9:
- 3014 0193 75696E74 		.ascii	"uint8\000"
- 3014      3800
- 3015              	.LASF13:
- 3016 0199 646F7562 		.ascii	"double\000"
- 3016      6C6500
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 83
+ 2998      38355F53 
+ 2998      65745278 
+ 2998      496E7465 
+ 2999              	.LASF6:
+ 3000 0139 6C6F6E67 		.ascii	"long long int\000"
+ 3000      206C6F6E 
+ 3000      6720696E 
+ 3000      7400
+ 3001              	.LASF0:
+ 3002 0147 7369676E 		.ascii	"signed char\000"
+ 3002      65642063 
+ 3002      68617200 
+ 3003              	.LASF64:
+ 3004 0153 74785065 		.ascii	"txPeriod\000"
+ 3004      72696F64 
+ 3004      00
+ 3005              	.LASF35:
+ 3006 015c 55415254 		.ascii	"UART_RS485_GetChar\000"
+ 3006      5F525334 
+ 3006      38355F47 
+ 3006      65744368 
+ 3006      617200
+ 3007              	.LASF4:
+ 3008 016f 6C6F6E67 		.ascii	"long int\000"
+ 3008      20696E74 
+ 3008      00
+ 3009              	.LASF66:
+ 3010 0178 55415254 		.ascii	"UART_RS485_initVar\000"
+ 3010      5F525334 
+ 3010      38355F69 
+ 3010      6E697456 
+ 3010      617200
+ 3011              	.LASF9:
+ 3012 018b 75696E74 		.ascii	"uint8\000"
+ 3012      3800
+ 3013              	.LASF13:
+ 3014 0191 646F7562 		.ascii	"double\000"
+ 3014      6C6500
+ 3015              	.LASF43:
+ 3016 0198 61646472 		.ascii	"addressMode\000"
+ 3016      6573734D 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 83
 
 
- 3017              	.LASF43:
- 3018 01a0 61646472 		.ascii	"addressMode\000"
- 3018      6573734D 
- 3018      6F646500 
- 3019              	.LASF61:
- 3020 01ac 55415254 		.ascii	"UART_RS485_SendBreak\000"
- 3020      5F525334 
- 3020      38355F53 
- 3020      656E6442 
- 3020      7265616B 
- 3021              	.LASF11:
- 3022 01c1 75696E74 		.ascii	"uint32\000"
- 3022      333200
- 3023              	.LASF27:
- 3024 01c8 636F6E74 		.ascii	"control\000"
- 3024      726F6C00 
- 3025              	.LASF70:
- 3026 01d0 55415254 		.ascii	"UART_RS485_rxBufferWrite\000"
- 3026      5F525334 
- 3026      38355F72 
- 3026      78427566 
- 3026      66657257 
- 3027              	.LASF69:
- 3028 01e9 55415254 		.ascii	"UART_RS485_rxBufferRead\000"
- 3028      5F525334 
- 3028      38355F72 
- 3028      78427566 
- 3028      66657252 
- 3029              	.LASF51:
- 3030 0201 55415254 		.ascii	"UART_RS485_ReadTxStatus\000"
- 3030      5F525334 
- 3030      38355F52 
- 3030      65616454 
- 3030      78537461 
- 3031              	.LASF75:
- 3032 0219 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHand-PRO-"
- 3032      73657273 
- 3032      5C4D6174 
- 3032      7469615C 
- 3032      446F6375 
- 3033 0247 50536F43 		.ascii	"PSoC5\\SoftHand_Pro.cydsn\000"
- 3033      355C536F 
- 3033      66744861 
- 3033      6E645F50 
- 3033      726F2E63 
+ 3016      6F646500 
+ 3017              	.LASF61:
+ 3018 01a4 55415254 		.ascii	"UART_RS485_SendBreak\000"
+ 3018      5F525334 
+ 3018      38355F53 
+ 3018      656E6442 
+ 3018      7265616B 
+ 3019              	.LASF11:
+ 3020 01b9 75696E74 		.ascii	"uint32\000"
+ 3020      333200
+ 3021              	.LASF75:
+ 3022 01c0 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHandPRO-a"
+ 3022      73657273 
+ 3022      5C4D6174 
+ 3022      7469615C 
+ 3022      446F6375 
+ 3023 01ee 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\SoftHand_Pro.cydsn\000"
+ 3023      656E6572 
+ 3023      69632D46 
+ 3023      572D5053 
+ 3023      6F43355C 
+ 3024              	.LASF27:
+ 3025 0215 636F6E74 		.ascii	"control\000"
+ 3025      726F6C00 
+ 3026              	.LASF70:
+ 3027 021d 55415254 		.ascii	"UART_RS485_rxBufferWrite\000"
+ 3027      5F525334 
+ 3027      38355F72 
+ 3027      78427566 
+ 3027      66657257 
+ 3028              	.LASF69:
+ 3029 0236 55415254 		.ascii	"UART_RS485_rxBufferRead\000"
+ 3029      5F525334 
+ 3029      38355F72 
+ 3029      78427566 
+ 3029      66657252 
+ 3030              	.LASF51:
+ 3031 024e 55415254 		.ascii	"UART_RS485_ReadTxStatus\000"
+ 3031      5F525334 
+ 3031      38355F52 
+ 3031      65616454 
+ 3031      78537461 
+ 3032              	.LASF62:
+ 3033 0266 7265744D 		.ascii	"retMode\000"
+ 3033      6F646500 
  3034              	.LASF8:
- 3035 0260 756E7369 		.ascii	"unsigned int\000"
+ 3035 026e 756E7369 		.ascii	"unsigned int\000"
  3035      676E6564 
  3035      20696E74 
  3035      00
  3036              	.LASF67:
- 3037 026d 55415254 		.ascii	"UART_RS485_errorStatus\000"
+ 3037 027b 55415254 		.ascii	"UART_RS485_errorStatus\000"
  3037      5F525334 
  3037      38355F65 
  3037      72726F72 
  3037      53746174 
  3038              	.LASF38:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 84
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 84
 
 
- 3039 0284 6C6F6345 		.ascii	"locErrorStatus\000"
+ 3039 0292 6C6F6345 		.ascii	"locErrorStatus\000"
  3039      72726F72 
  3039      53746174 
  3039      757300
  3040              	.LASF5:
- 3041 0293 6C6F6E67 		.ascii	"long unsigned int\000"
+ 3041 02a1 6C6F6E67 		.ascii	"long unsigned int\000"
  3041      20756E73 
  3041      69676E65 
  3041      6420696E 
  3041      7400
  3042              	.LASF60:
- 3043 02a5 55415254 		.ascii	"UART_RS485_ClearTxBuffer\000"
+ 3043 02b3 55415254 		.ascii	"UART_RS485_ClearTxBuffer\000"
  3043      5F525334 
  3043      38355F43 
  3043      6C656172 
  3043      54784275 
  3044              	.LASF39:
- 3045 02be 55415254 		.ascii	"UART_RS485_GetRxBufferSize\000"
+ 3045 02cc 55415254 		.ascii	"UART_RS485_GetRxBufferSize\000"
  3045      5F525334 
  3045      38355F47 
  3045      65745278 
  3045      42756666 
  3046              	.LASF23:
- 3047 02d9 55415254 		.ascii	"UART_RS485_Stop\000"
+ 3047 02e7 55415254 		.ascii	"UART_RS485_Stop\000"
  3047      5F525334 
  3047      38355F53 
  3047      746F7000 
  3048              	.LASF40:
- 3049 02e9 73697A65 		.ascii	"size\000"
+ 3049 02f7 73697A65 		.ascii	"size\000"
  3049      00
  3050              	.LASF3:
- 3051 02ee 73686F72 		.ascii	"short unsigned int\000"
+ 3051 02fc 73686F72 		.ascii	"short unsigned int\000"
  3051      7420756E 
  3051      7369676E 
  3051      65642069 
  3051      6E7400
  3052              	.LASF48:
- 3053 0301 55415254 		.ascii	"UART_RS485_WriteTxData\000"
+ 3053 030f 55415254 		.ascii	"UART_RS485_WriteTxData\000"
  3053      5F525334 
  3053      38355F57 
  3053      72697465 
  3053      54784461 
  3054              	.LASF55:
- 3055 0318 62756649 		.ascii	"bufIndex\000"
+ 3055 0326 62756649 		.ascii	"bufIndex\000"
  3055      6E646578 
  3055      00
  3056              	.LASF32:
- 3057 0321 55415254 		.ascii	"UART_RS485_ReadRxData\000"
+ 3057 032f 55415254 		.ascii	"UART_RS485_ReadRxData\000"
  3057      5F525334 
  3057      38355F52 
  3057      65616452 
  3057      78446174 
  3058              	.LASF47:
- 3059 0337 55415254 		.ascii	"UART_RS485_SetTxInterruptMode\000"
+ 3059 0345 55415254 		.ascii	"UART_RS485_SetTxInterruptMode\000"
  3059      5F525334 
  3059      38355F53 
  3059      65745478 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 85
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 85
 
 
  3059      496E7465 
  3060              	.LASF28:
- 3061 0355 696E7453 		.ascii	"intSrc\000"
+ 3061 0363 696E7453 		.ascii	"intSrc\000"
  3061      726300
  3062              	.LASF17:
- 3063 035c 72656733 		.ascii	"reg32\000"
+ 3063 036a 72656733 		.ascii	"reg32\000"
  3063      3200
  3064              	.LASF63:
- 3065 0362 746D7053 		.ascii	"tmpStat\000"
+ 3065 0370 746D7053 		.ascii	"tmpStat\000"
  3065      74617400 
  3066              	.LASF53:
- 3067 036a 55415254 		.ascii	"UART_RS485_PutString\000"
+ 3067 0378 55415254 		.ascii	"UART_RS485_PutString\000"
  3067      5F525334 
  3067      38355F50 
  3067      75745374 
  3067      72696E67 
  3068              	.LASF19:
- 3069 037f 73697A65 		.ascii	"sizetype\000"
+ 3069 038d 73697A65 		.ascii	"sizetype\000"
  3069      74797065 
  3069      00
  3070              	.LASF72:
- 3071 0388 55415254 		.ascii	"UART_RS485_rxBufferOverflow\000"
+ 3071 0396 55415254 		.ascii	"UART_RS485_rxBufferOverflow\000"
  3071      5F525334 
  3071      38355F72 
  3071      78427566 
  3071      6665724F 
  3072              	.LASF18:
- 3073 03a4 6C6F6E67 		.ascii	"long double\000"
+ 3073 03b2 6C6F6E67 		.ascii	"long double\000"
  3073      20646F75 
  3073      626C6500 
  3074              	.LASF45:
- 3075 03b0 61646472 		.ascii	"address\000"
+ 3075 03be 61646472 		.ascii	"address\000"
  3075      65737300 
  3076              	.LASF44:
- 3077 03b8 55415254 		.ascii	"UART_RS485_SetRxAddress1\000"
+ 3077 03c6 55415254 		.ascii	"UART_RS485_SetRxAddress1\000"
  3077      5F525334 
  3077      38355F53 
  3077      65745278 
  3077      41646472 
  3078              	.LASF46:
- 3079 03d1 55415254 		.ascii	"UART_RS485_SetRxAddress2\000"
+ 3079 03df 55415254 		.ascii	"UART_RS485_SetRxAddress2\000"
  3079      5F525334 
  3079      38355F53 
  3079      65745278 
  3079      41646472 
  3080              	.LASF52:
- 3081 03ea 55415254 		.ascii	"UART_RS485_PutChar\000"
+ 3081 03f8 55415254 		.ascii	"UART_RS485_PutChar\000"
  3081      5F525334 
  3081      38355F50 
  3081      75744368 
  3081      617200
  3082              	.LASF31:
- 3083 03fd 6C6F6352 		.ascii	"locRxBufferWrite\000"
+ 3083 040b 6C6F6352 		.ascii	"locRxBufferWrite\000"
  3083      78427566 
  3083      66657257 
  3083      72697465 
  3083      00
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 86
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 86
 
 
  3084              	.LASF36:
- 3085 040e 72785374 		.ascii	"rxStatus\000"
+ 3085 041c 72785374 		.ascii	"rxStatus\000"
  3085      61747573 
  3085      00
  3086              	.LASF20:
- 3087 0417 55415254 		.ascii	"UART_RS485_Start\000"
+ 3087 0425 55415254 		.ascii	"UART_RS485_Start\000"
  3087      5F525334 
  3087      38355F53 
  3087      74617274 
  3087      00
  3088              	.LASF12:
- 3089 0428 666C6F61 		.ascii	"float\000"
+ 3089 0436 666C6F61 		.ascii	"float\000"
  3089      7400
  3090              	.LASF33:
- 3091 042e 55415254 		.ascii	"UART_RS485_ReadRxStatus\000"
+ 3091 043c 55415254 		.ascii	"UART_RS485_ReadRxStatus\000"
  3091      5F525334 
  3091      38355F52 
  3091      65616452 
  3091      78537461 
  3092              	.LASF16:
- 3093 0446 72656738 		.ascii	"reg8\000"
+ 3093 0454 72656738 		.ascii	"reg8\000"
  3093      00
  3094              	.LASF1:
- 3095 044b 756E7369 		.ascii	"unsigned char\000"
+ 3095 0459 756E7369 		.ascii	"unsigned char\000"
  3095      676E6564 
  3095      20636861 
  3095      7200
  3096              	.LASF2:
- 3097 0459 73686F72 		.ascii	"short int\000"
+ 3097 0467 73686F72 		.ascii	"short int\000"
  3097      7420696E 
  3097      7400
  3098              	.LASF37:
- 3099 0463 55415254 		.ascii	"UART_RS485_GetByte\000"
+ 3099 0471 55415254 		.ascii	"UART_RS485_GetByte\000"
  3099      5F525334 
  3099      38355F47 
  3099      65744279 
  3099      746500
  3100              	.LASF58:
- 3101 0476 55415254 		.ascii	"UART_RS485_PutCRLF\000"
+ 3101 0484 55415254 		.ascii	"UART_RS485_PutCRLF\000"
  3101      5F525334 
  3101      38355F50 
  3101      75744352 
  3101      4C4600
  3102              	.LASF71:
- 3103 0489 55415254 		.ascii	"UART_RS485_rxBufferLoopDetect\000"
+ 3103 0497 55415254 		.ascii	"UART_RS485_rxBufferLoopDetect\000"
  3103      5F525334 
  3103      38355F72 
  3103      78427566 
  3103      6665724C 
  3104              	.LASF57:
- 3105 04a7 62797465 		.ascii	"byteCount\000"
+ 3105 04b5 62797465 		.ascii	"byteCount\000"
  3105      436F756E 
  3105      7400
  3106              	.LASF25:
- 3107 04b1 55415254 		.ascii	"UART_RS485_WriteControlRegister\000"
+ 3107 04bf 55415254 		.ascii	"UART_RS485_WriteControlRegister\000"
  3107      5F525334 
  3107      38355F57 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 87
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 87
 
 
  3107      72697465 
  3107      436F6E74 
  3108              	.LASF29:
- 3109 04d1 72784461 		.ascii	"rxData\000"
+ 3109 04df 72784461 		.ascii	"rxData\000"
  3109      746100
  3110              	.LASF15:
- 3111 04d8 63686172 		.ascii	"char\000"
+ 3111 04e6 63686172 		.ascii	"char\000"
  3111      00
  3112              	.LASF21:
- 3113 04dd 55415254 		.ascii	"UART_RS485_Init\000"
+ 3113 04eb 55415254 		.ascii	"UART_RS485_Init\000"
  3113      5F525334 
  3113      38355F49 
  3113      6E697400 
  3114              	.LASF14:
- 3115 04ed 63686172 		.ascii	"char8\000"
+ 3115 04fb 63686172 		.ascii	"char8\000"
  3115      3800
  3116              	.LASF65:
- 3117 04f3 55415254 		.ascii	"UART_RS485_SetTxAddressMode\000"
+ 3117 0501 55415254 		.ascii	"UART_RS485_SetTxAddressMode\000"
  3117      5F525334 
  3117      38355F53 
  3117      65745478 
  3117      41646472 
  3118              	.LASF50:
- 3119 050f 55415254 		.ascii	"UART_RS485_ReadControlRegister\000"
+ 3119 051d 55415254 		.ascii	"UART_RS485_ReadControlRegister\000"
  3119      5F525334 
  3119      38355F52 
  3119      65616443 
  3119      6F6E7472 
  3120              	.LASF30:
- 3121 052e 6C6F6352 		.ascii	"locRxBufferRead\000"
+ 3121 053c 6C6F6352 		.ascii	"locRxBufferRead\000"
  3121      78427566 
  3121      66657252 
  3121      65616400 
  3122              	.LASF24:
- 3123 053e 656E6162 		.ascii	"enableInterrupts\000"
+ 3123 054c 656E6162 		.ascii	"enableInterrupts\000"
  3123      6C65496E 
  3123      74657272 
  3123      75707473 
  3123      00
  3124              	.LASF34:
- 3125 054f 73746174 		.ascii	"status\000"
+ 3125 055d 73746174 		.ascii	"status\000"
  3125      757300
  3126              	.LASF74:
- 3127 0556 47656E65 		.ascii	"Generated_Source\\PSoC5\\UART_RS485.c\000"
+ 3127 0564 47656E65 		.ascii	"Generated_Source\\PSoC5\\UART_RS485.c\000"
  3127      72617465 
  3127      645F536F 
  3127      75726365 
  3127      5C50536F 
  3128              	.LASF56:
- 3129 057a 55415254 		.ascii	"UART_RS485_PutArray\000"
+ 3129 0588 55415254 		.ascii	"UART_RS485_PutArray\000"
  3129      5F525334 
  3129      38355F50 
  3129      75744172 
  3129      72617900 
  3130              	.LASF41:
- 3131 058e 55415254 		.ascii	"UART_RS485_ClearRxBuffer\000"
+ 3131 059c 55415254 		.ascii	"UART_RS485_ClearRxBuffer\000"
  3131      5F525334 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5Cios0.s 			page 88
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2kujJq.s 			page 88
 
 
  3131      38355F43 

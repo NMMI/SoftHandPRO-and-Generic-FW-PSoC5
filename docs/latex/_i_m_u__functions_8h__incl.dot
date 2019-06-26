@@ -1,0 +1,35 @@
+digraph "IMU_functions.h"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node0 [label="IMU_functions.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node0 -> Node1 [color="midnightblue",fontsize="10",style="solid"];
+  Node1 [label="project.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node0 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="globals.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$globals_8h.html",tooltip="Global definitions and macros are set in this file. "];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="FIRMWARE_CONFIGURATION.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_f_i_r_m_w_a_r_e___c_o_n_f_i_g_u_r_a_t_i_o_n_8h.html",tooltip="Definitions for SoftHand and Other Devices commands, parameters and packages. "];
+  Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="device.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$device_8h_source.html"];
+  Node4 -> Node1 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="stdlib.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node2 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="string.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node2 -> Node7 [color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="stdio.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node2 -> Node8 [color="midnightblue",fontsize="10",style="solid"];
+  Node8 [label="math.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node2 -> Node9 [color="midnightblue",fontsize="10",style="solid"];
+  Node9 [label="commands.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$commands_8h.html",tooltip="Definitions for SoftHand commands, parameters and packages. "];
+  Node2 -> Node10 [color="midnightblue",fontsize="10",style="solid"];
+  Node10 [label="FS.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node0 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node0 -> Node7 [color="midnightblue",fontsize="10",style="solid"];
+  Node0 -> Node11 [color="midnightblue",fontsize="10",style="solid"];
+  Node11 [label="utils.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$utils_8h.html",tooltip="Utility functions declaration. "];
+  Node11 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node11 -> Node8 [color="midnightblue",fontsize="10",style="solid"];
+  Node0 -> Node12 [color="midnightblue",fontsize="10",style="solid"];
+  Node12 [label="SPI_IMU.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+}

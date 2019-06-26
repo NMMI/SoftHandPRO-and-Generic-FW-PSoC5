@@ -3749,122 +3749,122 @@ END GROUP
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
                 0x00020254                __exidx_end = .
 
-.rodata         0x00020258     0x1f18
+.rodata         0x00020258     0x1f20
  *(.rodata .rodata.* .gnu.linkonce.r.*)
- .rodata        0x00020258     0x1ab3 .\CortexM3\ARM_GCC_541\Release\command_processing.o
- *fill*         0x00021d0b        0x1 
- .rodata        0x00021d0c       0x1d .\CortexM3\ARM_GCC_541\Release\interruptions.o
- *fill*         0x00021d29        0x3 
- .rodata        0x00021d2c       0x43 .\CortexM3\ARM_GCC_541\Release\SD_RTC_functions.o
- *fill*         0x00021d6f        0x1 
- .rodata        0x00021d70       0xac .\CortexM3\ARM_GCC_541\Release\cyfitter_cfg.o
-                0x00021d70                ADC_AMux__addrTable
-                0x00021d78                ADC_AMux__maskTable
- .rodata        0x00021e1c       0x10 ..\src\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf16noslfn.a(FAT_LFN.o)
-                0x00021e1c                FAT_LFN_API
- .rodata        0x00021e2c       0x10 ..\src\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf16noslfn.a(FAT_Misc.o)
-                0x00021e2c                FAT_SFN_API
+ .rodata        0x00020258     0x1ab7 .\CortexM3\ARM_GCC_541\Release\command_processing.o
+ *fill*         0x00021d0f        0x1 
+ .rodata        0x00021d10       0x1d .\CortexM3\ARM_GCC_541\Release\interruptions.o
+ *fill*         0x00021d2d        0x3 
+ .rodata        0x00021d30       0x43 .\CortexM3\ARM_GCC_541\Release\SD_RTC_functions.o
+ *fill*         0x00021d73        0x1 
+ .rodata        0x00021d74       0xac .\CortexM3\ARM_GCC_541\Release\cyfitter_cfg.o
+                0x00021d74                ADC_AMux__addrTable
+                0x00021d7c                ADC_AMux__maskTable
+ .rodata        0x00021e20       0x10 ..\src\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf16noslfn.a(FAT_LFN.o)
+                0x00021e20                FAT_LFN_API
+ .rodata        0x00021e30       0x10 ..\src\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf16noslfn.a(FAT_Misc.o)
+                0x00021e30                FAT_SFN_API
  .rodata.str1.1
-                0x00021e3c        0x3 ..\src\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf16noslfn.a(FAT_Open.o)
- *fill*         0x00021e3f        0x1 
- .rodata        0x00021e40       0x78 ..\src\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf16noslfn.a(FS_Misc.o)
+                0x00021e40        0x3 ..\src\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf16noslfn.a(FAT_Open.o)
+ *fill*         0x00021e43        0x1 
+ .rodata        0x00021e44       0x78 ..\src\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf16noslfn.a(FS_Misc.o)
  .rodata.str1.1
-                0x00021eb8       0x30 ..\src\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf16noslfn.a(FS_Misc.o)
- .rodata        0x00021ee8       0x18 ..\src\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf16noslfn.a(FAT_Dir.o)
+                0x00021ebc       0x30 ..\src\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf16noslfn.a(FS_Misc.o)
+ .rodata        0x00021eec       0x18 ..\src\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf16noslfn.a(FAT_Dir.o)
  .rodata.str1.4
-                0x00021f00        0x8 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libm.a(lib_a-w_sqrt.o)
+                0x00021f04        0x8 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libm.a(lib_a-w_sqrt.o)
                                   0x5 (size before relaxing)
- .rodata        0x00021f08       0x68 ..\src\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf16noslfn.a(MMC_Drv.o)
-                0x00021f50                FS_MMC_SPI_Driver
+ .rodata        0x00021f0c       0x68 ..\src\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf16noslfn.a(MMC_Drv.o)
+                0x00021f54                FS_MMC_SPI_Driver
  .rodata.str1.1
-                0x00021f70        0x4 ..\src\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf16noslfn.a(MMC_Drv.o)
+                0x00021f74        0x4 ..\src\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf16noslfn.a(MMC_Drv.o)
  .rodata.str1.1
-                0x00021f74        0x2 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
- *fill*         0x00021f76        0x2 
+                0x00021f78        0x2 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
+ *fill*         0x00021f7a        0x2 
  .rodata._global_impure_ptr
-                0x00021f78        0x4 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
-                0x00021f78                _global_impure_ptr
+                0x00021f7c        0x4 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
+                0x00021f7c                _global_impure_ptr
  .rodata.str1.1
-                0x00021f7c       0x11 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-vfprintf.o)
+                0x00021f80       0x11 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-vfprintf.o)
  .rodata.str1.1
-                0x00021f8d       0x12 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-vfprintf_float.o)
+                0x00021f91       0x12 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-vfprintf_float.o)
  .rodata.str1.1
-                0x00021f9f       0x22 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-vfprintf_i.o)
+                0x00021fa3       0x22 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-vfprintf_i.o)
  .rodata.str1.1
-                0x00021fc1        0xd c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-dtoa.o)
+                0x00021fc5        0xd c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-dtoa.o)
                                   0xf (size before relaxing)
- *fill*         0x00021fce        0x2 
+ *fill*         0x00021fd2        0x2 
  .rodata.__sf_fake_stdin
-                0x00021fd0       0x20 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-findfp.o)
-                0x00021fd0                __sf_fake_stdin
+                0x00021fd4       0x20 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-findfp.o)
+                0x00021fd4                __sf_fake_stdin
  .rodata.__sf_fake_stdout
-                0x00021ff0       0x20 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-findfp.o)
-                0x00021ff0                __sf_fake_stdout
+                0x00021ff4       0x20 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-findfp.o)
+                0x00021ff4                __sf_fake_stdout
  .rodata.__sf_fake_stderr
-                0x00022010       0x20 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-findfp.o)
-                0x00022010                __sf_fake_stderr
+                0x00022014       0x20 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-findfp.o)
+                0x00022014                __sf_fake_stderr
  .rodata.str1.1
-                0x00022030        0x6 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-locale.o)
+                0x00022034        0x6 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-locale.o)
                                   0xb (size before relaxing)
- *fill*         0x00022036        0x2 
+ *fill*         0x0002203a        0x6 
  .rodata.__mprec_tens
-                0x00022038       0xc8 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-mprec.o)
-                0x00022038                __mprec_tens
+                0x00022040       0xc8 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-mprec.o)
+                0x00022040                __mprec_tens
  .rodata.p05.5408
-                0x00022100        0xc c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-mprec.o)
- *fill*         0x0002210c        0x4 
+                0x00022108        0xc c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-mprec.o)
+ *fill*         0x00022114        0x4 
  .rodata.__mprec_bigtens
-                0x00022110       0x28 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-mprec.o)
-                0x00022110                __mprec_bigtens
+                0x00022118       0x28 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-mprec.o)
+                0x00022118                __mprec_bigtens
  .rodata.str1.1
-                0x00022138       0x11 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-svfprintf.o)
-                0x0002214c                . = ALIGN (0x4)
+                0x00022140       0x11 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-svfprintf.o)
+                0x00022154                . = ALIGN (0x4)
  *(.init)
- .init          0x00022138        0x4 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
-                0x00022138                _init
- .init          0x0002213c        0x8 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
-                0x0002214c                . = ALIGN (0x4)
-                0x0002214c                __preinit_array_start = .
+ .init          0x00022140        0x4 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
+                0x00022140                _init
+ .init          0x00022144        0x8 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
+                0x00022154                . = ALIGN (0x4)
+                0x00022154                __preinit_array_start = .
  *(.preinit_array)
-                0x0002214c                __preinit_array_end = .
-                0x0002214c                . = ALIGN (0x4)
-                0x0002214c                __init_array_start = .
+                0x00022154                __preinit_array_end = .
+                0x00022154                . = ALIGN (0x4)
+                0x00022154                __init_array_start = .
  *(SORT(.init_array.*))
  *(.init_array)
- .init_array    0x00022144        0x4 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
- .init_array    0x00022148        0x4 .\CortexM3\ARM_GCC_541\Release\Cm3Start.o
-                0x0002214c                __init_array_end = .
-                0x0002214c                . = ALIGN (0x4)
+ .init_array    0x0002214c        0x4 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+ .init_array    0x00022150        0x4 .\CortexM3\ARM_GCC_541\Release\Cm3Start.o
+                0x00022154                __init_array_end = .
+                0x00022154                . = ALIGN (0x4)
  *(.fini)
- .fini          0x0002214c        0x4 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
-                0x0002214c                _fini
- .fini          0x00022150        0x8 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
-                0x00022158                . = ALIGN (0x4)
-                0x00022158                __fini_array_start = .
+ .fini          0x00022154        0x4 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
+                0x00022154                _fini
+ .fini          0x00022158        0x8 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
+                0x00022160                . = ALIGN (0x4)
+                0x00022160                __fini_array_start = .
  *(.fini_array)
- .fini_array    0x00022158        0x4 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+ .fini_array    0x00022160        0x4 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
  *(SORT(.fini_array.*))
-                0x0002215c                __fini_array_end = .
-                0x0002215c                . = ALIGN (0x4)
+                0x00022164                __fini_array_end = .
+                0x00022164                . = ALIGN (0x4)
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT(.ctors.*))
  *crtend.o(.ctors)
-                0x0002215c                . = ALIGN (0x4)
+                0x00022164                . = ALIGN (0x4)
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT(.dtors.*))
  *crtend.o(.dtors)
-                0x0002215c                . = ALIGN (0x4)
-                0x0002215c                __cy_regions = .
-                0x0002215c        0x4 LONG 0x22170 __cy_region_init_ram
-                0x00022160        0x4 LONG 0x1fff80c8 __cy_region_start_data
-                0x00022164        0x4 LONG 0xe8 __cy_region_init_size_ram
-                0x00022168        0x4 LONG 0x1fd8 __cy_region_zero_size_ram
-                0x0002216c                __cy_regions_end = .
-                0x00022170                . = ALIGN (0x8)
- *fill*         0x0002216c        0x4 
-                0x00022170                _etext = .
+                0x00022164                . = ALIGN (0x4)
+                0x00022164                __cy_regions = .
+                0x00022164        0x4 LONG 0x22178 __cy_region_init_ram
+                0x00022168        0x4 LONG 0x1fff80c8 __cy_region_start_data
+                0x0002216c        0x4 LONG 0xe8 __cy_region_init_size_ram
+                0x00022170        0x4 LONG 0x1fd8 __cy_region_zero_size_ram
+                0x00022174                __cy_regions_end = .
+                0x00022178                . = ALIGN (0x8)
+ *fill*         0x00022174        0x4 
+                0x00022178                _etext = .
 
 .ramvectors     0x1fff8000       0xc0
                 0x1fff8000                __cy_region_start_ram = .
@@ -3878,7 +3878,7 @@ END GROUP
  .noinit        0x1fff80c4        0x1 .\CortexM3\ARM_GCC_541\Release\Generic.a(CyLib.o)
                 0x1fff80c4                CyResetStatus
 
-.data           0x1fff80c8       0xe8 load address 0x00022170
+.data           0x1fff80c8       0xe8 load address 0x00022178
                 0x1fff80c8                __cy_region_start_data = .
  *(.jcr)
  .jcr           0x1fff80c8        0x0 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
@@ -3930,10 +3930,10 @@ END GROUP
  *(.ram)
                 0x1fff81b0                _edata = .
 
-.igot.plt       0x1fff81b0        0x0 load address 0x00022258
+.igot.plt       0x1fff81b0        0x0 load address 0x00022260
  .igot.plt      0x1fff81b0        0x0 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
 
-.bss            0x1fff81b0     0x1fd8 load address 0x00022258
+.bss            0x1fff81b0     0x1fd8 load address 0x00022260
                 0x1fff81b0                PROVIDE (__bss_start__, .)
  *(.shbss)
  *(.bss .bss.* .gnu.linkonce.b.*)
@@ -4073,11 +4073,11 @@ END GROUP
                 0x1fffa188                __end = .
                 0x1fffa188                PROVIDE (end, .)
                 0x1fffa188                PROVIDE (__bss_end__, .)
-                0x00022170                __cy_region_init_ram = LOADADDR (.data)
+                0x00022178                __cy_region_init_ram = LOADADDR (.data)
                 0x000000e8                __cy_region_init_size_ram = (_edata - ADDR (.data))
                 0x00001fd8                __cy_region_zero_size_ram = (_end - _edata)
 
-.heap           0x1fffa188      0x800 load address 0x00022258
+.heap           0x1fffa188      0x800 load address 0x00022260
                 0x1fffa188                . = _end
                 0x1fffa988                . = (. + 0x800)
  *fill*         0x1fffa188      0x800 
@@ -4315,7 +4315,7 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000    0x109d2
+.debug_info     0x00000000    0x109e0
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000     0x20b7 .\CortexM3\ARM_GCC_541\Release\command_processing.o
  .debug_info    0x000020b7      0x21b .\CortexM3\ARM_GCC_541\Release\Encoder_functions.o
@@ -4380,12 +4380,12 @@ END GROUP
  .debug_info    0x0000e387      0xe51 .\CortexM3\ARM_GCC_541\Release\Generic.a(CyLib.o)
  .debug_info    0x0000f1d8      0x57a .\CortexM3\ARM_GCC_541\Release\Generic.a(cyPm.o)
  .debug_info    0x0000f752      0x4c0 .\CortexM3\ARM_GCC_541\Release\Generic.a(CySpc.o)
- .debug_info    0x0000fc12       0x90 .\CortexM3\ARM_GCC_541\Release\Generic.a(CyBootAsmGnu.o)
- .debug_info    0x0000fca2      0x281 .\CortexM3\ARM_GCC_541\Release\Generic.a(SD_ConfigMMC_SPI.o)
- .debug_info    0x0000ff23      0x340 .\CortexM3\ARM_GCC_541\Release\Generic.a(SD_MMC_HW_SPI.o)
- .debug_info    0x00010263      0x3f4 .\CortexM3\ARM_GCC_541\Release\Generic.a(SD_SPI0.o)
- .debug_info    0x00010657      0x25d .\CortexM3\ARM_GCC_541\Release\Generic.a(SD_Clock_1.o)
- .debug_info    0x000108b4      0x11e .\CortexM3\ARM_GCC_541\Release\Generic.a(SD_SPI0_CS.o)
+ .debug_info    0x0000fc12       0x9e .\CortexM3\ARM_GCC_541\Release\Generic.a(CyBootAsmGnu.o)
+ .debug_info    0x0000fcb0      0x281 .\CortexM3\ARM_GCC_541\Release\Generic.a(SD_ConfigMMC_SPI.o)
+ .debug_info    0x0000ff31      0x340 .\CortexM3\ARM_GCC_541\Release\Generic.a(SD_MMC_HW_SPI.o)
+ .debug_info    0x00010271      0x3f4 .\CortexM3\ARM_GCC_541\Release\Generic.a(SD_SPI0.o)
+ .debug_info    0x00010665      0x25d .\CortexM3\ARM_GCC_541\Release\Generic.a(SD_Clock_1.o)
+ .debug_info    0x000108c2      0x11e .\CortexM3\ARM_GCC_541\Release\Generic.a(SD_SPI0_CS.o)
 
 .debug_abbrev   0x00000000     0x456b
  *(.debug_abbrev)
@@ -4649,144 +4649,144 @@ END GROUP
  .debug_frame   0x000077d0       0x20 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libnosys.a(read.o)
  .debug_frame   0x000077f0       0x20 c:/program files (x86)/cypress/psoc creator/4.2/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libnosys.a(write.o)
 
-.debug_str      0x00000000     0x6070
+.debug_str      0x00000000     0x607e
  *(.debug_str)
- .debug_str     0x00000000     0x10c1 .\CortexM3\ARM_GCC_541\Release\command_processing.o
-                               0x11e6 (size before relaxing)
- .debug_str     0x000010c1       0xa0 .\CortexM3\ARM_GCC_541\Release\Encoder_functions.o
-                                0x283 (size before relaxing)
- .debug_str     0x00001161      0x1af .\CortexM3\ARM_GCC_541\Release\globals.o
-                                0x9d3 (size before relaxing)
- .debug_str     0x00001310      0x107 .\CortexM3\ARM_GCC_541\Release\IMU_functions.o
-                                0x782 (size before relaxing)
- .debug_str     0x00001417      0x48a .\CortexM3\ARM_GCC_541\Release\interruptions.o
-                                0xf19 (size before relaxing)
- .debug_str     0x000018a1       0x23 .\CortexM3\ARM_GCC_541\Release\main.o
-                                0x7ca (size before relaxing)
- .debug_str     0x000018c4      0x170 .\CortexM3\ARM_GCC_541\Release\SD_RTC_functions.o
-                                0x73f (size before relaxing)
- .debug_str     0x00001a34      0x171 .\CortexM3\ARM_GCC_541\Release\utils.o
-                                0x8d8 (size before relaxing)
- .debug_str     0x00001ba5      0x1dd .\CortexM3\ARM_GCC_541\Release\cyfitter_cfg.o
-                                0x392 (size before relaxing)
- .debug_str     0x00001d82       0x82 .\CortexM3\ARM_GCC_541\Release\cybootloader.o
-                                0x1f7 (size before relaxing)
- .debug_str     0x00001e04       0x51 .\CortexM3\ARM_GCC_541\Release\cymetadata.o
-                                0x1b6 (size before relaxing)
- .debug_str     0x00001e55      0x11d .\CortexM3\ARM_GCC_541\Release\Cm3Start.o
-                                0x2d7 (size before relaxing)
- .debug_str     0x00001f72       0x54 .\CortexM3\ARM_GCC_541\Release\Generic.a(Chip_Select_IMU.o)
-                                0x1cd (size before relaxing)
- .debug_str     0x00001fc6       0x48 .\CortexM3\ARM_GCC_541\Release\Generic.a(MOTOR_DIR_1.o)
-                                0x1c1 (size before relaxing)
- .debug_str     0x0000200e      0x117 .\CortexM3\ARM_GCC_541\Release\Generic.a(EEPROM.o)
-                                0x2e4 (size before relaxing)
- .debug_str     0x00002125       0x84 .\CortexM3\ARM_GCC_541\Release\Generic.a(FTDI_ENABLE.o)
-                                0x200 (size before relaxing)
- .debug_str     0x000021a9       0x6f .\CortexM3\ARM_GCC_541\Release\Generic.a(RS485_CTS.o)
-                                0x1f6 (size before relaxing)
- .debug_str     0x00002218      0x1a2 .\CortexM3\ARM_GCC_541\Release\Generic.a(PWM_MOTORS.o)
-                                0x33f (size before relaxing)
- .debug_str     0x000023ba      0x1ab .\CortexM3\ARM_GCC_541\Release\Generic.a(PACER_TIMER.o)
-                                0x355 (size before relaxing)
- .debug_str     0x00002565       0x3f .\CortexM3\ARM_GCC_541\Release\Generic.a(RESET_FF.o)
-                                0x1b8 (size before relaxing)
- .debug_str     0x000025a4       0x93 .\CortexM3\ARM_GCC_541\Release\Generic.a(FF_STATUS.o)
-                                0x228 (size before relaxing)
- .debug_str     0x00002637      0x161 .\CortexM3\ARM_GCC_541\Release\Generic.a(MY_TIMER.o)
-                                0x325 (size before relaxing)
- .debug_str     0x00002798      0x3e5 .\CortexM3\ARM_GCC_541\Release\Generic.a(UART_RS485.o)
-                                0x5a2 (size before relaxing)
- .debug_str     0x00002b7d       0x5f .\CortexM3\ARM_GCC_541\Release\Generic.a(UART_RS485_INT.o)
-                                0x27b (size before relaxing)
- .debug_str     0x00002bdc      0x160 .\CortexM3\ARM_GCC_541\Release\Generic.a(ISR_RS485_RX.o)
-                                0x308 (size before relaxing)
- .debug_str     0x00002d3c      0x186 .\CortexM3\ARM_GCC_541\Release\Generic.a(CLOCK_UART.o)
-                                0x312 (size before relaxing)
- .debug_str     0x00002ec2      0x1a1 .\CortexM3\ARM_GCC_541\Release\Generic.a(CYCLES_TIMER.o)
-                                0x365 (size before relaxing)
- .debug_str     0x00003063      0x12c .\CortexM3\ARM_GCC_541\Release\Generic.a(ISR_CYCLES.o)
-                                0x2ec (size before relaxing)
- .debug_str     0x0000318f       0x71 .\CortexM3\ARM_GCC_541\Release\Generic.a(Bootloadable.o)
-                                0x21e (size before relaxing)
- .debug_str     0x00003200       0x60 .\CortexM3\ARM_GCC_541\Release\Generic.a(CS_RTC.o)
-                                0x1e7 (size before relaxing)
- .debug_str     0x00003260       0x65 .\CortexM3\ARM_GCC_541\Release\Generic.a(CLK_RTC.o)
-                                0x1ec (size before relaxing)
- .debug_str     0x000032c5       0x6a .\CortexM3\ARM_GCC_541\Release\Generic.a(MOSI_RTC.o)
-                                0x1f1 (size before relaxing)
- .debug_str     0x0000332f       0x6a .\CortexM3\ARM_GCC_541\Release\Generic.a(MISO_RTC.o)
-                                0x1f1 (size before relaxing)
- .debug_str     0x00003399      0x248 .\CortexM3\ARM_GCC_541\Release\Generic.a(SPI_IMU.o)
-                                0x40c (size before relaxing)
- .debug_str     0x000035e1       0x48 .\CortexM3\ARM_GCC_541\Release\Generic.a(MOTOR_DIR_2.o)
-                                0x1c1 (size before relaxing)
- .debug_str     0x00003629      0x15b .\CortexM3\ARM_GCC_541\Release\Generic.a(BLINK_05HZ.o)
-                                0x319 (size before relaxing)
- .debug_str     0x00003784       0x3f .\CortexM3\ARM_GCC_541\Release\Generic.a(LED_CTRL.o)
-                                0x1b8 (size before relaxing)
- .debug_str     0x000037c3       0x4e .\CortexM3\ARM_GCC_541\Release\Generic.a(BLINK_CTRL_EN.o)
-                                0x1c7 (size before relaxing)
- .debug_str     0x00003811      0x15b .\CortexM3\ARM_GCC_541\Release\Generic.a(BLINK_25HZ.o)
-                                0x30c (size before relaxing)
- .debug_str     0x0000396c       0x3c .\CortexM3\ARM_GCC_541\Release\Generic.a(ADC_SOC.o)
-                                0x1b5 (size before relaxing)
- .debug_str     0x000039a8       0x8b .\CortexM3\ARM_GCC_541\Release\Generic.a(DMA_dma.o)
-                                0x213 (size before relaxing)
- .debug_str     0x00003a33       0x94 .\CortexM3\ARM_GCC_541\Release\Generic.a(ADC_STATUS.o)
-                                0x22e (size before relaxing)
- .debug_str     0x00003ac7      0x2c5 .\CortexM3\ARM_GCC_541\Release\Generic.a(ADC.o)
-                                0x4df (size before relaxing)
- .debug_str     0x00003d8c       0x45 .\CortexM3\ARM_GCC_541\Release\Generic.a(ADC_INT.o)
-                                0x1c0 (size before relaxing)
- .debug_str     0x00003dd1       0x51 .\CortexM3\ARM_GCC_541\Release\Generic.a(MOTOR_ON_OFF_1.o)
-                                0x1ca (size before relaxing)
- .debug_str     0x00003e22       0x60 .\CortexM3\ARM_GCC_541\Release\Generic.a(ADC_N_CHANNELS_USED.o)
-                                0x1d9 (size before relaxing)
- .debug_str     0x00003e82      0x1e6 .\CortexM3\ARM_GCC_541\Release\Generic.a(COUNTER_ENC.o)
-                                0x390 (size before relaxing)
- .debug_str     0x00004068      0x18a .\CortexM3\ARM_GCC_541\Release\Generic.a(SHIFTREG_ENC_3.o)
-                                0x333 (size before relaxing)
- .debug_str     0x000041f2      0x169 .\CortexM3\ARM_GCC_541\Release\Generic.a(SHIFTREG_ENC_2.o)
-                                0x333 (size before relaxing)
- .debug_str     0x0000435b      0x169 .\CortexM3\ARM_GCC_541\Release\Generic.a(SHIFTREG_ENC_1.o)
-                                0x333 (size before relaxing)
- .debug_str     0x000044c4       0x51 .\CortexM3\ARM_GCC_541\Release\Generic.a(RESET_COUNTERS.o)
-                                0x1ca (size before relaxing)
- .debug_str     0x00004515       0x6f .\CortexM3\ARM_GCC_541\Release\Generic.a(Chip_Select_ENCODER_LINE.o)
-                                0x1e8 (size before relaxing)
- .debug_str     0x00004584       0x4b .\CortexM3\ARM_GCC_541\Release\Generic.a(MY_TIMER_REG.o)
+ .debug_str     0x00000000     0x10cf .\CortexM3\ARM_GCC_541\Release\command_processing.o
+                               0x11f4 (size before relaxing)
+ .debug_str     0x000010cf       0xa0 .\CortexM3\ARM_GCC_541\Release\Encoder_functions.o
+                                0x291 (size before relaxing)
+ .debug_str     0x0000116f      0x1af .\CortexM3\ARM_GCC_541\Release\globals.o
+                                0x9e1 (size before relaxing)
+ .debug_str     0x0000131e      0x107 .\CortexM3\ARM_GCC_541\Release\IMU_functions.o
+                                0x790 (size before relaxing)
+ .debug_str     0x00001425      0x48a .\CortexM3\ARM_GCC_541\Release\interruptions.o
+                                0xf27 (size before relaxing)
+ .debug_str     0x000018af       0x23 .\CortexM3\ARM_GCC_541\Release\main.o
+                                0x7d8 (size before relaxing)
+ .debug_str     0x000018d2      0x170 .\CortexM3\ARM_GCC_541\Release\SD_RTC_functions.o
+                                0x74d (size before relaxing)
+ .debug_str     0x00001a42      0x171 .\CortexM3\ARM_GCC_541\Release\utils.o
+                                0x8e6 (size before relaxing)
+ .debug_str     0x00001bb3      0x1dd .\CortexM3\ARM_GCC_541\Release\cyfitter_cfg.o
+                                0x3a0 (size before relaxing)
+ .debug_str     0x00001d90       0x82 .\CortexM3\ARM_GCC_541\Release\cybootloader.o
+                                0x205 (size before relaxing)
+ .debug_str     0x00001e12       0x51 .\CortexM3\ARM_GCC_541\Release\cymetadata.o
                                 0x1c4 (size before relaxing)
- .debug_str     0x000045cf       0x5a .\CortexM3\ARM_GCC_541\Release\Generic.a(MOTOR_DRIVER_TYPE.o)
-                                0x1d3 (size before relaxing)
- .debug_str     0x00004629       0x51 .\CortexM3\ARM_GCC_541\Release\Generic.a(MOTOR_ON_OFF_2.o)
-                                0x1ca (size before relaxing)
- .debug_str     0x0000467a       0x6f .\CortexM3\ARM_GCC_541\Release\Generic.a(ADC_AMux.o)
-                                0x1e3 (size before relaxing)
- .debug_str     0x000046e9      0x16b .\CortexM3\ARM_GCC_541\Release\Generic.a(ADC_Ext_CP_Clk.o)
-                                0x342 (size before relaxing)
- .debug_str     0x00004854      0x18a .\CortexM3\ARM_GCC_541\Release\Generic.a(ADC_theACLK.o)
-                                0x361 (size before relaxing)
- .debug_str     0x000049de      0x340 .\CortexM3\ARM_GCC_541\Release\Generic.a(CyDmac.o)
-                                0x51d (size before relaxing)
- .debug_str     0x00004d1e      0x12b .\CortexM3\ARM_GCC_541\Release\Generic.a(CyFlash.o)
-                                0x307 (size before relaxing)
- .debug_str     0x00004e49      0x7a5 .\CortexM3\ARM_GCC_541\Release\Generic.a(CyLib.o)
-                                0x9ea (size before relaxing)
- .debug_str     0x000055ee      0x371 .\CortexM3\ARM_GCC_541\Release\Generic.a(cyPm.o)
-                                0x543 (size before relaxing)
- .debug_str     0x0000595f      0x11a .\CortexM3\ARM_GCC_541\Release\Generic.a(CySpc.o)
-                                0x301 (size before relaxing)
- .debug_str     0x00005a79       0xdb .\CortexM3\ARM_GCC_541\Release\Generic.a(SD_ConfigMMC_SPI.o)
-                                0x24a (size before relaxing)
- .debug_str     0x00005b54      0x136 .\CortexM3\ARM_GCC_541\Release\Generic.a(SD_MMC_HW_SPI.o)
-                                0x2ed (size before relaxing)
- .debug_str     0x00005c8a      0x237 .\CortexM3\ARM_GCC_541\Release\Generic.a(SD_SPI0.o)
-                                0x40c (size before relaxing)
- .debug_str     0x00005ec1      0x13b .\CortexM3\ARM_GCC_541\Release\Generic.a(SD_Clock_1.o)
-                                0x312 (size before relaxing)
- .debug_str     0x00005ffc       0x74 .\CortexM3\ARM_GCC_541\Release\Generic.a(SD_SPI0_CS.o)
-                                0x1fb (size before relaxing)
+ .debug_str     0x00001e63      0x11d .\CortexM3\ARM_GCC_541\Release\Cm3Start.o
+                                0x2e5 (size before relaxing)
+ .debug_str     0x00001f80       0x54 .\CortexM3\ARM_GCC_541\Release\Generic.a(Chip_Select_IMU.o)
+                                0x1db (size before relaxing)
+ .debug_str     0x00001fd4       0x48 .\CortexM3\ARM_GCC_541\Release\Generic.a(MOTOR_DIR_1.o)
+                                0x1cf (size before relaxing)
+ .debug_str     0x0000201c      0x117 .\CortexM3\ARM_GCC_541\Release\Generic.a(EEPROM.o)
+                                0x2f2 (size before relaxing)
+ .debug_str     0x00002133       0x84 .\CortexM3\ARM_GCC_541\Release\Generic.a(FTDI_ENABLE.o)
+                                0x20e (size before relaxing)
+ .debug_str     0x000021b7       0x6f .\CortexM3\ARM_GCC_541\Release\Generic.a(RS485_CTS.o)
+                                0x204 (size before relaxing)
+ .debug_str     0x00002226      0x1a2 .\CortexM3\ARM_GCC_541\Release\Generic.a(PWM_MOTORS.o)
+                                0x34d (size before relaxing)
+ .debug_str     0x000023c8      0x1ab .\CortexM3\ARM_GCC_541\Release\Generic.a(PACER_TIMER.o)
+                                0x363 (size before relaxing)
+ .debug_str     0x00002573       0x3f .\CortexM3\ARM_GCC_541\Release\Generic.a(RESET_FF.o)
+                                0x1c6 (size before relaxing)
+ .debug_str     0x000025b2       0x93 .\CortexM3\ARM_GCC_541\Release\Generic.a(FF_STATUS.o)
+                                0x236 (size before relaxing)
+ .debug_str     0x00002645      0x161 .\CortexM3\ARM_GCC_541\Release\Generic.a(MY_TIMER.o)
+                                0x333 (size before relaxing)
+ .debug_str     0x000027a6      0x3e5 .\CortexM3\ARM_GCC_541\Release\Generic.a(UART_RS485.o)
+                                0x5b0 (size before relaxing)
+ .debug_str     0x00002b8b       0x5f .\CortexM3\ARM_GCC_541\Release\Generic.a(UART_RS485_INT.o)
+                                0x289 (size before relaxing)
+ .debug_str     0x00002bea      0x160 .\CortexM3\ARM_GCC_541\Release\Generic.a(ISR_RS485_RX.o)
+                                0x316 (size before relaxing)
+ .debug_str     0x00002d4a      0x186 .\CortexM3\ARM_GCC_541\Release\Generic.a(CLOCK_UART.o)
+                                0x320 (size before relaxing)
+ .debug_str     0x00002ed0      0x1a1 .\CortexM3\ARM_GCC_541\Release\Generic.a(CYCLES_TIMER.o)
+                                0x373 (size before relaxing)
+ .debug_str     0x00003071      0x12c .\CortexM3\ARM_GCC_541\Release\Generic.a(ISR_CYCLES.o)
+                                0x2fa (size before relaxing)
+ .debug_str     0x0000319d       0x71 .\CortexM3\ARM_GCC_541\Release\Generic.a(Bootloadable.o)
+                                0x22c (size before relaxing)
+ .debug_str     0x0000320e       0x60 .\CortexM3\ARM_GCC_541\Release\Generic.a(CS_RTC.o)
+                                0x1f5 (size before relaxing)
+ .debug_str     0x0000326e       0x65 .\CortexM3\ARM_GCC_541\Release\Generic.a(CLK_RTC.o)
+                                0x1fa (size before relaxing)
+ .debug_str     0x000032d3       0x6a .\CortexM3\ARM_GCC_541\Release\Generic.a(MOSI_RTC.o)
+                                0x1ff (size before relaxing)
+ .debug_str     0x0000333d       0x6a .\CortexM3\ARM_GCC_541\Release\Generic.a(MISO_RTC.o)
+                                0x1ff (size before relaxing)
+ .debug_str     0x000033a7      0x248 .\CortexM3\ARM_GCC_541\Release\Generic.a(SPI_IMU.o)
+                                0x41a (size before relaxing)
+ .debug_str     0x000035ef       0x48 .\CortexM3\ARM_GCC_541\Release\Generic.a(MOTOR_DIR_2.o)
+                                0x1cf (size before relaxing)
+ .debug_str     0x00003637      0x15b .\CortexM3\ARM_GCC_541\Release\Generic.a(BLINK_05HZ.o)
+                                0x327 (size before relaxing)
+ .debug_str     0x00003792       0x3f .\CortexM3\ARM_GCC_541\Release\Generic.a(LED_CTRL.o)
+                                0x1c6 (size before relaxing)
+ .debug_str     0x000037d1       0x4e .\CortexM3\ARM_GCC_541\Release\Generic.a(BLINK_CTRL_EN.o)
+                                0x1d5 (size before relaxing)
+ .debug_str     0x0000381f      0x15b .\CortexM3\ARM_GCC_541\Release\Generic.a(BLINK_25HZ.o)
+                                0x31a (size before relaxing)
+ .debug_str     0x0000397a       0x3c .\CortexM3\ARM_GCC_541\Release\Generic.a(ADC_SOC.o)
+                                0x1c3 (size before relaxing)
+ .debug_str     0x000039b6       0x8b .\CortexM3\ARM_GCC_541\Release\Generic.a(DMA_dma.o)
+                                0x221 (size before relaxing)
+ .debug_str     0x00003a41       0x94 .\CortexM3\ARM_GCC_541\Release\Generic.a(ADC_STATUS.o)
+                                0x23c (size before relaxing)
+ .debug_str     0x00003ad5      0x2c5 .\CortexM3\ARM_GCC_541\Release\Generic.a(ADC.o)
+                                0x4ed (size before relaxing)
+ .debug_str     0x00003d9a       0x45 .\CortexM3\ARM_GCC_541\Release\Generic.a(ADC_INT.o)
+                                0x1ce (size before relaxing)
+ .debug_str     0x00003ddf       0x51 .\CortexM3\ARM_GCC_541\Release\Generic.a(MOTOR_ON_OFF_1.o)
+                                0x1d8 (size before relaxing)
+ .debug_str     0x00003e30       0x60 .\CortexM3\ARM_GCC_541\Release\Generic.a(ADC_N_CHANNELS_USED.o)
+                                0x1e7 (size before relaxing)
+ .debug_str     0x00003e90      0x1e6 .\CortexM3\ARM_GCC_541\Release\Generic.a(COUNTER_ENC.o)
+                                0x39e (size before relaxing)
+ .debug_str     0x00004076      0x18a .\CortexM3\ARM_GCC_541\Release\Generic.a(SHIFTREG_ENC_3.o)
+                                0x341 (size before relaxing)
+ .debug_str     0x00004200      0x169 .\CortexM3\ARM_GCC_541\Release\Generic.a(SHIFTREG_ENC_2.o)
+                                0x341 (size before relaxing)
+ .debug_str     0x00004369      0x169 .\CortexM3\ARM_GCC_541\Release\Generic.a(SHIFTREG_ENC_1.o)
+                                0x341 (size before relaxing)
+ .debug_str     0x000044d2       0x51 .\CortexM3\ARM_GCC_541\Release\Generic.a(RESET_COUNTERS.o)
+                                0x1d8 (size before relaxing)
+ .debug_str     0x00004523       0x6f .\CortexM3\ARM_GCC_541\Release\Generic.a(Chip_Select_ENCODER_LINE.o)
+                                0x1f6 (size before relaxing)
+ .debug_str     0x00004592       0x4b .\CortexM3\ARM_GCC_541\Release\Generic.a(MY_TIMER_REG.o)
+                                0x1d2 (size before relaxing)
+ .debug_str     0x000045dd       0x5a .\CortexM3\ARM_GCC_541\Release\Generic.a(MOTOR_DRIVER_TYPE.o)
+                                0x1e1 (size before relaxing)
+ .debug_str     0x00004637       0x51 .\CortexM3\ARM_GCC_541\Release\Generic.a(MOTOR_ON_OFF_2.o)
+                                0x1d8 (size before relaxing)
+ .debug_str     0x00004688       0x6f .\CortexM3\ARM_GCC_541\Release\Generic.a(ADC_AMux.o)
+                                0x1f1 (size before relaxing)
+ .debug_str     0x000046f7      0x16b .\CortexM3\ARM_GCC_541\Release\Generic.a(ADC_Ext_CP_Clk.o)
+                                0x350 (size before relaxing)
+ .debug_str     0x00004862      0x18a .\CortexM3\ARM_GCC_541\Release\Generic.a(ADC_theACLK.o)
+                                0x36f (size before relaxing)
+ .debug_str     0x000049ec      0x340 .\CortexM3\ARM_GCC_541\Release\Generic.a(CyDmac.o)
+                                0x52b (size before relaxing)
+ .debug_str     0x00004d2c      0x12b .\CortexM3\ARM_GCC_541\Release\Generic.a(CyFlash.o)
+                                0x315 (size before relaxing)
+ .debug_str     0x00004e57      0x7a5 .\CortexM3\ARM_GCC_541\Release\Generic.a(CyLib.o)
+                                0x9f8 (size before relaxing)
+ .debug_str     0x000055fc      0x371 .\CortexM3\ARM_GCC_541\Release\Generic.a(cyPm.o)
+                                0x551 (size before relaxing)
+ .debug_str     0x0000596d      0x11a .\CortexM3\ARM_GCC_541\Release\Generic.a(CySpc.o)
+                                0x30f (size before relaxing)
+ .debug_str     0x00005a87       0xdb .\CortexM3\ARM_GCC_541\Release\Generic.a(SD_ConfigMMC_SPI.o)
+                                0x258 (size before relaxing)
+ .debug_str     0x00005b62      0x136 .\CortexM3\ARM_GCC_541\Release\Generic.a(SD_MMC_HW_SPI.o)
+                                0x2fb (size before relaxing)
+ .debug_str     0x00005c98      0x237 .\CortexM3\ARM_GCC_541\Release\Generic.a(SD_SPI0.o)
+                                0x41a (size before relaxing)
+ .debug_str     0x00005ecf      0x13b .\CortexM3\ARM_GCC_541\Release\Generic.a(SD_Clock_1.o)
+                                0x320 (size before relaxing)
+ .debug_str     0x0000600a       0x74 .\CortexM3\ARM_GCC_541\Release\Generic.a(SD_SPI0_CS.o)
+                                0x209 (size before relaxing)
 
 .debug_loc
  *(.debug_loc)
@@ -5311,4 +5311,4 @@ END GROUP
 
 /DISCARD/
  *(.note.GNU-stack)
-OUTPUT(C:\Users\Mattia\Documents\GITHUB\SoftHand-PRO-PSoC5\Generic.cydsn\CortexM3\ARM_GCC_541\Release\Generic.elf elf32-littlearm)
+OUTPUT(C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\Generic.cydsn\CortexM3\ARM_GCC_541\Release\Generic.elf elf32-littlearm)

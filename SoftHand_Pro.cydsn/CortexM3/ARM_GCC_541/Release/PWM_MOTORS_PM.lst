@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrl5H6B.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
   24:Generated_Source\PSoC5/PWM_MOTORS_PM.c **** * Function Name: PWM_MOTORS_SaveConfig
   25:Generated_Source\PSoC5/PWM_MOTORS_PM.c **** ********************************************************************************
   26:Generated_Source\PSoC5/PWM_MOTORS_PM.c **** *
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrl5H6B.s 			page 2
 
 
   27:Generated_Source\PSoC5/PWM_MOTORS_PM.c **** * Summary:
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
   59:Generated_Source\PSoC5/PWM_MOTORS_PM.c ****         #if(PWM_MOTORS_KillModeMinTime)
   60:Generated_Source\PSoC5/PWM_MOTORS_PM.c ****              PWM_MOTORS_backup.PWMKillCounterPeriod = PWM_MOTORS_ReadKillTime();
   61:Generated_Source\PSoC5/PWM_MOTORS_PM.c ****         #endif /* (PWM_MOTORS_KillModeMinTime) */
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrl5H6B.s 			page 3
 
 
   62:Generated_Source\PSoC5/PWM_MOTORS_PM.c **** 
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
   80              		@ args = 0, pretend = 0, frame = 0
   81              		@ frame_needed = 1, uses_anonymous_args = 0
   82 0000 80B5     		push	{r7, lr}
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrl5H6B.s 			page 4
 
 
   83              		.cfi_def_cfa_offset 8
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
  112              		.size	PWM_MOTORS_RestoreConfig, .-PWM_MOTORS_RestoreConfig
  113              		.section	.text.PWM_MOTORS_Sleep,"ax",%progbits
  114              		.align	2
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrl5H6B.s 			page 5
 
 
  115              		.global	PWM_MOTORS_Sleep
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
  141 0014 1A70     		strb	r2, [r3]
  142 0016 02E0     		b	.L9
  143              	.L8:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 6
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrl5H6B.s 			page 6
 
 
  143:Generated_Source\PSoC5/PWM_MOTORS_PM.c ****         }
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
  169:Generated_Source\PSoC5/PWM_MOTORS_PM.c **** *
  170:Generated_Source\PSoC5/PWM_MOTORS_PM.c **** * Return:
  171:Generated_Source\PSoC5/PWM_MOTORS_PM.c **** *  None
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 7
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrl5H6B.s 			page 7
 
 
  172:Generated_Source\PSoC5/PWM_MOTORS_PM.c **** *
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
  208 0000 41010000 		.4byte	0x141
  209 0004 0400     		.2byte	0x4
  210 0006 00000000 		.4byte	.Ldebug_abbrev0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 8
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrl5H6B.s 			page 8
 
 
  211 000a 04       		.byte	0x4
@@ -426,14 +426,14 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
  213 000c BC000000 		.4byte	.LASF25
  214 0010 0C       		.byte	0xc
  215 0011 2A000000 		.4byte	.LASF26
- 216 0015 EC010000 		.4byte	.LASF27
+ 216 0015 75010000 		.4byte	.LASF27
  217 0019 00000000 		.4byte	.Ldebug_ranges0+0
  218 001d 00000000 		.4byte	0
  219 0021 00000000 		.4byte	.Ldebug_line0
  220 0025 02       		.uleb128 0x2
  221 0026 01       		.byte	0x1
  222 0027 06       		.byte	0x6
- 223 0028 E0010000 		.4byte	.LASF0
+ 223 0028 23020000 		.4byte	.LASF0
  224 002c 02       		.uleb128 0x2
  225 002d 01       		.byte	0x1
  226 002e 08       		.byte	0x8
@@ -441,15 +441,15 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
  228 0033 02       		.uleb128 0x2
  229 0034 02       		.byte	0x2
  230 0035 05       		.byte	0x5
- 231 0036 3F020000 		.4byte	.LASF2
+ 231 0036 4D020000 		.4byte	.LASF2
  232 003a 02       		.uleb128 0x2
  233 003b 02       		.byte	0x2
  234 003c 07       		.byte	0x7
- 235 003d CD010000 		.4byte	.LASF3
+ 235 003d 10020000 		.4byte	.LASF3
  236 0041 02       		.uleb128 0x2
  237 0042 04       		.byte	0x4
  238 0043 05       		.byte	0x5
- 239 0044 A4010000 		.4byte	.LASF4
+ 239 0044 E3010000 		.4byte	.LASF4
  240 0048 02       		.uleb128 0x2
  241 0049 04       		.byte	0x4
  242 004a 07       		.byte	0x7
@@ -478,20 +478,20 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
  265 0077 02       		.uleb128 0x2
  266 0078 04       		.byte	0x4
  267 0079 04       		.byte	0x4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 9
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrl5H6B.s 			page 9
 
 
  268 007a B6000000 		.4byte	.LASF9
  269 007e 02       		.uleb128 0x2
  270 007f 08       		.byte	0x8
  271 0080 04       		.byte	0x4
- 272 0081 AD010000 		.4byte	.LASF10
+ 272 0081 02020000 		.4byte	.LASF10
  273 0085 02       		.uleb128 0x2
  274 0086 01       		.byte	0x1
  275 0087 08       		.byte	0x8
  276 0088 70010000 		.4byte	.LASF11
  277 008c 04       		.uleb128 0x4
- 278 008d 49020000 		.4byte	.LASF13
+ 278 008d 57020000 		.4byte	.LASF13
  279 0091 02       		.byte	0x2
  280 0092 8E02     		.2byte	0x28e
  281 0094 98000000 		.4byte	0x98
@@ -500,11 +500,11 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
  284 009d 02       		.uleb128 0x2
  285 009e 08       		.byte	0x8
  286 009f 04       		.byte	0x4
- 287 00a0 33020000 		.4byte	.LASF14
+ 287 00a0 41020000 		.4byte	.LASF14
  288 00a4 02       		.uleb128 0x2
  289 00a5 04       		.byte	0x4
  290 00a6 07       		.byte	0x7
- 291 00a7 58020000 		.4byte	.LASF15
+ 291 00a7 66020000 		.4byte	.LASF15
  292 00ab 06       		.uleb128 0x6
  293 00ac 04       		.byte	0x4
  294 00ad 03       		.byte	0x3
@@ -517,13 +517,13 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
  301 00ba 6B000000 		.4byte	0x6b
  302 00be 00       		.byte	0
  303 00bf 07       		.uleb128 0x7
- 304 00c0 B4010000 		.4byte	.LASF17
+ 304 00c0 09020000 		.4byte	.LASF17
  305 00c4 03       		.byte	0x3
  306 00c5 71       		.byte	0x71
  307 00c6 6B000000 		.4byte	0x6b
  308 00ca 01       		.byte	0x1
  309 00cb 07       		.uleb128 0x7
- 310 00cc 4E020000 		.4byte	.LASF18
+ 310 00cc 5C020000 		.4byte	.LASF18
  311 00d0 03       		.byte	0x3
  312 00d1 73       		.byte	0x73
  313 00d2 6B000000 		.4byte	0x6b
@@ -538,13 +538,13 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
  322 00e4 08       		.uleb128 0x8
  323 00e5 4A010000 		.4byte	.LASF20
  324 00e9 03       		.byte	0x3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 10
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrl5H6B.s 			page 10
 
 
  325 00ea 8B       		.byte	0x8b
  326 00eb AB000000 		.4byte	0xab
  327 00ef 09       		.uleb128 0x9
- 328 00f0 75010000 		.4byte	.LASF21
+ 328 00f0 EC010000 		.4byte	.LASF21
  329 00f4 01       		.byte	0x1
  330 00f5 2A       		.byte	0x2a
  331 00f6 00000000 		.4byte	.LFB0
@@ -552,7 +552,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
  333 00fe 01       		.uleb128 0x1
  334 00ff 9C       		.byte	0x9c
  335 0100 09       		.uleb128 0x9
- 336 0101 8B010000 		.4byte	.LASF22
+ 336 0101 CA010000 		.4byte	.LASF22
  337 0105 01       		.byte	0x1
  338 0106 58       		.byte	0x58
  339 0107 00000000 		.4byte	.LFB1
@@ -568,7 +568,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
  349 0120 01       		.uleb128 0x1
  350 0121 9C       		.byte	0x9c
  351 0122 09       		.uleb128 0x9
- 352 0123 BB010000 		.4byte	.LASF24
+ 352 0123 2F020000 		.4byte	.LASF24
  353 0127 01       		.byte	0x1
  354 0128 B2       		.byte	0xb2
  355 0129 00000000 		.4byte	.LFB3
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
  379 0009 1B       		.uleb128 0x1b
  380 000a 0E       		.uleb128 0xe
  381 000b 55       		.uleb128 0x55
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrl5H6B.s 			page 11
 
 
  382 000c 17       		.uleb128 0x17
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
  436 0042 3A       		.uleb128 0x3a
  437 0043 0B       		.uleb128 0xb
  438 0044 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 12
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrl5H6B.s 			page 12
 
 
  439 0045 0B       		.uleb128 0xb
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
  493 007c 00       		.byte	0
  494 007d 00       		.byte	0
  495 007e 0A       		.uleb128 0xa
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrl5H6B.s 			page 13
 
 
  496 007f 34       		.uleb128 0x34
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
  545      206C6F6E 
  545      6720696E 
  545      7400
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 14
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrl5H6B.s 			page 14
 
 
  546              	.LASF8:
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
  567      43313120 
  567      352E342E 
  567      31203230 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 15
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrl5H6B.s 			page 15
 
 
  567      31363036 
@@ -866,75 +866,75 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 1
  574              	.LASF11:
  575 0170 63686172 		.ascii	"char\000"
  575      00
- 576              	.LASF21:
- 577 0175 50574D5F 		.ascii	"PWM_MOTORS_SaveConfig\000"
- 577      4D4F544F 
- 577      52535F53 
- 577      61766543 
- 577      6F6E6669 
- 578              	.LASF22:
- 579 018b 50574D5F 		.ascii	"PWM_MOTORS_RestoreConfig\000"
- 579      4D4F544F 
- 579      52535F52 
- 579      6573746F 
- 579      7265436F 
- 580              	.LASF4:
- 581 01a4 6C6F6E67 		.ascii	"long int\000"
- 581      20696E74 
- 581      00
- 582              	.LASF10:
- 583 01ad 646F7562 		.ascii	"double\000"
- 583      6C6500
- 584              	.LASF17:
- 585 01b4 50574D55 		.ascii	"PWMUdb\000"
- 585      646200
- 586              	.LASF24:
- 587 01bb 50574D5F 		.ascii	"PWM_MOTORS_Wakeup\000"
- 587      4D4F544F 
- 587      52535F57 
- 587      616B6575 
- 587      7000
- 588              	.LASF3:
- 589 01cd 73686F72 		.ascii	"short unsigned int\000"
- 589      7420756E 
- 589      7369676E 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccifDZTG.s 			page 16
+ 576              	.LASF27:
+ 577 0175 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHandPRO-a"
+ 577      73657273 
+ 577      5C4D6174 
+ 577      7469615C 
+ 577      446F6375 
+ 578 01a3 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\SoftHand_Pro.cydsn\000"
+ 578      656E6572 
+ 578      69632D46 
+ 578      572D5053 
+ 578      6F43355C 
+ 579              	.LASF22:
+ 580 01ca 50574D5F 		.ascii	"PWM_MOTORS_RestoreConfig\000"
+ 580      4D4F544F 
+ 580      52535F52 
+ 580      6573746F 
+ 580      7265436F 
+ 581              	.LASF4:
+ 582 01e3 6C6F6E67 		.ascii	"long int\000"
+ 582      20696E74 
+ 582      00
+ 583              	.LASF21:
+ 584 01ec 50574D5F 		.ascii	"PWM_MOTORS_SaveConfig\000"
+ 584      4D4F544F 
+ 584      52535F53 
+ 584      61766543 
+ 584      6F6E6669 
+ 585              	.LASF10:
+ 586 0202 646F7562 		.ascii	"double\000"
+ 586      6C6500
+ 587              	.LASF17:
+ 588 0209 50574D55 		.ascii	"PWMUdb\000"
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrl5H6B.s 			page 16
 
 
- 589      65642069 
- 589      6E7400
- 590              	.LASF0:
- 591 01e0 7369676E 		.ascii	"signed char\000"
- 591      65642063 
- 591      68617200 
- 592              	.LASF27:
- 593 01ec 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHand-PRO-"
- 593      73657273 
- 593      5C4D6174 
- 593      7469615C 
- 593      446F6375 
- 594 021a 50536F43 		.ascii	"PSoC5\\SoftHand_Pro.cydsn\000"
- 594      355C536F 
- 594      66744861 
- 594      6E645F50 
- 594      726F2E63 
+ 588      646200
+ 589              	.LASF3:
+ 590 0210 73686F72 		.ascii	"short unsigned int\000"
+ 590      7420756E 
+ 590      7369676E 
+ 590      65642069 
+ 590      6E7400
+ 591              	.LASF0:
+ 592 0223 7369676E 		.ascii	"signed char\000"
+ 592      65642063 
+ 592      68617200 
+ 593              	.LASF24:
+ 594 022f 50574D5F 		.ascii	"PWM_MOTORS_Wakeup\000"
+ 594      4D4F544F 
+ 594      52535F57 
+ 594      616B6575 
+ 594      7000
  595              	.LASF14:
- 596 0233 6C6F6E67 		.ascii	"long double\000"
+ 596 0241 6C6F6E67 		.ascii	"long double\000"
  596      20646F75 
  596      626C6500 
  597              	.LASF2:
- 598 023f 73686F72 		.ascii	"short int\000"
+ 598 024d 73686F72 		.ascii	"short int\000"
  598      7420696E 
  598      7400
  599              	.LASF13:
- 600 0249 72656738 		.ascii	"reg8\000"
+ 600 0257 72656738 		.ascii	"reg8\000"
  600      00
  601              	.LASF18:
- 602 024e 50574D50 		.ascii	"PWMPeriod\000"
+ 602 025c 50574D50 		.ascii	"PWMPeriod\000"
  602      6572696F 
  602      6400
  603              	.LASF15:
- 604 0258 73697A65 		.ascii	"sizetype\000"
+ 604 0266 73697A65 		.ascii	"sizetype\000"
  604      74797065 
  604      00
  605              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

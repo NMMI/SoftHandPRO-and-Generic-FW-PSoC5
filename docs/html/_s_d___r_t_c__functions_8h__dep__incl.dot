@@ -1,0 +1,23 @@
+digraph "SD_RTC_functions.h"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node17 [label="SD_RTC_functions.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node17 -> Node18 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 [label="command_processing.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$command__processing_8h.html",tooltip="Received commands processing functions. "];
+  Node18 -> Node19 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 [label="command_processing.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$command__processing_8c.html",tooltip="Command processing functions. "];
+  Node18 -> Node17 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 -> Node20 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node20 [label="interruptions.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interruptions_8h.html",tooltip="Interruptions header file. "];
+  Node20 -> Node18 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node20 -> Node21 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 [label="interruptions.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interruptions_8c.html",tooltip="Interruption handling and firmware core functions. "];
+  Node20 -> Node22 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node22 [label="main.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8c.html",tooltip="Firmware main file. "];
+  Node18 -> Node22 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node17 -> Node20 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node17 -> Node22 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node17 -> Node23 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node23 [label="SD_RTC_functions.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_s_d___r_t_c__functions_8c.html",tooltip="Implementation of SD and RTC module functions. "];
+}

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckUXUFb.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 1
   28:Generated_Source\PSoC5/FF_STATUS.c **** *  Reads the current value assigned to the Status Register.
   29:Generated_Source\PSoC5/FF_STATUS.c **** *
   30:Generated_Source\PSoC5/FF_STATUS.c **** * Parameters:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckUXUFb.s 			page 2
 
 
   31:Generated_Source\PSoC5/FF_STATUS.c **** *  None.
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 1
   47:Generated_Source\PSoC5/FF_STATUS.c **** * Summary:
   48:Generated_Source\PSoC5/FF_STATUS.c **** *  Enables the Status Register interrupt.
   49:Generated_Source\PSoC5/FF_STATUS.c **** *
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckUXUFb.s 			page 3
 
 
   50:Generated_Source\PSoC5/FF_STATUS.c **** * Parameters:
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 1
  106              		.cfi_endproc
  107              	.LFE1:
  108              		.size	FF_STATUS_InterruptEnable, .-FF_STATUS_InterruptEnable
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckUXUFb.s 			page 4
 
 
  109              		.section	.text.FF_STATUS_InterruptDisable,"ax",%progbits
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 1
  141              		.loc 1 85 0
  142 001e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
  143 0020 1846     		mov	r0, r3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckUXUFb.s 			page 5
 
 
  144 0022 FFF7FEFF 		bl	CyExitCriticalSection
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 1
  179              		.cfi_def_cfa_register 7
  180 0006 0346     		mov	r3, r0
  181 0008 FB71     		strb	r3, [r7, #7]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 6
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckUXUFb.s 			page 6
 
 
  105:Generated_Source\PSoC5/FF_STATUS.c ****     #if(FF_STATUS_INPUTS < 8u)
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 1
  125:Generated_Source\PSoC5/FF_STATUS.c **** *******************************************************************************/
  126:Generated_Source\PSoC5/FF_STATUS.c **** uint8 FF_STATUS_ReadMask(void) 
  127:Generated_Source\PSoC5/FF_STATUS.c **** {
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 7
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckUXUFb.s 			page 7
 
 
  216              		.loc 1 127 0
@@ -403,36 +403,36 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 1
  253 0006 00000000 		.4byte	.Ldebug_abbrev0
  254 000a 04       		.byte	0x4
  255 000b 01       		.uleb128 0x1
- 256 000c AE000000 		.4byte	.LASF22
+ 256 000c FE000000 		.4byte	.LASF22
  257 0010 0C       		.byte	0xc
  258 0011 1B000000 		.4byte	.LASF23
- 259 0015 72010000 		.4byte	.LASF24
+ 259 0015 AE000000 		.4byte	.LASF24
  260 0019 00000000 		.4byte	.Ldebug_ranges0+0
  261 001d 00000000 		.4byte	0
  262 0021 00000000 		.4byte	.Ldebug_line0
  263 0025 02       		.uleb128 0x2
  264 0026 01       		.byte	0x1
  265 0027 06       		.byte	0x6
- 266 0028 CE010000 		.4byte	.LASF0
+ 266 0028 DC010000 		.4byte	.LASF0
  267 002c 02       		.uleb128 0x2
  268 002d 01       		.byte	0x1
  269 002e 08       		.byte	0x8
- 270 002f 3C010000 		.4byte	.LASF1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 8
+ 270 002f 8C010000 		.4byte	.LASF1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckUXUFb.s 			page 8
 
 
  271 0033 02       		.uleb128 0x2
  272 0034 02       		.byte	0x2
  273 0035 05       		.byte	0x5
- 274 0036 01020000 		.4byte	.LASF2
+ 274 0036 0F020000 		.4byte	.LASF2
  275 003a 02       		.uleb128 0x2
  276 003b 02       		.byte	0x2
  277 003c 07       		.byte	0x7
- 278 003d BB010000 		.4byte	.LASF3
+ 278 003d C9010000 		.4byte	.LASF3
  279 0041 02       		.uleb128 0x2
  280 0042 04       		.byte	0x4
  281 0043 05       		.byte	0x5
- 282 0044 69010000 		.4byte	.LASF4
+ 282 0044 B9010000 		.4byte	.LASF4
  283 0048 02       		.uleb128 0x2
  284 0049 04       		.byte	0x4
  285 004a 07       		.byte	0x7
@@ -465,29 +465,29 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 1
  312 007e 02       		.uleb128 0x2
  313 007f 08       		.byte	0x8
  314 0080 04       		.byte	0x4
- 315 0081 B4010000 		.4byte	.LASF10
+ 315 0081 C2010000 		.4byte	.LASF10
  316 0085 02       		.uleb128 0x2
  317 0086 01       		.byte	0x1
  318 0087 08       		.byte	0x8
- 319 0088 4A010000 		.4byte	.LASF11
+ 319 0088 9A010000 		.4byte	.LASF11
  320 008c 04       		.uleb128 0x4
- 321 008d 0B020000 		.4byte	.LASF13
+ 321 008d 19020000 		.4byte	.LASF13
  322 0091 02       		.byte	0x2
  323 0092 8E02     		.2byte	0x28e
  324 0094 98000000 		.4byte	0x98
  325 0098 05       		.uleb128 0x5
  326 0099 6B000000 		.4byte	0x6b
  327 009d 02       		.uleb128 0x2
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 9
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckUXUFb.s 			page 9
 
 
  328 009e 08       		.byte	0x8
  329 009f 04       		.byte	0x4
- 330 00a0 F5010000 		.4byte	.LASF14
+ 330 00a0 03020000 		.4byte	.LASF14
  331 00a4 02       		.uleb128 0x2
  332 00a5 04       		.byte	0x4
  333 00a6 07       		.byte	0x7
- 334 00a7 10020000 		.4byte	.LASF15
+ 334 00a7 1E020000 		.4byte	.LASF15
  335 00ab 06       		.uleb128 0x6
  336 00ac 65000000 		.4byte	.LASF20
  337 00b0 01       		.byte	0x1
@@ -498,7 +498,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 1
  342 00be 01       		.uleb128 0x1
  343 00bf 9C       		.byte	0x9c
  344 00c0 07       		.uleb128 0x7
- 345 00c1 4F010000 		.4byte	.LASF16
+ 345 00c1 9F010000 		.4byte	.LASF16
  346 00c5 01       		.byte	0x1
  347 00c6 39       		.byte	0x39
  348 00c7 00000000 		.4byte	.LFB1
@@ -507,7 +507,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 1
  351 00d0 9C       		.byte	0x9c
  352 00d1 E4000000 		.4byte	0xe4
  353 00d5 08       		.uleb128 0x8
- 354 00d6 19020000 		.4byte	.LASF18
+ 354 00d6 27020000 		.4byte	.LASF18
  355 00da 01       		.byte	0x1
  356 00db 3B       		.byte	0x3b
  357 00dc 6B000000 		.4byte	0x6b
@@ -516,7 +516,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 1
  360 00e2 77       		.sleb128 -9
  361 00e3 00       		.byte	0
  362 00e4 07       		.uleb128 0x7
- 363 00e5 DA010000 		.4byte	.LASF17
+ 363 00e5 E8010000 		.4byte	.LASF17
  364 00e9 01       		.byte	0x1
  365 00ea 50       		.byte	0x50
  366 00eb 00000000 		.4byte	.LFB2
@@ -525,7 +525,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 1
  369 00f4 9C       		.byte	0x9c
  370 00f5 08010000 		.4byte	0x108
  371 00f9 08       		.uleb128 0x8
- 372 00fa 19020000 		.4byte	.LASF18
+ 372 00fa 27020000 		.4byte	.LASF18
  373 00fe 01       		.byte	0x1
  374 00ff 52       		.byte	0x52
  375 0100 6B000000 		.4byte	0x6b
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 1
  382 010d 01       		.byte	0x1
  383 010e 67       		.byte	0x67
  384 010f 00000000 		.4byte	.LFB3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 10
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckUXUFb.s 			page 10
 
 
  385 0113 28000000 		.4byte	.LFE3-.LFB3
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 1
  439 001d 00       		.byte	0
  440 001e 03       		.uleb128 0x3
  441 001f 24       		.uleb128 0x24
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckUXUFb.s 			page 11
 
 
  442 0020 00       		.byte	0
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 1
  496 0057 07       		.uleb128 0x7
  497 0058 2E       		.uleb128 0x2e
  498 0059 01       		.byte	0x1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 12
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckUXUFb.s 			page 12
 
 
  499 005a 3F       		.uleb128 0x3f
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 1
  553 0091 40       		.uleb128 0x40
  554 0092 18       		.uleb128 0x18
  555 0093 9742     		.uleb128 0x2117
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckUXUFb.s 			page 13
 
 
  556 0095 19       		.uleb128 0x19
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 1
  610 002c 00000000 		.4byte	0
  611              		.section	.debug_line,"",%progbits
  612              	.Ldebug_line0:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 14
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckUXUFb.s 			page 14
 
 
  613 0000 A9000000 		.section	.debug_str,"MS",%progbits,1
@@ -838,95 +838,95 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 1
  633 00a3 666C6F61 		.ascii	"float\000"
  633      7400
  634              	.LASF25:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 15
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckUXUFb.s 			page 15
 
 
  635 00a9 6D61736B 		.ascii	"mask\000"
  635      00
- 636              	.LASF22:
- 637 00ae 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 637      43313120 
- 637      352E342E 
- 637      31203230 
- 637      31363036 
- 638 00e1 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 638      20726576 
- 638      6973696F 
- 638      6E203233 
- 638      37373135 
- 639 0114 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
- 639      66756E63 
- 639      74696F6E 
- 639      2D736563 
- 639      74696F6E 
- 640              	.LASF1:
- 641 013c 756E7369 		.ascii	"unsigned char\000"
- 641      676E6564 
- 641      20636861 
- 641      7200
- 642              	.LASF11:
- 643 014a 63686172 		.ascii	"char\000"
- 643      00
- 644              	.LASF16:
- 645 014f 46465F53 		.ascii	"FF_STATUS_InterruptEnable\000"
- 645      54415455 
- 645      535F496E 
- 645      74657272 
- 645      75707445 
- 646              	.LASF4:
- 647 0169 6C6F6E67 		.ascii	"long int\000"
- 647      20696E74 
- 647      00
- 648              	.LASF24:
- 649 0172 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHand-PRO-"
- 649      73657273 
- 649      5C4D6174 
- 649      7469615C 
- 649      446F6375 
- 650 01a0 50536F43 		.ascii	"PSoC5\\Generic.cydsn\000"
- 650      355C4765 
- 650      6E657269 
- 650      632E6379 
- 650      64736E00 
+ 636              	.LASF24:
+ 637 00ae 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHandPRO-a"
+ 637      73657273 
+ 637      5C4D6174 
+ 637      7469615C 
+ 637      446F6375 
+ 638 00dc 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\Generic.cydsn\000"
+ 638      656E6572 
+ 638      69632D46 
+ 638      572D5053 
+ 638      6F43355C 
+ 639              	.LASF22:
+ 640 00fe 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 640      43313120 
+ 640      352E342E 
+ 640      31203230 
+ 640      31363036 
+ 641 0131 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 641      20726576 
+ 641      6973696F 
+ 641      6E203233 
+ 641      37373135 
+ 642 0164 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 642      66756E63 
+ 642      74696F6E 
+ 642      2D736563 
+ 642      74696F6E 
+ 643              	.LASF1:
+ 644 018c 756E7369 		.ascii	"unsigned char\000"
+ 644      676E6564 
+ 644      20636861 
+ 644      7200
+ 645              	.LASF11:
+ 646 019a 63686172 		.ascii	"char\000"
+ 646      00
+ 647              	.LASF16:
+ 648 019f 46465F53 		.ascii	"FF_STATUS_InterruptEnable\000"
+ 648      54415455 
+ 648      535F496E 
+ 648      74657272 
+ 648      75707445 
+ 649              	.LASF4:
+ 650 01b9 6C6F6E67 		.ascii	"long int\000"
+ 650      20696E74 
+ 650      00
  651              	.LASF10:
- 652 01b4 646F7562 		.ascii	"double\000"
+ 652 01c2 646F7562 		.ascii	"double\000"
  652      6C6500
  653              	.LASF3:
- 654 01bb 73686F72 		.ascii	"short unsigned int\000"
+ 654 01c9 73686F72 		.ascii	"short unsigned int\000"
  654      7420756E 
  654      7369676E 
  654      65642069 
  654      6E7400
  655              	.LASF0:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccQz0Ryp.s 			page 16
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckUXUFb.s 			page 16
 
 
- 656 01ce 7369676E 		.ascii	"signed char\000"
+ 656 01dc 7369676E 		.ascii	"signed char\000"
  656      65642063 
  656      68617200 
  657              	.LASF17:
- 658 01da 46465F53 		.ascii	"FF_STATUS_InterruptDisable\000"
+ 658 01e8 46465F53 		.ascii	"FF_STATUS_InterruptDisable\000"
  658      54415455 
  658      535F496E 
  658      74657272 
  658      75707444 
  659              	.LASF14:
- 660 01f5 6C6F6E67 		.ascii	"long double\000"
+ 660 0203 6C6F6E67 		.ascii	"long double\000"
  660      20646F75 
  660      626C6500 
  661              	.LASF2:
- 662 0201 73686F72 		.ascii	"short int\000"
+ 662 020f 73686F72 		.ascii	"short int\000"
  662      7420696E 
  662      7400
  663              	.LASF13:
- 664 020b 72656738 		.ascii	"reg8\000"
+ 664 0219 72656738 		.ascii	"reg8\000"
  664      00
  665              	.LASF15:
- 666 0210 73697A65 		.ascii	"sizetype\000"
+ 666 021e 73697A65 		.ascii	"sizetype\000"
  666      74797065 
  666      00
  667              	.LASF18:
- 668 0219 696E7465 		.ascii	"interruptState\000"
+ 668 0227 696E7465 		.ascii	"interruptState\000"
  668      72727570 
  668      74537461 
  668      746500

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
   22:Generated_Source\PSoC5/BLINK_05HZ.c **** ********************************************************************************/
   23:Generated_Source\PSoC5/BLINK_05HZ.c **** 
   24:Generated_Source\PSoC5/BLINK_05HZ.c **** #include "BLINK_05HZ.h"
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 2
 
 
   25:Generated_Source\PSoC5/BLINK_05HZ.c **** 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
   51              		.loc 1 61 0
   52 0010 034B     		ldr	r3, .L3
   53 0012 0122     		movs	r2, #1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 3
 
 
   54 0014 1A70     		strb	r2, [r3]
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
   84 0002 82B0     		sub	sp, sp, #8
   85              		.cfi_def_cfa_offset 16
   86 0004 00AF     		add	r7, sp, #0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 4
 
 
   87              		.cfi_def_cfa_register 7
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  127:Generated_Source\PSoC5/BLINK_05HZ.c ****         #else /* (BLINK_05HZ_Resolution == 16)*/
  128:Generated_Source\PSoC5/BLINK_05HZ.c ****             /* Set FIFO 0 to 1 byte register for period */
  129:Generated_Source\PSoC5/BLINK_05HZ.c ****             BLINK_05HZ_AUX_CONTROLDP0 |= (BLINK_05HZ_AUX_CTRL_FIFO0_CLR);
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 5
 
 
  100              		.loc 1 129 0
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  159:Generated_Source\PSoC5/BLINK_05HZ.c ****         BLINK_05HZ_GLOBAL_ENABLE |= BLINK_05HZ_BLOCK_EN_MASK;
  160:Generated_Source\PSoC5/BLINK_05HZ.c ****         /* Set the Interrupt source to come from the status register */
  161:Generated_Source\PSoC5/BLINK_05HZ.c ****         BLINK_05HZ_CONTROL2 |= BLINK_05HZ_CTRL2_IRQ_SEL;
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 6
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 6
 
 
  162:Generated_Source\PSoC5/BLINK_05HZ.c ****     #else
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  191:Generated_Source\PSoC5/BLINK_05HZ.c **** *
  192:Generated_Source\PSoC5/BLINK_05HZ.c **** * Return:
  193:Generated_Source\PSoC5/BLINK_05HZ.c **** *  None
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 7
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 7
 
 
  194:Generated_Source\PSoC5/BLINK_05HZ.c **** *
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  186              		.global	BLINK_05HZ_Stop
  187              		.thumb
  188              		.thumb_func
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 8
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 8
 
 
  189              		.type	BLINK_05HZ_Stop, %function
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  210              		.loc 1 244 0
  211 0014 00BF     		nop
  212 0016 BD46     		mov	sp, r7
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 9
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 9
 
 
  213              		.cfi_def_cfa_register 13
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  278:Generated_Source\PSoC5/BLINK_05HZ.c **** 
  279:Generated_Source\PSoC5/BLINK_05HZ.c ****             #elif (BLINK_05HZ_UseControl)
  280:Generated_Source\PSoC5/BLINK_05HZ.c **** 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 10
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 10
 
 
  281:Generated_Source\PSoC5/BLINK_05HZ.c ****                 #if(0 != BLINK_05HZ_CTRL_CMPMODE1_SHIFT)
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  335:Generated_Source\PSoC5/BLINK_05HZ.c ****             #if (BLINK_05HZ_UseControl)
  336:Generated_Source\PSoC5/BLINK_05HZ.c ****                 BLINK_05HZ_CONTROL &= ((uint8)(~BLINK_05HZ_CTRL_CMPMODE1_MASK)); /*Clear existing m
  337:Generated_Source\PSoC5/BLINK_05HZ.c ****                 BLINK_05HZ_CONTROL |= comparemodemasked;
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 11
 
 
  338:Generated_Source\PSoC5/BLINK_05HZ.c ****             #endif /* (BLINK_05HZ_UseControl) */
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  392:Generated_Source\PSoC5/BLINK_05HZ.c ****     *
  393:Generated_Source\PSoC5/BLINK_05HZ.c ****     * Parameters:
  394:Generated_Source\PSoC5/BLINK_05HZ.c ****     *  counter:  The period new period counter value.
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 12
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 12
 
 
  395:Generated_Source\PSoC5/BLINK_05HZ.c ****     *
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  275              		.type	BLINK_05HZ_ReadCounter, %function
  276              	BLINK_05HZ_ReadCounter:
  277              	.LFB5:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 13
 
 
  408:Generated_Source\PSoC5/BLINK_05HZ.c **** 
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  305 0016 00BF     		.align	2
  306              	.L19:
  307 0018 19640040 		.word	1073767449
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 14
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 14
 
 
  308 001c B2680040 		.word	1073768626
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  477:Generated_Source\PSoC5/BLINK_05HZ.c **** *
  478:Generated_Source\PSoC5/BLINK_05HZ.c **** * Return:
  479:Generated_Source\PSoC5/BLINK_05HZ.c **** *  None
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 15
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 15
 
 
  480:Generated_Source\PSoC5/BLINK_05HZ.c **** *
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  490:Generated_Source\PSoC5/BLINK_05HZ.c **** 
  491:Generated_Source\PSoC5/BLINK_05HZ.c **** #if (BLINK_05HZ_UseOneCompareMode)
  492:Generated_Source\PSoC5/BLINK_05HZ.c **** 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 16
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 16
 
 
  493:Generated_Source\PSoC5/BLINK_05HZ.c **** 
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  529:Generated_Source\PSoC5/BLINK_05HZ.c ****                 CY_SET_REG16(BLINK_05HZ_COMPARE2_LSB_PTR, (compare + 1u));
  530:Generated_Source\PSoC5/BLINK_05HZ.c ****             #endif /* (BLINK_05HZ_UsingFixedFunction) */
  531:Generated_Source\PSoC5/BLINK_05HZ.c ****         #endif /* (BLINK_05HZ_PWMMode == BLINK_05HZ__B_PWM__DITHER) */
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 17
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 17
 
 
  532:Generated_Source\PSoC5/BLINK_05HZ.c ****     }
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  560:Generated_Source\PSoC5/BLINK_05HZ.c ****         #else
  561:Generated_Source\PSoC5/BLINK_05HZ.c ****             CY_SET_REG16(BLINK_05HZ_COMPARE1_LSB_PTR, compare);
  562:Generated_Source\PSoC5/BLINK_05HZ.c ****         #endif /* (BLINK_05HZ_UsingFixedFunction) */
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 18
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 18
 
 
  563:Generated_Source\PSoC5/BLINK_05HZ.c ****     }
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  617:Generated_Source\PSoC5/BLINK_05HZ.c ****         #else
  618:Generated_Source\PSoC5/BLINK_05HZ.c ****             /* Otherwise the data has to be masked and offset */
  619:Generated_Source\PSoC5/BLINK_05HZ.c ****             /* Clear existing data */
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 19
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 19
 
 
  620:Generated_Source\PSoC5/BLINK_05HZ.c ****             BLINK_05HZ_DEADBAND_COUNT &= ((uint8)(~BLINK_05HZ_DEADBAND_COUNT_MASK));
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  674:Generated_Source\PSoC5/BLINK_05HZ.c ****     *  This function configures the interrupts mask control of theinterrupt
  675:Generated_Source\PSoC5/BLINK_05HZ.c ****     *  source status register.
  676:Generated_Source\PSoC5/BLINK_05HZ.c ****     *
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 20
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 20
 
 
  677:Generated_Source\PSoC5/BLINK_05HZ.c ****     * Parameters:
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  731:Generated_Source\PSoC5/BLINK_05HZ.c ****     *  None
  732:Generated_Source\PSoC5/BLINK_05HZ.c ****     *
  733:Generated_Source\PSoC5/BLINK_05HZ.c ****     * Return:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 21
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 21
 
 
  734:Generated_Source\PSoC5/BLINK_05HZ.c ****     *  uint8 : Current control register value
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  744:Generated_Source\PSoC5/BLINK_05HZ.c **** 
  745:Generated_Source\PSoC5/BLINK_05HZ.c **** 
  746:Generated_Source\PSoC5/BLINK_05HZ.c ****     /*******************************************************************************
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 22
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 22
 
 
  747:Generated_Source\PSoC5/BLINK_05HZ.c ****     * Function Name: BLINK_05HZ_WriteControlRegister
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  484 001c 75650040 		.word	1073767797
  485              		.cfi_endproc
  486              	.LFE9:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 23
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 23
 
 
  487              		.size	BLINK_05HZ_WriteControlRegister, .-BLINK_05HZ_WriteControlRegister
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  516              		.cfi_restore 7
  517              		.cfi_def_cfa_offset 0
  518 0010 7047     		bx	lr
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 24
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 24
 
 
  519              	.L37:
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  545 0004 034B     		ldr	r3, .L40
  546 0006 1B88     		ldrh	r3, [r3]	@ movhi
  547 0008 9BB2     		uxth	r3, r3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 25
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 25
 
 
  822:Generated_Source\PSoC5/BLINK_05HZ.c ****         #endif /* (BLINK_05HZ_UsingFixedFunction) */
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  852:Generated_Source\PSoC5/BLINK_05HZ.c ****     * Summary:
  853:Generated_Source\PSoC5/BLINK_05HZ.c ****     *  Reads the compare value for the compare2 output.
  854:Generated_Source\PSoC5/BLINK_05HZ.c ****     *
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 26
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 26
 
 
  855:Generated_Source\PSoC5/BLINK_05HZ.c ****     * Parameters:
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  589              		.cfi_def_cfa_register 13
  590              		@ sp needed
  591 000e 80BC     		pop	{r7}
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 27
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 27
 
 
  592              		.cfi_restore 7
@@ -1583,15 +1583,15 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  611 000b 01       		.uleb128 0x1
  612 000c 25000000 		.4byte	.LASF36
  613 0010 0C       		.byte	0xc
- 614 0011 AF020000 		.4byte	.LASF37
- 615 0015 2D020000 		.4byte	.LASF38
+ 614 0011 BD020000 		.4byte	.LASF37
+ 615 0015 32020000 		.4byte	.LASF38
  616 0019 00000000 		.4byte	.Ldebug_ranges0+0
  617 001d 00000000 		.4byte	0
  618 0021 00000000 		.4byte	.Ldebug_line0
  619 0025 02       		.uleb128 0x2
  620 0026 01       		.byte	0x1
  621 0027 06       		.byte	0x6
- 622 0028 DF020000 		.4byte	.LASF0
+ 622 0028 ED020000 		.4byte	.LASF0
  623 002c 02       		.uleb128 0x2
  624 002d 01       		.byte	0x1
  625 002e 08       		.byte	0x8
@@ -1599,7 +1599,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  627 0033 02       		.uleb128 0x2
  628 0034 02       		.byte	0x2
  629 0035 05       		.byte	0x5
- 630 0036 74020000 		.4byte	.LASF2
+ 630 0036 82020000 		.4byte	.LASF2
  631 003a 02       		.uleb128 0x2
  632 003b 02       		.byte	0x2
  633 003c 07       		.byte	0x7
@@ -1607,7 +1607,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  635 0041 02       		.uleb128 0x2
  636 0042 04       		.byte	0x4
  637 0043 05       		.byte	0x5
- 638 0044 A6020000 		.4byte	.LASF4
+ 638 0044 B4020000 		.4byte	.LASF4
  639 0048 02       		.uleb128 0x2
  640 0049 04       		.byte	0x4
  641 004a 07       		.byte	0x7
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  646 0052 1F020000 		.4byte	.LASF6
  647 0056 02       		.uleb128 0x2
  648 0057 08       		.byte	0x8
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 28
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 28
 
 
  649 0058 07       		.byte	0x7
@@ -1632,7 +1632,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  657 0066 07       		.byte	0x7
  658 0067 C2010000 		.4byte	.LASF8
  659 006b 04       		.uleb128 0x4
- 660 006c 90020000 		.4byte	.LASF9
+ 660 006c 9E020000 		.4byte	.LASF9
  661 0070 02       		.byte	0x2
  662 0071 E401     		.2byte	0x1e4
  663 0073 2C000000 		.4byte	0x2c
@@ -1652,7 +1652,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  677 0091 02       		.uleb128 0x2
  678 0092 01       		.byte	0x1
  679 0093 08       		.byte	0x8
- 680 0094 6F020000 		.4byte	.LASF13
+ 680 0094 2D020000 		.4byte	.LASF13
  681 0098 04       		.uleb128 0x4
  682 0099 3E010000 		.4byte	.LASF14
  683 009d 02       		.byte	0x2
@@ -1670,7 +1670,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  695 00ba 02       		.uleb128 0x2
  696 00bb 08       		.byte	0x8
  697 00bc 04       		.byte	0x4
- 698 00bd D3020000 		.4byte	.LASF16
+ 698 00bd E1020000 		.4byte	.LASF16
  699 00c1 02       		.uleb128 0x2
  700 00c2 04       		.byte	0x4
  701 00c3 07       		.byte	0x7
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  703 00c8 06       		.uleb128 0x6
  704 00c9 ED010000 		.4byte	.LASF18
  705 00cd 01       		.byte	0x1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 29
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 29
 
 
  706 00ce 37       		.byte	0x37
@@ -1687,7 +1687,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  709 00d7 01       		.uleb128 0x1
  710 00d8 9C       		.byte	0x9c
  711 00d9 07       		.uleb128 0x7
- 712 00da 96020000 		.4byte	.LASF21
+ 712 00da A4020000 		.4byte	.LASF21
  713 00de 01       		.byte	0x1
  714 00df 54       		.byte	0x54
  715 00e0 00000000 		.4byte	.LFB1
@@ -1705,7 +1705,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  727 00fb 77       		.sleb128 -9
  728 00fc 00       		.byte	0
  729 00fd 09       		.uleb128 0x9
- 730 00fe 7E020000 		.4byte	.LASF19
+ 730 00fe 8C020000 		.4byte	.LASF19
  731 0102 01       		.byte	0x1
  732 0103 C7       		.byte	0xc7
  733 0104 00000000 		.4byte	.LFB2
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  760 0142 91       		.byte	0x91
  761 0143 76       		.sleb128 -10
  762 0144 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 30
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 30
 
 
  763 0145 0C       		.uleb128 0xc
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  817 01bd D1010000 		.4byte	0x1d1
  818 01c1 0E       		.uleb128 0xe
  819 01c2 E6010000 		.4byte	.LASF29
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 31
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 31
 
 
  820 01c6 01       		.byte	0x1
@@ -1827,7 +1827,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  843 01f5 77       		.sleb128 -9
  844 01f6 00       		.byte	0
  845 01f7 0C       		.uleb128 0xc
- 846 01f8 02030000 		.4byte	.LASF33
+ 846 01f8 10030000 		.4byte	.LASF33
  847 01fc 01       		.byte	0x1
  848 01fd 1603     		.2byte	0x316
  849 01ff 77000000 		.4byte	0x77
@@ -1836,7 +1836,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  852 020b 01       		.uleb128 0x1
  853 020c 9C       		.byte	0x9c
  854 020d 0C       		.uleb128 0xc
- 855 020e EB020000 		.4byte	.LASF34
+ 855 020e F9020000 		.4byte	.LASF34
  856 0212 01       		.byte	0x1
  857 0213 3003     		.2byte	0x330
  858 0215 77000000 		.4byte	0x77
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  874 023e 01       		.byte	0x1
  875 023f 20       		.byte	0x20
  876 0240 6B000000 		.4byte	0x6b
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 32
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 32
 
 
  877 0244 05       		.uleb128 0x5
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  931 0030 3B       		.uleb128 0x3b
  932 0031 05       		.uleb128 0x5
  933 0032 49       		.uleb128 0x49
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 33
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 33
 
 
  934 0033 13       		.uleb128 0x13
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  988 006b 01       		.uleb128 0x1
  989 006c 13       		.uleb128 0x13
  990 006d 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 34
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 34
 
 
  991 006e 00       		.byte	0
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  1045 00a5 12       		.uleb128 0x12
  1046 00a6 06       		.uleb128 0x6
  1047 00a7 40       		.uleb128 0x40
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 35
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 35
 
 
  1048 00a8 18       		.uleb128 0x18
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  1102 00e0 3A       		.uleb128 0x3a
  1103 00e1 0B       		.uleb128 0xb
  1104 00e2 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 36
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 36
 
 
  1105 00e3 05       		.uleb128 0x5
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  1159 000a 04       		.byte	0x4
  1160 000b 00       		.byte	0
  1161 000c 0000     		.2byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 37
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 37
 
 
  1162 000e 0000     		.2byte	0
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  1216 005c 18000000 		.4byte	.LFE11
  1217 0060 00000000 		.4byte	.LFB12
  1218 0064 18000000 		.4byte	.LFE12
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 38
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 38
 
 
  1219 0068 00000000 		.4byte	0
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  1241      4B5F3035 
  1241      485A5F53 
  1241      746F7000 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 39
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 39
 
 
  1242              	.LASF11:
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  1265      72697465 
  1265      436F756E 
  1266              	.LASF10:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 40
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 40
 
 
  1267 01bb 75696E74 		.ascii	"uint16\000"
@@ -2381,67 +2381,67 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 1
  1283      206C6F6E 
  1283      6720696E 
  1283      7400
- 1284              	.LASF38:
- 1285 022d 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHand-PRO-"
- 1285      73657273 
- 1285      5C4D6174 
- 1285      7469615C 
- 1285      446F6375 
- 1286 025b 50536F43 		.ascii	"PSoC5\\Generic.cydsn\000"
- 1286      355C4765 
- 1286      6E657269 
- 1286      632E6379 
- 1286      64736E00 
- 1287              	.LASF13:
- 1288 026f 63686172 		.ascii	"char\000"
- 1288      00
+ 1284              	.LASF13:
+ 1285 022d 63686172 		.ascii	"char\000"
+ 1285      00
+ 1286              	.LASF38:
+ 1287 0232 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHandPRO-a"
+ 1287      73657273 
+ 1287      5C4D6174 
+ 1287      7469615C 
+ 1287      446F6375 
+ 1288 0260 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\Generic.cydsn\000"
+ 1288      656E6572 
+ 1288      69632D46 
+ 1288      572D5053 
+ 1288      6F43355C 
  1289              	.LASF2:
- 1290 0274 73686F72 		.ascii	"short int\000"
+ 1290 0282 73686F72 		.ascii	"short int\000"
  1290      7420696E 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccnVzl9g.s 			page 41
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccHrR5Im.s 			page 41
 
 
  1290      7400
  1291              	.LASF19:
- 1292 027e 424C494E 		.ascii	"BLINK_05HZ_Enable\000"
+ 1292 028c 424C494E 		.ascii	"BLINK_05HZ_Enable\000"
  1292      4B5F3035 
  1292      485A5F45 
  1292      6E61626C 
  1292      6500
  1293              	.LASF9:
- 1294 0290 75696E74 		.ascii	"uint8\000"
+ 1294 029e 75696E74 		.ascii	"uint8\000"
  1294      3800
  1295              	.LASF21:
- 1296 0296 424C494E 		.ascii	"BLINK_05HZ_Init\000"
+ 1296 02a4 424C494E 		.ascii	"BLINK_05HZ_Init\000"
  1296      4B5F3035 
  1296      485A5F49 
  1296      6E697400 
  1297              	.LASF4:
- 1298 02a6 6C6F6E67 		.ascii	"long int\000"
+ 1298 02b4 6C6F6E67 		.ascii	"long int\000"
  1298      20696E74 
  1298      00
  1299              	.LASF37:
- 1300 02af 47656E65 		.ascii	"Generated_Source\\PSoC5\\BLINK_05HZ.c\000"
+ 1300 02bd 47656E65 		.ascii	"Generated_Source\\PSoC5\\BLINK_05HZ.c\000"
  1300      72617465 
  1300      645F536F 
  1300      75726365 
  1300      5C50536F 
  1301              	.LASF16:
- 1302 02d3 6C6F6E67 		.ascii	"long double\000"
+ 1302 02e1 6C6F6E67 		.ascii	"long double\000"
  1302      20646F75 
  1302      626C6500 
  1303              	.LASF0:
- 1304 02df 7369676E 		.ascii	"signed char\000"
+ 1304 02ed 7369676E 		.ascii	"signed char\000"
  1304      65642063 
  1304      68617200 
  1305              	.LASF34:
- 1306 02eb 424C494E 		.ascii	"BLINK_05HZ_ReadCompare\000"
+ 1306 02f9 424C494E 		.ascii	"BLINK_05HZ_ReadCompare\000"
  1306      4B5F3035 
  1306      485A5F52 
  1306      65616443 
  1306      6F6D7061 
  1307              	.LASF33:
- 1308 0302 424C494E 		.ascii	"BLINK_05HZ_ReadCapture\000"
+ 1308 0310 424C494E 		.ascii	"BLINK_05HZ_ReadCapture\000"
  1308      4B5F3035 
  1308      485A5F52 
  1308      65616443 

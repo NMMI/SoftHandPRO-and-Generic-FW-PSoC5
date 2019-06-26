@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cczZHdMZ.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 1
   28:Generated_Source\PSoC5/UART_RS485_INT.c ****     * Function Name: UART_RS485_RXISR
   29:Generated_Source\PSoC5/UART_RS485_INT.c ****     ********************************************************************************
   30:Generated_Source\PSoC5/UART_RS485_INT.c ****     *
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cczZHdMZ.s 			page 2
 
 
   31:Generated_Source\PSoC5/UART_RS485_INT.c ****     * Summary:
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 1
   69:Generated_Source\PSoC5/UART_RS485_INT.c ****     #ifdef UART_RS485_RXISR_ENTRY_CALLBACK
   70:Generated_Source\PSoC5/UART_RS485_INT.c ****         UART_RS485_RXISR_EntryCallback();
   71:Generated_Source\PSoC5/UART_RS485_INT.c ****     #endif /* UART_RS485_RXISR_ENTRY_CALLBACK */
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cczZHdMZ.s 			page 3
 
 
   72:Generated_Source\PSoC5/UART_RS485_INT.c **** 
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 1
   99:Generated_Source\PSoC5/UART_RS485_INT.c ****                                                             UART_RS485_RX_STS_PAR_ERROR | 
  100:Generated_Source\PSoC5/UART_RS485_INT.c ****                                                             UART_RS485_RX_STS_STOP_ERROR | 
  101:Generated_Source\PSoC5/UART_RS485_INT.c ****                                                             UART_RS485_RX_STS_OVERRUN);
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cczZHdMZ.s 			page 4
 
 
  102:Generated_Source\PSoC5/UART_RS485_INT.c ****                 /* `#START UART_RS485_RXISR_ERROR` */
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 1
   84 0050 1D4A     		ldr	r2, .L7+16
   85 0052 7B79     		ldrb	r3, [r7, #5]
   86 0054 5354     		strb	r3, [r2, r1]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cczZHdMZ.s 			page 5
 
 
  142:Generated_Source\PSoC5/UART_RS485_INT.c ****                 increment_pointer = 1u;
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 1
  159:Generated_Source\PSoC5/UART_RS485_INT.c ****                     }
  160:Generated_Source\PSoC5/UART_RS485_INT.c **** 
  161:Generated_Source\PSoC5/UART_RS485_INT.c ****                     /* Detect pre-overload condition and set flag */
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 6
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cczZHdMZ.s 			page 6
 
 
  162:Generated_Source\PSoC5/UART_RS485_INT.c ****                     if(UART_RS485_rxBufferWrite == UART_RS485_rxBufferRead)
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 1
  150 00b4 80BC     		pop	{r7}
  151              		.cfi_restore 7
  152              		.cfi_def_cfa_offset 0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 7
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cczZHdMZ.s 			page 7
 
 
  153 00b6 7047     		bx	lr
@@ -387,38 +387,38 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 1
  176 0006 00000000 		.4byte	.Ldebug_abbrev0
  177 000a 04       		.byte	0x4
  178 000b 01       		.uleb128 0x1
- 179 000c BC000000 		.4byte	.LASF25
+ 179 000c 0C010000 		.4byte	.LASF25
  180 0010 0C       		.byte	0xc
  181 0011 7A000000 		.4byte	.LASF26
- 182 0015 8C010000 		.4byte	.LASF27
+ 182 0015 BC000000 		.4byte	.LASF27
  183 0019 00000000 		.4byte	.Ldebug_ranges0+0
  184 001d 00000000 		.4byte	0
  185 0021 00000000 		.4byte	.Ldebug_line0
  186 0025 02       		.uleb128 0x2
  187 0026 01       		.byte	0x1
  188 0027 06       		.byte	0x6
- 189 0028 E8010000 		.4byte	.LASF0
+ 189 0028 F6010000 		.4byte	.LASF0
  190 002c 02       		.uleb128 0x2
  191 002d 01       		.byte	0x1
  192 002e 08       		.byte	0x8
- 193 002f 4A010000 		.4byte	.LASF1
+ 193 002f 9A010000 		.4byte	.LASF1
  194 0033 02       		.uleb128 0x2
  195 0034 02       		.byte	0x2
  196 0035 05       		.byte	0x5
- 197 0036 82010000 		.4byte	.LASF2
+ 197 0036 D2010000 		.4byte	.LASF2
  198 003a 02       		.uleb128 0x2
  199 003b 02       		.byte	0x2
  200 003c 07       		.byte	0x7
- 201 003d D5010000 		.4byte	.LASF3
+ 201 003d E3010000 		.4byte	.LASF3
  202 0041 02       		.uleb128 0x2
  203 0042 04       		.byte	0x4
  204 0043 05       		.byte	0x5
- 205 0044 5D010000 		.4byte	.LASF4
+ 205 0044 AD010000 		.4byte	.LASF4
  206 0048 02       		.uleb128 0x2
  207 0049 04       		.byte	0x4
  208 004a 07       		.byte	0x7
  209 004b 51000000 		.4byte	.LASF5
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 8
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cczZHdMZ.s 			page 8
 
 
  210 004f 02       		.uleb128 0x2
@@ -449,13 +449,13 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 1
  235 007e 02       		.uleb128 0x2
  236 007f 08       		.byte	0x8
  237 0080 04       		.byte	0x4
- 238 0081 CE010000 		.4byte	.LASF10
+ 238 0081 DC010000 		.4byte	.LASF10
  239 0085 02       		.uleb128 0x2
  240 0086 01       		.byte	0x1
  241 0087 08       		.byte	0x8
- 242 0088 58010000 		.4byte	.LASF11
+ 242 0088 A8010000 		.4byte	.LASF11
  243 008c 04       		.uleb128 0x4
- 244 008d 4B020000 		.4byte	.LASF13
+ 244 008d 59020000 		.4byte	.LASF13
  245 0091 02       		.byte	0x2
  246 0092 8E02     		.2byte	0x28e
  247 0094 98000000 		.4byte	0x98
@@ -464,13 +464,13 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 1
  250 009d 02       		.uleb128 0x2
  251 009e 08       		.byte	0x8
  252 009f 04       		.byte	0x4
- 253 00a0 17020000 		.4byte	.LASF14
+ 253 00a0 25020000 		.4byte	.LASF14
  254 00a4 02       		.uleb128 0x2
  255 00a5 04       		.byte	0x4
  256 00a6 07       		.byte	0x7
- 257 00a7 59020000 		.4byte	.LASF15
+ 257 00a7 67020000 		.4byte	.LASF15
  258 00ab 06       		.uleb128 0x6
- 259 00ac 3A020000 		.4byte	.LASF28
+ 259 00ac 48020000 		.4byte	.LASF28
  260 00b0 01       		.byte	0x1
  261 00b1 3B       		.byte	0x3b
  262 00b2 00000000 		.4byte	.LFB0
@@ -478,11 +478,11 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 1
  264 00ba 01       		.uleb128 0x1
  265 00bb 9C       		.byte	0x9c
  266 00bc EB000000 		.4byte	0xeb
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 9
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cczZHdMZ.s 			page 9
 
 
  267 00c0 07       		.uleb128 0x7
- 268 00c1 50020000 		.4byte	.LASF16
+ 268 00c1 5E020000 		.4byte	.LASF16
  269 00c5 01       		.byte	0x1
  270 00c6 3D       		.byte	0x3d
  271 00c7 6B000000 		.4byte	0x6b
@@ -490,7 +490,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 1
  273 00cc 91       		.byte	0x91
  274 00cd 75       		.sleb128 -11
  275 00ce 07       		.uleb128 0x7
- 276 00cf 0C020000 		.4byte	.LASF17
+ 276 00cf 1A020000 		.4byte	.LASF17
  277 00d3 01       		.byte	0x1
  278 00d4 3E       		.byte	0x3e
  279 00d5 6B000000 		.4byte	0x6b
@@ -507,7 +507,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 1
  290 00e9 77       		.sleb128 -9
  291 00ea 00       		.byte	0
  292 00eb 08       		.uleb128 0x8
- 293 00ec 23020000 		.4byte	.LASF19
+ 293 00ec 31020000 		.4byte	.LASF19
  294 00f0 03       		.byte	0x3
  295 00f1 3D01     		.2byte	0x13d
  296 00f3 6B000000 		.4byte	0x6b
@@ -526,25 +526,25 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 1
  309 0113 05       		.uleb128 0x5
  310 0114 F7000000 		.4byte	0xf7
  311 0118 08       		.uleb128 0x8
- 312 0119 F4010000 		.4byte	.LASF21
+ 312 0119 02020000 		.4byte	.LASF21
  313 011d 03       		.byte	0x3
  314 011e 3F01     		.2byte	0x13f
  315 0120 98000000 		.4byte	0x98
  316 0124 08       		.uleb128 0x8
- 317 0125 62020000 		.4byte	.LASF22
+ 317 0125 70020000 		.4byte	.LASF22
  318 0129 03       		.byte	0x3
  319 012a 4001     		.2byte	0x140
  320 012c 98000000 		.4byte	0x98
  321 0130 08       		.uleb128 0x8
  322 0131 2D000000 		.4byte	.LASF23
  323 0135 03       		.byte	0x3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 10
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cczZHdMZ.s 			page 10
 
 
  324 0136 4101     		.2byte	0x141
  325 0138 98000000 		.4byte	0x98
  326 013c 08       		.uleb128 0x8
- 327 013d 66010000 		.4byte	.LASF24
+ 327 013d B6010000 		.4byte	.LASF24
  328 0141 03       		.byte	0x3
  329 0142 4201     		.2byte	0x142
  330 0144 98000000 		.4byte	0x98
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 1
  378 002c 03       		.uleb128 0x3
  379 002d 0E       		.uleb128 0xe
  380 002e 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cczZHdMZ.s 			page 11
 
 
  381 002f 0B       		.uleb128 0xb
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 1
  435 0066 08       		.uleb128 0x8
  436 0067 34       		.uleb128 0x34
  437 0068 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 12
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cczZHdMZ.s 			page 12
 
 
  438 0069 03       		.uleb128 0x3
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 1
  491      02005B00 
  491      00000201 
  491      FB0E0D00 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cczZHdMZ.s 			page 13
 
 
  491      01010101 
@@ -774,113 +774,113 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 1
  510              	.LASF9:
  511 00b6 666C6F61 		.ascii	"float\000"
  511      7400
- 512              	.LASF25:
- 513 00bc 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 513      43313120 
- 513      352E342E 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 14
+ 512              	.LASF27:
+ 513 00bc 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHandPRO-a"
+ 513      73657273 
+ 513      5C4D6174 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cczZHdMZ.s 			page 14
 
 
- 513      31203230 
- 513      31363036 
- 514 00ef 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 514      20726576 
- 514      6973696F 
- 514      6E203233 
- 514      37373135 
- 515 0122 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
- 515      66756E63 
- 515      74696F6E 
- 515      2D736563 
- 515      74696F6E 
- 516              	.LASF1:
- 517 014a 756E7369 		.ascii	"unsigned char\000"
- 517      676E6564 
- 517      20636861 
- 517      7200
- 518              	.LASF11:
- 519 0158 63686172 		.ascii	"char\000"
- 519      00
- 520              	.LASF4:
- 521 015d 6C6F6E67 		.ascii	"long int\000"
- 521      20696E74 
- 521      00
- 522              	.LASF24:
- 523 0166 55415254 		.ascii	"UART_RS485_rxBufferOverflow\000"
- 523      5F525334 
- 523      38355F72 
- 523      78427566 
- 523      6665724F 
- 524              	.LASF2:
- 525 0182 73686F72 		.ascii	"short int\000"
- 525      7420696E 
- 525      7400
- 526              	.LASF27:
- 527 018c 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHand-PRO-"
- 527      73657273 
- 527      5C4D6174 
- 527      7469615C 
- 527      446F6375 
- 528 01ba 50536F43 		.ascii	"PSoC5\\Generic.cydsn\000"
- 528      355C4765 
- 528      6E657269 
- 528      632E6379 
- 528      64736E00 
+ 513      7469615C 
+ 513      446F6375 
+ 514 00ea 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\Generic.cydsn\000"
+ 514      656E6572 
+ 514      69632D46 
+ 514      572D5053 
+ 514      6F43355C 
+ 515              	.LASF25:
+ 516 010c 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 516      43313120 
+ 516      352E342E 
+ 516      31203230 
+ 516      31363036 
+ 517 013f 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 517      20726576 
+ 517      6973696F 
+ 517      6E203233 
+ 517      37373135 
+ 518 0172 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 518      66756E63 
+ 518      74696F6E 
+ 518      2D736563 
+ 518      74696F6E 
+ 519              	.LASF1:
+ 520 019a 756E7369 		.ascii	"unsigned char\000"
+ 520      676E6564 
+ 520      20636861 
+ 520      7200
+ 521              	.LASF11:
+ 522 01a8 63686172 		.ascii	"char\000"
+ 522      00
+ 523              	.LASF4:
+ 524 01ad 6C6F6E67 		.ascii	"long int\000"
+ 524      20696E74 
+ 524      00
+ 525              	.LASF24:
+ 526 01b6 55415254 		.ascii	"UART_RS485_rxBufferOverflow\000"
+ 526      5F525334 
+ 526      38355F72 
+ 526      78427566 
+ 526      6665724F 
+ 527              	.LASF2:
+ 528 01d2 73686F72 		.ascii	"short int\000"
+ 528      7420696E 
+ 528      7400
  529              	.LASF10:
- 530 01ce 646F7562 		.ascii	"double\000"
+ 530 01dc 646F7562 		.ascii	"double\000"
  530      6C6500
  531              	.LASF3:
- 532 01d5 73686F72 		.ascii	"short unsigned int\000"
+ 532 01e3 73686F72 		.ascii	"short unsigned int\000"
  532      7420756E 
  532      7369676E 
  532      65642069 
  532      6E7400
  533              	.LASF0:
- 534 01e8 7369676E 		.ascii	"signed char\000"
+ 534 01f6 7369676E 		.ascii	"signed char\000"
  534      65642063 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccWfphuP.s 			page 15
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cczZHdMZ.s 			page 15
 
 
  534      68617200 
  535              	.LASF21:
- 536 01f4 55415254 		.ascii	"UART_RS485_rxBufferRead\000"
+ 536 0202 55415254 		.ascii	"UART_RS485_rxBufferRead\000"
  536      5F525334 
  536      38355F72 
  536      78427566 
  536      66657252 
  537              	.LASF17:
- 538 020c 72656164 		.ascii	"readStatus\000"
+ 538 021a 72656164 		.ascii	"readStatus\000"
  538      53746174 
  538      757300
  539              	.LASF14:
- 540 0217 6C6F6E67 		.ascii	"long double\000"
+ 540 0225 6C6F6E67 		.ascii	"long double\000"
  540      20646F75 
  540      626C6500 
  541              	.LASF19:
- 542 0223 55415254 		.ascii	"UART_RS485_errorStatus\000"
+ 542 0231 55415254 		.ascii	"UART_RS485_errorStatus\000"
  542      5F525334 
  542      38355F65 
  542      72726F72 
  542      53746174 
  543              	.LASF28:
- 544 023a 55415254 		.ascii	"UART_RS485_RXISR\000"
+ 544 0248 55415254 		.ascii	"UART_RS485_RXISR\000"
  544      5F525334 
  544      38355F52 
  544      58495352 
  544      00
  545              	.LASF13:
- 546 024b 72656738 		.ascii	"reg8\000"
+ 546 0259 72656738 		.ascii	"reg8\000"
  546      00
  547              	.LASF16:
- 548 0250 72656164 		.ascii	"readData\000"
+ 548 025e 72656164 		.ascii	"readData\000"
  548      44617461 
  548      00
  549              	.LASF15:
- 550 0259 73697A65 		.ascii	"sizetype\000"
+ 550 0267 73697A65 		.ascii	"sizetype\000"
  550      74797065 
  550      00
  551              	.LASF22:
- 552 0262 55415254 		.ascii	"UART_RS485_rxBufferWrite\000"
+ 552 0270 55415254 		.ascii	"UART_RS485_rxBufferWrite\000"
  552      5F525334 
  552      38355F72 
  552      78427566 

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
   22:Generated_Source\PSoC5/SHIFTREG_ENC_2.c **** /*******************************************************************************
   23:Generated_Source\PSoC5/SHIFTREG_ENC_2.c **** * Function Name: SHIFTREG_ENC_2_Start
   24:Generated_Source\PSoC5/SHIFTREG_ENC_2.c **** ********************************************************************************
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 2
 
 
   25:Generated_Source\PSoC5/SHIFTREG_ENC_2.c **** *
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
   60 001c 80BD     		pop	{r7, pc}
   61              	.L4:
   62 001e 00BF     		.align	2
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 3
 
 
   63              	.L3:
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
   94              		.loc 1 75 0
   95 0014 FFF7FEFF 		bl	SHIFTREG_ENC_2_EnableInt
   76:Generated_Source\PSoC5/SHIFTREG_ENC_2.c **** }
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 4
 
 
   96              		.loc 1 76 0
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  130              		.cfi_endproc
  131              	.LFE2:
  132              		.size	SHIFTREG_ENC_2_Init, .-SHIFTREG_ENC_2_Init
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 5
 
 
  133 000e 00BF     		.section	.text.SHIFTREG_ENC_2_Stop,"ax",%progbits
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  165              		.align	2
  166              	.L10:
  167 001c 7F640040 		.word	1073767551
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 6
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 6
 
 
  168              		.cfi_endproc
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  200 0016 43F01003 		orr	r3, r3, #16
  201 001a DBB2     		uxtb	r3, r3
  202 001c 1370     		strb	r3, [r2]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 7
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 7
 
 
  141:Generated_Source\PSoC5/SHIFTREG_ENC_2.c ****     CyExitCriticalSection(interruptState);
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  237              		.cfi_offset 14, -4
  238 0002 82B0     		sub	sp, sp, #8
  239              		.cfi_def_cfa_offset 16
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 8
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 8
 
 
  240 0004 00AF     		add	r7, sp, #0
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  174:Generated_Source\PSoC5/SHIFTREG_ENC_2.c **** *  Returns current status of input or output FIFO.
  175:Generated_Source\PSoC5/SHIFTREG_ENC_2.c **** *
  176:Generated_Source\PSoC5/SHIFTREG_ENC_2.c **** * Parameters:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 9
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 9
 
 
  177:Generated_Source\PSoC5/SHIFTREG_ENC_2.c **** *  fifoId.
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  214:Generated_Source\PSoC5/SHIFTREG_ENC_2.c ****     #endif /* (0u != SHIFTREG_ENC_2_USE_INPUT_FIFO) */
  215:Generated_Source\PSoC5/SHIFTREG_ENC_2.c **** 
  216:Generated_Source\PSoC5/SHIFTREG_ENC_2.c ****     if(SHIFTREG_ENC_2_OUT_FIFO == fifoId)
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 10
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 10
 
 
  298              		.loc 1 216 0
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  235:Generated_Source\PSoC5/SHIFTREG_ENC_2.c ****                  */
  236:Generated_Source\PSoC5/SHIFTREG_ENC_2.c ****                 result = SHIFTREG_ENC_2_RET_FIFO_FULL;
  334              		.loc 1 236 0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 11
 
 
  335 0040 0023     		movs	r3, #0
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  258:Generated_Source\PSoC5/SHIFTREG_ENC_2.c **** *  None.
  259:Generated_Source\PSoC5/SHIFTREG_ENC_2.c **** *
  260:Generated_Source\PSoC5/SHIFTREG_ENC_2.c **** *******************************************************************************/
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 12
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 12
 
 
  261:Generated_Source\PSoC5/SHIFTREG_ENC_2.c **** void SHIFTREG_ENC_2_SetIntMode(uint8 interruptSource) 
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  417              	.LFE7:
  418              		.size	SHIFTREG_ENC_2_SetIntMode, .-SHIFTREG_ENC_2_SetIntMode
  419              		.section	.text.SHIFTREG_ENC_2_GetIntStatus,"ax",%progbits
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 13
 
 
  420              		.align	2
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  454              	.L33:
  455 0018 67650040 		.word	1073767783
  456              		.cfi_endproc
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 14
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 14
 
 
  457              	.LFE8:
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  490              		@ sp needed
  491 0014 80BC     		pop	{r7}
  492              		.cfi_restore 7
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 15
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 15
 
 
  493              		.cfi_def_cfa_offset 0
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  344:Generated_Source\PSoC5/SHIFTREG_ENC_2.c ****     }
  345:Generated_Source\PSoC5/SHIFTREG_ENC_2.c **** #endif /* (0u != SHIFTREG_ENC_2_USE_INPUT_FIFO) */
  346:Generated_Source\PSoC5/SHIFTREG_ENC_2.c **** 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 16
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 16
 
 
  347:Generated_Source\PSoC5/SHIFTREG_ENC_2.c **** 
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  541              		.global	SHIFTREG_ENC_2_ReadRegValue
  542              		.thumb
  543              		.thumb_func
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 17
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 17
 
 
  544              		.type	SHIFTREG_ENC_2_ReadRegValue, %function
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  568 000e FFF7FEFF 		bl	SHIFTREG_ENC_2_GetFIFOStatus
  569 0012 0346     		mov	r3, r0
  570 0014 022B     		cmp	r3, #2
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 18
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 18
 
 
  571 0016 F7D1     		bne	.L44
@@ -1073,18 +1073,18 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  606 000b 01       		.uleb128 0x1
  607 000c 23000000 		.4byte	.LASF35
  608 0010 0C       		.byte	0xc
- 609 0011 39020000 		.4byte	.LASF36
- 610 0015 92020000 		.4byte	.LASF37
+ 609 0011 8E020000 		.4byte	.LASF36
+ 610 0015 79010000 		.4byte	.LASF37
  611 0019 00000000 		.4byte	.Ldebug_ranges0+0
  612 001d 00000000 		.4byte	0
  613 0021 00000000 		.4byte	.Ldebug_line0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 19
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 19
 
 
  614 0025 02       		.uleb128 0x2
  615 0026 01       		.byte	0x1
  616 0027 06       		.byte	0x6
- 617 0028 15030000 		.4byte	.LASF0
+ 617 0028 23030000 		.4byte	.LASF0
  618 002c 02       		.uleb128 0x2
  619 002d 01       		.byte	0x1
  620 002e 08       		.byte	0x8
@@ -1092,7 +1092,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  622 0033 02       		.uleb128 0x2
  623 0034 02       		.byte	0x2
  624 0035 05       		.byte	0x5
- 625 0036 D9020000 		.4byte	.LASF2
+ 625 0036 E7020000 		.4byte	.LASF2
  626 003a 02       		.uleb128 0x2
  627 003b 02       		.byte	0x2
  628 003c 07       		.byte	0x7
@@ -1100,7 +1100,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  630 0041 02       		.uleb128 0x2
  631 0042 04       		.byte	0x4
  632 0043 05       		.byte	0x5
- 633 0044 E3020000 		.4byte	.LASF4
+ 633 0044 F1020000 		.4byte	.LASF4
  634 0048 02       		.uleb128 0x2
  635 0049 04       		.byte	0x4
  636 004a 07       		.byte	0x7
@@ -1108,11 +1108,11 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  638 004f 02       		.uleb128 0x2
  639 0050 08       		.byte	0x8
  640 0051 05       		.byte	0x5
- 641 0052 6A020000 		.4byte	.LASF6
+ 641 0052 BF020000 		.4byte	.LASF6
  642 0056 02       		.uleb128 0x2
  643 0057 08       		.byte	0x8
  644 0058 07       		.byte	0x7
- 645 0059 01020000 		.4byte	.LASF7
+ 645 0059 56020000 		.4byte	.LASF7
  646 005d 03       		.uleb128 0x3
  647 005e 04       		.byte	0x4
  648 005f 05       		.byte	0x5
@@ -1120,14 +1120,14 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  650 0064 02       		.uleb128 0x2
  651 0065 04       		.byte	0x4
  652 0066 07       		.byte	0x7
- 653 0067 C2010000 		.4byte	.LASF8
+ 653 0067 17020000 		.4byte	.LASF8
  654 006b 04       		.uleb128 0x4
  655 006c 65010000 		.4byte	.LASF9
  656 0070 02       		.byte	0x2
  657 0071 E401     		.2byte	0x1e4
  658 0073 2C000000 		.4byte	0x2c
  659 0077 04       		.uleb128 0x4
- 660 0078 BB010000 		.4byte	.LASF10
+ 660 0078 10020000 		.4byte	.LASF10
  661 007c 02       		.byte	0x2
  662 007d E601     		.2byte	0x1e6
  663 007f 48000000 		.4byte	0x48
@@ -1138,14 +1138,14 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  668 008a 02       		.uleb128 0x2
  669 008b 08       		.byte	0x8
  670 008c 04       		.byte	0x4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 20
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 20
 
 
  671 008d 72010000 		.4byte	.LASF12
  672 0091 02       		.uleb128 0x2
  673 0092 01       		.byte	0x1
  674 0093 08       		.byte	0x8
- 675 0094 78020000 		.4byte	.LASF13
+ 675 0094 CD020000 		.4byte	.LASF13
  676 0098 04       		.uleb128 0x4
  677 0099 27010000 		.4byte	.LASF14
  678 009d 02       		.byte	0x2
@@ -1163,13 +1163,13 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  690 00ba 02       		.uleb128 0x2
  691 00bb 08       		.byte	0x8
  692 00bc 04       		.byte	0x4
- 693 00bd EC020000 		.4byte	.LASF16
+ 693 00bd FA020000 		.4byte	.LASF16
  694 00c1 02       		.uleb128 0x2
  695 00c2 04       		.byte	0x4
  696 00c3 07       		.byte	0x7
- 697 00c4 61020000 		.4byte	.LASF17
+ 697 00c4 B6020000 		.4byte	.LASF17
  698 00c8 06       		.uleb128 0x6
- 699 00c9 7D020000 		.4byte	.LASF18
+ 699 00c9 D2020000 		.4byte	.LASF18
  700 00cd 01       		.byte	0x1
  701 00ce 2B       		.byte	0x2b
  702 00cf 00000000 		.4byte	.LFB0
@@ -1177,7 +1177,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  704 00d7 01       		.uleb128 0x1
  705 00d8 9C       		.byte	0x9c
  706 00d9 06       		.uleb128 0x6
- 707 00da EB010000 		.4byte	.LASF19
+ 707 00da 40020000 		.4byte	.LASF19
  708 00de 01       		.byte	0x1
  709 00df 45       		.byte	0x45
  710 00e0 00000000 		.4byte	.LFB1
@@ -1185,7 +1185,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  712 00e8 01       		.uleb128 0x1
  713 00e9 9C       		.byte	0x9c
  714 00ea 06       		.uleb128 0x6
- 715 00eb 8D010000 		.4byte	.LASF20
+ 715 00eb E2010000 		.4byte	.LASF20
  716 00ef 01       		.byte	0x1
  717 00f0 5D       		.byte	0x5d
  718 00f1 00000000 		.4byte	.LFB2
@@ -1193,12 +1193,12 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  720 00f9 01       		.uleb128 0x1
  721 00fa 9C       		.byte	0x9c
  722 00fb 06       		.uleb128 0x6
- 723 00fc 79010000 		.4byte	.LASF21
+ 723 00fc CE010000 		.4byte	.LASF21
  724 0100 01       		.byte	0x1
  725 0101 71       		.byte	0x71
  726 0102 00000000 		.4byte	.LFB3
  727 0106 20000000 		.4byte	.LFE3-.LFB3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 21
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 21
 
 
  728 010a 01       		.uleb128 0x1
@@ -1222,7 +1222,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  746 012e 77       		.sleb128 -9
  747 012f 00       		.byte	0
  748 0130 07       		.uleb128 0x7
- 749 0131 18020000 		.4byte	.LASF23
+ 749 0131 6D020000 		.4byte	.LASF23
  750 0135 01       		.byte	0x1
  751 0136 9F       		.byte	0x9f
  752 0137 00000000 		.4byte	.LFB5
@@ -1240,7 +1240,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  764 0152 77       		.sleb128 -9
  765 0153 00       		.byte	0
  766 0154 09       		.uleb128 0x9
- 767 0155 F8020000 		.4byte	.LASF33
+ 767 0155 06030000 		.4byte	.LASF33
  768 0159 01       		.byte	0x1
  769 015a B7       		.byte	0xb7
  770 015b 6B000000 		.4byte	0x6b
@@ -1258,10 +1258,10 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  782 0179 91       		.byte	0x91
  783 017a 6F       		.sleb128 -17
  784 017b 08       		.uleb128 0x8
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 22
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 22
 
 
- 785 017c 32020000 		.4byte	.LASF25
+ 785 017c 87020000 		.4byte	.LASF25
  786 0180 01       		.byte	0x1
  787 0181 B9       		.byte	0xb9
  788 0182 6B000000 		.4byte	0x6b
@@ -1279,7 +1279,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  800 019b 9C       		.byte	0x9c
  801 019c B0010000 		.4byte	0x1b0
  802 01a0 0C       		.uleb128 0xc
- 803 01a1 A1010000 		.4byte	.LASF28
+ 803 01a1 F6010000 		.4byte	.LASF28
  804 01a5 01       		.byte	0x1
  805 01a6 0501     		.2byte	0x105
  806 01a8 6B000000 		.4byte	0x6b
@@ -1306,7 +1306,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  827 01d7 9C       		.byte	0x9c
  828 01d8 EC010000 		.4byte	0x1ec
  829 01dc 0C       		.uleb128 0xc
- 830 01dd B1010000 		.4byte	.LASF30
+ 830 01dd 06020000 		.4byte	.LASF30
  831 01e1 01       		.byte	0x1
  832 01e2 2E01     		.2byte	0x12e
  833 01e4 77000000 		.4byte	0x77
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  839 01ed 4D010000 		.4byte	.LASF32
  840 01f1 01       		.byte	0x1
  841 01f2 6E01     		.2byte	0x16e
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 23
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 23
 
 
  842 01f4 77000000 		.4byte	0x77
@@ -1327,7 +1327,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  845 0200 01       		.uleb128 0x1
  846 0201 9C       		.byte	0x9c
  847 0202 0E       		.uleb128 0xe
- 848 0203 CF010000 		.4byte	.LASF34
+ 848 0203 24020000 		.4byte	.LASF34
  849 0207 01       		.byte	0x1
  850 0208 8701     		.2byte	0x187
  851 020a 77000000 		.4byte	0x77
@@ -1337,7 +1337,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  855 0217 9C       		.byte	0x9c
  856 0218 2C020000 		.4byte	0x22c
  857 021c 0F       		.uleb128 0xf
- 858 021d 32020000 		.4byte	.LASF25
+ 858 021d 87020000 		.4byte	.LASF25
  859 0221 01       		.byte	0x1
  860 0222 8901     		.2byte	0x189
  861 0224 77000000 		.4byte	0x77
@@ -1346,7 +1346,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  864 022a 74       		.sleb128 -12
  865 022b 00       		.byte	0
  866 022c 10       		.uleb128 0x10
- 867 022d 21030000 		.4byte	.LASF38
+ 867 022d 2F030000 		.4byte	.LASF38
  868 0231 01       		.byte	0x1
  869 0232 13       		.byte	0x13
  870 0233 6B000000 		.4byte	0x6b
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  896 0013 02       		.uleb128 0x2
  897 0014 24       		.uleb128 0x24
  898 0015 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 24
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 24
 
 
  899 0016 0B       		.uleb128 0xb
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  953 004c 12       		.uleb128 0x12
  954 004d 06       		.uleb128 0x6
  955 004e 40       		.uleb128 0x40
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 25
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 25
 
 
  956 004f 18       		.uleb128 0x18
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  1010 0087 3B       		.uleb128 0x3b
  1011 0088 0B       		.uleb128 0xb
  1012 0089 27       		.uleb128 0x27
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 26
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 26
 
 
  1013 008a 19       		.uleb128 0x19
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  1067 00c2 00       		.byte	0
  1068 00c3 0C       		.uleb128 0xc
  1069 00c4 05       		.uleb128 0x5
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 27
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 27
 
 
  1070 00c5 00       		.byte	0
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  1124 00fc 01       		.uleb128 0x1
  1125 00fd 12       		.uleb128 0x12
  1126 00fe 06       		.uleb128 0x6
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 28
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 28
 
 
  1127 00ff 40       		.uleb128 0x40
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  1181 0024 0E000000 		.4byte	.LFE2-.LFB2
  1182 0028 00000000 		.4byte	.LFB3
  1183 002c 20000000 		.4byte	.LFE3-.LFB3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 29
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 29
 
 
  1184 0030 00000000 		.4byte	.LFB4
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  1234 0000 72656733 		.ascii	"reg32\000"
  1234      3200
  1235              	.LASF29:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 30
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 30
 
 
  1236 0006 53484946 		.ascii	"SHIFTREG_ENC_2_WriteRegValue\000"
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  1254 0127 72656738 		.ascii	"reg8\000"
  1254      00
  1255              	.LASF24:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 31
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 31
 
 
  1256 012c 696E7465 		.ascii	"interruptState\000"
@@ -1826,127 +1826,127 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 1
  1265              	.LASF12:
  1266 0172 646F7562 		.ascii	"double\000"
  1266      6C6500
- 1267              	.LASF21:
- 1268 0179 53484946 		.ascii	"SHIFTREG_ENC_2_Stop\000"
- 1268      54524547 
- 1268      5F454E43 
- 1268      5F325F53 
- 1268      746F7000 
- 1269              	.LASF20:
- 1270 018d 53484946 		.ascii	"SHIFTREG_ENC_2_Init\000"
- 1270      54524547 
- 1270      5F454E43 
- 1270      5F325F49 
- 1270      6E697400 
- 1271              	.LASF28:
- 1272 01a1 696E7465 		.ascii	"interruptSource\000"
- 1272      72727570 
- 1272      74536F75 
- 1272      72636500 
- 1273              	.LASF30:
- 1274 01b1 73686966 		.ascii	"shiftData\000"
- 1274      74446174 
- 1274      6100
- 1275              	.LASF10:
- 1276 01bb 75696E74 		.ascii	"uint32\000"
- 1276      333200
- 1277              	.LASF8:
- 1278 01c2 756E7369 		.ascii	"unsigned int\000"
- 1278      676E6564 
- 1278      20696E74 
- 1278      00
- 1279              	.LASF34:
- 1280 01cf 53484946 		.ascii	"SHIFTREG_ENC_2_ReadRegValue\000"
- 1280      54524547 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 32
+ 1267              	.LASF37:
+ 1268 0179 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHandPRO-a"
+ 1268      73657273 
+ 1268      5C4D6174 
+ 1268      7469615C 
+ 1268      446F6375 
+ 1269 01a7 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\SoftHand_Pro.cydsn\000"
+ 1269      656E6572 
+ 1269      69632D46 
+ 1269      572D5053 
+ 1269      6F43355C 
+ 1270              	.LASF21:
+ 1271 01ce 53484946 		.ascii	"SHIFTREG_ENC_2_Stop\000"
+ 1271      54524547 
+ 1271      5F454E43 
+ 1271      5F325F53 
+ 1271      746F7000 
+ 1272              	.LASF20:
+ 1273 01e2 53484946 		.ascii	"SHIFTREG_ENC_2_Init\000"
+ 1273      54524547 
+ 1273      5F454E43 
+ 1273      5F325F49 
+ 1273      6E697400 
+ 1274              	.LASF28:
+ 1275 01f6 696E7465 		.ascii	"interruptSource\000"
+ 1275      72727570 
+ 1275      74536F75 
+ 1275      72636500 
+ 1276              	.LASF30:
+ 1277 0206 73686966 		.ascii	"shiftData\000"
+ 1277      74446174 
+ 1277      6100
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 32
 
 
- 1280      5F454E43 
- 1280      5F325F52 
- 1280      65616452 
- 1281              	.LASF19:
- 1282 01eb 53484946 		.ascii	"SHIFTREG_ENC_2_Enable\000"
- 1282      54524547 
- 1282      5F454E43 
- 1282      5F325F45 
- 1282      6E61626C 
- 1283              	.LASF7:
- 1284 0201 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1284      206C6F6E 
- 1284      6720756E 
- 1284      7369676E 
- 1284      65642069 
- 1285              	.LASF23:
- 1286 0218 53484946 		.ascii	"SHIFTREG_ENC_2_DisableInt\000"
- 1286      54524547 
- 1286      5F454E43 
- 1286      5F325F44 
- 1286      69736162 
- 1287              	.LASF25:
- 1288 0232 72657375 		.ascii	"result\000"
- 1288      6C7400
- 1289              	.LASF36:
- 1290 0239 47656E65 		.ascii	"Generated_Source\\PSoC5\\SHIFTREG_ENC_2.c\000"
- 1290      72617465 
- 1290      645F536F 
- 1290      75726365 
- 1290      5C50536F 
- 1291              	.LASF17:
- 1292 0261 73697A65 		.ascii	"sizetype\000"
- 1292      74797065 
- 1292      00
- 1293              	.LASF6:
- 1294 026a 6C6F6E67 		.ascii	"long long int\000"
- 1294      206C6F6E 
- 1294      6720696E 
- 1294      7400
- 1295              	.LASF13:
- 1296 0278 63686172 		.ascii	"char\000"
- 1296      00
- 1297              	.LASF18:
- 1298 027d 53484946 		.ascii	"SHIFTREG_ENC_2_Start\000"
- 1298      54524547 
- 1298      5F454E43 
- 1298      5F325F53 
- 1298      74617274 
- 1299              	.LASF37:
- 1300 0292 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHand-PRO-"
- 1300      73657273 
- 1300      5C4D6174 
- 1300      7469615C 
- 1300      446F6375 
- 1301 02c0 50536F43 		.ascii	"PSoC5\\SoftHand_Pro.cydsn\000"
- 1301      355C536F 
- 1301      66744861 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUgIZ96.s 			page 33
+ 1278              	.LASF10:
+ 1279 0210 75696E74 		.ascii	"uint32\000"
+ 1279      333200
+ 1280              	.LASF8:
+ 1281 0217 756E7369 		.ascii	"unsigned int\000"
+ 1281      676E6564 
+ 1281      20696E74 
+ 1281      00
+ 1282              	.LASF34:
+ 1283 0224 53484946 		.ascii	"SHIFTREG_ENC_2_ReadRegValue\000"
+ 1283      54524547 
+ 1283      5F454E43 
+ 1283      5F325F52 
+ 1283      65616452 
+ 1284              	.LASF19:
+ 1285 0240 53484946 		.ascii	"SHIFTREG_ENC_2_Enable\000"
+ 1285      54524547 
+ 1285      5F454E43 
+ 1285      5F325F45 
+ 1285      6E61626C 
+ 1286              	.LASF7:
+ 1287 0256 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1287      206C6F6E 
+ 1287      6720756E 
+ 1287      7369676E 
+ 1287      65642069 
+ 1288              	.LASF23:
+ 1289 026d 53484946 		.ascii	"SHIFTREG_ENC_2_DisableInt\000"
+ 1289      54524547 
+ 1289      5F454E43 
+ 1289      5F325F44 
+ 1289      69736162 
+ 1290              	.LASF25:
+ 1291 0287 72657375 		.ascii	"result\000"
+ 1291      6C7400
+ 1292              	.LASF36:
+ 1293 028e 47656E65 		.ascii	"Generated_Source\\PSoC5\\SHIFTREG_ENC_2.c\000"
+ 1293      72617465 
+ 1293      645F536F 
+ 1293      75726365 
+ 1293      5C50536F 
+ 1294              	.LASF17:
+ 1295 02b6 73697A65 		.ascii	"sizetype\000"
+ 1295      74797065 
+ 1295      00
+ 1296              	.LASF6:
+ 1297 02bf 6C6F6E67 		.ascii	"long long int\000"
+ 1297      206C6F6E 
+ 1297      6720696E 
+ 1297      7400
+ 1298              	.LASF13:
+ 1299 02cd 63686172 		.ascii	"char\000"
+ 1299      00
+ 1300              	.LASF18:
+ 1301 02d2 53484946 		.ascii	"SHIFTREG_ENC_2_Start\000"
+ 1301      54524547 
+ 1301      5F454E43 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5cGCU5.s 			page 33
 
 
- 1301      6E645F50 
- 1301      726F2E63 
+ 1301      5F325F53 
+ 1301      74617274 
  1302              	.LASF2:
- 1303 02d9 73686F72 		.ascii	"short int\000"
+ 1303 02e7 73686F72 		.ascii	"short int\000"
  1303      7420696E 
  1303      7400
  1304              	.LASF4:
- 1305 02e3 6C6F6E67 		.ascii	"long int\000"
+ 1305 02f1 6C6F6E67 		.ascii	"long int\000"
  1305      20696E74 
  1305      00
  1306              	.LASF16:
- 1307 02ec 6C6F6E67 		.ascii	"long double\000"
+ 1307 02fa 6C6F6E67 		.ascii	"long double\000"
  1307      20646F75 
  1307      626C6500 
  1308              	.LASF33:
- 1309 02f8 53484946 		.ascii	"SHIFTREG_ENC_2_GetFIFOStatus\000"
+ 1309 0306 53484946 		.ascii	"SHIFTREG_ENC_2_GetFIFOStatus\000"
  1309      54524547 
  1309      5F454E43 
  1309      5F325F47 
  1309      65744649 
  1310              	.LASF0:
- 1311 0315 7369676E 		.ascii	"signed char\000"
+ 1311 0323 7369676E 		.ascii	"signed char\000"
  1311      65642063 
  1311      68617200 
  1312              	.LASF38:
- 1313 0321 53484946 		.ascii	"SHIFTREG_ENC_2_initVar\000"
+ 1313 032f 53484946 		.ascii	"SHIFTREG_ENC_2_initVar\000"
  1313      54524547 
  1313      5F454E43 
  1313      5F325F69 

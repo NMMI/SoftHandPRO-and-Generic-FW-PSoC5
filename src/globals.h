@@ -240,10 +240,11 @@ struct st_data{
 };
 
 //============================================     settings stored on the memory
-/** \brief EEPROM stored structures
- * 
-**/
 
+//=================================================     Counters
+/** \brief Usage counters structure
+ *
+**/ 
 struct st_counters{
     uint32  emg_counter[2];             /*!< Counter for EMG activation - both channels.*/                  //8
     uint32  position_hist[10];          /*!< Positions histogram - 10 zones.*/                              //40
@@ -254,6 +255,10 @@ struct st_counters{
     uint32  total_time_rest;            /*!< Total time of system while rest position is maintained.*/      //4
 };                                                                                                          // TOTAL: 80 bytes
 
+//=================================================     Device
+/** \brief Device related parameters structure
+ *
+**/ 
 struct st_device{
     uint8   id;                         /*!< Device id.*/                                                   //1    
     uint8   hw_maint_date[3];           /*!< Date of last hardware maintenance.*/                           //3
@@ -267,6 +272,10 @@ struct st_device{
     uint8   unused_bytes[3];            /*!< Unused bytes to fill row.*/                                    //3
 };                                                                                                          // TOTAL: 16 BYTES
 
+//=================================================     Motor
+/** \brief Motor related parameters structure
+ *
+**/ 
 struct st_motor{
     int32   k_p;                        /*!< Position controller proportional constant.*/                   //4
     int32   k_i;                        /*!< Position controller integrative constant.*/                    //4
@@ -298,6 +307,10 @@ struct st_motor{
     uint8   unused_bytes[13];           /*!< Unused bytes to fill row.*/                                    //13
 };                                                                                                          // TOTAL: 112 BYTES
 
+//=================================================     Encoder
+/** \brief Encoder related parameters structure
+ *
+**/ 
 struct st_encoder{
     uint8   Enc_raw_read_conf[N_ENCODERS_PER_LINE_MAX]; /*!< Encoder configuration flags for raw reading.*/ //5
     uint8   res[NUM_OF_SENSORS];        /*!< Angle resolution.*/                                            //3
@@ -310,6 +323,10 @@ struct st_encoder{
     uint8   unused_bytes[8];            /*!< Unused bytes to fill row.*/                                    //8
 };                                                                                                          // TOTAL: 48 BYTES
 
+//=================================================     EMG
+/** \brief EMG related parameters structure
+ *
+**/ 
 struct st_emg{
     uint16  emg_threshold[NUM_OF_INPUT_EMGS]; /*!< Minimum value for activation of EMG control.*/           //4
     uint32  emg_max_value[NUM_OF_INPUT_EMGS]; /*!< Maximum value for EMG.*/                                 //8     
@@ -319,6 +336,10 @@ struct st_emg{
     uint8   unused_bytes[1];            /*!< Unused bytes to fill row.*/                                    //1
 };                                                                                                          // TOTAL: 16 BYTES                                                                                                         // TOTAL: 32 BYTES
 
+//=================================================     IMU
+/** \brief IMU related parameters structure
+ *
+**/ 
 struct st_imu{
     uint8   read_imu_flag;              /*!< Enable IMU reading feature.*/                                  //1
     uint8   SPI_read_delay;             /*!< Delay on SPI reading.*/                                        //1
@@ -326,6 +347,10 @@ struct st_imu{
     uint8   unused_bytes[5];            /*!< Unused bytes to fill row.*/                                    //5
 };                                                                                                          // TOTAL: 32 BYTES
 
+//=================================================     Expansion
+/** \brief Expansion board related parameters structure
+ *
+**/ 
 struct st_expansion{
     uint8   curr_time[6];               /*!< Current time from RTC (DD/MM/YY HH:MM:SS).*/                   //6 
     uint8   read_exp_port_flag;         /*!< Enable Expansion Port.*/                                       //1
@@ -334,12 +359,20 @@ struct st_expansion{
     uint8   unused_bytes[12];           /*!< Unused bytes to fill row.*/                                    //12
 };                                                                                                          // TOTAL: 32 BYTES
 
+//=================================================     User
+/** \brief User related parameters structure
+ *
+**/ 
 struct st_user{
     char    user_code_string[8];        /*!< User code string.*/                                            //8
     struct  st_emg user_emg;            /*!< st_emg structure to store user emg values.*/                   //16
     uint8   unused_bytes[8];            /*!< Unused bytes to fill row.*/                                    //8
 };                                                                                                          // TOTAL: 32 BYTES
 
+//=================================================     SoftHand specific
+/** \brief SoftHand specific related prameters structure
+ *
+**/ 
 struct st_SH_spec{
     int32   rest_pos;                   /*!< Hand rest position while in EMG mode.*/                        //4
     int32   rest_delay;                 /*!< Hand rest position delay while in EMG mode.*/                  //4
@@ -349,6 +382,9 @@ struct st_SH_spec{
 };                                                                                                          // TOTAL: 16 BYTES                                                                                                         // TOTAL: 80 BYTES
 
 //-------------------------------------------- MEMORY VARIABLES ---------------------------------------------// 
+/** \brief Memory variables
+ *
+**/ 
 // Since PSOC5 ARM memory is 4-bytes aligned, st_mem structure variables are not contiguous
 struct st_eeprom {
     
@@ -375,6 +411,9 @@ struct st_eeprom {
 };
 
 //=================================================     IMU variables
+/** \brief IMU data structure
+ *
+**/ 
 struct st_imu_data {
     uint8 flags;        // Flags to know what we are reading (0/1) from each imu [ accel | gyro | magn | quat | temp ]
     int16 accel_value[3];
