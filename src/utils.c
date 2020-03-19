@@ -414,7 +414,7 @@ void battery_management() {
                 
                     if (v_count_lb >= 10000){                    
                         
-                        //battery_low_SoC = 1;
+                        //battery_low_SoC = TRUE;
                         
                         //red light - blink @ 2.5 Hz
                         LED_control(3);

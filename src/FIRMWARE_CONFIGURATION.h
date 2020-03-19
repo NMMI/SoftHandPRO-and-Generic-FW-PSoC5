@@ -57,11 +57,12 @@
 //====================================================================================
 //====================================================================================
     
+    
 // Macro related to different firmware configurations
 #ifdef SOFTHAND_FW
-    #define VERSION                 "SoftHand PRO firmware v. 1.7 (PSoC5)"
+    #define VERSION                 "SoftHand PRO firmware v. 1.7.2 (PSoC5)"
 #else
-    #define VERSION                 "Generic firmware v. 1.7 (PSoC5)"
+    #define VERSION                 "Generic firmware v. 1.7.2 (PSoC5)"
 #endif      
 
 #ifdef SOFTHAND_FW

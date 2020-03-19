@@ -151,8 +151,8 @@ void interrupt_manager(){
 
     //======================================================     receive routine
     
-    while(UART_RS485_GetRxBufferSize() && (package_count < 6)){
-        // 6 - estimated maximum number of packets we can read without blocking firmware execution
+    while(UART_RS485_GetRxBufferSize() && (package_count < 100)){
+        // 100 - estimated maximum number of packets we can read without blocking firmware execution
 
         // Get next char
         rx_data = UART_RS485_GetChar();
@@ -304,6 +304,13 @@ void function_scheduler(void) {
         //---------------------------------- Control SH Motor
         
         motor_control_SH();
+        
+        // Check external reference before processing other serial data and right after motor control
+        if (c_mem.motor[MOTOR_IDX].not_revers_motor_flag == TRUE) {
+            if (c_mem.motor[MOTOR_IDX].input_mode == INPUT_MODE_EXTERNAL) {
+                change_ext_ref_flag = FALSE;
+            }   
+        }
 
         // Check Interrupt 
 
@@ -351,6 +358,13 @@ void function_scheduler(void) {
         // Control MOTOR_IDX motor (always active) according to motor driver type
         motor_control_generic(MOTOR_IDX);
         
+        // Check external reference before processing other serial data and right after motor control
+        if (c_mem.motor[MOTOR_IDX].not_revers_motor_flag == TRUE) {
+            if (c_mem.motor[MOTOR_IDX].input_mode == INPUT_MODE_EXTERNAL) {
+                change_ext_ref_flag = FALSE;
+            }   
+        }
+        
         // Check Interrupt 
 
         if (interrupt_flag){
@@ -361,6 +375,13 @@ void function_scheduler(void) {
         // Control 2nd motor (if necessary) according to motor driver type
         if (c_mem.dev.use_2nd_motor_flag == TRUE){
             motor_control_generic(SECOND_MOTOR_IDX);
+            
+            // Check external reference before processing other serial data and right after motor control
+            if (c_mem.motor[SECOND_MOTOR_IDX].not_revers_motor_flag == TRUE) {
+                if (c_mem.motor[SECOND_MOTOR_IDX].input_mode == INPUT_MODE_EXTERNAL) {
+                    change_ext_ref_flag = FALSE;
+                }   
+            }
             
             // Check Interrupt 
 
@@ -507,12 +528,6 @@ void function_scheduler(void) {
         interrupt_manager();
     }
 
-    if (c_mem.dev.dev_type == SOFTHAND_PRO) {
-        if (c_mem.motor[MOTOR_IDX].input_mode == INPUT_MODE_EXTERNAL) {
-            change_ext_ref_flag = FALSE;
-        }   
-    }
-
     timer_value = (uint16)MY_TIMER_ReadCounter();
     cycle_time = ((float)(timer_value0 - timer_value)/1000000.0);
     MY_TIMER_REG_Write(0x01);   // reset timer
@@ -601,9 +616,16 @@ void motor_control_SH() {
             else
                 g_ref[0].pos = 0;
             break;
+                
+        case INPUT_MODE_EMG_PROPORTIONAL_NC:
+            if (err_emg_1 > 0)
+                g_ref[0].pos = g_mem.motor[0].pos_lim_sup - (err_emg_1 * g_mem.motor[0].pos_lim_sup) / (1024 - c_mem.emg.emg_threshold[0]);
+            else
+                g_ref[0].pos = g_mem.motor[0].pos_lim_sup;
+            break;
 
         case INPUT_MODE_EMG_INTEGRAL:
-            g_ref[0].pos = g_refOld[0].pos;
+            g_ref[0].pos = g_mem.motor[0].pos_lim_sup - g_refOld[0].pos;
             if (err_emg_1 > 0) {
                 g_ref[0].pos = g_refOld[0].pos + (err_emg_1 * (int)g_mem.emg.emg_speed * 2) / (1024 - c_mem.emg.emg_threshold[0]);
             }
@@ -611,6 +633,7 @@ void motor_control_SH() {
                 g_ref[0].pos = g_refOld[0].pos - (err_emg_2 * (int)g_mem.emg.emg_speed * 2) / (1024 - c_mem.emg.emg_threshold[1]);
             }
             break;
+
 
         case INPUT_MODE_EMG_FCFS:
             g_ref[0].pos = g_refOld[0].pos;
@@ -708,7 +731,7 @@ void motor_control_SH() {
             g_ref[0].pos = SH_MOT->pos_lim_sup;
     }
     
-    if (battery_low_SoC == 1) {
+    if (battery_low_SoC == TRUE) {
         //Reopen the terminal device before disabling motor
         g_ref[0].pos = 0;
     }
@@ -938,11 +961,10 @@ void motor_control_SH() {
         pwm_input = (((pwm_input << 10) / PWM_MAX_VALUE) * dev_pwm_limit[0]) >> 10;
  
     //// RATE LIMITER ////
-    if(SIGN(pwm_input-prev_pwm) == SIGN(pos_error))
-    {
-        if((pwm_input-prev_pwm) > SH_MOT->pwm_rate_limiter)
-            pwm_input =  prev_pwm + SH_MOT->pwm_rate_limiter;
-    
+    if((pwm_input-prev_pwm) > SH_MOT->pwm_rate_limiter){
+        pwm_input =  prev_pwm + SH_MOT->pwm_rate_limiter;
+    }
+    else {
         if((pwm_input-prev_pwm) < -SH_MOT->pwm_rate_limiter)
             pwm_input =  prev_pwm - SH_MOT->pwm_rate_limiter;
     }
@@ -963,11 +985,16 @@ void motor_control_SH() {
             ((g_refOld[0].pos - g_ref[0].pos) < 100 && (g_refOld[0].pos - g_ref[0].pos) > -100) ) {     // if used with EMG input, 100 is related to an emg speed greater than 25 (<< 2)
             position_counter++;
             
-            if (position_counter > 250) { 
+            if (position_counter >= 250) { 
                 if (SH_MOT->input_mode == INPUT_MODE_EXTERNAL && change_ext_ref_flag == FALSE) {
                     g_refNew[0].pos = g_meas[SH_ENC_L].pos[0];       // Needed only when USB input mode is used, since g_refNew structure is used only with this input
                 }
                 g_ref[0].pos = g_meas[SH_ENC_L].pos[0];
+                
+                if (position_counter == 250){
+                    // To do only once
+                    g_meas[SH_ENC_L].hold_curr = g_meas[SH_ENC_L].curr;
+                }
                 pwm_input = 0;            
             }
         }
@@ -1171,7 +1198,7 @@ void motor_control_generic(uint8 idx) {
     }
     
     // SAFETY
-    if (battery_low_SoC == 1) {
+    if (battery_low_SoC == TRUE) {
         //Reopen the terminal device before disabling motor
         g_ref[idx].pos = 0;
     }        
@@ -1385,11 +1412,10 @@ void motor_control_generic(uint8 idx) {
         pwm_input = (((pwm_input << 10) / PWM_MAX_VALUE) * dev_pwm_limit[0]) >> 10;
  
     //// RATE LIMITER ////
-    if(SIGN(pwm_input-prev_pwm[idx]) == SIGN(pos_error))
-    {
-        if((pwm_input-prev_pwm[idx]) > MOT->pwm_rate_limiter)
-            pwm_input =  prev_pwm[idx] + MOT->pwm_rate_limiter;
-    
+       if((pwm_input-prev_pwm[idx]) > MOT->pwm_rate_limiter){
+        pwm_input =  prev_pwm[idx] + MOT->pwm_rate_limiter;
+    }
+    else {
         if((pwm_input-prev_pwm[idx]) < -MOT->pwm_rate_limiter)
             pwm_input =  prev_pwm[idx] - MOT->pwm_rate_limiter;
     }
@@ -1410,11 +1436,16 @@ void motor_control_generic(uint8 idx) {
             ((g_refOld[idx].pos - g_ref[idx].pos) < 100 && (g_refOld[idx].pos - g_ref[idx].pos) > -100) ) {
             position_counter[idx]++;
             
-            if (position_counter[idx] > 250) { 
+            if (position_counter[idx] >= 250) { 
                 if (MOT->input_mode == INPUT_MODE_EXTERNAL && change_ext_ref_flag == FALSE) {
                     g_refNew[idx].pos = g_meas[ENC_L].pos[0];       // Needed only when USB input mode is used, since g_refNew structure is used only with this input
                 }
                 g_ref[idx].pos = g_meas[ENC_L].pos[0];
+                
+                if (position_counter[idx] == 250){
+                    // To do only once
+                    g_meas[ENC_L].hold_curr = g_meas[ENC_L].curr;
+                }
                 pwm_input = 0;            
             }
         }
@@ -2110,7 +2141,7 @@ void overcurrent_control() {
     for (uint8 i = 0; i <NUM_OF_MOTORS; i++) {
         if (c_mem.motor[i].current_limit != 0) {
             // if the current is over the limit
-            if (g_meas[i].curr > c_mem.motor[i].current_limit) {
+            if (g_meas[g_mem.motor[i].encoder_line].curr > c_mem.motor[i].current_limit) {
                 //decrease pwm_limit
                 dev_pwm_limit[i]--;
             // if the current is in the safe zone
@@ -2159,17 +2190,17 @@ void cycles_counter_update() {
     static uint8 rest_cycle_status = STATE_INACTIVE;
     static int32 bin_threshold = 250;
     static int32 thr_pos = 0, max_pos = 0;
-    uint8 i, bin_st, bin_max;
-    int32 curr_pos, curr_off;
+    uint8 i, bin_st, bin_max, bin_1, bin_2;
+    int32 curr_pos, curr_off, curr_ref;
     int32 step;
     static uint32 timer_value_s, timer_value_e;
 
-    curr_pos = (int32)(g_meas[g_mem.motor[0].encoder_line].pos[0] >> g_mem.enc[0].res[0]);
+    curr_pos = (int32)(g_meas[g_mem.motor[0].encoder_line].pos[0] >> g_mem.enc[g_mem.motor[0].encoder_line].res[0]);
     
     // State machine - Evaluate position counter update
     switch (pos_cycle_status){
         case STATE_INACTIVE:
-            if (pwm_sign == 1){
+            if ((g_mem.motor[0].input_mode != INPUT_MODE_EMG_PROPORTIONAL_NC && pwm_sign == 1) || (g_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL_NC && pwm_sign == -1)){
                 thr_pos = curr_pos; 
                 curr_off = (max_pos>thr_pos)?(max_pos-thr_pos):(thr_pos-max_pos);
                 g_mem.cnt.wire_disp = g_mem.cnt.wire_disp + curr_off;     //sum opening track
@@ -2177,7 +2208,7 @@ void cycles_counter_update() {
             }
             break;
         case STATE_ACTIVE:
-            if (pwm_sign == -1){
+            if ((g_mem.motor[0].input_mode != INPUT_MODE_EMG_PROPORTIONAL_NC && pwm_sign == -1) || (g_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL_NC && pwm_sign == 1)){
                 max_pos = curr_pos;
                 curr_off = (max_pos>thr_pos)?(max_pos-thr_pos):(thr_pos-max_pos);
                 g_mem.cnt.wire_disp = g_mem.cnt.wire_disp + curr_off;     //sum closure track
@@ -2189,20 +2220,29 @@ void cycles_counter_update() {
             curr_off = (max_pos>thr_pos)?(max_pos-thr_pos):(thr_pos-max_pos);
             if (curr_off > bin_threshold){
                 //update position histogram
-                step = ((int32)(g_mem.motor[0].pos_lim_sup >> g_mem.enc[0].res[0]) / 10);
+                step = ((int32)(g_mem.motor[0].pos_lim_sup >> g_mem.enc[g_mem.motor[0].encoder_line].res[0]) / 10);
                 bin_st  = (uint8)(thr_pos/step);
                 bin_max = (uint8)(max_pos/step);
-                for (i=bin_st; i<= bin_max; i++){
-                    //position_hist counts how many times the SoftHand stays in bin while closing
+                
+                // Bin computation valid for both NO and NC working
+                bin_1 = (bin_st<bin_max)?bin_st:bin_max;
+                bin_2 = (bin_st<bin_max)?bin_max:bin_st;    
+                for (i=bin_1; i<= bin_2; i++){
+                    //position_hist counts how many times the SoftHand stays in bin while moving
                     g_mem.cnt.position_hist[i] = g_mem.cnt.position_hist[i] + 1;
                 }
                 
-                //update current histogram
+                //update current histogram (only positive current measures)
                 step = ((int32)(g_mem.motor[0].current_limit) / 4);
-                if (g_meas[g_mem.motor[0].encoder_line].curr > g_mem.motor[0].current_limit)
+                if (g_mem.motor[0].not_revers_motor_flag == TRUE)
+                    curr_ref = g_meas[g_mem.motor[0].encoder_line].hold_curr; 
+                else
+                    curr_ref = g_meas[g_mem.motor[0].encoder_line].curr;
+                    
+                if (curr_ref > g_mem.motor[0].current_limit)
                     g_mem.cnt.current_hist[3] = g_mem.cnt.current_hist[3] + 1; 
                 else
-                    g_mem.cnt.current_hist[(uint8)(g_meas[g_mem.motor[0].encoder_line].curr/step)] = g_mem.cnt.current_hist[(uint8)(g_meas[g_mem.motor[0].encoder_line].curr/step)] + 1;
+                    g_mem.cnt.current_hist[(uint8)(curr_ref/step)] = g_mem.cnt.current_hist[(uint8)(curr_ref/step)] + 1;
             }
             pos_cycle_status = STATE_INACTIVE;
             break;
@@ -2217,7 +2257,7 @@ void cycles_counter_update() {
                 }
                 break;
             case STATE_ACTIVE:
-                if (g_emg_meas.emg[i] < 10){
+                if (g_emg_meas.emg[i] < g_mem.emg.emg_threshold[i]-10){
                     emg_cycle_status[i] = COUNTER_INC;
                 }
                 break;

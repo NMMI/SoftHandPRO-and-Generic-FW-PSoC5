@@ -218,6 +218,7 @@ struct st_meas {
     int32 pos[NUM_OF_SENSORS];      /*!< Encoder sensor position.*/
     int32 curr;                     /*!< Motor current.*/
     int32 estim_curr;               /*!< Current estimation.*/
+    int32 hold_curr;                /*!< Maximum current reached while grasping.*/
     int8 rot[NUM_OF_SENSORS];       /*!< Encoder sensor rotations.*/
     int32 vel[NUM_OF_SENSORS];              /*!< Encoder rotational velocity.*/
     int32 acc[NUM_OF_SENSORS];              /*!< Encoder rotational acceleration.*/

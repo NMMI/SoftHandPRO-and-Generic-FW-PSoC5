@@ -660,6 +660,9 @@ void get_param_list (uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS],
                         case INPUT_MODE_EMG_FCFS_ADV:
                             strcat(aux_str, " EMG FCFS Advanced");
                         break;
+                        case INPUT_MODE_EMG_PROPORTIONAL_NC:
+                            strcat(aux_str, " EMG proportional Normally Closed");
+                        break;
                     }
                     break;
                 case 2:     // control mode menu
@@ -1005,7 +1008,7 @@ void manage_param_list(uint16 index) {
     sprintf(spi_delay_menu, "0 -> None\n1 -> Low (%u us delay for each 8-bit register read)\n2 -> High (%u us delay for each 8-bit register read)\n", (int)SPI_DELAY_LOW, (int)SPI_DELAY_HIGH);
 
     const char* MENU_STR[NUM_OF_PARAMS_MENU] = {
-        "0 -> Usb\n1 -> Handle\n2 -> EMG proportional\n3 -> EMG Integral\n4 -> EMG FCFS\n5 -> EMG FCFS Advanced\n",         //1 input_mode_menu
+        "0 -> Usb\n1 -> Handle\n2 -> EMG proportional\n3 -> EMG Integral\n4 -> EMG FCFS\n5 -> EMG FCFS Advanced\n6 -> EMG proportional NC\n",         //1 input_mode_menu
         "0 -> Position\n1 -> PWM\n2 -> Current\n3 -> Position and Current\n",                                               //2 control_mode_menu
         "0 -> Deactivate [NO]\n1 -> Activate [YES]\n",                                                                      //3 yes_no_menu
         "0 -> Right\n1 -> Left\n",                                                                                          //4 right_left_menu
@@ -1871,6 +1874,12 @@ void prepare_generic_info(char *info_string)
             strcat(info_string, str);
             strcat(info_string, "\r\n");
             
+            if (MOT->not_revers_motor_flag == TRUE){
+                sprintf(str, "Last Grasp Hold Current %d (mA): %ld", MOTOR_IDX+1, (int32) g_meas[ENC_L].hold_curr );
+                strcat(info_string, str);
+                strcat(info_string, "\r\n");
+            }
+            
             sprintf(str, "\r\nMOTOR %d CONFIGURATION\r\n", MOTOR_IDX+1);
             strcat(info_string, str);
 
@@ -1934,6 +1943,9 @@ void prepare_generic_info(char *info_string)
                 case INPUT_MODE_EMG_FCFS_ADV:
                     strcat(info_string, "Input mode: EMG FCFS ADV\r\n");
                     break;
+                case INPUT_MODE_EMG_PROPORTIONAL_NC:
+                    strcat(info_string, "Input mode: EMG proportional Normally Closed\r\n");
+                    break;
             }
 
             switch(MOT->control_mode) {
@@ -1960,7 +1972,7 @@ void prepare_generic_info(char *info_string)
 
             sprintf(str, "Motor-Handle Ratio: %d\r\n", (int)MEM_P->enc[ENC_L].motor_handle_ratio);
             strcat(info_string, str);
-//#ifdef GENERIC_FW       // decided not to show when using SOFTHAND_FW to streamline ping, since these parameters are not settable            
+#ifdef GENERIC_FW       // decided not to show when using SOFTHAND_FW to streamline ping, since these parameters are not settable            
             strcat(info_string, "Encoder indices used for motor control: ");
             for (i = 0; i < NUM_OF_SENSORS; ++i) {
                 sprintf(str, "%d", (int) MEM_P->enc[ENC_L].Enc_idx_use_for_control[i]);
@@ -1976,7 +1988,7 @@ void prepare_generic_info(char *info_string)
             strcat(info_string, str);
             sprintf(str, "Gear invariant: %d\r\n", (int)MEM_P->enc[ENC_L].gears_params[2]);
             strcat(info_string, str);
-//#endif            
+#endif            
             strcat(info_string, "\r\n");
 
             strcat(info_string, "Sensor resolution: ");
@@ -2355,6 +2367,9 @@ void prepare_SD_param_info(char *info_string)
             case INPUT_MODE_EMG_FCFS_ADV:
                 strcat(info_string, "Input mode: EMG FCFS ADV\r\n");
                 break;
+            case INPUT_MODE_EMG_PROPORTIONAL_NC:
+                    strcat(info_string, "Input mode: EMG proportional Normally Closed\r\n");
+                    break;
         }
 
         switch(MOT->control_mode) {
@@ -3080,11 +3095,11 @@ void cmd_set_inputs(){
     // Check if last command received was the same as this 
     //(Note: last command not last motor reference in g_ref)
     for (uint8 i = 0; i < (1 + c_mem.dev.use_2nd_motor_flag); i++) {
-        if(last_aux_int16[i] != aux_int16[i]){
+       if(last_aux_int16[i] != aux_int16[i]){
             change_ext_ref_flag = TRUE;
-        }
+       }
         // Update last command
-        last_aux_int16[i] = aux_int16[i];
+       last_aux_int16[i] = aux_int16[i];
     }
     
     // Update g_refNew in case a new command has been received
@@ -3294,7 +3309,7 @@ void cmd_get_inputs(){
 
     packet_data[0] = CMD_GET_INPUTS;
         
-    aux_int16 = (int16) (g_refOld[0].pos  >> g_mem.enc[g_mem.motor[0].encoder_line].res[0]);
+    aux_int16 = (int16)(g_refOld[0].pos  >> g_mem.enc[g_mem.motor[0].encoder_line].res[0]);
     packet_data[2] = ((char*)(&aux_int16))[0];
     packet_data[1] = ((char*)(&aux_int16))[1];
     
