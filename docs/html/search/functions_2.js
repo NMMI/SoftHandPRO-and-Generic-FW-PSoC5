@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['encoder_5freading_5fspi',['encoder_reading_SPI',['../interruptions_8c.html#a6eeedfdf03dd87bd2922b7005fd8c691',1,'encoder_reading_SPI(uint8 n_line, uint8 assoc_motor):&#160;interruptions.c'],['../interruptions_8h.html#a6eeedfdf03dd87bd2922b7005fd8c691',1,'encoder_reading_SPI(uint8 n_line, uint8 assoc_motor):&#160;interruptions.c']]]
+  ['deactivate_5fslaves',['deactivate_slaves',['../command__processing_8c.html#a22eb92c869daf62079d72a328c54aec7',1,'deactivate_slaves():&#160;command_processing.c'],['../command__processing_8h.html#a22eb92c869daf62079d72a328c54aec7',1,'deactivate_slaves():&#160;command_processing.c']]],
+  ['drive_5fslave',['drive_slave',['../command__processing_8c.html#ab7088642f851a8375e8b8edf673b91a4',1,'drive_slave(uint8 motor_idx, uint8 slave_ID):&#160;command_processing.c'],['../command__processing_8h.html#ab7088642f851a8375e8b8edf673b91a4',1,'drive_slave(uint8 motor_idx, uint8 slave_ID):&#160;command_processing.c']]]
 ];

@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2019, Centro "E.Piaggio"
+// Copyright (c) 2017-2020, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -36,10 +36,10 @@
  * \file        command_processing.h
  *
  * \brief       Received commands processing functions             
- * \date        October 01, 2017
+ * \date        March 20th, 2020
  * \author      _Centro "E.Piaggio"_
  * \copyright   (C) 2012-2016 qbrobotics. All rights reserved.
- * \copyright   (C) 2017-2019 Centro "E.Piaggio". All rights reserved.
+ * \copyright   (C) 2017-2020 Centro "E.Piaggio". All rights reserved.
  * \details
  *
  *  This file contains all the definitions of the functions used to 
@@ -162,16 +162,15 @@ void    commWrite_old_id   (uint8 *packet_data, uint16 packet_lenght, uint8 old_
 **/
 void    commWrite         (uint8 *packet_data, uint16 packet_lenght);
 
-//============================================================  commWrite_to_cuff
-/** This function writes on the serial port the package that needs to be sent
- * to the Cuff device. It is used only when a specific device is connected to
- * the hand. The Hand must have ID equal to the one of the Cuff plus one.
+//============================================================  commWriteID
+ /** This function writes on the serial port the package that needs to be sent
+ * to another board.
  *
  *	\param packet_data 		The array of data that must be written.
  *	\param packet_lenght	The lenght of the data array.
  *
 **/
-void    commWrite_to_cuff (uint8* packet_data, uint16 packet_lenght);
+void    commWriteID  (uint8 *packet_data, uint16 packet_lenght, uint8 id);
 /** \} */
 
 
@@ -259,6 +258,20 @@ uint8   memInit            ();
  *
 **/
 void   memInit_SoftHandPro ();
+
+//============================================================  memInitMaster
+/** This functions initializes the memory. It is used also to restore the
+ * 	the parameters to their default values. Specific for Master firmware
+ *
+**/
+void   memInit_Master ();
+
+//============================================================  memInitAirChambersFb
+/** This functions initializes the memory. It is used also to restore the
+ * 	the parameters to their default values. Specific for Air Chambers firmware
+ *
+**/
+void   memInit_AirChambersFb ();
 
 /** \} */
 
@@ -402,6 +415,32 @@ void cmd_get_ADC_raw();
 /** This function gets both SD parameters and data files
 **/
 void cmd_get_SD_files();
+
+//============================================================  air_chamber_control
+/* This function is used to drive air chambers feedback device */
+void air_chambers_control();
+
+//============================================================  commReadResCurrFromSH
+/** This function reads on the serial port the residual current from SH.
+ *
+**/
+int16 commReadResCurrFromSH();
+
+//=====================================================     drive_slave
+/** This function is used to create a package and send it to another device, only
+ *  if the actual board is in master mode.
+**/
+void drive_slave(uint8 motor_idx, uint8 slave_ID);
+
+//=====================================================     stop_feedback
+/** This function is used to deactivate feedback motors when occurred.
+**/
+void stop_feedback();
+
+//=====================================================     deactivate_slaves
+/** This function is used to create a package to deactivate motors on all the other devices.
+**/
+void deactivate_slaves();
 
 #endif
 

@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2019, Centro "E.Piaggio"
+// Copyright (c) 2017-2020, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -38,10 +38,10 @@
 *
 
 * \brief        Command processing functions.
-* \date         October 01, 2017
+* \date         March 20th, 2020
 * \author       _Centro "E.Piaggio"_
 * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
-* \copyright    (C) 2017-2019 Centro "E.Piaggio". All rights reserved.
+* \copyright    (C) 2017-2020 Centro "E.Piaggio". All rights reserved.
 */
 //=================================================================     includes
 #include "command_processing.h"
@@ -771,6 +771,8 @@ void get_param_list (uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS],
                         case 1:
                             strcat(aux_str, " GENERIC 2 MOTORS\0");
                         break;
+                        case 2:
+                            strcat(aux_str, " AIR CHAMBERS \0");
                     }
                     break;
             }
@@ -908,7 +910,14 @@ void manage_param_list(uint16 index) {
         (uint8*)&(MEM_P->exp.read_ADC_sensors_port_flag),		
     	(uint8*)&(MEM_P->exp.ADC_conf[0]),
     	(uint8*)&(MEM_P->exp.ADC_conf[6]),                          //70         
-        (uint8*)&(MEM_P->dev.dev_type)
+        (uint8*)&(MEM_P->dev.dev_type),
+        
+        (uint8*)&(MEM_P->MS.slave_comm_active),                        // additional master params
+        (uint8*)&(MEM_P->MS.slave_ID),
+        
+        (uint8*)&(MEM_P->FB.max_residual_current),                     // additional feedback params
+        (uint8*)&(MEM_P->FB.maximum_pressure_kPa),
+        (uint8*)&(MEM_P->FB.prop_err_fb_gain)
     };
     
     uint8 TYPES[NUM_OF_PARAMS] = {
@@ -931,7 +940,8 @@ void manage_param_list(uint16 index) {
         TYPE_INT8,  TYPE_FLAG, TYPE_FLOAT, TYPE_UINT8,
         TYPE_FLAG,  TYPE_UINT8, TYPE_FLAG, TYPE_UINT8,
         TYPE_INT8, TYPE_UINT8, TYPE_UINT8, TYPE_FLAG,
-        TYPE_UINT8, TYPE_UINT8, TYPE_FLAG      
+        TYPE_UINT8, TYPE_UINT8, TYPE_FLAG, TYPE_FLAG,
+        TYPE_UINT8, TYPE_INT32, TYPE_FLOAT, TYPE_FLOAT      
     };
 
     uint8 NUM_ITEMS[NUM_OF_PARAMS] = {
@@ -954,7 +964,8 @@ void manage_param_list(uint16 index) {
         1, 1, 6, 1,
         1, 1, 1, 3, 
         3, N_Encoder_Line_Connected[0], N_Encoder_Line_Connected[1], 1,
-        6, 6, 1
+        6, 6, 1, 1,
+        1, 1, 1, 1
     };
     
     uint8 NUM_STRUCT[NUM_OF_PARAMS] = {     // see STRUCTURES INDEX in globals.h
@@ -977,7 +988,8 @@ void manage_param_list(uint16 index) {
         ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line), ST_MOTOR+SECOND_MOTOR_IDX, ST_MOTOR+SECOND_MOTOR_IDX, ST_MOTOR+SECOND_MOTOR_IDX, 
         ST_MOTOR+SECOND_MOTOR_IDX, ST_MOTOR+SECOND_MOTOR_IDX, ST_MOTOR+SECOND_MOTOR_IDX, ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line),
         ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line), ST_ENCODER+0, ST_ENCODER+1, ST_EXPANSION,
-        ST_EXPANSION, ST_EXPANSION, ST_DEVICE
+        ST_EXPANSION, ST_EXPANSION, ST_DEVICE, ST_MS_SPEC, 
+        ST_MS_SPEC, ST_FB_SPEC, ST_FB_SPEC, ST_FB_SPEC
     };
     
     const char* PARAMS_STR[NUM_OF_PARAMS] = {
@@ -1000,7 +1012,8 @@ void manage_param_list(uint16 index) {
         "57 - Motor handle ratio:", "58 - PWM rescaling:", "59 - Current lookup:", "60 - Associated encoder line:", 
         "61 - Driver type:", "62 - PWM rate limiter:", "63 - Not reversible:", "64 - Enc idx used for control:",
         "65 - Gear params[N1, N2, I1]:", "66 - Read enc raw line 0:", "67 - Read enc raw line 1:", "68 - Read additional ADC port:",
-        "69 - ADC channel [1-6]:", "70 - ADC channel [7-12]:", "71 - Device type:"
+        "69 - ADC channel [1-6]:", "70 - ADC channel [7-12]:", "71 - Device type:", "72 - Slave communication active:",
+        "73 - Slave ID:", "74 - Maximum slave residual current:", "75 - Maximum pressure feedback (kPa):", "76 - Proportional pressure error gain:"
     };
 
     //Parameters menu
@@ -1017,10 +1030,10 @@ void manage_param_list(uint16 index) {
         spi_delay_menu,                                                                                                     //7 spi_delay_menu
         "0 -> Generic user\n1 -> Maria\n2 -> Roza\nThe board will reset\n",                                                 //8 user_id_menu
         "0 -> MC33887 (Standard)\n1 -> VNH5019 (High power)\nThe board will reset\n",                                       //9 motor_driver_type_menu
-        "0 -> SOFTHAND PRO\n1 -> GENERIC 2 MOTORS\nThe board will reset\n"                                                  //10 device_type_menu
+        "0 -> SOFTHAND PRO\n1 -> GENERIC 2 MOTORS\n2 -> AIR CHAMBERS\nThe board will reset\n"                               //10 device_type_menu
     };   
     
-    uint8 NUM_MENU[28] = {3, 1, 2, 3, 3, 3, 3, 3, 3, 4, 5, 6, 3, 7, 8, 9, 3, 5, 3, 1, 2, 3, 3, 3, 9, 3, 5, 10};
+    uint8 NUM_MENU[29] = {3, 1, 2, 3, 3, 3, 3, 3, 3, 4, 5, 6, 3, 7, 8, 9, 3, 5, 3, 1, 2, 3, 3, 3, 9, 3, 5, 10, 3};
     uint8 CUSTOM_PARAM_GET_LIST[9]  = {2, 3, 8, 11, 23, 44, 45, 50, 53};
     uint8 CUSTOM_PARAM_SET_LIST[18] = {2, 3, 5, 8, 11, 23, 24, 28, 31, 32, 38, 44, 45, 47, 50, 53, 61, 71};
     uint8 USER_ID_PARAM = 35;
@@ -1774,6 +1787,9 @@ void prepare_generic_info(char *info_string)
             case GENERIC_2_MOTORS:
                 strcat(info_string, "Device: GENERIC 2 MOTORS\r\n");
                 break;
+            case AIR_CHAMBERS_FB:
+                strcat(info_string, "Device: AIR CHAMBERS HAPTIC FEEDBACK\r\n");
+                break;
             default:
                 break;
         }
@@ -2184,6 +2200,16 @@ void prepare_generic_info(char *info_string)
         }
 #endif   
         
+#ifdef MASTER_FW
+        if (MEM_P->MS.slave_comm_active)
+            strcat(info_string, "Slave communication active: YES\r\n");
+        else
+            strcat(info_string, "Slave communication active: NO\r\n");
+
+        sprintf(str, "Slave ID: %d\r\n", (int)MEM_P->MS.slave_ID);
+        strcat(info_string, str);
+#endif
+
         sprintf(str, "Last FW cycle time: %u us\r\n", (uint16)timer_value0 - (uint16)timer_value);
         strcat(info_string, str);
   
@@ -2678,25 +2704,32 @@ void commWrite(uint8 *packet_data, uint16 packet_lenght)
     RS485_CTS_Write(0);
 }
 
-void commWrite_to_cuff(uint8 *packet_data, uint16 packet_lenght)
+//==============================================================================
+//                                             WRITE FUNCTION FOR ANOTHER DEVICE
+//==============================================================================
+
+void commWriteID(uint8 *packet_data, uint16 packet_lenght, uint8 id)
 {
-    uint16 CYDATA index;    // iterator
+    static uint16 CYDATA i;    // iterator
 
     // frame - start
     UART_RS485_PutChar(':');
     UART_RS485_PutChar(':');
     // frame - ID
-    UART_RS485_PutChar(g_mem.dev.id - 1);
+    UART_RS485_PutChar(id);
     // frame - length
     UART_RS485_PutChar((uint8)packet_lenght);
     // frame - packet data
-    for(index = 0; index < packet_lenght; ++index) {
-        UART_RS485_PutChar(packet_data[index]);
+    for(i = 0; i < packet_lenght; ++i) {
+        UART_RS485_PutChar(packet_data[i]);
     }
 
-    index = 0;
+    i = 0;
 
-    while(!(UART_RS485_ReadTxStatus() & UART_RS485_TX_STS_COMPLETE) && index++ <= 1000){}
+    while(!(UART_RS485_ReadTxStatus() & UART_RS485_TX_STS_COMPLETE) && i++ <= 1000){}
+    
+    RS485_CTS_Write(1);
+    RS485_CTS_Write(0);
 }
 
 //==============================================================================
@@ -2936,11 +2969,24 @@ uint8 memInit(void)
     for (i = 0; i < NUM_OF_ADC_CHANNELS_MAX; i++) {
         g_mem.exp.ADC_conf[i] = 0;
     }
+    //Activate only the two EMG channels by default for every firmware configuration
+    g_mem.exp.ADC_conf[2] = 1;
+    g_mem.exp.ADC_conf[3] = 1;
 
 #ifdef SOFTHAND_FW
     // Override memory values with specific ones for SoftHand Pro device
     memInit_SoftHandPro();
-#endif    
+#endif 
+
+#ifdef MASTER_FW
+    // Override memory values with specific ones for Master device
+    memInit_Master();
+#endif 
+
+#ifdef AIR_CHAMBERS_FB_FW
+    // Override memory values with specific ones for Air Chmabers device
+    memInit_AirChambersFb();
+#endif 
 
     // Default generic user_id
     g_mem.dev.user_id = GENERIC_USER;    
@@ -2999,6 +3045,40 @@ void memInit_SoftHandPro(void)
     g_mem.imu.read_imu_flag = FALSE;
     g_mem.exp.read_exp_port_flag = EXP_NONE;       // 0 - None
     strcpy(g_mem.user[g_mem.dev.user_id].user_code_string, "USR001");
+}
+
+//==============================================================================
+//                                                            MEMORY INIT MASTER
+//==============================================================================
+void memInit_Master(void)
+{
+    g_mem.dev.id                = 2;
+    
+    // MS STRUCT
+    g_mem.MS.slave_ID = 1;
+    g_mem.MS.slave_comm_active = FALSE;
+}
+
+//==============================================================================
+//                                                   MEMORY INIT AIR CHAMBERS FB
+//==============================================================================
+void memInit_AirChambersFb(void)
+{
+    // Default configuration with Air Chambers Haptic feedback
+    g_mem.dev.dev_type          = AIR_CHAMBERS_FB;
+    
+    g_mem.motor[0].control_mode  = CONTROL_PWM;
+    
+    // Drive slave with reference generated on second motor index
+    // Default slave configuration for haptic feedback with SoftHand 2.0.3            
+    g_mem.motor[1].input_mode = INPUT_MODE_EMG_FCFS;
+    g_mem.motor[1].pos_lim_inf = 0;
+    g_mem.motor[1].pos_lim_sup = (int32)22000 << g_mem.enc[g_mem.motor[1].encoder_line].res[0];
+    
+    // FB STRUCT
+    g_mem.FB.max_residual_current = 450;
+    g_mem.FB.maximum_pressure_kPa = 25.0;
+    g_mem.FB.prop_err_fb_gain = 1.0;
 }
 
 //==============================================================================
@@ -3141,6 +3221,20 @@ void cmd_activate(){
         g_refNew[0].pos = g_meas[g_mem.motor[0].encoder_line].pos[0];
     }
     g_refNew[0].onoff = (aux & 0x01);
+    
+#ifdef AIR_CHAMBERS_FB_FW
+    if (g_mem.dev.dev_type == AIR_CHAMBERS_FB){
+        // Send PWM 0 to the PUMP in case a deactivation command arrives
+        // [There is no driver activation, so g_refNew[i].onoff is useless]
+        if (!(g_refNew[0].onoff)) {
+            g_refNew[0].pwm = 0;
+        }
+        
+        // Activate or deactivate the valve
+        VALVE_Write((aux >> 1) & 0x01);
+    }
+#endif
+    
     // Activate/Deactivate motor
     enable_motor(0, g_refNew[0].onoff); 
     
@@ -3227,8 +3321,14 @@ void cmd_get_currents(){
 
     packet_data[0] = CMD_GET_CURRENTS;
 
-    // Currents
-    aux_int16 = (int16) g_measOld[g_mem.motor[0].encoder_line].curr; //Real current
+    if (c_mem.dev.dev_type != AIR_CHAMBERS_FB){
+        // Currents
+        aux_int16 = (int16) g_measOld[g_mem.motor[0].encoder_line].curr; //Real current
+    }
+    else {
+        // Send pressure times 100 here instead of current (Simulink use)
+        aux_int16 = (int16)(g_fb_meas.pressure*100.0); //Pressure
+    }
     packet_data[2] = ((char*)(&aux_int16))[0];
     packet_data[1] = ((char*)(&aux_int16))[1];
     
@@ -3267,7 +3367,46 @@ void cmd_get_currents_for_cuff(){
 
     packet_data[3] = LCRChecksum (packet_data, 3);
     
-    commWrite_to_cuff(packet_data, 4);
+    commWriteID(packet_data, 4, g_mem.dev.id -1);
+}
+
+//==============================================================================
+//                                  READ RESIDUAL CURRENT FUNCTION FROM SOFTHAND
+//==============================================================================
+
+int16 commReadResCurrFromSH()
+{
+    uint8 packet_data[16];
+    uint8 packet_lenght;
+    int16 curr_diff = 0;
+    uint32 t_start, t_end;
+    uint8 read_flag = TRUE;
+
+    packet_lenght = 2;
+    packet_data[0] = CMD_GET_CURR_DIFF;
+    packet_data[1] = CMD_GET_CURR_DIFF;
+    commWriteID(packet_data, packet_lenght, c_mem.MS.slave_ID);
+
+    t_start = (uint32) MY_TIMER_ReadCounter();
+    while(g_rx.buffer[0] != CMD_SET_CUFF_INPUTS) {
+        if (interrupt_flag){
+            interrupt_flag = FALSE;
+            interrupt_manager();
+        }
+
+        t_end = (uint32) MY_TIMER_ReadCounter();
+        if((t_start - t_end) > 4500000){            // 4.5 s timeout
+            read_flag = FALSE;
+            master_mode = 0;                // Exit from master mode
+            break;
+        }
+    }
+
+    if (read_flag) {
+        curr_diff = (int16)(g_rx.buffer[1]<<8 | g_rx.buffer[2]);                        
+    }
+    
+    return curr_diff;
 }
 
 void cmd_set_baudrate(){
@@ -3309,7 +3448,7 @@ void cmd_get_inputs(){
 
     packet_data[0] = CMD_GET_INPUTS;
         
-    aux_int16 = (int16)(g_refOld[0].pos  >> g_mem.enc[g_mem.motor[0].encoder_line].res[0]);
+    aux_int16 = (int16)(g_refOld[0].pos >> g_mem.enc[g_mem.motor[0].encoder_line].res[0]);
     packet_data[2] = ((char*)(&aux_int16))[0];
     packet_data[1] = ((char*)(&aux_int16))[1];
     
@@ -3621,6 +3760,165 @@ void cmd_get_ADC_raw(){
     
     // Send package to UART
     commWrite(packet_data, 2+2*idx);
+}
+
+//==============================================================================
+//                                                          AIR CHAMBERS CONTROL
+//==============================================================================
+/* It asks current difference to the SoftHand and sets force feedback device inputs proportionally to this difference.*/
+
+void air_chambers_control() {
+    
+#ifdef AIR_CHAMBERS_FB_FW
+    
+    int16 curr_diff;
+    int32 pressure_reference, err_pressure, pressure_value;
+    int32 valve_command;
+    int16 x_value;
+
+    // Use pressure and residual current read from the SoftHand
+    
+    curr_diff = (int16)commReadResCurrFromSH();
+    
+    // Current difference saturation old mapping
+//    if(curr_diff > c_mem.FB.max_residual_current) {
+//        curr_diff = c_mem.FB.max_residual_current;
+//    }
+//    if(curr_diff < 0) {
+//        curr_diff = 0;
+//    }
+
+    // Compute pressure reference
+
+    x_value = curr_diff - 50.0;
+    if (x_value < 0)
+        x_value = 0;
+    
+    // old mapping --- linear mapping
+    //pressure_reference = (int32)(curr_diff * (c_mem.FB.maximum_pressure_kPa/c_mem.FB.max_residual_current)); // normalization by maximum values (200 mmHg->26.6 kPa)
+    pressure_reference = (int32)((int32)(-30.0*x_value*x_value + 55.0*c_mem.FB.max_residual_current*x_value)/(c_mem.FB.max_residual_current*c_mem.FB.max_residual_current));
+    if (pressure_reference < 0)
+        pressure_reference = 0;
+    if (pressure_reference > c_mem.FB.maximum_pressure_kPa)
+        pressure_reference = c_mem.FB.maximum_pressure_kPa;
+    
+    pressure_value = (int32)g_fb_meas.pressure;
+    err_pressure = pressure_reference - pressure_value;       // error in kPa
+//    if (err_pressure < 0){
+//        err_pressure = 0;
+//    }
+    
+    if (x_value <= 0){
+        //i.e the hand is opening
+        valve_command = 0;  //valve open: air passes
+    }
+    else {
+        //i.e the hand is closing, so valve should stay closed independently from the pressure error
+        //if err_pressure greater than 0, it means pressure should increase, so valve should stay closed
+        //if err_pressure==0, it means you reached the right pressure, so valve should stay closed
+        valve_command = 1;  //3.6V (5V - 2 diodes) - valve close: air doesn't pass
+    }
+    
+    // Pump control
+    g_refNew[0].pwm = (int32)(c_mem.FB.prop_err_fb_gain*err_pressure);
+    //c_mem.FB.prop_err_fb_gain default 1.0 gain since, max err_pressure is 25 and pwm range is approx. 25 ticks [45=2V,70=3V]
+    
+    // Limit output voltage
+    if (g_refNew[0].pwm > 80) // 80 (3.5V) 80% of 4.3V (5V - 1 diode)
+        g_refNew[0].pwm = 80; // 80
+    if (g_refNew[0].pwm < 20)
+        g_refNew[0].pwm = 0;
+        
+    VALVE_Write(valve_command);
+#endif
+}
+
+//==============================================================================
+//                                                                   DRIVE SLAVE
+//==============================================================================
+ 
+void drive_slave(uint8 motor_idx, uint8 slave_ID) {
+
+#ifdef MASTER_FW
+    uint8 packet_data[6];
+    uint8 packet_lenght;
+    int16 aux_int16;
+    
+    // If not the use of handle or an emg input mode is set, exit from master_mode
+    if( c_mem.motor[motor_idx].input_mode != INPUT_MODE_ENCODER3          &&
+        c_mem.motor[motor_idx].input_mode != INPUT_MODE_EMG_PROPORTIONAL  &&
+        c_mem.motor[motor_idx].input_mode != INPUT_MODE_EMG_INTEGRAL      &&
+        c_mem.motor[motor_idx].input_mode != INPUT_MODE_EMG_FCFS          &&
+        c_mem.motor[motor_idx].input_mode != INPUT_MODE_EMG_FCFS_ADV     ){
+        master_mode = 0;
+        return;
+    }
+        
+    if (dev_tension[0] > 5000 && dev_tension[0] < 7000){
+        master_mode = 0;
+        return;
+    }
+    
+       
+    //Sends a Set inputs command to a second board
+    packet_data[0] = CMD_SET_INPUTS;
+    aux_int16 = (int16) (g_ref[motor_idx].pos >> g_mem.enc[g_mem.motor[motor_idx].encoder_line].res[0]);
+    packet_data[2] = ((char*)(&aux_int16))[0];
+    packet_data[1] = ((char*)(&aux_int16))[1];
+    *((int16 *) &packet_data[3]) = 0;
+    
+    packet_lenght = 6;
+    packet_data[packet_lenght - 1] = LCRChecksum(packet_data,packet_lenght - 1);
+    commWriteID(packet_data, packet_lenght, slave_ID);
+
+#endif
+}
+
+//==============================================================================
+//                                                                 STOP FEEDBACK
+//==============================================================================
+ 
+void stop_feedback() {
+    
+#ifdef AIR_CHAMBERS_FB_FW
+    if (c_mem.dev.dev_type == AIR_CHAMBERS_FB){
+        // Stop pump and open valve
+        g_refNew[0].pwm = 0;    
+        VALVE_Write(0);
+    }
+#endif
+}
+
+//==============================================================================
+//                                                             DEACTIVATE SLAVES
+//==============================================================================
+ 
+void deactivate_slaves() {
+    
+#ifdef MASTER_FW
+    
+    uint8 packet_data[10];
+    uint8 packet_lenght;
+    
+    // If not a emg input mode is set, exit from master_mode
+    if(c_mem.motor[0].input_mode != INPUT_MODE_EMG_PROPORTIONAL  &&
+        c_mem.motor[0].input_mode != INPUT_MODE_EMG_INTEGRAL      &&
+        c_mem.motor[0].input_mode != INPUT_MODE_EMG_FCFS          &&
+        c_mem.motor[0].input_mode != INPUT_MODE_EMG_FCFS_ADV     ){
+        master_mode = 0;
+        return;
+    }
+    
+    //Sends a Set inputs command to a second board
+    packet_data[0] = CMD_ACTIVATE;
+
+    *((int16 *) &packet_data[1]) = 0;   //3 to activate, 0 to deactivate
+    packet_lenght = 3;
+    packet_data[packet_lenght - 1] = LCRChecksum(packet_data,packet_lenght - 1);
+    
+    commWrite(packet_data, packet_lenght);
+    
+#endif    
 }
 
 /* [] END OF FILE */

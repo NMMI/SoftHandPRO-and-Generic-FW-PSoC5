@@ -26,6 +26,8 @@ struct \textbf{ st\+\_\+meas}
 \begin{DoxyCompactList}\small\item\em Measurements structure. \end{DoxyCompactList}\item 
 struct \textbf{ st\+\_\+emg\+\_\+meas}
 \item 
+struct \textbf{ st\+\_\+fb\+\_\+meas}
+\item 
 struct \textbf{ st\+\_\+data}
 \begin{DoxyCompactList}\small\item\em Data sent/received structure. \end{DoxyCompactList}\item 
 struct \textbf{ st\+\_\+counters}
@@ -45,7 +47,11 @@ struct \textbf{ st\+\_\+expansion}
 struct \textbf{ st\+\_\+user}
 \begin{DoxyCompactList}\small\item\em User related parameters structure. \end{DoxyCompactList}\item 
 struct \textbf{ st\+\_\+\+S\+H\+\_\+spec}
-\begin{DoxyCompactList}\small\item\em Soft\+Hand specific related prameters structure. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Soft\+Hand specific related parameters structure. \end{DoxyCompactList}\item 
+struct \textbf{ st\+\_\+\+M\+A\+S\+T\+E\+R\+\_\+spec}
+\begin{DoxyCompactList}\small\item\em Master mode specific parameters structure. \end{DoxyCompactList}\item 
+struct \textbf{ st\+\_\+\+F\+B\+\_\+spec}
+\begin{DoxyCompactList}\small\item\em Feedback mode specific parameters structure. \end{DoxyCompactList}\item 
 struct \textbf{ st\+\_\+eeprom}
 \begin{DoxyCompactList}\small\item\em Memory variables. \end{DoxyCompactList}\item 
 struct \textbf{ st\+\_\+imu\+\_\+data}
@@ -68,7 +74,11 @@ struct \textbf{ st\+\_\+calib}
 \mbox{\label{globals_8h_a94a49570e3bc73b67084f1a9ae90d89a}} 
 \#define {\bfseries N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+D\+C\+\_\+\+C\+H\+A\+N\+N\+E\+L\+S\+\_\+\+M\+AX}~(4+\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS}+\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+D\+D\+I\+T\+I\+O\+N\+A\+L\+\_\+\+E\+M\+GS})
 \item 
-\#define \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS}~71
+\#define \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+S\+\_\+\+P\+A\+R\+A\+MS}~2
+\item 
+\#define \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+F\+B\+\_\+\+P\+A\+R\+A\+MS}~3
+\item 
+\#define \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS}~(71 + \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+S\+\_\+\+P\+A\+R\+A\+MS} + \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+F\+B\+\_\+\+P\+A\+R\+A\+MS})
 \item 
 \#define \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+M\+E\+NU}~10
 \item 
@@ -165,8 +175,11 @@ struct \textbf{ st\+\_\+calib}
 \mbox{\label{globals_8h_a577f879b1a05acd55b1d56412a17e13f}} 
 \#define {\bfseries G\+E\+N\+E\+R\+I\+C\+\_\+2\+\_\+\+M\+O\+T\+O\+RS}~1
 \item 
+\mbox{\label{globals_8h_ad854ddb03952eb3f1d2e2282bbf21eb4}} 
+\#define {\bfseries A\+I\+R\+\_\+\+C\+H\+A\+M\+B\+E\+R\+S\+\_\+\+FB}~2
+\item 
 \mbox{\label{globals_8h_ac5a0bd9be15f1dcd0ba86f27d3dbda50}} 
-\#define {\bfseries C\+U\+FF}~2
+\#define {\bfseries C\+U\+FF}~3
 \item 
 \#define \textbf{ S\+H\+\_\+\+N1}~35
 \item 
@@ -197,6 +210,12 @@ struct \textbf{ st\+\_\+calib}
 \item 
 \mbox{\label{globals_8h_a788bae111bb48b9aa005ecf765ce1e94}} 
 \#define {\bfseries S\+T\+\_\+\+S\+H\+\_\+\+S\+P\+EC}~70
+\item 
+\mbox{\label{globals_8h_a09fa5a059f637c6e635e27cbb1b437f8}} 
+\#define {\bfseries S\+T\+\_\+\+M\+S\+\_\+\+S\+P\+EC}~80
+\item 
+\mbox{\label{globals_8h_aad8e3965151790073226b9ec124c0808}} 
+\#define {\bfseries S\+T\+\_\+\+F\+B\+\_\+\+S\+P\+EC}~90
 \item 
 \mbox{\label{globals_8h_aa93f0eb578d23995850d61f7d61c55c1}} 
 \#define {\bfseries F\+A\+L\+SE}~0
@@ -278,6 +297,8 @@ struct \textbf{ st\+\_\+meas} {\bfseries g\+\_\+meas} [\textbf{ N\+\_\+\+E\+N\+C
 struct \textbf{ st\+\_\+meas} \textbf{ g\+\_\+meas\+Old} [\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}]
 \item 
 struct \textbf{ st\+\_\+emg\+\_\+meas} g\+\_\+emg\+\_\+meas \textbf{ g\+\_\+emg\+\_\+meas\+Old}
+\item 
+struct \textbf{ st\+\_\+fb\+\_\+meas} \textbf{ g\+\_\+fb\+\_\+meas}
 \item 
 struct \textbf{ st\+\_\+data} \textbf{ g\+\_\+rx}
 \item 
@@ -406,6 +427,8 @@ uint8 {\bfseries Temp} [N\+\_\+\+I\+M\+U\+\_\+\+M\+AX][2]
 \item 
 \mbox{\label{globals_8h_a79179edea7394e7176f8768b1b0f6f92}} 
 float {\bfseries Quat} [N\+\_\+\+I\+M\+U\+\_\+\+M\+AX][4]
+\item 
+uint8 \textbf{ master\+\_\+mode}
 \end{DoxyCompactItemize}
 
 
@@ -413,7 +436,7 @@ float {\bfseries Quat} [N\+\_\+\+I\+M\+U\+\_\+\+M\+AX][4]
 Global definitions and macros are set in this file. 
 
 \begin{DoxyDate}{Date}
-February 01, 2018 
+March 20th, 2020 
 \end{DoxyDate}
 \begin{DoxyAuthor}{Author}
 {\itshape Centro \char`\"{}\+E.\+Piaggio\char`\"{}} 
@@ -421,7 +444,7 @@ February 01, 2018
 \begin{DoxyCopyright}{Copyright}
 (C) 2012-\/2016 qbrobotics. All rights reserved. 
 
-(C) 2017-\/2019 Centro \char`\"{}\+E.\+Piaggio\char`\"{}. All rights reserved. 
+(C) 2017-\/2020 Centro \char`\"{}\+E.\+Piaggio\char`\"{}. All rights reserved. 
 \end{DoxyCopyright}
 
 
@@ -516,7 +539,13 @@ Max number of encoders per line. \mbox{\label{globals_8h_acfef2d9600a7535f4ad258
 \subsubsection{N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+D\+D\+I\+T\+I\+O\+N\+A\+L\+\_\+\+E\+M\+GS}
 {\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+D\+D\+I\+T\+I\+O\+N\+A\+L\+\_\+\+E\+M\+GS~6}
 
-Number of additional emg channels. \mbox{\label{globals_8h_a21ab5f0a6e4cb48bd320177c4f7aa078}} 
+Number of additional emg channels. \mbox{\label{globals_8h_abb8ebf7cfe1d67e459ceef94dcb0e045}} 
+\index{globals.\+h@{globals.\+h}!N\+U\+M\+\_\+\+O\+F\+\_\+\+F\+B\+\_\+\+P\+A\+R\+A\+MS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+F\+B\+\_\+\+P\+A\+R\+A\+MS}}
+\index{N\+U\+M\+\_\+\+O\+F\+\_\+\+F\+B\+\_\+\+P\+A\+R\+A\+MS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+F\+B\+\_\+\+P\+A\+R\+A\+MS}!globals.\+h@{globals.\+h}}
+\subsubsection{N\+U\+M\+\_\+\+O\+F\+\_\+\+F\+B\+\_\+\+P\+A\+R\+A\+MS}
+{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+O\+F\+\_\+\+F\+B\+\_\+\+P\+A\+R\+A\+MS~3}
+
+Number of feedback parameters saved in the E\+E\+P\+R\+OM. \mbox{\label{globals_8h_a21ab5f0a6e4cb48bd320177c4f7aa078}} 
 \index{globals.\+h@{globals.\+h}!N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS}}
 \index{N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS}!globals.\+h@{globals.\+h}}
 \subsubsection{N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS}
@@ -528,11 +557,17 @@ Number of emg channels. \mbox{\label{globals_8h_a39ac50737c1ee7d5b723b2597fdf6f2
 \subsubsection{N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}
 {\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS~2}
 
-Number of motors. \mbox{\label{globals_8h_aab4f4a0ece20c4bc27152bd72926d89c}} 
+Number of motors. \mbox{\label{globals_8h_aecd556b3ea0656fe9e059814426de5f7}} 
+\index{globals.\+h@{globals.\+h}!N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+S\+\_\+\+P\+A\+R\+A\+MS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+S\+\_\+\+P\+A\+R\+A\+MS}}
+\index{N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+S\+\_\+\+P\+A\+R\+A\+MS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+S\+\_\+\+P\+A\+R\+A\+MS}!globals.\+h@{globals.\+h}}
+\subsubsection{N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+S\+\_\+\+P\+A\+R\+A\+MS}
+{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+S\+\_\+\+P\+A\+R\+A\+MS~2}
+
+Number of master parameters saved in the E\+E\+P\+R\+OM. \mbox{\label{globals_8h_aab4f4a0ece20c4bc27152bd72926d89c}} 
 \index{globals.\+h@{globals.\+h}!N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS}}
 \index{N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS}!globals.\+h@{globals.\+h}}
 \subsubsection{N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS}
-{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS~71}
+{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS~(71 + \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+S\+\_\+\+P\+A\+R\+A\+MS} + \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+F\+B\+\_\+\+P\+A\+R\+A\+MS})}
 
 Number of parameters saved in the E\+E\+P\+R\+OM. \mbox{\label{globals_8h_aa19d88ac3e94a34d9a9f1c37bea9a271}} 
 \index{globals.\+h@{globals.\+h}!N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+M\+E\+NU@{N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+M\+E\+NU}}
@@ -830,7 +865,13 @@ Forced open flag (used in position with rest position control). \mbox{\label{glo
 \subsubsection{g\+\_\+emg\+\_\+meas\+Old}
 {\footnotesize\ttfamily struct \textbf{ st\+\_\+emg\+\_\+meas} g\+\_\+emg\+\_\+meas g\+\_\+emg\+\_\+meas\+Old}
 
-E\+MG Measurements. \mbox{\label{globals_8h_a7b175385b2b9418fa7159c72d0f470fd}} 
+E\+MG Measurements. \mbox{\label{globals_8h_af8d2d84570b7e85614e0455a23177e62}} 
+\index{globals.\+h@{globals.\+h}!g\+\_\+fb\+\_\+meas@{g\+\_\+fb\+\_\+meas}}
+\index{g\+\_\+fb\+\_\+meas@{g\+\_\+fb\+\_\+meas}!globals.\+h@{globals.\+h}}
+\subsubsection{g\+\_\+fb\+\_\+meas}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+fb\+\_\+meas} g\+\_\+fb\+\_\+meas}
+
+Haptic Feedback Measurements. \mbox{\label{globals_8h_a7b175385b2b9418fa7159c72d0f470fd}} 
 \index{globals.\+h@{globals.\+h}!g\+\_\+meas\+Old@{g\+\_\+meas\+Old}}
 \index{g\+\_\+meas\+Old@{g\+\_\+meas\+Old}!globals.\+h@{globals.\+h}}
 \subsubsection{g\+\_\+meas\+Old}
@@ -860,7 +901,13 @@ Interrupt flag enabler. \mbox{\label{globals_8h_a7bdd0aaa2a8c38bd61f34d76d3a69db
 \subsubsection{maintenance\+\_\+flag}
 {\footnotesize\ttfamily uint8 maintenance\+\_\+flag}
 
-Maintenance flag. \mbox{\label{globals_8h_ab302ef69391ec5a0b59dadb9c7d2a3ef}} 
+Maintenance flag. \mbox{\label{globals_8h_acf0e2a5d5954714103e295ac35513215}} 
+\index{globals.\+h@{globals.\+h}!master\+\_\+mode@{master\+\_\+mode}}
+\index{master\+\_\+mode@{master\+\_\+mode}!globals.\+h@{globals.\+h}}
+\subsubsection{master\+\_\+mode}
+{\footnotesize\ttfamily uint8 master\+\_\+mode}
+
+Flag used to set/unset master mode to send messages to other boards. \mbox{\label{globals_8h_ab302ef69391ec5a0b59dadb9c7d2a3ef}} 
 \index{globals.\+h@{globals.\+h}!N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+N\+A\+L\+O\+G\+\_\+\+I\+N\+P\+U\+TS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+N\+A\+L\+O\+G\+\_\+\+I\+N\+P\+U\+TS}}
 \index{N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+N\+A\+L\+O\+G\+\_\+\+I\+N\+P\+U\+TS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+N\+A\+L\+O\+G\+\_\+\+I\+N\+P\+U\+TS}!globals.\+h@{globals.\+h}}
 \subsubsection{N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+N\+A\+L\+O\+G\+\_\+\+I\+N\+P\+U\+TS}

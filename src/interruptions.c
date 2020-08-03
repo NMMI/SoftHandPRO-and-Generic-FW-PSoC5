@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2019, Centro "E.Piaggio"
+// Copyright (c) 2017-2020, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -36,10 +36,10 @@
 * \file         interruptions.c
 *
 * \brief        Interruption handling and firmware core functions
-* \date         October 01, 2017
+* \date         March 20th, 2020
 * \author       _Centro "E.Piaggio"_
 * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
-* \copyright    (C) 2017-2019 Centro "E.Piaggio". All rights reserved.
+* \copyright    (C) 2017-2020 Centro "E.Piaggio". All rights reserved.
 */
 
 
@@ -182,11 +182,17 @@ void interrupt_manager(){
             case  WAIT_ID:
 
                 // packet is for my ID or is broadcast
+#ifdef MASTER_FW
+                if (rx_data == c_mem.dev.id || rx_data == 0 || (c_mem.MS.slave_comm_active && rx_data == c_mem.MS.slave_ID))
+                   rx_data_type = FALSE;
+                else                //packet is for others
+                    rx_data_type = TRUE;
+#else
                 if (rx_data == c_mem.dev.id || rx_data == 0)
                     rx_data_type = FALSE;
                 else                //packet is for others
                     rx_data_type = TRUE;
-                
+#endif                
                 data_packet_length = 0;
                 state = WAIT_LENGTH;
                 break;
@@ -282,67 +288,17 @@ void function_scheduler(void) {
         interrupt_manager();
     }
     
-    if (c_mem.dev.dev_type == SOFTHAND_PRO){
+    switch(c_mem.dev.dev_type){
+        case SOFTHAND_PRO:
         
-        //---------------------------------- Get Encoders
-        
-        // Get CS0 encoder line for RIGHT HAND and CS1 line for LEFT HAND
-        if (N_Encoder_Line_Connected[c_mem.motor[MOTOR_IDX].encoder_line] > 0) {
-            // Change CS only if there are attached encoders on the line
-            Change_CS_EncoderLine(c_mem.motor[MOTOR_IDX].encoder_line);
+            //---------------------------------- Get Encoders
             
-            encoder_reading_SPI(c_mem.motor[MOTOR_IDX].encoder_line, 0);    // assoc_motor = 0 for SoftHand
-
-            // Check Interrupt     
-            
-            if (interrupt_flag){
-                interrupt_flag = FALSE;
-                interrupt_manager();
-            }
-        }
-        
-        //---------------------------------- Control SH Motor
-        
-        motor_control_SH();
-        
-        // Check external reference before processing other serial data and right after motor control
-        if (c_mem.motor[MOTOR_IDX].not_revers_motor_flag == TRUE) {
-            if (c_mem.motor[MOTOR_IDX].input_mode == INPUT_MODE_EXTERNAL) {
-                change_ext_ref_flag = FALSE;
-            }   
-        }
-
-        // Check Interrupt 
-
-        if (interrupt_flag){
-            interrupt_flag = FALSE;
-            interrupt_manager();
-        }  
-    }
-    else {      // GENERIC device
-
-        //---------------------------------- Get Encoders
-
-        for (uint8 i = 0; i < N_ENCODER_LINE_MAX; i++) {
-            if (N_Encoder_Line_Connected[i] > 0) {
+            // Get CS0 encoder line for RIGHT HAND and CS1 line for LEFT HAND
+            if (N_Encoder_Line_Connected[c_mem.motor[MOTOR_IDX].encoder_line] > 0) {
                 // Change CS only if there are attached encoders on the line
-                Change_CS_EncoderLine(i);
-                          
-                if (c_mem.motor[MOTOR_IDX].encoder_line == i) {
-                    // Check if the line is used to control motor or not
-                    encoder_reading_SPI(i, MOTOR_IDX); 
-                }
-                else {
-                    if (c_mem.motor[SECOND_MOTOR_IDX].encoder_line == i) {
-                        // Check if the line is used to control motor or not
-                        encoder_reading_SPI(i, SECOND_MOTOR_IDX); 
-                    }
-                    else {
-                        // Get only raw encoder value
-                        ReadEncoderLine(N_Encoder_Line_Connected[i], i);
-                        // Values are stored in Encoder_Value[i] vector
-                    }
-                }
+                Change_CS_EncoderLine(c_mem.motor[MOTOR_IDX].encoder_line);
+                
+                encoder_reading_SPI(c_mem.motor[MOTOR_IDX].encoder_line, 0);    // assoc_motor = 0 for SoftHand
 
                 // Check Interrupt     
                 
@@ -351,34 +307,67 @@ void function_scheduler(void) {
                     interrupt_manager();
                 }
             }
-        } 
-        
-        //---------------------------------- Control Motor
-        
-        // Control MOTOR_IDX motor (always active) according to motor driver type
-        motor_control_generic(MOTOR_IDX);
-        
-        // Check external reference before processing other serial data and right after motor control
-        if (c_mem.motor[MOTOR_IDX].not_revers_motor_flag == TRUE) {
-            if (c_mem.motor[MOTOR_IDX].input_mode == INPUT_MODE_EXTERNAL) {
-                change_ext_ref_flag = FALSE;
-            }   
-        }
-        
-        // Check Interrupt 
-
-        if (interrupt_flag){
-            interrupt_flag = FALSE;
-            interrupt_manager();
-        }
-        
-        // Control 2nd motor (if necessary) according to motor driver type
-        if (c_mem.dev.use_2nd_motor_flag == TRUE){
-            motor_control_generic(SECOND_MOTOR_IDX);
+            
+            //---------------------------------- Control SH Motor
+            
+            motor_control_SH();
             
             // Check external reference before processing other serial data and right after motor control
-            if (c_mem.motor[SECOND_MOTOR_IDX].not_revers_motor_flag == TRUE) {
-                if (c_mem.motor[SECOND_MOTOR_IDX].input_mode == INPUT_MODE_EXTERNAL) {
+            if (c_mem.motor[MOTOR_IDX].not_revers_motor_flag == TRUE) {
+                if (c_mem.motor[MOTOR_IDX].input_mode == INPUT_MODE_EXTERNAL) {
+                    change_ext_ref_flag = FALSE;
+                }   
+            }
+
+            // Check Interrupt 
+
+            if (interrupt_flag){
+                interrupt_flag = FALSE;
+                interrupt_manager();
+            }
+            break;
+            
+        case GENERIC_2_MOTORS:
+            
+            //---------------------------------- Get Encoders
+            for (uint8 i = 0; i < N_ENCODER_LINE_MAX; i++) {
+                if (N_Encoder_Line_Connected[i] > 0) {
+                    // Change CS only if there are attached encoders on the line
+                    Change_CS_EncoderLine(i);
+                              
+                    if (c_mem.motor[MOTOR_IDX].encoder_line == i) {
+                        // Check if the line is used to control motor or not
+                        encoder_reading_SPI(i, MOTOR_IDX); 
+                    }
+                    else {
+                        if (c_mem.motor[SECOND_MOTOR_IDX].encoder_line == i) {
+                            // Check if the line is used to control motor or not
+                            encoder_reading_SPI(i, SECOND_MOTOR_IDX); 
+                        }
+                        else {
+                            // Get only raw encoder value
+                            ReadEncoderLine(N_Encoder_Line_Connected[i], i);
+                            // Values are stored in Encoder_Value[i] vector
+                        }
+                    }
+
+                    // Check Interrupt     
+                    
+                    if (interrupt_flag){
+                        interrupt_flag = FALSE;
+                        interrupt_manager();
+                    }
+                }
+            } 
+            
+            //---------------------------------- Control Motor
+            
+            // Control MOTOR_IDX motor (always active) according to motor driver type
+            motor_control_generic(MOTOR_IDX);
+            
+            // Check external reference before processing other serial data and right after motor control
+            if (c_mem.motor[MOTOR_IDX].not_revers_motor_flag == TRUE) {
+                if (c_mem.motor[MOTOR_IDX].input_mode == INPUT_MODE_EXTERNAL) {
                     change_ext_ref_flag = FALSE;
                 }   
             }
@@ -389,7 +378,89 @@ void function_scheduler(void) {
                 interrupt_flag = FALSE;
                 interrupt_manager();
             }
-        }  
+            
+            // Control 2nd motor (if necessary) according to motor driver type
+            if (c_mem.dev.use_2nd_motor_flag == TRUE){
+                motor_control_generic(SECOND_MOTOR_IDX);
+                
+                // Check external reference before processing other serial data and right after motor control
+                if (c_mem.motor[SECOND_MOTOR_IDX].not_revers_motor_flag == TRUE) {
+                    if (c_mem.motor[SECOND_MOTOR_IDX].input_mode == INPUT_MODE_EXTERNAL) {
+                        change_ext_ref_flag = FALSE;
+                    }   
+                }
+                
+                // Check Interrupt 
+
+                if (interrupt_flag){
+                    interrupt_flag = FALSE;
+                    interrupt_manager();
+                }
+            }  
+            break;
+            
+        case AIR_CHAMBERS_FB:
+            
+            //---------------------------------- Force Feedback control
+            if (master_mode && c_mem.MS.slave_comm_active) {
+                
+                air_chambers_control();
+            
+                // Check Interrupt 
+                
+                if (interrupt_flag){
+                    interrupt_flag = FALSE;
+                    interrupt_manager();
+                }
+                
+                // Drive slave with reference generated on second motor index
+                // Use second motor structures and parameters, only to generate position reference not for PID control
+                // IMPORTANT: configure second motor parameters with proper slave parameters
+                motor_control_generic(SECOND_MOTOR_IDX);
+                
+                // Check Interrupt 
+
+                if (interrupt_flag){
+                    interrupt_flag = FALSE;
+                    interrupt_manager();
+                }
+                
+                drive_slave(SECOND_MOTOR_IDX, c_mem.MS.slave_ID);
+            
+                // Check Interrupt 
+
+                if (interrupt_flag){
+                    interrupt_flag = FALSE;
+                    interrupt_manager();
+                }
+            }
+            if (!master_mode){
+                
+                if (c_mem.MS.slave_comm_active) {
+                    // Stop feedback motors
+                    stop_feedback();
+                }
+                // Disable slave or motors
+                deactivate_slaves();
+                        
+                // Check Interrupt 
+                if (interrupt_flag){
+                    interrupt_flag = FALSE;
+                    interrupt_manager();
+                } 
+            }
+    
+            // Control MOTOR_IDX motor [PUMP] with PWM control
+            motor_control_generic(MOTOR_IDX);
+            
+            // Check Interrupt 
+
+            if (interrupt_flag){
+                interrupt_flag = FALSE;
+                interrupt_manager();
+            }
+            
+            break;
     }
 
     //---------------------------------- Read conversion buffer - LOCK function
@@ -1603,7 +1674,7 @@ void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor) {
             if (value_diff < -49152)
                 g_meas[n_line].rot[index]++;
             else{
-                if (abs(value_diff) > 16384) { // if two measure are too far
+                if (abs(value_diff) > 16384) { // if two measures are too far
                     error[n_line][index]++;
                                 
                     if (error[n_line][index] < 10)
@@ -1746,8 +1817,22 @@ void analog_read_end() {
         }
     }
     
+#ifdef AIR_CHAMBERS_FB_FW
+    if (c_mem.dev.dev_type == AIR_CHAMBERS_FB){
+        // Read pressure in any case
+        g_fb_meas.pressure  = (int32)(ADC_buf[0] -1540);    //0 - 4096  
+        g_fb_meas.pressure = (((float)g_fb_meas.pressure/4096.0)/0.004);       // datasheet transfer function ticks->kPa
+        if (g_fb_meas.pressure < 0) g_fb_meas.pressure = 0;
+    }
+#endif
+ 
     // Convert tension read
-    dev_tension[0] = ((int32)(ADC_buf[0] - 1621) * 1990) >> 7;
+    if (g_mem.dev.dev_type != AIR_CHAMBERS_FB){
+        dev_tension[0] = 5000;
+    }
+    else {
+        dev_tension[0] = ((int32)(ADC_buf[0] - 1621) * 1990) >> 7;
+    }
     
     // Read also 2nd power tension (if necessary)
     if (NUM_OF_ANALOG_INPUTS > 4) {
@@ -1895,8 +1980,14 @@ void analog_read_end() {
     // Calibration state machine
     switch(emg_1_status) {
         case NORMAL: // normal execution
-            i_aux = ((int32)(ADC_buf[2 + c_mem.emg.switch_emg] - 1639) * 87) >> 5;  //map range to 0-4096
-            //i_aux = (int32)(ADC_buf[2 + c_mem.switch_emg]);
+            
+            if (g_mem.dev.dev_type != AIR_CHAMBERS_FB){
+                i_aux = ((int32)(ADC_buf[2 + c_mem.emg.switch_emg] - 1639) * 87) >> 5;  //map range to 0-4096
+            }
+            else {  // Use additional ADC channels, so the signal does not pass through AVAGO isolators
+                i_aux = (int32)(ADC_buf[2 + c_mem.emg.switch_emg]);
+            }
+            
             if (i_aux < 0) 
                 i_aux = 0;
             i_aux = filter(i_aux, &filt_emg[0]);
@@ -1982,25 +2073,31 @@ void analog_read_end() {
     // EMG 2 calibration state machine
     switch(emg_2_status) {
         case NORMAL: // normal execution
-            i_aux = ((int32)(ADC_buf[3 - c_mem.emg.switch_emg] - 1640) * 87) >> 5;  //map range to 0-4096
-            //i_aux = (int32)(ADC_buf[3 - c_mem.switch_emg]);
-                if (i_aux < 0)
-                    i_aux = 0;
-                i_aux = filter(i_aux, &filt_emg[1]);
-                i_aux = (i_aux << 10) / g_mem.emg.emg_max_value[1];
-    
-                if (interrupt_flag){
-                    interrupt_flag = FALSE;
-                    interrupt_manager();
-                }
-                
-                if (i_aux < 0) 
-                    i_aux = 0;
-                else 
-                    if (i_aux > 1024)
-                        i_aux = 1024;
-                
-                g_emg_meas.emg[1] = i_aux;
+        
+            if (g_mem.dev.dev_type != AIR_CHAMBERS_FB){
+                i_aux = ((int32)(ADC_buf[3 - c_mem.emg.switch_emg] - 1639) * 87) >> 5;  //map range to 0-4096
+            }
+            else {  // Use additional ADC channels, so the signal does not pass through AVAGO isolators
+                i_aux = (int32)(ADC_buf[3 - c_mem.emg.switch_emg]);
+            }
+
+            if (i_aux < 0)
+                i_aux = 0;
+            i_aux = filter(i_aux, &filt_emg[1]);
+            i_aux = (i_aux << 10) / g_mem.emg.emg_max_value[1];
+
+            if (interrupt_flag){
+                interrupt_flag = FALSE;
+                interrupt_manager();
+            }
+            
+            if (i_aux < 0) 
+                i_aux = 0;
+            else 
+                if (i_aux > 1024)
+                    i_aux = 1024;
+            
+            g_emg_meas.emg[1] = i_aux;
 
             break;
 

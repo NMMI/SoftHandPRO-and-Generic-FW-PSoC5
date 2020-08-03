@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2019, Centro "E.Piaggio"
+// Copyright (c) 2017-2020, Centro "E.Piaggio"
 // All rights reserved.
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -36,10 +36,10 @@
  *
  *  \brief      Definitions for SoftHand commands, parameters and packages.
  *
- *  \date         October 01, 2017
+ *  \date        March 20th, 2020
  *  \author       _Centro "E.Piaggio"_
  *  \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
- *  \copyright    (C) 2017-2019 Centro "E.Piaggio". All rights reserved.
+ *  \copyright    (C) 2017-2020 Centro "E.Piaggio". All rights reserved.
  *  \details
  *  This file is included in the firmware, in its libraries and
  *  applications. It contains all definitions that are necessary for the

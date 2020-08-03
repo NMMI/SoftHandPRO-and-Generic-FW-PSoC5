@@ -1,0 +1,918 @@
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAEnLzj.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"SHIFTREG_ENC_2_PM.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.bss
+  20              		.align	2
+  21              	SHIFTREG_ENC_2_backup:
+  22 0000 00000000 		.space	12
+  22      00000000 
+  22      00000000 
+  23              		.section	.text.SHIFTREG_ENC_2_SaveConfig,"ax",%progbits
+  24              		.align	2
+  25              		.global	SHIFTREG_ENC_2_SaveConfig
+  26              		.thumb
+  27              		.thumb_func
+  28              		.type	SHIFTREG_ENC_2_SaveConfig, %function
+  29              	SHIFTREG_ENC_2_SaveConfig:
+  30              	.LFB0:
+  31              		.file 1 "Generated_Source\\PSoC5\\SHIFTREG_ENC_2_PM.c"
+   1:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * File Name: SHIFTREG_ENC_2_PM.c
+   3:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Version 2.30
+   4:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *
+   5:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Description:
+   6:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *  This file provides the API source code for sleep mode support for Shift
+   7:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *  Register component.
+   8:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *
+   9:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Note:
+  10:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *
+  11:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** ********************************************************************************
+  12:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Copyright 2008-2013, Cypress Semiconductor Corporation.  All rights reserved.
+  13:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * You may use this file only in accordance with the license, terms, conditions,
+  14:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  15:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * the software package with which this file was provided.
+  16:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *******************************************************************************/
+  17:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** 
+  18:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** #include "SHIFTREG_ENC_2.h"
+  19:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** 
+  20:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** static SHIFTREG_ENC_2_BACKUP_STRUCT SHIFTREG_ENC_2_backup =
+  21:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** {
+  22:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     SHIFTREG_ENC_2_DISABLED,
+  23:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** 
+  24:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     ((uint32) SHIFTREG_ENC_2_DEFAULT_A0),
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAEnLzj.s 			page 2
+
+
+  25:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     ((uint32) SHIFTREG_ENC_2_DEFAULT_A1),
+  26:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** 
+  27:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     #if(CY_UDB_V0)
+  28:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****         ((uint32) SHIFTREG_ENC_2_INT_SRC),
+  29:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     #endif /* (CY_UDB_V0) */
+  30:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** };
+  31:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** 
+  32:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** 
+  33:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** /*******************************************************************************
+  34:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Function Name: SHIFTREG_ENC_2_SaveConfig
+  35:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** ********************************************************************************
+  36:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *
+  37:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Summary:
+  38:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *  Saves Shift Register configuration.
+  39:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *
+  40:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Parameters:
+  41:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *  None.
+  42:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *
+  43:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Return:
+  44:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *  None.
+  45:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *
+  46:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Reentrant:
+  47:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *  No.
+  48:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *
+  49:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *******************************************************************************/
+  50:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** void SHIFTREG_ENC_2_SaveConfig(void) 
+  51:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** {
+  32              		.loc 1 51 0
+  33              		.cfi_startproc
+  34              		@ args = 0, pretend = 0, frame = 0
+  35              		@ frame_needed = 1, uses_anonymous_args = 0
+  36              		@ link register save eliminated.
+  37 0000 80B4     		push	{r7}
+  38              		.cfi_def_cfa_offset 4
+  39              		.cfi_offset 7, -4
+  40 0002 00AF     		add	r7, sp, #0
+  41              		.cfi_def_cfa_register 7
+  52:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     /* Store working registers A0 and A1 */
+  53:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     SHIFTREG_ENC_2_backup.saveSrA0Reg   = CY_GET_REG32(SHIFTREG_ENC_2_SHIFT_REG_LSB_PTR);
+  42              		.loc 1 53 0
+  43 0004 054B     		ldr	r3, .L2
+  44 0006 1B68     		ldr	r3, [r3]
+  45 0008 054A     		ldr	r2, .L2+4
+  46 000a 5360     		str	r3, [r2, #4]
+  54:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     SHIFTREG_ENC_2_backup.saveSrA1Reg   = CY_GET_REG32(SHIFTREG_ENC_2_SHIFT_REG_VALUE_LSB_PTR);
+  47              		.loc 1 54 0
+  48 000c 054B     		ldr	r3, .L2+8
+  49 000e 1B68     		ldr	r3, [r3]
+  50 0010 034A     		ldr	r2, .L2+4
+  51 0012 9360     		str	r3, [r2, #8]
+  55:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** 
+  56:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     #if(CY_UDB_V0)
+  57:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****         SHIFTREG_ENC_2_backup.saveSrIntMask = SHIFTREG_ENC_2_SR_STATUS_MASK;
+  58:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     #endif /* (CY_UDB_V0) */
+  59:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** }
+  52              		.loc 1 59 0
+  53 0014 00BF     		nop
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAEnLzj.s 			page 3
+
+
+  54 0016 BD46     		mov	sp, r7
+  55              		.cfi_def_cfa_register 13
+  56              		@ sp needed
+  57 0018 80BC     		pop	{r7}
+  58              		.cfi_restore 7
+  59              		.cfi_def_cfa_offset 0
+  60 001a 7047     		bx	lr
+  61              	.L3:
+  62              		.align	2
+  63              	.L2:
+  64 001c 07640040 		.word	1073767431
+  65 0020 00000000 		.word	SHIFTREG_ENC_2_backup
+  66 0024 17640040 		.word	1073767447
+  67              		.cfi_endproc
+  68              	.LFE0:
+  69              		.size	SHIFTREG_ENC_2_SaveConfig, .-SHIFTREG_ENC_2_SaveConfig
+  70              		.section	.text.SHIFTREG_ENC_2_RestoreConfig,"ax",%progbits
+  71              		.align	2
+  72              		.global	SHIFTREG_ENC_2_RestoreConfig
+  73              		.thumb
+  74              		.thumb_func
+  75              		.type	SHIFTREG_ENC_2_RestoreConfig, %function
+  76              	SHIFTREG_ENC_2_RestoreConfig:
+  77              	.LFB1:
+  60:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** 
+  61:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** 
+  62:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** /*******************************************************************************
+  63:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Function Name: SHIFTREG_ENC_2_RestoreConfig
+  64:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** ********************************************************************************
+  65:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *
+  66:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Summary:
+  67:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *  Restores Shift Register configuration.
+  68:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *
+  69:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Parameters:
+  70:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *  None.
+  71:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *
+  72:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Return:
+  73:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *  None.
+  74:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *
+  75:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *******************************************************************************/
+  76:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** void SHIFTREG_ENC_2_RestoreConfig(void) 
+  77:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** {
+  78              		.loc 1 77 0
+  79              		.cfi_startproc
+  80              		@ args = 0, pretend = 0, frame = 0
+  81              		@ frame_needed = 1, uses_anonymous_args = 0
+  82              		@ link register save eliminated.
+  83 0000 80B4     		push	{r7}
+  84              		.cfi_def_cfa_offset 4
+  85              		.cfi_offset 7, -4
+  86 0002 00AF     		add	r7, sp, #0
+  87              		.cfi_def_cfa_register 7
+  78:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     /* Restore working registers A0 and A1 */
+  79:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     CY_SET_REG32(SHIFTREG_ENC_2_SHIFT_REG_LSB_PTR, SHIFTREG_ENC_2_backup.saveSrA0Reg);
+  88              		.loc 1 79 0
+  89 0004 054A     		ldr	r2, .L5
+  90 0006 064B     		ldr	r3, .L5+4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAEnLzj.s 			page 4
+
+
+  91 0008 5B68     		ldr	r3, [r3, #4]
+  92 000a 1360     		str	r3, [r2]
+  80:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     CY_SET_REG32(SHIFTREG_ENC_2_SHIFT_REG_VALUE_LSB_PTR, SHIFTREG_ENC_2_backup.saveSrA1Reg);
+  93              		.loc 1 80 0
+  94 000c 054A     		ldr	r2, .L5+8
+  95 000e 044B     		ldr	r3, .L5+4
+  96 0010 9B68     		ldr	r3, [r3, #8]
+  97 0012 1360     		str	r3, [r2]
+  81:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** 
+  82:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     #if(CY_UDB_V0)
+  83:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****         SHIFTREG_ENC_2_SR_STATUS_MASK = ((uint8) SHIFTREG_ENC_2_backup.saveSrIntMask);
+  84:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     #endif /* (CY_UDB_V0) */
+  85:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** }
+  98              		.loc 1 85 0
+  99 0014 00BF     		nop
+ 100 0016 BD46     		mov	sp, r7
+ 101              		.cfi_def_cfa_register 13
+ 102              		@ sp needed
+ 103 0018 80BC     		pop	{r7}
+ 104              		.cfi_restore 7
+ 105              		.cfi_def_cfa_offset 0
+ 106 001a 7047     		bx	lr
+ 107              	.L6:
+ 108              		.align	2
+ 109              	.L5:
+ 110 001c 07640040 		.word	1073767431
+ 111 0020 00000000 		.word	SHIFTREG_ENC_2_backup
+ 112 0024 17640040 		.word	1073767447
+ 113              		.cfi_endproc
+ 114              	.LFE1:
+ 115              		.size	SHIFTREG_ENC_2_RestoreConfig, .-SHIFTREG_ENC_2_RestoreConfig
+ 116              		.section	.text.SHIFTREG_ENC_2_Sleep,"ax",%progbits
+ 117              		.align	2
+ 118              		.global	SHIFTREG_ENC_2_Sleep
+ 119              		.thumb
+ 120              		.thumb_func
+ 121              		.type	SHIFTREG_ENC_2_Sleep, %function
+ 122              	SHIFTREG_ENC_2_Sleep:
+ 123              	.LFB2:
+  86:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** 
+  87:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** 
+  88:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** /*******************************************************************************
+  89:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Function Name: SHIFTREG_ENC_2_Sleep
+  90:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** ********************************************************************************
+  91:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *
+  92:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Summary:
+  93:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *  Prepare the component to enter a Sleep mode.
+  94:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *
+  95:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Parameters:
+  96:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *  None.
+  97:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *
+  98:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Return:
+  99:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *  None.
+ 100:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *
+ 101:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Reentrant:
+ 102:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *  No.
+ 103:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAEnLzj.s 			page 5
+
+
+ 104:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *******************************************************************************/
+ 105:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** void SHIFTREG_ENC_2_Sleep(void) 
+ 106:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** {
+ 124              		.loc 1 106 0
+ 125              		.cfi_startproc
+ 126              		@ args = 0, pretend = 0, frame = 0
+ 127              		@ frame_needed = 1, uses_anonymous_args = 0
+ 128 0000 80B5     		push	{r7, lr}
+ 129              		.cfi_def_cfa_offset 8
+ 130              		.cfi_offset 7, -8
+ 131              		.cfi_offset 14, -4
+ 132 0002 00AF     		add	r7, sp, #0
+ 133              		.cfi_def_cfa_register 7
+ 107:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     SHIFTREG_ENC_2_backup.enableState = ((uint8) SHIFTREG_ENC_2_IS_ENABLED);
+ 134              		.loc 1 107 0
+ 135 0004 094B     		ldr	r3, .L8
+ 136 0006 1B78     		ldrb	r3, [r3]
+ 137 0008 DBB2     		uxtb	r3, r3
+ 138 000a 03F00103 		and	r3, r3, #1
+ 139 000e 002B     		cmp	r3, #0
+ 140 0010 14BF     		ite	ne
+ 141 0012 0123     		movne	r3, #1
+ 142 0014 0023     		moveq	r3, #0
+ 143 0016 DBB2     		uxtb	r3, r3
+ 144 0018 1A46     		mov	r2, r3
+ 145 001a 054B     		ldr	r3, .L8+4
+ 146 001c 1A70     		strb	r2, [r3]
+ 108:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** 
+ 109:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     SHIFTREG_ENC_2_Stop();
+ 147              		.loc 1 109 0
+ 148 001e FFF7FEFF 		bl	SHIFTREG_ENC_2_Stop
+ 110:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     SHIFTREG_ENC_2_SaveConfig();
+ 149              		.loc 1 110 0
+ 150 0022 FFF7FEFF 		bl	SHIFTREG_ENC_2_SaveConfig
+ 111:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** }
+ 151              		.loc 1 111 0
+ 152 0026 00BF     		nop
+ 153 0028 80BD     		pop	{r7, pc}
+ 154              	.L9:
+ 155 002a 00BF     		.align	2
+ 156              	.L8:
+ 157 002c 79640040 		.word	1073767545
+ 158 0030 00000000 		.word	SHIFTREG_ENC_2_backup
+ 159              		.cfi_endproc
+ 160              	.LFE2:
+ 161              		.size	SHIFTREG_ENC_2_Sleep, .-SHIFTREG_ENC_2_Sleep
+ 162              		.section	.text.SHIFTREG_ENC_2_Wakeup,"ax",%progbits
+ 163              		.align	2
+ 164              		.global	SHIFTREG_ENC_2_Wakeup
+ 165              		.thumb
+ 166              		.thumb_func
+ 167              		.type	SHIFTREG_ENC_2_Wakeup, %function
+ 168              	SHIFTREG_ENC_2_Wakeup:
+ 169              	.LFB3:
+ 112:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** 
+ 113:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** 
+ 114:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** /*******************************************************************************
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAEnLzj.s 			page 6
+
+
+ 115:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Function Name: SHIFTREG_ENC_2_Wakeup
+ 116:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** ********************************************************************************
+ 117:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *
+ 118:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Summary:
+ 119:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *  Restores and enables the user configuration.
+ 120:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *
+ 121:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Parameters:
+ 122:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *  None.
+ 123:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *
+ 124:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** * Return:
+ 125:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *  None.
+ 126:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *
+ 127:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** *******************************************************************************/
+ 128:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** void SHIFTREG_ENC_2_Wakeup(void) 
+ 129:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** {
+ 170              		.loc 1 129 0
+ 171              		.cfi_startproc
+ 172              		@ args = 0, pretend = 0, frame = 0
+ 173              		@ frame_needed = 1, uses_anonymous_args = 0
+ 174 0000 80B5     		push	{r7, lr}
+ 175              		.cfi_def_cfa_offset 8
+ 176              		.cfi_offset 7, -8
+ 177              		.cfi_offset 14, -4
+ 178 0002 00AF     		add	r7, sp, #0
+ 179              		.cfi_def_cfa_register 7
+ 130:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     SHIFTREG_ENC_2_RestoreConfig();
+ 180              		.loc 1 130 0
+ 181 0004 FFF7FEFF 		bl	SHIFTREG_ENC_2_RestoreConfig
+ 131:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** 
+ 132:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     if(0u != SHIFTREG_ENC_2_backup.enableState)
+ 182              		.loc 1 132 0
+ 183 0008 034B     		ldr	r3, .L13
+ 184 000a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 185 000c 002B     		cmp	r3, #0
+ 186 000e 01D0     		beq	.L12
+ 133:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     {
+ 134:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****         SHIFTREG_ENC_2_Enable();
+ 187              		.loc 1 134 0
+ 188 0010 FFF7FEFF 		bl	SHIFTREG_ENC_2_Enable
+ 189              	.L12:
+ 135:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c ****     }
+ 136:Generated_Source\PSoC5/SHIFTREG_ENC_2_PM.c **** }
+ 190              		.loc 1 136 0
+ 191 0014 00BF     		nop
+ 192 0016 80BD     		pop	{r7, pc}
+ 193              	.L14:
+ 194              		.align	2
+ 195              	.L13:
+ 196 0018 00000000 		.word	SHIFTREG_ENC_2_backup
+ 197              		.cfi_endproc
+ 198              	.LFE3:
+ 199              		.size	SHIFTREG_ENC_2_Wakeup, .-SHIFTREG_ENC_2_Wakeup
+ 200              		.text
+ 201              	.Letext0:
+ 202              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 203              		.file 3 "Generated_Source\\PSoC5\\SHIFTREG_ENC_2.h"
+ 204              		.section	.debug_info,"",%progbits
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAEnLzj.s 			page 7
+
+
+ 205              	.Ldebug_info0:
+ 206 0000 52010000 		.4byte	0x152
+ 207 0004 0400     		.2byte	0x4
+ 208 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 209 000a 04       		.byte	0x4
+ 210 000b 01       		.uleb128 0x1
+ 211 000c 06000000 		.4byte	.LASF26
+ 212 0010 0C       		.byte	0xc
+ 213 0011 63020000 		.4byte	.LASF27
+ 214 0015 1B010000 		.4byte	.LASF28
+ 215 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 216 001d 00000000 		.4byte	0
+ 217 0021 00000000 		.4byte	.Ldebug_line0
+ 218 0025 02       		.uleb128 0x2
+ 219 0026 01       		.byte	0x1
+ 220 0027 06       		.byte	0x6
+ 221 0028 41020000 		.4byte	.LASF0
+ 222 002c 02       		.uleb128 0x2
+ 223 002d 01       		.byte	0x1
+ 224 002e 08       		.byte	0x8
+ 225 002f CF000000 		.4byte	.LASF1
+ 226 0033 02       		.uleb128 0x2
+ 227 0034 02       		.byte	0x2
+ 228 0035 05       		.byte	0x5
+ 229 0036 16020000 		.4byte	.LASF2
+ 230 003a 02       		.uleb128 0x2
+ 231 003b 02       		.byte	0x2
+ 232 003c 07       		.byte	0x7
+ 233 003d 94000000 		.4byte	.LASF3
+ 234 0041 02       		.uleb128 0x2
+ 235 0042 04       		.byte	0x4
+ 236 0043 05       		.byte	0x5
+ 237 0044 20020000 		.4byte	.LASF4
+ 238 0048 02       		.uleb128 0x2
+ 239 0049 04       		.byte	0x4
+ 240 004a 07       		.byte	0x7
+ 241 004b E2000000 		.4byte	.LASF5
+ 242 004f 02       		.uleb128 0x2
+ 243 0050 08       		.byte	0x8
+ 244 0051 05       		.byte	0x5
+ 245 0052 E6010000 		.4byte	.LASF6
+ 246 0056 02       		.uleb128 0x2
+ 247 0057 08       		.byte	0x8
+ 248 0058 07       		.byte	0x7
+ 249 0059 A9010000 		.4byte	.LASF7
+ 250 005d 03       		.uleb128 0x3
+ 251 005e 04       		.byte	0x4
+ 252 005f 05       		.byte	0x5
+ 253 0060 696E7400 		.ascii	"int\000"
+ 254 0064 02       		.uleb128 0x2
+ 255 0065 04       		.byte	0x4
+ 256 0066 07       		.byte	0x7
+ 257 0067 9C010000 		.4byte	.LASF8
+ 258 006b 04       		.uleb128 0x4
+ 259 006c 0E010000 		.4byte	.LASF9
+ 260 0070 02       		.byte	0x2
+ 261 0071 E401     		.2byte	0x1e4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAEnLzj.s 			page 8
+
+
+ 262 0073 2C000000 		.4byte	0x2c
+ 263 0077 04       		.uleb128 0x4
+ 264 0078 80010000 		.4byte	.LASF10
+ 265 007c 02       		.byte	0x2
+ 266 007d E601     		.2byte	0x1e6
+ 267 007f 48000000 		.4byte	0x48
+ 268 0083 02       		.uleb128 0x2
+ 269 0084 04       		.byte	0x4
+ 270 0085 04       		.byte	0x4
+ 271 0086 C9000000 		.4byte	.LASF11
+ 272 008a 02       		.uleb128 0x2
+ 273 008b 08       		.byte	0x8
+ 274 008c 04       		.byte	0x4
+ 275 008d 14010000 		.4byte	.LASF12
+ 276 0091 02       		.uleb128 0x2
+ 277 0092 01       		.byte	0x1
+ 278 0093 08       		.byte	0x8
+ 279 0094 11020000 		.4byte	.LASF13
+ 280 0098 04       		.uleb128 0x4
+ 281 0099 DD000000 		.4byte	.LASF14
+ 282 009d 02       		.byte	0x2
+ 283 009e 8E02     		.2byte	0x28e
+ 284 00a0 A4000000 		.4byte	0xa4
+ 285 00a4 05       		.uleb128 0x5
+ 286 00a5 6B000000 		.4byte	0x6b
+ 287 00a9 04       		.uleb128 0x4
+ 288 00aa 00000000 		.4byte	.LASF15
+ 289 00ae 02       		.byte	0x2
+ 290 00af 9002     		.2byte	0x290
+ 291 00b1 B5000000 		.4byte	0xb5
+ 292 00b5 05       		.uleb128 0x5
+ 293 00b6 77000000 		.4byte	0x77
+ 294 00ba 02       		.uleb128 0x2
+ 295 00bb 08       		.byte	0x8
+ 296 00bc 04       		.byte	0x4
+ 297 00bd 35020000 		.4byte	.LASF16
+ 298 00c1 02       		.uleb128 0x2
+ 299 00c2 04       		.byte	0x4
+ 300 00c3 07       		.byte	0x7
+ 301 00c4 DD010000 		.4byte	.LASF17
+ 302 00c8 06       		.uleb128 0x6
+ 303 00c9 0C       		.byte	0xc
+ 304 00ca 03       		.byte	0x3
+ 305 00cb 2A       		.byte	0x2a
+ 306 00cc F5000000 		.4byte	0xf5
+ 307 00d0 07       		.uleb128 0x7
+ 308 00d1 29020000 		.4byte	.LASF18
+ 309 00d5 03       		.byte	0x3
+ 310 00d6 2C       		.byte	0x2c
+ 311 00d7 6B000000 		.4byte	0x6b
+ 312 00db 00       		.byte	0
+ 313 00dc 07       		.uleb128 0x7
+ 314 00dd 8E020000 		.4byte	.LASF19
+ 315 00e1 03       		.byte	0x3
+ 316 00e2 2E       		.byte	0x2e
+ 317 00e3 77000000 		.4byte	0x77
+ 318 00e7 04       		.byte	0x4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAEnLzj.s 			page 9
+
+
+ 319 00e8 07       		.uleb128 0x7
+ 320 00e9 BD000000 		.4byte	.LASF20
+ 321 00ed 03       		.byte	0x3
+ 322 00ee 2F       		.byte	0x2f
+ 323 00ef 77000000 		.4byte	0x77
+ 324 00f3 08       		.byte	0x8
+ 325 00f4 00       		.byte	0
+ 326 00f5 08       		.uleb128 0x8
+ 327 00f6 C0010000 		.4byte	.LASF21
+ 328 00fa 03       		.byte	0x3
+ 329 00fb 35       		.byte	0x35
+ 330 00fc C8000000 		.4byte	0xc8
+ 331 0100 09       		.uleb128 0x9
+ 332 0101 F4000000 		.4byte	.LASF22
+ 333 0105 01       		.byte	0x1
+ 334 0106 32       		.byte	0x32
+ 335 0107 00000000 		.4byte	.LFB0
+ 336 010b 28000000 		.4byte	.LFE0-.LFB0
+ 337 010f 01       		.uleb128 0x1
+ 338 0110 9C       		.byte	0x9c
+ 339 0111 09       		.uleb128 0x9
+ 340 0112 F4010000 		.4byte	.LASF23
+ 341 0116 01       		.byte	0x1
+ 342 0117 4C       		.byte	0x4c
+ 343 0118 00000000 		.4byte	.LFB1
+ 344 011c 28000000 		.4byte	.LFE1-.LFB1
+ 345 0120 01       		.uleb128 0x1
+ 346 0121 9C       		.byte	0x9c
+ 347 0122 0A       		.uleb128 0xa
+ 348 0123 87010000 		.4byte	.LASF24
+ 349 0127 01       		.byte	0x1
+ 350 0128 69       		.byte	0x69
+ 351 0129 00000000 		.4byte	.LFB2
+ 352 012d 34000000 		.4byte	.LFE2-.LFB2
+ 353 0131 01       		.uleb128 0x1
+ 354 0132 9C       		.byte	0x9c
+ 355 0133 0A       		.uleb128 0xa
+ 356 0134 A7000000 		.4byte	.LASF25
+ 357 0138 01       		.byte	0x1
+ 358 0139 80       		.byte	0x80
+ 359 013a 00000000 		.4byte	.LFB3
+ 360 013e 1C000000 		.4byte	.LFE3-.LFB3
+ 361 0142 01       		.uleb128 0x1
+ 362 0143 9C       		.byte	0x9c
+ 363 0144 0B       		.uleb128 0xb
+ 364 0145 4D020000 		.4byte	.LASF29
+ 365 0149 01       		.byte	0x1
+ 366 014a 14       		.byte	0x14
+ 367 014b F5000000 		.4byte	0xf5
+ 368 014f 05       		.uleb128 0x5
+ 369 0150 03       		.byte	0x3
+ 370 0151 00000000 		.4byte	SHIFTREG_ENC_2_backup
+ 371 0155 00       		.byte	0
+ 372              		.section	.debug_abbrev,"",%progbits
+ 373              	.Ldebug_abbrev0:
+ 374 0000 01       		.uleb128 0x1
+ 375 0001 11       		.uleb128 0x11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAEnLzj.s 			page 10
+
+
+ 376 0002 01       		.byte	0x1
+ 377 0003 25       		.uleb128 0x25
+ 378 0004 0E       		.uleb128 0xe
+ 379 0005 13       		.uleb128 0x13
+ 380 0006 0B       		.uleb128 0xb
+ 381 0007 03       		.uleb128 0x3
+ 382 0008 0E       		.uleb128 0xe
+ 383 0009 1B       		.uleb128 0x1b
+ 384 000a 0E       		.uleb128 0xe
+ 385 000b 55       		.uleb128 0x55
+ 386 000c 17       		.uleb128 0x17
+ 387 000d 11       		.uleb128 0x11
+ 388 000e 01       		.uleb128 0x1
+ 389 000f 10       		.uleb128 0x10
+ 390 0010 17       		.uleb128 0x17
+ 391 0011 00       		.byte	0
+ 392 0012 00       		.byte	0
+ 393 0013 02       		.uleb128 0x2
+ 394 0014 24       		.uleb128 0x24
+ 395 0015 00       		.byte	0
+ 396 0016 0B       		.uleb128 0xb
+ 397 0017 0B       		.uleb128 0xb
+ 398 0018 3E       		.uleb128 0x3e
+ 399 0019 0B       		.uleb128 0xb
+ 400 001a 03       		.uleb128 0x3
+ 401 001b 0E       		.uleb128 0xe
+ 402 001c 00       		.byte	0
+ 403 001d 00       		.byte	0
+ 404 001e 03       		.uleb128 0x3
+ 405 001f 24       		.uleb128 0x24
+ 406 0020 00       		.byte	0
+ 407 0021 0B       		.uleb128 0xb
+ 408 0022 0B       		.uleb128 0xb
+ 409 0023 3E       		.uleb128 0x3e
+ 410 0024 0B       		.uleb128 0xb
+ 411 0025 03       		.uleb128 0x3
+ 412 0026 08       		.uleb128 0x8
+ 413 0027 00       		.byte	0
+ 414 0028 00       		.byte	0
+ 415 0029 04       		.uleb128 0x4
+ 416 002a 16       		.uleb128 0x16
+ 417 002b 00       		.byte	0
+ 418 002c 03       		.uleb128 0x3
+ 419 002d 0E       		.uleb128 0xe
+ 420 002e 3A       		.uleb128 0x3a
+ 421 002f 0B       		.uleb128 0xb
+ 422 0030 3B       		.uleb128 0x3b
+ 423 0031 05       		.uleb128 0x5
+ 424 0032 49       		.uleb128 0x49
+ 425 0033 13       		.uleb128 0x13
+ 426 0034 00       		.byte	0
+ 427 0035 00       		.byte	0
+ 428 0036 05       		.uleb128 0x5
+ 429 0037 35       		.uleb128 0x35
+ 430 0038 00       		.byte	0
+ 431 0039 49       		.uleb128 0x49
+ 432 003a 13       		.uleb128 0x13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAEnLzj.s 			page 11
+
+
+ 433 003b 00       		.byte	0
+ 434 003c 00       		.byte	0
+ 435 003d 06       		.uleb128 0x6
+ 436 003e 13       		.uleb128 0x13
+ 437 003f 01       		.byte	0x1
+ 438 0040 0B       		.uleb128 0xb
+ 439 0041 0B       		.uleb128 0xb
+ 440 0042 3A       		.uleb128 0x3a
+ 441 0043 0B       		.uleb128 0xb
+ 442 0044 3B       		.uleb128 0x3b
+ 443 0045 0B       		.uleb128 0xb
+ 444 0046 01       		.uleb128 0x1
+ 445 0047 13       		.uleb128 0x13
+ 446 0048 00       		.byte	0
+ 447 0049 00       		.byte	0
+ 448 004a 07       		.uleb128 0x7
+ 449 004b 0D       		.uleb128 0xd
+ 450 004c 00       		.byte	0
+ 451 004d 03       		.uleb128 0x3
+ 452 004e 0E       		.uleb128 0xe
+ 453 004f 3A       		.uleb128 0x3a
+ 454 0050 0B       		.uleb128 0xb
+ 455 0051 3B       		.uleb128 0x3b
+ 456 0052 0B       		.uleb128 0xb
+ 457 0053 49       		.uleb128 0x49
+ 458 0054 13       		.uleb128 0x13
+ 459 0055 38       		.uleb128 0x38
+ 460 0056 0B       		.uleb128 0xb
+ 461 0057 00       		.byte	0
+ 462 0058 00       		.byte	0
+ 463 0059 08       		.uleb128 0x8
+ 464 005a 16       		.uleb128 0x16
+ 465 005b 00       		.byte	0
+ 466 005c 03       		.uleb128 0x3
+ 467 005d 0E       		.uleb128 0xe
+ 468 005e 3A       		.uleb128 0x3a
+ 469 005f 0B       		.uleb128 0xb
+ 470 0060 3B       		.uleb128 0x3b
+ 471 0061 0B       		.uleb128 0xb
+ 472 0062 49       		.uleb128 0x49
+ 473 0063 13       		.uleb128 0x13
+ 474 0064 00       		.byte	0
+ 475 0065 00       		.byte	0
+ 476 0066 09       		.uleb128 0x9
+ 477 0067 2E       		.uleb128 0x2e
+ 478 0068 00       		.byte	0
+ 479 0069 3F       		.uleb128 0x3f
+ 480 006a 19       		.uleb128 0x19
+ 481 006b 03       		.uleb128 0x3
+ 482 006c 0E       		.uleb128 0xe
+ 483 006d 3A       		.uleb128 0x3a
+ 484 006e 0B       		.uleb128 0xb
+ 485 006f 3B       		.uleb128 0x3b
+ 486 0070 0B       		.uleb128 0xb
+ 487 0071 27       		.uleb128 0x27
+ 488 0072 19       		.uleb128 0x19
+ 489 0073 11       		.uleb128 0x11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAEnLzj.s 			page 12
+
+
+ 490 0074 01       		.uleb128 0x1
+ 491 0075 12       		.uleb128 0x12
+ 492 0076 06       		.uleb128 0x6
+ 493 0077 40       		.uleb128 0x40
+ 494 0078 18       		.uleb128 0x18
+ 495 0079 9742     		.uleb128 0x2117
+ 496 007b 19       		.uleb128 0x19
+ 497 007c 00       		.byte	0
+ 498 007d 00       		.byte	0
+ 499 007e 0A       		.uleb128 0xa
+ 500 007f 2E       		.uleb128 0x2e
+ 501 0080 00       		.byte	0
+ 502 0081 3F       		.uleb128 0x3f
+ 503 0082 19       		.uleb128 0x19
+ 504 0083 03       		.uleb128 0x3
+ 505 0084 0E       		.uleb128 0xe
+ 506 0085 3A       		.uleb128 0x3a
+ 507 0086 0B       		.uleb128 0xb
+ 508 0087 3B       		.uleb128 0x3b
+ 509 0088 0B       		.uleb128 0xb
+ 510 0089 27       		.uleb128 0x27
+ 511 008a 19       		.uleb128 0x19
+ 512 008b 11       		.uleb128 0x11
+ 513 008c 01       		.uleb128 0x1
+ 514 008d 12       		.uleb128 0x12
+ 515 008e 06       		.uleb128 0x6
+ 516 008f 40       		.uleb128 0x40
+ 517 0090 18       		.uleb128 0x18
+ 518 0091 9642     		.uleb128 0x2116
+ 519 0093 19       		.uleb128 0x19
+ 520 0094 00       		.byte	0
+ 521 0095 00       		.byte	0
+ 522 0096 0B       		.uleb128 0xb
+ 523 0097 34       		.uleb128 0x34
+ 524 0098 00       		.byte	0
+ 525 0099 03       		.uleb128 0x3
+ 526 009a 0E       		.uleb128 0xe
+ 527 009b 3A       		.uleb128 0x3a
+ 528 009c 0B       		.uleb128 0xb
+ 529 009d 3B       		.uleb128 0x3b
+ 530 009e 0B       		.uleb128 0xb
+ 531 009f 49       		.uleb128 0x49
+ 532 00a0 13       		.uleb128 0x13
+ 533 00a1 02       		.uleb128 0x2
+ 534 00a2 18       		.uleb128 0x18
+ 535 00a3 00       		.byte	0
+ 536 00a4 00       		.byte	0
+ 537 00a5 00       		.byte	0
+ 538              		.section	.debug_aranges,"",%progbits
+ 539 0000 34000000 		.4byte	0x34
+ 540 0004 0200     		.2byte	0x2
+ 541 0006 00000000 		.4byte	.Ldebug_info0
+ 542 000a 04       		.byte	0x4
+ 543 000b 00       		.byte	0
+ 544 000c 0000     		.2byte	0
+ 545 000e 0000     		.2byte	0
+ 546 0010 00000000 		.4byte	.LFB0
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAEnLzj.s 			page 13
+
+
+ 547 0014 28000000 		.4byte	.LFE0-.LFB0
+ 548 0018 00000000 		.4byte	.LFB1
+ 549 001c 28000000 		.4byte	.LFE1-.LFB1
+ 550 0020 00000000 		.4byte	.LFB2
+ 551 0024 34000000 		.4byte	.LFE2-.LFB2
+ 552 0028 00000000 		.4byte	.LFB3
+ 553 002c 1C000000 		.4byte	.LFE3-.LFB3
+ 554 0030 00000000 		.4byte	0
+ 555 0034 00000000 		.4byte	0
+ 556              		.section	.debug_ranges,"",%progbits
+ 557              	.Ldebug_ranges0:
+ 558 0000 00000000 		.4byte	.LFB0
+ 559 0004 28000000 		.4byte	.LFE0
+ 560 0008 00000000 		.4byte	.LFB1
+ 561 000c 28000000 		.4byte	.LFE1
+ 562 0010 00000000 		.4byte	.LFB2
+ 563 0014 34000000 		.4byte	.LFE2
+ 564 0018 00000000 		.4byte	.LFB3
+ 565 001c 1C000000 		.4byte	.LFE3
+ 566 0020 00000000 		.4byte	0
+ 567 0024 00000000 		.4byte	0
+ 568              		.section	.debug_line,"",%progbits
+ 569              	.Ldebug_line0:
+ 570 0000 B5000000 		.section	.debug_str,"MS",%progbits,1
+ 570      02006200 
+ 570      00000201 
+ 570      FB0E0D00 
+ 570      01010101 
+ 571              	.LASF15:
+ 572 0000 72656733 		.ascii	"reg32\000"
+ 572      3200
+ 573              	.LASF26:
+ 574 0006 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 574      43313120 
+ 574      352E342E 
+ 574      31203230 
+ 574      31363036 
+ 575 0039 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 575      20726576 
+ 575      6973696F 
+ 575      6E203233 
+ 575      37373135 
+ 576 006c 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 576      66756E63 
+ 576      74696F6E 
+ 576      2D736563 
+ 576      74696F6E 
+ 577              	.LASF3:
+ 578 0094 73686F72 		.ascii	"short unsigned int\000"
+ 578      7420756E 
+ 578      7369676E 
+ 578      65642069 
+ 578      6E7400
+ 579              	.LASF25:
+ 580 00a7 53484946 		.ascii	"SHIFTREG_ENC_2_Wakeup\000"
+ 580      54524547 
+ 580      5F454E43 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAEnLzj.s 			page 14
+
+
+ 580      5F325F57 
+ 580      616B6575 
+ 581              	.LASF20:
+ 582 00bd 73617665 		.ascii	"saveSrA1Reg\000"
+ 582      53724131 
+ 582      52656700 
+ 583              	.LASF11:
+ 584 00c9 666C6F61 		.ascii	"float\000"
+ 584      7400
+ 585              	.LASF1:
+ 586 00cf 756E7369 		.ascii	"unsigned char\000"
+ 586      676E6564 
+ 586      20636861 
+ 586      7200
+ 587              	.LASF14:
+ 588 00dd 72656738 		.ascii	"reg8\000"
+ 588      00
+ 589              	.LASF5:
+ 590 00e2 6C6F6E67 		.ascii	"long unsigned int\000"
+ 590      20756E73 
+ 590      69676E65 
+ 590      6420696E 
+ 590      7400
+ 591              	.LASF22:
+ 592 00f4 53484946 		.ascii	"SHIFTREG_ENC_2_SaveConfig\000"
+ 592      54524547 
+ 592      5F454E43 
+ 592      5F325F53 
+ 592      61766543 
+ 593              	.LASF9:
+ 594 010e 75696E74 		.ascii	"uint8\000"
+ 594      3800
+ 595              	.LASF12:
+ 596 0114 646F7562 		.ascii	"double\000"
+ 596      6C6500
+ 597              	.LASF28:
+ 598 011b 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHandPRO-a"
+ 598      73657273 
+ 598      5C4D6174 
+ 598      7469615C 
+ 598      446F6375 
+ 599 0149 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\Air_Chambers_Haptic_Feedback.c"
+ 599      656E6572 
+ 599      69632D46 
+ 599      572D5053 
+ 599      6F43355C 
+ 600 017b 7964736E 		.ascii	"ydsn\000"
+ 600      00
+ 601              	.LASF10:
+ 602 0180 75696E74 		.ascii	"uint32\000"
+ 602      333200
+ 603              	.LASF24:
+ 604 0187 53484946 		.ascii	"SHIFTREG_ENC_2_Sleep\000"
+ 604      54524547 
+ 604      5F454E43 
+ 604      5F325F53 
+ 604      6C656570 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAEnLzj.s 			page 15
+
+
+ 605              	.LASF8:
+ 606 019c 756E7369 		.ascii	"unsigned int\000"
+ 606      676E6564 
+ 606      20696E74 
+ 606      00
+ 607              	.LASF7:
+ 608 01a9 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 608      206C6F6E 
+ 608      6720756E 
+ 608      7369676E 
+ 608      65642069 
+ 609              	.LASF21:
+ 610 01c0 53484946 		.ascii	"SHIFTREG_ENC_2_BACKUP_STRUCT\000"
+ 610      54524547 
+ 610      5F454E43 
+ 610      5F325F42 
+ 610      41434B55 
+ 611              	.LASF17:
+ 612 01dd 73697A65 		.ascii	"sizetype\000"
+ 612      74797065 
+ 612      00
+ 613              	.LASF6:
+ 614 01e6 6C6F6E67 		.ascii	"long long int\000"
+ 614      206C6F6E 
+ 614      6720696E 
+ 614      7400
+ 615              	.LASF23:
+ 616 01f4 53484946 		.ascii	"SHIFTREG_ENC_2_RestoreConfig\000"
+ 616      54524547 
+ 616      5F454E43 
+ 616      5F325F52 
+ 616      6573746F 
+ 617              	.LASF13:
+ 618 0211 63686172 		.ascii	"char\000"
+ 618      00
+ 619              	.LASF2:
+ 620 0216 73686F72 		.ascii	"short int\000"
+ 620      7420696E 
+ 620      7400
+ 621              	.LASF4:
+ 622 0220 6C6F6E67 		.ascii	"long int\000"
+ 622      20696E74 
+ 622      00
+ 623              	.LASF18:
+ 624 0229 656E6162 		.ascii	"enableState\000"
+ 624      6C655374 
+ 624      61746500 
+ 625              	.LASF16:
+ 626 0235 6C6F6E67 		.ascii	"long double\000"
+ 626      20646F75 
+ 626      626C6500 
+ 627              	.LASF0:
+ 628 0241 7369676E 		.ascii	"signed char\000"
+ 628      65642063 
+ 628      68617200 
+ 629              	.LASF29:
+ 630 024d 53484946 		.ascii	"SHIFTREG_ENC_2_backup\000"
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAEnLzj.s 			page 16
+
+
+ 630      54524547 
+ 630      5F454E43 
+ 630      5F325F62 
+ 630      61636B75 
+ 631              	.LASF27:
+ 632 0263 47656E65 		.ascii	"Generated_Source\\PSoC5\\SHIFTREG_ENC_2_PM.c\000"
+ 632      72617465 
+ 632      645F536F 
+ 632      75726365 
+ 632      5C50536F 
+ 633              	.LASF19:
+ 634 028e 73617665 		.ascii	"saveSrA0Reg\000"
+ 634      53724130 
+ 634      52656700 
+ 635              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

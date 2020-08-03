@@ -16,6 +16,8 @@ var searchData=
   ['prepare_5fsd_5flegend',['prepare_SD_legend',['../command__processing_8c.html#a2bb1121744976bb9d61699edac3fc573',1,'prepare_SD_legend(char *info_string):&#160;command_processing.c'],['../command__processing_8h.html#a2bb1121744976bb9d61699edac3fc573',1,'prepare_SD_legend(char *info_string):&#160;command_processing.c']]],
   ['prepare_5fsd_5fparam_5finfo',['prepare_SD_param_info',['../command__processing_8c.html#ae7f46f75d43b833b5807542e772bc71f',1,'prepare_SD_param_info(char *info_string):&#160;command_processing.c'],['../command__processing_8h.html#ae7f46f75d43b833b5807542e772bc71f',1,'prepare_SD_param_info(char *info_string):&#160;command_processing.c']]],
   ['prerevision_5fcycles',['PREREVISION_CYCLES',['../globals_8h.html#a427b23fb922c3976be904d128f8dbdd5',1,'globals.h']]],
+  ['pressure',['pressure',['../structst__fb__meas.html#ac870e1249bab4a2a68cc4126761d24ef',1,'st_fb_meas']]],
+  ['prop_5ferr_5ffb_5fgain',['prop_err_fb_gain',['../structst___f_b__spec.html#af4dcbeffaf7f4bc2870dc1f093c0ce1b',1,'st_FB_spec']]],
   ['pwm',['pwm',['../structst__ref.html#af8587579fb553575d315bfe2e3183bc4',1,'st_ref']]],
   ['pwm_5flimit_5fsearch',['pwm_limit_search',['../interruptions_8c.html#ac7305eeb40ebfb2c0d67725aa2e88f78',1,'pwm_limit_search(uint8 mot_idx):&#160;interruptions.c'],['../interruptions_8h.html#ac7305eeb40ebfb2c0d67725aa2e88f78',1,'pwm_limit_search(uint8 mot_idx):&#160;interruptions.c']]],
   ['pwm_5fmax_5fvalue',['PWM_MAX_VALUE',['../globals_8h.html#aafe0521fa22763b7afc50e12d31b450d',1,'globals.h']]],

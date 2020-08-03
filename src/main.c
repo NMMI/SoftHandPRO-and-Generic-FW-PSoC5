@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2019, Centro "E.Piaggio"
+// Copyright (c) 2017-2020, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -36,12 +36,12 @@
 * \file         main.c
 *
 * \brief        Firmware main file.
-* \date         May 31, 2019
+* \date         March 20th, 2020
 * \author       _Centro "E.Piaggio"_
-* \copyright    (C) 2019 Centro "E.Piaggio". All rights reserved.
+* \copyright    (C) 2020 Centro "E.Piaggio". All rights reserved.
 * \mainpage     Firmware
 * \brief        This is the firmware of PSoC5 logic board.
-* \version      1.0
+* \version      1.8
 *
 * \details      This is the firmware of PSoC5 logic board. Depending on the configuration, 
 *               it can control up to two motors and read its encoders. Also can read and
@@ -117,7 +117,13 @@ int main()
     enable_motor(0, 0x00);
     MOTOR_DIR_2_Write(0);
     enable_motor(1, 0x00);
-     
+
+#ifdef AIR_CHAMBERS_FB_FW
+    if (c_mem.dev.dev_type == AIR_CHAMBERS_FB){
+        VALVE_Write(0);
+    }
+#endif
+
     // Init AS5045 devices  
     COUNTER_ENC_Start();
     SHIFTREG_ENC_1_Start();
@@ -200,7 +206,7 @@ int main()
     }
 
     for (i = 0; i< NUM_OF_MOTORS; i++) {
-        g_refNew[i] = g_ref[i];                         // Initialize k+1 measurements structure.
+        g_refNew[i] = g_ref[i];                         // Initialize k+1 reference structure.
     }
     
     //---------------------------------------------------  Initialize emg structure
@@ -248,6 +254,10 @@ int main()
     forced_open = 0;
     
     LED_control(5);     // Default - red light
+    
+#ifdef MASTER_FW
+    master_mode = 1;    // Default - activate master mode at startup
+#endif
 
     //============================================================    check if maintenance is due
 

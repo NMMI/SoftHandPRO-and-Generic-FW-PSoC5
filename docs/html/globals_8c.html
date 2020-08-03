@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_CP.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">PSoC5 firmware
-   &#160;<span id="projectnumber">v. 1.0</span>
+   &#160;<span id="projectnumber">v. 1.8</span>
    </div>
    <div id="projectbrief">Centro E.Piaggio</div>
   </td>
@@ -95,6 +95,8 @@ struct <a class="el" href="structst__meas.html">st_meas</a>&#160;</td><td class=
 <tr class="separator:a7b175385b2b9418fa7159c72d0f470fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85e15a194417ebcd15f662bd9bcfdded"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structst__emg__meas.html">st_emg_meas</a> g_emg_meas&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#a85e15a194417ebcd15f662bd9bcfdded">g_emg_measOld</a></td></tr>
 <tr class="separator:a85e15a194417ebcd15f662bd9bcfdded"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8d2d84570b7e85614e0455a23177e62"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structst__fb__meas.html">st_fb_meas</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#af8d2d84570b7e85614e0455a23177e62">g_fb_meas</a></td></tr>
+<tr class="separator:af8d2d84570b7e85614e0455a23177e62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa963ce8fafc11e104eb7ee22982d0345"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structst__data.html">st_data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#aa963ce8fafc11e104eb7ee22982d0345">g_rx</a></td></tr>
 <tr class="separator:aa963ce8fafc11e104eb7ee22982d0345"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ad3057028e3ab399e1d1549a8d67ab9"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structst__eeprom.html">st_eeprom</a> g_mem&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#a3ad3057028e3ab399e1d1549a8d67ab9">c_mem</a></td></tr>
@@ -223,14 +225,16 @@ uint8&#160;</td><td class="memItemRight" valign="bottom"><b>Temp</b> [N_IMU_MAX]
 <tr class="memitem:a79179edea7394e7176f8768b1b0f6f92"><td class="memItemLeft" align="right" valign="top"><a id="a79179edea7394e7176f8768b1b0f6f92"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX][4]</td></tr>
 <tr class="separator:a79179edea7394e7176f8768b1b0f6f92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf0e2a5d5954714103e295ac35513215"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#acf0e2a5d5954714103e295ac35513215">master_mode</a></td></tr>
+<tr class="separator:acf0e2a5d5954714103e295ac35513215"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Global variables. </p>
-<dl class="section date"><dt>Date</dt><dd>October 01, 2017 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>March 20th, 2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd><em>Centro "E.Piaggio"</em> </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>(C) 2012-2016 qbrobotics. All rights reserved. </dd>
 <dd>
-(C) 2017-2019 Centro "E.Piaggio". All rights reserved. </dd></dl>
+(C) 2017-2020 Centro "E.Piaggio". All rights reserved. </dd></dl>
 </div><h2 class="groupheader">Variable Documentation</h2>
 <a id="ab4765549a3f6990d35f3d0740263b254"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab4765549a3f6990d35f3d0740263b254">&#9670;&nbsp;</a></span>battery_low_SoC</h2>
@@ -517,6 +521,21 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
 
 </div>
 </div>
+<a id="af8d2d84570b7e85614e0455a23177e62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8d2d84570b7e85614e0455a23177e62">&#9670;&nbsp;</a></span>g_fb_meas</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structst__fb__meas.html">st_fb_meas</a> g_fb_meas</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Haptic Feedback Measurements. </p>
+
+</div>
+</div>
 <a id="a7b175385b2b9418fa7159c72d0f470fd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7b175385b2b9418fa7159c72d0f470fd">&#9670;&nbsp;</a></span>g_measOld</h2>
 
@@ -589,6 +608,21 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
       </table>
 </div><div class="memdoc">
 <p>Maintenance flag. </p>
+
+</div>
+</div>
+<a id="acf0e2a5d5954714103e295ac35513215"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf0e2a5d5954714103e295ac35513215">&#9670;&nbsp;</a></span>master_mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8 master_mode</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Flag used to set/unset master mode to send messages to other boards. </p>
 
 </div>
 </div>

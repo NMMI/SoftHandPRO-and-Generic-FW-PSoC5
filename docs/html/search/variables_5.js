@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['fb',['FB',['../structst__eeprom.html#a8917eae058a1a8c4d46b82e467cd0888',1,'st_eeprom']]],
   ['filt_5femg',['filt_emg',['../globals_8c.html#aad3d2663356b48553e2b22e0a9fd917e',1,'filt_emg():&#160;globals.c'],['../globals_8h.html#aad3d2663356b48553e2b22e0a9fd917e',1,'filt_emg():&#160;globals.c']]],
   ['filt_5fi',['filt_i',['../globals_8c.html#ad09553d6780c43066a9ac4385658bcf1',1,'filt_i():&#160;globals.c'],['../globals_8h.html#ad09553d6780c43066a9ac4385658bcf1',1,'filt_i():&#160;globals.c']]],
   ['filt_5fvel',['filt_vel',['../globals_8c.html#af2dc9b0614aeaf7a377d209416bee61c',1,'filt_vel():&#160;globals.c'],['../globals_8h.html#af2dc9b0614aeaf7a377d209416bee61c',1,'filt_vel():&#160;globals.c']]],

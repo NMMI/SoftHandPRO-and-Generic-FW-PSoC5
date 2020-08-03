@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_CP.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">PSoC5 firmware
-   &#160;<span id="projectnumber">v. 1.0</span>
+   &#160;<span id="projectnumber">v. 1.8</span>
    </div>
    <div id="projectbrief">Centro E.Piaggio</div>
   </td>
@@ -117,8 +117,8 @@ Functions</h2></td></tr>
 <tr class="separator:a517f4c61166381d40767fce9011e3c96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af92ab4f3c1e0c0e8f5966bf2e2edeaba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8h.html#af92ab4f3c1e0c0e8f5966bf2e2edeaba">commWrite</a> (uint8 *packet_data, uint16 packet_lenght)</td></tr>
 <tr class="separator:af92ab4f3c1e0c0e8f5966bf2e2edeaba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88e4b4d9bcf905337b5dfc6706499ce5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8h.html#a88e4b4d9bcf905337b5dfc6706499ce5">commWrite_to_cuff</a> (uint8 *packet_data, uint16 packet_lenght)</td></tr>
-<tr class="separator:a88e4b4d9bcf905337b5dfc6706499ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed6a94cc62768fbec790b25a22eb3424"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8h.html#aed6a94cc62768fbec790b25a22eb3424">commWriteID</a> (uint8 *packet_data, uint16 packet_lenght, uint8 id)</td></tr>
+<tr class="separator:aed6a94cc62768fbec790b25a22eb3424"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Memory management functions</div></td></tr>
 <tr class="memitem:a3495e73c73a56de8ec81a4a5defabf1b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8h.html#a3495e73c73a56de8ec81a4a5defabf1b">manage_param_list</a> (uint16 index)</td></tr>
 <tr class="separator:a3495e73c73a56de8ec81a4a5defabf1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,6 +140,10 @@ Functions</h2></td></tr>
 <tr class="separator:afe52941f8bc21271e811fb0d9f265f38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad768ebce95dccdd2081e8dcb9adc3597"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8h.html#ad768ebce95dccdd2081e8dcb9adc3597">memInit_SoftHandPro</a> ()</td></tr>
 <tr class="separator:ad768ebce95dccdd2081e8dcb9adc3597"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa85c5dae44c0b81fa1a19c8eea0d5e8c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8h.html#aa85c5dae44c0b81fa1a19c8eea0d5e8c">memInit_Master</a> ()</td></tr>
+<tr class="separator:aa85c5dae44c0b81fa1a19c8eea0d5e8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbae7e6ae9b20fa0fda42300e8384f90"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8h.html#adbae7e6ae9b20fa0fda42300e8384f90">memInit_AirChambersFb</a> ()</td></tr>
+<tr class="separator:adbae7e6ae9b20fa0fda42300e8384f90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Utility functions</div></td></tr>
 <tr class="memitem:a6205a6e88f72f4cc321a7d8abca23e26"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8h.html#a6205a6e88f72f4cc321a7d8abca23e26">LCRChecksum</a> (uint8 *data_array, uint8 data_length)</td></tr>
 <tr class="separator:a6205a6e88f72f4cc321a7d8abca23e26"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -186,14 +190,25 @@ Functions</h2></td></tr>
 <tr class="separator:afc8c1d4f31f68fc267fdfb6f9ce27f9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa69658ceb1692834bdb1def2fba2ec8c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8h.html#aa69658ceb1692834bdb1def2fba2ec8c">cmd_get_SD_files</a> ()</td></tr>
 <tr class="separator:aa69658ceb1692834bdb1def2fba2ec8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47884d88bea34ce92722c14ab60248ba"><td class="memItemLeft" align="right" valign="top"><a id="a47884d88bea34ce92722c14ab60248ba"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>air_chambers_control</b> ()</td></tr>
+<tr class="separator:a47884d88bea34ce92722c14ab60248ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af37abb7623deb4ea3af0da3801ab3788"><td class="memItemLeft" align="right" valign="top">int16&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8h.html#af37abb7623deb4ea3af0da3801ab3788">commReadResCurrFromSH</a> ()</td></tr>
+<tr class="separator:af37abb7623deb4ea3af0da3801ab3788"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7088642f851a8375e8b8edf673b91a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8h.html#ab7088642f851a8375e8b8edf673b91a4">drive_slave</a> (uint8 motor_idx, uint8 slave_ID)</td></tr>
+<tr class="separator:ab7088642f851a8375e8b8edf673b91a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ab18b8568ea220d085f46cc77a6b904"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8h.html#a9ab18b8568ea220d085f46cc77a6b904">stop_feedback</a> ()</td></tr>
+<tr class="separator:a9ab18b8568ea220d085f46cc77a6b904"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22eb92c869daf62079d72a328c54aec7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8h.html#a22eb92c869daf62079d72a328c54aec7">deactivate_slaves</a> ()</td></tr>
+<tr class="separator:a22eb92c869daf62079d72a328c54aec7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Received commands processing functions. </p>
-<dl class="section date"><dt>Date</dt><dd>October 01, 2017 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>March 20th, 2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd><em>Centro "E.Piaggio"</em> </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>(C) 2012-2016 qbrobotics. All rights reserved. </dd>
 <dd>
-(C) 2017-2019 Centro "E.Piaggio". All rights reserved.</dd></dl>
+(C) 2017-2020 Centro "E.Piaggio". All rights reserved.</dd></dl>
 <p>This file contains all the definitions of the functions used to process the commands sent from the user interfaces (simulink, command line, GUI) </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a107fc9f2982f9a953bdd82aa07279499"></a>
@@ -336,7 +351,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This function gets the motor current and puts it in the package to be sent to the Cuff device, using the <a class="el" href="command__processing_8h.html#a88e4b4d9bcf905337b5dfc6706499ce5">commWrite_to_cuff</a> function. </p>
+<p>This function gets the motor current and puts it in the package to be sent to the Cuff device, using the commWrite_to_cuff function. </p>
 
 </div>
 </div>
@@ -575,6 +590,24 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="af37abb7623deb4ea3af0da3801ab3788"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af37abb7623deb4ea3af0da3801ab3788">&#9670;&nbsp;</a></span>commReadResCurrFromSH()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16 commReadResCurrFromSH </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This function reads on the serial port the residual current from SH. </p>
+
+</div>
+</div>
 <a id="af92ab4f3c1e0c0e8f5966bf2e2edeaba"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af92ab4f3c1e0c0e8f5966bf2e2edeaba">&#9670;&nbsp;</a></span>commWrite()</h2>
 
@@ -654,14 +687,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a88e4b4d9bcf905337b5dfc6706499ce5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88e4b4d9bcf905337b5dfc6706499ce5">&#9670;&nbsp;</a></span>commWrite_to_cuff()</h2>
+<a id="aed6a94cc62768fbec790b25a22eb3424"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed6a94cc62768fbec790b25a22eb3424">&#9670;&nbsp;</a></span>commWriteID()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void commWrite_to_cuff </td>
+          <td class="memname">void commWriteID </td>
           <td>(</td>
           <td class="paramtype">uint8 *&#160;</td>
           <td class="paramname"><em>packet_data</em>, </td>
@@ -670,7 +703,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint16&#160;</td>
-          <td class="paramname"><em>packet_lenght</em>&#160;</td>
+          <td class="paramname"><em>packet_lenght</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -679,7 +718,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This function writes on the serial port the package that needs to be sent to the Cuff device. It is used only when a specific device is connected to the hand. The Hand must have ID equal to the one of the Cuff plus one.</p>
+<p>This function writes on the serial port the package that needs to be sent to another board.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">packet_data</td><td>The array of data that must be written. </td></tr>
@@ -687,6 +726,53 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a22eb92c869daf62079d72a328c54aec7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22eb92c869daf62079d72a328c54aec7">&#9670;&nbsp;</a></span>deactivate_slaves()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void deactivate_slaves </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This function is used to create a package to deactivate motors on all the other devices. </p>
+
+</div>
+</div>
+<a id="ab7088642f851a8375e8b8edf673b91a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7088642f851a8375e8b8edf673b91a4">&#9670;&nbsp;</a></span>drive_slave()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void drive_slave </td>
+          <td>(</td>
+          <td class="paramtype">uint8&#160;</td>
+          <td class="paramname"><em>motor_idx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8&#160;</td>
+          <td class="paramname"><em>slave_ID</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This function is used to create a package and send it to another device, only if the actual board is in master mode. </p>
 
 </div>
 </div>
@@ -920,6 +1006,42 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>This functions initializes the memory. It is used also to restore the the parameters to their default values.</p>
 <dl class="section return"><dt>Returns</dt><dd>A true value if the memory is correctly initialized, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="adbae7e6ae9b20fa0fda42300e8384f90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbae7e6ae9b20fa0fda42300e8384f90">&#9670;&nbsp;</a></span>memInit_AirChambersFb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void memInit_AirChambersFb </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This functions initializes the memory. It is used also to restore the the parameters to their default values. Specific for Air Chambers firmware </p>
+
+</div>
+</div>
+<a id="aa85c5dae44c0b81fa1a19c8eea0d5e8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa85c5dae44c0b81fa1a19c8eea0d5e8c">&#9670;&nbsp;</a></span>memInit_Master()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void memInit_Master </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This functions initializes the memory. It is used also to restore the the parameters to their default values. Specific for Master firmware </p>
 
 </div>
 </div>
@@ -1194,6 +1316,24 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>This function sets the encoders zero position. </p>
+
+</div>
+</div>
+<a id="a9ab18b8568ea220d085f46cc77a6b904"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ab18b8568ea220d085f46cc77a6b904">&#9670;&nbsp;</a></span>stop_feedback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void stop_feedback </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This function is used to deactivate feedback motors when occurred. </p>
 
 </div>
 </div>

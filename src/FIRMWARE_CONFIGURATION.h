@@ -1,7 +1,7 @@
 // ----------------------------------------------------------------------------
 // BSD 3-Clause License
 
-// Copyright (c) 2019, Centro "E.Piaggio"
+// Copyright (c) 2019-2020, Centro "E.Piaggio"
 // All rights reserved.
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -35,9 +35,9 @@
  *
  *  \brief      Definitions for SoftHand and Other Devices commands, parameters and packages.
  *
- *  \date         January 30, 2019
- *  \author       _Centro "E.Piaggio"_
- *  \copyright    (C) 2019 Centro "E.Piaggio". All rights reserved.
+ *  \date       March 20th, 2020
+ *  \author     _Centro "E.Piaggio"_
+ *  \copyright  (C) 2019-2020 Centro "E.Piaggio". All rights reserved.
  *  \details
  *  This file is included in the firmware, in its libraries and
  *  applications. It contains all definitions that are necessary to discriminate the right firmware.
@@ -53,29 +53,53 @@
 // PREPROCESSOR DEFINES (SOURCE AND HEADERS FILES ARE SHARED BETWEEN THE TWO PROJECTS)
 //    
 // SOFTHAND FW: #define SOFTHAND_FW
-// GENERIC FW:  #define GENERIC_FW    
+// GENERIC FW:  #define GENERIC_FW 
+// AIR_CHAMBERS_FB_FW:   #define AIR_CHAMBERS_FB_FW
 //====================================================================================
 //====================================================================================
     
     
 // Macro related to different firmware configurations
 #ifdef SOFTHAND_FW
-    #define VERSION                 "SoftHand PRO firmware v. 1.7.2 (PSoC5)"
+    #define VERSION                 "SoftHand PRO firmware v. 1.8 (PSoC5)"
 #else
-    #define VERSION                 "Generic firmware v. 1.7.2 (PSoC5)"
+    #ifdef GENERIC_FW
+        #define VERSION                 "Generic firmware v. 1.8 (PSoC5)"
+    #else   //AIR_CHAMBERS_FB_FW
+        #define MASTER_FW
+        #define VERSION                 "Air Chambers Haptic Feedback firmware v. 1.8 (PSoC5) - Master configuration"
+    #endif
 #endif      
 
+
+// Default number of parameters configuration
+// Handle multiple configuration with mutually exclusive macro preprocessor defines
+// Note: an if..else structure is preferred, but with a large number of exclusive configuration this is also good
 #ifdef SOFTHAND_FW
-    #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - 35)  // Number of parameters saved in the EEPROM for SOFTHAND FIRMWARE
+    #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - 35 - NUM_OF_MS_PARAMS - NUM_OF_FB_PARAMS)  // Number of parameters saved in the EEPROM for SOFTHAND FIRMWARE
                                                               // All parameters except: additional first motor parameters (4), second motor configuration and parameters (21),
-                                                              // Encoder configuration (2), ADC configuration (2), Read additional ADC port, Device type, Gear parameters, Encoders used for control
+                                                              // Encoder configuration (2), ADC configuration (2), Read additional ADC port, Device type, Gear parameters, Encoders used for control, 
+                                                              // Master parameters (2), Feedback parameters (3)
     #define NUM_OF_DEV_PARAM_MENUS      (NUM_OF_PARAMS_MENU - 2) // Number of parameters menu for SOFTHAND FIRMWARE
                                                                  // All menus except: Motor driver type, Device type
-#else
-    #define NUM_OF_DEV_PARAMS           NUM_OF_PARAMS        // Number of parameters saved in the EEPROM
+#endif
+#ifdef GENERIC_FW
+    #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - NUM_OF_MS_PARAMS - NUM_OF_FB_PARAMS)  // Number of parameters saved in the EEPROM for GENERIC FIRMWARE
+                                                             // All parameters except: Master parameters (2), Feedback parameters (3)
+    #define NUM_OF_DEV_PARAM_MENUS      NUM_OF_PARAMS_MENU   // Number of parameters menu
+#endif
+//#ifdef MASTER_FW (Not necessary statements for the moment)
+//    #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - NUM_OF_FB_PARAMS)  // Number of parameters saved in the EEPROM for MASTER FIRMWARE
+//                                                             // All parameters except: Feedback parameters (3)
+//    #define NUM_OF_DEV_PARAM_MENUS      NUM_OF_PARAMS_MENU   // Number of parameters menu
+//#endif
+#ifdef AIR_CHAMBERS_FB_FW
+    #define NUM_OF_DEV_PARAMS           NUM_OF_PARAMS        // Number of parameters saved in the EEPROM for AIR_CHAMBERS_FB_FW FIRMWARE
     #define NUM_OF_DEV_PARAM_MENUS      NUM_OF_PARAMS_MENU   // Number of parameters menu
 #endif
 
+
+// Default number of IMUs configuration
 #ifdef SOFTHAND_FW
     #define NUM_DEV_IMU         1       /*!< Number of device IMU for SOFTHAND FIRMWARE.*/
 #else

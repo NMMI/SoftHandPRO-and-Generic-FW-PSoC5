@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_CP.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">PSoC5 firmware
-   &#160;<span id="projectnumber">v. 1.0</span>
+   &#160;<span id="projectnumber">v. 1.8</span>
    </div>
    <div id="projectbrief">Centro E.Piaggio</div>
   </td>
@@ -106,6 +106,8 @@ Data Structures</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst__emg__meas.html">st_emg_meas</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst__fb__meas.html">st_fb_meas</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst__data.html">st_data</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data sent/received structure.  <a href="structst__data.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,7 +136,13 @@ Data Structures</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">User related parameters structure.  <a href="structst__user.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst___s_h__spec.html">st_SH_spec</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SoftHand specific related prameters structure.  <a href="structst___s_h__spec.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SoftHand specific related parameters structure.  <a href="structst___s_h__spec.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst___m_a_s_t_e_r__spec.html">st_MASTER_spec</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Master mode specific parameters structure.  <a href="structst___m_a_s_t_e_r__spec.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst___f_b__spec.html">st_FB_spec</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Feedback mode specific parameters structure.  <a href="structst___f_b__spec.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst__eeprom.html">st_eeprom</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Memory variables.  <a href="structst__eeprom.html#details">More...</a><br /></td></tr>
@@ -162,7 +170,11 @@ Macros</h2></td></tr>
 <tr class="memitem:a94a49570e3bc73b67084f1a9ae90d89a"><td class="memItemLeft" align="right" valign="top"><a id="a94a49570e3bc73b67084f1a9ae90d89a"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>NUM_OF_ADC_CHANNELS_MAX</b>&#160;&#160;&#160;(4+<a class="el" href="globals_8h.html#a21ab5f0a6e4cb48bd320177c4f7aa078">NUM_OF_INPUT_EMGS</a>+<a class="el" href="globals_8h.html#acfef2d9600a7535f4ad258c2370dd9fa">NUM_OF_ADDITIONAL_EMGS</a>)</td></tr>
 <tr class="separator:a94a49570e3bc73b67084f1a9ae90d89a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab4f4a0ece20c4bc27152bd72926d89c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#aab4f4a0ece20c4bc27152bd72926d89c">NUM_OF_PARAMS</a>&#160;&#160;&#160;71</td></tr>
+<tr class="memitem:aecd556b3ea0656fe9e059814426de5f7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#aecd556b3ea0656fe9e059814426de5f7">NUM_OF_MS_PARAMS</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:aecd556b3ea0656fe9e059814426de5f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb8ebf7cfe1d67e459ceef94dcb0e045"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#abb8ebf7cfe1d67e459ceef94dcb0e045">NUM_OF_FB_PARAMS</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:abb8ebf7cfe1d67e459ceef94dcb0e045"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab4f4a0ece20c4bc27152bd72926d89c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#aab4f4a0ece20c4bc27152bd72926d89c">NUM_OF_PARAMS</a>&#160;&#160;&#160;(71 + <a class="el" href="globals_8h.html#aecd556b3ea0656fe9e059814426de5f7">NUM_OF_MS_PARAMS</a> + <a class="el" href="globals_8h.html#abb8ebf7cfe1d67e459ceef94dcb0e045">NUM_OF_FB_PARAMS</a>)</td></tr>
 <tr class="separator:aab4f4a0ece20c4bc27152bd72926d89c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa19d88ac3e94a34d9a9f1c37bea9a271"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#aa19d88ac3e94a34d9a9f1c37bea9a271">NUM_OF_PARAMS_MENU</a>&#160;&#160;&#160;10</td></tr>
 <tr class="separator:aa19d88ac3e94a34d9a9f1c37bea9a271"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -259,8 +271,11 @@ Macros</h2></td></tr>
 <tr class="memitem:a577f879b1a05acd55b1d56412a17e13f"><td class="memItemLeft" align="right" valign="top"><a id="a577f879b1a05acd55b1d56412a17e13f"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>GENERIC_2_MOTORS</b>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a577f879b1a05acd55b1d56412a17e13f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad854ddb03952eb3f1d2e2282bbf21eb4"><td class="memItemLeft" align="right" valign="top"><a id="ad854ddb03952eb3f1d2e2282bbf21eb4"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>AIR_CHAMBERS_FB</b>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:ad854ddb03952eb3f1d2e2282bbf21eb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5a0bd9be15f1dcd0ba86f27d3dbda50"><td class="memItemLeft" align="right" valign="top"><a id="ac5a0bd9be15f1dcd0ba86f27d3dbda50"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>CUFF</b>&#160;&#160;&#160;2</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CUFF</b>&#160;&#160;&#160;3</td></tr>
 <tr class="separator:ac5a0bd9be15f1dcd0ba86f27d3dbda50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af550b25a7e09356fe9fac2773725fa53"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#af550b25a7e09356fe9fac2773725fa53">SH_N1</a>&#160;&#160;&#160;35</td></tr>
 <tr class="separator:af550b25a7e09356fe9fac2773725fa53"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -292,6 +307,12 @@ Macros</h2></td></tr>
 <tr class="memitem:a788bae111bb48b9aa005ecf765ce1e94"><td class="memItemLeft" align="right" valign="top"><a id="a788bae111bb48b9aa005ecf765ce1e94"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>ST_SH_SPEC</b>&#160;&#160;&#160;70</td></tr>
 <tr class="separator:a788bae111bb48b9aa005ecf765ce1e94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09fa5a059f637c6e635e27cbb1b437f8"><td class="memItemLeft" align="right" valign="top"><a id="a09fa5a059f637c6e635e27cbb1b437f8"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ST_MS_SPEC</b>&#160;&#160;&#160;80</td></tr>
+<tr class="separator:a09fa5a059f637c6e635e27cbb1b437f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad8e3965151790073226b9ec124c0808"><td class="memItemLeft" align="right" valign="top"><a id="aad8e3965151790073226b9ec124c0808"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ST_FB_SPEC</b>&#160;&#160;&#160;90</td></tr>
+<tr class="separator:aad8e3965151790073226b9ec124c0808"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa93f0eb578d23995850d61f7d61c55c1"><td class="memItemLeft" align="right" valign="top"><a id="aa93f0eb578d23995850d61f7d61c55c1"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>FALSE</b>&#160;&#160;&#160;0</td></tr>
 <tr class="separator:aa93f0eb578d23995850d61f7d61c55c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -375,6 +396,8 @@ struct <a class="el" href="structst__meas.html">st_meas</a>&#160;</td><td class=
 <tr class="separator:a7b175385b2b9418fa7159c72d0f470fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85e15a194417ebcd15f662bd9bcfdded"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structst__emg__meas.html">st_emg_meas</a> g_emg_meas&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#a85e15a194417ebcd15f662bd9bcfdded">g_emg_measOld</a></td></tr>
 <tr class="separator:a85e15a194417ebcd15f662bd9bcfdded"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8d2d84570b7e85614e0455a23177e62"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structst__fb__meas.html">st_fb_meas</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#af8d2d84570b7e85614e0455a23177e62">g_fb_meas</a></td></tr>
+<tr class="separator:af8d2d84570b7e85614e0455a23177e62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa963ce8fafc11e104eb7ee22982d0345"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structst__data.html">st_data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#aa963ce8fafc11e104eb7ee22982d0345">g_rx</a></td></tr>
 <tr class="separator:aa963ce8fafc11e104eb7ee22982d0345"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ad3057028e3ab399e1d1549a8d67ab9"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structst__eeprom.html">st_eeprom</a> g_mem&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#a3ad3057028e3ab399e1d1549a8d67ab9">c_mem</a></td></tr>
@@ -503,14 +526,16 @@ uint8&#160;</td><td class="memItemRight" valign="bottom"><b>Temp</b> [N_IMU_MAX]
 <tr class="memitem:a79179edea7394e7176f8768b1b0f6f92"><td class="memItemLeft" align="right" valign="top"><a id="a79179edea7394e7176f8768b1b0f6f92"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX][4]</td></tr>
 <tr class="separator:a79179edea7394e7176f8768b1b0f6f92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf0e2a5d5954714103e295ac35513215"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#acf0e2a5d5954714103e295ac35513215">master_mode</a></td></tr>
+<tr class="separator:acf0e2a5d5954714103e295ac35513215"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Global definitions and macros are set in this file. </p>
-<dl class="section date"><dt>Date</dt><dd>February 01, 2018 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>March 20th, 2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd><em>Centro "E.Piaggio"</em> </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>(C) 2012-2016 qbrobotics. All rights reserved. </dd>
 <dd>
-(C) 2017-2019 Centro "E.Piaggio". All rights reserved. </dd></dl>
+(C) 2017-2020 Centro "E.Piaggio". All rights reserved. </dd></dl>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a66edaed675ab232f06a4e5b3c30d101a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a66edaed675ab232f06a4e5b3c30d101a">&#9670;&nbsp;</a></span>ANTI_WINDUP</h2>
@@ -737,6 +762,21 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
 
 </div>
 </div>
+<a id="abb8ebf7cfe1d67e459ceef94dcb0e045"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb8ebf7cfe1d67e459ceef94dcb0e045">&#9670;&nbsp;</a></span>NUM_OF_FB_PARAMS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NUM_OF_FB_PARAMS&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Number of feedback parameters saved in the EEPROM. </p>
+
+</div>
+</div>
 <a id="a21ab5f0a6e4cb48bd320177c4f7aa078"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a21ab5f0a6e4cb48bd320177c4f7aa078">&#9670;&nbsp;</a></span>NUM_OF_INPUT_EMGS</h2>
 
@@ -767,6 +807,21 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
 
 </div>
 </div>
+<a id="aecd556b3ea0656fe9e059814426de5f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecd556b3ea0656fe9e059814426de5f7">&#9670;&nbsp;</a></span>NUM_OF_MS_PARAMS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NUM_OF_MS_PARAMS&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Number of master parameters saved in the EEPROM. </p>
+
+</div>
+</div>
 <a id="aab4f4a0ece20c4bc27152bd72926d89c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aab4f4a0ece20c4bc27152bd72926d89c">&#9670;&nbsp;</a></span>NUM_OF_PARAMS</h2>
 
@@ -774,7 +829,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define NUM_OF_PARAMS&#160;&#160;&#160;71</td>
+          <td class="memname">#define NUM_OF_PARAMS&#160;&#160;&#160;(71 + <a class="el" href="globals_8h.html#aecd556b3ea0656fe9e059814426de5f7">NUM_OF_MS_PARAMS</a> + <a class="el" href="globals_8h.html#abb8ebf7cfe1d67e459ceef94dcb0e045">NUM_OF_FB_PARAMS</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1409,6 +1464,21 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
 
 </div>
 </div>
+<a id="af8d2d84570b7e85614e0455a23177e62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8d2d84570b7e85614e0455a23177e62">&#9670;&nbsp;</a></span>g_fb_meas</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structst__fb__meas.html">st_fb_meas</a> g_fb_meas</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Haptic Feedback Measurements. </p>
+
+</div>
+</div>
 <a id="a7b175385b2b9418fa7159c72d0f470fd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7b175385b2b9418fa7159c72d0f470fd">&#9670;&nbsp;</a></span>g_measOld</h2>
 
@@ -1481,6 +1551,21 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
       </table>
 </div><div class="memdoc">
 <p>Maintenance flag. </p>
+
+</div>
+</div>
+<a id="acf0e2a5d5954714103e295ac35513215"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf0e2a5d5954714103e295ac35513215">&#9670;&nbsp;</a></span>master_mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8 master_mode</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Flag used to set/unset master mode to send messages to other boards. </p>
 
 </div>
 </div>

@@ -47,7 +47,7 @@ void \textbf{ comm\+Write\+\_\+old\+\_\+id} (uint8 $\ast$packet\+\_\+data, uint1
 \item 
 void \textbf{ comm\+Write} (uint8 $\ast$packet\+\_\+data, uint16 packet\+\_\+lenght)
 \item 
-void \textbf{ comm\+Write\+\_\+to\+\_\+cuff} (uint8 $\ast$packet\+\_\+data, uint16 packet\+\_\+lenght)
+void \textbf{ comm\+Write\+ID} (uint8 $\ast$packet\+\_\+data, uint16 packet\+\_\+lenght, uint8 id)
 \end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Memory management functions}\par
@@ -72,6 +72,10 @@ uint8 \textbf{ mem\+Restore} ()
 uint8 \textbf{ mem\+Init} ()
 \item 
 void \textbf{ mem\+Init\+\_\+\+Soft\+Hand\+Pro} ()
+\item 
+void \textbf{ mem\+Init\+\_\+\+Master} ()
+\item 
+void \textbf{ mem\+Init\+\_\+\+Air\+Chambers\+Fb} ()
 \end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Utility functions}\par
@@ -124,6 +128,17 @@ void \textbf{ cmd\+\_\+get\+\_\+\+A\+D\+C\+\_\+map} ()
 void \textbf{ cmd\+\_\+get\+\_\+\+A\+D\+C\+\_\+raw} ()
 \item 
 void \textbf{ cmd\+\_\+get\+\_\+\+S\+D\+\_\+files} ()
+\item 
+\mbox{\label{command__processing_8h_a47884d88bea34ce92722c14ab60248ba}} 
+void {\bfseries air\+\_\+chambers\+\_\+control} ()
+\item 
+int16 \textbf{ comm\+Read\+Res\+Curr\+From\+SH} ()
+\item 
+void \textbf{ drive\+\_\+slave} (uint8 motor\+\_\+idx, uint8 slave\+\_\+\+ID)
+\item 
+void \textbf{ stop\+\_\+feedback} ()
+\item 
+void \textbf{ deactivate\+\_\+slaves} ()
 \end{DoxyCompactItemize}
 \end{Indent}
 
@@ -132,7 +147,7 @@ void \textbf{ cmd\+\_\+get\+\_\+\+S\+D\+\_\+files} ()
 Received commands processing functions. 
 
 \begin{DoxyDate}{Date}
-October 01, 2017 
+March 20th, 2020 
 \end{DoxyDate}
 \begin{DoxyAuthor}{Author}
 {\itshape Centro \char`\"{}\+E.\+Piaggio\char`\"{}} 
@@ -140,7 +155,7 @@ October 01, 2017
 \begin{DoxyCopyright}{Copyright}
 (C) 2012-\/2016 qbrobotics. All rights reserved. 
 
-(C) 2017-\/2019 Centro \char`\"{}\+E.\+Piaggio\char`\"{}. All rights reserved.
+(C) 2017-\/2020 Centro \char`\"{}\+E.\+Piaggio\char`\"{}. All rights reserved.
 \end{DoxyCopyright}
 This file contains all the definitions of the functions used to process the commands sent from the user interfaces (simulink, command line, G\+UI) 
 
@@ -193,7 +208,7 @@ This function gets the motor current and puts it in the package to be sent to th
 \subsubsection{cmd\+\_\+get\+\_\+currents\+\_\+for\+\_\+cuff()}
 {\footnotesize\ttfamily void cmd\+\_\+get\+\_\+currents\+\_\+for\+\_\+cuff (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-This function gets the motor current and puts it in the package to be sent to the Cuff device, using the \doxyref{comm\+Write\+\_\+to\+\_\+cuff}{p.}{command__processing_8h_a88e4b4d9bcf905337b5dfc6706499ce5} function. \mbox{\label{command__processing_8h_ae579c6ac56fef33632f9c9f2c42b90a0}} 
+This function gets the motor current and puts it in the package to be sent to the Cuff device, using the comm\+Write\+\_\+to\+\_\+cuff function. \mbox{\label{command__processing_8h_ae579c6ac56fef33632f9c9f2c42b90a0}} 
 \index{command\+\_\+processing.\+h@{command\+\_\+processing.\+h}!cmd\+\_\+get\+\_\+emg@{cmd\+\_\+get\+\_\+emg}}
 \index{cmd\+\_\+get\+\_\+emg@{cmd\+\_\+get\+\_\+emg}!command\+\_\+processing.\+h@{command\+\_\+processing.\+h}}
 \subsubsection{cmd\+\_\+get\+\_\+emg()}
@@ -273,7 +288,13 @@ This function stores the parameters to the E\+E\+P\+R\+OM memory \mbox{\label{co
 \subsubsection{comm\+Process()}
 {\footnotesize\ttfamily void comm\+Process (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-This function unpacks the received package, depending on the command received. \mbox{\label{command__processing_8h_af92ab4f3c1e0c0e8f5966bf2e2edeaba}} 
+This function unpacks the received package, depending on the command received. \mbox{\label{command__processing_8h_af37abb7623deb4ea3af0da3801ab3788}} 
+\index{command\+\_\+processing.\+h@{command\+\_\+processing.\+h}!comm\+Read\+Res\+Curr\+From\+SH@{comm\+Read\+Res\+Curr\+From\+SH}}
+\index{comm\+Read\+Res\+Curr\+From\+SH@{comm\+Read\+Res\+Curr\+From\+SH}!command\+\_\+processing.\+h@{command\+\_\+processing.\+h}}
+\subsubsection{comm\+Read\+Res\+Curr\+From\+S\+H()}
+{\footnotesize\ttfamily int16 comm\+Read\+Res\+Curr\+From\+SH (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This function reads on the serial port the residual current from SH. \mbox{\label{command__processing_8h_af92ab4f3c1e0c0e8f5966bf2e2edeaba}} 
 \index{command\+\_\+processing.\+h@{command\+\_\+processing.\+h}!comm\+Write@{comm\+Write}}
 \index{comm\+Write@{comm\+Write}!command\+\_\+processing.\+h@{command\+\_\+processing.\+h}}
 \subsubsection{comm\+Write()}
@@ -305,13 +326,13 @@ This function writes on the serial port the package that needs to be sent to the
 {\em old\+\_\+id} & The previous id of the board, before setting a new one. \\
 \hline
 \end{DoxyParams}
-\mbox{\label{command__processing_8h_a88e4b4d9bcf905337b5dfc6706499ce5}} 
-\index{command\+\_\+processing.\+h@{command\+\_\+processing.\+h}!comm\+Write\+\_\+to\+\_\+cuff@{comm\+Write\+\_\+to\+\_\+cuff}}
-\index{comm\+Write\+\_\+to\+\_\+cuff@{comm\+Write\+\_\+to\+\_\+cuff}!command\+\_\+processing.\+h@{command\+\_\+processing.\+h}}
-\subsubsection{comm\+Write\+\_\+to\+\_\+cuff()}
-{\footnotesize\ttfamily void comm\+Write\+\_\+to\+\_\+cuff (\begin{DoxyParamCaption}\item[{uint8 $\ast$}]{packet\+\_\+data,  }\item[{uint16}]{packet\+\_\+lenght }\end{DoxyParamCaption})}
+\mbox{\label{command__processing_8h_aed6a94cc62768fbec790b25a22eb3424}} 
+\index{command\+\_\+processing.\+h@{command\+\_\+processing.\+h}!comm\+Write\+ID@{comm\+Write\+ID}}
+\index{comm\+Write\+ID@{comm\+Write\+ID}!command\+\_\+processing.\+h@{command\+\_\+processing.\+h}}
+\subsubsection{comm\+Write\+I\+D()}
+{\footnotesize\ttfamily void comm\+Write\+ID (\begin{DoxyParamCaption}\item[{uint8 $\ast$}]{packet\+\_\+data,  }\item[{uint16}]{packet\+\_\+lenght,  }\item[{uint8}]{id }\end{DoxyParamCaption})}
 
-This function writes on the serial port the package that needs to be sent to the Cuff device. It is used only when a specific device is connected to the hand. The Hand must have ID equal to the one of the Cuff plus one.
+This function writes on the serial port the package that needs to be sent to another board.
 
 
 \begin{DoxyParams}{Parameters}
@@ -320,7 +341,19 @@ This function writes on the serial port the package that needs to be sent to the
 {\em packet\+\_\+lenght} & The lenght of the data array. \\
 \hline
 \end{DoxyParams}
-\mbox{\label{command__processing_8h_a85586060c313547d3baf0ae2178665dd}} 
+\mbox{\label{command__processing_8h_a22eb92c869daf62079d72a328c54aec7}} 
+\index{command\+\_\+processing.\+h@{command\+\_\+processing.\+h}!deactivate\+\_\+slaves@{deactivate\+\_\+slaves}}
+\index{deactivate\+\_\+slaves@{deactivate\+\_\+slaves}!command\+\_\+processing.\+h@{command\+\_\+processing.\+h}}
+\subsubsection{deactivate\+\_\+slaves()}
+{\footnotesize\ttfamily void deactivate\+\_\+slaves (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This function is used to create a package to deactivate motors on all the other devices. \mbox{\label{command__processing_8h_ab7088642f851a8375e8b8edf673b91a4}} 
+\index{command\+\_\+processing.\+h@{command\+\_\+processing.\+h}!drive\+\_\+slave@{drive\+\_\+slave}}
+\index{drive\+\_\+slave@{drive\+\_\+slave}!command\+\_\+processing.\+h@{command\+\_\+processing.\+h}}
+\subsubsection{drive\+\_\+slave()}
+{\footnotesize\ttfamily void drive\+\_\+slave (\begin{DoxyParamCaption}\item[{uint8}]{motor\+\_\+idx,  }\item[{uint8}]{slave\+\_\+\+ID }\end{DoxyParamCaption})}
+
+This function is used to create a package and send it to another device, only if the actual board is in master mode. \mbox{\label{command__processing_8h_a85586060c313547d3baf0ae2178665dd}} 
 \index{command\+\_\+processing.\+h@{command\+\_\+processing.\+h}!get\+\_\+\+I\+M\+U\+\_\+param\+\_\+list@{get\+\_\+\+I\+M\+U\+\_\+param\+\_\+list}}
 \index{get\+\_\+\+I\+M\+U\+\_\+param\+\_\+list@{get\+\_\+\+I\+M\+U\+\_\+param\+\_\+list}!command\+\_\+processing.\+h@{command\+\_\+processing.\+h}}
 \subsubsection{get\+\_\+\+I\+M\+U\+\_\+param\+\_\+list()}
@@ -406,7 +439,19 @@ This functions initializes the memory. It is used also to restore the the parame
 \begin{DoxyReturn}{Returns}
 A true value if the memory is correctly initialized, false otherwise. 
 \end{DoxyReturn}
-\mbox{\label{command__processing_8h_ad768ebce95dccdd2081e8dcb9adc3597}} 
+\mbox{\label{command__processing_8h_adbae7e6ae9b20fa0fda42300e8384f90}} 
+\index{command\+\_\+processing.\+h@{command\+\_\+processing.\+h}!mem\+Init\+\_\+\+Air\+Chambers\+Fb@{mem\+Init\+\_\+\+Air\+Chambers\+Fb}}
+\index{mem\+Init\+\_\+\+Air\+Chambers\+Fb@{mem\+Init\+\_\+\+Air\+Chambers\+Fb}!command\+\_\+processing.\+h@{command\+\_\+processing.\+h}}
+\subsubsection{mem\+Init\+\_\+\+Air\+Chambers\+Fb()}
+{\footnotesize\ttfamily void mem\+Init\+\_\+\+Air\+Chambers\+Fb (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This functions initializes the memory. It is used also to restore the the parameters to their default values. Specific for Air Chambers firmware \mbox{\label{command__processing_8h_aa85c5dae44c0b81fa1a19c8eea0d5e8c}} 
+\index{command\+\_\+processing.\+h@{command\+\_\+processing.\+h}!mem\+Init\+\_\+\+Master@{mem\+Init\+\_\+\+Master}}
+\index{mem\+Init\+\_\+\+Master@{mem\+Init\+\_\+\+Master}!command\+\_\+processing.\+h@{command\+\_\+processing.\+h}}
+\subsubsection{mem\+Init\+\_\+\+Master()}
+{\footnotesize\ttfamily void mem\+Init\+\_\+\+Master (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This functions initializes the memory. It is used also to restore the the parameters to their default values. Specific for Master firmware \mbox{\label{command__processing_8h_ad768ebce95dccdd2081e8dcb9adc3597}} 
 \index{command\+\_\+processing.\+h@{command\+\_\+processing.\+h}!mem\+Init\+\_\+\+Soft\+Hand\+Pro@{mem\+Init\+\_\+\+Soft\+Hand\+Pro}}
 \index{mem\+Init\+\_\+\+Soft\+Hand\+Pro@{mem\+Init\+\_\+\+Soft\+Hand\+Pro}!command\+\_\+processing.\+h@{command\+\_\+processing.\+h}}
 \subsubsection{mem\+Init\+\_\+\+Soft\+Hand\+Pro()}
@@ -542,4 +587,10 @@ This function, depending on the \doxyref{Firmware}{p.}{index} received, sets the
 \subsubsection{set\+Zeros()}
 {\footnotesize\ttfamily void set\+Zeros (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-This function sets the encoders zero position. 
+This function sets the encoders zero position. \mbox{\label{command__processing_8h_a9ab18b8568ea220d085f46cc77a6b904}} 
+\index{command\+\_\+processing.\+h@{command\+\_\+processing.\+h}!stop\+\_\+feedback@{stop\+\_\+feedback}}
+\index{stop\+\_\+feedback@{stop\+\_\+feedback}!command\+\_\+processing.\+h@{command\+\_\+processing.\+h}}
+\subsubsection{stop\+\_\+feedback()}
+{\footnotesize\ttfamily void stop\+\_\+feedback (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This function is used to deactivate feedback motors when occurred. 

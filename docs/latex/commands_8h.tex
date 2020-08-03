@@ -94,7 +94,8 @@ enum \textbf{ S\+H\+\_\+input\+\_\+mode} \{ \newline
 \textbf{ I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+I\+N\+T\+E\+G\+R\+AL} = 3, 
 \newline
 \textbf{ I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+FS} = 4, 
-\textbf{ I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+F\+S\+\_\+\+A\+DV} = 5
+\textbf{ I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+F\+S\+\_\+\+A\+DV} = 5, 
+\textbf{ I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+P\+R\+O\+P\+O\+R\+T\+I\+O\+N\+A\+L\+\_\+\+NC} = 6
  \}
 \item 
 enum \textbf{ S\+H\+\_\+control\+\_\+mode} \{ \textbf{ C\+O\+N\+T\+R\+O\+L\+\_\+\+A\+N\+G\+LE} = 0, 
@@ -135,7 +136,7 @@ enum {\bfseries data\+\_\+types} \{ \newline
 Definitions for Soft\+Hand commands, parameters and packages. 
 
 \begin{DoxyDate}{Date}
-October 01, 2017 
+March 20th, 2020 
 \end{DoxyDate}
 \begin{DoxyAuthor}{Author}
 {\itshape Centro \char`\"{}\+E.\+Piaggio\char`\"{}} 
@@ -143,7 +144,7 @@ October 01, 2017
 \begin{DoxyCopyright}{Copyright}
 (C) 2012-\/2016 qbrobotics. All rights reserved. 
 
-(C) 2017-\/2019 Centro \char`\"{}\+E.\+Piaggio\char`\"{}. All rights reserved.
+(C) 2017-\/2020 Centro \char`\"{}\+E.\+Piaggio\char`\"{}. All rights reserved.
 \end{DoxyCopyright}
 This file is included in the firmware, in its libraries and applications. It contains all definitions that are necessary for the contruction of communication packages.
 
@@ -302,7 +303,11 @@ I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+FS&Use 2 E\+MG. Firs
 \hline
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+F\+S\+\_\+\+A\+DV@{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+F\+S\+\_\+\+A\+DV}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+F\+S\+\_\+\+A\+DV@{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+F\+S\+\_\+\+A\+DV}}}\mbox{\label{commands_8h_af5b4e6fe0787834c86e4ea44f0ece279a9e54aef6ab6f164ed0db5c3d59058da8}} 
-I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+F\+S\+\_\+\+A\+DV&Use 2 E\+MG. First reaching threshold. wins and its value defines hand closure. Wait for both E\+MG to lower under threshold. \\
+I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+F\+S\+\_\+\+A\+DV&Use 2 E\+MG. First reaching threshold. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+P\+R\+O\+P\+O\+R\+T\+I\+O\+N\+A\+L\+\_\+\+NC@{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+P\+R\+O\+P\+O\+R\+T\+I\+O\+N\+A\+L\+\_\+\+NC}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+P\+R\+O\+P\+O\+R\+T\+I\+O\+N\+A\+L\+\_\+\+NC@{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+P\+R\+O\+P\+O\+R\+T\+I\+O\+N\+A\+L\+\_\+\+NC}}}\mbox{\label{commands_8h_af5b4e6fe0787834c86e4ea44f0ece279a5615cd4b06b150f6832a773356e38101}} 
+I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+P\+R\+O\+P\+O\+R\+T\+I\+O\+N\+A\+L\+\_\+\+NC&Normally closed. wins and its value defines hand closure. Wait for both E\+MG to lower under threshold. \\
 \hline
 
 \end{DoxyEnumFields}

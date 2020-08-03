@@ -26,6 +26,8 @@ struct \textbf{ st\+\_\+meas} \textbf{ g\+\_\+meas\+Old} [\textbf{ N\+\_\+\+E\+N
 \item 
 struct \textbf{ st\+\_\+emg\+\_\+meas} g\+\_\+emg\+\_\+meas \textbf{ g\+\_\+emg\+\_\+meas\+Old}
 \item 
+struct \textbf{ st\+\_\+fb\+\_\+meas} \textbf{ g\+\_\+fb\+\_\+meas}
+\item 
 struct \textbf{ st\+\_\+data} \textbf{ g\+\_\+rx}
 \item 
 struct \textbf{ st\+\_\+eeprom} g\+\_\+mem \textbf{ c\+\_\+mem}
@@ -153,6 +155,8 @@ uint8 {\bfseries Temp} [N\+\_\+\+I\+M\+U\+\_\+\+M\+AX][2]
 \item 
 \mbox{\label{globals_8c_a79179edea7394e7176f8768b1b0f6f92}} 
 float {\bfseries Quat} [N\+\_\+\+I\+M\+U\+\_\+\+M\+AX][4]
+\item 
+uint8 \textbf{ master\+\_\+mode}
 \end{DoxyCompactItemize}
 
 
@@ -160,7 +164,7 @@ float {\bfseries Quat} [N\+\_\+\+I\+M\+U\+\_\+\+M\+AX][4]
 Global variables. 
 
 \begin{DoxyDate}{Date}
-October 01, 2017 
+March 20th, 2020 
 \end{DoxyDate}
 \begin{DoxyAuthor}{Author}
 {\itshape Centro \char`\"{}\+E.\+Piaggio\char`\"{}} 
@@ -168,7 +172,7 @@ October 01, 2017
 \begin{DoxyCopyright}{Copyright}
 (C) 2012-\/2016 qbrobotics. All rights reserved. 
 
-(C) 2017-\/2019 Centro \char`\"{}\+E.\+Piaggio\char`\"{}. All rights reserved. 
+(C) 2017-\/2020 Centro \char`\"{}\+E.\+Piaggio\char`\"{}. All rights reserved. 
 \end{DoxyCopyright}
 
 
@@ -287,7 +291,13 @@ Forced open flag (used in position with rest position control). \mbox{\label{glo
 \subsubsection{g\+\_\+emg\+\_\+meas\+Old}
 {\footnotesize\ttfamily struct \textbf{ st\+\_\+emg\+\_\+meas} g\+\_\+emg\+\_\+meas g\+\_\+emg\+\_\+meas\+Old}
 
-E\+MG Measurements. \mbox{\label{globals_8c_a7b175385b2b9418fa7159c72d0f470fd}} 
+E\+MG Measurements. \mbox{\label{globals_8c_af8d2d84570b7e85614e0455a23177e62}} 
+\index{globals.\+c@{globals.\+c}!g\+\_\+fb\+\_\+meas@{g\+\_\+fb\+\_\+meas}}
+\index{g\+\_\+fb\+\_\+meas@{g\+\_\+fb\+\_\+meas}!globals.\+c@{globals.\+c}}
+\subsubsection{g\+\_\+fb\+\_\+meas}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+fb\+\_\+meas} g\+\_\+fb\+\_\+meas}
+
+Haptic Feedback Measurements. \mbox{\label{globals_8c_a7b175385b2b9418fa7159c72d0f470fd}} 
 \index{globals.\+c@{globals.\+c}!g\+\_\+meas\+Old@{g\+\_\+meas\+Old}}
 \index{g\+\_\+meas\+Old@{g\+\_\+meas\+Old}!globals.\+c@{globals.\+c}}
 \subsubsection{g\+\_\+meas\+Old}
@@ -317,7 +327,13 @@ Interrupt flag enabler. \mbox{\label{globals_8c_a7bdd0aaa2a8c38bd61f34d76d3a69db
 \subsubsection{maintenance\+\_\+flag}
 {\footnotesize\ttfamily uint8 maintenance\+\_\+flag = F\+A\+L\+SE}
 
-Maintenance flag. \mbox{\label{globals_8c_ab302ef69391ec5a0b59dadb9c7d2a3ef}} 
+Maintenance flag. \mbox{\label{globals_8c_acf0e2a5d5954714103e295ac35513215}} 
+\index{globals.\+c@{globals.\+c}!master\+\_\+mode@{master\+\_\+mode}}
+\index{master\+\_\+mode@{master\+\_\+mode}!globals.\+c@{globals.\+c}}
+\subsubsection{master\+\_\+mode}
+{\footnotesize\ttfamily uint8 master\+\_\+mode}
+
+Flag used to set/unset master mode to send messages to other boards. \mbox{\label{globals_8c_ab302ef69391ec5a0b59dadb9c7d2a3ef}} 
 \index{globals.\+c@{globals.\+c}!N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+N\+A\+L\+O\+G\+\_\+\+I\+N\+P\+U\+TS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+N\+A\+L\+O\+G\+\_\+\+I\+N\+P\+U\+TS}}
 \index{N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+N\+A\+L\+O\+G\+\_\+\+I\+N\+P\+U\+TS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+N\+A\+L\+O\+G\+\_\+\+I\+N\+P\+U\+TS}!globals.\+c@{globals.\+c}}
 \subsubsection{N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+N\+A\+L\+O\+G\+\_\+\+I\+N\+P\+U\+TS}

@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2019, Centro "E.Piaggio"
+// Copyright (c) 2017-2020, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -36,10 +36,10 @@
 * \file         globals.c
 *
 * \brief        Global variables.
-* \date         October 01, 2017
+* \date         March 20th, 2020
 * \author       _Centro "E.Piaggio"_
 * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
-* \copyright    (C) 2017-2019 Centro "E.Piaggio". All rights reserved.
+* \copyright    (C) 2017-2020 Centro "E.Piaggio". All rights reserved.
 */
 
 //=================================================================     includes
@@ -50,6 +50,7 @@
 struct st_ref       g_ref[NUM_OF_MOTORS], g_refNew[NUM_OF_MOTORS], g_refOld[NUM_OF_MOTORS];  // Motor reference variables.
 struct st_meas      g_meas[N_ENCODER_LINE_MAX], g_measOld[N_ENCODER_LINE_MAX];          // Measurements.
 struct st_emg_meas  g_emg_meas, g_emg_measOld;  // EMG Measurements.
+struct st_fb_meas   g_fb_meas;                  // Haptic Feedback Measurements.
 struct st_data      g_rx;                       // Income data.
 struct st_eeprom    g_mem, c_mem;               // Memory variables.
 struct st_calib     calib;                      // Calibration variables.
@@ -120,5 +121,8 @@ uint8 Mag[N_IMU_MAX][6];
 uint8 MagCal[N_IMU_MAX][3];
 uint8 Temp[N_IMU_MAX][2];
 float Quat[N_IMU_MAX][4];
+
+// MASTER variables
+uint8 master_mode;               /*!< Flag used to set/unset master mode to send messages to other boards.*/
 
 /* END OF FILE */

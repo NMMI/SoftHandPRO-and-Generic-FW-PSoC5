@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2019, Centro "E.Piaggio"
+// Copyright (c) 2017-2020, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -36,10 +36,10 @@
 * \file         globals.h
 *
 * \brief        Global definitions and macros are set in this file.
-* \date         February 01, 2018
+* \date         March 20th, 2020
 * \author       _Centro "E.Piaggio"_
 * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
-* \copyright    (C) 2017-2019 Centro "E.Piaggio". All rights reserved.
+* \copyright    (C) 2017-2020 Centro "E.Piaggio". All rights reserved.
 *
 */
 
@@ -66,7 +66,9 @@
 #define NUM_OF_INPUT_EMGS       2       /*!< Number of emg channels.*/
 #define NUM_OF_ADDITIONAL_EMGS  6       /*!< Number of additional emg channels.*/
 #define NUM_OF_ADC_CHANNELS_MAX (4+NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS)    
-#define NUM_OF_PARAMS           71      /*!< Number of parameters saved in the EEPROM.*/
+#define NUM_OF_MS_PARAMS        2       /*!< Number of master parameters saved in the EEPROM.*/
+#define NUM_OF_FB_PARAMS        3       /*!< Number of feedback parameters saved in the EEPROM.*/
+#define NUM_OF_PARAMS           (71 + NUM_OF_MS_PARAMS + NUM_OF_FB_PARAMS)      /*!< Number of parameters saved in the EEPROM.*/
 #define NUM_OF_PARAMS_MENU      10      /*!< Number of parameters menu.*/    
 #define N_IMU_MAX               5    
 #define NUM_OF_IMU_DATA         5       // accelerometers, gyroscopes, magnetometers, quaternion and temperature data
@@ -146,7 +148,8 @@
 //==============================================================================
 #define SOFTHAND_PRO        0
 #define GENERIC_2_MOTORS    1
-#define CUFF                2
+#define AIR_CHAMBERS_FB     2
+#define CUFF                3 
 
 //==============================================================================
 //                                                                   MOTOR GEARS
@@ -169,7 +172,9 @@
 #define ST_IMU          40
 #define ST_EXPANSION    50
 #define ST_USER         60
-#define ST_SH_SPEC      70   
+#define ST_SH_SPEC      70
+#define ST_MS_SPEC      80
+#define ST_FB_SPEC      90
     
 //==============================================================================
 //                                                                         OTHER
@@ -220,13 +225,17 @@ struct st_meas {
     int32 estim_curr;               /*!< Current estimation.*/
     int32 hold_curr;                /*!< Maximum current reached while grasping.*/
     int8 rot[NUM_OF_SENSORS];       /*!< Encoder sensor rotations.*/
-    int32 vel[NUM_OF_SENSORS];              /*!< Encoder rotational velocity.*/
-    int32 acc[NUM_OF_SENSORS];              /*!< Encoder rotational acceleration.*/
+    int32 vel[NUM_OF_SENSORS];      /*!< Encoder rotational velocity.*/
+    int32 acc[NUM_OF_SENSORS];      /*!< Encoder rotational acceleration.*/
 };
 
 struct st_emg_meas {
     int32 emg[NUM_OF_INPUT_EMGS];           /*!< EMG sensors values.*/
     int32 add_emg[NUM_OF_ADDITIONAL_EMGS];  /*!< Additional EMG sensors values.*/
+};
+
+struct st_fb_meas {
+    float pressure;                 /*!< Pressure sensor measurements.*/
 };
 
 //==============================================================     data packet
@@ -371,7 +380,7 @@ struct st_user{
 };                                                                                                          // TOTAL: 32 BYTES
 
 //=================================================     SoftHand specific
-/** \brief SoftHand specific related prameters structure
+/** \brief SoftHand specific related parameters structure
  *
 **/ 
 struct st_SH_spec{
@@ -381,6 +390,28 @@ struct st_SH_spec{
     uint8   rest_position_flag;         /*!< Enable rest position feature.*/                                //1
     uint8   unused_bytes[3];            /*!< Unused bytes to fill row.*/                                    //3
 };                                                                                                          // TOTAL: 16 BYTES                                                                                                         // TOTAL: 80 BYTES
+
+//=================================================     Master specific
+/** \brief Master mode specific parameters structure
+ *
+**/ 
+struct st_MASTER_spec{
+    uint8   slave_comm_active;          /*!< Slave communication active flag.*/                             //1
+    uint8   slave_ID;                   /*!< Slave ID.*/                                                    //1
+    uint8   unused_bytes[14];           /*!< Unused bytes to fill row.*/                                    //14
+}; 
+
+//=================================================     Feedback specific
+/** \brief Feedback mode specific parameters structure
+ *
+**/ 
+struct st_FB_spec{
+    int32   max_residual_current;       /*!< Maximum slave residual current.*/                              //4
+    float   maximum_pressure_kPa;       /*!< Maximum pressure for feedback (in kPa).*/                      //4
+    float   prop_err_fb_gain;           /*!< Gain for proportional error fo rfeedback.*/                    //4
+    uint8   unused_bytes[4];            /*!< Unused bytes to fill row.*/                                    //4
+};                                                                                                          // TOTAL: 16 BYTES 
+ 
 
 //-------------------------------------------- MEMORY VARIABLES ---------------------------------------------// 
 /** \brief Memory variables
@@ -402,12 +433,12 @@ struct st_eeprom {
     struct st_user user[NUM_OF_USERS];  /*!< User variables.*/                                              //2*3 rows  (End of row 42)
     
     struct st_SH_spec SH;               /*!< SoftHand specific variables.*/                                 //1 row     (End of row 43)
- 
+    struct st_MASTER_spec MS;           /*!< Master specific variables.*/                                   //1 row     (End of row 44)
+    struct st_FB_spec FB;               /*!< Feedback specific variables.*/                                 //1 row     (End of row 45)
 
 #ifdef GENERIC_FW
     //struct st_CUFF_spec CUFF_spec;
     //struct st_JOY_spec JOY_spec;
-    //struct st_MASTER_spec MASTER_spec;
 #endif    
 };
 
@@ -469,6 +500,7 @@ typedef enum {
 extern struct st_ref    g_ref[NUM_OF_MOTORS], g_refNew[NUM_OF_MOTORS], g_refOld[NUM_OF_MOTORS]; /*!< Reference variables.*/
 extern struct st_meas   g_meas[N_ENCODER_LINE_MAX], g_measOld[N_ENCODER_LINE_MAX];              /*!< Measurements.*/
 extern struct st_emg_meas g_emg_meas, g_emg_measOld;/*!< EMG Measurements.*/
+extern struct st_fb_meas g_fb_meas;                 /*!< Haptic Feedback Measurements.*/
 extern struct st_data   g_rx;                       /*!< Incoming/Outcoming data.*/
 extern struct st_eeprom g_mem, c_mem;               /*!< Memory parameters.*/
 extern struct st_calib  calib;                      /*!< Calibration variables.*/
@@ -536,6 +568,9 @@ extern uint8 Mag[N_IMU_MAX][6];
 extern uint8 MagCal[N_IMU_MAX][3];
 extern uint8 Temp[N_IMU_MAX][2];
 extern float Quat[N_IMU_MAX][4];
+
+// MASTER variables
+extern uint8 master_mode;               /*!< Flag used to set/unset master mode to send messages to other boards.*/
 
 // -----------------------------------------------------------------------------
 

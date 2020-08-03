@@ -1,0 +1,3810 @@
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.main,"ax",%progbits
+  20              		.align	2
+  21              		.global	main
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	main, %function
+  25              	main:
+  26              	.LFB64:
+  27              		.file 1 "..\\src\\main.c"
+   1:..\src/main.c **** // ----------------------------------------------------------------------------
+   2:..\src/main.c **** // BSD 3-Clause License
+   3:..\src/main.c **** 
+   4:..\src/main.c **** // Copyright (c) 2016, qbrobotics
+   5:..\src/main.c **** // Copyright (c) 2017-2019, Centro "E.Piaggio"
+   6:..\src/main.c **** // All rights reserved.
+   7:..\src/main.c **** 
+   8:..\src/main.c **** // Redistribution and use in source and binary forms, with or without
+   9:..\src/main.c **** // modification, are permitted provided that the following conditions are met:
+  10:..\src/main.c **** 
+  11:..\src/main.c **** // * Redistributions of source code must retain the above copyright notice, this
+  12:..\src/main.c **** //   list of conditions and the following disclaimer.
+  13:..\src/main.c **** 
+  14:..\src/main.c **** // * Redistributions in binary form must reproduce the above copyright notice,
+  15:..\src/main.c **** //   this list of conditions and the following disclaimer in the documentation
+  16:..\src/main.c **** //   and/or other materials provided with the distribution.
+  17:..\src/main.c **** 
+  18:..\src/main.c **** // * Neither the name of the copyright holder nor the names of its
+  19:..\src/main.c **** //   contributors may be used to endorse or promote products derived from
+  20:..\src/main.c **** //   this software without specific prior written permission.
+  21:..\src/main.c **** 
+  22:..\src/main.c **** // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  23:..\src/main.c **** // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  24:..\src/main.c **** // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  25:..\src/main.c **** // DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  26:..\src/main.c **** // FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  27:..\src/main.c **** // DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  28:..\src/main.c **** // SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  29:..\src/main.c **** // CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  30:..\src/main.c **** // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 2
+
+
+  31:..\src/main.c **** // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  32:..\src/main.c **** // POSSIBILITY OF SUCH DAMAGE.
+  33:..\src/main.c **** // ----------------------------------------------------------------------------
+  34:..\src/main.c **** 
+  35:..\src/main.c **** /**
+  36:..\src/main.c **** * \file         main.c
+  37:..\src/main.c **** *
+  38:..\src/main.c **** * \brief        Firmware main file.
+  39:..\src/main.c **** * \date         May 31, 2019
+  40:..\src/main.c **** * \author       _Centro "E.Piaggio"_
+  41:..\src/main.c **** * \copyright    (C) 2019 Centro "E.Piaggio". All rights reserved.
+  42:..\src/main.c **** * \mainpage     Firmware
+  43:..\src/main.c **** * \brief        This is the firmware of PSoC5 logic board.
+  44:..\src/main.c **** * \version      1.0
+  45:..\src/main.c **** *
+  46:..\src/main.c **** * \details      This is the firmware of PSoC5 logic board. Depending on the configuration, 
+  47:..\src/main.c **** *               it can control up to two motors and read its encoders. Also can read and
+  48:..\src/main.c **** *               convert analog measurements connected to the PSoC microcontroller.                
+  49:..\src/main.c **** *
+  50:..\src/main.c **** */
+  51:..\src/main.c **** 
+  52:..\src/main.c **** 
+  53:..\src/main.c **** // ----------------------------------------------------------------------------
+  54:..\src/main.c **** // This version changes:
+  55:..\src/main.c **** //      - not reported
+  56:..\src/main.c **** 
+  57:..\src/main.c **** 
+  58:..\src/main.c **** //=================================================================     includes
+  59:..\src/main.c **** 
+  60:..\src/main.c **** #include "device.h"
+  61:..\src/main.c **** #include "globals.h"
+  62:..\src/main.c **** #include "interruptions.h"
+  63:..\src/main.c **** #include "command_processing.h"
+  64:..\src/main.c **** #include "IMU_functions.h"
+  65:..\src/main.c **** #include "Encoder_functions.h"
+  66:..\src/main.c **** #include "SD_RTC_functions.h"
+  67:..\src/main.c **** #include "utils.h"
+  68:..\src/main.c **** #include "project.h"
+  69:..\src/main.c **** #include "FS.h"
+  70:..\src/main.c **** 
+  71:..\src/main.c **** //==============================================================================
+  72:..\src/main.c **** //                                                                 MAIN FUNCTION
+  73:..\src/main.c **** //==============================================================================
+  74:..\src/main.c **** 
+  75:..\src/main.c **** int main()
+  76:..\src/main.c **** {
+  28              		.loc 1 76 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 90B5     		push	{r4, r7, lr}
+  33              		.cfi_def_cfa_offset 12
+  34              		.cfi_offset 4, -12
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 83B0     		sub	sp, sp, #12
+  38              		.cfi_def_cfa_offset 24
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 3
+
+
+  39 0004 00AF     		add	r7, sp, #0
+  40              		.cfi_def_cfa_register 7
+  77:..\src/main.c ****     // Iterator    
+  78:..\src/main.c ****     uint8 i, j;
+  79:..\src/main.c ****     
+  80:..\src/main.c ****     // Variable declarations for DMA     
+  81:..\src/main.c ****     uint8 DMA_Chan;
+  82:..\src/main.c ****     uint8 DMA_TD[1];
+  83:..\src/main.c ****     
+  84:..\src/main.c ****     //================================     initializations - psoc and components
+  85:..\src/main.c **** 
+  86:..\src/main.c ****     // EEPROM
+  87:..\src/main.c ****     EEPROM_Start();
+  41              		.loc 1 87 0
+  42 0006 FFF7FEFF 		bl	EEPROM_Start
+  88:..\src/main.c ****     memRecall();                                        // Recall configuration.  
+  43              		.loc 1 88 0
+  44 000a FFF7FEFF 		bl	memRecall
+  89:..\src/main.c ****     
+  90:..\src/main.c ****     // FTDI chip enable
+  91:..\src/main.c ****     CyDelay(100);
+  45              		.loc 1 91 0
+  46 000e 6420     		movs	r0, #100
+  47 0010 FFF7FEFF 		bl	CyDelay
+  92:..\src/main.c ****     FTDI_ENABLE_Write(0x01);
+  48              		.loc 1 92 0
+  49 0014 0120     		movs	r0, #1
+  50 0016 FFF7FEFF 		bl	FTDI_ENABLE_Write
+  93:..\src/main.c ****     
+  94:..\src/main.c **** 	// LED Enable   
+  95:..\src/main.c ****     LED_control(1);     // Green fixed light
+  51              		.loc 1 95 0
+  52 001a 0120     		movs	r0, #1
+  53 001c FFF7FEFF 		bl	LED_control
+  96:..\src/main.c ****     BLINK_05HZ_Start();
+  54              		.loc 1 96 0
+  55 0020 FFF7FEFF 		bl	BLINK_05HZ_Start
+  97:..\src/main.c ****     BLINK_25HZ_Start();
+  56              		.loc 1 97 0
+  57 0024 FFF7FEFF 		bl	BLINK_25HZ_Start
+  98:..\src/main.c ****     BLINK_05HZ_WriteCompare(499);
+  58              		.loc 1 98 0
+  59 0028 40F2F310 		movw	r0, #499
+  60 002c FFF7FEFF 		bl	BLINK_05HZ_WriteCompare
+  99:..\src/main.c ****     BLINK_25HZ_WriteCompare(99);
+  61              		.loc 1 99 0
+  62 0030 6320     		movs	r0, #99
+  63 0032 FFF7FEFF 		bl	BLINK_25HZ_WriteCompare
+ 100:..\src/main.c ****     
+ 101:..\src/main.c ****     // RS485
+ 102:..\src/main.c ****     UART_RS485_Stop();
+  64              		.loc 1 102 0
+  65 0036 FFF7FEFF 		bl	UART_RS485_Stop
+ 103:..\src/main.c ****     UART_RS485_Start();
+  66              		.loc 1 103 0
+  67 003a FFF7FEFF 		bl	UART_RS485_Start
+ 104:..\src/main.c ****     UART_RS485_Init();
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 4
+
+
+  68              		.loc 1 104 0
+  69 003e FFF7FEFF 		bl	UART_RS485_Init
+ 105:..\src/main.c ****     UART_RS485_ClearRxBuffer();
+  70              		.loc 1 105 0
+  71 0042 FFF7FEFF 		bl	UART_RS485_ClearRxBuffer
+ 106:..\src/main.c ****     UART_RS485_ClearTxBuffer();
+  72              		.loc 1 106 0
+  73 0046 FFF7FEFF 		bl	UART_RS485_ClearTxBuffer
+ 107:..\src/main.c ****     ISR_RS485_RX_StartEx(ISR_RS485_RX_ExInterrupt);
+  74              		.loc 1 107 0
+  75 004a A148     		ldr	r0, .L36
+  76 004c FFF7FEFF 		bl	ISR_RS485_RX_StartEx
+ 108:..\src/main.c ****     
+ 109:..\src/main.c ****     // CYCLES TIMER   
+ 110:..\src/main.c ****     CYCLES_TIMER_Start();
+  77              		.loc 1 110 0
+  78 0050 FFF7FEFF 		bl	CYCLES_TIMER_Start
+ 111:..\src/main.c ****     ISR_CYCLES_StartEx(ISR_CYCLES_Handler);
+  79              		.loc 1 111 0
+  80 0054 9F48     		ldr	r0, .L36+4
+  81 0056 FFF7FEFF 		bl	ISR_CYCLES_StartEx
+ 112:..\src/main.c ****     
+ 113:..\src/main.c ****     // PWM
+ 114:..\src/main.c ****     PWM_MOTORS_Start();
+  82              		.loc 1 114 0
+  83 005a FFF7FEFF 		bl	PWM_MOTORS_Start
+ 115:..\src/main.c ****     PWM_MOTORS_WriteCompare1(0);
+  84              		.loc 1 115 0
+  85 005e 0020     		movs	r0, #0
+  86 0060 FFF7FEFF 		bl	PWM_MOTORS_WriteCompare1
+ 116:..\src/main.c ****     MOTOR_DIR_1_Write(0);
+  87              		.loc 1 116 0
+  88 0064 0020     		movs	r0, #0
+  89 0066 FFF7FEFF 		bl	MOTOR_DIR_1_Write
+ 117:..\src/main.c ****     enable_motor(0, 0x00);
+  90              		.loc 1 117 0
+  91 006a 0021     		movs	r1, #0
+  92 006c 0020     		movs	r0, #0
+  93 006e FFF7FEFF 		bl	enable_motor
+ 118:..\src/main.c ****     MOTOR_DIR_2_Write(0);
+  94              		.loc 1 118 0
+  95 0072 0020     		movs	r0, #0
+  96 0074 FFF7FEFF 		bl	MOTOR_DIR_2_Write
+ 119:..\src/main.c ****     enable_motor(1, 0x00);
+  97              		.loc 1 119 0
+  98 0078 0021     		movs	r1, #0
+  99 007a 0120     		movs	r0, #1
+ 100 007c FFF7FEFF 		bl	enable_motor
+ 120:..\src/main.c **** 
+ 121:..\src/main.c **** #ifdef AIR_CHAMBERS_FB_FW
+ 122:..\src/main.c ****     if (c_mem.dev.dev_type == AIR_CHAMBERS_FB){
+ 101              		.loc 1 122 0
+ 102 0080 954B     		ldr	r3, .L36+8
+ 103 0082 93F8AC30 		ldrb	r3, [r3, #172]	@ zero_extendqisi2
+ 104 0086 022B     		cmp	r3, #2
+ 105 0088 02D1     		bne	.L2
+ 123:..\src/main.c ****         VALVE_Write(0);
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 5
+
+
+ 106              		.loc 1 123 0
+ 107 008a 0020     		movs	r0, #0
+ 108 008c FFF7FEFF 		bl	VALVE_Write
+ 109              	.L2:
+ 124:..\src/main.c ****     }
+ 125:..\src/main.c **** #endif
+ 126:..\src/main.c **** 
+ 127:..\src/main.c ****     // Init AS5045 devices  
+ 128:..\src/main.c ****     COUNTER_ENC_Start();
+ 110              		.loc 1 128 0
+ 111 0090 FFF7FEFF 		bl	COUNTER_ENC_Start
+ 129:..\src/main.c ****     SHIFTREG_ENC_1_Start();
+ 112              		.loc 1 129 0
+ 113 0094 FFF7FEFF 		bl	SHIFTREG_ENC_1_Start
+ 130:..\src/main.c ****     SHIFTREG_ENC_2_Start();
+ 114              		.loc 1 130 0
+ 115 0098 FFF7FEFF 		bl	SHIFTREG_ENC_2_Start
+ 131:..\src/main.c ****     SHIFTREG_ENC_3_Start();
+ 116              		.loc 1 131 0
+ 117 009c FFF7FEFF 		bl	SHIFTREG_ENC_3_Start
+ 132:..\src/main.c **** 
+ 133:..\src/main.c ****     // ADC
+ 134:..\src/main.c ****     ADC_Set_N_Channels();           // Set right number of ADC channels to sample
+ 118              		.loc 1 134 0
+ 119 00a0 FFF7FEFF 		bl	ADC_Set_N_Channels
+ 135:..\src/main.c ****     ADC_Start();
+ 120              		.loc 1 135 0
+ 121 00a4 FFF7FEFF 		bl	ADC_Start
+ 136:..\src/main.c ****     ADC_SOC_Write(0x01);            // Force first read cycle.
+ 122              		.loc 1 136 0
+ 123 00a8 0120     		movs	r0, #1
+ 124 00aa FFF7FEFF 		bl	ADC_SOC_Write
+ 137:..\src/main.c **** 
+ 138:..\src/main.c ****     // ADC DMA    
+ 139:..\src/main.c ****     DMA_Chan = DMA_DmaInitialize(DMA_BYTES_PER_BURST, DMA_REQUEST_PER_BURST, HI16(DMA_SRC_BASE), HI
+ 125              		.loc 1 139 0
+ 126 00ae 41F6FF73 		movw	r3, #8191
+ 127 00b2 4FF48042 		mov	r2, #16384
+ 128 00b6 0121     		movs	r1, #1
+ 129 00b8 0220     		movs	r0, #2
+ 130 00ba FFF7FEFF 		bl	DMA_DmaInitialize
+ 131 00be 0346     		mov	r3, r0
+ 132 00c0 7B71     		strb	r3, [r7, #5]
+ 140:..\src/main.c ****     DMA_TD[0] = CyDmaTdAllocate();                                                                 
+ 133              		.loc 1 140 0
+ 134 00c2 FFF7FEFF 		bl	CyDmaTdAllocate
+ 135 00c6 0346     		mov	r3, r0
+ 136 00c8 3B71     		strb	r3, [r7, #4]
+ 141:..\src/main.c ****     CyDmaTdSetConfiguration(DMA_TD[0], 2 * NUM_OF_ANALOG_INPUTS, DMA_TD[0], DMA__TD_TERMOUT_EN | TD
+ 137              		.loc 1 141 0
+ 138 00ca 3879     		ldrb	r0, [r7, #4]	@ zero_extendqisi2
+ 139 00cc 834B     		ldr	r3, .L36+12
+ 140 00ce 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 141 00d0 9BB2     		uxth	r3, r3
+ 142 00d2 5B00     		lsls	r3, r3, #1
+ 143 00d4 99B2     		uxth	r1, r3
+ 144 00d6 3A79     		ldrb	r2, [r7, #4]	@ zero_extendqisi2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 6
+
+
+ 145 00d8 0623     		movs	r3, #6
+ 146 00da FFF7FEFF 		bl	CyDmaTdSetConfiguration
+ 142:..\src/main.c ****     CyDmaTdSetAddress(DMA_TD[0], LO16((uint32)ADC_DEC_SAMP_PTR), LO16((uint32)ADC_buf));           
+ 147              		.loc 1 142 0
+ 148 00de 3B79     		ldrb	r3, [r7, #4]	@ zero_extendqisi2
+ 149 00e0 7F4A     		ldr	r2, .L36+16
+ 150 00e2 92B2     		uxth	r2, r2
+ 151 00e4 44F61061 		movw	r1, #19984
+ 152 00e8 1846     		mov	r0, r3
+ 153 00ea FFF7FEFF 		bl	CyDmaTdSetAddress
+ 143:..\src/main.c ****     CyDmaChSetInitialTd(DMA_Chan, DMA_TD[0]);                                                      
+ 154              		.loc 1 143 0
+ 155 00ee 3A79     		ldrb	r2, [r7, #4]	@ zero_extendqisi2
+ 156 00f0 7B79     		ldrb	r3, [r7, #5]	@ zero_extendqisi2
+ 157 00f2 1146     		mov	r1, r2
+ 158 00f4 1846     		mov	r0, r3
+ 159 00f6 FFF7FEFF 		bl	CyDmaChSetInitialTd
+ 144:..\src/main.c ****     CyDmaChEnable(DMA_Chan, 1);                                                                    
+ 160              		.loc 1 144 0
+ 161 00fa 7B79     		ldrb	r3, [r7, #5]	@ zero_extendqisi2
+ 162 00fc 0121     		movs	r1, #1
+ 163 00fe 1846     		mov	r0, r3
+ 164 0100 FFF7FEFF 		bl	CyDmaChEnable
+ 145:..\src/main.c ****     
+ 146:..\src/main.c ****     // TIMER
+ 147:..\src/main.c ****     MY_TIMER_Start();           
+ 165              		.loc 1 147 0
+ 166 0104 FFF7FEFF 		bl	MY_TIMER_Start
+ 148:..\src/main.c ****     PACER_TIMER_Start();    
+ 167              		.loc 1 148 0
+ 168 0108 FFF7FEFF 		bl	PACER_TIMER_Start
+ 149:..\src/main.c ****     
+ 150:..\src/main.c ****     CYGlobalIntEnable;              // Enable interrupts.
+ 169              		.loc 1 150 0
+ 170              		.syntax unified
+ 171              	@ 150 "..\src\main.c" 1
+ 172 010c 62B6     		CPSIE   i
+ 173              	@ 0 "" 2
+ 151:..\src/main.c **** 
+ 152:..\src/main.c ****     // Init AS5045 devices
+ 153:..\src/main.c ****     InitEncoderGeneral();
+ 174              		.loc 1 153 0
+ 175              		.thumb
+ 176              		.syntax unified
+ 177 010e FFF7FEFF 		bl	InitEncoderGeneral
+ 154:..\src/main.c **** 
+ 155:..\src/main.c ****     //SPI IMU module
+ 156:..\src/main.c ****     if (c_mem.imu.read_imu_flag) {
+ 178              		.loc 1 156 0
+ 179 0112 714B     		ldr	r3, .L36+8
+ 180 0114 93F80032 		ldrb	r3, [r3, #512]	@ zero_extendqisi2
+ 181 0118 002B     		cmp	r3, #0
+ 182 011a 34D0     		beq	.L3
+ 157:..\src/main.c **** 
+ 158:..\src/main.c ****     	SPI_IMU_Start();
+ 183              		.loc 1 158 0
+ 184 011c FFF7FEFF 		bl	SPI_IMU_Start
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 7
+
+
+ 159:..\src/main.c ****     	SPI_IMU_Init();
+ 185              		.loc 1 159 0
+ 186 0120 FFF7FEFF 		bl	SPI_IMU_Init
+ 160:..\src/main.c ****     	SPI_IMU_Enable();
+ 187              		.loc 1 160 0
+ 188 0124 FFF7FEFF 		bl	SPI_IMU_Enable
+ 161:..\src/main.c ****     	SPI_IMU_ClearRxBuffer();
+ 189              		.loc 1 161 0
+ 190 0128 FFF7FEFF 		bl	SPI_IMU_ClearRxBuffer
+ 162:..\src/main.c ****     	SPI_IMU_ClearTxBuffer();
+ 191              		.loc 1 162 0
+ 192 012c FFF7FEFF 		bl	SPI_IMU_ClearTxBuffer
+ 163:..\src/main.c ****     	SPI_IMU_ClearFIFO();							
+ 193              		.loc 1 163 0
+ 194 0130 FFF7FEFF 		bl	SPI_IMU_ClearFIFO
+ 164:..\src/main.c ****         CyDelay(10);
+ 195              		.loc 1 164 0
+ 196 0134 0A20     		movs	r0, #10
+ 197 0136 FFF7FEFF 		bl	CyDelay
+ 165:..\src/main.c ****         
+ 166:..\src/main.c ****         // Init MPU9250 devices
+ 167:..\src/main.c ****         InitIMUgeneral();
+ 198              		.loc 1 167 0
+ 199 013a FFF7FEFF 		bl	InitIMUgeneral
+ 168:..\src/main.c ****         
+ 169:..\src/main.c ****         // Initialize quaternion
+ 170:..\src/main.c ****         for (i = 0; i<N_IMU_MAX; i++) {
+ 200              		.loc 1 170 0
+ 201 013e 0023     		movs	r3, #0
+ 202 0140 FB71     		strb	r3, [r7, #7]
+ 203 0142 1DE0     		b	.L4
+ 204              	.L5:
+ 171:..\src/main.c ****             Quat[i][0] = 0.999;
+ 205              		.loc 1 171 0 discriminator 3
+ 206 0144 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 207 0146 674A     		ldr	r2, .L36+20
+ 208 0148 1B01     		lsls	r3, r3, #4
+ 209 014a 1344     		add	r3, r3, r2
+ 210 014c 664A     		ldr	r2, .L36+24
+ 211 014e 1A60     		str	r2, [r3]	@ float
+ 172:..\src/main.c ****             Quat[i][1] = 0.01;
+ 212              		.loc 1 172 0 discriminator 3
+ 213 0150 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 214 0152 644A     		ldr	r2, .L36+20
+ 215 0154 1B01     		lsls	r3, r3, #4
+ 216 0156 1344     		add	r3, r3, r2
+ 217 0158 0433     		adds	r3, r3, #4
+ 218 015a 644A     		ldr	r2, .L36+28
+ 219 015c 1A60     		str	r2, [r3]	@ float
+ 173:..\src/main.c ****             Quat[i][2] = 0.01;
+ 220              		.loc 1 173 0 discriminator 3
+ 221 015e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 222 0160 604A     		ldr	r2, .L36+20
+ 223 0162 1B01     		lsls	r3, r3, #4
+ 224 0164 1344     		add	r3, r3, r2
+ 225 0166 0833     		adds	r3, r3, #8
+ 226 0168 604A     		ldr	r2, .L36+28
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 8
+
+
+ 227 016a 1A60     		str	r2, [r3]	@ float
+ 174:..\src/main.c ****             Quat[i][3] = 0.01;
+ 228              		.loc 1 174 0 discriminator 3
+ 229 016c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 230 016e 5D4A     		ldr	r2, .L36+20
+ 231 0170 1B01     		lsls	r3, r3, #4
+ 232 0172 1344     		add	r3, r3, r2
+ 233 0174 0C33     		adds	r3, r3, #12
+ 234 0176 5D4A     		ldr	r2, .L36+28
+ 235 0178 1A60     		str	r2, [r3]	@ float
+ 170:..\src/main.c ****             Quat[i][0] = 0.999;
+ 236              		.loc 1 170 0 discriminator 3
+ 237 017a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 238 017c 0133     		adds	r3, r3, #1
+ 239 017e FB71     		strb	r3, [r7, #7]
+ 240              	.L4:
+ 170:..\src/main.c ****             Quat[i][0] = 0.999;
+ 241              		.loc 1 170 0 is_stmt 0 discriminator 1
+ 242 0180 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 243 0182 042B     		cmp	r3, #4
+ 244 0184 DED9     		bls	.L5
+ 245              	.L3:
+ 175:..\src/main.c ****         }
+ 176:..\src/main.c ****     }
+ 177:..\src/main.c ****     
+ 178:..\src/main.c ****     //========================================     initializations - clean variables
+ 179:..\src/main.c ****     
+ 180:..\src/main.c ****     //---------------------------------------------------  Initialize filters structure 
+ 181:..\src/main.c ****     for(i=0;i<NUM_OF_MOTORS;i++) {
+ 246              		.loc 1 181 0 is_stmt 1
+ 247 0186 0023     		movs	r3, #0
+ 248 0188 FB71     		strb	r3, [r7, #7]
+ 249 018a 1AE0     		b	.L6
+ 250              	.L7:
+ 182:..\src/main.c ****         filt_i[i].gain = 32;    // Current filter constant.
+ 251              		.loc 1 182 0 discriminator 3
+ 252 018c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 253 018e 584A     		ldr	r2, .L36+32
+ 254 0190 DB00     		lsls	r3, r3, #3
+ 255 0192 1344     		add	r3, r3, r2
+ 256 0194 2022     		movs	r2, #32
+ 257 0196 5A60     		str	r2, [r3, #4]
+ 183:..\src/main.c ****         filt_curr_diff[i].gain = 16;   // Current residual filter constant.       
+ 258              		.loc 1 183 0 discriminator 3
+ 259 0198 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 260 019a 564A     		ldr	r2, .L36+36
+ 261 019c DB00     		lsls	r3, r3, #3
+ 262 019e 1344     		add	r3, r3, r2
+ 263 01a0 1022     		movs	r2, #16
+ 264 01a2 5A60     		str	r2, [r3, #4]
+ 184:..\src/main.c ****         filt_v[i].old_value    = 12000;// Initial voltage filter value.
+ 265              		.loc 1 184 0 discriminator 3
+ 266 01a4 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 267 01a6 544A     		ldr	r2, .L36+40
+ 268 01a8 42F6E061 		movw	r1, #12000
+ 269 01ac 42F83310 		str	r1, [r2, r3, lsl #3]
+ 185:..\src/main.c ****         filt_v[i].gain         = 2;    // Voltage filter constant.
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 9
+
+
+ 270              		.loc 1 185 0 discriminator 3
+ 271 01b0 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 272 01b2 514A     		ldr	r2, .L36+40
+ 273 01b4 DB00     		lsls	r3, r3, #3
+ 274 01b6 1344     		add	r3, r3, r2
+ 275 01b8 0222     		movs	r2, #2
+ 276 01ba 5A60     		str	r2, [r3, #4]
+ 181:..\src/main.c ****         filt_i[i].gain = 32;    // Current filter constant.
+ 277              		.loc 1 181 0 discriminator 3
+ 278 01bc FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 279 01be 0133     		adds	r3, r3, #1
+ 280 01c0 FB71     		strb	r3, [r7, #7]
+ 281              	.L6:
+ 181:..\src/main.c ****         filt_i[i].gain = 32;    // Current filter constant.
+ 282              		.loc 1 181 0 is_stmt 0 discriminator 1
+ 283 01c2 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 284 01c4 012B     		cmp	r3, #1
+ 285 01c6 E1D9     		bls	.L7
+ 186:..\src/main.c ****     }
+ 187:..\src/main.c ****     for(i=0;i<NUM_OF_SENSORS;i++) {
+ 286              		.loc 1 187 0 is_stmt 1
+ 287 01c8 0023     		movs	r3, #0
+ 288 01ca FB71     		strb	r3, [r7, #7]
+ 289 01cc 08E0     		b	.L8
+ 290              	.L9:
+ 188:..\src/main.c ****         filt_vel[i].gain = 128; // Velocity filters constant.
+ 291              		.loc 1 188 0 discriminator 3
+ 292 01ce FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 293 01d0 4A4A     		ldr	r2, .L36+44
+ 294 01d2 DB00     		lsls	r3, r3, #3
+ 295 01d4 1344     		add	r3, r3, r2
+ 296 01d6 8022     		movs	r2, #128
+ 297 01d8 5A60     		str	r2, [r3, #4]
+ 187:..\src/main.c ****         filt_vel[i].gain = 128; // Velocity filters constant.
+ 298              		.loc 1 187 0 discriminator 3
+ 299 01da FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 300 01dc 0133     		adds	r3, r3, #1
+ 301 01de FB71     		strb	r3, [r7, #7]
+ 302              	.L8:
+ 187:..\src/main.c ****         filt_vel[i].gain = 128; // Velocity filters constant.
+ 303              		.loc 1 187 0 is_stmt 0 discriminator 1
+ 304 01e0 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 305 01e2 022B     		cmp	r3, #2
+ 306 01e4 F3D9     		bls	.L9
+ 189:..\src/main.c ****     }
+ 190:..\src/main.c ****     
+ 191:..\src/main.c ****     for(i=0;i<NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS;i++) {
+ 307              		.loc 1 191 0 is_stmt 1
+ 308 01e6 0023     		movs	r3, #0
+ 309 01e8 FB71     		strb	r3, [r7, #7]
+ 310 01ea 08E0     		b	.L10
+ 311              	.L11:
+ 192:..\src/main.c ****         filt_emg[i].gain      = 50;   // Emg channels filter constant.
+ 312              		.loc 1 192 0 discriminator 3
+ 313 01ec FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 314 01ee 444A     		ldr	r2, .L36+48
+ 315 01f0 DB00     		lsls	r3, r3, #3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 10
+
+
+ 316 01f2 1344     		add	r3, r3, r2
+ 317 01f4 3222     		movs	r2, #50
+ 318 01f6 5A60     		str	r2, [r3, #4]
+ 191:..\src/main.c ****         filt_emg[i].gain      = 50;   // Emg channels filter constant.
+ 319              		.loc 1 191 0 discriminator 3
+ 320 01f8 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 321 01fa 0133     		adds	r3, r3, #1
+ 322 01fc FB71     		strb	r3, [r7, #7]
+ 323              	.L10:
+ 191:..\src/main.c ****         filt_emg[i].gain      = 50;   // Emg channels filter constant.
+ 324              		.loc 1 191 0 is_stmt 0 discriminator 1
+ 325 01fe FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 326 0200 072B     		cmp	r3, #7
+ 327 0202 F3D9     		bls	.L11
+ 193:..\src/main.c ****     }
+ 194:..\src/main.c ****     
+ 195:..\src/main.c ****     //---------------------------------------------------  Initialize reference structure 
+ 196:..\src/main.c ****     for (i = 0; i< NUM_OF_MOTORS; i++) {
+ 328              		.loc 1 196 0 is_stmt 1
+ 329 0204 0023     		movs	r3, #0
+ 330 0206 FB71     		strb	r3, [r7, #7]
+ 331 0208 08E0     		b	.L12
+ 332              	.L13:
+ 197:..\src/main.c ****         g_ref[i].pos = 0;
+ 333              		.loc 1 197 0 discriminator 3
+ 334 020a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 335 020c 3D4A     		ldr	r2, .L36+52
+ 336 020e 1B01     		lsls	r3, r3, #4
+ 337 0210 1344     		add	r3, r3, r2
+ 338 0212 0022     		movs	r2, #0
+ 339 0214 1A60     		str	r2, [r3]
+ 196:..\src/main.c ****         g_ref[i].pos = 0;
+ 340              		.loc 1 196 0 discriminator 3
+ 341 0216 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 342 0218 0133     		adds	r3, r3, #1
+ 343 021a FB71     		strb	r3, [r7, #7]
+ 344              	.L12:
+ 196:..\src/main.c ****         g_ref[i].pos = 0;
+ 345              		.loc 1 196 0 is_stmt 0 discriminator 1
+ 346 021c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 347 021e 012B     		cmp	r3, #1
+ 348 0220 F3D9     		bls	.L13
+ 198:..\src/main.c ****     }
+ 199:..\src/main.c ****     
+ 200:..\src/main.c ****     //---------------------------------------------------  Initialize measurement structure
+ 201:..\src/main.c ****     for (j = 0; j< N_ENCODER_LINE_MAX; j++) { 
+ 349              		.loc 1 201 0 is_stmt 1
+ 350 0222 0023     		movs	r3, #0
+ 351 0224 BB71     		strb	r3, [r7, #6]
+ 352 0226 22E0     		b	.L14
+ 353              	.L17:
+ 202:..\src/main.c ****         for (i = 0; i < NUM_OF_SENSORS; i++) { 
+ 354              		.loc 1 202 0
+ 355 0228 0023     		movs	r3, #0
+ 356 022a FB71     		strb	r3, [r7, #7]
+ 357 022c 19E0     		b	.L15
+ 358              	.L16:
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 11
+
+
+ 203:..\src/main.c ****             g_meas[j].pos[i] = 0;
+ 359              		.loc 1 203 0 discriminator 3
+ 360 022e BA79     		ldrb	r2, [r7, #6]	@ zero_extendqisi2
+ 361 0230 F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
+ 362 0232 3548     		ldr	r0, .L36+56
+ 363 0234 1346     		mov	r3, r2
+ 364 0236 5B00     		lsls	r3, r3, #1
+ 365 0238 1344     		add	r3, r3, r2
+ 366 023a 9B00     		lsls	r3, r3, #2
+ 367 023c 1344     		add	r3, r3, r2
+ 368 023e 0B44     		add	r3, r3, r1
+ 369 0240 0022     		movs	r2, #0
+ 370 0242 40F82320 		str	r2, [r0, r3, lsl #2]
+ 204:..\src/main.c ****             g_meas[j].rot[i] = 0;
+ 371              		.loc 1 204 0 discriminator 3
+ 372 0246 BA79     		ldrb	r2, [r7, #6]	@ zero_extendqisi2
+ 373 0248 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 374 024a 2F49     		ldr	r1, .L36+56
+ 375 024c 3420     		movs	r0, #52
+ 376 024e 00FB02F2 		mul	r2, r0, r2
+ 377 0252 0A44     		add	r2, r2, r1
+ 378 0254 1344     		add	r3, r3, r2
+ 379 0256 1833     		adds	r3, r3, #24
+ 380 0258 0022     		movs	r2, #0
+ 381 025a 1A70     		strb	r2, [r3]
+ 202:..\src/main.c ****         for (i = 0; i < NUM_OF_SENSORS; i++) { 
+ 382              		.loc 1 202 0 discriminator 3
+ 383 025c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 384 025e 0133     		adds	r3, r3, #1
+ 385 0260 FB71     		strb	r3, [r7, #7]
+ 386              	.L15:
+ 202:..\src/main.c ****         for (i = 0; i < NUM_OF_SENSORS; i++) { 
+ 387              		.loc 1 202 0 is_stmt 0 discriminator 1
+ 388 0262 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 389 0264 022B     		cmp	r3, #2
+ 390 0266 E2D9     		bls	.L16
+ 201:..\src/main.c ****         for (i = 0; i < NUM_OF_SENSORS; i++) { 
+ 391              		.loc 1 201 0 is_stmt 1 discriminator 2
+ 392 0268 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 393 026a 0133     		adds	r3, r3, #1
+ 394 026c BB71     		strb	r3, [r7, #6]
+ 395              	.L14:
+ 201:..\src/main.c ****         for (i = 0; i < NUM_OF_SENSORS; i++) { 
+ 396              		.loc 1 201 0 is_stmt 0 discriminator 1
+ 397 026e BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 398 0270 012B     		cmp	r3, #1
+ 399 0272 D9D9     		bls	.L17
+ 205:..\src/main.c ****         }
+ 206:..\src/main.c ****     }
+ 207:..\src/main.c **** 
+ 208:..\src/main.c ****     for (i = 0; i< NUM_OF_MOTORS; i++) {
+ 400              		.loc 1 208 0 is_stmt 1
+ 401 0274 0023     		movs	r3, #0
+ 402 0276 FB71     		strb	r3, [r7, #7]
+ 403 0278 0EE0     		b	.L18
+ 404              	.L19:
+ 209:..\src/main.c ****         g_refNew[i] = g_ref[i];                         // Initialize k+1 reference structure.
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 12
+
+
+ 405              		.loc 1 209 0 discriminator 3
+ 406 027a FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 407 027c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 408 027e 2349     		ldr	r1, .L36+60
+ 409 0280 1201     		lsls	r2, r2, #4
+ 410 0282 1144     		add	r1, r1, r2
+ 411 0284 1F4A     		ldr	r2, .L36+52
+ 412 0286 1B01     		lsls	r3, r3, #4
+ 413 0288 1344     		add	r3, r3, r2
+ 414 028a 0C46     		mov	r4, r1
+ 415 028c 0FCB     		ldmia	r3, {r0, r1, r2, r3}
+ 416 028e 84E80F00 		stmia	r4, {r0, r1, r2, r3}
+ 208:..\src/main.c ****         g_refNew[i] = g_ref[i];                         // Initialize k+1 reference structure.
+ 417              		.loc 1 208 0 discriminator 3
+ 418 0292 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 419 0294 0133     		adds	r3, r3, #1
+ 420 0296 FB71     		strb	r3, [r7, #7]
+ 421              	.L18:
+ 208:..\src/main.c ****         g_refNew[i] = g_ref[i];                         // Initialize k+1 reference structure.
+ 422              		.loc 1 208 0 is_stmt 0 discriminator 1
+ 423 0298 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 424 029a 012B     		cmp	r3, #1
+ 425 029c EDD9     		bls	.L19
+ 210:..\src/main.c ****     }
+ 211:..\src/main.c ****     
+ 212:..\src/main.c ****     //---------------------------------------------------  Initialize emg structure
+ 213:..\src/main.c ****     g_emg_meas.emg[0] = 0;
+ 426              		.loc 1 213 0 is_stmt 1
+ 427 029e 1C4B     		ldr	r3, .L36+64
+ 428 02a0 0022     		movs	r2, #0
+ 429 02a2 1A60     		str	r2, [r3]
+ 214:..\src/main.c ****     g_emg_meas.emg[1] = 0;
+ 430              		.loc 1 214 0
+ 431 02a4 1A4B     		ldr	r3, .L36+64
+ 432 02a6 0022     		movs	r2, #0
+ 433 02a8 5A60     		str	r2, [r3, #4]
+ 215:..\src/main.c ****     
+ 216:..\src/main.c ****     MOTOR_DRIVER_TYPE_Write((g_mem.motor[1].motor_driver_type << 1) | g_mem.motor[0].motor_driver_t
+ 434              		.loc 1 216 0
+ 435 02aa 1A4B     		ldr	r3, .L36+68
+ 436 02ac 93F85231 		ldrb	r3, [r3, #338]	@ zero_extendqisi2
+ 437 02b0 5B00     		lsls	r3, r3, #1
+ 438 02b2 5AB2     		sxtb	r2, r3
+ 439 02b4 174B     		ldr	r3, .L36+68
+ 440 02b6 93F8E230 		ldrb	r3, [r3, #226]	@ zero_extendqisi2
+ 441 02ba 5BB2     		sxtb	r3, r3
+ 442 02bc 1343     		orrs	r3, r3, r2
+ 443 02be 5BB2     		sxtb	r3, r3
+ 444 02c0 DBB2     		uxtb	r3, r3
+ 445 02c2 1846     		mov	r0, r3
+ 446 02c4 FFF7FEFF 		bl	MOTOR_DRIVER_TYPE_Write
+ 217:..\src/main.c ****     for (i = 0; i< NUM_OF_MOTORS; i++) {
+ 447              		.loc 1 217 0
+ 448 02c8 0023     		movs	r3, #0
+ 449 02ca FB71     		strb	r3, [r7, #7]
+ 450 02cc CAE0     		b	.L20
+ 451              	.L37:
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 13
+
+
+ 452 02ce 00BF     		.align	2
+ 453              	.L36:
+ 454 02d0 00000000 		.word	ISR_RS485_RX_ExInterrupt
+ 455 02d4 00000000 		.word	ISR_CYCLES_Handler
+ 456 02d8 00000000 		.word	c_mem
+ 457 02dc 00000000 		.word	NUM_OF_ANALOG_INPUTS
+ 458 02e0 00000000 		.word	ADC_buf
+ 459 02e4 00000000 		.word	Quat
+ 460 02e8 77BE7F3F 		.word	1065336439
+ 461 02ec 0AD7233C 		.word	1008981770
+ 462 02f0 00000000 		.word	filt_i
+ 463 02f4 00000000 		.word	filt_curr_diff
+ 464 02f8 00000000 		.word	filt_v
+ 465 02fc 00000000 		.word	filt_vel
+ 466 0300 00000000 		.word	filt_emg
+ 467 0304 00000000 		.word	g_ref
+ 468 0308 00000000 		.word	g_meas
+ 469 030c 00000000 		.word	g_refNew
+ 470 0310 00000000 		.word	g_emg_meas
+ 471 0314 00000000 		.word	g_mem
+ 472              	.L28:
+ 218:..\src/main.c ****         if (c_mem.emg.emg_calibration_flag) {
+ 473              		.loc 1 218 0
+ 474 0318 884B     		ldr	r3, .L38
+ 475 031a 93F8FD31 		ldrb	r3, [r3, #509]	@ zero_extendqisi2
+ 476 031e 002B     		cmp	r3, #0
+ 477 0320 48D0     		beq	.L21
+ 219:..\src/main.c ****             if ((c_mem.motor[i].input_mode == INPUT_MODE_EMG_PROPORTIONAL) ||
+ 478              		.loc 1 219 0
+ 479 0322 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 480 0324 8549     		ldr	r1, .L38
+ 481 0326 1346     		mov	r3, r2
+ 482 0328 DB00     		lsls	r3, r3, #3
+ 483 032a 9B1A     		subs	r3, r3, r2
+ 484 032c 1B01     		lsls	r3, r3, #4
+ 485 032e 0B44     		add	r3, r3, r1
+ 486 0330 03F58773 		add	r3, r3, #270
+ 487 0334 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 488 0336 022B     		cmp	r3, #2
+ 489 0338 23D0     		beq	.L22
+ 220:..\src/main.c ****                 (c_mem.motor[i].input_mode == INPUT_MODE_EMG_INTEGRAL) ||
+ 490              		.loc 1 220 0 discriminator 1
+ 491 033a FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 492 033c 7F49     		ldr	r1, .L38
+ 493 033e 1346     		mov	r3, r2
+ 494 0340 DB00     		lsls	r3, r3, #3
+ 495 0342 9B1A     		subs	r3, r3, r2
+ 496 0344 1B01     		lsls	r3, r3, #4
+ 497 0346 0B44     		add	r3, r3, r1
+ 498 0348 03F58773 		add	r3, r3, #270
+ 499 034c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 219:..\src/main.c ****             if ((c_mem.motor[i].input_mode == INPUT_MODE_EMG_PROPORTIONAL) ||
+ 500              		.loc 1 219 0 discriminator 1
+ 501 034e 032B     		cmp	r3, #3
+ 502 0350 17D0     		beq	.L22
+ 221:..\src/main.c ****                 (c_mem.motor[i].input_mode == INPUT_MODE_EMG_FCFS) ||
+ 503              		.loc 1 221 0
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 14
+
+
+ 504 0352 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 505 0354 7949     		ldr	r1, .L38
+ 506 0356 1346     		mov	r3, r2
+ 507 0358 DB00     		lsls	r3, r3, #3
+ 508 035a 9B1A     		subs	r3, r3, r2
+ 509 035c 1B01     		lsls	r3, r3, #4
+ 510 035e 0B44     		add	r3, r3, r1
+ 511 0360 03F58773 		add	r3, r3, #270
+ 512 0364 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 220:..\src/main.c ****                 (c_mem.motor[i].input_mode == INPUT_MODE_EMG_INTEGRAL) ||
+ 513              		.loc 1 220 0
+ 514 0366 042B     		cmp	r3, #4
+ 515 0368 0BD0     		beq	.L22
+ 222:..\src/main.c ****                 (c_mem.motor[i].input_mode == INPUT_MODE_EMG_FCFS_ADV))
+ 516              		.loc 1 222 0
+ 517 036a FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 518 036c 7349     		ldr	r1, .L38
+ 519 036e 1346     		mov	r3, r2
+ 520 0370 DB00     		lsls	r3, r3, #3
+ 521 0372 9B1A     		subs	r3, r3, r2
+ 522 0374 1B01     		lsls	r3, r3, #4
+ 523 0376 0B44     		add	r3, r3, r1
+ 524 0378 03F58773 		add	r3, r3, #270
+ 525 037c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 221:..\src/main.c ****                 (c_mem.motor[i].input_mode == INPUT_MODE_EMG_FCFS) ||
+ 526              		.loc 1 221 0
+ 527 037e 052B     		cmp	r3, #5
+ 528 0380 07D1     		bne	.L23
+ 529              	.L22:
+ 223:..\src/main.c ****                 g_ref[i].onoff = 0x00;
+ 530              		.loc 1 223 0
+ 531 0382 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 532 0384 6E4A     		ldr	r2, .L38+4
+ 533 0386 1B01     		lsls	r3, r3, #4
+ 534 0388 1344     		add	r3, r3, r2
+ 535 038a 0C33     		adds	r3, r3, #12
+ 536 038c 0022     		movs	r2, #0
+ 537 038e 1A70     		strb	r2, [r3]
+ 538 0390 20E0     		b	.L25
+ 539              	.L23:
+ 224:..\src/main.c ****             else
+ 225:..\src/main.c ****                 g_ref[i].onoff = c_mem.motor[i].activ;
+ 540              		.loc 1 225 0
+ 541 0392 F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
+ 542 0394 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 543 0396 6948     		ldr	r0, .L38
+ 544 0398 1346     		mov	r3, r2
+ 545 039a DB00     		lsls	r3, r3, #3
+ 546 039c 9B1A     		subs	r3, r3, r2
+ 547 039e 1B01     		lsls	r3, r3, #4
+ 548 03a0 0344     		add	r3, r3, r0
+ 549 03a2 E033     		adds	r3, r3, #224
+ 550 03a4 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 551 03a6 664A     		ldr	r2, .L38+4
+ 552 03a8 0B01     		lsls	r3, r1, #4
+ 553 03aa 1344     		add	r3, r3, r2
+ 554 03ac 0C33     		adds	r3, r3, #12
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 15
+
+
+ 555 03ae 0246     		mov	r2, r0
+ 556 03b0 1A70     		strb	r2, [r3]
+ 557 03b2 0FE0     		b	.L25
+ 558              	.L21:
+ 226:..\src/main.c ****         } 
+ 227:..\src/main.c ****         else
+ 228:..\src/main.c ****             g_ref[i].onoff = c_mem.motor[i].activ;
+ 559              		.loc 1 228 0
+ 560 03b4 F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
+ 561 03b6 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 562 03b8 6048     		ldr	r0, .L38
+ 563 03ba 1346     		mov	r3, r2
+ 564 03bc DB00     		lsls	r3, r3, #3
+ 565 03be 9B1A     		subs	r3, r3, r2
+ 566 03c0 1B01     		lsls	r3, r3, #4
+ 567 03c2 0344     		add	r3, r3, r0
+ 568 03c4 E033     		adds	r3, r3, #224
+ 569 03c6 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 570 03c8 5D4A     		ldr	r2, .L38+4
+ 571 03ca 0B01     		lsls	r3, r1, #4
+ 572 03cc 1344     		add	r3, r3, r2
+ 573 03ce 0C33     		adds	r3, r3, #12
+ 574 03d0 0246     		mov	r2, r0
+ 575 03d2 1A70     		strb	r2, [r3]
+ 576              	.L25:
+ 229:..\src/main.c **** 
+ 230:..\src/main.c ****         if (!g_mem.enc[g_mem.motor[i].encoder_line].double_encoder_on_off) {
+ 577              		.loc 1 230 0
+ 578 03d4 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 579 03d6 5B49     		ldr	r1, .L38+8
+ 580 03d8 1346     		mov	r3, r2
+ 581 03da DB00     		lsls	r3, r3, #3
+ 582 03dc 9B1A     		subs	r3, r3, r2
+ 583 03de 1B01     		lsls	r3, r3, #4
+ 584 03e0 0B44     		add	r3, r3, r1
+ 585 03e2 03F58873 		add	r3, r3, #272
+ 586 03e6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 587 03e8 1946     		mov	r1, r3
+ 588 03ea 564A     		ldr	r2, .L38+8
+ 589 03ec 0B46     		mov	r3, r1
+ 590 03ee 5B00     		lsls	r3, r3, #1
+ 591 03f0 0B44     		add	r3, r3, r1
+ 592 03f2 1B01     		lsls	r3, r3, #4
+ 593 03f4 1344     		add	r3, r3, r2
+ 594 03f6 03F5D873 		add	r3, r3, #432
+ 595 03fa 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 596 03fc 002B     		cmp	r3, #0
+ 597 03fe 10D1     		bne	.L26
+ 231:..\src/main.c ****             g_ref[i].onoff = c_mem.motor[i].activ;                          // Initialize Activatio
+ 598              		.loc 1 231 0
+ 599 0400 F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
+ 600 0402 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 601 0404 4D48     		ldr	r0, .L38
+ 602 0406 1346     		mov	r3, r2
+ 603 0408 DB00     		lsls	r3, r3, #3
+ 604 040a 9B1A     		subs	r3, r3, r2
+ 605 040c 1B01     		lsls	r3, r3, #4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 16
+
+
+ 606 040e 0344     		add	r3, r3, r0
+ 607 0410 E033     		adds	r3, r3, #224
+ 608 0412 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 609 0414 4A4A     		ldr	r2, .L38+4
+ 610 0416 0B01     		lsls	r3, r1, #4
+ 611 0418 1344     		add	r3, r3, r2
+ 612 041a 0C33     		adds	r3, r3, #12
+ 613 041c 0246     		mov	r2, r0
+ 614 041e 1A70     		strb	r2, [r3]
+ 615 0420 06E0     		b	.L27
+ 616              	.L26:
+ 232:..\src/main.c ****         } 
+ 233:..\src/main.c ****         else {
+ 234:..\src/main.c ****             // Do not activate motor until position reconstruction has finished
+ 235:..\src/main.c ****             g_ref[i].onoff = 0x00;
+ 617              		.loc 1 235 0
+ 618 0422 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 619 0424 464A     		ldr	r2, .L38+4
+ 620 0426 1B01     		lsls	r3, r3, #4
+ 621 0428 1344     		add	r3, r3, r2
+ 622 042a 0C33     		adds	r3, r3, #12
+ 623 042c 0022     		movs	r2, #0
+ 624 042e 1A70     		strb	r2, [r3]
+ 625              	.L27:
+ 236:..\src/main.c ****         }
+ 237:..\src/main.c ****         enable_motor(i, g_ref[i].onoff); 
+ 626              		.loc 1 237 0 discriminator 2
+ 627 0430 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 628 0432 434A     		ldr	r2, .L38+4
+ 629 0434 1B01     		lsls	r3, r3, #4
+ 630 0436 1344     		add	r3, r3, r2
+ 631 0438 0C33     		adds	r3, r3, #12
+ 632 043a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 633 043c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 634 043e 1146     		mov	r1, r2
+ 635 0440 1846     		mov	r0, r3
+ 636 0442 FFF7FEFF 		bl	enable_motor
+ 238:..\src/main.c ****         
+ 239:..\src/main.c ****         dev_pwm_limit[i] = dev_pwm_sat[i];              // Init PWM limit.
+ 637              		.loc 1 239 0 discriminator 2
+ 638 0446 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 639 0448 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 640 044a 3F49     		ldr	r1, .L38+12
+ 641 044c 895C     		ldrb	r1, [r1, r2]	@ zero_extendqisi2
+ 642 044e 3F4A     		ldr	r2, .L38+16
+ 643 0450 D154     		strb	r1, [r2, r3]
+ 240:..\src/main.c **** 	
+ 241:..\src/main.c ****         pow_tension[i] = 12000;                         // 12000 mV (12 V)
+ 644              		.loc 1 241 0 discriminator 2
+ 645 0452 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 646 0454 3E4A     		ldr	r2, .L38+20
+ 647 0456 42F6E061 		movw	r1, #12000
+ 648 045a 42F82310 		str	r1, [r2, r3, lsl #2]
+ 217:..\src/main.c ****         if (c_mem.emg.emg_calibration_flag) {
+ 649              		.loc 1 217 0 discriminator 2
+ 650 045e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 651 0460 0133     		adds	r3, r3, #1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 17
+
+
+ 652 0462 FB71     		strb	r3, [r7, #7]
+ 653              	.L20:
+ 217:..\src/main.c ****         if (c_mem.emg.emg_calibration_flag) {
+ 654              		.loc 1 217 0 is_stmt 0 discriminator 1
+ 655 0464 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 656 0466 012B     		cmp	r3, #1
+ 657 0468 7FF656AF 		bls	.L28
+ 242:..\src/main.c ****     }
+ 243:..\src/main.c ****     
+ 244:..\src/main.c ****     tension_valid = FALSE;                              // Init tension_valid BIT.
+ 658              		.loc 1 244 0 is_stmt 1
+ 659 046c 394B     		ldr	r3, .L38+24
+ 660 046e 0022     		movs	r2, #0
+ 661 0470 1A70     		strb	r2, [r3]
+ 245:..\src/main.c **** 
+ 246:..\src/main.c ****     reset_last_value_flag = 0;                          // Do not reset encoder last value.
+ 662              		.loc 1 246 0
+ 663 0472 394B     		ldr	r3, .L38+28
+ 664 0474 0022     		movs	r2, #0
+ 665 0476 1A70     		strb	r2, [r3]
+ 247:..\src/main.c **** 
+ 248:..\src/main.c ****     //------------------------------------------------- Initialize package on receive from RS485
+ 249:..\src/main.c ****     g_rx.length = 0;
+ 666              		.loc 1 249 0
+ 667 0478 384B     		ldr	r3, .L38+32
+ 668 047a 0022     		movs	r2, #0
+ 669 047c A3F88020 		strh	r2, [r3, #128]	@ movhi
+ 250:..\src/main.c ****     g_rx.ready  = 0;
+ 670              		.loc 1 250 0
+ 671 0480 364B     		ldr	r3, .L38+32
+ 672 0482 0022     		movs	r2, #0
+ 673 0484 83F88420 		strb	r2, [r3, #132]
+ 251:..\src/main.c ****     
+ 252:..\src/main.c ****     //------------------------------------------------- Initialize rest position variables    
+ 253:..\src/main.c **** 	rest_enabled = 0;
+ 674              		.loc 1 253 0
+ 675 0488 354B     		ldr	r3, .L38+36
+ 676 048a 0022     		movs	r2, #0
+ 677 048c 1A70     		strb	r2, [r3]
+ 254:..\src/main.c ****     forced_open = 0;
+ 678              		.loc 1 254 0
+ 679 048e 354B     		ldr	r3, .L38+40
+ 680 0490 0022     		movs	r2, #0
+ 681 0492 1A70     		strb	r2, [r3]
+ 255:..\src/main.c ****     
+ 256:..\src/main.c ****     LED_control(5);     // Default - red light
+ 682              		.loc 1 256 0
+ 683 0494 0520     		movs	r0, #5
+ 684 0496 FFF7FEFF 		bl	LED_control
+ 257:..\src/main.c ****     
+ 258:..\src/main.c **** #ifdef MASTER_FW
+ 259:..\src/main.c ****     master_mode = 1;    // Default - activate master mode at startup
+ 685              		.loc 1 259 0
+ 686 049a 334B     		ldr	r3, .L38+44
+ 687 049c 0122     		movs	r2, #1
+ 688 049e 1A70     		strb	r2, [r3]
+ 260:..\src/main.c **** #endif
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 18
+
+
+ 261:..\src/main.c **** 
+ 262:..\src/main.c ****     //============================================================    check if maintenance is due
+ 263:..\src/main.c **** 
+ 264:..\src/main.c ****     if ( (g_mem.cnt.wire_disp/(((g_mem.motor[0].pos_lim_sup>>g_mem.enc[0].res[0]) - (g_mem.motor[0]
+ 689              		.loc 1 264 0
+ 690 04a0 284B     		ldr	r3, .L38+8
+ 691 04a2 5B6D     		ldr	r3, [r3, #84]
+ 692 04a4 274A     		ldr	r2, .L38+8
+ 693 04a6 D2F8E820 		ldr	r2, [r2, #232]
+ 694 04aa 2649     		ldr	r1, .L38+8
+ 695 04ac 91F89511 		ldrb	r1, [r1, #405]	@ zero_extendqisi2
+ 696 04b0 42FA01F1 		asr	r1, r2, r1
+ 697 04b4 234A     		ldr	r2, .L38+8
+ 698 04b6 D2F8E420 		ldr	r2, [r2, #228]
+ 699 04ba 2248     		ldr	r0, .L38+8
+ 700 04bc 90F89501 		ldrb	r0, [r0, #405]	@ zero_extendqisi2
+ 701 04c0 0241     		asrs	r2, r2, r0
+ 702 04c2 8A1A     		subs	r2, r1, r2
+ 703 04c4 5200     		lsls	r2, r2, #1
+ 704 04c6 B3FBF2F3 		udiv	r3, r3, r2
+ 705 04ca 284A     		ldr	r2, .L38+48
+ 706 04cc 9342     		cmp	r3, r2
+ 707 04ce 02D9     		bls	.L29
+ 265:..\src/main.c ****         maintenance_flag = TRUE;    
+ 708              		.loc 1 265 0
+ 709 04d0 274B     		ldr	r3, .L38+52
+ 710 04d2 0122     		movs	r2, #1
+ 711 04d4 1A70     		strb	r2, [r3]
+ 712              	.L29:
+ 266:..\src/main.c **** 
+ 267:..\src/main.c ****     if (g_mem.exp.read_exp_port_flag == EXP_SD_RTC) {
+ 713              		.loc 1 267 0
+ 714 04d6 1B4B     		ldr	r3, .L38+8
+ 715 04d8 93F82632 		ldrb	r3, [r3, #550]	@ zero_extendqisi2
+ 716 04dc 012B     		cmp	r3, #1
+ 717 04de 03D1     		bne	.L30
+ 268:..\src/main.c ****         
+ 269:..\src/main.c ****         store_RTC_current_time();
+ 718              		.loc 1 269 0
+ 719 04e0 FFF7FEFF 		bl	store_RTC_current_time
+ 270:..\src/main.c ****         
+ 271:..\src/main.c ****         // SD file
+ 272:..\src/main.c ****         InitSD_FS();
+ 720              		.loc 1 272 0
+ 721 04e4 FFF7FEFF 		bl	InitSD_FS
+ 722              	.L30:
+ 273:..\src/main.c ****     }
+ 274:..\src/main.c ****     
+ 275:..\src/main.c ****     //============================================================     main loop
+ 276:..\src/main.c ****     
+ 277:..\src/main.c ****     // All peripherals has started, now it is ok to start communication
+ 278:..\src/main.c ****     RS485_CTS_Write(0);             // Clear To Send on RS485.
+ 723              		.loc 1 278 0
+ 724 04e8 0020     		movs	r0, #0
+ 725 04ea FFF7FEFF 		bl	RS485_CTS_Write
+ 726              	.L35:
+ 279:..\src/main.c **** 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 19
+
+
+ 280:..\src/main.c ****     for(;;)
+ 281:..\src/main.c **** 
+ 282:..\src/main.c ****     {             
+ 283:..\src/main.c ****         // Put the FF reset pin to LOW
+ 284:..\src/main.c ****         RESET_FF_Write(0x00);
+ 727              		.loc 1 284 0
+ 728 04ee 0020     		movs	r0, #0
+ 729 04f0 FFF7FEFF 		bl	RESET_FF_Write
+ 285:..\src/main.c **** 
+ 286:..\src/main.c ****         // Call function scheduler
+ 287:..\src/main.c ****         function_scheduler(); 
+ 730              		.loc 1 287 0
+ 731 04f4 FFF7FEFF 		bl	function_scheduler
+ 288:..\src/main.c **** 
+ 289:..\src/main.c ****         //  Wait until the FF is set to 1
+ 290:..\src/main.c ****         while(FF_STATUS_Read() == 0){
+ 732              		.loc 1 290 0
+ 733 04f8 08E0     		b	.L31
+ 734              	.L32:
+ 291:..\src/main.c ****             // On interrupt from RS485
+ 292:..\src/main.c ****             if (interrupt_flag){
+ 735              		.loc 1 292 0
+ 736 04fa 1E4B     		ldr	r3, .L38+56
+ 737 04fc 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 738 04fe 002B     		cmp	r3, #0
+ 739 0500 04D0     		beq	.L31
+ 293:..\src/main.c ****                 // Reset flags
+ 294:..\src/main.c ****                 interrupt_flag = FALSE;
+ 740              		.loc 1 294 0
+ 741 0502 1C4B     		ldr	r3, .L38+56
+ 742 0504 0022     		movs	r2, #0
+ 743 0506 1A70     		strb	r2, [r3]
+ 295:..\src/main.c ****                 
+ 296:..\src/main.c ****                 // Manage Interrupt on rs485
+ 297:..\src/main.c ****                 interrupt_manager();
+ 744              		.loc 1 297 0
+ 745 0508 FFF7FEFF 		bl	interrupt_manager
+ 746              	.L31:
+ 290:..\src/main.c ****             // On interrupt from RS485
+ 747              		.loc 1 290 0
+ 748 050c FFF7FEFF 		bl	FF_STATUS_Read
+ 749 0510 0346     		mov	r3, r0
+ 750 0512 002B     		cmp	r3, #0
+ 751 0514 F1D0     		beq	.L32
+ 298:..\src/main.c ****             }
+ 299:..\src/main.c ****         };
+ 300:..\src/main.c **** 
+ 301:..\src/main.c ****         // Command a FF reset
+ 302:..\src/main.c ****         RESET_FF_Write(0x01);
+ 752              		.loc 1 302 0
+ 753 0516 0120     		movs	r0, #1
+ 754 0518 FFF7FEFF 		bl	RESET_FF_Write
+ 303:..\src/main.c **** 
+ 304:..\src/main.c ****         // Wait for FF to be reset
+ 305:..\src/main.c ****         while(FF_STATUS_Read() == 1);
+ 755              		.loc 1 305 0
+ 756 051c 00BF     		nop
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 20
+
+
+ 757              	.L33:
+ 758              		.loc 1 305 0 is_stmt 0 discriminator 1
+ 759 051e FFF7FEFF 		bl	FF_STATUS_Read
+ 760 0522 0346     		mov	r3, r0
+ 761 0524 012B     		cmp	r3, #1
+ 762 0526 FAD0     		beq	.L33
+ 306:..\src/main.c **** 
+ 307:..\src/main.c ****         if(UART_RS485_ReadRxStatus() & UART_RS485_RX_STS_SOFT_BUFF_OVER)
+ 763              		.loc 1 307 0 is_stmt 1
+ 764 0528 FFF7FEFF 		bl	UART_RS485_ReadRxStatus
+ 765 052c 0346     		mov	r3, r0
+ 766 052e 5BB2     		sxtb	r3, r3
+ 767 0530 002B     		cmp	r3, #0
+ 768 0532 DCDA     		bge	.L35
+ 308:..\src/main.c ****             UART_RS485_ClearRxBuffer();
+ 769              		.loc 1 308 0
+ 770 0534 FFF7FEFF 		bl	UART_RS485_ClearRxBuffer
+ 309:..\src/main.c ****     }
+ 771              		.loc 1 309 0
+ 772 0538 D9E7     		b	.L35
+ 773              	.L39:
+ 774 053a 00BF     		.align	2
+ 775              	.L38:
+ 776 053c 00000000 		.word	c_mem
+ 777 0540 00000000 		.word	g_ref
+ 778 0544 00000000 		.word	g_mem
+ 779 0548 00000000 		.word	dev_pwm_sat
+ 780 054c 00000000 		.word	dev_pwm_limit
+ 781 0550 00000000 		.word	pow_tension
+ 782 0554 00000000 		.word	tension_valid
+ 783 0558 00000000 		.word	reset_last_value_flag
+ 784 055c 00000000 		.word	g_rx
+ 785 0560 00000000 		.word	rest_enabled
+ 786 0564 00000000 		.word	forced_open
+ 787 0568 00000000 		.word	master_mode
+ 788 056c 400D0300 		.word	200000
+ 789 0570 00000000 		.word	maintenance_flag
+ 790 0574 00000000 		.word	interrupt_flag
+ 791              		.cfi_endproc
+ 792              	.LFE64:
+ 793              		.size	main, .-main
+ 794              		.text
+ 795              	.Letext0:
+ 796              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 797              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 798              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 799              		.file 5 "..\\src\\globals.h"
+ 800              		.file 6 "Generated_Source\\PSoC5/core_cm3.h"
+ 801              		.file 7 "..\\src\\commands.h"
+ 802              		.section	.debug_info,"",%progbits
+ 803              	.Ldebug_info0:
+ 804 0000 D70B0000 		.4byte	0xbd7
+ 805 0004 0400     		.2byte	0x4
+ 806 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 807 000a 04       		.byte	0x4
+ 808 000b 01       		.uleb128 0x1
+ 809 000c 8D000000 		.4byte	.LASF160
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 21
+
+
+ 810 0010 0C       		.byte	0xc
+ 811 0011 35040000 		.4byte	.LASF161
+ 812 0015 9C070000 		.4byte	.LASF162
+ 813 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 814 001d 00000000 		.4byte	0
+ 815 0021 00000000 		.4byte	.Ldebug_line0
+ 816 0025 02       		.uleb128 0x2
+ 817 0026 01       		.byte	0x1
+ 818 0027 06       		.byte	0x6
+ 819 0028 67000000 		.4byte	.LASF0
+ 820 002c 02       		.uleb128 0x2
+ 821 002d 01       		.byte	0x1
+ 822 002e 08       		.byte	0x8
+ 823 002f 75050000 		.4byte	.LASF1
+ 824 0033 02       		.uleb128 0x2
+ 825 0034 02       		.byte	0x2
+ 826 0035 05       		.byte	0x5
+ 827 0036 15000000 		.4byte	.LASF2
+ 828 003a 02       		.uleb128 0x2
+ 829 003b 02       		.byte	0x2
+ 830 003c 07       		.byte	0x7
+ 831 003d 72030000 		.4byte	.LASF3
+ 832 0041 03       		.uleb128 0x3
+ 833 0042 05040000 		.4byte	.LASF9
+ 834 0046 02       		.byte	0x2
+ 835 0047 3F       		.byte	0x3f
+ 836 0048 4C000000 		.4byte	0x4c
+ 837 004c 02       		.uleb128 0x2
+ 838 004d 04       		.byte	0x4
+ 839 004e 05       		.byte	0x5
+ 840 004f B9010000 		.4byte	.LASF4
+ 841 0053 02       		.uleb128 0x2
+ 842 0054 04       		.byte	0x4
+ 843 0055 07       		.byte	0x7
+ 844 0056 5E060000 		.4byte	.LASF5
+ 845 005a 02       		.uleb128 0x2
+ 846 005b 08       		.byte	0x8
+ 847 005c 05       		.byte	0x5
+ 848 005d 83010000 		.4byte	.LASF6
+ 849 0061 02       		.uleb128 0x2
+ 850 0062 08       		.byte	0x8
+ 851 0063 07       		.byte	0x7
+ 852 0064 2C010000 		.4byte	.LASF7
+ 853 0068 04       		.uleb128 0x4
+ 854 0069 04       		.byte	0x4
+ 855 006a 05       		.byte	0x5
+ 856 006b 696E7400 		.ascii	"int\000"
+ 857 006f 02       		.uleb128 0x2
+ 858 0070 04       		.byte	0x4
+ 859 0071 07       		.byte	0x7
+ 860 0072 EB020000 		.4byte	.LASF8
+ 861 0076 03       		.uleb128 0x3
+ 862 0077 6D050000 		.4byte	.LASF10
+ 863 007b 03       		.byte	0x3
+ 864 007c 2C       		.byte	0x2c
+ 865 007d 41000000 		.4byte	0x41
+ 866 0081 05       		.uleb128 0x5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 22
+
+
+ 867 0082 E4050000 		.4byte	.LASF11
+ 868 0086 04       		.byte	0x4
+ 869 0087 E401     		.2byte	0x1e4
+ 870 0089 2C000000 		.4byte	0x2c
+ 871 008d 05       		.uleb128 0x5
+ 872 008e AD020000 		.4byte	.LASF12
+ 873 0092 04       		.byte	0x4
+ 874 0093 E501     		.2byte	0x1e5
+ 875 0095 3A000000 		.4byte	0x3a
+ 876 0099 05       		.uleb128 0x5
+ 877 009a 77020000 		.4byte	.LASF13
+ 878 009e 04       		.byte	0x4
+ 879 009f E601     		.2byte	0x1e6
+ 880 00a1 53000000 		.4byte	0x53
+ 881 00a5 05       		.uleb128 0x5
+ 882 00a6 93030000 		.4byte	.LASF14
+ 883 00aa 04       		.byte	0x4
+ 884 00ab E701     		.2byte	0x1e7
+ 885 00ad 25000000 		.4byte	0x25
+ 886 00b1 05       		.uleb128 0x5
+ 887 00b2 11060000 		.4byte	.LASF15
+ 888 00b6 04       		.byte	0x4
+ 889 00b7 E801     		.2byte	0x1e8
+ 890 00b9 33000000 		.4byte	0x33
+ 891 00bd 05       		.uleb128 0x5
+ 892 00be B3010000 		.4byte	.LASF16
+ 893 00c2 04       		.byte	0x4
+ 894 00c3 E901     		.2byte	0x1e9
+ 895 00c5 4C000000 		.4byte	0x4c
+ 896 00c9 05       		.uleb128 0x5
+ 897 00ca 74040000 		.4byte	.LASF17
+ 898 00ce 04       		.byte	0x4
+ 899 00cf EA01     		.2byte	0x1ea
+ 900 00d1 D5000000 		.4byte	0xd5
+ 901 00d5 02       		.uleb128 0x2
+ 902 00d6 04       		.byte	0x4
+ 903 00d7 04       		.byte	0x4
+ 904 00d8 0A080000 		.4byte	.LASF18
+ 905 00dc 02       		.uleb128 0x2
+ 906 00dd 08       		.byte	0x8
+ 907 00de 04       		.byte	0x4
+ 908 00df 73080000 		.4byte	.LASF19
+ 909 00e3 02       		.uleb128 0x2
+ 910 00e4 01       		.byte	0x1
+ 911 00e5 08       		.byte	0x8
+ 912 00e6 77060000 		.4byte	.LASF20
+ 913 00ea 05       		.uleb128 0x5
+ 914 00eb AE010000 		.4byte	.LASF21
+ 915 00ef 04       		.byte	0x4
+ 916 00f0 8E02     		.2byte	0x28e
+ 917 00f2 F6000000 		.4byte	0xf6
+ 918 00f6 06       		.uleb128 0x6
+ 919 00f7 81000000 		.4byte	0x81
+ 920 00fb 02       		.uleb128 0x2
+ 921 00fc 08       		.byte	0x8
+ 922 00fd 04       		.byte	0x4
+ 923 00fe 9A040000 		.4byte	.LASF22
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 23
+
+
+ 924 0102 02       		.uleb128 0x2
+ 925 0103 04       		.byte	0x4
+ 926 0104 07       		.byte	0x7
+ 927 0105 7C040000 		.4byte	.LASF23
+ 928 0109 07       		.uleb128 0x7
+ 929 010a E3000000 		.4byte	0xe3
+ 930 010e 19010000 		.4byte	0x119
+ 931 0112 08       		.uleb128 0x8
+ 932 0113 02010000 		.4byte	0x102
+ 933 0117 07       		.byte	0x7
+ 934 0118 00       		.byte	0
+ 935 0119 09       		.uleb128 0x9
+ 936 011a 98030000 		.4byte	.LASF163
+ 937 011e 01       		.byte	0x1
+ 938 011f 2C000000 		.4byte	0x2c
+ 939 0123 07       		.byte	0x7
+ 940 0124 8B       		.byte	0x8b
+ 941 0125 54010000 		.4byte	0x154
+ 942 0129 0A       		.uleb128 0xa
+ 943 012a 93060000 		.4byte	.LASF24
+ 944 012e 00       		.byte	0
+ 945 012f 0A       		.uleb128 0xa
+ 946 0130 E3030000 		.4byte	.LASF25
+ 947 0134 01       		.byte	0x1
+ 948 0135 0A       		.uleb128 0xa
+ 949 0136 88020000 		.4byte	.LASF26
+ 950 013a 02       		.byte	0x2
+ 951 013b 0A       		.uleb128 0xa
+ 952 013c 6C070000 		.4byte	.LASF27
+ 953 0140 03       		.byte	0x3
+ 954 0141 0A       		.uleb128 0xa
+ 955 0142 25030000 		.4byte	.LASF28
+ 956 0146 04       		.byte	0x4
+ 957 0147 0A       		.uleb128 0xa
+ 958 0148 FC040000 		.4byte	.LASF29
+ 959 014c 05       		.byte	0x5
+ 960 014d 0A       		.uleb128 0xa
+ 961 014e 4D070000 		.4byte	.LASF30
+ 962 0152 06       		.byte	0x6
+ 963 0153 00       		.byte	0
+ 964 0154 0B       		.uleb128 0xb
+ 965 0155 F8020000 		.4byte	.LASF33
+ 966 0159 10       		.byte	0x10
+ 967 015a 05       		.byte	0x5
+ 968 015b D3       		.byte	0xd3
+ 969 015c 91010000 		.4byte	0x191
+ 970 0160 0C       		.uleb128 0xc
+ 971 0161 706F7300 		.ascii	"pos\000"
+ 972 0165 05       		.byte	0x5
+ 973 0166 D4       		.byte	0xd4
+ 974 0167 BD000000 		.4byte	0xbd
+ 975 016b 00       		.byte	0
+ 976 016c 0D       		.uleb128 0xd
+ 977 016d 83050000 		.4byte	.LASF31
+ 978 0171 05       		.byte	0x5
+ 979 0172 D5       		.byte	0xd5
+ 980 0173 BD000000 		.4byte	0xbd
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 24
+
+
+ 981 0177 04       		.byte	0x4
+ 982 0178 0C       		.uleb128 0xc
+ 983 0179 70776D00 		.ascii	"pwm\000"
+ 984 017d 05       		.byte	0x5
+ 985 017e D6       		.byte	0xd6
+ 986 017f BD000000 		.4byte	0xbd
+ 987 0183 08       		.byte	0x8
+ 988 0184 0D       		.uleb128 0xd
+ 989 0185 A5050000 		.4byte	.LASF32
+ 990 0189 05       		.byte	0x5
+ 991 018a D7       		.byte	0xd7
+ 992 018b 81000000 		.4byte	0x81
+ 993 018f 0C       		.byte	0xc
+ 994 0190 00       		.byte	0
+ 995 0191 0B       		.uleb128 0xb
+ 996 0192 32000000 		.4byte	.LASF34
+ 997 0196 34       		.byte	0x34
+ 998 0197 05       		.byte	0x5
+ 999 0198 DE       		.byte	0xde
+ 1000 0199 F2010000 		.4byte	0x1f2
+ 1001 019d 0C       		.uleb128 0xc
+ 1002 019e 706F7300 		.ascii	"pos\000"
+ 1003 01a2 05       		.byte	0x5
+ 1004 01a3 DF       		.byte	0xdf
+ 1005 01a4 F2010000 		.4byte	0x1f2
+ 1006 01a8 00       		.byte	0
+ 1007 01a9 0D       		.uleb128 0xd
+ 1008 01aa 83050000 		.4byte	.LASF31
+ 1009 01ae 05       		.byte	0x5
+ 1010 01af E0       		.byte	0xe0
+ 1011 01b0 BD000000 		.4byte	0xbd
+ 1012 01b4 0C       		.byte	0xc
+ 1013 01b5 0D       		.uleb128 0xd
+ 1014 01b6 97010000 		.4byte	.LASF35
+ 1015 01ba 05       		.byte	0x5
+ 1016 01bb E1       		.byte	0xe1
+ 1017 01bc BD000000 		.4byte	0xbd
+ 1018 01c0 10       		.byte	0x10
+ 1019 01c1 0D       		.uleb128 0xd
+ 1020 01c2 C7010000 		.4byte	.LASF36
+ 1021 01c6 05       		.byte	0x5
+ 1022 01c7 E2       		.byte	0xe2
+ 1023 01c8 BD000000 		.4byte	0xbd
+ 1024 01cc 14       		.byte	0x14
+ 1025 01cd 0C       		.uleb128 0xc
+ 1026 01ce 726F7400 		.ascii	"rot\000"
+ 1027 01d2 05       		.byte	0x5
+ 1028 01d3 E3       		.byte	0xe3
+ 1029 01d4 02020000 		.4byte	0x202
+ 1030 01d8 18       		.byte	0x18
+ 1031 01d9 0C       		.uleb128 0xc
+ 1032 01da 76656C00 		.ascii	"vel\000"
+ 1033 01de 05       		.byte	0x5
+ 1034 01df E4       		.byte	0xe4
+ 1035 01e0 F2010000 		.4byte	0x1f2
+ 1036 01e4 1C       		.byte	0x1c
+ 1037 01e5 0C       		.uleb128 0xc
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 25
+
+
+ 1038 01e6 61636300 		.ascii	"acc\000"
+ 1039 01ea 05       		.byte	0x5
+ 1040 01eb E5       		.byte	0xe5
+ 1041 01ec F2010000 		.4byte	0x1f2
+ 1042 01f0 28       		.byte	0x28
+ 1043 01f1 00       		.byte	0
+ 1044 01f2 07       		.uleb128 0x7
+ 1045 01f3 BD000000 		.4byte	0xbd
+ 1046 01f7 02020000 		.4byte	0x202
+ 1047 01fb 08       		.uleb128 0x8
+ 1048 01fc 02010000 		.4byte	0x102
+ 1049 0200 02       		.byte	0x2
+ 1050 0201 00       		.byte	0
+ 1051 0202 07       		.uleb128 0x7
+ 1052 0203 A5000000 		.4byte	0xa5
+ 1053 0207 12020000 		.4byte	0x212
+ 1054 020b 08       		.uleb128 0x8
+ 1055 020c 02010000 		.4byte	0x102
+ 1056 0210 02       		.byte	0x2
+ 1057 0211 00       		.byte	0
+ 1058 0212 0B       		.uleb128 0xb
+ 1059 0213 6B020000 		.4byte	.LASF37
+ 1060 0217 20       		.byte	0x20
+ 1061 0218 05       		.byte	0x5
+ 1062 0219 E8       		.byte	0xe8
+ 1063 021a 37020000 		.4byte	0x237
+ 1064 021e 0C       		.uleb128 0xc
+ 1065 021f 656D6700 		.ascii	"emg\000"
+ 1066 0223 05       		.byte	0x5
+ 1067 0224 E9       		.byte	0xe9
+ 1068 0225 37020000 		.4byte	0x237
+ 1069 0229 00       		.byte	0
+ 1070 022a 0D       		.uleb128 0xd
+ 1071 022b 43040000 		.4byte	.LASF38
+ 1072 022f 05       		.byte	0x5
+ 1073 0230 EA       		.byte	0xea
+ 1074 0231 47020000 		.4byte	0x247
+ 1075 0235 08       		.byte	0x8
+ 1076 0236 00       		.byte	0
+ 1077 0237 07       		.uleb128 0x7
+ 1078 0238 BD000000 		.4byte	0xbd
+ 1079 023c 47020000 		.4byte	0x247
+ 1080 0240 08       		.uleb128 0x8
+ 1081 0241 02010000 		.4byte	0x102
+ 1082 0245 01       		.byte	0x1
+ 1083 0246 00       		.byte	0
+ 1084 0247 07       		.uleb128 0x7
+ 1085 0248 BD000000 		.4byte	0xbd
+ 1086 024c 57020000 		.4byte	0x257
+ 1087 0250 08       		.uleb128 0x8
+ 1088 0251 02010000 		.4byte	0x102
+ 1089 0255 05       		.byte	0x5
+ 1090 0256 00       		.byte	0
+ 1091 0257 0B       		.uleb128 0xb
+ 1092 0258 8B060000 		.4byte	.LASF39
+ 1093 025c 86       		.byte	0x86
+ 1094 025d 05       		.byte	0x5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 26
+
+
+ 1095 025e F5       		.byte	0xf5
+ 1096 025f 94020000 		.4byte	0x294
+ 1097 0263 0D       		.uleb128 0xd
+ 1098 0264 C0060000 		.4byte	.LASF40
+ 1099 0268 05       		.byte	0x5
+ 1100 0269 F6       		.byte	0xf6
+ 1101 026a 94020000 		.4byte	0x294
+ 1102 026e 00       		.byte	0
+ 1103 026f 0D       		.uleb128 0xd
+ 1104 0270 70060000 		.4byte	.LASF41
+ 1105 0274 05       		.byte	0x5
+ 1106 0275 F7       		.byte	0xf7
+ 1107 0276 B1000000 		.4byte	0xb1
+ 1108 027a 80       		.byte	0x80
+ 1109 027b 0C       		.uleb128 0xc
+ 1110 027c 696E6400 		.ascii	"ind\000"
+ 1111 0280 05       		.byte	0x5
+ 1112 0281 F8       		.byte	0xf8
+ 1113 0282 B1000000 		.4byte	0xb1
+ 1114 0286 82       		.byte	0x82
+ 1115 0287 0D       		.uleb128 0xd
+ 1116 0288 91010000 		.4byte	.LASF42
+ 1117 028c 05       		.byte	0x5
+ 1118 028d F9       		.byte	0xf9
+ 1119 028e 81000000 		.4byte	0x81
+ 1120 0292 84       		.byte	0x84
+ 1121 0293 00       		.byte	0
+ 1122 0294 07       		.uleb128 0x7
+ 1123 0295 81000000 		.4byte	0x81
+ 1124 0299 A4020000 		.4byte	0x2a4
+ 1125 029d 08       		.uleb128 0x8
+ 1126 029e 02010000 		.4byte	0x102
+ 1127 02a2 7F       		.byte	0x7f
+ 1128 02a3 00       		.byte	0
+ 1129 02a4 0E       		.uleb128 0xe
+ 1130 02a5 EA050000 		.4byte	.LASF43
+ 1131 02a9 50       		.byte	0x50
+ 1132 02aa 05       		.byte	0x5
+ 1133 02ab 0201     		.2byte	0x102
+ 1134 02ad 0D030000 		.4byte	0x30d
+ 1135 02b1 0F       		.uleb128 0xf
+ 1136 02b2 05060000 		.4byte	.LASF44
+ 1137 02b6 05       		.byte	0x5
+ 1138 02b7 0301     		.2byte	0x103
+ 1139 02b9 0D030000 		.4byte	0x30d
+ 1140 02bd 00       		.byte	0
+ 1141 02be 0F       		.uleb128 0xf
+ 1142 02bf F7030000 		.4byte	.LASF45
+ 1143 02c3 05       		.byte	0x5
+ 1144 02c4 0401     		.2byte	0x104
+ 1145 02c6 1D030000 		.4byte	0x31d
+ 1146 02ca 08       		.byte	0x8
+ 1147 02cb 0F       		.uleb128 0xf
+ 1148 02cc 14050000 		.4byte	.LASF46
+ 1149 02d0 05       		.byte	0x5
+ 1150 02d1 0501     		.2byte	0x105
+ 1151 02d3 2D030000 		.4byte	0x32d
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 27
+
+
+ 1152 02d7 30       		.byte	0x30
+ 1153 02d8 0F       		.uleb128 0xf
+ 1154 02d9 51060000 		.4byte	.LASF47
+ 1155 02dd 05       		.byte	0x5
+ 1156 02de 0601     		.2byte	0x106
+ 1157 02e0 99000000 		.4byte	0x99
+ 1158 02e4 40       		.byte	0x40
+ 1159 02e5 0F       		.uleb128 0xf
+ 1160 02e6 12020000 		.4byte	.LASF48
+ 1161 02ea 05       		.byte	0x5
+ 1162 02eb 0701     		.2byte	0x107
+ 1163 02ed 99000000 		.4byte	0x99
+ 1164 02f1 44       		.byte	0x44
+ 1165 02f2 0F       		.uleb128 0xf
+ 1166 02f3 59000000 		.4byte	.LASF49
+ 1167 02f7 05       		.byte	0x5
+ 1168 02f8 0801     		.2byte	0x108
+ 1169 02fa 99000000 		.4byte	0x99
+ 1170 02fe 48       		.byte	0x48
+ 1171 02ff 0F       		.uleb128 0xf
+ 1172 0300 38060000 		.4byte	.LASF50
+ 1173 0304 05       		.byte	0x5
+ 1174 0305 0901     		.2byte	0x109
+ 1175 0307 99000000 		.4byte	0x99
+ 1176 030b 4C       		.byte	0x4c
+ 1177 030c 00       		.byte	0
+ 1178 030d 07       		.uleb128 0x7
+ 1179 030e 99000000 		.4byte	0x99
+ 1180 0312 1D030000 		.4byte	0x31d
+ 1181 0316 08       		.uleb128 0x8
+ 1182 0317 02010000 		.4byte	0x102
+ 1183 031b 01       		.byte	0x1
+ 1184 031c 00       		.byte	0
+ 1185 031d 07       		.uleb128 0x7
+ 1186 031e 99000000 		.4byte	0x99
+ 1187 0322 2D030000 		.4byte	0x32d
+ 1188 0326 08       		.uleb128 0x8
+ 1189 0327 02010000 		.4byte	0x102
+ 1190 032b 09       		.byte	0x9
+ 1191 032c 00       		.byte	0
+ 1192 032d 07       		.uleb128 0x7
+ 1193 032e 99000000 		.4byte	0x99
+ 1194 0332 3D030000 		.4byte	0x33d
+ 1195 0336 08       		.uleb128 0x8
+ 1196 0337 02010000 		.4byte	0x102
+ 1197 033b 03       		.byte	0x3
+ 1198 033c 00       		.byte	0
+ 1199 033d 0E       		.uleb128 0xe
+ 1200 033e A6040000 		.4byte	.LASF51
+ 1201 0342 10       		.byte	0x10
+ 1202 0343 05       		.byte	0x5
+ 1203 0344 1001     		.2byte	0x110
+ 1204 0346 CC030000 		.4byte	0x3cc
+ 1205 034a 10       		.uleb128 0x10
+ 1206 034b 696400   		.ascii	"id\000"
+ 1207 034e 05       		.byte	0x5
+ 1208 034f 1101     		.2byte	0x111
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 28
+
+
+ 1209 0351 81000000 		.4byte	0x81
+ 1210 0355 00       		.byte	0
+ 1211 0356 0F       		.uleb128 0xf
+ 1212 0357 0F040000 		.4byte	.LASF52
+ 1213 035b 05       		.byte	0x5
+ 1214 035c 1201     		.2byte	0x112
+ 1215 035e CC030000 		.4byte	0x3cc
+ 1216 0362 01       		.byte	0x1
+ 1217 0363 0F       		.uleb128 0xf
+ 1218 0364 1D040000 		.4byte	.LASF53
+ 1219 0368 05       		.byte	0x5
+ 1220 0369 1301     		.2byte	0x113
+ 1221 036b CC030000 		.4byte	0x3cc
+ 1222 036f 04       		.byte	0x4
+ 1223 0370 0F       		.uleb128 0xf
+ 1224 0371 07020000 		.4byte	.LASF54
+ 1225 0375 05       		.byte	0x5
+ 1226 0376 1401     		.2byte	0x114
+ 1227 0378 81000000 		.4byte	0x81
+ 1228 037c 07       		.byte	0x7
+ 1229 037d 0F       		.uleb128 0xf
+ 1230 037e DC020000 		.4byte	.LASF55
+ 1231 0382 05       		.byte	0x5
+ 1232 0383 1501     		.2byte	0x115
+ 1233 0385 81000000 		.4byte	0x81
+ 1234 0389 08       		.byte	0x8
+ 1235 038a 0F       		.uleb128 0xf
+ 1236 038b 1F000000 		.4byte	.LASF56
+ 1237 038f 05       		.byte	0x5
+ 1238 0390 1601     		.2byte	0x116
+ 1239 0392 81000000 		.4byte	0x81
+ 1240 0396 09       		.byte	0x9
+ 1241 0397 0F       		.uleb128 0xf
+ 1242 0398 43010000 		.4byte	.LASF57
+ 1243 039c 05       		.byte	0x5
+ 1244 039d 1701     		.2byte	0x117
+ 1245 039f 81000000 		.4byte	0x81
+ 1246 03a3 0A       		.byte	0xa
+ 1247 03a4 0F       		.uleb128 0xf
+ 1248 03a5 EC060000 		.4byte	.LASF58
+ 1249 03a9 05       		.byte	0x5
+ 1250 03aa 1801     		.2byte	0x118
+ 1251 03ac 81000000 		.4byte	0x81
+ 1252 03b0 0B       		.byte	0xb
+ 1253 03b1 0F       		.uleb128 0xf
+ 1254 03b2 C7060000 		.4byte	.LASF59
+ 1255 03b6 05       		.byte	0x5
+ 1256 03b7 1901     		.2byte	0x119
+ 1257 03b9 81000000 		.4byte	0x81
+ 1258 03bd 0C       		.byte	0xc
+ 1259 03be 0F       		.uleb128 0xf
+ 1260 03bf C4030000 		.4byte	.LASF60
+ 1261 03c3 05       		.byte	0x5
+ 1262 03c4 1A01     		.2byte	0x11a
+ 1263 03c6 CC030000 		.4byte	0x3cc
+ 1264 03ca 0D       		.byte	0xd
+ 1265 03cb 00       		.byte	0
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 29
+
+
+ 1266 03cc 07       		.uleb128 0x7
+ 1267 03cd 81000000 		.4byte	0x81
+ 1268 03d1 DC030000 		.4byte	0x3dc
+ 1269 03d5 08       		.uleb128 0x8
+ 1270 03d6 02010000 		.4byte	0x102
+ 1271 03da 02       		.byte	0x2
+ 1272 03db 00       		.byte	0
+ 1273 03dc 0E       		.uleb128 0xe
+ 1274 03dd 06070000 		.4byte	.LASF61
+ 1275 03e1 70       		.byte	0x70
+ 1276 03e2 05       		.byte	0x5
+ 1277 03e3 2101     		.2byte	0x121
+ 1278 03e5 56050000 		.4byte	0x556
+ 1279 03e9 10       		.uleb128 0x10
+ 1280 03ea 6B5F7000 		.ascii	"k_p\000"
+ 1281 03ee 05       		.byte	0x5
+ 1282 03ef 2201     		.2byte	0x122
+ 1283 03f1 BD000000 		.4byte	0xbd
+ 1284 03f5 00       		.byte	0
+ 1285 03f6 10       		.uleb128 0x10
+ 1286 03f7 6B5F6900 		.ascii	"k_i\000"
+ 1287 03fb 05       		.byte	0x5
+ 1288 03fc 2301     		.2byte	0x123
+ 1289 03fe BD000000 		.4byte	0xbd
+ 1290 0402 04       		.byte	0x4
+ 1291 0403 10       		.uleb128 0x10
+ 1292 0404 6B5F6400 		.ascii	"k_d\000"
+ 1293 0408 05       		.byte	0x5
+ 1294 0409 2401     		.2byte	0x124
+ 1295 040b BD000000 		.4byte	0xbd
+ 1296 040f 08       		.byte	0x8
+ 1297 0410 0F       		.uleb128 0xf
+ 1298 0411 D8040000 		.4byte	.LASF62
+ 1299 0415 05       		.byte	0x5
+ 1300 0416 2501     		.2byte	0x125
+ 1301 0418 BD000000 		.4byte	0xbd
+ 1302 041c 0C       		.byte	0xc
+ 1303 041d 0F       		.uleb128 0xf
+ 1304 041e 61080000 		.4byte	.LASF63
+ 1305 0422 05       		.byte	0x5
+ 1306 0423 2601     		.2byte	0x126
+ 1307 0425 BD000000 		.4byte	0xbd
+ 1308 0429 10       		.byte	0x10
+ 1309 042a 0F       		.uleb128 0xf
+ 1310 042b 24070000 		.4byte	.LASF64
+ 1311 042f 05       		.byte	0x5
+ 1312 0430 2701     		.2byte	0x127
+ 1313 0432 BD000000 		.4byte	0xbd
+ 1314 0436 14       		.byte	0x14
+ 1315 0437 0F       		.uleb128 0xf
+ 1316 0438 7A080000 		.4byte	.LASF65
+ 1317 043c 05       		.byte	0x5
+ 1318 043d 2801     		.2byte	0x128
+ 1319 043f BD000000 		.4byte	0xbd
+ 1320 0443 18       		.byte	0x18
+ 1321 0444 0F       		.uleb128 0xf
+ 1322 0445 1E030000 		.4byte	.LASF66
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 30
+
+
+ 1323 0449 05       		.byte	0x5
+ 1324 044a 2901     		.2byte	0x129
+ 1325 044c BD000000 		.4byte	0xbd
+ 1326 0450 1C       		.byte	0x1c
+ 1327 0451 0F       		.uleb128 0xf
+ 1328 0452 D5020000 		.4byte	.LASF67
+ 1329 0456 05       		.byte	0x5
+ 1330 0457 2A01     		.2byte	0x12a
+ 1331 0459 BD000000 		.4byte	0xbd
+ 1332 045d 20       		.byte	0x20
+ 1333 045e 0F       		.uleb128 0xf
+ 1334 045f A4020000 		.4byte	.LASF68
+ 1335 0463 05       		.byte	0x5
+ 1336 0464 2B01     		.2byte	0x12b
+ 1337 0466 BD000000 		.4byte	0xbd
+ 1338 046a 24       		.byte	0x24
+ 1339 046b 0F       		.uleb128 0xf
+ 1340 046c D0060000 		.4byte	.LASF69
+ 1341 0470 05       		.byte	0x5
+ 1342 0471 2C01     		.2byte	0x12c
+ 1343 0473 BD000000 		.4byte	0xbd
+ 1344 0477 28       		.byte	0x28
+ 1345 0478 0F       		.uleb128 0xf
+ 1346 0479 01080000 		.4byte	.LASF70
+ 1347 047d 05       		.byte	0x5
+ 1348 047e 2D01     		.2byte	0x12d
+ 1349 0480 BD000000 		.4byte	0xbd
+ 1350 0484 2C       		.byte	0x2c
+ 1351 0485 0F       		.uleb128 0xf
+ 1352 0486 2B050000 		.4byte	.LASF71
+ 1353 048a 05       		.byte	0x5
+ 1354 048b 2E01     		.2byte	0x12e
+ 1355 048d 81000000 		.4byte	0x81
+ 1356 0491 30       		.byte	0x30
+ 1357 0492 0F       		.uleb128 0xf
+ 1358 0493 37020000 		.4byte	.LASF72
+ 1359 0497 05       		.byte	0x5
+ 1360 0498 2F01     		.2byte	0x12f
+ 1361 049a 81000000 		.4byte	0x81
+ 1362 049e 31       		.byte	0x31
+ 1363 049f 0F       		.uleb128 0xf
+ 1364 04a0 A6030000 		.4byte	.LASF73
+ 1365 04a4 05       		.byte	0x5
+ 1366 04a5 3001     		.2byte	0x130
+ 1367 04a7 81000000 		.4byte	0x81
+ 1368 04ab 32       		.byte	0x32
+ 1369 04ac 0F       		.uleb128 0xf
+ 1370 04ad 17060000 		.4byte	.LASF74
+ 1371 04b1 05       		.byte	0x5
+ 1372 04b2 3101     		.2byte	0x131
+ 1373 04b4 81000000 		.4byte	0x81
+ 1374 04b8 33       		.byte	0x33
+ 1375 04b9 0F       		.uleb128 0xf
+ 1376 04ba B8030000 		.4byte	.LASF75
+ 1377 04be 05       		.byte	0x5
+ 1378 04bf 3201     		.2byte	0x132
+ 1379 04c1 BD000000 		.4byte	0xbd
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 31
+
+
+ 1380 04c5 34       		.byte	0x34
+ 1381 04c6 0F       		.uleb128 0xf
+ 1382 04c7 F0040000 		.4byte	.LASF76
+ 1383 04cb 05       		.byte	0x5
+ 1384 04cc 3301     		.2byte	0x133
+ 1385 04ce BD000000 		.4byte	0xbd
+ 1386 04d2 38       		.byte	0x38
+ 1387 04d3 0F       		.uleb128 0xf
+ 1388 04d4 39030000 		.4byte	.LASF77
+ 1389 04d8 05       		.byte	0x5
+ 1390 04d9 3401     		.2byte	0x134
+ 1391 04db BD000000 		.4byte	0xbd
+ 1392 04df 3C       		.byte	0x3c
+ 1393 04e0 0F       		.uleb128 0xf
+ 1394 04e1 2B060000 		.4byte	.LASF78
+ 1395 04e5 05       		.byte	0x5
+ 1396 04e6 3501     		.2byte	0x135
+ 1397 04e8 BD000000 		.4byte	0xbd
+ 1398 04ec 40       		.byte	0x40
+ 1399 04ed 0F       		.uleb128 0xf
+ 1400 04ee 2A070000 		.4byte	.LASF79
+ 1401 04f2 05       		.byte	0x5
+ 1402 04f3 3601     		.2byte	0x136
+ 1403 04f5 56050000 		.4byte	0x556
+ 1404 04f9 44       		.byte	0x44
+ 1405 04fa 0F       		.uleb128 0xf
+ 1406 04fb 37050000 		.4byte	.LASF80
+ 1407 04ff 05       		.byte	0x5
+ 1408 0500 3701     		.2byte	0x137
+ 1409 0502 B1000000 		.4byte	0xb1
+ 1410 0506 5C       		.byte	0x5c
+ 1411 0507 0F       		.uleb128 0xf
+ 1412 0508 BF020000 		.4byte	.LASF81
+ 1413 050c 05       		.byte	0x5
+ 1414 050d 3801     		.2byte	0x138
+ 1415 050f 81000000 		.4byte	0x81
+ 1416 0513 5E       		.byte	0x5e
+ 1417 0514 0F       		.uleb128 0xf
+ 1418 0515 1C020000 		.4byte	.LASF82
+ 1419 0519 05       		.byte	0x5
+ 1420 051a 3901     		.2byte	0x139
+ 1421 051c 81000000 		.4byte	0x81
+ 1422 0520 5F       		.byte	0x5f
+ 1423 0521 0F       		.uleb128 0xf
+ 1424 0522 79000000 		.4byte	.LASF83
+ 1425 0526 05       		.byte	0x5
+ 1426 0527 3A01     		.2byte	0x13a
+ 1427 0529 81000000 		.4byte	0x81
+ 1428 052d 60       		.byte	0x60
+ 1429 052e 0F       		.uleb128 0xf
+ 1430 052f 81080000 		.4byte	.LASF84
+ 1431 0533 05       		.byte	0x5
+ 1432 0534 3B01     		.2byte	0x13b
+ 1433 0536 81000000 		.4byte	0x81
+ 1434 053a 61       		.byte	0x61
+ 1435 053b 0F       		.uleb128 0xf
+ 1436 053c E9010000 		.4byte	.LASF85
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 32
+
+
+ 1437 0540 05       		.byte	0x5
+ 1438 0541 3C01     		.2byte	0x13c
+ 1439 0543 81000000 		.4byte	0x81
+ 1440 0547 62       		.byte	0x62
+ 1441 0548 0F       		.uleb128 0xf
+ 1442 0549 C4030000 		.4byte	.LASF60
+ 1443 054d 05       		.byte	0x5
+ 1444 054e 3D01     		.2byte	0x13d
+ 1445 0550 66050000 		.4byte	0x566
+ 1446 0554 63       		.byte	0x63
+ 1447 0555 00       		.byte	0
+ 1448 0556 07       		.uleb128 0x7
+ 1449 0557 D5000000 		.4byte	0xd5
+ 1450 055b 66050000 		.4byte	0x566
+ 1451 055f 08       		.uleb128 0x8
+ 1452 0560 02010000 		.4byte	0x102
+ 1453 0564 05       		.byte	0x5
+ 1454 0565 00       		.byte	0
+ 1455 0566 07       		.uleb128 0x7
+ 1456 0567 81000000 		.4byte	0x81
+ 1457 056b 76050000 		.4byte	0x576
+ 1458 056f 08       		.uleb128 0x8
+ 1459 0570 02010000 		.4byte	0x102
+ 1460 0574 0C       		.byte	0xc
+ 1461 0575 00       		.byte	0
+ 1462 0576 0E       		.uleb128 0xe
+ 1463 0577 CB050000 		.4byte	.LASF86
+ 1464 057b 30       		.byte	0x30
+ 1465 057c 05       		.byte	0x5
+ 1466 057d 4401     		.2byte	0x144
+ 1467 057f F9050000 		.4byte	0x5f9
+ 1468 0583 0F       		.uleb128 0xf
+ 1469 0584 F4060000 		.4byte	.LASF87
+ 1470 0588 05       		.byte	0x5
+ 1471 0589 4501     		.2byte	0x145
+ 1472 058b F9050000 		.4byte	0x5f9
+ 1473 058f 00       		.byte	0
+ 1474 0590 10       		.uleb128 0x10
+ 1475 0591 72657300 		.ascii	"res\000"
+ 1476 0595 05       		.byte	0x5
+ 1477 0596 4601     		.2byte	0x146
+ 1478 0598 CC030000 		.4byte	0x3cc
+ 1479 059c 05       		.byte	0x5
+ 1480 059d 0F       		.uleb128 0xf
+ 1481 059e 73000000 		.4byte	.LASF88
+ 1482 05a2 05       		.byte	0x5
+ 1483 05a3 4701     		.2byte	0x147
+ 1484 05a5 F2010000 		.4byte	0x1f2
+ 1485 05a9 08       		.byte	0x8
+ 1486 05aa 0F       		.uleb128 0xf
+ 1487 05ab 88050000 		.4byte	.LASF89
+ 1488 05af 05       		.byte	0x5
+ 1489 05b0 4801     		.2byte	0x148
+ 1490 05b2 09060000 		.4byte	0x609
+ 1491 05b6 14       		.byte	0x14
+ 1492 05b7 0F       		.uleb128 0xf
+ 1493 05b8 4B080000 		.4byte	.LASF90
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 33
+
+
+ 1494 05bc 05       		.byte	0x5
+ 1495 05bd 4901     		.2byte	0x149
+ 1496 05bf 81000000 		.4byte	0x81
+ 1497 05c3 20       		.byte	0x20
+ 1498 05c4 0F       		.uleb128 0xf
+ 1499 05c5 4B050000 		.4byte	.LASF91
+ 1500 05c9 05       		.byte	0x5
+ 1501 05ca 4A01     		.2byte	0x14a
+ 1502 05cc CC030000 		.4byte	0x3cc
+ 1503 05d0 21       		.byte	0x21
+ 1504 05d1 0F       		.uleb128 0xf
+ 1505 05d2 0B030000 		.4byte	.LASF92
+ 1506 05d6 05       		.byte	0x5
+ 1507 05d7 4B01     		.2byte	0x14b
+ 1508 05d9 A5000000 		.4byte	0xa5
+ 1509 05dd 24       		.byte	0x24
+ 1510 05de 0F       		.uleb128 0xf
+ 1511 05df B4050000 		.4byte	.LASF93
+ 1512 05e3 05       		.byte	0x5
+ 1513 05e4 4C01     		.2byte	0x14c
+ 1514 05e6 02020000 		.4byte	0x202
+ 1515 05ea 25       		.byte	0x25
+ 1516 05eb 0F       		.uleb128 0xf
+ 1517 05ec C4030000 		.4byte	.LASF60
+ 1518 05f0 05       		.byte	0x5
+ 1519 05f1 4D01     		.2byte	0x14d
+ 1520 05f3 19060000 		.4byte	0x619
+ 1521 05f7 28       		.byte	0x28
+ 1522 05f8 00       		.byte	0
+ 1523 05f9 07       		.uleb128 0x7
+ 1524 05fa 81000000 		.4byte	0x81
+ 1525 05fe 09060000 		.4byte	0x609
+ 1526 0602 08       		.uleb128 0x8
+ 1527 0603 02010000 		.4byte	0x102
+ 1528 0607 04       		.byte	0x4
+ 1529 0608 00       		.byte	0
+ 1530 0609 07       		.uleb128 0x7
+ 1531 060a C9000000 		.4byte	0xc9
+ 1532 060e 19060000 		.4byte	0x619
+ 1533 0612 08       		.uleb128 0x8
+ 1534 0613 02010000 		.4byte	0x102
+ 1535 0617 02       		.byte	0x2
+ 1536 0618 00       		.byte	0
+ 1537 0619 07       		.uleb128 0x7
+ 1538 061a 81000000 		.4byte	0x81
+ 1539 061e 29060000 		.4byte	0x629
+ 1540 0622 08       		.uleb128 0x8
+ 1541 0623 02010000 		.4byte	0x102
+ 1542 0627 07       		.byte	0x7
+ 1543 0628 00       		.byte	0
+ 1544 0629 0E       		.uleb128 0xe
+ 1545 062a 24060000 		.4byte	.LASF94
+ 1546 062e 10       		.byte	0x10
+ 1547 062f 05       		.byte	0x5
+ 1548 0630 5401     		.2byte	0x154
+ 1549 0632 85060000 		.4byte	0x685
+ 1550 0636 0F       		.uleb128 0xf
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 34
+
+
+ 1551 0637 75010000 		.4byte	.LASF95
+ 1552 063b 05       		.byte	0x5
+ 1553 063c 5501     		.2byte	0x155
+ 1554 063e 85060000 		.4byte	0x685
+ 1555 0642 00       		.byte	0
+ 1556 0643 0F       		.uleb128 0xf
+ 1557 0644 8E070000 		.4byte	.LASF96
+ 1558 0648 05       		.byte	0x5
+ 1559 0649 5601     		.2byte	0x156
+ 1560 064b 0D030000 		.4byte	0x30d
+ 1561 064f 04       		.byte	0x4
+ 1562 0650 0F       		.uleb128 0xf
+ 1563 0651 84070000 		.4byte	.LASF97
+ 1564 0655 05       		.byte	0x5
+ 1565 0656 5701     		.2byte	0x157
+ 1566 0658 81000000 		.4byte	0x81
+ 1567 065c 0C       		.byte	0xc
+ 1568 065d 0F       		.uleb128 0xf
+ 1569 065e 0F070000 		.4byte	.LASF98
+ 1570 0662 05       		.byte	0x5
+ 1571 0663 5801     		.2byte	0x158
+ 1572 0665 81000000 		.4byte	0x81
+ 1573 0669 0D       		.byte	0xd
+ 1574 066a 0F       		.uleb128 0xf
+ 1575 066b B4020000 		.4byte	.LASF99
+ 1576 066f 05       		.byte	0x5
+ 1577 0670 5901     		.2byte	0x159
+ 1578 0672 81000000 		.4byte	0x81
+ 1579 0676 0E       		.byte	0xe
+ 1580 0677 0F       		.uleb128 0xf
+ 1581 0678 C4030000 		.4byte	.LASF60
+ 1582 067c 05       		.byte	0x5
+ 1583 067d 5A01     		.2byte	0x15a
+ 1584 067f 95060000 		.4byte	0x695
+ 1585 0683 0F       		.byte	0xf
+ 1586 0684 00       		.byte	0
+ 1587 0685 07       		.uleb128 0x7
+ 1588 0686 8D000000 		.4byte	0x8d
+ 1589 068a 95060000 		.4byte	0x695
+ 1590 068e 08       		.uleb128 0x8
+ 1591 068f 02010000 		.4byte	0x102
+ 1592 0693 01       		.byte	0x1
+ 1593 0694 00       		.byte	0
+ 1594 0695 07       		.uleb128 0x7
+ 1595 0696 81000000 		.4byte	0x81
+ 1596 069a A5060000 		.4byte	0x6a5
+ 1597 069e 08       		.uleb128 0x8
+ 1598 069f 02010000 		.4byte	0x102
+ 1599 06a3 00       		.byte	0
+ 1600 06a4 00       		.byte	0
+ 1601 06a5 0E       		.uleb128 0xe
+ 1602 06a6 4B000000 		.4byte	.LASF100
+ 1603 06aa 20       		.byte	0x20
+ 1604 06ab 05       		.byte	0x5
+ 1605 06ac 6101     		.2byte	0x161
+ 1606 06ae E7060000 		.4byte	0x6e7
+ 1607 06b2 0F       		.uleb128 0xf
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 35
+
+
+ 1608 06b3 36070000 		.4byte	.LASF101
+ 1609 06b7 05       		.byte	0x5
+ 1610 06b8 6201     		.2byte	0x162
+ 1611 06ba 81000000 		.4byte	0x81
+ 1612 06be 00       		.byte	0
+ 1613 06bf 0F       		.uleb128 0xf
+ 1614 06c0 4E020000 		.4byte	.LASF102
+ 1615 06c4 05       		.byte	0x5
+ 1616 06c5 6301     		.2byte	0x163
+ 1617 06c7 81000000 		.4byte	0x81
+ 1618 06cb 01       		.byte	0x1
+ 1619 06cc 0F       		.uleb128 0xf
+ 1620 06cd 5A040000 		.4byte	.LASF103
+ 1621 06d1 05       		.byte	0x5
+ 1622 06d2 6401     		.2byte	0x164
+ 1623 06d4 E7060000 		.4byte	0x6e7
+ 1624 06d8 02       		.byte	0x2
+ 1625 06d9 0F       		.uleb128 0xf
+ 1626 06da C4030000 		.4byte	.LASF60
+ 1627 06de 05       		.byte	0x5
+ 1628 06df 6501     		.2byte	0x165
+ 1629 06e1 F9050000 		.4byte	0x5f9
+ 1630 06e5 1B       		.byte	0x1b
+ 1631 06e6 00       		.byte	0
+ 1632 06e7 07       		.uleb128 0x7
+ 1633 06e8 81000000 		.4byte	0x81
+ 1634 06ec FD060000 		.4byte	0x6fd
+ 1635 06f0 08       		.uleb128 0x8
+ 1636 06f1 02010000 		.4byte	0x102
+ 1637 06f5 04       		.byte	0x4
+ 1638 06f6 08       		.uleb128 0x8
+ 1639 06f7 02010000 		.4byte	0x102
+ 1640 06fb 04       		.byte	0x4
+ 1641 06fc 00       		.byte	0
+ 1642 06fd 0E       		.uleb128 0xe
+ 1643 06fe B3060000 		.4byte	.LASF104
+ 1644 0702 20       		.byte	0x20
+ 1645 0703 05       		.byte	0x5
+ 1646 0704 6C01     		.2byte	0x16c
+ 1647 0706 4C070000 		.4byte	0x74c
+ 1648 070a 0F       		.uleb128 0xf
+ 1649 070b 21050000 		.4byte	.LASF105
+ 1650 070f 05       		.byte	0x5
+ 1651 0710 6D01     		.2byte	0x16d
+ 1652 0712 4C070000 		.4byte	0x74c
+ 1653 0716 00       		.byte	0
+ 1654 0717 0F       		.uleb128 0xf
+ 1655 0718 10080000 		.4byte	.LASF106
+ 1656 071c 05       		.byte	0x5
+ 1657 071d 6E01     		.2byte	0x16e
+ 1658 071f 81000000 		.4byte	0x81
+ 1659 0723 06       		.byte	0x6
+ 1660 0724 0F       		.uleb128 0xf
+ 1661 0725 46030000 		.4byte	.LASF107
+ 1662 0729 05       		.byte	0x5
+ 1663 072a 6F01     		.2byte	0x16f
+ 1664 072c 81000000 		.4byte	0x81
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 36
+
+
+ 1665 0730 07       		.byte	0x7
+ 1666 0731 0F       		.uleb128 0xf
+ 1667 0732 AB050000 		.4byte	.LASF108
+ 1668 0736 05       		.byte	0x5
+ 1669 0737 7001     		.2byte	0x170
+ 1670 0739 5C070000 		.4byte	0x75c
+ 1671 073d 08       		.byte	0x8
+ 1672 073e 0F       		.uleb128 0xf
+ 1673 073f C4030000 		.4byte	.LASF60
+ 1674 0743 05       		.byte	0x5
+ 1675 0744 7101     		.2byte	0x171
+ 1676 0746 5C070000 		.4byte	0x75c
+ 1677 074a 14       		.byte	0x14
+ 1678 074b 00       		.byte	0
+ 1679 074c 07       		.uleb128 0x7
+ 1680 074d 81000000 		.4byte	0x81
+ 1681 0751 5C070000 		.4byte	0x75c
+ 1682 0755 08       		.uleb128 0x8
+ 1683 0756 02010000 		.4byte	0x102
+ 1684 075a 05       		.byte	0x5
+ 1685 075b 00       		.byte	0
+ 1686 075c 07       		.uleb128 0x7
+ 1687 075d 81000000 		.4byte	0x81
+ 1688 0761 6C070000 		.4byte	0x76c
+ 1689 0765 08       		.uleb128 0x8
+ 1690 0766 02010000 		.4byte	0x102
+ 1691 076a 0B       		.byte	0xb
+ 1692 076b 00       		.byte	0
+ 1693 076c 0E       		.uleb128 0xe
+ 1694 076d 61030000 		.4byte	.LASF109
+ 1695 0771 20       		.byte	0x20
+ 1696 0772 05       		.byte	0x5
+ 1697 0773 7801     		.2byte	0x178
+ 1698 0775 A1070000 		.4byte	0x7a1
+ 1699 0779 0F       		.uleb128 0xf
+ 1700 077a 63040000 		.4byte	.LASF110
+ 1701 077e 05       		.byte	0x5
+ 1702 077f 7901     		.2byte	0x179
+ 1703 0781 09010000 		.4byte	0x109
+ 1704 0785 00       		.byte	0
+ 1705 0786 0F       		.uleb128 0xf
+ 1706 0787 69030000 		.4byte	.LASF111
+ 1707 078b 05       		.byte	0x5
+ 1708 078c 7A01     		.2byte	0x17a
+ 1709 078e 29060000 		.4byte	0x629
+ 1710 0792 08       		.byte	0x8
+ 1711 0793 0F       		.uleb128 0xf
+ 1712 0794 C4030000 		.4byte	.LASF60
+ 1713 0798 05       		.byte	0x5
+ 1714 0799 7B01     		.2byte	0x17b
+ 1715 079b 19060000 		.4byte	0x619
+ 1716 079f 18       		.byte	0x18
+ 1717 07a0 00       		.byte	0
+ 1718 07a1 0E       		.uleb128 0xe
+ 1719 07a2 23080000 		.4byte	.LASF112
+ 1720 07a6 10       		.byte	0x10
+ 1721 07a7 05       		.byte	0x5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 37
+
+
+ 1722 07a8 8201     		.2byte	0x182
+ 1723 07aa F0070000 		.4byte	0x7f0
+ 1724 07ae 0F       		.uleb128 0xf
+ 1725 07af E7040000 		.4byte	.LASF113
+ 1726 07b3 05       		.byte	0x5
+ 1727 07b4 8301     		.2byte	0x183
+ 1728 07b6 BD000000 		.4byte	0xbd
+ 1729 07ba 00       		.byte	0
+ 1730 07bb 0F       		.uleb128 0xf
+ 1731 07bc 4D010000 		.4byte	.LASF114
+ 1732 07c0 05       		.byte	0x5
+ 1733 07c1 8401     		.2byte	0x184
+ 1734 07c3 BD000000 		.4byte	0xbd
+ 1735 07c7 04       		.byte	0x4
+ 1736 07c8 0F       		.uleb128 0xf
+ 1737 07c9 6C010000 		.4byte	.LASF115
+ 1738 07cd 05       		.byte	0x5
+ 1739 07ce 8501     		.2byte	0x185
+ 1740 07d0 BD000000 		.4byte	0xbd
+ 1741 07d4 08       		.byte	0x8
+ 1742 07d5 0F       		.uleb128 0xf
+ 1743 07d6 D9060000 		.4byte	.LASF116
+ 1744 07da 05       		.byte	0x5
+ 1745 07db 8601     		.2byte	0x186
+ 1746 07dd 81000000 		.4byte	0x81
+ 1747 07e1 0C       		.byte	0xc
+ 1748 07e2 0F       		.uleb128 0xf
+ 1749 07e3 C4030000 		.4byte	.LASF60
+ 1750 07e7 05       		.byte	0x5
+ 1751 07e8 8701     		.2byte	0x187
+ 1752 07ea CC030000 		.4byte	0x3cc
+ 1753 07ee 0D       		.byte	0xd
+ 1754 07ef 00       		.byte	0
+ 1755 07f0 0E       		.uleb128 0xe
+ 1756 07f1 F6050000 		.4byte	.LASF117
+ 1757 07f5 10       		.byte	0x10
+ 1758 07f6 05       		.byte	0x5
+ 1759 07f7 8E01     		.2byte	0x18e
+ 1760 07f9 25080000 		.4byte	0x825
+ 1761 07fd 0F       		.uleb128 0xf
+ 1762 07fe D1030000 		.4byte	.LASF118
+ 1763 0802 05       		.byte	0x5
+ 1764 0803 8F01     		.2byte	0x18f
+ 1765 0805 81000000 		.4byte	0x81
+ 1766 0809 00       		.byte	0
+ 1767 080a 0F       		.uleb128 0xf
+ 1768 080b DB050000 		.4byte	.LASF119
+ 1769 080f 05       		.byte	0x5
+ 1770 0810 9001     		.2byte	0x190
+ 1771 0812 81000000 		.4byte	0x81
+ 1772 0816 01       		.byte	0x1
+ 1773 0817 0F       		.uleb128 0xf
+ 1774 0818 C4030000 		.4byte	.LASF60
+ 1775 081c 05       		.byte	0x5
+ 1776 081d 9101     		.2byte	0x191
+ 1777 081f 25080000 		.4byte	0x825
+ 1778 0823 02       		.byte	0x2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 38
+
+
+ 1779 0824 00       		.byte	0
+ 1780 0825 07       		.uleb128 0x7
+ 1781 0826 81000000 		.4byte	0x81
+ 1782 082a 35080000 		.4byte	0x835
+ 1783 082e 08       		.uleb128 0x8
+ 1784 082f 02010000 		.4byte	0x102
+ 1785 0833 0D       		.byte	0xd
+ 1786 0834 00       		.byte	0
+ 1787 0835 0E       		.uleb128 0xe
+ 1788 0836 40000000 		.4byte	.LASF120
+ 1789 083a 10       		.byte	0x10
+ 1790 083b 05       		.byte	0x5
+ 1791 083c 9801     		.2byte	0x198
+ 1792 083e 77080000 		.4byte	0x877
+ 1793 0842 0F       		.uleb128 0xf
+ 1794 0843 00000000 		.4byte	.LASF121
+ 1795 0847 05       		.byte	0x5
+ 1796 0848 9901     		.2byte	0x199
+ 1797 084a BD000000 		.4byte	0xbd
+ 1798 084e 00       		.byte	0
+ 1799 084f 0F       		.uleb128 0xf
+ 1800 0850 85040000 		.4byte	.LASF122
+ 1801 0854 05       		.byte	0x5
+ 1802 0855 9A01     		.2byte	0x19a
+ 1803 0857 D5000000 		.4byte	0xd5
+ 1804 085b 04       		.byte	0x4
+ 1805 085c 0F       		.uleb128 0xf
+ 1806 085d 2E080000 		.4byte	.LASF123
+ 1807 0861 05       		.byte	0x5
+ 1808 0862 9B01     		.2byte	0x19b
+ 1809 0864 D5000000 		.4byte	0xd5
+ 1810 0868 08       		.byte	0x8
+ 1811 0869 0F       		.uleb128 0xf
+ 1812 086a C4030000 		.4byte	.LASF60
+ 1813 086e 05       		.byte	0x5
+ 1814 086f 9C01     		.2byte	0x19c
+ 1815 0871 77080000 		.4byte	0x877
+ 1816 0875 0C       		.byte	0xc
+ 1817 0876 00       		.byte	0
+ 1818 0877 07       		.uleb128 0x7
+ 1819 0878 81000000 		.4byte	0x81
+ 1820 087c 87080000 		.4byte	0x887
+ 1821 0880 08       		.uleb128 0x8
+ 1822 0881 02010000 		.4byte	0x102
+ 1823 0885 03       		.byte	0x3
+ 1824 0886 00       		.byte	0
+ 1825 0887 11       		.uleb128 0x11
+ 1826 0888 7E020000 		.4byte	.LASF124
+ 1827 088c D002     		.2byte	0x2d0
+ 1828 088e 05       		.byte	0x5
+ 1829 088f A501     		.2byte	0x1a5
+ 1830 0891 51090000 		.4byte	0x951
+ 1831 0895 0F       		.uleb128 0xf
+ 1832 0896 D6050000 		.4byte	.LASF125
+ 1833 089a 05       		.byte	0x5
+ 1834 089b A701     		.2byte	0x1a7
+ 1835 089d 81000000 		.4byte	0x81
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 39
+
+
+ 1836 08a1 00       		.byte	0
+ 1837 08a2 0F       		.uleb128 0xf
+ 1838 08a3 C4030000 		.4byte	.LASF60
+ 1839 08a7 05       		.byte	0x5
+ 1840 08a8 A801     		.2byte	0x1a8
+ 1841 08aa 51090000 		.4byte	0x951
+ 1842 08ae 01       		.byte	0x1
+ 1843 08af 10       		.uleb128 0x10
+ 1844 08b0 636E7400 		.ascii	"cnt\000"
+ 1845 08b4 05       		.byte	0x5
+ 1846 08b5 A901     		.2byte	0x1a9
+ 1847 08b7 A4020000 		.4byte	0x2a4
+ 1848 08bb 10       		.byte	0x10
+ 1849 08bc 0F       		.uleb128 0xf
+ 1850 08bd 29020000 		.4byte	.LASF126
+ 1851 08c1 05       		.byte	0x5
+ 1852 08c2 AA01     		.2byte	0x1aa
+ 1853 08c4 61090000 		.4byte	0x961
+ 1854 08c8 60       		.byte	0x60
+ 1855 08c9 10       		.uleb128 0x10
+ 1856 08ca 64657600 		.ascii	"dev\000"
+ 1857 08ce 05       		.byte	0x5
+ 1858 08cf AB01     		.2byte	0x1ab
+ 1859 08d1 3D030000 		.4byte	0x33d
+ 1860 08d5 A0       		.byte	0xa0
+ 1861 08d6 0F       		.uleb128 0xf
+ 1862 08d7 31050000 		.4byte	.LASF127
+ 1863 08db 05       		.byte	0x5
+ 1864 08dc AC01     		.2byte	0x1ac
+ 1865 08de 71090000 		.4byte	0x971
+ 1866 08e2 B0       		.byte	0xb0
+ 1867 08e3 12       		.uleb128 0x12
+ 1868 08e4 656E6300 		.ascii	"enc\000"
+ 1869 08e8 05       		.byte	0x5
+ 1870 08e9 AD01     		.2byte	0x1ad
+ 1871 08eb 81090000 		.4byte	0x981
+ 1872 08ef 9001     		.2byte	0x190
+ 1873 08f1 12       		.uleb128 0x12
+ 1874 08f2 656D6700 		.ascii	"emg\000"
+ 1875 08f6 05       		.byte	0x5
+ 1876 08f7 AE01     		.2byte	0x1ae
+ 1877 08f9 29060000 		.4byte	0x629
+ 1878 08fd F001     		.2byte	0x1f0
+ 1879 08ff 12       		.uleb128 0x12
+ 1880 0900 696D7500 		.ascii	"imu\000"
+ 1881 0904 05       		.byte	0x5
+ 1882 0905 AF01     		.2byte	0x1af
+ 1883 0907 A5060000 		.4byte	0x6a5
+ 1884 090b 0002     		.2byte	0x200
+ 1885 090d 12       		.uleb128 0x12
+ 1886 090e 65787000 		.ascii	"exp\000"
+ 1887 0912 05       		.byte	0x5
+ 1888 0913 B001     		.2byte	0x1b0
+ 1889 0915 FD060000 		.4byte	0x6fd
+ 1890 0919 2002     		.2byte	0x220
+ 1891 091b 13       		.uleb128 0x13
+ 1892 091c 63050000 		.4byte	.LASF128
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 40
+
+
+ 1893 0920 05       		.byte	0x5
+ 1894 0921 B101     		.2byte	0x1b1
+ 1895 0923 91090000 		.4byte	0x991
+ 1896 0927 4002     		.2byte	0x240
+ 1897 0929 12       		.uleb128 0x12
+ 1898 092a 534800   		.ascii	"SH\000"
+ 1899 092d 05       		.byte	0x5
+ 1900 092e B301     		.2byte	0x1b3
+ 1901 0930 A1070000 		.4byte	0x7a1
+ 1902 0934 A002     		.2byte	0x2a0
+ 1903 0936 12       		.uleb128 0x12
+ 1904 0937 4D5300   		.ascii	"MS\000"
+ 1905 093a 05       		.byte	0x5
+ 1906 093b B401     		.2byte	0x1b4
+ 1907 093d F0070000 		.4byte	0x7f0
+ 1908 0941 B002     		.2byte	0x2b0
+ 1909 0943 12       		.uleb128 0x12
+ 1910 0944 464200   		.ascii	"FB\000"
+ 1911 0947 05       		.byte	0x5
+ 1912 0948 B501     		.2byte	0x1b5
+ 1913 094a 35080000 		.4byte	0x835
+ 1914 094e C002     		.2byte	0x2c0
+ 1915 0950 00       		.byte	0
+ 1916 0951 07       		.uleb128 0x7
+ 1917 0952 81000000 		.4byte	0x81
+ 1918 0956 61090000 		.4byte	0x961
+ 1919 095a 08       		.uleb128 0x8
+ 1920 095b 02010000 		.4byte	0x102
+ 1921 095f 0E       		.byte	0xe
+ 1922 0960 00       		.byte	0
+ 1923 0961 07       		.uleb128 0x7
+ 1924 0962 81000000 		.4byte	0x81
+ 1925 0966 71090000 		.4byte	0x971
+ 1926 096a 08       		.uleb128 0x8
+ 1927 096b 02010000 		.4byte	0x102
+ 1928 096f 3F       		.byte	0x3f
+ 1929 0970 00       		.byte	0
+ 1930 0971 07       		.uleb128 0x7
+ 1931 0972 DC030000 		.4byte	0x3dc
+ 1932 0976 81090000 		.4byte	0x981
+ 1933 097a 08       		.uleb128 0x8
+ 1934 097b 02010000 		.4byte	0x102
+ 1935 097f 01       		.byte	0x1
+ 1936 0980 00       		.byte	0
+ 1937 0981 07       		.uleb128 0x7
+ 1938 0982 76050000 		.4byte	0x576
+ 1939 0986 91090000 		.4byte	0x991
+ 1940 098a 08       		.uleb128 0x8
+ 1941 098b 02010000 		.4byte	0x102
+ 1942 098f 01       		.byte	0x1
+ 1943 0990 00       		.byte	0
+ 1944 0991 07       		.uleb128 0x7
+ 1945 0992 6C070000 		.4byte	0x76c
+ 1946 0996 A1090000 		.4byte	0x9a1
+ 1947 099a 08       		.uleb128 0x8
+ 1948 099b 02010000 		.4byte	0x102
+ 1949 099f 02       		.byte	0x2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 41
+
+
+ 1950 09a0 00       		.byte	0
+ 1951 09a1 0E       		.uleb128 0xe
+ 1952 09a2 C1050000 		.4byte	.LASF129
+ 1953 09a6 08       		.byte	0x8
+ 1954 09a7 05       		.byte	0x5
+ 1955 09a8 CE01     		.2byte	0x1ce
+ 1956 09aa C9090000 		.4byte	0x9c9
+ 1957 09ae 0F       		.uleb128 0xf
+ 1958 09af DF010000 		.4byte	.LASF130
+ 1959 09b3 05       		.byte	0x5
+ 1960 09b4 CF01     		.2byte	0x1cf
+ 1961 09b6 BD000000 		.4byte	0xbd
+ 1962 09ba 00       		.byte	0
+ 1963 09bb 0F       		.uleb128 0xf
+ 1964 09bc 68050000 		.4byte	.LASF131
+ 1965 09c0 05       		.byte	0x5
+ 1966 09c1 D001     		.2byte	0x1d0
+ 1967 09c3 BD000000 		.4byte	0xbd
+ 1968 09c7 04       		.byte	0x4
+ 1969 09c8 00       		.byte	0
+ 1970 09c9 14       		.uleb128 0x14
+ 1971 09ca 67080000 		.4byte	.LASF164
+ 1972 09ce 01       		.byte	0x1
+ 1973 09cf 4B       		.byte	0x4b
+ 1974 09d0 68000000 		.4byte	0x68
+ 1975 09d4 00000000 		.4byte	.LFB64
+ 1976 09d8 78050000 		.4byte	.LFE64-.LFB64
+ 1977 09dc 01       		.uleb128 0x1
+ 1978 09dd 9C       		.byte	0x9c
+ 1979 09de 170A0000 		.4byte	0xa17
+ 1980 09e2 15       		.uleb128 0x15
+ 1981 09e3 6900     		.ascii	"i\000"
+ 1982 09e5 01       		.byte	0x1
+ 1983 09e6 4E       		.byte	0x4e
+ 1984 09e7 81000000 		.4byte	0x81
+ 1985 09eb 02       		.uleb128 0x2
+ 1986 09ec 91       		.byte	0x91
+ 1987 09ed 6F       		.sleb128 -17
+ 1988 09ee 15       		.uleb128 0x15
+ 1989 09ef 6A00     		.ascii	"j\000"
+ 1990 09f1 01       		.byte	0x1
+ 1991 09f2 4E       		.byte	0x4e
+ 1992 09f3 81000000 		.4byte	0x81
+ 1993 09f7 02       		.uleb128 0x2
+ 1994 09f8 91       		.byte	0x91
+ 1995 09f9 6E       		.sleb128 -18
+ 1996 09fa 16       		.uleb128 0x16
+ 1997 09fb DE040000 		.4byte	.LASF132
+ 1998 09ff 01       		.byte	0x1
+ 1999 0a00 51       		.byte	0x51
+ 2000 0a01 81000000 		.4byte	0x81
+ 2001 0a05 02       		.uleb128 0x2
+ 2002 0a06 91       		.byte	0x91
+ 2003 0a07 6D       		.sleb128 -19
+ 2004 0a08 16       		.uleb128 0x16
+ 2005 0a09 6C080000 		.4byte	.LASF133
+ 2006 0a0d 01       		.byte	0x1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 42
+
+
+ 2007 0a0e 52       		.byte	0x52
+ 2008 0a0f 95060000 		.4byte	0x695
+ 2009 0a13 02       		.uleb128 0x2
+ 2010 0a14 91       		.byte	0x91
+ 2011 0a15 6C       		.sleb128 -20
+ 2012 0a16 00       		.byte	0
+ 2013 0a17 17       		.uleb128 0x17
+ 2014 0a18 58010000 		.4byte	.LASF134
+ 2015 0a1c 06       		.byte	0x6
+ 2016 0a1d 1207     		.2byte	0x712
+ 2017 0a1f 230A0000 		.4byte	0xa23
+ 2018 0a23 06       		.uleb128 0x6
+ 2019 0a24 76000000 		.4byte	0x76
+ 2020 0a28 07       		.uleb128 0x7
+ 2021 0a29 54010000 		.4byte	0x154
+ 2022 0a2d 380A0000 		.4byte	0xa38
+ 2023 0a31 08       		.uleb128 0x8
+ 2024 0a32 02010000 		.4byte	0x102
+ 2025 0a36 01       		.byte	0x1
+ 2026 0a37 00       		.byte	0
+ 2027 0a38 17       		.uleb128 0x17
+ 2028 0a39 45050000 		.4byte	.LASF135
+ 2029 0a3d 05       		.byte	0x5
+ 2030 0a3e F401     		.2byte	0x1f4
+ 2031 0a40 280A0000 		.4byte	0xa28
+ 2032 0a44 17       		.uleb128 0x17
+ 2033 0a45 8A030000 		.4byte	.LASF136
+ 2034 0a49 05       		.byte	0x5
+ 2035 0a4a F401     		.2byte	0x1f4
+ 2036 0a4c 280A0000 		.4byte	0xa28
+ 2037 0a50 07       		.uleb128 0x7
+ 2038 0a51 91010000 		.4byte	0x191
+ 2039 0a55 600A0000 		.4byte	0xa60
+ 2040 0a59 08       		.uleb128 0x8
+ 2041 0a5a 02010000 		.4byte	0x102
+ 2042 0a5e 01       		.byte	0x1
+ 2043 0a5f 00       		.byte	0
+ 2044 0a60 17       		.uleb128 0x17
+ 2045 0a61 65010000 		.4byte	.LASF137
+ 2046 0a65 05       		.byte	0x5
+ 2047 0a66 F501     		.2byte	0x1f5
+ 2048 0a68 500A0000 		.4byte	0xa50
+ 2049 0a6c 17       		.uleb128 0x17
+ 2050 0a6d CA020000 		.4byte	.LASF138
+ 2051 0a71 05       		.byte	0x5
+ 2052 0a72 F601     		.2byte	0x1f6
+ 2053 0a74 12020000 		.4byte	0x212
+ 2054 0a78 17       		.uleb128 0x17
+ 2055 0a79 C2010000 		.4byte	.LASF139
+ 2056 0a7d 05       		.byte	0x5
+ 2057 0a7e F801     		.2byte	0x1f8
+ 2058 0a80 57020000 		.4byte	0x257
+ 2059 0a84 17       		.uleb128 0x17
+ 2060 0a85 BD040000 		.4byte	.LASF140
+ 2061 0a89 05       		.byte	0x5
+ 2062 0a8a F901     		.2byte	0x1f9
+ 2063 0a8c 87080000 		.4byte	0x887
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 43
+
+
+ 2064 0a90 17       		.uleb128 0x17
+ 2065 0a91 3A000000 		.4byte	.LASF141
+ 2066 0a95 05       		.byte	0x5
+ 2067 0a96 F901     		.2byte	0x1f9
+ 2068 0a98 87080000 		.4byte	0x887
+ 2069 0a9c 07       		.uleb128 0x7
+ 2070 0a9d A1090000 		.4byte	0x9a1
+ 2071 0aa1 AC0A0000 		.4byte	0xaac
+ 2072 0aa5 08       		.uleb128 0x8
+ 2073 0aa6 02010000 		.4byte	0x102
+ 2074 0aaa 01       		.byte	0x1
+ 2075 0aab 00       		.byte	0
+ 2076 0aac 17       		.uleb128 0x17
+ 2077 0aad 86000000 		.4byte	.LASF142
+ 2078 0ab1 05       		.byte	0x5
+ 2079 0ab2 FB01     		.2byte	0x1fb
+ 2080 0ab4 9C0A0000 		.4byte	0xa9c
+ 2081 0ab8 17       		.uleb128 0x17
+ 2082 0ab9 4B040000 		.4byte	.LASF143
+ 2083 0abd 05       		.byte	0x5
+ 2084 0abe FB01     		.2byte	0x1fb
+ 2085 0ac0 9C0A0000 		.4byte	0xa9c
+ 2086 0ac4 17       		.uleb128 0x17
+ 2087 0ac5 52000000 		.4byte	.LASF144
+ 2088 0ac9 05       		.byte	0x5
+ 2089 0aca FB01     		.2byte	0x1fb
+ 2090 0acc 9C0A0000 		.4byte	0xa9c
+ 2091 0ad0 07       		.uleb128 0x7
+ 2092 0ad1 A1090000 		.4byte	0x9a1
+ 2093 0ad5 E00A0000 		.4byte	0xae0
+ 2094 0ad9 08       		.uleb128 0x8
+ 2095 0ada 02010000 		.4byte	0x102
+ 2096 0ade 02       		.byte	0x2
+ 2097 0adf 00       		.byte	0
+ 2098 0ae0 17       		.uleb128 0x17
+ 2099 0ae1 48060000 		.4byte	.LASF145
+ 2100 0ae5 05       		.byte	0x5
+ 2101 0ae6 FC01     		.2byte	0x1fc
+ 2102 0ae8 D00A0000 		.4byte	0xad0
+ 2103 0aec 07       		.uleb128 0x7
+ 2104 0aed A1090000 		.4byte	0x9a1
+ 2105 0af1 FC0A0000 		.4byte	0xafc
+ 2106 0af5 08       		.uleb128 0x8
+ 2107 0af6 02010000 		.4byte	0x102
+ 2108 0afa 07       		.byte	0x7
+ 2109 0afb 00       		.byte	0
+ 2110 0afc 17       		.uleb128 0x17
+ 2111 0afd 44070000 		.4byte	.LASF146
+ 2112 0b01 05       		.byte	0x5
+ 2113 0b02 FD01     		.2byte	0x1fd
+ 2114 0b04 EC0A0000 		.4byte	0xaec
+ 2115 0b08 07       		.uleb128 0x7
+ 2116 0b09 81000000 		.4byte	0x81
+ 2117 0b0d 180B0000 		.4byte	0xb18
+ 2118 0b11 08       		.uleb128 0x8
+ 2119 0b12 02010000 		.4byte	0x102
+ 2120 0b16 01       		.byte	0x1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 44
+
+
+ 2121 0b17 00       		.byte	0
+ 2122 0b18 17       		.uleb128 0x17
+ 2123 0b19 5D020000 		.4byte	.LASF147
+ 2124 0b1d 05       		.byte	0x5
+ 2125 0b1e 0402     		.2byte	0x204
+ 2126 0b20 080B0000 		.4byte	0xb08
+ 2127 0b24 17       		.uleb128 0x17
+ 2128 0b25 FF020000 		.4byte	.LASF148
+ 2129 0b29 05       		.byte	0x5
+ 2130 0b2a 0502     		.2byte	0x205
+ 2131 0b2c 080B0000 		.4byte	0xb08
+ 2132 0b30 17       		.uleb128 0x17
+ 2133 0b31 3F080000 		.4byte	.LASF149
+ 2134 0b35 05       		.byte	0x5
+ 2135 0b36 0702     		.2byte	0x207
+ 2136 0b38 37020000 		.4byte	0x237
+ 2137 0b3c 17       		.uleb128 0x17
+ 2138 0b3d 8F050000 		.4byte	.LASF150
+ 2139 0b41 05       		.byte	0x5
+ 2140 0b42 0E02     		.2byte	0x20e
+ 2141 0b44 81000000 		.4byte	0x81
+ 2142 0b48 17       		.uleb128 0x17
+ 2143 0b49 D1010000 		.4byte	.LASF151
+ 2144 0b4d 05       		.byte	0x5
+ 2145 0b4e 0F02     		.2byte	0x20f
+ 2146 0b50 81000000 		.4byte	0x81
+ 2147 0b54 17       		.uleb128 0x17
+ 2148 0b55 7C060000 		.4byte	.LASF152
+ 2149 0b59 05       		.byte	0x5
+ 2150 0b5a 1002     		.2byte	0x210
+ 2151 0b5c 81000000 		.4byte	0x81
+ 2152 0b60 17       		.uleb128 0x17
+ 2153 0b61 1B010000 		.4byte	.LASF153
+ 2154 0b65 05       		.byte	0x5
+ 2155 0b66 1202     		.2byte	0x212
+ 2156 0b68 81000000 		.4byte	0x81
+ 2157 0b6c 17       		.uleb128 0x17
+ 2158 0b6d B0040000 		.4byte	.LASF154
+ 2159 0b71 05       		.byte	0x5
+ 2160 0b72 1402     		.2byte	0x214
+ 2161 0b74 81000000 		.4byte	0x81
+ 2162 0b78 17       		.uleb128 0x17
+ 2163 0b79 A2010000 		.4byte	.LASF155
+ 2164 0b7d 05       		.byte	0x5
+ 2165 0b7e 1502     		.2byte	0x215
+ 2166 0b80 81000000 		.4byte	0x81
+ 2167 0b84 07       		.uleb128 0x7
+ 2168 0b85 B1000000 		.4byte	0xb1
+ 2169 0b89 940B0000 		.4byte	0xb94
+ 2170 0b8d 08       		.uleb128 0x8
+ 2171 0b8e 02010000 		.4byte	0x102
+ 2172 0b92 0B       		.byte	0xb
+ 2173 0b93 00       		.byte	0
+ 2174 0b94 17       		.uleb128 0x17
+ 2175 0b95 FF010000 		.4byte	.LASF156
+ 2176 0b99 05       		.byte	0x5
+ 2177 0b9a 1B02     		.2byte	0x21b
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 45
+
+
+ 2178 0b9c 840B0000 		.4byte	0xb84
+ 2179 0ba0 17       		.uleb128 0x17
+ 2180 0ba1 C3040000 		.4byte	.LASF157
+ 2181 0ba5 05       		.byte	0x5
+ 2182 0ba6 1C02     		.2byte	0x21c
+ 2183 0ba8 81000000 		.4byte	0x81
+ 2184 0bac 07       		.uleb128 0x7
+ 2185 0bad D5000000 		.4byte	0xd5
+ 2186 0bb1 C20B0000 		.4byte	0xbc2
+ 2187 0bb5 08       		.uleb128 0x8
+ 2188 0bb6 02010000 		.4byte	0x102
+ 2189 0bba 04       		.byte	0x4
+ 2190 0bbb 08       		.uleb128 0x8
+ 2191 0bbc 02010000 		.4byte	0x102
+ 2192 0bc0 03       		.byte	0x3
+ 2193 0bc1 00       		.byte	0
+ 2194 0bc2 17       		.uleb128 0x17
+ 2195 0bc3 85030000 		.4byte	.LASF158
+ 2196 0bc7 05       		.byte	0x5
+ 2197 0bc8 3A02     		.2byte	0x23a
+ 2198 0bca AC0B0000 		.4byte	0xbac
+ 2199 0bce 17       		.uleb128 0x17
+ 2200 0bcf A7060000 		.4byte	.LASF159
+ 2201 0bd3 05       		.byte	0x5
+ 2202 0bd4 3D02     		.2byte	0x23d
+ 2203 0bd6 81000000 		.4byte	0x81
+ 2204 0bda 00       		.byte	0
+ 2205              		.section	.debug_abbrev,"",%progbits
+ 2206              	.Ldebug_abbrev0:
+ 2207 0000 01       		.uleb128 0x1
+ 2208 0001 11       		.uleb128 0x11
+ 2209 0002 01       		.byte	0x1
+ 2210 0003 25       		.uleb128 0x25
+ 2211 0004 0E       		.uleb128 0xe
+ 2212 0005 13       		.uleb128 0x13
+ 2213 0006 0B       		.uleb128 0xb
+ 2214 0007 03       		.uleb128 0x3
+ 2215 0008 0E       		.uleb128 0xe
+ 2216 0009 1B       		.uleb128 0x1b
+ 2217 000a 0E       		.uleb128 0xe
+ 2218 000b 55       		.uleb128 0x55
+ 2219 000c 17       		.uleb128 0x17
+ 2220 000d 11       		.uleb128 0x11
+ 2221 000e 01       		.uleb128 0x1
+ 2222 000f 10       		.uleb128 0x10
+ 2223 0010 17       		.uleb128 0x17
+ 2224 0011 00       		.byte	0
+ 2225 0012 00       		.byte	0
+ 2226 0013 02       		.uleb128 0x2
+ 2227 0014 24       		.uleb128 0x24
+ 2228 0015 00       		.byte	0
+ 2229 0016 0B       		.uleb128 0xb
+ 2230 0017 0B       		.uleb128 0xb
+ 2231 0018 3E       		.uleb128 0x3e
+ 2232 0019 0B       		.uleb128 0xb
+ 2233 001a 03       		.uleb128 0x3
+ 2234 001b 0E       		.uleb128 0xe
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 46
+
+
+ 2235 001c 00       		.byte	0
+ 2236 001d 00       		.byte	0
+ 2237 001e 03       		.uleb128 0x3
+ 2238 001f 16       		.uleb128 0x16
+ 2239 0020 00       		.byte	0
+ 2240 0021 03       		.uleb128 0x3
+ 2241 0022 0E       		.uleb128 0xe
+ 2242 0023 3A       		.uleb128 0x3a
+ 2243 0024 0B       		.uleb128 0xb
+ 2244 0025 3B       		.uleb128 0x3b
+ 2245 0026 0B       		.uleb128 0xb
+ 2246 0027 49       		.uleb128 0x49
+ 2247 0028 13       		.uleb128 0x13
+ 2248 0029 00       		.byte	0
+ 2249 002a 00       		.byte	0
+ 2250 002b 04       		.uleb128 0x4
+ 2251 002c 24       		.uleb128 0x24
+ 2252 002d 00       		.byte	0
+ 2253 002e 0B       		.uleb128 0xb
+ 2254 002f 0B       		.uleb128 0xb
+ 2255 0030 3E       		.uleb128 0x3e
+ 2256 0031 0B       		.uleb128 0xb
+ 2257 0032 03       		.uleb128 0x3
+ 2258 0033 08       		.uleb128 0x8
+ 2259 0034 00       		.byte	0
+ 2260 0035 00       		.byte	0
+ 2261 0036 05       		.uleb128 0x5
+ 2262 0037 16       		.uleb128 0x16
+ 2263 0038 00       		.byte	0
+ 2264 0039 03       		.uleb128 0x3
+ 2265 003a 0E       		.uleb128 0xe
+ 2266 003b 3A       		.uleb128 0x3a
+ 2267 003c 0B       		.uleb128 0xb
+ 2268 003d 3B       		.uleb128 0x3b
+ 2269 003e 05       		.uleb128 0x5
+ 2270 003f 49       		.uleb128 0x49
+ 2271 0040 13       		.uleb128 0x13
+ 2272 0041 00       		.byte	0
+ 2273 0042 00       		.byte	0
+ 2274 0043 06       		.uleb128 0x6
+ 2275 0044 35       		.uleb128 0x35
+ 2276 0045 00       		.byte	0
+ 2277 0046 49       		.uleb128 0x49
+ 2278 0047 13       		.uleb128 0x13
+ 2279 0048 00       		.byte	0
+ 2280 0049 00       		.byte	0
+ 2281 004a 07       		.uleb128 0x7
+ 2282 004b 01       		.uleb128 0x1
+ 2283 004c 01       		.byte	0x1
+ 2284 004d 49       		.uleb128 0x49
+ 2285 004e 13       		.uleb128 0x13
+ 2286 004f 01       		.uleb128 0x1
+ 2287 0050 13       		.uleb128 0x13
+ 2288 0051 00       		.byte	0
+ 2289 0052 00       		.byte	0
+ 2290 0053 08       		.uleb128 0x8
+ 2291 0054 21       		.uleb128 0x21
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 47
+
+
+ 2292 0055 00       		.byte	0
+ 2293 0056 49       		.uleb128 0x49
+ 2294 0057 13       		.uleb128 0x13
+ 2295 0058 2F       		.uleb128 0x2f
+ 2296 0059 0B       		.uleb128 0xb
+ 2297 005a 00       		.byte	0
+ 2298 005b 00       		.byte	0
+ 2299 005c 09       		.uleb128 0x9
+ 2300 005d 04       		.uleb128 0x4
+ 2301 005e 01       		.byte	0x1
+ 2302 005f 03       		.uleb128 0x3
+ 2303 0060 0E       		.uleb128 0xe
+ 2304 0061 0B       		.uleb128 0xb
+ 2305 0062 0B       		.uleb128 0xb
+ 2306 0063 49       		.uleb128 0x49
+ 2307 0064 13       		.uleb128 0x13
+ 2308 0065 3A       		.uleb128 0x3a
+ 2309 0066 0B       		.uleb128 0xb
+ 2310 0067 3B       		.uleb128 0x3b
+ 2311 0068 0B       		.uleb128 0xb
+ 2312 0069 01       		.uleb128 0x1
+ 2313 006a 13       		.uleb128 0x13
+ 2314 006b 00       		.byte	0
+ 2315 006c 00       		.byte	0
+ 2316 006d 0A       		.uleb128 0xa
+ 2317 006e 28       		.uleb128 0x28
+ 2318 006f 00       		.byte	0
+ 2319 0070 03       		.uleb128 0x3
+ 2320 0071 0E       		.uleb128 0xe
+ 2321 0072 1C       		.uleb128 0x1c
+ 2322 0073 0B       		.uleb128 0xb
+ 2323 0074 00       		.byte	0
+ 2324 0075 00       		.byte	0
+ 2325 0076 0B       		.uleb128 0xb
+ 2326 0077 13       		.uleb128 0x13
+ 2327 0078 01       		.byte	0x1
+ 2328 0079 03       		.uleb128 0x3
+ 2329 007a 0E       		.uleb128 0xe
+ 2330 007b 0B       		.uleb128 0xb
+ 2331 007c 0B       		.uleb128 0xb
+ 2332 007d 3A       		.uleb128 0x3a
+ 2333 007e 0B       		.uleb128 0xb
+ 2334 007f 3B       		.uleb128 0x3b
+ 2335 0080 0B       		.uleb128 0xb
+ 2336 0081 01       		.uleb128 0x1
+ 2337 0082 13       		.uleb128 0x13
+ 2338 0083 00       		.byte	0
+ 2339 0084 00       		.byte	0
+ 2340 0085 0C       		.uleb128 0xc
+ 2341 0086 0D       		.uleb128 0xd
+ 2342 0087 00       		.byte	0
+ 2343 0088 03       		.uleb128 0x3
+ 2344 0089 08       		.uleb128 0x8
+ 2345 008a 3A       		.uleb128 0x3a
+ 2346 008b 0B       		.uleb128 0xb
+ 2347 008c 3B       		.uleb128 0x3b
+ 2348 008d 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 48
+
+
+ 2349 008e 49       		.uleb128 0x49
+ 2350 008f 13       		.uleb128 0x13
+ 2351 0090 38       		.uleb128 0x38
+ 2352 0091 0B       		.uleb128 0xb
+ 2353 0092 00       		.byte	0
+ 2354 0093 00       		.byte	0
+ 2355 0094 0D       		.uleb128 0xd
+ 2356 0095 0D       		.uleb128 0xd
+ 2357 0096 00       		.byte	0
+ 2358 0097 03       		.uleb128 0x3
+ 2359 0098 0E       		.uleb128 0xe
+ 2360 0099 3A       		.uleb128 0x3a
+ 2361 009a 0B       		.uleb128 0xb
+ 2362 009b 3B       		.uleb128 0x3b
+ 2363 009c 0B       		.uleb128 0xb
+ 2364 009d 49       		.uleb128 0x49
+ 2365 009e 13       		.uleb128 0x13
+ 2366 009f 38       		.uleb128 0x38
+ 2367 00a0 0B       		.uleb128 0xb
+ 2368 00a1 00       		.byte	0
+ 2369 00a2 00       		.byte	0
+ 2370 00a3 0E       		.uleb128 0xe
+ 2371 00a4 13       		.uleb128 0x13
+ 2372 00a5 01       		.byte	0x1
+ 2373 00a6 03       		.uleb128 0x3
+ 2374 00a7 0E       		.uleb128 0xe
+ 2375 00a8 0B       		.uleb128 0xb
+ 2376 00a9 0B       		.uleb128 0xb
+ 2377 00aa 3A       		.uleb128 0x3a
+ 2378 00ab 0B       		.uleb128 0xb
+ 2379 00ac 3B       		.uleb128 0x3b
+ 2380 00ad 05       		.uleb128 0x5
+ 2381 00ae 01       		.uleb128 0x1
+ 2382 00af 13       		.uleb128 0x13
+ 2383 00b0 00       		.byte	0
+ 2384 00b1 00       		.byte	0
+ 2385 00b2 0F       		.uleb128 0xf
+ 2386 00b3 0D       		.uleb128 0xd
+ 2387 00b4 00       		.byte	0
+ 2388 00b5 03       		.uleb128 0x3
+ 2389 00b6 0E       		.uleb128 0xe
+ 2390 00b7 3A       		.uleb128 0x3a
+ 2391 00b8 0B       		.uleb128 0xb
+ 2392 00b9 3B       		.uleb128 0x3b
+ 2393 00ba 05       		.uleb128 0x5
+ 2394 00bb 49       		.uleb128 0x49
+ 2395 00bc 13       		.uleb128 0x13
+ 2396 00bd 38       		.uleb128 0x38
+ 2397 00be 0B       		.uleb128 0xb
+ 2398 00bf 00       		.byte	0
+ 2399 00c0 00       		.byte	0
+ 2400 00c1 10       		.uleb128 0x10
+ 2401 00c2 0D       		.uleb128 0xd
+ 2402 00c3 00       		.byte	0
+ 2403 00c4 03       		.uleb128 0x3
+ 2404 00c5 08       		.uleb128 0x8
+ 2405 00c6 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 49
+
+
+ 2406 00c7 0B       		.uleb128 0xb
+ 2407 00c8 3B       		.uleb128 0x3b
+ 2408 00c9 05       		.uleb128 0x5
+ 2409 00ca 49       		.uleb128 0x49
+ 2410 00cb 13       		.uleb128 0x13
+ 2411 00cc 38       		.uleb128 0x38
+ 2412 00cd 0B       		.uleb128 0xb
+ 2413 00ce 00       		.byte	0
+ 2414 00cf 00       		.byte	0
+ 2415 00d0 11       		.uleb128 0x11
+ 2416 00d1 13       		.uleb128 0x13
+ 2417 00d2 01       		.byte	0x1
+ 2418 00d3 03       		.uleb128 0x3
+ 2419 00d4 0E       		.uleb128 0xe
+ 2420 00d5 0B       		.uleb128 0xb
+ 2421 00d6 05       		.uleb128 0x5
+ 2422 00d7 3A       		.uleb128 0x3a
+ 2423 00d8 0B       		.uleb128 0xb
+ 2424 00d9 3B       		.uleb128 0x3b
+ 2425 00da 05       		.uleb128 0x5
+ 2426 00db 01       		.uleb128 0x1
+ 2427 00dc 13       		.uleb128 0x13
+ 2428 00dd 00       		.byte	0
+ 2429 00de 00       		.byte	0
+ 2430 00df 12       		.uleb128 0x12
+ 2431 00e0 0D       		.uleb128 0xd
+ 2432 00e1 00       		.byte	0
+ 2433 00e2 03       		.uleb128 0x3
+ 2434 00e3 08       		.uleb128 0x8
+ 2435 00e4 3A       		.uleb128 0x3a
+ 2436 00e5 0B       		.uleb128 0xb
+ 2437 00e6 3B       		.uleb128 0x3b
+ 2438 00e7 05       		.uleb128 0x5
+ 2439 00e8 49       		.uleb128 0x49
+ 2440 00e9 13       		.uleb128 0x13
+ 2441 00ea 38       		.uleb128 0x38
+ 2442 00eb 05       		.uleb128 0x5
+ 2443 00ec 00       		.byte	0
+ 2444 00ed 00       		.byte	0
+ 2445 00ee 13       		.uleb128 0x13
+ 2446 00ef 0D       		.uleb128 0xd
+ 2447 00f0 00       		.byte	0
+ 2448 00f1 03       		.uleb128 0x3
+ 2449 00f2 0E       		.uleb128 0xe
+ 2450 00f3 3A       		.uleb128 0x3a
+ 2451 00f4 0B       		.uleb128 0xb
+ 2452 00f5 3B       		.uleb128 0x3b
+ 2453 00f6 05       		.uleb128 0x5
+ 2454 00f7 49       		.uleb128 0x49
+ 2455 00f8 13       		.uleb128 0x13
+ 2456 00f9 38       		.uleb128 0x38
+ 2457 00fa 05       		.uleb128 0x5
+ 2458 00fb 00       		.byte	0
+ 2459 00fc 00       		.byte	0
+ 2460 00fd 14       		.uleb128 0x14
+ 2461 00fe 2E       		.uleb128 0x2e
+ 2462 00ff 01       		.byte	0x1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 50
+
+
+ 2463 0100 3F       		.uleb128 0x3f
+ 2464 0101 19       		.uleb128 0x19
+ 2465 0102 03       		.uleb128 0x3
+ 2466 0103 0E       		.uleb128 0xe
+ 2467 0104 3A       		.uleb128 0x3a
+ 2468 0105 0B       		.uleb128 0xb
+ 2469 0106 3B       		.uleb128 0x3b
+ 2470 0107 0B       		.uleb128 0xb
+ 2471 0108 49       		.uleb128 0x49
+ 2472 0109 13       		.uleb128 0x13
+ 2473 010a 11       		.uleb128 0x11
+ 2474 010b 01       		.uleb128 0x1
+ 2475 010c 12       		.uleb128 0x12
+ 2476 010d 06       		.uleb128 0x6
+ 2477 010e 40       		.uleb128 0x40
+ 2478 010f 18       		.uleb128 0x18
+ 2479 0110 9642     		.uleb128 0x2116
+ 2480 0112 19       		.uleb128 0x19
+ 2481 0113 01       		.uleb128 0x1
+ 2482 0114 13       		.uleb128 0x13
+ 2483 0115 00       		.byte	0
+ 2484 0116 00       		.byte	0
+ 2485 0117 15       		.uleb128 0x15
+ 2486 0118 34       		.uleb128 0x34
+ 2487 0119 00       		.byte	0
+ 2488 011a 03       		.uleb128 0x3
+ 2489 011b 08       		.uleb128 0x8
+ 2490 011c 3A       		.uleb128 0x3a
+ 2491 011d 0B       		.uleb128 0xb
+ 2492 011e 3B       		.uleb128 0x3b
+ 2493 011f 0B       		.uleb128 0xb
+ 2494 0120 49       		.uleb128 0x49
+ 2495 0121 13       		.uleb128 0x13
+ 2496 0122 02       		.uleb128 0x2
+ 2497 0123 18       		.uleb128 0x18
+ 2498 0124 00       		.byte	0
+ 2499 0125 00       		.byte	0
+ 2500 0126 16       		.uleb128 0x16
+ 2501 0127 34       		.uleb128 0x34
+ 2502 0128 00       		.byte	0
+ 2503 0129 03       		.uleb128 0x3
+ 2504 012a 0E       		.uleb128 0xe
+ 2505 012b 3A       		.uleb128 0x3a
+ 2506 012c 0B       		.uleb128 0xb
+ 2507 012d 3B       		.uleb128 0x3b
+ 2508 012e 0B       		.uleb128 0xb
+ 2509 012f 49       		.uleb128 0x49
+ 2510 0130 13       		.uleb128 0x13
+ 2511 0131 02       		.uleb128 0x2
+ 2512 0132 18       		.uleb128 0x18
+ 2513 0133 00       		.byte	0
+ 2514 0134 00       		.byte	0
+ 2515 0135 17       		.uleb128 0x17
+ 2516 0136 34       		.uleb128 0x34
+ 2517 0137 00       		.byte	0
+ 2518 0138 03       		.uleb128 0x3
+ 2519 0139 0E       		.uleb128 0xe
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 51
+
+
+ 2520 013a 3A       		.uleb128 0x3a
+ 2521 013b 0B       		.uleb128 0xb
+ 2522 013c 3B       		.uleb128 0x3b
+ 2523 013d 05       		.uleb128 0x5
+ 2524 013e 49       		.uleb128 0x49
+ 2525 013f 13       		.uleb128 0x13
+ 2526 0140 3F       		.uleb128 0x3f
+ 2527 0141 19       		.uleb128 0x19
+ 2528 0142 3C       		.uleb128 0x3c
+ 2529 0143 19       		.uleb128 0x19
+ 2530 0144 00       		.byte	0
+ 2531 0145 00       		.byte	0
+ 2532 0146 00       		.byte	0
+ 2533              		.section	.debug_aranges,"",%progbits
+ 2534 0000 1C000000 		.4byte	0x1c
+ 2535 0004 0200     		.2byte	0x2
+ 2536 0006 00000000 		.4byte	.Ldebug_info0
+ 2537 000a 04       		.byte	0x4
+ 2538 000b 00       		.byte	0
+ 2539 000c 0000     		.2byte	0
+ 2540 000e 0000     		.2byte	0
+ 2541 0010 00000000 		.4byte	.LFB64
+ 2542 0014 78050000 		.4byte	.LFE64-.LFB64
+ 2543 0018 00000000 		.4byte	0
+ 2544 001c 00000000 		.4byte	0
+ 2545              		.section	.debug_ranges,"",%progbits
+ 2546              	.Ldebug_ranges0:
+ 2547 0000 00000000 		.4byte	.LFB64
+ 2548 0004 78050000 		.4byte	.LFE64
+ 2549 0008 00000000 		.4byte	0
+ 2550 000c 00000000 		.4byte	0
+ 2551              		.section	.debug_line,"",%progbits
+ 2552              	.Ldebug_line0:
+ 2553 0000 CD020000 		.section	.debug_str,"MS",%progbits,1
+ 2553      02006E01 
+ 2553      00000201 
+ 2553      FB0E0D00 
+ 2553      01010101 
+ 2554              	.LASF121:
+ 2555 0000 6D61785F 		.ascii	"max_residual_current\000"
+ 2555      72657369 
+ 2555      6475616C 
+ 2555      5F637572 
+ 2555      72656E74 
+ 2556              	.LASF2:
+ 2557 0015 73686F72 		.ascii	"short int\000"
+ 2557      7420696E 
+ 2557      7400
+ 2558              	.LASF56:
+ 2559 001f 7573655F 		.ascii	"use_2nd_motor_flag\000"
+ 2559      326E645F 
+ 2559      6D6F746F 
+ 2559      725F666C 
+ 2559      616700
+ 2560              	.LASF34:
+ 2561 0032 73745F6D 		.ascii	"st_meas\000"
+ 2561      65617300 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 52
+
+
+ 2562              	.LASF141:
+ 2563 003a 635F6D65 		.ascii	"c_mem\000"
+ 2563      6D00
+ 2564              	.LASF120:
+ 2565 0040 73745F46 		.ascii	"st_FB_spec\000"
+ 2565      425F7370 
+ 2565      656300
+ 2566              	.LASF100:
+ 2567 004b 73745F69 		.ascii	"st_imu\000"
+ 2567      6D7500
+ 2568              	.LASF144:
+ 2569 0052 66696C74 		.ascii	"filt_i\000"
+ 2569      5F6900
+ 2570              	.LASF49:
+ 2571 0059 746F7461 		.ascii	"total_time_on\000"
+ 2571      6C5F7469 
+ 2571      6D655F6F 
+ 2571      6E00
+ 2572              	.LASF0:
+ 2573 0067 7369676E 		.ascii	"signed char\000"
+ 2573      65642063 
+ 2573      68617200 
+ 2574              	.LASF88:
+ 2575 0073 6D5F6F66 		.ascii	"m_off\000"
+ 2575      6600
+ 2576              	.LASF83:
+ 2577 0079 656E636F 		.ascii	"encoder_line\000"
+ 2577      6465725F 
+ 2577      6C696E65 
+ 2577      00
+ 2578              	.LASF142:
+ 2579 0086 66696C74 		.ascii	"filt_v\000"
+ 2579      5F7600
+ 2580              	.LASF160:
+ 2581 008d 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2581      43313120 
+ 2581      352E342E 
+ 2581      31203230 
+ 2581      31363036 
+ 2582 00c0 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2582      20726576 
+ 2582      6973696F 
+ 2582      6E203233 
+ 2582      37373135 
+ 2583 00f3 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 2583      66756E63 
+ 2583      74696F6E 
+ 2583      2D736563 
+ 2583      74696F6E 
+ 2584              	.LASF153:
+ 2585 011b 6D61696E 		.ascii	"maintenance_flag\000"
+ 2585      74656E61 
+ 2585      6E63655F 
+ 2585      666C6167 
+ 2585      00
+ 2586              	.LASF7:
+ 2587 012c 6C6F6E67 		.ascii	"long long unsigned int\000"
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 53
+
+
+ 2587      206C6F6E 
+ 2587      6720756E 
+ 2587      7369676E 
+ 2587      65642069 
+ 2588              	.LASF57:
+ 2589 0143 62617564 		.ascii	"baud_rate\000"
+ 2589      5F726174 
+ 2589      6500
+ 2590              	.LASF114:
+ 2591 014d 72657374 		.ascii	"rest_delay\000"
+ 2591      5F64656C 
+ 2591      617900
+ 2592              	.LASF134:
+ 2593 0158 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 2593      52784275 
+ 2593      66666572 
+ 2593      00
+ 2594              	.LASF137:
+ 2595 0165 675F6D65 		.ascii	"g_meas\000"
+ 2595      617300
+ 2596              	.LASF115:
+ 2597 016c 72657374 		.ascii	"rest_vel\000"
+ 2597      5F76656C 
+ 2597      00
+ 2598              	.LASF95:
+ 2599 0175 656D675F 		.ascii	"emg_threshold\000"
+ 2599      74687265 
+ 2599      73686F6C 
+ 2599      6400
+ 2600              	.LASF6:
+ 2601 0183 6C6F6E67 		.ascii	"long long int\000"
+ 2601      206C6F6E 
+ 2601      6720696E 
+ 2601      7400
+ 2602              	.LASF42:
+ 2603 0191 72656164 		.ascii	"ready\000"
+ 2603      7900
+ 2604              	.LASF35:
+ 2605 0197 65737469 		.ascii	"estim_curr\000"
+ 2605      6D5F6375 
+ 2605      727200
+ 2606              	.LASF155:
+ 2607 01a2 666F7263 		.ascii	"forced_open\000"
+ 2607      65645F6F 
+ 2607      70656E00 
+ 2608              	.LASF21:
+ 2609 01ae 72656738 		.ascii	"reg8\000"
+ 2609      00
+ 2610              	.LASF16:
+ 2611 01b3 696E7433 		.ascii	"int32\000"
+ 2611      3200
+ 2612              	.LASF4:
+ 2613 01b9 6C6F6E67 		.ascii	"long int\000"
+ 2613      20696E74 
+ 2613      00
+ 2614              	.LASF139:
+ 2615 01c2 675F7278 		.ascii	"g_rx\000"
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 54
+
+
+ 2615      00
+ 2616              	.LASF36:
+ 2617 01c7 686F6C64 		.ascii	"hold_curr\000"
+ 2617      5F637572 
+ 2617      7200
+ 2618              	.LASF151:
+ 2619 01d1 74656E73 		.ascii	"tension_valid\000"
+ 2619      696F6E5F 
+ 2619      76616C69 
+ 2619      6400
+ 2620              	.LASF130:
+ 2621 01df 6F6C645F 		.ascii	"old_value\000"
+ 2621      76616C75 
+ 2621      6500
+ 2622              	.LASF85:
+ 2623 01e9 6E6F745F 		.ascii	"not_revers_motor_flag\000"
+ 2623      72657665 
+ 2623      72735F6D 
+ 2623      6F746F72 
+ 2623      5F666C61 
+ 2624              	.LASF156:
+ 2625 01ff 4144435F 		.ascii	"ADC_buf\000"
+ 2625      62756600 
+ 2626              	.LASF54:
+ 2627 0207 72696768 		.ascii	"right_left\000"
+ 2627      745F6C65 
+ 2627      667400
+ 2628              	.LASF48:
+ 2629 0212 77697265 		.ascii	"wire_disp\000"
+ 2629      5F646973 
+ 2629      7000
+ 2630              	.LASF82:
+ 2631 021c 636F6E74 		.ascii	"control_mode\000"
+ 2631      726F6C5F 
+ 2631      6D6F6465 
+ 2631      00
+ 2632              	.LASF126:
+ 2633 0229 756E7573 		.ascii	"unused_bytes1\000"
+ 2633      65645F62 
+ 2633      79746573 
+ 2633      3100
+ 2634              	.LASF72:
+ 2635 0237 61637469 		.ascii	"activate_pwm_rescaling\000"
+ 2635      76617465 
+ 2635      5F70776D 
+ 2635      5F726573 
+ 2635      63616C69 
+ 2636              	.LASF102:
+ 2637 024e 5350495F 		.ascii	"SPI_read_delay\000"
+ 2637      72656164 
+ 2637      5F64656C 
+ 2637      617900
+ 2638              	.LASF147:
+ 2639 025d 6465765F 		.ascii	"dev_pwm_limit\000"
+ 2639      70776D5F 
+ 2639      6C696D69 
+ 2639      7400
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 55
+
+
+ 2640              	.LASF37:
+ 2641 026b 73745F65 		.ascii	"st_emg_meas\000"
+ 2641      6D675F6D 
+ 2641      65617300 
+ 2642              	.LASF13:
+ 2643 0277 75696E74 		.ascii	"uint32\000"
+ 2643      333200
+ 2644              	.LASF124:
+ 2645 027e 73745F65 		.ascii	"st_eeprom\000"
+ 2645      6570726F 
+ 2645      6D00
+ 2646              	.LASF26:
+ 2647 0288 494E5055 		.ascii	"INPUT_MODE_EMG_PROPORTIONAL\000"
+ 2647      545F4D4F 
+ 2647      44455F45 
+ 2647      4D475F50 
+ 2647      524F504F 
+ 2648              	.LASF68:
+ 2649 02a4 6B5F705F 		.ascii	"k_p_c_dl\000"
+ 2649      635F646C 
+ 2649      00
+ 2650              	.LASF12:
+ 2651 02ad 75696E74 		.ascii	"uint16\000"
+ 2651      313600
+ 2652              	.LASF99:
+ 2653 02b4 73776974 		.ascii	"switch_emg\000"
+ 2653      63685F65 
+ 2653      6D6700
+ 2654              	.LASF81:
+ 2655 02bf 696E7075 		.ascii	"input_mode\000"
+ 2655      745F6D6F 
+ 2655      646500
+ 2656              	.LASF138:
+ 2657 02ca 675F656D 		.ascii	"g_emg_meas\000"
+ 2657      675F6D65 
+ 2657      617300
+ 2658              	.LASF67:
+ 2659 02d5 6B5F645F 		.ascii	"k_d_dl\000"
+ 2659      646C00
+ 2660              	.LASF55:
+ 2661 02dc 72657365 		.ascii	"reset_counters\000"
+ 2661      745F636F 
+ 2661      756E7465 
+ 2661      727300
+ 2662              	.LASF8:
+ 2663 02eb 756E7369 		.ascii	"unsigned int\000"
+ 2663      676E6564 
+ 2663      20696E74 
+ 2663      00
+ 2664              	.LASF33:
+ 2665 02f8 73745F72 		.ascii	"st_ref\000"
+ 2665      656600
+ 2666              	.LASF148:
+ 2667 02ff 6465765F 		.ascii	"dev_pwm_sat\000"
+ 2667      70776D5F 
+ 2667      73617400 
+ 2668              	.LASF92:
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 56
+
+
+ 2669 030b 6D6F746F 		.ascii	"motor_handle_ratio\000"
+ 2669      725F6861 
+ 2669      6E646C65 
+ 2669      5F726174 
+ 2669      696F00
+ 2670              	.LASF66:
+ 2671 031e 6B5F695F 		.ascii	"k_i_dl\000"
+ 2671      646C00
+ 2672              	.LASF28:
+ 2673 0325 494E5055 		.ascii	"INPUT_MODE_EMG_FCFS\000"
+ 2673      545F4D4F 
+ 2673      44455F45 
+ 2673      4D475F46 
+ 2673      43465300 
+ 2674              	.LASF77:
+ 2675 0339 6D61785F 		.ascii	"max_step_neg\000"
+ 2675      73746570 
+ 2675      5F6E6567 
+ 2675      00
+ 2676              	.LASF107:
+ 2677 0346 72656164 		.ascii	"read_ADC_sensors_port_flag\000"
+ 2677      5F414443 
+ 2677      5F73656E 
+ 2677      736F7273 
+ 2677      5F706F72 
+ 2678              	.LASF109:
+ 2679 0361 73745F75 		.ascii	"st_user\000"
+ 2679      73657200 
+ 2680              	.LASF111:
+ 2681 0369 75736572 		.ascii	"user_emg\000"
+ 2681      5F656D67 
+ 2681      00
+ 2682              	.LASF3:
+ 2683 0372 73686F72 		.ascii	"short unsigned int\000"
+ 2683      7420756E 
+ 2683      7369676E 
+ 2683      65642069 
+ 2683      6E7400
+ 2684              	.LASF158:
+ 2685 0385 51756174 		.ascii	"Quat\000"
+ 2685      00
+ 2686              	.LASF136:
+ 2687 038a 675F7265 		.ascii	"g_refNew\000"
+ 2687      664E6577 
+ 2687      00
+ 2688              	.LASF14:
+ 2689 0393 696E7438 		.ascii	"int8\000"
+ 2689      00
+ 2690              	.LASF163:
+ 2691 0398 53485F69 		.ascii	"SH_input_mode\000"
+ 2691      6E707574 
+ 2691      5F6D6F64 
+ 2691      6500
+ 2692              	.LASF73:
+ 2693 03a6 6D6F746F 		.ascii	"motor_driver_type\000"
+ 2693      725F6472 
+ 2693      69766572 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 57
+
+
+ 2693      5F747970 
+ 2693      6500
+ 2694              	.LASF75:
+ 2695 03b8 706F735F 		.ascii	"pos_lim_inf\000"
+ 2695      6C696D5F 
+ 2695      696E6600 
+ 2696              	.LASF60:
+ 2697 03c4 756E7573 		.ascii	"unused_bytes\000"
+ 2697      65645F62 
+ 2697      79746573 
+ 2697      00
+ 2698              	.LASF118:
+ 2699 03d1 736C6176 		.ascii	"slave_comm_active\000"
+ 2699      655F636F 
+ 2699      6D6D5F61 
+ 2699      63746976 
+ 2699      6500
+ 2700              	.LASF25:
+ 2701 03e3 494E5055 		.ascii	"INPUT_MODE_ENCODER3\000"
+ 2701      545F4D4F 
+ 2701      44455F45 
+ 2701      4E434F44 
+ 2701      45523300 
+ 2702              	.LASF45:
+ 2703 03f7 706F7369 		.ascii	"position_hist\000"
+ 2703      74696F6E 
+ 2703      5F686973 
+ 2703      7400
+ 2704              	.LASF9:
+ 2705 0405 5F5F696E 		.ascii	"__int32_t\000"
+ 2705      7433325F 
+ 2705      7400
+ 2706              	.LASF52:
+ 2707 040f 68775F6D 		.ascii	"hw_maint_date\000"
+ 2707      61696E74 
+ 2707      5F646174 
+ 2707      6500
+ 2708              	.LASF53:
+ 2709 041d 73746174 		.ascii	"stats_period_begin_date\000"
+ 2709      735F7065 
+ 2709      72696F64 
+ 2709      5F626567 
+ 2709      696E5F64 
+ 2710              	.LASF161:
+ 2711 0435 2E2E5C73 		.ascii	"..\\src\\main.c\000"
+ 2711      72635C6D 
+ 2711      61696E2E 
+ 2711      6300
+ 2712              	.LASF38:
+ 2713 0443 6164645F 		.ascii	"add_emg\000"
+ 2713      656D6700 
+ 2714              	.LASF143:
+ 2715 044b 66696C74 		.ascii	"filt_curr_diff\000"
+ 2715      5F637572 
+ 2715      725F6469 
+ 2715      666600
+ 2716              	.LASF103:
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 58
+
+
+ 2717 045a 494D555F 		.ascii	"IMU_conf\000"
+ 2717      636F6E66 
+ 2717      00
+ 2718              	.LASF110:
+ 2719 0463 75736572 		.ascii	"user_code_string\000"
+ 2719      5F636F64 
+ 2719      655F7374 
+ 2719      72696E67 
+ 2719      00
+ 2720              	.LASF17:
+ 2721 0474 666C6F61 		.ascii	"float32\000"
+ 2721      74333200 
+ 2722              	.LASF23:
+ 2723 047c 73697A65 		.ascii	"sizetype\000"
+ 2723      74797065 
+ 2723      00
+ 2724              	.LASF122:
+ 2725 0485 6D617869 		.ascii	"maximum_pressure_kPa\000"
+ 2725      6D756D5F 
+ 2725      70726573 
+ 2725      73757265 
+ 2725      5F6B5061 
+ 2726              	.LASF22:
+ 2727 049a 6C6F6E67 		.ascii	"long double\000"
+ 2727      20646F75 
+ 2727      626C6500 
+ 2728              	.LASF51:
+ 2729 04a6 73745F64 		.ascii	"st_device\000"
+ 2729      65766963 
+ 2729      6500
+ 2730              	.LASF154:
+ 2731 04b0 72657374 		.ascii	"rest_enabled\000"
+ 2731      5F656E61 
+ 2731      626C6564 
+ 2731      00
+ 2732              	.LASF140:
+ 2733 04bd 675F6D65 		.ascii	"g_mem\000"
+ 2733      6D00
+ 2734              	.LASF157:
+ 2735 04c3 4E554D5F 		.ascii	"NUM_OF_ANALOG_INPUTS\000"
+ 2735      4F465F41 
+ 2735      4E414C4F 
+ 2735      475F494E 
+ 2735      50555453 
+ 2736              	.LASF62:
+ 2737 04d8 6B5F705F 		.ascii	"k_p_c\000"
+ 2737      6300
+ 2738              	.LASF132:
+ 2739 04de 444D415F 		.ascii	"DMA_Chan\000"
+ 2739      4368616E 
+ 2739      00
+ 2740              	.LASF113:
+ 2741 04e7 72657374 		.ascii	"rest_pos\000"
+ 2741      5F706F73 
+ 2741      00
+ 2742              	.LASF76:
+ 2743 04f0 706F735F 		.ascii	"pos_lim_sup\000"
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 59
+
+
+ 2743      6C696D5F 
+ 2743      73757000 
+ 2744              	.LASF29:
+ 2745 04fc 494E5055 		.ascii	"INPUT_MODE_EMG_FCFS_ADV\000"
+ 2745      545F4D4F 
+ 2745      44455F45 
+ 2745      4D475F46 
+ 2745      4346535F 
+ 2746              	.LASF46:
+ 2747 0514 63757272 		.ascii	"current_hist\000"
+ 2747      656E745F 
+ 2747      68697374 
+ 2747      00
+ 2748              	.LASF105:
+ 2749 0521 63757272 		.ascii	"curr_time\000"
+ 2749      5F74696D 
+ 2749      6500
+ 2750              	.LASF71:
+ 2751 052b 61637469 		.ascii	"activ\000"
+ 2751      7600
+ 2752              	.LASF127:
+ 2753 0531 6D6F746F 		.ascii	"motor\000"
+ 2753      7200
+ 2754              	.LASF80:
+ 2755 0537 63757272 		.ascii	"current_limit\000"
+ 2755      656E745F 
+ 2755      6C696D69 
+ 2755      7400
+ 2756              	.LASF135:
+ 2757 0545 675F7265 		.ascii	"g_ref\000"
+ 2757      6600
+ 2758              	.LASF91:
+ 2759 054b 456E635F 		.ascii	"Enc_idx_use_for_control\000"
+ 2759      6964785F 
+ 2759      7573655F 
+ 2759      666F725F 
+ 2759      636F6E74 
+ 2760              	.LASF128:
+ 2761 0563 75736572 		.ascii	"user\000"
+ 2761      00
+ 2762              	.LASF131:
+ 2763 0568 6761696E 		.ascii	"gain\000"
+ 2763      00
+ 2764              	.LASF10:
+ 2765 056d 696E7433 		.ascii	"int32_t\000"
+ 2765      325F7400 
+ 2766              	.LASF1:
+ 2767 0575 756E7369 		.ascii	"unsigned char\000"
+ 2767      676E6564 
+ 2767      20636861 
+ 2767      7200
+ 2768              	.LASF31:
+ 2769 0583 63757272 		.ascii	"curr\000"
+ 2769      00
+ 2770              	.LASF89:
+ 2771 0588 6D5F6D75 		.ascii	"m_mult\000"
+ 2771      6C7400
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 60
+
+
+ 2772              	.LASF150:
+ 2773 058f 72657365 		.ascii	"reset_last_value_flag\000"
+ 2773      745F6C61 
+ 2773      73745F76 
+ 2773      616C7565 
+ 2773      5F666C61 
+ 2774              	.LASF32:
+ 2775 05a5 6F6E6F66 		.ascii	"onoff\000"
+ 2775      6600
+ 2776              	.LASF108:
+ 2777 05ab 4144435F 		.ascii	"ADC_conf\000"
+ 2777      636F6E66 
+ 2777      00
+ 2778              	.LASF93:
+ 2779 05b4 67656172 		.ascii	"gears_params\000"
+ 2779      735F7061 
+ 2779      72616D73 
+ 2779      00
+ 2780              	.LASF129:
+ 2781 05c1 73745F66 		.ascii	"st_filter\000"
+ 2781      696C7465 
+ 2781      7200
+ 2782              	.LASF86:
+ 2783 05cb 73745F65 		.ascii	"st_encoder\000"
+ 2783      6E636F64 
+ 2783      657200
+ 2784              	.LASF125:
+ 2785 05d6 666C6167 		.ascii	"flag\000"
+ 2785      00
+ 2786              	.LASF119:
+ 2787 05db 736C6176 		.ascii	"slave_ID\000"
+ 2787      655F4944 
+ 2787      00
+ 2788              	.LASF11:
+ 2789 05e4 75696E74 		.ascii	"uint8\000"
+ 2789      3800
+ 2790              	.LASF43:
+ 2791 05ea 73745F63 		.ascii	"st_counters\000"
+ 2791      6F756E74 
+ 2791      65727300 
+ 2792              	.LASF117:
+ 2793 05f6 73745F4D 		.ascii	"st_MASTER_spec\000"
+ 2793      41535445 
+ 2793      525F7370 
+ 2793      656300
+ 2794              	.LASF44:
+ 2795 0605 656D675F 		.ascii	"emg_counter\000"
+ 2795      636F756E 
+ 2795      74657200 
+ 2796              	.LASF15:
+ 2797 0611 696E7431 		.ascii	"int16\000"
+ 2797      3600
+ 2798              	.LASF74:
+ 2799 0617 706F735F 		.ascii	"pos_lim_flag\000"
+ 2799      6C696D5F 
+ 2799      666C6167 
+ 2799      00
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 61
+
+
+ 2800              	.LASF94:
+ 2801 0624 73745F65 		.ascii	"st_emg\000"
+ 2801      6D6700
+ 2802              	.LASF78:
+ 2803 062b 6D61785F 		.ascii	"max_step_pos\000"
+ 2803      73746570 
+ 2803      5F706F73 
+ 2803      00
+ 2804              	.LASF50:
+ 2805 0638 746F7461 		.ascii	"total_time_rest\000"
+ 2805      6C5F7469 
+ 2805      6D655F72 
+ 2805      65737400 
+ 2806              	.LASF145:
+ 2807 0648 66696C74 		.ascii	"filt_vel\000"
+ 2807      5F76656C 
+ 2807      00
+ 2808              	.LASF47:
+ 2809 0651 72657374 		.ascii	"rest_counter\000"
+ 2809      5F636F75 
+ 2809      6E746572 
+ 2809      00
+ 2810              	.LASF5:
+ 2811 065e 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2811      20756E73 
+ 2811      69676E65 
+ 2811      6420696E 
+ 2811      7400
+ 2812              	.LASF41:
+ 2813 0670 6C656E67 		.ascii	"length\000"
+ 2813      746800
+ 2814              	.LASF20:
+ 2815 0677 63686172 		.ascii	"char\000"
+ 2815      00
+ 2816              	.LASF152:
+ 2817 067c 696E7465 		.ascii	"interrupt_flag\000"
+ 2817      72727570 
+ 2817      745F666C 
+ 2817      616700
+ 2818              	.LASF39:
+ 2819 068b 73745F64 		.ascii	"st_data\000"
+ 2819      61746100 
+ 2820              	.LASF24:
+ 2821 0693 494E5055 		.ascii	"INPUT_MODE_EXTERNAL\000"
+ 2821      545F4D4F 
+ 2821      44455F45 
+ 2821      58544552 
+ 2821      4E414C00 
+ 2822              	.LASF159:
+ 2823 06a7 6D617374 		.ascii	"master_mode\000"
+ 2823      65725F6D 
+ 2823      6F646500 
+ 2824              	.LASF104:
+ 2825 06b3 73745F65 		.ascii	"st_expansion\000"
+ 2825      7870616E 
+ 2825      73696F6E 
+ 2825      00
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 62
+
+
+ 2826              	.LASF40:
+ 2827 06c0 62756666 		.ascii	"buffer\000"
+ 2827      657200
+ 2828              	.LASF59:
+ 2829 06c7 6465765F 		.ascii	"dev_type\000"
+ 2829      74797065 
+ 2829      00
+ 2830              	.LASF69:
+ 2831 06d0 6B5F695F 		.ascii	"k_i_c_dl\000"
+ 2831      635F646C 
+ 2831      00
+ 2832              	.LASF116:
+ 2833 06d9 72657374 		.ascii	"rest_position_flag\000"
+ 2833      5F706F73 
+ 2833      6974696F 
+ 2833      6E5F666C 
+ 2833      616700
+ 2834              	.LASF58:
+ 2835 06ec 75736572 		.ascii	"user_id\000"
+ 2835      5F696400 
+ 2836              	.LASF87:
+ 2837 06f4 456E635F 		.ascii	"Enc_raw_read_conf\000"
+ 2837      7261775F 
+ 2837      72656164 
+ 2837      5F636F6E 
+ 2837      6600
+ 2838              	.LASF61:
+ 2839 0706 73745F6D 		.ascii	"st_motor\000"
+ 2839      6F746F72 
+ 2839      00
+ 2840              	.LASF98:
+ 2841 070f 656D675F 		.ascii	"emg_calibration_flag\000"
+ 2841      63616C69 
+ 2841      62726174 
+ 2841      696F6E5F 
+ 2841      666C6167 
+ 2842              	.LASF64:
+ 2843 0724 6B5F645F 		.ascii	"k_d_c\000"
+ 2843      6300
+ 2844              	.LASF79:
+ 2845 072a 63757272 		.ascii	"curr_lookup\000"
+ 2845      5F6C6F6F 
+ 2845      6B757000 
+ 2846              	.LASF101:
+ 2847 0736 72656164 		.ascii	"read_imu_flag\000"
+ 2847      5F696D75 
+ 2847      5F666C61 
+ 2847      6700
+ 2848              	.LASF146:
+ 2849 0744 66696C74 		.ascii	"filt_emg\000"
+ 2849      5F656D67 
+ 2849      00
+ 2850              	.LASF30:
+ 2851 074d 494E5055 		.ascii	"INPUT_MODE_EMG_PROPORTIONAL_NC\000"
+ 2851      545F4D4F 
+ 2851      44455F45 
+ 2851      4D475F50 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 63
+
+
+ 2851      524F504F 
+ 2852              	.LASF27:
+ 2853 076c 494E5055 		.ascii	"INPUT_MODE_EMG_INTEGRAL\000"
+ 2853      545F4D4F 
+ 2853      44455F45 
+ 2853      4D475F49 
+ 2853      4E544547 
+ 2854              	.LASF97:
+ 2855 0784 656D675F 		.ascii	"emg_speed\000"
+ 2855      73706565 
+ 2855      6400
+ 2856              	.LASF96:
+ 2857 078e 656D675F 		.ascii	"emg_max_value\000"
+ 2857      6D61785F 
+ 2857      76616C75 
+ 2857      6500
+ 2858              	.LASF162:
+ 2859 079c 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHandPRO-a"
+ 2859      73657273 
+ 2859      5C4D6174 
+ 2859      7469615C 
+ 2859      446F6375 
+ 2860 07ca 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\Air_Chambers_Haptic_Feedback.c"
+ 2860      656E6572 
+ 2860      69632D46 
+ 2860      572D5053 
+ 2860      6F43355C 
+ 2861 07fc 7964736E 		.ascii	"ydsn\000"
+ 2861      00
+ 2862              	.LASF70:
+ 2863 0801 6B5F645F 		.ascii	"k_d_c_dl\000"
+ 2863      635F646C 
+ 2863      00
+ 2864              	.LASF18:
+ 2865 080a 666C6F61 		.ascii	"float\000"
+ 2865      7400
+ 2866              	.LASF106:
+ 2867 0810 72656164 		.ascii	"read_exp_port_flag\000"
+ 2867      5F657870 
+ 2867      5F706F72 
+ 2867      745F666C 
+ 2867      616700
+ 2868              	.LASF112:
+ 2869 0823 73745F53 		.ascii	"st_SH_spec\000"
+ 2869      485F7370 
+ 2869      656300
+ 2870              	.LASF123:
+ 2871 082e 70726F70 		.ascii	"prop_err_fb_gain\000"
+ 2871      5F657272 
+ 2871      5F66625F 
+ 2871      6761696E 
+ 2871      00
+ 2872              	.LASF149:
+ 2873 083f 706F775F 		.ascii	"pow_tension\000"
+ 2873      74656E73 
+ 2873      696F6E00 
+ 2874              	.LASF90:
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUNBmDb.s 			page 64
+
+
+ 2875 084b 646F7562 		.ascii	"double_encoder_on_off\000"
+ 2875      6C655F65 
+ 2875      6E636F64 
+ 2875      65725F6F 
+ 2875      6E5F6F66 
+ 2876              	.LASF63:
+ 2877 0861 6B5F695F 		.ascii	"k_i_c\000"
+ 2877      6300
+ 2878              	.LASF164:
+ 2879 0867 6D61696E 		.ascii	"main\000"
+ 2879      00
+ 2880              	.LASF133:
+ 2881 086c 444D415F 		.ascii	"DMA_TD\000"
+ 2881      544400
+ 2882              	.LASF19:
+ 2883 0873 646F7562 		.ascii	"double\000"
+ 2883      6C6500
+ 2884              	.LASF65:
+ 2885 087a 6B5F705F 		.ascii	"k_p_dl\000"
+ 2885      646C00
+ 2886              	.LASF84:
+ 2887 0881 70776D5F 		.ascii	"pwm_rate_limiter\000"
+ 2887      72617465 
+ 2887      5F6C696D 
+ 2887      69746572 
+ 2887      00
+ 2888              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
