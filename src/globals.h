@@ -340,10 +340,9 @@ struct st_encoder{
 struct st_emg{
     uint16  emg_threshold[NUM_OF_INPUT_EMGS]; /*!< Minimum value for activation of EMG control.*/           //4
     uint32  emg_max_value[NUM_OF_INPUT_EMGS]; /*!< Maximum value for EMG.*/                                 //8     
-    uint8   emg_speed;                  /*!< Maximum closure speed when using EMG.*/                        //1    
+    uint8   emg_speed[NUM_OF_INPUT_EMGS];     /*!< Maximum closure speed when using EMG.*/                  //2    
     uint8   emg_calibration_flag;       /*!< Enable emg calibration on startup.*/                           //1  
     uint8   switch_emg;                 /*!< EMG opening/closure switch.*/                                  //1
-    uint8   unused_bytes[1];            /*!< Unused bytes to fill row.*/                                    //1
 };                                                                                                          // TOTAL: 16 BYTES                                                                                                         // TOTAL: 32 BYTES
 
 //=================================================     IMU

@@ -61,13 +61,13 @@
     
 // Macro related to different firmware configurations
 #ifdef SOFTHAND_FW
-    #define VERSION                 "SoftHand PRO firmware v. 1.8 (PSoC5)"
+    #define VERSION                 "SoftHand PRO firmware v. 1.8.1 (PSoC5)"
 #else
     #ifdef GENERIC_FW
-        #define VERSION                 "Generic firmware v. 1.8 (PSoC5)"
+        #define VERSION                 "Generic firmware v. 1.8.1 (PSoC5)"
     #else   //AIR_CHAMBERS_FB_FW
         #define MASTER_FW
-        #define VERSION                 "Air Chambers Haptic Feedback firmware v. 1.8 (PSoC5) - Master configuration"
+        #define VERSION                 "Air Chambers Haptic Feedback firmware v. 1.8.1 (PSoC5) - Master configuration"
     #endif
 #endif      
 

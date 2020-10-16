@@ -698,10 +698,10 @@ void motor_control_SH() {
         case INPUT_MODE_EMG_INTEGRAL:
             g_ref[0].pos = g_mem.motor[0].pos_lim_sup - g_refOld[0].pos;
             if (err_emg_1 > 0) {
-                g_ref[0].pos = g_refOld[0].pos + (err_emg_1 * (int)g_mem.emg.emg_speed * 2) / (1024 - c_mem.emg.emg_threshold[0]);
+                g_ref[0].pos = g_refOld[0].pos + (err_emg_1 * (int)g_mem.emg.emg_speed[0] * 2) / (1024 - c_mem.emg.emg_threshold[0]);
             }
             if (err_emg_2 > 0) {
-                g_ref[0].pos = g_refOld[0].pos - (err_emg_2 * (int)g_mem.emg.emg_speed * 2) / (1024 - c_mem.emg.emg_threshold[1]);
+                g_ref[0].pos = g_refOld[0].pos - (err_emg_2 * (int)g_mem.emg.emg_speed[1] * 2) / (1024 - c_mem.emg.emg_threshold[1]);
             }
             break;
 
@@ -727,7 +727,7 @@ void motor_control_SH() {
                         current_emg = 0;
                         break;
                     }
-                    g_ref[0].pos = g_refOld[0].pos + (err_emg_1 * g_mem.emg.emg_speed << 2) / (1024 - c_mem.emg.emg_threshold[0]);
+                    g_ref[0].pos = g_refOld[0].pos + (err_emg_1 * g_mem.emg.emg_speed[0] << 2) / (1024 - c_mem.emg.emg_threshold[0]);
                     break;
 
                 case 2:
@@ -736,7 +736,7 @@ void motor_control_SH() {
                         current_emg = 0;
                         break;
                     }
-                    g_ref[0].pos = g_refOld[0].pos - (err_emg_2 * g_mem.emg.emg_speed << 2) / (1024 - c_mem.emg.emg_threshold[1]);
+                    g_ref[0].pos = g_refOld[0].pos - (err_emg_2 * g_mem.emg.emg_speed[1] << 2) / (1024 - c_mem.emg.emg_threshold[1]);
                     break;
 
                 default:
@@ -768,7 +768,7 @@ void motor_control_SH() {
                     }
                     // but if the current signal come back over threshold, continue using it
                     if (err_emg_1 > 0) 
-                        g_ref[0].pos = g_refOld[0].pos + (err_emg_1 * g_mem.emg.emg_speed << 2) / (1024 - c_mem.emg.emg_threshold[0]);
+                        g_ref[0].pos = g_refOld[0].pos + (err_emg_1 * g_mem.emg.emg_speed[0] << 2) / (1024 - c_mem.emg.emg_threshold[0]);
                     
                     break;
 
@@ -781,7 +781,7 @@ void motor_control_SH() {
                     }
                     // but if the current signal come back over threshold, continue using it
                     if (err_emg_2 > 0) {
-                        g_ref[0].pos = g_refOld[0].pos - (err_emg_2 * c_mem.emg.emg_speed << 2) / (1024 - c_mem.emg.emg_threshold[1]);
+                        g_ref[0].pos = g_refOld[0].pos - (err_emg_2 * g_mem.emg.emg_speed[1] << 2) / (1024 - c_mem.emg.emg_threshold[1]);
                     }
                     break;
 
@@ -1165,10 +1165,10 @@ void motor_control_generic(uint8 idx) {
         case INPUT_MODE_EMG_INTEGRAL:
             g_ref[idx].pos = g_refOld[idx].pos;
             if (err_emg_1 > 0) {
-                g_ref[idx].pos = g_refOld[idx].pos + (err_emg_1 * (int)g_mem.emg.emg_speed * 2) / (1024 - c_mem.emg.emg_threshold[0]);
+                g_ref[idx].pos = g_refOld[idx].pos + (err_emg_1 * (int)g_mem.emg.emg_speed[0] * 2) / (1024 - c_mem.emg.emg_threshold[0]);
             }
             if (err_emg_2 > 0) {
-                g_ref[idx].pos = g_refOld[idx].pos - (err_emg_2 * (int)g_mem.emg.emg_speed * 2) / (1024 - c_mem.emg.emg_threshold[1]);
+                g_ref[idx].pos = g_refOld[idx].pos - (err_emg_2 * (int)g_mem.emg.emg_speed[1] * 2) / (1024 - c_mem.emg.emg_threshold[1]);
             }
             break;
 
@@ -1193,7 +1193,7 @@ void motor_control_generic(uint8 idx) {
                         current_emg[idx] = 0;
                         break;
                     }
-                    g_ref[idx].pos = g_refOld[idx].pos + (err_emg_1 * g_mem.emg.emg_speed << 2) / (1024 - c_mem.emg.emg_threshold[0]);
+                    g_ref[idx].pos = g_refOld[idx].pos + (err_emg_1 * g_mem.emg.emg_speed[0] << 2) / (1024 - c_mem.emg.emg_threshold[0]);
                     break;
 
                 case 2:
@@ -1202,7 +1202,7 @@ void motor_control_generic(uint8 idx) {
                         current_emg[idx] = 0;
                         break;
                     }
-                    g_ref[idx].pos = g_refOld[idx].pos - (err_emg_2 * g_mem.emg.emg_speed << 2) / (1024 - c_mem.emg.emg_threshold[1]);
+                    g_ref[idx].pos = g_refOld[idx].pos - (err_emg_2 * g_mem.emg.emg_speed[1] << 2) / (1024 - c_mem.emg.emg_threshold[1]);
                     break;
 
                 default:
@@ -1234,7 +1234,7 @@ void motor_control_generic(uint8 idx) {
                     }
                     // but if the current signal come back over threshold, continue using it
                     if (err_emg_1 > 0) 
-                        g_ref[idx].pos = g_refOld[idx].pos + (err_emg_1 * g_mem.emg.emg_speed << 2) / (1024 - c_mem.emg.emg_threshold[0]);
+                        g_ref[idx].pos = g_refOld[idx].pos + (err_emg_1 * g_mem.emg.emg_speed[0] << 2) / (1024 - c_mem.emg.emg_threshold[0]);
                     
                     break;
 
@@ -1247,7 +1247,7 @@ void motor_control_generic(uint8 idx) {
                     }
                     // but if the current signal come back over threshold, continue using it
                     if (err_emg_2 > 0) {
-                        g_ref[idx].pos = g_refOld[idx].pos - (err_emg_2 * c_mem.emg.emg_speed << 2) / (1024 - c_mem.emg.emg_threshold[1]);
+                        g_ref[idx].pos = g_refOld[idx].pos - (err_emg_2 * c_mem.emg.emg_speed[1] << 2) / (1024 - c_mem.emg.emg_threshold[1]);
                     }
                     break;
 
@@ -1827,7 +1827,7 @@ void analog_read_end() {
 #endif
  
     // Convert tension read
-    if (g_mem.dev.dev_type != AIR_CHAMBERS_FB){
+    if (g_mem.dev.dev_type == AIR_CHAMBERS_FB){
         dev_tension[0] = 5000;
     }
     else {

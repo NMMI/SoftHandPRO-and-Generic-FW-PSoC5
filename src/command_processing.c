@@ -853,7 +853,7 @@ void manage_param_list(uint16 index) {
     	(uint8*)&(MEM_P->emg.emg_threshold[0]),
     	(uint8*)&(MEM_P->emg.emg_calibration_flag),
     	(uint8*)&(MEM_P->emg.emg_max_value[0]),
-    	(uint8*)&(MEM_P->emg.emg_speed), 
+    	(uint8*)&(MEM_P->emg.emg_speed[0]), 
     	(uint8*)&(MEM_P->enc[MEM_P->motor[MOTOR_IDX].encoder_line].double_encoder_on_off),
     	(uint8*)&(MEM_P->enc[MEM_P->motor[MOTOR_IDX].encoder_line].motor_handle_ratio),
     	(uint8*)&(MEM_P->motor[MOTOR_IDX].activate_pwm_rescaling),                          //20
@@ -949,7 +949,7 @@ void manage_param_list(uint16 index) {
         1, 1, 3, 3,
         3, 1, 2, 2, 
         1, 2, 1, 2,
-        1, 1, 1, 1, 
+        2, 1, 1, 1, 
         6, 3, 1, 1,
         1, 1, 1, 1, 
         1, 1, 1, 6,
@@ -997,7 +997,7 @@ void manage_param_list(uint16 index) {
         "5 - Input mode:", "6 - Control mode:", "7 - Resolutions:", "8 - Measurement Offsets:", 
         "9 - Multipliers:", "10 - Pos. limit active:", "11 - Pos. limits [inf, sup]:", "12 - Max steps [neg, pos]:",
         "13 - Current limit:", "14 - EMG thresholds:", "15 - EMG calibration on startup:", "16 - EMG max values:",
-        "17 - EMG max speed:", "18 - Absolute encoder position:", "19 - Motor handle ratio:", "20 - PWM rescaling:",
+        "17 - EMG max speeds:", "18 - Absolute encoder position:", "19 - Motor handle ratio:", "20 - PWM rescaling:",
         "21 - Current lookup:", "22 - Date of maintenance [D/M/Y]:", "23 - Rest position:", "24 - Rest position time delay (ms):", 
         "25 - Rest vel closure (ticks/sec):", "26 - Rest position enabled:", "27 - EMG inversion:",  "28 - Hand side:",
         "29 - Enable IMUs:", "30 - Read Expansion port:", "31 - Reset counters:", "32 - Last checked Time [D/M/Y H:M:S]:", 
@@ -2099,7 +2099,7 @@ void prepare_generic_info(char *info_string)
         else
             strcat(info_string, "Calibration enabled: NO\r\n");
 
-        sprintf(str, "EMG max speed: %d", (int)MEM_P->emg.emg_speed);
+        sprintf(str, "EMG max speed: %d %d", (int)MEM_P->emg.emg_speed[0], (int)MEM_P->emg.emg_speed[1]);
         strcat(info_string, str);
         strcat(info_string, "\r\n");
 
@@ -2479,7 +2479,7 @@ void prepare_SD_param_info(char *info_string)
 			else
 				strcat(info_string, "Calibration enabled: NO\r\n");
 
-			sprintf(str, "EMG max speed: %d", (int)MEM_P->emg.emg_speed);
+			sprintf(str, "EMG max speed: %d %d", (int)MEM_P->emg.emg_speed[0], (int)MEM_P->emg.emg_speed[1]);
 			strcat(info_string, str);
 			strcat(info_string, "\r\n");
 		}
@@ -2939,7 +2939,8 @@ uint8 memInit(void)
     g_mem.emg.emg_threshold[1] = 200;
     g_mem.emg.emg_max_value[0] = 1024;
     g_mem.emg.emg_max_value[1] = 1024;   
-    g_mem.emg.emg_speed = 100;   
+    g_mem.emg.emg_speed[0] = 100; 
+    g_mem.emg.emg_speed[1] = 100; 
     g_mem.emg.emg_calibration_flag = 0;      // EMG calibration disabled by default
     g_mem.emg.switch_emg = 0;    
 
@@ -3028,12 +3029,13 @@ void memInit_SoftHandPro(void)
         g_mem.enc[i].gears_params[2] = SH_I1;  
     }
     
-    g_mem.emg.emg_calibration_flag = 0;
     g_mem.emg.emg_max_value[0] = 1024;
     g_mem.emg.emg_max_value[1] = 1024;
     g_mem.emg.emg_threshold[0] = 200;
     g_mem.emg.emg_threshold[1] = 200;
-    g_mem.emg.emg_speed = 100;
+    g_mem.emg.emg_speed[0] = 100;
+    g_mem.emg.emg_speed[1] = 100;
+    g_mem.emg.emg_calibration_flag = 0;      // EMG calibration disabled by default
     g_mem.emg.switch_emg = 0;
     
     //Initialize rest position parameters  
