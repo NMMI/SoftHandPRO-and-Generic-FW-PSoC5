@@ -234,7 +234,8 @@ void check_rest_position(void) {     // 100 Hz frequency.
     
     curr_pos = (int32)(g_meas[g_mem.motor[0].encoder_line].pos[0] >> g_mem.enc[g_mem.motor[0].encoder_line].res[0]);
     
-    if ( ( (c_mem.motor[0].input_mode >= 2 && g_emg_meas.emg[0] < 200 && g_emg_meas.emg[1] < 200) ) && curr_pos < 10000){
+    if ( ( ((c_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL || c_mem.motor[0].input_mode == INPUT_MODE_EMG_INTEGRAL || c_mem.motor[0].input_mode == INPUT_MODE_EMG_FCFS ||
+             c_mem.motor[0].input_mode == INPUT_MODE_EMG_FCFS_ADV || c_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL_NC) && g_adc_meas.emg[0] < 200 && g_adc_meas.emg[1] < 200) ) && curr_pos < 10000){
         if (flag_count == 1){
             count = count + 1;
         }
@@ -278,7 +279,8 @@ void check_rest_position(void) {     // 100 Hz frequency.
             // Stop condition
             rest_pos_curr_ref = g_mem.SH.rest_pos;
             
-            if (c_mem.motor[0].input_mode >= 2)   // EMG input mode
+            if (c_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL || c_mem.motor[0].input_mode == INPUT_MODE_EMG_INTEGRAL || c_mem.motor[0].input_mode == INPUT_MODE_EMG_FCFS ||
+                c_mem.motor[0].input_mode == INPUT_MODE_EMG_FCFS_ADV || c_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL_NC)   // EMG input mode
                 forced_open = 1; 
             
             count = 0;
@@ -378,8 +380,10 @@ void battery_management() {
     else {
 
         // The board LED is still or blinks depending on attached battery State of Charge
-        if (tension_valid == TRUE && ((c_mem.motor[0].input_mode <= 1)  ||
-            (c_mem.motor[0].input_mode > 1 && emg_1_status == NORMAL && emg_2_status == NORMAL)) ){ 
+        if (tension_valid == TRUE && (( c_mem.motor[0].input_mode == INPUT_MODE_EXTERNAL || c_mem.motor[0].input_mode == INPUT_MODE_ENCODER3 || c_mem.motor[0].input_mode == INPUT_MODE_JOYSTICK )  ||
+            ( (c_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL || c_mem.motor[0].input_mode == INPUT_MODE_EMG_INTEGRAL || c_mem.motor[0].input_mode == INPUT_MODE_EMG_FCFS ||
+               c_mem.motor[0].input_mode == INPUT_MODE_EMG_FCFS_ADV || c_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL_NC) && 
+                emg_1_status == NORMAL && emg_2_status == NORMAL)) ){ 
             dev_tension_f[0] = filter(dev_tension[0], &filt_v[0]);            
             if (c_mem.dev.use_2nd_motor_flag == TRUE) {
                 dev_tension_f[1] = filter(dev_tension[1], &filt_v[1]);
@@ -429,7 +433,9 @@ void battery_management() {
             
         }
         else {
-            if ((c_mem.motor[0].input_mode <= 1) || (c_mem.motor[0].input_mode > 1 && emg_1_status == NORMAL && emg_2_status == NORMAL)){
+            if ((c_mem.motor[0].input_mode == INPUT_MODE_EXTERNAL || c_mem.motor[0].input_mode == INPUT_MODE_ENCODER3 || c_mem.motor[0].input_mode == INPUT_MODE_JOYSTICK) || 
+                ((c_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL || c_mem.motor[0].input_mode == INPUT_MODE_EMG_INTEGRAL || c_mem.motor[0].input_mode == INPUT_MODE_EMG_FCFS ||
+                  c_mem.motor[0].input_mode == INPUT_MODE_EMG_FCFS_ADV || c_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL_NC) && emg_1_status == NORMAL && emg_2_status == NORMAL)){
                 LED_control(5);     // Default - red light
             }
         }

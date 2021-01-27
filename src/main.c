@@ -210,8 +210,10 @@ int main()
     }
     
     //---------------------------------------------------  Initialize emg structure
-    g_emg_meas.emg[0] = 0;
-    g_emg_meas.emg[1] = 0;
+    g_adc_meas.emg[0] = 0;
+    g_adc_meas.emg[1] = 0;
+    g_adc_meas.joystick[0] = 0;
+    g_adc_meas.joystick[1] = 0;
     
     MOTOR_DRIVER_TYPE_Write((g_mem.motor[1].motor_driver_type << 1) | g_mem.motor[0].motor_driver_type);
     for (i = 0; i< NUM_OF_MOTORS; i++) {
@@ -219,7 +221,8 @@ int main()
             if ((c_mem.motor[i].input_mode == INPUT_MODE_EMG_PROPORTIONAL) ||
                 (c_mem.motor[i].input_mode == INPUT_MODE_EMG_INTEGRAL) ||
                 (c_mem.motor[i].input_mode == INPUT_MODE_EMG_FCFS) ||
-                (c_mem.motor[i].input_mode == INPUT_MODE_EMG_FCFS_ADV))
+                (c_mem.motor[i].input_mode == INPUT_MODE_EMG_FCFS_ADV) ||
+                (c_mem.motor[i].input_mode == INPUT_MODE_EMG_PROPORTIONAL_NC))
                 g_ref[i].onoff = 0x00;
             else
                 g_ref[i].onoff = c_mem.motor[i].activ;

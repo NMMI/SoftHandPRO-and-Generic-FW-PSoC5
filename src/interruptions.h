@@ -100,6 +100,24 @@ void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor);
 
 /** \name Motor control function */
 /** \{ */
+//=====================================================     compute_reference
+/** This function computes the motor reference and stores it in the given 
+ *  st_ref structure.
+**/
+void compute_reference(uint8 motor_idx, struct st_ref* st_ref_p, struct st_ref* st_refOld_p);
+
+//=====================================================     compute_SoftHand_2_motors_joystick_reference
+/** This function computes the motor reference for SoftHand_2_motors device with joystick input 
+ * and stores it in the given st_ref structure.
+**/
+void compute_SoftHand_2_motors_joystick_reference(uint8 motor_idx, struct st_ref* st_ref_p, struct st_ref* st_refOld_p);
+
+//=====================================================     compute_SoftHand_2_motors_emg_reference
+/** This function computes the motor reference for SoftHand_2_motors device with EMG input 
+ * and stores it in the given st_ref structure.
+**/
+void compute_SoftHand_2_motors_emg_reference(uint8 motor_idx, struct st_ref* st_ref_p, struct st_ref* st_refOld_p, int32 err_emg_1, int32 err_emg_2);
+
 //=====================================================     motor_control_SH
 /** This function controls the motor direction and velocity, depending on 
  * 	the input and control modality set. 

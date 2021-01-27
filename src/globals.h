@@ -68,8 +68,9 @@
 #define NUM_OF_ADC_CHANNELS_MAX (4+NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS)    
 #define NUM_OF_MS_PARAMS        2       /*!< Number of master parameters saved in the EEPROM.*/
 #define NUM_OF_FB_PARAMS        3       /*!< Number of feedback parameters saved in the EEPROM.*/
-#define NUM_OF_PARAMS           (71 + NUM_OF_MS_PARAMS + NUM_OF_FB_PARAMS)      /*!< Number of parameters saved in the EEPROM.*/
-#define NUM_OF_PARAMS_MENU      10      /*!< Number of parameters menu.*/    
+#define NUM_OF_WR_PARAMS        3       /*!< Number of wrist parameters saved in the EEPROM.*/
+#define NUM_OF_PARAMS           (74 + NUM_OF_MS_PARAMS + NUM_OF_FB_PARAMS + NUM_OF_WR_PARAMS)      /*!< Number of parameters saved in the EEPROM.*/
+#define NUM_OF_PARAMS_MENU      12      /*!< Number of parameters menu.*/    
 #define N_IMU_MAX               5    
 #define NUM_OF_IMU_DATA         5       // accelerometers, gyroscopes, magnetometers, quaternion and temperature data
 #define N_ENCODER_LINE_MAX      2       /*!< Max number of CS lines which can contain encoders.*/
@@ -149,7 +150,17 @@
 #define SOFTHAND_PRO        0
 #define GENERIC_2_MOTORS    1
 #define AIR_CHAMBERS_FB     2
-#define CUFF                3 
+#define OTBK_ACT_WRIST_MS   3  
+#define SOFTHAND_2_MOTORS   4    
+#define CUFF                5 
+    
+//==============================================================================
+//                                                               WRIST FSM STATE
+//==============================================================================
+#define RELAX_STATE         0 
+#define TIMER_STATE         1
+#define MOVE_FAST_ACT       2
+#define MOVE_SLOW_ACT       3
 
 //==============================================================================
 //                                                                   MOTOR GEARS
@@ -175,6 +186,8 @@
 #define ST_SH_SPEC      70
 #define ST_MS_SPEC      80
 #define ST_FB_SPEC      90
+#define ST_WR_SPEC      100
+#define ST_JOY_SPEC     110
     
 //==============================================================================
 //                                                                         OTHER
@@ -192,6 +205,8 @@
 #define EMG_SAMPLE_TO_DISCARD   500     /*!< Number of sample to discard before calibration.*/
 #define SAMPLES_FOR_MEAN        100     /*!< Number of samples used to mean current values.*/
 #define SAMPLES_FOR_EMG_MEAN    1000    /*!< Number of samples used to mean emg values.*/
+#define SAMPLES_FOR_JOYSTICK_MEAN   200 /*!< Number of samples used to mean joystick values.*/
+#define JOYSTICK_SAMPLE_TO_DISCARD  100 /*!< Number of samples to discard before having joystick stable values.*/
 #define REST_POS_ERR_THR_GAIN   10      /*!< Gain related to stop condition threshold in rest position routine.*/
 #define POS_INTEGRAL_SAT_LIMIT  50000000    /*!< Anti windup on position control.*/
 #define CURR_INTEGRAL_SAT_LIMIT 100000      /*!< Anti windup on current control.*/
@@ -229,9 +244,10 @@ struct st_meas {
     int32 acc[NUM_OF_SENSORS];      /*!< Encoder rotational acceleration.*/
 };
 
-struct st_emg_meas {
+struct st_adc_meas {
     int32 emg[NUM_OF_INPUT_EMGS];           /*!< EMG sensors values.*/
     int32 add_emg[NUM_OF_ADDITIONAL_EMGS];  /*!< Additional EMG sensors values.*/
+    int32 joystick[NUM_OF_MOTORS];          /*!< Joystick measurements.*/
 };
 
 struct st_fb_meas {
@@ -390,6 +406,17 @@ struct st_SH_spec{
     uint8   unused_bytes[3];            /*!< Unused bytes to fill row.*/                                    //3
 };                                                                                                          // TOTAL: 16 BYTES                                                                                                         // TOTAL: 80 BYTES
 
+//=================================================     Joystick specific
+/** \brief Joystick specific parameters structure
+ *
+**/ 
+struct st_JOY_spec{
+    uint16  joystick_closure_speed;     /*!< Joystick closure speed.*/                                      //2 
+    int16   joystick_threshold;         /*!< Joystick threshold.*/                                          //2
+    uint16  joystick_gains[2];          /*!< Joystick measurements gains.*/                                 //4
+    uint8   unused_bytes[8];            /*!< Unused bytes to fill row.*/                                    //8
+};  
+
 //=================================================     Master specific
 /** \brief Master mode specific parameters structure
  *
@@ -398,7 +425,7 @@ struct st_MASTER_spec{
     uint8   slave_comm_active;          /*!< Slave communication active flag.*/                             //1
     uint8   slave_ID;                   /*!< Slave ID.*/                                                    //1
     uint8   unused_bytes[14];           /*!< Unused bytes to fill row.*/                                    //14
-}; 
+};                                                                                                          // TOTAL: 16 BYTES 
 
 //=================================================     Feedback specific
 /** \brief Feedback mode specific parameters structure
@@ -411,6 +438,17 @@ struct st_FB_spec{
     uint8   unused_bytes[4];            /*!< Unused bytes to fill row.*/                                    //4
 };                                                                                                          // TOTAL: 16 BYTES 
  
+//=================================================     Wrist specific
+/** \brief Wrist specific parameters structure
+ *
+**/ 
+struct st_WR_spec{
+    uint8   activation_mode;              /*!< Activation mode. Fast or slow activation for emg movement.*/ //1
+    uint16  fast_act_threshold[NUM_OF_INPUT_EMGS]; /*!< Minimum value for fast activation of EMG control.*/ //4
+    uint8   wrist_direction_association;           /*!< Wrist direction movement (CW or CCW).*/             //1
+    uint8   unused_bytes[10];                      /*!< Unused bytes to fill row.*/                         //10
+};                                                                                                          // TOTAL: 16 BYTES 
+                                                                                                       // TOTAL: 16 BYTES 
 
 //-------------------------------------------- MEMORY VARIABLES ---------------------------------------------// 
 /** \brief Memory variables
@@ -432,12 +470,13 @@ struct st_eeprom {
     struct st_user user[NUM_OF_USERS];  /*!< User variables.*/                                              //2*3 rows  (End of row 42)
     
     struct st_SH_spec SH;               /*!< SoftHand specific variables.*/                                 //1 row     (End of row 43)
-    struct st_MASTER_spec MS;           /*!< Master specific variables.*/                                   //1 row     (End of row 44)
-    struct st_FB_spec FB;               /*!< Feedback specific variables.*/                                 //1 row     (End of row 45)
+    struct st_JOY_spec JOY_spec;        /*!< Joystick specific variables.*/                                 //1 row     (End of row 44)
+    struct st_MASTER_spec MS;           /*!< Master specific variables.*/                                   //1 row     (End of row 45)
+    struct st_FB_spec FB;               /*!< Feedback specific variables.*/                                 //1 row     (End of row 46)
+    struct st_WR_spec WR;               /*!< Wrist specific variables.*/                                    //1 row     (End of row 47)
 
-#ifdef GENERIC_FW
+    #ifdef GENERIC_FW
     //struct st_CUFF_spec CUFF_spec;
-    //struct st_JOY_spec JOY_spec;
 #endif    
 };
 
@@ -483,7 +522,7 @@ typedef enum {
     SUM_AND_MEAN  = 3,              /*!< Sum and mean a definite value of samples.*/
     WAIT          = 4,              /*!< The second emg waits until the first emg has a valid value.*/
     WAIT_EoC      = 5               /*!< The second emg waits for end of calibration.*/
-} emg_status;                       /*!< EMG status enumeration.*/
+} adc_status;                       /*!< ADC status enumeration.*/
 
 typedef enum {
     
@@ -498,7 +537,7 @@ typedef enum {
 
 extern struct st_ref    g_ref[NUM_OF_MOTORS], g_refNew[NUM_OF_MOTORS], g_refOld[NUM_OF_MOTORS]; /*!< Reference variables.*/
 extern struct st_meas   g_meas[N_ENCODER_LINE_MAX], g_measOld[N_ENCODER_LINE_MAX];              /*!< Measurements.*/
-extern struct st_emg_meas g_emg_meas, g_emg_measOld;/*!< EMG Measurements.*/
+extern struct st_adc_meas g_adc_meas, g_adc_measOld;/*!< EMG Measurements.*/
 extern struct st_fb_meas g_fb_meas;                 /*!< Haptic Feedback Measurements.*/
 extern struct st_data   g_rx;                       /*!< Incoming/Outcoming data.*/
 extern struct st_eeprom g_mem, c_mem;               /*!< Memory parameters.*/
@@ -518,8 +557,10 @@ extern int32    dev_tension_f[NUM_OF_MOTORS];       /*!< Filtered power supply t
 extern int32    pow_tension[NUM_OF_MOTORS];         /*!< Computed power supply tension.*/
 
 extern counter_status CYDATA cycles_status;         /*!< Cycles counter state machine status.*/
-extern emg_status CYDATA emg_1_status;              /*!< First EMG sensor status.*/
-extern emg_status CYDATA emg_2_status;              /*!< Second EMG sensor status.*/                               
+extern adc_status CYDATA emg_1_status;              /*!< First EMG sensor status.*/
+extern adc_status CYDATA emg_2_status;              /*!< Second EMG sensor status.*/      
+extern adc_status CYDATA joy_UD_status;             /*!< Joystick UP/DOWN status.*/
+extern adc_status CYDATA joy_LR_status;             /*!< Joystick LEFT/RIGHT status.*/
     
 // Bit Flag
 extern CYBIT reset_last_value_flag;                 /*!< This flag is set when the encoders last values must be resetted.*/
@@ -570,6 +611,7 @@ extern float Quat[N_IMU_MAX][4];
 
 // MASTER variables
 extern uint8 master_mode;               /*!< Flag used to set/unset master mode to send messages to other boards.*/
+
 
 // -----------------------------------------------------------------------------
 

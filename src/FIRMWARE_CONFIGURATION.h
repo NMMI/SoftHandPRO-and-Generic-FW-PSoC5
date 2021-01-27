@@ -54,20 +54,25 @@
 //    
 // SOFTHAND FW: #define SOFTHAND_FW
 // GENERIC FW:  #define GENERIC_FW 
-// AIR_CHAMBERS_FB_FW:   #define AIR_CHAMBERS_FB_FW
+// AIR_CHAMBERS_FB_FW:      #define AIR_CHAMBERS_FB_FW
+// OTBK_ACT_WRIST_MS_FW:    #define OTBK_ACT_WRIST_MS_FW    
 //====================================================================================
 //====================================================================================
     
     
 // Macro related to different firmware configurations
 #ifdef SOFTHAND_FW
-    #define VERSION                 "SoftHand PRO firmware v. 1.8.1 (PSoC5)"
+    #define VERSION                 "SoftHand PRO firmware v. 1.9 (PSoC5)"
 #else
     #ifdef GENERIC_FW
-        #define VERSION                 "Generic firmware v. 1.8.1 (PSoC5)"
-    #else   //AIR_CHAMBERS_FB_FW
+        #define VERSION                 "Generic firmware v. 1.9 (PSoC5)"
+    #else   
         #define MASTER_FW
-        #define VERSION                 "Air Chambers Haptic Feedback firmware v. 1.8.1 (PSoC5) - Master configuration"
+        #ifdef AIR_CHAMBERS_FB_FW
+            #define VERSION                 "Air Chambers Haptic Feedback firmware v. 1.9 (PSoC5) - Master configuration"
+        #else //OTBK_ACT_WRIST_MS_FW
+            #define VERSION                 "Ottobock Active Wrist firmware v. 1.9 (PSoC5) - Master configuration"
+        #endif
     #endif
 #endif      
 
@@ -76,26 +81,33 @@
 // Handle multiple configuration with mutually exclusive macro preprocessor defines
 // Note: an if..else structure is preferred, but with a large number of exclusive configuration this is also good
 #ifdef SOFTHAND_FW
-    #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - 35 - NUM_OF_MS_PARAMS - NUM_OF_FB_PARAMS)  // Number of parameters saved in the EEPROM for SOFTHAND FIRMWARE
-                                                              // All parameters except: additional first motor parameters (4), second motor configuration and parameters (21),
-                                                              // Encoder configuration (2), ADC configuration (2), Read additional ADC port, Device type, Gear parameters, Encoders used for control, 
-                                                              // Master parameters (2), Feedback parameters (3)
-    #define NUM_OF_DEV_PARAM_MENUS      (NUM_OF_PARAMS_MENU - 2) // Number of parameters menu for SOFTHAND FIRMWARE
-                                                                 // All menus except: Motor driver type, Device type
+    #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - 38 - NUM_OF_WR_PARAMS - NUM_OF_MS_PARAMS - NUM_OF_FB_PARAMS)  // Number of parameters saved in the EEPROM for SOFTHAND FIRMWARE
+                                                              // All parameters except: additional first motor parameters (6), second motor configuration and parameters (23),
+                                                              // Encoder configuration (2), ADC configuration (2), Joystick configuration (3), Read additional ADC port, Device type, 
+                                                              // Wrist parameters (3), Master parameters (2), Feedback parameters (3)
+    #define NUM_OF_DEV_PARAM_MENUS      (NUM_OF_PARAMS_MENU - 4) // Number of parameters menu for SOFTHAND FIRMWARE
+                                                                 // All menus except: Motor driver type, Device type, Wrist mode, Wrist direction
 #endif
 #ifdef GENERIC_FW
-    #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - NUM_OF_MS_PARAMS - NUM_OF_FB_PARAMS)  // Number of parameters saved in the EEPROM for GENERIC FIRMWARE
-                                                             // All parameters except: Master parameters (2), Feedback parameters (3)
-    #define NUM_OF_DEV_PARAM_MENUS      NUM_OF_PARAMS_MENU   // Number of parameters menu
+    #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - 1 - NUM_OF_MS_PARAMS - NUM_OF_FB_PARAMS)  // Number of parameters saved in the EEPROM for GENERIC FIRMWARE
+                                                             // All parameters except: Wrist parameters (only 1), Master parameters (2), Feedback parameters (3)
+    #define NUM_OF_DEV_PARAM_MENUS      (NUM_OF_PARAMS_MENU - 1)  // Number of parameters menu
+                                                                  // All menus except: Wrist direction
 #endif
 //#ifdef MASTER_FW (Not necessary statements for the moment)
-//    #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - NUM_OF_FB_PARAMS)  // Number of parameters saved in the EEPROM for MASTER FIRMWARE
-//                                                             // All parameters except: Feedback parameters (3)
+//    #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - 1 - NUM_OF_FB_PARAMS)  // Number of parameters saved in the EEPROM for MASTER FIRMWARE
+//                                                             // All parameters except:  Wrist parameters (only 1), Feedback parameters (3)
 //    #define NUM_OF_DEV_PARAM_MENUS      NUM_OF_PARAMS_MENU   // Number of parameters menu
 //#endif
+#ifdef OTBK_ACT_WRIST_MS_FW
+    #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - NUM_OF_FB_PARAMS)  // Number of parameters saved in the EEPROM for MASTER FIRMWARE
+                                                                            // All parameters except: Feedback parameters (3)
+    #define NUM_OF_DEV_PARAM_MENUS      NUM_OF_PARAMS_MENU     // Number of parameters menu
+#endif
 #ifdef AIR_CHAMBERS_FB_FW
-    #define NUM_OF_DEV_PARAMS           NUM_OF_PARAMS        // Number of parameters saved in the EEPROM for AIR_CHAMBERS_FB_FW FIRMWARE
-    #define NUM_OF_DEV_PARAM_MENUS      NUM_OF_PARAMS_MENU   // Number of parameters menu
+    #define NUM_OF_DEV_PARAMS           NUM_OF_PARAMS          // Number of parameters saved in the EEPROM for AIR_CHAMBERS_FB_FW FIRMWARE
+                                                               // All parameters except: Wrist parameters (3)
+    #define NUM_OF_DEV_PARAM_MENUS      NUM_OF_PARAMS_MENU     // Number of parameters menu
 #endif
 
 

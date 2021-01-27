@@ -273,6 +273,13 @@ void   memInit_Master ();
 **/
 void   memInit_AirChambersFb ();
 
+//============================================================  memInitOtbkActWristMs
+/** This functions initializes the memory. It is used also to restore the
+ * 	the parameters to their default values. Specific for Ottobock Active Wrist Master firmware
+ *
+**/
+void   memInit_OtbkActWristMs ();
+
 /** \} */
 
 
@@ -339,6 +346,13 @@ void cmd_get_velocities();
 	to be sent.
 **/
 void cmd_get_accelerations();
+
+//============================================================  cmd_get_joystick
+/** This function gets the joystick analog values and puts them in the package
+	to be sent.
+**/
+void cmd_get_joystick();
+
 //============================================================  cmd_get_currents
 /** This function gets the motor current and puts it in the package to 
 	be sent to the user.
@@ -411,14 +425,22 @@ void cmd_get_ADC_map();
 **/
 void cmd_get_ADC_raw();
 
-//============================================================  cmd_get_SD_files
-/** This function gets both SD parameters and data files
+//============================================================  cmd_get_SD_file
+/** This function gets a file on the SD
 **/
-void cmd_get_SD_files();
+void cmd_get_SD_file();
 
 //============================================================  air_chamber_control
 /* This function is used to drive air chambers feedback device */
-void air_chambers_control();
+void air_chambers_control(int slave_motor_idx);
+
+//============================================================  emg_activation_velocity_fsm
+/* This function is used to decide which is the current emg activation velocity */
+uint8 emg_activation_velocity_fsm();
+
+//============================================================  active_wrist_control
+/* This function is used to drive Ottobock active wrist device */
+void otbk_act_wrist_control(int slave_motor_idx);
 
 //============================================================  commReadResCurrFromSH
 /** This function reads on the serial port the residual current from SH.
@@ -432,10 +454,10 @@ int16 commReadResCurrFromSH();
 **/
 void drive_slave(uint8 motor_idx, uint8 slave_ID);
 
-//=====================================================     stop_feedback
-/** This function is used to deactivate feedback motors when occurred.
+//=====================================================     stop_master_device
+/** This function is used to deactivate master device motors when occurred.
 **/
-void stop_feedback();
+void stop_master_device();
 
 //=====================================================     deactivate_slaves
 /** This function is used to create a package to deactivate motors on all the other devices.

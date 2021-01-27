@@ -109,6 +109,8 @@ enum SH_command
     CMD_SET_CUFF_INPUTS         = 142,  ///< Command used to set Cuff device inputs .
     CMD_SET_BAUDRATE            = 144,  ///< Command for setting baudrate
                                         ///  of communication.
+    CMD_GET_JOYSTICK            = 146,   ///< Command to get the joystick measurements (Only 
+                                        ///  for devices driven by a joystick)
     
     // SoftHand PRO custom commands
     CMD_GET_IMU_READINGS        = 161,  // Retrieve accelerometers, gyroscopes and magnetometers readings    
@@ -116,7 +118,8 @@ enum SH_command
     CMD_GET_ENCODER_CONF        = 163,  // Get encoder configuration
     CMD_GET_ENCODER_RAW         = 164,  // Get all encoder raw values
     CMD_GET_ADC_CONF            = 165,  // Get ADC configuration
-    CMD_GET_ADC_RAW             = 166   // Get ADC raw values 
+    CMD_GET_ADC_RAW             = 166,  // Get ADC raw values 
+    CMD_GET_SD_SINGLE_FILE      = 167   // Get a single file of the SD card given the path
 };
 
 //===================================================     resolution definitions
@@ -150,7 +153,8 @@ enum SH_input_mode
     INPUT_MODE_EMG_FCFS_ADV     = 5,     ///< Use 2 EMG. First reaching threshold.
                                         ///  wins and its value defines hand closure.
                                         ///  Wait for both EMG to lower under threshold.
-    INPUT_MODE_EMG_PROPORTIONAL_NC     = 6,    ///< Normally closed.
+    INPUT_MODE_JOYSTICK         = 6,    ///< Joystick input mode
+    INPUT_MODE_EMG_PROPORTIONAL_NC     = 7    ///< EMG Normally closed.
 };
 
 //============================================================     control modes

@@ -1,0 +1,2321 @@
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"COUNTER_ENC.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	COUNTER_ENC_initVar
+  20              		.bss
+  21              		.type	COUNTER_ENC_initVar, %object
+  22              		.size	COUNTER_ENC_initVar, 1
+  23              	COUNTER_ENC_initVar:
+  24 0000 00       		.space	1
+  25              		.section	.text.COUNTER_ENC_Init,"ax",%progbits
+  26              		.align	2
+  27              		.global	COUNTER_ENC_Init
+  28              		.thumb
+  29              		.thumb_func
+  30              		.type	COUNTER_ENC_Init, %function
+  31              	COUNTER_ENC_Init:
+  32              	.LFB0:
+  33              		.file 1 "Generated_Source\\PSoC5\\COUNTER_ENC.c"
+   1:Generated_Source\PSoC5/COUNTER_ENC.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/COUNTER_ENC.c **** * File Name: COUNTER_ENC.c  
+   3:Generated_Source\PSoC5/COUNTER_ENC.c **** * Version 3.0
+   4:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+   5:Generated_Source\PSoC5/COUNTER_ENC.c **** *  Description:
+   6:Generated_Source\PSoC5/COUNTER_ENC.c **** *     The Counter component consists of a 8, 16, 24 or 32-bit counter with
+   7:Generated_Source\PSoC5/COUNTER_ENC.c **** *     a selectable period between 2 and 2^Width - 1.  
+   8:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+   9:Generated_Source\PSoC5/COUNTER_ENC.c **** *   Note:
+  10:Generated_Source\PSoC5/COUNTER_ENC.c **** *     None
+  11:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+  12:Generated_Source\PSoC5/COUNTER_ENC.c **** ********************************************************************************
+  13:Generated_Source\PSoC5/COUNTER_ENC.c **** * Copyright 2008-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  14:Generated_Source\PSoC5/COUNTER_ENC.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  15:Generated_Source\PSoC5/COUNTER_ENC.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  16:Generated_Source\PSoC5/COUNTER_ENC.c **** * the software package with which this file was provided.
+  17:Generated_Source\PSoC5/COUNTER_ENC.c **** *******************************************************************************/
+  18:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+  19:Generated_Source\PSoC5/COUNTER_ENC.c **** #include "COUNTER_ENC.h"
+  20:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+  21:Generated_Source\PSoC5/COUNTER_ENC.c **** uint8 COUNTER_ENC_initVar = 0u;
+  22:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+  23:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+  24:Generated_Source\PSoC5/COUNTER_ENC.c **** /*******************************************************************************
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 2
+
+
+  25:Generated_Source\PSoC5/COUNTER_ENC.c **** * Function Name: COUNTER_ENC_Init
+  26:Generated_Source\PSoC5/COUNTER_ENC.c **** ********************************************************************************
+  27:Generated_Source\PSoC5/COUNTER_ENC.c **** * Summary:
+  28:Generated_Source\PSoC5/COUNTER_ENC.c **** *     Initialize to the schematic state
+  29:Generated_Source\PSoC5/COUNTER_ENC.c **** * 
+  30:Generated_Source\PSoC5/COUNTER_ENC.c **** * Parameters:  
+  31:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void  
+  32:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+  33:Generated_Source\PSoC5/COUNTER_ENC.c **** * Return: 
+  34:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void
+  35:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+  36:Generated_Source\PSoC5/COUNTER_ENC.c **** *******************************************************************************/
+  37:Generated_Source\PSoC5/COUNTER_ENC.c **** void COUNTER_ENC_Init(void) 
+  38:Generated_Source\PSoC5/COUNTER_ENC.c **** {
+  34              		.loc 1 38 0
+  35              		.cfi_startproc
+  36              		@ args = 0, pretend = 0, frame = 8
+  37              		@ frame_needed = 1, uses_anonymous_args = 0
+  38 0000 80B5     		push	{r7, lr}
+  39              		.cfi_def_cfa_offset 8
+  40              		.cfi_offset 7, -8
+  41              		.cfi_offset 14, -4
+  42 0002 82B0     		sub	sp, sp, #8
+  43              		.cfi_def_cfa_offset 16
+  44 0004 00AF     		add	r7, sp, #0
+  45              		.cfi_def_cfa_register 7
+  39:Generated_Source\PSoC5/COUNTER_ENC.c ****         #if (!COUNTER_ENC_UsingFixedFunction && !COUNTER_ENC_ControlRegRemoved)
+  40:Generated_Source\PSoC5/COUNTER_ENC.c ****             uint8 ctrl;
+  41:Generated_Source\PSoC5/COUNTER_ENC.c ****         #endif /* (!COUNTER_ENC_UsingFixedFunction && !COUNTER_ENC_ControlRegRemoved) */
+  42:Generated_Source\PSoC5/COUNTER_ENC.c ****         
+  43:Generated_Source\PSoC5/COUNTER_ENC.c ****         #if(!COUNTER_ENC_UsingFixedFunction) 
+  44:Generated_Source\PSoC5/COUNTER_ENC.c ****             /* Interrupt State Backup for Critical Region*/
+  45:Generated_Source\PSoC5/COUNTER_ENC.c ****             uint8 COUNTER_ENC_interruptState;
+  46:Generated_Source\PSoC5/COUNTER_ENC.c ****         #endif /* (!COUNTER_ENC_UsingFixedFunction) */
+  47:Generated_Source\PSoC5/COUNTER_ENC.c ****         
+  48:Generated_Source\PSoC5/COUNTER_ENC.c ****         #if (COUNTER_ENC_UsingFixedFunction)
+  49:Generated_Source\PSoC5/COUNTER_ENC.c ****             /* Clear all bits but the enable bit (if it's already set for Timer operation */
+  50:Generated_Source\PSoC5/COUNTER_ENC.c ****             COUNTER_ENC_CONTROL &= COUNTER_ENC_CTRL_ENABLE;
+  51:Generated_Source\PSoC5/COUNTER_ENC.c ****             
+  52:Generated_Source\PSoC5/COUNTER_ENC.c ****             /* Clear the mode bits for continuous run mode */
+  53:Generated_Source\PSoC5/COUNTER_ENC.c ****             #if (CY_PSOC5A)
+  54:Generated_Source\PSoC5/COUNTER_ENC.c ****                 COUNTER_ENC_CONTROL2 &= ((uint8)(~COUNTER_ENC_CTRL_MODE_MASK));
+  55:Generated_Source\PSoC5/COUNTER_ENC.c ****             #endif /* (CY_PSOC5A) */
+  56:Generated_Source\PSoC5/COUNTER_ENC.c ****             #if (CY_PSOC3 || CY_PSOC5LP)
+  57:Generated_Source\PSoC5/COUNTER_ENC.c ****                 COUNTER_ENC_CONTROL3 &= ((uint8)(~COUNTER_ENC_CTRL_MODE_MASK));                
+  58:Generated_Source\PSoC5/COUNTER_ENC.c ****             #endif /* (CY_PSOC3 || CY_PSOC5LP) */
+  59:Generated_Source\PSoC5/COUNTER_ENC.c ****             /* Check if One Shot mode is enabled i.e. RunMode !=0*/
+  60:Generated_Source\PSoC5/COUNTER_ENC.c ****             #if (COUNTER_ENC_RunModeUsed != 0x0u)
+  61:Generated_Source\PSoC5/COUNTER_ENC.c ****                 /* Set 3rd bit of Control register to enable one shot mode */
+  62:Generated_Source\PSoC5/COUNTER_ENC.c ****                 COUNTER_ENC_CONTROL |= COUNTER_ENC_ONESHOT;
+  63:Generated_Source\PSoC5/COUNTER_ENC.c ****             #endif /* (COUNTER_ENC_RunModeUsed != 0x0u) */
+  64:Generated_Source\PSoC5/COUNTER_ENC.c ****             
+  65:Generated_Source\PSoC5/COUNTER_ENC.c ****             /* Set the IRQ to use the status register interrupts */
+  66:Generated_Source\PSoC5/COUNTER_ENC.c ****             COUNTER_ENC_CONTROL2 |= COUNTER_ENC_CTRL2_IRQ_SEL;
+  67:Generated_Source\PSoC5/COUNTER_ENC.c ****             
+  68:Generated_Source\PSoC5/COUNTER_ENC.c ****             /* Clear and Set SYNCTC and SYNCCMP bits of RT1 register */
+  69:Generated_Source\PSoC5/COUNTER_ENC.c ****             COUNTER_ENC_RT1 &= ((uint8)(~COUNTER_ENC_RT1_MASK));
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 3
+
+
+  70:Generated_Source\PSoC5/COUNTER_ENC.c ****             COUNTER_ENC_RT1 |= COUNTER_ENC_SYNC;     
+  71:Generated_Source\PSoC5/COUNTER_ENC.c ****                     
+  72:Generated_Source\PSoC5/COUNTER_ENC.c ****             /*Enable DSI Sync all all inputs of the Timer*/
+  73:Generated_Source\PSoC5/COUNTER_ENC.c ****             COUNTER_ENC_RT1 &= ((uint8)(~COUNTER_ENC_SYNCDSI_MASK));
+  74:Generated_Source\PSoC5/COUNTER_ENC.c ****             COUNTER_ENC_RT1 |= COUNTER_ENC_SYNCDSI_EN;
+  75:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+  76:Generated_Source\PSoC5/COUNTER_ENC.c ****         #else
+  77:Generated_Source\PSoC5/COUNTER_ENC.c ****             #if(!COUNTER_ENC_ControlRegRemoved)
+  78:Generated_Source\PSoC5/COUNTER_ENC.c ****             /* Set the default compare mode defined in the parameter */
+  79:Generated_Source\PSoC5/COUNTER_ENC.c ****             ctrl = COUNTER_ENC_CONTROL & ((uint8)(~COUNTER_ENC_CTRL_CMPMODE_MASK));
+  46              		.loc 1 79 0
+  47 0006 1B4B     		ldr	r3, .L2
+  48 0008 1B78     		ldrb	r3, [r3]
+  49 000a DBB2     		uxtb	r3, r3
+  50 000c 23F00703 		bic	r3, r3, #7
+  51 0010 FB71     		strb	r3, [r7, #7]
+  80:Generated_Source\PSoC5/COUNTER_ENC.c ****             COUNTER_ENC_CONTROL = ctrl | COUNTER_ENC_DEFAULT_COMPARE_MODE;
+  52              		.loc 1 80 0
+  53 0012 184A     		ldr	r2, .L2
+  54 0014 FB79     		ldrb	r3, [r7, #7]
+  55 0016 1370     		strb	r3, [r2]
+  81:Generated_Source\PSoC5/COUNTER_ENC.c ****             
+  82:Generated_Source\PSoC5/COUNTER_ENC.c ****             /* Set the default capture mode defined in the parameter */
+  83:Generated_Source\PSoC5/COUNTER_ENC.c ****             ctrl = COUNTER_ENC_CONTROL & ((uint8)(~COUNTER_ENC_CTRL_CAPMODE_MASK));
+  56              		.loc 1 83 0
+  57 0018 164B     		ldr	r3, .L2
+  58 001a 1B78     		ldrb	r3, [r3]
+  59 001c DBB2     		uxtb	r3, r3
+  60 001e 23F00303 		bic	r3, r3, #3
+  61 0022 FB71     		strb	r3, [r7, #7]
+  84:Generated_Source\PSoC5/COUNTER_ENC.c ****             
+  85:Generated_Source\PSoC5/COUNTER_ENC.c ****             #if( 0 != COUNTER_ENC_CAPTURE_MODE_CONF)
+  86:Generated_Source\PSoC5/COUNTER_ENC.c ****                 COUNTER_ENC_CONTROL = ctrl | COUNTER_ENC_DEFAULT_CAPTURE_MODE;
+  87:Generated_Source\PSoC5/COUNTER_ENC.c ****             #else
+  88:Generated_Source\PSoC5/COUNTER_ENC.c ****                 COUNTER_ENC_CONTROL = ctrl;
+  62              		.loc 1 88 0
+  63 0024 134A     		ldr	r2, .L2
+  64 0026 FB79     		ldrb	r3, [r7, #7]
+  65 0028 1370     		strb	r3, [r2]
+  89:Generated_Source\PSoC5/COUNTER_ENC.c ****             #endif /* 0 != COUNTER_ENC_CAPTURE_MODE */ 
+  90:Generated_Source\PSoC5/COUNTER_ENC.c ****             
+  91:Generated_Source\PSoC5/COUNTER_ENC.c ****             #endif /* (!COUNTER_ENC_ControlRegRemoved) */
+  92:Generated_Source\PSoC5/COUNTER_ENC.c ****         #endif /* (COUNTER_ENC_UsingFixedFunction) */
+  93:Generated_Source\PSoC5/COUNTER_ENC.c ****         
+  94:Generated_Source\PSoC5/COUNTER_ENC.c ****         /* Clear all data in the FIFO's */
+  95:Generated_Source\PSoC5/COUNTER_ENC.c ****         #if (!COUNTER_ENC_UsingFixedFunction)
+  96:Generated_Source\PSoC5/COUNTER_ENC.c ****             COUNTER_ENC_ClearFIFO();
+  66              		.loc 1 96 0
+  67 002a FFF7FEFF 		bl	COUNTER_ENC_ClearFIFO
+  97:Generated_Source\PSoC5/COUNTER_ENC.c ****         #endif /* (!COUNTER_ENC_UsingFixedFunction) */
+  98:Generated_Source\PSoC5/COUNTER_ENC.c ****         
+  99:Generated_Source\PSoC5/COUNTER_ENC.c ****         /* Set Initial values from Configuration */
+ 100:Generated_Source\PSoC5/COUNTER_ENC.c ****         COUNTER_ENC_WritePeriod(COUNTER_ENC_INIT_PERIOD_VALUE);
+  68              		.loc 1 100 0
+  69 002e 6020     		movs	r0, #96
+  70 0030 FFF7FEFF 		bl	COUNTER_ENC_WritePeriod
+ 101:Generated_Source\PSoC5/COUNTER_ENC.c ****         #if (!(COUNTER_ENC_UsingFixedFunction && (CY_PSOC5A)))
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 4
+
+
+ 102:Generated_Source\PSoC5/COUNTER_ENC.c ****             COUNTER_ENC_WriteCounter(COUNTER_ENC_INIT_COUNTER_VALUE);
+  71              		.loc 1 102 0
+  72 0034 0020     		movs	r0, #0
+  73 0036 FFF7FEFF 		bl	COUNTER_ENC_WriteCounter
+ 103:Generated_Source\PSoC5/COUNTER_ENC.c ****         #endif /* (!(COUNTER_ENC_UsingFixedFunction && (CY_PSOC5A))) */
+ 104:Generated_Source\PSoC5/COUNTER_ENC.c ****         COUNTER_ENC_SetInterruptMode(COUNTER_ENC_INIT_INTERRUPTS_MASK);
+  74              		.loc 1 104 0
+  75 003a 0020     		movs	r0, #0
+  76 003c FFF7FEFF 		bl	COUNTER_ENC_SetInterruptMode
+ 105:Generated_Source\PSoC5/COUNTER_ENC.c ****         
+ 106:Generated_Source\PSoC5/COUNTER_ENC.c ****         #if (!COUNTER_ENC_UsingFixedFunction)
+ 107:Generated_Source\PSoC5/COUNTER_ENC.c ****             /* Read the status register to clear the unwanted interrupts */
+ 108:Generated_Source\PSoC5/COUNTER_ENC.c ****             (void)COUNTER_ENC_ReadStatusRegister();
+  77              		.loc 1 108 0
+  78 0040 FFF7FEFF 		bl	COUNTER_ENC_ReadStatusRegister
+ 109:Generated_Source\PSoC5/COUNTER_ENC.c ****             /* Set the compare value (only available to non-fixed function implementation */
+ 110:Generated_Source\PSoC5/COUNTER_ENC.c ****             COUNTER_ENC_WriteCompare(COUNTER_ENC_INIT_COMPARE_VALUE);
+  79              		.loc 1 110 0
+  80 0044 0020     		movs	r0, #0
+  81 0046 FFF7FEFF 		bl	COUNTER_ENC_WriteCompare
+ 111:Generated_Source\PSoC5/COUNTER_ENC.c ****             /* Use the interrupt output of the status register for IRQ output */
+ 112:Generated_Source\PSoC5/COUNTER_ENC.c ****             
+ 113:Generated_Source\PSoC5/COUNTER_ENC.c ****             /* CyEnterCriticalRegion and CyExitCriticalRegion are used to mark following region cri
+ 114:Generated_Source\PSoC5/COUNTER_ENC.c ****             /* Enter Critical Region*/
+ 115:Generated_Source\PSoC5/COUNTER_ENC.c ****             COUNTER_ENC_interruptState = CyEnterCriticalSection();
+  82              		.loc 1 115 0
+  83 004a FFF7FEFF 		bl	CyEnterCriticalSection
+  84 004e 0346     		mov	r3, r0
+  85 0050 BB71     		strb	r3, [r7, #6]
+ 116:Generated_Source\PSoC5/COUNTER_ENC.c ****             
+ 117:Generated_Source\PSoC5/COUNTER_ENC.c ****             COUNTER_ENC_STATUS_AUX_CTRL |= COUNTER_ENC_STATUS_ACTL_INT_EN_MASK;
+  86              		.loc 1 117 0
+  87 0052 094A     		ldr	r2, .L2+4
+  88 0054 084B     		ldr	r3, .L2+4
+  89 0056 1B78     		ldrb	r3, [r3]
+  90 0058 DBB2     		uxtb	r3, r3
+  91 005a 43F01003 		orr	r3, r3, #16
+  92 005e DBB2     		uxtb	r3, r3
+  93 0060 1370     		strb	r3, [r2]
+ 118:Generated_Source\PSoC5/COUNTER_ENC.c ****             
+ 119:Generated_Source\PSoC5/COUNTER_ENC.c ****             /* Exit Critical Region*/
+ 120:Generated_Source\PSoC5/COUNTER_ENC.c ****             CyExitCriticalSection(COUNTER_ENC_interruptState);
+  94              		.loc 1 120 0
+  95 0062 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+  96 0064 1846     		mov	r0, r3
+  97 0066 FFF7FEFF 		bl	CyExitCriticalSection
+ 121:Generated_Source\PSoC5/COUNTER_ENC.c ****             
+ 122:Generated_Source\PSoC5/COUNTER_ENC.c ****         #endif /* (!COUNTER_ENC_UsingFixedFunction) */
+ 123:Generated_Source\PSoC5/COUNTER_ENC.c **** }
+  98              		.loc 1 123 0
+  99 006a 00BF     		nop
+ 100 006c 0837     		adds	r7, r7, #8
+ 101              		.cfi_def_cfa_offset 8
+ 102 006e BD46     		mov	sp, r7
+ 103              		.cfi_def_cfa_register 13
+ 104              		@ sp needed
+ 105 0070 80BD     		pop	{r7, pc}
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 5
+
+
+ 106              	.L3:
+ 107 0072 00BF     		.align	2
+ 108              	.L2:
+ 109 0074 76650040 		.word	1073767798
+ 110 0078 96640040 		.word	1073767574
+ 111              		.cfi_endproc
+ 112              	.LFE0:
+ 113              		.size	COUNTER_ENC_Init, .-COUNTER_ENC_Init
+ 114              		.section	.text.COUNTER_ENC_Enable,"ax",%progbits
+ 115              		.align	2
+ 116              		.global	COUNTER_ENC_Enable
+ 117              		.thumb
+ 118              		.thumb_func
+ 119              		.type	COUNTER_ENC_Enable, %function
+ 120              	COUNTER_ENC_Enable:
+ 121              	.LFB1:
+ 124:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 125:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 126:Generated_Source\PSoC5/COUNTER_ENC.c **** /*******************************************************************************
+ 127:Generated_Source\PSoC5/COUNTER_ENC.c **** * Function Name: COUNTER_ENC_Enable
+ 128:Generated_Source\PSoC5/COUNTER_ENC.c **** ********************************************************************************
+ 129:Generated_Source\PSoC5/COUNTER_ENC.c **** * Summary:
+ 130:Generated_Source\PSoC5/COUNTER_ENC.c **** *     Enable the Counter
+ 131:Generated_Source\PSoC5/COUNTER_ENC.c **** * 
+ 132:Generated_Source\PSoC5/COUNTER_ENC.c **** * Parameters:  
+ 133:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void  
+ 134:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 135:Generated_Source\PSoC5/COUNTER_ENC.c **** * Return: 
+ 136:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void
+ 137:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 138:Generated_Source\PSoC5/COUNTER_ENC.c **** * Side Effects: 
+ 139:Generated_Source\PSoC5/COUNTER_ENC.c **** *   If the Enable mode is set to Hardware only then this function has no effect 
+ 140:Generated_Source\PSoC5/COUNTER_ENC.c **** *   on the operation of the counter.
+ 141:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 142:Generated_Source\PSoC5/COUNTER_ENC.c **** *******************************************************************************/
+ 143:Generated_Source\PSoC5/COUNTER_ENC.c **** void COUNTER_ENC_Enable(void) 
+ 144:Generated_Source\PSoC5/COUNTER_ENC.c **** {
+ 122              		.loc 1 144 0
+ 123              		.cfi_startproc
+ 124              		@ args = 0, pretend = 0, frame = 0
+ 125              		@ frame_needed = 1, uses_anonymous_args = 0
+ 126              		@ link register save eliminated.
+ 127 0000 80B4     		push	{r7}
+ 128              		.cfi_def_cfa_offset 4
+ 129              		.cfi_offset 7, -4
+ 130 0002 00AF     		add	r7, sp, #0
+ 131              		.cfi_def_cfa_register 7
+ 145:Generated_Source\PSoC5/COUNTER_ENC.c ****     /* Globally Enable the Fixed Function Block chosen */
+ 146:Generated_Source\PSoC5/COUNTER_ENC.c ****     #if (COUNTER_ENC_UsingFixedFunction)
+ 147:Generated_Source\PSoC5/COUNTER_ENC.c ****         COUNTER_ENC_GLOBAL_ENABLE |= COUNTER_ENC_BLOCK_EN_MASK;
+ 148:Generated_Source\PSoC5/COUNTER_ENC.c ****         COUNTER_ENC_GLOBAL_STBY_ENABLE |= COUNTER_ENC_BLOCK_STBY_EN_MASK;
+ 149:Generated_Source\PSoC5/COUNTER_ENC.c ****     #endif /* (COUNTER_ENC_UsingFixedFunction) */  
+ 150:Generated_Source\PSoC5/COUNTER_ENC.c ****         
+ 151:Generated_Source\PSoC5/COUNTER_ENC.c ****     /* Enable the counter from the control register  */
+ 152:Generated_Source\PSoC5/COUNTER_ENC.c ****     /* If Fixed Function then make sure Mode is set correctly */
+ 153:Generated_Source\PSoC5/COUNTER_ENC.c ****     /* else make sure reset is clear */
+ 154:Generated_Source\PSoC5/COUNTER_ENC.c ****     #if(!COUNTER_ENC_ControlRegRemoved || COUNTER_ENC_UsingFixedFunction)
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 6
+
+
+ 155:Generated_Source\PSoC5/COUNTER_ENC.c ****         COUNTER_ENC_CONTROL |= COUNTER_ENC_CTRL_ENABLE;                
+ 132              		.loc 1 155 0
+ 133 0004 054A     		ldr	r2, .L5
+ 134 0006 054B     		ldr	r3, .L5
+ 135 0008 1B78     		ldrb	r3, [r3]
+ 136 000a DBB2     		uxtb	r3, r3
+ 137 000c 63F07F03 		orn	r3, r3, #127
+ 138 0010 DBB2     		uxtb	r3, r3
+ 139 0012 1370     		strb	r3, [r2]
+ 156:Generated_Source\PSoC5/COUNTER_ENC.c ****     #endif /* (!COUNTER_ENC_ControlRegRemoved || COUNTER_ENC_UsingFixedFunction) */
+ 157:Generated_Source\PSoC5/COUNTER_ENC.c ****     
+ 158:Generated_Source\PSoC5/COUNTER_ENC.c **** }
+ 140              		.loc 1 158 0
+ 141 0014 00BF     		nop
+ 142 0016 BD46     		mov	sp, r7
+ 143              		.cfi_def_cfa_register 13
+ 144              		@ sp needed
+ 145 0018 80BC     		pop	{r7}
+ 146              		.cfi_restore 7
+ 147              		.cfi_def_cfa_offset 0
+ 148 001a 7047     		bx	lr
+ 149              	.L6:
+ 150              		.align	2
+ 151              	.L5:
+ 152 001c 76650040 		.word	1073767798
+ 153              		.cfi_endproc
+ 154              	.LFE1:
+ 155              		.size	COUNTER_ENC_Enable, .-COUNTER_ENC_Enable
+ 156              		.section	.text.COUNTER_ENC_Start,"ax",%progbits
+ 157              		.align	2
+ 158              		.global	COUNTER_ENC_Start
+ 159              		.thumb
+ 160              		.thumb_func
+ 161              		.type	COUNTER_ENC_Start, %function
+ 162              	COUNTER_ENC_Start:
+ 163              	.LFB2:
+ 159:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 160:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 161:Generated_Source\PSoC5/COUNTER_ENC.c **** /*******************************************************************************
+ 162:Generated_Source\PSoC5/COUNTER_ENC.c **** * Function Name: COUNTER_ENC_Start
+ 163:Generated_Source\PSoC5/COUNTER_ENC.c **** ********************************************************************************
+ 164:Generated_Source\PSoC5/COUNTER_ENC.c **** * Summary:
+ 165:Generated_Source\PSoC5/COUNTER_ENC.c **** *  Enables the counter for operation 
+ 166:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 167:Generated_Source\PSoC5/COUNTER_ENC.c **** * Parameters:  
+ 168:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void  
+ 169:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 170:Generated_Source\PSoC5/COUNTER_ENC.c **** * Return: 
+ 171:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void
+ 172:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 173:Generated_Source\PSoC5/COUNTER_ENC.c **** * Global variables:
+ 174:Generated_Source\PSoC5/COUNTER_ENC.c **** *  COUNTER_ENC_initVar: Is modified when this function is called for the  
+ 175:Generated_Source\PSoC5/COUNTER_ENC.c **** *   first time. Is used to ensure that initialization happens only once.
+ 176:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 177:Generated_Source\PSoC5/COUNTER_ENC.c **** *******************************************************************************/
+ 178:Generated_Source\PSoC5/COUNTER_ENC.c **** void COUNTER_ENC_Start(void) 
+ 179:Generated_Source\PSoC5/COUNTER_ENC.c **** {
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 7
+
+
+ 164              		.loc 1 179 0
+ 165              		.cfi_startproc
+ 166              		@ args = 0, pretend = 0, frame = 0
+ 167              		@ frame_needed = 1, uses_anonymous_args = 0
+ 168 0000 80B5     		push	{r7, lr}
+ 169              		.cfi_def_cfa_offset 8
+ 170              		.cfi_offset 7, -8
+ 171              		.cfi_offset 14, -4
+ 172 0002 00AF     		add	r7, sp, #0
+ 173              		.cfi_def_cfa_register 7
+ 180:Generated_Source\PSoC5/COUNTER_ENC.c ****     if(COUNTER_ENC_initVar == 0u)
+ 174              		.loc 1 180 0
+ 175 0004 064B     		ldr	r3, .L9
+ 176 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 177 0008 002B     		cmp	r3, #0
+ 178 000a 04D1     		bne	.L8
+ 181:Generated_Source\PSoC5/COUNTER_ENC.c ****     {
+ 182:Generated_Source\PSoC5/COUNTER_ENC.c ****         COUNTER_ENC_Init();
+ 179              		.loc 1 182 0
+ 180 000c FFF7FEFF 		bl	COUNTER_ENC_Init
+ 183:Generated_Source\PSoC5/COUNTER_ENC.c ****         
+ 184:Generated_Source\PSoC5/COUNTER_ENC.c ****         COUNTER_ENC_initVar = 1u; /* Clear this bit for Initialization */        
+ 181              		.loc 1 184 0
+ 182 0010 034B     		ldr	r3, .L9
+ 183 0012 0122     		movs	r2, #1
+ 184 0014 1A70     		strb	r2, [r3]
+ 185              	.L8:
+ 185:Generated_Source\PSoC5/COUNTER_ENC.c ****     }
+ 186:Generated_Source\PSoC5/COUNTER_ENC.c ****     
+ 187:Generated_Source\PSoC5/COUNTER_ENC.c ****     /* Enable the Counter */
+ 188:Generated_Source\PSoC5/COUNTER_ENC.c ****     COUNTER_ENC_Enable();        
+ 186              		.loc 1 188 0
+ 187 0016 FFF7FEFF 		bl	COUNTER_ENC_Enable
+ 189:Generated_Source\PSoC5/COUNTER_ENC.c **** }
+ 188              		.loc 1 189 0
+ 189 001a 00BF     		nop
+ 190 001c 80BD     		pop	{r7, pc}
+ 191              	.L10:
+ 192 001e 00BF     		.align	2
+ 193              	.L9:
+ 194 0020 00000000 		.word	COUNTER_ENC_initVar
+ 195              		.cfi_endproc
+ 196              	.LFE2:
+ 197              		.size	COUNTER_ENC_Start, .-COUNTER_ENC_Start
+ 198              		.section	.text.COUNTER_ENC_Stop,"ax",%progbits
+ 199              		.align	2
+ 200              		.global	COUNTER_ENC_Stop
+ 201              		.thumb
+ 202              		.thumb_func
+ 203              		.type	COUNTER_ENC_Stop, %function
+ 204              	COUNTER_ENC_Stop:
+ 205              	.LFB3:
+ 190:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 191:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 192:Generated_Source\PSoC5/COUNTER_ENC.c **** /*******************************************************************************
+ 193:Generated_Source\PSoC5/COUNTER_ENC.c **** * Function Name: COUNTER_ENC_Stop
+ 194:Generated_Source\PSoC5/COUNTER_ENC.c **** ********************************************************************************
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 8
+
+
+ 195:Generated_Source\PSoC5/COUNTER_ENC.c **** * Summary:
+ 196:Generated_Source\PSoC5/COUNTER_ENC.c **** * Halts the counter, but does not change any modes or disable interrupts.
+ 197:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 198:Generated_Source\PSoC5/COUNTER_ENC.c **** * Parameters:  
+ 199:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void  
+ 200:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 201:Generated_Source\PSoC5/COUNTER_ENC.c **** * Return: 
+ 202:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void
+ 203:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 204:Generated_Source\PSoC5/COUNTER_ENC.c **** * Side Effects: If the Enable mode is set to Hardware only then this function
+ 205:Generated_Source\PSoC5/COUNTER_ENC.c **** *               has no effect on the operation of the counter.
+ 206:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 207:Generated_Source\PSoC5/COUNTER_ENC.c **** *******************************************************************************/
+ 208:Generated_Source\PSoC5/COUNTER_ENC.c **** void COUNTER_ENC_Stop(void) 
+ 209:Generated_Source\PSoC5/COUNTER_ENC.c **** {
+ 206              		.loc 1 209 0
+ 207              		.cfi_startproc
+ 208              		@ args = 0, pretend = 0, frame = 0
+ 209              		@ frame_needed = 1, uses_anonymous_args = 0
+ 210              		@ link register save eliminated.
+ 211 0000 80B4     		push	{r7}
+ 212              		.cfi_def_cfa_offset 4
+ 213              		.cfi_offset 7, -4
+ 214 0002 00AF     		add	r7, sp, #0
+ 215              		.cfi_def_cfa_register 7
+ 210:Generated_Source\PSoC5/COUNTER_ENC.c ****     /* Disable Counter */
+ 211:Generated_Source\PSoC5/COUNTER_ENC.c ****     #if(!COUNTER_ENC_ControlRegRemoved || COUNTER_ENC_UsingFixedFunction)
+ 212:Generated_Source\PSoC5/COUNTER_ENC.c ****         COUNTER_ENC_CONTROL &= ((uint8)(~COUNTER_ENC_CTRL_ENABLE));        
+ 216              		.loc 1 212 0
+ 217 0004 054A     		ldr	r2, .L12
+ 218 0006 054B     		ldr	r3, .L12
+ 219 0008 1B78     		ldrb	r3, [r3]
+ 220 000a DBB2     		uxtb	r3, r3
+ 221 000c 03F07F03 		and	r3, r3, #127
+ 222 0010 DBB2     		uxtb	r3, r3
+ 223 0012 1370     		strb	r3, [r2]
+ 213:Generated_Source\PSoC5/COUNTER_ENC.c ****     #endif /* (!COUNTER_ENC_ControlRegRemoved || COUNTER_ENC_UsingFixedFunction) */
+ 214:Generated_Source\PSoC5/COUNTER_ENC.c ****     
+ 215:Generated_Source\PSoC5/COUNTER_ENC.c ****     /* Globally disable the Fixed Function Block chosen */
+ 216:Generated_Source\PSoC5/COUNTER_ENC.c ****     #if (COUNTER_ENC_UsingFixedFunction)
+ 217:Generated_Source\PSoC5/COUNTER_ENC.c ****         COUNTER_ENC_GLOBAL_ENABLE &= ((uint8)(~COUNTER_ENC_BLOCK_EN_MASK));
+ 218:Generated_Source\PSoC5/COUNTER_ENC.c ****         COUNTER_ENC_GLOBAL_STBY_ENABLE &= ((uint8)(~COUNTER_ENC_BLOCK_STBY_EN_MASK));
+ 219:Generated_Source\PSoC5/COUNTER_ENC.c ****     #endif /* (COUNTER_ENC_UsingFixedFunction) */
+ 220:Generated_Source\PSoC5/COUNTER_ENC.c **** }
+ 224              		.loc 1 220 0
+ 225 0014 00BF     		nop
+ 226 0016 BD46     		mov	sp, r7
+ 227              		.cfi_def_cfa_register 13
+ 228              		@ sp needed
+ 229 0018 80BC     		pop	{r7}
+ 230              		.cfi_restore 7
+ 231              		.cfi_def_cfa_offset 0
+ 232 001a 7047     		bx	lr
+ 233              	.L13:
+ 234              		.align	2
+ 235              	.L12:
+ 236 001c 76650040 		.word	1073767798
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 9
+
+
+ 237              		.cfi_endproc
+ 238              	.LFE3:
+ 239              		.size	COUNTER_ENC_Stop, .-COUNTER_ENC_Stop
+ 240              		.section	.text.COUNTER_ENC_SetInterruptMode,"ax",%progbits
+ 241              		.align	2
+ 242              		.global	COUNTER_ENC_SetInterruptMode
+ 243              		.thumb
+ 244              		.thumb_func
+ 245              		.type	COUNTER_ENC_SetInterruptMode, %function
+ 246              	COUNTER_ENC_SetInterruptMode:
+ 247              	.LFB4:
+ 221:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 222:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 223:Generated_Source\PSoC5/COUNTER_ENC.c **** /*******************************************************************************
+ 224:Generated_Source\PSoC5/COUNTER_ENC.c **** * Function Name: COUNTER_ENC_SetInterruptMode
+ 225:Generated_Source\PSoC5/COUNTER_ENC.c **** ********************************************************************************
+ 226:Generated_Source\PSoC5/COUNTER_ENC.c **** * Summary:
+ 227:Generated_Source\PSoC5/COUNTER_ENC.c **** * Configures which interrupt sources are enabled to generate the final interrupt
+ 228:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 229:Generated_Source\PSoC5/COUNTER_ENC.c **** * Parameters:  
+ 230:Generated_Source\PSoC5/COUNTER_ENC.c **** *  InterruptsMask: This parameter is an or'd collection of the status bits
+ 231:Generated_Source\PSoC5/COUNTER_ENC.c **** *                   which will be allowed to generate the counters interrupt.   
+ 232:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 233:Generated_Source\PSoC5/COUNTER_ENC.c **** * Return: 
+ 234:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void
+ 235:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 236:Generated_Source\PSoC5/COUNTER_ENC.c **** *******************************************************************************/
+ 237:Generated_Source\PSoC5/COUNTER_ENC.c **** void COUNTER_ENC_SetInterruptMode(uint8 interruptsMask) 
+ 238:Generated_Source\PSoC5/COUNTER_ENC.c **** {
+ 248              		.loc 1 238 0
+ 249              		.cfi_startproc
+ 250              		@ args = 0, pretend = 0, frame = 8
+ 251              		@ frame_needed = 1, uses_anonymous_args = 0
+ 252              		@ link register save eliminated.
+ 253 0000 80B4     		push	{r7}
+ 254              		.cfi_def_cfa_offset 4
+ 255              		.cfi_offset 7, -4
+ 256 0002 83B0     		sub	sp, sp, #12
+ 257              		.cfi_def_cfa_offset 16
+ 258 0004 00AF     		add	r7, sp, #0
+ 259              		.cfi_def_cfa_register 7
+ 260 0006 0346     		mov	r3, r0
+ 261 0008 FB71     		strb	r3, [r7, #7]
+ 239:Generated_Source\PSoC5/COUNTER_ENC.c ****     COUNTER_ENC_STATUS_MASK = interruptsMask;
+ 262              		.loc 1 239 0
+ 263 000a 044A     		ldr	r2, .L15
+ 264 000c FB79     		ldrb	r3, [r7, #7]
+ 265 000e 1370     		strb	r3, [r2]
+ 240:Generated_Source\PSoC5/COUNTER_ENC.c **** }
+ 266              		.loc 1 240 0
+ 267 0010 00BF     		nop
+ 268 0012 0C37     		adds	r7, r7, #12
+ 269              		.cfi_def_cfa_offset 4
+ 270 0014 BD46     		mov	sp, r7
+ 271              		.cfi_def_cfa_register 13
+ 272              		@ sp needed
+ 273 0016 80BC     		pop	{r7}
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 10
+
+
+ 274              		.cfi_restore 7
+ 275              		.cfi_def_cfa_offset 0
+ 276 0018 7047     		bx	lr
+ 277              	.L16:
+ 278 001a 00BF     		.align	2
+ 279              	.L15:
+ 280 001c 86640040 		.word	1073767558
+ 281              		.cfi_endproc
+ 282              	.LFE4:
+ 283              		.size	COUNTER_ENC_SetInterruptMode, .-COUNTER_ENC_SetInterruptMode
+ 284              		.section	.text.COUNTER_ENC_ReadStatusRegister,"ax",%progbits
+ 285              		.align	2
+ 286              		.global	COUNTER_ENC_ReadStatusRegister
+ 287              		.thumb
+ 288              		.thumb_func
+ 289              		.type	COUNTER_ENC_ReadStatusRegister, %function
+ 290              	COUNTER_ENC_ReadStatusRegister:
+ 291              	.LFB5:
+ 241:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 242:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 243:Generated_Source\PSoC5/COUNTER_ENC.c **** /*******************************************************************************
+ 244:Generated_Source\PSoC5/COUNTER_ENC.c **** * Function Name: COUNTER_ENC_ReadStatusRegister
+ 245:Generated_Source\PSoC5/COUNTER_ENC.c **** ********************************************************************************
+ 246:Generated_Source\PSoC5/COUNTER_ENC.c **** * Summary:
+ 247:Generated_Source\PSoC5/COUNTER_ENC.c **** *   Reads the status register and returns it's state. This function should use
+ 248:Generated_Source\PSoC5/COUNTER_ENC.c **** *       defined types for the bit-field information as the bits in this
+ 249:Generated_Source\PSoC5/COUNTER_ENC.c **** *       register may be permuteable.
+ 250:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 251:Generated_Source\PSoC5/COUNTER_ENC.c **** * Parameters:  
+ 252:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void
+ 253:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 254:Generated_Source\PSoC5/COUNTER_ENC.c **** * Return: 
+ 255:Generated_Source\PSoC5/COUNTER_ENC.c **** *  (uint8) The contents of the status register
+ 256:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 257:Generated_Source\PSoC5/COUNTER_ENC.c **** * Side Effects:
+ 258:Generated_Source\PSoC5/COUNTER_ENC.c **** *   Status register bits may be clear on read. 
+ 259:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 260:Generated_Source\PSoC5/COUNTER_ENC.c **** *******************************************************************************/
+ 261:Generated_Source\PSoC5/COUNTER_ENC.c **** uint8   COUNTER_ENC_ReadStatusRegister(void) 
+ 262:Generated_Source\PSoC5/COUNTER_ENC.c **** {
+ 292              		.loc 1 262 0
+ 293              		.cfi_startproc
+ 294              		@ args = 0, pretend = 0, frame = 0
+ 295              		@ frame_needed = 1, uses_anonymous_args = 0
+ 296              		@ link register save eliminated.
+ 297 0000 80B4     		push	{r7}
+ 298              		.cfi_def_cfa_offset 4
+ 299              		.cfi_offset 7, -4
+ 300 0002 00AF     		add	r7, sp, #0
+ 301              		.cfi_def_cfa_register 7
+ 263:Generated_Source\PSoC5/COUNTER_ENC.c ****     return COUNTER_ENC_STATUS;
+ 302              		.loc 1 263 0
+ 303 0004 034B     		ldr	r3, .L19
+ 304 0006 1B78     		ldrb	r3, [r3]
+ 305 0008 DBB2     		uxtb	r3, r3
+ 264:Generated_Source\PSoC5/COUNTER_ENC.c **** }
+ 306              		.loc 1 264 0
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 11
+
+
+ 307 000a 1846     		mov	r0, r3
+ 308 000c BD46     		mov	sp, r7
+ 309              		.cfi_def_cfa_register 13
+ 310              		@ sp needed
+ 311 000e 80BC     		pop	{r7}
+ 312              		.cfi_restore 7
+ 313              		.cfi_def_cfa_offset 0
+ 314 0010 7047     		bx	lr
+ 315              	.L20:
+ 316 0012 00BF     		.align	2
+ 317              	.L19:
+ 318 0014 66640040 		.word	1073767526
+ 319              		.cfi_endproc
+ 320              	.LFE5:
+ 321              		.size	COUNTER_ENC_ReadStatusRegister, .-COUNTER_ENC_ReadStatusRegister
+ 322              		.section	.text.COUNTER_ENC_ReadControlRegister,"ax",%progbits
+ 323              		.align	2
+ 324              		.global	COUNTER_ENC_ReadControlRegister
+ 325              		.thumb
+ 326              		.thumb_func
+ 327              		.type	COUNTER_ENC_ReadControlRegister, %function
+ 328              	COUNTER_ENC_ReadControlRegister:
+ 329              	.LFB6:
+ 265:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 266:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 267:Generated_Source\PSoC5/COUNTER_ENC.c **** #if(!COUNTER_ENC_ControlRegRemoved)
+ 268:Generated_Source\PSoC5/COUNTER_ENC.c **** /*******************************************************************************
+ 269:Generated_Source\PSoC5/COUNTER_ENC.c **** * Function Name: COUNTER_ENC_ReadControlRegister
+ 270:Generated_Source\PSoC5/COUNTER_ENC.c **** ********************************************************************************
+ 271:Generated_Source\PSoC5/COUNTER_ENC.c **** * Summary:
+ 272:Generated_Source\PSoC5/COUNTER_ENC.c **** *   Reads the control register and returns it's state. This function should use
+ 273:Generated_Source\PSoC5/COUNTER_ENC.c **** *       defined types for the bit-field information as the bits in this
+ 274:Generated_Source\PSoC5/COUNTER_ENC.c **** *       register may be permuteable.
+ 275:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 276:Generated_Source\PSoC5/COUNTER_ENC.c **** * Parameters:  
+ 277:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void
+ 278:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 279:Generated_Source\PSoC5/COUNTER_ENC.c **** * Return: 
+ 280:Generated_Source\PSoC5/COUNTER_ENC.c **** *  (uint8) The contents of the control register
+ 281:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 282:Generated_Source\PSoC5/COUNTER_ENC.c **** *******************************************************************************/
+ 283:Generated_Source\PSoC5/COUNTER_ENC.c **** uint8   COUNTER_ENC_ReadControlRegister(void) 
+ 284:Generated_Source\PSoC5/COUNTER_ENC.c **** {
+ 330              		.loc 1 284 0
+ 331              		.cfi_startproc
+ 332              		@ args = 0, pretend = 0, frame = 0
+ 333              		@ frame_needed = 1, uses_anonymous_args = 0
+ 334              		@ link register save eliminated.
+ 335 0000 80B4     		push	{r7}
+ 336              		.cfi_def_cfa_offset 4
+ 337              		.cfi_offset 7, -4
+ 338 0002 00AF     		add	r7, sp, #0
+ 339              		.cfi_def_cfa_register 7
+ 285:Generated_Source\PSoC5/COUNTER_ENC.c ****     return COUNTER_ENC_CONTROL;
+ 340              		.loc 1 285 0
+ 341 0004 034B     		ldr	r3, .L23
+ 342 0006 1B78     		ldrb	r3, [r3]
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 12
+
+
+ 343 0008 DBB2     		uxtb	r3, r3
+ 286:Generated_Source\PSoC5/COUNTER_ENC.c **** }
+ 344              		.loc 1 286 0
+ 345 000a 1846     		mov	r0, r3
+ 346 000c BD46     		mov	sp, r7
+ 347              		.cfi_def_cfa_register 13
+ 348              		@ sp needed
+ 349 000e 80BC     		pop	{r7}
+ 350              		.cfi_restore 7
+ 351              		.cfi_def_cfa_offset 0
+ 352 0010 7047     		bx	lr
+ 353              	.L24:
+ 354 0012 00BF     		.align	2
+ 355              	.L23:
+ 356 0014 76650040 		.word	1073767798
+ 357              		.cfi_endproc
+ 358              	.LFE6:
+ 359              		.size	COUNTER_ENC_ReadControlRegister, .-COUNTER_ENC_ReadControlRegister
+ 360              		.section	.text.COUNTER_ENC_WriteControlRegister,"ax",%progbits
+ 361              		.align	2
+ 362              		.global	COUNTER_ENC_WriteControlRegister
+ 363              		.thumb
+ 364              		.thumb_func
+ 365              		.type	COUNTER_ENC_WriteControlRegister, %function
+ 366              	COUNTER_ENC_WriteControlRegister:
+ 367              	.LFB7:
+ 287:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 288:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 289:Generated_Source\PSoC5/COUNTER_ENC.c **** /*******************************************************************************
+ 290:Generated_Source\PSoC5/COUNTER_ENC.c **** * Function Name: COUNTER_ENC_WriteControlRegister
+ 291:Generated_Source\PSoC5/COUNTER_ENC.c **** ********************************************************************************
+ 292:Generated_Source\PSoC5/COUNTER_ENC.c **** * Summary:
+ 293:Generated_Source\PSoC5/COUNTER_ENC.c **** *   Sets the bit-field of the control register.  This function should use
+ 294:Generated_Source\PSoC5/COUNTER_ENC.c **** *       defined types for the bit-field information as the bits in this
+ 295:Generated_Source\PSoC5/COUNTER_ENC.c **** *       register may be permuteable.
+ 296:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 297:Generated_Source\PSoC5/COUNTER_ENC.c **** * Parameters:  
+ 298:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void
+ 299:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 300:Generated_Source\PSoC5/COUNTER_ENC.c **** * Return: 
+ 301:Generated_Source\PSoC5/COUNTER_ENC.c **** *  (uint8) The contents of the control register
+ 302:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 303:Generated_Source\PSoC5/COUNTER_ENC.c **** *******************************************************************************/
+ 304:Generated_Source\PSoC5/COUNTER_ENC.c **** void    COUNTER_ENC_WriteControlRegister(uint8 control) 
+ 305:Generated_Source\PSoC5/COUNTER_ENC.c **** {
+ 368              		.loc 1 305 0
+ 369              		.cfi_startproc
+ 370              		@ args = 0, pretend = 0, frame = 8
+ 371              		@ frame_needed = 1, uses_anonymous_args = 0
+ 372              		@ link register save eliminated.
+ 373 0000 80B4     		push	{r7}
+ 374              		.cfi_def_cfa_offset 4
+ 375              		.cfi_offset 7, -4
+ 376 0002 83B0     		sub	sp, sp, #12
+ 377              		.cfi_def_cfa_offset 16
+ 378 0004 00AF     		add	r7, sp, #0
+ 379              		.cfi_def_cfa_register 7
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 13
+
+
+ 380 0006 0346     		mov	r3, r0
+ 381 0008 FB71     		strb	r3, [r7, #7]
+ 306:Generated_Source\PSoC5/COUNTER_ENC.c ****     COUNTER_ENC_CONTROL = control;
+ 382              		.loc 1 306 0
+ 383 000a 044A     		ldr	r2, .L26
+ 384 000c FB79     		ldrb	r3, [r7, #7]
+ 385 000e 1370     		strb	r3, [r2]
+ 307:Generated_Source\PSoC5/COUNTER_ENC.c **** }
+ 386              		.loc 1 307 0
+ 387 0010 00BF     		nop
+ 388 0012 0C37     		adds	r7, r7, #12
+ 389              		.cfi_def_cfa_offset 4
+ 390 0014 BD46     		mov	sp, r7
+ 391              		.cfi_def_cfa_register 13
+ 392              		@ sp needed
+ 393 0016 80BC     		pop	{r7}
+ 394              		.cfi_restore 7
+ 395              		.cfi_def_cfa_offset 0
+ 396 0018 7047     		bx	lr
+ 397              	.L27:
+ 398 001a 00BF     		.align	2
+ 399              	.L26:
+ 400 001c 76650040 		.word	1073767798
+ 401              		.cfi_endproc
+ 402              	.LFE7:
+ 403              		.size	COUNTER_ENC_WriteControlRegister, .-COUNTER_ENC_WriteControlRegister
+ 404              		.section	.text.COUNTER_ENC_WriteCounter,"ax",%progbits
+ 405              		.align	2
+ 406              		.global	COUNTER_ENC_WriteCounter
+ 407              		.thumb
+ 408              		.thumb_func
+ 409              		.type	COUNTER_ENC_WriteCounter, %function
+ 410              	COUNTER_ENC_WriteCounter:
+ 411              	.LFB8:
+ 308:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 309:Generated_Source\PSoC5/COUNTER_ENC.c **** #endif  /* (!COUNTER_ENC_ControlRegRemoved) */
+ 310:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 311:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 312:Generated_Source\PSoC5/COUNTER_ENC.c **** #if (!(COUNTER_ENC_UsingFixedFunction && (CY_PSOC5A)))
+ 313:Generated_Source\PSoC5/COUNTER_ENC.c **** /*******************************************************************************
+ 314:Generated_Source\PSoC5/COUNTER_ENC.c **** * Function Name: COUNTER_ENC_WriteCounter
+ 315:Generated_Source\PSoC5/COUNTER_ENC.c **** ********************************************************************************
+ 316:Generated_Source\PSoC5/COUNTER_ENC.c **** * Summary:
+ 317:Generated_Source\PSoC5/COUNTER_ENC.c **** *   This funtion is used to set the counter to a specific value
+ 318:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 319:Generated_Source\PSoC5/COUNTER_ENC.c **** * Parameters:  
+ 320:Generated_Source\PSoC5/COUNTER_ENC.c **** *  counter:  New counter value. 
+ 321:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 322:Generated_Source\PSoC5/COUNTER_ENC.c **** * Return: 
+ 323:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void 
+ 324:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 325:Generated_Source\PSoC5/COUNTER_ENC.c **** *******************************************************************************/
+ 326:Generated_Source\PSoC5/COUNTER_ENC.c **** void COUNTER_ENC_WriteCounter(uint8 counter) \
+ 327:Generated_Source\PSoC5/COUNTER_ENC.c ****                                    
+ 328:Generated_Source\PSoC5/COUNTER_ENC.c **** {
+ 412              		.loc 1 328 0
+ 413              		.cfi_startproc
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 14
+
+
+ 414              		@ args = 0, pretend = 0, frame = 8
+ 415              		@ frame_needed = 1, uses_anonymous_args = 0
+ 416              		@ link register save eliminated.
+ 417 0000 80B4     		push	{r7}
+ 418              		.cfi_def_cfa_offset 4
+ 419              		.cfi_offset 7, -4
+ 420 0002 83B0     		sub	sp, sp, #12
+ 421              		.cfi_def_cfa_offset 16
+ 422 0004 00AF     		add	r7, sp, #0
+ 423              		.cfi_def_cfa_register 7
+ 424 0006 0346     		mov	r3, r0
+ 425 0008 FB71     		strb	r3, [r7, #7]
+ 329:Generated_Source\PSoC5/COUNTER_ENC.c ****     #if(COUNTER_ENC_UsingFixedFunction)
+ 330:Generated_Source\PSoC5/COUNTER_ENC.c ****         /* assert if block is already enabled */
+ 331:Generated_Source\PSoC5/COUNTER_ENC.c ****         CYASSERT (0u == (COUNTER_ENC_GLOBAL_ENABLE & COUNTER_ENC_BLOCK_EN_MASK));
+ 332:Generated_Source\PSoC5/COUNTER_ENC.c ****         /* If block is disabled, enable it and then write the counter */
+ 333:Generated_Source\PSoC5/COUNTER_ENC.c ****         COUNTER_ENC_GLOBAL_ENABLE |= COUNTER_ENC_BLOCK_EN_MASK;
+ 334:Generated_Source\PSoC5/COUNTER_ENC.c ****         CY_SET_REG16(COUNTER_ENC_COUNTER_LSB_PTR, (uint16)counter);
+ 335:Generated_Source\PSoC5/COUNTER_ENC.c ****         COUNTER_ENC_GLOBAL_ENABLE &= ((uint8)(~COUNTER_ENC_BLOCK_EN_MASK));
+ 336:Generated_Source\PSoC5/COUNTER_ENC.c ****     #else
+ 337:Generated_Source\PSoC5/COUNTER_ENC.c ****         CY_SET_REG8(COUNTER_ENC_COUNTER_LSB_PTR, counter);
+ 426              		.loc 1 337 0
+ 427 000a 044A     		ldr	r2, .L29
+ 428 000c FB79     		ldrb	r3, [r7, #7]
+ 429 000e 1370     		strb	r3, [r2]
+ 338:Generated_Source\PSoC5/COUNTER_ENC.c ****     #endif /* (COUNTER_ENC_UsingFixedFunction) */
+ 339:Generated_Source\PSoC5/COUNTER_ENC.c **** }
+ 430              		.loc 1 339 0
+ 431 0010 00BF     		nop
+ 432 0012 0C37     		adds	r7, r7, #12
+ 433              		.cfi_def_cfa_offset 4
+ 434 0014 BD46     		mov	sp, r7
+ 435              		.cfi_def_cfa_register 13
+ 436              		@ sp needed
+ 437 0016 80BC     		pop	{r7}
+ 438              		.cfi_restore 7
+ 439              		.cfi_def_cfa_offset 0
+ 440 0018 7047     		bx	lr
+ 441              	.L30:
+ 442 001a 00BF     		.align	2
+ 443              	.L29:
+ 444 001c 06650040 		.word	1073767686
+ 445              		.cfi_endproc
+ 446              	.LFE8:
+ 447              		.size	COUNTER_ENC_WriteCounter, .-COUNTER_ENC_WriteCounter
+ 448              		.section	.text.COUNTER_ENC_ReadCounter,"ax",%progbits
+ 449              		.align	2
+ 450              		.global	COUNTER_ENC_ReadCounter
+ 451              		.thumb
+ 452              		.thumb_func
+ 453              		.type	COUNTER_ENC_ReadCounter, %function
+ 454              	COUNTER_ENC_ReadCounter:
+ 455              	.LFB9:
+ 340:Generated_Source\PSoC5/COUNTER_ENC.c **** #endif /* (!(COUNTER_ENC_UsingFixedFunction && (CY_PSOC5A))) */
+ 341:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 342:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 343:Generated_Source\PSoC5/COUNTER_ENC.c **** /*******************************************************************************
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 15
+
+
+ 344:Generated_Source\PSoC5/COUNTER_ENC.c **** * Function Name: COUNTER_ENC_ReadCounter
+ 345:Generated_Source\PSoC5/COUNTER_ENC.c **** ********************************************************************************
+ 346:Generated_Source\PSoC5/COUNTER_ENC.c **** * Summary:
+ 347:Generated_Source\PSoC5/COUNTER_ENC.c **** * Returns the current value of the counter.  It doesn't matter
+ 348:Generated_Source\PSoC5/COUNTER_ENC.c **** * if the counter is enabled or running.
+ 349:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 350:Generated_Source\PSoC5/COUNTER_ENC.c **** * Parameters:  
+ 351:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void:  
+ 352:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 353:Generated_Source\PSoC5/COUNTER_ENC.c **** * Return: 
+ 354:Generated_Source\PSoC5/COUNTER_ENC.c **** *  (uint8) The present value of the counter.
+ 355:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 356:Generated_Source\PSoC5/COUNTER_ENC.c **** *******************************************************************************/
+ 357:Generated_Source\PSoC5/COUNTER_ENC.c **** uint8 COUNTER_ENC_ReadCounter(void) 
+ 358:Generated_Source\PSoC5/COUNTER_ENC.c **** {
+ 456              		.loc 1 358 0
+ 457              		.cfi_startproc
+ 458              		@ args = 0, pretend = 0, frame = 0
+ 459              		@ frame_needed = 1, uses_anonymous_args = 0
+ 460              		@ link register save eliminated.
+ 461 0000 80B4     		push	{r7}
+ 462              		.cfi_def_cfa_offset 4
+ 463              		.cfi_offset 7, -4
+ 464 0002 00AF     		add	r7, sp, #0
+ 465              		.cfi_def_cfa_register 7
+ 359:Generated_Source\PSoC5/COUNTER_ENC.c ****     /* Force capture by reading Accumulator */
+ 360:Generated_Source\PSoC5/COUNTER_ENC.c ****     /* Must first do a software capture to be able to read the counter */
+ 361:Generated_Source\PSoC5/COUNTER_ENC.c ****     /* It is up to the user code to make sure there isn't already captured data in the FIFO */
+ 362:Generated_Source\PSoC5/COUNTER_ENC.c ****     #if(COUNTER_ENC_UsingFixedFunction)
+ 363:Generated_Source\PSoC5/COUNTER_ENC.c **** 		(void)CY_GET_REG16(COUNTER_ENC_COUNTER_LSB_PTR);
+ 364:Generated_Source\PSoC5/COUNTER_ENC.c **** 	#else
+ 365:Generated_Source\PSoC5/COUNTER_ENC.c **** 		(void)CY_GET_REG8(COUNTER_ENC_COUNTER_LSB_PTR_8BIT);
+ 466              		.loc 1 365 0
+ 467 0004 044B     		ldr	r3, .L33
+ 468 0006 1B78     		ldrb	r3, [r3]
+ 366:Generated_Source\PSoC5/COUNTER_ENC.c **** 	#endif/* (COUNTER_ENC_UsingFixedFunction) */
+ 367:Generated_Source\PSoC5/COUNTER_ENC.c ****     
+ 368:Generated_Source\PSoC5/COUNTER_ENC.c ****     /* Read the data from the FIFO (or capture register for Fixed Function)*/
+ 369:Generated_Source\PSoC5/COUNTER_ENC.c ****     #if(COUNTER_ENC_UsingFixedFunction)
+ 370:Generated_Source\PSoC5/COUNTER_ENC.c ****         return ((uint8)CY_GET_REG16(COUNTER_ENC_STATICCOUNT_LSB_PTR));
+ 371:Generated_Source\PSoC5/COUNTER_ENC.c ****     #else
+ 372:Generated_Source\PSoC5/COUNTER_ENC.c ****         return (CY_GET_REG8(COUNTER_ENC_STATICCOUNT_LSB_PTR));
+ 469              		.loc 1 372 0
+ 470 0008 044B     		ldr	r3, .L33+4
+ 471 000a 1B78     		ldrb	r3, [r3]
+ 472 000c DBB2     		uxtb	r3, r3
+ 373:Generated_Source\PSoC5/COUNTER_ENC.c ****     #endif /* (COUNTER_ENC_UsingFixedFunction) */
+ 374:Generated_Source\PSoC5/COUNTER_ENC.c **** }
+ 473              		.loc 1 374 0
+ 474 000e 1846     		mov	r0, r3
+ 475 0010 BD46     		mov	sp, r7
+ 476              		.cfi_def_cfa_register 13
+ 477              		@ sp needed
+ 478 0012 80BC     		pop	{r7}
+ 479              		.cfi_restore 7
+ 480              		.cfi_def_cfa_offset 0
+ 481 0014 7047     		bx	lr
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 16
+
+
+ 482              	.L34:
+ 483 0016 00BF     		.align	2
+ 484              	.L33:
+ 485 0018 06650040 		.word	1073767686
+ 486 001c 46650040 		.word	1073767750
+ 487              		.cfi_endproc
+ 488              	.LFE9:
+ 489              		.size	COUNTER_ENC_ReadCounter, .-COUNTER_ENC_ReadCounter
+ 490              		.section	.text.COUNTER_ENC_ReadCapture,"ax",%progbits
+ 491              		.align	2
+ 492              		.global	COUNTER_ENC_ReadCapture
+ 493              		.thumb
+ 494              		.thumb_func
+ 495              		.type	COUNTER_ENC_ReadCapture, %function
+ 496              	COUNTER_ENC_ReadCapture:
+ 497              	.LFB10:
+ 375:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 376:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 377:Generated_Source\PSoC5/COUNTER_ENC.c **** /*******************************************************************************
+ 378:Generated_Source\PSoC5/COUNTER_ENC.c **** * Function Name: COUNTER_ENC_ReadCapture
+ 379:Generated_Source\PSoC5/COUNTER_ENC.c **** ********************************************************************************
+ 380:Generated_Source\PSoC5/COUNTER_ENC.c **** * Summary:
+ 381:Generated_Source\PSoC5/COUNTER_ENC.c **** *   This function returns the last value captured.
+ 382:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 383:Generated_Source\PSoC5/COUNTER_ENC.c **** * Parameters:  
+ 384:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void
+ 385:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 386:Generated_Source\PSoC5/COUNTER_ENC.c **** * Return: 
+ 387:Generated_Source\PSoC5/COUNTER_ENC.c **** *  (uint8) Present Capture value.
+ 388:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 389:Generated_Source\PSoC5/COUNTER_ENC.c **** *******************************************************************************/
+ 390:Generated_Source\PSoC5/COUNTER_ENC.c **** uint8 COUNTER_ENC_ReadCapture(void) 
+ 391:Generated_Source\PSoC5/COUNTER_ENC.c **** {
+ 498              		.loc 1 391 0
+ 499              		.cfi_startproc
+ 500              		@ args = 0, pretend = 0, frame = 0
+ 501              		@ frame_needed = 1, uses_anonymous_args = 0
+ 502              		@ link register save eliminated.
+ 503 0000 80B4     		push	{r7}
+ 504              		.cfi_def_cfa_offset 4
+ 505              		.cfi_offset 7, -4
+ 506 0002 00AF     		add	r7, sp, #0
+ 507              		.cfi_def_cfa_register 7
+ 392:Generated_Source\PSoC5/COUNTER_ENC.c ****     #if(COUNTER_ENC_UsingFixedFunction)
+ 393:Generated_Source\PSoC5/COUNTER_ENC.c ****         return ((uint8)CY_GET_REG16(COUNTER_ENC_STATICCOUNT_LSB_PTR));
+ 394:Generated_Source\PSoC5/COUNTER_ENC.c ****     #else
+ 395:Generated_Source\PSoC5/COUNTER_ENC.c ****         return (CY_GET_REG8(COUNTER_ENC_STATICCOUNT_LSB_PTR));
+ 508              		.loc 1 395 0
+ 509 0004 034B     		ldr	r3, .L37
+ 510 0006 1B78     		ldrb	r3, [r3]
+ 511 0008 DBB2     		uxtb	r3, r3
+ 396:Generated_Source\PSoC5/COUNTER_ENC.c ****     #endif /* (COUNTER_ENC_UsingFixedFunction) */
+ 397:Generated_Source\PSoC5/COUNTER_ENC.c **** }
+ 512              		.loc 1 397 0
+ 513 000a 1846     		mov	r0, r3
+ 514 000c BD46     		mov	sp, r7
+ 515              		.cfi_def_cfa_register 13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 17
+
+
+ 516              		@ sp needed
+ 517 000e 80BC     		pop	{r7}
+ 518              		.cfi_restore 7
+ 519              		.cfi_def_cfa_offset 0
+ 520 0010 7047     		bx	lr
+ 521              	.L38:
+ 522 0012 00BF     		.align	2
+ 523              	.L37:
+ 524 0014 46650040 		.word	1073767750
+ 525              		.cfi_endproc
+ 526              	.LFE10:
+ 527              		.size	COUNTER_ENC_ReadCapture, .-COUNTER_ENC_ReadCapture
+ 528              		.section	.text.COUNTER_ENC_WritePeriod,"ax",%progbits
+ 529              		.align	2
+ 530              		.global	COUNTER_ENC_WritePeriod
+ 531              		.thumb
+ 532              		.thumb_func
+ 533              		.type	COUNTER_ENC_WritePeriod, %function
+ 534              	COUNTER_ENC_WritePeriod:
+ 535              	.LFB11:
+ 398:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 399:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 400:Generated_Source\PSoC5/COUNTER_ENC.c **** /*******************************************************************************
+ 401:Generated_Source\PSoC5/COUNTER_ENC.c **** * Function Name: COUNTER_ENC_WritePeriod
+ 402:Generated_Source\PSoC5/COUNTER_ENC.c **** ********************************************************************************
+ 403:Generated_Source\PSoC5/COUNTER_ENC.c **** * Summary:
+ 404:Generated_Source\PSoC5/COUNTER_ENC.c **** * Changes the period of the counter.  The new period 
+ 405:Generated_Source\PSoC5/COUNTER_ENC.c **** * will be loaded the next time terminal count is detected.
+ 406:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 407:Generated_Source\PSoC5/COUNTER_ENC.c **** * Parameters:  
+ 408:Generated_Source\PSoC5/COUNTER_ENC.c **** *  period: (uint8) A value of 0 will result in
+ 409:Generated_Source\PSoC5/COUNTER_ENC.c **** *         the counter remaining at zero.  
+ 410:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 411:Generated_Source\PSoC5/COUNTER_ENC.c **** * Return: 
+ 412:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void
+ 413:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 414:Generated_Source\PSoC5/COUNTER_ENC.c **** *******************************************************************************/
+ 415:Generated_Source\PSoC5/COUNTER_ENC.c **** void COUNTER_ENC_WritePeriod(uint8 period) 
+ 416:Generated_Source\PSoC5/COUNTER_ENC.c **** {
+ 536              		.loc 1 416 0
+ 537              		.cfi_startproc
+ 538              		@ args = 0, pretend = 0, frame = 8
+ 539              		@ frame_needed = 1, uses_anonymous_args = 0
+ 540              		@ link register save eliminated.
+ 541 0000 80B4     		push	{r7}
+ 542              		.cfi_def_cfa_offset 4
+ 543              		.cfi_offset 7, -4
+ 544 0002 83B0     		sub	sp, sp, #12
+ 545              		.cfi_def_cfa_offset 16
+ 546 0004 00AF     		add	r7, sp, #0
+ 547              		.cfi_def_cfa_register 7
+ 548 0006 0346     		mov	r3, r0
+ 549 0008 FB71     		strb	r3, [r7, #7]
+ 417:Generated_Source\PSoC5/COUNTER_ENC.c ****     #if(COUNTER_ENC_UsingFixedFunction)
+ 418:Generated_Source\PSoC5/COUNTER_ENC.c ****         CY_SET_REG16(COUNTER_ENC_PERIOD_LSB_PTR,(uint16)period);
+ 419:Generated_Source\PSoC5/COUNTER_ENC.c ****     #else
+ 420:Generated_Source\PSoC5/COUNTER_ENC.c ****         CY_SET_REG8(COUNTER_ENC_PERIOD_LSB_PTR, period);
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 18
+
+
+ 550              		.loc 1 420 0
+ 551 000a 044A     		ldr	r2, .L40
+ 552 000c FB79     		ldrb	r3, [r7, #7]
+ 553 000e 1370     		strb	r3, [r2]
+ 421:Generated_Source\PSoC5/COUNTER_ENC.c ****     #endif /* (COUNTER_ENC_UsingFixedFunction) */
+ 422:Generated_Source\PSoC5/COUNTER_ENC.c **** }
+ 554              		.loc 1 422 0
+ 555 0010 00BF     		nop
+ 556 0012 0C37     		adds	r7, r7, #12
+ 557              		.cfi_def_cfa_offset 4
+ 558 0014 BD46     		mov	sp, r7
+ 559              		.cfi_def_cfa_register 13
+ 560              		@ sp needed
+ 561 0016 80BC     		pop	{r7}
+ 562              		.cfi_restore 7
+ 563              		.cfi_def_cfa_offset 0
+ 564 0018 7047     		bx	lr
+ 565              	.L41:
+ 566 001a 00BF     		.align	2
+ 567              	.L40:
+ 568 001c 26650040 		.word	1073767718
+ 569              		.cfi_endproc
+ 570              	.LFE11:
+ 571              		.size	COUNTER_ENC_WritePeriod, .-COUNTER_ENC_WritePeriod
+ 572              		.section	.text.COUNTER_ENC_ReadPeriod,"ax",%progbits
+ 573              		.align	2
+ 574              		.global	COUNTER_ENC_ReadPeriod
+ 575              		.thumb
+ 576              		.thumb_func
+ 577              		.type	COUNTER_ENC_ReadPeriod, %function
+ 578              	COUNTER_ENC_ReadPeriod:
+ 579              	.LFB12:
+ 423:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 424:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 425:Generated_Source\PSoC5/COUNTER_ENC.c **** /*******************************************************************************
+ 426:Generated_Source\PSoC5/COUNTER_ENC.c **** * Function Name: COUNTER_ENC_ReadPeriod
+ 427:Generated_Source\PSoC5/COUNTER_ENC.c **** ********************************************************************************
+ 428:Generated_Source\PSoC5/COUNTER_ENC.c **** * Summary:
+ 429:Generated_Source\PSoC5/COUNTER_ENC.c **** * Reads the current period value without affecting counter operation.
+ 430:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 431:Generated_Source\PSoC5/COUNTER_ENC.c **** * Parameters:  
+ 432:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void:  
+ 433:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 434:Generated_Source\PSoC5/COUNTER_ENC.c **** * Return: 
+ 435:Generated_Source\PSoC5/COUNTER_ENC.c **** *  (uint8) Present period value.
+ 436:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 437:Generated_Source\PSoC5/COUNTER_ENC.c **** *******************************************************************************/
+ 438:Generated_Source\PSoC5/COUNTER_ENC.c **** uint8 COUNTER_ENC_ReadPeriod(void) 
+ 439:Generated_Source\PSoC5/COUNTER_ENC.c **** {
+ 580              		.loc 1 439 0
+ 581              		.cfi_startproc
+ 582              		@ args = 0, pretend = 0, frame = 0
+ 583              		@ frame_needed = 1, uses_anonymous_args = 0
+ 584              		@ link register save eliminated.
+ 585 0000 80B4     		push	{r7}
+ 586              		.cfi_def_cfa_offset 4
+ 587              		.cfi_offset 7, -4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 19
+
+
+ 588 0002 00AF     		add	r7, sp, #0
+ 589              		.cfi_def_cfa_register 7
+ 440:Generated_Source\PSoC5/COUNTER_ENC.c ****     #if(COUNTER_ENC_UsingFixedFunction)
+ 441:Generated_Source\PSoC5/COUNTER_ENC.c ****         return ((uint8)CY_GET_REG16(COUNTER_ENC_PERIOD_LSB_PTR));
+ 442:Generated_Source\PSoC5/COUNTER_ENC.c ****     #else
+ 443:Generated_Source\PSoC5/COUNTER_ENC.c ****         return (CY_GET_REG8(COUNTER_ENC_PERIOD_LSB_PTR));
+ 590              		.loc 1 443 0
+ 591 0004 034B     		ldr	r3, .L44
+ 592 0006 1B78     		ldrb	r3, [r3]
+ 593 0008 DBB2     		uxtb	r3, r3
+ 444:Generated_Source\PSoC5/COUNTER_ENC.c ****     #endif /* (COUNTER_ENC_UsingFixedFunction) */
+ 445:Generated_Source\PSoC5/COUNTER_ENC.c **** }
+ 594              		.loc 1 445 0
+ 595 000a 1846     		mov	r0, r3
+ 596 000c BD46     		mov	sp, r7
+ 597              		.cfi_def_cfa_register 13
+ 598              		@ sp needed
+ 599 000e 80BC     		pop	{r7}
+ 600              		.cfi_restore 7
+ 601              		.cfi_def_cfa_offset 0
+ 602 0010 7047     		bx	lr
+ 603              	.L45:
+ 604 0012 00BF     		.align	2
+ 605              	.L44:
+ 606 0014 26650040 		.word	1073767718
+ 607              		.cfi_endproc
+ 608              	.LFE12:
+ 609              		.size	COUNTER_ENC_ReadPeriod, .-COUNTER_ENC_ReadPeriod
+ 610              		.section	.text.COUNTER_ENC_WriteCompare,"ax",%progbits
+ 611              		.align	2
+ 612              		.global	COUNTER_ENC_WriteCompare
+ 613              		.thumb
+ 614              		.thumb_func
+ 615              		.type	COUNTER_ENC_WriteCompare, %function
+ 616              	COUNTER_ENC_WriteCompare:
+ 617              	.LFB13:
+ 446:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 447:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 448:Generated_Source\PSoC5/COUNTER_ENC.c **** #if (!COUNTER_ENC_UsingFixedFunction)
+ 449:Generated_Source\PSoC5/COUNTER_ENC.c **** /*******************************************************************************
+ 450:Generated_Source\PSoC5/COUNTER_ENC.c **** * Function Name: COUNTER_ENC_WriteCompare
+ 451:Generated_Source\PSoC5/COUNTER_ENC.c **** ********************************************************************************
+ 452:Generated_Source\PSoC5/COUNTER_ENC.c **** * Summary:
+ 453:Generated_Source\PSoC5/COUNTER_ENC.c **** * Changes the compare value.  The compare output will 
+ 454:Generated_Source\PSoC5/COUNTER_ENC.c **** * reflect the new value on the next UDB clock.  The compare output will be 
+ 455:Generated_Source\PSoC5/COUNTER_ENC.c **** * driven high when the present counter value compares true based on the 
+ 456:Generated_Source\PSoC5/COUNTER_ENC.c **** * configured compare mode setting. 
+ 457:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 458:Generated_Source\PSoC5/COUNTER_ENC.c **** * Parameters:  
+ 459:Generated_Source\PSoC5/COUNTER_ENC.c **** *  Compare:  New compare value. 
+ 460:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 461:Generated_Source\PSoC5/COUNTER_ENC.c **** * Return: 
+ 462:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void
+ 463:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 464:Generated_Source\PSoC5/COUNTER_ENC.c **** *******************************************************************************/
+ 465:Generated_Source\PSoC5/COUNTER_ENC.c **** void COUNTER_ENC_WriteCompare(uint8 compare) \
+ 466:Generated_Source\PSoC5/COUNTER_ENC.c ****                                    
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 20
+
+
+ 467:Generated_Source\PSoC5/COUNTER_ENC.c **** {
+ 618              		.loc 1 467 0
+ 619              		.cfi_startproc
+ 620              		@ args = 0, pretend = 0, frame = 8
+ 621              		@ frame_needed = 1, uses_anonymous_args = 0
+ 622              		@ link register save eliminated.
+ 623 0000 80B4     		push	{r7}
+ 624              		.cfi_def_cfa_offset 4
+ 625              		.cfi_offset 7, -4
+ 626 0002 83B0     		sub	sp, sp, #12
+ 627              		.cfi_def_cfa_offset 16
+ 628 0004 00AF     		add	r7, sp, #0
+ 629              		.cfi_def_cfa_register 7
+ 630 0006 0346     		mov	r3, r0
+ 631 0008 FB71     		strb	r3, [r7, #7]
+ 468:Generated_Source\PSoC5/COUNTER_ENC.c ****     #if(COUNTER_ENC_UsingFixedFunction)
+ 469:Generated_Source\PSoC5/COUNTER_ENC.c ****         CY_SET_REG16(COUNTER_ENC_COMPARE_LSB_PTR, (uint16)compare);
+ 470:Generated_Source\PSoC5/COUNTER_ENC.c ****     #else
+ 471:Generated_Source\PSoC5/COUNTER_ENC.c ****         CY_SET_REG8(COUNTER_ENC_COMPARE_LSB_PTR, compare);
+ 632              		.loc 1 471 0
+ 633 000a 044A     		ldr	r2, .L47
+ 634 000c FB79     		ldrb	r3, [r7, #7]
+ 635 000e 1370     		strb	r3, [r2]
+ 472:Generated_Source\PSoC5/COUNTER_ENC.c ****     #endif /* (COUNTER_ENC_UsingFixedFunction) */
+ 473:Generated_Source\PSoC5/COUNTER_ENC.c **** }
+ 636              		.loc 1 473 0
+ 637 0010 00BF     		nop
+ 638 0012 0C37     		adds	r7, r7, #12
+ 639              		.cfi_def_cfa_offset 4
+ 640 0014 BD46     		mov	sp, r7
+ 641              		.cfi_def_cfa_register 13
+ 642              		@ sp needed
+ 643 0016 80BC     		pop	{r7}
+ 644              		.cfi_restore 7
+ 645              		.cfi_def_cfa_offset 0
+ 646 0018 7047     		bx	lr
+ 647              	.L48:
+ 648 001a 00BF     		.align	2
+ 649              	.L47:
+ 650 001c 36650040 		.word	1073767734
+ 651              		.cfi_endproc
+ 652              	.LFE13:
+ 653              		.size	COUNTER_ENC_WriteCompare, .-COUNTER_ENC_WriteCompare
+ 654              		.section	.text.COUNTER_ENC_ReadCompare,"ax",%progbits
+ 655              		.align	2
+ 656              		.global	COUNTER_ENC_ReadCompare
+ 657              		.thumb
+ 658              		.thumb_func
+ 659              		.type	COUNTER_ENC_ReadCompare, %function
+ 660              	COUNTER_ENC_ReadCompare:
+ 661              	.LFB14:
+ 474:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 475:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 476:Generated_Source\PSoC5/COUNTER_ENC.c **** /*******************************************************************************
+ 477:Generated_Source\PSoC5/COUNTER_ENC.c **** * Function Name: COUNTER_ENC_ReadCompare
+ 478:Generated_Source\PSoC5/COUNTER_ENC.c **** ********************************************************************************
+ 479:Generated_Source\PSoC5/COUNTER_ENC.c **** * Summary:
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 21
+
+
+ 480:Generated_Source\PSoC5/COUNTER_ENC.c **** * Returns the compare value.
+ 481:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 482:Generated_Source\PSoC5/COUNTER_ENC.c **** * Parameters:  
+ 483:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void:
+ 484:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 485:Generated_Source\PSoC5/COUNTER_ENC.c **** * Return: 
+ 486:Generated_Source\PSoC5/COUNTER_ENC.c **** *  (uint8) Present compare value.
+ 487:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 488:Generated_Source\PSoC5/COUNTER_ENC.c **** *******************************************************************************/
+ 489:Generated_Source\PSoC5/COUNTER_ENC.c **** uint8 COUNTER_ENC_ReadCompare(void) 
+ 490:Generated_Source\PSoC5/COUNTER_ENC.c **** {
+ 662              		.loc 1 490 0
+ 663              		.cfi_startproc
+ 664              		@ args = 0, pretend = 0, frame = 0
+ 665              		@ frame_needed = 1, uses_anonymous_args = 0
+ 666              		@ link register save eliminated.
+ 667 0000 80B4     		push	{r7}
+ 668              		.cfi_def_cfa_offset 4
+ 669              		.cfi_offset 7, -4
+ 670 0002 00AF     		add	r7, sp, #0
+ 671              		.cfi_def_cfa_register 7
+ 491:Generated_Source\PSoC5/COUNTER_ENC.c ****     return (CY_GET_REG8(COUNTER_ENC_COMPARE_LSB_PTR));
+ 672              		.loc 1 491 0
+ 673 0004 034B     		ldr	r3, .L51
+ 674 0006 1B78     		ldrb	r3, [r3]
+ 675 0008 DBB2     		uxtb	r3, r3
+ 492:Generated_Source\PSoC5/COUNTER_ENC.c **** }
+ 676              		.loc 1 492 0
+ 677 000a 1846     		mov	r0, r3
+ 678 000c BD46     		mov	sp, r7
+ 679              		.cfi_def_cfa_register 13
+ 680              		@ sp needed
+ 681 000e 80BC     		pop	{r7}
+ 682              		.cfi_restore 7
+ 683              		.cfi_def_cfa_offset 0
+ 684 0010 7047     		bx	lr
+ 685              	.L52:
+ 686 0012 00BF     		.align	2
+ 687              	.L51:
+ 688 0014 36650040 		.word	1073767734
+ 689              		.cfi_endproc
+ 690              	.LFE14:
+ 691              		.size	COUNTER_ENC_ReadCompare, .-COUNTER_ENC_ReadCompare
+ 692              		.section	.text.COUNTER_ENC_ClearFIFO,"ax",%progbits
+ 693              		.align	2
+ 694              		.global	COUNTER_ENC_ClearFIFO
+ 695              		.thumb
+ 696              		.thumb_func
+ 697              		.type	COUNTER_ENC_ClearFIFO, %function
+ 698              	COUNTER_ENC_ClearFIFO:
+ 699              	.LFB15:
+ 493:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 494:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 495:Generated_Source\PSoC5/COUNTER_ENC.c **** #if (COUNTER_ENC_COMPARE_MODE_SOFTWARE)
+ 496:Generated_Source\PSoC5/COUNTER_ENC.c **** /*******************************************************************************
+ 497:Generated_Source\PSoC5/COUNTER_ENC.c **** * Function Name: COUNTER_ENC_SetCompareMode
+ 498:Generated_Source\PSoC5/COUNTER_ENC.c **** ********************************************************************************
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 22
+
+
+ 499:Generated_Source\PSoC5/COUNTER_ENC.c **** * Summary:
+ 500:Generated_Source\PSoC5/COUNTER_ENC.c **** *  Sets the software controlled Compare Mode.
+ 501:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 502:Generated_Source\PSoC5/COUNTER_ENC.c **** * Parameters:
+ 503:Generated_Source\PSoC5/COUNTER_ENC.c **** *  compareMode:  Compare Mode Enumerated Type.
+ 504:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 505:Generated_Source\PSoC5/COUNTER_ENC.c **** * Return:
+ 506:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void
+ 507:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 508:Generated_Source\PSoC5/COUNTER_ENC.c **** *******************************************************************************/
+ 509:Generated_Source\PSoC5/COUNTER_ENC.c **** void COUNTER_ENC_SetCompareMode(uint8 compareMode) 
+ 510:Generated_Source\PSoC5/COUNTER_ENC.c **** {
+ 511:Generated_Source\PSoC5/COUNTER_ENC.c ****     /* Clear the compare mode bits in the control register */
+ 512:Generated_Source\PSoC5/COUNTER_ENC.c ****     COUNTER_ENC_CONTROL &= ((uint8)(~COUNTER_ENC_CTRL_CMPMODE_MASK));
+ 513:Generated_Source\PSoC5/COUNTER_ENC.c ****     
+ 514:Generated_Source\PSoC5/COUNTER_ENC.c ****     /* Write the new setting */
+ 515:Generated_Source\PSoC5/COUNTER_ENC.c ****     COUNTER_ENC_CONTROL |= compareMode;
+ 516:Generated_Source\PSoC5/COUNTER_ENC.c **** }
+ 517:Generated_Source\PSoC5/COUNTER_ENC.c **** #endif  /* (COUNTER_ENC_COMPARE_MODE_SOFTWARE) */
+ 518:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 519:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 520:Generated_Source\PSoC5/COUNTER_ENC.c **** #if (COUNTER_ENC_CAPTURE_MODE_SOFTWARE)
+ 521:Generated_Source\PSoC5/COUNTER_ENC.c **** /*******************************************************************************
+ 522:Generated_Source\PSoC5/COUNTER_ENC.c **** * Function Name: COUNTER_ENC_SetCaptureMode
+ 523:Generated_Source\PSoC5/COUNTER_ENC.c **** ********************************************************************************
+ 524:Generated_Source\PSoC5/COUNTER_ENC.c **** * Summary:
+ 525:Generated_Source\PSoC5/COUNTER_ENC.c **** *  Sets the software controlled Capture Mode.
+ 526:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 527:Generated_Source\PSoC5/COUNTER_ENC.c **** * Parameters:
+ 528:Generated_Source\PSoC5/COUNTER_ENC.c **** *  captureMode:  Capture Mode Enumerated Type.
+ 529:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 530:Generated_Source\PSoC5/COUNTER_ENC.c **** * Return:
+ 531:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void
+ 532:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 533:Generated_Source\PSoC5/COUNTER_ENC.c **** *******************************************************************************/
+ 534:Generated_Source\PSoC5/COUNTER_ENC.c **** void COUNTER_ENC_SetCaptureMode(uint8 captureMode) 
+ 535:Generated_Source\PSoC5/COUNTER_ENC.c **** {
+ 536:Generated_Source\PSoC5/COUNTER_ENC.c ****     /* Clear the capture mode bits in the control register */
+ 537:Generated_Source\PSoC5/COUNTER_ENC.c ****     COUNTER_ENC_CONTROL &= ((uint8)(~COUNTER_ENC_CTRL_CAPMODE_MASK));
+ 538:Generated_Source\PSoC5/COUNTER_ENC.c ****     
+ 539:Generated_Source\PSoC5/COUNTER_ENC.c ****     /* Write the new setting */
+ 540:Generated_Source\PSoC5/COUNTER_ENC.c ****     COUNTER_ENC_CONTROL |= ((uint8)((uint8)captureMode << COUNTER_ENC_CTRL_CAPMODE0_SHIFT));
+ 541:Generated_Source\PSoC5/COUNTER_ENC.c **** }
+ 542:Generated_Source\PSoC5/COUNTER_ENC.c **** #endif  /* (COUNTER_ENC_CAPTURE_MODE_SOFTWARE) */
+ 543:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 544:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 545:Generated_Source\PSoC5/COUNTER_ENC.c **** /*******************************************************************************
+ 546:Generated_Source\PSoC5/COUNTER_ENC.c **** * Function Name: COUNTER_ENC_ClearFIFO
+ 547:Generated_Source\PSoC5/COUNTER_ENC.c **** ********************************************************************************
+ 548:Generated_Source\PSoC5/COUNTER_ENC.c **** * Summary:
+ 549:Generated_Source\PSoC5/COUNTER_ENC.c **** *   This function clears all capture data from the capture FIFO
+ 550:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 551:Generated_Source\PSoC5/COUNTER_ENC.c **** * Parameters:  
+ 552:Generated_Source\PSoC5/COUNTER_ENC.c **** *  void:
+ 553:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 554:Generated_Source\PSoC5/COUNTER_ENC.c **** * Return: 
+ 555:Generated_Source\PSoC5/COUNTER_ENC.c **** *  None
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 23
+
+
+ 556:Generated_Source\PSoC5/COUNTER_ENC.c **** *
+ 557:Generated_Source\PSoC5/COUNTER_ENC.c **** *******************************************************************************/
+ 558:Generated_Source\PSoC5/COUNTER_ENC.c **** void COUNTER_ENC_ClearFIFO(void) 
+ 559:Generated_Source\PSoC5/COUNTER_ENC.c **** {
+ 700              		.loc 1 559 0
+ 701              		.cfi_startproc
+ 702              		@ args = 0, pretend = 0, frame = 0
+ 703              		@ frame_needed = 1, uses_anonymous_args = 0
+ 704 0000 80B5     		push	{r7, lr}
+ 705              		.cfi_def_cfa_offset 8
+ 706              		.cfi_offset 7, -8
+ 707              		.cfi_offset 14, -4
+ 708 0002 00AF     		add	r7, sp, #0
+ 709              		.cfi_def_cfa_register 7
+ 560:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 561:Generated_Source\PSoC5/COUNTER_ENC.c ****     while(0u != (COUNTER_ENC_ReadStatusRegister() & COUNTER_ENC_STATUS_FIFONEMP))
+ 710              		.loc 1 561 0
+ 711 0004 01E0     		b	.L54
+ 712              	.L55:
+ 562:Generated_Source\PSoC5/COUNTER_ENC.c ****     {
+ 563:Generated_Source\PSoC5/COUNTER_ENC.c ****         (void)COUNTER_ENC_ReadCapture();
+ 713              		.loc 1 563 0
+ 714 0006 FFF7FEFF 		bl	COUNTER_ENC_ReadCapture
+ 715              	.L54:
+ 561:Generated_Source\PSoC5/COUNTER_ENC.c ****     {
+ 716              		.loc 1 561 0
+ 717 000a FFF7FEFF 		bl	COUNTER_ENC_ReadStatusRegister
+ 718 000e 0346     		mov	r3, r0
+ 719 0010 03F04003 		and	r3, r3, #64
+ 720 0014 002B     		cmp	r3, #0
+ 721 0016 F6D1     		bne	.L55
+ 564:Generated_Source\PSoC5/COUNTER_ENC.c ****     }
+ 565:Generated_Source\PSoC5/COUNTER_ENC.c **** 
+ 566:Generated_Source\PSoC5/COUNTER_ENC.c **** }
+ 722              		.loc 1 566 0
+ 723 0018 00BF     		nop
+ 724 001a 80BD     		pop	{r7, pc}
+ 725              		.cfi_endproc
+ 726              	.LFE15:
+ 727              		.size	COUNTER_ENC_ClearFIFO, .-COUNTER_ENC_ClearFIFO
+ 728              		.text
+ 729              	.Letext0:
+ 730              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 731              		.section	.debug_info,"",%progbits
+ 732              	.Ldebug_info0:
+ 733 0000 70020000 		.4byte	0x270
+ 734 0004 0400     		.2byte	0x4
+ 735 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 736 000a 04       		.byte	0x4
+ 737 000b 01       		.uleb128 0x1
+ 738 000c 3C000000 		.4byte	.LASF39
+ 739 0010 0C       		.byte	0xc
+ 740 0011 B5020000 		.4byte	.LASF40
+ 741 0015 1D010000 		.4byte	.LASF41
+ 742 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 743 001d 00000000 		.4byte	0
+ 744 0021 00000000 		.4byte	.Ldebug_line0
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 24
+
+
+ 745 0025 02       		.uleb128 0x2
+ 746 0026 01       		.byte	0x1
+ 747 0027 06       		.byte	0x6
+ 748 0028 5C030000 		.4byte	.LASF0
+ 749 002c 02       		.uleb128 0x2
+ 750 002d 01       		.byte	0x1
+ 751 002e 08       		.byte	0x8
+ 752 002f 99010000 		.4byte	.LASF1
+ 753 0033 02       		.uleb128 0x2
+ 754 0034 02       		.byte	0x2
+ 755 0035 05       		.byte	0x5
+ 756 0036 2B030000 		.4byte	.LASF2
+ 757 003a 02       		.uleb128 0x2
+ 758 003b 02       		.byte	0x2
+ 759 003c 07       		.byte	0x7
+ 760 003d 0A010000 		.4byte	.LASF3
+ 761 0041 02       		.uleb128 0x2
+ 762 0042 04       		.byte	0x4
+ 763 0043 05       		.byte	0x5
+ 764 0044 47030000 		.4byte	.LASF4
+ 765 0048 02       		.uleb128 0x2
+ 766 0049 04       		.byte	0x4
+ 767 004a 07       		.byte	0x7
+ 768 004b BD010000 		.4byte	.LASF5
+ 769 004f 02       		.uleb128 0x2
+ 770 0050 08       		.byte	0x8
+ 771 0051 05       		.byte	0x5
+ 772 0052 E8020000 		.4byte	.LASF6
+ 773 0056 02       		.uleb128 0x2
+ 774 0057 08       		.byte	0x8
+ 775 0058 07       		.byte	0x7
+ 776 0059 68020000 		.4byte	.LASF7
+ 777 005d 03       		.uleb128 0x3
+ 778 005e 04       		.byte	0x4
+ 779 005f 05       		.byte	0x5
+ 780 0060 696E7400 		.ascii	"int\000"
+ 781 0064 02       		.uleb128 0x2
+ 782 0065 04       		.byte	0x4
+ 783 0066 07       		.byte	0x7
+ 784 0067 2F020000 		.4byte	.LASF8
+ 785 006b 04       		.uleb128 0x4
+ 786 006c CF010000 		.4byte	.LASF12
+ 787 0070 02       		.byte	0x2
+ 788 0071 E401     		.2byte	0x1e4
+ 789 0073 2C000000 		.4byte	0x2c
+ 790 0077 02       		.uleb128 0x2
+ 791 0078 04       		.byte	0x4
+ 792 0079 04       		.byte	0x4
+ 793 007a 7B010000 		.4byte	.LASF9
+ 794 007e 02       		.uleb128 0x2
+ 795 007f 08       		.byte	0x8
+ 796 0080 04       		.byte	0x4
+ 797 0081 28020000 		.4byte	.LASF10
+ 798 0085 02       		.uleb128 0x2
+ 799 0086 01       		.byte	0x1
+ 800 0087 08       		.byte	0x8
+ 801 0088 F6020000 		.4byte	.LASF11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 25
+
+
+ 802 008c 04       		.uleb128 0x4
+ 803 008d B8010000 		.4byte	.LASF13
+ 804 0091 02       		.byte	0x2
+ 805 0092 8E02     		.2byte	0x28e
+ 806 0094 98000000 		.4byte	0x98
+ 807 0098 05       		.uleb128 0x5
+ 808 0099 6B000000 		.4byte	0x6b
+ 809 009d 02       		.uleb128 0x2
+ 810 009e 08       		.byte	0x8
+ 811 009f 04       		.byte	0x4
+ 812 00a0 50030000 		.4byte	.LASF14
+ 813 00a4 02       		.uleb128 0x2
+ 814 00a5 04       		.byte	0x4
+ 815 00a6 07       		.byte	0x7
+ 816 00a7 DF020000 		.4byte	.LASF15
+ 817 00ab 06       		.uleb128 0x6
+ 818 00ac 9B030000 		.4byte	.LASF21
+ 819 00b0 01       		.byte	0x1
+ 820 00b1 25       		.byte	0x25
+ 821 00b2 00000000 		.4byte	.LFB0
+ 822 00b6 7C000000 		.4byte	.LFE0-.LFB0
+ 823 00ba 01       		.uleb128 0x1
+ 824 00bb 9C       		.byte	0x9c
+ 825 00bc DD000000 		.4byte	0xdd
+ 826 00c0 07       		.uleb128 0x7
+ 827 00c1 DA020000 		.4byte	.LASF16
+ 828 00c5 01       		.byte	0x1
+ 829 00c6 28       		.byte	0x28
+ 830 00c7 6B000000 		.4byte	0x6b
+ 831 00cb 02       		.uleb128 0x2
+ 832 00cc 91       		.byte	0x91
+ 833 00cd 77       		.sleb128 -9
+ 834 00ce 07       		.uleb128 0x7
+ 835 00cf 80030000 		.4byte	.LASF17
+ 836 00d3 01       		.byte	0x1
+ 837 00d4 2D       		.byte	0x2d
+ 838 00d5 6B000000 		.4byte	0x6b
+ 839 00d9 02       		.uleb128 0x2
+ 840 00da 91       		.byte	0x91
+ 841 00db 76       		.sleb128 -10
+ 842 00dc 00       		.byte	0
+ 843 00dd 08       		.uleb128 0x8
+ 844 00de EC010000 		.4byte	.LASF18
+ 845 00e2 01       		.byte	0x1
+ 846 00e3 8F       		.byte	0x8f
+ 847 00e4 00000000 		.4byte	.LFB1
+ 848 00e8 20000000 		.4byte	.LFE1-.LFB1
+ 849 00ec 01       		.uleb128 0x1
+ 850 00ed 9C       		.byte	0x9c
+ 851 00ee 09       		.uleb128 0x9
+ 852 00ef 35030000 		.4byte	.LASF19
+ 853 00f3 01       		.byte	0x1
+ 854 00f4 B2       		.byte	0xb2
+ 855 00f5 00000000 		.4byte	.LFB2
+ 856 00f9 24000000 		.4byte	.LFE2-.LFB2
+ 857 00fd 01       		.uleb128 0x1
+ 858 00fe 9C       		.byte	0x9c
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 26
+
+
+ 859 00ff 08       		.uleb128 0x8
+ 860 0100 A7010000 		.4byte	.LASF20
+ 861 0104 01       		.byte	0x1
+ 862 0105 D0       		.byte	0xd0
+ 863 0106 00000000 		.4byte	.LFB3
+ 864 010a 20000000 		.4byte	.LFE3-.LFB3
+ 865 010e 01       		.uleb128 0x1
+ 866 010f 9C       		.byte	0x9c
+ 867 0110 0A       		.uleb128 0xa
+ 868 0111 1F000000 		.4byte	.LASF22
+ 869 0115 01       		.byte	0x1
+ 870 0116 ED       		.byte	0xed
+ 871 0117 00000000 		.4byte	.LFB4
+ 872 011b 20000000 		.4byte	.LFE4-.LFB4
+ 873 011f 01       		.uleb128 0x1
+ 874 0120 9C       		.byte	0x9c
+ 875 0121 34010000 		.4byte	0x134
+ 876 0125 0B       		.uleb128 0xb
+ 877 0126 DD010000 		.4byte	.LASF26
+ 878 012a 01       		.byte	0x1
+ 879 012b ED       		.byte	0xed
+ 880 012c 6B000000 		.4byte	0x6b
+ 881 0130 02       		.uleb128 0x2
+ 882 0131 91       		.byte	0x91
+ 883 0132 77       		.sleb128 -9
+ 884 0133 00       		.byte	0
+ 885 0134 0C       		.uleb128 0xc
+ 886 0135 00000000 		.4byte	.LASF23
+ 887 0139 01       		.byte	0x1
+ 888 013a 0501     		.2byte	0x105
+ 889 013c 6B000000 		.4byte	0x6b
+ 890 0140 00000000 		.4byte	.LFB5
+ 891 0144 18000000 		.4byte	.LFE5-.LFB5
+ 892 0148 01       		.uleb128 0x1
+ 893 0149 9C       		.byte	0x9c
+ 894 014a 0C       		.uleb128 0xc
+ 895 014b 95020000 		.4byte	.LASF24
+ 896 014f 01       		.byte	0x1
+ 897 0150 1B01     		.2byte	0x11b
+ 898 0152 6B000000 		.4byte	0x6b
+ 899 0156 00000000 		.4byte	.LFB6
+ 900 015a 18000000 		.4byte	.LFE6-.LFB6
+ 901 015e 01       		.uleb128 0x1
+ 902 015f 9C       		.byte	0x9c
+ 903 0160 0D       		.uleb128 0xd
+ 904 0161 FF010000 		.4byte	.LASF25
+ 905 0165 01       		.byte	0x1
+ 906 0166 3001     		.2byte	0x130
+ 907 0168 00000000 		.4byte	.LFB7
+ 908 016c 20000000 		.4byte	.LFE7-.LFB7
+ 909 0170 01       		.uleb128 0x1
+ 910 0171 9C       		.byte	0x9c
+ 911 0172 86010000 		.4byte	0x186
+ 912 0176 0E       		.uleb128 0xe
+ 913 0177 D5010000 		.4byte	.LASF27
+ 914 017b 01       		.byte	0x1
+ 915 017c 3001     		.2byte	0x130
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 27
+
+
+ 916 017e 6B000000 		.4byte	0x6b
+ 917 0182 02       		.uleb128 0x2
+ 918 0183 91       		.byte	0x91
+ 919 0184 77       		.sleb128 -9
+ 920 0185 00       		.byte	0
+ 921 0186 0D       		.uleb128 0xd
+ 922 0187 F1000000 		.4byte	.LASF28
+ 923 018b 01       		.byte	0x1
+ 924 018c 4601     		.2byte	0x146
+ 925 018e 00000000 		.4byte	.LFB8
+ 926 0192 20000000 		.4byte	.LFE8-.LFB8
+ 927 0196 01       		.uleb128 0x1
+ 928 0197 9C       		.byte	0x9c
+ 929 0198 AC010000 		.4byte	0x1ac
+ 930 019c 0E       		.uleb128 0xe
+ 931 019d 20020000 		.4byte	.LASF29
+ 932 01a1 01       		.byte	0x1
+ 933 01a2 4601     		.2byte	0x146
+ 934 01a4 6B000000 		.4byte	0x6b
+ 935 01a8 02       		.uleb128 0x2
+ 936 01a9 91       		.byte	0x91
+ 937 01aa 77       		.sleb128 -9
+ 938 01ab 00       		.byte	0
+ 939 01ac 0C       		.uleb128 0xc
+ 940 01ad 81010000 		.4byte	.LASF30
+ 941 01b1 01       		.byte	0x1
+ 942 01b2 6501     		.2byte	0x165
+ 943 01b4 6B000000 		.4byte	0x6b
+ 944 01b8 00000000 		.4byte	.LFB9
+ 945 01bc 20000000 		.4byte	.LFE9-.LFB9
+ 946 01c0 01       		.uleb128 0x1
+ 947 01c1 9C       		.byte	0x9c
+ 948 01c2 0C       		.uleb128 0xc
+ 949 01c3 D2000000 		.4byte	.LASF31
+ 950 01c7 01       		.byte	0x1
+ 951 01c8 8601     		.2byte	0x186
+ 952 01ca 6B000000 		.4byte	0x6b
+ 953 01ce 00000000 		.4byte	.LFB10
+ 954 01d2 18000000 		.4byte	.LFE10-.LFB10
+ 955 01d6 01       		.uleb128 0x1
+ 956 01d7 9C       		.byte	0x9c
+ 957 01d8 0D       		.uleb128 0xd
+ 958 01d9 50020000 		.4byte	.LASF32
+ 959 01dd 01       		.byte	0x1
+ 960 01de 9F01     		.2byte	0x19f
+ 961 01e0 00000000 		.4byte	.LFB11
+ 962 01e4 20000000 		.4byte	.LFE11-.LFB11
+ 963 01e8 01       		.uleb128 0x1
+ 964 01e9 9C       		.byte	0x9c
+ 965 01ea FE010000 		.4byte	0x1fe
+ 966 01ee 0E       		.uleb128 0xe
+ 967 01ef EA000000 		.4byte	.LASF33
+ 968 01f3 01       		.byte	0x1
+ 969 01f4 9F01     		.2byte	0x19f
+ 970 01f6 6B000000 		.4byte	0x6b
+ 971 01fa 02       		.uleb128 0x2
+ 972 01fb 91       		.byte	0x91
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 28
+
+
+ 973 01fc 77       		.sleb128 -9
+ 974 01fd 00       		.byte	0
+ 975 01fe 0C       		.uleb128 0xc
+ 976 01ff FB020000 		.4byte	.LASF34
+ 977 0203 01       		.byte	0x1
+ 978 0204 B601     		.2byte	0x1b6
+ 979 0206 6B000000 		.4byte	0x6b
+ 980 020a 00000000 		.4byte	.LFB12
+ 981 020e 18000000 		.4byte	.LFE12-.LFB12
+ 982 0212 01       		.uleb128 0x1
+ 983 0213 9C       		.byte	0x9c
+ 984 0214 0D       		.uleb128 0xd
+ 985 0215 12030000 		.4byte	.LASF35
+ 986 0219 01       		.byte	0x1
+ 987 021a D101     		.2byte	0x1d1
+ 988 021c 00000000 		.4byte	.LFB13
+ 989 0220 20000000 		.4byte	.LFE13-.LFB13
+ 990 0224 01       		.uleb128 0x1
+ 991 0225 9C       		.byte	0x9c
+ 992 0226 3A020000 		.4byte	0x23a
+ 993 022a 0E       		.uleb128 0xe
+ 994 022b CA000000 		.4byte	.LASF36
+ 995 022f 01       		.byte	0x1
+ 996 0230 D101     		.2byte	0x1d1
+ 997 0232 6B000000 		.4byte	0x6b
+ 998 0236 02       		.uleb128 0x2
+ 999 0237 91       		.byte	0x91
+ 1000 0238 77       		.sleb128 -9
+ 1001 0239 00       		.byte	0
+ 1002 023a 0C       		.uleb128 0xc
+ 1003 023b 68030000 		.4byte	.LASF37
+ 1004 023f 01       		.byte	0x1
+ 1005 0240 E901     		.2byte	0x1e9
+ 1006 0242 6B000000 		.4byte	0x6b
+ 1007 0246 00000000 		.4byte	.LFB14
+ 1008 024a 18000000 		.4byte	.LFE14-.LFB14
+ 1009 024e 01       		.uleb128 0x1
+ 1010 024f 9C       		.byte	0x9c
+ 1011 0250 0F       		.uleb128 0xf
+ 1012 0251 7F020000 		.4byte	.LASF38
+ 1013 0255 01       		.byte	0x1
+ 1014 0256 2E02     		.2byte	0x22e
+ 1015 0258 00000000 		.4byte	.LFB15
+ 1016 025c 1C000000 		.4byte	.LFE15-.LFB15
+ 1017 0260 01       		.uleb128 0x1
+ 1018 0261 9C       		.byte	0x9c
+ 1019 0262 10       		.uleb128 0x10
+ 1020 0263 3C020000 		.4byte	.LASF42
+ 1021 0267 01       		.byte	0x1
+ 1022 0268 15       		.byte	0x15
+ 1023 0269 6B000000 		.4byte	0x6b
+ 1024 026d 05       		.uleb128 0x5
+ 1025 026e 03       		.byte	0x3
+ 1026 026f 00000000 		.4byte	COUNTER_ENC_initVar
+ 1027 0273 00       		.byte	0
+ 1028              		.section	.debug_abbrev,"",%progbits
+ 1029              	.Ldebug_abbrev0:
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 29
+
+
+ 1030 0000 01       		.uleb128 0x1
+ 1031 0001 11       		.uleb128 0x11
+ 1032 0002 01       		.byte	0x1
+ 1033 0003 25       		.uleb128 0x25
+ 1034 0004 0E       		.uleb128 0xe
+ 1035 0005 13       		.uleb128 0x13
+ 1036 0006 0B       		.uleb128 0xb
+ 1037 0007 03       		.uleb128 0x3
+ 1038 0008 0E       		.uleb128 0xe
+ 1039 0009 1B       		.uleb128 0x1b
+ 1040 000a 0E       		.uleb128 0xe
+ 1041 000b 55       		.uleb128 0x55
+ 1042 000c 17       		.uleb128 0x17
+ 1043 000d 11       		.uleb128 0x11
+ 1044 000e 01       		.uleb128 0x1
+ 1045 000f 10       		.uleb128 0x10
+ 1046 0010 17       		.uleb128 0x17
+ 1047 0011 00       		.byte	0
+ 1048 0012 00       		.byte	0
+ 1049 0013 02       		.uleb128 0x2
+ 1050 0014 24       		.uleb128 0x24
+ 1051 0015 00       		.byte	0
+ 1052 0016 0B       		.uleb128 0xb
+ 1053 0017 0B       		.uleb128 0xb
+ 1054 0018 3E       		.uleb128 0x3e
+ 1055 0019 0B       		.uleb128 0xb
+ 1056 001a 03       		.uleb128 0x3
+ 1057 001b 0E       		.uleb128 0xe
+ 1058 001c 00       		.byte	0
+ 1059 001d 00       		.byte	0
+ 1060 001e 03       		.uleb128 0x3
+ 1061 001f 24       		.uleb128 0x24
+ 1062 0020 00       		.byte	0
+ 1063 0021 0B       		.uleb128 0xb
+ 1064 0022 0B       		.uleb128 0xb
+ 1065 0023 3E       		.uleb128 0x3e
+ 1066 0024 0B       		.uleb128 0xb
+ 1067 0025 03       		.uleb128 0x3
+ 1068 0026 08       		.uleb128 0x8
+ 1069 0027 00       		.byte	0
+ 1070 0028 00       		.byte	0
+ 1071 0029 04       		.uleb128 0x4
+ 1072 002a 16       		.uleb128 0x16
+ 1073 002b 00       		.byte	0
+ 1074 002c 03       		.uleb128 0x3
+ 1075 002d 0E       		.uleb128 0xe
+ 1076 002e 3A       		.uleb128 0x3a
+ 1077 002f 0B       		.uleb128 0xb
+ 1078 0030 3B       		.uleb128 0x3b
+ 1079 0031 05       		.uleb128 0x5
+ 1080 0032 49       		.uleb128 0x49
+ 1081 0033 13       		.uleb128 0x13
+ 1082 0034 00       		.byte	0
+ 1083 0035 00       		.byte	0
+ 1084 0036 05       		.uleb128 0x5
+ 1085 0037 35       		.uleb128 0x35
+ 1086 0038 00       		.byte	0
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 30
+
+
+ 1087 0039 49       		.uleb128 0x49
+ 1088 003a 13       		.uleb128 0x13
+ 1089 003b 00       		.byte	0
+ 1090 003c 00       		.byte	0
+ 1091 003d 06       		.uleb128 0x6
+ 1092 003e 2E       		.uleb128 0x2e
+ 1093 003f 01       		.byte	0x1
+ 1094 0040 3F       		.uleb128 0x3f
+ 1095 0041 19       		.uleb128 0x19
+ 1096 0042 03       		.uleb128 0x3
+ 1097 0043 0E       		.uleb128 0xe
+ 1098 0044 3A       		.uleb128 0x3a
+ 1099 0045 0B       		.uleb128 0xb
+ 1100 0046 3B       		.uleb128 0x3b
+ 1101 0047 0B       		.uleb128 0xb
+ 1102 0048 27       		.uleb128 0x27
+ 1103 0049 19       		.uleb128 0x19
+ 1104 004a 11       		.uleb128 0x11
+ 1105 004b 01       		.uleb128 0x1
+ 1106 004c 12       		.uleb128 0x12
+ 1107 004d 06       		.uleb128 0x6
+ 1108 004e 40       		.uleb128 0x40
+ 1109 004f 18       		.uleb128 0x18
+ 1110 0050 9642     		.uleb128 0x2116
+ 1111 0052 19       		.uleb128 0x19
+ 1112 0053 01       		.uleb128 0x1
+ 1113 0054 13       		.uleb128 0x13
+ 1114 0055 00       		.byte	0
+ 1115 0056 00       		.byte	0
+ 1116 0057 07       		.uleb128 0x7
+ 1117 0058 34       		.uleb128 0x34
+ 1118 0059 00       		.byte	0
+ 1119 005a 03       		.uleb128 0x3
+ 1120 005b 0E       		.uleb128 0xe
+ 1121 005c 3A       		.uleb128 0x3a
+ 1122 005d 0B       		.uleb128 0xb
+ 1123 005e 3B       		.uleb128 0x3b
+ 1124 005f 0B       		.uleb128 0xb
+ 1125 0060 49       		.uleb128 0x49
+ 1126 0061 13       		.uleb128 0x13
+ 1127 0062 02       		.uleb128 0x2
+ 1128 0063 18       		.uleb128 0x18
+ 1129 0064 00       		.byte	0
+ 1130 0065 00       		.byte	0
+ 1131 0066 08       		.uleb128 0x8
+ 1132 0067 2E       		.uleb128 0x2e
+ 1133 0068 00       		.byte	0
+ 1134 0069 3F       		.uleb128 0x3f
+ 1135 006a 19       		.uleb128 0x19
+ 1136 006b 03       		.uleb128 0x3
+ 1137 006c 0E       		.uleb128 0xe
+ 1138 006d 3A       		.uleb128 0x3a
+ 1139 006e 0B       		.uleb128 0xb
+ 1140 006f 3B       		.uleb128 0x3b
+ 1141 0070 0B       		.uleb128 0xb
+ 1142 0071 27       		.uleb128 0x27
+ 1143 0072 19       		.uleb128 0x19
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 31
+
+
+ 1144 0073 11       		.uleb128 0x11
+ 1145 0074 01       		.uleb128 0x1
+ 1146 0075 12       		.uleb128 0x12
+ 1147 0076 06       		.uleb128 0x6
+ 1148 0077 40       		.uleb128 0x40
+ 1149 0078 18       		.uleb128 0x18
+ 1150 0079 9742     		.uleb128 0x2117
+ 1151 007b 19       		.uleb128 0x19
+ 1152 007c 00       		.byte	0
+ 1153 007d 00       		.byte	0
+ 1154 007e 09       		.uleb128 0x9
+ 1155 007f 2E       		.uleb128 0x2e
+ 1156 0080 00       		.byte	0
+ 1157 0081 3F       		.uleb128 0x3f
+ 1158 0082 19       		.uleb128 0x19
+ 1159 0083 03       		.uleb128 0x3
+ 1160 0084 0E       		.uleb128 0xe
+ 1161 0085 3A       		.uleb128 0x3a
+ 1162 0086 0B       		.uleb128 0xb
+ 1163 0087 3B       		.uleb128 0x3b
+ 1164 0088 0B       		.uleb128 0xb
+ 1165 0089 27       		.uleb128 0x27
+ 1166 008a 19       		.uleb128 0x19
+ 1167 008b 11       		.uleb128 0x11
+ 1168 008c 01       		.uleb128 0x1
+ 1169 008d 12       		.uleb128 0x12
+ 1170 008e 06       		.uleb128 0x6
+ 1171 008f 40       		.uleb128 0x40
+ 1172 0090 18       		.uleb128 0x18
+ 1173 0091 9642     		.uleb128 0x2116
+ 1174 0093 19       		.uleb128 0x19
+ 1175 0094 00       		.byte	0
+ 1176 0095 00       		.byte	0
+ 1177 0096 0A       		.uleb128 0xa
+ 1178 0097 2E       		.uleb128 0x2e
+ 1179 0098 01       		.byte	0x1
+ 1180 0099 3F       		.uleb128 0x3f
+ 1181 009a 19       		.uleb128 0x19
+ 1182 009b 03       		.uleb128 0x3
+ 1183 009c 0E       		.uleb128 0xe
+ 1184 009d 3A       		.uleb128 0x3a
+ 1185 009e 0B       		.uleb128 0xb
+ 1186 009f 3B       		.uleb128 0x3b
+ 1187 00a0 0B       		.uleb128 0xb
+ 1188 00a1 27       		.uleb128 0x27
+ 1189 00a2 19       		.uleb128 0x19
+ 1190 00a3 11       		.uleb128 0x11
+ 1191 00a4 01       		.uleb128 0x1
+ 1192 00a5 12       		.uleb128 0x12
+ 1193 00a6 06       		.uleb128 0x6
+ 1194 00a7 40       		.uleb128 0x40
+ 1195 00a8 18       		.uleb128 0x18
+ 1196 00a9 9742     		.uleb128 0x2117
+ 1197 00ab 19       		.uleb128 0x19
+ 1198 00ac 01       		.uleb128 0x1
+ 1199 00ad 13       		.uleb128 0x13
+ 1200 00ae 00       		.byte	0
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 32
+
+
+ 1201 00af 00       		.byte	0
+ 1202 00b0 0B       		.uleb128 0xb
+ 1203 00b1 05       		.uleb128 0x5
+ 1204 00b2 00       		.byte	0
+ 1205 00b3 03       		.uleb128 0x3
+ 1206 00b4 0E       		.uleb128 0xe
+ 1207 00b5 3A       		.uleb128 0x3a
+ 1208 00b6 0B       		.uleb128 0xb
+ 1209 00b7 3B       		.uleb128 0x3b
+ 1210 00b8 0B       		.uleb128 0xb
+ 1211 00b9 49       		.uleb128 0x49
+ 1212 00ba 13       		.uleb128 0x13
+ 1213 00bb 02       		.uleb128 0x2
+ 1214 00bc 18       		.uleb128 0x18
+ 1215 00bd 00       		.byte	0
+ 1216 00be 00       		.byte	0
+ 1217 00bf 0C       		.uleb128 0xc
+ 1218 00c0 2E       		.uleb128 0x2e
+ 1219 00c1 00       		.byte	0
+ 1220 00c2 3F       		.uleb128 0x3f
+ 1221 00c3 19       		.uleb128 0x19
+ 1222 00c4 03       		.uleb128 0x3
+ 1223 00c5 0E       		.uleb128 0xe
+ 1224 00c6 3A       		.uleb128 0x3a
+ 1225 00c7 0B       		.uleb128 0xb
+ 1226 00c8 3B       		.uleb128 0x3b
+ 1227 00c9 05       		.uleb128 0x5
+ 1228 00ca 27       		.uleb128 0x27
+ 1229 00cb 19       		.uleb128 0x19
+ 1230 00cc 49       		.uleb128 0x49
+ 1231 00cd 13       		.uleb128 0x13
+ 1232 00ce 11       		.uleb128 0x11
+ 1233 00cf 01       		.uleb128 0x1
+ 1234 00d0 12       		.uleb128 0x12
+ 1235 00d1 06       		.uleb128 0x6
+ 1236 00d2 40       		.uleb128 0x40
+ 1237 00d3 18       		.uleb128 0x18
+ 1238 00d4 9742     		.uleb128 0x2117
+ 1239 00d6 19       		.uleb128 0x19
+ 1240 00d7 00       		.byte	0
+ 1241 00d8 00       		.byte	0
+ 1242 00d9 0D       		.uleb128 0xd
+ 1243 00da 2E       		.uleb128 0x2e
+ 1244 00db 01       		.byte	0x1
+ 1245 00dc 3F       		.uleb128 0x3f
+ 1246 00dd 19       		.uleb128 0x19
+ 1247 00de 03       		.uleb128 0x3
+ 1248 00df 0E       		.uleb128 0xe
+ 1249 00e0 3A       		.uleb128 0x3a
+ 1250 00e1 0B       		.uleb128 0xb
+ 1251 00e2 3B       		.uleb128 0x3b
+ 1252 00e3 05       		.uleb128 0x5
+ 1253 00e4 27       		.uleb128 0x27
+ 1254 00e5 19       		.uleb128 0x19
+ 1255 00e6 11       		.uleb128 0x11
+ 1256 00e7 01       		.uleb128 0x1
+ 1257 00e8 12       		.uleb128 0x12
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 33
+
+
+ 1258 00e9 06       		.uleb128 0x6
+ 1259 00ea 40       		.uleb128 0x40
+ 1260 00eb 18       		.uleb128 0x18
+ 1261 00ec 9742     		.uleb128 0x2117
+ 1262 00ee 19       		.uleb128 0x19
+ 1263 00ef 01       		.uleb128 0x1
+ 1264 00f0 13       		.uleb128 0x13
+ 1265 00f1 00       		.byte	0
+ 1266 00f2 00       		.byte	0
+ 1267 00f3 0E       		.uleb128 0xe
+ 1268 00f4 05       		.uleb128 0x5
+ 1269 00f5 00       		.byte	0
+ 1270 00f6 03       		.uleb128 0x3
+ 1271 00f7 0E       		.uleb128 0xe
+ 1272 00f8 3A       		.uleb128 0x3a
+ 1273 00f9 0B       		.uleb128 0xb
+ 1274 00fa 3B       		.uleb128 0x3b
+ 1275 00fb 05       		.uleb128 0x5
+ 1276 00fc 49       		.uleb128 0x49
+ 1277 00fd 13       		.uleb128 0x13
+ 1278 00fe 02       		.uleb128 0x2
+ 1279 00ff 18       		.uleb128 0x18
+ 1280 0100 00       		.byte	0
+ 1281 0101 00       		.byte	0
+ 1282 0102 0F       		.uleb128 0xf
+ 1283 0103 2E       		.uleb128 0x2e
+ 1284 0104 00       		.byte	0
+ 1285 0105 3F       		.uleb128 0x3f
+ 1286 0106 19       		.uleb128 0x19
+ 1287 0107 03       		.uleb128 0x3
+ 1288 0108 0E       		.uleb128 0xe
+ 1289 0109 3A       		.uleb128 0x3a
+ 1290 010a 0B       		.uleb128 0xb
+ 1291 010b 3B       		.uleb128 0x3b
+ 1292 010c 05       		.uleb128 0x5
+ 1293 010d 27       		.uleb128 0x27
+ 1294 010e 19       		.uleb128 0x19
+ 1295 010f 11       		.uleb128 0x11
+ 1296 0110 01       		.uleb128 0x1
+ 1297 0111 12       		.uleb128 0x12
+ 1298 0112 06       		.uleb128 0x6
+ 1299 0113 40       		.uleb128 0x40
+ 1300 0114 18       		.uleb128 0x18
+ 1301 0115 9642     		.uleb128 0x2116
+ 1302 0117 19       		.uleb128 0x19
+ 1303 0118 00       		.byte	0
+ 1304 0119 00       		.byte	0
+ 1305 011a 10       		.uleb128 0x10
+ 1306 011b 34       		.uleb128 0x34
+ 1307 011c 00       		.byte	0
+ 1308 011d 03       		.uleb128 0x3
+ 1309 011e 0E       		.uleb128 0xe
+ 1310 011f 3A       		.uleb128 0x3a
+ 1311 0120 0B       		.uleb128 0xb
+ 1312 0121 3B       		.uleb128 0x3b
+ 1313 0122 0B       		.uleb128 0xb
+ 1314 0123 49       		.uleb128 0x49
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 34
+
+
+ 1315 0124 13       		.uleb128 0x13
+ 1316 0125 3F       		.uleb128 0x3f
+ 1317 0126 19       		.uleb128 0x19
+ 1318 0127 02       		.uleb128 0x2
+ 1319 0128 18       		.uleb128 0x18
+ 1320 0129 00       		.byte	0
+ 1321 012a 00       		.byte	0
+ 1322 012b 00       		.byte	0
+ 1323              		.section	.debug_aranges,"",%progbits
+ 1324 0000 94000000 		.4byte	0x94
+ 1325 0004 0200     		.2byte	0x2
+ 1326 0006 00000000 		.4byte	.Ldebug_info0
+ 1327 000a 04       		.byte	0x4
+ 1328 000b 00       		.byte	0
+ 1329 000c 0000     		.2byte	0
+ 1330 000e 0000     		.2byte	0
+ 1331 0010 00000000 		.4byte	.LFB0
+ 1332 0014 7C000000 		.4byte	.LFE0-.LFB0
+ 1333 0018 00000000 		.4byte	.LFB1
+ 1334 001c 20000000 		.4byte	.LFE1-.LFB1
+ 1335 0020 00000000 		.4byte	.LFB2
+ 1336 0024 24000000 		.4byte	.LFE2-.LFB2
+ 1337 0028 00000000 		.4byte	.LFB3
+ 1338 002c 20000000 		.4byte	.LFE3-.LFB3
+ 1339 0030 00000000 		.4byte	.LFB4
+ 1340 0034 20000000 		.4byte	.LFE4-.LFB4
+ 1341 0038 00000000 		.4byte	.LFB5
+ 1342 003c 18000000 		.4byte	.LFE5-.LFB5
+ 1343 0040 00000000 		.4byte	.LFB6
+ 1344 0044 18000000 		.4byte	.LFE6-.LFB6
+ 1345 0048 00000000 		.4byte	.LFB7
+ 1346 004c 20000000 		.4byte	.LFE7-.LFB7
+ 1347 0050 00000000 		.4byte	.LFB8
+ 1348 0054 20000000 		.4byte	.LFE8-.LFB8
+ 1349 0058 00000000 		.4byte	.LFB9
+ 1350 005c 20000000 		.4byte	.LFE9-.LFB9
+ 1351 0060 00000000 		.4byte	.LFB10
+ 1352 0064 18000000 		.4byte	.LFE10-.LFB10
+ 1353 0068 00000000 		.4byte	.LFB11
+ 1354 006c 20000000 		.4byte	.LFE11-.LFB11
+ 1355 0070 00000000 		.4byte	.LFB12
+ 1356 0074 18000000 		.4byte	.LFE12-.LFB12
+ 1357 0078 00000000 		.4byte	.LFB13
+ 1358 007c 20000000 		.4byte	.LFE13-.LFB13
+ 1359 0080 00000000 		.4byte	.LFB14
+ 1360 0084 18000000 		.4byte	.LFE14-.LFB14
+ 1361 0088 00000000 		.4byte	.LFB15
+ 1362 008c 1C000000 		.4byte	.LFE15-.LFB15
+ 1363 0090 00000000 		.4byte	0
+ 1364 0094 00000000 		.4byte	0
+ 1365              		.section	.debug_ranges,"",%progbits
+ 1366              	.Ldebug_ranges0:
+ 1367 0000 00000000 		.4byte	.LFB0
+ 1368 0004 7C000000 		.4byte	.LFE0
+ 1369 0008 00000000 		.4byte	.LFB1
+ 1370 000c 20000000 		.4byte	.LFE1
+ 1371 0010 00000000 		.4byte	.LFB2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 35
+
+
+ 1372 0014 24000000 		.4byte	.LFE2
+ 1373 0018 00000000 		.4byte	.LFB3
+ 1374 001c 20000000 		.4byte	.LFE3
+ 1375 0020 00000000 		.4byte	.LFB4
+ 1376 0024 20000000 		.4byte	.LFE4
+ 1377 0028 00000000 		.4byte	.LFB5
+ 1378 002c 18000000 		.4byte	.LFE5
+ 1379 0030 00000000 		.4byte	.LFB6
+ 1380 0034 18000000 		.4byte	.LFE6
+ 1381 0038 00000000 		.4byte	.LFB7
+ 1382 003c 20000000 		.4byte	.LFE7
+ 1383 0040 00000000 		.4byte	.LFB8
+ 1384 0044 20000000 		.4byte	.LFE8
+ 1385 0048 00000000 		.4byte	.LFB9
+ 1386 004c 20000000 		.4byte	.LFE9
+ 1387 0050 00000000 		.4byte	.LFB10
+ 1388 0054 18000000 		.4byte	.LFE10
+ 1389 0058 00000000 		.4byte	.LFB11
+ 1390 005c 20000000 		.4byte	.LFE11
+ 1391 0060 00000000 		.4byte	.LFB12
+ 1392 0064 18000000 		.4byte	.LFE12
+ 1393 0068 00000000 		.4byte	.LFB13
+ 1394 006c 20000000 		.4byte	.LFE13
+ 1395 0070 00000000 		.4byte	.LFB14
+ 1396 0074 18000000 		.4byte	.LFE14
+ 1397 0078 00000000 		.4byte	.LFB15
+ 1398 007c 1C000000 		.4byte	.LFE15
+ 1399 0080 00000000 		.4byte	0
+ 1400 0084 00000000 		.4byte	0
+ 1401              		.section	.debug_line,"",%progbits
+ 1402              	.Ldebug_line0:
+ 1403 0000 85010000 		.section	.debug_str,"MS",%progbits,1
+ 1403      02004800 
+ 1403      00000201 
+ 1403      FB0E0D00 
+ 1403      01010101 
+ 1404              	.LASF23:
+ 1405 0000 434F554E 		.ascii	"COUNTER_ENC_ReadStatusRegister\000"
+ 1405      5445525F 
+ 1405      454E435F 
+ 1405      52656164 
+ 1405      53746174 
+ 1406              	.LASF22:
+ 1407 001f 434F554E 		.ascii	"COUNTER_ENC_SetInterruptMode\000"
+ 1407      5445525F 
+ 1407      454E435F 
+ 1407      53657449 
+ 1407      6E746572 
+ 1408              	.LASF39:
+ 1409 003c 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1409      43313120 
+ 1409      352E342E 
+ 1409      31203230 
+ 1409      31363036 
+ 1410 006f 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1410      20726576 
+ 1410      6973696F 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 36
+
+
+ 1410      6E203233 
+ 1410      37373135 
+ 1411 00a2 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1411      66756E63 
+ 1411      74696F6E 
+ 1411      2D736563 
+ 1411      74696F6E 
+ 1412              	.LASF36:
+ 1413 00ca 636F6D70 		.ascii	"compare\000"
+ 1413      61726500 
+ 1414              	.LASF31:
+ 1415 00d2 434F554E 		.ascii	"COUNTER_ENC_ReadCapture\000"
+ 1415      5445525F 
+ 1415      454E435F 
+ 1415      52656164 
+ 1415      43617074 
+ 1416              	.LASF33:
+ 1417 00ea 70657269 		.ascii	"period\000"
+ 1417      6F6400
+ 1418              	.LASF28:
+ 1419 00f1 434F554E 		.ascii	"COUNTER_ENC_WriteCounter\000"
+ 1419      5445525F 
+ 1419      454E435F 
+ 1419      57726974 
+ 1419      65436F75 
+ 1420              	.LASF3:
+ 1421 010a 73686F72 		.ascii	"short unsigned int\000"
+ 1421      7420756E 
+ 1421      7369676E 
+ 1421      65642069 
+ 1421      6E7400
+ 1422              	.LASF41:
+ 1423 011d 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHandPRO-a"
+ 1423      73657273 
+ 1423      5C4D6174 
+ 1423      7469615C 
+ 1423      446F6375 
+ 1424 014b 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\Ottobock_Active_Wrist.cydsn\000"
+ 1424      656E6572 
+ 1424      69632D46 
+ 1424      572D5053 
+ 1424      6F43355C 
+ 1425              	.LASF9:
+ 1426 017b 666C6F61 		.ascii	"float\000"
+ 1426      7400
+ 1427              	.LASF30:
+ 1428 0181 434F554E 		.ascii	"COUNTER_ENC_ReadCounter\000"
+ 1428      5445525F 
+ 1428      454E435F 
+ 1428      52656164 
+ 1428      436F756E 
+ 1429              	.LASF1:
+ 1430 0199 756E7369 		.ascii	"unsigned char\000"
+ 1430      676E6564 
+ 1430      20636861 
+ 1430      7200
+ 1431              	.LASF20:
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 37
+
+
+ 1432 01a7 434F554E 		.ascii	"COUNTER_ENC_Stop\000"
+ 1432      5445525F 
+ 1432      454E435F 
+ 1432      53746F70 
+ 1432      00
+ 1433              	.LASF13:
+ 1434 01b8 72656738 		.ascii	"reg8\000"
+ 1434      00
+ 1435              	.LASF5:
+ 1436 01bd 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1436      20756E73 
+ 1436      69676E65 
+ 1436      6420696E 
+ 1436      7400
+ 1437              	.LASF12:
+ 1438 01cf 75696E74 		.ascii	"uint8\000"
+ 1438      3800
+ 1439              	.LASF27:
+ 1440 01d5 636F6E74 		.ascii	"control\000"
+ 1440      726F6C00 
+ 1441              	.LASF26:
+ 1442 01dd 696E7465 		.ascii	"interruptsMask\000"
+ 1442      72727570 
+ 1442      74734D61 
+ 1442      736B00
+ 1443              	.LASF18:
+ 1444 01ec 434F554E 		.ascii	"COUNTER_ENC_Enable\000"
+ 1444      5445525F 
+ 1444      454E435F 
+ 1444      456E6162 
+ 1444      6C6500
+ 1445              	.LASF25:
+ 1446 01ff 434F554E 		.ascii	"COUNTER_ENC_WriteControlRegister\000"
+ 1446      5445525F 
+ 1446      454E435F 
+ 1446      57726974 
+ 1446      65436F6E 
+ 1447              	.LASF29:
+ 1448 0220 636F756E 		.ascii	"counter\000"
+ 1448      74657200 
+ 1449              	.LASF10:
+ 1450 0228 646F7562 		.ascii	"double\000"
+ 1450      6C6500
+ 1451              	.LASF8:
+ 1452 022f 756E7369 		.ascii	"unsigned int\000"
+ 1452      676E6564 
+ 1452      20696E74 
+ 1452      00
+ 1453              	.LASF42:
+ 1454 023c 434F554E 		.ascii	"COUNTER_ENC_initVar\000"
+ 1454      5445525F 
+ 1454      454E435F 
+ 1454      696E6974 
+ 1454      56617200 
+ 1455              	.LASF32:
+ 1456 0250 434F554E 		.ascii	"COUNTER_ENC_WritePeriod\000"
+ 1456      5445525F 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 38
+
+
+ 1456      454E435F 
+ 1456      57726974 
+ 1456      65506572 
+ 1457              	.LASF7:
+ 1458 0268 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1458      206C6F6E 
+ 1458      6720756E 
+ 1458      7369676E 
+ 1458      65642069 
+ 1459              	.LASF38:
+ 1460 027f 434F554E 		.ascii	"COUNTER_ENC_ClearFIFO\000"
+ 1460      5445525F 
+ 1460      454E435F 
+ 1460      436C6561 
+ 1460      72464946 
+ 1461              	.LASF24:
+ 1462 0295 434F554E 		.ascii	"COUNTER_ENC_ReadControlRegister\000"
+ 1462      5445525F 
+ 1462      454E435F 
+ 1462      52656164 
+ 1462      436F6E74 
+ 1463              	.LASF40:
+ 1464 02b5 47656E65 		.ascii	"Generated_Source\\PSoC5\\COUNTER_ENC.c\000"
+ 1464      72617465 
+ 1464      645F536F 
+ 1464      75726365 
+ 1464      5C50536F 
+ 1465              	.LASF16:
+ 1466 02da 6374726C 		.ascii	"ctrl\000"
+ 1466      00
+ 1467              	.LASF15:
+ 1468 02df 73697A65 		.ascii	"sizetype\000"
+ 1468      74797065 
+ 1468      00
+ 1469              	.LASF6:
+ 1470 02e8 6C6F6E67 		.ascii	"long long int\000"
+ 1470      206C6F6E 
+ 1470      6720696E 
+ 1470      7400
+ 1471              	.LASF11:
+ 1472 02f6 63686172 		.ascii	"char\000"
+ 1472      00
+ 1473              	.LASF34:
+ 1474 02fb 434F554E 		.ascii	"COUNTER_ENC_ReadPeriod\000"
+ 1474      5445525F 
+ 1474      454E435F 
+ 1474      52656164 
+ 1474      50657269 
+ 1475              	.LASF35:
+ 1476 0312 434F554E 		.ascii	"COUNTER_ENC_WriteCompare\000"
+ 1476      5445525F 
+ 1476      454E435F 
+ 1476      57726974 
+ 1476      65436F6D 
+ 1477              	.LASF2:
+ 1478 032b 73686F72 		.ascii	"short int\000"
+ 1478      7420696E 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccCtxnOr.s 			page 39
+
+
+ 1478      7400
+ 1479              	.LASF19:
+ 1480 0335 434F554E 		.ascii	"COUNTER_ENC_Start\000"
+ 1480      5445525F 
+ 1480      454E435F 
+ 1480      53746172 
+ 1480      7400
+ 1481              	.LASF4:
+ 1482 0347 6C6F6E67 		.ascii	"long int\000"
+ 1482      20696E74 
+ 1482      00
+ 1483              	.LASF14:
+ 1484 0350 6C6F6E67 		.ascii	"long double\000"
+ 1484      20646F75 
+ 1484      626C6500 
+ 1485              	.LASF0:
+ 1486 035c 7369676E 		.ascii	"signed char\000"
+ 1486      65642063 
+ 1486      68617200 
+ 1487              	.LASF37:
+ 1488 0368 434F554E 		.ascii	"COUNTER_ENC_ReadCompare\000"
+ 1488      5445525F 
+ 1488      454E435F 
+ 1488      52656164 
+ 1488      436F6D70 
+ 1489              	.LASF17:
+ 1490 0380 434F554E 		.ascii	"COUNTER_ENC_interruptState\000"
+ 1490      5445525F 
+ 1490      454E435F 
+ 1490      696E7465 
+ 1490      72727570 
+ 1491              	.LASF21:
+ 1492 039b 434F554E 		.ascii	"COUNTER_ENC_Init\000"
+ 1492      5445525F 
+ 1492      454E435F 
+ 1492      496E6974 
+ 1492      00
+ 1493              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

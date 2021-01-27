@@ -49,7 +49,7 @@
 
 struct st_ref       g_ref[NUM_OF_MOTORS], g_refNew[NUM_OF_MOTORS], g_refOld[NUM_OF_MOTORS];  // Motor reference variables.
 struct st_meas      g_meas[N_ENCODER_LINE_MAX], g_measOld[N_ENCODER_LINE_MAX];          // Measurements.
-struct st_emg_meas  g_emg_meas, g_emg_measOld;  // EMG Measurements.
+struct st_adc_meas  g_adc_meas, g_adc_measOld;  // EMG Measurements.
 struct st_fb_meas   g_fb_meas;                  // Haptic Feedback Measurements.
 struct st_data      g_rx;                       // Income data.
 struct st_eeprom    g_mem, c_mem;               // Memory variables.
@@ -71,8 +71,11 @@ int32   dev_tension_f[NUM_OF_MOTORS];       /*!< Filtered power supply tension.*
 int32   pow_tension[NUM_OF_MOTORS];         /*!< Computed power supply tension.*/
 
 counter_status CYDATA cycles_status = NONE;     /*!< Cycles counter state machine status.*/
-emg_status CYDATA emg_1_status = RESET;         /*!< First EMG sensor status.*/
-emg_status CYDATA emg_2_status = RESET;         /*!< Second EMG sensor status.*/                               
+adc_status CYDATA emg_1_status = RESET;         /*!< First EMG sensor status.*/
+adc_status CYDATA emg_2_status = RESET;         /*!< Second EMG sensor status.*/   
+adc_status CYDATA joy_UD_status = RESET;        /*!< Joystick UP/DOWN status.*/
+adc_status CYDATA joy_LR_status = RESET;        /*!< Joystick LEFT/RIGHT status.*/
+
     
 // Bit Flag
 CYBIT reset_last_value_flag;                /*!< This flag is set when the encoders last values must be resetted.*/
@@ -124,5 +127,6 @@ float Quat[N_IMU_MAX][4];
 
 // MASTER variables
 uint8 master_mode;               /*!< Flag used to set/unset master mode to send messages to other boards.*/
+
 
 /* END OF FILE */

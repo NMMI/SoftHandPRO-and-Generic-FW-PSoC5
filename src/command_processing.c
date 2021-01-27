@@ -119,6 +119,12 @@ void commProcess(void){
         case CMD_GET_ACCEL:
             cmd_get_accelerations();
             break;
+
+//=========================================================     CMD_GET_JOYSTICK
+
+        case CMD_GET_JOYSTICK:
+            cmd_get_joystick();
+        break;
             
 //=========================================================     CMD_GET_EMG
 
@@ -277,6 +283,12 @@ void commProcess(void){
         case CMD_GET_ADC_RAW:
             cmd_get_ADC_raw();
             break; 
+            
+//=====================================================     CMD_GET_SD_FILESYSTEM
+
+        case CMD_GET_SD_SINGLE_FILE:
+            cmd_get_SD_file();
+            break;             
             
             
 //=========================================================== ALL OTHER COMMANDS
@@ -660,6 +672,9 @@ void get_param_list (uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS],
                         case INPUT_MODE_EMG_FCFS_ADV:
                             strcat(aux_str, " EMG FCFS Advanced");
                         break;
+                        case INPUT_MODE_JOYSTICK:
+                            strcat(aux_str, " Joystick");
+                        break;
                         case INPUT_MODE_EMG_PROPORTIONAL_NC:
                             strcat(aux_str, " EMG proportional Normally Closed");
                         break;
@@ -772,7 +787,44 @@ void get_param_list (uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS],
                             strcat(aux_str, " GENERIC 2 MOTORS\0");
                         break;
                         case 2:
-                            strcat(aux_str, " AIR CHAMBERS \0");
+                            strcat(aux_str, " AIR CHAMBERS\0");
+                        break;
+                        case 3:
+                            strcat(aux_str, " OTTOBOCK WRIST\0");
+                        break;
+                        case 4:
+                            strcat(aux_str, " SOFTHAND 2 MOTORS\0");
+                        break;
+                    }
+                    break;
+                case 11:    // fsm activation mode menu
+                    switch(*m_addr){
+                        case 0:
+                            if (c_mem.dev.dev_type == SOFTHAND_2_MOTORS){
+                                strcat(aux_str, " Fast:syn2, Slow:syn1\0");
+                            }
+                            else {
+                                strcat(aux_str, " Fast:wrist, Slow:hand\0");
+                            }                            
+                        break;
+                        case 1:
+                            if (c_mem.dev.dev_type == SOFTHAND_2_MOTORS){
+                                strcat(aux_str, " Slow:syn2, Fast:syn1\0");
+                            }
+                            else {
+                                strcat(aux_str, " Slow:wrist, Fast:hand\0");
+                            }
+                        break;
+                    }
+                    break;
+                case 12:    // wrist direction association menu
+                    switch(*m_addr){
+                        case 0:
+                            strcat(aux_str, " Close:CW, Open:CCW\0");
+                        break;
+                        case 1:
+                            strcat(aux_str, " Close:CCW, Open:CW\0");
+                        break;
                     }
                     break;
             }
@@ -909,8 +961,15 @@ void manage_param_list(uint16 index) {
     	(uint8*)&(MEM_P->enc[1].Enc_raw_read_conf[0]),
         (uint8*)&(MEM_P->exp.read_ADC_sensors_port_flag),		
     	(uint8*)&(MEM_P->exp.ADC_conf[0]),
-    	(uint8*)&(MEM_P->exp.ADC_conf[6]),                          //70         
+    	(uint8*)&(MEM_P->exp.ADC_conf[6]),                          //70  
+        (uint8*)&(MEM_P->JOY_spec.joystick_closure_speed),
+        (uint8*)&(MEM_P->JOY_spec.joystick_threshold),
+        (uint8*)&(MEM_P->JOY_spec.joystick_gains[0]),
         (uint8*)&(MEM_P->dev.dev_type),
+        (uint8*)&(MEM_P->WR.activation_mode),                           
+        (uint8*)&(MEM_P->WR.fast_act_threshold[0]),
+        
+        (uint8*)&(MEM_P->WR.wrist_direction_association),              // additional wrist params
         
         (uint8*)&(MEM_P->MS.slave_comm_active),                        // additional master params
         (uint8*)&(MEM_P->MS.slave_ID),
@@ -918,6 +977,8 @@ void manage_param_list(uint16 index) {
         (uint8*)&(MEM_P->FB.max_residual_current),                     // additional feedback params
         (uint8*)&(MEM_P->FB.maximum_pressure_kPa),
         (uint8*)&(MEM_P->FB.prop_err_fb_gain)
+        
+
     };
     
     uint8 TYPES[NUM_OF_PARAMS] = {
@@ -940,8 +1001,11 @@ void manage_param_list(uint16 index) {
         TYPE_INT8,  TYPE_FLAG, TYPE_FLOAT, TYPE_UINT8,
         TYPE_FLAG,  TYPE_UINT8, TYPE_FLAG, TYPE_UINT8,
         TYPE_INT8, TYPE_UINT8, TYPE_UINT8, TYPE_FLAG,
-        TYPE_UINT8, TYPE_UINT8, TYPE_FLAG, TYPE_FLAG,
-        TYPE_UINT8, TYPE_INT32, TYPE_FLOAT, TYPE_FLOAT      
+        TYPE_UINT8, TYPE_UINT8, TYPE_UINT16, TYPE_INT16,
+        TYPE_UINT16, TYPE_FLAG, TYPE_FLAG, TYPE_UINT16,
+        
+        TYPE_FLAG, TYPE_FLAG, TYPE_UINT8, TYPE_INT32,
+        TYPE_FLOAT, TYPE_FLOAT
     };
 
     uint8 NUM_ITEMS[NUM_OF_PARAMS] = {
@@ -965,7 +1029,10 @@ void manage_param_list(uint16 index) {
         1, 1, 1, 3, 
         3, N_Encoder_Line_Connected[0], N_Encoder_Line_Connected[1], 1,
         6, 6, 1, 1,
-        1, 1, 1, 1
+        2, 1, 1, 2,
+        
+        1, 1, 1, 1,
+        1, 1
     };
     
     uint8 NUM_STRUCT[NUM_OF_PARAMS] = {     // see STRUCTURES INDEX in globals.h
@@ -988,8 +1055,12 @@ void manage_param_list(uint16 index) {
         ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line), ST_MOTOR+SECOND_MOTOR_IDX, ST_MOTOR+SECOND_MOTOR_IDX, ST_MOTOR+SECOND_MOTOR_IDX, 
         ST_MOTOR+SECOND_MOTOR_IDX, ST_MOTOR+SECOND_MOTOR_IDX, ST_MOTOR+SECOND_MOTOR_IDX, ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line),
         ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line), ST_ENCODER+0, ST_ENCODER+1, ST_EXPANSION,
-        ST_EXPANSION, ST_EXPANSION, ST_DEVICE, ST_MS_SPEC, 
-        ST_MS_SPEC, ST_FB_SPEC, ST_FB_SPEC, ST_FB_SPEC
+        ST_EXPANSION, ST_EXPANSION, ST_JOY_SPEC, ST_JOY_SPEC,
+        ST_JOY_SPEC, ST_DEVICE, ST_WR_SPEC, ST_WR_SPEC,
+        
+        ST_WR_SPEC, ST_MS_SPEC, ST_MS_SPEC, ST_FB_SPEC,
+        ST_FB_SPEC, ST_FB_SPEC
+        
     };
     
     const char* PARAMS_STR[NUM_OF_PARAMS] = {
@@ -1012,16 +1083,27 @@ void manage_param_list(uint16 index) {
         "57 - Motor handle ratio:", "58 - PWM rescaling:", "59 - Current lookup:", "60 - Associated encoder line:", 
         "61 - Driver type:", "62 - PWM rate limiter:", "63 - Not reversible:", "64 - Enc idx used for control:",
         "65 - Gear params[N1, N2, I1]:", "66 - Read enc raw line 0:", "67 - Read enc raw line 1:", "68 - Read additional ADC port:",
-        "69 - ADC channel [1-6]:", "70 - ADC channel [7-12]:", "71 - Device type:", "72 - Slave communication active:",
-        "73 - Slave ID:", "74 - Maximum slave residual current:", "75 - Maximum pressure feedback (kPa):", "76 - Proportional pressure error gain:"
+        "69 - ADC channel [1-6]:", "70 - ADC channel [7-12]:", "71 - Joystick closure speed:", "72 - Joystick threshold:", 
+        "73 - Joystick gains:", "74 - Device type:", "75 - EMG FSM act.mode:", "76 - Fast act.thresholds:",
+        
+        "77 - Wrist direction:", "78 - Slave communication active:", "79 - Slave ID:", "80 - Maximum slave residual current:",
+        "81 - Maximum pressure feedback (kPa):", "82 - Proportional pressure error gain:", 
     };
 
     //Parameters menu
     char spi_delay_menu[118]    = ""; 
     sprintf(spi_delay_menu, "0 -> None\n1 -> Low (%u us delay for each 8-bit register read)\n2 -> High (%u us delay for each 8-bit register read)\n", (int)SPI_DELAY_LOW, (int)SPI_DELAY_HIGH);
 
+    char fsm_activation_mode_menu[56] = "";
+    if (MEM_P->dev.dev_type == SOFTHAND_2_MOTORS){
+        sprintf(fsm_activation_mode_menu, "0 -> Fast:syn2, Slow:syn1\n1 -> Slow:syn2, Fast:syn1\n");
+    }
+    else {
+        sprintf(fsm_activation_mode_menu, "0 -> Fast:wrist, Slow:hand\n1 -> Slow:wrist, Fast:hand\n");
+    }
+    
     const char* MENU_STR[NUM_OF_PARAMS_MENU] = {
-        "0 -> Usb\n1 -> Handle\n2 -> EMG proportional\n3 -> EMG Integral\n4 -> EMG FCFS\n5 -> EMG FCFS Advanced\n6 -> EMG proportional NC\n",         //1 input_mode_menu
+        "0 -> Usb\n1 -> Handle\n2 -> EMG proportional\n3 -> EMG Integral\n4 -> EMG FCFS\n5 -> EMG FCFS Advanced\n6 -> Joystick\n7 -> EMG proportional NC\n",         //1 input_mode_menu
         "0 -> Position\n1 -> PWM\n2 -> Current\n3 -> Position and Current\n",                                               //2 control_mode_menu
         "0 -> Deactivate [NO]\n1 -> Activate [YES]\n",                                                                      //3 yes_no_menu
         "0 -> Right\n1 -> Left\n",                                                                                          //4 right_left_menu
@@ -1030,12 +1112,14 @@ void manage_param_list(uint16 index) {
         spi_delay_menu,                                                                                                     //7 spi_delay_menu
         "0 -> Generic user\n1 -> Maria\n2 -> Roza\nThe board will reset\n",                                                 //8 user_id_menu
         "0 -> MC33887 (Standard)\n1 -> VNH5019 (High power)\nThe board will reset\n",                                       //9 motor_driver_type_menu
-        "0 -> SOFTHAND PRO\n1 -> GENERIC 2 MOTORS\n2 -> AIR CHAMBERS\nThe board will reset\n"                               //10 device_type_menu
+        "0 -> SOFTHAND PRO\n1 -> GENERIC 2 MOTORS\n2 -> AIR CHAMBERS\n3 -> OTTOBOCK WRIST\n4 -> SOFTHAND 2 MOTORS\nThe board will reset\n",         //10 device_type_menu
+        fsm_activation_mode_menu,                                                                             //11 fsm_activation_mode_menu
+        "0 -> Close:CW, Open:CCW\n1 -> Close:CCW, Open:CW\n"                                                  //12 wrist_direction_menu
     };   
     
-    uint8 NUM_MENU[29] = {3, 1, 2, 3, 3, 3, 3, 3, 3, 4, 5, 6, 3, 7, 8, 9, 3, 5, 3, 1, 2, 3, 3, 3, 9, 3, 5, 10, 3};
+    uint8 NUM_MENU[31] = {3, 1, 2, 3, 3, 3, 3, 3, 3, 4, 5, 6, 3, 7, 8, 9, 3, 5, 3, 1, 2, 3, 3, 3, 9, 3, 5, 10, 11, 12, 3};
     uint8 CUSTOM_PARAM_GET_LIST[9]  = {2, 3, 8, 11, 23, 44, 45, 50, 53};
-    uint8 CUSTOM_PARAM_SET_LIST[18] = {2, 3, 5, 8, 11, 23, 24, 28, 31, 32, 38, 44, 45, 47, 50, 53, 61, 71};
+    uint8 CUSTOM_PARAM_SET_LIST[18] = {2, 3, 5, 8, 11, 23, 24, 28, 31, 32, 38, 44, 45, 47, 50, 53, 61, 74};
     uint8 USER_ID_PARAM = 35;
 
 // Note: If a custom parameter change is needed, add to CUSTOM_PARAM_LIST, then change it
@@ -1478,7 +1562,7 @@ void set_custom_param(uint16 index) {
             MOTOR_DRIVER_TYPE_Write((g_mem.motor[1].motor_driver_type << 1) | g_mem.motor[0].motor_driver_type);    // Note: leave numeric indices (not parameteric)
             break;
 
-        case 71:        // Device type
+        case 74:        // Device type
             g_mem.dev.dev_type = g_rx.buffer[3];
             
             if (g_mem.dev.dev_type == SOFTHAND_PRO){    // change also gears parameters
@@ -1493,7 +1577,14 @@ void set_custom_param(uint16 index) {
                 g_mem.motor[MOTOR_IDX].not_revers_motor_flag = TRUE;       // SoftHand not reversible motor
                 g_mem.motor[MOTOR_IDX].pos_lim_inf = 0;
                 g_mem.motor[MOTOR_IDX].pos_lim_sup = (int32)16000 << g_mem.enc[g_mem.motor[0].encoder_line].res[0];   
-            }        
+            }      
+            
+            if (g_mem.dev.dev_type == SOFTHAND_2_MOTORS){    // activate also 2nd motor and double_encoder
+                g_mem.dev.use_2nd_motor_flag = TRUE;
+                g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].double_encoder_on_off = TRUE;
+                g_mem.enc[g_mem.motor[SECOND_MOTOR_IDX].encoder_line].double_encoder_on_off = TRUE;
+            }      
+            
             break;
             
         default:
@@ -1790,6 +1881,12 @@ void prepare_generic_info(char *info_string)
             case AIR_CHAMBERS_FB:
                 strcat(info_string, "Device: AIR CHAMBERS HAPTIC FEEDBACK\r\n");
                 break;
+            case OTBK_ACT_WRIST_MS:
+                strcat(info_string, "Device: OTTOBOCK 6v ACTIVE WRIST MASTER\r\n");
+                break;
+            case SOFTHAND_2_MOTORS:
+                strcat(info_string, "Device: SOFTHAND 2 MOTORS\r\n");
+                break;
             default:
                 break;
         }
@@ -1877,6 +1974,12 @@ void prepare_generic_info(char *info_string)
                 }                
             }
             strcat(info_string, "\r\n");
+            
+            if (MOT->input_mode == INPUT_MODE_JOYSTICK){
+                sprintf(str, "Joystick measurements: %d, %d", (int)g_adc_measOld.joystick[0], (int)g_adc_measOld.joystick[1]);
+                strcat(info_string, str);
+                strcat(info_string, "\r\n");
+            }
 
             sprintf(str, "Battery %d Voltage (mV): %ld", MOTOR_IDX+1, (int32) dev_tension[MOTOR_IDX] );
             strcat(info_string, str);
@@ -1958,6 +2061,9 @@ void prepare_generic_info(char *info_string)
                     break;
                 case INPUT_MODE_EMG_FCFS_ADV:
                     strcat(info_string, "Input mode: EMG FCFS ADV\r\n");
+                    break;
+                case INPUT_MODE_JOYSTICK:
+                    strcat(info_string, "Input mode: Joystick\r\n");
                     break;
                 case INPUT_MODE_EMG_PROPORTIONAL_NC:
                     strcat(info_string, "Input mode: EMG proportional Normally Closed\r\n");
@@ -2106,16 +2212,33 @@ void prepare_generic_info(char *info_string)
         if (MEM_P->exp.read_ADC_sensors_port_flag == TRUE){
             strcat(info_string, "Additional ADC sensors value:\r\n");
             for (i = 0; i < NUM_OF_ADDITIONAL_EMGS; ++i) {
-                sprintf(str,"ADC %d -> %d", (int)(i + 1), (int) g_emg_meas.add_emg[i]);
+                sprintf(str,"ADC %d -> %d", (int)(i + 1), (int) g_adc_meas.add_emg[i]);
                 strcat(info_string, str);
                 strcat(info_string,"\r\n");
             }
             for (i = 0; i < NUM_OF_INPUT_EMGS; ++i) {
-                sprintf(str,"EMG input %d -> %d", (int)(i + 1), (int) g_emg_meas.emg[i]);
+                sprintf(str,"EMG input %d -> %d", (int)(i + 1), (int) g_adc_meas.emg[i]);
                 strcat(info_string, str);
                 strcat(info_string,"\r\n");
             }
         }
+
+#ifdef GENERIC_FW
+    
+        strcat(info_string, "\r\n");
+        strcat(info_string, "JOYSTICK CONFIGURATION\r\n");
+        sprintf(str, "Closure speed: %d", c_mem.JOY_spec.joystick_closure_speed);
+        strcat(info_string, str);
+        strcat(info_string, "\r\n");
+
+        sprintf(str, "Joystick Threshold: %d", c_mem.JOY_spec.joystick_threshold);
+        strcat(info_string, str);
+        strcat(info_string, "\r\n");
+        sprintf(str, "Joystick Gains - X:%hu  Y:%hu", c_mem.JOY_spec.joystick_gains[0], c_mem.JOY_spec.joystick_gains[1]);
+        strcat(info_string, str);
+        strcat(info_string, "\r\n");
+
+#endif
         
         if (MEM_P->SH.rest_position_flag) {
     		sprintf(str, "Rest time delay (ms): %d", (int)MEM_P->SH.rest_delay);
@@ -2393,9 +2516,12 @@ void prepare_SD_param_info(char *info_string)
             case INPUT_MODE_EMG_FCFS_ADV:
                 strcat(info_string, "Input mode: EMG FCFS ADV\r\n");
                 break;
+            case INPUT_MODE_JOYSTICK:
+                strcat(info_string, "Input mode: Joystick\r\n");
+                break;
             case INPUT_MODE_EMG_PROPORTIONAL_NC:
-                    strcat(info_string, "Input mode: EMG proportional Normally Closed\r\n");
-                    break;
+                strcat(info_string, "Input mode: EMG proportional Normally Closed\r\n");
+                break;
         }
 
         switch(MOT->control_mode) {
@@ -2465,7 +2591,8 @@ void prepare_SD_param_info(char *info_string)
 		if ((MOT->input_mode == INPUT_MODE_EMG_PROPORTIONAL) ||
 			(MOT->input_mode == INPUT_MODE_EMG_INTEGRAL) ||
 			(MOT->input_mode == INPUT_MODE_EMG_FCFS) ||
-			(MOT->input_mode == INPUT_MODE_EMG_FCFS_ADV)) {
+            (MOT->input_mode == INPUT_MODE_EMG_FCFS_ADV) ||
+			(MOT->input_mode == INPUT_MODE_EMG_PROPORTIONAL_NC)) {
 			sprintf(str, "EMG thresholds [0 - 1024]: %u, %u", MEM_P->emg.emg_threshold[0], MEM_P->emg.emg_threshold[1]);
 			strcat(info_string, str);
 			strcat(info_string, "\r\n");
@@ -2985,9 +3112,20 @@ uint8 memInit(void)
 #endif 
 
 #ifdef AIR_CHAMBERS_FB_FW
-    // Override memory values with specific ones for Air Chmabers device
+    // Override memory values with specific ones for Air Chambers device
     memInit_AirChambersFb();
 #endif 
+
+#ifdef OTBK_ACT_WRIST_MS_FW
+    // Override memory values with specific ones for Ottobock Wrist device
+    memInit_OtbkActWristMs();
+#endif
+
+    // JOYSTICK STRUCT
+    g_mem.JOY_spec.joystick_closure_speed = 150;
+    g_mem.JOY_spec.joystick_threshold = 100;
+    g_mem.JOY_spec.joystick_gains[0] = 1024;
+    g_mem.JOY_spec.joystick_gains[1] = 1024;
 
     // Default generic user_id
     g_mem.dev.user_id = GENERIC_USER;    
@@ -3084,6 +3222,35 @@ void memInit_AirChambersFb(void)
 }
 
 //==============================================================================
+//                                   MEMORY INIT OTTOBOCK ACTIVE WRIST MASTER FB
+//==============================================================================
+void memInit_OtbkActWristMs(void)
+{
+    // Default configuration with Ottobock Active Wrist feedback
+    g_mem.dev.dev_type  = OTBK_ACT_WRIST_MS;
+    g_mem.dev.right_left = LEFT_HAND;
+    
+    g_mem.motor[0].control_mode = CONTROL_PWM;
+    g_mem.motor[0].pwm_rate_limiter = 100;
+    g_mem.motor[0].not_revers_motor_flag = FALSE;
+    
+    // Drive slave with reference generated on second motor index
+    // Default slave configuration for SoftHand 3.0            
+    g_mem.motor[1].input_mode = INPUT_MODE_EMG_FCFS;
+    g_mem.motor[1].encoder_line  = g_mem.dev.right_left;
+    g_mem.motor[1].pwm_rate_limiter = PWM_RATE_LIMITER_MAX;
+    g_mem.motor[1].not_revers_motor_flag = FALSE;       // False, because it is important only to configure motor parameters to compute position reference
+    g_mem.motor[1].pos_lim_inf = 0;
+    g_mem.motor[1].pos_lim_sup = (int32)16000 << g_mem.enc[g_mem.motor[1].encoder_line].res[0];
+    
+    // WR STRUCT
+    g_mem.WR.activation_mode = 0;                // Default Fast:wrist/syn2, Slow:hand/syn1
+    g_mem.WR.fast_act_threshold[0] = 800;
+    g_mem.WR.fast_act_threshold[1] = 800;
+    g_mem.WR.wrist_direction_association = 0;   // Default Close:CW, Open:CCW
+}
+
+//==============================================================================
 //                                                    ROUTINE INTERRUPT FUNCTION
 //==============================================================================
 /**
@@ -3163,6 +3330,30 @@ void cmd_get_accelerations(){
     packet_data[7] = LCRChecksum (packet_data, 7);
 
     commWrite(packet_data, 8); 
+}
+
+void cmd_get_joystick() {
+ 
+    int16 aux_int16;
+    
+    // Packet: header + measure(int16) + crc
+    
+    uint8 packet_data[6];
+    
+    // Header        
+    packet_data[0] = CMD_GET_JOYSTICK;
+    
+    aux_int16 = (int16) g_adc_measOld.joystick[0];
+    packet_data[2] = ((char*)(&aux_int16))[0];
+    packet_data[1] = ((char*)(&aux_int16))[1];
+    
+    aux_int16 = (int16) g_adc_measOld.joystick[1];
+    packet_data[4] = ((char*)(&aux_int16))[0];
+    packet_data[3] = ((char*)(&aux_int16))[1];
+
+    packet_data[5] = LCRChecksum (packet_data, 5);
+
+    commWrite(packet_data, 6);
 }
 
 void cmd_set_inputs(){
@@ -3453,6 +3644,9 @@ void cmd_get_inputs(){
     aux_int16 = (int16)(g_refOld[0].pos >> g_mem.enc[g_mem.motor[0].encoder_line].res[0]);
     packet_data[2] = ((char*)(&aux_int16))[0];
     packet_data[1] = ((char*)(&aux_int16))[1];
+    aux_int16 = (int16)(g_refOld[1].pos >> g_mem.enc[g_mem.motor[1].encoder_line].res[0]);
+    packet_data[4] = ((char*)(&aux_int16))[0];
+    packet_data[3] = ((char*)(&aux_int16))[1];
     
     // Calculate Checksum and send message to UART 
 
@@ -3534,11 +3728,11 @@ void cmd_get_emg(){
     // Header        
     packet_data[0] = CMD_GET_EMG;
     
-    aux_int16 = (int16) g_emg_measOld.emg[0];
+    aux_int16 = (int16) g_adc_measOld.emg[0];
     packet_data[2] = ((char*)(&aux_int16))[0];
     packet_data[1] = ((char*)(&aux_int16))[1];
     
-    aux_int16 = (int16) g_emg_measOld.emg[1];
+    aux_int16 = (int16) g_adc_measOld.emg[1];
     packet_data[4] = ((char*)(&aux_int16))[0];
     packet_data[3] = ((char*)(&aux_int16))[1];
 
@@ -3764,12 +3958,50 @@ void cmd_get_ADC_raw(){
     commWrite(packet_data, 2+2*idx);
 }
 
+void cmd_get_SD_file(){
+    
+    // With PING command
+    // Get all the folders with path and contained files number in the CSV-like format
+    // USER\YYYY\MM\DD, number_of_files
+    
+    
+    
+    // Get the total number of files by sum of number_of_files fields
+    
+    // Read each file and send it to API
+    
+ /*   //Retrieve Additional EMG port raw values
+    
+    uint8 packet_data[2+2*NUM_OF_ADC_CHANNELS_MAX];
+    uint8 CYDATA i, idx = 0;
+    int16 aux_int16;
+    
+    // Header        
+    packet_data[0] = CMD_GET_ADC_RAW;
+    
+    // Fill payload
+    for (i = 0; i < NUM_OF_ANALOG_INPUTS; i++) {       
+        if (c_mem.exp.ADC_conf[i] == 1) {
+            aux_int16 = (int16) ADC_buf[i];
+            packet_data[(idx << 1) + 2] = ((char*)(&aux_int16))[0];
+            packet_data[(idx << 1) + 1] = ((char*)(&aux_int16))[1];
+            idx++;
+        }
+    }
+
+    // Calculate checksum
+    packet_data[1+2*idx] = LCRChecksum(packet_data, 1+2*idx);
+    
+    // Send package to UART
+    commWrite(packet_data, 2+2*idx);*/
+}
+
 //==============================================================================
 //                                                          AIR CHAMBERS CONTROL
 //==============================================================================
 /* It asks current difference to the SoftHand and sets force feedback device inputs proportionally to this difference.*/
 
-void air_chambers_control() {
+void air_chambers_control(int slave_motor_idx) {
     
 #ifdef AIR_CHAMBERS_FB_FW
     
@@ -3832,6 +4064,172 @@ void air_chambers_control() {
         g_refNew[0].pwm = 0;
         
     VALVE_Write(valve_command);
+    
+    
+    // Drive slave with reference generated on second motor index
+    // Use second motor structures and parameters, only to generate position reference not for PID control
+    // IMPORTANT: configure second motor parameters with proper slave parameters
+    motor_control_generic(slave_motor_idx);
+#endif
+}
+
+
+//==============================================================================
+//                                                   EMG ACTIVATION VELOCITY FSM
+//==============================================================================
+/* It decides which is the current emg activation velocity.*/
+
+uint8 emg_activation_velocity_fsm() {
+      
+    static uint8 fsm_state = RELAX_STATE;     // Wrist FSM state
+    static int32 cnt = 0;
+    int32 CYDATA err_emg_1, err_emg_2; 
+    int32 CYDATA f_err_emg_1, f_err_emg_2; 
+    
+    err_emg_1 = g_adc_meas.emg[0] - c_mem.emg.emg_threshold[0];
+    err_emg_2 = g_adc_meas.emg[1] - c_mem.emg.emg_threshold[1];
+    f_err_emg_1 = g_adc_meas.emg[0] - c_mem.WR.fast_act_threshold[0];
+    f_err_emg_2 = g_adc_meas.emg[1] - c_mem.WR.fast_act_threshold[1];
+    
+
+    // State machine - Evaluate emg activation status
+    // Note: in this way, diff_emg_1 and diff_emg_2 are for sure differences between two consecutive activated values
+    switch (fsm_state){
+        case RELAX_STATE:
+            if (err_emg_1 > 0 || err_emg_2 > 0){
+                fsm_state = TIMER_STATE;
+            }
+            
+            break;
+        case TIMER_STATE:     // Timer
+            if (err_emg_1 > 0 || err_emg_2 > 0){
+                cnt = cnt +1;
+            }
+            else {
+                fsm_state = RELAX_STATE;
+            }
+            
+            if (cnt > 100){
+                if ((err_emg_1 > 0 && f_err_emg_1 > 0) || (err_emg_2 > 0 && f_err_emg_2 > 0)){
+                    // Fast activation
+                    if (c_mem.WR.activation_mode == 0){
+                        fsm_state = MOVE_FAST_ACT;
+                    }
+                    else{
+                        fsm_state = MOVE_SLOW_ACT;
+                    }
+                }
+                if ((err_emg_1 > 0 && f_err_emg_1 < 0) || (err_emg_2 > 0 && f_err_emg_2 < 0)){
+                    // Slow activation
+                    if (c_mem.WR.activation_mode == 0){
+                        fsm_state = MOVE_SLOW_ACT;
+                    }
+                    else{
+                        fsm_state = MOVE_FAST_ACT;
+                    }
+                }
+                if (err_emg_1 < 0 && err_emg_2 < 0){
+                    // Involuntary activation
+                    fsm_state = RELAX_STATE;
+                }
+                cnt = 0;
+            }
+    
+            break;
+        case MOVE_FAST_ACT:
+            
+            if (err_emg_1 < 0 && err_emg_2 < 0){
+                fsm_state = RELAX_STATE;
+            }
+        
+            break;
+        case MOVE_SLOW_ACT:
+          
+            if (err_emg_1 < 0 && err_emg_2 < 0){
+                fsm_state = RELAX_STATE;
+            }
+            
+            break;
+    }
+    
+    return fsm_state;
+
+}
+
+//==============================================================================
+//                                          OTTOBOCK ACTIVE WRIST MASTER CONTROL
+//==============================================================================
+/* It moves Ottobock active wrist (as master) and connected SoftHand slave according to emg activation velocity.*/
+
+void otbk_act_wrist_control(int slave_motor_idx) {
+    
+#ifdef OTBK_ACT_WRIST_MS_FW
+    
+    uint8 fsm_state = emg_activation_velocity_fsm();
+        
+    // State machine - Evaluate emg activation status
+    // Note: in this way, diff_emg_1 and diff_emg_2 are for sure differences between two consecutive activated values
+    switch (fsm_state){
+        case RELAX_STATE:
+            
+            // Wrist stop
+            g_refNew[0].pwm = 0;
+            
+            // Softhand stop
+            // Do not update the motor reference, so the SoftHand stays still
+            g_ref[slave_motor_idx].pos = g_refOld[slave_motor_idx].pos;
+            g_refNew[slave_motor_idx].pos = g_ref[slave_motor_idx].pos;
+            
+            break;
+        case TIMER_STATE:     // Timer
+                
+            break;
+        case MOVE_FAST_ACT: // Wrist movement
+            
+            // Wrist movement
+            if (g_adc_meas.emg[0] > g_adc_meas.emg[1]){
+                if (c_mem.WR.wrist_direction_association == 0){
+                    g_refNew[0].pwm = 60;       //Rotate CW
+                }
+                else {
+                    g_refNew[0].pwm = -60;   // Rotate CCW
+                }
+            }
+            else {
+                if (c_mem.WR.wrist_direction_association == 0){
+                    g_refNew[0].pwm = -60;   // Rotate CCW
+                }
+                else {
+                    g_refNew[0].pwm = 60;       //Rotate CW
+                }
+            }
+            
+            // Softhand stop
+            // Do not update the motor reference, so the SoftHand stays still
+            g_ref[slave_motor_idx].pos = g_refOld[slave_motor_idx].pos;
+            g_refNew[slave_motor_idx].pos = g_ref[slave_motor_idx].pos;
+            
+            break;
+        case MOVE_SLOW_ACT: // Hand movement
+            
+            // Wrist stop
+            g_refNew[0].pwm = 0;
+            
+            // SoftHand movement
+            // Drive slave with reference generated on second motor index
+            // Use second motor structures and parameters, only to generate position reference not for PID control
+            // IMPORTANT: configure second motor parameters with proper slave parameters
+            motor_control_generic(slave_motor_idx);
+            
+            break;
+    }
+        
+    // Limit output voltage
+    if (g_refNew[0].pwm > 67) // 67 (8.4V max of 2S ottobock battery) 66.6% of 12.6V
+        g_refNew[0].pwm = 67; // 67
+    if (g_refNew[0].pwm < -67)
+        g_refNew[0].pwm = -67;
+    
 #endif
 }
 
@@ -3845,18 +4243,19 @@ void drive_slave(uint8 motor_idx, uint8 slave_ID) {
     uint8 packet_data[6];
     uint8 packet_lenght;
     int16 aux_int16;
-    
+
     // If not the use of handle or an emg input mode is set, exit from master_mode
     if( c_mem.motor[motor_idx].input_mode != INPUT_MODE_ENCODER3          &&
         c_mem.motor[motor_idx].input_mode != INPUT_MODE_EMG_PROPORTIONAL  &&
         c_mem.motor[motor_idx].input_mode != INPUT_MODE_EMG_INTEGRAL      &&
         c_mem.motor[motor_idx].input_mode != INPUT_MODE_EMG_FCFS          &&
-        c_mem.motor[motor_idx].input_mode != INPUT_MODE_EMG_FCFS_ADV     ){
+        c_mem.motor[motor_idx].input_mode != INPUT_MODE_EMG_FCFS_ADV          &&
+        c_mem.motor[motor_idx].input_mode != INPUT_MODE_EMG_PROPORTIONAL_NC     ){
         master_mode = 0;
         return;
     }
         
-    if (dev_tension[0] > 5000 && dev_tension[0] < 7000){
+    if (dev_tension[0] >= 5000 && dev_tension[0] < 7000){
         master_mode = 0;
         return;
     }
@@ -3877,10 +4276,10 @@ void drive_slave(uint8 motor_idx, uint8 slave_ID) {
 }
 
 //==============================================================================
-//                                                                 STOP FEEDBACK
+//                                                            STOP MASTER DEVICE
 //==============================================================================
  
-void stop_feedback() {
+void stop_master_device() {
     
 #ifdef AIR_CHAMBERS_FB_FW
     if (c_mem.dev.dev_type == AIR_CHAMBERS_FB){
@@ -3889,6 +4288,13 @@ void stop_feedback() {
         VALVE_Write(0);
     }
 #endif
+
+#ifdef OTBK_ACT_WRIST_MS_FW
+    if (c_mem.dev.dev_type == OTBK_ACT_WRIST_MS){
+        //Stop wrist motor
+        g_refNew[0].pwm = 0;
+    }
+#endif    
 }
 
 //==============================================================================
@@ -3904,13 +4310,14 @@ void deactivate_slaves() {
     
     // If not a emg input mode is set, exit from master_mode
     if(c_mem.motor[0].input_mode != INPUT_MODE_EMG_PROPORTIONAL  &&
-        c_mem.motor[0].input_mode != INPUT_MODE_EMG_INTEGRAL      &&
-        c_mem.motor[0].input_mode != INPUT_MODE_EMG_FCFS          &&
-        c_mem.motor[0].input_mode != INPUT_MODE_EMG_FCFS_ADV     ){
+        c_mem.motor[0].input_mode != INPUT_MODE_EMG_INTEGRAL     &&
+        c_mem.motor[0].input_mode != INPUT_MODE_EMG_FCFS         &&
+        c_mem.motor[0].input_mode != INPUT_MODE_EMG_FCFS_ADV     &&
+        c_mem.motor[0].input_mode != INPUT_MODE_EMG_PROPORTIONAL_NC     ){
         master_mode = 0;
         return;
     }
-    
+   
     //Sends a Set inputs command to a second board
     packet_data[0] = CMD_ACTIVATE;
 

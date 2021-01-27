@@ -327,7 +327,7 @@ void function_scheduler(void) {
             }
             break;
             
-        case GENERIC_2_MOTORS:
+        case GENERIC_2_MOTORS: case SOFTHAND_2_MOTORS:
             
             //---------------------------------- Get Encoders
             for (uint8 i = 0; i < N_ENCODER_LINE_MAX; i++) {
@@ -399,32 +399,25 @@ void function_scheduler(void) {
             }  
             break;
             
-        case AIR_CHAMBERS_FB:
+        case AIR_CHAMBERS_FB: case OTBK_ACT_WRIST_MS:
             
             //---------------------------------- Force Feedback control
             if (master_mode && c_mem.MS.slave_comm_active) {
                 
-                air_chambers_control();
-            
-                // Check Interrupt 
-                
-                if (interrupt_flag){
-                    interrupt_flag = FALSE;
-                    interrupt_manager();
+                if (c_mem.dev.dev_type == AIR_CHAMBERS_FB){
+                    air_chambers_control(SECOND_MOTOR_IDX);
                 }
-                
-                // Drive slave with reference generated on second motor index
-                // Use second motor structures and parameters, only to generate position reference not for PID control
-                // IMPORTANT: configure second motor parameters with proper slave parameters
-                motor_control_generic(SECOND_MOTOR_IDX);
-                
+                else{ //OTBK_ACT_WRIST_MS
+                    otbk_act_wrist_control(SECOND_MOTOR_IDX);
+                }
+
                 // Check Interrupt 
 
                 if (interrupt_flag){
                     interrupt_flag = FALSE;
                     interrupt_manager();
                 }
-                
+            
                 drive_slave(SECOND_MOTOR_IDX, c_mem.MS.slave_ID);
             
                 // Check Interrupt 
@@ -438,7 +431,7 @@ void function_scheduler(void) {
                 
                 if (c_mem.MS.slave_comm_active) {
                     // Stop feedback motors
-                    stop_feedback();
+                    stop_master_device();
                 }
                 // Disable slave or motors
                 deactivate_slaves();
@@ -450,8 +443,17 @@ void function_scheduler(void) {
                 } 
             }
     
-            // Control MOTOR_IDX motor [PUMP] with PWM control
+            // Control Master device main motor 
+            // (e.g. in AIR_CHAMBERS_FB device controls MOTOR_IDX motor [PUMP] with PWM control)
             motor_control_generic(MOTOR_IDX);
+                        
+            // Always limit output voltage on the wrist
+             if (c_mem.dev.dev_type == OTBK_ACT_WRIST_MS){
+                if (g_refNew[0].pwm > 67) // 67 (8.4V max of 2S ottobock battery) 66.6% of 12.6V
+                    g_refNew[0].pwm = 67; // 67
+                if (g_refNew[0].pwm < -67)
+                    g_refNew[0].pwm = -67;
+            }
             
             // Check Interrupt 
 
@@ -586,7 +588,7 @@ void function_scheduler(void) {
     //---------------------------------- Update States
     
     // Load k-1 state
-    memcpy( &g_emg_measOld, &g_emg_meas, sizeof(g_emg_meas) );
+    memcpy( &g_adc_measOld, &g_adc_meas, sizeof(g_adc_meas) );
     memcpy( &g_measOld, &g_meas, sizeof(g_meas) );
     memcpy( &g_refOld, &g_ref, sizeof(g_ref) );
 
@@ -606,6 +608,372 @@ void function_scheduler(void) {
 }
 
 //==============================================================================
+//                                                       COMPUTE MOTOR REFERENCE
+//==============================================================================
+void compute_reference(uint8 motor_idx, struct st_ref* st_ref_p, struct st_ref* st_refOld_p) {
+    
+    int32 CYDATA handle_value;
+    int32 CYDATA err_emg_1, err_emg_2;
+    struct st_motor* MOT = &c_mem.motor[motor_idx];      // SoftHand default motor
+    uint8 ENC_L = MOT->encoder_line;          // Associated encoder line
+    
+    static uint8 current_emg[NUM_OF_MOTORS] = {0, 0};   // 0 NONE
+                                                        // 1 EMG 1
+                                                        // 2 EMG 2
+                                                        // wait for both to get down
+    
+    err_emg_1 = g_adc_meas.emg[0] - c_mem.emg.emg_threshold[0];
+    err_emg_2 = g_adc_meas.emg[1] - c_mem.emg.emg_threshold[1];
+    
+     // =========================== POSITION INPUT ==============================            
+    switch(MOT->input_mode) {
+        case INPUT_MODE_ENCODER3:
+
+            // Calculate handle value based on position of handle in the
+            // sensor chain and multiplication factor between handle and motor position
+            if (c_mem.enc[ENC_L].double_encoder_on_off) 
+                handle_value = (g_meas[ENC_L].pos[2] * c_mem.enc[ENC_L].motor_handle_ratio) + MOT->pos_lim_inf;
+            else
+                handle_value = (g_meas[ENC_L].pos[1] * c_mem.enc[ENC_L].motor_handle_ratio) + MOT->pos_lim_inf;
+            
+
+            // Read handle and use it as reference for the motor
+            if (((handle_value - st_refOld_p->pos) > MOT->max_step_pos) && (MOT->max_step_pos != 0))
+                st_ref_p->pos += MOT->max_step_pos;
+            else {
+                if (((handle_value - st_refOld_p->pos) < MOT->max_step_neg) && (MOT->max_step_neg != 0))
+                    st_ref_p->pos += MOT->max_step_neg;
+                else
+                    st_ref_p->pos = handle_value;
+            }
+            break;
+        
+        case INPUT_MODE_JOYSTICK:
+            
+            if (c_mem.dev.use_2nd_motor_flag == FALSE){
+                // Code for single motor devices. Use only up/down direction to give speed reference
+                st_ref_p->pos = st_refOld_p->pos;
+                if(!(g_adc_meas.joystick[0] > 700)) {
+                    int32 CYDATA err_joy_1 = g_adc_meas.joystick[0] - c_mem.JOY_spec.joystick_threshold;
+
+                    if(g_adc_meas.joystick[0] > c_mem.JOY_spec.joystick_threshold) {     //both motors wind the wire around the pulley
+                        st_ref_p->pos += ((int32) err_joy_1 * c_mem.JOY_spec.joystick_closure_speed) / (1024 - c_mem.JOY_spec.joystick_threshold);
+                    }
+                    else {
+                        err_joy_1 = g_adc_meas.joystick[0] + c_mem.JOY_spec.joystick_threshold;
+                        if(g_adc_meas.joystick[0] < -c_mem.JOY_spec.joystick_threshold) {  //both motors unroll the wire around the pulley
+                            st_ref_p->pos += ((int32) err_joy_1 * c_mem.JOY_spec.joystick_closure_speed) / (1024 - c_mem.JOY_spec.joystick_threshold);
+                        }
+                    }
+                }
+                else {  //The button is pressed and the motor reference is gradually set to zero 
+                    st_ref_p->pos -= (int32) g_mem.JOY_spec.joystick_closure_speed;
+                }
+            }
+            else {
+                // Code for two motors devices. Use both direction to give speed references
+                if (c_mem.dev.dev_type == SOFTHAND_2_MOTORS){
+                    compute_SoftHand_2_motors_joystick_reference(motor_idx, st_ref_p, st_refOld_p);
+                }
+            }
+            break;
+            
+        case INPUT_MODE_EMG_PROPORTIONAL:
+            if (err_emg_1 > 0)
+                st_ref_p->pos = (err_emg_1 * g_mem.motor[motor_idx].pos_lim_sup) / (1024 - c_mem.emg.emg_threshold[0]);
+            else
+                st_ref_p->pos = 0;
+            break;
+        
+        case INPUT_MODE_EMG_PROPORTIONAL_NC:
+            if (err_emg_1 > 0)
+                st_ref_p->pos = g_mem.motor[motor_idx].pos_lim_sup - (err_emg_1 * g_mem.motor[motor_idx].pos_lim_sup) / (1024 - c_mem.emg.emg_threshold[0]);
+            else
+                st_ref_p->pos = g_mem.motor[motor_idx].pos_lim_sup;
+            break;
+
+        case INPUT_MODE_EMG_INTEGRAL:
+            st_ref_p->pos = st_refOld_p->pos;
+            if (err_emg_1 > 0) {
+                st_ref_p->pos = st_refOld_p->pos + (err_emg_1 * (int)g_mem.emg.emg_speed[0] * 2) / (1024 - c_mem.emg.emg_threshold[0]);
+            }
+            if (err_emg_2 > 0) {
+                st_ref_p->pos = st_refOld_p->pos - (err_emg_2 * (int)g_mem.emg.emg_speed[1] * 2) / (1024 - c_mem.emg.emg_threshold[1]);
+            }
+            break;
+
+        case INPUT_MODE_EMG_FCFS:
+            st_ref_p->pos = st_refOld_p->pos;
+            if (c_mem.dev.dev_type != SOFTHAND_2_MOTORS){
+                switch (current_emg[motor_idx]) {
+                    case 0:
+                        // Look for the first EMG passing the threshold
+                        if (err_emg_1 > 0 && err_emg_1 > err_emg_2) {
+                            current_emg[motor_idx] = 1;
+                            break;
+                        }
+                        if (err_emg_2 > 0 && err_emg_2 > err_emg_1) {
+                            current_emg[motor_idx] = 2;
+                            break;
+                        }
+                        break;
+
+                    case 1:
+                        // EMG 1 is first
+                        if (err_emg_1 < 0) {
+                            current_emg[motor_idx] = 0;
+                            break;
+                        }
+                        st_ref_p->pos = st_refOld_p->pos + (err_emg_1 * g_mem.emg.emg_speed[0] << 2) / (1024 - c_mem.emg.emg_threshold[0]);
+                        break;
+
+                    case 2:
+                        // EMG 2 is first
+                        if (err_emg_2 < 0) {
+                            current_emg[motor_idx] = 0;
+                            break;
+                        }
+                        st_ref_p->pos = st_refOld_p->pos - (err_emg_2 * g_mem.emg.emg_speed[1] << 2) / (1024 - c_mem.emg.emg_threshold[1]);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            else{ // case SOFTHAND_2_MOTORS
+                //compute reference using a FSM for choosing the right sinergy to activate
+                compute_SoftHand_2_motors_emg_reference(motor_idx, st_ref_p, st_refOld_p, err_emg_1, err_emg_2);
+            }
+            break;
+
+        case INPUT_MODE_EMG_FCFS_ADV:
+            st_ref_p->pos = st_refOld_p->pos;
+            switch (current_emg[motor_idx]) {
+                // Look for the first EMG passing the threshold
+                case 0:
+                    if (err_emg_1 > 0 && err_emg_1 > err_emg_2) {
+                        current_emg[motor_idx] = 1;
+                        break;
+                    }
+                    if (err_emg_2 > 0 && err_emg_2 > err_emg_1) {
+                        current_emg[motor_idx] = 2;
+                        break;
+                    }
+                    break;
+
+                // EMG 1 is first
+                case 1:
+                    // If both signals are under threshold go back to status 0
+                    if ((err_emg_1 < 0) && (err_emg_2 < 0)) {
+                        current_emg[motor_idx] = 0;
+                        break;
+                    }
+                    // but if the current signal come back over threshold, continue using it
+                    if (err_emg_1 > 0) 
+                        st_ref_p->pos = st_refOld_p->pos + (err_emg_1 * g_mem.emg.emg_speed[0] << 2) / (1024 - c_mem.emg.emg_threshold[0]);
+                    
+                    break;
+
+                // EMG 2 is first
+                case 2:
+                    // If both signals are under threshold go back to status 0
+                    if ((err_emg_1 < 0) && (err_emg_2 < 0)) {
+                        current_emg[motor_idx] = 0;
+                        break;
+                    }
+                    // but if the current signal come back over threshold, continue using it
+                    if (err_emg_2 > 0) {
+                        st_ref_p->pos = st_refOld_p->pos - (err_emg_2 * c_mem.emg.emg_speed[1] << 2) / (1024 - c_mem.emg.emg_threshold[1]);
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+            break;
+
+        default:
+            break;
+    }
+
+    // Position limit saturation
+    if (MOT->pos_lim_flag) {
+        if (st_ref_p->pos < MOT->pos_lim_inf) 
+            st_ref_p->pos = MOT->pos_lim_inf;
+        if (st_ref_p->pos > MOT->pos_lim_sup) 
+            st_ref_p->pos = MOT->pos_lim_sup;
+    }
+    
+    // SAFETY
+    if (battery_low_SoC == TRUE) {
+        //Reopen the terminal device before disabling motor
+        st_ref_p->pos = 0;
+    }      
+    
+       
+    if (c_mem.SH.rest_position_flag == TRUE) {
+        if (rest_enabled == 1){
+            // Change position reference to drive motor to rest position smoothly
+            st_ref_p->pos = rest_pos_curr_ref;
+        }
+        
+        if (forced_open == 1) {
+            // Open the SoftHand as EMG PROPORTIONAL input mode 
+            if (err_emg_2 > 0)
+                st_ref_p->pos = g_mem.SH.rest_pos - (err_emg_2 * g_mem.SH.rest_pos) / (1024 - c_mem.emg.emg_threshold[1]);
+            else {
+                st_ref_p->pos = g_mem.SH.rest_pos;
+                forced_open = 0;
+            }
+        }
+    }
+}
+
+
+//==============================================================================
+//                                  COMPUTE SOFTHAND 2 MOTORS JOYSTICK REFERENCE
+//==============================================================================
+void compute_SoftHand_2_motors_joystick_reference(uint8 motor_idx, struct st_ref* st_ref_p, struct st_ref* st_refOld_p){
+    
+    if (c_mem.motor[0].input_mode == INPUT_MODE_JOYSTICK && c_mem.motor[1].input_mode == INPUT_MODE_JOYSTICK){  //only if both motor inputs are in joystick mode
+        st_ref_p->pos = st_refOld_p->pos;
+    
+        if(!(g_adc_meas.joystick[0] > 700)) {
+             
+            int32 CYDATA err_joy_1 = 0;
+            int32 CYDATA err_joy_2 = 0;
+        
+            if(g_adc_meas.joystick[0] > c_mem.JOY_spec.joystick_threshold) {     //both motors wind the wire around the pulley
+                err_joy_1 = g_adc_meas.joystick[0] - c_mem.JOY_spec.joystick_threshold;
+                st_ref_p->pos += ((int32) err_joy_1 * c_mem.JOY_spec.joystick_closure_speed) / (1024 - c_mem.JOY_spec.joystick_threshold);
+            }
+            else {
+                if(g_adc_meas.joystick[0] < -c_mem.JOY_spec.joystick_threshold) {  //both motors unroll the wire around the pulley
+                    err_joy_1 = g_adc_meas.joystick[0] + c_mem.JOY_spec.joystick_threshold;
+                    st_ref_p->pos += ((int32) err_joy_1 * c_mem.JOY_spec.joystick_closure_speed) / (1024 - c_mem.JOY_spec.joystick_threshold);               
+                }
+            }
+
+            if(g_adc_meas.joystick[1] > c_mem.JOY_spec.joystick_threshold) {    //The wire is winded around the first pulley and unwinded from the second one
+                err_joy_2 = g_adc_meas.joystick[1] - c_mem.JOY_spec.joystick_threshold;
+                if (motor_idx == 0){
+                    st_ref_p->pos += ((int32) err_joy_2 * c_mem.JOY_spec.joystick_closure_speed) / (1024 - c_mem.JOY_spec.joystick_threshold);   
+                }
+                if (motor_idx == 1){
+                    st_ref_p->pos -= ((int32) err_joy_2 * c_mem.JOY_spec.joystick_closure_speed) / (1024 - c_mem.JOY_spec.joystick_threshold);   
+                }          
+            }
+            else {
+                if(g_adc_meas.joystick[1] < -c_mem.JOY_spec.joystick_threshold) {  //The wire is unwinded from the first pulley and winded on the second one
+                    
+                    err_joy_2 = g_adc_meas.joystick[1] + c_mem.JOY_spec.joystick_threshold;
+                    if (motor_idx == 0){
+                        st_ref_p->pos += ((int32) err_joy_2 * c_mem.JOY_spec.joystick_closure_speed) / (1024 - c_mem.JOY_spec.joystick_threshold);   
+                    }
+                    if (motor_idx == 1){
+                        st_ref_p->pos -= ((int32) err_joy_2 * c_mem.JOY_spec.joystick_closure_speed) / (1024 - c_mem.JOY_spec.joystick_threshold);   
+                    }
+                }
+            }
+        }
+        else {  //The button is pressed and the hand is opened firstly making the position difference
+                //equal to zero, then the position sum is gradually set to zero 
+            int32 pos_diff = (g_meas[c_mem.motor[0].encoder_line].pos[0] - g_meas[c_mem.motor[0].encoder_line].pos[1]) >> c_mem.enc[c_mem.motor[0].encoder_line].res[0];
+            int32 pos_sum = (g_meas[c_mem.motor[0].encoder_line].pos[0] + g_meas[c_mem.motor[0].encoder_line].pos[1]) >> c_mem.enc[c_mem.motor[0].encoder_line].res[0];
+
+            if(pos_diff > 500 || pos_diff < -500) {
+                if(SIGN(pos_diff) == 1) {
+                    if (motor_idx == 1){
+                        st_ref_p->pos += c_mem.JOY_spec.joystick_closure_speed;
+                    }
+                    if (motor_idx == 0){
+                        st_ref_p->pos -= c_mem.JOY_spec.joystick_closure_speed / 2;
+                    }                    
+                }
+                else {
+                    if (motor_idx == 0){
+                        st_ref_p->pos += c_mem.JOY_spec.joystick_closure_speed;
+                    }
+                    if (motor_idx == 1){
+                        st_ref_p->pos -= c_mem.JOY_spec.joystick_closure_speed / 2;
+                    }
+                }
+                
+            }
+            else {
+                if(pos_sum > 0) {
+                    if (motor_idx == 0){
+                        st_ref_p->pos -= c_mem.JOY_spec.joystick_closure_speed * 2;
+                    }
+                    if (motor_idx == 1){
+                        st_ref_p->pos -= c_mem.JOY_spec.joystick_closure_speed * 2;
+                    }
+                    
+                    if (st_ref_p->pos < 0){
+                        st_ref_p->pos = 0;
+                    }
+                }
+            }
+        }
+    }           
+}
+
+
+//==============================================================================
+//                                       COMPUTE SOFTHAND 2 MOTORS EMG REFERENCE
+//==============================================================================
+void compute_SoftHand_2_motors_emg_reference(uint8 motor_idx, struct st_ref* st_ref_p, struct st_ref* st_refOld_p,
+    int32 err_emg_1, int32 err_emg_2) {
+    
+    //Compute reference using a FSM for choosing the right sinergy to activate (call this routine only once per cycle)
+    static uint8 fsm_state;     
+    if (motor_idx == 0){        //update the fsm only at motor 0 compute reference call and hold the value for motor 1 reference computation
+        fsm_state = emg_activation_velocity_fsm();
+    }
+       
+    switch (fsm_state){
+        case RELAX_STATE: case TIMER_STATE:
+             
+            st_ref_p->pos = st_refOld_p->pos;
+    
+            break;
+        
+        case MOVE_SLOW_ACT: // First sinergy movement (related to default slow activation)
+
+            if (err_emg_1 > 0 && err_emg_1 > err_emg_2) {   //both motors wind the wire around the pulley and use emg1 error
+               st_ref_p->pos = st_refOld_p->pos + (err_emg_1 * g_mem.emg.emg_speed[0] << 2) / (1024 - c_mem.emg.emg_threshold[0]);                       
+            }
+            if (err_emg_2 > 0 && err_emg_2 > err_emg_1) {   //both motors unroll the wire around the pulley and use emg2 error
+               st_ref_p->pos = st_refOld_p->pos - (err_emg_2 * g_mem.emg.emg_speed[1] << 2) / (1024 - c_mem.emg.emg_threshold[1]);
+            }
+            
+            break;
+            
+        case MOVE_FAST_ACT: // Second sinergy movement (related to default fast activation)
+            
+            if (err_emg_1 > 0 && err_emg_1 > err_emg_2) {   //(Pinch) The wire is winded around the first pulley and unwinded from the second one
+                if (motor_idx == 0){
+                    st_ref_p->pos = st_refOld_p->pos + (err_emg_1 * g_mem.emg.emg_speed[0] << 2) / (1024 - c_mem.emg.emg_threshold[0]);   
+                }
+                if (motor_idx == 1){
+                    st_ref_p->pos = st_refOld_p->pos - (err_emg_1 * g_mem.emg.emg_speed[0] << 2) / (1024 - c_mem.emg.emg_threshold[0]);  
+                }   
+            }
+            if (err_emg_2 > 0 && err_emg_2 > err_emg_1) {   //(Index point) The wire is unwinded from the first pulley and winded on the second one
+                if (motor_idx == 0){
+                    st_ref_p->pos = st_refOld_p->pos - (err_emg_2 * g_mem.emg.emg_speed[1] << 2) / (1024 - c_mem.emg.emg_threshold[1]);   
+                }
+                if (motor_idx == 1){
+                    st_ref_p->pos = st_refOld_p->pos + (err_emg_2 * g_mem.emg.emg_speed[1] << 2) / (1024 - c_mem.emg.emg_threshold[1]);  
+                }
+            }
+            
+            break;
+    }
+ 
+}
+
+//==============================================================================
 //                                                        MOTOR CONTROL SOFTHAND
 //==============================================================================
 void motor_control_SH() {
@@ -614,9 +982,7 @@ void motor_control_SH() {
     int32 CYDATA pos_error;         // position error
     int32 CYDATA curr_error;        // current error
     int32 CYDATA i_ref;             // current reference
-    int32 CYDATA handle_value;
-    int32 CYDATA err_emg_1, err_emg_2;
-
+ 
     uint8 MOTOR_IDX = 0;
     
     struct st_motor* SH_MOT = &c_mem.motor[MOTOR_IDX];      // SoftHand default motor
@@ -649,185 +1015,14 @@ void motor_control_SH() {
 
     static CYBIT motor_dir = FALSE;
     static uint32 position_counter = 0;
-    static uint8 current_emg = 0;   // 0 NONE
-                                    // 1 EMG 1
-                                    // 2 EMG 2
-                                    // wait for both to get down
-    
-
-    err_emg_1 = g_emg_meas.emg[0] - c_mem.emg.emg_threshold[0];
-    err_emg_2 = g_emg_meas.emg[1] - c_mem.emg.emg_threshold[1];
-
-    // =========================== POSITION INPUT ==============================            
-    switch(SH_MOT->input_mode) {
-        case INPUT_MODE_ENCODER3:
-
-            // Calculate handle value based on position of handle in the
-            // sensor chain and multiplication factor between handle and motor position
-            if (c_mem.enc[SH_ENC_L].double_encoder_on_off) 
-                handle_value = (g_meas[SH_ENC_L].pos[2] * c_mem.enc[SH_ENC_L].motor_handle_ratio) + SH_MOT->pos_lim_inf;
-            else
-                handle_value = (g_meas[SH_ENC_L].pos[1] * c_mem.enc[SH_ENC_L].motor_handle_ratio) + SH_MOT->pos_lim_inf;
-            
-
-            // Read handle and use it as reference for the motor
-            if (((handle_value - g_refOld[0].pos) > SH_MOT->max_step_pos) && (SH_MOT->max_step_pos != 0))
-                g_ref[0].pos += SH_MOT->max_step_pos;
-            else {
-                if (((handle_value - g_refOld[0].pos) < SH_MOT->max_step_neg) && (SH_MOT->max_step_neg != 0))
-                    g_ref[0].pos += SH_MOT->max_step_neg;
-                else
-                    g_ref[0].pos = handle_value;
-            }
-            break;
-            
-        case INPUT_MODE_EMG_PROPORTIONAL:
-            if (err_emg_1 > 0)
-                g_ref[0].pos = (err_emg_1 * g_mem.motor[0].pos_lim_sup) / (1024 - c_mem.emg.emg_threshold[0]);
-            else
-                g_ref[0].pos = 0;
-            break;
-                
-        case INPUT_MODE_EMG_PROPORTIONAL_NC:
-            if (err_emg_1 > 0)
-                g_ref[0].pos = g_mem.motor[0].pos_lim_sup - (err_emg_1 * g_mem.motor[0].pos_lim_sup) / (1024 - c_mem.emg.emg_threshold[0]);
-            else
-                g_ref[0].pos = g_mem.motor[0].pos_lim_sup;
-            break;
-
-        case INPUT_MODE_EMG_INTEGRAL:
-            g_ref[0].pos = g_mem.motor[0].pos_lim_sup - g_refOld[0].pos;
-            if (err_emg_1 > 0) {
-                g_ref[0].pos = g_refOld[0].pos + (err_emg_1 * (int)g_mem.emg.emg_speed[0] * 2) / (1024 - c_mem.emg.emg_threshold[0]);
-            }
-            if (err_emg_2 > 0) {
-                g_ref[0].pos = g_refOld[0].pos - (err_emg_2 * (int)g_mem.emg.emg_speed[1] * 2) / (1024 - c_mem.emg.emg_threshold[1]);
-            }
-            break;
-
-
-        case INPUT_MODE_EMG_FCFS:
-            g_ref[0].pos = g_refOld[0].pos;
-            switch (current_emg) {
-                case 0:
-                    // Look for the first EMG passing the threshold
-                    if (err_emg_1 > 0 && err_emg_1 > err_emg_2) {
-                        current_emg = 1;
-                        break;
-                    }
-                    if (err_emg_2 > 0 && err_emg_2 > err_emg_1) {
-                        current_emg = 2;
-                        break;
-                    }
-                    break;
-
-                case 1:
-                    // EMG 1 is first
-                    if (err_emg_1 < 0) {
-                        current_emg = 0;
-                        break;
-                    }
-                    g_ref[0].pos = g_refOld[0].pos + (err_emg_1 * g_mem.emg.emg_speed[0] << 2) / (1024 - c_mem.emg.emg_threshold[0]);
-                    break;
-
-                case 2:
-                    // EMG 2 is first
-                    if (err_emg_2 < 0) {
-                        current_emg = 0;
-                        break;
-                    }
-                    g_ref[0].pos = g_refOld[0].pos - (err_emg_2 * g_mem.emg.emg_speed[1] << 2) / (1024 - c_mem.emg.emg_threshold[1]);
-                    break;
-
-                default:
-                    break;
-            }
-            break;
-
-        case INPUT_MODE_EMG_FCFS_ADV:
-            g_ref[0].pos = g_refOld[0].pos;
-            switch (current_emg) {
-                // Look for the first EMG passing the threshold
-                case 0:
-                    if (err_emg_1 > 0 && err_emg_1 > err_emg_2) {
-                        current_emg = 1;
-                        break;
-                    }
-                    if (err_emg_2 > 0 && err_emg_2 > err_emg_1) {
-                        current_emg = 2;
-                        break;
-                    }
-                    break;
-
-                // EMG 1 is first
-                case 1:
-                    // If both signals are under threshold go back to status 0
-                    if ((err_emg_1 < 0) && (err_emg_2 < 0)) {
-                        current_emg = 0;
-                        break;
-                    }
-                    // but if the current signal come back over threshold, continue using it
-                    if (err_emg_1 > 0) 
-                        g_ref[0].pos = g_refOld[0].pos + (err_emg_1 * g_mem.emg.emg_speed[0] << 2) / (1024 - c_mem.emg.emg_threshold[0]);
-                    
-                    break;
-
-                // EMG 2 is first
-                case 2:
-                    // If both signals are under threshold go back to status 0
-                    if ((err_emg_1 < 0) && (err_emg_2 < 0)) {
-                        current_emg = 0;
-                        break;
-                    }
-                    // but if the current signal come back over threshold, continue using it
-                    if (err_emg_2 > 0) {
-                        g_ref[0].pos = g_refOld[0].pos - (err_emg_2 * g_mem.emg.emg_speed[1] << 2) / (1024 - c_mem.emg.emg_threshold[1]);
-                    }
-                    break;
-
-                default:
-                    break;
-            }
-            break;
-
-        default:
-            break;
-    }
-
-    // Position limit saturation
-    if (SH_MOT->pos_lim_flag) {
-        if (g_ref[0].pos < SH_MOT->pos_lim_inf) 
-            g_ref[0].pos = SH_MOT->pos_lim_inf;
-        if (g_ref[0].pos > SH_MOT->pos_lim_sup) 
-            g_ref[0].pos = SH_MOT->pos_lim_sup;
-    }
-    
-    if (battery_low_SoC == TRUE) {
-        //Reopen the terminal device before disabling motor
-        g_ref[0].pos = 0;
-    }
-        
-    if (c_mem.SH.rest_position_flag == TRUE) {
-        if (rest_enabled == 1){
-            // Change position reference to drive motor to rest position smoothly
-            g_ref[0].pos = rest_pos_curr_ref;
-        }
-        
-        if (forced_open == 1) {
-            // Open the SoftHand as EMG PROPORTIONAL input mode 
-            if (err_emg_2 > 0)
-                g_ref[0].pos = g_mem.SH.rest_pos - (err_emg_2 * g_mem.SH.rest_pos) / (1024 - c_mem.emg.emg_threshold[1]);
-            else {
-                g_ref[0].pos = g_mem.SH.rest_pos;
-                forced_open = 0;
-            }
-        }
-    }
-
+  
+    // ======================= UPDATE MOTOR REFERENCE ==========================            
+    compute_reference(MOTOR_IDX, &g_ref[MOTOR_IDX], &g_refOld[MOTOR_IDX]);
+     
     switch(SH_MOT->control_mode) {
         // ======================= CURRENT AND POSITION CONTROL =======================
         case CURR_AND_POS_CONTROL:
-            pos_error = g_ref[0].pos - g_meas[SH_ENC_L].pos[0];
+            pos_error = g_ref[MOTOR_IDX].pos - g_meas[SH_ENC_L].pos[0];
 
             pos_error_sum += pos_error;
 
@@ -914,7 +1109,7 @@ void motor_control_SH() {
 
         // ============================== POSITION CONTROL =====================
         case CONTROL_ANGLE:
-            pos_error = g_ref[0].pos - g_meas[SH_ENC_L].pos[0];
+            pos_error = g_ref[MOTOR_IDX].pos - g_meas[SH_ENC_L].pos[0];
 
             pos_error_sum += pos_error;
 
@@ -953,9 +1148,9 @@ void motor_control_SH() {
 
         // ========================== CURRENT CONTROL ==========================
         case CONTROL_CURRENT:
-            if(g_ref[0].onoff && tension_valid) {
+            if(g_ref[MOTOR_IDX].onoff && tension_valid) {
                 
-                i_ref = g_ref[0].curr;
+                i_ref = g_ref[MOTOR_IDX].curr;
 
                 if (i_ref > SH_MOT->current_limit) 
                     i_ref = SH_MOT->current_limit;
@@ -1001,7 +1196,7 @@ void motor_control_SH() {
         // ================= DIRECT PWM CONTROL ================================
         case CONTROL_PWM:
 
-            pwm_input = g_ref[0].pwm;
+            pwm_input = g_ref[MOTOR_IDX].pwm;
 
             if (pwm_input > 0) 
                 motor_dir = TRUE;
@@ -1053,14 +1248,14 @@ void motor_control_SH() {
         // Block motor with pwm = 0 to exploit not reversible motor behaviour 
     	if ( SH_MOT->control_mode != CONTROL_PWM && ((g_measOld[SH_ENC_L].pos[0]-g_meas[SH_ENC_L].pos[0]) < 50 && 
             (g_measOld[SH_ENC_L].pos[0]-g_meas[SH_ENC_L].pos[0]) > -50) && 
-            ((g_refOld[0].pos - g_ref[0].pos) < 100 && (g_refOld[0].pos - g_ref[0].pos) > -100) ) {     // if used with EMG input, 100 is related to an emg speed greater than 25 (<< 2)
+            ((g_refOld[MOTOR_IDX].pos - g_ref[MOTOR_IDX].pos) < 100 && (g_refOld[MOTOR_IDX].pos - g_ref[MOTOR_IDX].pos) > -100) ) {     // if used with EMG input, 100 is related to an emg speed greater than 25 (<< 2)
             position_counter++;
             
             if (position_counter >= 250) { 
                 if (SH_MOT->input_mode == INPUT_MODE_EXTERNAL && change_ext_ref_flag == FALSE) {
-                    g_refNew[0].pos = g_meas[SH_ENC_L].pos[0];       // Needed only when USB input mode is used, since g_refNew structure is used only with this input
+                    g_refNew[MOTOR_IDX].pos = g_meas[SH_ENC_L].pos[0];       // Needed only when USB input mode is used, since g_refNew structure is used only with this input
                 }
-                g_ref[0].pos = g_meas[SH_ENC_L].pos[0];
+                g_ref[MOTOR_IDX].pos = g_meas[SH_ENC_L].pos[0];
                 
                 if (position_counter == 250){
                     // To do only once
@@ -1091,8 +1286,6 @@ void motor_control_generic(uint8 idx) {
     int32 CYDATA pos_error;         // position error
     int32 CYDATA curr_error;        // current error
     int32 CYDATA i_ref;             // current reference
-    int32 CYDATA handle_value;
-    int32 CYDATA err_emg_1, err_emg_2;
 
     struct st_motor* MOT = &c_mem.motor[idx]; // Motor struct
     uint8 ENC_L = MOT->encoder_line;          // Associated encoder line
@@ -1124,156 +1317,11 @@ void motor_control_generic(uint8 idx) {
 
     static CYBIT motor_dir[NUM_OF_MOTORS] = {FALSE, FALSE};
     static uint32 position_counter[NUM_OF_MOTORS] = {0, 0};
-    static uint8 current_emg[NUM_OF_MOTORS] = {0, 0};   // 0 NONE
-                                                        // 1 EMG 1
-                                                        // 2 EMG 2
-                                                        // wait for both to get down
+
+    // ======================= UPDATE MOTOR REFERENCE ==========================            
+    compute_reference(idx, &g_ref[idx], &g_refOld[idx]);
     
-    err_emg_1 = g_emg_meas.emg[0] - c_mem.emg.emg_threshold[0];
-    err_emg_2 = g_emg_meas.emg[1] - c_mem.emg.emg_threshold[1];
-
-    // =========================== POSITION INPUT ==============================            
-    switch(MOT->input_mode) {
-        case INPUT_MODE_ENCODER3:
-
-            // Calculate handle value based on position of handle in the
-            // sensor chain and multiplication factor between handle and motor position
-            if (c_mem.enc[ENC_L].double_encoder_on_off) 
-                handle_value = (g_meas[ENC_L].pos[2] * c_mem.enc[ENC_L].motor_handle_ratio) + MOT->pos_lim_inf;
-            else
-                handle_value = (g_meas[ENC_L].pos[1] * c_mem.enc[ENC_L].motor_handle_ratio) + MOT->pos_lim_inf;
-            
-
-            // Read handle and use it as reference for the motor
-            if (((handle_value - g_refOld[idx].pos) > MOT->max_step_pos) && (MOT->max_step_pos != 0))
-                g_ref[idx].pos += MOT->max_step_pos;
-            else {
-                if (((handle_value - g_refOld[idx].pos) < MOT->max_step_neg) && (MOT->max_step_neg != 0))
-                    g_ref[idx].pos += MOT->max_step_neg;
-                else
-                    g_ref[idx].pos = handle_value;
-            }
-            break;
-            
-        case INPUT_MODE_EMG_PROPORTIONAL:
-            if (err_emg_1 > 0)
-                g_ref[idx].pos = (err_emg_1 * g_mem.motor[idx].pos_lim_sup) / (1024 - c_mem.emg.emg_threshold[0]);
-            else
-                g_ref[idx].pos = 0;
-            break;
-
-        case INPUT_MODE_EMG_INTEGRAL:
-            g_ref[idx].pos = g_refOld[idx].pos;
-            if (err_emg_1 > 0) {
-                g_ref[idx].pos = g_refOld[idx].pos + (err_emg_1 * (int)g_mem.emg.emg_speed[0] * 2) / (1024 - c_mem.emg.emg_threshold[0]);
-            }
-            if (err_emg_2 > 0) {
-                g_ref[idx].pos = g_refOld[idx].pos - (err_emg_2 * (int)g_mem.emg.emg_speed[1] * 2) / (1024 - c_mem.emg.emg_threshold[1]);
-            }
-            break;
-
-        case INPUT_MODE_EMG_FCFS:
-            g_ref[idx].pos = g_refOld[idx].pos;
-            switch (current_emg[idx]) {
-                case 0:
-                    // Look for the first EMG passing the threshold
-                    if (err_emg_1 > 0 && err_emg_1 > err_emg_2) {
-                        current_emg[idx] = 1;
-                        break;
-                    }
-                    if (err_emg_2 > 0 && err_emg_2 > err_emg_1) {
-                        current_emg[idx] = 2;
-                        break;
-                    }
-                    break;
-
-                case 1:
-                    // EMG 1 is first
-                    if (err_emg_1 < 0) {
-                        current_emg[idx] = 0;
-                        break;
-                    }
-                    g_ref[idx].pos = g_refOld[idx].pos + (err_emg_1 * g_mem.emg.emg_speed[0] << 2) / (1024 - c_mem.emg.emg_threshold[0]);
-                    break;
-
-                case 2:
-                    // EMG 2 is first
-                    if (err_emg_2 < 0) {
-                        current_emg[idx] = 0;
-                        break;
-                    }
-                    g_ref[idx].pos = g_refOld[idx].pos - (err_emg_2 * g_mem.emg.emg_speed[1] << 2) / (1024 - c_mem.emg.emg_threshold[1]);
-                    break;
-
-                default:
-                    break;
-            }
-            break;
-
-        case INPUT_MODE_EMG_FCFS_ADV:
-            g_ref[idx].pos = g_refOld[idx].pos;
-            switch (current_emg[idx]) {
-                // Look for the first EMG passing the threshold
-                case 0:
-                    if (err_emg_1 > 0 && err_emg_1 > err_emg_2) {
-                        current_emg[idx] = 1;
-                        break;
-                    }
-                    if (err_emg_2 > 0 && err_emg_2 > err_emg_1) {
-                        current_emg[idx] = 2;
-                        break;
-                    }
-                    break;
-
-                // EMG 1 is first
-                case 1:
-                    // If both signals are under threshold go back to status 0
-                    if ((err_emg_1 < 0) && (err_emg_2 < 0)) {
-                        current_emg[idx] = 0;
-                        break;
-                    }
-                    // but if the current signal come back over threshold, continue using it
-                    if (err_emg_1 > 0) 
-                        g_ref[idx].pos = g_refOld[idx].pos + (err_emg_1 * g_mem.emg.emg_speed[0] << 2) / (1024 - c_mem.emg.emg_threshold[0]);
-                    
-                    break;
-
-                // EMG 2 is first
-                case 2:
-                    // If both signals are under threshold go back to status 0
-                    if ((err_emg_1 < 0) && (err_emg_2 < 0)) {
-                        current_emg[idx] = 0;
-                        break;
-                    }
-                    // but if the current signal come back over threshold, continue using it
-                    if (err_emg_2 > 0) {
-                        g_ref[idx].pos = g_refOld[idx].pos - (err_emg_2 * c_mem.emg.emg_speed[1] << 2) / (1024 - c_mem.emg.emg_threshold[1]);
-                    }
-                    break;
-
-                default:
-                    break;
-            }
-            break;
-
-        default:
-            break;
-    }
-
-    // Position limit saturation
-    if (MOT->pos_lim_flag) {
-        if (g_ref[idx].pos < MOT->pos_lim_inf) 
-            g_ref[idx].pos = MOT->pos_lim_inf;
-        if (g_ref[idx].pos > MOT->pos_lim_sup) 
-            g_ref[idx].pos = MOT->pos_lim_sup;
-    }
-    
-    // SAFETY
-    if (battery_low_SoC == TRUE) {
-        //Reopen the terminal device before disabling motor
-        g_ref[idx].pos = 0;
-    }        
-
+   
     switch(MOT->control_mode) {
         // ======================= CURRENT AND POSITION CONTROL =======================
         case CURR_AND_POS_CONTROL:
@@ -1483,7 +1531,7 @@ void motor_control_generic(uint8 idx) {
         pwm_input = (((pwm_input << 10) / PWM_MAX_VALUE) * dev_pwm_limit[0]) >> 10;
  
     //// RATE LIMITER ////
-       if((pwm_input-prev_pwm[idx]) > MOT->pwm_rate_limiter){
+    if((pwm_input-prev_pwm[idx]) > MOT->pwm_rate_limiter){
         pwm_input =  prev_pwm[idx] + MOT->pwm_rate_limiter;
     }
     else {
@@ -1801,6 +1849,10 @@ void analog_read_end() {
 
     static uint16 emg_counter_1 = 0;
     static uint16 emg_counter_2 = 0;
+    static uint16 UD_counter = 0;
+    static uint16 LR_counter = 0;
+    static int32 UD_mean_value;
+    static int32 LR_mean_value;
 	static uint8 first_tension_valid = TRUE;
     //static int32 pow_tension = 12000;       //12000 mV (12 V)
     static uint16 count = 0;
@@ -1887,7 +1939,8 @@ void analog_read_end() {
                 if ((c_mem.motor[idx].input_mode == INPUT_MODE_EMG_PROPORTIONAL) ||
                     (c_mem.motor[idx].input_mode == INPUT_MODE_EMG_INTEGRAL) ||
                     (c_mem.motor[idx].input_mode == INPUT_MODE_EMG_FCFS) ||
-                    (c_mem.motor[idx].input_mode == INPUT_MODE_EMG_FCFS_ADV)) {
+                    (c_mem.motor[idx].input_mode == INPUT_MODE_EMG_FCFS_ADV) ||
+                    (c_mem.motor[idx].input_mode == INPUT_MODE_EMG_PROPORTIONAL_NC)) {
                     g_ref[idx].onoff = 0x00;
                     enable_motor(idx, g_ref[idx].onoff); 
                     
@@ -1901,10 +1954,10 @@ void analog_read_end() {
         
         // Reset emg
         for (idx = 0; idx < NUM_OF_INPUT_EMGS; idx++){
-            g_emg_meas.emg[idx] = 0;
+            g_adc_meas.emg[idx] = 0;
         }
         for (idx = 0; c_mem.exp.read_ADC_sensors_port_flag && idx < NUM_OF_ADDITIONAL_EMGS; idx++){
-            g_emg_meas.add_emg[idx] = 0;
+            g_adc_meas.add_emg[idx] = 0;
         }
         
     }
@@ -1981,7 +2034,7 @@ void analog_read_end() {
     switch(emg_1_status) {
         case NORMAL: // normal execution
             
-            if (g_mem.dev.dev_type != AIR_CHAMBERS_FB){
+            if (g_mem.dev.dev_type != AIR_CHAMBERS_FB && g_mem.dev.dev_type != OTBK_ACT_WRIST_MS){
                 i_aux = ((int32)(ADC_buf[2 + c_mem.emg.switch_emg] - 1639) * 87) >> 5;  //map range to 0-4096
             }
             else {  // Use additional ADC channels, so the signal does not pass through AVAGO isolators
@@ -2004,7 +2057,7 @@ void analog_read_end() {
                 if (i_aux > 1024) 
                     i_aux = 1024;
             
-            g_emg_meas.emg[0] = i_aux;
+            g_adc_meas.emg[0] = i_aux;
 
             if (interrupt_flag){
                 interrupt_flag = FALSE;
@@ -2074,7 +2127,7 @@ void analog_read_end() {
     switch(emg_2_status) {
         case NORMAL: // normal execution
         
-            if (g_mem.dev.dev_type != AIR_CHAMBERS_FB){
+            if (g_mem.dev.dev_type != AIR_CHAMBERS_FB && g_mem.dev.dev_type != OTBK_ACT_WRIST_MS){
                 i_aux = ((int32)(ADC_buf[3 - c_mem.emg.switch_emg] - 1639) * 87) >> 5;  //map range to 0-4096
             }
             else {  // Use additional ADC channels, so the signal does not pass through AVAGO isolators
@@ -2097,7 +2150,7 @@ void analog_read_end() {
                 if (i_aux > 1024)
                     i_aux = 1024;
             
-            g_emg_meas.emg[1] = i_aux;
+            g_adc_meas.emg[1] = i_aux;
 
             break;
 
@@ -2173,7 +2226,8 @@ void analog_read_end() {
                     if ((c_mem.motor[idx].input_mode == INPUT_MODE_EMG_PROPORTIONAL) ||
                         (c_mem.motor[idx].input_mode == INPUT_MODE_EMG_INTEGRAL) ||
                         (c_mem.motor[idx].input_mode == INPUT_MODE_EMG_FCFS) ||
-                        (c_mem.motor[idx].input_mode == INPUT_MODE_EMG_FCFS_ADV)) {
+                        (c_mem.motor[idx].input_mode == INPUT_MODE_EMG_FCFS_ADV) ||
+                        (c_mem.motor[idx].input_mode == INPUT_MODE_EMG_PROPORTIONAL_NC)) {
                         if (c_mem.motor[idx].control_mode == CONTROL_ANGLE) {
                             g_ref[idx].pos = g_meas[g_mem.motor[idx].encoder_line].pos[0];
                         }
@@ -2194,6 +2248,166 @@ void analog_read_end() {
     if (interrupt_flag){
         interrupt_flag = FALSE;
         interrupt_manager();
+    }
+    
+    if (c_mem.motor[0].input_mode == INPUT_MODE_JOYSTICK || c_mem.motor[1].input_mode == INPUT_MODE_JOYSTICK){
+        // Read joystick
+        
+        switch (joy_UD_status) {
+            case NORMAL:
+                i_aux = (int32)(ADC_buf[2]);
+                // Remap the analog reading from -1024 to 1024.  
+                i_aux = (int32) (((float) (i_aux - UD_mean_value) / UD_mean_value) * c_mem.JOY_spec.joystick_gains[1]); 
+                
+                if (interrupt_flag){
+                    interrupt_flag = FALSE;
+                    interrupt_manager();
+                }
+
+                //Saturation
+                if (i_aux < -1024) 
+                    i_aux = -1024;
+                if (i_aux > 1024)
+                    i_aux = 1024;
+
+                g_adc_meas.joystick[1] = (int16) i_aux;
+
+                if (interrupt_flag){
+                    interrupt_flag = FALSE;
+                    interrupt_manager();
+                }
+
+            break;
+
+            case RESET: // reset variables
+                UD_counter = 0;
+                UD_mean_value = 0;
+                joy_UD_status = WAIT; // go to waiting status
+
+            break;
+
+            case DISCARD: // discard first EMG_SAMPLE_TO_DISCARD samples
+                UD_counter++;
+                if (UD_counter == JOYSTICK_SAMPLE_TO_DISCARD) {
+                    UD_counter = 0;                     // reset counter
+
+                    if (interrupt_flag){
+                        interrupt_flag = FALSE;
+                        interrupt_manager();
+                    }
+
+                    joy_UD_status = SUM_AND_MEAN;           // sum and mean status
+                }
+
+            break;
+
+            case SUM_AND_MEAN: // sum first SAMPLES_FOR_EMG_MEAN samples
+                // NOTE max(value)*SAMPLES_FOR_EMG_MEAN must fit in 32bit
+                UD_counter++;
+                UD_mean_value += (int32)(ADC_buf[2]);        // No filter
+
+                if (interrupt_flag){
+                    interrupt_flag = FALSE;
+                    interrupt_manager();
+                }
+
+                if (UD_counter == SAMPLES_FOR_JOYSTICK_MEAN) {
+                    UD_mean_value = UD_mean_value / SAMPLES_FOR_JOYSTICK_MEAN; // calc mean
+
+                    if (interrupt_flag){
+                        interrupt_flag = FALSE;
+                        interrupt_manager();
+                    }
+
+                    UD_counter = 0;          // reset counter
+                    joy_UD_status = NORMAL;           // goto normal execution
+                }
+            break;
+
+            case WAIT: case WAIT_EoC: // wait for both EMG calibrations to be done
+                if (emg_1_status == NORMAL && emg_2_status == NORMAL)
+                    joy_UD_status = DISCARD;           // goto discard sample
+            break;
+        }
+
+        if (interrupt_flag){
+            interrupt_flag = FALSE;
+            interrupt_manager();
+        }
+            
+        switch (joy_LR_status) {
+            case NORMAL:
+                i_aux = (int32)(ADC_buf[3]);
+
+                i_aux = (int32) (((float) (i_aux - LR_mean_value) / LR_mean_value) * c_mem.JOY_spec.joystick_gains[0]); 
+                
+                if (interrupt_flag){
+                    interrupt_flag = FALSE;
+                    interrupt_manager();
+                }
+
+                //Saturation
+                if (i_aux < -1024)
+                    i_aux = -1024;
+                if (i_aux > 1024)
+                    i_aux = 1024;
+
+                if (interrupt_flag){
+                    interrupt_flag = FALSE;
+                    interrupt_manager();
+                }
+
+                g_adc_meas.joystick[0] = (int16) i_aux;
+
+            break;
+
+            case RESET: // reset variables
+                LR_counter = 0;
+                LR_mean_value = 0;
+                joy_LR_status = WAIT; // goes waiting for all conversions to be done
+            break;
+
+            case DISCARD: // discard first EMG_SAMPLE_TO_DISCARD samples8
+                LR_counter++;
+                if (LR_counter == JOYSTICK_SAMPLE_TO_DISCARD) {
+                    LR_counter = 0;                     // reset counter
+
+                    if (interrupt_flag){
+                        interrupt_flag = FALSE;
+                        interrupt_manager();
+                    }
+
+                    joy_LR_status = SUM_AND_MEAN;           // sum and mean status
+                }
+            break;
+
+            case SUM_AND_MEAN: // sum first SAMPLES_FOR_EMG_MEAN samples
+                // NOTE max(value)*SAMPLES_FOR_EMG_MEAN must fit in 32bit
+                LR_counter++;
+                LR_mean_value += (int32)(ADC_buf[3]);
+                if (LR_counter == SAMPLES_FOR_JOYSTICK_MEAN) {
+                    LR_mean_value = LR_mean_value / SAMPLES_FOR_JOYSTICK_MEAN; // calc mean
+                    
+                    if (interrupt_flag){
+                        interrupt_flag = FALSE;
+                        interrupt_manager();
+                    }
+
+                    LR_counter = 0;               // reset counter
+                    joy_LR_status = NORMAL;           // goto normal execution
+                }
+            break;
+
+            case WAIT: case WAIT_EoC:
+                if(emg_1_status == NORMAL && emg_2_status == NORMAL && joy_UD_status == NORMAL)
+                    joy_LR_status = DISCARD;
+            break;
+        }
+       
+        if (interrupt_flag){
+            interrupt_flag = FALSE;
+            interrupt_manager();
+        }
     }
     
     // Read also EMG additional sensors port
@@ -2218,7 +2432,7 @@ void analog_read_end() {
                 if (i_aux > 1024) 
                     i_aux = 1024;
             
-            g_emg_meas.add_emg[idx] = i_aux;
+            g_adc_meas.add_emg[idx] = i_aux;
 
             if (interrupt_flag){
                 interrupt_flag = FALSE;
@@ -2349,12 +2563,12 @@ void cycles_counter_update() {
     for (i=0; i<2 && emg_1_status == NORMAL && emg_2_status == NORMAL; i++){
         switch (emg_cycle_status[i]){
             case STATE_INACTIVE:
-                if (g_emg_meas.emg[i] > g_mem.emg.emg_threshold[i]){
+                if (g_adc_meas.emg[i] > g_mem.emg.emg_threshold[i]){
                     emg_cycle_status[i] = STATE_ACTIVE;
                 }
                 break;
             case STATE_ACTIVE:
-                if (g_emg_meas.emg[i] < g_mem.emg.emg_threshold[i]-10){
+                if (g_adc_meas.emg[i] < g_mem.emg.emg_threshold[i]-10){
                     emg_cycle_status[i] = COUNTER_INC;
                 }
                 break;
