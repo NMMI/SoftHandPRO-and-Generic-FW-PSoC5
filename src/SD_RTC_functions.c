@@ -235,25 +235,25 @@ void Write_SD_Param_file(){
 }
 
 /*******************************************************************************
-* Function Name: Read SD Param File
+* Function Name: Read SD Closed File (Param or closed Data files)
 *********************************************************************************/
-void Read_SD_Param(char* info_param, int n_p){
+void Read_SD_Closed_File(char* src_file, char* info_file, int n_p){
     int i;
-    FS_FILE* pParam;
+    FS_FILE* pF;
     
     // Open param file in read mode
-    pParam = FS_FOpen(sdParam, "r");
-    if (pParam != 0) {
-        i = FS_FRead(info_param, 1, n_p, pParam);
-        info_param[i] = 0;
+    pF = FS_FOpen(src_file, "r");
+    if (pF != 0) {
+        i = FS_FRead(info_file, 1, n_p, pF);
+        info_file[i] = 0;
     }
-    FS_FClose(pParam);
+    FS_FClose(pF);
 }
 
 /*******************************************************************************
-* Function Name: Read SD Data File
+* Function Name: Read SD Current Open Data File
 *********************************************************************************/
-void Read_SD_Data(char* info_data, int n_d){
+void Read_SD_Current_Data(char* info_data, int n_d){
     int i;
     FS_FILE* pData;
     
@@ -269,4 +269,108 @@ void Read_SD_Data(char* info_data, int n_d){
     
     // Before exiting, reopen data file in append mode
     pFile = FS_FOpen(sdFile, "a");
+}
+
+/*******************************************************************************
+* Function Name: Get SD Directories List
+*********************************************************************************/
+int Get_DirectoriesList(char* path, char directories_list[3000][8], int first_idx){
+    
+    FS_FIND_DATA fd;
+    int num_found_dirs = 0;
+    char acDirname[20];    
+    
+    if (FS_FindFirstFile(&fd, path, acDirname, sizeof(acDirname)) == 0) {
+        do {
+            FS_DIR *pDir;
+            char curr_path[100] = "";
+            strcpy(curr_path, path);
+            strcat(curr_path, "\\");
+            strcat(curr_path, acDirname);
+            strcat(curr_path, "\\");
+            pDir = FS_OpenDir(curr_path);
+            int num_files_dir = FS_GetNumFiles(pDir);
+            FS_CloseDir(pDir);
+            if (num_files_dir != -1){
+  
+                if (strcmp(acDirname, ".") && strcmp(acDirname, "..")){
+                    strcpy(directories_list[first_idx + num_found_dirs], acDirname);                              
+                    num_found_dirs++;
+                }
+            }    
+ 
+        } while (FS_FindNextFile (&fd));
+    }
+    FS_FindClose(&fd);
+    
+    return num_found_dirs;
+}
+
+/*******************************************************************************
+* Function Name: Get SD Filesystem
+*********************************************************************************/
+void Get_SD_FS(char* info_data){
+        
+    // Called with PING command
+    // Get all the folders with path and contained files number in the CSV-like format
+    // and send to API through info_data string
+    // USER\YYYY\MM\DD, number_of_files
+    
+    
+    strcpy(info_data, "");
+    
+    // Get users folders   
+    int num_found_users = 0;
+    char CYDATA found_users[20][8];         // Max. 20 users (each with 8 max. characters)
+    char CYDATA folder_tree_data[3000][8];  //3000 days (>8 yrs) of everyday folders for each users (8=4+2+2, y+m+d)
+    memset(&found_users, 0, 20*8);
+    memset(&folder_tree_data, 0, 3000*8);
+   
+    num_found_users = Get_DirectoriesList("\\", folder_tree_data, 0);
+    for (int i=0; i< num_found_users; i++){ // Copy user folders and free the tree structure
+        strcpy(found_users[i], folder_tree_data[i]);
+    }
+    memset(&folder_tree_data, 0, 3000*8);
+    
+    int n_idx = 0;
+    for (int i=0; i< num_found_users; i++){
+        char y_path[100] = "\\";
+        strcat(y_path, found_users[i]);
+        strcat(y_path, "\\");
+        
+        int nyears = Get_DirectoriesList(y_path, folder_tree_data, n_idx);
+        int nmonths = 0, ndays = 0;
+        for (int j=0; j< nyears; j++){
+            char m_path[100] = "\\";
+            strcpy(m_path, y_path);
+            strcat(m_path, folder_tree_data[n_idx + j]);
+            strcat(m_path, "\\");
+            nmonths = Get_DirectoriesList(m_path, folder_tree_data, n_idx + nyears);
+            for (int k=0; k< nmonths; k++){
+                char d_path[100] = "\\";
+                strcpy(d_path, m_path);
+                strcat(d_path, folder_tree_data[n_idx + nyears + k]);
+                strcat(d_path, "\\");
+                ndays = Get_DirectoriesList(d_path, folder_tree_data, n_idx + nyears + nmonths);
+                for (int h=0; h< ndays; h++){
+                    
+                    char f_path[100] = "\\";
+                    strcpy(f_path, d_path);
+                    strcat(f_path, folder_tree_data[n_idx + nyears + nmonths + h]);
+                    strcat(f_path, "\\");
+                    
+                    // A directory with data files cannot be empty
+                    FS_DIR* pDir = FS_OpenDir(f_path);
+                    int nfiles = FS_GetNumFiles(pDir);
+                    FS_CloseDir(pDir);
+                              
+                    char str[100] = "";
+                    sprintf(str, "\\%s\\%s\\%s\\%s,%d\r\n", found_users[i], folder_tree_data[n_idx+j], 
+                            folder_tree_data[n_idx+nyears+k], folder_tree_data[n_idx+nyears+nmonths+h], nfiles);
+                    strcat(info_data, str);
+                }
+            }
+        }
+        n_idx += nyears + nmonths + ndays;
+    }    
 }

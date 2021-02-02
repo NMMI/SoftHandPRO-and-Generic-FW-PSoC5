@@ -287,7 +287,7 @@ void commProcess(void){
 //=====================================================     CMD_GET_SD_FILESYSTEM
 
         case CMD_GET_SD_SINGLE_FILE:
-            cmd_get_SD_file();
+            cmd_get_SD_file( __REV16(*((uint16 *) &g_rx.buffer[1])) );
             break;             
             
             
@@ -331,15 +331,19 @@ void infoGet(uint16 info_type) {
             UART_RS485_PutString(packet_string);
             break;
         case GET_SD_PARAM:
-            Read_SD_Param(packet_string, sizeof(packet_string));
+            Read_SD_Closed_File(sdParam, packet_string, sizeof(packet_string));
             UART_RS485_ClearTxBuffer();
             UART_RS485_PutString(packet_string);
             break;
         case GET_SD_DATA:
-            Read_SD_Data(str_sd_data, sizeof(str_sd_data));
+            Read_SD_Current_Data(str_sd_data, sizeof(str_sd_data));
             UART_RS485_ClearTxBuffer();
             UART_RS485_PutString(str_sd_data);
-
+            break;
+        case GET_SD_FS_TREE:
+            Get_SD_FS(str_sd_data);
+            UART_RS485_ClearTxBuffer();
+            UART_RS485_PutString(str_sd_data);
             break;
         default:
             break;
@@ -3958,42 +3962,32 @@ void cmd_get_ADC_raw(){
     commWrite(packet_data, 2+2*idx);
 }
 
-void cmd_get_SD_file(){
+void cmd_get_SD_file( uint16 filename_length ){
     
-    // With PING command
-    // Get all the folders with path and contained files number in the CSV-like format
-    // USER\YYYY\MM\DD, number_of_files
+    uint8 i = 0;
+    char CYDATA filename[50] = "";
+    char CYDATA str_sd_data[20000] = "";
+    strcpy(filename, "");
+    strcpy(str_sd_data, "");
     
-    
-    
-    // Get the total number of files by sum of number_of_files fields
-    
-    // Read each file and send it to API
-    
- /*   //Retrieve Additional EMG port raw values
-    
-    uint8 packet_data[2+2*NUM_OF_ADC_CHANNELS_MAX];
-    uint8 CYDATA i, idx = 0;
-    int16 aux_int16;
-    
-    // Header        
-    packet_data[0] = CMD_GET_ADC_RAW;
-    
-    // Fill payload
-    for (i = 0; i < NUM_OF_ANALOG_INPUTS; i++) {       
-        if (c_mem.exp.ADC_conf[i] == 1) {
-            aux_int16 = (int16) ADC_buf[i];
-            packet_data[(idx << 1) + 2] = ((char*)(&aux_int16))[0];
-            packet_data[(idx << 1) + 1] = ((char*)(&aux_int16))[1];
-            idx++;
-        }
+    for (i=0; i<filename_length; i++){
+        *((uint8*)filename + i) = (char)g_rx.buffer[3+i];
+    }
+    *((uint8*)filename + i) = '\0';
+     
+    // Check if the file is the one currently opened or not
+    if (strcmp(filename, sdFile)){
+        Read_SD_Closed_File(filename, str_sd_data, sizeof(str_sd_data));
+    }
+    else {
+        //It is the currently open working file
+        Read_SD_Current_Data(str_sd_data, sizeof(str_sd_data));
     }
 
-    // Calculate checksum
-    packet_data[1+2*idx] = LCRChecksum(packet_data, 1+2*idx);
-    
-    // Send package to UART
-    commWrite(packet_data, 2+2*idx);*/
+    //itoa(filename_length, filename, 10);
+    // Send the file to API that receives packet as a ping string
+    UART_RS485_ClearTxBuffer();
+    UART_RS485_PutString(str_sd_data);
 }
 
 //==============================================================================

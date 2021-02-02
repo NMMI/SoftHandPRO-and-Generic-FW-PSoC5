@@ -428,7 +428,7 @@ void cmd_get_ADC_raw();
 //============================================================  cmd_get_SD_file
 /** This function gets a file on the SD
 **/
-void cmd_get_SD_file();
+void cmd_get_SD_file(uint16 filename_length);
 
 //============================================================  air_chamber_control
 /* This function is used to drive air chambers feedback device */

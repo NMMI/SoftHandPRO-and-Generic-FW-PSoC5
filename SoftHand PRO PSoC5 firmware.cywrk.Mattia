@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="SoftHand PRO PSoC5 firmware\SoftHand_Pro\Header Files\commands.h">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="SoftHand PRO PSoC5 firmware\SoftHand_Pro\TopDesign">
 <ExpandedNodeIds>
 <v>SoftHand PRO PSoC5 firmware</v>
 <v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\TopDesign</v>
@@ -145,9 +145,6 @@
 <v>SoftHand PRO PSoC5 firmware\SoftHand_Pro\Generated_Source\PSoC5</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
-<v>SoftHand PRO PSoC5 firmware</v>
-<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback</v>
-<v>SoftHand PRO PSoC5 firmware\Generic</v>
 <v>SoftHand PRO PSoC5 firmware\Generic\TopDesign</v>
 <v>SoftHand PRO PSoC5 firmware\Generic\Generic.cydwr</v>
 <v>SoftHand PRO PSoC5 firmware\Generic\Header Files</v>
@@ -178,6 +175,9 @@
 <v>SoftHand PRO PSoC5 firmware\SoftHand_Pro\Source Files\IMU_functions.c</v>
 <v>SoftHand PRO PSoC5 firmware\SoftHand_Pro\Source Files\interruptions.c</v>
 <v>SoftHand PRO PSoC5 firmware\SoftHand_Pro\Source Files\main.c</v>
+<v>SoftHand PRO PSoC5 firmware\SoftHand_Pro\Source Files\SD_RTC_functions.c</v>
+<v>SoftHand PRO PSoC5 firmware\SoftHand_Pro\Source Files\utils.c</v>
+<v>SoftHand PRO PSoC5 firmware\SoftHand_Pro\Generated_Source</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -848,6 +848,37 @@
 <VisibleNodeIds>
 <v>SoftHand PRO PSoC5 firmware</v>
 <v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\ADC.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\ADC_AMux.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\ADC_Ext_CP_Clk.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\ADC_INT.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\ADC_IRQ.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\ADC_N_CHANNELS_USED.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\ADC_N_CHANNELS_USED_PM.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\ADC_PM.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\ADC_SOC.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\ADC_SOC_PM.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\ADC_STATUS.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\ADC_theACLK.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\BLINK_05HZ.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\BLINK_05HZ_PM.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\BLINK_25HZ.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\BLINK_25HZ_PM.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\BLINK_CTRL_EN.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\BLINK_CTRL_EN_PM.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\Bootloadable.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\Chip_Select_ENCODER_LINE.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\Chip_Select_ENCODER_LINE_PM.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\Chip_Select_IMU.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\Chip_Select_IMU_PM.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\CLK_ENCODER.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\CLK_RTC.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\CLOCK_ENCODERS.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\CLOCK_PWM.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -1121,13 +1152,12 @@
 <OpenDocs>
 <name v=".\src\command_processing.c" />
 <name v=".\src\globals.h" />
-<name v=".\src\interruptions.c" />
-<name v=".\src\globals.c" />
-<name v=".\src\interruptions.h" />
 <name v=".\src\command_processing.h" />
-<name v=".\Generic.cydsn\TopDesign\TopDesign.cysch" />
-<name v=".\src\FIRMWARE_CONFIGURATION.h" />
 <name v=".\src\commands.h" />
+<name v=".\src\SD_RTC_functions.h" />
+<name v=".\src\SD_RTC_functions.c" />
+<name v=".\src\interruptions.c" />
+<name v=".\src\FIRMWARE_CONFIGURATION.h" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -1135,7 +1165,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1543, 644" SelectedTabbedMdiWindow="baa18670-7bbf-4eca-9e19-83fbd3ddc3b4"><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\src\command_processing.c" Guid="baa18670-7bbf-4eca-9e19-83fbd3ddc3b4" /><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\src\globals.h" Guid="43134da0-3fdd-431f-9c45-e03f0bd75ce0" /><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\src\interruptions.c" Guid="0119817f-7616-460f-8f1a-9a6960efea08" /><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\src\globals.c" Guid="2ea01348-7812-42ed-bbc1-680fac8c3890" /><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\src\interruptions.h" Guid="91a90d5c-95cf-4b4f-a27a-9c2be38ca258" /><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\src\command_processing.h" Guid="dacd3ee0-6b9c-4cd0-9223-4f0d1fb86545" /><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\Generic.cydsn\TopDesign\TopDesign.cysch" Guid="4455f055-d43d-43e6-b9b5-c5d6d2058cce" /><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\src\FIRMWARE_CONFIGURATION.h" Guid="8e22dd69-9547-4a2e-abe7-7ebad7573ae4" /><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\src\commands.h" Guid="03dd8c9c-d8a4-4b6d-ac54-af6e63a3a618" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1193, 644" SelectedTabbedMdiWindow="2ee723e2-5f3e-4a34-b9a6-ff86721d6ee2"><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\src\command_processing.c" Guid="baa18670-7bbf-4eca-9e19-83fbd3ddc3b4" /><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\src\globals.h" Guid="43134da0-3fdd-431f-9c45-e03f0bd75ce0" /><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\src\command_processing.h" Guid="dacd3ee0-6b9c-4cd0-9223-4f0d1fb86545" /><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\src\commands.h" Guid="03dd8c9c-d8a4-4b6d-ac54-af6e63a3a618" /><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\src\SD_RTC_functions.h" Guid="2b27105d-0fc1-4087-9eea-03aabbb8cacc" /><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\src\SD_RTC_functions.c" Guid="6dfcf5f2-3a15-4462-abea-36ff33ae85e8" /><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\src\interruptions.c" Guid="98bb9948-54ac-4021-9413-d6e7e1609f88" /><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\src\FIRMWARE_CONFIGURATION.h" Guid="2ee723e2-5f3e-4a34-b9a6-ff86721d6ee2" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="Release" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

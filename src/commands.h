@@ -208,6 +208,7 @@ enum data_types {
 #define CYCLES_INFO     1           ///< Cycles counter information.
 #define GET_SD_PARAM    2           ///< Read Firmware Parameters from SD file
 #define GET_SD_DATA     3           ///< Read Usage Data from SD file
+#define GET_SD_FS_TREE  4           ///< Get info on SD card filesystem tree
 
 /** \} */
 
