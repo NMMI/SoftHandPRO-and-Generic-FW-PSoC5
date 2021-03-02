@@ -18,6 +18,7 @@ var searchData=
   ['input_5fmode_5femg_5fproportional_5fnc',['INPUT_MODE_EMG_PROPORTIONAL_NC',['../commands_8h.html#af5b4e6fe0787834c86e4ea44f0ece279a5615cd4b06b150f6832a773356e38101',1,'commands.h']]],
   ['input_5fmode_5fencoder3',['INPUT_MODE_ENCODER3',['../commands_8h.html#af5b4e6fe0787834c86e4ea44f0ece279a9bfa7271b88d5876a1c3fd050f67bd3e',1,'commands.h']]],
   ['input_5fmode_5fexternal',['INPUT_MODE_EXTERNAL',['../commands_8h.html#af5b4e6fe0787834c86e4ea44f0ece279ae9164f9cc9192eb336b04d078f46b8ba',1,'commands.h']]],
+  ['input_5fmode_5fjoystick',['INPUT_MODE_JOYSTICK',['../commands_8h.html#af5b4e6fe0787834c86e4ea44f0ece279a6f5918e455c85bc7e916bddbf8889538',1,'commands.h']]],
   ['interrupt_5fflag',['interrupt_flag',['../globals_8c.html#a1e6fda88dfdabc63859f8907eb702920',1,'interrupt_flag():&#160;globals.c'],['../globals_8h.html#a1e6fda88dfdabc63859f8907eb702920',1,'interrupt_flag():&#160;globals.c']]],
   ['interrupt_5fmanager',['interrupt_manager',['../interruptions_8c.html#a9790811526002d99b25a814afd02cbae',1,'interrupt_manager():&#160;interruptions.c'],['../interruptions_8h.html#a9790811526002d99b25a814afd02cbae',1,'interrupt_manager():&#160;interruptions.c']]],
   ['interruptions_2ec',['interruptions.c',['../interruptions_8c.html',1,'']]],

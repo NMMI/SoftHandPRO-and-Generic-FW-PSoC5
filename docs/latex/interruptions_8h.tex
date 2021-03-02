@@ -46,6 +46,12 @@ void \textbf{ encoder\+\_\+reading\+\_\+\+S\+PI} (uint8 n\+\_\+line, uint8 assoc
 \begin{Indent}\textbf{ Motor control function}\par
 \begin{DoxyCompactItemize}
 \item 
+void \textbf{ compute\+\_\+reference} (uint8 motor\+\_\+idx, struct \textbf{ st\+\_\+ref} $\ast$st\+\_\+ref\+\_\+p, struct \textbf{ st\+\_\+ref} $\ast$st\+\_\+ref\+Old\+\_\+p)
+\item 
+void \textbf{ compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+joystick\+\_\+reference} (uint8 motor\+\_\+idx, struct \textbf{ st\+\_\+ref} $\ast$st\+\_\+ref\+\_\+p, struct \textbf{ st\+\_\+ref} $\ast$st\+\_\+ref\+Old\+\_\+p)
+\item 
+void \textbf{ compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+emg\+\_\+reference} (uint8 motor\+\_\+idx, struct \textbf{ st\+\_\+ref} $\ast$st\+\_\+ref\+\_\+p, struct \textbf{ st\+\_\+ref} $\ast$st\+\_\+ref\+Old\+\_\+p, int32 err\+\_\+emg\+\_\+1, int32 err\+\_\+emg\+\_\+2)
+\item 
 void \textbf{ motor\+\_\+control\+\_\+\+SH} ()
 \end{DoxyCompactItemize}
 \end{Indent}
@@ -96,7 +102,25 @@ March 20th, 2020
 \subsubsection{analog\+\_\+read\+\_\+end()}
 {\footnotesize\ttfamily void analog\+\_\+read\+\_\+end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-This function executes and terminates the analog readings. \mbox{\label{interruptions_8h_a7e24af8c83537b0441877bf0f00dd30a}} 
+This function executes and terminates the analog readings. \mbox{\label{interruptions_8h_ab9beadac459e017e1ed807124208d132}} 
+\index{interruptions.\+h@{interruptions.\+h}!compute\+\_\+reference@{compute\+\_\+reference}}
+\index{compute\+\_\+reference@{compute\+\_\+reference}!interruptions.\+h@{interruptions.\+h}}
+\subsubsection{compute\+\_\+reference()}
+{\footnotesize\ttfamily void compute\+\_\+reference (\begin{DoxyParamCaption}\item[{uint8}]{motor\+\_\+idx,  }\item[{struct \textbf{ st\+\_\+ref} $\ast$}]{st\+\_\+ref\+\_\+p,  }\item[{struct \textbf{ st\+\_\+ref} $\ast$}]{st\+\_\+ref\+Old\+\_\+p }\end{DoxyParamCaption})}
+
+This function computes the motor reference and stores it in the given \doxyref{st\+\_\+ref}{p.}{structst__ref} structure. \mbox{\label{interruptions_8h_a32d8abb2b74c69cb1cb0e21101e61f8f}} 
+\index{interruptions.\+h@{interruptions.\+h}!compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+emg\+\_\+reference@{compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+emg\+\_\+reference}}
+\index{compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+emg\+\_\+reference@{compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+emg\+\_\+reference}!interruptions.\+h@{interruptions.\+h}}
+\subsubsection{compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+emg\+\_\+reference()}
+{\footnotesize\ttfamily void compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+emg\+\_\+reference (\begin{DoxyParamCaption}\item[{uint8}]{motor\+\_\+idx,  }\item[{struct \textbf{ st\+\_\+ref} $\ast$}]{st\+\_\+ref\+\_\+p,  }\item[{struct \textbf{ st\+\_\+ref} $\ast$}]{st\+\_\+ref\+Old\+\_\+p,  }\item[{int32}]{err\+\_\+emg\+\_\+1,  }\item[{int32}]{err\+\_\+emg\+\_\+2 }\end{DoxyParamCaption})}
+
+This function computes the motor reference for Soft\+Hand\+\_\+2\+\_\+motors device with E\+MG input and stores it in the given \doxyref{st\+\_\+ref}{p.}{structst__ref} structure. \mbox{\label{interruptions_8h_aa34d2793dd85a2e5662e6f4dc8a3dfd2}} 
+\index{interruptions.\+h@{interruptions.\+h}!compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+joystick\+\_\+reference@{compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+joystick\+\_\+reference}}
+\index{compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+joystick\+\_\+reference@{compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+joystick\+\_\+reference}!interruptions.\+h@{interruptions.\+h}}
+\subsubsection{compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+joystick\+\_\+reference()}
+{\footnotesize\ttfamily void compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+joystick\+\_\+reference (\begin{DoxyParamCaption}\item[{uint8}]{motor\+\_\+idx,  }\item[{struct \textbf{ st\+\_\+ref} $\ast$}]{st\+\_\+ref\+\_\+p,  }\item[{struct \textbf{ st\+\_\+ref} $\ast$}]{st\+\_\+ref\+Old\+\_\+p }\end{DoxyParamCaption})}
+
+This function computes the motor reference for Soft\+Hand\+\_\+2\+\_\+motors device with joystick input and stores it in the given \doxyref{st\+\_\+ref}{p.}{structst__ref} structure. \mbox{\label{interruptions_8h_a7e24af8c83537b0441877bf0f00dd30a}} 
 \index{interruptions.\+h@{interruptions.\+h}!C\+Y\+\_\+\+I\+S\+R\+\_\+\+P\+R\+O\+TO@{C\+Y\+\_\+\+I\+S\+R\+\_\+\+P\+R\+O\+TO}}
 \index{C\+Y\+\_\+\+I\+S\+R\+\_\+\+P\+R\+O\+TO@{C\+Y\+\_\+\+I\+S\+R\+\_\+\+P\+R\+O\+TO}!interruptions.\+h@{interruptions.\+h}}
 \subsubsection{C\+Y\+\_\+\+I\+S\+R\+\_\+\+P\+R\+O\+T\+O()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}

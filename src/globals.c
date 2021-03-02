@@ -98,7 +98,7 @@ uint8 NUM_OF_ANALOG_INPUTS = 4;             /*! ADC currently configured channel
 int8 pwm_sign;                               /*!< Sign of pwm driven. Used to obtain current sign.*/
 
 // Encoder variables
-uint32 data_encoder_raw[N_ENCODERS_PER_LINE_MAX];
+uint32 data_encoder_raw[N_ENCODER_LINE_MAX][N_ENCODERS_PER_LINE_MAX];
 uint8 N_Encoder_Line_Connected[N_ENCODER_LINE_MAX]; // Used to map how many encoders are connected to each CS pin, there are N_ENCODER_LINE_MAX CS on the board and each of them can contain N_ENCODERS_PER_LINE_MAX encoders
 uint16 Encoder_Value[N_ENCODER_LINE_MAX][N_ENCODERS_PER_LINE_MAX];
 uint8 Encoder_Check[N_ENCODER_LINE_MAX][N_ENCODERS_PER_LINE_MAX];
@@ -110,6 +110,8 @@ int32 rest_pos_curr_ref;                     /*!< Rest position current referenc
 FS_FILE * pFile;
 char sdFile[100] = "";
 char sdParam[100] = "";
+FS_FILE * pEMGHFile;
+char sdEMGHFile[100] = "\\EMG_History.csv";
 
 // IMU variables
 uint8 N_IMU_Connected;
@@ -128,5 +130,8 @@ float Quat[N_IMU_MAX][4];
 // MASTER variables
 uint8 master_mode;               /*!< Flag used to set/unset master mode to send messages to other boards.*/
 
+// EMG HISTORY
+uint16 emg_history[SAMPLES_FOR_EMG_HISTORY][NUM_OF_INPUT_EMGS];   /*!< EMG data with the history of last activity.*/
+uint32 emg_history_next_idx;    /*!< Vector index of last (newest) element.*/
 
 /* END OF FILE */

@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_CP.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">PSoC5 firmware
-   &#160;<span id="projectnumber">v. 1.8</span>
+   &#160;<span id="projectnumber">v. 1.9</span>
    </div>
    <div id="projectbrief">Centro E.Piaggio</div>
   </td>
@@ -134,12 +134,16 @@ Functions</h2></td></tr>
 <tr class="separator:a9a269059a30ccb92e4d493baa0e7c509"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3dd6f5b24ace363132fc9b1883e7cd88"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a3dd6f5b24ace363132fc9b1883e7cd88">memInit_AirChambersFb</a> (void)</td></tr>
 <tr class="separator:a3dd6f5b24ace363132fc9b1883e7cd88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a365625dbe7bb68797bed3abb1c492d42"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a365625dbe7bb68797bed3abb1c492d42">memInit_OtbkActWristMs</a> (void)</td></tr>
+<tr class="separator:a365625dbe7bb68797bed3abb1c492d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5ccd403f1d3e49c97bafd6e7713cff3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#af5ccd403f1d3e49c97bafd6e7713cff3">cmd_get_measurements</a> ()</td></tr>
 <tr class="separator:af5ccd403f1d3e49c97bafd6e7713cff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a212883283bd7a8f32846615271cad8ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a212883283bd7a8f32846615271cad8ce">cmd_get_velocities</a> ()</td></tr>
 <tr class="separator:a212883283bd7a8f32846615271cad8ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0da9d76da2e4332137635f18e1d0004b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a0da9d76da2e4332137635f18e1d0004b">cmd_get_accelerations</a> ()</td></tr>
 <tr class="separator:a0da9d76da2e4332137635f18e1d0004b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09b189bd1592a8f95769a1907f44b555"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a09b189bd1592a8f95769a1907f44b555">cmd_get_joystick</a> ()</td></tr>
+<tr class="separator:a09b189bd1592a8f95769a1907f44b555"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d8a4542f55af960a27f875b00aad6a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a2d8a4542f55af960a27f875b00aad6a1">cmd_set_inputs</a> ()</td></tr>
 <tr class="separator:a2d8a4542f55af960a27f875b00aad6a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a107fc9f2982f9a953bdd82aa07279499"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a107fc9f2982f9a953bdd82aa07279499">cmd_activate</a> ()</td></tr>
@@ -174,13 +178,21 @@ Functions</h2></td></tr>
 <tr class="separator:aed52a69c50e11b3db2feaebe65bacdc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc8c1d4f31f68fc267fdfb6f9ce27f9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#afc8c1d4f31f68fc267fdfb6f9ce27f9b">cmd_get_ADC_raw</a> ()</td></tr>
 <tr class="separator:afc8c1d4f31f68fc267fdfb6f9ce27f9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47884d88bea34ce92722c14ab60248ba"><td class="memItemLeft" align="right" valign="top"><a id="a47884d88bea34ce92722c14ab60248ba"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>air_chambers_control</b> ()</td></tr>
-<tr class="separator:a47884d88bea34ce92722c14ab60248ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90d37f64d1eac91112e56a3724e57e0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a90d37f64d1eac91112e56a3724e57e0a">cmd_get_SD_file</a> (uint16 filename_length)</td></tr>
+<tr class="separator:a90d37f64d1eac91112e56a3724e57e0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a308022a04c9da94099b233c05942f9d9"><td class="memItemLeft" align="right" valign="top"><a id="a308022a04c9da94099b233c05942f9d9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>air_chambers_control</b> (int slave_motor_idx)</td></tr>
+<tr class="separator:a308022a04c9da94099b233c05942f9d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79073b26a718383551f0b008082291d4"><td class="memItemLeft" align="right" valign="top"><a id="a79073b26a718383551f0b008082291d4"></a>
+uint8&#160;</td><td class="memItemRight" valign="bottom"><b>emg_activation_velocity_fsm</b> ()</td></tr>
+<tr class="separator:a79073b26a718383551f0b008082291d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a792fff039e9d237fee86bda6d41b8067"><td class="memItemLeft" align="right" valign="top"><a id="a792fff039e9d237fee86bda6d41b8067"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>otbk_act_wrist_control</b> (int slave_motor_idx)</td></tr>
+<tr class="separator:a792fff039e9d237fee86bda6d41b8067"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7088642f851a8375e8b8edf673b91a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#ab7088642f851a8375e8b8edf673b91a4">drive_slave</a> (uint8 motor_idx, uint8 slave_ID)</td></tr>
 <tr class="separator:ab7088642f851a8375e8b8edf673b91a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ab18b8568ea220d085f46cc77a6b904"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a9ab18b8568ea220d085f46cc77a6b904">stop_feedback</a> ()</td></tr>
-<tr class="separator:a9ab18b8568ea220d085f46cc77a6b904"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dbcb914c7348f441f7dd56b3400f434"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a4dbcb914c7348f441f7dd56b3400f434">stop_master_device</a> ()</td></tr>
+<tr class="separator:a4dbcb914c7348f441f7dd56b3400f434"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22eb92c869daf62079d72a328c54aec7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a22eb92c869daf62079d72a328c54aec7">deactivate_slaves</a> ()</td></tr>
 <tr class="separator:a22eb92c869daf62079d72a328c54aec7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -432,6 +444,24 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
 
 </div>
 </div>
+<a id="a09b189bd1592a8f95769a1907f44b555"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09b189bd1592a8f95769a1907f44b555">&#9670;&nbsp;</a></span>cmd_get_joystick()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cmd_get_joystick </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This function gets the joystick analog values and puts them in the package to be sent. </p>
+
+</div>
+</div>
 <a id="af5ccd403f1d3e49c97bafd6e7713cff3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af5ccd403f1d3e49c97bafd6e7713cff3">&#9670;&nbsp;</a></span>cmd_get_measurements()</h2>
 
@@ -447,6 +477,25 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
       </table>
 </div><div class="memdoc">
 <p>Bunch of functions used on request from UART communication </p>
+
+</div>
+</div>
+<a id="a90d37f64d1eac91112e56a3724e57e0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90d37f64d1eac91112e56a3724e57e0a">&#9670;&nbsp;</a></span>cmd_get_SD_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cmd_get_SD_file </td>
+          <td>(</td>
+          <td class="paramtype">uint16&#160;</td>
+          <td class="paramname"><em>filename_length</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This function gets a file on the SD </p>
 
 </div>
 </div>
@@ -1013,6 +1062,24 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
 
 </div>
 </div>
+<a id="a365625dbe7bb68797bed3abb1c492d42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a365625dbe7bb68797bed3abb1c492d42">&#9670;&nbsp;</a></span>memInit_OtbkActWristMs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void memInit_OtbkActWristMs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This functions initializes the memory. It is used also to restore the the parameters to their default values. Specific for Ottobock Active Wrist Master firmware </p>
+
+</div>
+</div>
 <a id="aa93addc878e4efa2b8681a7116c1a07b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa93addc878e4efa2b8681a7116c1a07b">&#9670;&nbsp;</a></span>memInit_SoftHandPro()</h2>
 
@@ -1287,21 +1354,21 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
 
 </div>
 </div>
-<a id="a9ab18b8568ea220d085f46cc77a6b904"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ab18b8568ea220d085f46cc77a6b904">&#9670;&nbsp;</a></span>stop_feedback()</h2>
+<a id="a4dbcb914c7348f441f7dd56b3400f434"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dbcb914c7348f441f7dd56b3400f434">&#9670;&nbsp;</a></span>stop_master_device()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void stop_feedback </td>
+          <td class="memname">void stop_master_device </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This function is used to deactivate feedback motors when occurred. </p>
+<p>This function is used to deactivate master device motors when occurred. </p>
 
 </div>
 </div>

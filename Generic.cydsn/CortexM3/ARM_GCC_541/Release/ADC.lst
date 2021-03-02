@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
   55              		.thumb
   56              		.thumb_func
   57              		.type	ADC_Init, %function
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 2
 
 
   58              	ADC_Init:
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
   52:Generated_Source\PSoC5/ADC.c **** volatile int32 ADC_Offset;
   53:Generated_Source\PSoC5/ADC.c **** volatile int32 ADC_CountsPerVolt;
   54:Generated_Source\PSoC5/ADC.c **** 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 3
 
 
   55:Generated_Source\PSoC5/ADC.c **** 
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
   75 0008 0122     		movs	r2, #1
   76 000a 1A70     		strb	r2, [r3]
   95:Generated_Source\PSoC5/ADC.c ****     ADC_convDone = 0u;
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 4
 
 
   77              		.loc 1 95 0
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  112 0048 274B     		ldr	r3, .L2+24
  113 004a 0022     		movs	r2, #0
  114 004c 1A70     		strb	r2, [r3]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 5
 
 
  115:Generated_Source\PSoC5/ADC.c **** 
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  133:Generated_Source\PSoC5/ADC.c ****     ADC_GainCompensation(ADC_CFG1_INPUT_RANGE,
  151              		.loc 1 133 0
  152 0084 0123     		movs	r3, #1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 6
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 6
 
 
  153 0086 0093     		str	r3, [sp]
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  178 00bc 1380     		strh	r3, [r2]	@ movhi
  163:Generated_Source\PSoC5/ADC.c **** 
  164:Generated_Source\PSoC5/ADC.c ****     /* Initialize the registers with default customizer settings for config1 */
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 7
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 7
 
 
  165:Generated_Source\PSoC5/ADC.c ****     ADC_InitConfig(ADC_Config);
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  174:Generated_Source\PSoC5/ADC.c **** *  Enables the ADC DelSig block operation.
  175:Generated_Source\PSoC5/ADC.c **** *
  176:Generated_Source\PSoC5/ADC.c **** *
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 8
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 8
 
 
  177:Generated_Source\PSoC5/ADC.c **** * Parameters:
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  259 0032 1370     		strb	r3, [r2]
  196:Generated_Source\PSoC5/ADC.c **** 
  197:Generated_Source\PSoC5/ADC.c ****      /* Enable alternative active mode power for ADC */
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 9
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 9
 
 
  198:Generated_Source\PSoC5/ADC.c ****     ADC_STBY_PWRMGR_DEC_REG |= ADC_STBY_PWR_DEC_EN;
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  212:Generated_Source\PSoC5/ADC.c ****            (ADC_CFG2_REFERENCE == ADC_EXT_REF_ON_P32))) || \
  213:Generated_Source\PSoC5/ADC.c ****          ((ADC_DEFAULT_NUM_CONFIGS > 2) && \
  214:Generated_Source\PSoC5/ADC.c ****           ((ADC_CFG3_REFERENCE == ADC_EXT_REF_ON_P03) ||  \
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 10
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 10
 
 
  215:Generated_Source\PSoC5/ADC.c ****            (ADC_CFG3_REFERENCE == ADC_EXT_REF_ON_P32))) || \
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  269:Generated_Source\PSoC5/ADC.c **** 
  270:Generated_Source\PSoC5/ADC.c ****     /* Wait for 3 microseconds */
  271:Generated_Source\PSoC5/ADC.c ****     CyDelayUs(ADC_PRES_DELAY_TIME);
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 11
 
 
  300              		.loc 1 271 0
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  339              		.loc 1 286 0
  340 00d0 1C4A     		ldr	r2, .L5+36
  341 00d2 1C4B     		ldr	r3, .L5+36
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 12
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 12
 
 
  342 00d4 1B78     		ldrb	r3, [r3]
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  380              		.cfi_def_cfa_register 13
  381              		@ sp needed
  382 011e 80BD     		pop	{r7, pc}
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 13
 
 
  383              	.L6:
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  329:Generated_Source\PSoC5/ADC.c **** void ADC_Start(void) 
  330:Generated_Source\PSoC5/ADC.c **** {
  411              		.loc 1 330 0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 14
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 14
 
 
  412              		.cfi_startproc
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  454              		.align	2
  455              		.global	ADC_Stop
  456              		.thumb
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 15
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 15
 
 
  457              		.thumb_func
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  369:Generated_Source\PSoC5/ADC.c ****     ADC_DEC_SR_REG |=  ADC_DEC_INTR_CLEAR;
  485              		.loc 1 369 0
  486 001e 4A4A     		ldr	r2, .L13+4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 16
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 16
 
 
  487 0020 494B     		ldr	r3, .L13+4
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  383:Generated_Source\PSoC5/ADC.c ****     ADC_RESET_CR4_REG &= (uint8)~ADC_IGNORE_PRESA1;
  528              		.loc 1 383 0
  529 0074 354A     		ldr	r2, .L13+8
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 17
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 17
 
 
  530 0076 354B     		ldr	r3, .L13+8
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  573 00cc 23F01003 		bic	r3, r3, #16
  574 00d0 DBB2     		uxtb	r3, r3
  575 00d2 1370     		strb	r3, [r2]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 18
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 18
 
 
  395:Generated_Source\PSoC5/ADC.c **** 
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  409:Generated_Source\PSoC5/ADC.c ****     ADC_STBY_PWRMGR_CHARGE_PUMP_CLK_REG &= (uint8)~ADC_STBY_PWR_CHARGE_PUMP_CLK_EN;
  616              		.loc 1 409 0
  617 0124 144A     		ldr	r2, .L13+52
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 19
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 19
 
 
  618 0126 144B     		ldr	r3, .L13+52
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  418:Generated_Source\PSoC5/ADC.c **** *
  419:Generated_Source\PSoC5/ADC.c **** * Summary:
  420:Generated_Source\PSoC5/ADC.c **** *  Sets input buffer gain.
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 20
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 20
 
 
  421:Generated_Source\PSoC5/ADC.c **** *
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  703              		@ sp needed
  704 0034 80BC     		pop	{r7}
  705              		.cfi_restore 7
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 21
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 21
 
 
  706              		.cfi_def_cfa_offset 0
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  729              		.cfi_def_cfa_offset 4
  730              		.cfi_offset 7, -4
  731 0002 85B0     		sub	sp, sp, #20
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 22
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 22
 
 
  732              		.cfi_def_cfa_offset 24
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  780              		.global	ADC_SetGCOR
  781              		.thumb
  782              		.thumb_func
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 23
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 23
 
 
  783              		.type	ADC_SetGCOR, %function
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  511:Generated_Source\PSoC5/ADC.c ****     tmpReg = ADC_gcor[ADC_Config - 1u].gcor;
  799              		.loc 1 511 0
  800 0008 254B     		ldr	r3, .L28+8
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 24
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 24
 
 
  801 000a 1B78     		ldrb	r3, [r3]
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  844 0066 B868     		ldr	r0, [r7, #8]	@ float
  845 0068 FFF7FEFF 		bl	__aeabi_f2uiz
  846 006c 0346     		mov	r3, r0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 25
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 25
 
 
  847 006e BB81     		strh	r3, [r7, #12]	@ movhi
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  892              	.LFB7:
  532:Generated_Source\PSoC5/ADC.c **** 
  533:Generated_Source\PSoC5/ADC.c **** 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 26
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 26
 
 
  534:Generated_Source\PSoC5/ADC.c **** /******************************************************************************
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  918 0018 FA88     		ldrh	r2, [r7, #6]
  919 001a 7B79     		ldrb	r3, [r7, #5]	@ zero_extendqisi2
  920 001c C3F10F03 		rsb	r3, r3, #15
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 27
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 27
 
 
  921 0020 02FA03F3 		lsl	r3, r2, r3
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  585:Generated_Source\PSoC5/ADC.c **** *******************************************************************************/
  586:Generated_Source\PSoC5/ADC.c **** void ADC_StartConvert(void) 
  587:Generated_Source\PSoC5/ADC.c **** {
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 28
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 28
 
 
  953              		.loc 1 587 0
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  600:Generated_Source\PSoC5/ADC.c **** *  conversion.
  601:Generated_Source\PSoC5/ADC.c **** *
  602:Generated_Source\PSoC5/ADC.c **** * Parameters:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 29
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 29
 
 
  603:Generated_Source\PSoC5/ADC.c **** *  None
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  615:Generated_Source\PSoC5/ADC.c **** 
  616:Generated_Source\PSoC5/ADC.c **** /*******************************************************************************
  617:Generated_Source\PSoC5/ADC.c **** * Function Name: ADC_IsEndConversion
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 30
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 30
 
 
  618:Generated_Source\PSoC5/ADC.c **** ********************************************************************************
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  1055 000e DBB2     		uxtb	r3, r3
  1056 0010 002B     		cmp	r3, #0
  1057 0012 03D0     		beq	.L42
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 31
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 31
 
 
  654:Generated_Source\PSoC5/ADC.c ****         {
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  1101              		.size	ADC_IsEndConversion, .-ADC_IsEndConversion
  1102              		.section	.text.ADC_GetResult8,"ax",%progbits
  1103              		.align	2
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 32
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 32
 
 
  1104              		.global	ADC_GetResult8
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  1125 000a DBB2     		uxtb	r3, r3
  1126 000c 03F00303 		and	r3, r3, #3
  1127 0010 FB71     		strb	r3, [r7, #7]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 33
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 33
 
 
  698:Generated_Source\PSoC5/ADC.c **** 
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  1162 0040 97F90630 		ldrsb	r3, [r7, #6]
  718:Generated_Source\PSoC5/ADC.c **** }
  1163              		.loc 1 718 0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 34
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 34
 
 
  1164 0044 1846     		mov	r0, r3
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  743:Generated_Source\PSoC5/ADC.c **** *
  744:Generated_Source\PSoC5/ADC.c **** *******************************************************************************/
  745:Generated_Source\PSoC5/ADC.c **** int16 ADC_GetResult16(void) 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 35
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 35
 
 
  746:Generated_Source\PSoC5/ADC.c **** {
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  1226 0026 FB80     		strh	r3, [r7, #6]	@ movhi
  768:Generated_Source\PSoC5/ADC.c ****             result |=  (uint16)((uint16)ADC_DEC_SAMPM_REG << 8u);
  1227              		.loc 1 768 0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 36
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 36
 
 
  1228 0028 104B     		ldr	r3, .L61+8
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  1268 0060 7047     		bx	lr
  1269              	.L62:
  1270 0062 00BF     		.align	2
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 37
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 37
 
 
  1271              	.L61:
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  807:Generated_Source\PSoC5/ADC.c ****     uint32 result;
  808:Generated_Source\PSoC5/ADC.c ****     uint8 coherency;
  809:Generated_Source\PSoC5/ADC.c ****     #if (CY_PSOC3)
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 38
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 38
 
 
  810:Generated_Source\PSoC5/ADC.c **** 	    uint16 tmp;
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  835:Generated_Source\PSoC5/ADC.c ****             if((result & 0x80u) != 0u)
  836:Generated_Source\PSoC5/ADC.c ****             {   /* Sign extend */
  837:Generated_Source\PSoC5/ADC.c ****                 result |= 0xFF00u;
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 39
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 39
 
 
  838:Generated_Source\PSoC5/ADC.c ****             }
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  1362 006a 1B04     		lsls	r3, r3, #16
  1363 006c 7A68     		ldr	r2, [r7, #4]
  1364 006e 1343     		orrs	r3, r3, r2
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 40
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 40
 
 
  1365 0070 7B60     		str	r3, [r7, #4]
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  1409              	ADC_SetOffset:
  1410              	.LFB14:
  870:Generated_Source\PSoC5/ADC.c **** 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 41
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 41
 
 
  871:Generated_Source\PSoC5/ADC.c **** 
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  1433              		.cfi_def_cfa_register 13
  1434              		@ sp needed
  1435 0014 80BC     		pop	{r7}
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 42
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 42
 
 
  1436              		.cfi_restore 7
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  1458              		@ link register save eliminated.
  1459 0000 80B4     		push	{r7}
  1460              		.cfi_def_cfa_offset 4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 43
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 43
 
 
  1461              		.cfi_offset 7, -4
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  953:Generated_Source\PSoC5/ADC.c **** *
  954:Generated_Source\PSoC5/ADC.c **** * Global variables:
  955:Generated_Source\PSoC5/ADC.c **** *  ADC_CountsPerVolt:  used to convert ADC counts to mVolts.
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 44
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 44
 
 
  956:Generated_Source\PSoC5/ADC.c **** *  ADC_Offset:  Used as the offset while converting ADC counts
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  1514 000e D31A     		subs	r3, r2, r3
  1515 0010 7B60     		str	r3, [r7, #4]
  993:Generated_Source\PSoC5/ADC.c **** 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 45
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 45
 
 
  994:Generated_Source\PSoC5/ADC.c ****     mVolts = (int16)(( adcCounts * ADC_1MV_COUNTS ) / ADC_CountsPerVolt) ;
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
 1010:Generated_Source\PSoC5/ADC.c **** *  int32 adcCounts:  Result from the ADC conversion.
 1011:Generated_Source\PSoC5/ADC.c **** *
 1012:Generated_Source\PSoC5/ADC.c **** * Return:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 46
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 46
 
 
 1013:Generated_Source\PSoC5/ADC.c **** *  float32: Result in Volts
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
 1053:Generated_Source\PSoC5/ADC.c ****     adcCounts -= ADC_Offset;
  1568              		.loc 1 1053 0
  1569 0008 0C4B     		ldr	r3, .L83
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 47
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 47
 
 
  1570 000a 1B68     		ldr	r3, [r3]
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
 1064:Generated_Source\PSoC5/ADC.c **** *
 1065:Generated_Source\PSoC5/ADC.c **** * Summary:
 1066:Generated_Source\PSoC5/ADC.c **** *  Converts the ADC output to uVolts as a 32-bit integer. For example,
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 48
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 48
 
 
 1067:Generated_Source\PSoC5/ADC.c **** *  if the ADC measured -0.02345 Volts, the return value would be -23450 uVolts.
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  1635 0014 FB73     		strb	r3, [r7, #15]
  1636 0016 11E0     		b	.L87
  1637              	.L86:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 49
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 49
 
 
 1100:Generated_Source\PSoC5/ADC.c ****         #if(ADC_CFG1_DEC_DIV != 0)
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  1665 003c FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
  1666 003e 0C2B     		cmp	r3, #12
  1667 0040 02D0     		beq	.L91
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 50
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 50
 
 
  1668 0042 102B     		cmp	r3, #16
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
 1168:Generated_Source\PSoC5/ADC.c ****             case (uint8)ADC__BITS_16:
 1169:Generated_Source\PSoC5/ADC.c ****                 coefA = ADC_1UV_COUNTS / ADC_DIVISOR_32;
  1681              		.loc 1 1169 0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 51
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 51
 
 
  1682 0052 47F61223 		movw	r3, #31250
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  1693              		.loc 1 1212 0
  1694 0062 0123     		movs	r3, #1
  1695 0064 3B61     		str	r3, [r7, #16]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 52
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 52
 
 
 1213:Generated_Source\PSoC5/ADC.c ****             break;
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  1743              		.section	.text.ADC_InitConfig,"ax",%progbits
  1744              		.align	2
  1745              		.thumb
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 53
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 53
 
 
  1746              		.thumb_func
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
 1248:Generated_Source\PSoC5/ADC.c ****         /* Default Config */
 1249:Generated_Source\PSoC5/ADC.c ****         ADC_DEC_CR_REG      = ADC_CFG1_DEC_CR;
  1772              		.loc 1 1249 0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 54
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 54
 
 
  1773 0016 364B     		ldr	r3, .L101+4
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
 1261:Generated_Source\PSoC5/ADC.c ****         ADC_DSM_CR5_REG     = ADC_CFG1_DSM_CR5;
  1816              		.loc 1 1261 0
  1817 0058 304B     		ldr	r3, .L101+48
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 55
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 55
 
 
  1818 005a 0522     		movs	r2, #5
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  1860 009a 2A4B     		ldr	r3, .L101+88
  1861 009c 5822     		movs	r2, #88
  1862 009e 1A70     		strb	r2, [r3]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 56
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 56
 
 
 1274:Generated_Source\PSoC5/ADC.c ****         ADC_DSM_REF3_REG    = ADC_CFG1_DSM_REF3;
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
 1301:Generated_Source\PSoC5/ADC.c **** 
 1302:Generated_Source\PSoC5/ADC.c ****         ADC_Ext_CP_Clk_SetDividerRegister(ADC_CFG1_CP_CLK_DIVIDER, 1u);
  1890              		.loc 1 1302 0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 57
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 57
 
 
  1891 00cc 0121     		movs	r1, #1
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
 1345:Generated_Source\PSoC5/ADC.c **** 
 1346:Generated_Source\PSoC5/ADC.c ****             ADC_DSM_BUF0_REG    = ADC_CFG2_DSM_BUF0;
 1347:Generated_Source\PSoC5/ADC.c ****             ADC_DSM_BUF1_REG    = ADC_CFG2_DSM_BUF1;
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 58
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 58
 
 
 1348:Generated_Source\PSoC5/ADC.c ****             ADC_DSM_BUF2_REG    = ADC_CFG2_DSM_BUF2;
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
 1402:Generated_Source\PSoC5/ADC.c ****             ADC_DSM_CR4_REG     = ADC_CFG3_DSM_CR4;
 1403:Generated_Source\PSoC5/ADC.c ****             ADC_DSM_CR5_REG     = ADC_CFG3_DSM_CR5;
 1404:Generated_Source\PSoC5/ADC.c ****             ADC_DSM_CR6_REG     = ADC_CFG3_DSM_CR6;
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 59
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 59
 
 
 1405:Generated_Source\PSoC5/ADC.c ****             ADC_DSM_CR7_REG     = ADC_CFG3_DSM_CR7;
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
 1459:Generated_Source\PSoC5/ADC.c ****         {
 1460:Generated_Source\PSoC5/ADC.c ****             /* Fourth Config */
 1461:Generated_Source\PSoC5/ADC.c ****             ADC_DEC_CR_REG      = ADC_CFG4_DEC_CR;
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 60
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 60
 
 
 1462:Generated_Source\PSoC5/ADC.c ****             ADC_DEC_SHIFT1_REG  = ADC_CFG4_DEC_SHIFT1;
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
 1516:Generated_Source\PSoC5/ADC.c ****             #if(ADC_DEFAULT_INTERNAL_CLK)
 1517:Generated_Source\PSoC5/ADC.c ****                 ADC_theACLK_SetDividerRegister(ADC_CFG4_ADC_CLK_DIVIDER, 1u);
 1518:Generated_Source\PSoC5/ADC.c ****             #endif /* ADC_DEFAULT_INTERNAL_CLK */
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 61
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 61
 
 
 1519:Generated_Source\PSoC5/ADC.c **** 
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  1949              		.global	ADC_SelectConfiguration
  1950              		.thumb
  1951              		.thumb_func
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 62
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 62
 
 
  1952              		.type	ADC_SelectConfiguration, %function
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  1976              		.loc 1 1556 0 is_stmt 0 discriminator 1
  1977 0016 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
  1978 0018 012B     		cmp	r3, #1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 63
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 63
 
 
  1979 001a 25D8     		bhi	.L107
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  2012 0050 013B     		subs	r3, r3, #1
  2013 0052 0B49     		ldr	r1, .L108+16
  2014 0054 31F82330 		ldrh	r3, [r1, r3, lsl #2]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 64
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 64
 
 
  2015 0058 1380     		strh	r3, [r2]	@ movhi
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
 1595:Generated_Source\PSoC5/ADC.c **** 
 1596:Generated_Source\PSoC5/ADC.c **** /*******************************************************************************
 1597:Generated_Source\PSoC5/ADC.c **** * Function Name: ADC_GainCompensation
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 65
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 65
 
 
 1598:Generated_Source\PSoC5/ADC.c **** ********************************************************************************
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  2078 001e 97F82030 		ldrb	r3, [r7, #32]	@ zero_extendqisi2
  2079 0022 002B     		cmp	r3, #0
  2080 0024 00F08A80 		beq	.L129
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 66
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 66
 
 
  2081              		.loc 1 1625 0 is_stmt 0 discriminator 1
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  2119 0078 344B     		ldr	r3, .L130+4
  2120 007a 1B78     		ldrb	r3, [r3]
  2121 007c DBB2     		uxtb	r3, r3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 67
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 67
 
 
  2122 007e FB75     		strb	r3, [r7, #23]
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
 1661:Generated_Source\PSoC5/ADC.c ****                 {
 1662:Generated_Source\PSoC5/ADC.c ****                     flash = ADC_DEC_TRIM_VREF_4_DIFF_8_15;
 1663:Generated_Source\PSoC5/ADC.c ****                 }
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 68
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 68
 
 
 1664:Generated_Source\PSoC5/ADC.c ****                 break;
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  2190 00d4 00BF     		nop
  2191              	.L120:
 1681:Generated_Source\PSoC5/ADC.c ****         }
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 69
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 69
 
 
 1682:Generated_Source\PSoC5/ADC.c **** 
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  2231 011e 97F82030 		ldrb	r3, [r7, #32]	@ zero_extendqisi2
  2232 0122 013B     		subs	r3, r3, #1
  2233 0124 104A     		ldr	r2, .L130+32
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 70
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 70
 
 
  2234 0126 9B00     		lsls	r3, r3, #2
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  2277              		.type	ADC_SetDSMRef0Reg, %function
  2278              	ADC_SetDSMRef0Reg:
  2279              	.LFB22:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 71
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 71
 
 
 1708:Generated_Source\PSoC5/ADC.c **** 
@@ -4258,7 +4258,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  2310 0028 DBB2     		uxtb	r3, r3
  2311 002a 43F00303 		orr	r3, r3, #3
  2312 002e DBB2     		uxtb	r3, r3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 72
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 72
 
 
  2313 0030 1370     		strb	r3, [r2]
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  2357              		.size	ADC_SetDSMRef0Reg, .-ADC_SetDSMRef0Reg
  2358              		.section	.text.ADC_Read8,"ax",%progbits
  2359              		.align	2
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 73
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 73
 
 
  2360              		.global	ADC_Read8
@@ -4378,7 +4378,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  2387 0016 FFF7FEFF 		bl	ADC_StartConvert
 1769:Generated_Source\PSoC5/ADC.c ****     (void)ADC_IsEndConversion(ADC_WAIT_FOR_RESULT);
  2388              		.loc 1 1769 0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 74
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 74
 
 
  2389 001a 0020     		movs	r0, #0
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
 1791:Generated_Source\PSoC5/ADC.c **** * Return:
 1792:Generated_Source\PSoC5/ADC.c **** *  int16:  ADC result.
 1793:Generated_Source\PSoC5/ADC.c **** *
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 75
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 75
 
 
 1794:Generated_Source\PSoC5/ADC.c **** *******************************************************************************/
@@ -4498,7 +4498,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  2462 0036 80BD     		pop	{r7, pc}
  2463              	.L142:
  2464              		.align	2
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 76
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 76
 
 
  2465              	.L141:
@@ -4558,7 +4558,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  2493 000a 1B78     		ldrb	r3, [r3]
  2494 000c DBB2     		uxtb	r3, r3
  2495 000e 43F00403 		orr	r3, r3, #4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 77
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 77
 
 
  2496 0012 DBB2     		uxtb	r3, r3
@@ -4618,7 +4618,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  2543 0025 02       		.uleb128 0x2
  2544 0026 01       		.byte	0x1
  2545 0027 06       		.byte	0x6
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 78
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 78
 
 
  2546 0028 61010000 		.4byte	.LASF0
@@ -4678,7 +4678,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  2600 0094 02       		.byte	0x2
  2601 0095 E701     		.2byte	0x1e7
  2602 0097 25000000 		.4byte	0x25
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 79
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 79
 
 
  2603 009b 04       		.uleb128 0x4
@@ -4738,7 +4738,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  2657 0110 07       		.byte	0x7
  2658 0111 FA020000 		.4byte	.LASF23
  2659 0115 06       		.uleb128 0x6
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 80
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 80
 
 
  2660 0116 04       		.byte	0x4
@@ -4798,7 +4798,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  2714 0182 77       		.sleb128 -9
  2715 0183 00       		.byte	0
  2716 0184 0C       		.uleb128 0xc
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 81
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 81
 
 
  2717 0185 60040000 		.4byte	.LASF30
@@ -4858,7 +4858,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  2771 01f7 D101     		.2byte	0x1d1
  2772 01f9 00000000 		.4byte	.LFB5
  2773 01fd 38000000 		.4byte	.LFE5-.LFB5
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 82
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 82
 
 
  2774 0201 01       		.uleb128 0x1
@@ -4918,7 +4918,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  2828 026d 0E       		.uleb128 0xe
  2829 026e 2B040000 		.4byte	.LASF40
  2830 0272 01       		.byte	0x1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 83
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 83
 
 
  2831 0273 FD01     		.2byte	0x1fd
@@ -4978,7 +4978,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  2885 02e6 00000000 		.4byte	.LFB10
  2886 02ea 4C000000 		.4byte	.LFE10-.LFB10
  2887 02ee 01       		.uleb128 0x1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 84
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 84
 
 
  2888 02ef 9C       		.byte	0x9c
@@ -5038,7 +5038,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  2942 0361 9C       		.byte	0x9c
  2943 0362 85030000 		.4byte	0x385
  2944 0366 0E       		.uleb128 0xe
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 85
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 85
 
 
  2945 0367 D6040000 		.4byte	.LASF50
@@ -5098,7 +5098,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  2999 03d9 01       		.byte	0x1
  3000 03da 8203     		.2byte	0x382
  3001 03dc A7000000 		.4byte	0xa7
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 86
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 86
 
 
  3002 03e0 02       		.uleb128 0x2
@@ -5158,7 +5158,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  3056 044f 00000000 		.4byte	.LFB17
  3057 0453 44000000 		.4byte	.LFE17-.LFB17
  3058 0457 01       		.uleb128 0x1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 87
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 87
 
 
  3059 0458 9C       		.byte	0x9c
@@ -5218,7 +5218,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  3113 04c4 05040000 		.4byte	.LASF65
  3114 04c8 01       		.byte	0x1
  3115 04c9 4404     		.2byte	0x444
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 88
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 88
 
 
  3116 04cb A7000000 		.4byte	0xa7
@@ -5278,7 +5278,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  3170 053a 91       		.byte	0x91
  3171 053b 76       		.sleb128 -10
  3172 053c 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 89
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 89
 
 
  3173 053d 15       		.uleb128 0x15
@@ -5338,7 +5338,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  3227 05aa 02       		.uleb128 0x2
  3228 05ab 91       		.byte	0x91
  3229 05ac 77       		.sleb128 -9
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 90
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 90
 
 
  3230 05ad 0E       		.uleb128 0xe
@@ -5398,7 +5398,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  3284 0616 E206     		.2byte	0x6e2
  3285 0618 8F000000 		.4byte	0x8f
  3286 061c 00000000 		.4byte	.LFB23
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 91
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 91
 
 
  3287 0620 3C000000 		.4byte	.LFE23-.LFB23
@@ -5458,7 +5458,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  3341 0697 17       		.uleb128 0x17
  3342 0698 0E010000 		.4byte	0x10e
  3343 069c 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 92
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 92
 
 
  3344 069d 00       		.byte	0
@@ -5518,7 +5518,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  3398 070f 05       		.uleb128 0x5
  3399 0710 03       		.byte	0x3
  3400 0711 00000000 		.4byte	ADC_Offset
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 93
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 93
 
 
  3401 0715 05       		.uleb128 0x5
@@ -5578,7 +5578,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  3455 0029 04       		.uleb128 0x4
  3456 002a 16       		.uleb128 0x16
  3457 002b 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 94
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 94
 
 
  3458 002c 03       		.uleb128 0x3
@@ -5638,7 +5638,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  3512 0062 49       		.uleb128 0x49
  3513 0063 13       		.uleb128 0x13
  3514 0064 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 95
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 95
 
 
  3515 0065 00       		.byte	0
@@ -5698,7 +5698,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  3569 009d 3A       		.uleb128 0x3a
  3570 009e 0B       		.uleb128 0xb
  3571 009f 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 96
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 96
 
 
  3572 00a0 0B       		.uleb128 0xb
@@ -5758,7 +5758,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  3626 00d8 00       		.byte	0
  3627 00d9 0E       		.uleb128 0xe
  3628 00da 34       		.uleb128 0x34
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 97
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 97
 
 
  3629 00db 00       		.byte	0
@@ -5818,7 +5818,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  3683 0112 2E       		.uleb128 0x2e
  3684 0113 01       		.byte	0x1
  3685 0114 3F       		.uleb128 0x3f
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 98
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 98
 
 
  3686 0115 19       		.uleb128 0x19
@@ -5878,7 +5878,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  3740 014d 19       		.uleb128 0x19
  3741 014e 03       		.uleb128 0x3
  3742 014f 0E       		.uleb128 0xe
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 99
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 99
 
 
  3743 0150 3A       		.uleb128 0x3a
@@ -5938,7 +5938,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  3797 0188 40       		.uleb128 0x40
  3798 0189 18       		.uleb128 0x18
  3799 018a 9742     		.uleb128 0x2117
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 100
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 100
 
 
  3800 018c 19       		.uleb128 0x19
@@ -5998,7 +5998,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  3854 0024 30000000 		.4byte	.LFE2-.LFB2
  3855 0028 00000000 		.4byte	.LFB3
  3856 002c 7C010000 		.4byte	.LFE3-.LFB3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 101
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 101
 
 
  3857 0030 00000000 		.4byte	.LFB4
@@ -6058,7 +6058,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  3911 0018 00000000 		.4byte	.LFB3
  3912 001c 7C010000 		.4byte	.LFE3
  3913 0020 00000000 		.4byte	.LFB4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 102
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 102
 
 
  3914 0024 3C000000 		.4byte	.LFE4
@@ -6118,7 +6118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  3963      313600
  3964              	.LASF56:
  3965 0007 61646347 		.ascii	"adcGain\000"
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 103
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 103
 
 
  3965      61696E00 
@@ -6178,7 +6178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  3986              	.LASF91:
  3987 010a 47656E65 		.ascii	"Generated_Source\\PSoC5\\ADC.c\000"
  3987      72617465 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 104
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 104
 
 
  3987      645F536F 
@@ -6238,7 +6238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  4008      00
  4009              	.LASF4:
  4010 01e9 6C6F6E67 		.ascii	"long int\000"
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 105
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 105
 
 
  4010      20696E74 
@@ -6298,7 +6298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  4038      20756E73 
  4038      69676E65 
  4038      6420696E 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 106
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 106
 
 
  4038      7400
@@ -6358,7 +6358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  4065              	.LASF47:
  4066 031b 4144435F 		.ascii	"ADC_IsEndConversion\000"
  4066      4973456E 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 107
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 107
 
 
  4066      64436F6E 
@@ -6418,7 +6418,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  4091              	.LASF67:
  4092 03b6 4144435F 		.ascii	"ADC_SelectConfiguration\000"
  4092      53656C65 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 108
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 108
 
 
  4092      6374436F 
@@ -6478,7 +6478,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  4122      656E6379 
  4122      00
  4123              	.LASF79:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 109
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 109
 
 
  4124 044c 4144435F 		.ascii	"ADC_Read8\000"
@@ -6538,7 +6538,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 1
  4149              	.LASF51:
  4150 04dd 4144435F 		.ascii	"ADC_GetResult16\000"
  4150      47657452 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccqqClbm.s 			page 110
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccambf7E.s 			page 110
 
 
  4150      6573756C 

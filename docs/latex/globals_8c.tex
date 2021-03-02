@@ -24,7 +24,7 @@ struct \textbf{ st\+\_\+meas} {\bfseries g\+\_\+meas} [\textbf{ N\+\_\+\+E\+N\+C
 \item 
 struct \textbf{ st\+\_\+meas} \textbf{ g\+\_\+meas\+Old} [\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}]
 \item 
-struct \textbf{ st\+\_\+emg\+\_\+meas} g\+\_\+emg\+\_\+meas \textbf{ g\+\_\+emg\+\_\+meas\+Old}
+struct \textbf{ st\+\_\+adc\+\_\+meas} g\+\_\+adc\+\_\+meas \textbf{ g\+\_\+adc\+\_\+meas\+Old}
 \item 
 struct \textbf{ st\+\_\+fb\+\_\+meas} \textbf{ g\+\_\+fb\+\_\+meas}
 \item 
@@ -64,9 +64,13 @@ int32 \textbf{ pow\+\_\+tension} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O
 \item 
 \textbf{ counter\+\_\+status} C\+Y\+D\+A\+TA \textbf{ cycles\+\_\+status} = \textbf{ N\+O\+NE}
 \item 
-\textbf{ emg\+\_\+status} C\+Y\+D\+A\+TA \textbf{ emg\+\_\+1\+\_\+status} = \textbf{ R\+E\+S\+ET}
+\textbf{ adc\+\_\+status} C\+Y\+D\+A\+TA \textbf{ emg\+\_\+1\+\_\+status} = \textbf{ R\+E\+S\+ET}
 \item 
-\textbf{ emg\+\_\+status} C\+Y\+D\+A\+TA \textbf{ emg\+\_\+2\+\_\+status} = \textbf{ R\+E\+S\+ET}
+\textbf{ adc\+\_\+status} C\+Y\+D\+A\+TA \textbf{ emg\+\_\+2\+\_\+status} = \textbf{ R\+E\+S\+ET}
+\item 
+\textbf{ adc\+\_\+status} C\+Y\+D\+A\+TA \textbf{ joy\+\_\+\+U\+D\+\_\+status} = \textbf{ R\+E\+S\+ET}
+\item 
+\textbf{ adc\+\_\+status} C\+Y\+D\+A\+TA \textbf{ joy\+\_\+\+L\+R\+\_\+status} = \textbf{ R\+E\+S\+ET}
 \item 
 C\+Y\+B\+IT \textbf{ reset\+\_\+last\+\_\+value\+\_\+flag}
 \item 
@@ -97,8 +101,8 @@ uint8 \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+N\+A\+L\+O\+G\+\_\+\+I\+N\+P\+U\+TS
 \item 
 int8 \textbf{ pwm\+\_\+sign}
 \item 
-\mbox{\label{globals_8c_a5190337b2d433e192edc68cf3d603ede}} 
-uint32 {\bfseries data\+\_\+encoder\+\_\+raw} [\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+P\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}]
+\mbox{\label{globals_8c_af1bb506bc73f01ca200da713384fefe8}} 
+uint32 {\bfseries data\+\_\+encoder\+\_\+raw} [\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}][\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+P\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}]
 \item 
 \mbox{\label{globals_8c_ae62a59fe712aba1b45a5358ece0b3d35}} 
 uint8 {\bfseries N\+\_\+\+Encoder\+\_\+\+Line\+\_\+\+Connected} [\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}]
@@ -249,17 +253,17 @@ Power supply tension. \mbox{\label{globals_8c_aa2494c7cd8f096ca7f2ead0a1430a597}
 \subsubsection{dev\+\_\+tension\+\_\+f}
 {\footnotesize\ttfamily int32 dev\+\_\+tension\+\_\+f[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]}
 
-Filtered power supply tension. \mbox{\label{globals_8c_a433230c4343adf14967e6f4f9082b199}} 
+Filtered power supply tension. \mbox{\label{globals_8c_af909e8281823c106dd4191858f995b32}} 
 \index{globals.\+c@{globals.\+c}!emg\+\_\+1\+\_\+status@{emg\+\_\+1\+\_\+status}}
 \index{emg\+\_\+1\+\_\+status@{emg\+\_\+1\+\_\+status}!globals.\+c@{globals.\+c}}
 \subsubsection{emg\+\_\+1\+\_\+status}
-{\footnotesize\ttfamily \textbf{ emg\+\_\+status} C\+Y\+D\+A\+TA emg\+\_\+1\+\_\+status = \textbf{ R\+E\+S\+ET}}
+{\footnotesize\ttfamily \textbf{ adc\+\_\+status} C\+Y\+D\+A\+TA emg\+\_\+1\+\_\+status = \textbf{ R\+E\+S\+ET}}
 
-First E\+MG sensor status. \mbox{\label{globals_8c_a7eef8180f636a73854d52b58e2be4e51}} 
+First E\+MG sensor status. \mbox{\label{globals_8c_ab157f05be16bbec6bbbf4966ee61f5cd}} 
 \index{globals.\+c@{globals.\+c}!emg\+\_\+2\+\_\+status@{emg\+\_\+2\+\_\+status}}
 \index{emg\+\_\+2\+\_\+status@{emg\+\_\+2\+\_\+status}!globals.\+c@{globals.\+c}}
 \subsubsection{emg\+\_\+2\+\_\+status}
-{\footnotesize\ttfamily \textbf{ emg\+\_\+status} C\+Y\+D\+A\+TA emg\+\_\+2\+\_\+status = \textbf{ R\+E\+S\+ET}}
+{\footnotesize\ttfamily \textbf{ adc\+\_\+status} C\+Y\+D\+A\+TA emg\+\_\+2\+\_\+status = \textbf{ R\+E\+S\+ET}}
 
 Second E\+MG sensor status. \mbox{\label{globals_8c_aad3d2663356b48553e2b22e0a9fd917e}} 
 \index{globals.\+c@{globals.\+c}!filt\+\_\+emg@{filt\+\_\+emg}}
@@ -285,11 +289,11 @@ Velocity filter variables. \mbox{\label{globals_8c_a0f13b80a0c329fa3176eb1e72ef3
 \subsubsection{forced\+\_\+open}
 {\footnotesize\ttfamily uint8 forced\+\_\+open}
 
-Forced open flag (used in position with rest position control). \mbox{\label{globals_8c_a85e15a194417ebcd15f662bd9bcfdded}} 
-\index{globals.\+c@{globals.\+c}!g\+\_\+emg\+\_\+meas\+Old@{g\+\_\+emg\+\_\+meas\+Old}}
-\index{g\+\_\+emg\+\_\+meas\+Old@{g\+\_\+emg\+\_\+meas\+Old}!globals.\+c@{globals.\+c}}
-\subsubsection{g\+\_\+emg\+\_\+meas\+Old}
-{\footnotesize\ttfamily struct \textbf{ st\+\_\+emg\+\_\+meas} g\+\_\+emg\+\_\+meas g\+\_\+emg\+\_\+meas\+Old}
+Forced open flag (used in position with rest position control). \mbox{\label{globals_8c_acc5bb8855e965e00106ae614ae1aa510}} 
+\index{globals.\+c@{globals.\+c}!g\+\_\+adc\+\_\+meas\+Old@{g\+\_\+adc\+\_\+meas\+Old}}
+\index{g\+\_\+adc\+\_\+meas\+Old@{g\+\_\+adc\+\_\+meas\+Old}!globals.\+c@{globals.\+c}}
+\subsubsection{g\+\_\+adc\+\_\+meas\+Old}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+adc\+\_\+meas} g\+\_\+adc\+\_\+meas g\+\_\+adc\+\_\+meas\+Old}
 
 E\+MG Measurements. \mbox{\label{globals_8c_af8d2d84570b7e85614e0455a23177e62}} 
 \index{globals.\+c@{globals.\+c}!g\+\_\+fb\+\_\+meas@{g\+\_\+fb\+\_\+meas}}
@@ -321,7 +325,19 @@ Incoming/\+Outcoming data. \mbox{\label{globals_8c_a1e6fda88dfdabc63859f8907eb70
 \subsubsection{interrupt\+\_\+flag}
 {\footnotesize\ttfamily C\+Y\+B\+IT interrupt\+\_\+flag = F\+A\+L\+SE}
 
-Interrupt flag enabler. \mbox{\label{globals_8c_a7bdd0aaa2a8c38bd61f34d76d3a69dbf}} 
+Interrupt flag enabler. \mbox{\label{globals_8c_ad8db2d45996868177ae599a5cc9f41ff}} 
+\index{globals.\+c@{globals.\+c}!joy\+\_\+\+L\+R\+\_\+status@{joy\+\_\+\+L\+R\+\_\+status}}
+\index{joy\+\_\+\+L\+R\+\_\+status@{joy\+\_\+\+L\+R\+\_\+status}!globals.\+c@{globals.\+c}}
+\subsubsection{joy\+\_\+\+L\+R\+\_\+status}
+{\footnotesize\ttfamily \textbf{ adc\+\_\+status} C\+Y\+D\+A\+TA joy\+\_\+\+L\+R\+\_\+status = \textbf{ R\+E\+S\+ET}}
+
+Joystick L\+E\+F\+T/\+R\+I\+G\+HT status. \mbox{\label{globals_8c_afece0e67682b8e3a920f1bb395ae0ec9}} 
+\index{globals.\+c@{globals.\+c}!joy\+\_\+\+U\+D\+\_\+status@{joy\+\_\+\+U\+D\+\_\+status}}
+\index{joy\+\_\+\+U\+D\+\_\+status@{joy\+\_\+\+U\+D\+\_\+status}!globals.\+c@{globals.\+c}}
+\subsubsection{joy\+\_\+\+U\+D\+\_\+status}
+{\footnotesize\ttfamily \textbf{ adc\+\_\+status} C\+Y\+D\+A\+TA joy\+\_\+\+U\+D\+\_\+status = \textbf{ R\+E\+S\+ET}}
+
+Joystick U\+P/\+D\+O\+WN status. \mbox{\label{globals_8c_a7bdd0aaa2a8c38bd61f34d76d3a69dbf}} 
 \index{globals.\+c@{globals.\+c}!maintenance\+\_\+flag@{maintenance\+\_\+flag}}
 \index{maintenance\+\_\+flag@{maintenance\+\_\+flag}!globals.\+c@{globals.\+c}}
 \subsubsection{maintenance\+\_\+flag}

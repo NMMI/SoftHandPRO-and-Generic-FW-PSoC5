@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['zero_5ftol',['ZERO_TOL',['../utils_8h.html#a2d55df83bcb11e53743ff6732e4bf7c1',1,'utils.h']]],
-  ['zmax',['ZMAX',['../utils_8h.html#a131010b0d7e64a592f782aec28c6a4d8',1,'utils.h']]]
+  ['wait_5fid',['WAIT_ID',['../globals_8h.html#a6a6a0bb02e515a094c3e7ea1bcb66fcc',1,'globals.h']]],
+  ['wait_5flength',['WAIT_LENGTH',['../globals_8h.html#a235d2d0eac7e9af190ebafb84df37fd9',1,'globals.h']]],
+  ['wait_5fstart',['WAIT_START',['../globals_8h.html#aea55597952638136c7c929b238904c82',1,'globals.h']]]
 ];

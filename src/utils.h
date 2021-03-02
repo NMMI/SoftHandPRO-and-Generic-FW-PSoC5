@@ -148,6 +148,10 @@ float invSqrt(float x);
 void v3_normalize(float v3_in[3]);
 void v4_normalize(float v4_in[4]);
 
+/** This function updates the EMG history values with last availables.
+**/
+void update_EMG_history();
+
 #endif
 
 /* [] END OF FILE */

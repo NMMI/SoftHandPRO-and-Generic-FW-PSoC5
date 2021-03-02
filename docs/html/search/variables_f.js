@@ -1,21 +1,14 @@
 var searchData=
 [
-  ['read_5fadc_5fsensors_5fport_5fflag',['read_ADC_sensors_port_flag',['../structst__expansion.html#a35f3f96b2d425fc3934ee6cfa8166a04',1,'st_expansion']]],
-  ['read_5fexp_5fport_5fflag',['read_exp_port_flag',['../structst__expansion.html#aa0fa0bc36fe5fc720d757680e189f6d2',1,'st_expansion']]],
-  ['read_5fimu_5fflag',['read_imu_flag',['../structst__imu.html#a02e930c22d986c574b7041926068e65d',1,'st_imu']]],
-  ['ready',['ready',['../structst__data.html#ac24f07ab21d61d7af9cb3a49d102e0ac',1,'st_data']]],
-  ['repetitions',['repetitions',['../structst__calib.html#a6d03a0b0677c33357a5d3b49bc296205',1,'st_calib']]],
-  ['res',['res',['../structst__encoder.html#ac2e19d167eac4c8ca9ce97c646e78595',1,'st_encoder']]],
-  ['reset_5fcounters',['reset_counters',['../structst__device.html#aa3174a5c2f1351b0da08cd82d84a5a5e',1,'st_device']]],
-  ['reset_5flast_5fvalue_5fflag',['reset_last_value_flag',['../globals_8c.html#aa89a782cfe75ce7970236babd308fe69',1,'reset_last_value_flag():&#160;globals.c'],['../globals_8h.html#aa89a782cfe75ce7970236babd308fe69',1,'reset_last_value_flag():&#160;globals.c']]],
-  ['reset_5fpsoc_5fflag',['reset_PSoC_flag',['../globals_8c.html#a7f81d1d66186b1c7cd358ea7cfff2caf',1,'reset_PSoC_flag():&#160;globals.c'],['../globals_8h.html#a7f81d1d66186b1c7cd358ea7cfff2caf',1,'reset_PSoC_flag():&#160;globals.c']]],
-  ['rest_5fcounter',['rest_counter',['../structst__counters.html#ac3b4a645a1b680f6f03e6efdf9d7a2df',1,'st_counters']]],
-  ['rest_5fdelay',['rest_delay',['../structst___s_h__spec.html#a0c8e71bf78005976d2887594a9808eda',1,'st_SH_spec']]],
-  ['rest_5fenabled',['rest_enabled',['../globals_8c.html#a1f8839fadee52a47a0042eaa695c3f3a',1,'rest_enabled():&#160;globals.c'],['../globals_8h.html#a1f8839fadee52a47a0042eaa695c3f3a',1,'rest_enabled():&#160;globals.c']]],
-  ['rest_5fpos',['rest_pos',['../structst___s_h__spec.html#a27742da1d6ad36d8051848f9e4346146',1,'st_SH_spec']]],
-  ['rest_5fpos_5fcurr_5fref',['rest_pos_curr_ref',['../globals_8c.html#a485e5b90bbfb79aa97f874873cd6c93a',1,'rest_pos_curr_ref():&#160;globals.c'],['../globals_8h.html#a485e5b90bbfb79aa97f874873cd6c93a',1,'rest_pos_curr_ref():&#160;globals.c']]],
-  ['rest_5fposition_5fflag',['rest_position_flag',['../structst___s_h__spec.html#a8a4aa5efee4b9d62ea71a1459cf3ac3b',1,'st_SH_spec']]],
-  ['rest_5fvel',['rest_vel',['../structst___s_h__spec.html#a94cdcf7b401877a792ba800585324d9c',1,'st_SH_spec']]],
-  ['right_5fleft',['right_left',['../structst__device.html#a95ebb9bb0592170f336cd2815aa63fa9',1,'st_device']]],
-  ['rot',['rot',['../structst__meas.html#a26b47db1884c475bc42d76a709349f97',1,'st_meas']]]
+  ['pos',['pos',['../structst__ref.html#aa98fea17674bef3e67fbd014da075008',1,'st_ref::pos()'],['../structst__meas.html#a3ee4913e7257d25d3e47cbbada9c8546',1,'st_meas::pos()']]],
+  ['pos_5flim_5fflag',['pos_lim_flag',['../structst__motor.html#aa2ceebf7546e978c8b0393ce8035532d',1,'st_motor']]],
+  ['pos_5flim_5finf',['pos_lim_inf',['../structst__motor.html#a09aaaa265df5ea6cba5a3f216f1dc2c8',1,'st_motor']]],
+  ['pos_5flim_5fsup',['pos_lim_sup',['../structst__motor.html#a981b8ec7db1222b3afbd4f1fd5da983d',1,'st_motor']]],
+  ['position_5fhist',['position_hist',['../structst__counters.html#ab6a7872da6e5008df9709e4d0a57b7ab',1,'st_counters']]],
+  ['pow_5ftension',['pow_tension',['../globals_8c.html#a1c717f431f1d1ea4a500f6027102d001',1,'pow_tension():&#160;globals.c'],['../globals_8h.html#a1c717f431f1d1ea4a500f6027102d001',1,'pow_tension():&#160;globals.c']]],
+  ['pressure',['pressure',['../structst__fb__meas.html#ac870e1249bab4a2a68cc4126761d24ef',1,'st_fb_meas']]],
+  ['prop_5ferr_5ffb_5fgain',['prop_err_fb_gain',['../structst___f_b__spec.html#af4dcbeffaf7f4bc2870dc1f093c0ce1b',1,'st_FB_spec']]],
+  ['pwm',['pwm',['../structst__ref.html#af8587579fb553575d315bfe2e3183bc4',1,'st_ref']]],
+  ['pwm_5frate_5flimiter',['pwm_rate_limiter',['../structst__motor.html#a1230396f2894c516a42a418ec34a60a1',1,'st_motor']]],
+  ['pwm_5fsign',['pwm_sign',['../globals_8c.html#a8ac7ad7c894db750e93bc745818e26ca',1,'pwm_sign():&#160;globals.c'],['../globals_8h.html#a8ac7ad7c894db750e93bc745818e26ca',1,'pwm_sign():&#160;globals.c']]]
 ];

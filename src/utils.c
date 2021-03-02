@@ -549,4 +549,31 @@ void v4_normalize(float v4_in[4]){
     v4_in[3] = v4_in[3]*norm;
 }
 
+//==============================================================================
+//                                                            UPDATE_EMG_HISTORY
+//==============================================================================
+void update_EMG_history(){
+    
+    static int32 last_counter_value = 6000;
+    
+    uint32 current_counter_value = (uint32)CYCLES_TIMER_ReadCounter();
+    int32 counter_diff = last_counter_value - current_counter_value;
+    
+    if ( counter_diff >= 10 || counter_diff <= -10 ){
+        // Run this part only after 10 CYCLES_TIMER timer steps (50Hz timer -> 5 Hz)
+        
+        
+        for (int i = 0; i < NUM_OF_INPUT_EMGS; i++){
+            emg_history[emg_history_next_idx][i] = g_adc_meas.emg[i];
+        }        
+        
+        last_counter_value = current_counter_value;
+        
+        emg_history_next_idx++;
+        if (emg_history_next_idx >= SAMPLES_FOR_EMG_HISTORY){
+            emg_history_next_idx = 0;
+        }
+    }
+}
+
 /* [] END OF FILE */

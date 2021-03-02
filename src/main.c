@@ -214,6 +214,12 @@ int main()
     g_adc_meas.emg[1] = 0;
     g_adc_meas.joystick[0] = 0;
     g_adc_meas.joystick[1] = 0;
+    for (uint16 k = 0; k<SAMPLES_FOR_EMG_HISTORY; k++){
+        for (j = 0; j<NUM_OF_INPUT_EMGS; j++){
+            emg_history[k][j] = (uint16)0;
+        }
+    }
+    emg_history_next_idx = 0;
     
     MOTOR_DRIVER_TYPE_Write((g_mem.motor[1].motor_driver_type << 1) | g_mem.motor[0].motor_driver_type);
     for (i = 0; i< NUM_OF_MOTORS; i++) {

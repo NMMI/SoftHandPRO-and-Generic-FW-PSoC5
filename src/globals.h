@@ -69,7 +69,7 @@
 #define NUM_OF_MS_PARAMS        2       /*!< Number of master parameters saved in the EEPROM.*/
 #define NUM_OF_FB_PARAMS        3       /*!< Number of feedback parameters saved in the EEPROM.*/
 #define NUM_OF_WR_PARAMS        3       /*!< Number of wrist parameters saved in the EEPROM.*/
-#define NUM_OF_PARAMS           (74 + NUM_OF_MS_PARAMS + NUM_OF_FB_PARAMS + NUM_OF_WR_PARAMS)      /*!< Number of parameters saved in the EEPROM.*/
+#define NUM_OF_PARAMS           (75 + NUM_OF_MS_PARAMS + NUM_OF_FB_PARAMS + NUM_OF_WR_PARAMS)      /*!< Number of parameters saved in the EEPROM.*/
 #define NUM_OF_PARAMS_MENU      12      /*!< Number of parameters menu.*/    
 #define N_IMU_MAX               5    
 #define NUM_OF_IMU_DATA         5       // accelerometers, gyroscopes, magnetometers, quaternion and temperature data
@@ -80,8 +80,8 @@
 //                                                               SYNCHRONIZATION
 //==============================================================================
 
-//Main frequency 1000 Hz
-#define CALIBRATION_DIV         10      /*!< Frequency divisor for hand calibration (100Hz).*/
+//Main frequency 5000 Hz (110 us - max. 200 us cycle time)
+#define CALIBRATION_DIV         10      /*!< Frequency divisor for hand calibration (500Hz).*/
 #define DIV_INIT_VALUE          1       /*!< Initial value for hand counter calibration.*/
 
 //==============================================================================
@@ -214,7 +214,7 @@
 #define SAFE_STARTUP_MOTOR_READINGS 8000    /*!< Number of encoder readings after position reconstruction before activating motor.*/
 #define LOOKUP_DIM              6           /*!< Dimension of the current lookup table.*/
 #define PREREVISION_CYCLES      400000      /*!< Number of SoftHand Pro cycles before maintenance.*/    
-
+#define SAMPLES_FOR_EMG_HISTORY 600 /*!< Number of EMG history values ( 5 smpls/sec. x 120 secs = 600 smpls / channel ).*/
 //==============================================================================
 //                                                        structures definitions
 //==============================================================================
@@ -381,7 +381,8 @@ struct st_expansion{
     uint8   read_exp_port_flag;         /*!< Enable Expansion Port.*/                                       //1
     uint8   read_ADC_sensors_port_flag; /*!< Enable ADC sensors Port.*/                                     //1
     uint8   ADC_conf[NUM_OF_ADC_CHANNELS_MAX];  /*!< ADC configuration flags.*/                             //12
-    uint8   unused_bytes[12];           /*!< Unused bytes to fill row.*/                                    //12
+    uint8   record_EMG_history_on_SD;   /*!< Enable EMG recording on SD Card.*/                             //1
+    uint8   unused_bytes[11];           /*!< Unused bytes to fill row.*/                                    //11
 };                                                                                                          // TOTAL: 32 BYTES
 
 //=================================================     User
@@ -583,7 +584,7 @@ extern uint8 NUM_OF_ANALOG_INPUTS;                  /*! ADC currently configured
 extern int8 pwm_sign;                               /*!< Sign of pwm driven. Used to obtain current sign.*/
 
 // Encoder variables
-extern uint32 data_encoder_raw[N_ENCODERS_PER_LINE_MAX];
+extern uint32 data_encoder_raw[N_ENCODER_LINE_MAX][N_ENCODERS_PER_LINE_MAX];
 extern uint8 N_Encoder_Line_Connected[N_ENCODER_LINE_MAX]; // Used to map how many encoders are connected to each CS pin, there are N_ENCODER_LINE_MAX CS on the board and each of them can contain N_ENCODERS_PER_LINE_MAX encoders
 extern uint16 Encoder_Value[N_ENCODER_LINE_MAX][N_ENCODERS_PER_LINE_MAX];
 extern uint8 Encoder_Check[N_ENCODER_LINE_MAX][N_ENCODERS_PER_LINE_MAX];
@@ -595,6 +596,8 @@ extern int32 rest_pos_curr_ref;                     /*!< Rest position current r
 extern FS_FILE * pFile;
 extern char sdFile[100];
 extern char sdParam[100];
+extern FS_FILE * pEMGHFile;
+extern char sdEMGHFile[100];
 
 // IMU variables
 extern uint8 N_IMU_Connected;
@@ -612,6 +615,9 @@ extern float Quat[N_IMU_MAX][4];
 // MASTER variables
 extern uint8 master_mode;               /*!< Flag used to set/unset master mode to send messages to other boards.*/
 
+// EMG HISTORY    
+extern uint16 emg_history[SAMPLES_FOR_EMG_HISTORY][NUM_OF_INPUT_EMGS];   /*!< EMG data with the history of last activity.*/
+extern uint32 emg_history_next_idx;    /*!< Vector index of last (newest) element.*/
 
 // -----------------------------------------------------------------------------
 

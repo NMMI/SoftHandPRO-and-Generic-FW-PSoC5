@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_CP.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">PSoC5 firmware
-   &#160;<span id="projectnumber">v. 1.8</span>
+   &#160;<span id="projectnumber">v. 1.9</span>
    </div>
    <div id="projectbrief">Centro E.Piaggio</div>
   </td>
@@ -96,6 +96,10 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="commands_8h.html#a3154ffe43f7cb799f7c35cfad7339f49">GET_SD_DATA</a>&#160;&#160;&#160;3</td></tr>
 <tr class="memdesc:a3154ffe43f7cb799f7c35cfad7339f49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read Usage Data from SD file. <br /></td></tr>
 <tr class="separator:a3154ffe43f7cb799f7c35cfad7339f49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb8f46ce96d5f85985e3a2c7e7f9da43"><td class="memItemLeft" align="right" valign="top"><a id="abb8f46ce96d5f85985e3a2c7e7f9da43"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="commands_8h.html#abb8f46ce96d5f85985e3a2c7e7f9da43">GET_SD_FS_TREE</a>&#160;&#160;&#160;4</td></tr>
+<tr class="memdesc:abb8f46ce96d5f85985e3a2c7e7f9da43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get info on SD card filesystem tree. <br /></td></tr>
+<tr class="separator:abb8f46ce96d5f85985e3a2c7e7f9da43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
 SoftHand Commands</h2></td></tr>
@@ -136,14 +140,16 @@ SoftHand Commands</h2></td></tr>
 &#160;&#160;<a class="el" href="commands_8h.html#a4aaf0abc6fbbed856a4a9538ae886e61ac1a1e6554eb0603ea5a5f77f604f594c">CMD_GET_CURR_DIFF</a> = 140, 
 <a class="el" href="commands_8h.html#a4aaf0abc6fbbed856a4a9538ae886e61a78d9d45e499f848da1c4d03a1ba534a4">CMD_SET_CUFF_INPUTS</a> = 142, 
 <a class="el" href="commands_8h.html#a4aaf0abc6fbbed856a4a9538ae886e61a2ddc0e8c5f0a28ad470e881d1e196c47">CMD_SET_BAUDRATE</a> = 144, 
-<b>CMD_GET_IMU_READINGS</b> = 161, 
+<a class="el" href="commands_8h.html#a4aaf0abc6fbbed856a4a9538ae886e61a51f92ae4cb4dffafda985f714433039a">CMD_GET_JOYSTICK</a> = 146, 
 <br />
-&#160;&#160;<b>CMD_GET_IMU_PARAM</b> = 162, 
+&#160;&#160;<a class="el" href="commands_8h.html#a4aaf0abc6fbbed856a4a9538ae886e61a172dacbbb78cf7088b6706718082d54f">CMD_GET_IMU_READINGS</a> = 161, 
+<b>CMD_GET_IMU_PARAM</b> = 162, 
 <b>CMD_GET_ENCODER_CONF</b> = 163, 
 <b>CMD_GET_ENCODER_RAW</b> = 164, 
-<b>CMD_GET_ADC_CONF</b> = 165, 
 <br />
-&#160;&#160;<b>CMD_GET_ADC_RAW</b> = 166
+&#160;&#160;<b>CMD_GET_ADC_CONF</b> = 165, 
+<b>CMD_GET_ADC_RAW</b> = 166, 
+<b>CMD_GET_SD_SINGLE_FILE</b> = 167
 <br />
  }</td></tr>
 <tr class="separator:a4aaf0abc6fbbed856a4a9538ae886e61"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -170,7 +176,8 @@ SoftHand Commands</h2></td></tr>
 <br />
 &#160;&#160;<a class="el" href="commands_8h.html#af5b4e6fe0787834c86e4ea44f0ece279a63042e0fb1fcf5bf0008b15442eea194">INPUT_MODE_EMG_FCFS</a> = 4, 
 <a class="el" href="commands_8h.html#af5b4e6fe0787834c86e4ea44f0ece279a9e54aef6ab6f164ed0db5c3d59058da8">INPUT_MODE_EMG_FCFS_ADV</a> = 5, 
-<a class="el" href="commands_8h.html#af5b4e6fe0787834c86e4ea44f0ece279a5615cd4b06b150f6832a773356e38101">INPUT_MODE_EMG_PROPORTIONAL_NC</a> = 6
+<a class="el" href="commands_8h.html#af5b4e6fe0787834c86e4ea44f0ece279a6f5918e455c85bc7e916bddbf8889538">INPUT_MODE_JOYSTICK</a> = 6, 
+<a class="el" href="commands_8h.html#af5b4e6fe0787834c86e4ea44f0ece279a5615cd4b06b150f6832a773356e38101">INPUT_MODE_EMG_PROPORTIONAL_NC</a> = 7
 <br />
  }</td></tr>
 <tr class="separator:af5b4e6fe0787834c86e4ea44f0ece279"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -273,6 +280,10 @@ SoftHand Commands</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="a4aaf0abc6fbbed856a4a9538ae886e61a2ddc0e8c5f0a28ad470e881d1e196c47"></a>CMD_SET_BAUDRATE&#160;</td><td class="fielddoc"><p>Command for setting baudrate of communication. </p>
 </td></tr>
+<tr><td class="fieldname"><a id="a4aaf0abc6fbbed856a4a9538ae886e61a51f92ae4cb4dffafda985f714433039a"></a>CMD_GET_JOYSTICK&#160;</td><td class="fielddoc"><p>Command to get the joystick measurements (Only </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a4aaf0abc6fbbed856a4a9538ae886e61a172dacbbb78cf7088b6706718082d54f"></a>CMD_GET_IMU_READINGS&#160;</td><td class="fielddoc"><p>for devices driven by a joystick) </p>
+</td></tr>
 </table>
 
 </div>
@@ -325,8 +336,10 @@ SoftHand Commands</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="af5b4e6fe0787834c86e4ea44f0ece279a9e54aef6ab6f164ed0db5c3d59058da8"></a>INPUT_MODE_EMG_FCFS_ADV&#160;</td><td class="fielddoc"><p>Use 2 EMG. First reaching threshold. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="af5b4e6fe0787834c86e4ea44f0ece279a5615cd4b06b150f6832a773356e38101"></a>INPUT_MODE_EMG_PROPORTIONAL_NC&#160;</td><td class="fielddoc"><p>Normally closed. </p>
+<tr><td class="fieldname"><a id="af5b4e6fe0787834c86e4ea44f0ece279a6f5918e455c85bc7e916bddbf8889538"></a>INPUT_MODE_JOYSTICK&#160;</td><td class="fielddoc"><p>Joystick input mode. </p>
 <p>wins and its value defines hand closure. Wait for both EMG to lower under threshold. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af5b4e6fe0787834c86e4ea44f0ece279a5615cd4b06b150f6832a773356e38101"></a>INPUT_MODE_EMG_PROPORTIONAL_NC&#160;</td><td class="fielddoc"><p>EMG Normally closed. </p>
 </td></tr>
 </table>
 

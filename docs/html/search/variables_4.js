@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['emg',['emg',['../structst__emg__meas.html#ae0da72aee09f1465400d8af30b55c1b1',1,'st_emg_meas::emg()'],['../structst__eeprom.html#a423333afbc7d0ab697d1f8e12ef8271f',1,'st_eeprom::emg()']]],
-  ['emg_5f1_5fstatus',['emg_1_status',['../globals_8c.html#a433230c4343adf14967e6f4f9082b199',1,'emg_1_status():&#160;globals.c'],['../globals_8h.html#a433230c4343adf14967e6f4f9082b199',1,'emg_1_status():&#160;globals.c']]],
-  ['emg_5f2_5fstatus',['emg_2_status',['../globals_8c.html#a7eef8180f636a73854d52b58e2be4e51',1,'emg_2_status():&#160;globals.c'],['../globals_8h.html#a7eef8180f636a73854d52b58e2be4e51',1,'emg_2_status():&#160;globals.c']]],
+  ['emg',['emg',['../structst__adc__meas.html#ae0da72aee09f1465400d8af30b55c1b1',1,'st_adc_meas::emg()'],['../structst__eeprom.html#a423333afbc7d0ab697d1f8e12ef8271f',1,'st_eeprom::emg()']]],
+  ['emg_5f1_5fstatus',['emg_1_status',['../globals_8c.html#af909e8281823c106dd4191858f995b32',1,'emg_1_status():&#160;globals.c'],['../globals_8h.html#af909e8281823c106dd4191858f995b32',1,'emg_1_status():&#160;globals.c']]],
+  ['emg_5f2_5fstatus',['emg_2_status',['../globals_8c.html#ab157f05be16bbec6bbbf4966ee61f5cd',1,'emg_2_status():&#160;globals.c'],['../globals_8h.html#ab157f05be16bbec6bbbf4966ee61f5cd',1,'emg_2_status():&#160;globals.c']]],
   ['emg_5fcalibration_5fflag',['emg_calibration_flag',['../structst__emg.html#a78f0b0c6db2a7118cd15ec0aa38ccdb9',1,'st_emg']]],
   ['emg_5fcounter',['emg_counter',['../structst__counters.html#a4f0e42865ba18f09c8cd90f8cd36534c',1,'st_counters']]],
   ['emg_5fmax_5fvalue',['emg_max_value',['../structst__emg.html#ad35fe7496b3455cdaf034ddc2c157163',1,'st_emg']]],
-  ['emg_5fspeed',['emg_speed',['../structst__emg.html#ae8e800591064bf14eb2dd3a3fb2c325b',1,'st_emg']]],
+  ['emg_5fspeed',['emg_speed',['../structst__emg.html#a66c08e905054b65a7e2a25a8780eb59b',1,'st_emg']]],
   ['emg_5fthreshold',['emg_threshold',['../structst__emg.html#aa406dc76b9d1c8741dc42db9ac4dab51',1,'st_emg']]],
   ['enabled',['enabled',['../structst__calib.html#a2333939d3e81212884efcaa5bb1c1ec1',1,'st_calib']]],
   ['enc',['enc',['../structst__eeprom.html#aa275bd5d24411d272636769852d7ccdc',1,'st_eeprom']]],

@@ -16,13 +16,11 @@ uint16 \textbf{ emg\+\_\+threshold} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P
 \item 
 uint32 \textbf{ emg\+\_\+max\+\_\+value} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS}]
 \item 
-uint8 \textbf{ emg\+\_\+speed}
+uint8 \textbf{ emg\+\_\+speed} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS}]
 \item 
 uint8 \textbf{ emg\+\_\+calibration\+\_\+flag}
 \item 
 uint8 \textbf{ switch\+\_\+emg}
-\item 
-uint8 \textbf{ unused\+\_\+bytes} [1]
 \end{DoxyCompactItemize}
 
 
@@ -44,11 +42,11 @@ Enable emg calibration on startup. \mbox{\label{structst__emg_ad35fe7496b3455cda
 \subsubsection{emg\+\_\+max\+\_\+value}
 {\footnotesize\ttfamily uint32 emg\+\_\+max\+\_\+value[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS}]}
 
-Maximum value for E\+MG. \mbox{\label{structst__emg_ae8e800591064bf14eb2dd3a3fb2c325b}} 
+Maximum value for E\+MG. \mbox{\label{structst__emg_a66c08e905054b65a7e2a25a8780eb59b}} 
 \index{st\+\_\+emg@{st\+\_\+emg}!emg\+\_\+speed@{emg\+\_\+speed}}
 \index{emg\+\_\+speed@{emg\+\_\+speed}!st\+\_\+emg@{st\+\_\+emg}}
 \subsubsection{emg\+\_\+speed}
-{\footnotesize\ttfamily uint8 emg\+\_\+speed}
+{\footnotesize\ttfamily uint8 emg\+\_\+speed[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS}]}
 
 Maximum closure speed when using E\+MG. \mbox{\label{structst__emg_aa406dc76b9d1c8741dc42db9ac4dab51}} 
 \index{st\+\_\+emg@{st\+\_\+emg}!emg\+\_\+threshold@{emg\+\_\+threshold}}
@@ -62,13 +60,7 @@ Minimum value for activation of E\+MG control. \mbox{\label{structst__emg_a90c7b
 \subsubsection{switch\+\_\+emg}
 {\footnotesize\ttfamily uint8 switch\+\_\+emg}
 
-E\+MG opening/closure switch. \mbox{\label{structst__emg_ac60066bd7150d73c95439a5e2af21e05}} 
-\index{st\+\_\+emg@{st\+\_\+emg}!unused\+\_\+bytes@{unused\+\_\+bytes}}
-\index{unused\+\_\+bytes@{unused\+\_\+bytes}!st\+\_\+emg@{st\+\_\+emg}}
-\subsubsection{unused\+\_\+bytes}
-{\footnotesize\ttfamily uint8 unused\+\_\+bytes[1]}
-
-Unused bytes to fill row. 
+E\+MG opening/closure switch. 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

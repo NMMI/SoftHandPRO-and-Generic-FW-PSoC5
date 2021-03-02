@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_CP.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">PSoC5 firmware
-   &#160;<span id="projectnumber">v. 1.8</span>
+   &#160;<span id="projectnumber">v. 1.9</span>
    </div>
    <div id="projectbrief">Centro E.Piaggio</div>
   </td>
@@ -171,6 +171,9 @@ $(function() {
 : <a class="el" href="command__processing_8c.html#a40f7c67690279132ab72019b76165cb8">command_processing.c</a>
 , <a class="el" href="command__processing_8h.html#a40f7c67690279132ab72019b76165cb8">command_processing.h</a>
 </li>
+<li>CMD_GET_IMU_READINGS
+: <a class="el" href="commands_8h.html#a4aaf0abc6fbbed856a4a9538ae886e61a172dacbbb78cf7088b6706718082d54f">commands.h</a>
+</li>
 <li>CMD_GET_INFO
 : <a class="el" href="commands_8h.html#a4aaf0abc6fbbed856a4a9538ae886e61a4681b714888632a2d8ad0a2140e4ba7f">commands.h</a>
 </li>
@@ -180,6 +183,13 @@ $(function() {
 </li>
 <li>CMD_GET_INPUTS
 : <a class="el" href="commands_8h.html#a4aaf0abc6fbbed856a4a9538ae886e61a7e1020474f9835468c3cfbcce610f7df">commands.h</a>
+</li>
+<li>cmd_get_joystick()
+: <a class="el" href="command__processing_8c.html#a09b189bd1592a8f95769a1907f44b555">command_processing.c</a>
+, <a class="el" href="command__processing_8h.html#a09b189bd1592a8f95769a1907f44b555">command_processing.h</a>
+</li>
+<li>CMD_GET_JOYSTICK
+: <a class="el" href="commands_8h.html#a4aaf0abc6fbbed856a4a9538ae886e61a51f92ae4cb4dffafda985f714433039a">commands.h</a>
 </li>
 <li>cmd_get_measurements()
 : <a class="el" href="command__processing_8c.html#af5ccd403f1d3e49c97bafd6e7713cff3">command_processing.c</a>
@@ -191,8 +201,9 @@ $(function() {
 <li>CMD_GET_PARAM_LIST
 : <a class="el" href="commands_8h.html#a4aaf0abc6fbbed856a4a9538ae886e61a3e92a6e4c288be3abb6f3cfadf261e78">commands.h</a>
 </li>
-<li>cmd_get_SD_files()
-: <a class="el" href="command__processing_8h.html#aa69658ceb1692834bdb1def2fba2ec8c">command_processing.h</a>
+<li>cmd_get_SD_file()
+: <a class="el" href="command__processing_8c.html#a90d37f64d1eac91112e56a3724e57e0a">command_processing.c</a>
+, <a class="el" href="command__processing_8h.html#a90d37f64d1eac91112e56a3724e57e0a">command_processing.h</a>
 </li>
 <li>cmd_get_velocities()
 : <a class="el" href="command__processing_8c.html#a212883283bd7a8f32846615271cad8ce">command_processing.c</a>
@@ -240,12 +251,12 @@ $(function() {
 <li>CMD_STORE_DEFAULT_PARAMS
 : <a class="el" href="commands_8h.html#a4aaf0abc6fbbed856a4a9538ae886e61a17d9c730cd01059737de14b9f062e44c">commands.h</a>
 </li>
-<li>CMD_STORE_PARAMS
-: <a class="el" href="commands_8h.html#a4aaf0abc6fbbed856a4a9538ae886e61ac7d1170961179d8dc5ec1b4aeb4f3116">commands.h</a>
-</li>
 <li>cmd_store_params()
 : <a class="el" href="command__processing_8c.html#a1a2493bfc2f30171d7e7a3bd5aebab14">command_processing.c</a>
 , <a class="el" href="command__processing_8h.html#a1a2493bfc2f30171d7e7a3bd5aebab14">command_processing.h</a>
+</li>
+<li>CMD_STORE_PARAMS
+: <a class="el" href="commands_8h.html#a4aaf0abc6fbbed856a4a9538ae886e61ac7d1170961179d8dc5ec1b4aeb4f3116">commands.h</a>
 </li>
 <li>commProcess()
 : <a class="el" href="command__processing_8c.html#a0c97206a61d782ebd9aa24bbb96f8aea">command_processing.c</a>
@@ -256,16 +267,28 @@ $(function() {
 , <a class="el" href="command__processing_8h.html#af37abb7623deb4ea3af0da3801ab3788">command_processing.h</a>
 </li>
 <li>commWrite()
-: <a class="el" href="command__processing_8c.html#af92ab4f3c1e0c0e8f5966bf2e2edeaba">command_processing.c</a>
-, <a class="el" href="command__processing_8h.html#af92ab4f3c1e0c0e8f5966bf2e2edeaba">command_processing.h</a>
+: <a class="el" href="command__processing_8h.html#af92ab4f3c1e0c0e8f5966bf2e2edeaba">command_processing.h</a>
+, <a class="el" href="command__processing_8c.html#af92ab4f3c1e0c0e8f5966bf2e2edeaba">command_processing.c</a>
 </li>
 <li>commWrite_old_id()
-: <a class="el" href="command__processing_8c.html#a517f4c61166381d40767fce9011e3c96">command_processing.c</a>
-, <a class="el" href="command__processing_8h.html#a517f4c61166381d40767fce9011e3c96">command_processing.h</a>
+: <a class="el" href="command__processing_8h.html#a517f4c61166381d40767fce9011e3c96">command_processing.h</a>
+, <a class="el" href="command__processing_8c.html#a517f4c61166381d40767fce9011e3c96">command_processing.c</a>
 </li>
 <li>commWriteID()
-: <a class="el" href="command__processing_8h.html#aed6a94cc62768fbec790b25a22eb3424">command_processing.h</a>
-, <a class="el" href="command__processing_8c.html#aed6a94cc62768fbec790b25a22eb3424">command_processing.c</a>
+: <a class="el" href="command__processing_8c.html#aed6a94cc62768fbec790b25a22eb3424">command_processing.c</a>
+, <a class="el" href="command__processing_8h.html#aed6a94cc62768fbec790b25a22eb3424">command_processing.h</a>
+</li>
+<li>compute_reference()
+: <a class="el" href="interruptions_8h.html#ab9beadac459e017e1ed807124208d132">interruptions.h</a>
+, <a class="el" href="interruptions_8c.html#ab9beadac459e017e1ed807124208d132">interruptions.c</a>
+</li>
+<li>compute_SoftHand_2_motors_emg_reference()
+: <a class="el" href="interruptions_8h.html#a32d8abb2b74c69cb1cb0e21101e61f8f">interruptions.h</a>
+, <a class="el" href="interruptions_8c.html#a32d8abb2b74c69cb1cb0e21101e61f8f">interruptions.c</a>
+</li>
+<li>compute_SoftHand_2_motors_joystick_reference()
+: <a class="el" href="interruptions_8h.html#aa34d2793dd85a2e5662e6f4dc8a3dfd2">interruptions.h</a>
+, <a class="el" href="interruptions_8c.html#aa34d2793dd85a2e5662e6f4dc8a3dfd2">interruptions.c</a>
 </li>
 <li>CONTROL_ANGLE
 : <a class="el" href="commands_8h.html#a203dabc080d386096f50d9024b62b0f9a20c655b0cd3c61eec041dc6da114880d">commands.h</a>
@@ -296,15 +319,15 @@ $(function() {
 : <a class="el" href="globals_8h.html#ad03b1f5576bd45568413662f28b88d4e">globals.h</a>
 </li>
 <li>CY_ISR_PROTO()
-: <a class="el" href="interruptions_8h.html#a4b74d7d608d07d4a230aaa9cd0c1a21a">interruptions.h</a>
+: <a class="el" href="interruptions_8h.html#a7e24af8c83537b0441877bf0f00dd30a">interruptions.h</a>
 </li>
 <li>cycle_time
-: <a class="el" href="globals_8c.html#a910e6d34a0bb2e8dbaf576e06bdf56f5">globals.c</a>
-, <a class="el" href="globals_8h.html#a910e6d34a0bb2e8dbaf576e06bdf56f5">globals.h</a>
+: <a class="el" href="globals_8h.html#a910e6d34a0bb2e8dbaf576e06bdf56f5">globals.h</a>
+, <a class="el" href="globals_8c.html#a910e6d34a0bb2e8dbaf576e06bdf56f5">globals.c</a>
 </li>
 <li>cycles_counter_update()
-: <a class="el" href="interruptions_8h.html#a77877c16b42f6f384f7c80d3002aed22">interruptions.h</a>
-, <a class="el" href="interruptions_8c.html#a77877c16b42f6f384f7c80d3002aed22">interruptions.c</a>
+: <a class="el" href="interruptions_8c.html#a77877c16b42f6f384f7c80d3002aed22">interruptions.c</a>
+, <a class="el" href="interruptions_8h.html#a77877c16b42f6f384f7c80d3002aed22">interruptions.h</a>
 </li>
 <li>CYCLES_INFO
 : <a class="el" href="commands_8h.html#a3a52d8c1fc0a681a8b8bdb9434ec1ee6">commands.h</a>
@@ -314,8 +337,8 @@ $(function() {
 , <a class="el" href="globals_8h.html#a9c58c534e60c7991a92a13d012e7ef86">globals.h</a>
 </li>
 <li>cycles_status
-: <a class="el" href="globals_8c.html#a9087b28d15f17c6475922ba6943b14f3">globals.c</a>
-, <a class="el" href="globals_8h.html#a9087b28d15f17c6475922ba6943b14f3">globals.h</a>
+: <a class="el" href="globals_8h.html#a9087b28d15f17c6475922ba6943b14f3">globals.h</a>
+, <a class="el" href="globals_8c.html#a9087b28d15f17c6475922ba6943b14f3">globals.c</a>
 </li>
 </ul>
 </div><!-- contents -->

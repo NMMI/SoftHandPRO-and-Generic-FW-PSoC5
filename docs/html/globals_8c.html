@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_CP.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">PSoC5 firmware
-   &#160;<span id="projectnumber">v. 1.8</span>
+   &#160;<span id="projectnumber">v. 1.9</span>
    </div>
    <div id="projectbrief">Centro E.Piaggio</div>
   </td>
@@ -93,8 +93,8 @@ struct <a class="el" href="structst__meas.html">st_meas</a>&#160;</td><td class=
 <tr class="separator:a6f0c00c1300c30d398231d1e76f3f780"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b175385b2b9418fa7159c72d0f470fd"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structst__meas.html">st_meas</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#a7b175385b2b9418fa7159c72d0f470fd">g_measOld</a> [<a class="el" href="globals_8h.html#a3f7f07f40f51532ee7cb93e5d0c7d16d">N_ENCODER_LINE_MAX</a>]</td></tr>
 <tr class="separator:a7b175385b2b9418fa7159c72d0f470fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85e15a194417ebcd15f662bd9bcfdded"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structst__emg__meas.html">st_emg_meas</a> g_emg_meas&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#a85e15a194417ebcd15f662bd9bcfdded">g_emg_measOld</a></td></tr>
-<tr class="separator:a85e15a194417ebcd15f662bd9bcfdded"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc5bb8855e965e00106ae614ae1aa510"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structst__adc__meas.html">st_adc_meas</a> g_adc_meas&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#acc5bb8855e965e00106ae614ae1aa510">g_adc_measOld</a></td></tr>
+<tr class="separator:acc5bb8855e965e00106ae614ae1aa510"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8d2d84570b7e85614e0455a23177e62"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structst__fb__meas.html">st_fb_meas</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#af8d2d84570b7e85614e0455a23177e62">g_fb_meas</a></td></tr>
 <tr class="separator:af8d2d84570b7e85614e0455a23177e62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa963ce8fafc11e104eb7ee22982d0345"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structst__data.html">st_data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#aa963ce8fafc11e104eb7ee22982d0345">g_rx</a></td></tr>
@@ -133,10 +133,14 @@ struct <a class="el" href="structst__filter.html">st_filter</a>&#160;</td><td cl
 <tr class="separator:a1c717f431f1d1ea4a500f6027102d001"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9087b28d15f17c6475922ba6943b14f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="globals_8h.html#a368077232a067805e98c61f28948abee">counter_status</a> CYDATA&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#a9087b28d15f17c6475922ba6943b14f3">cycles_status</a> = <a class="el" href="globals_8h.html#a368077232a067805e98c61f28948abeeac157bdf0b85a40d2619cbc8bc1ae5fe2">NONE</a></td></tr>
 <tr class="separator:a9087b28d15f17c6475922ba6943b14f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a433230c4343adf14967e6f4f9082b199"><td class="memItemLeft" align="right" valign="top"><a class="el" href="globals_8h.html#a723f289c2be966c5e6c8dfe3d0b46f1e">emg_status</a> CYDATA&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#a433230c4343adf14967e6f4f9082b199">emg_1_status</a> = <a class="el" href="globals_8h.html#a723f289c2be966c5e6c8dfe3d0b46f1ea589b7d94a3d91d145720e2fed0eb3a05">RESET</a></td></tr>
-<tr class="separator:a433230c4343adf14967e6f4f9082b199"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7eef8180f636a73854d52b58e2be4e51"><td class="memItemLeft" align="right" valign="top"><a class="el" href="globals_8h.html#a723f289c2be966c5e6c8dfe3d0b46f1e">emg_status</a> CYDATA&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#a7eef8180f636a73854d52b58e2be4e51">emg_2_status</a> = <a class="el" href="globals_8h.html#a723f289c2be966c5e6c8dfe3d0b46f1ea589b7d94a3d91d145720e2fed0eb3a05">RESET</a></td></tr>
-<tr class="separator:a7eef8180f636a73854d52b58e2be4e51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af909e8281823c106dd4191858f995b32"><td class="memItemLeft" align="right" valign="top"><a class="el" href="globals_8h.html#a66f719d83f18dc6d1369b0776f25b1ef">adc_status</a> CYDATA&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#af909e8281823c106dd4191858f995b32">emg_1_status</a> = <a class="el" href="globals_8h.html#a66f719d83f18dc6d1369b0776f25b1efa589b7d94a3d91d145720e2fed0eb3a05">RESET</a></td></tr>
+<tr class="separator:af909e8281823c106dd4191858f995b32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab157f05be16bbec6bbbf4966ee61f5cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="globals_8h.html#a66f719d83f18dc6d1369b0776f25b1ef">adc_status</a> CYDATA&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#ab157f05be16bbec6bbbf4966ee61f5cd">emg_2_status</a> = <a class="el" href="globals_8h.html#a66f719d83f18dc6d1369b0776f25b1efa589b7d94a3d91d145720e2fed0eb3a05">RESET</a></td></tr>
+<tr class="separator:ab157f05be16bbec6bbbf4966ee61f5cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afece0e67682b8e3a920f1bb395ae0ec9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="globals_8h.html#a66f719d83f18dc6d1369b0776f25b1ef">adc_status</a> CYDATA&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#afece0e67682b8e3a920f1bb395ae0ec9">joy_UD_status</a> = <a class="el" href="globals_8h.html#a66f719d83f18dc6d1369b0776f25b1efa589b7d94a3d91d145720e2fed0eb3a05">RESET</a></td></tr>
+<tr class="separator:afece0e67682b8e3a920f1bb395ae0ec9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8db2d45996868177ae599a5cc9f41ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="globals_8h.html#a66f719d83f18dc6d1369b0776f25b1ef">adc_status</a> CYDATA&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#ad8db2d45996868177ae599a5cc9f41ff">joy_LR_status</a> = <a class="el" href="globals_8h.html#a66f719d83f18dc6d1369b0776f25b1efa589b7d94a3d91d145720e2fed0eb3a05">RESET</a></td></tr>
+<tr class="separator:ad8db2d45996868177ae599a5cc9f41ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa89a782cfe75ce7970236babd308fe69"><td class="memItemLeft" align="right" valign="top">CYBIT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#aa89a782cfe75ce7970236babd308fe69">reset_last_value_flag</a></td></tr>
 <tr class="separator:aa89a782cfe75ce7970236babd308fe69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac42fa606610c2600210d9b7b2c1d0882"><td class="memItemLeft" align="right" valign="top">CYBIT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#ac42fa606610c2600210d9b7b2c1d0882">tension_valid</a></td></tr>
@@ -166,9 +170,9 @@ int16&#160;</td><td class="memItemRight" valign="bottom"><b>ADC_buf</b> [NUM_OF_
 <tr class="separator:ab302ef69391ec5a0b59dadb9c7d2a3ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ac7ad7c894db750e93bc745818e26ca"><td class="memItemLeft" align="right" valign="top">int8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#a8ac7ad7c894db750e93bc745818e26ca">pwm_sign</a></td></tr>
 <tr class="separator:a8ac7ad7c894db750e93bc745818e26ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5190337b2d433e192edc68cf3d603ede"><td class="memItemLeft" align="right" valign="top"><a id="a5190337b2d433e192edc68cf3d603ede"></a>
-uint32&#160;</td><td class="memItemRight" valign="bottom"><b>data_encoder_raw</b> [<a class="el" href="globals_8h.html#ab1fe8195c284dcb0c168d095f5fb8806">N_ENCODERS_PER_LINE_MAX</a>]</td></tr>
-<tr class="separator:a5190337b2d433e192edc68cf3d603ede"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1bb506bc73f01ca200da713384fefe8"><td class="memItemLeft" align="right" valign="top"><a id="af1bb506bc73f01ca200da713384fefe8"></a>
+uint32&#160;</td><td class="memItemRight" valign="bottom"><b>data_encoder_raw</b> [<a class="el" href="globals_8h.html#a3f7f07f40f51532ee7cb93e5d0c7d16d">N_ENCODER_LINE_MAX</a>][<a class="el" href="globals_8h.html#ab1fe8195c284dcb0c168d095f5fb8806">N_ENCODERS_PER_LINE_MAX</a>]</td></tr>
+<tr class="separator:af1bb506bc73f01ca200da713384fefe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae62a59fe712aba1b45a5358ece0b3d35"><td class="memItemLeft" align="right" valign="top"><a id="ae62a59fe712aba1b45a5358ece0b3d35"></a>
 uint8&#160;</td><td class="memItemRight" valign="bottom"><b>N_Encoder_Line_Connected</b> [<a class="el" href="globals_8h.html#a3f7f07f40f51532ee7cb93e5d0c7d16d">N_ENCODER_LINE_MAX</a>]</td></tr>
 <tr class="separator:ae62a59fe712aba1b45a5358ece0b3d35"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -416,14 +420,14 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
 
 </div>
 </div>
-<a id="a433230c4343adf14967e6f4f9082b199"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a433230c4343adf14967e6f4f9082b199">&#9670;&nbsp;</a></span>emg_1_status</h2>
+<a id="af909e8281823c106dd4191858f995b32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af909e8281823c106dd4191858f995b32">&#9670;&nbsp;</a></span>emg_1_status</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="globals_8h.html#a723f289c2be966c5e6c8dfe3d0b46f1e">emg_status</a> CYDATA emg_1_status = <a class="el" href="globals_8h.html#a723f289c2be966c5e6c8dfe3d0b46f1ea589b7d94a3d91d145720e2fed0eb3a05">RESET</a></td>
+          <td class="memname"><a class="el" href="globals_8h.html#a66f719d83f18dc6d1369b0776f25b1ef">adc_status</a> CYDATA emg_1_status = <a class="el" href="globals_8h.html#a66f719d83f18dc6d1369b0776f25b1efa589b7d94a3d91d145720e2fed0eb3a05">RESET</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -431,14 +435,14 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
 
 </div>
 </div>
-<a id="a7eef8180f636a73854d52b58e2be4e51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7eef8180f636a73854d52b58e2be4e51">&#9670;&nbsp;</a></span>emg_2_status</h2>
+<a id="ab157f05be16bbec6bbbf4966ee61f5cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab157f05be16bbec6bbbf4966ee61f5cd">&#9670;&nbsp;</a></span>emg_2_status</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="globals_8h.html#a723f289c2be966c5e6c8dfe3d0b46f1e">emg_status</a> CYDATA emg_2_status = <a class="el" href="globals_8h.html#a723f289c2be966c5e6c8dfe3d0b46f1ea589b7d94a3d91d145720e2fed0eb3a05">RESET</a></td>
+          <td class="memname"><a class="el" href="globals_8h.html#a66f719d83f18dc6d1369b0776f25b1ef">adc_status</a> CYDATA emg_2_status = <a class="el" href="globals_8h.html#a66f719d83f18dc6d1369b0776f25b1efa589b7d94a3d91d145720e2fed0eb3a05">RESET</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -506,14 +510,14 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
 
 </div>
 </div>
-<a id="a85e15a194417ebcd15f662bd9bcfdded"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a85e15a194417ebcd15f662bd9bcfdded">&#9670;&nbsp;</a></span>g_emg_measOld</h2>
+<a id="acc5bb8855e965e00106ae614ae1aa510"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc5bb8855e965e00106ae614ae1aa510">&#9670;&nbsp;</a></span>g_adc_measOld</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">struct <a class="el" href="structst__emg__meas.html">st_emg_meas</a> g_emg_meas g_emg_measOld</td>
+          <td class="memname">struct <a class="el" href="structst__adc__meas.html">st_adc_meas</a> g_adc_meas g_adc_measOld</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -593,6 +597,36 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
       </table>
 </div><div class="memdoc">
 <p>Interrupt flag enabler. </p>
+
+</div>
+</div>
+<a id="ad8db2d45996868177ae599a5cc9f41ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8db2d45996868177ae599a5cc9f41ff">&#9670;&nbsp;</a></span>joy_LR_status</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="globals_8h.html#a66f719d83f18dc6d1369b0776f25b1ef">adc_status</a> CYDATA joy_LR_status = <a class="el" href="globals_8h.html#a66f719d83f18dc6d1369b0776f25b1efa589b7d94a3d91d145720e2fed0eb3a05">RESET</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Joystick LEFT/RIGHT status. </p>
+
+</div>
+</div>
+<a id="afece0e67682b8e3a920f1bb395ae0ec9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afece0e67682b8e3a920f1bb395ae0ec9">&#9670;&nbsp;</a></span>joy_UD_status</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="globals_8h.html#a66f719d83f18dc6d1369b0776f25b1ef">adc_status</a> CYDATA joy_UD_status = <a class="el" href="globals_8h.html#a66f719d83f18dc6d1369b0776f25b1efa589b7d94a3d91d145720e2fed0eb3a05">RESET</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Joystick UP/DOWN status. </p>
 
 </div>
 </div>

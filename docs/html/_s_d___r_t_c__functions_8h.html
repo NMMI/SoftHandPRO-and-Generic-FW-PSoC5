@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_CP.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">PSoC5 firmware
-   &#160;<span id="projectnumber">v. 1.8</span>
+   &#160;<span id="projectnumber">v. 1.9</span>
    </div>
    <div id="projectbrief">Centro E.Piaggio</div>
   </td>
@@ -159,12 +159,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>InitSD_FS</b> ()</td>
 <tr class="memitem:a5072914b0c92c6825bb196ba84b332c4"><td class="memItemLeft" align="right" valign="top"><a id="a5072914b0c92c6825bb196ba84b332c4"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>Write_SD_Param_file</b> ()</td></tr>
 <tr class="separator:a5072914b0c92c6825bb196ba84b332c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab859160c1aaa93a7acab54f21be69c1c"><td class="memItemLeft" align="right" valign="top"><a id="ab859160c1aaa93a7acab54f21be69c1c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Read_SD_Param</b> (char *, int)</td></tr>
-<tr class="separator:ab859160c1aaa93a7acab54f21be69c1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a629e87adeb558dd2c752a3b5712af3ed"><td class="memItemLeft" align="right" valign="top"><a id="a629e87adeb558dd2c752a3b5712af3ed"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Read_SD_Data</b> (char *, int)</td></tr>
-<tr class="separator:a629e87adeb558dd2c752a3b5712af3ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba7e3006e26119efb8f8764b27fd31fa"><td class="memItemLeft" align="right" valign="top"><a id="aba7e3006e26119efb8f8764b27fd31fa"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Read_SD_Closed_File</b> (char *, char *, int)</td></tr>
+<tr class="separator:aba7e3006e26119efb8f8764b27fd31fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe0b3f7e7bb802a235c504c143bdad3f"><td class="memItemLeft" align="right" valign="top"><a id="abe0b3f7e7bb802a235c504c143bdad3f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Read_SD_Current_Data</b> (char *, int)</td></tr>
+<tr class="separator:abe0b3f7e7bb802a235c504c143bdad3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3a7b606d29e076ac0b4fa78b46a56a1"><td class="memItemLeft" align="right" valign="top"><a id="ac3a7b606d29e076ac0b4fa78b46a56a1"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>Get_DirectoriesList</b> (char *path, char directories_list[3000][8], int first_idx)</td></tr>
+<tr class="separator:ac3a7b606d29e076ac0b4fa78b46a56a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdf9196d903441c0febde4aa4d82f91f"><td class="memItemLeft" align="right" valign="top"><a id="abdf9196d903441c0febde4aa4d82f91f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Get_SD_FS</b> (char *)</td></tr>
+<tr class="separator:abdf9196d903441c0febde4aa4d82f91f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Definition of SD and RTC module functions. </p>

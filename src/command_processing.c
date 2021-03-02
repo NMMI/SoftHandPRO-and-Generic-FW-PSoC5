@@ -315,8 +315,8 @@ void infoSend(void){
 //==============================================================================
 
 void infoGet(uint16 info_type) {
-    char packet_string[4000] = "";
-    char str_sd_data[20000] = "";
+    char CYDATA packet_string[4000] = "";
+    char CYDATA str_sd_data[20000] = "";
     //==================================     choose info type and prepare string
 
     switch (info_type) {
@@ -345,6 +345,9 @@ void infoGet(uint16 info_type) {
             UART_RS485_ClearTxBuffer();
             UART_RS485_PutString(str_sd_data);
             break;
+        case GET_SD_EMG_HIST:
+            // Send every single byte inside the function
+            Read_SD_EMG_History_Data();
         default:
             break;
     }
@@ -966,6 +969,7 @@ void manage_param_list(uint16 index) {
         (uint8*)&(MEM_P->exp.read_ADC_sensors_port_flag),		
     	(uint8*)&(MEM_P->exp.ADC_conf[0]),
     	(uint8*)&(MEM_P->exp.ADC_conf[6]),                          //70  
+        (uint8*)&(MEM_P->exp.record_EMG_history_on_SD),
         (uint8*)&(MEM_P->JOY_spec.joystick_closure_speed),
         (uint8*)&(MEM_P->JOY_spec.joystick_threshold),
         (uint8*)&(MEM_P->JOY_spec.joystick_gains[0]),
@@ -1005,11 +1009,12 @@ void manage_param_list(uint16 index) {
         TYPE_INT8,  TYPE_FLAG, TYPE_FLOAT, TYPE_UINT8,
         TYPE_FLAG,  TYPE_UINT8, TYPE_FLAG, TYPE_UINT8,
         TYPE_INT8, TYPE_UINT8, TYPE_UINT8, TYPE_FLAG,
-        TYPE_UINT8, TYPE_UINT8, TYPE_UINT16, TYPE_INT16,
-        TYPE_UINT16, TYPE_FLAG, TYPE_FLAG, TYPE_UINT16,
+        TYPE_UINT8, TYPE_UINT8, TYPE_FLAG, TYPE_UINT16, 
+        TYPE_INT16, TYPE_UINT16, TYPE_FLAG, TYPE_FLAG,
+        TYPE_UINT16,
         
-        TYPE_FLAG, TYPE_FLAG, TYPE_UINT8, TYPE_INT32,
-        TYPE_FLOAT, TYPE_FLOAT
+                    TYPE_FLAG, TYPE_FLAG, TYPE_UINT8,
+        TYPE_INT32, TYPE_FLOAT, TYPE_FLOAT
     };
 
     uint8 NUM_ITEMS[NUM_OF_PARAMS] = {
@@ -1033,10 +1038,11 @@ void manage_param_list(uint16 index) {
         1, 1, 1, 3, 
         3, N_Encoder_Line_Connected[0], N_Encoder_Line_Connected[1], 1,
         6, 6, 1, 1,
-        2, 1, 1, 2,
+        1, 2, 1, 1,
+        2,
         
-        1, 1, 1, 1,
-        1, 1
+           1, 1, 1, 
+        1, 1, 1
     };
     
     uint8 NUM_STRUCT[NUM_OF_PARAMS] = {     // see STRUCTURES INDEX in globals.h
@@ -1059,11 +1065,12 @@ void manage_param_list(uint16 index) {
         ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line), ST_MOTOR+SECOND_MOTOR_IDX, ST_MOTOR+SECOND_MOTOR_IDX, ST_MOTOR+SECOND_MOTOR_IDX, 
         ST_MOTOR+SECOND_MOTOR_IDX, ST_MOTOR+SECOND_MOTOR_IDX, ST_MOTOR+SECOND_MOTOR_IDX, ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line),
         ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line), ST_ENCODER+0, ST_ENCODER+1, ST_EXPANSION,
-        ST_EXPANSION, ST_EXPANSION, ST_JOY_SPEC, ST_JOY_SPEC,
-        ST_JOY_SPEC, ST_DEVICE, ST_WR_SPEC, ST_WR_SPEC,
+        ST_EXPANSION, ST_EXPANSION, ST_EXPANSION, ST_JOY_SPEC,
+        ST_JOY_SPEC, ST_JOY_SPEC, ST_DEVICE, ST_WR_SPEC, 
+        ST_WR_SPEC,
         
-        ST_WR_SPEC, ST_MS_SPEC, ST_MS_SPEC, ST_FB_SPEC,
-        ST_FB_SPEC, ST_FB_SPEC
+                    ST_WR_SPEC, ST_MS_SPEC, ST_MS_SPEC,
+        ST_FB_SPEC, ST_FB_SPEC, ST_FB_SPEC
         
     };
     
@@ -1087,11 +1094,12 @@ void manage_param_list(uint16 index) {
         "57 - Motor handle ratio:", "58 - PWM rescaling:", "59 - Current lookup:", "60 - Associated encoder line:", 
         "61 - Driver type:", "62 - PWM rate limiter:", "63 - Not reversible:", "64 - Enc idx used for control:",
         "65 - Gear params[N1, N2, I1]:", "66 - Read enc raw line 0:", "67 - Read enc raw line 1:", "68 - Read additional ADC port:",
-        "69 - ADC channel [1-6]:", "70 - ADC channel [7-12]:", "71 - Joystick closure speed:", "72 - Joystick threshold:", 
-        "73 - Joystick gains:", "74 - Device type:", "75 - EMG FSM act.mode:", "76 - Fast act.thresholds:",
+        "69 - ADC channel [1-6]:", "70 - ADC channel [7-12]:", "71 - Record EMG on SD card:", "72 - Joystick closure speed:", 
+        "73 - Joystick threshold:", "74 - Joystick gains:", "75 - Device type:", "76 - EMG FSM act.mode:",
+        "77 - Fast act.thresholds:",
         
-        "77 - Wrist direction:", "78 - Slave communication active:", "79 - Slave ID:", "80 - Maximum slave residual current:",
-        "81 - Maximum pressure feedback (kPa):", "82 - Proportional pressure error gain:", 
+                                     "78 - Wrist direction:", "79 - Slave communication active:", "80 - Slave ID:", 
+        "81 - Maximum slave residual current:", "82 - Maximum pressure feedback (kPa):", "83 - Proportional pressure error gain:", 
     };
 
     //Parameters menu
@@ -1121,9 +1129,9 @@ void manage_param_list(uint16 index) {
         "0 -> Close:CW, Open:CCW\n1 -> Close:CCW, Open:CW\n"                                                  //12 wrist_direction_menu
     };   
     
-    uint8 NUM_MENU[31] = {3, 1, 2, 3, 3, 3, 3, 3, 3, 4, 5, 6, 3, 7, 8, 9, 3, 5, 3, 1, 2, 3, 3, 3, 9, 3, 5, 10, 11, 12, 3};
+    uint8 NUM_MENU[32] = {3, 1, 2, 3, 3, 3, 3, 3, 3, 4, 5, 6, 3, 7, 8, 9, 3, 5, 3, 1, 2, 3, 3, 3, 9, 3, 5, 3, 10, 11, 12, 3};
     uint8 CUSTOM_PARAM_GET_LIST[9]  = {2, 3, 8, 11, 23, 44, 45, 50, 53};
-    uint8 CUSTOM_PARAM_SET_LIST[18] = {2, 3, 5, 8, 11, 23, 24, 28, 31, 32, 38, 44, 45, 47, 50, 53, 61, 74};
+    uint8 CUSTOM_PARAM_SET_LIST[18] = {2, 3, 5, 8, 11, 23, 24, 28, 31, 32, 38, 44, 45, 47, 50, 53, 61, 75};
     uint8 USER_ID_PARAM = 35;
 
 // Note: If a custom parameter change is needed, add to CUSTOM_PARAM_LIST, then change it
@@ -1566,7 +1574,7 @@ void set_custom_param(uint16 index) {
             MOTOR_DRIVER_TYPE_Write((g_mem.motor[1].motor_driver_type << 1) | g_mem.motor[0].motor_driver_type);    // Note: leave numeric indices (not parameteric)
             break;
 
-        case 74:        // Device type
+        case 75:        // Device type
             g_mem.dev.dev_type = g_rx.buffer[3];
             
             if (g_mem.dev.dev_type == SOFTHAND_PRO){    // change also gears parameters
@@ -1844,8 +1852,8 @@ void setZeros()
     uint8 CYDATA i, j;        // iterator
     
     for (j = 0; j < N_ENCODER_LINE_MAX; j++) {
-        for(i = 0; i < NUM_OF_SENSORS; ++i) {
-            g_mem.enc[j].m_off[i] = data_encoder_raw[i];
+        for(i = 0; i < NUM_OF_SENSORS; i++) {
+            g_mem.enc[j].m_off[i] = data_encoder_raw[j][i];
             g_meas[j].rot[i] = 0;
         }
     }
@@ -2358,6 +2366,8 @@ void prepare_counter_info(char *info_string)
     struct st_motor* MOT = &(MEM_P->motor[0]);      // Default motor
     uint8 ENC_L = MOT->encoder_line;                // Associated encoder line
     
+    strcpy(info_string, "");
+    
     strcat(info_string, "\r\nUSAGE STATISTICS\r\n");
     strcat(info_string, "\r\n");
     
@@ -2698,6 +2708,7 @@ void prepare_SD_legend(char *info_string)
     strcat(info_string, "\r\n");
 }
 
+
 //==============================================================================
 //                                                          PREPARE SD CARD INFO
 //==============================================================================
@@ -2734,6 +2745,49 @@ void prepare_SD_info(char *info_string)
     strcat(info_string, str);
     
     strcat(info_string, "\r\n");
+}
+
+//==============================================================================
+//                                            PREPARE SD CARD EMG HISTORY LEGEND
+//==============================================================================
+void prepare_SD_EMG_History_legend(char *info_string)
+{
+        
+    // Legend
+    strcpy(info_string, "Time,EMG1,EMG2\n");
+    
+}
+
+//==============================================================================
+//                                                   PREPARE SD CARD EMG HISTORY
+//==============================================================================
+void prepare_SD_EMG_history(char *info_string)
+{
+    char str_data[100] = "";
+    uint16 v_idx = 0;
+    static float h_time = 0.0;
+                
+    strcpy(info_string, "");
+    
+    // Oldest samples of the vector
+    for (int i = 0; i < SAMPLES_FOR_EMG_HISTORY; i++){
+              
+        // Send line per line all the history vector
+        // First line (oldest) is made by values of emg_history_next_idx index (they will be the next to be updated)
+        v_idx = emg_history_next_idx + i;
+        if (v_idx > SAMPLES_FOR_EMG_HISTORY){
+            v_idx -= SAMPLES_FOR_EMG_HISTORY;
+        }
+        
+        // Time vector is reconstructed setting oldest samples as t=0.0s
+        sprintf(str_data, "%.1f,%u,%u\n", h_time, emg_history[v_idx][0], emg_history[v_idx][1]);
+        
+        strcat(info_string, str_data);
+        
+        h_time += 0.2;      // Row time interval is 200ms (5Hz)
+
+    }
+    
 }
 
 //==============================================================================
@@ -3104,6 +3158,7 @@ uint8 memInit(void)
     //Activate only the two EMG channels by default for every firmware configuration
     g_mem.exp.ADC_conf[2] = 1;
     g_mem.exp.ADC_conf[3] = 1;
+    g_mem.exp.record_EMG_history_on_SD = FALSE;
 
 #ifdef SOFTHAND_FW
     // Override memory values with specific ones for SoftHand Pro device
@@ -3278,6 +3333,14 @@ void cmd_get_measurements(){
         packet_data[(index << 1) + 1] = ((char*)(&aux_int16))[1];
     }
 
+    if (g_mem.dev.use_2nd_motor_flag == TRUE){
+        //Overwrite only second measure with first encoder on second motor line (just to have a measure also of second motor line on API)
+        index = 1;
+        aux_int16 = (int16)(g_measOld[g_mem.motor[1].encoder_line].pos[0] >> g_mem.enc[g_mem.motor[1].encoder_line].res[0]);
+        packet_data[(index << 1) + 2] = ((char*)(&aux_int16))[0];
+        packet_data[(index << 1) + 1] = ((char*)(&aux_int16))[1];
+    }
+    
     // Calculate Checksum and send message to UART 
 
     packet_data[7] = LCRChecksum (packet_data, 7);

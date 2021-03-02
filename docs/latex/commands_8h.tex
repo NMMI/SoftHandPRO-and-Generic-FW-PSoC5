@@ -22,7 +22,10 @@ This graph shows which files directly or indirectly include this file\+:
 \begin{DoxyCompactList}\small\item\em Read Firmware Parameters from SD file. \end{DoxyCompactList}\item 
 \mbox{\label{commands_8h_a3154ffe43f7cb799f7c35cfad7339f49}} 
 \#define \textbf{ G\+E\+T\+\_\+\+S\+D\+\_\+\+D\+A\+TA}~3
-\begin{DoxyCompactList}\small\item\em Read Usage Data from SD file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Read Usage Data from SD file. \end{DoxyCompactList}\item 
+\mbox{\label{commands_8h_abb8f46ce96d5f85985e3a2c7e7f9da43}} 
+\#define \textbf{ G\+E\+T\+\_\+\+S\+D\+\_\+\+F\+S\+\_\+\+T\+R\+EE}~4
+\begin{DoxyCompactList}\small\item\em Get info on SD card filesystem tree. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \subsection*{Soft\+Hand Commands}
 \begin{DoxyCompactItemize}
@@ -62,14 +65,16 @@ enum \textbf{ S\+H\+\_\+command} \{ \newline
 \textbf{ C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+U\+R\+R\+\_\+\+D\+I\+FF} = 140, 
 \textbf{ C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+C\+U\+F\+F\+\_\+\+I\+N\+P\+U\+TS} = 142, 
 \textbf{ C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+B\+A\+U\+D\+R\+A\+TE} = 144, 
-{\bfseries C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+I\+M\+U\+\_\+\+R\+E\+A\+D\+I\+N\+GS} = 161, 
+\textbf{ C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+J\+O\+Y\+S\+T\+I\+CK} = 146, 
 \newline
+\textbf{ C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+I\+M\+U\+\_\+\+R\+E\+A\+D\+I\+N\+GS} = 161, 
 {\bfseries C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+I\+M\+U\+\_\+\+P\+A\+R\+AM} = 162, 
 {\bfseries C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+C\+O\+NF} = 163, 
 {\bfseries C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+R\+AW} = 164, 
-{\bfseries C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+A\+D\+C\+\_\+\+C\+O\+NF} = 165, 
 \newline
-{\bfseries C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+A\+D\+C\+\_\+\+R\+AW} = 166
+{\bfseries C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+A\+D\+C\+\_\+\+C\+O\+NF} = 165, 
+{\bfseries C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+A\+D\+C\+\_\+\+R\+AW} = 166, 
+{\bfseries C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+S\+D\+\_\+\+S\+I\+N\+G\+L\+E\+\_\+\+F\+I\+LE} = 167
  \}
 \item 
 \mbox{\label{commands_8h_a929dcdf4fe183d585367c2aa05b57765}} 
@@ -95,7 +100,8 @@ enum \textbf{ S\+H\+\_\+input\+\_\+mode} \{ \newline
 \newline
 \textbf{ I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+FS} = 4, 
 \textbf{ I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+F\+S\+\_\+\+A\+DV} = 5, 
-\textbf{ I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+P\+R\+O\+P\+O\+R\+T\+I\+O\+N\+A\+L\+\_\+\+NC} = 6
+\textbf{ I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+J\+O\+Y\+S\+T\+I\+CK} = 6, 
+\textbf{ I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+P\+R\+O\+P\+O\+R\+T\+I\+O\+N\+A\+L\+\_\+\+NC} = 7
  \}
 \item 
 enum \textbf{ S\+H\+\_\+control\+\_\+mode} \{ \textbf{ C\+O\+N\+T\+R\+O\+L\+\_\+\+A\+N\+G\+LE} = 0, 
@@ -250,6 +256,14 @@ C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+C\+U\+F\+F\+\_\+\+I\+N\+P\+U\+TS&Command used to s
 C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+B\+A\+U\+D\+R\+A\+TE&Command for setting baudrate of communication. \\
 \hline
 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+J\+O\+Y\+S\+T\+I\+CK@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+J\+O\+Y\+S\+T\+I\+CK}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+J\+O\+Y\+S\+T\+I\+CK@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+J\+O\+Y\+S\+T\+I\+CK}}}\mbox{\label{commands_8h_a4aaf0abc6fbbed856a4a9538ae886e61a51f92ae4cb4dffafda985f714433039a}} 
+C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+J\+O\+Y\+S\+T\+I\+CK&Command to get the joystick measurements (Only \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+I\+M\+U\+\_\+\+R\+E\+A\+D\+I\+N\+GS@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+I\+M\+U\+\_\+\+R\+E\+A\+D\+I\+N\+GS}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+I\+M\+U\+\_\+\+R\+E\+A\+D\+I\+N\+GS@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+I\+M\+U\+\_\+\+R\+E\+A\+D\+I\+N\+GS}}}\mbox{\label{commands_8h_a4aaf0abc6fbbed856a4a9538ae886e61a172dacbbb78cf7088b6706718082d54f}} 
+C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+I\+M\+U\+\_\+\+R\+E\+A\+D\+I\+N\+GS&for devices driven by a joystick) \\
+\hline
+
 \end{DoxyEnumFields}
 \mbox{\label{commands_8h_a203dabc080d386096f50d9024b62b0f9}} 
 \index{commands.\+h@{commands.\+h}!S\+H\+\_\+control\+\_\+mode@{S\+H\+\_\+control\+\_\+mode}}
@@ -306,8 +320,12 @@ I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+FS&Use 2 E\+MG. Firs
 I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+F\+S\+\_\+\+A\+DV&Use 2 E\+MG. First reaching threshold. \\
 \hline
 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+J\+O\+Y\+S\+T\+I\+CK@{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+J\+O\+Y\+S\+T\+I\+CK}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+J\+O\+Y\+S\+T\+I\+CK@{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+J\+O\+Y\+S\+T\+I\+CK}}}\mbox{\label{commands_8h_af5b4e6fe0787834c86e4ea44f0ece279a6f5918e455c85bc7e916bddbf8889538}} 
+I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+J\+O\+Y\+S\+T\+I\+CK&Joystick input mode. wins and its value defines hand closure. Wait for both E\+MG to lower under threshold. \\
+\hline
+
 \raisebox{\heightof{T}}[0pt][0pt]{\index{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+P\+R\+O\+P\+O\+R\+T\+I\+O\+N\+A\+L\+\_\+\+NC@{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+P\+R\+O\+P\+O\+R\+T\+I\+O\+N\+A\+L\+\_\+\+NC}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+P\+R\+O\+P\+O\+R\+T\+I\+O\+N\+A\+L\+\_\+\+NC@{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+P\+R\+O\+P\+O\+R\+T\+I\+O\+N\+A\+L\+\_\+\+NC}}}\mbox{\label{commands_8h_af5b4e6fe0787834c86e4ea44f0ece279a5615cd4b06b150f6832a773356e38101}} 
-I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+P\+R\+O\+P\+O\+R\+T\+I\+O\+N\+A\+L\+\_\+\+NC&Normally closed. wins and its value defines hand closure. Wait for both E\+MG to lower under threshold. \\
+I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+P\+R\+O\+P\+O\+R\+T\+I\+O\+N\+A\+L\+\_\+\+NC&E\+MG Normally closed. \\
 \hline
 
 \end{DoxyEnumFields}

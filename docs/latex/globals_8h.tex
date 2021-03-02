@@ -24,7 +24,7 @@ struct \textbf{ st\+\_\+ref}
 \begin{DoxyCompactList}\small\item\em Motor Reference structure. \end{DoxyCompactList}\item 
 struct \textbf{ st\+\_\+meas}
 \begin{DoxyCompactList}\small\item\em Measurements structure. \end{DoxyCompactList}\item 
-struct \textbf{ st\+\_\+emg\+\_\+meas}
+struct \textbf{ st\+\_\+adc\+\_\+meas}
 \item 
 struct \textbf{ st\+\_\+fb\+\_\+meas}
 \item 
@@ -48,10 +48,14 @@ struct \textbf{ st\+\_\+user}
 \begin{DoxyCompactList}\small\item\em User related parameters structure. \end{DoxyCompactList}\item 
 struct \textbf{ st\+\_\+\+S\+H\+\_\+spec}
 \begin{DoxyCompactList}\small\item\em Soft\+Hand specific related parameters structure. \end{DoxyCompactList}\item 
+struct \textbf{ st\+\_\+\+J\+O\+Y\+\_\+spec}
+\begin{DoxyCompactList}\small\item\em Joystick specific parameters structure. \end{DoxyCompactList}\item 
 struct \textbf{ st\+\_\+\+M\+A\+S\+T\+E\+R\+\_\+spec}
 \begin{DoxyCompactList}\small\item\em Master mode specific parameters structure. \end{DoxyCompactList}\item 
 struct \textbf{ st\+\_\+\+F\+B\+\_\+spec}
 \begin{DoxyCompactList}\small\item\em Feedback mode specific parameters structure. \end{DoxyCompactList}\item 
+struct \textbf{ st\+\_\+\+W\+R\+\_\+spec}
+\begin{DoxyCompactList}\small\item\em Wrist specific parameters structure. \end{DoxyCompactList}\item 
 struct \textbf{ st\+\_\+eeprom}
 \begin{DoxyCompactList}\small\item\em Memory variables. \end{DoxyCompactList}\item 
 struct \textbf{ st\+\_\+imu\+\_\+data}
@@ -78,9 +82,11 @@ struct \textbf{ st\+\_\+calib}
 \item 
 \#define \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+F\+B\+\_\+\+P\+A\+R\+A\+MS}~3
 \item 
-\#define \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS}~(71 + \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+S\+\_\+\+P\+A\+R\+A\+MS} + \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+F\+B\+\_\+\+P\+A\+R\+A\+MS})
+\#define \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+W\+R\+\_\+\+P\+A\+R\+A\+MS}~3
 \item 
-\#define \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+M\+E\+NU}~10
+\#define \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS}~(74 + \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+S\+\_\+\+P\+A\+R\+A\+MS} + \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+F\+B\+\_\+\+P\+A\+R\+A\+MS} + \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+W\+R\+\_\+\+P\+A\+R\+A\+MS})
+\item 
+\#define \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+M\+E\+NU}~12
 \item 
 \mbox{\label{globals_8h_a8e4d7a571850d3268c9b780b171474e6}} 
 \#define {\bfseries N\+\_\+\+I\+M\+U\+\_\+\+M\+AX}~5
@@ -178,8 +184,26 @@ struct \textbf{ st\+\_\+calib}
 \mbox{\label{globals_8h_ad854ddb03952eb3f1d2e2282bbf21eb4}} 
 \#define {\bfseries A\+I\+R\+\_\+\+C\+H\+A\+M\+B\+E\+R\+S\+\_\+\+FB}~2
 \item 
+\mbox{\label{globals_8h_ab92ee899bc7746a7148fa06da5a121a6}} 
+\#define {\bfseries O\+T\+B\+K\+\_\+\+A\+C\+T\+\_\+\+W\+R\+I\+S\+T\+\_\+\+MS}~3
+\item 
+\mbox{\label{globals_8h_a3c105963a392309caa76708290acd589}} 
+\#define {\bfseries S\+O\+F\+T\+H\+A\+N\+D\+\_\+2\+\_\+\+M\+O\+T\+O\+RS}~4
+\item 
 \mbox{\label{globals_8h_ac5a0bd9be15f1dcd0ba86f27d3dbda50}} 
-\#define {\bfseries C\+U\+FF}~3
+\#define {\bfseries C\+U\+FF}~5
+\item 
+\mbox{\label{globals_8h_a04e38ed0acd535042d77f459ce075ad0}} 
+\#define {\bfseries R\+E\+L\+A\+X\+\_\+\+S\+T\+A\+TE}~0
+\item 
+\mbox{\label{globals_8h_a109b31985592a8efa8d8d772c345d66a}} 
+\#define {\bfseries T\+I\+M\+E\+R\+\_\+\+S\+T\+A\+TE}~1
+\item 
+\mbox{\label{globals_8h_a8e0a147f2c0cf9f8e529346ec0753ca2}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+F\+A\+S\+T\+\_\+\+A\+CT}~2
+\item 
+\mbox{\label{globals_8h_ad0f7f935c66d64eb042fe250aa94d027}} 
+\#define {\bfseries M\+O\+V\+E\+\_\+\+S\+L\+O\+W\+\_\+\+A\+CT}~3
 \item 
 \#define \textbf{ S\+H\+\_\+\+N1}~35
 \item 
@@ -217,6 +241,12 @@ struct \textbf{ st\+\_\+calib}
 \mbox{\label{globals_8h_aad8e3965151790073226b9ec124c0808}} 
 \#define {\bfseries S\+T\+\_\+\+F\+B\+\_\+\+S\+P\+EC}~90
 \item 
+\mbox{\label{globals_8h_a8d9602ba2be82a71e64ec82dc5ce72ba}} 
+\#define {\bfseries S\+T\+\_\+\+W\+R\+\_\+\+S\+P\+EC}~100
+\item 
+\mbox{\label{globals_8h_ae485f34b39604cd4ae1d475911e68aaa}} 
+\#define {\bfseries S\+T\+\_\+\+J\+O\+Y\+\_\+\+S\+P\+EC}~110
+\item 
 \mbox{\label{globals_8h_aa93f0eb578d23995850d61f7d61c55c1}} 
 \#define {\bfseries F\+A\+L\+SE}~0
 \item 
@@ -243,6 +273,10 @@ struct \textbf{ st\+\_\+calib}
 \item 
 \#define \textbf{ S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+E\+M\+G\+\_\+\+M\+E\+AN}~1000
 \item 
+\#define \textbf{ S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+J\+O\+Y\+S\+T\+I\+C\+K\+\_\+\+M\+E\+AN}~200
+\item 
+\#define \textbf{ J\+O\+Y\+S\+T\+I\+C\+K\+\_\+\+S\+A\+M\+P\+L\+E\+\_\+\+T\+O\+\_\+\+D\+I\+S\+C\+A\+RD}~100
+\item 
 \#define \textbf{ R\+E\+S\+T\+\_\+\+P\+O\+S\+\_\+\+E\+R\+R\+\_\+\+T\+H\+R\+\_\+\+G\+A\+IN}~10
 \item 
 \#define \textbf{ P\+O\+S\+\_\+\+I\+N\+T\+E\+G\+R\+A\+L\+\_\+\+S\+A\+T\+\_\+\+L\+I\+M\+IT}~50000000
@@ -261,7 +295,7 @@ struct \textbf{ st\+\_\+calib}
 \subsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum \textbf{ emg\+\_\+status} \{ \newline
+enum \textbf{ adc\+\_\+status} \{ \newline
 \textbf{ N\+O\+R\+M\+AL} = 0, 
 \textbf{ R\+E\+S\+ET} = 1, 
 \textbf{ D\+I\+S\+C\+A\+RD} = 2, 
@@ -296,7 +330,7 @@ struct \textbf{ st\+\_\+meas} {\bfseries g\+\_\+meas} [\textbf{ N\+\_\+\+E\+N\+C
 \item 
 struct \textbf{ st\+\_\+meas} \textbf{ g\+\_\+meas\+Old} [\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}]
 \item 
-struct \textbf{ st\+\_\+emg\+\_\+meas} g\+\_\+emg\+\_\+meas \textbf{ g\+\_\+emg\+\_\+meas\+Old}
+struct \textbf{ st\+\_\+adc\+\_\+meas} g\+\_\+adc\+\_\+meas \textbf{ g\+\_\+adc\+\_\+meas\+Old}
 \item 
 struct \textbf{ st\+\_\+fb\+\_\+meas} \textbf{ g\+\_\+fb\+\_\+meas}
 \item 
@@ -336,9 +370,13 @@ int32 \textbf{ pow\+\_\+tension} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O
 \item 
 \textbf{ counter\+\_\+status} C\+Y\+D\+A\+TA \textbf{ cycles\+\_\+status}
 \item 
-\textbf{ emg\+\_\+status} C\+Y\+D\+A\+TA \textbf{ emg\+\_\+1\+\_\+status}
+\textbf{ adc\+\_\+status} C\+Y\+D\+A\+TA \textbf{ emg\+\_\+1\+\_\+status}
 \item 
-\textbf{ emg\+\_\+status} C\+Y\+D\+A\+TA \textbf{ emg\+\_\+2\+\_\+status}
+\textbf{ adc\+\_\+status} C\+Y\+D\+A\+TA \textbf{ emg\+\_\+2\+\_\+status}
+\item 
+\textbf{ adc\+\_\+status} C\+Y\+D\+A\+TA \textbf{ joy\+\_\+\+U\+D\+\_\+status}
+\item 
+\textbf{ adc\+\_\+status} C\+Y\+D\+A\+TA \textbf{ joy\+\_\+\+L\+R\+\_\+status}
 \item 
 C\+Y\+B\+IT \textbf{ reset\+\_\+last\+\_\+value\+\_\+flag}
 \item 
@@ -369,8 +407,8 @@ uint8 \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+N\+A\+L\+O\+G\+\_\+\+I\+N\+P\+U\+TS
 \item 
 int8 \textbf{ pwm\+\_\+sign}
 \item 
-\mbox{\label{globals_8h_a5190337b2d433e192edc68cf3d603ede}} 
-uint32 {\bfseries data\+\_\+encoder\+\_\+raw} [\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+P\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}]
+\mbox{\label{globals_8h_af1bb506bc73f01ca200da713384fefe8}} 
+uint32 {\bfseries data\+\_\+encoder\+\_\+raw} [\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}][\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+P\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}]
 \item 
 \mbox{\label{globals_8h_ae62a59fe712aba1b45a5358ece0b3d35}} 
 uint8 {\bfseries N\+\_\+\+Encoder\+\_\+\+Line\+\_\+\+Connected} [\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}]
@@ -515,7 +553,13 @@ E\+E\+P\+R\+OM number of rows dedicated to store counters. \mbox{\label{globals_
 \subsubsection{E\+M\+G\+\_\+\+S\+A\+M\+P\+L\+E\+\_\+\+T\+O\+\_\+\+D\+I\+S\+C\+A\+RD}
 {\footnotesize\ttfamily \#define E\+M\+G\+\_\+\+S\+A\+M\+P\+L\+E\+\_\+\+T\+O\+\_\+\+D\+I\+S\+C\+A\+RD~500}
 
-Number of sample to discard before calibration. \mbox{\label{globals_8h_a4f18d105a8fc18f649a92d96fb933eb3}} 
+Number of sample to discard before calibration. \mbox{\label{globals_8h_a1283d2865c7502d328d4d7c0e4061f7e}} 
+\index{globals.\+h@{globals.\+h}!J\+O\+Y\+S\+T\+I\+C\+K\+\_\+\+S\+A\+M\+P\+L\+E\+\_\+\+T\+O\+\_\+\+D\+I\+S\+C\+A\+RD@{J\+O\+Y\+S\+T\+I\+C\+K\+\_\+\+S\+A\+M\+P\+L\+E\+\_\+\+T\+O\+\_\+\+D\+I\+S\+C\+A\+RD}}
+\index{J\+O\+Y\+S\+T\+I\+C\+K\+\_\+\+S\+A\+M\+P\+L\+E\+\_\+\+T\+O\+\_\+\+D\+I\+S\+C\+A\+RD@{J\+O\+Y\+S\+T\+I\+C\+K\+\_\+\+S\+A\+M\+P\+L\+E\+\_\+\+T\+O\+\_\+\+D\+I\+S\+C\+A\+RD}!globals.\+h@{globals.\+h}}
+\subsubsection{J\+O\+Y\+S\+T\+I\+C\+K\+\_\+\+S\+A\+M\+P\+L\+E\+\_\+\+T\+O\+\_\+\+D\+I\+S\+C\+A\+RD}
+{\footnotesize\ttfamily \#define J\+O\+Y\+S\+T\+I\+C\+K\+\_\+\+S\+A\+M\+P\+L\+E\+\_\+\+T\+O\+\_\+\+D\+I\+S\+C\+A\+RD~100}
+
+Number of samples to discard before having joystick stable values. \mbox{\label{globals_8h_a4f18d105a8fc18f649a92d96fb933eb3}} 
 \index{globals.\+h@{globals.\+h}!L\+O\+O\+K\+U\+P\+\_\+\+D\+IM@{L\+O\+O\+K\+U\+P\+\_\+\+D\+IM}}
 \index{L\+O\+O\+K\+U\+P\+\_\+\+D\+IM@{L\+O\+O\+K\+U\+P\+\_\+\+D\+IM}!globals.\+h@{globals.\+h}}
 \subsubsection{L\+O\+O\+K\+U\+P\+\_\+\+D\+IM}
@@ -567,13 +611,13 @@ Number of master parameters saved in the E\+E\+P\+R\+OM. \mbox{\label{globals_8h
 \index{globals.\+h@{globals.\+h}!N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS}}
 \index{N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS}!globals.\+h@{globals.\+h}}
 \subsubsection{N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS}
-{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS~(71 + \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+S\+\_\+\+P\+A\+R\+A\+MS} + \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+F\+B\+\_\+\+P\+A\+R\+A\+MS})}
+{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS~(74 + \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+S\+\_\+\+P\+A\+R\+A\+MS} + \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+F\+B\+\_\+\+P\+A\+R\+A\+MS} + \textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+W\+R\+\_\+\+P\+A\+R\+A\+MS})}
 
 Number of parameters saved in the E\+E\+P\+R\+OM. \mbox{\label{globals_8h_aa19d88ac3e94a34d9a9f1c37bea9a271}} 
 \index{globals.\+h@{globals.\+h}!N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+M\+E\+NU@{N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+M\+E\+NU}}
 \index{N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+M\+E\+NU@{N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+M\+E\+NU}!globals.\+h@{globals.\+h}}
 \subsubsection{N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+M\+E\+NU}
-{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+M\+E\+NU~10}
+{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+M\+E\+NU~12}
 
 Number of parameters menu. \mbox{\label{globals_8h_af48a6b6fcdc5f5019fb108d03b07a727}} 
 \index{globals.\+h@{globals.\+h}!N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS}}
@@ -581,7 +625,13 @@ Number of parameters menu. \mbox{\label{globals_8h_af48a6b6fcdc5f5019fb108d03b07
 \subsubsection{N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS}
 {\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS~3}
 
-Number of encoders. \mbox{\label{globals_8h_ad252b8b0421e545cce8ba0548a6ca4ed}} 
+Number of encoders. \mbox{\label{globals_8h_ab6c259a53985439ee30fc3afdc12cacb}} 
+\index{globals.\+h@{globals.\+h}!N\+U\+M\+\_\+\+O\+F\+\_\+\+W\+R\+\_\+\+P\+A\+R\+A\+MS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+W\+R\+\_\+\+P\+A\+R\+A\+MS}}
+\index{N\+U\+M\+\_\+\+O\+F\+\_\+\+W\+R\+\_\+\+P\+A\+R\+A\+MS@{N\+U\+M\+\_\+\+O\+F\+\_\+\+W\+R\+\_\+\+P\+A\+R\+A\+MS}!globals.\+h@{globals.\+h}}
+\subsubsection{N\+U\+M\+\_\+\+O\+F\+\_\+\+W\+R\+\_\+\+P\+A\+R\+A\+MS}
+{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+O\+F\+\_\+\+W\+R\+\_\+\+P\+A\+R\+A\+MS~3}
+
+Number of wrist parameters saved in the E\+E\+P\+R\+OM. \mbox{\label{globals_8h_ad252b8b0421e545cce8ba0548a6ca4ed}} 
 \index{globals.\+h@{globals.\+h}!P\+O\+S\+\_\+\+I\+N\+T\+E\+G\+R\+A\+L\+\_\+\+S\+A\+T\+\_\+\+L\+I\+M\+IT@{P\+O\+S\+\_\+\+I\+N\+T\+E\+G\+R\+A\+L\+\_\+\+S\+A\+T\+\_\+\+L\+I\+M\+IT}}
 \index{P\+O\+S\+\_\+\+I\+N\+T\+E\+G\+R\+A\+L\+\_\+\+S\+A\+T\+\_\+\+L\+I\+M\+IT@{P\+O\+S\+\_\+\+I\+N\+T\+E\+G\+R\+A\+L\+\_\+\+S\+A\+T\+\_\+\+L\+I\+M\+IT}!globals.\+h@{globals.\+h}}
 \subsubsection{P\+O\+S\+\_\+\+I\+N\+T\+E\+G\+R\+A\+L\+\_\+\+S\+A\+T\+\_\+\+L\+I\+M\+IT}
@@ -623,7 +673,13 @@ Number of encoder readings after position reconstruction before activating motor
 \subsubsection{S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+E\+M\+G\+\_\+\+M\+E\+AN}
 {\footnotesize\ttfamily \#define S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+E\+M\+G\+\_\+\+M\+E\+AN~1000}
 
-Number of samples used to mean emg values. \mbox{\label{globals_8h_a1f15a178b37117a29361e7ec20f77cc4}} 
+Number of samples used to mean emg values. \mbox{\label{globals_8h_a4325f476970c4aa263bfabee0221eb9e}} 
+\index{globals.\+h@{globals.\+h}!S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+J\+O\+Y\+S\+T\+I\+C\+K\+\_\+\+M\+E\+AN@{S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+J\+O\+Y\+S\+T\+I\+C\+K\+\_\+\+M\+E\+AN}}
+\index{S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+J\+O\+Y\+S\+T\+I\+C\+K\+\_\+\+M\+E\+AN@{S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+J\+O\+Y\+S\+T\+I\+C\+K\+\_\+\+M\+E\+AN}!globals.\+h@{globals.\+h}}
+\subsubsection{S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+J\+O\+Y\+S\+T\+I\+C\+K\+\_\+\+M\+E\+AN}
+{\footnotesize\ttfamily \#define S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+J\+O\+Y\+S\+T\+I\+C\+K\+\_\+\+M\+E\+AN~200}
+
+Number of samples used to mean joystick values. \mbox{\label{globals_8h_a1f15a178b37117a29361e7ec20f77cc4}} 
 \index{globals.\+h@{globals.\+h}!S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+M\+E\+AN@{S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+M\+E\+AN}}
 \index{S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+M\+E\+AN@{S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+M\+E\+AN}!globals.\+h@{globals.\+h}}
 \subsubsection{S\+A\+M\+P\+L\+E\+S\+\_\+\+F\+O\+R\+\_\+\+M\+E\+AN}
@@ -686,6 +742,38 @@ Package lenght waiting status. \mbox{\label{globals_8h_aea55597952638136c7c929b2
 Package start waiting status. 
 
 \subsection{Enumeration Type Documentation}
+\mbox{\label{globals_8h_a66f719d83f18dc6d1369b0776f25b1ef}} 
+\index{globals.\+h@{globals.\+h}!adc\+\_\+status@{adc\+\_\+status}}
+\index{adc\+\_\+status@{adc\+\_\+status}!globals.\+h@{globals.\+h}}
+\subsubsection{adc\+\_\+status}
+{\footnotesize\ttfamily enum \textbf{ adc\+\_\+status}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{N\+O\+R\+M\+AL@{N\+O\+R\+M\+AL}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!N\+O\+R\+M\+AL@{N\+O\+R\+M\+AL}}}\mbox{\label{globals_8h_a66f719d83f18dc6d1369b0776f25b1efa50d1448013c6f17125caee18aa418af7}} 
+N\+O\+R\+M\+AL&Normal execution. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+E\+S\+ET@{R\+E\+S\+ET}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!R\+E\+S\+ET@{R\+E\+S\+ET}}}\mbox{\label{globals_8h_a66f719d83f18dc6d1369b0776f25b1efa589b7d94a3d91d145720e2fed0eb3a05}} 
+R\+E\+S\+ET&Reset analog measurements. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+I\+S\+C\+A\+RD@{D\+I\+S\+C\+A\+RD}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!D\+I\+S\+C\+A\+RD@{D\+I\+S\+C\+A\+RD}}}\mbox{\label{globals_8h_a66f719d83f18dc6d1369b0776f25b1efa2c65e1f3e87da84f74b4fc2a908bf69d}} 
+D\+I\+S\+C\+A\+RD&Discard first samples to obtain a correct value. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+U\+M\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AN@{S\+U\+M\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AN}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!S\+U\+M\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AN@{S\+U\+M\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AN}}}\mbox{\label{globals_8h_a66f719d83f18dc6d1369b0776f25b1efa5bd42edcea28ad65a046391d8af6dfd8}} 
+S\+U\+M\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AN&Sum and mean a definite value of samples. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{W\+A\+IT@{W\+A\+IT}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!W\+A\+IT@{W\+A\+IT}}}\mbox{\label{globals_8h_a66f719d83f18dc6d1369b0776f25b1efa79a322ccb4b29b85b3cab52dbccefd17}} 
+W\+A\+IT&The second emg waits until the first emg has a valid value. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{W\+A\+I\+T\+\_\+\+EoC@{W\+A\+I\+T\+\_\+\+EoC}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!W\+A\+I\+T\+\_\+\+EoC@{W\+A\+I\+T\+\_\+\+EoC}}}\mbox{\label{globals_8h_a66f719d83f18dc6d1369b0776f25b1efa81de86f7e28eb45b782fe4f79470575b}} 
+W\+A\+I\+T\+\_\+\+EoC&The second emg waits for end of calibration. \\
+\hline
+
+\end{DoxyEnumFields}
 \mbox{\label{globals_8h_a368077232a067805e98c61f28948abee}} 
 \index{globals.\+h@{globals.\+h}!counter\+\_\+status@{counter\+\_\+status}}
 \index{counter\+\_\+status@{counter\+\_\+status}!globals.\+h@{globals.\+h}}
@@ -711,38 +799,6 @@ W\+R\+I\+T\+E\+\_\+\+E\+ND&End of E\+E\+P\+R\+OM writing. \\
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{N\+O\+NE@{N\+O\+NE}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!N\+O\+NE@{N\+O\+NE}}}\mbox{\label{globals_8h_a368077232a067805e98c61f28948abeeac157bdf0b85a40d2619cbc8bc1ae5fe2}} 
 N\+O\+NE&Cycles writing on E\+E\+P\+R\+OM is disabled. \\
-\hline
-
-\end{DoxyEnumFields}
-\mbox{\label{globals_8h_a723f289c2be966c5e6c8dfe3d0b46f1e}} 
-\index{globals.\+h@{globals.\+h}!emg\+\_\+status@{emg\+\_\+status}}
-\index{emg\+\_\+status@{emg\+\_\+status}!globals.\+h@{globals.\+h}}
-\subsubsection{emg\+\_\+status}
-{\footnotesize\ttfamily enum \textbf{ emg\+\_\+status}}
-
-\begin{DoxyEnumFields}{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{N\+O\+R\+M\+AL@{N\+O\+R\+M\+AL}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!N\+O\+R\+M\+AL@{N\+O\+R\+M\+AL}}}\mbox{\label{globals_8h_a723f289c2be966c5e6c8dfe3d0b46f1ea50d1448013c6f17125caee18aa418af7}} 
-N\+O\+R\+M\+AL&Normal execution. \\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+E\+S\+ET@{R\+E\+S\+ET}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!R\+E\+S\+ET@{R\+E\+S\+ET}}}\mbox{\label{globals_8h_a723f289c2be966c5e6c8dfe3d0b46f1ea589b7d94a3d91d145720e2fed0eb3a05}} 
-R\+E\+S\+ET&Reset analog measurements. \\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+I\+S\+C\+A\+RD@{D\+I\+S\+C\+A\+RD}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!D\+I\+S\+C\+A\+RD@{D\+I\+S\+C\+A\+RD}}}\mbox{\label{globals_8h_a723f289c2be966c5e6c8dfe3d0b46f1ea2c65e1f3e87da84f74b4fc2a908bf69d}} 
-D\+I\+S\+C\+A\+RD&Discard first samples to obtain a correct value. \\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+U\+M\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AN@{S\+U\+M\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AN}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!S\+U\+M\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AN@{S\+U\+M\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AN}}}\mbox{\label{globals_8h_a723f289c2be966c5e6c8dfe3d0b46f1ea5bd42edcea28ad65a046391d8af6dfd8}} 
-S\+U\+M\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AN&Sum and mean a definite value of samples. \\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{W\+A\+IT@{W\+A\+IT}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!W\+A\+IT@{W\+A\+IT}}}\mbox{\label{globals_8h_a723f289c2be966c5e6c8dfe3d0b46f1ea79a322ccb4b29b85b3cab52dbccefd17}} 
-W\+A\+IT&The second emg waits until the first emg has a valid value. \\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{W\+A\+I\+T\+\_\+\+EoC@{W\+A\+I\+T\+\_\+\+EoC}!globals.\+h@{globals.\+h}}\index{globals.\+h@{globals.\+h}!W\+A\+I\+T\+\_\+\+EoC@{W\+A\+I\+T\+\_\+\+EoC}}}\mbox{\label{globals_8h_a723f289c2be966c5e6c8dfe3d0b46f1ea81de86f7e28eb45b782fe4f79470575b}} 
-W\+A\+I\+T\+\_\+\+EoC&The second emg waits for end of calibration. \\
 \hline
 
 \end{DoxyEnumFields}
@@ -823,17 +879,17 @@ Power supply tension. \mbox{\label{globals_8h_aa2494c7cd8f096ca7f2ead0a1430a597}
 \subsubsection{dev\+\_\+tension\+\_\+f}
 {\footnotesize\ttfamily int32 dev\+\_\+tension\+\_\+f[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+M\+O\+T\+O\+RS}]}
 
-Filtered power supply tension. \mbox{\label{globals_8h_a433230c4343adf14967e6f4f9082b199}} 
+Filtered power supply tension. \mbox{\label{globals_8h_af909e8281823c106dd4191858f995b32}} 
 \index{globals.\+h@{globals.\+h}!emg\+\_\+1\+\_\+status@{emg\+\_\+1\+\_\+status}}
 \index{emg\+\_\+1\+\_\+status@{emg\+\_\+1\+\_\+status}!globals.\+h@{globals.\+h}}
 \subsubsection{emg\+\_\+1\+\_\+status}
-{\footnotesize\ttfamily \textbf{ emg\+\_\+status} C\+Y\+D\+A\+TA emg\+\_\+1\+\_\+status}
+{\footnotesize\ttfamily \textbf{ adc\+\_\+status} C\+Y\+D\+A\+TA emg\+\_\+1\+\_\+status}
 
-First E\+MG sensor status. \mbox{\label{globals_8h_a7eef8180f636a73854d52b58e2be4e51}} 
+First E\+MG sensor status. \mbox{\label{globals_8h_ab157f05be16bbec6bbbf4966ee61f5cd}} 
 \index{globals.\+h@{globals.\+h}!emg\+\_\+2\+\_\+status@{emg\+\_\+2\+\_\+status}}
 \index{emg\+\_\+2\+\_\+status@{emg\+\_\+2\+\_\+status}!globals.\+h@{globals.\+h}}
 \subsubsection{emg\+\_\+2\+\_\+status}
-{\footnotesize\ttfamily \textbf{ emg\+\_\+status} C\+Y\+D\+A\+TA emg\+\_\+2\+\_\+status}
+{\footnotesize\ttfamily \textbf{ adc\+\_\+status} C\+Y\+D\+A\+TA emg\+\_\+2\+\_\+status}
 
 Second E\+MG sensor status. \mbox{\label{globals_8h_aad3d2663356b48553e2b22e0a9fd917e}} 
 \index{globals.\+h@{globals.\+h}!filt\+\_\+emg@{filt\+\_\+emg}}
@@ -859,11 +915,11 @@ Velocity filter variables. \mbox{\label{globals_8h_a0f13b80a0c329fa3176eb1e72ef3
 \subsubsection{forced\+\_\+open}
 {\footnotesize\ttfamily uint8 forced\+\_\+open}
 
-Forced open flag (used in position with rest position control). \mbox{\label{globals_8h_a85e15a194417ebcd15f662bd9bcfdded}} 
-\index{globals.\+h@{globals.\+h}!g\+\_\+emg\+\_\+meas\+Old@{g\+\_\+emg\+\_\+meas\+Old}}
-\index{g\+\_\+emg\+\_\+meas\+Old@{g\+\_\+emg\+\_\+meas\+Old}!globals.\+h@{globals.\+h}}
-\subsubsection{g\+\_\+emg\+\_\+meas\+Old}
-{\footnotesize\ttfamily struct \textbf{ st\+\_\+emg\+\_\+meas} g\+\_\+emg\+\_\+meas g\+\_\+emg\+\_\+meas\+Old}
+Forced open flag (used in position with rest position control). \mbox{\label{globals_8h_acc5bb8855e965e00106ae614ae1aa510}} 
+\index{globals.\+h@{globals.\+h}!g\+\_\+adc\+\_\+meas\+Old@{g\+\_\+adc\+\_\+meas\+Old}}
+\index{g\+\_\+adc\+\_\+meas\+Old@{g\+\_\+adc\+\_\+meas\+Old}!globals.\+h@{globals.\+h}}
+\subsubsection{g\+\_\+adc\+\_\+meas\+Old}
+{\footnotesize\ttfamily struct \textbf{ st\+\_\+adc\+\_\+meas} g\+\_\+adc\+\_\+meas g\+\_\+adc\+\_\+meas\+Old}
 
 E\+MG Measurements. \mbox{\label{globals_8h_af8d2d84570b7e85614e0455a23177e62}} 
 \index{globals.\+h@{globals.\+h}!g\+\_\+fb\+\_\+meas@{g\+\_\+fb\+\_\+meas}}
@@ -895,7 +951,19 @@ Incoming/\+Outcoming data. \mbox{\label{globals_8h_a1e6fda88dfdabc63859f8907eb70
 \subsubsection{interrupt\+\_\+flag}
 {\footnotesize\ttfamily C\+Y\+B\+IT interrupt\+\_\+flag}
 
-Interrupt flag enabler. \mbox{\label{globals_8h_a7bdd0aaa2a8c38bd61f34d76d3a69dbf}} 
+Interrupt flag enabler. \mbox{\label{globals_8h_ad8db2d45996868177ae599a5cc9f41ff}} 
+\index{globals.\+h@{globals.\+h}!joy\+\_\+\+L\+R\+\_\+status@{joy\+\_\+\+L\+R\+\_\+status}}
+\index{joy\+\_\+\+L\+R\+\_\+status@{joy\+\_\+\+L\+R\+\_\+status}!globals.\+h@{globals.\+h}}
+\subsubsection{joy\+\_\+\+L\+R\+\_\+status}
+{\footnotesize\ttfamily \textbf{ adc\+\_\+status} C\+Y\+D\+A\+TA joy\+\_\+\+L\+R\+\_\+status}
+
+Joystick L\+E\+F\+T/\+R\+I\+G\+HT status. \mbox{\label{globals_8h_afece0e67682b8e3a920f1bb395ae0ec9}} 
+\index{globals.\+h@{globals.\+h}!joy\+\_\+\+U\+D\+\_\+status@{joy\+\_\+\+U\+D\+\_\+status}}
+\index{joy\+\_\+\+U\+D\+\_\+status@{joy\+\_\+\+U\+D\+\_\+status}!globals.\+h@{globals.\+h}}
+\subsubsection{joy\+\_\+\+U\+D\+\_\+status}
+{\footnotesize\ttfamily \textbf{ adc\+\_\+status} C\+Y\+D\+A\+TA joy\+\_\+\+U\+D\+\_\+status}
+
+Joystick U\+P/\+D\+O\+WN status. \mbox{\label{globals_8h_a7bdd0aaa2a8c38bd61f34d76d3a69dbf}} 
 \index{globals.\+h@{globals.\+h}!maintenance\+\_\+flag@{maintenance\+\_\+flag}}
 \index{maintenance\+\_\+flag@{maintenance\+\_\+flag}!globals.\+h@{globals.\+h}}
 \subsubsection{maintenance\+\_\+flag}

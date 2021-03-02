@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_CP.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">PSoC5 firmware
-   &#160;<span id="projectnumber">v. 1.8</span>
+   &#160;<span id="projectnumber">v. 1.9</span>
    </div>
    <div id="projectbrief">Centro E.Piaggio</div>
   </td>
@@ -79,14 +79,12 @@ Data Fields</h2></td></tr>
 <tr class="separator:aa406dc76b9d1c8741dc42db9ac4dab51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad35fe7496b3455cdaf034ddc2c157163"><td class="memItemLeft" align="right" valign="top">uint32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst__emg.html#ad35fe7496b3455cdaf034ddc2c157163">emg_max_value</a> [<a class="el" href="globals_8h.html#a21ab5f0a6e4cb48bd320177c4f7aa078">NUM_OF_INPUT_EMGS</a>]</td></tr>
 <tr class="separator:ad35fe7496b3455cdaf034ddc2c157163"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8e800591064bf14eb2dd3a3fb2c325b"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst__emg.html#ae8e800591064bf14eb2dd3a3fb2c325b">emg_speed</a></td></tr>
-<tr class="separator:ae8e800591064bf14eb2dd3a3fb2c325b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66c08e905054b65a7e2a25a8780eb59b"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst__emg.html#a66c08e905054b65a7e2a25a8780eb59b">emg_speed</a> [<a class="el" href="globals_8h.html#a21ab5f0a6e4cb48bd320177c4f7aa078">NUM_OF_INPUT_EMGS</a>]</td></tr>
+<tr class="separator:a66c08e905054b65a7e2a25a8780eb59b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78f0b0c6db2a7118cd15ec0aa38ccdb9"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst__emg.html#a78f0b0c6db2a7118cd15ec0aa38ccdb9">emg_calibration_flag</a></td></tr>
 <tr class="separator:a78f0b0c6db2a7118cd15ec0aa38ccdb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90c7b59f97a26bf3da8b26b145b32919"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst__emg.html#a90c7b59f97a26bf3da8b26b145b32919">switch_emg</a></td></tr>
 <tr class="separator:a90c7b59f97a26bf3da8b26b145b32919"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac60066bd7150d73c95439a5e2af21e05"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst__emg.html#ac60066bd7150d73c95439a5e2af21e05">unused_bytes</a> [1]</td></tr>
-<tr class="separator:ac60066bd7150d73c95439a5e2af21e05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>EMG related parameters structure. </p>
@@ -121,14 +119,14 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="ae8e800591064bf14eb2dd3a3fb2c325b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae8e800591064bf14eb2dd3a3fb2c325b">&#9670;&nbsp;</a></span>emg_speed</h2>
+<a id="a66c08e905054b65a7e2a25a8780eb59b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66c08e905054b65a7e2a25a8780eb59b">&#9670;&nbsp;</a></span>emg_speed</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8 emg_speed</td>
+          <td class="memname">uint8 emg_speed[<a class="el" href="globals_8h.html#a21ab5f0a6e4cb48bd320177c4f7aa078">NUM_OF_INPUT_EMGS</a>]</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -163,21 +161,6 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>EMG opening/closure switch. </p>
-
-</div>
-</div>
-<a id="ac60066bd7150d73c95439a5e2af21e05"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac60066bd7150d73c95439a5e2af21e05">&#9670;&nbsp;</a></span>unused_bytes</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8 unused_bytes[1]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Unused bytes to fill row. </p>
 
 </div>
 </div>

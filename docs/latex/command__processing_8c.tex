@@ -63,11 +63,15 @@ void \textbf{ mem\+Init\+\_\+\+Master} (void)
 \item 
 void \textbf{ mem\+Init\+\_\+\+Air\+Chambers\+Fb} (void)
 \item 
+void \textbf{ mem\+Init\+\_\+\+Otbk\+Act\+Wrist\+Ms} (void)
+\item 
 void \textbf{ cmd\+\_\+get\+\_\+measurements} ()
 \item 
 void \textbf{ cmd\+\_\+get\+\_\+velocities} ()
 \item 
 void \textbf{ cmd\+\_\+get\+\_\+accelerations} ()
+\item 
+void \textbf{ cmd\+\_\+get\+\_\+joystick} ()
 \item 
 void \textbf{ cmd\+\_\+set\+\_\+inputs} ()
 \item 
@@ -103,12 +107,20 @@ void \textbf{ cmd\+\_\+get\+\_\+\+A\+D\+C\+\_\+map} ()
 \item 
 void \textbf{ cmd\+\_\+get\+\_\+\+A\+D\+C\+\_\+raw} ()
 \item 
-\mbox{\label{command__processing_8c_a47884d88bea34ce92722c14ab60248ba}} 
-void {\bfseries air\+\_\+chambers\+\_\+control} ()
+void \textbf{ cmd\+\_\+get\+\_\+\+S\+D\+\_\+file} (uint16 filename\+\_\+length)
+\item 
+\mbox{\label{command__processing_8c_a308022a04c9da94099b233c05942f9d9}} 
+void {\bfseries air\+\_\+chambers\+\_\+control} (int slave\+\_\+motor\+\_\+idx)
+\item 
+\mbox{\label{command__processing_8c_a79073b26a718383551f0b008082291d4}} 
+uint8 {\bfseries emg\+\_\+activation\+\_\+velocity\+\_\+fsm} ()
+\item 
+\mbox{\label{command__processing_8c_a792fff039e9d237fee86bda6d41b8067}} 
+void {\bfseries otbk\+\_\+act\+\_\+wrist\+\_\+control} (int slave\+\_\+motor\+\_\+idx)
 \item 
 void \textbf{ drive\+\_\+slave} (uint8 motor\+\_\+idx, uint8 slave\+\_\+\+ID)
 \item 
-void \textbf{ stop\+\_\+feedback} ()
+void \textbf{ stop\+\_\+master\+\_\+device} ()
 \item 
 void \textbf{ deactivate\+\_\+slaves} ()
 \end{DoxyCompactItemize}
@@ -215,13 +227,25 @@ This function gets I\+MU readings \mbox{\label{command__processing_8c_a20db4694e
 \subsubsection{cmd\+\_\+get\+\_\+inputs()}
 {\footnotesize\ttfamily void cmd\+\_\+get\+\_\+inputs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-This function gets the current motor reference inputs and puts them in the package to be sent. \mbox{\label{command__processing_8c_af5ccd403f1d3e49c97bafd6e7713cff3}} 
+This function gets the current motor reference inputs and puts them in the package to be sent. \mbox{\label{command__processing_8c_a09b189bd1592a8f95769a1907f44b555}} 
+\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+get\+\_\+joystick@{cmd\+\_\+get\+\_\+joystick}}
+\index{cmd\+\_\+get\+\_\+joystick@{cmd\+\_\+get\+\_\+joystick}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
+\subsubsection{cmd\+\_\+get\+\_\+joystick()}
+{\footnotesize\ttfamily void cmd\+\_\+get\+\_\+joystick (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This function gets the joystick analog values and puts them in the package to be sent. \mbox{\label{command__processing_8c_af5ccd403f1d3e49c97bafd6e7713cff3}} 
 \index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+get\+\_\+measurements@{cmd\+\_\+get\+\_\+measurements}}
 \index{cmd\+\_\+get\+\_\+measurements@{cmd\+\_\+get\+\_\+measurements}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
 \subsubsection{cmd\+\_\+get\+\_\+measurements()}
 {\footnotesize\ttfamily void cmd\+\_\+get\+\_\+measurements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Bunch of functions used on request from U\+A\+RT communication \mbox{\label{command__processing_8c_a212883283bd7a8f32846615271cad8ce}} 
+Bunch of functions used on request from U\+A\+RT communication \mbox{\label{command__processing_8c_a90d37f64d1eac91112e56a3724e57e0a}} 
+\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+get\+\_\+\+S\+D\+\_\+file@{cmd\+\_\+get\+\_\+\+S\+D\+\_\+file}}
+\index{cmd\+\_\+get\+\_\+\+S\+D\+\_\+file@{cmd\+\_\+get\+\_\+\+S\+D\+\_\+file}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
+\subsubsection{cmd\+\_\+get\+\_\+\+S\+D\+\_\+file()}
+{\footnotesize\ttfamily void cmd\+\_\+get\+\_\+\+S\+D\+\_\+file (\begin{DoxyParamCaption}\item[{uint16}]{filename\+\_\+length }\end{DoxyParamCaption})}
+
+This function gets a file on the SD \mbox{\label{command__processing_8c_a212883283bd7a8f32846615271cad8ce}} 
 \index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+get\+\_\+velocities@{cmd\+\_\+get\+\_\+velocities}}
 \index{cmd\+\_\+get\+\_\+velocities@{cmd\+\_\+get\+\_\+velocities}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
 \subsubsection{cmd\+\_\+get\+\_\+velocities()}
@@ -420,7 +444,13 @@ This functions initializes the memory. It is used also to restore the the parame
 \subsubsection{mem\+Init\+\_\+\+Master()}
 {\footnotesize\ttfamily void mem\+Init\+\_\+\+Master (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-This functions initializes the memory. It is used also to restore the the parameters to their default values. Specific for Master firmware \mbox{\label{command__processing_8c_aa93addc878e4efa2b8681a7116c1a07b}} 
+This functions initializes the memory. It is used also to restore the the parameters to their default values. Specific for Master firmware \mbox{\label{command__processing_8c_a365625dbe7bb68797bed3abb1c492d42}} 
+\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!mem\+Init\+\_\+\+Otbk\+Act\+Wrist\+Ms@{mem\+Init\+\_\+\+Otbk\+Act\+Wrist\+Ms}}
+\index{mem\+Init\+\_\+\+Otbk\+Act\+Wrist\+Ms@{mem\+Init\+\_\+\+Otbk\+Act\+Wrist\+Ms}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
+\subsubsection{mem\+Init\+\_\+\+Otbk\+Act\+Wrist\+Ms()}
+{\footnotesize\ttfamily void mem\+Init\+\_\+\+Otbk\+Act\+Wrist\+Ms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This functions initializes the memory. It is used also to restore the the parameters to their default values. Specific for Ottobock Active Wrist Master firmware \mbox{\label{command__processing_8c_aa93addc878e4efa2b8681a7116c1a07b}} 
 \index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!mem\+Init\+\_\+\+Soft\+Hand\+Pro@{mem\+Init\+\_\+\+Soft\+Hand\+Pro}}
 \index{mem\+Init\+\_\+\+Soft\+Hand\+Pro@{mem\+Init\+\_\+\+Soft\+Hand\+Pro}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
 \subsubsection{mem\+Init\+\_\+\+Soft\+Hand\+Pro()}
@@ -556,10 +586,10 @@ This function, depending on the \doxyref{Firmware}{p.}{index} received, sets the
 \subsubsection{set\+Zeros()}
 {\footnotesize\ttfamily void set\+Zeros (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-This function sets the encoders zero position. \mbox{\label{command__processing_8c_a9ab18b8568ea220d085f46cc77a6b904}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!stop\+\_\+feedback@{stop\+\_\+feedback}}
-\index{stop\+\_\+feedback@{stop\+\_\+feedback}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{stop\+\_\+feedback()}
-{\footnotesize\ttfamily void stop\+\_\+feedback (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+This function sets the encoders zero position. \mbox{\label{command__processing_8c_a4dbcb914c7348f441f7dd56b3400f434}} 
+\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!stop\+\_\+master\+\_\+device@{stop\+\_\+master\+\_\+device}}
+\index{stop\+\_\+master\+\_\+device@{stop\+\_\+master\+\_\+device}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
+\subsubsection{stop\+\_\+master\+\_\+device()}
+{\footnotesize\ttfamily void stop\+\_\+master\+\_\+device (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-This function is used to deactivate feedback motors when occurred. 
+This function is used to deactivate master device motors when occurred. 

@@ -262,7 +262,7 @@ void interrupt_manager(){
 //==============================================================================
 // Call all the function with the right frequency
 //==============================================================================
-// Base frequency 1000 Hz
+// Base frequency 5000 Hz (110 us - max. 200 us cycle time)
 //==============================================================================
 
 void function_scheduler(void) {
@@ -523,6 +523,22 @@ void function_scheduler(void) {
         }
         
     }
+    
+     
+    //---------------------------------- EMG history Update
+    if (c_mem.exp.record_EMG_history_on_SD){
+        
+        update_EMG_history();
+
+        // Check Interrupt 
+
+        if (interrupt_flag){
+            interrupt_flag = FALSE;
+            interrupt_manager();
+        }
+    }
+
+    
     //---------------------------------- Control Cycles Counter
 
     cycles_counter_update();
@@ -547,6 +563,13 @@ void function_scheduler(void) {
                 //Write in SD card
                 prepare_SD_info(info_);
                 FS_Write(pFile, info_, strlen(info_));
+                
+                if (c_mem.exp.record_EMG_history_on_SD){
+                    char EMG_history_info_[15000] = "";
+                    strcpy(EMG_history_info_, "");
+                    prepare_SD_EMG_history(EMG_history_info_);
+                    FS_Write(pEMGHFile, EMG_history_info_, strlen(EMG_history_info_));
+                }
             }
         }
     }
@@ -1674,7 +1697,7 @@ void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor) {
     
     for (index = 0; index < N_ENCODERS; index++) {
         
-        data_encoder_raw[index] = aux_encoder[index];
+        data_encoder_raw[n_line][index] = aux_encoder[index];
         
         tmp_value_encoder = (int16)(aux_encoder[index] - (uint16)g_mem.enc[n_line].m_off[index]);
         if (tmp_value_encoder < 0){
@@ -2591,13 +2614,13 @@ void cycles_counter_update() {
             if (!rest_enabled){
                 timer_value_e = (uint32)CYCLES_TIMER_ReadCounter();
                 if (timer_value_s < timer_value_e) {
-                    timer_value_s = timer_value_s + (uint32)1200;
+                    timer_value_s = timer_value_s + (uint32)6000;
                 }
                 rest_cycle_status = COUNTER_INC;
             }
             break;
         case COUNTER_INC: 
-            g_mem.cnt.total_time_rest = g_mem.cnt.total_time_rest + (uint32)((timer_value_s - timer_value_e)/10);
+            g_mem.cnt.total_time_rest = g_mem.cnt.total_time_rest + (uint32)((timer_value_s - timer_value_e)/50);
             g_mem.cnt.rest_counter = g_mem.cnt.rest_counter + 1;
             rest_cycle_status = STATE_INACTIVE;
             break;

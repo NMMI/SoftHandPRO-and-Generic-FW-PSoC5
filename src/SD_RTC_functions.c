@@ -222,6 +222,13 @@ void InitSD_FS()
         FS_Write(pFile, info_, strlen(info_));
     }
     //FS_FClose(pFile); 
+     
+    // Open file for EMG History in write mode (create it if it does not exist)
+    if (c_mem.exp.record_EMG_history_on_SD){
+        pEMGHFile = FS_FOpen(sdEMGHFile, "w");
+        prepare_SD_EMG_History_legend(info_);
+        FS_Write(pEMGHFile, info_, strlen(info_));
+    }
 }
 
 /*******************************************************************************
@@ -262,13 +269,40 @@ void Read_SD_Current_Data(char* info_data, int n_d){
     // Open data file in read mode    
     pData = FS_FOpen(sdFile, "r");
     if (pData != 0) {
-        i = FS_FRead(info_data, 1, n_d, pFile);
+        i = FS_FRead(info_data, 1, n_d, pData);
         info_data[i] = 0;  
     }
     FS_FClose(pData);
     
     // Before exiting, reopen data file in append mode
     pFile = FS_FOpen(sdFile, "a");
+}
+
+/*******************************************************************************
+* Function Name: Read SD Current Open EMG History File
+*********************************************************************************/
+void Read_SD_EMG_History_Data(){
+    int i;
+    FS_FILE* pData;
+    char iData[10];
+    
+    FS_FClose(pEMGHFile);
+    
+    // Open data file in read mode    
+    pData = FS_FOpen(sdEMGHFile, "r");
+    
+    UART_RS485_ClearTxBuffer();
+    do {
+        i = FS_FRead(iData, 1, 1, pData);
+        UART_RS485_PutChar((uint8)iData[0]);
+    }
+    while(i);
+    UART_RS485_PutChar((uint8)0);
+    
+    FS_FClose(pData);
+    
+    // Before exiting, reopen file in append mode
+    pEMGHFile = FS_FOpen(sdEMGHFile, "a");
 }
 
 /*******************************************************************************

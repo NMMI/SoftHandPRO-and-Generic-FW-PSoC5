@@ -98,12 +98,26 @@ void    prepare_SD_info(char *info_string);
 **/
 void    prepare_SD_param_info(char *info_string);
 
+//============================================================  prepare_SD_EMG_history
+/** This function is used to prepare an information string to be on a SD card
+ *
+ * \param 	info_string 	An array of chars containing the requested information.
+**/
+void    prepare_SD_EMG_history(char *info_string);
+
 //============================================================  prepare_SD_legend
 /** This function is used to prepare an information string to be on a SD card
  *
  * \param 	info_string 	An array of chars containing the requested information.
 **/
 void    prepare_SD_legend(char *info_string);
+
+//============================================================  prepare_SD_EMG_History_legend
+/** This function is used to prepare an information string to be on a SD card
+ *
+ * \param 	info_string 	An array of chars containing the requested information.
+**/
+void    prepare_SD_EMG_History_legend(char *info_string);
 
 //============================================================  IMU_reading_info
 /** This function is used to prepare an information string about the IMU sensors
@@ -429,6 +443,7 @@ void cmd_get_ADC_raw();
 /** This function gets a file on the SD
 **/
 void cmd_get_SD_file(uint16 filename_length);
+
 
 //============================================================  air_chamber_control
 /* This function is used to drive air chambers feedback device */

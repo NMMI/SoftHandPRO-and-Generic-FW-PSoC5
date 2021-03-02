@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['old_5fvalue',['old_value',['../structst__filter.html#a80bc1645f2427aeb042cc33910f6a625',1,'st_filter']]],
-  ['onoff',['onoff',['../structst__ref.html#aea636dc117fd774b0cbfc5e936eac3e5',1,'st_ref']]]
+  ['not_5frevers_5fmotor_5fflag',['not_revers_motor_flag',['../structst__motor.html#a6525eb3c16595104c1d0fbcf0a8d1de4',1,'st_motor']]],
+  ['num_5fof_5fanalog_5finputs',['NUM_OF_ANALOG_INPUTS',['../globals_8c.html#ab302ef69391ec5a0b59dadb9c7d2a3ef',1,'NUM_OF_ANALOG_INPUTS():&#160;globals.c'],['../globals_8h.html#ab302ef69391ec5a0b59dadb9c7d2a3ef',1,'NUM_OF_ANALOG_INPUTS():&#160;globals.c']]]
 ];

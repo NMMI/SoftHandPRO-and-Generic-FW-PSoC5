@@ -6,5 +6,6 @@ var searchData=
   ['input_5fmode_5femg_5fproportional',['INPUT_MODE_EMG_PROPORTIONAL',['../commands_8h.html#af5b4e6fe0787834c86e4ea44f0ece279a791c735316bd375c6e93d561cb80eafd',1,'commands.h']]],
   ['input_5fmode_5femg_5fproportional_5fnc',['INPUT_MODE_EMG_PROPORTIONAL_NC',['../commands_8h.html#af5b4e6fe0787834c86e4ea44f0ece279a5615cd4b06b150f6832a773356e38101',1,'commands.h']]],
   ['input_5fmode_5fencoder3',['INPUT_MODE_ENCODER3',['../commands_8h.html#af5b4e6fe0787834c86e4ea44f0ece279a9bfa7271b88d5876a1c3fd050f67bd3e',1,'commands.h']]],
-  ['input_5fmode_5fexternal',['INPUT_MODE_EXTERNAL',['../commands_8h.html#af5b4e6fe0787834c86e4ea44f0ece279ae9164f9cc9192eb336b04d078f46b8ba',1,'commands.h']]]
+  ['input_5fmode_5fexternal',['INPUT_MODE_EXTERNAL',['../commands_8h.html#af5b4e6fe0787834c86e4ea44f0ece279ae9164f9cc9192eb336b04d078f46b8ba',1,'commands.h']]],
+  ['input_5fmode_5fjoystick',['INPUT_MODE_JOYSTICK',['../commands_8h.html#af5b4e6fe0787834c86e4ea44f0ece279a6f5918e455c85bc7e916bddbf8889538',1,'commands.h']]]
 ];
