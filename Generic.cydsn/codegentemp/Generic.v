@@ -1,6 +1,6 @@
 // ======================================================================
 // Generic.v generated from TopDesign.cysch
-// 02/26/2021 at 14:08
+// 04/01/2021 at 16:42
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -2165,14 +2165,14 @@ module top ;
           wire  Net_3875;
           wire  Net_3874;
           wire  Net_3872;
-          wire  Net_1385;
-          wire  Net_337;
-          wire  Net_336;
-          wire  Net_335;
-          wire  Net_334;
-          wire  Net_333;
-          wire  Net_331;
-          wire  Net_330;
+          wire  Net_10646;
+          wire  Net_10644;
+          wire  Net_10643;
+          wire  Net_10642;
+          wire  Net_10641;
+          wire  Net_10640;
+          wire  Net_10639;
+          wire  Net_10638;
           wire  Net_2752;
           wire  Net_327;
           wire  Net_326;
@@ -4078,17 +4078,17 @@ module top ;
     UART_v2_50_3 UART_RS485 (
         .cts_n(1'b0),
         .tx(Net_2627),
-        .rts_n(Net_331),
+        .rts_n(Net_10639),
         .tx_en(Net_6020),
         .clock(Net_124),
         .reset(Net_332),
         .rx(Net_6196),
-        .tx_interrupt(Net_333),
+        .tx_interrupt(Net_10640),
         .rx_interrupt(Net_6117),
-        .tx_data(Net_334),
-        .tx_clk(Net_335),
-        .rx_data(Net_336),
-        .rx_clk(Net_337));
+        .tx_data(Net_10641),
+        .tx_clk(Net_10642),
+        .rx_data(Net_10643),
+        .rx_clk(Net_10644));
     defparam UART_RS485.Address1 = 2;
     defparam UART_RS485.Address2 = 0;
     defparam UART_RS485.EnIntRXInterrupt = 1;

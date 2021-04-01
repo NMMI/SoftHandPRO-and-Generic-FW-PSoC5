@@ -1265,7 +1265,7 @@ void motor_control_SH() {
     
     prev_pwm = pwm_input;
 	
-    pwm_sign = SIGN(pwm_input);   
+    pwm_sign[MOTOR_IDX] = SIGN(pwm_input);   
     
     if (SH_MOT->not_revers_motor_flag == TRUE) {
         // Block motor with pwm = 0 to exploit not reversible motor behaviour 
@@ -1551,7 +1551,7 @@ void motor_control_generic(uint8 idx) {
         pwm_input = -PWM_MAX_VALUE;
 
     if (MOT->control_mode != CONTROL_PWM) 
-        pwm_input = (((pwm_input << 10) / PWM_MAX_VALUE) * dev_pwm_limit[0]) >> 10;
+        pwm_input = (((pwm_input << 10) / PWM_MAX_VALUE) * dev_pwm_limit[idx]) >> 10;
  
     //// RATE LIMITER ////
     if((pwm_input-prev_pwm[idx]) > MOT->pwm_rate_limiter){
@@ -1569,7 +1569,7 @@ void motor_control_generic(uint8 idx) {
     
     prev_pwm[idx] = pwm_input;
 	
-    pwm_sign = SIGN(pwm_input);   
+    pwm_sign[idx] = SIGN(pwm_input);   
     
     if (MOT->not_revers_motor_flag == TRUE) {
         // Block motor with pwm = 0 to exploit not reversible motor behaviour 
@@ -2013,9 +2013,9 @@ void analog_read_end() {
         
         // Filter and Set currents
         if (g_mem.motor[0].motor_driver_type == DRIVER_MC33887) { // [GS]
-            g_meas[g_mem.motor[0].encoder_line].curr = filter((int16) (((int32)(ADC_buf[1] - 1648) * 22634) >> 13) * pwm_sign, &filt_i[0]);
-        } else { // [GS]
-            g_meas[g_mem.motor[0].encoder_line].curr = ((int16) ((int32)((ADC_buf[1] - 1635) * 480) >> 4) * pwm_sign); // filter((int16) (((int32)(ADC_buf[1] - 1648) * 43125) >> 13) * pwm_sign, &filt_i[0]); // [GS]
+            g_meas[g_mem.motor[0].encoder_line].curr = (int16)(filter((((int32)(ADC_buf[1] - 1643) * 22634) >> 13), &filt_i[0]) * pwm_sign[0]);
+        } else {
+            g_meas[g_mem.motor[0].encoder_line].curr = (int16)(filter((((int32)(ADC_buf[1] - 1635) * 480) >> 4), &filt_i[0]) * pwm_sign[0]);
         }  
 
         // Calculate current estimation and put it in the second part of the current measurement array;
@@ -2025,11 +2025,10 @@ void analog_read_end() {
         if (NUM_OF_ANALOG_INPUTS > 4) {
             // Filter and Set currents
             if (g_mem.motor[1].motor_driver_type == DRIVER_MC33887) { // [GS]
-                g_meas[g_mem.motor[1].encoder_line].curr = filter((int16) (((int32)(ADC_buf[5] - 1648) * 22634) >> 13) * pwm_sign, &filt_i[1]);
-            } else { // [GS]
-                g_meas[g_mem.motor[1].encoder_line].curr = ((int16) ((int32)((ADC_buf[5] - 1635) * 480) >> 4) * pwm_sign); // filter((int16) (((int32)(ADC_buf[1] - 1648) * 43125) >> 13) * pwm_sign, &filt_i[0]); // [GS]
+                g_meas[g_mem.motor[1].encoder_line].curr = (int16)(filter((((int32)(ADC_buf[5] - 1643) * 22634) >> 13), &filt_i[1])* pwm_sign[1]);
+            } else {
+                g_meas[g_mem.motor[1].encoder_line].curr = (int16)(filter((((int32)(ADC_buf[5] - 1635) * 480) >> 4), &filt_i[1]) * pwm_sign[1]);
             }  
-            //g_meas[g_mem.motor[1].encoder_line].curr = filter((int16) (((int32)(ADC_buf[5] - 1648) * 22634) >> 13) * pwm_sign, &filt_i[1]);
             
             g_meas[g_mem.motor[1].encoder_line].estim_curr = (int16) filter(((int32) g_meas[g_mem.motor[1].encoder_line].curr) - curr_estim(1, g_meas[g_mem.motor[1].encoder_line].pos[0] >> g_mem.enc[g_mem.motor[1].encoder_line].res[0], g_meas[g_mem.motor[1].encoder_line].vel[0] >> g_mem.enc[g_mem.motor[1].encoder_line].res[0], g_ref[1].pos >> g_mem.enc[g_mem.motor[1].encoder_line].res[0]), &filt_curr_diff[1]);
         }
@@ -2474,12 +2473,18 @@ void overcurrent_control() {
     
     for (uint8 i = 0; i <NUM_OF_MOTORS; i++) {
         if (c_mem.motor[i].current_limit != 0) {
-            // if the current is over the limit
-            if (g_meas[g_mem.motor[i].encoder_line].curr > c_mem.motor[i].current_limit) {
+            int32 curr = g_meas[g_mem.motor[i].encoder_line].curr;
+            // check if the current is over the limit
+            if (c_mem.dev.dev_type == SOFTHAND_2_MOTORS){
+                if (curr < 0){
+                    curr = -curr;       // Invert sign to have a positive current reading in this function
+                }
+            }
+            if (curr > c_mem.motor[i].current_limit) {
                 //decrease pwm_limit
                 dev_pwm_limit[i]--;
-            // if the current is in the safe zone
-            } else if (g_meas[i].curr < (c_mem.motor[i].current_limit - CURRENT_HYSTERESIS)) {
+            // check if the current is in the safe zone
+            } else if (curr < (c_mem.motor[i].current_limit - CURRENT_HYSTERESIS)) {
                 //increase pwm_limit
                 dev_pwm_limit[i]++;
             }
@@ -2534,7 +2539,7 @@ void cycles_counter_update() {
     // State machine - Evaluate position counter update
     switch (pos_cycle_status){
         case STATE_INACTIVE:
-            if ((g_mem.motor[0].input_mode != INPUT_MODE_EMG_PROPORTIONAL_NC && pwm_sign == 1) || (g_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL_NC && pwm_sign == -1)){
+            if ((g_mem.motor[0].input_mode != INPUT_MODE_EMG_PROPORTIONAL_NC && pwm_sign[0] == 1) || (g_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL_NC && pwm_sign[0] == -1)){
                 thr_pos = curr_pos; 
                 curr_off = (max_pos>thr_pos)?(max_pos-thr_pos):(thr_pos-max_pos);
                 g_mem.cnt.wire_disp = g_mem.cnt.wire_disp + curr_off;     //sum opening track
@@ -2542,7 +2547,7 @@ void cycles_counter_update() {
             }
             break;
         case STATE_ACTIVE:
-            if ((g_mem.motor[0].input_mode != INPUT_MODE_EMG_PROPORTIONAL_NC && pwm_sign == -1) || (g_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL_NC && pwm_sign == 1)){
+            if ((g_mem.motor[0].input_mode != INPUT_MODE_EMG_PROPORTIONAL_NC && pwm_sign[0] == -1) || (g_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL_NC && pwm_sign[0] == 1)){
                 max_pos = curr_pos;
                 curr_off = (max_pos>thr_pos)?(max_pos-thr_pos):(thr_pos-max_pos);
                 g_mem.cnt.wire_disp = g_mem.cnt.wire_disp + curr_off;     //sum closure track

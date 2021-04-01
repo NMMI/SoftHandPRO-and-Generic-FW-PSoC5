@@ -62,16 +62,16 @@
     
 // Macro related to different firmware configurations
 #ifdef SOFTHAND_FW
-    #define VERSION                 "SoftHand PRO firmware v. 1.9.2 (PSoC5)"
+    #define VERSION                 "SoftHand PRO firmware v. 1.9.3 (PSoC5)"
 #else
     #ifdef GENERIC_FW
-        #define VERSION                 "Generic firmware v. 1.9.2 (PSoC5)"
+        #define VERSION                 "Generic firmware v. 1.9.3 (PSoC5)"
     #else   
         #define MASTER_FW
         #ifdef AIR_CHAMBERS_FB_FW
-            #define VERSION                 "Air Chambers Haptic Feedback firmware v. 1.9.2 (PSoC5) - Master configuration"
+            #define VERSION                 "Air Chambers Haptic Feedback firmware v. 1.9.3 (PSoC5) - Master configuration"
         #else //OTBK_ACT_WRIST_MS_FW
-            #define VERSION                 "Ottobock Active Wrist firmware v. 1.9.2 (PSoC5) - Master configuration"
+            #define VERSION                 "Ottobock Active Wrist firmware v. 1.9.3 (PSoC5) - Master configuration"
         #endif
     #endif
 #endif      

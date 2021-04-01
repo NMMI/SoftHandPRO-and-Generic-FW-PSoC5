@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
   23:..\src/utils.c **** // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
   24:..\src/utils.c **** // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
   25:..\src/utils.c **** // DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 2
 
 
   26:..\src/utils.c **** // FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
   54 0012 632B     		cmp	r3, #99
   55 0014 05DC     		bgt	.L2
   59:..\src/utils.c **** 			virtual_pos_friction[idx] = pos;
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 3
 
 
   56              		.loc 1 59 0
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  100 006a DB00     		lsls	r3, r3, #3
  101 006c 9B1A     		subs	r3, r3, r2
  102 006e 1B01     		lsls	r3, r3, #4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 4
 
 
  103 0070 0B44     		add	r3, r3, r1
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  157 00f0 0346     		mov	r3, r0
  158 00f2 1946     		mov	r1, r3
  159 00f4 2046     		mov	r0, r4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 5
 
 
  160 00f6 FFF7FEFF 		bl	__aeabi_fadd
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  214 017a 1846     		mov	r0, r3
  215 017c FFF7FEFF 		bl	__aeabi_i2f
  216 0180 FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 6
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 6
 
 
  217 0182 3749     		ldr	r1, .L9+4
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  266 01ec 1346     		mov	r3, r2
  267 01ee DB00     		lsls	r3, r3, #3
  268 01f0 9B1A     		subs	r3, r3, r2
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 7
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 7
 
 
  269 01f2 1B01     		lsls	r3, r3, #4
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  315 0254 1846     		mov	r0, r3
  316 0256 1837     		adds	r7, r7, #24
  317              		.cfi_def_cfa_offset 16
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 8
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 8
 
 
  318 0258 BD46     		mov	sp, r7
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  363 001c 9B01     		lsls	r3, r3, #6
  364 001e 3968     		ldr	r1, [r7]
  365 0020 4968     		ldr	r1, [r1, #4]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 9
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 9
 
 
  366 0022 01FB03F3 		mul	r3, r1, r3
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  409              		@ args = 0, pretend = 0, frame = 8
  410              		@ frame_needed = 1, uses_anonymous_args = 0
  411              		@ link register save eliminated.
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 10
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 10
 
 
  412 0000 80B4     		push	{r7}
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  459              		.cfi_def_cfa_offset 0
  460 004e 7047     		bx	lr
  461              		.cfi_endproc
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 11
 
 
  462              	.LFE66:
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  501 0028 1B01     		lsls	r3, r3, #4
  502 002a 0B44     		add	r3, r3, r1
  503 002c 03F29513 		addw	r3, r3, #405
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 12
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 12
 
 
  504 0030 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  540 0078 04FA03F3 		lsl	r3, r4, r3
  541 007c D31A     		subs	r3, r2, r3
  542 007e 114A     		ldr	r2, .L23+4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 13
 
 
  543 0080 1360     		str	r3, [r2]
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  591 00c4 00000000 		.word	g_refNew
  592 00c8 00000000 		.word	calib
  593 00cc 00000000 		.word	g_mem
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 14
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 14
 
 
  594 00d0 12000000 		.word	closure_counter.10203
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  620 000a 7A60     		str	r2, [r7, #4]
  621 000c 3B60     		str	r3, [r7]
  170:..\src/utils.c ****     
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 15
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 15
 
 
  171:..\src/utils.c ****     int32 x;
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  664 0064 3B68     		ldr	r3, [r7]
  665 0066 5A42     		negs	r2, r3
  666 0068 7B69     		ldr	r3, [r7, #20]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 16
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 16
 
 
  667 006a 9A42     		cmp	r2, r3
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  196:..\src/utils.c ****     return aux; 
  707              		.loc 1 196 0
  708 00b4 7B69     		ldr	r3, [r7, #20]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 17
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 17
 
 
  197:..\src/utils.c **** 
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  756 001c 3B68     		ldr	r3, [r7]
  757 001e 7A68     		ldr	r2, [r7, #4]
  758 0020 B968     		ldr	r1, [r7, #8]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 18
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 18
 
 
  759 0022 F868     		ldr	r0, [r7, #12]
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  805 0084 DA0F     		lsrs	r2, r3, #31
  806 0086 1344     		add	r3, r3, r2
  807 0088 5B10     		asrs	r3, r3, #1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 19
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 19
 
 
  808 008a CB1A     		subs	r3, r1, r3
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  847              		.loc 1 226 0
  848 0006 0023     		movs	r3, #0
  849 0008 7B60     		str	r3, [r7, #4]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 20
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 20
 
 
  227:..\src/utils.c ****     static int32 rest_error;
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  895 0066 42FA03F3 		asr	r3, r2, r3
  896 006a 7B60     		str	r3, [r7, #4]
  236:..\src/utils.c ****     
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 21
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 21
 
 
  237:..\src/utils.c ****     if ( ( ((c_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL || c_mem.motor[0].input_mode 
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  946 00c2 1B68     		ldr	r3, [r3]
  947 00c4 0133     		adds	r3, r3, #1
  948 00c6 754A     		ldr	r2, .L54+12
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 22
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 22
 
 
  949 00c8 1360     		str	r3, [r2]
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  984 0102 634B     		ldr	r3, .L54
  985 0104 93F81031 		ldrb	r3, [r3, #272]	@ zero_extendqisi2
  986 0108 1946     		mov	r1, r3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 23
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 23
 
 
  987 010a 654A     		ldr	r2, .L54+16
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  1035 017c 0346     		mov	r3, r0
  1036 017e 1846     		mov	r0, r3
  1037 0180 FFF7FEFF 		bl	__aeabi_f2iz
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 24
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 24
 
 
  1038 0184 424B     		ldr	r3, .L54
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  1087 01f2 0B46     		mov	r3, r1
  1088 01f4 5B00     		lsls	r3, r3, #1
  1089 01f6 0B44     		add	r3, r3, r1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 25
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 25
 
 
  1090 01f8 1B01     		lsls	r3, r3, #4
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  280:..\src/utils.c ****             rest_pos_curr_ref = g_mem.SH.rest_pos;
  1134              		.loc 1 280 0 is_stmt 1
  1135 0246 124B     		ldr	r3, .L54
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 26
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 26
 
 
  1136 0248 D3F8A032 		ldr	r3, [r3, #672]
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  1183 02a0 00000000 		.word	g_meas
  1184 02a4 00000000 		.word	c_mem
  1185 02a8 00000000 		.word	g_adc_meas
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 27
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 27
 
 
  1186 02ac 01000000 		.word	flag_count.10229
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  1231 0312 174B     		ldr	r3, .L56+12
  1232 0314 1A68     		ldr	r2, [r3]
  1233 0316 174B     		ldr	r3, .L56+16
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 28
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 28
 
 
  1234 0318 1B68     		ldr	r3, [r3]
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  1275              		.cfi_def_cfa_register 13
  1276              		@ sp needed
  1277 0360 90BD     		pop	{r4, r7, pc}
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 29
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 29
 
 
  1278              	.L57:
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  1324 0028 69000000 		.word	.L65+1
  1325 002c 77000000 		.word	.L66+1
  1326              		.p2align 1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 30
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 30
 
 
  1327              	.L60:
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  1362 0066 0EE0     		b	.L67
  1363              	.L65:
  336:..\src/utils.c ****             
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 31
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 31
 
 
  337:..\src/utils.c ****         case 4:     // Yellow fixed light - maintenance
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  1404              		.type	battery_management, %function
  1405              	battery_management:
  1406              	.LFB72:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 32
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 32
 
 
  351:..\src/utils.c **** 
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  371:..\src/utils.c ****             enable_motor(0, g_refNew[0].onoff);
  1441              		.loc 1 371 0
  1442 002a A64B     		ldr	r3, .L97+28
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 33
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 33
 
 
  1443 002c 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  408:..\src/utils.c ****                     if (!maintenance_flag)
  409:..\src/utils.c ****                         LED_control(0);     // NO LIGHT - all leds off
  410:..\src/utils.c ****                     else
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 34
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 34
 
 
  411:..\src/utils.c ****                         LED_control(4);     // yellow light - fixed
@@ -1991,7 +1991,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  418:..\src/utils.c ****                 
  419:..\src/utils.c ****                     if (v_count_lb >= 10000){                    
  420:..\src/utils.c ****                         
- 421:..\src/utils.c ****                         //battery_low_SoC = TRUE;
+ 421:..\src/utils.c ****                         //battery_low_SoC = TRUE;     //[MP] Uncomment for softhand 2 motors
  422:..\src/utils.c ****                         
  423:..\src/utils.c ****                         //red light - blink @ 2.5 Hz
  424:..\src/utils.c ****                         LED_control(3);
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  1479 0066 994B     		ldr	r3, .L97+36
  1480 0068 93F80E31 		ldrb	r3, [r3, #270]	@ zero_extendqisi2
  1481 006c 002B     		cmp	r3, #0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 35
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 35
 
 
  1482 006e 2DD0     		beq	.L75
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  1525 00bc 002B     		cmp	r3, #0
  1526 00be 40F0BD80 		bne	.L74
  386:..\src/utils.c ****             dev_tension_f[0] = filter(dev_tension[0], &filt_v[0]);            
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 36
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 36
 
 
  1527              		.loc 1 386 0
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  1577 012a 002B     		cmp	r3, #0
  1578 012c 2AD0     		beq	.L78
  395:..\src/utils.c ****                 //fixed
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 37
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 37
 
 
  1579              		.loc 1 395 0 is_stmt 0 discriminator 1
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  1626 0186 1B68     		ldr	r3, [r3]
  1627 0188 1846     		mov	r0, r3
  1628 018a FFF7FEFF 		bl	__aeabi_i2d
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 38
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 38
 
 
  1629 018e 0446     		mov	r4, r0
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  1679              		.loc 1 409 0
  1680 01fe 0020     		movs	r0, #0
  1681 0200 FFF7FEFF 		bl	LED_control
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 39
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 39
 
 
  1682 0204 02E0     		b	.L90
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  1726 0244 2AD0     		beq	.L92
  436:..\src/utils.c ****                 ((c_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL || c_mem.motor[0].input_
  1727              		.loc 1 436 0 is_stmt 0 discriminator 1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 40
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 40
 
 
  1728 0246 214B     		ldr	r3, .L97+36
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  1772 0296 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  1773 0298 002B     		cmp	r3, #0
  1774 029a 03D1     		bne	.L96
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 41
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 41
 
 
  1775              	.L92:
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  1823              		.cfi_offset 7, -8
  1824              		.cfi_offset 14, -4
  1825 0002 00AF     		add	r7, sp, #0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 42
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 42
 
 
  1826              		.cfi_def_cfa_register 7
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  1854 002e 013B     		subs	r3, r3, #1
  1855 0030 DBB2     		uxtb	r3, r3
  1856 0032 1846     		mov	r0, r3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 43
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 43
 
 
  1857 0034 FFF7FEFF 		bl	ADC_N_CHANNELS_USED_Write
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  1901 001a FFF7FEFF 		bl	MOTOR_ON_OFF_1_Write
  1902              	.L105:
  485:..\src/utils.c ****     }   
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 44
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 44
 
 
  486:..\src/utils.c ****     if (idx == 1) {
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  500:..\src/utils.c ****     g_mem.cnt.emg_counter[0] = g_mem.cnt.emg_counter[1] = 0;
  1943              		.loc 1 500 0
  1944 0006 1B4B     		ldr	r3, .L113
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 45
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 45
 
 
  1945 0008 0022     		movs	r2, #0
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  1990 004e F3D9     		bls	.L112
  506:..\src/utils.c ****     }
  507:..\src/utils.c ****     g_mem.cnt.rest_counter = 0;
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 46
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 46
 
 
  1991              		.loc 1 507 0 is_stmt 1
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  2035              		.cfi_startproc
  2036              		@ args = 0, pretend = 0, frame = 24
  2037              		@ frame_needed = 1, uses_anonymous_args = 0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 47
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 47
 
 
  2038 0000 80B5     		push	{r7, lr}
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  2086 005a 1A46     		mov	r2, r3
  2087 005c 3B69     		ldr	r3, [r7, #16]	@ float
  2088 005e 1946     		mov	r1, r3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 48
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 48
 
 
  2089 0060 1046     		mov	r0, r2
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  2134 000a 1A68     		ldr	r2, [r3]	@ float
  2135 000c 7B68     		ldr	r3, [r7, #4]
  2136 000e 1B68     		ldr	r3, [r3]	@ float
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 49
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 49
 
 
  2137 0010 1946     		mov	r1, r3
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  2188 0080 0433     		adds	r3, r3, #4
  2189 0082 1B68     		ldr	r3, [r3]	@ float
  2190 0084 F968     		ldr	r1, [r7, #12]	@ float
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 50
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 50
 
 
  2191 0086 1846     		mov	r0, r3
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  2238 0006 7860     		str	r0, [r7, #4]
  543:..\src/utils.c ****     // Vector 4 normalization
  544:..\src/utils.c ****     float norm = invSqrt(v4_in[0] * v4_in[0] + v4_in[1] * v4_in[1] + v4_in[2] * v4_in[2] + v4_in[3]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 51
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 51
 
 
  2239              		.loc 1 544 0
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  2293 0080 1846     		mov	r0, r3
  2294 0082 FFF7FEFF 		bl	invSqrt
  2295 0086 F860     		str	r0, [r7, #12]	@ float
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 52
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 52
 
 
  545:..\src/utils.c ****     
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  2344              		.cfi_def_cfa_register 13
  2345              		@ sp needed
  2346 00e8 90BD     		pop	{r4, r7, pc}
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 53
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 53
 
 
  2347              		.cfi_endproc
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  2389              	.L122:
  2390              	.LBB3:
  563:..\src/utils.c ****         // Run this part only after 10 CYCLES_TIMER timer steps (50Hz timer -> 5 Hz)
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 54
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 54
 
 
  564:..\src/utils.c ****         
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  2433 006e 02D3     		bcc	.L126
  574:..\src/utils.c ****             emg_history_next_idx = 0;
  2434              		.loc 1 574 0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 55
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 55
 
 
  2435 0070 044B     		ldr	r3, .L127+4
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  2484              		.align	2
  2485              	m.10231:
  2486 0018 00000000 		.space	4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 56
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 56
 
 
  2487              		.align	2
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  2541 003c 07       		.byte	0x7
  2542 003d E6040000 		.4byte	.LASF3
  2543 0041 03       		.uleb128 0x3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 57
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 57
 
 
  2544 0042 CE050000 		.4byte	.LASF9
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  2598 00b2 27080000 		.4byte	.LASF15
  2599 00b6 04       		.byte	0x4
  2600 00b7 E801     		.2byte	0x1e8
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 58
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 58
 
 
  2601 00b9 33000000 		.4byte	0x33
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  2655 012a 09       		.uleb128 0x9
  2656 012b 0F0A0000 		.4byte	.LASF26
  2657 012f 03       		.byte	0x3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 59
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 59
 
 
  2658 0130 09       		.uleb128 0x9
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  2712 0199 E7010000 		.4byte	0x1e7
  2713 019d 00       		.byte	0
  2714 019e 0C       		.uleb128 0xc
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 60
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 60
 
 
  2715 019f 8C070000 		.4byte	.LASF31
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  2769 020e F7       		.byte	0xf7
  2770 020f 38020000 		.4byte	0x238
  2771 0213 0B       		.uleb128 0xb
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 61
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 61
 
 
  2772 0214 656D6700 		.ascii	"emg\000"
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  2826 0287 E1020000 		.4byte	0x2e1
  2827 028b 30       		.byte	0x30
  2828 028c 0E       		.uleb128 0xe
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 62
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 62
 
 
  2829 028d 62080000 		.4byte	.LASF44
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  2883 0303 2101     		.2byte	0x121
  2884 0305 81000000 		.4byte	0x81
  2885 0309 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 63
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 63
 
 
  2886 030a 0E       		.uleb128 0xe
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  2940 037f 00       		.byte	0
  2941 0380 06       		.uleb128 0x6
  2942 0381 81000000 		.4byte	0x81
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 64
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 64
 
 
  2943 0385 90030000 		.4byte	0x390
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  2997 03f9 5C040000 		.4byte	.LASF63
  2998 03fd 05       		.byte	0x5
  2999 03fe 3901     		.2byte	0x139
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 65
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 65
 
 
  3000 0400 BD000000 		.4byte	0xbd
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  3054 0475 BD000000 		.4byte	0xbd
  3055 0479 34       		.byte	0x34
  3056 047a 0E       		.uleb128 0xe
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 66
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 66
 
 
  3057 047b D6060000 		.4byte	.LASF73
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  3111 04f0 B2020000 		.4byte	.LASF82
  3112 04f4 05       		.byte	0x5
  3113 04f5 4C01     		.2byte	0x14c
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 67
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 67
 
 
  3114 04f7 81000000 		.4byte	0x81
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  3168 056c C80A0000 		.4byte	.LASF87
  3169 0570 05       		.byte	0x5
  3170 0571 5901     		.2byte	0x159
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 68
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 68
 
 
  3171 0573 81000000 		.4byte	0x81
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  3225 05ea 0E       		.uleb128 0xe
  3226 05eb CE010000 		.4byte	.LASF92
  3227 05ef 05       		.byte	0x5
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 69
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 69
 
 
  3228 05f0 6501     		.2byte	0x165
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  3282 0666 0E       		.uleb128 0xe
  3283 0667 4B030000 		.4byte	.LASF99
  3284 066b 05       		.byte	0x5
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 70
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 70
 
 
  3285 066c 7201     		.2byte	0x172
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  3339 06e0 10070000 		.4byte	0x710
  3340 06e4 08       		.byte	0x8
  3341 06e5 0E       		.uleb128 0xe
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 71
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 71
 
 
  3342 06e6 FA080000 		.4byte	.LASF106
@@ -4258,7 +4258,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  3396 075d 8B01     		.2byte	0x18b
  3397 075f CD050000 		.4byte	0x5cd
  3398 0763 18       		.byte	0x18
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 72
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 72
 
 
  3399 0764 00       		.byte	0
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  3453 07d6 B1000000 		.4byte	0xb1
  3454 07da 02       		.byte	0x2
  3455 07db 0E       		.uleb128 0xe
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 73
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 73
 
 
  3456 07dc FA0A0000 		.4byte	.LASF118
@@ -4378,7 +4378,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  3510 0850 BD000000 		.4byte	0xbd
  3511 0854 00       		.byte	0
  3512 0855 0E       		.uleb128 0xe
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 74
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 74
 
 
  3513 0856 36060000 		.4byte	.LASF124
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  3567 08cd 07       		.byte	0x7
  3568 08ce 00       		.byte	0
  3569 08cf 06       		.uleb128 0x6
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 75
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 75
 
 
  3570 08d0 81000000 		.4byte	0x81
@@ -4498,7 +4498,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  3624 0949 11       		.uleb128 0x11
  3625 094a 656D6700 		.ascii	"emg\000"
  3626 094e 05       		.byte	0x5
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 76
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 76
 
 
  3627 094f D401     		.2byte	0x1d4
@@ -4558,7 +4558,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  3681 09c9 D4090000 		.4byte	0x9d4
  3682 09cd 07       		.uleb128 0x7
  3683 09ce F1000000 		.4byte	0xf1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 77
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 77
 
 
  3684 09d2 0E       		.byte	0xe
@@ -4618,7 +4618,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  3738 0a45 7E0A0000 		.4byte	0xa7e
  3739 0a49 0E       		.uleb128 0xe
  3740 0a4a 5A080000 		.4byte	.LASF140
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 78
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 78
 
 
  3741 0a4e 05       		.byte	0x5
@@ -4678,7 +4678,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  3795 0abd F6010000 		.4byte	.LASF154
  3796 0ac1 01       		.byte	0x1
  3797 0ac2 33       		.byte	0x33
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 79
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 79
 
 
  3798 0ac3 BD000000 		.4byte	0xbd
@@ -4738,7 +4738,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  3852 0b2f 16       		.uleb128 0x16
  3853 0b30 7E070000 		.4byte	.LASF153
  3854 0b34 01       		.byte	0x1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 80
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 80
 
 
  3855 0b35 38       		.byte	0x38
@@ -4798,7 +4798,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  3909 0b9f 15       		.uleb128 0x15
  3910 0ba0 76616C00 		.ascii	"val\000"
  3911 0ba4 01       		.byte	0x1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 81
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 81
 
 
  3912 0ba5 66       		.byte	0x66
@@ -4858,7 +4858,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  3966 0c14 6B0C0000 		.4byte	0xc6b
  3967 0c18 02       		.uleb128 0x2
  3968 0c19 91       		.byte	0x91
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 82
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 82
 
 
  3969 0c1a 6C       		.sleb128 -20
@@ -4918,7 +4918,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  4023 0c75 14       		.uleb128 0x14
  4024 0c76 EB0A0000 		.4byte	.LASF163
  4025 0c7a 01       		.byte	0x1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 83
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 83
 
 
  4026 0c7b C8       		.byte	0xc8
@@ -4978,7 +4978,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  4080 0cdf BD000000 		.4byte	0xbd
  4081 0ce3 02       		.uleb128 0x2
  4082 0ce4 91       		.byte	0x91
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 84
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 84
 
 
  4083 0ce5 74       		.sleb128 -12
@@ -5038,7 +5038,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  4137 0d52 01       		.byte	0x1
  4138 0d53 E0       		.byte	0xe0
  4139 0d54 BD000000 		.4byte	0xbd
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 85
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 85
 
 
  4140 0d58 05       		.uleb128 0x5
@@ -5098,7 +5098,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  4194 0dc3 21       		.uleb128 0x21
  4195 0dc4 16030000 		.4byte	.LASF178
  4196 0dc8 01       		.byte	0x1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 86
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 86
 
 
  4197 0dc9 6401     		.2byte	0x164
@@ -5158,7 +5158,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  4251 0e3f 78000000 		.4byte	.LFE75-.LFB75
  4252 0e43 01       		.uleb128 0x1
  4253 0e44 9C       		.byte	0x9c
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 87
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 87
 
 
  4254 0e45 570E0000 		.4byte	0xe57
@@ -5218,7 +5218,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  4308 0ea9 530A0000 		.4byte	.LASF181
  4309 0ead 01       		.byte	0x1
  4310 0eae 1202     		.2byte	0x212
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 88
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 88
 
 
  4311 0eb0 00000000 		.4byte	.LFB77
@@ -5278,7 +5278,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  4365 0f1e 2B02     		.2byte	0x22b
  4366 0f20 00000000 		.4byte	.LFB79
  4367 0f24 90000000 		.4byte	.LFE79-.LFB79
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 89
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 89
 
 
  4368 0f28 01       		.uleb128 0x1
@@ -5338,7 +5338,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  4422 0f97 28       		.uleb128 0x28
  4423 0f98 05050000 		.4byte	.LASF191
  4424 0f9c 05       		.byte	0x5
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 90
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 90
 
 
  4425 0f9d 1B02     		.2byte	0x21b
@@ -5398,7 +5398,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  4479 101d 2D02     		.2byte	0x22d
  4480 101f 38020000 		.4byte	0x238
  4481 1023 28       		.uleb128 0x28
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 91
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 91
 
 
  4482 1024 C8020000 		.4byte	.LASF200
@@ -5458,7 +5458,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  4536 10a9 5702     		.2byte	0x257
  4537 10ab 07       		.uleb128 0x7
  4538 10ac F1000000 		.4byte	0xf1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 92
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 92
 
 
  4539 10b0 01       		.byte	0x1
@@ -5518,7 +5518,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  4593 0027 49       		.uleb128 0x49
  4594 0028 13       		.uleb128 0x13
  4595 0029 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 93
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 93
 
 
  4596 002a 00       		.byte	0
@@ -5578,7 +5578,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  4650 0060 3B       		.uleb128 0x3b
  4651 0061 0B       		.uleb128 0xb
  4652 0062 01       		.uleb128 0x1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 94
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 94
 
 
  4653 0063 13       		.uleb128 0x13
@@ -5638,7 +5638,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  4707 0099 0B       		.uleb128 0xb
  4708 009a 00       		.byte	0
  4709 009b 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 95
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 95
 
 
  4710 009c 0D       		.uleb128 0xd
@@ -5698,7 +5698,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  4764 00d2 3B       		.uleb128 0x3b
  4765 00d3 05       		.uleb128 0x5
  4766 00d4 01       		.uleb128 0x1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 96
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 96
 
 
  4767 00d5 13       		.uleb128 0x13
@@ -5758,7 +5758,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  4821 010b 0E       		.uleb128 0xe
  4822 010c 3A       		.uleb128 0x3a
  4823 010d 0B       		.uleb128 0xb
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 97
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 97
 
 
  4824 010e 3B       		.uleb128 0x3b
@@ -5818,7 +5818,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  4878 0145 0E       		.uleb128 0xe
  4879 0146 3A       		.uleb128 0x3a
  4880 0147 0B       		.uleb128 0xb
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 98
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 98
 
 
  4881 0148 3B       		.uleb128 0x3b
@@ -5878,7 +5878,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  4935 017f 13       		.uleb128 0x13
  4936 0180 00       		.byte	0
  4937 0181 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 99
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 99
 
 
  4938 0182 1B       		.uleb128 0x1b
@@ -5938,7 +5938,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  4992 01b9 11       		.uleb128 0x11
  4993 01ba 01       		.uleb128 0x1
  4994 01bb 12       		.uleb128 0x12
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 100
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 100
 
 
  4995 01bc 06       		.uleb128 0x6
@@ -5998,7 +5998,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5049 01f4 03       		.uleb128 0x3
  5050 01f5 0E       		.uleb128 0xe
  5051 01f6 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 101
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 101
 
 
  5052 01f7 0B       		.uleb128 0xb
@@ -6058,7 +6058,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5106 022f 03       		.uleb128 0x3
  5107 0230 08       		.uleb128 0x8
  5108 0231 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 102
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 102
 
 
  5109 0232 0B       		.uleb128 0xb
@@ -6118,7 +6118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5163 0269 3A       		.uleb128 0x3a
  5164 026a 0B       		.uleb128 0xb
  5165 026b 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 103
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 103
 
 
  5166 026c 05       		.uleb128 0x5
@@ -6178,7 +6178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5220 0006 00000000 		.4byte	.Ldebug_info0
  5221 000a 04       		.byte	0x4
  5222 000b 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 104
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 104
 
 
  5223 000c 0000     		.2byte	0
@@ -6238,7 +6238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5277 0040 00000000 		.4byte	.LFB72
  5278 0044 F0020000 		.4byte	.LFE72
  5279 0048 00000000 		.4byte	.LFB73
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 105
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 105
 
 
  5280 004c 44000000 		.4byte	.LFE73
@@ -6298,7 +6298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5314              	.LASF159:
  5315 0056 636C6F73 		.ascii	"closure_counter\000"
  5315      7572655F 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 106
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 106
 
 
  5315      636F756E 
@@ -6358,7 +6358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5336              	.LASF7:
  5337 0161 6C6F6E67 		.ascii	"long long unsigned int\000"
  5337      206C6F6E 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 107
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 107
 
 
  5337      6720756E 
@@ -6418,7 +6418,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5361      00
  5362              	.LASF35:
  5363 0206 65737469 		.ascii	"estim_curr\000"
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 108
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 108
 
 
  5363      6D5F6375 
@@ -6478,7 +6478,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5388      74656E73 
  5388      696F6E00 
  5389              	.LASF51:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 109
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 109
 
 
  5390 02d4 72696768 		.ascii	"right_left\000"
@@ -6538,7 +6538,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5412      6C6400
  5413              	.LASF13:
  5414 0374 75696E74 		.ascii	"uint32\000"
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 110
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 110
 
 
  5414      333200
@@ -6598,7 +6598,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5440      727300
  5441              	.LASF116:
  5442 0416 6A6F7973 		.ascii	"joystick_closure_speed\000"
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 111
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 111
 
 
  5442      7469636B 
@@ -6658,7 +6658,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5464      5F706F72 
  5465              	.LASF107:
  5466 04c7 73745F75 		.ascii	"st_user\000"
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 112
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 112
 
 
  5466      73657200 
@@ -6718,7 +6718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5488      5F747970 
  5488      6500
  5489              	.LASF72:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 113
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 113
 
 
  5490 056f 706F735F 		.ascii	"pos_lim_inf\000"
@@ -6778,7 +6778,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5512 0607 75736572 		.ascii	"user_code_string\000"
  5512      5F636F64 
  5512      655F7374 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 114
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 114
 
 
  5512      72696E67 
@@ -6838,7 +6838,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5538      6300
  5539              	.LASF11:
  5540 06ab 75696E74 		.ascii	"uint8\000"
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 115
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 115
 
 
  5540      3800
@@ -6898,7 +6898,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5566 0743 6D6F746F 		.ascii	"motor\000"
  5566      7200
  5567              	.LASF161:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 116
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 116
 
 
  5568 0749 706F7331 		.ascii	"pos1\000"
@@ -6958,7 +6958,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5596 07d0 666C6167 		.ascii	"flag\000"
  5596      00
  5597              	.LASF121:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 117
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 117
 
 
  5598 07d5 736C6176 		.ascii	"slave_ID\000"
@@ -7018,7 +7018,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5624      5F636F75 
  5624      6E746572 
  5624      00
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 118
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 118
 
 
  5625              	.LASF198:
@@ -7078,7 +7078,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5648      72795F6F 
  5649              	.LASF210:
  5650 0913 656D675F 		.ascii	"emg_history\000"
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 119
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 119
 
 
  5650      68697374 
@@ -7138,7 +7138,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5676 09a6 656D675F 		.ascii	"emg_history_next_idx\000"
  5676      68697374 
  5676      6F72795F 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 120
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 120
 
 
  5676      6E657874 
@@ -7198,7 +7198,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5700      6F726D61 
  5700      6C697A65 
  5700      00
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 121
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 121
 
 
  5701              	.LASF18:
@@ -7258,7 +7258,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 1
  5724 0afa 6A6F7973 		.ascii	"joystick_gains\000"
  5724      7469636B 
  5724      5F676169 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccmKZvxC.s 			page 122
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUc3JYZ.s 			page 122
 
 
  5724      6E7300

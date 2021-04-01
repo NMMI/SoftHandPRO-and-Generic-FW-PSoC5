@@ -346,7 +346,7 @@ void infoGet(uint16 info_type) {
             UART_RS485_PutString(str_sd_data);
             break;
         case GET_SD_EMG_HIST:
-            // Send every single byte inside the function
+            // Send every single byte inside the function, since it could be a large file to send
             Read_SD_EMG_History_Data();
         default:
             break;
@@ -1588,13 +1588,25 @@ void set_custom_param(uint16 index) {
                 g_mem.motor[MOTOR_IDX].pwm_rate_limiter = PWM_RATE_LIMITER_MAX;
                 g_mem.motor[MOTOR_IDX].not_revers_motor_flag = TRUE;       // SoftHand not reversible motor
                 g_mem.motor[MOTOR_IDX].pos_lim_inf = 0;
-                g_mem.motor[MOTOR_IDX].pos_lim_sup = (int32)16000 << g_mem.enc[g_mem.motor[0].encoder_line].res[0];   
+                g_mem.motor[MOTOR_IDX].pos_lim_sup = (int32)16000 << g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[0];   
             }      
             
             if (g_mem.dev.dev_type == SOFTHAND_2_MOTORS){    // activate also 2nd motor and double_encoder
                 g_mem.dev.use_2nd_motor_flag = TRUE;
                 g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].double_encoder_on_off = TRUE;
                 g_mem.enc[g_mem.motor[SECOND_MOTOR_IDX].encoder_line].double_encoder_on_off = TRUE;
+                
+                g_mem.motor[MOTOR_IDX].pos_lim_inf = 0;
+                g_mem.motor[MOTOR_IDX].pos_lim_sup = (int32)16000 << g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[0];
+                g_mem.motor[SECOND_MOTOR_IDX].pos_lim_sup = (int32)(-16000) << g_mem.enc[g_mem.motor[SECOND_MOTOR_IDX].encoder_line].res[0];
+                g_mem.motor[SECOND_MOTOR_IDX].pos_lim_sup = 0;
+                
+                for (i=0; i< NUM_OF_MOTORS; i++) {                     // Maxon DCX16S
+                    g_mem.motor[i].current_limit = 800;                // [mA]
+                    g_mem.motor[i].k_p           = 0.12 * 65536;
+                    g_mem.motor[i].k_i           = 0;
+                    g_mem.motor[i].k_d           = 0.05 * 65536;
+                }
             }      
             
             break;
@@ -2967,8 +2979,8 @@ uint8 memStore(int displacement)
     // Stop motor
     PWM_MOTORS_WriteCompare1(0);
 
-    // Retrieve temperature for better writing performance
-    CySetTemp();
+    // Update temperature information for better writing performance
+    EEPROM_UpdateTemperature();
 
     memcpy( &c_mem, &g_mem, sizeof(g_mem) );
 

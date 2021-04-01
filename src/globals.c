@@ -95,7 +95,7 @@ int16 ADC_buf[NUM_OF_ADC_CHANNELS_MAX];     /*! ADC measurements buffer.*/
 uint8 NUM_OF_ANALOG_INPUTS = 4;             /*! ADC currently configured channels.*/
 
 // PWM value
-int8 pwm_sign;                               /*!< Sign of pwm driven. Used to obtain current sign.*/
+int8 pwm_sign[NUM_OF_MOTORS];               /*!< Sign of pwm driven. Used to obtain current sign.*/
 
 // Encoder variables
 uint32 data_encoder_raw[N_ENCODER_LINE_MAX][N_ENCODERS_PER_LINE_MAX];

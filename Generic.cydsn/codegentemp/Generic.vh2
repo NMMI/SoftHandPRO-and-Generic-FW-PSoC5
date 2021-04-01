@@ -2,7 +2,7 @@
 --	Conversion of Generic.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Fri Feb 26 14:08:26 2021
+--	Thu Apr 01 16:42:53 2021
 --
 
 USE cypress.cypress.all;
@@ -831,7 +831,7 @@ SIGNAL \UART_RS485:BUART:reset_sr\ : bit;
 SIGNAL \UART_RS485:BUART:HalfDuplexSend_last\ : bit;
 SIGNAL Net_2627 : bit;
 SIGNAL \UART_RS485:BUART:txn\ : bit;
-SIGNAL Net_333 : bit;
+SIGNAL Net_10640 : bit;
 SIGNAL \UART_RS485:BUART:tx_interrupt_out\ : bit;
 SIGNAL \UART_RS485:BUART:rx_interrupt_out\ : bit;
 SIGNAL \UART_RS485:BUART:tx_state_1\ : bit;
@@ -1015,7 +1015,7 @@ SIGNAL \UART_RS485:BUART:rx_status_4\ : bit;
 SIGNAL \UART_RS485:BUART:rx_status_5\ : bit;
 SIGNAL \UART_RS485:BUART:rx_status_6\ : bit;
 SIGNAL \UART_RS485:BUART:rx_addr_match_status\ : bit;
-SIGNAL Net_331 : bit;
+SIGNAL Net_10639 : bit;
 SIGNAL \UART_RS485:BUART:rx_markspace_pre\ : bit;
 SIGNAL \UART_RS485:BUART:rx_parity_error_pre\ : bit;
 SIGNAL \UART_RS485:BUART:sRX:cmp_vv_vv_MODGEN_7\ : bit;

@@ -418,7 +418,7 @@ void battery_management() {
                 
                     if (v_count_lb >= 10000){                    
                         
-                        //battery_low_SoC = TRUE;
+                        //battery_low_SoC = TRUE;     //[MP] Uncomment for softhand 2 motors
                         
                         //red light - blink @ 2.5 Hz
                         LED_control(3);
