@@ -564,7 +564,7 @@ extern adc_status CYDATA joy_UD_status;             /*!< Joystick UP/DOWN status
 extern adc_status CYDATA joy_LR_status;             /*!< Joystick LEFT/RIGHT status.*/
     
 // Bit Flag
-extern CYBIT reset_last_value_flag;                 /*!< This flag is set when the encoders last values must be resetted.*/
+extern CYBIT reset_last_value_flag[N_ENCODER_LINE_MAX]; /*!< This flag is set when the encoders last values must be resetted.*/
 extern CYBIT tension_valid;                         /*!< Tension validation bit.*/
 extern CYBIT interrupt_flag;                        /*!< Interrupt flag enabler.*/
 extern CYBIT cycles_interrupt_flag;                 /*!< Cycles timer interrupt flag enabler.*/
@@ -588,6 +588,7 @@ extern uint32 data_encoder_raw[N_ENCODER_LINE_MAX][N_ENCODERS_PER_LINE_MAX];
 extern uint8 N_Encoder_Line_Connected[N_ENCODER_LINE_MAX]; // Used to map how many encoders are connected to each CS pin, there are N_ENCODER_LINE_MAX CS on the board and each of them can contain N_ENCODERS_PER_LINE_MAX encoders
 extern uint16 Encoder_Value[N_ENCODER_LINE_MAX][N_ENCODERS_PER_LINE_MAX];
 extern uint8 Encoder_Check[N_ENCODER_LINE_MAX][N_ENCODERS_PER_LINE_MAX];
+extern CYBIT pos_reconstruct[N_ENCODER_LINE_MAX];
 
 // Rest Position variables
 extern int32 rest_pos_curr_ref;                     /*!< Rest position current reference.*/

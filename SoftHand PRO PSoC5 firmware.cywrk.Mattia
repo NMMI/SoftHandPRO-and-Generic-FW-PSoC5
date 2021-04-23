@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="SoftHand PRO PSoC5 firmware\Generic\Source Files\utils.c">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="SoftHand PRO PSoC5 firmware\Generic\TopDesign">
 <ExpandedNodeIds>
 <v>SoftHand PRO PSoC5 firmware</v>
 <v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\TopDesign</v>
@@ -889,6 +889,17 @@
 <v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\CLOCK_UART.lst</v>
 <v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\Cm3Start.lst</v>
 <v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\command_processing.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\counter_cyc_clk.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\COUNTER_ENC.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\COUNTER_ENC_PM.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\CS_ENCODER0.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\CS_ENCODER1.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\CS_on_board_IMU.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\CS_RTC.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\CS0.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\CS1.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\CS2.lst</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\CortexM3\ARM_GCC_541\Release\Listing Files\CS3.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -1150,6 +1161,17 @@
 <v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\demux_v1_10\demux_v1_10.pdf</v>
 <v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\DigitalComp_v1_0.pdf</v>
 <v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\EEPROM_v3_0.pdf</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\emFile_v1_20.pdf</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\mux_v1_10</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\mux_v1_10\mux_v1_10.pdf</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\not_v1_0</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\not_v1_0\not_v1_0.pdf</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\or_v1_0</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\or_v1_0\or_v1_0.pdf</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\PWM_v3_30</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\PWM_v3_30\PWM_v3_30.pdf</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\ShiftReg_v2_30</v>
+<v>SoftHand PRO PSoC5 firmware\Air_Chambers_Haptic_Feedback\ShiftReg_v2_30\ShiftReg_v2_30.pdf</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStatesV2>
@@ -1164,12 +1186,12 @@
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
 <OpenDocs>
+<name v=".\src\utils.c" />
 <name v=".\src\interruptions.c" />
+<name v=".\src\command_processing.c" />
 <name v=".\src\globals.h" />
 <name v=".\src\globals.c" />
-<name v=".\src\command_processing.c" />
-<name v=".\src\utils.c" />
-<name v=".\src\FIRMWARE_CONFIGURATION.h" />
+<name v=".\src\utils.h" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -1177,7 +1199,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1234, 720" SelectedTabbedMdiWindow="c18b526a-b883-42f9-8860-28ccc5d027a3"><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5 - Copia (prima di BT)\src\interruptions.c" Guid="c18b526a-b883-42f9-8860-28ccc5d027a3" /><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5 - Copia (prima di BT)\src\globals.h" Guid="38ec6468-286c-410d-b9a4-6d4cf47721ff" /><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5 - Copia (prima di BT)\src\globals.c" Guid="73d09b53-c5dd-450e-8c43-521dd7134c48" /><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5 - Copia (prima di BT)\src\command_processing.c" Guid="9d5eada3-b2aa-4705-bd81-d5be6f52503d" /><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5 - Copia (prima di BT)\src\utils.c" Guid="0d775ee8-1f68-430d-8f28-49ea8068da4e" /><DocumentWindow Key="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5 - Copia (prima di BT)\src\FIRMWARE_CONFIGURATION.h" Guid="76bb6d38-3b74-431f-adf1-af0870b567b7" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1273, 711" SelectedTabbedMdiWindow="c2f2c8b9-fd12-449d-8215-3f16734a0c72"><DocumentWindow Key="C:\Users\Mattia\Documents\GitHub\SoftHandPRO-and-Generic-FW-PSoC5\src\utils.c" Guid="3b6156ad-bee5-4d12-b026-830acefcdad9" /><DocumentWindow Key="C:\Users\Mattia\Documents\GitHub\SoftHandPRO-and-Generic-FW-PSoC5\src\interruptions.c" Guid="c2f2c8b9-fd12-449d-8215-3f16734a0c72" /><DocumentWindow Key="C:\Users\Mattia\Documents\GitHub\SoftHandPRO-and-Generic-FW-PSoC5\src\command_processing.c" Guid="592df240-0456-4f53-aebb-86cc3b520c5d" /><DocumentWindow Key="C:\Users\Mattia\Documents\GitHub\SoftHandPRO-and-Generic-FW-PSoC5\src\globals.h" Guid="32dd8958-53f9-4a82-869c-062367165be1" /><DocumentWindow Key="C:\Users\Mattia\Documents\GitHub\SoftHandPRO-and-Generic-FW-PSoC5\src\globals.c" Guid="d2a52a06-ac2d-4021-9219-9efe1450ba1d" /><DocumentWindow Key="C:\Users\Mattia\Documents\GitHub\SoftHandPRO-and-Generic-FW-PSoC5\src\utils.h" Guid="f91384f8-f50e-420b-b351-fe4fed7ee5d9" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="Release" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

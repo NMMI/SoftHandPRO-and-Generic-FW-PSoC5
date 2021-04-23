@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccKEm9cW.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
   28:Generated_Source\PSoC5/Bootloadable.c **** /*******************************************************************************
   29:Generated_Source\PSoC5/Bootloadable.c **** * Function Name: Bootloadable_Load
   30:Generated_Source\PSoC5/Bootloadable.c **** ****************************************************************************//**
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccKEm9cW.s 			page 2
 
 
   31:Generated_Source\PSoC5/Bootloadable.c **** *
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
   51:Generated_Source\PSoC5/Bootloadable.c **** * Function Name: Bootloadable_GetActiveApplication
   52:Generated_Source\PSoC5/Bootloadable.c **** ****************************************************************************//**
   53:Generated_Source\PSoC5/Bootloadable.c **** *
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccKEm9cW.s 			page 3
 
 
   54:Generated_Source\PSoC5/Bootloadable.c **** * \brief
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
  108:Generated_Source\PSoC5/Bootloadable.c **** *
  109:Generated_Source\PSoC5/Bootloadable.c **** *   NOTE Intended for the combination project type ONLY!
  110:Generated_Source\PSoC5/Bootloadable.c **** *
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccKEm9cW.s 			page 4
 
 
  111:Generated_Source\PSoC5/Bootloadable.c **** * \param appId  
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
  165:Generated_Source\PSoC5/Bootloadable.c **** * \brief 
  166:Generated_Source\PSoC5/Bootloadable.c **** *   This API writes to flash the specified data.
  167:Generated_Source\PSoC5/Bootloadable.c **** *
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccKEm9cW.s 			page 5
 
 
  168:Generated_Source\PSoC5/Bootloadable.c **** * \param address 
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
  222:Generated_Source\PSoC5/Bootloadable.c **** #endif /*(CYDEV_PROJ_TYPE == CYDEV_PROJ_TYPE_LOADABLEANDBOOTLOADER)*/
  223:Generated_Source\PSoC5/Bootloadable.c **** /** @} functions_group */
  224:Generated_Source\PSoC5/Bootloadable.c **** 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 6
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccKEm9cW.s 			page 6
 
 
  225:Generated_Source\PSoC5/Bootloadable.c **** /*******************************************************************************
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
  244:Generated_Source\PSoC5/Bootloadable.c ****     uint16 idx;
  245:Generated_Source\PSoC5/Bootloadable.c **** 
  246:Generated_Source\PSoC5/Bootloadable.c **** 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 7
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccKEm9cW.s 			page 7
 
 
  247:Generated_Source\PSoC5/Bootloadable.c ****     for (idx = 0u; idx < CYDEV_FLS_ROW_SIZE; idx++)
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
  263:Generated_Source\PSoC5/Bootloadable.c ****         * flash. A call to CyFlushCache() is required to invalidate the data in the
  264:Generated_Source\PSoC5/Bootloadable.c ****         * cache and force fresh information to be loaded from flash.
  265:Generated_Source\PSoC5/Bootloadable.c ****         ***************************************************************************/
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 8
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccKEm9cW.s 			page 8
 
 
  266:Generated_Source\PSoC5/Bootloadable.c ****         CyFlushCache();
@@ -449,23 +449,23 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
  155 000b 01       		.uleb128 0x1
  156 000c 00000000 		.4byte	.LASF25
  157 0010 0C       		.byte	0xc
- 158 0011 FB010000 		.4byte	.LASF26
- 159 0015 A8000000 		.4byte	.LASF27
+ 158 0011 E5010000 		.4byte	.LASF26
+ 159 0015 6C010000 		.4byte	.LASF27
  160 0019 00000000 		.4byte	.Ldebug_ranges0+0
  161 001d 00000000 		.4byte	0
  162 0021 00000000 		.4byte	.Ldebug_line0
  163 0025 02       		.uleb128 0x2
  164 0026 01       		.byte	0x1
  165 0027 06       		.byte	0x6
- 166 0028 36020000 		.4byte	.LASF0
+ 166 0028 20020000 		.4byte	.LASF0
  167 002c 02       		.uleb128 0x2
  168 002d 01       		.byte	0x1
  169 002e 08       		.byte	0x8
- 170 002f 14010000 		.4byte	.LASF1
+ 170 002f AE000000 		.4byte	.LASF1
  171 0033 02       		.uleb128 0x2
  172 0034 02       		.byte	0x2
  173 0035 05       		.byte	0x5
- 174 0036 F1010000 		.4byte	.LASF2
+ 174 0036 DB010000 		.4byte	.LASF2
  175 003a 02       		.uleb128 0x2
  176 003b 02       		.byte	0x2
  177 003c 07       		.byte	0x7
@@ -473,22 +473,22 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
  179 0041 02       		.uleb128 0x2
  180 0042 04       		.byte	0x4
  181 0043 05       		.byte	0x5
- 182 0044 21020000 		.4byte	.LASF4
+ 182 0044 0B020000 		.4byte	.LASF4
  183 0048 02       		.uleb128 0x2
  184 0049 04       		.byte	0x4
  185 004a 07       		.byte	0x7
- 186 004b 2F010000 		.4byte	.LASF5
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 9
+ 186 004b C9000000 		.4byte	.LASF5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccKEm9cW.s 			page 9
 
 
  187 004f 02       		.uleb128 0x2
  188 0050 08       		.byte	0x8
  189 0051 05       		.byte	0x5
- 190 0052 C4010000 		.4byte	.LASF6
+ 190 0052 5E010000 		.4byte	.LASF6
  191 0056 02       		.uleb128 0x2
  192 0057 08       		.byte	0x8
  193 0058 07       		.byte	0x7
- 194 0059 93010000 		.4byte	.LASF7
+ 194 0059 2D010000 		.4byte	.LASF7
  195 005d 03       		.uleb128 0x3
  196 005e 04       		.byte	0x4
  197 005f 05       		.byte	0x5
@@ -496,36 +496,36 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
  199 0064 02       		.uleb128 0x2
  200 0065 04       		.byte	0x4
  201 0066 07       		.byte	0x7
- 202 0067 7E010000 		.4byte	.LASF8
+ 202 0067 18010000 		.4byte	.LASF8
  203 006b 04       		.uleb128 0x4
- 204 006c 41010000 		.4byte	.LASF9
+ 204 006c DB000000 		.4byte	.LASF9
  205 0070 02       		.byte	0x2
  206 0071 E401     		.2byte	0x1e4
  207 0073 2C000000 		.4byte	0x2c
  208 0077 04       		.uleb128 0x4
- 209 0078 70010000 		.4byte	.LASF10
+ 209 0078 0A010000 		.4byte	.LASF10
  210 007c 02       		.byte	0x2
  211 007d E501     		.2byte	0x1e5
  212 007f 3A000000 		.4byte	0x3a
  213 0083 04       		.uleb128 0x4
- 214 0084 77010000 		.4byte	.LASF11
+ 214 0084 11010000 		.4byte	.LASF11
  215 0088 02       		.byte	0x2
  216 0089 E601     		.2byte	0x1e6
  217 008b 48000000 		.4byte	0x48
  218 008f 02       		.uleb128 0x2
  219 0090 04       		.byte	0x4
  220 0091 04       		.byte	0x4
- 221 0092 0E010000 		.4byte	.LASF12
+ 221 0092 A8000000 		.4byte	.LASF12
  222 0096 02       		.uleb128 0x2
  223 0097 08       		.byte	0x8
  224 0098 04       		.byte	0x4
- 225 0099 61010000 		.4byte	.LASF13
+ 225 0099 FB000000 		.4byte	.LASF13
  226 009d 02       		.uleb128 0x2
  227 009e 01       		.byte	0x1
  228 009f 08       		.byte	0x8
- 229 00a0 D2010000 		.4byte	.LASF14
+ 229 00a0 BC010000 		.4byte	.LASF14
  230 00a4 04       		.uleb128 0x4
- 231 00a5 2A010000 		.4byte	.LASF15
+ 231 00a5 C4000000 		.4byte	.LASF15
  232 00a9 02       		.byte	0x2
  233 00aa 8E02     		.2byte	0x28e
  234 00ac B0000000 		.4byte	0xb0
@@ -534,16 +534,16 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
  237 00b5 02       		.uleb128 0x2
  238 00b6 08       		.byte	0x8
  239 00b7 04       		.byte	0x4
- 240 00b8 2A020000 		.4byte	.LASF16
+ 240 00b8 14020000 		.4byte	.LASF16
  241 00bc 02       		.uleb128 0x2
  242 00bd 04       		.byte	0x4
  243 00be 07       		.byte	0x7
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 10
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccKEm9cW.s 			page 10
 
 
- 244 00bf BB010000 		.4byte	.LASF17
+ 244 00bf 55010000 		.4byte	.LASF17
  245 00c3 06       		.uleb128 0x6
- 246 00c4 4F010000 		.4byte	.LASF28
+ 246 00c4 E9000000 		.4byte	.LASF28
  247 00c8 01       		.byte	0x1
  248 00c9 29       		.byte	0x29
  249 00ca 00000000 		.4byte	.LFB0
@@ -551,7 +551,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
  251 00d2 01       		.uleb128 0x1
  252 00d3 9C       		.byte	0x9c
  253 00d4 07       		.uleb128 0x7
- 254 00d5 D7010000 		.4byte	.LASF29
+ 254 00d5 C1010000 		.4byte	.LASF29
  255 00d9 01       		.byte	0x1
  256 00da E4       		.byte	0xe4
  257 00db 00000000 		.4byte	.LFB1
@@ -560,7 +560,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
  260 00e4 9C       		.byte	0x9c
  261 00e5 5D010000 		.4byte	0x15d
  262 00e9 08       		.uleb128 0x8
- 263 00ea 8B010000 		.4byte	.LASF18
+ 263 00ea 25010000 		.4byte	.LASF18
  264 00ee 01       		.byte	0x1
  265 00ef E4       		.byte	0xe4
  266 00f0 83000000 		.4byte	0x83
@@ -568,7 +568,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
  268 00f5 91       		.byte	0x91
  269 00f6 E47D     		.sleb128 -284
  270 00f8 08       		.uleb128 0x8
- 271 00f9 AA010000 		.4byte	.LASF19
+ 271 00f9 44010000 		.4byte	.LASF19
  272 00fd 01       		.byte	0x1
  273 00fe E4       		.byte	0xe4
  274 00ff 6B000000 		.4byte	0x6b
@@ -576,7 +576,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
  276 0104 91       		.byte	0x91
  277 0105 E37D     		.sleb128 -285
  278 0107 09       		.uleb128 0x9
- 279 0108 68010000 		.4byte	.LASF20
+ 279 0108 02010000 		.4byte	.LASF20
  280 010c 01       		.byte	0x1
  281 010d E6       		.byte	0xe6
  282 010e 83000000 		.4byte	0x83
@@ -584,7 +584,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
  284 0113 91       		.byte	0x91
  285 0114 70       		.sleb128 -16
  286 0115 09       		.uleb128 0x9
- 287 0116 22010000 		.4byte	.LASF21
+ 287 0116 BC000000 		.4byte	.LASF21
  288 011a 01       		.byte	0x1
  289 011b E7       		.byte	0xe7
  290 011c 5D010000 		.4byte	0x15d
@@ -592,13 +592,13 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
  292 0121 91       		.byte	0x91
  293 0122 E87D     		.sleb128 -280
  294 0124 09       		.uleb128 0x9
- 295 0125 47010000 		.4byte	.LASF22
+ 295 0125 E1000000 		.4byte	.LASF22
  296 0129 01       		.byte	0x1
  297 012a EA       		.byte	0xea
  298 012b 6B000000 		.4byte	0x6b
  299 012f 02       		.uleb128 0x2
  300 0130 91       		.byte	0x91
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccKEm9cW.s 			page 11
 
 
  301 0131 6F       		.sleb128 -17
@@ -611,7 +611,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
  308 013e 91       		.byte	0x91
  309 013f 6C       		.sleb128 -20
  310 0140 09       		.uleb128 0x9
- 311 0141 B2010000 		.4byte	.LASF24
+ 311 0141 4C010000 		.4byte	.LASF24
  312 0145 01       		.byte	0x1
  313 0146 F3       		.byte	0xf3
  314 0147 83000000 		.4byte	0x83
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
  355 0013 02       		.uleb128 0x2
  356 0014 24       		.uleb128 0x24
  357 0015 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 12
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccKEm9cW.s 			page 12
 
 
  358 0016 0B       		.uleb128 0xb
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
  412 004c 12       		.uleb128 0x12
  413 004d 06       		.uleb128 0x6
  414 004e 40       		.uleb128 0x40
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccKEm9cW.s 			page 13
 
 
  415 004f 18       		.uleb128 0x18
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
  469 0087 49       		.uleb128 0x49
  470 0088 13       		.uleb128 0x13
  471 0089 02       		.uleb128 0x2
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 14
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccKEm9cW.s 			page 14
 
 
  472 008a 18       		.uleb128 0x18
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
  526 000c 9A000000 		.4byte	.LFE1
  527 0010 00000000 		.4byte	0
  528 0014 00000000 		.4byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 15
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccKEm9cW.s 			page 15
 
 
  529              		.section	.debug_line,"",%progbits
@@ -873,128 +873,126 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 1
  539      7369676E 
  539      65642069 
  539      6E7400
- 540              	.LASF27:
- 541 00a8 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHandPRO-a"
- 541      73657273 
- 541      5C4D6174 
- 541      7469615C 
- 541      446F6375 
- 542 00d6 6E642D47 		.ascii	"nd-Generic-FW-PSoC5 - Copia (prima di BT)\\Generic."
- 542      656E6572 
- 542      69632D46 
- 542      572D5053 
- 542      6F433520 
- 543 0108 63796473 		.ascii	"cydsn\000"
- 543      6E00
- 544              	.LASF12:
- 545 010e 666C6F61 		.ascii	"float\000"
- 545      7400
- 546              	.LASF1:
- 547 0114 756E7369 		.ascii	"unsigned char\000"
- 547      676E6564 
- 547      20636861 
- 547      7200
- 548              	.LASF21:
- 549 0122 726F7744 		.ascii	"rowData\000"
- 549      61746100 
- 550              	.LASF15:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 16
+ 540              	.LASF12:
+ 541 00a8 666C6F61 		.ascii	"float\000"
+ 541      7400
+ 542              	.LASF1:
+ 543 00ae 756E7369 		.ascii	"unsigned char\000"
+ 543      676E6564 
+ 543      20636861 
+ 543      7200
+ 544              	.LASF21:
+ 545 00bc 726F7744 		.ascii	"rowData\000"
+ 545      61746100 
+ 546              	.LASF15:
+ 547 00c4 72656738 		.ascii	"reg8\000"
+ 547      00
+ 548              	.LASF5:
+ 549 00c9 6C6F6E67 		.ascii	"long unsigned int\000"
+ 549      20756E73 
+ 549      69676E65 
+ 549      6420696E 
+ 549      7400
+ 550              	.LASF9:
+ 551 00db 75696E74 		.ascii	"uint8\000"
+ 551      3800
+ 552              	.LASF22:
+ 553 00e1 61727261 		.ascii	"arrayId\000"
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccKEm9cW.s 			page 16
 
 
- 551 012a 72656738 		.ascii	"reg8\000"
- 551      00
- 552              	.LASF5:
- 553 012f 6C6F6E67 		.ascii	"long unsigned int\000"
- 553      20756E73 
- 553      69676E65 
- 553      6420696E 
- 553      7400
- 554              	.LASF9:
- 555 0141 75696E74 		.ascii	"uint8\000"
- 555      3800
- 556              	.LASF22:
- 557 0147 61727261 		.ascii	"arrayId\000"
- 557      79496400 
- 558              	.LASF28:
- 559 014f 426F6F74 		.ascii	"Bootloadable_Load\000"
- 559      6C6F6164 
- 559      61626C65 
- 559      5F4C6F61 
- 559      6400
- 560              	.LASF13:
- 561 0161 646F7562 		.ascii	"double\000"
- 561      6C6500
- 562              	.LASF20:
- 563 0168 666C7341 		.ascii	"flsAddr\000"
- 563      64647200 
- 564              	.LASF10:
- 565 0170 75696E74 		.ascii	"uint16\000"
- 565      313600
- 566              	.LASF11:
- 567 0177 75696E74 		.ascii	"uint32\000"
- 567      333200
- 568              	.LASF8:
- 569 017e 756E7369 		.ascii	"unsigned int\000"
- 569      676E6564 
- 569      20696E74 
- 569      00
- 570              	.LASF18:
- 571 018b 61646472 		.ascii	"address\000"
- 571      65737300 
- 572              	.LASF7:
- 573 0193 6C6F6E67 		.ascii	"long long unsigned int\000"
- 573      206C6F6E 
- 573      6720756E 
- 573      7369676E 
- 573      65642069 
- 574              	.LASF19:
- 575 01aa 72756E54 		.ascii	"runType\000"
- 575      79706500 
- 576              	.LASF24:
- 577 01b2 62617365 		.ascii	"baseAddr\000"
- 577      41646472 
- 577      00
- 578              	.LASF17:
- 579 01bb 73697A65 		.ascii	"sizetype\000"
- 579      74797065 
- 579      00
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccI74d4B.s 			page 17
+ 553      79496400 
+ 554              	.LASF28:
+ 555 00e9 426F6F74 		.ascii	"Bootloadable_Load\000"
+ 555      6C6F6164 
+ 555      61626C65 
+ 555      5F4C6F61 
+ 555      6400
+ 556              	.LASF13:
+ 557 00fb 646F7562 		.ascii	"double\000"
+ 557      6C6500
+ 558              	.LASF20:
+ 559 0102 666C7341 		.ascii	"flsAddr\000"
+ 559      64647200 
+ 560              	.LASF10:
+ 561 010a 75696E74 		.ascii	"uint16\000"
+ 561      313600
+ 562              	.LASF11:
+ 563 0111 75696E74 		.ascii	"uint32\000"
+ 563      333200
+ 564              	.LASF8:
+ 565 0118 756E7369 		.ascii	"unsigned int\000"
+ 565      676E6564 
+ 565      20696E74 
+ 565      00
+ 566              	.LASF18:
+ 567 0125 61646472 		.ascii	"address\000"
+ 567      65737300 
+ 568              	.LASF7:
+ 569 012d 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 569      206C6F6E 
+ 569      6720756E 
+ 569      7369676E 
+ 569      65642069 
+ 570              	.LASF19:
+ 571 0144 72756E54 		.ascii	"runType\000"
+ 571      79706500 
+ 572              	.LASF24:
+ 573 014c 62617365 		.ascii	"baseAddr\000"
+ 573      41646472 
+ 573      00
+ 574              	.LASF17:
+ 575 0155 73697A65 		.ascii	"sizetype\000"
+ 575      74797065 
+ 575      00
+ 576              	.LASF6:
+ 577 015e 6C6F6E67 		.ascii	"long long int\000"
+ 577      206C6F6E 
+ 577      6720696E 
+ 577      7400
+ 578              	.LASF27:
+ 579 016c 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GitHub\\SoftHandPRO-a"
+ 579      73657273 
+ 579      5C4D6174 
+ 579      7469615C 
+ 579      446F6375 
+ 580 019a 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\Generic.cydsn\000"
+ 580      656E6572 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccKEm9cW.s 			page 17
 
 
- 580              	.LASF6:
- 581 01c4 6C6F6E67 		.ascii	"long long int\000"
- 581      206C6F6E 
- 581      6720696E 
- 581      7400
- 582              	.LASF14:
- 583 01d2 63686172 		.ascii	"char\000"
- 583      00
- 584              	.LASF29:
- 585 01d7 426F6F74 		.ascii	"Bootloadable_SetFlashByte\000"
- 585      6C6F6164 
- 585      61626C65 
- 585      5F536574 
- 585      466C6173 
- 586              	.LASF2:
- 587 01f1 73686F72 		.ascii	"short int\000"
- 587      7420696E 
- 587      7400
- 588              	.LASF26:
- 589 01fb 47656E65 		.ascii	"Generated_Source\\PSoC5\\Bootloadable.c\000"
- 589      72617465 
- 589      645F536F 
- 589      75726365 
- 589      5C50536F 
- 590              	.LASF4:
- 591 0221 6C6F6E67 		.ascii	"long int\000"
- 591      20696E74 
- 591      00
- 592              	.LASF16:
- 593 022a 6C6F6E67 		.ascii	"long double\000"
- 593      20646F75 
- 593      626C6500 
- 594              	.LASF0:
- 595 0236 7369676E 		.ascii	"signed char\000"
- 595      65642063 
- 595      68617200 
- 596              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 580      69632D46 
+ 580      572D5053 
+ 580      6F43355C 
+ 581              	.LASF14:
+ 582 01bc 63686172 		.ascii	"char\000"
+ 582      00
+ 583              	.LASF29:
+ 584 01c1 426F6F74 		.ascii	"Bootloadable_SetFlashByte\000"
+ 584      6C6F6164 
+ 584      61626C65 
+ 584      5F536574 
+ 584      466C6173 
+ 585              	.LASF2:
+ 586 01db 73686F72 		.ascii	"short int\000"
+ 586      7420696E 
+ 586      7400
+ 587              	.LASF26:
+ 588 01e5 47656E65 		.ascii	"Generated_Source\\PSoC5\\Bootloadable.c\000"
+ 588      72617465 
+ 588      645F536F 
+ 588      75726365 
+ 588      5C50536F 
+ 589              	.LASF4:
+ 590 020b 6C6F6E67 		.ascii	"long int\000"
+ 590      20696E74 
+ 590      00
+ 591              	.LASF16:
+ 592 0214 6C6F6E67 		.ascii	"long double\000"
+ 592      20646F75 
+ 592      626C6500 
+ 593              	.LASF0:
+ 594 0220 7369676E 		.ascii	"signed char\000"
+ 594      65642063 
+ 594      68617200 
+ 595              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

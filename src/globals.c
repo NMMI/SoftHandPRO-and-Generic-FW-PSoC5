@@ -78,7 +78,7 @@ adc_status CYDATA joy_LR_status = RESET;        /*!< Joystick LEFT/RIGHT status.
 
     
 // Bit Flag
-CYBIT reset_last_value_flag;                /*!< This flag is set when the encoders last values must be resetted.*/
+CYBIT reset_last_value_flag[N_ENCODER_LINE_MAX]; /*!< This flag is set when the encoders last values must be resetted.*/
 CYBIT tension_valid;                        /*!< Tension validation bit.*/
 CYBIT interrupt_flag = FALSE;               /*!< Interrupt flag enabler.*/
 CYBIT cycles_interrupt_flag = FALSE;        /*!< Cycles timer interrupt flag enabler.*/
@@ -102,6 +102,7 @@ uint32 data_encoder_raw[N_ENCODER_LINE_MAX][N_ENCODERS_PER_LINE_MAX];
 uint8 N_Encoder_Line_Connected[N_ENCODER_LINE_MAX]; // Used to map how many encoders are connected to each CS pin, there are N_ENCODER_LINE_MAX CS on the board and each of them can contain N_ENCODERS_PER_LINE_MAX encoders
 uint16 Encoder_Value[N_ENCODER_LINE_MAX][N_ENCODERS_PER_LINE_MAX];
 uint8 Encoder_Check[N_ENCODER_LINE_MAX][N_ENCODERS_PER_LINE_MAX];
+CYBIT pos_reconstruct[N_ENCODER_LINE_MAX] = {FALSE, FALSE};
 
 // Rest Position variables
 int32 rest_pos_curr_ref;                     /*!< Rest position current reference.*/

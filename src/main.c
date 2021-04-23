@@ -201,7 +201,7 @@ int main()
     for (j = 0; j< N_ENCODER_LINE_MAX; j++) { 
         for (i = 0; i < NUM_OF_SENSORS; i++) { 
             g_meas[j].pos[i] = 0;
-            g_meas[j].rot[i] = 0;
+            g_meas[j].rot[i] = (int8)0;
         }
     }
 
@@ -252,7 +252,9 @@ int main()
     
     tension_valid = FALSE;                              // Init tension_valid BIT.
 
-    reset_last_value_flag = 0;                          // Do not reset encoder last value.
+    for (j = 0; j< N_ENCODER_LINE_MAX; j++) { 
+        reset_last_value_flag[j] = 0;                   // Do not reset encoder last value.
+    }
 
     //------------------------------------------------- Initialize package on receive from RS485
     g_rx.length = 0;

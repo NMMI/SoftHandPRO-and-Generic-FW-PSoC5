@@ -309,14 +309,15 @@ void function_scheduler(void) {
             }
             
             //---------------------------------- Control SH Motor
-            
-            motor_control_SH();
-            
-            // Check external reference before processing other serial data and right after motor control
-            if (c_mem.motor[MOTOR_IDX].not_revers_motor_flag == TRUE) {
-                if (c_mem.motor[MOTOR_IDX].input_mode == INPUT_MODE_EXTERNAL) {
-                    change_ext_ref_flag = FALSE;
-                }   
+            if (pos_reconstruct[c_mem.motor[MOTOR_IDX].encoder_line]){      // Once encoder line reading is ready
+                motor_control_SH();
+                
+                // Check external reference before processing other serial data and right after motor control
+                if (c_mem.motor[MOTOR_IDX].not_revers_motor_flag == TRUE) {
+                    if (c_mem.motor[MOTOR_IDX].input_mode == INPUT_MODE_EXTERNAL) {
+                        change_ext_ref_flag = FALSE;
+                    }   
+                }
             }
 
             // Check Interrupt 
@@ -361,15 +362,16 @@ void function_scheduler(void) {
             } 
             
             //---------------------------------- Control Motor
-            
-            // Control MOTOR_IDX motor (always active) according to motor driver type
-            motor_control_generic(MOTOR_IDX);
-            
-            // Check external reference before processing other serial data and right after motor control
-            if (c_mem.motor[MOTOR_IDX].not_revers_motor_flag == TRUE) {
-                if (c_mem.motor[MOTOR_IDX].input_mode == INPUT_MODE_EXTERNAL) {
-                    change_ext_ref_flag = FALSE;
-                }   
+            if (pos_reconstruct[c_mem.motor[MOTOR_IDX].encoder_line]){      // Once encoder line reading is ready
+                // Control MOTOR_IDX motor (always active) according to motor driver type
+                motor_control_generic(MOTOR_IDX);
+                
+                // Check external reference before processing other serial data and right after motor control
+                if (c_mem.motor[MOTOR_IDX].not_revers_motor_flag == TRUE) {
+                    if (c_mem.motor[MOTOR_IDX].input_mode == INPUT_MODE_EXTERNAL) {
+                        change_ext_ref_flag = FALSE;
+                    }   
+                }
             }
             
             // Check Interrupt 
@@ -381,15 +383,16 @@ void function_scheduler(void) {
             
             // Control 2nd motor (if necessary) according to motor driver type
             if (c_mem.dev.use_2nd_motor_flag == TRUE){
-                motor_control_generic(SECOND_MOTOR_IDX);
-                
-                // Check external reference before processing other serial data and right after motor control
-                if (c_mem.motor[SECOND_MOTOR_IDX].not_revers_motor_flag == TRUE) {
-                    if (c_mem.motor[SECOND_MOTOR_IDX].input_mode == INPUT_MODE_EXTERNAL) {
-                        change_ext_ref_flag = FALSE;
-                    }   
+                if (pos_reconstruct[c_mem.motor[SECOND_MOTOR_IDX].encoder_line]){      // Once encoder line reading is ready
+                    motor_control_generic(SECOND_MOTOR_IDX);
+                    
+                    // Check external reference before processing other serial data and right after motor control
+                    if (c_mem.motor[SECOND_MOTOR_IDX].not_revers_motor_flag == TRUE) {
+                        if (c_mem.motor[SECOND_MOTOR_IDX].input_mode == INPUT_MODE_EXTERNAL) {
+                            change_ext_ref_flag = FALSE;
+                        }   
+                    }
                 }
-                
                 // Check Interrupt 
 
                 if (interrupt_flag){
@@ -541,7 +544,9 @@ void function_scheduler(void) {
     
     //---------------------------------- Control Cycles Counter
 
-    cycles_counter_update();
+    if (pos_reconstruct[c_mem.motor[0].encoder_line]){      // Once Motor 0 encoder line reading is ready
+        cycles_counter_update();
+    }
 
     // Check Cycles Interrupt 
     
@@ -1545,14 +1550,15 @@ void motor_control_generic(uint8 idx) {
     ////////////////////////////////////////////////////////////////////////////
      ////////////////////////////////////////////////////////////////////////////
 
-    if(pwm_input >  PWM_MAX_VALUE) 
+
+    if(pwm_input > PWM_MAX_VALUE) 
         pwm_input =  PWM_MAX_VALUE;
     if(pwm_input < -PWM_MAX_VALUE) 
         pwm_input = -PWM_MAX_VALUE;
 
     if (MOT->control_mode != CONTROL_PWM) 
         pwm_input = (((pwm_input << 10) / PWM_MAX_VALUE) * dev_pwm_limit[idx]) >> 10;
- 
+
     //// RATE LIMITER ////
     if((pwm_input-prev_pwm[idx]) > MOT->pwm_rate_limiter){
         pwm_input =  prev_pwm[idx] + MOT->pwm_rate_limiter;
@@ -1561,14 +1567,14 @@ void motor_control_generic(uint8 idx) {
         if((pwm_input-prev_pwm[idx]) < -MOT->pwm_rate_limiter)
             pwm_input =  prev_pwm[idx] - MOT->pwm_rate_limiter;
     }
-    
+   
     if(pwm_input >  PWM_MAX_VALUE) 
         pwm_input =  PWM_MAX_VALUE;
     if(pwm_input < -PWM_MAX_VALUE) 
         pwm_input = -PWM_MAX_VALUE;
     
     prev_pwm[idx] = pwm_input;
-	
+           
     pwm_sign[idx] = SIGN(pwm_input);   
     
     if (MOT->not_revers_motor_flag == TRUE) {
@@ -1660,17 +1666,16 @@ void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor) {
     static CYBIT safe_startup_motor_activation[N_ENCODER_LINE_MAX] = {FALSE, FALSE};
     static uint8 one_time_execute[N_ENCODER_LINE_MAX] = {0, 0};
     static uint32 count_startup_motor[N_ENCODER_LINE_MAX] = {0, 0};
-    static CYBIT pos_reconstruct[N_ENCODER_LINE_MAX] = {FALSE, FALSE};
 
     static int32 v_value[N_ENCODER_LINE_MAX][N_ENCODERS];   //last value for velocity
     static int32 vv_value[N_ENCODER_LINE_MAX][N_ENCODERS];  //last last value for velocity
     static int32 vvv_value[N_ENCODER_LINE_MAX][N_ENCODERS];  //last last last value for velocity
-//    
-    if (reset_last_value_flag) {
+    
+    if (reset_last_value_flag[n_line]) {
         for (jj = N_ENCODERS; jj--;) 
             last_value_encoder[n_line][jj] = 0;
         
-        reset_last_value_flag = 0;
+        reset_last_value_flag[n_line] = 0;
     }
 
     //======================================================     reading sensors
@@ -1774,9 +1779,8 @@ void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor) {
                     value_encoder *= -1;        
                 }
             }
-        }
- 
-
+        } 
+        
         g_meas[n_line].pos[index] = value_encoder;
     
         speed_encoder = (int16)filter((11*value_encoder - 18* v_value[n_line][index] + 9 * vv_value[n_line][index] -2 * vvv_value[n_line][index]), &filt_vel[index]);
@@ -1790,15 +1794,17 @@ void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor) {
         vv_value[n_line][index] = v_value[n_line][index];
         v_value[n_line][index] = value_encoder;
 
-        // wait at least 3 * max_num_of_error (10) + 5 = 35 cycles to reconstruct the right turn
+        // wait at least 5 * max_num_of_error (10) + 5 = 55 cycles to reconstruct the right turn
         if (pos_reconstruct[n_line] == FALSE){
-            if (one_time_execute[n_line] < 34) 
+            if (one_time_execute[n_line] < 54) 
                 one_time_execute[n_line]++;
             else {
+
                 //Double encoder translation
                 if (c_mem.enc[n_line].double_encoder_on_off){
                     init_rot = calc_turns_fcn(comp_value_encoder[n_line][0],comp_value_encoder[n_line][1], 
                                 c_mem.enc[n_line].gears_params[0], c_mem.enc[n_line].gears_params[1], c_mem.enc[n_line].gears_params[2]);
+
 
                     if (c_mem.enc[n_line].m_mult[0] < 0)
                         init_rot = -init_rot;
@@ -1809,11 +1815,21 @@ void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor) {
                 if (c_mem.enc[n_line].m_mult[0] != 1.0)
                     g_meas[n_line].pos[0] /= c_mem.enc[n_line].m_mult[0];
                 
-                g_meas[n_line].pos[0] += (int32)(init_rot << 16);
-            
-                if (c_mem.enc[n_line].m_mult[0] != 1.0)
-                    g_meas[n_line].pos[0] *= c_mem.enc[n_line].m_mult[0];
-            
+                value_encoder += ((int32)init_rot << 16); 
+       
+                if (c_mem.enc[n_line].m_mult[0] != 1.0) {
+                    value_encoder *= c_mem.enc[n_line].m_mult[0];
+                }
+
+                if (c_mem.dev.dev_type == SOFTHAND_PRO) {
+                    // Right / Left hand turn
+                    if (c_mem.dev.right_left == RIGHT_HAND){
+                        value_encoder *= -1;        
+                    }
+                }
+         
+                g_meas[n_line].pos[0] = value_encoder;
+                
                 g_refNew[assoc_motor].pos = g_meas[n_line].pos[0];
 
                 // If necessary activate motor
@@ -2013,10 +2029,10 @@ void analog_read_end() {
         
         // Filter and Set currents
         if (g_mem.motor[0].motor_driver_type == DRIVER_MC33887) { // [GS]
-            g_meas[g_mem.motor[0].encoder_line].curr = (int16)(filter((((int32)(ADC_buf[1] - 1643) * 22634) >> 13), &filt_i[0]) * pwm_sign[0]);
-        } else {
-            g_meas[g_mem.motor[0].encoder_line].curr = (int16)(filter((((int32)(ADC_buf[1] - 1635) * 480) >> 4), &filt_i[0]) * pwm_sign[0]);
-        }  
+            g_meas[g_mem.motor[0].encoder_line].curr = filter((int16) (((int32)(ADC_buf[1] - 1648) * 22634) >> 13) * (int32)pwm_sign[0], &filt_i[0]);
+        } else { // [GS]
+            g_meas[g_mem.motor[0].encoder_line].curr = ((int16) ((int32)((ADC_buf[1] - 1635) * 480) >> 4) * (int32)pwm_sign[0]); // filter((int16) (((int32)(ADC_buf[1] - 1648) * 43125) >> 13) * pwm_sign, &filt_i[0]); // [GS]
+        }
 
         // Calculate current estimation and put it in the second part of the current measurement array;
 		g_meas[g_mem.motor[0].encoder_line].estim_curr = (int16) filter(((int32) g_meas[g_mem.motor[0].encoder_line].curr) - curr_estim(0, g_meas[g_mem.motor[0].encoder_line].pos[0] >> g_mem.enc[g_mem.motor[0].encoder_line].res[0], g_meas[g_mem.motor[0].encoder_line].vel[0] >> g_mem.enc[g_mem.motor[0].encoder_line].res[0], g_ref[0].pos >> g_mem.enc[g_mem.motor[0].encoder_line].res[0]), &filt_curr_diff[0]);
@@ -2025,10 +2041,10 @@ void analog_read_end() {
         if (NUM_OF_ANALOG_INPUTS > 4) {
             // Filter and Set currents
             if (g_mem.motor[1].motor_driver_type == DRIVER_MC33887) { // [GS]
-                g_meas[g_mem.motor[1].encoder_line].curr = (int16)(filter((((int32)(ADC_buf[5] - 1643) * 22634) >> 13), &filt_i[1])* pwm_sign[1]);
-            } else {
-                g_meas[g_mem.motor[1].encoder_line].curr = (int16)(filter((((int32)(ADC_buf[5] - 1635) * 480) >> 4), &filt_i[1]) * pwm_sign[1]);
-            }  
+                g_meas[g_mem.motor[1].encoder_line].curr = filter((int16) (((int32)(ADC_buf[5] - 1648) * 22634) >> 13) * (int32)pwm_sign[1], &filt_i[1]);
+            } else { // [GS]
+                g_meas[g_mem.motor[1].encoder_line].curr = ((int16) ((int32)((ADC_buf[5] - 1635) * 480) >> 4) * (int32)pwm_sign[1]); // filter((int16) (((int32)(ADC_buf[1] - 1648) * 43125) >> 13) * pwm_sign, &filt_i[0]); // [GS]
+            } 
             
             g_meas[g_mem.motor[1].encoder_line].estim_curr = (int16) filter(((int32) g_meas[g_mem.motor[1].encoder_line].curr) - curr_estim(1, g_meas[g_mem.motor[1].encoder_line].pos[0] >> g_mem.enc[g_mem.motor[1].encoder_line].res[0], g_meas[g_mem.motor[1].encoder_line].vel[0] >> g_mem.enc[g_mem.motor[1].encoder_line].res[0], g_ref[1].pos >> g_mem.enc[g_mem.motor[1].encoder_line].res[0]), &filt_curr_diff[1]);
         }
@@ -2475,11 +2491,11 @@ void overcurrent_control() {
         if (c_mem.motor[i].current_limit != 0) {
             int32 curr = g_meas[g_mem.motor[i].encoder_line].curr;
             // check if the current is over the limit
-            if (c_mem.dev.dev_type == SOFTHAND_2_MOTORS){
+          //  if (c_mem.dev.dev_type == SOFTHAND_2_MOTORS){
                 if (curr < 0){
                     curr = -curr;       // Invert sign to have a positive current reading in this function
                 }
-            }
+         //   }
             if (curr > c_mem.motor[i].current_limit) {
                 //decrease pwm_limit
                 dev_pwm_limit[i]--;
@@ -2528,14 +2544,15 @@ void cycles_counter_update() {
     static uint8 emg_cycle_status[2] = {STATE_INACTIVE, STATE_INACTIVE};
     static uint8 rest_cycle_status = STATE_INACTIVE;
     static int32 bin_threshold = 250;
-    static int32 thr_pos = 0, max_pos = 0;
+    static int32 thr_pos = 0;
+    static int32 max_pos = 0;
     uint8 i, bin_st, bin_max, bin_1, bin_2;
-    int32 curr_pos, curr_off, curr_ref;
+    int32 curr_pos = 0, curr_off = 0, curr_ref = 0;
     int32 step;
     static uint32 timer_value_s, timer_value_e;
 
     curr_pos = (int32)(g_meas[g_mem.motor[0].encoder_line].pos[0] >> g_mem.enc[g_mem.motor[0].encoder_line].res[0]);
-    
+        
     // State machine - Evaluate position counter update
     switch (pos_cycle_status){
         case STATE_INACTIVE:
@@ -2566,7 +2583,7 @@ void cycles_counter_update() {
                 // Bin computation valid for both NO and NC working
                 bin_1 = (bin_st<bin_max)?bin_st:bin_max;
                 bin_2 = (bin_st<bin_max)?bin_max:bin_st;    
-                for (i=bin_1; i<= bin_2; i++){
+                for (i=bin_1; i<= bin_2 && i <10; i++){
                     //position_hist counts how many times the SoftHand stays in bin while moving
                     g_mem.cnt.position_hist[i] = g_mem.cnt.position_hist[i] + 1;
                 }
@@ -2577,7 +2594,11 @@ void cycles_counter_update() {
                     curr_ref = g_meas[g_mem.motor[0].encoder_line].hold_curr; 
                 else
                     curr_ref = g_meas[g_mem.motor[0].encoder_line].curr;
-                    
+
+                if (curr_ref < 0){
+                    curr_ref = -curr_ref;       // Invert sign to have a positive current reading in this function
+                }
+                
                 if (curr_ref > g_mem.motor[0].current_limit)
                     g_mem.cnt.current_hist[3] = g_mem.cnt.current_hist[3] + 1; 
                 else

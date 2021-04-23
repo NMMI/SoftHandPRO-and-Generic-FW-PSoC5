@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrLrLVh.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 1
   23:Generated_Source\PSoC5/BLINK_05HZ_PM.c **** /*******************************************************************************
   24:Generated_Source\PSoC5/BLINK_05HZ_PM.c **** * Function Name: BLINK_05HZ_SaveConfig
   25:Generated_Source\PSoC5/BLINK_05HZ_PM.c **** ********************************************************************************
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrLrLVh.s 			page 2
 
 
   26:Generated_Source\PSoC5/BLINK_05HZ_PM.c **** *
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 1
   58:Generated_Source\PSoC5/BLINK_05HZ_PM.c **** 
   59:Generated_Source\PSoC5/BLINK_05HZ_PM.c ****         #if(BLINK_05HZ_KillModeMinTime)
   60:Generated_Source\PSoC5/BLINK_05HZ_PM.c ****              BLINK_05HZ_backup.PWMKillCounterPeriod = BLINK_05HZ_ReadKillTime();
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrLrLVh.s 			page 3
 
 
   61:Generated_Source\PSoC5/BLINK_05HZ_PM.c ****         #endif /* (BLINK_05HZ_KillModeMinTime) */
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 1
   79              		.cfi_startproc
   80              		@ args = 0, pretend = 0, frame = 0
   81              		@ frame_needed = 1, uses_anonymous_args = 0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrLrLVh.s 			page 4
 
 
   82 0000 80B5     		push	{r7, lr}
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 1
  111              	.LFE1:
  112              		.size	BLINK_05HZ_RestoreConfig, .-BLINK_05HZ_RestoreConfig
  113              		.section	.text.BLINK_05HZ_Sleep,"ax",%progbits
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrLrLVh.s 			page 5
 
 
  114              		.align	2
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 1
  140 0012 0122     		movs	r2, #1
  141 0014 1A70     		strb	r2, [r3]
  142 0016 02E0     		b	.L9
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 6
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrLrLVh.s 			page 6
 
 
  143              	.L8:
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 1
  168:Generated_Source\PSoC5/BLINK_05HZ_PM.c **** *  None
  169:Generated_Source\PSoC5/BLINK_05HZ_PM.c **** *
  170:Generated_Source\PSoC5/BLINK_05HZ_PM.c **** * Return:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 7
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrLrLVh.s 			page 7
 
 
  171:Generated_Source\PSoC5/BLINK_05HZ_PM.c **** *  None
@@ -418,31 +418,31 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 1
  207              	.Ldebug_info0:
  208 0000 4D010000 		.4byte	0x14d
  209 0004 0400     		.2byte	0x4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 8
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrLrLVh.s 			page 8
 
 
  210 0006 00000000 		.4byte	.Ldebug_abbrev0
  211 000a 04       		.byte	0x4
  212 000b 01       		.uleb128 0x1
- 213 000c F9010000 		.4byte	.LASF26
+ 213 000c E3010000 		.4byte	.LASF26
  214 0010 0C       		.byte	0xc
- 215 0011 31010000 		.4byte	.LASF27
- 216 0015 4C000000 		.4byte	.LASF28
+ 215 0011 CB000000 		.4byte	.LASF27
+ 216 0015 32010000 		.4byte	.LASF28
  217 0019 00000000 		.4byte	.Ldebug_ranges0+0
  218 001d 00000000 		.4byte	0
  219 0021 00000000 		.4byte	.Ldebug_line0
  220 0025 02       		.uleb128 0x2
  221 0026 01       		.byte	0x1
  222 0027 06       		.byte	0x6
- 223 0028 ED010000 		.4byte	.LASF0
+ 223 0028 D7010000 		.4byte	.LASF0
  224 002c 02       		.uleb128 0x2
  225 002d 01       		.byte	0x1
  226 002e 08       		.byte	0x8
- 227 002f B8000000 		.4byte	.LASF1
+ 227 002f 52000000 		.4byte	.LASF1
  228 0033 02       		.uleb128 0x2
  229 0034 02       		.byte	0x2
  230 0035 05       		.byte	0x5
- 231 0036 9D010000 		.4byte	.LASF2
+ 231 0036 87010000 		.4byte	.LASF2
  232 003a 02       		.uleb128 0x2
  233 003b 02       		.byte	0x2
  234 003c 07       		.byte	0x7
@@ -450,19 +450,19 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 1
  236 0041 02       		.uleb128 0x2
  237 0042 04       		.byte	0x4
  238 0043 05       		.byte	0x5
- 239 0044 C0010000 		.4byte	.LASF4
+ 239 0044 AA010000 		.4byte	.LASF4
  240 0048 02       		.uleb128 0x2
  241 0049 04       		.byte	0x4
  242 004a 07       		.byte	0x7
- 243 004b D5000000 		.4byte	.LASF5
+ 243 004b 6F000000 		.4byte	.LASF5
  244 004f 02       		.uleb128 0x2
  245 0050 08       		.byte	0x8
  246 0051 05       		.byte	0x5
- 247 0052 8A010000 		.4byte	.LASF6
+ 247 0052 24010000 		.4byte	.LASF6
  248 0056 02       		.uleb128 0x2
  249 0057 08       		.byte	0x8
  250 0058 07       		.byte	0x7
- 251 0059 65010000 		.4byte	.LASF7
+ 251 0059 FF000000 		.4byte	.LASF7
  252 005d 03       		.uleb128 0x3
  253 005e 04       		.byte	0x4
  254 005f 05       		.byte	0x5
@@ -470,15 +470,15 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 1
  256 0064 02       		.uleb128 0x2
  257 0065 04       		.byte	0x4
  258 0066 07       		.byte	0x7
- 259 0067 58010000 		.4byte	.LASF8
+ 259 0067 F2000000 		.4byte	.LASF8
  260 006b 04       		.uleb128 0x4
- 261 006c E7000000 		.4byte	.LASF9
+ 261 006c 81000000 		.4byte	.LASF9
  262 0070 02       		.byte	0x2
  263 0071 E401     		.2byte	0x1e4
  264 0073 2C000000 		.4byte	0x2c
  265 0077 04       		.uleb128 0x4
- 266 0078 2A010000 		.4byte	.LASF10
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 9
+ 266 0078 C4000000 		.4byte	.LASF10
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrLrLVh.s 			page 9
 
 
  267 007c 02       		.byte	0x2
@@ -487,17 +487,17 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 1
  270 0083 02       		.uleb128 0x2
  271 0084 04       		.byte	0x4
  272 0085 04       		.byte	0x4
- 273 0086 B2000000 		.4byte	.LASF11
+ 273 0086 4C000000 		.4byte	.LASF11
  274 008a 02       		.uleb128 0x2
  275 008b 08       		.byte	0x8
  276 008c 04       		.byte	0x4
- 277 008d 23010000 		.4byte	.LASF12
+ 277 008d BD000000 		.4byte	.LASF12
  278 0091 02       		.uleb128 0x2
  279 0092 01       		.byte	0x1
  280 0093 08       		.byte	0x8
- 281 0094 98010000 		.4byte	.LASF13
+ 281 0094 82010000 		.4byte	.LASF13
  282 0098 04       		.uleb128 0x4
- 283 0099 7C010000 		.4byte	.LASF14
+ 283 0099 16010000 		.4byte	.LASF14
  284 009d 02       		.byte	0x2
  285 009e 8E02     		.2byte	0x28e
  286 00a0 A4000000 		.4byte	0xa4
@@ -506,18 +506,18 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 1
  289 00a9 02       		.uleb128 0x2
  290 00aa 08       		.byte	0x8
  291 00ab 04       		.byte	0x4
- 292 00ac E1010000 		.4byte	.LASF15
+ 292 00ac CB010000 		.4byte	.LASF15
  293 00b0 02       		.uleb128 0x2
  294 00b1 04       		.byte	0x4
  295 00b2 07       		.byte	0x7
- 296 00b3 81010000 		.4byte	.LASF16
+ 296 00b3 1B010000 		.4byte	.LASF16
  297 00b7 06       		.uleb128 0x6
  298 00b8 08       		.byte	0x8
  299 00b9 03       		.byte	0x3
  300 00ba 6B       		.byte	0x6b
  301 00bb F0000000 		.4byte	0xf0
  302 00bf 07       		.uleb128 0x7
- 303 00c0 C6000000 		.4byte	.LASF17
+ 303 00c0 60000000 		.4byte	.LASF17
  304 00c4 03       		.byte	0x3
  305 00c5 6E       		.byte	0x6e
  306 00c6 6B000000 		.4byte	0x6b
@@ -535,17 +535,17 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 1
  318 00de 77000000 		.4byte	0x77
  319 00e2 04       		.byte	0x4
  320 00e3 07       		.uleb128 0x7
- 321 00e4 FF000000 		.4byte	.LASF20
+ 321 00e4 99000000 		.4byte	.LASF20
  322 00e8 03       		.byte	0x3
  323 00e9 86       		.byte	0x86
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 10
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrLrLVh.s 			page 10
 
 
  324 00ea 6B000000 		.4byte	0x6b
  325 00ee 06       		.byte	0x6
  326 00ef 00       		.byte	0
  327 00f0 08       		.uleb128 0x8
- 328 00f1 C9010000 		.4byte	.LASF21
+ 328 00f1 B3010000 		.4byte	.LASF21
  329 00f5 03       		.byte	0x3
  330 00f6 8B       		.byte	0x8b
  331 00f7 B7000000 		.4byte	0xb7
@@ -558,7 +558,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 1
  338 010a 01       		.uleb128 0x1
  339 010b 9C       		.byte	0x9c
  340 010c 09       		.uleb128 0x9
- 341 010d A7010000 		.4byte	.LASF23
+ 341 010d 91010000 		.4byte	.LASF23
  342 0111 01       		.byte	0x1
  343 0112 58       		.byte	0x58
  344 0113 00000000 		.4byte	.LFB1
@@ -566,7 +566,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 1
  346 011b 01       		.uleb128 0x1
  347 011c 9C       		.byte	0x9c
  348 011d 09       		.uleb128 0x9
- 349 011e 12010000 		.4byte	.LASF24
+ 349 011e AC000000 		.4byte	.LASF24
  350 0122 01       		.byte	0x1
  351 0123 88       		.byte	0x88
  352 0124 00000000 		.4byte	.LFB2
@@ -574,7 +574,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 1
  354 012c 01       		.uleb128 0x1
  355 012d 9C       		.byte	0x9c
  356 012e 09       		.uleb128 0x9
- 357 012f ED000000 		.4byte	.LASF25
+ 357 012f 87000000 		.4byte	.LASF25
  358 0133 01       		.byte	0x1
  359 0134 B2       		.byte	0xb2
  360 0135 00000000 		.4byte	.LFB3
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 1
  378 0003 25       		.uleb128 0x25
  379 0004 0E       		.uleb128 0xe
  380 0005 13       		.uleb128 0x13
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrLrLVh.s 			page 11
 
 
  381 0006 0B       		.uleb128 0xb
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 1
  435 003c 00       		.byte	0
  436 003d 06       		.uleb128 0x6
  437 003e 13       		.uleb128 0x13
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 12
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrLrLVh.s 			page 12
 
 
  438 003f 01       		.byte	0x1
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 1
  492 0075 12       		.uleb128 0x12
  493 0076 06       		.uleb128 0x6
  494 0077 40       		.uleb128 0x40
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrLrLVh.s 			page 13
 
 
  495 0078 18       		.uleb128 0x18
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 1
  548      02005A00 
  548      00000201 
  548      FB0E0D00 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 14
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrLrLVh.s 			page 14
 
 
  548      01010101 
@@ -807,145 +807,143 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 1
  558      485A5F62 
  558      61636B75 
  558      7000
- 559              	.LASF28:
- 560 004c 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHandPRO-a"
- 560      73657273 
- 560      5C4D6174 
- 560      7469615C 
- 560      446F6375 
- 561 007a 6E642D47 		.ascii	"nd-Generic-FW-PSoC5 - Copia (prima di BT)\\Generic."
- 561      656E6572 
- 561      69632D46 
- 561      572D5053 
- 561      6F433520 
- 562 00ac 63796473 		.ascii	"cydsn\000"
- 562      6E00
- 563              	.LASF11:
- 564 00b2 666C6F61 		.ascii	"float\000"
- 564      7400
- 565              	.LASF1:
- 566 00b8 756E7369 		.ascii	"unsigned char\000"
- 566      676E6564 
- 566      20636861 
- 566      7200
- 567              	.LASF17:
- 568 00c6 50574D45 		.ascii	"PWMEnableState\000"
- 568      6E61626C 
- 568      65537461 
- 568      746500
- 569              	.LASF5:
- 570 00d5 6C6F6E67 		.ascii	"long unsigned int\000"
- 570      20756E73 
- 570      69676E65 
- 570      6420696E 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 15
+ 559              	.LASF11:
+ 560 004c 666C6F61 		.ascii	"float\000"
+ 560      7400
+ 561              	.LASF1:
+ 562 0052 756E7369 		.ascii	"unsigned char\000"
+ 562      676E6564 
+ 562      20636861 
+ 562      7200
+ 563              	.LASF17:
+ 564 0060 50574D45 		.ascii	"PWMEnableState\000"
+ 564      6E61626C 
+ 564      65537461 
+ 564      746500
+ 565              	.LASF5:
+ 566 006f 6C6F6E67 		.ascii	"long unsigned int\000"
+ 566      20756E73 
+ 566      69676E65 
+ 566      6420696E 
+ 566      7400
+ 567              	.LASF9:
+ 568 0081 75696E74 		.ascii	"uint8\000"
+ 568      3800
+ 569              	.LASF25:
+ 570 0087 424C494E 		.ascii	"BLINK_05HZ_Wakeup\000"
+ 570      4B5F3035 
+ 570      485A5F57 
+ 570      616B6575 
+ 570      7000
+ 571              	.LASF20:
+ 572 0099 50574D43 		.ascii	"PWMControlRegister\000"
+ 572      6F6E7472 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrLrLVh.s 			page 15
 
 
- 570      7400
- 571              	.LASF9:
- 572 00e7 75696E74 		.ascii	"uint8\000"
- 572      3800
- 573              	.LASF25:
- 574 00ed 424C494E 		.ascii	"BLINK_05HZ_Wakeup\000"
+ 572      6F6C5265 
+ 572      67697374 
+ 572      657200
+ 573              	.LASF24:
+ 574 00ac 424C494E 		.ascii	"BLINK_05HZ_Sleep\000"
  574      4B5F3035 
- 574      485A5F57 
- 574      616B6575 
- 574      7000
- 575              	.LASF20:
- 576 00ff 50574D43 		.ascii	"PWMControlRegister\000"
- 576      6F6E7472 
- 576      6F6C5265 
- 576      67697374 
- 576      657200
- 577              	.LASF24:
- 578 0112 424C494E 		.ascii	"BLINK_05HZ_Sleep\000"
- 578      4B5F3035 
- 578      485A5F53 
- 578      6C656570 
- 578      00
- 579              	.LASF12:
- 580 0123 646F7562 		.ascii	"double\000"
- 580      6C6500
- 581              	.LASF10:
- 582 012a 75696E74 		.ascii	"uint16\000"
- 582      313600
- 583              	.LASF27:
- 584 0131 47656E65 		.ascii	"Generated_Source\\PSoC5\\BLINK_05HZ_PM.c\000"
- 584      72617465 
- 584      645F536F 
- 584      75726365 
- 584      5C50536F 
- 585              	.LASF8:
- 586 0158 756E7369 		.ascii	"unsigned int\000"
- 586      676E6564 
- 586      20696E74 
+ 574      485A5F53 
+ 574      6C656570 
+ 574      00
+ 575              	.LASF12:
+ 576 00bd 646F7562 		.ascii	"double\000"
+ 576      6C6500
+ 577              	.LASF10:
+ 578 00c4 75696E74 		.ascii	"uint16\000"
+ 578      313600
+ 579              	.LASF27:
+ 580 00cb 47656E65 		.ascii	"Generated_Source\\PSoC5\\BLINK_05HZ_PM.c\000"
+ 580      72617465 
+ 580      645F536F 
+ 580      75726365 
+ 580      5C50536F 
+ 581              	.LASF8:
+ 582 00f2 756E7369 		.ascii	"unsigned int\000"
+ 582      676E6564 
+ 582      20696E74 
+ 582      00
+ 583              	.LASF7:
+ 584 00ff 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 584      206C6F6E 
+ 584      6720756E 
+ 584      7369676E 
+ 584      65642069 
+ 585              	.LASF14:
+ 586 0116 72656738 		.ascii	"reg8\000"
  586      00
- 587              	.LASF7:
- 588 0165 6C6F6E67 		.ascii	"long long unsigned int\000"
- 588      206C6F6E 
- 588      6720756E 
- 588      7369676E 
- 588      65642069 
- 589              	.LASF14:
- 590 017c 72656738 		.ascii	"reg8\000"
- 590      00
- 591              	.LASF16:
- 592 0181 73697A65 		.ascii	"sizetype\000"
- 592      74797065 
- 592      00
- 593              	.LASF6:
- 594 018a 6C6F6E67 		.ascii	"long long int\000"
- 594      206C6F6E 
- 594      6720696E 
- 594      7400
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccAUC2Sc.s 			page 16
+ 587              	.LASF16:
+ 588 011b 73697A65 		.ascii	"sizetype\000"
+ 588      74797065 
+ 588      00
+ 589              	.LASF6:
+ 590 0124 6C6F6E67 		.ascii	"long long int\000"
+ 590      206C6F6E 
+ 590      6720696E 
+ 590      7400
+ 591              	.LASF28:
+ 592 0132 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GitHub\\SoftHandPRO-a"
+ 592      73657273 
+ 592      5C4D6174 
+ 592      7469615C 
+ 592      446F6375 
+ 593 0160 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\Generic.cydsn\000"
+ 593      656E6572 
+ 593      69632D46 
+ 593      572D5053 
+ 593      6F43355C 
+ 594              	.LASF13:
+ 595 0182 63686172 		.ascii	"char\000"
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccrLrLVh.s 			page 16
 
 
- 595              	.LASF13:
- 596 0198 63686172 		.ascii	"char\000"
- 596      00
- 597              	.LASF2:
- 598 019d 73686F72 		.ascii	"short int\000"
- 598      7420696E 
- 598      7400
- 599              	.LASF23:
- 600 01a7 424C494E 		.ascii	"BLINK_05HZ_RestoreConfig\000"
- 600      4B5F3035 
- 600      485A5F52 
- 600      6573746F 
- 600      7265436F 
- 601              	.LASF4:
- 602 01c0 6C6F6E67 		.ascii	"long int\000"
- 602      20696E74 
- 602      00
- 603              	.LASF21:
- 604 01c9 424C494E 		.ascii	"BLINK_05HZ_backupStruct\000"
- 604      4B5F3035 
- 604      485A5F62 
- 604      61636B75 
- 604      70537472 
- 605              	.LASF15:
- 606 01e1 6C6F6E67 		.ascii	"long double\000"
- 606      20646F75 
- 606      626C6500 
- 607              	.LASF0:
- 608 01ed 7369676E 		.ascii	"signed char\000"
- 608      65642063 
- 608      68617200 
- 609              	.LASF26:
- 610 01f9 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 610      43313120 
- 610      352E342E 
- 610      31203230 
- 610      31363036 
- 611 022c 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 611      20726576 
- 611      6973696F 
- 611      6E203233 
- 611      37373135 
- 612 025f 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
- 612      66756E63 
- 612      74696F6E 
- 612      2D736563 
- 612      74696F6E 
- 613              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 595      00
+ 596              	.LASF2:
+ 597 0187 73686F72 		.ascii	"short int\000"
+ 597      7420696E 
+ 597      7400
+ 598              	.LASF23:
+ 599 0191 424C494E 		.ascii	"BLINK_05HZ_RestoreConfig\000"
+ 599      4B5F3035 
+ 599      485A5F52 
+ 599      6573746F 
+ 599      7265436F 
+ 600              	.LASF4:
+ 601 01aa 6C6F6E67 		.ascii	"long int\000"
+ 601      20696E74 
+ 601      00
+ 602              	.LASF21:
+ 603 01b3 424C494E 		.ascii	"BLINK_05HZ_backupStruct\000"
+ 603      4B5F3035 
+ 603      485A5F62 
+ 603      61636B75 
+ 603      70537472 
+ 604              	.LASF15:
+ 605 01cb 6C6F6E67 		.ascii	"long double\000"
+ 605      20646F75 
+ 605      626C6500 
+ 606              	.LASF0:
+ 607 01d7 7369676E 		.ascii	"signed char\000"
+ 607      65642063 
+ 607      68617200 
+ 608              	.LASF26:
+ 609 01e3 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 609      43313120 
+ 609      352E342E 
+ 609      31203230 
+ 609      31363036 
+ 610 0216 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 610      20726576 
+ 610      6973696F 
+ 610      6E203233 
+ 610      37373135 
+ 611 0249 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 611      66756E63 
+ 611      74696F6E 
+ 611      2D736563 
+ 611      74696F6E 
+ 612              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

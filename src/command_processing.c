@@ -541,9 +541,11 @@ void get_param_list (uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS],
                         break;  
 
                     case 8:         //Measurement Offset
-                        aux_int16 = (c_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].m_off[i] >> c_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[i]);
-                        for(j = 0; j < sod; j++) {
-                            packet_data[(4 + PARAM_BYTE_SLOT*idx + i*sod) + sod - j -1] = ((char*)(&aux_int16))[j];
+                        for (i=0; i<NUM_ITEMS[idx]; i++){
+                            aux_int16 = (c_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].m_off[i] >> c_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[i]);
+                            for(j = 0; j < sod; j++) {
+                                packet_data[(4 + PARAM_BYTE_SLOT*idx + i*sod) + sod - j -1] = ((char*)(&aux_int16))[j];
+                            }
                         }
                         break;
                 
@@ -811,7 +813,7 @@ void get_param_list (uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS],
                                 strcat(aux_str, " Fast:syn2, Slow:syn1\0");
                             }
                             else {
-                                strcat(aux_str, " Fast:wrist, Slow:hand\0");
+                                strcat(aux_str, " Fast:wrist,Slow:hand\0");
                             }                            
                         break;
                         case 1:
@@ -819,7 +821,7 @@ void get_param_list (uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS],
                                 strcat(aux_str, " Slow:syn2, Fast:syn1\0");
                             }
                             else {
-                                strcat(aux_str, " Slow:wrist, Fast:hand\0");
+                                strcat(aux_str, " Slow:wrist,Fast:hand\0");
                             }
                         break;
                     }
@@ -1111,7 +1113,7 @@ void manage_param_list(uint16 index) {
         sprintf(fsm_activation_mode_menu, "0 -> Fast:syn2, Slow:syn1\n1 -> Slow:syn2, Fast:syn1\n");
     }
     else {
-        sprintf(fsm_activation_mode_menu, "0 -> Fast:wrist, Slow:hand\n1 -> Slow:wrist, Fast:hand\n");
+        sprintf(fsm_activation_mode_menu, "0 -> Fast:wrist,Slow:hand\n1 -> Slow:wrist,Fast:hand\n");
     }
     
     const char* MENU_STR[NUM_OF_PARAMS_MENU] = {
@@ -1380,7 +1382,7 @@ void set_custom_param(uint16 index) {
 
                 g_meas[g_mem.motor[MOTOR_IDX].encoder_line].rot[i] = 0;
             }
-            reset_last_value_flag = 1;
+            reset_last_value_flag[MOTOR_IDX] = 1;
             break;
     
         case 11:        //Position limits
@@ -1408,7 +1410,7 @@ void set_custom_param(uint16 index) {
             } else {            // 0
                 g_mem.dev.right_left = RIGHT_HAND;
             }
-			reset_last_value_flag = 1;
+			reset_last_value_flag[MOTOR_IDX] = 1;
 
             if (g_mem.dev.dev_type == SOFTHAND_PRO){    
                 // Change also default encoder line (only with SoftHand FW)
@@ -1558,7 +1560,7 @@ void set_custom_param(uint16 index) {
 
                 g_meas[g_mem.motor[SECOND_MOTOR_IDX].encoder_line].rot[i] = 0;
             }
-            reset_last_value_flag = 1;
+            reset_last_value_flag[SECOND_MOTOR_IDX] = 1;
             break;
     
         case 53:        // Second Motor Position limits
@@ -1595,16 +1597,16 @@ void set_custom_param(uint16 index) {
                 g_mem.dev.use_2nd_motor_flag = TRUE;
                 g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].double_encoder_on_off = TRUE;
                 g_mem.enc[g_mem.motor[SECOND_MOTOR_IDX].encoder_line].double_encoder_on_off = TRUE;
-                
+            /*    
                 g_mem.motor[MOTOR_IDX].pos_lim_inf = 0;
-                g_mem.motor[MOTOR_IDX].pos_lim_sup = (int32)16000 << g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[0];
-                g_mem.motor[SECOND_MOTOR_IDX].pos_lim_sup = (int32)(-16000) << g_mem.enc[g_mem.motor[SECOND_MOTOR_IDX].encoder_line].res[0];
+                g_mem.motor[MOTOR_IDX].pos_lim_sup = (int32)18000 << g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[0];
+                g_mem.motor[SECOND_MOTOR_IDX].pos_lim_inf = ((int32)(-25000)) << g_mem.enc[g_mem.motor[SECOND_MOTOR_IDX].encoder_line].res[0];
                 g_mem.motor[SECOND_MOTOR_IDX].pos_lim_sup = 0;
-                
+            */    
                 for (i=0; i< NUM_OF_MOTORS; i++) {                     // Maxon DCX16S
                     g_mem.motor[i].current_limit = 800;                // [mA]
                     g_mem.motor[i].k_p           = 0.12 * 65536;
-                    g_mem.motor[i].k_i           = 0;
+                    g_mem.motor[i].k_i           =    0 * 65536;
                     g_mem.motor[i].k_d           = 0.05 * 65536;
                 }
             }      
@@ -1865,11 +1867,11 @@ void setZeros()
     
     for (j = 0; j < N_ENCODER_LINE_MAX; j++) {
         for(i = 0; i < NUM_OF_SENSORS; i++) {
-            g_mem.enc[j].m_off[i] = data_encoder_raw[j][i];
-            g_meas[j].rot[i] = 0;
+            g_mem.enc[j].m_off[i] = (int32)(data_encoder_raw[j][i]);
+            g_meas[j].rot[i] = (int8)0;
         }
+        reset_last_value_flag[j] = 1;
     }
-    reset_last_value_flag = 1;
 
     sendAcknowledgment(ACK_OK);
 }
@@ -3171,6 +3173,10 @@ uint8 memInit(void)
     g_mem.exp.ADC_conf[2] = 1;
     g_mem.exp.ADC_conf[3] = 1;
     g_mem.exp.record_EMG_history_on_SD = FALSE;
+
+    // WR STRUCT (default in generic fw)
+    g_mem.WR.activation_mode = 0;                // Default Fast:wrist/syn2, Slow:hand/syn1
+    g_mem.WR.fast_act_threshold[0] = 800;
 
 #ifdef SOFTHAND_FW
     // Override memory values with specific ones for SoftHand Pro device

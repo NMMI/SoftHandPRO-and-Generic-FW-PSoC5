@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUHu78C.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
   28:Generated_Source\PSoC5/ADC_STATUS.c **** *  Reads the current value assigned to the Status Register.
   29:Generated_Source\PSoC5/ADC_STATUS.c **** *
   30:Generated_Source\PSoC5/ADC_STATUS.c **** * Parameters:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUHu78C.s 			page 2
 
 
   31:Generated_Source\PSoC5/ADC_STATUS.c **** *  None.
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
   47:Generated_Source\PSoC5/ADC_STATUS.c **** * Summary:
   48:Generated_Source\PSoC5/ADC_STATUS.c **** *  Enables the Status Register interrupt.
   49:Generated_Source\PSoC5/ADC_STATUS.c **** *
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUHu78C.s 			page 3
 
 
   50:Generated_Source\PSoC5/ADC_STATUS.c **** * Parameters:
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
  106              		.cfi_endproc
  107              	.LFE1:
  108              		.size	ADC_STATUS_InterruptEnable, .-ADC_STATUS_InterruptEnable
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUHu78C.s 			page 4
 
 
  109              		.section	.text.ADC_STATUS_InterruptDisable,"ax",%progbits
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
  141              		.loc 1 85 0
  142 001e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
  143 0020 1846     		mov	r0, r3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUHu78C.s 			page 5
 
 
  144 0022 FFF7FEFF 		bl	CyExitCriticalSection
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
  179              		.cfi_def_cfa_register 7
  180 0006 0346     		mov	r3, r0
  181 0008 FB71     		strb	r3, [r7, #7]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 6
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUHu78C.s 			page 6
 
 
  105:Generated_Source\PSoC5/ADC_STATUS.c ****     #if(ADC_STATUS_INPUTS < 8u)
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
  125:Generated_Source\PSoC5/ADC_STATUS.c **** *******************************************************************************/
  126:Generated_Source\PSoC5/ADC_STATUS.c **** uint8 ADC_STATUS_ReadMask(void) 
  127:Generated_Source\PSoC5/ADC_STATUS.c **** {
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 7
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUHu78C.s 			page 7
 
 
  216              		.loc 1 127 0
@@ -406,7 +406,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
  256 000c B9000000 		.4byte	.LASF22
  257 0010 0C       		.byte	0xc
  258 0011 90000000 		.4byte	.LASF23
- 259 0015 D4010000 		.4byte	.LASF24
+ 259 0015 BA010000 		.4byte	.LASF24
  260 0019 00000000 		.4byte	.Ldebug_ranges0+0
  261 001d 00000000 		.4byte	0
  262 0021 00000000 		.4byte	.Ldebug_line0
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
  268 002d 01       		.byte	0x1
  269 002e 08       		.byte	0x8
  270 002f 62010000 		.4byte	.LASF1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 8
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUHu78C.s 			page 8
 
 
  271 0033 02       		.uleb128 0x2
@@ -461,7 +461,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
  308 0077 02       		.uleb128 0x2
  309 0078 04       		.byte	0x4
  310 0079 04       		.byte	0x4
- 311 007a BA010000 		.4byte	.LASF9
+ 311 007a 0A020000 		.4byte	.LASF9
  312 007e 02       		.uleb128 0x2
  313 007f 08       		.byte	0x8
  314 0080 04       		.byte	0x4
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
  325 0098 05       		.uleb128 0x5
  326 0099 6B000000 		.4byte	0x6b
  327 009d 02       		.uleb128 0x2
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 9
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUHu78C.s 			page 9
 
 
  328 009e 08       		.byte	0x8
@@ -487,7 +487,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
  331 00a4 02       		.uleb128 0x2
  332 00a5 04       		.byte	0x4
  333 00a6 07       		.byte	0x7
- 334 00a7 3A020000 		.4byte	.LASF15
+ 334 00a7 24020000 		.4byte	.LASF15
  335 00ab 06       		.uleb128 0x6
  336 00ac 30000000 		.4byte	.LASF20
  337 00b0 01       		.byte	0x1
@@ -507,7 +507,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
  351 00d0 9C       		.byte	0x9c
  352 00d1 E4000000 		.4byte	0xe4
  353 00d5 08       		.uleb128 0x8
- 354 00d6 43020000 		.4byte	.LASF18
+ 354 00d6 2D020000 		.4byte	.LASF18
  355 00da 01       		.byte	0x1
  356 00db 3B       		.byte	0x3b
  357 00dc 6B000000 		.4byte	0x6b
@@ -525,7 +525,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
  369 00f4 9C       		.byte	0x9c
  370 00f5 08010000 		.4byte	0x108
  371 00f9 08       		.uleb128 0x8
- 372 00fa 43020000 		.4byte	.LASF18
+ 372 00fa 2D020000 		.4byte	.LASF18
  373 00fe 01       		.byte	0x1
  374 00ff 52       		.byte	0x52
  375 0100 6B000000 		.4byte	0x6b
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
  382 010d 01       		.byte	0x1
  383 010e 67       		.byte	0x67
  384 010f 00000000 		.4byte	.LFB3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 10
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUHu78C.s 			page 10
 
 
  385 0113 28000000 		.4byte	.LFE3-.LFB3
@@ -555,7 +555,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
  396 012a 77       		.sleb128 -9
  397 012b 00       		.byte	0
  398 012c 06       		.uleb128 0x6
- 399 012d C0010000 		.4byte	.LASF21
+ 399 012d 10020000 		.4byte	.LASF21
  400 0131 01       		.byte	0x1
  401 0132 7E       		.byte	0x7e
  402 0133 6B000000 		.4byte	0x6b
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
  439 001d 00       		.byte	0
  440 001e 03       		.uleb128 0x3
  441 001f 24       		.uleb128 0x24
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUHu78C.s 			page 11
 
 
  442 0020 00       		.byte	0
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
  496 0057 07       		.uleb128 0x7
  497 0058 2E       		.uleb128 0x2e
  498 0059 01       		.byte	0x1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 12
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUHu78C.s 			page 12
 
 
  499 005a 3F       		.uleb128 0x3f
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
  553 0091 40       		.uleb128 0x40
  554 0092 18       		.uleb128 0x18
  555 0093 9742     		.uleb128 0x2117
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUHu78C.s 			page 13
 
 
  556 0095 19       		.uleb128 0x19
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
  610 002c 00000000 		.4byte	0
  611              		.section	.debug_line,"",%progbits
  612              	.Ldebug_line0:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 14
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUHu78C.s 			page 14
 
 
  613 0000 AA000000 		.section	.debug_str,"MS",%progbits,1
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
  633      75726365 
  633      5C50536F 
  634              	.LASF25:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 15
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUHu78C.s 			page 15
 
 
  635 00b4 6D61736B 		.ascii	"mask\000"
@@ -898,38 +898,36 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 1
  657 01ae 6C6F6E67 		.ascii	"long double\000"
  657      20646F75 
  657      626C6500 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccuyGfkz.s 			page 16
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccUHu78C.s 			page 16
 
 
- 658              	.LASF9:
- 659 01ba 666C6F61 		.ascii	"float\000"
- 659      7400
- 660              	.LASF21:
- 661 01c0 4144435F 		.ascii	"ADC_STATUS_ReadMask\000"
- 661      53544154 
- 661      55535F52 
- 661      6561644D 
- 661      61736B00 
- 662              	.LASF24:
- 663 01d4 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHandPRO-a"
- 663      73657273 
- 663      5C4D6174 
- 663      7469615C 
- 663      446F6375 
- 664 0202 6E642D47 		.ascii	"nd-Generic-FW-PSoC5 - Copia (prima di BT)\\Generic."
- 664      656E6572 
- 664      69632D46 
- 664      572D5053 
- 664      6F433520 
- 665 0234 63796473 		.ascii	"cydsn\000"
- 665      6E00
- 666              	.LASF15:
- 667 023a 73697A65 		.ascii	"sizetype\000"
- 667      74797065 
- 667      00
- 668              	.LASF18:
- 669 0243 696E7465 		.ascii	"interruptState\000"
- 669      72727570 
- 669      74537461 
- 669      746500
- 670              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 658              	.LASF24:
+ 659 01ba 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GitHub\\SoftHandPRO-a"
+ 659      73657273 
+ 659      5C4D6174 
+ 659      7469615C 
+ 659      446F6375 
+ 660 01e8 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\Generic.cydsn\000"
+ 660      656E6572 
+ 660      69632D46 
+ 660      572D5053 
+ 660      6F43355C 
+ 661              	.LASF9:
+ 662 020a 666C6F61 		.ascii	"float\000"
+ 662      7400
+ 663              	.LASF21:
+ 664 0210 4144435F 		.ascii	"ADC_STATUS_ReadMask\000"
+ 664      53544154 
+ 664      55535F52 
+ 664      6561644D 
+ 664      61736B00 
+ 665              	.LASF15:
+ 666 0224 73697A65 		.ascii	"sizetype\000"
+ 666      74797065 
+ 666      00
+ 667              	.LASF18:
+ 668 022d 696E7465 		.ascii	"interruptState\000"
+ 668      72727570 
+ 668      74537461 
+ 668      746500
+ 669              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

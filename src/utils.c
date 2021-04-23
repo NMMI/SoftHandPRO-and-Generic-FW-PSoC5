@@ -223,7 +223,7 @@ void check_rest_position(void) {     // 100 Hz frequency.
     static float m = 0;
     static int32 abs_err_thr = 0;
     static int32 delta_inc = 0;
-    int32 curr_pos = 0;
+    int32 act_pos = 0;
     static int32 rest_error;
     float rest_vel_ticks_ms = ((float)g_mem.SH.rest_vel)/1000.0;    //[ticks/s] -> [ticks/ms]
     
@@ -232,10 +232,10 @@ void check_rest_position(void) {     // 100 Hz frequency.
         first_time = 0;
     }
     
-    curr_pos = (int32)(g_meas[g_mem.motor[0].encoder_line].pos[0] >> g_mem.enc[g_mem.motor[0].encoder_line].res[0]);
+    act_pos = (int32)(g_meas[g_mem.motor[0].encoder_line].pos[0] >> g_mem.enc[g_mem.motor[0].encoder_line].res[0]);
     
     if ( ( ((c_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL || c_mem.motor[0].input_mode == INPUT_MODE_EMG_INTEGRAL || c_mem.motor[0].input_mode == INPUT_MODE_EMG_FCFS ||
-             c_mem.motor[0].input_mode == INPUT_MODE_EMG_FCFS_ADV || c_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL_NC) && g_adc_meas.emg[0] < 200 && g_adc_meas.emg[1] < 200) ) && curr_pos < 10000){
+             c_mem.motor[0].input_mode == INPUT_MODE_EMG_FCFS_ADV || c_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL_NC) && g_adc_meas.emg[0] < 200 && g_adc_meas.emg[1] < 200) ) && act_pos < 10000){
         if (flag_count == 1){
             count = count + 1;
         }
@@ -418,7 +418,10 @@ void battery_management() {
                 
                     if (v_count_lb >= 10000){                    
                         
-                        //battery_low_SoC = TRUE;     //[MP] Uncomment for softhand 2 motors
+                        if (c_mem.dev.dev_type == SOFTHAND_2_MOTORS) {
+                            // [MP] For the moment, it is active only on the SOFTHAND_2_MOTORS device
+                            battery_low_SoC = TRUE;
+                        }
                         
                         //red light - blink @ 2.5 Hz
                         LED_control(3);
