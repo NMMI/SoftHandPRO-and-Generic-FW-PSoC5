@@ -372,6 +372,8 @@ void function_scheduler(void) {
                         change_ext_ref_flag = FALSE;
                     }   
                 }
+                     
+                
             }
             
             // Check Interrupt 
@@ -392,6 +394,8 @@ void function_scheduler(void) {
                             change_ext_ref_flag = FALSE;
                         }   
                     }
+                    
+                  
                 }
                 // Check Interrupt 
 
@@ -545,7 +549,7 @@ void function_scheduler(void) {
     //---------------------------------- Control Cycles Counter
 
     if (pos_reconstruct[c_mem.motor[0].encoder_line]){      // Once Motor 0 encoder line reading is ready
-        cycles_counter_update();
+        cycles_counter_update();                            // Need at least one encoder to work
     }
 
     // Check Cycles Interrupt 
@@ -559,7 +563,7 @@ void function_scheduler(void) {
             cycles_status = PREPARE_DATA;
             
             //Update time variable
-            g_mem.cnt.total_time_on = g_mem.cnt.total_time_on + 120;  // Add 120 seconds.
+            g_mem.cnt.total_runtime = g_mem.cnt.total_runtime + 120;  // Add 120 seconds.
             
             if (c_mem.exp.read_exp_port_flag == EXP_SD_RTC) {
                 
@@ -1123,11 +1127,11 @@ void motor_control_SH() {
                 pwm_input += (int32)(k_d_c_dl * (curr_error - prev_curr_err)) >> 16;
 
             // pwm_input saturation
-            if (pwm_input < -PWM_MAX_VALUE) 
-                pwm_input = -PWM_MAX_VALUE;
+            if (pwm_input < -PWM_MAX_VALUE_DC) 
+                pwm_input = -PWM_MAX_VALUE_DC;
             else {
-                if (pwm_input > PWM_MAX_VALUE)
-                    pwm_input = PWM_MAX_VALUE;
+                if (pwm_input > PWM_MAX_VALUE_DC)
+                    pwm_input = PWM_MAX_VALUE_DC;
             }
 
             // Update previous current
@@ -1233,11 +1237,11 @@ void motor_control_SH() {
             
 
             // pwm_input saturation
-            if (pwm_input < -PWM_MAX_VALUE) 
-                pwm_input = -PWM_MAX_VALUE;
+            if (pwm_input < -PWM_MAX_VALUE_DC) 
+                pwm_input = -PWM_MAX_VALUE_DC;
             else {
-				if (pwm_input > PWM_MAX_VALUE) 
-                	pwm_input = PWM_MAX_VALUE;
+				if (pwm_input > PWM_MAX_VALUE_DC) 
+                	pwm_input = PWM_MAX_VALUE_DC;
         	}
 
         break;
@@ -1246,13 +1250,13 @@ void motor_control_SH() {
 
     ////////////////////////////////////////////////////////////////////////////
 
-    if(pwm_input >  PWM_MAX_VALUE) 
-        pwm_input =  PWM_MAX_VALUE;
-    if(pwm_input < -PWM_MAX_VALUE) 
-        pwm_input = -PWM_MAX_VALUE;
+    if(pwm_input >  PWM_MAX_VALUE_DC) 
+        pwm_input =  PWM_MAX_VALUE_DC;
+    if(pwm_input < -PWM_MAX_VALUE_DC) 
+        pwm_input = -PWM_MAX_VALUE_DC;
 
     if (SH_MOT->control_mode != CONTROL_PWM) 
-        pwm_input = (((pwm_input << 10) / PWM_MAX_VALUE) * dev_pwm_limit[0]) >> 10;
+        pwm_input = (((pwm_input << 10) / PWM_MAX_VALUE_DC) * dev_pwm_limit[0]) >> 10;
  
     //// RATE LIMITER ////
     if((pwm_input-prev_pwm) > SH_MOT->pwm_rate_limiter){
@@ -1263,10 +1267,10 @@ void motor_control_SH() {
             pwm_input =  prev_pwm - SH_MOT->pwm_rate_limiter;
     }
     
-    if(pwm_input >  PWM_MAX_VALUE) 
-        pwm_input =  PWM_MAX_VALUE;
-    if(pwm_input < -PWM_MAX_VALUE) 
-        pwm_input = -PWM_MAX_VALUE;
+    if(pwm_input >  PWM_MAX_VALUE_DC) 
+        pwm_input =  PWM_MAX_VALUE_DC;
+    if(pwm_input < -PWM_MAX_VALUE_DC) 
+        pwm_input = -PWM_MAX_VALUE_DC;
     
     prev_pwm = pwm_input;
 	
@@ -1424,13 +1428,19 @@ void motor_control_generic(uint8 idx) {
             // Derivative
             if (k_d_c_dl != 0)
                 pwm_input += (int32)(k_d_c_dl * (curr_error - prev_curr_err[idx])) >> 16;
-
-            // pwm_input saturation
-            if (pwm_input < -PWM_MAX_VALUE) 
-                pwm_input = -PWM_MAX_VALUE;
+             
+            // Limit PWM in range (specific per motor driver)
+            if (MOT->motor_driver_type == DRIVER_BRUSHLESS) {
+                if(pwm_input > PWM_MAX_VALUE_ESC) 
+                    pwm_input =  PWM_MAX_VALUE_ESC;
+                if(pwm_input < -PWM_MAX_VALUE_ESC) 
+                    pwm_input = -PWM_MAX_VALUE_ESC;
+            }
             else {
-                if (pwm_input > PWM_MAX_VALUE)
-                    pwm_input = PWM_MAX_VALUE;
+                if(pwm_input > PWM_MAX_VALUE_DC) 
+                    pwm_input =  PWM_MAX_VALUE_DC;
+                if(pwm_input < -PWM_MAX_VALUE_DC) 
+                    pwm_input = -PWM_MAX_VALUE_DC;
             }
 
             // Update previous current
@@ -1534,14 +1544,20 @@ void motor_control_generic(uint8 idx) {
             else 
                 motor_dir[idx] = FALSE;
             
-
-            // pwm_input saturation
-            if (pwm_input < -PWM_MAX_VALUE) 
-                pwm_input = -PWM_MAX_VALUE;
+          
+            // Limit PWM in range (specific per motor driver)
+            if (MOT->motor_driver_type == DRIVER_BRUSHLESS) {
+                if(pwm_input > PWM_MAX_VALUE_ESC) 
+                    pwm_input =  PWM_MAX_VALUE_ESC;
+                if(pwm_input < -PWM_MAX_VALUE_ESC) 
+                    pwm_input = -PWM_MAX_VALUE_ESC;
+            }
             else {
-				if (pwm_input > PWM_MAX_VALUE) 
-                	pwm_input = PWM_MAX_VALUE;
-        	}
+                if(pwm_input > PWM_MAX_VALUE_DC) 
+                    pwm_input =  PWM_MAX_VALUE_DC;
+                if(pwm_input < -PWM_MAX_VALUE_DC) 
+                    pwm_input = -PWM_MAX_VALUE_DC;
+            }
 
         break;
             
@@ -1550,14 +1566,25 @@ void motor_control_generic(uint8 idx) {
     ////////////////////////////////////////////////////////////////////////////
      ////////////////////////////////////////////////////////////////////////////
 
-
-    if(pwm_input > PWM_MAX_VALUE) 
-        pwm_input =  PWM_MAX_VALUE;
-    if(pwm_input < -PWM_MAX_VALUE) 
-        pwm_input = -PWM_MAX_VALUE;
-
-    if (MOT->control_mode != CONTROL_PWM) 
-        pwm_input = (((pwm_input << 10) / PWM_MAX_VALUE) * dev_pwm_limit[idx]) >> 10;
+    // Limit PWM in range (specific per motor driver)
+    if (MOT->motor_driver_type == DRIVER_BRUSHLESS) {
+        if(pwm_input > PWM_MAX_VALUE_ESC) 
+            pwm_input =  PWM_MAX_VALUE_ESC;
+        if(pwm_input < -PWM_MAX_VALUE_ESC) 
+            pwm_input = -PWM_MAX_VALUE_ESC;
+        
+        if (MOT->control_mode != CONTROL_PWM) 
+            pwm_input = (((pwm_input << 10) / PWM_MAX_VALUE_ESC) * dev_pwm_limit[idx]) >> 10;
+    }
+    else {
+        if(pwm_input > PWM_MAX_VALUE_DC) 
+            pwm_input =  PWM_MAX_VALUE_DC;
+        if(pwm_input < -PWM_MAX_VALUE_DC) 
+            pwm_input = -PWM_MAX_VALUE_DC;
+        
+        if (MOT->control_mode != CONTROL_PWM) 
+            pwm_input = (((pwm_input << 10) / PWM_MAX_VALUE_DC) * dev_pwm_limit[idx]) >> 10;
+    }
 
     //// RATE LIMITER ////
     if((pwm_input-prev_pwm[idx]) > MOT->pwm_rate_limiter){
@@ -1568,11 +1595,20 @@ void motor_control_generic(uint8 idx) {
             pwm_input =  prev_pwm[idx] - MOT->pwm_rate_limiter;
     }
    
-    if(pwm_input >  PWM_MAX_VALUE) 
-        pwm_input =  PWM_MAX_VALUE;
-    if(pwm_input < -PWM_MAX_VALUE) 
-        pwm_input = -PWM_MAX_VALUE;
-    
+    // Limit PWM in range (specific per motor driver)
+    if (MOT->motor_driver_type == DRIVER_BRUSHLESS) {
+        if(pwm_input > PWM_MAX_VALUE_ESC) 
+            pwm_input =  PWM_MAX_VALUE_ESC;
+        if(pwm_input < -PWM_MAX_VALUE_ESC) 
+            pwm_input = -PWM_MAX_VALUE_ESC;
+    }
+    else {
+        if(pwm_input > PWM_MAX_VALUE_DC) 
+            pwm_input =  PWM_MAX_VALUE_DC;
+        if(pwm_input < -PWM_MAX_VALUE_DC) 
+            pwm_input = -PWM_MAX_VALUE_DC;
+    }
+
     prev_pwm[idx] = pwm_input;
            
     pwm_sign[idx] = SIGN(pwm_input);   
@@ -1602,6 +1638,20 @@ void motor_control_generic(uint8 idx) {
         }
     }
     
+    
+    // Always limit PWM if using Brushless motors and ESC module
+    if (MOT->motor_driver_type == DRIVER_BRUSHLESS) {           
+        // Allowed in range [-2700,-200] and [200,2700] where 200 -> 0 rpm, 2700 -> MAX no load speed rpm (90% approx.)
+        if (abs(pwm_input) > 2700){
+            pwm_input = SIGN(pwm_input) * 2700;
+        }
+        
+        if (abs(pwm_input) < 200){
+            pwm_input = SIGN(pwm_input) * 200;
+        }
+       
+    }
+    
     // Set motor direction and write pwm value
     switch (idx) {
         case 0:         // Motor 1
@@ -1611,9 +1661,9 @@ void motor_control_generic(uint8 idx) {
                 MOTOR_DIR_1_Write(0x00);
             
             if (MOT->motor_driver_type == DRIVER_VNH5019) {
-                PWM_MOTORS_WriteCompare1(PWM_MAX_VALUE - abs(pwm_input));
+                PWM_MOTORS_WriteCompare1(PWM_MAX_VALUE_DC - abs(pwm_input));
             }
-            else {  // DRIVER_MC33887 standard
+            else {  // DRIVER_MC33887 standard or DRIVER_BRUSHLESS
                 PWM_MOTORS_WriteCompare1(abs(pwm_input));    
             }
             
@@ -1626,9 +1676,9 @@ void motor_control_generic(uint8 idx) {
                 MOTOR_DIR_2_Write(0x00);
             
             if (MOT->motor_driver_type == DRIVER_VNH5019) {
-                PWM_MOTORS_WriteCompare2(PWM_MAX_VALUE - abs(pwm_input));
+                PWM_MOTORS_WriteCompare2(PWM_MAX_VALUE_DC - abs(pwm_input));
             }
-            else {  // DRIVER_MC33887 standard
+            else {  // DRIVER_MC33887 standard or DRIVER_BRUSHLESS
                 PWM_MOTORS_WriteCompare2(abs(pwm_input));    
             }
             
@@ -1893,10 +1943,11 @@ void analog_read_end() {
     static int32 UD_mean_value;
     static int32 LR_mean_value;
 	static uint8 first_tension_valid = TRUE;
-    //static int32 pow_tension = 12000;       //12000 mV (12 V)
+    static int32 detect_power_cycle_prev = -3;
     static uint16 count = 0;
     static uint32 v_count = 0;
     static uint8 idx = 0;
+    
     
     // Wait for conversion end
     
@@ -1922,7 +1973,7 @@ void analog_read_end() {
         dev_tension[0] = 5000;
     }
     else {
-        dev_tension[0] = ((int32)(ADC_buf[0] - 1621) * 1990) >> 7;
+        dev_tension[0] =  ((int32)(ADC_buf[0] - 1621) * 1990) >> 7;
     }
     
     // Read also 2nd power tension (if necessary)
@@ -1934,6 +1985,14 @@ void analog_read_end() {
         interrupt_flag = FALSE;                                                                                                                                                                                                                                                                                                                                                                                                                                                 
         interrupt_manager();
     }
+    
+    // Update cycle power value
+    detect_power_cycle = filter(dev_tension[0]/6000, &filt_detect_pc);
+    if (detect_power_cycle_prev < 0 && detect_power_cycle >= 0){    // Only positive difference is valid to update power cycles
+        g_mem.cnt.power_cycles++;       // New power cycle (update value)   
+    }
+    detect_power_cycle_prev = detect_power_cycle;
+  
     
     // VOLTAGE READING
     // Once firmware starts, first_tension_valid flag is set to TRUE while tension_valid status is FALSE
@@ -1963,7 +2022,7 @@ void analog_read_end() {
 
     // Until there is no valid input tension repeat this measurement
 
-    if (dev_tension[0] < 7000 && (NUM_OF_ANALOG_INPUTS<=4 || dev_tension[1] < 7000)) {       // Voltage reading (Low voltage condition)
+    if (dev_tension[0] < 6500 && (NUM_OF_ANALOG_INPUTS<=4 || dev_tension[1] < 6500)) {       // Voltage reading (Low voltage condition)
         // PSoC is powered through uUSB
         
         tension_valid = FALSE;
@@ -2002,7 +2061,7 @@ void analog_read_end() {
     }
     else {
         // PSoC is powered through battery or power source
-        // (at least > 7.36 V (92% of 8 V) that is minimum charge of smallest battery)
+        // (at least > 6.88 V (86% of 8 V) that is minimum charge of smallest battery (2 cells @ 2000 mAh Ossur))
         
         // Read ADC sampled value of power source tension and motor current
         
@@ -2010,7 +2069,7 @@ void analog_read_end() {
             // After 1000 v_count cycles, dev_tension_f is stable
             tension_valid = TRUE;   
             count = 0;
-            v_count = 0;
+            v_count = 0;            
         }
         else {  
             // wait for battery voltage stabilization
@@ -2028,11 +2087,18 @@ void analog_read_end() {
         }
         
         // Filter and Set currents
-        if (g_mem.motor[0].motor_driver_type == DRIVER_MC33887) { // [GS]
+        if (g_mem.motor[0].motor_driver_type == DRIVER_MC33887) {
             g_meas[g_mem.motor[0].encoder_line].curr = filter((int16) (((int32)(ADC_buf[1] - 1648) * 22634) >> 13) * (int32)pwm_sign[0], &filt_i[0]);
-        } else { // [GS]
-            g_meas[g_mem.motor[0].encoder_line].curr = ((int16) ((int32)((ADC_buf[1] - 1635) * 480) >> 4) * (int32)pwm_sign[0]); // filter((int16) (((int32)(ADC_buf[1] - 1648) * 43125) >> 13) * pwm_sign, &filt_i[0]); // [GS]
+        } 
+        else {
+            if (g_mem.motor[0].motor_driver_type == DRIVER_BRUSHLESS) {
+                // Direct measure in range [2V, 4V] referenced to 4.88V meas supply and up to 5A current
+                g_meas[g_mem.motor[0].encoder_line].curr = filter((int16) (((int32)(ADC_buf[1] - 1679) * 24400) >> 13) * (int32)pwm_sign[0], &filt_i[0]);
+            } else { // [GS]
+                g_meas[g_mem.motor[0].encoder_line].curr = ((int16) ((int32)((ADC_buf[1] - 1635) * 480) >> 4) * (int32)pwm_sign[0]);
+            }
         }
+        
 
         // Calculate current estimation and put it in the second part of the current measurement array;
 		g_meas[g_mem.motor[0].encoder_line].estim_curr = (int16) filter(((int32) g_meas[g_mem.motor[0].encoder_line].curr) - curr_estim(0, g_meas[g_mem.motor[0].encoder_line].pos[0] >> g_mem.enc[g_mem.motor[0].encoder_line].res[0], g_meas[g_mem.motor[0].encoder_line].vel[0] >> g_mem.enc[g_mem.motor[0].encoder_line].res[0], g_ref[0].pos >> g_mem.enc[g_mem.motor[0].encoder_line].res[0]), &filt_curr_diff[0]);
@@ -2040,11 +2106,17 @@ void analog_read_end() {
         // Read also 2nd power current (if necessary)
         if (NUM_OF_ANALOG_INPUTS > 4) {
             // Filter and Set currents
-            if (g_mem.motor[1].motor_driver_type == DRIVER_MC33887) { // [GS]
+            if (g_mem.motor[1].motor_driver_type == DRIVER_MC33887) {
                 g_meas[g_mem.motor[1].encoder_line].curr = filter((int16) (((int32)(ADC_buf[5] - 1648) * 22634) >> 13) * (int32)pwm_sign[1], &filt_i[1]);
-            } else { // [GS]
-                g_meas[g_mem.motor[1].encoder_line].curr = ((int16) ((int32)((ADC_buf[5] - 1635) * 480) >> 4) * (int32)pwm_sign[1]); // filter((int16) (((int32)(ADC_buf[1] - 1648) * 43125) >> 13) * pwm_sign, &filt_i[0]); // [GS]
             } 
+            else {
+                if (g_mem.motor[1].motor_driver_type == DRIVER_BRUSHLESS) {
+                    // Direct measure in range [2V, 4V] referenced to 4.88V meas supply and up to 5A current
+                    g_meas[g_mem.motor[1].encoder_line].curr = filter((int16) (((int32)(ADC_buf[5] - 1679) * 24400) >> 13) * (int32)pwm_sign[1], &filt_i[1]);
+                } else { // [GS]
+                    g_meas[g_mem.motor[1].encoder_line].curr = ((int16) ((int32)((ADC_buf[5] - 1635) * 480) >> 4) * (int32)pwm_sign[1]);
+                }
+            }
             
             g_meas[g_mem.motor[1].encoder_line].estim_curr = (int16) filter(((int32) g_meas[g_mem.motor[1].encoder_line].curr) - curr_estim(1, g_meas[g_mem.motor[1].encoder_line].pos[0] >> g_mem.enc[g_mem.motor[1].encoder_line].res[0], g_meas[g_mem.motor[1].encoder_line].vel[0] >> g_mem.enc[g_mem.motor[1].encoder_line].res[0], g_ref[1].pos >> g_mem.enc[g_mem.motor[1].encoder_line].res[0]), &filt_curr_diff[1]);
         }
@@ -2522,13 +2594,17 @@ void overcurrent_control() {
 void pwm_limit_search(uint8 mot_idx) {
 
     uint8 CYDATA index;
-    uint16 CYDATA max_tension = 25500;
+    uint16 CYDATA max_tension = 26500;
     uint16 CYDATA min_tension = 11500;
     
     if (dev_tension[mot_idx] > max_tension) {
         dev_pwm_sat[mot_idx] = 0;
     } else if (dev_tension[mot_idx] < min_tension) {
-        dev_pwm_sat[mot_idx] = 100;
+        if (c_mem.motor[mot_idx].motor_driver_type == DRIVER_BRUSHLESS){
+            dev_pwm_sat[mot_idx] = PWM_MAX_VALUE_ESC;
+        } else {
+            dev_pwm_sat[mot_idx] = PWM_MAX_VALUE_DC;
+        }
     } else {
         index = (uint8)((dev_tension[mot_idx] - min_tension) >> 9);
         dev_pwm_sat[mot_idx] = pwm_preload_values[index];
@@ -2542,14 +2618,18 @@ void pwm_limit_search(uint8 mot_idx) {
 void cycles_counter_update() {
 	static uint8 pos_cycle_status = STATE_INACTIVE;
     static uint8 emg_cycle_status[2] = {STATE_INACTIVE, STATE_INACTIVE};
+    static uint8 emg_excess_status[2] = {STATE_INACTIVE, STATE_INACTIVE};
     static uint8 rest_cycle_status = STATE_INACTIVE;
     static int32 bin_threshold = 250;
+    static int32 exc_act_thr = 980; //0.95*1024
     static int32 thr_pos = 0;
     static int32 max_pos = 0;
     uint8 i, bin_st, bin_max, bin_1, bin_2;
     int32 curr_pos = 0, curr_off = 0, curr_ref = 0;
     int32 step;
     static uint32 timer_value_s, timer_value_e;
+    static uint32 timer_exc_s[2], timer_exc_e[2];
+    static int32 start_emg_pos[2] = {0,0};
 
     curr_pos = (int32)(g_meas[g_mem.motor[0].encoder_line].pos[0] >> g_mem.enc[g_mem.motor[0].encoder_line].res[0]);
         
@@ -2559,7 +2639,9 @@ void cycles_counter_update() {
             if ((g_mem.motor[0].input_mode != INPUT_MODE_EMG_PROPORTIONAL_NC && pwm_sign[0] == 1) || (g_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL_NC && pwm_sign[0] == -1)){
                 thr_pos = curr_pos; 
                 curr_off = (max_pos>thr_pos)?(max_pos-thr_pos):(thr_pos-max_pos);
-                g_mem.cnt.wire_disp = g_mem.cnt.wire_disp + curr_off;     //sum opening track
+                if (curr_off > 20){    // it has to be a sensible movement to update counter (to avoid noisy measurements sum)  
+                    g_mem.cnt.wire_disp = g_mem.cnt.wire_disp + curr_off;     //sum opening track
+                }
                 pos_cycle_status = STATE_ACTIVE;
             }
             break;
@@ -2567,7 +2649,9 @@ void cycles_counter_update() {
             if ((g_mem.motor[0].input_mode != INPUT_MODE_EMG_PROPORTIONAL_NC && pwm_sign[0] == -1) || (g_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL_NC && pwm_sign[0] == 1)){
                 max_pos = curr_pos;
                 curr_off = (max_pos>thr_pos)?(max_pos-thr_pos):(thr_pos-max_pos);
-                g_mem.cnt.wire_disp = g_mem.cnt.wire_disp + curr_off;     //sum closure track
+                if (curr_off > 20){    // it has to be a sensible movement to update counter (to avoid noisy measurements sum)  
+                   g_mem.cnt.wire_disp = g_mem.cnt.wire_disp + curr_off;     //sum closure track
+                }
                 pos_cycle_status = COUNTER_INC;
             }
             break;
@@ -2608,22 +2692,58 @@ void cycles_counter_update() {
             break;
     }
     
-    // State machine - Evaluate EMG counter update
+    // State machine - Evaluate EMG activation counter update
     for (i=0; i<2 && emg_1_status == NORMAL && emg_2_status == NORMAL; i++){
         switch (emg_cycle_status[i]){
             case STATE_INACTIVE:
                 if (g_adc_meas.emg[i] > g_mem.emg.emg_threshold[i]){
+                    start_emg_pos[i] = curr_pos;
                     emg_cycle_status[i] = STATE_ACTIVE;
                 }
                 break;
             case STATE_ACTIVE:
-                if (g_adc_meas.emg[i] < g_mem.emg.emg_threshold[i]-10){
-                    emg_cycle_status[i] = COUNTER_INC;
+                if (g_adc_meas.emg[i] < g_mem.emg.emg_threshold[i]-10){                    
+                    if (abs(start_emg_pos[i] - curr_pos) > 200){     // it has to be a sensible movement to update counter (only if produces motor movement)
+                        emg_cycle_status[i] = COUNTER_INC;
+                    }
+                    else {
+                        emg_cycle_status[i] = STATE_INACTIVE;
+                    }
                 }
                 break;
             case COUNTER_INC:
-                g_mem.cnt.emg_counter[i] = g_mem.cnt.emg_counter[i] + 1;
+                g_mem.cnt.emg_act_counter[i] = g_mem.cnt.emg_act_counter[i] + 1;
                 emg_cycle_status[i] = STATE_INACTIVE;
+                break;
+        }
+    }
+    
+    // State machine - Evaluate EMG excessive activity counter update
+    for (i=0; i<2 && emg_1_status == NORMAL && emg_2_status == NORMAL; i++){
+        switch (emg_excess_status[i]){
+            case STATE_INACTIVE:
+                if (g_adc_meas.emg[i] > exc_act_thr){
+                    timer_exc_s[i] = (uint32)CYCLES_TIMER_ReadCounter();
+                    emg_excess_status[i] = STATE_ACTIVE;
+                }
+                break;
+            case STATE_ACTIVE:
+                if (g_adc_meas.emg[i] < exc_act_thr-10){
+                    timer_exc_e[i] = (uint32)CYCLES_TIMER_ReadCounter();
+                    if (timer_exc_s[i] < timer_exc_e[i]) {
+                        timer_exc_s[i] = timer_exc_s[i] + (uint32)6000;
+                    }
+                    if (((float)(timer_exc_s[i] - timer_exc_e[i])/50.0) > 4.0){      //50 timers ticks per second
+                        emg_excess_status[i] = COUNTER_INC;
+                    }
+                    else {
+                        emg_excess_status[i] = STATE_INACTIVE;
+                    }
+                }
+                break;
+            case COUNTER_INC:
+                g_mem.cnt.excessive_signal_activity[i] = g_mem.cnt.excessive_signal_activity[i] + 1;
+                emg_excess_status[i] = STATE_INACTIVE;
                 break;
         }
     }
@@ -2666,8 +2786,8 @@ void save_cycles_eeprom() {
     cystatus status;
     static uint8 row_number;
     uint8 row_start = 1;
-    uint8* addr_start   = (uint8*)&g_mem.cnt.emg_counter[0];    //Data at beginning of the row 1
-    uint8* addr_start_c = (uint8*)&c_mem.cnt.emg_counter[0];
+    uint8* addr_start   = (uint8*)&g_mem.cnt.emg_act_counter[0];    //Data at beginning of the row 1
+    uint8* addr_start_c = (uint8*)&c_mem.cnt.emg_act_counter[0];
     uint8 row_end   = row_start + EEPROM_COUNTERS_ROWS - 1;
     static uint8* m_addr = NULL; 
 

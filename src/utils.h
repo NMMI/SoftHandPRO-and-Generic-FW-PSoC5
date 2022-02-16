@@ -152,6 +152,8 @@ void v4_normalize(float v4_in[4]);
 **/
 void update_EMG_history();
 
+void set_motor_driver_type();
+
 #endif
 
 /* [] END OF FILE */

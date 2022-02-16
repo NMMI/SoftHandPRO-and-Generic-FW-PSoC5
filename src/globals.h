@@ -129,6 +129,7 @@
 //==============================================================================
 #define DRIVER_MC33887  0       // Standard motor driver
 #define DRIVER_VNH5019  1       // High power motor driver
+#define DRIVER_BRUSHLESS 2      // ESC driver for brushless motors
  
 //==============================================================================
 //                                                                     HAND SIDE
@@ -142,7 +143,7 @@
 #define NUM_OF_USERS    3
 #define GENERIC_USER    0
 #define MARIA           1
-#define ROZA            2   
+#define R01             2   
     
 //==============================================================================
 //                                                                   DEVICE TYPE
@@ -197,8 +198,10 @@
 #define TRUE                    1
 #define DEFAULT_EEPROM_DISPLACEMENT 50  /*!< Number of pages occupied by the EEPROM.*/
 #define EEPROM_BYTES_ROW        16      /*!< EEPROM number of bytes per row.*/
-#define EEPROM_COUNTERS_ROWS    5       /*!< EEPROM number of rows dedicated to store counters.*/
-#define PWM_MAX_VALUE           100     /*!< Maximum value of the PWM signal.*/
+#define EEPROM_COUNTERS_ROWS    6       /*!< EEPROM number of rows dedicated to store counters.*/
+#define EEPROM_AFTER_CNT_FREE_ROWS 3    /*!< EEPROM number of rows free after counters.*/   
+#define PWM_MAX_VALUE_DC        100     /*!< Maximum value of the PWM signal.*/
+#define PWM_MAX_VALUE_ESC       2985    /*!< Maximum value of the PWM signal for ESC driver module.*/
 #define ANTI_WINDUP             1000    /*!< Anti windup saturation.*/ 
 #define DEFAULT_CURRENT_LIMIT   1500    /*!< Default Current limit, 0 stands for unlimited.*/
 #define CURRENT_HYSTERESIS      10      /*!< milliAmperes of hysteresis for current control.*/
@@ -272,14 +275,17 @@ struct st_data{
  *
 **/ 
 struct st_counters{
-    uint32  emg_counter[2];             /*!< Counter for EMG activation - both channels.*/                  //8
+    uint32  emg_act_counter[2];         /*!< Counter for EMG activation - both channels.*/                  //8
     uint32  position_hist[10];          /*!< Positions histogram - 10 zones.*/                              //40
     uint32  current_hist[4];            /*!< Current histogram - 4 zones.*/                                 //16
     uint32  rest_counter;               /*!< Counter for rest position occurrences.*/                       //4
     uint32  wire_disp;                  /*!< Counter for total wire displacement measurement.*/             //4
-    uint32  total_time_on;              /*!< Total time of system power (in seconds).*/                     //4
-    uint32  total_time_rest;            /*!< Total time of system while rest position is maintained.*/      //4
-};                                                                                                          // TOTAL: 80 bytes
+    uint32  total_runtime;              /*!< Total time of system power (in seconds).*/                     //4
+    uint32  total_time_rest;            /*!< Total time of system while rest position is maintained.*/      //4    
+    uint32  power_cycles;               /*!< Number of times the board has benne switched on since reset.*/ //4
+    uint32  excessive_signal_activity[2];  /*!< Number of times the EMG signals saturate for a long time.*/ //8
+    uint8   unused_bytes[4];            /*!< Unused bytes to fill row.*/                                    //4
+};                                                                                                          // TOTAL: 96 bytes
 
 //=================================================     Device
 /** \brief Device related parameters structure
@@ -460,8 +466,8 @@ struct st_eeprom {
     
     uint8  flag;                        /*!< If checked the device has been configured.*/                   //1 byte
     uint8  unused_bytes[15];            /*!< Leave bytes to align structures to memory rows.*/              //1 row     (End of row 1)
-    struct st_counters cnt;             /*!< Statistics Counters.*/                                         //5 rows    (End of row 6)
-    uint8  unused_bytes1[EEPROM_BYTES_ROW*4]; /*!< Leave for rows free for further uses.*/                  //4 rows    (End of row 10)
+    struct st_counters cnt;             /*!< Statistics Counters.*/                                         //6 rows    (End of row 7)
+    uint8  unused_bytes1[EEPROM_BYTES_ROW*EEPROM_AFTER_CNT_FREE_ROWS]; /*!< Rows free for further uses.*/   //3 rows    (End of row 10)
     struct st_device dev;               /*!< Device information.*/                                          //1 row     (End of row 11)
     struct st_motor motor[NUM_OF_MOTORS];       /*!< Motor variables.*/                                     //7*2 rows  (End of row 25)
     struct st_encoder enc[N_ENCODER_LINE_MAX];  /*!< Encoder variables (1 line).*/                          //3*2 rows  (End of row 31)
@@ -546,16 +552,18 @@ extern struct st_calib  calib;                      /*!< Calibration variables.*
 extern struct st_filter filt_v[NUM_OF_MOTORS], filt_curr_diff[NUM_OF_MOTORS], filt_i[NUM_OF_MOTORS];     /*!< Voltage and current filter variables.*/
 extern struct st_filter filt_vel[NUM_OF_SENSORS];                /*!< Velocity filter variables.*/
 extern struct st_filter filt_emg[NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS]; /*!< EMG filter variables.*/
+extern struct st_filter filt_detect_pc;             /*!< Battery tension filter to detect a new power cycle.*/
 
 extern uint16 timer_value;                          /*!< End time of the firmware main loop.*/
 extern uint16 timer_value0;                         /*!< Start time of the firmware main loop.*/
 extern float cycle_time;							/*!< Variable used to calculate how much time a cycle takes.*/
 
 extern int32    dev_tension[NUM_OF_MOTORS];         /*!< Power supply tension.*/
-extern uint8    dev_pwm_limit[NUM_OF_MOTORS];       /*!< Device pwm limit. It may change during execution.*/
-extern uint8    dev_pwm_sat[NUM_OF_MOTORS];         /*!< Device pwm saturation.*/
+extern uint16   dev_pwm_limit[NUM_OF_MOTORS];       /*!< Device pwm limit. It may change during execution.*/
+extern uint16   dev_pwm_sat[NUM_OF_MOTORS];         /*!< Device pwm saturation.*/
 extern int32    dev_tension_f[NUM_OF_MOTORS];       /*!< Filtered power supply tension.*/
 extern int32    pow_tension[NUM_OF_MOTORS];         /*!< Computed power supply tension.*/
+extern int32    detect_power_cycle;                 /*!< Variable used to detect a new power cycle.*/
 
 extern counter_status CYDATA cycles_status;         /*!< Cycles counter state machine status.*/
 extern adc_status CYDATA emg_1_status;              /*!< First EMG sensor status.*/
@@ -599,6 +607,7 @@ extern char sdFile[100];
 extern char sdParam[100];
 extern FS_FILE * pEMGHFile;
 extern char sdEMGHFile[100];
+extern char sdR01File[100];
 
 // IMU variables
 extern uint8 N_IMU_Connected;

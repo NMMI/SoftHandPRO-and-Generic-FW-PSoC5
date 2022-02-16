@@ -284,12 +284,17 @@ void commProcess(void){
             cmd_get_ADC_raw();
             break; 
             
-//=====================================================     CMD_GET_SD_FILESYSTEM
+//=====================================================     CMD_GET_SD_SINGLE_FILE
 
         case CMD_GET_SD_SINGLE_FILE:
             cmd_get_SD_file( __REV16(*((uint16 *) &g_rx.buffer[1])) );
-            break;             
+            break;   
             
+//=====================================================     CMD_REMOVE_SD_SINGLE_FILE
+
+        case CMD_REMOVE_SD_SINGLE_FILE:
+            cmd_remove_SD_file( __REV16(*((uint16 *) &g_rx.buffer[1])) );
+            break;               
             
 //=========================================================== ALL OTHER COMMANDS
         default:
@@ -348,6 +353,12 @@ void infoGet(uint16 info_type) {
         case GET_SD_EMG_HIST:
             // Send every single byte inside the function, since it could be a large file to send
             Read_SD_EMG_History_Data();
+            break;
+        case GET_SD_R01_SUMM:
+            Read_SD_Closed_File(sdR01File, packet_string, sizeof(packet_string));
+            UART_RS485_ClearTxBuffer();
+            UART_RS485_PutString(packet_string);
+            break;            
         default:
             break;
     }
@@ -772,8 +783,8 @@ void get_param_list (uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS],
                         case MARIA:
                             strcat(aux_str, " MARIA\0");
                         break;
-                        case ROZA:
-                            strcat(aux_str, " ROZA\0");
+                        case R01:
+                            strcat(aux_str, " R01\0");
                         break;
                     }   
                     break;                    
@@ -784,6 +795,9 @@ void get_param_list (uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS],
                         break;
                         case 1:
                             strcat(aux_str, " VNH5019 (High power)\0");
+                        break;
+                        case 2:
+                            strcat(aux_str, " ESC (Brushless)\0");
                         break;
                     }
                     break;
@@ -1124,8 +1138,8 @@ void manage_param_list(uint16 index) {
         "0 -> OFF\n1 -> ON\nThe board will reset\n",                                                                        //5 on_off_menu
         "0 -> None\n1 -> SD/RTC board\n2 -> WiFi board [N/A]\n3 -> Other [N/A]\nThe board will reset\n",                    //6 exp_port_menu
         spi_delay_menu,                                                                                                     //7 spi_delay_menu
-        "0 -> Generic user\n1 -> Maria\n2 -> Roza\nThe board will reset\n",                                                 //8 user_id_menu
-        "0 -> MC33887 (Standard)\n1 -> VNH5019 (High power)\nThe board will reset\n",                                       //9 motor_driver_type_menu
+        "0 -> Generic user\n1 -> Maria\n2 -> R01\nThe board will reset\n",                                                  //8 user_id_menu
+        "0 -> MC33887 (Standard)\n1 -> VNH5019 (High power)\n2 -> ESC (Brushless)\nThe board will reset\n",                                       //9 motor_driver_type_menu
         "0 -> SOFTHAND PRO\n1 -> GENERIC 2 MOTORS\n2 -> AIR CHAMBERS\n3 -> OTTOBOCK WRIST\n4 -> SOFTHAND 2 MOTORS\nThe board will reset\n",         //10 device_type_menu
         fsm_activation_mode_menu,                                                                             //11 fsm_activation_mode_menu
         "0 -> Close:CW, Open:CCW\n1 -> Close:CCW, Open:CW\n"                                                  //12 wrist_direction_menu
@@ -1461,7 +1475,7 @@ void set_custom_param(uint16 index) {
            
         case 38:        // First Motor Driver Type
             g_mem.motor[MOTOR_IDX].motor_driver_type = g_rx.buffer[3];
-            MOTOR_DRIVER_TYPE_Write((g_mem.motor[1].motor_driver_type << 1) | g_mem.motor[0].motor_driver_type);    // Note: leave numeric indices (not parameteric)
+            set_motor_driver_type();            
             break;
             
         case 44:         // Second Motor Position PID
@@ -1573,7 +1587,7 @@ void set_custom_param(uint16 index) {
             
         case 61:        // Second Motor Driver Type
             g_mem.motor[SECOND_MOTOR_IDX].motor_driver_type = g_rx.buffer[3];
-            MOTOR_DRIVER_TYPE_Write((g_mem.motor[1].motor_driver_type << 1) | g_mem.motor[0].motor_driver_type);    // Note: leave numeric indices (not parameteric)
+            set_motor_driver_type();
             break;
 
         case 75:        // Device type
@@ -1930,8 +1944,8 @@ void prepare_generic_info(char *info_string)
             case MARIA:
                 strcat(info_string, "User: MARIA\r\n");
                 break;
-            case ROZA:
-                strcat(info_string, "User: ROZA\r\n");
+            case R01:
+                strcat(info_string, "User: R01\r\n");
                 break;
             default:
                 strcat(info_string, "User: GENERIC USER\r\n");
@@ -2199,6 +2213,9 @@ void prepare_generic_info(char *info_string)
                 case DRIVER_VNH5019:
                     strcat(info_string, "Driver type: VNH5019 (High power)\r\n");
                     break;
+                case DRIVER_BRUSHLESS:
+                    strcat(info_string, "Driver type: ESC (Brushless)\r\n");
+                    break;
                 default:
                     break;
             }
@@ -2367,7 +2384,7 @@ void prepare_generic_info(char *info_string)
 }
 
 //==============================================================================
-//                                                   PREPARE GENERIC DEVICE INFO
+//                                                 PREPARE GENERIC COUNTERS INFO
 //==============================================================================
 
 void prepare_counter_info(char *info_string)
@@ -2412,7 +2429,7 @@ void prepare_counter_info(char *info_string)
     }
     strcat(info_string, "\r\n");
             
-    sprintf(str, "EMG activations counter: %lu, %lu", MEM_P->cnt.emg_counter[0], MEM_P->cnt.emg_counter[1]);
+    sprintf(str, "EMG activations counter: %lu, %lu", MEM_P->cnt.emg_act_counter[0], MEM_P->cnt.emg_act_counter[1]);
     strcat(info_string, str);
     strcat(info_string, "\r\n");
     
@@ -2424,11 +2441,58 @@ void prepare_counter_info(char *info_string)
     strcat(info_string, str);
     strcat(info_string, "\r\n");
     
-    sprintf(str, "Total power on time (sec): %lu", MEM_P->cnt.total_time_on);
+    sprintf(str, "Total power on time (sec): %lu", MEM_P->cnt.total_runtime);
     strcat(info_string, str);
     strcat(info_string, "\r\n");
     
     sprintf(str, "Total rest position time (sec): %lu", MEM_P->cnt.total_time_rest);
+    strcat(info_string, str);
+    strcat(info_string, "\r\n");
+    
+    
+    // R01 Project statistics (some are duplicated)
+    char CYDATA R01_str[300];
+    prepare_R01_info(R01_str);
+    strcat(info_string, "\r\n");
+    strcat(info_string, R01_str);
+}
+
+//==============================================================================
+//                                                 PREPARE GENERIC COUNTERS INFO
+//==============================================================================
+
+void prepare_R01_info(char *info_string)
+{
+    char str[100];  
+
+    struct st_eeprom* MEM_P = &g_mem;    
+
+    strcpy(info_string, "");
+    
+    strcat(info_string, "R01 PROJECT STATISTICS\r\n");
+    strcat(info_string, "\r\n");
+    
+    sprintf(str, "Power cycles: %lu", MEM_P->cnt.power_cycles);
+    strcat(info_string, str);
+    strcat(info_string, "\r\n");
+    
+    sprintf(str, "Number of motions (close/open): %lu, %lu", MEM_P->cnt.emg_act_counter[0], MEM_P->cnt.emg_act_counter[1]);
+    strcat(info_string, str);
+    strcat(info_string, "\r\n");
+    
+    sprintf(str, "Excessive signal activity (close/open): %lu, %lu", MEM_P->cnt.excessive_signal_activity[0], MEM_P->cnt.excessive_signal_activity[1]);
+    strcat(info_string, str);
+    strcat(info_string, "\r\n");
+    
+    sprintf(str, "Total runtime (sec): %lu", MEM_P->cnt.total_runtime);
+    strcat(info_string, str);
+    strcat(info_string, "\r\n");
+    
+    sprintf(str, "Average duration of a powered-on session (sec): %.4f", (float)(MEM_P->cnt.total_runtime / MEM_P->cnt.power_cycles));
+    strcat(info_string, str);
+    strcat(info_string, "\r\n");
+    
+    sprintf(str, "Frequency of motions: %.4f", (float)((MEM_P->cnt.emg_act_counter[0] + MEM_P->cnt.emg_act_counter[1]) / (float)MEM_P->cnt.total_runtime));
     strcat(info_string, str);
     strcat(info_string, "\r\n");
 
@@ -2704,7 +2768,7 @@ void prepare_SD_param_info(char *info_string)
 //==============================================================================
 void prepare_SD_legend(char *info_string)
 {
-    char str[100];  
+    char str[120];  
     int i;
         
     // Legend
@@ -2717,7 +2781,7 @@ void prepare_SD_legend(char *info_string)
         sprintf(str, "Bin_%d_Curr,", i); 
         strcat(info_string, str);
     }
-    sprintf(str, "EMG_1_act,EMG_2_act,Rest_times,Wire_disp,Total_power_on_time,Total_rest_time");
+    sprintf(str, "Rest_times,Wire_disp,Total_rest_time,Power_cycles,EMG_1_act,EMG_2_act,EMG_1_excess,EMG_2_excess,Total_runtime");
     strcat(info_string, str);
     strcat(info_string, "\r\n");
 }
@@ -2749,13 +2813,18 @@ void prepare_SD_info(char *info_string)
         sprintf(str, "%lu,", g_mem.cnt.current_hist[i-1]); 
         strcat(info_string, str);
     }
-       
-    // EMG_1, EMG_2
-    sprintf(str, "%lu,%lu,", g_mem.cnt.emg_counter[0], g_mem.cnt.emg_counter[1]);
+
+    // Rest_times, Wire_disp, Total_time_rest, Power_cycles
+    sprintf(str, "%lu,%lu,%lu,%lu,", g_mem.cnt.rest_counter, g_mem.cnt.wire_disp, g_mem.cnt.total_time_rest, g_mem.cnt.power_cycles);
     strcat(info_string, str);
     
-    // Rest_times, Wire_disp, Total_power_on_time, Total_rest_time
-    sprintf(str, "%lu,%lu,%lu,%lu", g_mem.cnt.rest_counter, g_mem.cnt.wire_disp, g_mem.cnt.total_time_on, g_mem.cnt.total_time_rest);
+    // EMG_1_act, EMG_2_act, EMG_1_excess, EMG_2_excess
+    sprintf(str, "%lu,%lu,%lu,%lu,", g_mem.cnt.emg_act_counter[0], g_mem.cnt.emg_act_counter[1], 
+                                    g_mem.cnt.excessive_signal_activity[0], g_mem.cnt.excessive_signal_activity[1]);
+    strcat(info_string, str);
+    
+    // Total_runtime
+    sprintf(str, "%lu", g_mem.cnt.total_runtime);
     strcat(info_string, str);
     
     strcat(info_string, "\r\n");
@@ -3069,7 +3138,7 @@ uint8 memInit(void)
     g_mem.dev.dev_type          = GENERIC_2_MOTORS;
     g_mem.dev.reset_counters    = FALSE;   
     reset_counters();                       //Initialize counters
-    for (i=0; i<EEPROM_BYTES_ROW*4; i++){
+    for (i=0; i<EEPROM_BYTES_ROW*EEPROM_AFTER_CNT_FREE_ROWS; i++){
         g_mem.unused_bytes1[i] = 0;
     }
     g_mem.dev.use_2nd_motor_flag = FALSE;
@@ -3261,6 +3330,7 @@ void memInit_SoftHandPro(void)
 	
     g_mem.imu.read_imu_flag = FALSE;
     g_mem.exp.read_exp_port_flag = EXP_NONE;       // 0 - None
+    g_mem.exp.record_EMG_history_on_SD = FALSE;
     strcpy(g_mem.user[g_mem.dev.user_id].user_code_string, "USR001");
 }
 
@@ -4069,6 +4139,34 @@ void cmd_get_SD_file( uint16 filename_length ){
     // Send the file to API that receives packet as a ping string
     UART_RS485_ClearTxBuffer();
     UART_RS485_PutString(str_sd_data);
+}
+
+void cmd_remove_SD_file( uint16 filename_length ){
+    
+    uint8 i = 0;
+    char CYDATA filename[50] = "";
+    strcpy(filename, "");
+    
+    for (i=0; i<filename_length; i++){
+        *((uint8*)filename + i) = (char)g_rx.buffer[3+i];
+    }
+    *((uint8*)filename + i) = '\0';
+     
+    // Check if the file is the one currently opened or not
+    uint8 res = Remove_SD_File(filename);
+  
+    
+    uint8 packet_data[3]; 
+    
+    //Header package
+
+    packet_data[0] = CMD_REMOVE_SD_SINGLE_FILE;
+    packet_data[1] = res;
+
+    // Calculate Checksum and send message to UART 
+    packet_data[2] = LCRChecksum (packet_data, 2);
+    
+    commWrite(packet_data, 3);
 }
 
 //==============================================================================

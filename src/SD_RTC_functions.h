@@ -74,6 +74,7 @@ void set_RTC_time();
 void InitSD_FS();
 void Write_SD_Param_file();
 void Read_SD_Closed_File(char*, char*, int);
+int  Remove_SD_File(char*);
 void Read_SD_Current_Data(char*, int);
 void Read_SD_EMG_History_Data();
 int  Get_DirectoriesList(char* path, char directories_list[3000][8], int first_idx);

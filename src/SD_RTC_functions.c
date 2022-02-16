@@ -229,6 +229,12 @@ void InitSD_FS()
         prepare_SD_EMG_History_legend(info_);
         FS_Write(pEMGHFile, info_, strlen(info_));
     }
+    
+    //Write updated data on R01 project
+    FS_FILE* pR01File = FS_FOpen(sdR01File, "w");
+    prepare_R01_info(info_);
+    FS_Write(pR01File, info_, strlen(info_));
+    FS_FClose(pR01File);
 }
 
 /*******************************************************************************
@@ -255,6 +261,13 @@ void Read_SD_Closed_File(char* src_file, char* info_file, int n_p){
         info_file[i] = 0;
     }
     FS_FClose(pF);
+}
+
+/*******************************************************************************
+* Function Name: Remove SD File
+*********************************************************************************/
+int Remove_SD_File(char* src_file){     
+    return FS_Remove(src_file);  
 }
 
 /*******************************************************************************

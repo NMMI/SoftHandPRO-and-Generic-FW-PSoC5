@@ -57,6 +57,8 @@ struct st_calib     calib;                      // Calibration variables.
 struct st_filter    filt_v[NUM_OF_MOTORS], filt_curr_diff[NUM_OF_MOTORS], filt_i[NUM_OF_MOTORS];     // Voltage and current filter variables.
 struct st_filter    filt_vel[NUM_OF_SENSORS];                // Velocity filter variables.
 struct st_filter    filt_emg[NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS];                // EMG filter variables.
+struct st_filter    filt_detect_pc;             // Battery tension filter to detect a new power cycle.
+
 
 // Timer value for debug field
 uint16  timer_value;
@@ -65,10 +67,11 @@ float   cycle_time;
 
 // Device Data
 int32   dev_tension[NUM_OF_MOTORS];         /*!< Power supply tension.*/
-uint8   dev_pwm_limit[NUM_OF_MOTORS];       /*!< Device pwm limit. It may change during execution.*/
-uint8   dev_pwm_sat[NUM_OF_MOTORS] = {100,100};  /*!< Device pwm saturation. By default the saturation value must not exceed 100.*/
+uint16  dev_pwm_limit[NUM_OF_MOTORS];       /*!< Device pwm limit. It may change during execution.*/
+uint16  dev_pwm_sat[NUM_OF_MOTORS];         /*!< Device pwm saturation. By default the saturation value must not exceed 100.*/
 int32   dev_tension_f[NUM_OF_MOTORS];       /*!< Filtered power supply tension.*/
 int32   pow_tension[NUM_OF_MOTORS];         /*!< Computed power supply tension.*/
+int32   detect_power_cycle = 0;             /*!< Variable used to detect a new power cycle.*/
 
 counter_status CYDATA cycles_status = NONE;     /*!< Cycles counter state machine status.*/
 adc_status CYDATA emg_1_status = RESET;         /*!< First EMG sensor status.*/
@@ -113,6 +116,7 @@ char sdFile[100] = "";
 char sdParam[100] = "";
 FS_FILE * pEMGHFile;
 char sdEMGHFile[100] = "\\EMG_History.csv";
+char sdR01File[100] = "\\R01_Summary.csv";
 
 // IMU variables
 uint8 N_IMU_Connected;

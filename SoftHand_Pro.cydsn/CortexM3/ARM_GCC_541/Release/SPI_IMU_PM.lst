@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgWzezI.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 1
   21:Generated_Source\PSoC5/SPI_IMU_PM.c **** {
   22:Generated_Source\PSoC5/SPI_IMU_PM.c ****     SPI_IMU_DISABLED,
   23:Generated_Source\PSoC5/SPI_IMU_PM.c ****     SPI_IMU_BITCTR_INIT,
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgWzezI.s 			page 2
 
 
   24:Generated_Source\PSoC5/SPI_IMU_PM.c **** };
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 1
   48:Generated_Source\PSoC5/SPI_IMU_PM.c **** * Function Name: SPI_IMU_RestoreConfig
   49:Generated_Source\PSoC5/SPI_IMU_PM.c **** ********************************************************************************
   50:Generated_Source\PSoC5/SPI_IMU_PM.c **** *
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgWzezI.s 			page 3
 
 
   51:Generated_Source\PSoC5/SPI_IMU_PM.c **** * Summary:
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 1
   75:Generated_Source\PSoC5/SPI_IMU_PM.c **** *  None.
   76:Generated_Source\PSoC5/SPI_IMU_PM.c **** *
   77:Generated_Source\PSoC5/SPI_IMU_PM.c **** * Return:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgWzezI.s 			page 4
 
 
   78:Generated_Source\PSoC5/SPI_IMU_PM.c **** *  None.
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 1
  133              		.global	SPI_IMU_Wakeup
  134              		.thumb
  135              		.thumb_func
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgWzezI.s 			page 5
 
 
  136              		.type	SPI_IMU_Wakeup, %function
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 1
  135:Generated_Source\PSoC5/SPI_IMU_PM.c ****         SPI_IMU_txBufferWrite = 0u;
  136:Generated_Source\PSoC5/SPI_IMU_PM.c ****     #endif /* (SPI_IMU_TX_SOFTWARE_BUF_ENABLED) */
  137:Generated_Source\PSoC5/SPI_IMU_PM.c **** 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 6
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgWzezI.s 			page 6
 
 
  138:Generated_Source\PSoC5/SPI_IMU_PM.c ****     /* Clear any data from the RX and TX FIFO */
@@ -341,10 +341,10 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 1
  177 0006 00000000 		.4byte	.Ldebug_abbrev0
  178 000a 04       		.byte	0x4
  179 000b 01       		.uleb128 0x1
- 180 000c E9000000 		.4byte	.LASF23
+ 180 000c 94000000 		.4byte	.LASF23
  181 0010 0C       		.byte	0xc
- 182 0011 8B000000 		.4byte	.LASF24
- 183 0015 36000000 		.4byte	.LASF25
+ 182 0011 36000000 		.4byte	.LASF24
+ 183 0015 44010000 		.4byte	.LASF25
  184 0019 00000000 		.4byte	.Ldebug_ranges0+0
  185 001d 00000000 		.4byte	0
  186 0021 00000000 		.4byte	.Ldebug_line0
@@ -355,10 +355,10 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 1
  191 002c 02       		.uleb128 0x2
  192 002d 01       		.byte	0x1
  193 002e 08       		.byte	0x8
- 194 002f 77010000 		.4byte	.LASF1
+ 194 002f 22010000 		.4byte	.LASF1
  195 0033 02       		.uleb128 0x2
  196 0034 02       		.byte	0x2
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 7
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgWzezI.s 			page 7
 
 
  197 0035 05       		.byte	0x5
@@ -374,7 +374,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 1
  207 0048 02       		.uleb128 0x2
  208 0049 04       		.byte	0x4
  209 004a 07       		.byte	0x7
- 210 004b BA000000 		.4byte	.LASF5
+ 210 004b 65000000 		.4byte	.LASF5
  211 004f 02       		.uleb128 0x2
  212 0050 08       		.byte	0x8
  213 0051 05       		.byte	0x5
@@ -382,7 +382,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 1
  215 0056 02       		.uleb128 0x2
  216 0057 08       		.byte	0x8
  217 0058 07       		.byte	0x7
- 218 0059 CC000000 		.4byte	.LASF7
+ 218 0059 77000000 		.4byte	.LASF7
  219 005d 03       		.uleb128 0x3
  220 005e 04       		.byte	0x4
  221 005f 05       		.byte	0x5
@@ -392,14 +392,14 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 1
  225 0066 07       		.byte	0x7
  226 0067 1A000000 		.4byte	.LASF8
  227 006b 04       		.uleb128 0x4
- 228 006c B4000000 		.4byte	.LASF12
+ 228 006c 5F000000 		.4byte	.LASF12
  229 0070 02       		.byte	0x2
  230 0071 E401     		.2byte	0x1e4
  231 0073 2C000000 		.4byte	0x2c
  232 0077 02       		.uleb128 0x2
  233 0078 04       		.byte	0x4
  234 0079 04       		.byte	0x4
- 235 007a E3000000 		.4byte	.LASF9
+ 235 007a 8E000000 		.4byte	.LASF9
  236 007e 02       		.uleb128 0x2
  237 007f 08       		.byte	0x8
  238 0080 04       		.byte	0x4
@@ -407,9 +407,9 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 1
  240 0085 02       		.uleb128 0x2
  241 0086 01       		.byte	0x1
  242 0087 08       		.byte	0x8
- 243 0088 94010000 		.4byte	.LASF11
+ 243 0088 3F010000 		.4byte	.LASF11
  244 008c 04       		.uleb128 0x4
- 245 008d AF000000 		.4byte	.LASF13
+ 245 008d 5A000000 		.4byte	.LASF13
  246 0091 02       		.byte	0x2
  247 0092 8E02     		.2byte	0x28e
  248 0094 98000000 		.4byte	0x98
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 1
  251 009d 02       		.uleb128 0x2
  252 009e 08       		.byte	0x8
  253 009f 04       		.byte	0x4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 8
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgWzezI.s 			page 8
 
 
  254 00a0 0D020000 		.4byte	.LASF14
@@ -478,14 +478,14 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 1
  308 010f 01       		.byte	0x1
  309 0110 7C       		.byte	0x7c
  310 0111 00000000 		.4byte	.LFB3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 9
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgWzezI.s 			page 9
 
 
  311 0115 1C000000 		.4byte	.LFE3-.LFB3
  312 0119 01       		.uleb128 0x1
  313 011a 9C       		.byte	0x9c
  314 011b 0B       		.uleb128 0xb
- 315 011c 85010000 		.4byte	.LASF26
+ 315 011c 30010000 		.4byte	.LASF26
  316 0120 01       		.byte	0x1
  317 0121 14       		.byte	0x14
  318 0122 CC000000 		.4byte	0xcc
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 1
  365 0028 00       		.byte	0
  366 0029 04       		.uleb128 0x4
  367 002a 16       		.uleb128 0x16
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 10
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgWzezI.s 			page 10
 
 
  368 002b 00       		.byte	0
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 1
  422 0061 0B       		.uleb128 0xb
  423 0062 49       		.uleb128 0x49
  424 0063 13       		.uleb128 0x13
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgWzezI.s 			page 11
 
 
  425 0064 00       		.byte	0
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 1
  479 009c 0B       		.uleb128 0xb
  480 009d 3B       		.uleb128 0x3b
  481 009e 0B       		.uleb128 0xb
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 12
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgWzezI.s 			page 12
 
 
  482 009f 49       		.uleb128 0x49
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 1
  527 001a 756E7369 		.ascii	"unsigned int\000"
  527      676E6564 
  527      20696E74 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgWzezI.s 			page 13
 
 
  527      00
@@ -727,76 +727,76 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 1
  529      494D555F 
  529      57616B65 
  529      757000
- 530              	.LASF25:
- 531 0036 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHandPRO-a"
- 531      73657273 
- 531      5C4D6174 
- 531      7469615C 
- 531      446F6375 
- 532 0064 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\SoftHand_Pro.cydsn\000"
- 532      656E6572 
- 532      69632D46 
- 532      572D5053 
- 532      6F43355C 
- 533              	.LASF24:
- 534 008b 47656E65 		.ascii	"Generated_Source\\PSoC5\\SPI_IMU_PM.c\000"
- 534      72617465 
- 534      645F536F 
- 534      75726365 
- 534      5C50536F 
- 535              	.LASF13:
- 536 00af 72656738 		.ascii	"reg8\000"
- 536      00
- 537              	.LASF12:
- 538 00b4 75696E74 		.ascii	"uint8\000"
- 538      3800
- 539              	.LASF5:
- 540 00ba 6C6F6E67 		.ascii	"long unsigned int\000"
- 540      20756E73 
- 540      69676E65 
- 540      6420696E 
- 540      7400
- 541              	.LASF7:
- 542 00cc 6C6F6E67 		.ascii	"long long unsigned int\000"
- 542      206C6F6E 
- 542      6720756E 
- 542      7369676E 
- 542      65642069 
- 543              	.LASF9:
- 544 00e3 666C6F61 		.ascii	"float\000"
- 544      7400
- 545              	.LASF23:
- 546 00e9 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 546      43313120 
- 546      352E342E 
- 546      31203230 
- 546      31363036 
- 547 011c 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 547      20726576 
- 547      6973696F 
- 547      6E203233 
- 547      37373135 
- 548 014f 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
- 548      66756E63 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 14
+ 530              	.LASF24:
+ 531 0036 47656E65 		.ascii	"Generated_Source\\PSoC5\\SPI_IMU_PM.c\000"
+ 531      72617465 
+ 531      645F536F 
+ 531      75726365 
+ 531      5C50536F 
+ 532              	.LASF13:
+ 533 005a 72656738 		.ascii	"reg8\000"
+ 533      00
+ 534              	.LASF12:
+ 535 005f 75696E74 		.ascii	"uint8\000"
+ 535      3800
+ 536              	.LASF5:
+ 537 0065 6C6F6E67 		.ascii	"long unsigned int\000"
+ 537      20756E73 
+ 537      69676E65 
+ 537      6420696E 
+ 537      7400
+ 538              	.LASF7:
+ 539 0077 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 539      206C6F6E 
+ 539      6720756E 
+ 539      7369676E 
+ 539      65642069 
+ 540              	.LASF9:
+ 541 008e 666C6F61 		.ascii	"float\000"
+ 541      7400
+ 542              	.LASF23:
+ 543 0094 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 543      43313120 
+ 543      352E342E 
+ 543      31203230 
+ 543      31363036 
+ 544 00c7 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 544      20726576 
+ 544      6973696F 
+ 544      6E203233 
+ 544      37373135 
+ 545 00fa 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 545      66756E63 
+ 545      74696F6E 
+ 545      2D736563 
+ 545      74696F6E 
+ 546              	.LASF1:
+ 547 0122 756E7369 		.ascii	"unsigned char\000"
+ 547      676E6564 
+ 547      20636861 
+ 547      7200
+ 548              	.LASF26:
+ 549 0130 5350495F 		.ascii	"SPI_IMU_backup\000"
+ 549      494D555F 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgWzezI.s 			page 14
 
 
- 548      74696F6E 
- 548      2D736563 
- 548      74696F6E 
- 549              	.LASF1:
- 550 0177 756E7369 		.ascii	"unsigned char\000"
- 550      676E6564 
- 550      20636861 
- 550      7200
- 551              	.LASF26:
- 552 0185 5350495F 		.ascii	"SPI_IMU_backup\000"
- 552      494D555F 
- 552      6261636B 
- 552      757000
- 553              	.LASF11:
- 554 0194 63686172 		.ascii	"char\000"
- 554      00
+ 549      6261636B 
+ 549      757000
+ 550              	.LASF11:
+ 551 013f 63686172 		.ascii	"char\000"
+ 551      00
+ 552              	.LASF25:
+ 553 0144 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GitHub\\SoftHandPRO-a"
+ 553      73657273 
+ 553      5C4D6174 
+ 553      7469615C 
+ 553      446F6375 
+ 554 0172 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\SoftHand_Pro.cydsn\000"
+ 554      656E6572 
+ 554      69632D46 
+ 554      572D5053 
+ 554      6F43355C 
  555              	.LASF4:
  556 0199 6C6F6E67 		.ascii	"long int\000"
  556      20696E74 
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 1
  571              	.LASF14:
  572 020d 6C6F6E67 		.ascii	"long double\000"
  572      20646F75 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc5bHX8E.s 			page 15
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgWzezI.s 			page 15
 
 
  572      626C6500 

@@ -130,6 +130,7 @@
 #define LP_ACC_FREQ_20              0x04
 #define LP_ACC_FREQ_10              0x05
 #define LP_ACC_FREQ_5               0x06
+#define NO_ACC_FIL                  0x08
 
 // macro for quaternion estimation
 #define TICK2GYRO                   0.000133158     // rad->deg conversion is included

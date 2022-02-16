@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
   22:Generated_Source\PSoC5/PWM_MOTORS.c **** ********************************************************************************/
   23:Generated_Source\PSoC5/PWM_MOTORS.c **** 
   24:Generated_Source\PSoC5/PWM_MOTORS.c **** #include "PWM_MOTORS.h"
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 2
 
 
   25:Generated_Source\PSoC5/PWM_MOTORS.c **** 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
   51              		.loc 1 61 0
   52 0010 034B     		ldr	r3, .L3
   53 0012 0122     		movs	r2, #1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 3
 
 
   54 0014 1A70     		strb	r2, [r3]
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
   84 0002 82B0     		sub	sp, sp, #8
   85              		.cfi_def_cfa_offset 16
   86 0004 00AF     		add	r7, sp, #0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 4
 
 
   87              		.cfi_def_cfa_register 7
@@ -215,7 +215,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  116:Generated_Source\PSoC5/PWM_MOTORS.c ****         /* Set the default compare mode defined in the parameter */
  117:Generated_Source\PSoC5/PWM_MOTORS.c ****         ctrl = PWM_MOTORS_CONTROL & ((uint8)(~PWM_MOTORS_CTRL_CMPMODE2_MASK)) &
   88              		.loc 1 117 0
-  89 0006 124B     		ldr	r3, .L6
+  89 0006 164B     		ldr	r3, .L6
   90 0008 1B78     		ldrb	r3, [r3]
   91 000a DBB2     		uxtb	r3, r3
   92 000c 23F03F03 		bic	r3, r3, #63
@@ -223,7 +223,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  118:Generated_Source\PSoC5/PWM_MOTORS.c ****                 ((uint8)(~PWM_MOTORS_CTRL_CMPMODE1_MASK));
  119:Generated_Source\PSoC5/PWM_MOTORS.c ****         PWM_MOTORS_CONTROL = ctrl | PWM_MOTORS_DEFAULT_COMPARE2_MODE |
   94              		.loc 1 119 0
-  95 0012 0F4A     		ldr	r2, .L6
+  95 0012 134A     		ldr	r2, .L6
   96 0014 FB79     		ldrb	r3, [r7, #7]
   97 0016 43F01203 		orr	r3, r3, #18
   98 001a DBB2     		uxtb	r3, r3
@@ -235,45 +235,53 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  124:Generated_Source\PSoC5/PWM_MOTORS.c ****         #if (PWM_MOTORS_Resolution == 8)
  125:Generated_Source\PSoC5/PWM_MOTORS.c ****             /* Set FIFO 0 to 1 byte register for period*/
  126:Generated_Source\PSoC5/PWM_MOTORS.c ****             PWM_MOTORS_AUX_CONTROLDP0 |= (PWM_MOTORS_AUX_CTRL_FIFO0_CLR);
- 100              		.loc 1 126 0
- 101 001e 0D4A     		ldr	r2, .L6+4
- 102 0020 0C4B     		ldr	r3, .L6+4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 5
+ 127:Generated_Source\PSoC5/PWM_MOTORS.c ****         #else /* (PWM_MOTORS_Resolution == 16)*/
+ 128:Generated_Source\PSoC5/PWM_MOTORS.c ****             /* Set FIFO 0 to 1 byte register for period */
+ 129:Generated_Source\PSoC5/PWM_MOTORS.c ****             PWM_MOTORS_AUX_CONTROLDP0 |= (PWM_MOTORS_AUX_CTRL_FIFO0_CLR);
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 5
 
 
+ 100              		.loc 1 129 0
+ 101 001e 114A     		ldr	r2, .L6+4
+ 102 0020 104B     		ldr	r3, .L6+4
  103 0022 1B78     		ldrb	r3, [r3]
  104 0024 DBB2     		uxtb	r3, r3
  105 0026 43F00103 		orr	r3, r3, #1
  106 002a DBB2     		uxtb	r3, r3
  107 002c 1370     		strb	r3, [r2]
- 127:Generated_Source\PSoC5/PWM_MOTORS.c ****         #else /* (PWM_MOTORS_Resolution == 16)*/
- 128:Generated_Source\PSoC5/PWM_MOTORS.c ****             /* Set FIFO 0 to 1 byte register for period */
- 129:Generated_Source\PSoC5/PWM_MOTORS.c ****             PWM_MOTORS_AUX_CONTROLDP0 |= (PWM_MOTORS_AUX_CTRL_FIFO0_CLR);
  130:Generated_Source\PSoC5/PWM_MOTORS.c ****             PWM_MOTORS_AUX_CONTROLDP1 |= (PWM_MOTORS_AUX_CTRL_FIFO0_CLR);
+ 108              		.loc 1 130 0
+ 109 002e 0E4A     		ldr	r2, .L6+8
+ 110 0030 0D4B     		ldr	r3, .L6+8
+ 111 0032 1B78     		ldrb	r3, [r3]
+ 112 0034 DBB2     		uxtb	r3, r3
+ 113 0036 43F00103 		orr	r3, r3, #1
+ 114 003a DBB2     		uxtb	r3, r3
+ 115 003c 1370     		strb	r3, [r2]
  131:Generated_Source\PSoC5/PWM_MOTORS.c ****         #endif /* (PWM_MOTORS_Resolution == 8) */
  132:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  133:Generated_Source\PSoC5/PWM_MOTORS.c ****         PWM_MOTORS_WriteCounter(PWM_MOTORS_INIT_PERIOD_VALUE);
- 108              		.loc 1 133 0
- 109 002e 6420     		movs	r0, #100
- 110 0030 FFF7FEFF 		bl	PWM_MOTORS_WriteCounter
+ 116              		.loc 1 133 0
+ 117 003e 6420     		movs	r0, #100
+ 118 0040 FFF7FEFF 		bl	PWM_MOTORS_WriteCounter
  134:Generated_Source\PSoC5/PWM_MOTORS.c ****     #endif /* (!PWM_MOTORS_UsingFixedFunction) */
  135:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  136:Generated_Source\PSoC5/PWM_MOTORS.c ****     PWM_MOTORS_WritePeriod(PWM_MOTORS_INIT_PERIOD_VALUE);
- 111              		.loc 1 136 0
- 112 0034 6420     		movs	r0, #100
- 113 0036 FFF7FEFF 		bl	PWM_MOTORS_WritePeriod
+ 119              		.loc 1 136 0
+ 120 0044 6420     		movs	r0, #100
+ 121 0046 FFF7FEFF 		bl	PWM_MOTORS_WritePeriod
  137:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  138:Generated_Source\PSoC5/PWM_MOTORS.c ****         #if (PWM_MOTORS_UseOneCompareMode)
  139:Generated_Source\PSoC5/PWM_MOTORS.c ****             PWM_MOTORS_WriteCompare(PWM_MOTORS_INIT_COMPARE_VALUE1);
  140:Generated_Source\PSoC5/PWM_MOTORS.c ****         #else
  141:Generated_Source\PSoC5/PWM_MOTORS.c ****             PWM_MOTORS_WriteCompare1(PWM_MOTORS_INIT_COMPARE_VALUE1);
- 114              		.loc 1 141 0
- 115 003a 0020     		movs	r0, #0
- 116 003c FFF7FEFF 		bl	PWM_MOTORS_WriteCompare1
+ 122              		.loc 1 141 0
+ 123 004a 0020     		movs	r0, #0
+ 124 004c FFF7FEFF 		bl	PWM_MOTORS_WriteCompare1
  142:Generated_Source\PSoC5/PWM_MOTORS.c ****             PWM_MOTORS_WriteCompare2(PWM_MOTORS_INIT_COMPARE_VALUE2);
- 117              		.loc 1 142 0
- 118 0040 0020     		movs	r0, #0
- 119 0042 FFF7FEFF 		bl	PWM_MOTORS_WriteCompare2
+ 125              		.loc 1 142 0
+ 126 0050 0020     		movs	r0, #0
+ 127 0052 FFF7FEFF 		bl	PWM_MOTORS_WriteCompare2
  143:Generated_Source\PSoC5/PWM_MOTORS.c ****         #endif /* (PWM_MOTORS_UseOneCompareMode) */
  144:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  145:Generated_Source\PSoC5/PWM_MOTORS.c ****         #if (PWM_MOTORS_KillModeMinTime)
@@ -290,6 +298,9 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  156:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  157:Generated_Source\PSoC5/PWM_MOTORS.c ****     #if (PWM_MOTORS_UsingFixedFunction)
  158:Generated_Source\PSoC5/PWM_MOTORS.c ****         /* Globally Enable the Fixed Function Block chosen */
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 6
+
+
  159:Generated_Source\PSoC5/PWM_MOTORS.c ****         PWM_MOTORS_GLOBAL_ENABLE |= PWM_MOTORS_BLOCK_EN_MASK;
  160:Generated_Source\PSoC5/PWM_MOTORS.c ****         /* Set the Interrupt source to come from the status register */
  161:Generated_Source\PSoC5/PWM_MOTORS.c ****         PWM_MOTORS_CONTROL2 |= PWM_MOTORS_CTRL2_IRQ_SEL;
@@ -298,9 +309,6 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  164:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  165:Generated_Source\PSoC5/PWM_MOTORS.c ****             /* CyEnterCriticalRegion and CyExitCriticalRegion are used to mark following region cri
  166:Generated_Source\PSoC5/PWM_MOTORS.c ****             /* Enter Critical Region*/
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 6
-
-
  167:Generated_Source\PSoC5/PWM_MOTORS.c ****             PWM_MOTORS_interruptState = CyEnterCriticalSection();
  168:Generated_Source\PSoC5/PWM_MOTORS.c ****             /* Use the interrupt output of the status register for IRQ output */
  169:Generated_Source\PSoC5/PWM_MOTORS.c ****             PWM_MOTORS_STATUS_AUX_CTRL |= PWM_MOTORS_STATUS_ACTL_INT_EN_MASK;
@@ -314,30 +322,31 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  177:Generated_Source\PSoC5/PWM_MOTORS.c ****         #endif /* (PWM_MOTORS_UseStatus) */
  178:Generated_Source\PSoC5/PWM_MOTORS.c ****     #endif /* (PWM_MOTORS_UsingFixedFunction) */
  179:Generated_Source\PSoC5/PWM_MOTORS.c **** }
- 120              		.loc 1 179 0
- 121 0046 00BF     		nop
- 122 0048 0837     		adds	r7, r7, #8
- 123              		.cfi_def_cfa_offset 8
- 124 004a BD46     		mov	sp, r7
- 125              		.cfi_def_cfa_register 13
- 126              		@ sp needed
- 127 004c 80BD     		pop	{r7, pc}
- 128              	.L7:
- 129 004e 00BF     		.align	2
- 130              	.L6:
- 131 0050 78640040 		.word	1073767544
- 132 0054 91640040 		.word	1073767569
- 133              		.cfi_endproc
- 134              	.LFE1:
- 135              		.size	PWM_MOTORS_Init, .-PWM_MOTORS_Init
- 136              		.section	.text.PWM_MOTORS_Enable,"ax",%progbits
- 137              		.align	2
- 138              		.global	PWM_MOTORS_Enable
- 139              		.thumb
- 140              		.thumb_func
- 141              		.type	PWM_MOTORS_Enable, %function
- 142              	PWM_MOTORS_Enable:
- 143              	.LFB2:
+ 128              		.loc 1 179 0
+ 129 0056 00BF     		nop
+ 130 0058 0837     		adds	r7, r7, #8
+ 131              		.cfi_def_cfa_offset 8
+ 132 005a BD46     		mov	sp, r7
+ 133              		.cfi_def_cfa_register 13
+ 134              		@ sp needed
+ 135 005c 80BD     		pop	{r7, pc}
+ 136              	.L7:
+ 137 005e 00BF     		.align	2
+ 138              	.L6:
+ 139 0060 78650040 		.word	1073767800
+ 140 0064 94640040 		.word	1073767572
+ 141 0068 95640040 		.word	1073767573
+ 142              		.cfi_endproc
+ 143              	.LFE1:
+ 144              		.size	PWM_MOTORS_Init, .-PWM_MOTORS_Init
+ 145              		.section	.text.PWM_MOTORS_Enable,"ax",%progbits
+ 146              		.align	2
+ 147              		.global	PWM_MOTORS_Enable
+ 148              		.thumb
+ 149              		.thumb_func
+ 150              		.type	PWM_MOTORS_Enable, %function
+ 151              	PWM_MOTORS_Enable:
+ 152              	.LFB2:
  180:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  181:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  182:Generated_Source\PSoC5/PWM_MOTORS.c **** /*******************************************************************************
@@ -349,6 +358,9 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  188:Generated_Source\PSoC5/PWM_MOTORS.c **** *
  189:Generated_Source\PSoC5/PWM_MOTORS.c **** * Parameters:
  190:Generated_Source\PSoC5/PWM_MOTORS.c **** *  None
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 7
+
+
  191:Generated_Source\PSoC5/PWM_MOTORS.c **** *
  192:Generated_Source\PSoC5/PWM_MOTORS.c **** * Return:
  193:Generated_Source\PSoC5/PWM_MOTORS.c **** *  None
@@ -358,20 +370,17 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  197:Generated_Source\PSoC5/PWM_MOTORS.c **** *
  198:Generated_Source\PSoC5/PWM_MOTORS.c **** *******************************************************************************/
  199:Generated_Source\PSoC5/PWM_MOTORS.c **** void PWM_MOTORS_Enable(void) 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 7
-
-
  200:Generated_Source\PSoC5/PWM_MOTORS.c **** {
- 144              		.loc 1 200 0
- 145              		.cfi_startproc
- 146              		@ args = 0, pretend = 0, frame = 0
- 147              		@ frame_needed = 1, uses_anonymous_args = 0
- 148              		@ link register save eliminated.
- 149 0000 80B4     		push	{r7}
- 150              		.cfi_def_cfa_offset 4
- 151              		.cfi_offset 7, -4
- 152 0002 00AF     		add	r7, sp, #0
- 153              		.cfi_def_cfa_register 7
+ 153              		.loc 1 200 0
+ 154              		.cfi_startproc
+ 155              		@ args = 0, pretend = 0, frame = 0
+ 156              		@ frame_needed = 1, uses_anonymous_args = 0
+ 157              		@ link register save eliminated.
+ 158 0000 80B4     		push	{r7}
+ 159              		.cfi_def_cfa_offset 4
+ 160              		.cfi_offset 7, -4
+ 161 0002 00AF     		add	r7, sp, #0
+ 162              		.cfi_def_cfa_register 7
  201:Generated_Source\PSoC5/PWM_MOTORS.c ****     /* Globally Enable the Fixed Function Block chosen */
  202:Generated_Source\PSoC5/PWM_MOTORS.c ****     #if (PWM_MOTORS_UsingFixedFunction)
  203:Generated_Source\PSoC5/PWM_MOTORS.c ****         PWM_MOTORS_GLOBAL_ENABLE |= PWM_MOTORS_BLOCK_EN_MASK;
@@ -381,46 +390,46 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  207:Generated_Source\PSoC5/PWM_MOTORS.c ****     /* Enable the PWM from the control register  */
  208:Generated_Source\PSoC5/PWM_MOTORS.c ****     #if (PWM_MOTORS_UseControl || PWM_MOTORS_UsingFixedFunction)
  209:Generated_Source\PSoC5/PWM_MOTORS.c ****         PWM_MOTORS_CONTROL |= PWM_MOTORS_CTRL_ENABLE;
- 154              		.loc 1 209 0
- 155 0004 054A     		ldr	r2, .L9
- 156 0006 054B     		ldr	r3, .L9
- 157 0008 1B78     		ldrb	r3, [r3]
- 158 000a DBB2     		uxtb	r3, r3
- 159 000c 63F07F03 		orn	r3, r3, #127
- 160 0010 DBB2     		uxtb	r3, r3
- 161 0012 1370     		strb	r3, [r2]
+ 163              		.loc 1 209 0
+ 164 0004 054A     		ldr	r2, .L9
+ 165 0006 054B     		ldr	r3, .L9
+ 166 0008 1B78     		ldrb	r3, [r3]
+ 167 000a DBB2     		uxtb	r3, r3
+ 168 000c 63F07F03 		orn	r3, r3, #127
+ 169 0010 DBB2     		uxtb	r3, r3
+ 170 0012 1370     		strb	r3, [r2]
  210:Generated_Source\PSoC5/PWM_MOTORS.c ****     #endif /* (PWM_MOTORS_UseControl || PWM_MOTORS_UsingFixedFunction) */
  211:Generated_Source\PSoC5/PWM_MOTORS.c **** }
- 162              		.loc 1 211 0
- 163 0014 00BF     		nop
- 164 0016 BD46     		mov	sp, r7
- 165              		.cfi_def_cfa_register 13
- 166              		@ sp needed
- 167 0018 80BC     		pop	{r7}
- 168              		.cfi_restore 7
- 169              		.cfi_def_cfa_offset 0
- 170 001a 7047     		bx	lr
- 171              	.L10:
- 172              		.align	2
- 173              	.L9:
- 174 001c 78640040 		.word	1073767544
- 175              		.cfi_endproc
- 176              	.LFE2:
- 177              		.size	PWM_MOTORS_Enable, .-PWM_MOTORS_Enable
- 178              		.section	.text.PWM_MOTORS_Stop,"ax",%progbits
- 179              		.align	2
- 180              		.global	PWM_MOTORS_Stop
- 181              		.thumb
- 182              		.thumb_func
- 183              		.type	PWM_MOTORS_Stop, %function
- 184              	PWM_MOTORS_Stop:
- 185              	.LFB3:
+ 171              		.loc 1 211 0
+ 172 0014 00BF     		nop
+ 173 0016 BD46     		mov	sp, r7
+ 174              		.cfi_def_cfa_register 13
+ 175              		@ sp needed
+ 176 0018 80BC     		pop	{r7}
+ 177              		.cfi_restore 7
+ 178              		.cfi_def_cfa_offset 0
+ 179 001a 7047     		bx	lr
+ 180              	.L10:
+ 181              		.align	2
+ 182              	.L9:
+ 183 001c 78650040 		.word	1073767800
+ 184              		.cfi_endproc
+ 185              	.LFE2:
+ 186              		.size	PWM_MOTORS_Enable, .-PWM_MOTORS_Enable
+ 187              		.section	.text.PWM_MOTORS_Stop,"ax",%progbits
+ 188              		.align	2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 8
+
+
+ 189              		.global	PWM_MOTORS_Stop
+ 190              		.thumb
+ 191              		.thumb_func
+ 192              		.type	PWM_MOTORS_Stop, %function
+ 193              	PWM_MOTORS_Stop:
+ 194              	.LFB3:
  212:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  213:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  214:Generated_Source\PSoC5/PWM_MOTORS.c **** /*******************************************************************************
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 8
-
-
  215:Generated_Source\PSoC5/PWM_MOTORS.c **** * Function Name: PWM_MOTORS_Stop
  216:Generated_Source\PSoC5/PWM_MOTORS.c **** ********************************************************************************
  217:Generated_Source\PSoC5/PWM_MOTORS.c **** *
@@ -441,26 +450,26 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  232:Generated_Source\PSoC5/PWM_MOTORS.c **** *******************************************************************************/
  233:Generated_Source\PSoC5/PWM_MOTORS.c **** void PWM_MOTORS_Stop(void) 
  234:Generated_Source\PSoC5/PWM_MOTORS.c **** {
- 186              		.loc 1 234 0
- 187              		.cfi_startproc
- 188              		@ args = 0, pretend = 0, frame = 0
- 189              		@ frame_needed = 1, uses_anonymous_args = 0
- 190              		@ link register save eliminated.
- 191 0000 80B4     		push	{r7}
- 192              		.cfi_def_cfa_offset 4
- 193              		.cfi_offset 7, -4
- 194 0002 00AF     		add	r7, sp, #0
- 195              		.cfi_def_cfa_register 7
+ 195              		.loc 1 234 0
+ 196              		.cfi_startproc
+ 197              		@ args = 0, pretend = 0, frame = 0
+ 198              		@ frame_needed = 1, uses_anonymous_args = 0
+ 199              		@ link register save eliminated.
+ 200 0000 80B4     		push	{r7}
+ 201              		.cfi_def_cfa_offset 4
+ 202              		.cfi_offset 7, -4
+ 203 0002 00AF     		add	r7, sp, #0
+ 204              		.cfi_def_cfa_register 7
  235:Generated_Source\PSoC5/PWM_MOTORS.c ****     #if (PWM_MOTORS_UseControl || PWM_MOTORS_UsingFixedFunction)
  236:Generated_Source\PSoC5/PWM_MOTORS.c ****         PWM_MOTORS_CONTROL &= ((uint8)(~PWM_MOTORS_CTRL_ENABLE));
- 196              		.loc 1 236 0
- 197 0004 054A     		ldr	r2, .L12
- 198 0006 054B     		ldr	r3, .L12
- 199 0008 1B78     		ldrb	r3, [r3]
- 200 000a DBB2     		uxtb	r3, r3
- 201 000c 03F07F03 		and	r3, r3, #127
- 202 0010 DBB2     		uxtb	r3, r3
- 203 0012 1370     		strb	r3, [r2]
+ 205              		.loc 1 236 0
+ 206 0004 054A     		ldr	r2, .L12
+ 207 0006 054B     		ldr	r3, .L12
+ 208 0008 1B78     		ldrb	r3, [r3]
+ 209 000a DBB2     		uxtb	r3, r3
+ 210 000c 03F07F03 		and	r3, r3, #127
+ 211 0010 DBB2     		uxtb	r3, r3
+ 212 0012 1370     		strb	r3, [r2]
  237:Generated_Source\PSoC5/PWM_MOTORS.c ****     #endif /* (PWM_MOTORS_UseControl || PWM_MOTORS_UsingFixedFunction) */
  238:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  239:Generated_Source\PSoC5/PWM_MOTORS.c ****     /* Globally disable the Fixed Function Block chosen */
@@ -469,33 +478,33 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  242:Generated_Source\PSoC5/PWM_MOTORS.c ****         PWM_MOTORS_GLOBAL_STBY_ENABLE &= ((uint8)(~PWM_MOTORS_BLOCK_STBY_EN_MASK));
  243:Generated_Source\PSoC5/PWM_MOTORS.c ****     #endif /* (PWM_MOTORS_UsingFixedFunction) */
  244:Generated_Source\PSoC5/PWM_MOTORS.c **** }
- 204              		.loc 1 244 0
- 205 0014 00BF     		nop
- 206 0016 BD46     		mov	sp, r7
- 207              		.cfi_def_cfa_register 13
- 208              		@ sp needed
- 209 0018 80BC     		pop	{r7}
- 210              		.cfi_restore 7
- 211              		.cfi_def_cfa_offset 0
- 212 001a 7047     		bx	lr
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 9
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 9
 
 
- 213              	.L13:
- 214              		.align	2
- 215              	.L12:
- 216 001c 78640040 		.word	1073767544
- 217              		.cfi_endproc
- 218              	.LFE3:
- 219              		.size	PWM_MOTORS_Stop, .-PWM_MOTORS_Stop
- 220              		.section	.text.PWM_MOTORS_WriteCounter,"ax",%progbits
- 221              		.align	2
- 222              		.global	PWM_MOTORS_WriteCounter
- 223              		.thumb
- 224              		.thumb_func
- 225              		.type	PWM_MOTORS_WriteCounter, %function
- 226              	PWM_MOTORS_WriteCounter:
- 227              	.LFB4:
+ 213              		.loc 1 244 0
+ 214 0014 00BF     		nop
+ 215 0016 BD46     		mov	sp, r7
+ 216              		.cfi_def_cfa_register 13
+ 217              		@ sp needed
+ 218 0018 80BC     		pop	{r7}
+ 219              		.cfi_restore 7
+ 220              		.cfi_def_cfa_offset 0
+ 221 001a 7047     		bx	lr
+ 222              	.L13:
+ 223              		.align	2
+ 224              	.L12:
+ 225 001c 78650040 		.word	1073767800
+ 226              		.cfi_endproc
+ 227              	.LFE3:
+ 228              		.size	PWM_MOTORS_Stop, .-PWM_MOTORS_Stop
+ 229              		.section	.text.PWM_MOTORS_WriteCounter,"ax",%progbits
+ 230              		.align	2
+ 231              		.global	PWM_MOTORS_WriteCounter
+ 232              		.thumb
+ 233              		.thumb_func
+ 234              		.type	PWM_MOTORS_WriteCounter, %function
+ 235              	PWM_MOTORS_WriteCounter:
+ 236              	.LFB4:
  245:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  246:Generated_Source\PSoC5/PWM_MOTORS.c **** #if (PWM_MOTORS_UseOneCompareMode)
  247:Generated_Source\PSoC5/PWM_MOTORS.c ****     #if (PWM_MOTORS_CompareMode1SW)
@@ -529,6 +538,9 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  275:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  276:Generated_Source\PSoC5/PWM_MOTORS.c ****                 PWM_MOTORS_CONTROL3 &= ((uint8)(~PWM_MOTORS_CTRL_CMPMODE1_MASK)); /*Clear Existing 
  277:Generated_Source\PSoC5/PWM_MOTORS.c ****                 PWM_MOTORS_CONTROL3 |= comparemodemasked;
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 10
+
+
  278:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  279:Generated_Source\PSoC5/PWM_MOTORS.c ****             #elif (PWM_MOTORS_UseControl)
  280:Generated_Source\PSoC5/PWM_MOTORS.c **** 
@@ -538,9 +550,6 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  284:Generated_Source\PSoC5/PWM_MOTORS.c ****                 #else
  285:Generated_Source\PSoC5/PWM_MOTORS.c ****                     uint8 comparemode1masked = comparemode & PWM_MOTORS_CTRL_CMPMODE1_MASK;
  286:Generated_Source\PSoC5/PWM_MOTORS.c ****                 #endif /* (0 != PWM_MOTORS_CTRL_CMPMODE1_SHIFT) */
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 10
-
-
  287:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  288:Generated_Source\PSoC5/PWM_MOTORS.c ****                 #if(0 != PWM_MOTORS_CTRL_CMPMODE2_SHIFT)
  289:Generated_Source\PSoC5/PWM_MOTORS.c ****                     uint8 comparemode2masked = ((uint8)((uint8)comparemode << PWM_MOTORS_CTRL_CMPMO
@@ -589,6 +598,9 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  332:Generated_Source\PSoC5/PWM_MOTORS.c ****                 uint8 comparemodemasked = comparemode & PWM_MOTORS_CTRL_CMPMODE1_MASK;
  333:Generated_Source\PSoC5/PWM_MOTORS.c ****             #endif /* (0 != PWM_MOTORS_CTRL_CMPMODE1_SHIFT) */
  334:Generated_Source\PSoC5/PWM_MOTORS.c **** 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 11
+
+
  335:Generated_Source\PSoC5/PWM_MOTORS.c ****             #if (PWM_MOTORS_UseControl)
  336:Generated_Source\PSoC5/PWM_MOTORS.c ****                 PWM_MOTORS_CONTROL &= ((uint8)(~PWM_MOTORS_CTRL_CMPMODE1_MASK)); /*Clear existing m
  337:Generated_Source\PSoC5/PWM_MOTORS.c ****                 PWM_MOTORS_CONTROL |= comparemodemasked;
@@ -598,9 +610,6 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  341:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  342:Generated_Source\PSoC5/PWM_MOTORS.c **** #if (PWM_MOTORS_CompareMode2SW)
  343:Generated_Source\PSoC5/PWM_MOTORS.c **** 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 11
-
-
  344:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  345:Generated_Source\PSoC5/PWM_MOTORS.c ****     /*******************************************************************************
  346:Generated_Source\PSoC5/PWM_MOTORS.c ****     * Function Name: PWM_MOTORS_SetCompareMode2
@@ -649,6 +658,9 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  389:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  implemented for that currently running period and only that period. This API
  390:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  is valid only for UDB implementation and not available for fixed function
  391:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  PWM implementation.
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 12
+
+
  392:Generated_Source\PSoC5/PWM_MOTORS.c ****     *
  393:Generated_Source\PSoC5/PWM_MOTORS.c ****     * Parameters:
  394:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  counter:  The period new period counter value.
@@ -658,69 +670,66 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  398:Generated_Source\PSoC5/PWM_MOTORS.c ****     *
  399:Generated_Source\PSoC5/PWM_MOTORS.c ****     * Side Effects:
  400:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  The PWM Period will be reloaded when a counter value will be a zero
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 12
-
-
  401:Generated_Source\PSoC5/PWM_MOTORS.c ****     *
  402:Generated_Source\PSoC5/PWM_MOTORS.c ****     *******************************************************************************/
- 403:Generated_Source\PSoC5/PWM_MOTORS.c ****     void PWM_MOTORS_WriteCounter(uint8 counter) \
+ 403:Generated_Source\PSoC5/PWM_MOTORS.c ****     void PWM_MOTORS_WriteCounter(uint16 counter) \
  404:Generated_Source\PSoC5/PWM_MOTORS.c ****                                        
  405:Generated_Source\PSoC5/PWM_MOTORS.c ****     {
- 228              		.loc 1 405 0
- 229              		.cfi_startproc
- 230              		@ args = 0, pretend = 0, frame = 8
- 231              		@ frame_needed = 1, uses_anonymous_args = 0
- 232              		@ link register save eliminated.
- 233 0000 80B4     		push	{r7}
- 234              		.cfi_def_cfa_offset 4
- 235              		.cfi_offset 7, -4
- 236 0002 83B0     		sub	sp, sp, #12
- 237              		.cfi_def_cfa_offset 16
- 238 0004 00AF     		add	r7, sp, #0
- 239              		.cfi_def_cfa_register 7
- 240 0006 0346     		mov	r3, r0
- 241 0008 FB71     		strb	r3, [r7, #7]
- 406:Generated_Source\PSoC5/PWM_MOTORS.c ****         CY_SET_REG8(PWM_MOTORS_COUNTER_LSB_PTR, counter);
- 242              		.loc 1 406 0
- 243 000a 044A     		ldr	r2, .L15
- 244 000c FB79     		ldrb	r3, [r7, #7]
- 245 000e 1370     		strb	r3, [r2]
+ 237              		.loc 1 405 0
+ 238              		.cfi_startproc
+ 239              		@ args = 0, pretend = 0, frame = 8
+ 240              		@ frame_needed = 1, uses_anonymous_args = 0
+ 241              		@ link register save eliminated.
+ 242 0000 80B4     		push	{r7}
+ 243              		.cfi_def_cfa_offset 4
+ 244              		.cfi_offset 7, -4
+ 245 0002 83B0     		sub	sp, sp, #12
+ 246              		.cfi_def_cfa_offset 16
+ 247 0004 00AF     		add	r7, sp, #0
+ 248              		.cfi_def_cfa_register 7
+ 249 0006 0346     		mov	r3, r0
+ 250 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 406:Generated_Source\PSoC5/PWM_MOTORS.c ****         CY_SET_REG16(PWM_MOTORS_COUNTER_LSB_PTR, counter);
+ 251              		.loc 1 406 0
+ 252 000a 044A     		ldr	r2, .L15
+ 253 000c FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 254 000e 1380     		strh	r3, [r2]	@ movhi
  407:Generated_Source\PSoC5/PWM_MOTORS.c ****     }
- 246              		.loc 1 407 0
- 247 0010 00BF     		nop
- 248 0012 0C37     		adds	r7, r7, #12
- 249              		.cfi_def_cfa_offset 4
- 250 0014 BD46     		mov	sp, r7
- 251              		.cfi_def_cfa_register 13
- 252              		@ sp needed
- 253 0016 80BC     		pop	{r7}
- 254              		.cfi_restore 7
- 255              		.cfi_def_cfa_offset 0
- 256 0018 7047     		bx	lr
- 257              	.L16:
- 258 001a 00BF     		.align	2
- 259              	.L15:
- 260 001c 01640040 		.word	1073767425
- 261              		.cfi_endproc
- 262              	.LFE4:
- 263              		.size	PWM_MOTORS_WriteCounter, .-PWM_MOTORS_WriteCounter
- 264              		.section	.text.PWM_MOTORS_ReadCounter,"ax",%progbits
- 265              		.align	2
- 266              		.global	PWM_MOTORS_ReadCounter
- 267              		.thumb
- 268              		.thumb_func
- 269              		.type	PWM_MOTORS_ReadCounter, %function
- 270              	PWM_MOTORS_ReadCounter:
- 271              	.LFB5:
+ 255              		.loc 1 407 0
+ 256 0010 00BF     		nop
+ 257 0012 0C37     		adds	r7, r7, #12
+ 258              		.cfi_def_cfa_offset 4
+ 259 0014 BD46     		mov	sp, r7
+ 260              		.cfi_def_cfa_register 13
+ 261              		@ sp needed
+ 262 0016 80BC     		pop	{r7}
+ 263              		.cfi_restore 7
+ 264              		.cfi_def_cfa_offset 0
+ 265 0018 7047     		bx	lr
+ 266              	.L16:
+ 267 001a 00BF     		.align	2
+ 268              	.L15:
+ 269 001c 08680040 		.word	1073768456
+ 270              		.cfi_endproc
+ 271              	.LFE4:
+ 272              		.size	PWM_MOTORS_WriteCounter, .-PWM_MOTORS_WriteCounter
+ 273              		.section	.text.PWM_MOTORS_ReadCounter,"ax",%progbits
+ 274              		.align	2
+ 275              		.global	PWM_MOTORS_ReadCounter
+ 276              		.thumb
+ 277              		.thumb_func
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 13
+
+
+ 278              		.type	PWM_MOTORS_ReadCounter, %function
+ 279              	PWM_MOTORS_ReadCounter:
+ 280              	.LFB5:
  408:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  409:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  410:Generated_Source\PSoC5/PWM_MOTORS.c ****     /*******************************************************************************
  411:Generated_Source\PSoC5/PWM_MOTORS.c ****     * Function Name: PWM_MOTORS_ReadCounter
  412:Generated_Source\PSoC5/PWM_MOTORS.c ****     ********************************************************************************
  413:Generated_Source\PSoC5/PWM_MOTORS.c ****     *
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 13
-
-
  414:Generated_Source\PSoC5/PWM_MOTORS.c ****     * Summary:
  415:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  This function returns the current value of the counter.  It doesn't matter
  416:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  if the counter is enabled or running.
@@ -732,61 +741,61 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  422:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  The current value of the counter.
  423:Generated_Source\PSoC5/PWM_MOTORS.c ****     *
  424:Generated_Source\PSoC5/PWM_MOTORS.c ****     *******************************************************************************/
- 425:Generated_Source\PSoC5/PWM_MOTORS.c ****     uint8 PWM_MOTORS_ReadCounter(void) 
+ 425:Generated_Source\PSoC5/PWM_MOTORS.c ****     uint16 PWM_MOTORS_ReadCounter(void) 
  426:Generated_Source\PSoC5/PWM_MOTORS.c ****     {
- 272              		.loc 1 426 0
- 273              		.cfi_startproc
- 274              		@ args = 0, pretend = 0, frame = 0
- 275              		@ frame_needed = 1, uses_anonymous_args = 0
- 276              		@ link register save eliminated.
- 277 0000 80B4     		push	{r7}
- 278              		.cfi_def_cfa_offset 4
- 279              		.cfi_offset 7, -4
- 280 0002 00AF     		add	r7, sp, #0
- 281              		.cfi_def_cfa_register 7
+ 281              		.loc 1 426 0
+ 282              		.cfi_startproc
+ 283              		@ args = 0, pretend = 0, frame = 0
+ 284              		@ frame_needed = 1, uses_anonymous_args = 0
+ 285              		@ link register save eliminated.
+ 286 0000 80B4     		push	{r7}
+ 287              		.cfi_def_cfa_offset 4
+ 288              		.cfi_offset 7, -4
+ 289 0002 00AF     		add	r7, sp, #0
+ 290              		.cfi_def_cfa_register 7
  427:Generated_Source\PSoC5/PWM_MOTORS.c ****         /* Force capture by reading Accumulator */
  428:Generated_Source\PSoC5/PWM_MOTORS.c ****         /* Must first do a software capture to be able to read the counter */
  429:Generated_Source\PSoC5/PWM_MOTORS.c ****         /* It is up to the user code to make sure there isn't already captured data in the FIFO */
  430:Generated_Source\PSoC5/PWM_MOTORS.c ****           (void)CY_GET_REG8(PWM_MOTORS_COUNTERCAP_LSB_PTR_8BIT);
- 282              		.loc 1 430 0
- 283 0004 044B     		ldr	r3, .L19
- 284 0006 1B78     		ldrb	r3, [r3]
+ 291              		.loc 1 430 0
+ 292 0004 044B     		ldr	r3, .L19
+ 293 0006 1B78     		ldrb	r3, [r3]
  431:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  432:Generated_Source\PSoC5/PWM_MOTORS.c ****         /* Read the data from the FIFO */
- 433:Generated_Source\PSoC5/PWM_MOTORS.c ****         return (CY_GET_REG8(PWM_MOTORS_CAPTURE_LSB_PTR));
- 285              		.loc 1 433 0
- 286 0008 044B     		ldr	r3, .L19+4
- 287 000a 1B78     		ldrb	r3, [r3]
- 288 000c DBB2     		uxtb	r3, r3
+ 433:Generated_Source\PSoC5/PWM_MOTORS.c ****         return (CY_GET_REG16(PWM_MOTORS_CAPTURE_LSB_PTR));
+ 294              		.loc 1 433 0
+ 295 0008 044B     		ldr	r3, .L19+4
+ 296 000a 1B88     		ldrh	r3, [r3]	@ movhi
+ 297 000c 9BB2     		uxth	r3, r3
  434:Generated_Source\PSoC5/PWM_MOTORS.c ****     }
- 289              		.loc 1 434 0
- 290 000e 1846     		mov	r0, r3
- 291 0010 BD46     		mov	sp, r7
- 292              		.cfi_def_cfa_register 13
- 293              		@ sp needed
- 294 0012 80BC     		pop	{r7}
- 295              		.cfi_restore 7
- 296              		.cfi_def_cfa_offset 0
- 297 0014 7047     		bx	lr
- 298              	.L20:
- 299 0016 00BF     		.align	2
- 300              	.L19:
- 301 0018 11640040 		.word	1073767441
- 302 001c 51640040 		.word	1073767505
- 303              		.cfi_endproc
- 304              	.LFE5:
- 305              		.size	PWM_MOTORS_ReadCounter, .-PWM_MOTORS_ReadCounter
- 306              		.section	.text.PWM_MOTORS_WritePeriod,"ax",%progbits
- 307              		.align	2
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 14
+ 298              		.loc 1 434 0
+ 299 000e 1846     		mov	r0, r3
+ 300 0010 BD46     		mov	sp, r7
+ 301              		.cfi_def_cfa_register 13
+ 302              		@ sp needed
+ 303 0012 80BC     		pop	{r7}
+ 304              		.cfi_restore 7
+ 305              		.cfi_def_cfa_offset 0
+ 306 0014 7047     		bx	lr
+ 307              	.L20:
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 14
 
 
- 308              		.global	PWM_MOTORS_WritePeriod
- 309              		.thumb
- 310              		.thumb_func
- 311              		.type	PWM_MOTORS_WritePeriod, %function
- 312              	PWM_MOTORS_WritePeriod:
- 313              	.LFB6:
+ 308 0016 00BF     		.align	2
+ 309              	.L19:
+ 310 0018 14640040 		.word	1073767444
+ 311 001c A8680040 		.word	1073768616
+ 312              		.cfi_endproc
+ 313              	.LFE5:
+ 314              		.size	PWM_MOTORS_ReadCounter, .-PWM_MOTORS_ReadCounter
+ 315              		.section	.text.PWM_MOTORS_WritePeriod,"ax",%progbits
+ 316              		.align	2
+ 317              		.global	PWM_MOTORS_WritePeriod
+ 318              		.thumb
+ 319              		.thumb_func
+ 320              		.type	PWM_MOTORS_WritePeriod, %function
+ 321              	PWM_MOTORS_WritePeriod:
+ 322              	.LFB6:
  435:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  436:Generated_Source\PSoC5/PWM_MOTORS.c ****     #if (PWM_MOTORS_UseStatus)
  437:Generated_Source\PSoC5/PWM_MOTORS.c **** 
@@ -829,66 +838,69 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  474:Generated_Source\PSoC5/PWM_MOTORS.c **** * Parameters:
  475:Generated_Source\PSoC5/PWM_MOTORS.c **** *  period:  Period value. May be between 1 and (2^Resolution)-1.  A value of 0
  476:Generated_Source\PSoC5/PWM_MOTORS.c **** *           will result in the counter remaining at zero.
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 15
+
+
  477:Generated_Source\PSoC5/PWM_MOTORS.c **** *
  478:Generated_Source\PSoC5/PWM_MOTORS.c **** * Return:
  479:Generated_Source\PSoC5/PWM_MOTORS.c **** *  None
  480:Generated_Source\PSoC5/PWM_MOTORS.c **** *
  481:Generated_Source\PSoC5/PWM_MOTORS.c **** *******************************************************************************/
- 482:Generated_Source\PSoC5/PWM_MOTORS.c **** void PWM_MOTORS_WritePeriod(uint8 period) 
+ 482:Generated_Source\PSoC5/PWM_MOTORS.c **** void PWM_MOTORS_WritePeriod(uint16 period) 
  483:Generated_Source\PSoC5/PWM_MOTORS.c **** {
- 314              		.loc 1 483 0
- 315              		.cfi_startproc
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 15
-
-
- 316              		@ args = 0, pretend = 0, frame = 8
- 317              		@ frame_needed = 1, uses_anonymous_args = 0
- 318              		@ link register save eliminated.
- 319 0000 80B4     		push	{r7}
- 320              		.cfi_def_cfa_offset 4
- 321              		.cfi_offset 7, -4
- 322 0002 83B0     		sub	sp, sp, #12
- 323              		.cfi_def_cfa_offset 16
- 324 0004 00AF     		add	r7, sp, #0
- 325              		.cfi_def_cfa_register 7
- 326 0006 0346     		mov	r3, r0
- 327 0008 FB71     		strb	r3, [r7, #7]
+ 323              		.loc 1 483 0
+ 324              		.cfi_startproc
+ 325              		@ args = 0, pretend = 0, frame = 8
+ 326              		@ frame_needed = 1, uses_anonymous_args = 0
+ 327              		@ link register save eliminated.
+ 328 0000 80B4     		push	{r7}
+ 329              		.cfi_def_cfa_offset 4
+ 330              		.cfi_offset 7, -4
+ 331 0002 83B0     		sub	sp, sp, #12
+ 332              		.cfi_def_cfa_offset 16
+ 333 0004 00AF     		add	r7, sp, #0
+ 334              		.cfi_def_cfa_register 7
+ 335 0006 0346     		mov	r3, r0
+ 336 0008 FB80     		strh	r3, [r7, #6]	@ movhi
  484:Generated_Source\PSoC5/PWM_MOTORS.c ****     #if(PWM_MOTORS_UsingFixedFunction)
  485:Generated_Source\PSoC5/PWM_MOTORS.c ****         CY_SET_REG16(PWM_MOTORS_PERIOD_LSB_PTR, (uint16)period);
  486:Generated_Source\PSoC5/PWM_MOTORS.c ****     #else
- 487:Generated_Source\PSoC5/PWM_MOTORS.c ****         CY_SET_REG8(PWM_MOTORS_PERIOD_LSB_PTR, period);
- 328              		.loc 1 487 0
- 329 000a 044A     		ldr	r2, .L22
- 330 000c FB79     		ldrb	r3, [r7, #7]
- 331 000e 1370     		strb	r3, [r2]
+ 487:Generated_Source\PSoC5/PWM_MOTORS.c ****         CY_SET_REG16(PWM_MOTORS_PERIOD_LSB_PTR, period);
+ 337              		.loc 1 487 0
+ 338 000a 044A     		ldr	r2, .L22
+ 339 000c FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 340 000e 1380     		strh	r3, [r2]	@ movhi
  488:Generated_Source\PSoC5/PWM_MOTORS.c ****     #endif /* (PWM_MOTORS_UsingFixedFunction) */
  489:Generated_Source\PSoC5/PWM_MOTORS.c **** }
- 332              		.loc 1 489 0
- 333 0010 00BF     		nop
- 334 0012 0C37     		adds	r7, r7, #12
- 335              		.cfi_def_cfa_offset 4
- 336 0014 BD46     		mov	sp, r7
- 337              		.cfi_def_cfa_register 13
- 338              		@ sp needed
- 339 0016 80BC     		pop	{r7}
- 340              		.cfi_restore 7
- 341              		.cfi_def_cfa_offset 0
- 342 0018 7047     		bx	lr
- 343              	.L23:
- 344 001a 00BF     		.align	2
- 345              	.L22:
- 346 001c 41640040 		.word	1073767489
- 347              		.cfi_endproc
- 348              	.LFE6:
- 349              		.size	PWM_MOTORS_WritePeriod, .-PWM_MOTORS_WritePeriod
- 350              		.section	.text.PWM_MOTORS_WriteCompare1,"ax",%progbits
- 351              		.align	2
- 352              		.global	PWM_MOTORS_WriteCompare1
- 353              		.thumb
- 354              		.thumb_func
- 355              		.type	PWM_MOTORS_WriteCompare1, %function
- 356              	PWM_MOTORS_WriteCompare1:
- 357              	.LFB7:
+ 341              		.loc 1 489 0
+ 342 0010 00BF     		nop
+ 343 0012 0C37     		adds	r7, r7, #12
+ 344              		.cfi_def_cfa_offset 4
+ 345 0014 BD46     		mov	sp, r7
+ 346              		.cfi_def_cfa_register 13
+ 347              		@ sp needed
+ 348 0016 80BC     		pop	{r7}
+ 349              		.cfi_restore 7
+ 350              		.cfi_def_cfa_offset 0
+ 351 0018 7047     		bx	lr
+ 352              	.L23:
+ 353 001a 00BF     		.align	2
+ 354              	.L22:
+ 355 001c 88680040 		.word	1073768584
+ 356              		.cfi_endproc
+ 357              	.LFE6:
+ 358              		.size	PWM_MOTORS_WritePeriod, .-PWM_MOTORS_WritePeriod
+ 359              		.section	.text.PWM_MOTORS_WriteCompare1,"ax",%progbits
+ 360              		.align	2
+ 361              		.global	PWM_MOTORS_WriteCompare1
+ 362              		.thumb
+ 363              		.thumb_func
+ 364              		.type	PWM_MOTORS_WriteCompare1, %function
+ 365              	PWM_MOTORS_WriteCompare1:
+ 366              	.LFB7:
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 16
+
+
  490:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  491:Generated_Source\PSoC5/PWM_MOTORS.c **** #if (PWM_MOTORS_UseOneCompareMode)
  492:Generated_Source\PSoC5/PWM_MOTORS.c **** 
@@ -898,9 +910,6 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  496:Generated_Source\PSoC5/PWM_MOTORS.c ****     ********************************************************************************
  497:Generated_Source\PSoC5/PWM_MOTORS.c ****     *
  498:Generated_Source\PSoC5/PWM_MOTORS.c ****     * Summary:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 16
-
-
  499:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  This funtion is used to change the compare1 value when the PWM is in Dither
  500:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  mode. The compare output will reflect the new value on the next UDB clock.
  501:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  The compare output will be driven high when the present counter value is
@@ -918,20 +927,20 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  513:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  Dither Mode, Center Aligned Mode or One Output Mode
  514:Generated_Source\PSoC5/PWM_MOTORS.c ****     *
  515:Generated_Source\PSoC5/PWM_MOTORS.c ****     *******************************************************************************/
- 516:Generated_Source\PSoC5/PWM_MOTORS.c ****     void PWM_MOTORS_WriteCompare(uint8 compare) \
+ 516:Generated_Source\PSoC5/PWM_MOTORS.c ****     void PWM_MOTORS_WriteCompare(uint16 compare) \
  517:Generated_Source\PSoC5/PWM_MOTORS.c ****                                        
  518:Generated_Source\PSoC5/PWM_MOTORS.c ****     {
  519:Generated_Source\PSoC5/PWM_MOTORS.c ****         #if(PWM_MOTORS_UsingFixedFunction)
  520:Generated_Source\PSoC5/PWM_MOTORS.c ****             CY_SET_REG16(PWM_MOTORS_COMPARE1_LSB_PTR, (uint16)compare);
  521:Generated_Source\PSoC5/PWM_MOTORS.c ****         #else
- 522:Generated_Source\PSoC5/PWM_MOTORS.c ****             CY_SET_REG8(PWM_MOTORS_COMPARE1_LSB_PTR, compare);
+ 522:Generated_Source\PSoC5/PWM_MOTORS.c ****             CY_SET_REG16(PWM_MOTORS_COMPARE1_LSB_PTR, compare);
  523:Generated_Source\PSoC5/PWM_MOTORS.c ****         #endif /* (PWM_MOTORS_UsingFixedFunction) */
  524:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  525:Generated_Source\PSoC5/PWM_MOTORS.c ****         #if (PWM_MOTORS_PWMMode == PWM_MOTORS__B_PWM__DITHER)
  526:Generated_Source\PSoC5/PWM_MOTORS.c ****             #if(PWM_MOTORS_UsingFixedFunction)
  527:Generated_Source\PSoC5/PWM_MOTORS.c ****                 CY_SET_REG16(PWM_MOTORS_COMPARE2_LSB_PTR, (uint16)(compare + 1u));
  528:Generated_Source\PSoC5/PWM_MOTORS.c ****             #else
- 529:Generated_Source\PSoC5/PWM_MOTORS.c ****                 CY_SET_REG8(PWM_MOTORS_COMPARE2_LSB_PTR, (compare + 1u));
+ 529:Generated_Source\PSoC5/PWM_MOTORS.c ****                 CY_SET_REG16(PWM_MOTORS_COMPARE2_LSB_PTR, (compare + 1u));
  530:Generated_Source\PSoC5/PWM_MOTORS.c ****             #endif /* (PWM_MOTORS_UsingFixedFunction) */
  531:Generated_Source\PSoC5/PWM_MOTORS.c ****         #endif /* (PWM_MOTORS_PWMMode == PWM_MOTORS__B_PWM__DITHER) */
  532:Generated_Source\PSoC5/PWM_MOTORS.c ****     }
@@ -949,6 +958,9 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  544:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  reflect the new value on the next UDB clock.  The compare output will be
  545:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  driven high when the present counter value is less than or less than or
  546:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  equal to the compare register, depending on the mode.
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 17
+
+
  547:Generated_Source\PSoC5/PWM_MOTORS.c ****     *
  548:Generated_Source\PSoC5/PWM_MOTORS.c ****     * Parameters:
  549:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  compare:  New compare value.
@@ -957,70 +969,67 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  552:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  None
  553:Generated_Source\PSoC5/PWM_MOTORS.c ****     *
  554:Generated_Source\PSoC5/PWM_MOTORS.c ****     *******************************************************************************/
- 555:Generated_Source\PSoC5/PWM_MOTORS.c ****     void PWM_MOTORS_WriteCompare1(uint8 compare) \
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 17
-
-
+ 555:Generated_Source\PSoC5/PWM_MOTORS.c ****     void PWM_MOTORS_WriteCompare1(uint16 compare) \
  556:Generated_Source\PSoC5/PWM_MOTORS.c ****                                         
  557:Generated_Source\PSoC5/PWM_MOTORS.c ****     {
- 358              		.loc 1 557 0
- 359              		.cfi_startproc
- 360              		@ args = 0, pretend = 0, frame = 8
- 361              		@ frame_needed = 1, uses_anonymous_args = 0
- 362              		@ link register save eliminated.
- 363 0000 80B4     		push	{r7}
- 364              		.cfi_def_cfa_offset 4
- 365              		.cfi_offset 7, -4
- 366 0002 83B0     		sub	sp, sp, #12
- 367              		.cfi_def_cfa_offset 16
- 368 0004 00AF     		add	r7, sp, #0
- 369              		.cfi_def_cfa_register 7
- 370 0006 0346     		mov	r3, r0
- 371 0008 FB71     		strb	r3, [r7, #7]
+ 367              		.loc 1 557 0
+ 368              		.cfi_startproc
+ 369              		@ args = 0, pretend = 0, frame = 8
+ 370              		@ frame_needed = 1, uses_anonymous_args = 0
+ 371              		@ link register save eliminated.
+ 372 0000 80B4     		push	{r7}
+ 373              		.cfi_def_cfa_offset 4
+ 374              		.cfi_offset 7, -4
+ 375 0002 83B0     		sub	sp, sp, #12
+ 376              		.cfi_def_cfa_offset 16
+ 377 0004 00AF     		add	r7, sp, #0
+ 378              		.cfi_def_cfa_register 7
+ 379 0006 0346     		mov	r3, r0
+ 380 0008 FB80     		strh	r3, [r7, #6]	@ movhi
  558:Generated_Source\PSoC5/PWM_MOTORS.c ****         #if(PWM_MOTORS_UsingFixedFunction)
  559:Generated_Source\PSoC5/PWM_MOTORS.c ****             CY_SET_REG16(PWM_MOTORS_COMPARE1_LSB_PTR, (uint16)compare);
  560:Generated_Source\PSoC5/PWM_MOTORS.c ****         #else
- 561:Generated_Source\PSoC5/PWM_MOTORS.c ****             CY_SET_REG8(PWM_MOTORS_COMPARE1_LSB_PTR, compare);
- 372              		.loc 1 561 0
- 373 000a 044A     		ldr	r2, .L25
- 374 000c FB79     		ldrb	r3, [r7, #7]
- 375 000e 1370     		strb	r3, [r2]
+ 561:Generated_Source\PSoC5/PWM_MOTORS.c ****             CY_SET_REG16(PWM_MOTORS_COMPARE1_LSB_PTR, compare);
+ 381              		.loc 1 561 0
+ 382 000a 044A     		ldr	r2, .L25
+ 383 000c FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 384 000e 1380     		strh	r3, [r2]	@ movhi
  562:Generated_Source\PSoC5/PWM_MOTORS.c ****         #endif /* (PWM_MOTORS_UsingFixedFunction) */
  563:Generated_Source\PSoC5/PWM_MOTORS.c ****     }
- 376              		.loc 1 563 0
- 377 0010 00BF     		nop
- 378 0012 0C37     		adds	r7, r7, #12
- 379              		.cfi_def_cfa_offset 4
- 380 0014 BD46     		mov	sp, r7
- 381              		.cfi_def_cfa_register 13
- 382              		@ sp needed
- 383 0016 80BC     		pop	{r7}
- 384              		.cfi_restore 7
- 385              		.cfi_def_cfa_offset 0
- 386 0018 7047     		bx	lr
- 387              	.L26:
- 388 001a 00BF     		.align	2
- 389              	.L25:
- 390 001c 21640040 		.word	1073767457
- 391              		.cfi_endproc
- 392              	.LFE7:
- 393              		.size	PWM_MOTORS_WriteCompare1, .-PWM_MOTORS_WriteCompare1
- 394              		.section	.text.PWM_MOTORS_WriteCompare2,"ax",%progbits
- 395              		.align	2
- 396              		.global	PWM_MOTORS_WriteCompare2
- 397              		.thumb
- 398              		.thumb_func
- 399              		.type	PWM_MOTORS_WriteCompare2, %function
- 400              	PWM_MOTORS_WriteCompare2:
- 401              	.LFB8:
+ 385              		.loc 1 563 0
+ 386 0010 00BF     		nop
+ 387 0012 0C37     		adds	r7, r7, #12
+ 388              		.cfi_def_cfa_offset 4
+ 389 0014 BD46     		mov	sp, r7
+ 390              		.cfi_def_cfa_register 13
+ 391              		@ sp needed
+ 392 0016 80BC     		pop	{r7}
+ 393              		.cfi_restore 7
+ 394              		.cfi_def_cfa_offset 0
+ 395 0018 7047     		bx	lr
+ 396              	.L26:
+ 397 001a 00BF     		.align	2
+ 398              	.L25:
+ 399 001c 48680040 		.word	1073768520
+ 400              		.cfi_endproc
+ 401              	.LFE7:
+ 402              		.size	PWM_MOTORS_WriteCompare1, .-PWM_MOTORS_WriteCompare1
+ 403              		.section	.text.PWM_MOTORS_WriteCompare2,"ax",%progbits
+ 404              		.align	2
+ 405              		.global	PWM_MOTORS_WriteCompare2
+ 406              		.thumb
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 18
+
+
+ 407              		.thumb_func
+ 408              		.type	PWM_MOTORS_WriteCompare2, %function
+ 409              	PWM_MOTORS_WriteCompare2:
+ 410              	.LFB8:
  564:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  565:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  566:Generated_Source\PSoC5/PWM_MOTORS.c ****     /*******************************************************************************
  567:Generated_Source\PSoC5/PWM_MOTORS.c ****     * Function Name: PWM_MOTORS_WriteCompare2
  568:Generated_Source\PSoC5/PWM_MOTORS.c ****     ********************************************************************************
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 18
-
-
  569:Generated_Source\PSoC5/PWM_MOTORS.c ****     *
  570:Generated_Source\PSoC5/PWM_MOTORS.c ****     * Summary:
  571:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  This funtion is used to change the compare value, for compare1 output.
@@ -1036,62 +1045,62 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  581:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  None
  582:Generated_Source\PSoC5/PWM_MOTORS.c ****     *
  583:Generated_Source\PSoC5/PWM_MOTORS.c ****     *******************************************************************************/
- 584:Generated_Source\PSoC5/PWM_MOTORS.c ****     void PWM_MOTORS_WriteCompare2(uint8 compare) \
+ 584:Generated_Source\PSoC5/PWM_MOTORS.c ****     void PWM_MOTORS_WriteCompare2(uint16 compare) \
  585:Generated_Source\PSoC5/PWM_MOTORS.c ****                                         
  586:Generated_Source\PSoC5/PWM_MOTORS.c ****     {
- 402              		.loc 1 586 0
- 403              		.cfi_startproc
- 404              		@ args = 0, pretend = 0, frame = 8
- 405              		@ frame_needed = 1, uses_anonymous_args = 0
- 406              		@ link register save eliminated.
- 407 0000 80B4     		push	{r7}
- 408              		.cfi_def_cfa_offset 4
- 409              		.cfi_offset 7, -4
- 410 0002 83B0     		sub	sp, sp, #12
- 411              		.cfi_def_cfa_offset 16
- 412 0004 00AF     		add	r7, sp, #0
- 413              		.cfi_def_cfa_register 7
- 414 0006 0346     		mov	r3, r0
- 415 0008 FB71     		strb	r3, [r7, #7]
+ 411              		.loc 1 586 0
+ 412              		.cfi_startproc
+ 413              		@ args = 0, pretend = 0, frame = 8
+ 414              		@ frame_needed = 1, uses_anonymous_args = 0
+ 415              		@ link register save eliminated.
+ 416 0000 80B4     		push	{r7}
+ 417              		.cfi_def_cfa_offset 4
+ 418              		.cfi_offset 7, -4
+ 419 0002 83B0     		sub	sp, sp, #12
+ 420              		.cfi_def_cfa_offset 16
+ 421 0004 00AF     		add	r7, sp, #0
+ 422              		.cfi_def_cfa_register 7
+ 423 0006 0346     		mov	r3, r0
+ 424 0008 FB80     		strh	r3, [r7, #6]	@ movhi
  587:Generated_Source\PSoC5/PWM_MOTORS.c ****         #if(PWM_MOTORS_UsingFixedFunction)
  588:Generated_Source\PSoC5/PWM_MOTORS.c ****             CY_SET_REG16(PWM_MOTORS_COMPARE2_LSB_PTR, compare);
  589:Generated_Source\PSoC5/PWM_MOTORS.c ****         #else
- 590:Generated_Source\PSoC5/PWM_MOTORS.c ****             CY_SET_REG8(PWM_MOTORS_COMPARE2_LSB_PTR, compare);
- 416              		.loc 1 590 0
- 417 000a 044A     		ldr	r2, .L28
- 418 000c FB79     		ldrb	r3, [r7, #7]
- 419 000e 1370     		strb	r3, [r2]
+ 590:Generated_Source\PSoC5/PWM_MOTORS.c ****             CY_SET_REG16(PWM_MOTORS_COMPARE2_LSB_PTR, compare);
+ 425              		.loc 1 590 0
+ 426 000a 044A     		ldr	r2, .L28
+ 427 000c FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 428 000e 1380     		strh	r3, [r2]	@ movhi
  591:Generated_Source\PSoC5/PWM_MOTORS.c ****         #endif /* (PWM_MOTORS_UsingFixedFunction) */
  592:Generated_Source\PSoC5/PWM_MOTORS.c ****     }
- 420              		.loc 1 592 0
- 421 0010 00BF     		nop
- 422 0012 0C37     		adds	r7, r7, #12
- 423              		.cfi_def_cfa_offset 4
- 424 0014 BD46     		mov	sp, r7
- 425              		.cfi_def_cfa_register 13
- 426              		@ sp needed
- 427 0016 80BC     		pop	{r7}
- 428              		.cfi_restore 7
- 429              		.cfi_def_cfa_offset 0
- 430 0018 7047     		bx	lr
- 431              	.L29:
- 432 001a 00BF     		.align	2
- 433              	.L28:
- 434 001c 31640040 		.word	1073767473
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 19
+ 429              		.loc 1 592 0
+ 430 0010 00BF     		nop
+ 431 0012 0C37     		adds	r7, r7, #12
+ 432              		.cfi_def_cfa_offset 4
+ 433 0014 BD46     		mov	sp, r7
+ 434              		.cfi_def_cfa_register 13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 19
 
 
- 435              		.cfi_endproc
- 436              	.LFE8:
- 437              		.size	PWM_MOTORS_WriteCompare2, .-PWM_MOTORS_WriteCompare2
- 438              		.section	.text.PWM_MOTORS_ReadControlRegister,"ax",%progbits
- 439              		.align	2
- 440              		.global	PWM_MOTORS_ReadControlRegister
- 441              		.thumb
- 442              		.thumb_func
- 443              		.type	PWM_MOTORS_ReadControlRegister, %function
- 444              	PWM_MOTORS_ReadControlRegister:
- 445              	.LFB9:
+ 435              		@ sp needed
+ 436 0016 80BC     		pop	{r7}
+ 437              		.cfi_restore 7
+ 438              		.cfi_def_cfa_offset 0
+ 439 0018 7047     		bx	lr
+ 440              	.L29:
+ 441 001a 00BF     		.align	2
+ 442              	.L28:
+ 443 001c 68680040 		.word	1073768552
+ 444              		.cfi_endproc
+ 445              	.LFE8:
+ 446              		.size	PWM_MOTORS_WriteCompare2, .-PWM_MOTORS_WriteCompare2
+ 447              		.section	.text.PWM_MOTORS_ReadControlRegister,"ax",%progbits
+ 448              		.align	2
+ 449              		.global	PWM_MOTORS_ReadControlRegister
+ 450              		.thumb
+ 451              		.thumb_func
+ 452              		.type	PWM_MOTORS_ReadControlRegister, %function
+ 453              	PWM_MOTORS_ReadControlRegister:
+ 454              	.LFB9:
  593:Generated_Source\PSoC5/PWM_MOTORS.c **** #endif /* UseOneCompareMode */
  594:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  595:Generated_Source\PSoC5/PWM_MOTORS.c **** #if (PWM_MOTORS_DeadBandUsed)
@@ -1129,6 +1138,9 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  627:Generated_Source\PSoC5/PWM_MOTORS.c ****                 PWM_MOTORS_DEADBAND_COUNT |= deadtime & PWM_MOTORS_DEADBAND_COUNT_MASK;
  628:Generated_Source\PSoC5/PWM_MOTORS.c ****             #endif /* (PWM_MOTORS_DEADBAND_COUNT_SHIFT) */
  629:Generated_Source\PSoC5/PWM_MOTORS.c **** 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 20
+
+
  630:Generated_Source\PSoC5/PWM_MOTORS.c ****         #endif /* (!PWM_MOTORS_DeadBand2_4) */
  631:Generated_Source\PSoC5/PWM_MOTORS.c ****     }
  632:Generated_Source\PSoC5/PWM_MOTORS.c **** 
@@ -1138,9 +1150,6 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  636:Generated_Source\PSoC5/PWM_MOTORS.c ****     ********************************************************************************
  637:Generated_Source\PSoC5/PWM_MOTORS.c ****     *
  638:Generated_Source\PSoC5/PWM_MOTORS.c ****     * Summary:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 20
-
-
  639:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  This function reads the dead-band counts from the corresponding register
  640:Generated_Source\PSoC5/PWM_MOTORS.c ****     *
  641:Generated_Source\PSoC5/PWM_MOTORS.c ****     * Parameters:
@@ -1189,6 +1198,9 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  684:Generated_Source\PSoC5/PWM_MOTORS.c ****     void PWM_MOTORS_SetInterruptMode(uint8 interruptMode) 
  685:Generated_Source\PSoC5/PWM_MOTORS.c ****     {
  686:Generated_Source\PSoC5/PWM_MOTORS.c ****         CY_SET_REG8(PWM_MOTORS_STATUS_MASK_PTR, interruptMode);
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 21
+
+
  687:Generated_Source\PSoC5/PWM_MOTORS.c ****     }
  688:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  689:Generated_Source\PSoC5/PWM_MOTORS.c **** 
@@ -1198,9 +1210,6 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  693:Generated_Source\PSoC5/PWM_MOTORS.c ****     *
  694:Generated_Source\PSoC5/PWM_MOTORS.c ****     * Summary:
  695:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  This function returns the current state of the status register.
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 21
-
-
  696:Generated_Source\PSoC5/PWM_MOTORS.c ****     *
  697:Generated_Source\PSoC5/PWM_MOTORS.c ****     * Parameters:
  698:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  None
@@ -1244,58 +1253,58 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  736:Generated_Source\PSoC5/PWM_MOTORS.c ****     *******************************************************************************/
  737:Generated_Source\PSoC5/PWM_MOTORS.c ****     uint8 PWM_MOTORS_ReadControlRegister(void) 
  738:Generated_Source\PSoC5/PWM_MOTORS.c ****     {
- 446              		.loc 1 738 0
- 447              		.cfi_startproc
- 448              		@ args = 0, pretend = 0, frame = 8
- 449              		@ frame_needed = 1, uses_anonymous_args = 0
- 450              		@ link register save eliminated.
- 451 0000 80B4     		push	{r7}
- 452              		.cfi_def_cfa_offset 4
- 453              		.cfi_offset 7, -4
- 454 0002 83B0     		sub	sp, sp, #12
- 455              		.cfi_def_cfa_offset 16
- 456 0004 00AF     		add	r7, sp, #0
- 457              		.cfi_def_cfa_register 7
+ 455              		.loc 1 738 0
+ 456              		.cfi_startproc
+ 457              		@ args = 0, pretend = 0, frame = 8
+ 458              		@ frame_needed = 1, uses_anonymous_args = 0
+ 459              		@ link register save eliminated.
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 22
+
+
+ 460 0000 80B4     		push	{r7}
+ 461              		.cfi_def_cfa_offset 4
+ 462              		.cfi_offset 7, -4
+ 463 0002 83B0     		sub	sp, sp, #12
+ 464              		.cfi_def_cfa_offset 16
+ 465 0004 00AF     		add	r7, sp, #0
+ 466              		.cfi_def_cfa_register 7
  739:Generated_Source\PSoC5/PWM_MOTORS.c ****         uint8 result;
  740:Generated_Source\PSoC5/PWM_MOTORS.c **** 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 22
-
-
  741:Generated_Source\PSoC5/PWM_MOTORS.c ****         result = CY_GET_REG8(PWM_MOTORS_CONTROL_PTR);
- 458              		.loc 1 741 0
- 459 0006 044B     		ldr	r3, .L32
- 460 0008 1B78     		ldrb	r3, [r3]
- 461 000a FB71     		strb	r3, [r7, #7]
+ 467              		.loc 1 741 0
+ 468 0006 044B     		ldr	r3, .L32
+ 469 0008 1B78     		ldrb	r3, [r3]
+ 470 000a FB71     		strb	r3, [r7, #7]
  742:Generated_Source\PSoC5/PWM_MOTORS.c ****         return (result);
- 462              		.loc 1 742 0
- 463 000c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 471              		.loc 1 742 0
+ 472 000c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
  743:Generated_Source\PSoC5/PWM_MOTORS.c ****     }
- 464              		.loc 1 743 0
- 465 000e 1846     		mov	r0, r3
- 466 0010 0C37     		adds	r7, r7, #12
- 467              		.cfi_def_cfa_offset 4
- 468 0012 BD46     		mov	sp, r7
- 469              		.cfi_def_cfa_register 13
- 470              		@ sp needed
- 471 0014 80BC     		pop	{r7}
- 472              		.cfi_restore 7
- 473              		.cfi_def_cfa_offset 0
- 474 0016 7047     		bx	lr
- 475              	.L33:
- 476              		.align	2
- 477              	.L32:
- 478 0018 78640040 		.word	1073767544
- 479              		.cfi_endproc
- 480              	.LFE9:
- 481              		.size	PWM_MOTORS_ReadControlRegister, .-PWM_MOTORS_ReadControlRegister
- 482              		.section	.text.PWM_MOTORS_WriteControlRegister,"ax",%progbits
- 483              		.align	2
- 484              		.global	PWM_MOTORS_WriteControlRegister
- 485              		.thumb
- 486              		.thumb_func
- 487              		.type	PWM_MOTORS_WriteControlRegister, %function
- 488              	PWM_MOTORS_WriteControlRegister:
- 489              	.LFB10:
+ 473              		.loc 1 743 0
+ 474 000e 1846     		mov	r0, r3
+ 475 0010 0C37     		adds	r7, r7, #12
+ 476              		.cfi_def_cfa_offset 4
+ 477 0012 BD46     		mov	sp, r7
+ 478              		.cfi_def_cfa_register 13
+ 479              		@ sp needed
+ 480 0014 80BC     		pop	{r7}
+ 481              		.cfi_restore 7
+ 482              		.cfi_def_cfa_offset 0
+ 483 0016 7047     		bx	lr
+ 484              	.L33:
+ 485              		.align	2
+ 486              	.L32:
+ 487 0018 78650040 		.word	1073767800
+ 488              		.cfi_endproc
+ 489              	.LFE9:
+ 490              		.size	PWM_MOTORS_ReadControlRegister, .-PWM_MOTORS_ReadControlRegister
+ 491              		.section	.text.PWM_MOTORS_WriteControlRegister,"ax",%progbits
+ 492              		.align	2
+ 493              		.global	PWM_MOTORS_WriteControlRegister
+ 494              		.thumb
+ 495              		.thumb_func
+ 496              		.type	PWM_MOTORS_WriteControlRegister, %function
+ 497              	PWM_MOTORS_WriteControlRegister:
+ 498              	.LFB10:
  744:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  745:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  746:Generated_Source\PSoC5/PWM_MOTORS.c ****     /*******************************************************************************
@@ -1309,6 +1318,9 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  754:Generated_Source\PSoC5/PWM_MOTORS.c ****     * Parameters:
  755:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  uint8 control: Control register bit field, The status register bits are:
  756:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  [7]   : PWM Enable
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 23
+
+
  757:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  [6]   : Reset
  758:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  [5:3] : Compare Mode2
  759:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  [2:0] : Compare Mode2
@@ -1318,57 +1330,57 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  763:Generated_Source\PSoC5/PWM_MOTORS.c ****     *
  764:Generated_Source\PSoC5/PWM_MOTORS.c ****     *******************************************************************************/
  765:Generated_Source\PSoC5/PWM_MOTORS.c ****     void PWM_MOTORS_WriteControlRegister(uint8 control) 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 23
-
-
  766:Generated_Source\PSoC5/PWM_MOTORS.c ****     {
- 490              		.loc 1 766 0
- 491              		.cfi_startproc
- 492              		@ args = 0, pretend = 0, frame = 8
- 493              		@ frame_needed = 1, uses_anonymous_args = 0
- 494              		@ link register save eliminated.
- 495 0000 80B4     		push	{r7}
- 496              		.cfi_def_cfa_offset 4
- 497              		.cfi_offset 7, -4
- 498 0002 83B0     		sub	sp, sp, #12
- 499              		.cfi_def_cfa_offset 16
- 500 0004 00AF     		add	r7, sp, #0
- 501              		.cfi_def_cfa_register 7
- 502 0006 0346     		mov	r3, r0
- 503 0008 FB71     		strb	r3, [r7, #7]
+ 499              		.loc 1 766 0
+ 500              		.cfi_startproc
+ 501              		@ args = 0, pretend = 0, frame = 8
+ 502              		@ frame_needed = 1, uses_anonymous_args = 0
+ 503              		@ link register save eliminated.
+ 504 0000 80B4     		push	{r7}
+ 505              		.cfi_def_cfa_offset 4
+ 506              		.cfi_offset 7, -4
+ 507 0002 83B0     		sub	sp, sp, #12
+ 508              		.cfi_def_cfa_offset 16
+ 509 0004 00AF     		add	r7, sp, #0
+ 510              		.cfi_def_cfa_register 7
+ 511 0006 0346     		mov	r3, r0
+ 512 0008 FB71     		strb	r3, [r7, #7]
  767:Generated_Source\PSoC5/PWM_MOTORS.c ****         CY_SET_REG8(PWM_MOTORS_CONTROL_PTR, control);
- 504              		.loc 1 767 0
- 505 000a 044A     		ldr	r2, .L35
- 506 000c FB79     		ldrb	r3, [r7, #7]
- 507 000e 1370     		strb	r3, [r2]
+ 513              		.loc 1 767 0
+ 514 000a 044A     		ldr	r2, .L35
+ 515 000c FB79     		ldrb	r3, [r7, #7]
+ 516 000e 1370     		strb	r3, [r2]
  768:Generated_Source\PSoC5/PWM_MOTORS.c ****     }
- 508              		.loc 1 768 0
- 509 0010 00BF     		nop
- 510 0012 0C37     		adds	r7, r7, #12
- 511              		.cfi_def_cfa_offset 4
- 512 0014 BD46     		mov	sp, r7
- 513              		.cfi_def_cfa_register 13
- 514              		@ sp needed
- 515 0016 80BC     		pop	{r7}
- 516              		.cfi_restore 7
- 517              		.cfi_def_cfa_offset 0
- 518 0018 7047     		bx	lr
- 519              	.L36:
- 520 001a 00BF     		.align	2
- 521              	.L35:
- 522 001c 78640040 		.word	1073767544
- 523              		.cfi_endproc
- 524              	.LFE10:
- 525              		.size	PWM_MOTORS_WriteControlRegister, .-PWM_MOTORS_WriteControlRegister
- 526              		.section	.text.PWM_MOTORS_ReadCapture,"ax",%progbits
- 527              		.align	2
- 528              		.global	PWM_MOTORS_ReadCapture
- 529              		.thumb
- 530              		.thumb_func
- 531              		.type	PWM_MOTORS_ReadCapture, %function
- 532              	PWM_MOTORS_ReadCapture:
- 533              	.LFB11:
+ 517              		.loc 1 768 0
+ 518 0010 00BF     		nop
+ 519 0012 0C37     		adds	r7, r7, #12
+ 520              		.cfi_def_cfa_offset 4
+ 521 0014 BD46     		mov	sp, r7
+ 522              		.cfi_def_cfa_register 13
+ 523              		@ sp needed
+ 524 0016 80BC     		pop	{r7}
+ 525              		.cfi_restore 7
+ 526              		.cfi_def_cfa_offset 0
+ 527 0018 7047     		bx	lr
+ 528              	.L36:
+ 529 001a 00BF     		.align	2
+ 530              	.L35:
+ 531 001c 78650040 		.word	1073767800
+ 532              		.cfi_endproc
+ 533              	.LFE10:
+ 534              		.size	PWM_MOTORS_WriteControlRegister, .-PWM_MOTORS_WriteControlRegister
+ 535              		.section	.text.PWM_MOTORS_ReadCapture,"ax",%progbits
+ 536              		.align	2
+ 537              		.global	PWM_MOTORS_ReadCapture
+ 538              		.thumb
+ 539              		.thumb_func
+ 540              		.type	PWM_MOTORS_ReadCapture, %function
+ 541              	PWM_MOTORS_ReadCapture:
+ 542              	.LFB11:
  769:Generated_Source\PSoC5/PWM_MOTORS.c **** 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 24
+
+
  770:Generated_Source\PSoC5/PWM_MOTORS.c **** #endif /* (PWM_MOTORS_UseControl) */
  771:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  772:Generated_Source\PSoC5/PWM_MOTORS.c **** 
@@ -1378,9 +1390,6 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  776:Generated_Source\PSoC5/PWM_MOTORS.c ****     /*******************************************************************************
  777:Generated_Source\PSoC5/PWM_MOTORS.c ****     * Function Name: PWM_MOTORS_ReadCapture
  778:Generated_Source\PSoC5/PWM_MOTORS.c ****     ********************************************************************************
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 24
-
-
  779:Generated_Source\PSoC5/PWM_MOTORS.c ****     *
  780:Generated_Source\PSoC5/PWM_MOTORS.c ****     * Summary:
  781:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  Reads the capture value from the capture FIFO.
@@ -1392,55 +1401,55 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  787:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  uint8/uint16: The current capture value
  788:Generated_Source\PSoC5/PWM_MOTORS.c ****     *
  789:Generated_Source\PSoC5/PWM_MOTORS.c ****     *******************************************************************************/
- 790:Generated_Source\PSoC5/PWM_MOTORS.c ****     uint8 PWM_MOTORS_ReadCapture(void) 
+ 790:Generated_Source\PSoC5/PWM_MOTORS.c ****     uint16 PWM_MOTORS_ReadCapture(void) 
  791:Generated_Source\PSoC5/PWM_MOTORS.c ****     {
- 534              		.loc 1 791 0
- 535              		.cfi_startproc
- 536              		@ args = 0, pretend = 0, frame = 0
- 537              		@ frame_needed = 1, uses_anonymous_args = 0
- 538              		@ link register save eliminated.
- 539 0000 80B4     		push	{r7}
- 540              		.cfi_def_cfa_offset 4
- 541              		.cfi_offset 7, -4
- 542 0002 00AF     		add	r7, sp, #0
- 543              		.cfi_def_cfa_register 7
- 792:Generated_Source\PSoC5/PWM_MOTORS.c ****         return (CY_GET_REG8(PWM_MOTORS_CAPTURE_LSB_PTR));
- 544              		.loc 1 792 0
- 545 0004 034B     		ldr	r3, .L39
- 546 0006 1B78     		ldrb	r3, [r3]
- 547 0008 DBB2     		uxtb	r3, r3
+ 543              		.loc 1 791 0
+ 544              		.cfi_startproc
+ 545              		@ args = 0, pretend = 0, frame = 0
+ 546              		@ frame_needed = 1, uses_anonymous_args = 0
+ 547              		@ link register save eliminated.
+ 548 0000 80B4     		push	{r7}
+ 549              		.cfi_def_cfa_offset 4
+ 550              		.cfi_offset 7, -4
+ 551 0002 00AF     		add	r7, sp, #0
+ 552              		.cfi_def_cfa_register 7
+ 792:Generated_Source\PSoC5/PWM_MOTORS.c ****         return (CY_GET_REG16(PWM_MOTORS_CAPTURE_LSB_PTR));
+ 553              		.loc 1 792 0
+ 554 0004 034B     		ldr	r3, .L39
+ 555 0006 1B88     		ldrh	r3, [r3]	@ movhi
+ 556 0008 9BB2     		uxth	r3, r3
  793:Generated_Source\PSoC5/PWM_MOTORS.c ****     }
- 548              		.loc 1 793 0
- 549 000a 1846     		mov	r0, r3
- 550 000c BD46     		mov	sp, r7
- 551              		.cfi_def_cfa_register 13
- 552              		@ sp needed
- 553 000e 80BC     		pop	{r7}
- 554              		.cfi_restore 7
- 555              		.cfi_def_cfa_offset 0
- 556 0010 7047     		bx	lr
- 557              	.L40:
- 558 0012 00BF     		.align	2
- 559              	.L39:
- 560 0014 51640040 		.word	1073767505
- 561              		.cfi_endproc
- 562              	.LFE11:
- 563              		.size	PWM_MOTORS_ReadCapture, .-PWM_MOTORS_ReadCapture
- 564              		.section	.text.PWM_MOTORS_ReadCompare1,"ax",%progbits
- 565              		.align	2
- 566              		.global	PWM_MOTORS_ReadCompare1
- 567              		.thumb
- 568              		.thumb_func
- 569              		.type	PWM_MOTORS_ReadCompare1, %function
- 570              	PWM_MOTORS_ReadCompare1:
- 571              	.LFB12:
+ 557              		.loc 1 793 0
+ 558 000a 1846     		mov	r0, r3
+ 559 000c BD46     		mov	sp, r7
+ 560              		.cfi_def_cfa_register 13
+ 561              		@ sp needed
+ 562 000e 80BC     		pop	{r7}
+ 563              		.cfi_restore 7
+ 564              		.cfi_def_cfa_offset 0
+ 565 0010 7047     		bx	lr
+ 566              	.L40:
+ 567 0012 00BF     		.align	2
+ 568              	.L39:
+ 569 0014 A8680040 		.word	1073768616
+ 570              		.cfi_endproc
+ 571              	.LFE11:
+ 572              		.size	PWM_MOTORS_ReadCapture, .-PWM_MOTORS_ReadCapture
+ 573              		.section	.text.PWM_MOTORS_ReadCompare1,"ax",%progbits
+ 574              		.align	2
+ 575              		.global	PWM_MOTORS_ReadCompare1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 25
+
+
+ 576              		.thumb
+ 577              		.thumb_func
+ 578              		.type	PWM_MOTORS_ReadCompare1, %function
+ 579              	PWM_MOTORS_ReadCompare1:
+ 580              	.LFB12:
  794:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  795:Generated_Source\PSoC5/PWM_MOTORS.c **** #endif /* (!PWM_MOTORS_UsingFixedFunction) */
  796:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  797:Generated_Source\PSoC5/PWM_MOTORS.c **** 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 25
-
-
  798:Generated_Source\PSoC5/PWM_MOTORS.c **** #if (PWM_MOTORS_UseOneCompareMode)
  799:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  800:Generated_Source\PSoC5/PWM_MOTORS.c **** 
@@ -1459,12 +1468,12 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  813:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  uint8/uint16: Current compare value
  814:Generated_Source\PSoC5/PWM_MOTORS.c ****     *
  815:Generated_Source\PSoC5/PWM_MOTORS.c ****     *******************************************************************************/
- 816:Generated_Source\PSoC5/PWM_MOTORS.c ****     uint8 PWM_MOTORS_ReadCompare(void) 
+ 816:Generated_Source\PSoC5/PWM_MOTORS.c ****     uint16 PWM_MOTORS_ReadCompare(void) 
  817:Generated_Source\PSoC5/PWM_MOTORS.c ****     {
  818:Generated_Source\PSoC5/PWM_MOTORS.c ****         #if(PWM_MOTORS_UsingFixedFunction)
- 819:Generated_Source\PSoC5/PWM_MOTORS.c ****             return ((uint8)CY_GET_REG16(PWM_MOTORS_COMPARE1_LSB_PTR));
+ 819:Generated_Source\PSoC5/PWM_MOTORS.c ****             return ((uint16)CY_GET_REG16(PWM_MOTORS_COMPARE1_LSB_PTR));
  820:Generated_Source\PSoC5/PWM_MOTORS.c ****         #else
- 821:Generated_Source\PSoC5/PWM_MOTORS.c ****             return (CY_GET_REG8(PWM_MOTORS_COMPARE1_LSB_PTR));
+ 821:Generated_Source\PSoC5/PWM_MOTORS.c ****             return (CY_GET_REG16(PWM_MOTORS_COMPARE1_LSB_PTR));
  822:Generated_Source\PSoC5/PWM_MOTORS.c ****         #endif /* (PWM_MOTORS_UsingFixedFunction) */
  823:Generated_Source\PSoC5/PWM_MOTORS.c ****     }
  824:Generated_Source\PSoC5/PWM_MOTORS.c **** 
@@ -1485,51 +1494,51 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  839:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  uint8/uint16: Current compare value.
  840:Generated_Source\PSoC5/PWM_MOTORS.c ****     *
  841:Generated_Source\PSoC5/PWM_MOTORS.c ****     *******************************************************************************/
- 842:Generated_Source\PSoC5/PWM_MOTORS.c ****     uint8 PWM_MOTORS_ReadCompare1(void) 
+ 842:Generated_Source\PSoC5/PWM_MOTORS.c ****     uint16 PWM_MOTORS_ReadCompare1(void) 
  843:Generated_Source\PSoC5/PWM_MOTORS.c ****     {
- 572              		.loc 1 843 0
- 573              		.cfi_startproc
- 574              		@ args = 0, pretend = 0, frame = 0
- 575              		@ frame_needed = 1, uses_anonymous_args = 0
- 576              		@ link register save eliminated.
- 577 0000 80B4     		push	{r7}
- 578              		.cfi_def_cfa_offset 4
- 579              		.cfi_offset 7, -4
- 580 0002 00AF     		add	r7, sp, #0
- 581              		.cfi_def_cfa_register 7
- 844:Generated_Source\PSoC5/PWM_MOTORS.c ****         return (CY_GET_REG8(PWM_MOTORS_COMPARE1_LSB_PTR));
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 26
+ 581              		.loc 1 843 0
+ 582              		.cfi_startproc
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 26
 
 
- 582              		.loc 1 844 0
- 583 0004 034B     		ldr	r3, .L43
- 584 0006 1B78     		ldrb	r3, [r3]
- 585 0008 DBB2     		uxtb	r3, r3
+ 583              		@ args = 0, pretend = 0, frame = 0
+ 584              		@ frame_needed = 1, uses_anonymous_args = 0
+ 585              		@ link register save eliminated.
+ 586 0000 80B4     		push	{r7}
+ 587              		.cfi_def_cfa_offset 4
+ 588              		.cfi_offset 7, -4
+ 589 0002 00AF     		add	r7, sp, #0
+ 590              		.cfi_def_cfa_register 7
+ 844:Generated_Source\PSoC5/PWM_MOTORS.c ****         return (CY_GET_REG16(PWM_MOTORS_COMPARE1_LSB_PTR));
+ 591              		.loc 1 844 0
+ 592 0004 034B     		ldr	r3, .L43
+ 593 0006 1B88     		ldrh	r3, [r3]	@ movhi
+ 594 0008 9BB2     		uxth	r3, r3
  845:Generated_Source\PSoC5/PWM_MOTORS.c ****     }
- 586              		.loc 1 845 0
- 587 000a 1846     		mov	r0, r3
- 588 000c BD46     		mov	sp, r7
- 589              		.cfi_def_cfa_register 13
- 590              		@ sp needed
- 591 000e 80BC     		pop	{r7}
- 592              		.cfi_restore 7
- 593              		.cfi_def_cfa_offset 0
- 594 0010 7047     		bx	lr
- 595              	.L44:
- 596 0012 00BF     		.align	2
- 597              	.L43:
- 598 0014 21640040 		.word	1073767457
- 599              		.cfi_endproc
- 600              	.LFE12:
- 601              		.size	PWM_MOTORS_ReadCompare1, .-PWM_MOTORS_ReadCompare1
- 602              		.section	.text.PWM_MOTORS_ReadCompare2,"ax",%progbits
- 603              		.align	2
- 604              		.global	PWM_MOTORS_ReadCompare2
- 605              		.thumb
- 606              		.thumb_func
- 607              		.type	PWM_MOTORS_ReadCompare2, %function
- 608              	PWM_MOTORS_ReadCompare2:
- 609              	.LFB13:
+ 595              		.loc 1 845 0
+ 596 000a 1846     		mov	r0, r3
+ 597 000c BD46     		mov	sp, r7
+ 598              		.cfi_def_cfa_register 13
+ 599              		@ sp needed
+ 600 000e 80BC     		pop	{r7}
+ 601              		.cfi_restore 7
+ 602              		.cfi_def_cfa_offset 0
+ 603 0010 7047     		bx	lr
+ 604              	.L44:
+ 605 0012 00BF     		.align	2
+ 606              	.L43:
+ 607 0014 48680040 		.word	1073768520
+ 608              		.cfi_endproc
+ 609              	.LFE12:
+ 610              		.size	PWM_MOTORS_ReadCompare1, .-PWM_MOTORS_ReadCompare1
+ 611              		.section	.text.PWM_MOTORS_ReadCompare2,"ax",%progbits
+ 612              		.align	2
+ 613              		.global	PWM_MOTORS_ReadCompare2
+ 614              		.thumb
+ 615              		.thumb_func
+ 616              		.type	PWM_MOTORS_ReadCompare2, %function
+ 617              	PWM_MOTORS_ReadCompare2:
+ 618              	.LFB13:
  846:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  847:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  848:Generated_Source\PSoC5/PWM_MOTORS.c ****     /*******************************************************************************
@@ -1546,51 +1555,51 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  859:Generated_Source\PSoC5/PWM_MOTORS.c ****     *  uint8/uint16: Current compare value.
  860:Generated_Source\PSoC5/PWM_MOTORS.c ****     *
  861:Generated_Source\PSoC5/PWM_MOTORS.c ****     *******************************************************************************/
- 862:Generated_Source\PSoC5/PWM_MOTORS.c ****     uint8 PWM_MOTORS_ReadCompare2(void) 
+ 862:Generated_Source\PSoC5/PWM_MOTORS.c ****     uint16 PWM_MOTORS_ReadCompare2(void) 
  863:Generated_Source\PSoC5/PWM_MOTORS.c ****     {
- 610              		.loc 1 863 0
- 611              		.cfi_startproc
- 612              		@ args = 0, pretend = 0, frame = 0
- 613              		@ frame_needed = 1, uses_anonymous_args = 0
- 614              		@ link register save eliminated.
- 615 0000 80B4     		push	{r7}
- 616              		.cfi_def_cfa_offset 4
- 617              		.cfi_offset 7, -4
- 618 0002 00AF     		add	r7, sp, #0
- 619              		.cfi_def_cfa_register 7
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 27
+ 619              		.loc 1 863 0
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 27
 
 
- 864:Generated_Source\PSoC5/PWM_MOTORS.c ****         return (CY_GET_REG8(PWM_MOTORS_COMPARE2_LSB_PTR));
- 620              		.loc 1 864 0
- 621 0004 034B     		ldr	r3, .L47
- 622 0006 1B78     		ldrb	r3, [r3]
- 623 0008 DBB2     		uxtb	r3, r3
+ 620              		.cfi_startproc
+ 621              		@ args = 0, pretend = 0, frame = 0
+ 622              		@ frame_needed = 1, uses_anonymous_args = 0
+ 623              		@ link register save eliminated.
+ 624 0000 80B4     		push	{r7}
+ 625              		.cfi_def_cfa_offset 4
+ 626              		.cfi_offset 7, -4
+ 627 0002 00AF     		add	r7, sp, #0
+ 628              		.cfi_def_cfa_register 7
+ 864:Generated_Source\PSoC5/PWM_MOTORS.c ****         return (CY_GET_REG16(PWM_MOTORS_COMPARE2_LSB_PTR));
+ 629              		.loc 1 864 0
+ 630 0004 034B     		ldr	r3, .L47
+ 631 0006 1B88     		ldrh	r3, [r3]	@ movhi
+ 632 0008 9BB2     		uxth	r3, r3
  865:Generated_Source\PSoC5/PWM_MOTORS.c ****     }
- 624              		.loc 1 865 0
- 625 000a 1846     		mov	r0, r3
- 626 000c BD46     		mov	sp, r7
- 627              		.cfi_def_cfa_register 13
- 628              		@ sp needed
- 629 000e 80BC     		pop	{r7}
- 630              		.cfi_restore 7
- 631              		.cfi_def_cfa_offset 0
- 632 0010 7047     		bx	lr
- 633              	.L48:
- 634 0012 00BF     		.align	2
- 635              	.L47:
- 636 0014 31640040 		.word	1073767473
- 637              		.cfi_endproc
- 638              	.LFE13:
- 639              		.size	PWM_MOTORS_ReadCompare2, .-PWM_MOTORS_ReadCompare2
- 640              		.section	.text.PWM_MOTORS_ReadPeriod,"ax",%progbits
- 641              		.align	2
- 642              		.global	PWM_MOTORS_ReadPeriod
- 643              		.thumb
- 644              		.thumb_func
- 645              		.type	PWM_MOTORS_ReadPeriod, %function
- 646              	PWM_MOTORS_ReadPeriod:
- 647              	.LFB14:
+ 633              		.loc 1 865 0
+ 634 000a 1846     		mov	r0, r3
+ 635 000c BD46     		mov	sp, r7
+ 636              		.cfi_def_cfa_register 13
+ 637              		@ sp needed
+ 638 000e 80BC     		pop	{r7}
+ 639              		.cfi_restore 7
+ 640              		.cfi_def_cfa_offset 0
+ 641 0010 7047     		bx	lr
+ 642              	.L48:
+ 643 0012 00BF     		.align	2
+ 644              	.L47:
+ 645 0014 68680040 		.word	1073768552
+ 646              		.cfi_endproc
+ 647              	.LFE13:
+ 648              		.size	PWM_MOTORS_ReadCompare2, .-PWM_MOTORS_ReadCompare2
+ 649              		.section	.text.PWM_MOTORS_ReadPeriod,"ax",%progbits
+ 650              		.align	2
+ 651              		.global	PWM_MOTORS_ReadPeriod
+ 652              		.thumb
+ 653              		.thumb_func
+ 654              		.type	PWM_MOTORS_ReadPeriod, %function
+ 655              	PWM_MOTORS_ReadPeriod:
+ 656              	.LFB14:
  866:Generated_Source\PSoC5/PWM_MOTORS.c **** 
  867:Generated_Source\PSoC5/PWM_MOTORS.c **** #endif /* (PWM_MOTORS_UseOneCompareMode) */
  868:Generated_Source\PSoC5/PWM_MOTORS.c **** 
@@ -1609,952 +1618,973 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 1
  881:Generated_Source\PSoC5/PWM_MOTORS.c **** *  uint8/16: Period value
  882:Generated_Source\PSoC5/PWM_MOTORS.c **** *
  883:Generated_Source\PSoC5/PWM_MOTORS.c **** *******************************************************************************/
- 884:Generated_Source\PSoC5/PWM_MOTORS.c **** uint8 PWM_MOTORS_ReadPeriod(void) 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 28
+
+
+ 884:Generated_Source\PSoC5/PWM_MOTORS.c **** uint16 PWM_MOTORS_ReadPeriod(void) 
  885:Generated_Source\PSoC5/PWM_MOTORS.c **** {
- 648              		.loc 1 885 0
- 649              		.cfi_startproc
- 650              		@ args = 0, pretend = 0, frame = 0
- 651              		@ frame_needed = 1, uses_anonymous_args = 0
- 652              		@ link register save eliminated.
- 653 0000 80B4     		push	{r7}
- 654              		.cfi_def_cfa_offset 4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 28
-
-
- 655              		.cfi_offset 7, -4
- 656 0002 00AF     		add	r7, sp, #0
- 657              		.cfi_def_cfa_register 7
+ 657              		.loc 1 885 0
+ 658              		.cfi_startproc
+ 659              		@ args = 0, pretend = 0, frame = 0
+ 660              		@ frame_needed = 1, uses_anonymous_args = 0
+ 661              		@ link register save eliminated.
+ 662 0000 80B4     		push	{r7}
+ 663              		.cfi_def_cfa_offset 4
+ 664              		.cfi_offset 7, -4
+ 665 0002 00AF     		add	r7, sp, #0
+ 666              		.cfi_def_cfa_register 7
  886:Generated_Source\PSoC5/PWM_MOTORS.c ****     #if(PWM_MOTORS_UsingFixedFunction)
- 887:Generated_Source\PSoC5/PWM_MOTORS.c ****         return ((uint8)CY_GET_REG16(PWM_MOTORS_PERIOD_LSB_PTR));
+ 887:Generated_Source\PSoC5/PWM_MOTORS.c ****         return ((uint16)CY_GET_REG16(PWM_MOTORS_PERIOD_LSB_PTR));
  888:Generated_Source\PSoC5/PWM_MOTORS.c ****     #else
- 889:Generated_Source\PSoC5/PWM_MOTORS.c ****         return (CY_GET_REG8(PWM_MOTORS_PERIOD_LSB_PTR));
- 658              		.loc 1 889 0
- 659 0004 034B     		ldr	r3, .L51
- 660 0006 1B78     		ldrb	r3, [r3]
- 661 0008 DBB2     		uxtb	r3, r3
+ 889:Generated_Source\PSoC5/PWM_MOTORS.c ****         return (CY_GET_REG16(PWM_MOTORS_PERIOD_LSB_PTR));
+ 667              		.loc 1 889 0
+ 668 0004 034B     		ldr	r3, .L51
+ 669 0006 1B88     		ldrh	r3, [r3]	@ movhi
+ 670 0008 9BB2     		uxth	r3, r3
  890:Generated_Source\PSoC5/PWM_MOTORS.c ****     #endif /* (PWM_MOTORS_UsingFixedFunction) */
  891:Generated_Source\PSoC5/PWM_MOTORS.c **** }
- 662              		.loc 1 891 0
- 663 000a 1846     		mov	r0, r3
- 664 000c BD46     		mov	sp, r7
- 665              		.cfi_def_cfa_register 13
- 666              		@ sp needed
- 667 000e 80BC     		pop	{r7}
- 668              		.cfi_restore 7
- 669              		.cfi_def_cfa_offset 0
- 670 0010 7047     		bx	lr
- 671              	.L52:
- 672 0012 00BF     		.align	2
- 673              	.L51:
- 674 0014 41640040 		.word	1073767489
- 675              		.cfi_endproc
- 676              	.LFE14:
- 677              		.size	PWM_MOTORS_ReadPeriod, .-PWM_MOTORS_ReadPeriod
- 678              		.text
- 679              	.Letext0:
- 680              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
- 681              		.section	.debug_info,"",%progbits
- 682              	.Ldebug_info0:
- 683 0000 66020000 		.4byte	0x266
- 684 0004 0400     		.2byte	0x4
- 685 0006 00000000 		.4byte	.Ldebug_abbrev0
- 686 000a 04       		.byte	0x4
- 687 000b 01       		.uleb128 0x1
- 688 000c 13000000 		.4byte	.LASF36
- 689 0010 0C       		.byte	0xc
- 690 0011 7F020000 		.4byte	.LASF37
- 691 0015 0F020000 		.4byte	.LASF38
- 692 0019 00000000 		.4byte	.Ldebug_ranges0+0
- 693 001d 00000000 		.4byte	0
- 694 0021 00000000 		.4byte	.Ldebug_line0
- 695 0025 02       		.uleb128 0x2
- 696 0026 01       		.byte	0x1
- 697 0027 06       		.byte	0x6
- 698 0028 28030000 		.4byte	.LASF0
- 699 002c 02       		.uleb128 0x2
- 700 002d 01       		.byte	0x1
- 701 002e 08       		.byte	0x8
- 702 002f 88010000 		.4byte	.LASF1
- 703 0033 02       		.uleb128 0x2
- 704 0034 02       		.byte	0x2
- 705 0035 05       		.byte	0x5
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 29
+ 671              		.loc 1 891 0
+ 672 000a 1846     		mov	r0, r3
+ 673 000c BD46     		mov	sp, r7
+ 674              		.cfi_def_cfa_register 13
+ 675              		@ sp needed
+ 676 000e 80BC     		pop	{r7}
+ 677              		.cfi_restore 7
+ 678              		.cfi_def_cfa_offset 0
+ 679 0010 7047     		bx	lr
+ 680              	.L52:
+ 681 0012 00BF     		.align	2
+ 682              	.L51:
+ 683 0014 88680040 		.word	1073768584
+ 684              		.cfi_endproc
+ 685              	.LFE14:
+ 686              		.size	PWM_MOTORS_ReadPeriod, .-PWM_MOTORS_ReadPeriod
+ 687              		.text
+ 688              	.Letext0:
+ 689              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 690              		.section	.debug_info,"",%progbits
+ 691              	.Ldebug_info0:
+ 692 0000 83020000 		.4byte	0x283
+ 693 0004 0400     		.2byte	0x4
+ 694 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 695 000a 04       		.byte	0x4
+ 696 000b 01       		.uleb128 0x1
+ 697 000c 19000000 		.4byte	.LASF38
+ 698 0010 0C       		.byte	0xc
+ 699 0011 8B020000 		.4byte	.LASF39
+ 700 0015 1B020000 		.4byte	.LASF40
+ 701 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 702 001d 00000000 		.4byte	0
+ 703 0021 00000000 		.4byte	.Ldebug_line0
+ 704 0025 02       		.uleb128 0x2
+ 705 0026 01       		.byte	0x1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 29
 
 
- 706 0036 D4020000 		.4byte	.LASF2
- 707 003a 02       		.uleb128 0x2
- 708 003b 02       		.byte	0x2
- 709 003c 07       		.byte	0x7
- 710 003d FE000000 		.4byte	.LASF3
- 711 0041 02       		.uleb128 0x2
- 712 0042 04       		.byte	0x4
- 713 0043 05       		.byte	0x5
- 714 0044 0E030000 		.4byte	.LASF4
- 715 0048 02       		.uleb128 0x2
- 716 0049 04       		.byte	0x4
- 717 004a 07       		.byte	0x7
- 718 004b 34010000 		.4byte	.LASF5
- 719 004f 02       		.uleb128 0x2
- 720 0050 08       		.byte	0x8
- 721 0051 05       		.byte	0x5
- 722 0052 01020000 		.4byte	.LASF6
- 723 0056 02       		.uleb128 0x2
- 724 0057 08       		.byte	0x8
- 725 0058 07       		.byte	0x7
- 726 0059 B5010000 		.4byte	.LASF7
- 727 005d 03       		.uleb128 0x3
- 728 005e 04       		.byte	0x4
- 729 005f 05       		.byte	0x5
- 730 0060 696E7400 		.ascii	"int\000"
- 731 0064 02       		.uleb128 0x2
- 732 0065 04       		.byte	0x4
- 733 0066 07       		.byte	0x7
- 734 0067 96010000 		.4byte	.LASF8
- 735 006b 04       		.uleb128 0x4
- 736 006c 46010000 		.4byte	.LASF12
- 737 0070 02       		.byte	0x2
- 738 0071 E401     		.2byte	0x1e4
- 739 0073 2C000000 		.4byte	0x2c
- 740 0077 02       		.uleb128 0x2
- 741 0078 04       		.byte	0x4
- 742 0079 04       		.byte	0x4
- 743 007a 11010000 		.4byte	.LASF9
- 744 007e 02       		.uleb128 0x2
- 745 007f 08       		.byte	0x8
- 746 0080 04       		.byte	0x4
- 747 0081 81010000 		.4byte	.LASF10
- 748 0085 02       		.uleb128 0x2
- 749 0086 01       		.byte	0x1
- 750 0087 08       		.byte	0x8
- 751 0088 17030000 		.4byte	.LASF11
- 752 008c 04       		.uleb128 0x4
- 753 008d 2F010000 		.4byte	.LASF13
- 754 0091 02       		.byte	0x2
- 755 0092 8E02     		.2byte	0x28e
- 756 0094 98000000 		.4byte	0x98
- 757 0098 05       		.uleb128 0x5
- 758 0099 6B000000 		.4byte	0x6b
- 759 009d 02       		.uleb128 0x2
- 760 009e 08       		.byte	0x8
- 761 009f 04       		.byte	0x4
- 762 00a0 1C030000 		.4byte	.LASF14
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 30
+ 706 0027 06       		.byte	0x6
+ 707 0028 35030000 		.4byte	.LASF0
+ 708 002c 02       		.uleb128 0x2
+ 709 002d 01       		.byte	0x1
+ 710 002e 08       		.byte	0x8
+ 711 002f 94010000 		.4byte	.LASF1
+ 712 0033 02       		.uleb128 0x2
+ 713 0034 02       		.byte	0x2
+ 714 0035 05       		.byte	0x5
+ 715 0036 E1020000 		.4byte	.LASF2
+ 716 003a 02       		.uleb128 0x2
+ 717 003b 02       		.byte	0x2
+ 718 003c 07       		.byte	0x7
+ 719 003d 03010000 		.4byte	.LASF3
+ 720 0041 02       		.uleb128 0x2
+ 721 0042 04       		.byte	0x4
+ 722 0043 05       		.byte	0x5
+ 723 0044 1B030000 		.4byte	.LASF4
+ 724 0048 02       		.uleb128 0x2
+ 725 0049 04       		.byte	0x4
+ 726 004a 07       		.byte	0x7
+ 727 004b 39010000 		.4byte	.LASF5
+ 728 004f 02       		.uleb128 0x2
+ 729 0050 08       		.byte	0x8
+ 730 0051 05       		.byte	0x5
+ 731 0052 0D020000 		.4byte	.LASF6
+ 732 0056 02       		.uleb128 0x2
+ 733 0057 08       		.byte	0x8
+ 734 0058 07       		.byte	0x7
+ 735 0059 C1010000 		.4byte	.LASF7
+ 736 005d 03       		.uleb128 0x3
+ 737 005e 04       		.byte	0x4
+ 738 005f 05       		.byte	0x5
+ 739 0060 696E7400 		.ascii	"int\000"
+ 740 0064 02       		.uleb128 0x2
+ 741 0065 04       		.byte	0x4
+ 742 0066 07       		.byte	0x7
+ 743 0067 A2010000 		.4byte	.LASF8
+ 744 006b 04       		.uleb128 0x4
+ 745 006c 4B010000 		.4byte	.LASF9
+ 746 0070 02       		.byte	0x2
+ 747 0071 E401     		.2byte	0x1e4
+ 748 0073 2C000000 		.4byte	0x2c
+ 749 0077 04       		.uleb128 0x4
+ 750 0078 8D010000 		.4byte	.LASF10
+ 751 007c 02       		.byte	0x2
+ 752 007d E501     		.2byte	0x1e5
+ 753 007f 3A000000 		.4byte	0x3a
+ 754 0083 02       		.uleb128 0x2
+ 755 0084 04       		.byte	0x4
+ 756 0085 04       		.byte	0x4
+ 757 0086 16010000 		.4byte	.LASF11
+ 758 008a 02       		.uleb128 0x2
+ 759 008b 08       		.byte	0x8
+ 760 008c 04       		.byte	0x4
+ 761 008d 86010000 		.4byte	.LASF12
+ 762 0091 02       		.uleb128 0x2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 30
 
 
- 763 00a4 02       		.uleb128 0x2
- 764 00a5 04       		.byte	0x4
- 765 00a6 07       		.byte	0x7
- 766 00a7 F8010000 		.4byte	.LASF15
- 767 00ab 06       		.uleb128 0x6
- 768 00ac 3C030000 		.4byte	.LASF16
- 769 00b0 01       		.byte	0x1
- 770 00b1 37       		.byte	0x37
- 771 00b2 00000000 		.4byte	.LFB0
- 772 00b6 24000000 		.4byte	.LFE0-.LFB0
- 773 00ba 01       		.uleb128 0x1
- 774 00bb 9C       		.byte	0x9c
- 775 00bc 07       		.uleb128 0x7
- 776 00bd 1F010000 		.4byte	.LASF19
- 777 00c1 01       		.byte	0x1
- 778 00c2 54       		.byte	0x54
- 779 00c3 00000000 		.4byte	.LFB1
- 780 00c7 58000000 		.4byte	.LFE1-.LFB1
- 781 00cb 01       		.uleb128 0x1
- 782 00cc 9C       		.byte	0x9c
- 783 00cd E0000000 		.4byte	0xe0
- 784 00d1 08       		.uleb128 0x8
- 785 00d2 F3010000 		.4byte	.LASF27
- 786 00d6 01       		.byte	0x1
- 787 00d7 57       		.byte	0x57
- 788 00d8 6B000000 		.4byte	0x6b
- 789 00dc 02       		.uleb128 0x2
- 790 00dd 91       		.byte	0x91
- 791 00de 77       		.sleb128 -9
- 792 00df 00       		.byte	0
- 793 00e0 09       		.uleb128 0x9
- 794 00e1 A3010000 		.4byte	.LASF17
- 795 00e5 01       		.byte	0x1
- 796 00e6 C7       		.byte	0xc7
- 797 00e7 00000000 		.4byte	.LFB2
- 798 00eb 20000000 		.4byte	.LFE2-.LFB2
- 799 00ef 01       		.uleb128 0x1
- 800 00f0 9C       		.byte	0x9c
- 801 00f1 09       		.uleb128 0x9
- 802 00f2 E3010000 		.4byte	.LASF18
- 803 00f6 01       		.byte	0x1
- 804 00f7 E9       		.byte	0xe9
- 805 00f8 00000000 		.4byte	.LFB3
- 806 00fc 20000000 		.4byte	.LFE3-.LFB3
- 807 0100 01       		.uleb128 0x1
- 808 0101 9C       		.byte	0x9c
- 809 0102 0A       		.uleb128 0xa
- 810 0103 BC020000 		.4byte	.LASF20
- 811 0107 01       		.byte	0x1
- 812 0108 9301     		.2byte	0x193
- 813 010a 00000000 		.4byte	.LFB4
- 814 010e 20000000 		.4byte	.LFE4-.LFB4
- 815 0112 01       		.uleb128 0x1
- 816 0113 9C       		.byte	0x9c
- 817 0114 28010000 		.4byte	0x128
- 818 0118 0B       		.uleb128 0xb
- 819 0119 17010000 		.4byte	.LASF22
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 31
+ 763 0092 01       		.byte	0x1
+ 764 0093 08       		.byte	0x8
+ 765 0094 24030000 		.4byte	.LASF13
+ 766 0098 04       		.uleb128 0x4
+ 767 0099 34010000 		.4byte	.LASF14
+ 768 009d 02       		.byte	0x2
+ 769 009e 8E02     		.2byte	0x28e
+ 770 00a0 A4000000 		.4byte	0xa4
+ 771 00a4 05       		.uleb128 0x5
+ 772 00a5 6B000000 		.4byte	0x6b
+ 773 00a9 04       		.uleb128 0x4
+ 774 00aa 00000000 		.4byte	.LASF15
+ 775 00ae 02       		.byte	0x2
+ 776 00af 8F02     		.2byte	0x28f
+ 777 00b1 B5000000 		.4byte	0xb5
+ 778 00b5 05       		.uleb128 0x5
+ 779 00b6 77000000 		.4byte	0x77
+ 780 00ba 02       		.uleb128 0x2
+ 781 00bb 08       		.byte	0x8
+ 782 00bc 04       		.byte	0x4
+ 783 00bd 29030000 		.4byte	.LASF16
+ 784 00c1 02       		.uleb128 0x2
+ 785 00c2 04       		.byte	0x4
+ 786 00c3 07       		.byte	0x7
+ 787 00c4 04020000 		.4byte	.LASF17
+ 788 00c8 06       		.uleb128 0x6
+ 789 00c9 49030000 		.4byte	.LASF18
+ 790 00cd 01       		.byte	0x1
+ 791 00ce 37       		.byte	0x37
+ 792 00cf 00000000 		.4byte	.LFB0
+ 793 00d3 24000000 		.4byte	.LFE0-.LFB0
+ 794 00d7 01       		.uleb128 0x1
+ 795 00d8 9C       		.byte	0x9c
+ 796 00d9 07       		.uleb128 0x7
+ 797 00da 24010000 		.4byte	.LASF21
+ 798 00de 01       		.byte	0x1
+ 799 00df 54       		.byte	0x54
+ 800 00e0 00000000 		.4byte	.LFB1
+ 801 00e4 6C000000 		.4byte	.LFE1-.LFB1
+ 802 00e8 01       		.uleb128 0x1
+ 803 00e9 9C       		.byte	0x9c
+ 804 00ea FD000000 		.4byte	0xfd
+ 805 00ee 08       		.uleb128 0x8
+ 806 00ef FF010000 		.4byte	.LASF29
+ 807 00f3 01       		.byte	0x1
+ 808 00f4 57       		.byte	0x57
+ 809 00f5 6B000000 		.4byte	0x6b
+ 810 00f9 02       		.uleb128 0x2
+ 811 00fa 91       		.byte	0x91
+ 812 00fb 77       		.sleb128 -9
+ 813 00fc 00       		.byte	0
+ 814 00fd 09       		.uleb128 0x9
+ 815 00fe AF010000 		.4byte	.LASF19
+ 816 0102 01       		.byte	0x1
+ 817 0103 C7       		.byte	0xc7
+ 818 0104 00000000 		.4byte	.LFB2
+ 819 0108 20000000 		.4byte	.LFE2-.LFB2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 31
 
 
- 820 011d 01       		.byte	0x1
- 821 011e 9301     		.2byte	0x193
- 822 0120 6B000000 		.4byte	0x6b
- 823 0124 02       		.uleb128 0x2
- 824 0125 91       		.byte	0x91
- 825 0126 77       		.sleb128 -9
- 826 0127 00       		.byte	0
- 827 0128 0C       		.uleb128 0xc
- 828 0129 6A010000 		.4byte	.LASF31
- 829 012d 01       		.byte	0x1
- 830 012e A901     		.2byte	0x1a9
- 831 0130 6B000000 		.4byte	0x6b
- 832 0134 00000000 		.4byte	.LFB5
- 833 0138 20000000 		.4byte	.LFE5-.LFB5
- 834 013c 01       		.uleb128 0x1
- 835 013d 9C       		.byte	0x9c
- 836 013e 0A       		.uleb128 0xa
- 837 013f CC010000 		.4byte	.LASF21
- 838 0143 01       		.byte	0x1
- 839 0144 E201     		.2byte	0x1e2
- 840 0146 00000000 		.4byte	.LFB6
- 841 014a 20000000 		.4byte	.LFE6-.LFB6
- 842 014e 01       		.uleb128 0x1
- 843 014f 9C       		.byte	0x9c
- 844 0150 64010000 		.4byte	0x164
- 845 0154 0B       		.uleb128 0xb
- 846 0155 E0000000 		.4byte	.LASF23
- 847 0159 01       		.byte	0x1
- 848 015a E201     		.2byte	0x1e2
- 849 015c 6B000000 		.4byte	0x6b
- 850 0160 02       		.uleb128 0x2
- 851 0161 91       		.byte	0x91
- 852 0162 77       		.sleb128 -9
- 853 0163 00       		.byte	0
- 854 0164 0A       		.uleb128 0xa
- 855 0165 A3020000 		.4byte	.LASF24
- 856 0169 01       		.byte	0x1
- 857 016a 2B02     		.2byte	0x22b
- 858 016c 00000000 		.4byte	.LFB7
- 859 0170 20000000 		.4byte	.LFE7-.LFB7
- 860 0174 01       		.uleb128 0x1
- 861 0175 9C       		.byte	0x9c
- 862 0176 8A010000 		.4byte	0x18a
- 863 017a 0B       		.uleb128 0xb
- 864 017b 34030000 		.4byte	.LASF25
- 865 017f 01       		.byte	0x1
- 866 0180 2B02     		.2byte	0x22b
- 867 0182 6B000000 		.4byte	0x6b
- 868 0186 02       		.uleb128 0x2
- 869 0187 91       		.byte	0x91
- 870 0188 77       		.sleb128 -9
- 871 0189 00       		.byte	0
- 872 018a 0A       		.uleb128 0xa
- 873 018b A1000000 		.4byte	.LASF26
- 874 018f 01       		.byte	0x1
- 875 0190 4802     		.2byte	0x248
- 876 0192 00000000 		.4byte	.LFB8
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 32
+ 820 010c 01       		.uleb128 0x1
+ 821 010d 9C       		.byte	0x9c
+ 822 010e 09       		.uleb128 0x9
+ 823 010f EF010000 		.4byte	.LASF20
+ 824 0113 01       		.byte	0x1
+ 825 0114 E9       		.byte	0xe9
+ 826 0115 00000000 		.4byte	.LFB3
+ 827 0119 20000000 		.4byte	.LFE3-.LFB3
+ 828 011d 01       		.uleb128 0x1
+ 829 011e 9C       		.byte	0x9c
+ 830 011f 0A       		.uleb128 0xa
+ 831 0120 AE000000 		.4byte	.LASF22
+ 832 0124 01       		.byte	0x1
+ 833 0125 9301     		.2byte	0x193
+ 834 0127 00000000 		.4byte	.LFB4
+ 835 012b 20000000 		.4byte	.LFE4-.LFB4
+ 836 012f 01       		.uleb128 0x1
+ 837 0130 9C       		.byte	0x9c
+ 838 0131 45010000 		.4byte	0x145
+ 839 0135 0B       		.uleb128 0xb
+ 840 0136 1C010000 		.4byte	.LASF24
+ 841 013a 01       		.byte	0x1
+ 842 013b 9301     		.2byte	0x193
+ 843 013d 77000000 		.4byte	0x77
+ 844 0141 02       		.uleb128 0x2
+ 845 0142 91       		.byte	0x91
+ 846 0143 76       		.sleb128 -10
+ 847 0144 00       		.byte	0
+ 848 0145 0C       		.uleb128 0xc
+ 849 0146 6F010000 		.4byte	.LASF33
+ 850 014a 01       		.byte	0x1
+ 851 014b A901     		.2byte	0x1a9
+ 852 014d 77000000 		.4byte	0x77
+ 853 0151 00000000 		.4byte	.LFB5
+ 854 0155 20000000 		.4byte	.LFE5-.LFB5
+ 855 0159 01       		.uleb128 0x1
+ 856 015a 9C       		.byte	0x9c
+ 857 015b 0A       		.uleb128 0xa
+ 858 015c D8010000 		.4byte	.LASF23
+ 859 0160 01       		.byte	0x1
+ 860 0161 E201     		.2byte	0x1e2
+ 861 0163 00000000 		.4byte	.LFB6
+ 862 0167 20000000 		.4byte	.LFE6-.LFB6
+ 863 016b 01       		.uleb128 0x1
+ 864 016c 9C       		.byte	0x9c
+ 865 016d 81010000 		.4byte	0x181
+ 866 0171 0B       		.uleb128 0xb
+ 867 0172 E5000000 		.4byte	.LASF25
+ 868 0176 01       		.byte	0x1
+ 869 0177 E201     		.2byte	0x1e2
+ 870 0179 77000000 		.4byte	0x77
+ 871 017d 02       		.uleb128 0x2
+ 872 017e 91       		.byte	0x91
+ 873 017f 76       		.sleb128 -10
+ 874 0180 00       		.byte	0
+ 875 0181 0A       		.uleb128 0xa
+ 876 0182 AF020000 		.4byte	.LASF26
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 32
 
 
- 877 0196 20000000 		.4byte	.LFE8-.LFB8
- 878 019a 01       		.uleb128 0x1
- 879 019b 9C       		.byte	0x9c
- 880 019c B0010000 		.4byte	0x1b0
- 881 01a0 0B       		.uleb128 0xb
- 882 01a1 34030000 		.4byte	.LASF25
- 883 01a5 01       		.byte	0x1
- 884 01a6 4802     		.2byte	0x248
- 885 01a8 6B000000 		.4byte	0x6b
- 886 01ac 02       		.uleb128 0x2
- 887 01ad 91       		.byte	0x91
- 888 01ae 77       		.sleb128 -9
- 889 01af 00       		.byte	0
- 890 01b0 0D       		.uleb128 0xd
- 891 01b1 C1000000 		.4byte	.LASF39
- 892 01b5 01       		.byte	0x1
- 893 01b6 E102     		.2byte	0x2e1
- 894 01b8 6B000000 		.4byte	0x6b
- 895 01bc 00000000 		.4byte	.LFB9
- 896 01c0 1C000000 		.4byte	.LFE9-.LFB9
- 897 01c4 01       		.uleb128 0x1
- 898 01c5 9C       		.byte	0x9c
- 899 01c6 DA010000 		.4byte	0x1da
- 900 01ca 0E       		.uleb128 0xe
- 901 01cb BA000000 		.4byte	.LASF28
- 902 01cf 01       		.byte	0x1
- 903 01d0 E302     		.2byte	0x2e3
- 904 01d2 6B000000 		.4byte	0x6b
- 905 01d6 02       		.uleb128 0x2
- 906 01d7 91       		.byte	0x91
- 907 01d8 77       		.sleb128 -9
- 908 01d9 00       		.byte	0
- 909 01da 0A       		.uleb128 0xa
- 910 01db 5F020000 		.4byte	.LASF29
- 911 01df 01       		.byte	0x1
- 912 01e0 FD02     		.2byte	0x2fd
- 913 01e2 00000000 		.4byte	.LFB10
- 914 01e6 20000000 		.4byte	.LFE10-.LFB10
- 915 01ea 01       		.uleb128 0x1
- 916 01eb 9C       		.byte	0x9c
- 917 01ec 00020000 		.4byte	0x200
- 918 01f0 0B       		.uleb128 0xb
- 919 01f1 4C010000 		.4byte	.LASF30
- 920 01f5 01       		.byte	0x1
- 921 01f6 FD02     		.2byte	0x2fd
- 922 01f8 6B000000 		.4byte	0x6b
- 923 01fc 02       		.uleb128 0x2
- 924 01fd 91       		.byte	0x91
- 925 01fe 77       		.sleb128 -9
- 926 01ff 00       		.byte	0
- 927 0200 0C       		.uleb128 0xc
- 928 0201 E7000000 		.4byte	.LASF32
- 929 0205 01       		.byte	0x1
- 930 0206 1603     		.2byte	0x316
- 931 0208 6B000000 		.4byte	0x6b
- 932 020c 00000000 		.4byte	.LFB11
- 933 0210 18000000 		.4byte	.LFE11-.LFB11
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 33
+ 877 0186 01       		.byte	0x1
+ 878 0187 2B02     		.2byte	0x22b
+ 879 0189 00000000 		.4byte	.LFB7
+ 880 018d 20000000 		.4byte	.LFE7-.LFB7
+ 881 0191 01       		.uleb128 0x1
+ 882 0192 9C       		.byte	0x9c
+ 883 0193 A7010000 		.4byte	0x1a7
+ 884 0197 0B       		.uleb128 0xb
+ 885 0198 41030000 		.4byte	.LASF27
+ 886 019c 01       		.byte	0x1
+ 887 019d 2B02     		.2byte	0x22b
+ 888 019f 77000000 		.4byte	0x77
+ 889 01a3 02       		.uleb128 0x2
+ 890 01a4 91       		.byte	0x91
+ 891 01a5 76       		.sleb128 -10
+ 892 01a6 00       		.byte	0
+ 893 01a7 0A       		.uleb128 0xa
+ 894 01a8 C8020000 		.4byte	.LASF28
+ 895 01ac 01       		.byte	0x1
+ 896 01ad 4802     		.2byte	0x248
+ 897 01af 00000000 		.4byte	.LFB8
+ 898 01b3 20000000 		.4byte	.LFE8-.LFB8
+ 899 01b7 01       		.uleb128 0x1
+ 900 01b8 9C       		.byte	0x9c
+ 901 01b9 CD010000 		.4byte	0x1cd
+ 902 01bd 0B       		.uleb128 0xb
+ 903 01be 41030000 		.4byte	.LASF27
+ 904 01c2 01       		.byte	0x1
+ 905 01c3 4802     		.2byte	0x248
+ 906 01c5 77000000 		.4byte	0x77
+ 907 01c9 02       		.uleb128 0x2
+ 908 01ca 91       		.byte	0x91
+ 909 01cb 76       		.sleb128 -10
+ 910 01cc 00       		.byte	0
+ 911 01cd 0D       		.uleb128 0xd
+ 912 01ce C6000000 		.4byte	.LASF41
+ 913 01d2 01       		.byte	0x1
+ 914 01d3 E102     		.2byte	0x2e1
+ 915 01d5 6B000000 		.4byte	0x6b
+ 916 01d9 00000000 		.4byte	.LFB9
+ 917 01dd 1C000000 		.4byte	.LFE9-.LFB9
+ 918 01e1 01       		.uleb128 0x1
+ 919 01e2 9C       		.byte	0x9c
+ 920 01e3 F7010000 		.4byte	0x1f7
+ 921 01e7 0E       		.uleb128 0xe
+ 922 01e8 A7000000 		.4byte	.LASF30
+ 923 01ec 01       		.byte	0x1
+ 924 01ed E302     		.2byte	0x2e3
+ 925 01ef 6B000000 		.4byte	0x6b
+ 926 01f3 02       		.uleb128 0x2
+ 927 01f4 91       		.byte	0x91
+ 928 01f5 77       		.sleb128 -9
+ 929 01f6 00       		.byte	0
+ 930 01f7 0A       		.uleb128 0xa
+ 931 01f8 6B020000 		.4byte	.LASF31
+ 932 01fc 01       		.byte	0x1
+ 933 01fd FD02     		.2byte	0x2fd
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 33
 
 
- 934 0214 01       		.uleb128 0x1
- 935 0215 9C       		.byte	0x9c
- 936 0216 0C       		.uleb128 0xc
- 937 0217 DE020000 		.4byte	.LASF33
- 938 021b 01       		.byte	0x1
- 939 021c 4A03     		.2byte	0x34a
- 940 021e 6B000000 		.4byte	0x6b
- 941 0222 00000000 		.4byte	.LFB12
- 942 0226 18000000 		.4byte	.LFE12-.LFB12
- 943 022a 01       		.uleb128 0x1
- 944 022b 9C       		.byte	0x9c
- 945 022c 0C       		.uleb128 0xc
- 946 022d F6020000 		.4byte	.LASF34
- 947 0231 01       		.byte	0x1
- 948 0232 5E03     		.2byte	0x35e
- 949 0234 6B000000 		.4byte	0x6b
- 950 0238 00000000 		.4byte	.LFB13
- 951 023c 18000000 		.4byte	.LFE13-.LFB13
- 952 0240 01       		.uleb128 0x1
- 953 0241 9C       		.byte	0x9c
- 954 0242 0C       		.uleb128 0xc
- 955 0243 54010000 		.4byte	.LASF35
- 956 0247 01       		.byte	0x1
- 957 0248 7403     		.2byte	0x374
- 958 024a 6B000000 		.4byte	0x6b
- 959 024e 00000000 		.4byte	.LFB14
- 960 0252 18000000 		.4byte	.LFE14-.LFB14
- 961 0256 01       		.uleb128 0x1
- 962 0257 9C       		.byte	0x9c
- 963 0258 0F       		.uleb128 0xf
- 964 0259 00000000 		.4byte	.LASF40
- 965 025d 01       		.byte	0x1
- 966 025e 20       		.byte	0x20
- 967 025f 6B000000 		.4byte	0x6b
- 968 0263 05       		.uleb128 0x5
- 969 0264 03       		.byte	0x3
- 970 0265 00000000 		.4byte	PWM_MOTORS_initVar
- 971 0269 00       		.byte	0
- 972              		.section	.debug_abbrev,"",%progbits
- 973              	.Ldebug_abbrev0:
- 974 0000 01       		.uleb128 0x1
- 975 0001 11       		.uleb128 0x11
- 976 0002 01       		.byte	0x1
- 977 0003 25       		.uleb128 0x25
- 978 0004 0E       		.uleb128 0xe
- 979 0005 13       		.uleb128 0x13
- 980 0006 0B       		.uleb128 0xb
- 981 0007 03       		.uleb128 0x3
- 982 0008 0E       		.uleb128 0xe
- 983 0009 1B       		.uleb128 0x1b
- 984 000a 0E       		.uleb128 0xe
- 985 000b 55       		.uleb128 0x55
- 986 000c 17       		.uleb128 0x17
- 987 000d 11       		.uleb128 0x11
- 988 000e 01       		.uleb128 0x1
- 989 000f 10       		.uleb128 0x10
- 990 0010 17       		.uleb128 0x17
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 34
+ 934 01ff 00000000 		.4byte	.LFB10
+ 935 0203 20000000 		.4byte	.LFE10-.LFB10
+ 936 0207 01       		.uleb128 0x1
+ 937 0208 9C       		.byte	0x9c
+ 938 0209 1D020000 		.4byte	0x21d
+ 939 020d 0B       		.uleb128 0xb
+ 940 020e 51010000 		.4byte	.LASF32
+ 941 0212 01       		.byte	0x1
+ 942 0213 FD02     		.2byte	0x2fd
+ 943 0215 6B000000 		.4byte	0x6b
+ 944 0219 02       		.uleb128 0x2
+ 945 021a 91       		.byte	0x91
+ 946 021b 77       		.sleb128 -9
+ 947 021c 00       		.byte	0
+ 948 021d 0C       		.uleb128 0xc
+ 949 021e EC000000 		.4byte	.LASF34
+ 950 0222 01       		.byte	0x1
+ 951 0223 1603     		.2byte	0x316
+ 952 0225 77000000 		.4byte	0x77
+ 953 0229 00000000 		.4byte	.LFB11
+ 954 022d 18000000 		.4byte	.LFE11-.LFB11
+ 955 0231 01       		.uleb128 0x1
+ 956 0232 9C       		.byte	0x9c
+ 957 0233 0C       		.uleb128 0xc
+ 958 0234 EB020000 		.4byte	.LASF35
+ 959 0238 01       		.byte	0x1
+ 960 0239 4A03     		.2byte	0x34a
+ 961 023b 77000000 		.4byte	0x77
+ 962 023f 00000000 		.4byte	.LFB12
+ 963 0243 18000000 		.4byte	.LFE12-.LFB12
+ 964 0247 01       		.uleb128 0x1
+ 965 0248 9C       		.byte	0x9c
+ 966 0249 0C       		.uleb128 0xc
+ 967 024a 03030000 		.4byte	.LASF36
+ 968 024e 01       		.byte	0x1
+ 969 024f 5E03     		.2byte	0x35e
+ 970 0251 77000000 		.4byte	0x77
+ 971 0255 00000000 		.4byte	.LFB13
+ 972 0259 18000000 		.4byte	.LFE13-.LFB13
+ 973 025d 01       		.uleb128 0x1
+ 974 025e 9C       		.byte	0x9c
+ 975 025f 0C       		.uleb128 0xc
+ 976 0260 59010000 		.4byte	.LASF37
+ 977 0264 01       		.byte	0x1
+ 978 0265 7403     		.2byte	0x374
+ 979 0267 77000000 		.4byte	0x77
+ 980 026b 00000000 		.4byte	.LFB14
+ 981 026f 18000000 		.4byte	.LFE14-.LFB14
+ 982 0273 01       		.uleb128 0x1
+ 983 0274 9C       		.byte	0x9c
+ 984 0275 0F       		.uleb128 0xf
+ 985 0276 06000000 		.4byte	.LASF42
+ 986 027a 01       		.byte	0x1
+ 987 027b 20       		.byte	0x20
+ 988 027c 6B000000 		.4byte	0x6b
+ 989 0280 05       		.uleb128 0x5
+ 990 0281 03       		.byte	0x3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 34
 
 
- 991 0011 00       		.byte	0
- 992 0012 00       		.byte	0
- 993 0013 02       		.uleb128 0x2
- 994 0014 24       		.uleb128 0x24
- 995 0015 00       		.byte	0
- 996 0016 0B       		.uleb128 0xb
- 997 0017 0B       		.uleb128 0xb
- 998 0018 3E       		.uleb128 0x3e
- 999 0019 0B       		.uleb128 0xb
- 1000 001a 03       		.uleb128 0x3
- 1001 001b 0E       		.uleb128 0xe
- 1002 001c 00       		.byte	0
- 1003 001d 00       		.byte	0
- 1004 001e 03       		.uleb128 0x3
- 1005 001f 24       		.uleb128 0x24
- 1006 0020 00       		.byte	0
- 1007 0021 0B       		.uleb128 0xb
- 1008 0022 0B       		.uleb128 0xb
- 1009 0023 3E       		.uleb128 0x3e
- 1010 0024 0B       		.uleb128 0xb
- 1011 0025 03       		.uleb128 0x3
- 1012 0026 08       		.uleb128 0x8
- 1013 0027 00       		.byte	0
- 1014 0028 00       		.byte	0
- 1015 0029 04       		.uleb128 0x4
- 1016 002a 16       		.uleb128 0x16
- 1017 002b 00       		.byte	0
- 1018 002c 03       		.uleb128 0x3
- 1019 002d 0E       		.uleb128 0xe
- 1020 002e 3A       		.uleb128 0x3a
- 1021 002f 0B       		.uleb128 0xb
- 1022 0030 3B       		.uleb128 0x3b
- 1023 0031 05       		.uleb128 0x5
- 1024 0032 49       		.uleb128 0x49
- 1025 0033 13       		.uleb128 0x13
- 1026 0034 00       		.byte	0
- 1027 0035 00       		.byte	0
- 1028 0036 05       		.uleb128 0x5
- 1029 0037 35       		.uleb128 0x35
- 1030 0038 00       		.byte	0
- 1031 0039 49       		.uleb128 0x49
- 1032 003a 13       		.uleb128 0x13
- 1033 003b 00       		.byte	0
- 1034 003c 00       		.byte	0
- 1035 003d 06       		.uleb128 0x6
- 1036 003e 2E       		.uleb128 0x2e
- 1037 003f 00       		.byte	0
- 1038 0040 3F       		.uleb128 0x3f
- 1039 0041 19       		.uleb128 0x19
- 1040 0042 03       		.uleb128 0x3
- 1041 0043 0E       		.uleb128 0xe
- 1042 0044 3A       		.uleb128 0x3a
- 1043 0045 0B       		.uleb128 0xb
- 1044 0046 3B       		.uleb128 0x3b
- 1045 0047 0B       		.uleb128 0xb
- 1046 0048 27       		.uleb128 0x27
- 1047 0049 19       		.uleb128 0x19
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 35
+ 991 0282 00000000 		.4byte	PWM_MOTORS_initVar
+ 992 0286 00       		.byte	0
+ 993              		.section	.debug_abbrev,"",%progbits
+ 994              	.Ldebug_abbrev0:
+ 995 0000 01       		.uleb128 0x1
+ 996 0001 11       		.uleb128 0x11
+ 997 0002 01       		.byte	0x1
+ 998 0003 25       		.uleb128 0x25
+ 999 0004 0E       		.uleb128 0xe
+ 1000 0005 13       		.uleb128 0x13
+ 1001 0006 0B       		.uleb128 0xb
+ 1002 0007 03       		.uleb128 0x3
+ 1003 0008 0E       		.uleb128 0xe
+ 1004 0009 1B       		.uleb128 0x1b
+ 1005 000a 0E       		.uleb128 0xe
+ 1006 000b 55       		.uleb128 0x55
+ 1007 000c 17       		.uleb128 0x17
+ 1008 000d 11       		.uleb128 0x11
+ 1009 000e 01       		.uleb128 0x1
+ 1010 000f 10       		.uleb128 0x10
+ 1011 0010 17       		.uleb128 0x17
+ 1012 0011 00       		.byte	0
+ 1013 0012 00       		.byte	0
+ 1014 0013 02       		.uleb128 0x2
+ 1015 0014 24       		.uleb128 0x24
+ 1016 0015 00       		.byte	0
+ 1017 0016 0B       		.uleb128 0xb
+ 1018 0017 0B       		.uleb128 0xb
+ 1019 0018 3E       		.uleb128 0x3e
+ 1020 0019 0B       		.uleb128 0xb
+ 1021 001a 03       		.uleb128 0x3
+ 1022 001b 0E       		.uleb128 0xe
+ 1023 001c 00       		.byte	0
+ 1024 001d 00       		.byte	0
+ 1025 001e 03       		.uleb128 0x3
+ 1026 001f 24       		.uleb128 0x24
+ 1027 0020 00       		.byte	0
+ 1028 0021 0B       		.uleb128 0xb
+ 1029 0022 0B       		.uleb128 0xb
+ 1030 0023 3E       		.uleb128 0x3e
+ 1031 0024 0B       		.uleb128 0xb
+ 1032 0025 03       		.uleb128 0x3
+ 1033 0026 08       		.uleb128 0x8
+ 1034 0027 00       		.byte	0
+ 1035 0028 00       		.byte	0
+ 1036 0029 04       		.uleb128 0x4
+ 1037 002a 16       		.uleb128 0x16
+ 1038 002b 00       		.byte	0
+ 1039 002c 03       		.uleb128 0x3
+ 1040 002d 0E       		.uleb128 0xe
+ 1041 002e 3A       		.uleb128 0x3a
+ 1042 002f 0B       		.uleb128 0xb
+ 1043 0030 3B       		.uleb128 0x3b
+ 1044 0031 05       		.uleb128 0x5
+ 1045 0032 49       		.uleb128 0x49
+ 1046 0033 13       		.uleb128 0x13
+ 1047 0034 00       		.byte	0
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 35
 
 
- 1048 004a 11       		.uleb128 0x11
- 1049 004b 01       		.uleb128 0x1
- 1050 004c 12       		.uleb128 0x12
- 1051 004d 06       		.uleb128 0x6
- 1052 004e 40       		.uleb128 0x40
- 1053 004f 18       		.uleb128 0x18
- 1054 0050 9642     		.uleb128 0x2116
- 1055 0052 19       		.uleb128 0x19
- 1056 0053 00       		.byte	0
- 1057 0054 00       		.byte	0
- 1058 0055 07       		.uleb128 0x7
- 1059 0056 2E       		.uleb128 0x2e
- 1060 0057 01       		.byte	0x1
- 1061 0058 3F       		.uleb128 0x3f
- 1062 0059 19       		.uleb128 0x19
- 1063 005a 03       		.uleb128 0x3
- 1064 005b 0E       		.uleb128 0xe
- 1065 005c 3A       		.uleb128 0x3a
- 1066 005d 0B       		.uleb128 0xb
- 1067 005e 3B       		.uleb128 0x3b
- 1068 005f 0B       		.uleb128 0xb
- 1069 0060 27       		.uleb128 0x27
- 1070 0061 19       		.uleb128 0x19
- 1071 0062 11       		.uleb128 0x11
- 1072 0063 01       		.uleb128 0x1
- 1073 0064 12       		.uleb128 0x12
- 1074 0065 06       		.uleb128 0x6
- 1075 0066 40       		.uleb128 0x40
- 1076 0067 18       		.uleb128 0x18
- 1077 0068 9642     		.uleb128 0x2116
- 1078 006a 19       		.uleb128 0x19
- 1079 006b 01       		.uleb128 0x1
- 1080 006c 13       		.uleb128 0x13
- 1081 006d 00       		.byte	0
- 1082 006e 00       		.byte	0
- 1083 006f 08       		.uleb128 0x8
- 1084 0070 34       		.uleb128 0x34
- 1085 0071 00       		.byte	0
- 1086 0072 03       		.uleb128 0x3
- 1087 0073 0E       		.uleb128 0xe
- 1088 0074 3A       		.uleb128 0x3a
- 1089 0075 0B       		.uleb128 0xb
- 1090 0076 3B       		.uleb128 0x3b
- 1091 0077 0B       		.uleb128 0xb
- 1092 0078 49       		.uleb128 0x49
- 1093 0079 13       		.uleb128 0x13
- 1094 007a 02       		.uleb128 0x2
- 1095 007b 18       		.uleb128 0x18
- 1096 007c 00       		.byte	0
- 1097 007d 00       		.byte	0
- 1098 007e 09       		.uleb128 0x9
- 1099 007f 2E       		.uleb128 0x2e
- 1100 0080 00       		.byte	0
- 1101 0081 3F       		.uleb128 0x3f
- 1102 0082 19       		.uleb128 0x19
- 1103 0083 03       		.uleb128 0x3
- 1104 0084 0E       		.uleb128 0xe
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 36
+ 1048 0035 00       		.byte	0
+ 1049 0036 05       		.uleb128 0x5
+ 1050 0037 35       		.uleb128 0x35
+ 1051 0038 00       		.byte	0
+ 1052 0039 49       		.uleb128 0x49
+ 1053 003a 13       		.uleb128 0x13
+ 1054 003b 00       		.byte	0
+ 1055 003c 00       		.byte	0
+ 1056 003d 06       		.uleb128 0x6
+ 1057 003e 2E       		.uleb128 0x2e
+ 1058 003f 00       		.byte	0
+ 1059 0040 3F       		.uleb128 0x3f
+ 1060 0041 19       		.uleb128 0x19
+ 1061 0042 03       		.uleb128 0x3
+ 1062 0043 0E       		.uleb128 0xe
+ 1063 0044 3A       		.uleb128 0x3a
+ 1064 0045 0B       		.uleb128 0xb
+ 1065 0046 3B       		.uleb128 0x3b
+ 1066 0047 0B       		.uleb128 0xb
+ 1067 0048 27       		.uleb128 0x27
+ 1068 0049 19       		.uleb128 0x19
+ 1069 004a 11       		.uleb128 0x11
+ 1070 004b 01       		.uleb128 0x1
+ 1071 004c 12       		.uleb128 0x12
+ 1072 004d 06       		.uleb128 0x6
+ 1073 004e 40       		.uleb128 0x40
+ 1074 004f 18       		.uleb128 0x18
+ 1075 0050 9642     		.uleb128 0x2116
+ 1076 0052 19       		.uleb128 0x19
+ 1077 0053 00       		.byte	0
+ 1078 0054 00       		.byte	0
+ 1079 0055 07       		.uleb128 0x7
+ 1080 0056 2E       		.uleb128 0x2e
+ 1081 0057 01       		.byte	0x1
+ 1082 0058 3F       		.uleb128 0x3f
+ 1083 0059 19       		.uleb128 0x19
+ 1084 005a 03       		.uleb128 0x3
+ 1085 005b 0E       		.uleb128 0xe
+ 1086 005c 3A       		.uleb128 0x3a
+ 1087 005d 0B       		.uleb128 0xb
+ 1088 005e 3B       		.uleb128 0x3b
+ 1089 005f 0B       		.uleb128 0xb
+ 1090 0060 27       		.uleb128 0x27
+ 1091 0061 19       		.uleb128 0x19
+ 1092 0062 11       		.uleb128 0x11
+ 1093 0063 01       		.uleb128 0x1
+ 1094 0064 12       		.uleb128 0x12
+ 1095 0065 06       		.uleb128 0x6
+ 1096 0066 40       		.uleb128 0x40
+ 1097 0067 18       		.uleb128 0x18
+ 1098 0068 9642     		.uleb128 0x2116
+ 1099 006a 19       		.uleb128 0x19
+ 1100 006b 01       		.uleb128 0x1
+ 1101 006c 13       		.uleb128 0x13
+ 1102 006d 00       		.byte	0
+ 1103 006e 00       		.byte	0
+ 1104 006f 08       		.uleb128 0x8
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 36
 
 
- 1105 0085 3A       		.uleb128 0x3a
- 1106 0086 0B       		.uleb128 0xb
- 1107 0087 3B       		.uleb128 0x3b
- 1108 0088 0B       		.uleb128 0xb
- 1109 0089 27       		.uleb128 0x27
- 1110 008a 19       		.uleb128 0x19
- 1111 008b 11       		.uleb128 0x11
- 1112 008c 01       		.uleb128 0x1
- 1113 008d 12       		.uleb128 0x12
- 1114 008e 06       		.uleb128 0x6
- 1115 008f 40       		.uleb128 0x40
- 1116 0090 18       		.uleb128 0x18
- 1117 0091 9742     		.uleb128 0x2117
- 1118 0093 19       		.uleb128 0x19
- 1119 0094 00       		.byte	0
- 1120 0095 00       		.byte	0
- 1121 0096 0A       		.uleb128 0xa
- 1122 0097 2E       		.uleb128 0x2e
- 1123 0098 01       		.byte	0x1
- 1124 0099 3F       		.uleb128 0x3f
- 1125 009a 19       		.uleb128 0x19
- 1126 009b 03       		.uleb128 0x3
- 1127 009c 0E       		.uleb128 0xe
- 1128 009d 3A       		.uleb128 0x3a
- 1129 009e 0B       		.uleb128 0xb
- 1130 009f 3B       		.uleb128 0x3b
- 1131 00a0 05       		.uleb128 0x5
- 1132 00a1 27       		.uleb128 0x27
- 1133 00a2 19       		.uleb128 0x19
- 1134 00a3 11       		.uleb128 0x11
- 1135 00a4 01       		.uleb128 0x1
- 1136 00a5 12       		.uleb128 0x12
- 1137 00a6 06       		.uleb128 0x6
- 1138 00a7 40       		.uleb128 0x40
- 1139 00a8 18       		.uleb128 0x18
- 1140 00a9 9742     		.uleb128 0x2117
- 1141 00ab 19       		.uleb128 0x19
- 1142 00ac 01       		.uleb128 0x1
- 1143 00ad 13       		.uleb128 0x13
- 1144 00ae 00       		.byte	0
- 1145 00af 00       		.byte	0
- 1146 00b0 0B       		.uleb128 0xb
- 1147 00b1 05       		.uleb128 0x5
- 1148 00b2 00       		.byte	0
- 1149 00b3 03       		.uleb128 0x3
- 1150 00b4 0E       		.uleb128 0xe
- 1151 00b5 3A       		.uleb128 0x3a
- 1152 00b6 0B       		.uleb128 0xb
- 1153 00b7 3B       		.uleb128 0x3b
- 1154 00b8 05       		.uleb128 0x5
- 1155 00b9 49       		.uleb128 0x49
- 1156 00ba 13       		.uleb128 0x13
- 1157 00bb 02       		.uleb128 0x2
- 1158 00bc 18       		.uleb128 0x18
- 1159 00bd 00       		.byte	0
- 1160 00be 00       		.byte	0
- 1161 00bf 0C       		.uleb128 0xc
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 37
+ 1105 0070 34       		.uleb128 0x34
+ 1106 0071 00       		.byte	0
+ 1107 0072 03       		.uleb128 0x3
+ 1108 0073 0E       		.uleb128 0xe
+ 1109 0074 3A       		.uleb128 0x3a
+ 1110 0075 0B       		.uleb128 0xb
+ 1111 0076 3B       		.uleb128 0x3b
+ 1112 0077 0B       		.uleb128 0xb
+ 1113 0078 49       		.uleb128 0x49
+ 1114 0079 13       		.uleb128 0x13
+ 1115 007a 02       		.uleb128 0x2
+ 1116 007b 18       		.uleb128 0x18
+ 1117 007c 00       		.byte	0
+ 1118 007d 00       		.byte	0
+ 1119 007e 09       		.uleb128 0x9
+ 1120 007f 2E       		.uleb128 0x2e
+ 1121 0080 00       		.byte	0
+ 1122 0081 3F       		.uleb128 0x3f
+ 1123 0082 19       		.uleb128 0x19
+ 1124 0083 03       		.uleb128 0x3
+ 1125 0084 0E       		.uleb128 0xe
+ 1126 0085 3A       		.uleb128 0x3a
+ 1127 0086 0B       		.uleb128 0xb
+ 1128 0087 3B       		.uleb128 0x3b
+ 1129 0088 0B       		.uleb128 0xb
+ 1130 0089 27       		.uleb128 0x27
+ 1131 008a 19       		.uleb128 0x19
+ 1132 008b 11       		.uleb128 0x11
+ 1133 008c 01       		.uleb128 0x1
+ 1134 008d 12       		.uleb128 0x12
+ 1135 008e 06       		.uleb128 0x6
+ 1136 008f 40       		.uleb128 0x40
+ 1137 0090 18       		.uleb128 0x18
+ 1138 0091 9742     		.uleb128 0x2117
+ 1139 0093 19       		.uleb128 0x19
+ 1140 0094 00       		.byte	0
+ 1141 0095 00       		.byte	0
+ 1142 0096 0A       		.uleb128 0xa
+ 1143 0097 2E       		.uleb128 0x2e
+ 1144 0098 01       		.byte	0x1
+ 1145 0099 3F       		.uleb128 0x3f
+ 1146 009a 19       		.uleb128 0x19
+ 1147 009b 03       		.uleb128 0x3
+ 1148 009c 0E       		.uleb128 0xe
+ 1149 009d 3A       		.uleb128 0x3a
+ 1150 009e 0B       		.uleb128 0xb
+ 1151 009f 3B       		.uleb128 0x3b
+ 1152 00a0 05       		.uleb128 0x5
+ 1153 00a1 27       		.uleb128 0x27
+ 1154 00a2 19       		.uleb128 0x19
+ 1155 00a3 11       		.uleb128 0x11
+ 1156 00a4 01       		.uleb128 0x1
+ 1157 00a5 12       		.uleb128 0x12
+ 1158 00a6 06       		.uleb128 0x6
+ 1159 00a7 40       		.uleb128 0x40
+ 1160 00a8 18       		.uleb128 0x18
+ 1161 00a9 9742     		.uleb128 0x2117
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 37
 
 
- 1162 00c0 2E       		.uleb128 0x2e
- 1163 00c1 00       		.byte	0
- 1164 00c2 3F       		.uleb128 0x3f
- 1165 00c3 19       		.uleb128 0x19
- 1166 00c4 03       		.uleb128 0x3
- 1167 00c5 0E       		.uleb128 0xe
- 1168 00c6 3A       		.uleb128 0x3a
- 1169 00c7 0B       		.uleb128 0xb
- 1170 00c8 3B       		.uleb128 0x3b
- 1171 00c9 05       		.uleb128 0x5
- 1172 00ca 27       		.uleb128 0x27
- 1173 00cb 19       		.uleb128 0x19
- 1174 00cc 49       		.uleb128 0x49
- 1175 00cd 13       		.uleb128 0x13
- 1176 00ce 11       		.uleb128 0x11
- 1177 00cf 01       		.uleb128 0x1
- 1178 00d0 12       		.uleb128 0x12
- 1179 00d1 06       		.uleb128 0x6
- 1180 00d2 40       		.uleb128 0x40
- 1181 00d3 18       		.uleb128 0x18
- 1182 00d4 9742     		.uleb128 0x2117
- 1183 00d6 19       		.uleb128 0x19
- 1184 00d7 00       		.byte	0
- 1185 00d8 00       		.byte	0
- 1186 00d9 0D       		.uleb128 0xd
- 1187 00da 2E       		.uleb128 0x2e
- 1188 00db 01       		.byte	0x1
- 1189 00dc 3F       		.uleb128 0x3f
- 1190 00dd 19       		.uleb128 0x19
- 1191 00de 03       		.uleb128 0x3
- 1192 00df 0E       		.uleb128 0xe
- 1193 00e0 3A       		.uleb128 0x3a
- 1194 00e1 0B       		.uleb128 0xb
- 1195 00e2 3B       		.uleb128 0x3b
- 1196 00e3 05       		.uleb128 0x5
- 1197 00e4 27       		.uleb128 0x27
- 1198 00e5 19       		.uleb128 0x19
- 1199 00e6 49       		.uleb128 0x49
- 1200 00e7 13       		.uleb128 0x13
- 1201 00e8 11       		.uleb128 0x11
- 1202 00e9 01       		.uleb128 0x1
- 1203 00ea 12       		.uleb128 0x12
- 1204 00eb 06       		.uleb128 0x6
- 1205 00ec 40       		.uleb128 0x40
- 1206 00ed 18       		.uleb128 0x18
- 1207 00ee 9742     		.uleb128 0x2117
- 1208 00f0 19       		.uleb128 0x19
- 1209 00f1 01       		.uleb128 0x1
- 1210 00f2 13       		.uleb128 0x13
- 1211 00f3 00       		.byte	0
- 1212 00f4 00       		.byte	0
- 1213 00f5 0E       		.uleb128 0xe
- 1214 00f6 34       		.uleb128 0x34
- 1215 00f7 00       		.byte	0
- 1216 00f8 03       		.uleb128 0x3
- 1217 00f9 0E       		.uleb128 0xe
- 1218 00fa 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 38
+ 1162 00ab 19       		.uleb128 0x19
+ 1163 00ac 01       		.uleb128 0x1
+ 1164 00ad 13       		.uleb128 0x13
+ 1165 00ae 00       		.byte	0
+ 1166 00af 00       		.byte	0
+ 1167 00b0 0B       		.uleb128 0xb
+ 1168 00b1 05       		.uleb128 0x5
+ 1169 00b2 00       		.byte	0
+ 1170 00b3 03       		.uleb128 0x3
+ 1171 00b4 0E       		.uleb128 0xe
+ 1172 00b5 3A       		.uleb128 0x3a
+ 1173 00b6 0B       		.uleb128 0xb
+ 1174 00b7 3B       		.uleb128 0x3b
+ 1175 00b8 05       		.uleb128 0x5
+ 1176 00b9 49       		.uleb128 0x49
+ 1177 00ba 13       		.uleb128 0x13
+ 1178 00bb 02       		.uleb128 0x2
+ 1179 00bc 18       		.uleb128 0x18
+ 1180 00bd 00       		.byte	0
+ 1181 00be 00       		.byte	0
+ 1182 00bf 0C       		.uleb128 0xc
+ 1183 00c0 2E       		.uleb128 0x2e
+ 1184 00c1 00       		.byte	0
+ 1185 00c2 3F       		.uleb128 0x3f
+ 1186 00c3 19       		.uleb128 0x19
+ 1187 00c4 03       		.uleb128 0x3
+ 1188 00c5 0E       		.uleb128 0xe
+ 1189 00c6 3A       		.uleb128 0x3a
+ 1190 00c7 0B       		.uleb128 0xb
+ 1191 00c8 3B       		.uleb128 0x3b
+ 1192 00c9 05       		.uleb128 0x5
+ 1193 00ca 27       		.uleb128 0x27
+ 1194 00cb 19       		.uleb128 0x19
+ 1195 00cc 49       		.uleb128 0x49
+ 1196 00cd 13       		.uleb128 0x13
+ 1197 00ce 11       		.uleb128 0x11
+ 1198 00cf 01       		.uleb128 0x1
+ 1199 00d0 12       		.uleb128 0x12
+ 1200 00d1 06       		.uleb128 0x6
+ 1201 00d2 40       		.uleb128 0x40
+ 1202 00d3 18       		.uleb128 0x18
+ 1203 00d4 9742     		.uleb128 0x2117
+ 1204 00d6 19       		.uleb128 0x19
+ 1205 00d7 00       		.byte	0
+ 1206 00d8 00       		.byte	0
+ 1207 00d9 0D       		.uleb128 0xd
+ 1208 00da 2E       		.uleb128 0x2e
+ 1209 00db 01       		.byte	0x1
+ 1210 00dc 3F       		.uleb128 0x3f
+ 1211 00dd 19       		.uleb128 0x19
+ 1212 00de 03       		.uleb128 0x3
+ 1213 00df 0E       		.uleb128 0xe
+ 1214 00e0 3A       		.uleb128 0x3a
+ 1215 00e1 0B       		.uleb128 0xb
+ 1216 00e2 3B       		.uleb128 0x3b
+ 1217 00e3 05       		.uleb128 0x5
+ 1218 00e4 27       		.uleb128 0x27
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 38
 
 
- 1219 00fb 0B       		.uleb128 0xb
- 1220 00fc 3B       		.uleb128 0x3b
- 1221 00fd 05       		.uleb128 0x5
- 1222 00fe 49       		.uleb128 0x49
- 1223 00ff 13       		.uleb128 0x13
- 1224 0100 02       		.uleb128 0x2
- 1225 0101 18       		.uleb128 0x18
- 1226 0102 00       		.byte	0
- 1227 0103 00       		.byte	0
- 1228 0104 0F       		.uleb128 0xf
- 1229 0105 34       		.uleb128 0x34
- 1230 0106 00       		.byte	0
- 1231 0107 03       		.uleb128 0x3
- 1232 0108 0E       		.uleb128 0xe
- 1233 0109 3A       		.uleb128 0x3a
- 1234 010a 0B       		.uleb128 0xb
- 1235 010b 3B       		.uleb128 0x3b
- 1236 010c 0B       		.uleb128 0xb
- 1237 010d 49       		.uleb128 0x49
- 1238 010e 13       		.uleb128 0x13
- 1239 010f 3F       		.uleb128 0x3f
- 1240 0110 19       		.uleb128 0x19
- 1241 0111 02       		.uleb128 0x2
- 1242 0112 18       		.uleb128 0x18
- 1243 0113 00       		.byte	0
- 1244 0114 00       		.byte	0
- 1245 0115 00       		.byte	0
- 1246              		.section	.debug_aranges,"",%progbits
- 1247 0000 8C000000 		.4byte	0x8c
- 1248 0004 0200     		.2byte	0x2
- 1249 0006 00000000 		.4byte	.Ldebug_info0
- 1250 000a 04       		.byte	0x4
- 1251 000b 00       		.byte	0
- 1252 000c 0000     		.2byte	0
- 1253 000e 0000     		.2byte	0
- 1254 0010 00000000 		.4byte	.LFB0
- 1255 0014 24000000 		.4byte	.LFE0-.LFB0
- 1256 0018 00000000 		.4byte	.LFB1
- 1257 001c 58000000 		.4byte	.LFE1-.LFB1
- 1258 0020 00000000 		.4byte	.LFB2
- 1259 0024 20000000 		.4byte	.LFE2-.LFB2
- 1260 0028 00000000 		.4byte	.LFB3
- 1261 002c 20000000 		.4byte	.LFE3-.LFB3
- 1262 0030 00000000 		.4byte	.LFB4
- 1263 0034 20000000 		.4byte	.LFE4-.LFB4
- 1264 0038 00000000 		.4byte	.LFB5
- 1265 003c 20000000 		.4byte	.LFE5-.LFB5
- 1266 0040 00000000 		.4byte	.LFB6
- 1267 0044 20000000 		.4byte	.LFE6-.LFB6
- 1268 0048 00000000 		.4byte	.LFB7
- 1269 004c 20000000 		.4byte	.LFE7-.LFB7
- 1270 0050 00000000 		.4byte	.LFB8
- 1271 0054 20000000 		.4byte	.LFE8-.LFB8
- 1272 0058 00000000 		.4byte	.LFB9
- 1273 005c 1C000000 		.4byte	.LFE9-.LFB9
- 1274 0060 00000000 		.4byte	.LFB10
- 1275 0064 20000000 		.4byte	.LFE10-.LFB10
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 39
+ 1219 00e5 19       		.uleb128 0x19
+ 1220 00e6 49       		.uleb128 0x49
+ 1221 00e7 13       		.uleb128 0x13
+ 1222 00e8 11       		.uleb128 0x11
+ 1223 00e9 01       		.uleb128 0x1
+ 1224 00ea 12       		.uleb128 0x12
+ 1225 00eb 06       		.uleb128 0x6
+ 1226 00ec 40       		.uleb128 0x40
+ 1227 00ed 18       		.uleb128 0x18
+ 1228 00ee 9742     		.uleb128 0x2117
+ 1229 00f0 19       		.uleb128 0x19
+ 1230 00f1 01       		.uleb128 0x1
+ 1231 00f2 13       		.uleb128 0x13
+ 1232 00f3 00       		.byte	0
+ 1233 00f4 00       		.byte	0
+ 1234 00f5 0E       		.uleb128 0xe
+ 1235 00f6 34       		.uleb128 0x34
+ 1236 00f7 00       		.byte	0
+ 1237 00f8 03       		.uleb128 0x3
+ 1238 00f9 0E       		.uleb128 0xe
+ 1239 00fa 3A       		.uleb128 0x3a
+ 1240 00fb 0B       		.uleb128 0xb
+ 1241 00fc 3B       		.uleb128 0x3b
+ 1242 00fd 05       		.uleb128 0x5
+ 1243 00fe 49       		.uleb128 0x49
+ 1244 00ff 13       		.uleb128 0x13
+ 1245 0100 02       		.uleb128 0x2
+ 1246 0101 18       		.uleb128 0x18
+ 1247 0102 00       		.byte	0
+ 1248 0103 00       		.byte	0
+ 1249 0104 0F       		.uleb128 0xf
+ 1250 0105 34       		.uleb128 0x34
+ 1251 0106 00       		.byte	0
+ 1252 0107 03       		.uleb128 0x3
+ 1253 0108 0E       		.uleb128 0xe
+ 1254 0109 3A       		.uleb128 0x3a
+ 1255 010a 0B       		.uleb128 0xb
+ 1256 010b 3B       		.uleb128 0x3b
+ 1257 010c 0B       		.uleb128 0xb
+ 1258 010d 49       		.uleb128 0x49
+ 1259 010e 13       		.uleb128 0x13
+ 1260 010f 3F       		.uleb128 0x3f
+ 1261 0110 19       		.uleb128 0x19
+ 1262 0111 02       		.uleb128 0x2
+ 1263 0112 18       		.uleb128 0x18
+ 1264 0113 00       		.byte	0
+ 1265 0114 00       		.byte	0
+ 1266 0115 00       		.byte	0
+ 1267              		.section	.debug_aranges,"",%progbits
+ 1268 0000 8C000000 		.4byte	0x8c
+ 1269 0004 0200     		.2byte	0x2
+ 1270 0006 00000000 		.4byte	.Ldebug_info0
+ 1271 000a 04       		.byte	0x4
+ 1272 000b 00       		.byte	0
+ 1273 000c 0000     		.2byte	0
+ 1274 000e 0000     		.2byte	0
+ 1275 0010 00000000 		.4byte	.LFB0
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 39
 
 
- 1276 0068 00000000 		.4byte	.LFB11
- 1277 006c 18000000 		.4byte	.LFE11-.LFB11
- 1278 0070 00000000 		.4byte	.LFB12
- 1279 0074 18000000 		.4byte	.LFE12-.LFB12
- 1280 0078 00000000 		.4byte	.LFB13
- 1281 007c 18000000 		.4byte	.LFE13-.LFB13
- 1282 0080 00000000 		.4byte	.LFB14
- 1283 0084 18000000 		.4byte	.LFE14-.LFB14
- 1284 0088 00000000 		.4byte	0
- 1285 008c 00000000 		.4byte	0
- 1286              		.section	.debug_ranges,"",%progbits
- 1287              	.Ldebug_ranges0:
- 1288 0000 00000000 		.4byte	.LFB0
- 1289 0004 24000000 		.4byte	.LFE0
- 1290 0008 00000000 		.4byte	.LFB1
- 1291 000c 58000000 		.4byte	.LFE1
- 1292 0010 00000000 		.4byte	.LFB2
- 1293 0014 20000000 		.4byte	.LFE2
- 1294 0018 00000000 		.4byte	.LFB3
- 1295 001c 20000000 		.4byte	.LFE3
- 1296 0020 00000000 		.4byte	.LFB4
- 1297 0024 20000000 		.4byte	.LFE4
- 1298 0028 00000000 		.4byte	.LFB5
- 1299 002c 20000000 		.4byte	.LFE5
- 1300 0030 00000000 		.4byte	.LFB6
- 1301 0034 20000000 		.4byte	.LFE6
- 1302 0038 00000000 		.4byte	.LFB7
- 1303 003c 20000000 		.4byte	.LFE7
- 1304 0040 00000000 		.4byte	.LFB8
- 1305 0044 20000000 		.4byte	.LFE8
- 1306 0048 00000000 		.4byte	.LFB9
- 1307 004c 1C000000 		.4byte	.LFE9
- 1308 0050 00000000 		.4byte	.LFB10
- 1309 0054 20000000 		.4byte	.LFE10
- 1310 0058 00000000 		.4byte	.LFB11
- 1311 005c 18000000 		.4byte	.LFE11
- 1312 0060 00000000 		.4byte	.LFB12
- 1313 0064 18000000 		.4byte	.LFE12
- 1314 0068 00000000 		.4byte	.LFB13
- 1315 006c 18000000 		.4byte	.LFE13
- 1316 0070 00000000 		.4byte	.LFB14
- 1317 0074 18000000 		.4byte	.LFE14
- 1318 0078 00000000 		.4byte	0
- 1319 007c 00000000 		.4byte	0
- 1320              		.section	.debug_line,"",%progbits
- 1321              	.Ldebug_line0:
- 1322 0000 6B010000 		.section	.debug_str,"MS",%progbits,1
- 1322      02004700 
- 1322      00000201 
- 1322      FB0E0D00 
- 1322      01010101 
- 1323              	.LASF40:
- 1324 0000 50574D5F 		.ascii	"PWM_MOTORS_initVar\000"
- 1324      4D4F544F 
- 1324      52535F69 
- 1324      6E697456 
- 1324      617200
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 40
+ 1276 0014 24000000 		.4byte	.LFE0-.LFB0
+ 1277 0018 00000000 		.4byte	.LFB1
+ 1278 001c 6C000000 		.4byte	.LFE1-.LFB1
+ 1279 0020 00000000 		.4byte	.LFB2
+ 1280 0024 20000000 		.4byte	.LFE2-.LFB2
+ 1281 0028 00000000 		.4byte	.LFB3
+ 1282 002c 20000000 		.4byte	.LFE3-.LFB3
+ 1283 0030 00000000 		.4byte	.LFB4
+ 1284 0034 20000000 		.4byte	.LFE4-.LFB4
+ 1285 0038 00000000 		.4byte	.LFB5
+ 1286 003c 20000000 		.4byte	.LFE5-.LFB5
+ 1287 0040 00000000 		.4byte	.LFB6
+ 1288 0044 20000000 		.4byte	.LFE6-.LFB6
+ 1289 0048 00000000 		.4byte	.LFB7
+ 1290 004c 20000000 		.4byte	.LFE7-.LFB7
+ 1291 0050 00000000 		.4byte	.LFB8
+ 1292 0054 20000000 		.4byte	.LFE8-.LFB8
+ 1293 0058 00000000 		.4byte	.LFB9
+ 1294 005c 1C000000 		.4byte	.LFE9-.LFB9
+ 1295 0060 00000000 		.4byte	.LFB10
+ 1296 0064 20000000 		.4byte	.LFE10-.LFB10
+ 1297 0068 00000000 		.4byte	.LFB11
+ 1298 006c 18000000 		.4byte	.LFE11-.LFB11
+ 1299 0070 00000000 		.4byte	.LFB12
+ 1300 0074 18000000 		.4byte	.LFE12-.LFB12
+ 1301 0078 00000000 		.4byte	.LFB13
+ 1302 007c 18000000 		.4byte	.LFE13-.LFB13
+ 1303 0080 00000000 		.4byte	.LFB14
+ 1304 0084 18000000 		.4byte	.LFE14-.LFB14
+ 1305 0088 00000000 		.4byte	0
+ 1306 008c 00000000 		.4byte	0
+ 1307              		.section	.debug_ranges,"",%progbits
+ 1308              	.Ldebug_ranges0:
+ 1309 0000 00000000 		.4byte	.LFB0
+ 1310 0004 24000000 		.4byte	.LFE0
+ 1311 0008 00000000 		.4byte	.LFB1
+ 1312 000c 6C000000 		.4byte	.LFE1
+ 1313 0010 00000000 		.4byte	.LFB2
+ 1314 0014 20000000 		.4byte	.LFE2
+ 1315 0018 00000000 		.4byte	.LFB3
+ 1316 001c 20000000 		.4byte	.LFE3
+ 1317 0020 00000000 		.4byte	.LFB4
+ 1318 0024 20000000 		.4byte	.LFE4
+ 1319 0028 00000000 		.4byte	.LFB5
+ 1320 002c 20000000 		.4byte	.LFE5
+ 1321 0030 00000000 		.4byte	.LFB6
+ 1322 0034 20000000 		.4byte	.LFE6
+ 1323 0038 00000000 		.4byte	.LFB7
+ 1324 003c 20000000 		.4byte	.LFE7
+ 1325 0040 00000000 		.4byte	.LFB8
+ 1326 0044 20000000 		.4byte	.LFE8
+ 1327 0048 00000000 		.4byte	.LFB9
+ 1328 004c 1C000000 		.4byte	.LFE9
+ 1329 0050 00000000 		.4byte	.LFB10
+ 1330 0054 20000000 		.4byte	.LFE10
+ 1331 0058 00000000 		.4byte	.LFB11
+ 1332 005c 18000000 		.4byte	.LFE11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 40
 
 
- 1325              	.LASF36:
- 1326 0013 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 1326      43313120 
- 1326      352E342E 
- 1326      31203230 
- 1326      31363036 
- 1327 0046 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 1327      20726576 
- 1327      6973696F 
- 1327      6E203233 
- 1327      37373135 
- 1328 0079 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
- 1328      66756E63 
- 1328      74696F6E 
- 1328      2D736563 
- 1328      74696F6E 
- 1329              	.LASF26:
- 1330 00a1 50574D5F 		.ascii	"PWM_MOTORS_WriteCompare2\000"
- 1330      4D4F544F 
- 1330      52535F57 
- 1330      72697465 
- 1330      436F6D70 
- 1331              	.LASF28:
- 1332 00ba 72657375 		.ascii	"result\000"
- 1332      6C7400
- 1333              	.LASF39:
- 1334 00c1 50574D5F 		.ascii	"PWM_MOTORS_ReadControlRegister\000"
- 1334      4D4F544F 
- 1334      52535F52 
- 1334      65616443 
- 1334      6F6E7472 
- 1335              	.LASF23:
- 1336 00e0 70657269 		.ascii	"period\000"
- 1336      6F6400
- 1337              	.LASF32:
- 1338 00e7 50574D5F 		.ascii	"PWM_MOTORS_ReadCapture\000"
- 1338      4D4F544F 
- 1338      52535F52 
- 1338      65616443 
- 1338      61707475 
- 1339              	.LASF3:
- 1340 00fe 73686F72 		.ascii	"short unsigned int\000"
- 1340      7420756E 
- 1340      7369676E 
- 1340      65642069 
- 1340      6E7400
- 1341              	.LASF9:
- 1342 0111 666C6F61 		.ascii	"float\000"
- 1342      7400
- 1343              	.LASF22:
- 1344 0117 636F756E 		.ascii	"counter\000"
- 1344      74657200 
- 1345              	.LASF19:
- 1346 011f 50574D5F 		.ascii	"PWM_MOTORS_Init\000"
- 1346      4D4F544F 
- 1346      52535F49 
- 1346      6E697400 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 41
+ 1333 0060 00000000 		.4byte	.LFB12
+ 1334 0064 18000000 		.4byte	.LFE12
+ 1335 0068 00000000 		.4byte	.LFB13
+ 1336 006c 18000000 		.4byte	.LFE13
+ 1337 0070 00000000 		.4byte	.LFB14
+ 1338 0074 18000000 		.4byte	.LFE14
+ 1339 0078 00000000 		.4byte	0
+ 1340 007c 00000000 		.4byte	0
+ 1341              		.section	.debug_line,"",%progbits
+ 1342              	.Ldebug_line0:
+ 1343 0000 6E010000 		.section	.debug_str,"MS",%progbits,1
+ 1343      02004700 
+ 1343      00000201 
+ 1343      FB0E0D00 
+ 1343      01010101 
+ 1344              	.LASF15:
+ 1345 0000 72656731 		.ascii	"reg16\000"
+ 1345      3600
+ 1346              	.LASF42:
+ 1347 0006 50574D5F 		.ascii	"PWM_MOTORS_initVar\000"
+ 1347      4D4F544F 
+ 1347      52535F69 
+ 1347      6E697456 
+ 1347      617200
+ 1348              	.LASF38:
+ 1349 0019 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1349      43313120 
+ 1349      352E342E 
+ 1349      31203230 
+ 1349      31363036 
+ 1350 004c 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1350      20726576 
+ 1350      6973696F 
+ 1350      6E203233 
+ 1350      37373135 
+ 1351 007f 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1351      66756E63 
+ 1351      74696F6E 
+ 1351      2D736563 
+ 1351      74696F6E 
+ 1352              	.LASF30:
+ 1353 00a7 72657375 		.ascii	"result\000"
+ 1353      6C7400
+ 1354              	.LASF22:
+ 1355 00ae 50574D5F 		.ascii	"PWM_MOTORS_WriteCounter\000"
+ 1355      4D4F544F 
+ 1355      52535F57 
+ 1355      72697465 
+ 1355      436F756E 
+ 1356              	.LASF41:
+ 1357 00c6 50574D5F 		.ascii	"PWM_MOTORS_ReadControlRegister\000"
+ 1357      4D4F544F 
+ 1357      52535F52 
+ 1357      65616443 
+ 1357      6F6E7472 
+ 1358              	.LASF25:
+ 1359 00e5 70657269 		.ascii	"period\000"
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 41
 
 
- 1347              	.LASF13:
- 1348 012f 72656738 		.ascii	"reg8\000"
- 1348      00
- 1349              	.LASF5:
- 1350 0134 6C6F6E67 		.ascii	"long unsigned int\000"
- 1350      20756E73 
- 1350      69676E65 
- 1350      6420696E 
- 1350      7400
- 1351              	.LASF12:
- 1352 0146 75696E74 		.ascii	"uint8\000"
- 1352      3800
- 1353              	.LASF30:
- 1354 014c 636F6E74 		.ascii	"control\000"
- 1354      726F6C00 
- 1355              	.LASF35:
- 1356 0154 50574D5F 		.ascii	"PWM_MOTORS_ReadPeriod\000"
- 1356      4D4F544F 
- 1356      52535F52 
- 1356      65616450 
- 1356      6572696F 
- 1357              	.LASF31:
- 1358 016a 50574D5F 		.ascii	"PWM_MOTORS_ReadCounter\000"
- 1358      4D4F544F 
- 1358      52535F52 
- 1358      65616443 
- 1358      6F756E74 
- 1359              	.LASF10:
- 1360 0181 646F7562 		.ascii	"double\000"
- 1360      6C6500
- 1361              	.LASF1:
- 1362 0188 756E7369 		.ascii	"unsigned char\000"
- 1362      676E6564 
- 1362      20636861 
- 1362      7200
- 1363              	.LASF8:
- 1364 0196 756E7369 		.ascii	"unsigned int\000"
- 1364      676E6564 
- 1364      20696E74 
- 1364      00
- 1365              	.LASF17:
- 1366 01a3 50574D5F 		.ascii	"PWM_MOTORS_Enable\000"
- 1366      4D4F544F 
- 1366      52535F45 
- 1366      6E61626C 
- 1366      6500
- 1367              	.LASF7:
- 1368 01b5 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1368      206C6F6E 
- 1368      6720756E 
- 1368      7369676E 
- 1368      65642069 
- 1369              	.LASF21:
- 1370 01cc 50574D5F 		.ascii	"PWM_MOTORS_WritePeriod\000"
- 1370      4D4F544F 
- 1370      52535F57 
- 1370      72697465 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 42
+ 1359      6F6400
+ 1360              	.LASF34:
+ 1361 00ec 50574D5F 		.ascii	"PWM_MOTORS_ReadCapture\000"
+ 1361      4D4F544F 
+ 1361      52535F52 
+ 1361      65616443 
+ 1361      61707475 
+ 1362              	.LASF3:
+ 1363 0103 73686F72 		.ascii	"short unsigned int\000"
+ 1363      7420756E 
+ 1363      7369676E 
+ 1363      65642069 
+ 1363      6E7400
+ 1364              	.LASF11:
+ 1365 0116 666C6F61 		.ascii	"float\000"
+ 1365      7400
+ 1366              	.LASF24:
+ 1367 011c 636F756E 		.ascii	"counter\000"
+ 1367      74657200 
+ 1368              	.LASF21:
+ 1369 0124 50574D5F 		.ascii	"PWM_MOTORS_Init\000"
+ 1369      4D4F544F 
+ 1369      52535F49 
+ 1369      6E697400 
+ 1370              	.LASF14:
+ 1371 0134 72656738 		.ascii	"reg8\000"
+ 1371      00
+ 1372              	.LASF5:
+ 1373 0139 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1373      20756E73 
+ 1373      69676E65 
+ 1373      6420696E 
+ 1373      7400
+ 1374              	.LASF9:
+ 1375 014b 75696E74 		.ascii	"uint8\000"
+ 1375      3800
+ 1376              	.LASF32:
+ 1377 0151 636F6E74 		.ascii	"control\000"
+ 1377      726F6C00 
+ 1378              	.LASF37:
+ 1379 0159 50574D5F 		.ascii	"PWM_MOTORS_ReadPeriod\000"
+ 1379      4D4F544F 
+ 1379      52535F52 
+ 1379      65616450 
+ 1379      6572696F 
+ 1380              	.LASF33:
+ 1381 016f 50574D5F 		.ascii	"PWM_MOTORS_ReadCounter\000"
+ 1381      4D4F544F 
+ 1381      52535F52 
+ 1381      65616443 
+ 1381      6F756E74 
+ 1382              	.LASF12:
+ 1383 0186 646F7562 		.ascii	"double\000"
+ 1383      6C6500
+ 1384              	.LASF10:
+ 1385 018d 75696E74 		.ascii	"uint16\000"
+ 1385      313600
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 42
 
 
- 1370      50657269 
- 1371              	.LASF18:
- 1372 01e3 50574D5F 		.ascii	"PWM_MOTORS_Stop\000"
- 1372      4D4F544F 
- 1372      52535F53 
- 1372      746F7000 
- 1373              	.LASF27:
- 1374 01f3 6374726C 		.ascii	"ctrl\000"
- 1374      00
- 1375              	.LASF15:
- 1376 01f8 73697A65 		.ascii	"sizetype\000"
- 1376      74797065 
- 1376      00
- 1377              	.LASF6:
- 1378 0201 6C6F6E67 		.ascii	"long long int\000"
- 1378      206C6F6E 
- 1378      6720696E 
- 1378      7400
- 1379              	.LASF38:
- 1380 020f 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GitHub\\SoftHandPRO-a"
- 1380      73657273 
- 1380      5C4D6174 
- 1380      7469615C 
- 1380      446F6375 
- 1381 023d 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\Generic.cydsn\000"
- 1381      656E6572 
- 1381      69632D46 
- 1381      572D5053 
- 1381      6F43355C 
- 1382              	.LASF29:
- 1383 025f 50574D5F 		.ascii	"PWM_MOTORS_WriteControlRegister\000"
- 1383      4D4F544F 
- 1383      52535F57 
- 1383      72697465 
- 1383      436F6E74 
- 1384              	.LASF37:
- 1385 027f 47656E65 		.ascii	"Generated_Source\\PSoC5\\PWM_MOTORS.c\000"
- 1385      72617465 
- 1385      645F536F 
- 1385      75726365 
- 1385      5C50536F 
- 1386              	.LASF24:
- 1387 02a3 50574D5F 		.ascii	"PWM_MOTORS_WriteCompare1\000"
- 1387      4D4F544F 
- 1387      52535F57 
- 1387      72697465 
- 1387      436F6D70 
- 1388              	.LASF20:
- 1389 02bc 50574D5F 		.ascii	"PWM_MOTORS_WriteCounter\000"
- 1389      4D4F544F 
- 1389      52535F57 
- 1389      72697465 
- 1389      436F756E 
- 1390              	.LASF2:
- 1391 02d4 73686F72 		.ascii	"short int\000"
- 1391      7420696E 
- 1391      7400
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccVXA1W3.s 			page 43
-
-
- 1392              	.LASF33:
- 1393 02de 50574D5F 		.ascii	"PWM_MOTORS_ReadCompare1\000"
- 1393      4D4F544F 
- 1393      52535F52 
- 1393      65616443 
- 1393      6F6D7061 
- 1394              	.LASF34:
- 1395 02f6 50574D5F 		.ascii	"PWM_MOTORS_ReadCompare2\000"
+ 1386              	.LASF1:
+ 1387 0194 756E7369 		.ascii	"unsigned char\000"
+ 1387      676E6564 
+ 1387      20636861 
+ 1387      7200
+ 1388              	.LASF8:
+ 1389 01a2 756E7369 		.ascii	"unsigned int\000"
+ 1389      676E6564 
+ 1389      20696E74 
+ 1389      00
+ 1390              	.LASF19:
+ 1391 01af 50574D5F 		.ascii	"PWM_MOTORS_Enable\000"
+ 1391      4D4F544F 
+ 1391      52535F45 
+ 1391      6E61626C 
+ 1391      6500
+ 1392              	.LASF7:
+ 1393 01c1 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1393      206C6F6E 
+ 1393      6720756E 
+ 1393      7369676E 
+ 1393      65642069 
+ 1394              	.LASF23:
+ 1395 01d8 50574D5F 		.ascii	"PWM_MOTORS_WritePeriod\000"
  1395      4D4F544F 
- 1395      52535F52 
- 1395      65616443 
- 1395      6F6D7061 
- 1396              	.LASF4:
- 1397 030e 6C6F6E67 		.ascii	"long int\000"
- 1397      20696E74 
- 1397      00
- 1398              	.LASF11:
- 1399 0317 63686172 		.ascii	"char\000"
+ 1395      52535F57 
+ 1395      72697465 
+ 1395      50657269 
+ 1396              	.LASF20:
+ 1397 01ef 50574D5F 		.ascii	"PWM_MOTORS_Stop\000"
+ 1397      4D4F544F 
+ 1397      52535F53 
+ 1397      746F7000 
+ 1398              	.LASF29:
+ 1399 01ff 6374726C 		.ascii	"ctrl\000"
  1399      00
- 1400              	.LASF14:
- 1401 031c 6C6F6E67 		.ascii	"long double\000"
- 1401      20646F75 
- 1401      626C6500 
- 1402              	.LASF0:
- 1403 0328 7369676E 		.ascii	"signed char\000"
- 1403      65642063 
- 1403      68617200 
- 1404              	.LASF25:
- 1405 0334 636F6D70 		.ascii	"compare\000"
- 1405      61726500 
- 1406              	.LASF16:
- 1407 033c 50574D5F 		.ascii	"PWM_MOTORS_Start\000"
- 1407      4D4F544F 
- 1407      52535F53 
- 1407      74617274 
- 1407      00
- 1408              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 1400              	.LASF17:
+ 1401 0204 73697A65 		.ascii	"sizetype\000"
+ 1401      74797065 
+ 1401      00
+ 1402              	.LASF6:
+ 1403 020d 6C6F6E67 		.ascii	"long long int\000"
+ 1403      206C6F6E 
+ 1403      6720696E 
+ 1403      7400
+ 1404              	.LASF40:
+ 1405 021b 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GitHub\\SoftHandPRO-a"
+ 1405      73657273 
+ 1405      5C4D6174 
+ 1405      7469615C 
+ 1405      446F6375 
+ 1406 0249 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\Generic.cydsn\000"
+ 1406      656E6572 
+ 1406      69632D46 
+ 1406      572D5053 
+ 1406      6F43355C 
+ 1407              	.LASF31:
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 43
+
+
+ 1408 026b 50574D5F 		.ascii	"PWM_MOTORS_WriteControlRegister\000"
+ 1408      4D4F544F 
+ 1408      52535F57 
+ 1408      72697465 
+ 1408      436F6E74 
+ 1409              	.LASF39:
+ 1410 028b 47656E65 		.ascii	"Generated_Source\\PSoC5\\PWM_MOTORS.c\000"
+ 1410      72617465 
+ 1410      645F536F 
+ 1410      75726365 
+ 1410      5C50536F 
+ 1411              	.LASF26:
+ 1412 02af 50574D5F 		.ascii	"PWM_MOTORS_WriteCompare1\000"
+ 1412      4D4F544F 
+ 1412      52535F57 
+ 1412      72697465 
+ 1412      436F6D70 
+ 1413              	.LASF28:
+ 1414 02c8 50574D5F 		.ascii	"PWM_MOTORS_WriteCompare2\000"
+ 1414      4D4F544F 
+ 1414      52535F57 
+ 1414      72697465 
+ 1414      436F6D70 
+ 1415              	.LASF2:
+ 1416 02e1 73686F72 		.ascii	"short int\000"
+ 1416      7420696E 
+ 1416      7400
+ 1417              	.LASF35:
+ 1418 02eb 50574D5F 		.ascii	"PWM_MOTORS_ReadCompare1\000"
+ 1418      4D4F544F 
+ 1418      52535F52 
+ 1418      65616443 
+ 1418      6F6D7061 
+ 1419              	.LASF36:
+ 1420 0303 50574D5F 		.ascii	"PWM_MOTORS_ReadCompare2\000"
+ 1420      4D4F544F 
+ 1420      52535F52 
+ 1420      65616443 
+ 1420      6F6D7061 
+ 1421              	.LASF4:
+ 1422 031b 6C6F6E67 		.ascii	"long int\000"
+ 1422      20696E74 
+ 1422      00
+ 1423              	.LASF13:
+ 1424 0324 63686172 		.ascii	"char\000"
+ 1424      00
+ 1425              	.LASF16:
+ 1426 0329 6C6F6E67 		.ascii	"long double\000"
+ 1426      20646F75 
+ 1426      626C6500 
+ 1427              	.LASF0:
+ 1428 0335 7369676E 		.ascii	"signed char\000"
+ 1428      65642063 
+ 1428      68617200 
+ 1429              	.LASF27:
+ 1430 0341 636F6D70 		.ascii	"compare\000"
+ 1430      61726500 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccXhvOqx.s 			page 44
+
+
+ 1431              	.LASF18:
+ 1432 0349 50574D5F 		.ascii	"PWM_MOTORS_Start\000"
+ 1432      4D4F544F 
+ 1432      52535F53 
+ 1432      74617274 
+ 1432      00
+ 1433              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccjvNeWy.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
   24:Generated_Source\PSoC5/CYCLES_TIMER_PM.c **** /*******************************************************************************
   25:Generated_Source\PSoC5/CYCLES_TIMER_PM.c **** * Function Name: CYCLES_TIMER_SaveConfig
   26:Generated_Source\PSoC5/CYCLES_TIMER_PM.c **** ********************************************************************************
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccjvNeWy.s 			page 2
 
 
   27:Generated_Source\PSoC5/CYCLES_TIMER_PM.c **** *
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
   56              		.global	CYCLES_TIMER_RestoreConfig
   57              		.thumb
   58              		.thumb_func
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccjvNeWy.s 			page 3
 
 
   59              		.type	CYCLES_TIMER_RestoreConfig, %function
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
   78              		.cfi_restore 7
   79              		.cfi_def_cfa_offset 0
   80 000a 7047     		bx	lr
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccjvNeWy.s 			page 4
 
 
   81              		.cfi_endproc
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
  118:Generated_Source\PSoC5/CYCLES_TIMER_PM.c ****             /* Timer is enabled */
  119:Generated_Source\PSoC5/CYCLES_TIMER_PM.c ****             CYCLES_TIMER_backup.TimerEnableState = 1u;
  109              		.loc 1 119 0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccjvNeWy.s 			page 5
 
 
  110 0012 074B     		ldr	r3, .L6+4
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
  141:Generated_Source\PSoC5/CYCLES_TIMER_PM.c **** *
  142:Generated_Source\PSoC5/CYCLES_TIMER_PM.c **** * Return:
  143:Generated_Source\PSoC5/CYCLES_TIMER_PM.c **** *  void
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 6
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccjvNeWy.s 			page 6
 
 
  144:Generated_Source\PSoC5/CYCLES_TIMER_PM.c **** *
@@ -358,13 +358,13 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
  181 0006 00000000 		.4byte	.Ldebug_abbrev0
  182 000a 04       		.byte	0x4
  183 000b 01       		.uleb128 0x1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 7
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccjvNeWy.s 			page 7
 
 
- 184 000c 35010000 		.4byte	.LASF21
+ 184 000c E0000000 		.4byte	.LASF21
  185 0010 0C       		.byte	0xc
- 186 0011 F5000000 		.4byte	.LASF22
- 187 0015 2F000000 		.4byte	.LASF23
+ 186 0011 A0000000 		.4byte	.LASF22
+ 187 0015 81010000 		.4byte	.LASF23
  188 0019 00000000 		.4byte	.Ldebug_ranges0+0
  189 001d 00000000 		.4byte	0
  190 0021 00000000 		.4byte	.Ldebug_line0
@@ -375,7 +375,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
  195 002c 02       		.uleb128 0x2
  196 002d 01       		.byte	0x1
  197 002e 08       		.byte	0x8
- 198 002f C3010000 		.4byte	.LASF1
+ 198 002f 6E010000 		.4byte	.LASF1
  199 0033 02       		.uleb128 0x2
  200 0034 02       		.byte	0x2
  201 0035 05       		.byte	0x5
@@ -391,7 +391,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
  211 0048 02       		.uleb128 0x2
  212 0049 04       		.byte	0x4
  213 004a 07       		.byte	0x7
- 214 004b CC000000 		.4byte	.LASF5
+ 214 004b 77000000 		.4byte	.LASF5
  215 004f 02       		.uleb128 0x2
  216 0050 08       		.byte	0x8
  217 0051 05       		.byte	0x5
@@ -399,7 +399,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
  219 0056 02       		.uleb128 0x2
  220 0057 08       		.byte	0x8
  221 0058 07       		.byte	0x7
- 222 0059 DE000000 		.4byte	.LASF7
+ 222 0059 89000000 		.4byte	.LASF7
  223 005d 03       		.uleb128 0x3
  224 005e 04       		.byte	0x4
  225 005f 05       		.byte	0x5
@@ -409,16 +409,16 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
  229 0066 07       		.byte	0x7
  230 0067 0E000000 		.4byte	.LASF8
  231 006b 04       		.uleb128 0x4
- 232 006c C6000000 		.4byte	.LASF12
+ 232 006c 71000000 		.4byte	.LASF12
  233 0070 02       		.byte	0x2
  234 0071 E401     		.2byte	0x1e4
  235 0073 2C000000 		.4byte	0x2c
  236 0077 02       		.uleb128 0x2
  237 0078 04       		.byte	0x4
  238 0079 04       		.byte	0x4
- 239 007a 1E010000 		.4byte	.LASF9
+ 239 007a C9000000 		.4byte	.LASF9
  240 007e 02       		.uleb128 0x2
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 8
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccjvNeWy.s 			page 8
 
 
  241 007f 08       		.byte	0x8
@@ -427,7 +427,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
  244 0085 02       		.uleb128 0x2
  245 0086 01       		.byte	0x1
  246 0087 08       		.byte	0x8
- 247 0088 D1010000 		.4byte	.LASF11
+ 247 0088 7C010000 		.4byte	.LASF11
  248 008c 04       		.uleb128 0x4
  249 008d 4D020000 		.4byte	.LASF13
  250 0091 02       		.byte	0x2
@@ -449,7 +449,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
  266 00ae 43       		.byte	0x43
  267 00af C0000000 		.4byte	0xc0
  268 00b3 07       		.uleb128 0x7
- 269 00b4 24010000 		.4byte	.LASF24
+ 269 00b4 CF000000 		.4byte	.LASF24
  270 00b8 03       		.byte	0x3
  271 00b9 45       		.byte	0x45
  272 00ba 6B000000 		.4byte	0x6b
@@ -469,7 +469,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
  286 00da 01       		.uleb128 0x1
  287 00db 9C       		.byte	0x9c
  288 00dc 09       		.uleb128 0x9
- 289 00dd 84000000 		.4byte	.LASF18
+ 289 00dd 2F000000 		.4byte	.LASF18
  290 00e1 01       		.byte	0x1
  291 00e2 4D       		.byte	0x4d
  292 00e3 00000000 		.4byte	.LFB1
@@ -477,8 +477,8 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
  294 00eb 01       		.uleb128 0x1
  295 00ec 9C       		.byte	0x9c
  296 00ed 0A       		.uleb128 0xa
- 297 00ee B3000000 		.4byte	.LASF19
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 9
+ 297 00ee 5E000000 		.4byte	.LASF19
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccjvNeWy.s 			page 9
 
 
  298 00f2 01       		.byte	0x1
@@ -496,7 +496,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
  310 010d 01       		.uleb128 0x1
  311 010e 9C       		.byte	0x9c
  312 010f 0B       		.uleb128 0xb
- 313 0110 9F000000 		.4byte	.LASF25
+ 313 0110 4A000000 		.4byte	.LASF25
  314 0114 01       		.byte	0x1
  315 0115 15       		.byte	0x15
  316 0116 C0000000 		.4byte	0xc0
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
  352 001d 00       		.byte	0
  353 001e 03       		.uleb128 0x3
  354 001f 24       		.uleb128 0x24
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 10
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccjvNeWy.s 			page 10
 
 
  355 0020 00       		.byte	0
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
  409 0056 0B       		.uleb128 0xb
  410 0057 00       		.byte	0
  411 0058 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccjvNeWy.s 			page 11
 
 
  412 0059 08       		.uleb128 0x8
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
  466 0090 18       		.uleb128 0x18
  467 0091 9642     		.uleb128 0x2116
  468 0093 19       		.uleb128 0x19
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 12
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccjvNeWy.s 			page 12
 
 
  469 0094 00       		.byte	0
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
  519      01010101 
  520              	.LASF6:
  521 0000 6C6F6E67 		.ascii	"long long int\000"
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccjvNeWy.s 			page 13
 
 
  521      206C6F6E 
@@ -735,92 +735,92 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
  525      494D4552 
  525      5F57616B 
  525      65757000 
- 526              	.LASF23:
- 527 002f 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHandPRO-a"
- 527      73657273 
- 527      5C4D6174 
- 527      7469615C 
- 527      446F6375 
- 528 005d 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\SoftHand_Pro.cydsn\000"
- 528      656E6572 
- 528      69632D46 
- 528      572D5053 
- 528      6F43355C 
- 529              	.LASF18:
- 530 0084 4359434C 		.ascii	"CYCLES_TIMER_RestoreConfig\000"
- 530      45535F54 
- 530      494D4552 
- 530      5F526573 
- 530      746F7265 
- 531              	.LASF25:
- 532 009f 4359434C 		.ascii	"CYCLES_TIMER_backup\000"
- 532      45535F54 
- 532      494D4552 
- 532      5F626163 
- 532      6B757000 
- 533              	.LASF19:
- 534 00b3 4359434C 		.ascii	"CYCLES_TIMER_Sleep\000"
- 534      45535F54 
- 534      494D4552 
- 534      5F536C65 
- 534      657000
- 535              	.LASF12:
- 536 00c6 75696E74 		.ascii	"uint8\000"
- 536      3800
- 537              	.LASF5:
- 538 00cc 6C6F6E67 		.ascii	"long unsigned int\000"
- 538      20756E73 
- 538      69676E65 
- 538      6420696E 
- 538      7400
- 539              	.LASF7:
- 540 00de 6C6F6E67 		.ascii	"long long unsigned int\000"
- 540      206C6F6E 
- 540      6720756E 
- 540      7369676E 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 14
+ 526              	.LASF18:
+ 527 002f 4359434C 		.ascii	"CYCLES_TIMER_RestoreConfig\000"
+ 527      45535F54 
+ 527      494D4552 
+ 527      5F526573 
+ 527      746F7265 
+ 528              	.LASF25:
+ 529 004a 4359434C 		.ascii	"CYCLES_TIMER_backup\000"
+ 529      45535F54 
+ 529      494D4552 
+ 529      5F626163 
+ 529      6B757000 
+ 530              	.LASF19:
+ 531 005e 4359434C 		.ascii	"CYCLES_TIMER_Sleep\000"
+ 531      45535F54 
+ 531      494D4552 
+ 531      5F536C65 
+ 531      657000
+ 532              	.LASF12:
+ 533 0071 75696E74 		.ascii	"uint8\000"
+ 533      3800
+ 534              	.LASF5:
+ 535 0077 6C6F6E67 		.ascii	"long unsigned int\000"
+ 535      20756E73 
+ 535      69676E65 
+ 535      6420696E 
+ 535      7400
+ 536              	.LASF7:
+ 537 0089 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 537      206C6F6E 
+ 537      6720756E 
+ 537      7369676E 
+ 537      65642069 
+ 538              	.LASF22:
+ 539 00a0 47656E65 		.ascii	"Generated_Source\\PSoC5\\CYCLES_TIMER_PM.c\000"
+ 539      72617465 
+ 539      645F536F 
+ 539      75726365 
+ 539      5C50536F 
+ 540              	.LASF9:
+ 541 00c9 666C6F61 		.ascii	"float\000"
+ 541      7400
+ 542              	.LASF24:
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccjvNeWy.s 			page 14
 
 
- 540      65642069 
- 541              	.LASF22:
- 542 00f5 47656E65 		.ascii	"Generated_Source\\PSoC5\\CYCLES_TIMER_PM.c\000"
- 542      72617465 
- 542      645F536F 
- 542      75726365 
- 542      5C50536F 
- 543              	.LASF9:
- 544 011e 666C6F61 		.ascii	"float\000"
- 544      7400
- 545              	.LASF24:
- 546 0124 54696D65 		.ascii	"TimerEnableState\000"
- 546      72456E61 
- 546      626C6553 
- 546      74617465 
- 546      00
- 547              	.LASF21:
- 548 0135 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 548      43313120 
- 548      352E342E 
- 548      31203230 
- 548      31363036 
- 549 0168 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 549      20726576 
- 549      6973696F 
- 549      6E203233 
- 549      37373135 
- 550 019b 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
- 550      66756E63 
- 550      74696F6E 
- 550      2D736563 
- 550      74696F6E 
- 551              	.LASF1:
- 552 01c3 756E7369 		.ascii	"unsigned char\000"
- 552      676E6564 
- 552      20636861 
- 552      7200
- 553              	.LASF11:
- 554 01d1 63686172 		.ascii	"char\000"
- 554      00
+ 543 00cf 54696D65 		.ascii	"TimerEnableState\000"
+ 543      72456E61 
+ 543      626C6553 
+ 543      74617465 
+ 543      00
+ 544              	.LASF21:
+ 545 00e0 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 545      43313120 
+ 545      352E342E 
+ 545      31203230 
+ 545      31363036 
+ 546 0113 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 546      20726576 
+ 546      6973696F 
+ 546      6E203233 
+ 546      37373135 
+ 547 0146 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 547      66756E63 
+ 547      74696F6E 
+ 547      2D736563 
+ 547      74696F6E 
+ 548              	.LASF1:
+ 549 016e 756E7369 		.ascii	"unsigned char\000"
+ 549      676E6564 
+ 549      20636861 
+ 549      7200
+ 550              	.LASF11:
+ 551 017c 63686172 		.ascii	"char\000"
+ 551      00
+ 552              	.LASF23:
+ 553 0181 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GitHub\\SoftHandPRO-a"
+ 553      73657273 
+ 553      5C4D6174 
+ 553      7469615C 
+ 553      446F6375 
+ 554 01af 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\SoftHand_Pro.cydsn\000"
+ 554      656E6572 
+ 554      69632D46 
+ 554      572D5053 
+ 554      6F43355C 
  555              	.LASF4:
  556 01d6 6C6F6E67 		.ascii	"long int\000"
  556      20696E74 
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 1
  562 01fe 73686F72 		.ascii	"short unsigned int\000"
  562      7420756E 
  562      7369676E 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccv9Kmkd.s 			page 15
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccjvNeWy.s 			page 15
 
 
  562      65642069 

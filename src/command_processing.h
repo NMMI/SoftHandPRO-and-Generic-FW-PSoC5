@@ -84,6 +84,14 @@ void    prepare_generic_info(char *info_string);
 **/
 void    prepare_counter_info(char *info_string);
 
+//============================================================  prepare_R01_info
+/** This function is used to prepare an information string about the cycles counter
+ *  of the hand used in R01 project.
+ *
+ * \param 	info_string 	An array of chars containing the requested information.
+**/
+void    prepare_R01_info(char *info_string);
+
 //============================================================  prepare_SD_info
 /** This function is used to prepare an information string to be on a SD card
  *
@@ -444,6 +452,10 @@ void cmd_get_ADC_raw();
 **/
 void cmd_get_SD_file(uint16 filename_length);
 
+//============================================================  cmd_remove_SD_file
+/** This function removes a file on the SD
+**/
+void cmd_remove_SD_file(uint16 filename_length);
 
 //============================================================  air_chamber_control
 /* This function is used to drive air chambers feedback device */

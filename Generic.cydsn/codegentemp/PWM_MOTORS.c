@@ -400,10 +400,10 @@ void PWM_MOTORS_Stop(void)
     *  The PWM Period will be reloaded when a counter value will be a zero
     *
     *******************************************************************************/
-    void PWM_MOTORS_WriteCounter(uint8 counter) \
+    void PWM_MOTORS_WriteCounter(uint16 counter) \
                                        
     {
-        CY_SET_REG8(PWM_MOTORS_COUNTER_LSB_PTR, counter);
+        CY_SET_REG16(PWM_MOTORS_COUNTER_LSB_PTR, counter);
     }
 
 
@@ -422,7 +422,7 @@ void PWM_MOTORS_Stop(void)
     *  The current value of the counter.
     *
     *******************************************************************************/
-    uint8 PWM_MOTORS_ReadCounter(void) 
+    uint16 PWM_MOTORS_ReadCounter(void) 
     {
         /* Force capture by reading Accumulator */
         /* Must first do a software capture to be able to read the counter */
@@ -430,7 +430,7 @@ void PWM_MOTORS_Stop(void)
           (void)CY_GET_REG8(PWM_MOTORS_COUNTERCAP_LSB_PTR_8BIT);
 
         /* Read the data from the FIFO */
-        return (CY_GET_REG8(PWM_MOTORS_CAPTURE_LSB_PTR));
+        return (CY_GET_REG16(PWM_MOTORS_CAPTURE_LSB_PTR));
     }
 
     #if (PWM_MOTORS_UseStatus)
@@ -479,12 +479,12 @@ void PWM_MOTORS_Stop(void)
 *  None
 *
 *******************************************************************************/
-void PWM_MOTORS_WritePeriod(uint8 period) 
+void PWM_MOTORS_WritePeriod(uint16 period) 
 {
     #if(PWM_MOTORS_UsingFixedFunction)
         CY_SET_REG16(PWM_MOTORS_PERIOD_LSB_PTR, (uint16)period);
     #else
-        CY_SET_REG8(PWM_MOTORS_PERIOD_LSB_PTR, period);
+        CY_SET_REG16(PWM_MOTORS_PERIOD_LSB_PTR, period);
     #endif /* (PWM_MOTORS_UsingFixedFunction) */
 }
 
@@ -513,20 +513,20 @@ void PWM_MOTORS_WritePeriod(uint8 period)
     *  Dither Mode, Center Aligned Mode or One Output Mode
     *
     *******************************************************************************/
-    void PWM_MOTORS_WriteCompare(uint8 compare) \
+    void PWM_MOTORS_WriteCompare(uint16 compare) \
                                        
     {
         #if(PWM_MOTORS_UsingFixedFunction)
             CY_SET_REG16(PWM_MOTORS_COMPARE1_LSB_PTR, (uint16)compare);
         #else
-            CY_SET_REG8(PWM_MOTORS_COMPARE1_LSB_PTR, compare);
+            CY_SET_REG16(PWM_MOTORS_COMPARE1_LSB_PTR, compare);
         #endif /* (PWM_MOTORS_UsingFixedFunction) */
 
         #if (PWM_MOTORS_PWMMode == PWM_MOTORS__B_PWM__DITHER)
             #if(PWM_MOTORS_UsingFixedFunction)
                 CY_SET_REG16(PWM_MOTORS_COMPARE2_LSB_PTR, (uint16)(compare + 1u));
             #else
-                CY_SET_REG8(PWM_MOTORS_COMPARE2_LSB_PTR, (compare + 1u));
+                CY_SET_REG16(PWM_MOTORS_COMPARE2_LSB_PTR, (compare + 1u));
             #endif /* (PWM_MOTORS_UsingFixedFunction) */
         #endif /* (PWM_MOTORS_PWMMode == PWM_MOTORS__B_PWM__DITHER) */
     }
@@ -552,13 +552,13 @@ void PWM_MOTORS_WritePeriod(uint8 period)
     *  None
     *
     *******************************************************************************/
-    void PWM_MOTORS_WriteCompare1(uint8 compare) \
+    void PWM_MOTORS_WriteCompare1(uint16 compare) \
                                         
     {
         #if(PWM_MOTORS_UsingFixedFunction)
             CY_SET_REG16(PWM_MOTORS_COMPARE1_LSB_PTR, (uint16)compare);
         #else
-            CY_SET_REG8(PWM_MOTORS_COMPARE1_LSB_PTR, compare);
+            CY_SET_REG16(PWM_MOTORS_COMPARE1_LSB_PTR, compare);
         #endif /* (PWM_MOTORS_UsingFixedFunction) */
     }
 
@@ -581,13 +581,13 @@ void PWM_MOTORS_WritePeriod(uint8 period)
     *  None
     *
     *******************************************************************************/
-    void PWM_MOTORS_WriteCompare2(uint8 compare) \
+    void PWM_MOTORS_WriteCompare2(uint16 compare) \
                                         
     {
         #if(PWM_MOTORS_UsingFixedFunction)
             CY_SET_REG16(PWM_MOTORS_COMPARE2_LSB_PTR, compare);
         #else
-            CY_SET_REG8(PWM_MOTORS_COMPARE2_LSB_PTR, compare);
+            CY_SET_REG16(PWM_MOTORS_COMPARE2_LSB_PTR, compare);
         #endif /* (PWM_MOTORS_UsingFixedFunction) */
     }
 #endif /* UseOneCompareMode */
@@ -787,9 +787,9 @@ void PWM_MOTORS_WritePeriod(uint8 period)
     *  uint8/uint16: The current capture value
     *
     *******************************************************************************/
-    uint8 PWM_MOTORS_ReadCapture(void) 
+    uint16 PWM_MOTORS_ReadCapture(void) 
     {
-        return (CY_GET_REG8(PWM_MOTORS_CAPTURE_LSB_PTR));
+        return (CY_GET_REG16(PWM_MOTORS_CAPTURE_LSB_PTR));
     }
 
 #endif /* (!PWM_MOTORS_UsingFixedFunction) */
@@ -813,12 +813,12 @@ void PWM_MOTORS_WritePeriod(uint8 period)
     *  uint8/uint16: Current compare value
     *
     *******************************************************************************/
-    uint8 PWM_MOTORS_ReadCompare(void) 
+    uint16 PWM_MOTORS_ReadCompare(void) 
     {
         #if(PWM_MOTORS_UsingFixedFunction)
-            return ((uint8)CY_GET_REG16(PWM_MOTORS_COMPARE1_LSB_PTR));
+            return ((uint16)CY_GET_REG16(PWM_MOTORS_COMPARE1_LSB_PTR));
         #else
-            return (CY_GET_REG8(PWM_MOTORS_COMPARE1_LSB_PTR));
+            return (CY_GET_REG16(PWM_MOTORS_COMPARE1_LSB_PTR));
         #endif /* (PWM_MOTORS_UsingFixedFunction) */
     }
 
@@ -839,9 +839,9 @@ void PWM_MOTORS_WritePeriod(uint8 period)
     *  uint8/uint16: Current compare value.
     *
     *******************************************************************************/
-    uint8 PWM_MOTORS_ReadCompare1(void) 
+    uint16 PWM_MOTORS_ReadCompare1(void) 
     {
-        return (CY_GET_REG8(PWM_MOTORS_COMPARE1_LSB_PTR));
+        return (CY_GET_REG16(PWM_MOTORS_COMPARE1_LSB_PTR));
     }
 
 
@@ -859,9 +859,9 @@ void PWM_MOTORS_WritePeriod(uint8 period)
     *  uint8/uint16: Current compare value.
     *
     *******************************************************************************/
-    uint8 PWM_MOTORS_ReadCompare2(void) 
+    uint16 PWM_MOTORS_ReadCompare2(void) 
     {
-        return (CY_GET_REG8(PWM_MOTORS_COMPARE2_LSB_PTR));
+        return (CY_GET_REG16(PWM_MOTORS_COMPARE2_LSB_PTR));
     }
 
 #endif /* (PWM_MOTORS_UseOneCompareMode) */
@@ -881,12 +881,12 @@ void PWM_MOTORS_WritePeriod(uint8 period)
 *  uint8/16: Period value
 *
 *******************************************************************************/
-uint8 PWM_MOTORS_ReadPeriod(void) 
+uint16 PWM_MOTORS_ReadPeriod(void) 
 {
     #if(PWM_MOTORS_UsingFixedFunction)
-        return ((uint8)CY_GET_REG16(PWM_MOTORS_PERIOD_LSB_PTR));
+        return ((uint16)CY_GET_REG16(PWM_MOTORS_PERIOD_LSB_PTR));
     #else
-        return (CY_GET_REG8(PWM_MOTORS_PERIOD_LSB_PTR));
+        return (CY_GET_REG16(PWM_MOTORS_PERIOD_LSB_PTR));
     #endif /* (PWM_MOTORS_UsingFixedFunction) */
 }
 

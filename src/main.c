@@ -41,7 +41,7 @@
 * \copyright    (C) 2020 Centro "E.Piaggio". All rights reserved.
 * \mainpage     Firmware
 * \brief        This is the firmware of PSoC5 logic board.
-* \version      1.8
+* \version      1.9.4
 *
 * \details      This is the firmware of PSoC5 logic board. Depending on the configuration, 
 *               it can control up to two motors and read its encoders. Also can read and
@@ -191,6 +191,7 @@ int main()
     for(i=0;i<NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS;i++) {
         filt_emg[i].gain      = 50;   // Emg channels filter constant.
     }
+    filt_detect_pc.gain = 500;    
     
     //---------------------------------------------------  Initialize reference structure 
     for (i = 0; i< NUM_OF_MOTORS; i++) {
@@ -221,7 +222,8 @@ int main()
     }
     emg_history_next_idx = 0;
     
-    MOTOR_DRIVER_TYPE_Write((g_mem.motor[1].motor_driver_type << 1) | g_mem.motor[0].motor_driver_type);
+    set_motor_driver_type();
+    
     for (i = 0; i< NUM_OF_MOTORS; i++) {
         if (c_mem.emg.emg_calibration_flag) {
             if ((c_mem.motor[i].input_mode == INPUT_MODE_EMG_PROPORTIONAL) ||

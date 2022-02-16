@@ -997,14 +997,14 @@
 <v>Generated_Source\PSoC5\MOTOR_DRIVER_TYPE_2_PM.c</v>
 </gen_list>
 <warp_dep>
-<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\ieee\work\stdlogic.vif</v>
-<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\stdlogic\mod_genv.vif</v>
-<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\cypress.v</v>
-<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\cy_psoc3_inc.v</v>
-<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\stdlogic\rtlpkg.vif</v>
-<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\stdlogic\cy_psoc3.vif</v>
+<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\ieee\work\stdlogic.vif</v>
+<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\mod_genv.vif</v>
+<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\cypress.v</v>
+<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\cy_psoc3_inc.v</v>
+<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\rtlpkg.vif</v>
+<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\cy_psoc3.vif</v>
 </warp_dep>
-<deps_time v="132047223495818692" />
+<deps_time v="132670221725332079" />
 <top_block v="TopDesign" />
 <last_generation v="3" />
 <pdl_path v="" />
@@ -4461,6 +4461,16 @@
 <dep name=".\Generated_Source\PSoC5\timer_clock.h" />
 </file>
 <file name=".\Generated_Source\PSoC5\timer_clock.c" />
+<file name=".\CortexM3\ARM_GCC_541\Release\CyBootAsmGnu.o">
+<dep name=".\Generated_Source\PSoC5\CyBootAsmGnu.s" />
+<dep name=".\Generated_Source\PSoC5\cydevicegnu.inc" />
+<dep name=".\Generated_Source\PSoC5\cydevicegnu_trm.inc" />
+<dep name=".\Generated_Source\PSoC5\cyfittergnu.inc" />
+</file>
+<file name=".\Generated_Source\PSoC5\CyBootAsmGnu.s" />
+<file name=".\Generated_Source\PSoC5\cydevicegnu.inc" />
+<file name=".\Generated_Source\PSoC5\cydevicegnu_trm.inc" />
+<file name=".\Generated_Source\PSoC5\cyfittergnu.inc" />
 <file name=".\CortexM3\ARM_GCC_541\Release\FS_ConfigIO.o">
 <dep name="..\src\emFile_V322c\Code\Include\PSoC5\FS.h" />
 <dep name="..\src\emFile_V322c\Code\Include\PSoC5\FS_ConfDefaults.h" />
@@ -4473,16 +4483,6 @@
 <dep name="..\src\emFile_V322c\Code\Source\PSoC5\FS_ConfigIO.c" />
 </file>
 <file name="..\src\emFile_V322c\Code\Source\PSoC5\FS_ConfigIO.c" />
-<file name=".\CortexM3\ARM_GCC_541\Release\CyBootAsmGnu.o">
-<dep name=".\Generated_Source\PSoC5\CyBootAsmGnu.s" />
-<dep name=".\Generated_Source\PSoC5\cydevicegnu.inc" />
-<dep name=".\Generated_Source\PSoC5\cydevicegnu_trm.inc" />
-<dep name=".\Generated_Source\PSoC5\cyfittergnu.inc" />
-</file>
-<file name=".\Generated_Source\PSoC5\CyBootAsmGnu.s" />
-<file name=".\Generated_Source\PSoC5\cydevicegnu.inc" />
-<file name=".\Generated_Source\PSoC5\cydevicegnu_trm.inc" />
-<file name=".\Generated_Source\PSoC5\cyfittergnu.inc" />
 </CyGuid_1173175f-1b9b-4ad4-a065-754a48a27021>
 </dependency_info>
 </CyGuid_f44455c5-3770-4452-b988-0a7a7ff46256>
@@ -4799,15 +4799,16 @@
 <name_val_pair name="Generated_Source\PSoC5\MOTOR_DRIVER_TYPE_PM.c" v="-mcpu=cortex-m3 -mthumb -I..\src\emFile_V322c\Code\Include\PSoC5\emf16nOS -I..\src\emFile_V322c\Code\Include\PSoC5 -I. -IGenerated_Source\PSoC5 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -D SOFTHAND_FW" />
 <name_val_pair name="C:\Users\Mattia\Documents\GITHUB\SoftHand-PRO-PSoC5\SoftHand_Pro.cydsn\CortexM3\ARM_GCC_541\Release\SoftHand_Pro.hex" v="-mcpu=cortex-m3 -mthumb -L Generated_Source\PSoC5 ..\src\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf16noslfn.a -Wl,-Map,${OutputDir}/${ProjectShortName}.map -T Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -u _printf_float -Wl,--gc-sections -Wl,-u,vfprintf -lm -g -ffunction-sections -O0 -ffat-lto-objects" />
 <name_val_pair name="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\SoftHand_Pro.cydsn\CortexM3\ARM_GCC_541\Release\SoftHand_Pro.hex" v="-mcpu=cortex-m3 -mthumb -L Generated_Source\PSoC5 ..\src\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf16noslfn.a -Wl,-Map,${OutputDir}/${ProjectShortName}.map -T Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -u _printf_float -Wl,--gc-sections -Wl,-u,vfprintf -lm -g -ffunction-sections -O0 -ffat-lto-objects" />
+<name_val_pair name="C:\Users\Mattia\Documents\GitHub\SoftHandPRO-and-Generic-FW-PSoC5\SoftHand_Pro.cydsn\CortexM3\ARM_GCC_541\Release\SoftHand_Pro.hex" v="-mcpu=cortex-m3 -mthumb -L Generated_Source\PSoC5 ..\src\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf16noslfn.a -Wl,-Map,${OutputDir}/${ProjectShortName}.map -T Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -u _printf_float -Wl,--gc-sections -Wl,-u,vfprintf -lm -g -ffunction-sections -O0 -ffat-lto-objects" />
 </name>
 </genericCmdLineData>
-<codeGenCmdLineTag v="-.appdatapath &quot;C:\Users\Mattia\AppData\Local\Cypress Semiconductor\PSoC Creator\4.2&quot; -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\SoftHand_Pro.cydsn\SoftHand_Pro.cyprj -d CY8C5888LTI-LP097 -s C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\SoftHand_Pro.cydsn\Generated_Source\PSoC5 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE" />
+<codeGenCmdLineTag v="-.appdatapath &quot;C:\Users\Mattia\AppData\Local\Cypress Semiconductor\PSoC Creator\4.4&quot; -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p C:\Users\Mattia\Documents\GitHub\SoftHandPRO-and-Generic-FW-PSoC5\SoftHand_Pro.cydsn\SoftHand_Pro.cyprj -d CY8C5888LTI-LP097 -s C:\Users\Mattia\Documents\GitHub\SoftHandPRO-and-Generic-FW-PSoC5\SoftHand_Pro.cydsn\Generated_Source\PSoC5 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE" />
 </CyGuid_b0374e30-ce3a-47f2-ad85-821643292c68>
 </dataGuid>
 <dataGuid v="769d31ea-68b1-4f0c-b90a-7c10a43ee563">
 <CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563 type_name="CyDesigner.Common.ProjMgmt.Model.CyLinkCustomData" version="1">
 <link_deps_times>
-<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Release@CortexM3" v="132557993625916640" />
+<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Release@CortexM3" v="132894021484423081" />
 </link_deps_times>
 </CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563>
 </dataGuid>

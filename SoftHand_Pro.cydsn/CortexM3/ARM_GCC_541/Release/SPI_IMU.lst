@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
   20:Generated_Source\PSoC5/SPI_IMU.c **** #if(SPI_IMU_TX_SOFTWARE_BUF_ENABLED)
   21:Generated_Source\PSoC5/SPI_IMU.c ****     volatile uint8 SPI_IMU_txBuffer[SPI_IMU_TX_BUFFER_SIZE];
   22:Generated_Source\PSoC5/SPI_IMU.c ****     volatile uint8 SPI_IMU_txBufferFull;
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 2
 
 
   23:Generated_Source\PSoC5/SPI_IMU.c ****     volatile uint8 SPI_IMU_txBufferRead;
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
   46              		.loc 1 66 0
   47 0004 084B     		ldr	r3, .L2
   48 0006 0F22     		movs	r2, #15
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 3
 
 
   49 0008 1A70     		strb	r2, [r3]
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
   66 0024 80BD     		pop	{r7, pc}
   67              	.L3:
   68 0026 00BF     		.align	2
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 4
 
 
   69              	.L2:
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  101 000e 124A     		ldr	r2, .L5
  102 0010 114B     		ldr	r3, .L5
  103 0012 1B78     		ldrb	r3, [r3]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 5
 
 
  104 0014 DBB2     		uxtb	r3, r3
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  147              	.LFE1:
  148              		.size	SPI_IMU_Enable, .-SPI_IMU_Enable
  149              		.section	.text.SPI_IMU_Start,"ax",%progbits
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 6
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 6
 
 
  150              		.align	2
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  173 000c FFF7FEFF 		bl	SPI_IMU_Init
  168:Generated_Source\PSoC5/SPI_IMU.c ****         SPI_IMU_initVar = 1u;
  174              		.loc 1 168 0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 7
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 7
 
 
  175 0010 034B     		ldr	r3, .L9
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  204              		.cfi_def_cfa_offset 8
  205              		.cfi_offset 7, -8
  206              		.cfi_offset 14, -4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 8
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 8
 
 
  207 0002 82B0     		sub	sp, sp, #8
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  247              	.L13:
  248 0046 00BF     		.align	2
  249              	.L12:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 9
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 9
 
 
  250 0048 98650040 		.word	1073767832
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  279              		.cfi_restore 7
  280              		.cfi_def_cfa_offset 0
  281 000a 7047     		bx	lr
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 10
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 10
 
 
  282              		.cfi_endproc
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  311 000a 7047     		bx	lr
  312              		.cfi_endproc
  313              	.LFE5:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 11
 
 
  314              		.size	SPI_IMU_EnableRxInt, .-SPI_IMU_EnableRxInt
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  343              	.LFE6:
  344              		.size	SPI_IMU_DisableTxInt, .-SPI_IMU_DisableTxInt
  345              		.section	.text.SPI_IMU_DisableRxInt,"ax",%progbits
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 12
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 12
 
 
  346              		.align	2
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  375              		.section	.text.SPI_IMU_SetTxInterruptMode,"ax",%progbits
  376              		.align	2
  377              		.global	SPI_IMU_SetTxInterruptMode
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 13
 
 
  378              		.thumb
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  408 0016 80BC     		pop	{r7}
  409              		.cfi_restore 7
  410              		.cfi_def_cfa_offset 0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 14
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 14
 
 
  411 0018 7047     		bx	lr
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  442 000a 044A     		ldr	r2, .L22
  443 000c FB79     		ldrb	r3, [r7, #7]
  444 000e 1370     		strb	r3, [r2]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 15
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 15
 
 
  355:Generated_Source\PSoC5/SPI_IMU.c **** }
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  383:Generated_Source\PSoC5/SPI_IMU.c **** *  No.
  384:Generated_Source\PSoC5/SPI_IMU.c **** *
  385:Generated_Source\PSoC5/SPI_IMU.c **** *******************************************************************************/
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 16
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 16
 
 
  386:Generated_Source\PSoC5/SPI_IMU.c **** uint8 SPI_IMU_ReadTxStatus(void) 
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  504              		.cfi_endproc
  505              	.LFE10:
  506              		.size	SPI_IMU_ReadTxStatus, .-SPI_IMU_ReadTxStatus
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 17
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 17
 
 
  507              		.section	.text.SPI_IMU_ReadRxStatus,"ax",%progbits
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  441:Generated_Source\PSoC5/SPI_IMU.c ****     #if(SPI_IMU_RX_SOFTWARE_BUF_ENABLED)
  442:Generated_Source\PSoC5/SPI_IMU.c ****         /* Disable RX interrupt to protect global veriables */
  443:Generated_Source\PSoC5/SPI_IMU.c ****         SPI_IMU_DisableRxInt();
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 18
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 18
 
 
  444:Generated_Source\PSoC5/SPI_IMU.c **** 
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  466:Generated_Source\PSoC5/SPI_IMU.c **** *
  467:Generated_Source\PSoC5/SPI_IMU.c **** * Parameters:
  468:Generated_Source\PSoC5/SPI_IMU.c **** *  txDataByte: The data value to send across the SPI.
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 19
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 19
 
 
  469:Generated_Source\PSoC5/SPI_IMU.c **** *
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  509:Generated_Source\PSoC5/SPI_IMU.c ****             else
  510:Generated_Source\PSoC5/SPI_IMU.c ****             {
  511:Generated_Source\PSoC5/SPI_IMU.c ****                 tmpTxBufferRead--;
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 20
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 20
 
 
  512:Generated_Source\PSoC5/SPI_IMU.c ****             }
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  581 0016 002B     		cmp	r3, #0
  582 0018 F8D0     		beq	.L33
  558:Generated_Source\PSoC5/SPI_IMU.c ****         {
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 21
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 21
 
 
  559:Generated_Source\PSoC5/SPI_IMU.c ****         }
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  582:Generated_Source\PSoC5/SPI_IMU.c **** *  SPI_IMU_rxBufferWrite - used for the account of the bytes which
  583:Generated_Source\PSoC5/SPI_IMU.c **** *  have been written down in the RX software buffer.
  584:Generated_Source\PSoC5/SPI_IMU.c **** *  SPI_IMU_rxBufferRead - used for the account of the bytes which
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 22
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 22
 
 
  585:Generated_Source\PSoC5/SPI_IMU.c **** *  have been read from the RX software buffer, modified every function
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  627:Generated_Source\PSoC5/SPI_IMU.c ****         rxData = SPI_IMU_rxBuffer[SPI_IMU_rxBufferRead];
  628:Generated_Source\PSoC5/SPI_IMU.c **** 
  629:Generated_Source\PSoC5/SPI_IMU.c ****         SPI_IMU_EnableRxInt();
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 23
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 23
 
 
  630:Generated_Source\PSoC5/SPI_IMU.c **** 
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  652:Generated_Source\PSoC5/SPI_IMU.c **** *
  653:Generated_Source\PSoC5/SPI_IMU.c **** * Return:
  654:Generated_Source\PSoC5/SPI_IMU.c **** *  Integer count of the number of bytes/words in the RX buffer.
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 24
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 24
 
 
  655:Generated_Source\PSoC5/SPI_IMU.c **** *
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  673 000a DBB2     		uxtb	r3, r3
  674 000c 03F02003 		and	r3, r3, #32
  675 0010 002B     		cmp	r3, #0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 25
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 25
 
 
  676 0012 01D0     		beq	.L41
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  710:Generated_Source\PSoC5/SPI_IMU.c **** *
  711:Generated_Source\PSoC5/SPI_IMU.c **** * Parameters:
  712:Generated_Source\PSoC5/SPI_IMU.c **** *  None.
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 26
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 26
 
 
  713:Generated_Source\PSoC5/SPI_IMU.c **** *
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  728 0008 1B78     		ldrb	r3, [r3]
  729 000a FB71     		strb	r3, [r7, #7]
  753:Generated_Source\PSoC5/SPI_IMU.c **** 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 27
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 27
 
 
  754:Generated_Source\PSoC5/SPI_IMU.c ****         if(0u != (size & SPI_IMU_STS_TX_FIFO_EMPTY))
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  767              	.L52:
  768              		.align	2
  769              	.L51:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 28
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 28
 
 
  770 003c 68650040 		.word	1073767784
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  787 0000 80B4     		push	{r7}
  788              		.cfi_def_cfa_offset 4
  789              		.cfi_offset 7, -4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 29
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 29
 
 
  790 0002 00AF     		add	r7, sp, #0
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  826              		.thumb
  827              		.thumb_func
  828              		.type	SPI_IMU_ClearTxBuffer, %function
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 30
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 30
 
 
  829              	SPI_IMU_ClearTxBuffer:
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  865:Generated_Source\PSoC5/SPI_IMU.c ****     enableInterrupts = CyEnterCriticalSection();
  843              		.loc 1 865 0
  844 0006 FFF7FEFF 		bl	CyEnterCriticalSection
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 31
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 31
 
 
  845 000a 0346     		mov	r3, r0
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  874 003c 80BD     		pop	{r7, pc}
  875              	.L60:
  876 003e 00BF     		.align	2
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 32
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 32
 
 
  877              	.L59:
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  932:Generated_Source\PSoC5/SPI_IMU.c ****         SPI_IMU_CONTROL_REG &= ((uint8) ~SPI_IMU_CTRL_TX_SIGNAL_EN);
  933:Generated_Source\PSoC5/SPI_IMU.c ****     }
  934:Generated_Source\PSoC5/SPI_IMU.c **** 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 33
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 33
 
 
  935:Generated_Source\PSoC5/SPI_IMU.c **** #endif /* (0u != SPI_IMU_BIDIRECTIONAL_MODE) */
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  909 0010 0CE0     		b	.L62
  910              	.L63:
  970:Generated_Source\PSoC5/SPI_IMU.c ****     {
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 34
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 34
 
 
  971:Generated_Source\PSoC5/SPI_IMU.c ****         SPI_IMU_WriteTxData(buffer[bufIndex]);
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  985:Generated_Source\PSoC5/SPI_IMU.c **** * Parameters:
  986:Generated_Source\PSoC5/SPI_IMU.c **** *  None.
  987:Generated_Source\PSoC5/SPI_IMU.c **** *
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 35
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 35
 
 
  988:Generated_Source\PSoC5/SPI_IMU.c **** * Return:
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  983 0026 1B78     		ldrb	r3, [r3]
  984 0028 DBB2     		uxtb	r3, r3
  985 002a 43F00103 		orr	r3, r3, #1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 36
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 36
 
 
  986 002e DBB2     		uxtb	r3, r3
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
 1023:Generated_Source\PSoC5/SPI_IMU.c **** 
 1024:Generated_Source\PSoC5/SPI_IMU.c **** /*******************************************************************************
 1025:Generated_Source\PSoC5/SPI_IMU.c **** * Function Name: SPI_IMU_EnableInt
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 37
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 37
 
 
 1026:Generated_Source\PSoC5/SPI_IMU.c **** ********************************************************************************
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
 1052:Generated_Source\PSoC5/SPI_IMU.c **** * Summary:
 1053:Generated_Source\PSoC5/SPI_IMU.c **** *  Disable internal interrupt generation.
 1054:Generated_Source\PSoC5/SPI_IMU.c **** *
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 38
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 38
 
 
 1055:Generated_Source\PSoC5/SPI_IMU.c **** * Parameters:
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
 1081:Generated_Source\PSoC5/SPI_IMU.c **** *  header file).
 1082:Generated_Source\PSoC5/SPI_IMU.c **** *
 1083:Generated_Source\PSoC5/SPI_IMU.c **** * Return:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 39
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 39
 
 
 1084:Generated_Source\PSoC5/SPI_IMU.c **** *  None.
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1124              		.section	.text.SPI_IMU_ReadStatus,"ax",%progbits
  1125              		.align	2
  1126              		.global	SPI_IMU_ReadStatus
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 40
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 40
 
 
  1127              		.thumb
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
 1132:Generated_Source\PSoC5/SPI_IMU.c **** 
 1133:Generated_Source\PSoC5/SPI_IMU.c ****         tmpStatus  = SPI_IMU_GET_STATUS_RX(SPI_IMU_swStatusRx);
 1134:Generated_Source\PSoC5/SPI_IMU.c ****         tmpStatus |= SPI_IMU_GET_STATUS_TX(SPI_IMU_swStatusTx);
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 41
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 41
 
 
 1135:Generated_Source\PSoC5/SPI_IMU.c ****         tmpStatus &= ((uint8) ~SPI_IMU_STS_SPI_IDLE);
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1181              	.Letext0:
  1182              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
  1183              		.section	.debug_info,"",%progbits
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 42
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 42
 
 
  1184              	.Ldebug_info0:
@@ -2470,7 +2470,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1190 000c 2A000000 		.4byte	.LASF52
  1191 0010 0C       		.byte	0xc
  1192 0011 30030000 		.4byte	.LASF53
- 1193 0015 FC010000 		.4byte	.LASF54
+ 1193 0015 85020000 		.4byte	.LASF54
  1194 0019 00000000 		.4byte	.Ldebug_ranges0+0
  1195 001d 00000000 		.4byte	0
  1196 0021 00000000 		.4byte	.Ldebug_line0
@@ -2481,7 +2481,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1201 002c 02       		.uleb128 0x2
  1202 002d 01       		.byte	0x1
  1203 002e 08       		.byte	0x8
- 1204 002f E7010000 		.4byte	.LASF1
+ 1204 002f E0010000 		.4byte	.LASF1
  1205 0033 02       		.uleb128 0x2
  1206 0034 02       		.byte	0x2
  1207 0035 05       		.byte	0x5
@@ -2497,7 +2497,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1217 0048 02       		.uleb128 0x2
  1218 0049 04       		.byte	0x4
  1219 004a 07       		.byte	0x7
- 1220 004b 85020000 		.4byte	.LASF5
+ 1220 004b 30020000 		.4byte	.LASF5
  1221 004f 02       		.uleb128 0x2
  1222 0050 08       		.byte	0x8
  1223 0051 05       		.byte	0x5
@@ -2505,7 +2505,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1225 0056 02       		.uleb128 0x2
  1226 0057 08       		.byte	0x8
  1227 0058 07       		.byte	0x7
- 1228 0059 C3020000 		.4byte	.LASF7
+ 1228 0059 6E020000 		.4byte	.LASF7
  1229 005d 03       		.uleb128 0x3
  1230 005e 04       		.byte	0x4
  1231 005f 05       		.byte	0x5
@@ -2513,29 +2513,29 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1233 0064 02       		.uleb128 0x2
  1234 0065 04       		.byte	0x4
  1235 0066 07       		.byte	0x7
- 1236 0067 97020000 		.4byte	.LASF8
+ 1236 0067 42020000 		.4byte	.LASF8
  1237 006b 04       		.uleb128 0x4
- 1238 006c 8F010000 		.4byte	.LASF12
+ 1238 006c 88010000 		.4byte	.LASF12
  1239 0070 02       		.byte	0x2
  1240 0071 E401     		.2byte	0x1e4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 43
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 43
 
 
  1241 0073 2C000000 		.4byte	0x2c
  1242 0077 02       		.uleb128 0x2
  1243 0078 04       		.byte	0x4
  1244 0079 04       		.byte	0x4
- 1245 007a 6A010000 		.4byte	.LASF9
+ 1245 007a 63010000 		.4byte	.LASF9
  1246 007e 02       		.uleb128 0x2
  1247 007f 08       		.byte	0x8
  1248 0080 04       		.byte	0x4
- 1249 0081 F5010000 		.4byte	.LASF10
+ 1249 0081 EE010000 		.4byte	.LASF10
  1250 0085 02       		.uleb128 0x2
  1251 0086 01       		.byte	0x1
  1252 0087 08       		.byte	0x8
  1253 0088 25000000 		.4byte	.LASF11
  1254 008c 04       		.uleb128 0x4
- 1255 008d 75010000 		.4byte	.LASF13
+ 1255 008d 6E010000 		.4byte	.LASF13
  1256 0091 02       		.byte	0x2
  1257 0092 8E02     		.2byte	0x28e
  1258 0094 98000000 		.4byte	0x98
@@ -2548,7 +2548,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1265 00a4 02       		.uleb128 0x2
  1266 00a5 04       		.byte	0x4
  1267 00a6 07       		.byte	0x7
- 1268 00a7 F6020000 		.4byte	.LASF15
+ 1268 00a7 E3020000 		.4byte	.LASF15
  1269 00ab 06       		.uleb128 0x6
  1270 00ac 12040000 		.4byte	.LASF16
  1271 00b0 01       		.byte	0x1
@@ -2567,7 +2567,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1284 00cc 9C       		.byte	0x9c
  1285 00cd E0000000 		.4byte	0xe0
  1286 00d1 08       		.uleb128 0x8
- 1287 00d2 C1010000 		.4byte	.LASF20
+ 1287 00d2 BA010000 		.4byte	.LASF20
  1288 00d6 01       		.byte	0x1
  1289 00d7 7A       		.byte	0x7a
  1290 00d8 6B000000 		.4byte	0x6b
@@ -2576,9 +2576,9 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1293 00de 77       		.sleb128 -9
  1294 00df 00       		.byte	0
  1295 00e0 06       		.uleb128 0x6
- 1296 00e1 A9010000 		.4byte	.LASF17
+ 1296 00e1 A2010000 		.4byte	.LASF17
  1297 00e5 01       		.byte	0x1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 44
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 44
 
 
  1298 00e6 A3       		.byte	0xa3
@@ -2587,7 +2587,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1301 00ef 01       		.uleb128 0x1
  1302 00f0 9C       		.byte	0x9c
  1303 00f1 07       		.uleb128 0x7
- 1304 00f2 51020000 		.4byte	.LASF19
+ 1304 00f2 FC010000 		.4byte	.LASF19
  1305 00f6 01       		.byte	0x1
  1306 00f7 C0       		.byte	0xc0
  1307 00f8 00000000 		.4byte	.LFB3
@@ -2596,7 +2596,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1310 0101 9C       		.byte	0x9c
  1311 0102 15010000 		.4byte	0x115
  1312 0106 08       		.uleb128 0x8
- 1313 0107 C1010000 		.4byte	.LASF20
+ 1313 0107 BA010000 		.4byte	.LASF20
  1314 010b 01       		.byte	0x1
  1315 010c C2       		.byte	0xc2
  1316 010d 6B000000 		.4byte	0x6b
@@ -2613,7 +2613,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1327 0124 01       		.uleb128 0x1
  1328 0125 9C       		.byte	0x9c
  1329 0126 09       		.uleb128 0x9
- 1330 0127 15010000 		.4byte	.LASF22
+ 1330 0127 0E010000 		.4byte	.LASF22
  1331 012b 01       		.byte	0x1
  1332 012c FC       		.byte	0xfc
  1333 012d 00000000 		.4byte	.LFB5
@@ -2629,7 +2629,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1343 0147 01       		.uleb128 0x1
  1344 0148 9C       		.byte	0x9c
  1345 0149 0A       		.uleb128 0xa
- 1346 014a 7A010000 		.4byte	.LASF24
+ 1346 014a 73010000 		.4byte	.LASF24
  1347 014e 01       		.byte	0x1
  1348 014f 2E01     		.2byte	0x12e
  1349 0151 00000000 		.4byte	.LFB7
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1352 015a 9C       		.byte	0x9c
  1353 015b 0B       		.uleb128 0xb
  1354 015c DC030000 		.4byte	.LASF25
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 45
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 45
 
 
  1355 0160 01       		.byte	0x1
@@ -2649,7 +2649,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1360 016c 9C       		.byte	0x9c
  1361 016d 81010000 		.4byte	0x181
  1362 0171 0C       		.uleb128 0xc
- 1363 0172 0E010000 		.4byte	.LASF27
+ 1363 0172 F5010000 		.4byte	.LASF27
  1364 0176 01       		.byte	0x1
  1365 0177 4801     		.2byte	0x148
  1366 0179 6B000000 		.4byte	0x6b
@@ -2667,7 +2667,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1378 0192 9C       		.byte	0x9c
  1379 0193 A7010000 		.4byte	0x1a7
  1380 0197 0C       		.uleb128 0xc
- 1381 0198 0E010000 		.4byte	.LASF27
+ 1381 0198 F5010000 		.4byte	.LASF27
  1382 019c 01       		.byte	0x1
  1383 019d 6001     		.2byte	0x160
  1384 019f 6B000000 		.4byte	0x6b
@@ -2676,7 +2676,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1387 01a5 77       		.sleb128 -9
  1388 01a6 00       		.byte	0
  1389 01a7 0D       		.uleb128 0xd
- 1390 01a8 D2010000 		.4byte	.LASF29
+ 1390 01a8 CB010000 		.4byte	.LASF29
  1391 01ac 01       		.byte	0x1
  1392 01ad 8201     		.2byte	0x182
  1393 01af 6B000000 		.4byte	0x6b
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1409 01d2 64030000 		.4byte	.LASF30
  1410 01d6 01       		.byte	0x1
  1411 01d7 B501     		.2byte	0x1b5
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 46
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 46
 
 
  1412 01d9 6B000000 		.4byte	0x6b
@@ -2717,7 +2717,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1425 01f9 77       		.sleb128 -9
  1426 01fa 00       		.byte	0
  1427 01fb 0B       		.uleb128 0xb
- 1428 01fc 95010000 		.4byte	.LASF31
+ 1428 01fc 8E010000 		.4byte	.LASF31
  1429 0200 01       		.byte	0x1
  1430 0201 EE01     		.2byte	0x1ee
  1431 0203 00000000 		.4byte	.LFB12
@@ -2745,7 +2745,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1453 0236 9C       		.byte	0x9c
  1454 0237 4B020000 		.4byte	0x24b
  1455 023b 0E       		.uleb128 0xe
- 1456 023c BC020000 		.4byte	.LASF34
+ 1456 023c 67020000 		.4byte	.LASF34
  1457 0240 01       		.byte	0x1
  1458 0241 5C02     		.2byte	0x25c
  1459 0243 6B000000 		.4byte	0x6b
@@ -2754,11 +2754,11 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1462 0249 77       		.sleb128 -9
  1463 024a 00       		.byte	0
  1464 024b 0D       		.uleb128 0xd
- 1465 024c A4020000 		.4byte	.LASF35
+ 1465 024c 4F020000 		.4byte	.LASF35
  1466 0250 01       		.byte	0x1
  1467 0251 9A02     		.2byte	0x29a
  1468 0253 6B000000 		.4byte	0x6b
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 47
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 47
 
 
  1469 0257 00000000 		.4byte	.LFB14
@@ -2767,7 +2767,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1472 0260 9C       		.byte	0x9c
  1473 0261 75020000 		.4byte	0x275
  1474 0265 0E       		.uleb128 0xe
- 1475 0266 70010000 		.4byte	.LASF36
+ 1475 0266 69010000 		.4byte	.LASF36
  1476 026a 01       		.byte	0x1
  1477 026b 9C02     		.2byte	0x29c
  1478 026d 6B000000 		.4byte	0x6b
@@ -2776,7 +2776,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1481 0273 77       		.sleb128 -9
  1482 0274 00       		.byte	0
  1483 0275 0D       		.uleb128 0xd
- 1484 0276 29010000 		.4byte	.LASF37
+ 1484 0276 22010000 		.4byte	.LASF37
  1485 027a 01       		.byte	0x1
  1486 027b D702     		.2byte	0x2d7
  1487 027d 6B000000 		.4byte	0x6b
@@ -2786,7 +2786,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1491 028a 9C       		.byte	0x9c
  1492 028b 9F020000 		.4byte	0x29f
  1493 028f 0E       		.uleb128 0xe
- 1494 0290 70010000 		.4byte	.LASF36
+ 1494 0290 69010000 		.4byte	.LASF36
  1495 0294 01       		.byte	0x1
  1496 0295 D902     		.2byte	0x2d9
  1497 0297 6B000000 		.4byte	0x6b
@@ -2795,7 +2795,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1500 029d 77       		.sleb128 -9
  1501 029e 00       		.byte	0
  1502 029f 0A       		.uleb128 0xa
- 1503 02a0 6F020000 		.4byte	.LASF38
+ 1503 02a0 1A020000 		.4byte	.LASF38
  1504 02a4 01       		.byte	0x1
  1505 02a5 2603     		.2byte	0x326
  1506 02a7 00000000 		.4byte	.LFB16
@@ -2812,19 +2812,19 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1517 02c2 9C       		.byte	0x9c
  1518 02c3 D7020000 		.4byte	0x2d7
  1519 02c7 0E       		.uleb128 0xe
- 1520 02c8 C1010000 		.4byte	.LASF20
+ 1520 02c8 BA010000 		.4byte	.LASF20
  1521 02cc 01       		.byte	0x1
  1522 02cd 5F03     		.2byte	0x35f
  1523 02cf 6B000000 		.4byte	0x6b
  1524 02d3 02       		.uleb128 0x2
  1525 02d4 91       		.byte	0x91
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 48
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 48
 
 
  1526 02d5 77       		.sleb128 -9
  1527 02d6 00       		.byte	0
  1528 02d7 0F       		.uleb128 0xf
- 1529 02d8 5E020000 		.4byte	.LASF40
+ 1529 02d8 09020000 		.4byte	.LASF40
  1530 02dc 01       		.byte	0x1
  1531 02dd C203     		.2byte	0x3c2
  1532 02df 00000000 		.4byte	.LFB18
@@ -2841,7 +2841,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1543 02fa 91       		.byte	0x91
  1544 02fb 6C       		.sleb128 -20
  1545 02fc 0C       		.uleb128 0xc
- 1546 02fd B7010000 		.4byte	.LASF42
+ 1546 02fd B0010000 		.4byte	.LASF42
  1547 0301 01       		.byte	0x1
  1548 0302 C203     		.2byte	0x3c2
  1549 0304 6B000000 		.4byte	0x6b
@@ -2849,7 +2849,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1551 0309 91       		.byte	0x91
  1552 030a 6B       		.sleb128 -21
  1553 030b 0E       		.uleb128 0xe
- 1554 030c ED020000 		.4byte	.LASF43
+ 1554 030c DA020000 		.4byte	.LASF43
  1555 0310 01       		.byte	0x1
  1556 0311 C503     		.2byte	0x3c5
  1557 0313 6B000000 		.4byte	0x6b
@@ -2872,13 +2872,13 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1574 0337 9C       		.byte	0x9c
  1575 0338 4C030000 		.4byte	0x34c
  1576 033c 0E       		.uleb128 0xe
- 1577 033d C1010000 		.4byte	.LASF20
+ 1577 033d BA010000 		.4byte	.LASF20
  1578 0341 01       		.byte	0x1
  1579 0342 E503     		.2byte	0x3e5
  1580 0344 6B000000 		.4byte	0x6b
  1581 0348 02       		.uleb128 0x2
  1582 0349 91       		.byte	0x91
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 49
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 49
 
 
  1583 034a 77       		.sleb128 -9
@@ -2892,7 +2892,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1591 035c 01       		.uleb128 0x1
  1592 035d 9C       		.byte	0x9c
  1593 035e 12       		.uleb128 0x12
- 1594 035f DA020000 		.4byte	.LASF46
+ 1594 035f EC020000 		.4byte	.LASF46
  1595 0363 01       		.byte	0x1
  1596 0364 2904     		.2byte	0x429
  1597 0366 00000000 		.4byte	.LFB21
@@ -2900,7 +2900,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1599 036e 01       		.uleb128 0x1
  1600 036f 9C       		.byte	0x9c
  1601 0370 0B       		.uleb128 0xb
- 1602 0371 51010000 		.4byte	.LASF47
+ 1602 0371 4A010000 		.4byte	.LASF47
  1603 0375 01       		.byte	0x1
  1604 0376 4204     		.2byte	0x442
  1605 0378 00000000 		.4byte	.LFB22
@@ -2909,7 +2909,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1608 0381 9C       		.byte	0x9c
  1609 0382 96030000 		.4byte	0x396
  1610 0386 0C       		.uleb128 0xc
- 1611 0387 0E010000 		.4byte	.LASF27
+ 1611 0387 F5010000 		.4byte	.LASF27
  1612 038b 01       		.byte	0x1
  1613 038c 4204     		.2byte	0x442
  1614 038e 6B000000 		.4byte	0x6b
@@ -2937,8 +2937,8 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1636 03be 77       		.sleb128 -9
  1637 03bf 00       		.byte	0
  1638 03c0 13       		.uleb128 0x13
- 1639 03c1 41010000 		.4byte	.LASF49
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 50
+ 1639 03c1 3A010000 		.4byte	.LASF49
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 50
 
 
  1640 03c5 01       		.byte	0x1
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1694 001d 00       		.byte	0
  1695 001e 03       		.uleb128 0x3
  1696 001f 24       		.uleb128 0x24
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 51
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 51
 
 
  1697 0020 00       		.byte	0
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1751 0057 01       		.byte	0x1
  1752 0058 3F       		.uleb128 0x3f
  1753 0059 19       		.uleb128 0x19
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 52
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 52
 
 
  1754 005a 03       		.uleb128 0x3
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1808 0091 9742     		.uleb128 0x2117
  1809 0093 19       		.uleb128 0x19
  1810 0094 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 53
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 53
 
 
  1811 0095 00       		.byte	0
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1865 00cd 3A       		.uleb128 0x3a
  1866 00ce 0B       		.uleb128 0xb
  1867 00cf 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 54
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 54
 
 
  1868 00d0 05       		.uleb128 0x5
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1922 0107 03       		.uleb128 0x3
  1923 0108 0E       		.uleb128 0xe
  1924 0109 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 55
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 55
 
 
  1925 010a 0B       		.uleb128 0xb
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  1979 0142 00       		.byte	0
  1980 0143 00       		.byte	0
  1981 0144 13       		.uleb128 0x13
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 56
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 56
 
 
  1982 0145 34       		.uleb128 0x34
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  2036 0084 2C000000 		.4byte	.LFE14-.LFB14
  2037 0088 00000000 		.4byte	.LFB15
  2038 008c 40000000 		.4byte	.LFE15-.LFB15
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 57
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 57
 
 
  2039 0090 00000000 		.4byte	.LFB16
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  2093 0088 00000000 		.4byte	.LFB17
  2094 008c 44000000 		.4byte	.LFE17
  2095 0090 00000000 		.4byte	.LFB18
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 58
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 58
 
 
  2096 0094 3A000000 		.4byte	.LFE18
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  2123      436C6561 
  2123      72547842 
  2123      75666665 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 59
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 59
 
 
  2124              	.LASF50:
@@ -3502,163 +3502,163 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  2131      7369676E 
  2131      65642069 
  2131      6E7400
- 2132              	.LASF27:
- 2133 010e 696E7453 		.ascii	"intSrc\000"
- 2133      726300
- 2134              	.LASF22:
- 2135 0115 5350495F 		.ascii	"SPI_IMU_EnableRxInt\000"
+ 2132              	.LASF22:
+ 2133 010e 5350495F 		.ascii	"SPI_IMU_EnableRxInt\000"
+ 2133      494D555F 
+ 2133      456E6162 
+ 2133      6C655278 
+ 2133      496E7400 
+ 2134              	.LASF37:
+ 2135 0122 5350495F 		.ascii	"SPI_IMU_GetTxBufferSize\000"
  2135      494D555F 
- 2135      456E6162 
- 2135      6C655278 
- 2135      496E7400 
- 2136              	.LASF37:
- 2137 0129 5350495F 		.ascii	"SPI_IMU_GetTxBufferSize\000"
+ 2135      47657454 
+ 2135      78427566 
+ 2135      66657253 
+ 2136              	.LASF49:
+ 2137 013a 5350495F 		.ascii	"SPI_IMU_initVar\000"
  2137      494D555F 
- 2137      47657454 
- 2137      78427566 
- 2137      66657253 
- 2138              	.LASF49:
- 2139 0141 5350495F 		.ascii	"SPI_IMU_initVar\000"
+ 2137      696E6974 
+ 2137      56617200 
+ 2138              	.LASF47:
+ 2139 014a 5350495F 		.ascii	"SPI_IMU_SetInterruptMode\000"
  2139      494D555F 
- 2139      696E6974 
- 2139      56617200 
- 2140              	.LASF47:
- 2141 0151 5350495F 		.ascii	"SPI_IMU_SetInterruptMode\000"
- 2141      494D555F 
- 2141      53657449 
- 2141      6E746572 
- 2141      72757074 
- 2142              	.LASF9:
- 2143 016a 666C6F61 		.ascii	"float\000"
- 2143      7400
- 2144              	.LASF36:
- 2145 0170 73697A65 		.ascii	"size\000"
+ 2139      53657449 
+ 2139      6E746572 
+ 2139      72757074 
+ 2140              	.LASF9:
+ 2141 0163 666C6F61 		.ascii	"float\000"
+ 2141      7400
+ 2142              	.LASF36:
+ 2143 0169 73697A65 		.ascii	"size\000"
+ 2143      00
+ 2144              	.LASF13:
+ 2145 016e 72656738 		.ascii	"reg8\000"
  2145      00
- 2146              	.LASF13:
- 2147 0175 72656738 		.ascii	"reg8\000"
- 2147      00
- 2148              	.LASF24:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 60
+ 2146              	.LASF24:
+ 2147 0173 5350495F 		.ascii	"SPI_IMU_DisableRxInt\000"
+ 2147      494D555F 
+ 2147      44697361 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 60
 
 
- 2149 017a 5350495F 		.ascii	"SPI_IMU_DisableRxInt\000"
- 2149      494D555F 
- 2149      44697361 
- 2149      626C6552 
- 2149      78496E74 
- 2150              	.LASF12:
- 2151 018f 75696E74 		.ascii	"uint8\000"
- 2151      3800
- 2152              	.LASF31:
- 2153 0195 5350495F 		.ascii	"SPI_IMU_WriteTxData\000"
+ 2147      626C6552 
+ 2147      78496E74 
+ 2148              	.LASF12:
+ 2149 0188 75696E74 		.ascii	"uint8\000"
+ 2149      3800
+ 2150              	.LASF31:
+ 2151 018e 5350495F 		.ascii	"SPI_IMU_WriteTxData\000"
+ 2151      494D555F 
+ 2151      57726974 
+ 2151      65547844 
+ 2151      61746100 
+ 2152              	.LASF17:
+ 2153 01a2 5350495F 		.ascii	"SPI_IMU_Start\000"
  2153      494D555F 
- 2153      57726974 
- 2153      65547844 
- 2153      61746100 
- 2154              	.LASF17:
- 2155 01a9 5350495F 		.ascii	"SPI_IMU_Start\000"
- 2155      494D555F 
- 2155      53746172 
+ 2153      53746172 
+ 2153      7400
+ 2154              	.LASF42:
+ 2155 01b0 62797465 		.ascii	"byteCount\000"
+ 2155      436F756E 
  2155      7400
- 2156              	.LASF42:
- 2157 01b7 62797465 		.ascii	"byteCount\000"
- 2157      436F756E 
- 2157      7400
- 2158              	.LASF20:
- 2159 01c1 656E6162 		.ascii	"enableInterrupts\000"
- 2159      6C65496E 
- 2159      74657272 
- 2159      75707473 
- 2159      00
- 2160              	.LASF29:
- 2161 01d2 5350495F 		.ascii	"SPI_IMU_ReadTxStatus\000"
- 2161      494D555F 
- 2161      52656164 
- 2161      54785374 
- 2161      61747573 
- 2162              	.LASF1:
- 2163 01e7 756E7369 		.ascii	"unsigned char\000"
- 2163      676E6564 
- 2163      20636861 
- 2163      7200
- 2164              	.LASF10:
- 2165 01f5 646F7562 		.ascii	"double\000"
- 2165      6C6500
- 2166              	.LASF54:
- 2167 01fc 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHandPRO-a"
- 2167      73657273 
- 2167      5C4D6174 
- 2167      7469615C 
- 2167      446F6375 
- 2168 022a 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\SoftHand_Pro.cydsn\000"
- 2168      656E6572 
- 2168      69632D46 
- 2168      572D5053 
- 2168      6F43355C 
- 2169              	.LASF19:
- 2170 0251 5350495F 		.ascii	"SPI_IMU_Stop\000"
- 2170      494D555F 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 61
+ 2156              	.LASF20:
+ 2157 01ba 656E6162 		.ascii	"enableInterrupts\000"
+ 2157      6C65496E 
+ 2157      74657272 
+ 2157      75707473 
+ 2157      00
+ 2158              	.LASF29:
+ 2159 01cb 5350495F 		.ascii	"SPI_IMU_ReadTxStatus\000"
+ 2159      494D555F 
+ 2159      52656164 
+ 2159      54785374 
+ 2159      61747573 
+ 2160              	.LASF1:
+ 2161 01e0 756E7369 		.ascii	"unsigned char\000"
+ 2161      676E6564 
+ 2161      20636861 
+ 2161      7200
+ 2162              	.LASF10:
+ 2163 01ee 646F7562 		.ascii	"double\000"
+ 2163      6C6500
+ 2164              	.LASF27:
+ 2165 01f5 696E7453 		.ascii	"intSrc\000"
+ 2165      726300
+ 2166              	.LASF19:
+ 2167 01fc 5350495F 		.ascii	"SPI_IMU_Stop\000"
+ 2167      494D555F 
+ 2167      53746F70 
+ 2167      00
+ 2168              	.LASF40:
+ 2169 0209 5350495F 		.ascii	"SPI_IMU_PutArray\000"
+ 2169      494D555F 
+ 2169      50757441 
+ 2169      72726179 
+ 2169      00
+ 2170              	.LASF38:
+ 2171 021a 5350495F 		.ascii	"SPI_IMU_ClearRxBuffer\000"
+ 2171      494D555F 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 61
 
 
- 2170      53746F70 
- 2170      00
- 2171              	.LASF40:
- 2172 025e 5350495F 		.ascii	"SPI_IMU_PutArray\000"
- 2172      494D555F 
- 2172      50757441 
- 2172      72726179 
- 2172      00
- 2173              	.LASF38:
- 2174 026f 5350495F 		.ascii	"SPI_IMU_ClearRxBuffer\000"
- 2174      494D555F 
- 2174      436C6561 
- 2174      72527842 
- 2174      75666665 
- 2175              	.LASF5:
- 2176 0285 6C6F6E67 		.ascii	"long unsigned int\000"
- 2176      20756E73 
- 2176      69676E65 
- 2176      6420696E 
- 2176      7400
- 2177              	.LASF8:
- 2178 0297 756E7369 		.ascii	"unsigned int\000"
- 2178      676E6564 
- 2178      20696E74 
- 2178      00
- 2179              	.LASF35:
- 2180 02a4 5350495F 		.ascii	"SPI_IMU_GetRxBufferSize\000"
- 2180      494D555F 
- 2180      47657452 
- 2180      78427566 
- 2180      66657253 
- 2181              	.LASF34:
- 2182 02bc 72784461 		.ascii	"rxData\000"
- 2182      746100
- 2183              	.LASF7:
- 2184 02c3 6C6F6E67 		.ascii	"long long unsigned int\000"
- 2184      206C6F6E 
- 2184      6720756E 
- 2184      7369676E 
- 2184      65642069 
- 2185              	.LASF46:
- 2186 02da 5350495F 		.ascii	"SPI_IMU_DisableInt\000"
- 2186      494D555F 
- 2186      44697361 
- 2186      626C6549 
- 2186      6E7400
- 2187              	.LASF43:
- 2188 02ed 62756649 		.ascii	"bufIndex\000"
- 2188      6E646578 
+ 2171      436C6561 
+ 2171      72527842 
+ 2171      75666665 
+ 2172              	.LASF5:
+ 2173 0230 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2173      20756E73 
+ 2173      69676E65 
+ 2173      6420696E 
+ 2173      7400
+ 2174              	.LASF8:
+ 2175 0242 756E7369 		.ascii	"unsigned int\000"
+ 2175      676E6564 
+ 2175      20696E74 
+ 2175      00
+ 2176              	.LASF35:
+ 2177 024f 5350495F 		.ascii	"SPI_IMU_GetRxBufferSize\000"
+ 2177      494D555F 
+ 2177      47657452 
+ 2177      78427566 
+ 2177      66657253 
+ 2178              	.LASF34:
+ 2179 0267 72784461 		.ascii	"rxData\000"
+ 2179      746100
+ 2180              	.LASF7:
+ 2181 026e 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2181      206C6F6E 
+ 2181      6720756E 
+ 2181      7369676E 
+ 2181      65642069 
+ 2182              	.LASF54:
+ 2183 0285 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GitHub\\SoftHandPRO-a"
+ 2183      73657273 
+ 2183      5C4D6174 
+ 2183      7469615C 
+ 2183      446F6375 
+ 2184 02b3 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\SoftHand_Pro.cydsn\000"
+ 2184      656E6572 
+ 2184      69632D46 
+ 2184      572D5053 
+ 2184      6F43355C 
+ 2185              	.LASF43:
+ 2186 02da 62756649 		.ascii	"bufIndex\000"
+ 2186      6E646578 
+ 2186      00
+ 2187              	.LASF15:
+ 2188 02e3 73697A65 		.ascii	"sizetype\000"
+ 2188      74797065 
  2188      00
- 2189              	.LASF15:
- 2190 02f6 73697A65 		.ascii	"sizetype\000"
- 2190      74797065 
- 2190      00
+ 2189              	.LASF46:
+ 2190 02ec 5350495F 		.ascii	"SPI_IMU_DisableInt\000"
+ 2190      494D555F 
+ 2190      44697361 
+ 2190      626C6549 
+ 2190      6E7400
  2191              	.LASF21:
  2192 02ff 5350495F 		.ascii	"SPI_IMU_EnableTxInt\000"
  2192      494D555F 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 62
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 62
 
 
  2192      456E6162 
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 1
  2214      20646F75 
  2214      626C6500 
  2215              	.LASF0:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccbDWzVm.s 			page 63
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2y3CNB.s 			page 63
 
 
  2216 03be 7369676E 		.ascii	"signed char\000"

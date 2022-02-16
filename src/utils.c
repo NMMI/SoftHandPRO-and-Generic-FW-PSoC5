@@ -390,7 +390,7 @@ void battery_management() {
             }
             
             // Note: Sometimes pow_tension is not well computed when using power supply
-            // Parrot/Renata: 0.9, 0.87
+            // Parrot/Renata/(2 cells @ 2000 mAh Ossur): 0.9, 0.87
             // ARTS: 0.87, 0.8
             if (dev_tension_f[0] > 0.95 * pow_tension[0] && (c_mem.dev.use_2nd_motor_flag == FALSE || dev_tension_f[1] > 0.95 * pow_tension[1])){
                 //fixed
@@ -500,7 +500,7 @@ void reset_counters() {
     uint8 i;
     
     // Initialize counters        
-    g_mem.cnt.emg_counter[0] = g_mem.cnt.emg_counter[1] = 0;
+    g_mem.cnt.emg_act_counter[0] = g_mem.cnt.emg_act_counter[1] = 0;
     for(i = 0; i< 10; i++){
         g_mem.cnt.position_hist[i] = 0;
     }
@@ -509,8 +509,11 @@ void reset_counters() {
     }
     g_mem.cnt.rest_counter = 0;
     g_mem.cnt.wire_disp = 0;
-    g_mem.cnt.total_time_on = 0;
+    g_mem.cnt.total_runtime = 0;
     g_mem.cnt.total_time_rest = 0; 
+    g_mem.cnt.power_cycles = 0;
+    g_mem.cnt.excessive_signal_activity[0] = g_mem.cnt.excessive_signal_activity[1] = 0;
+    
 }
 
 
@@ -579,4 +582,39 @@ void update_EMG_history(){
     }
 }
 
+//==============================================================================
+//                                                         SET MOTOR DRIVER TYPE
+//==============================================================================
+void set_motor_driver_type(){
+    // Set Motor Driver Type Control Register according to the two motors drivers
+    uint8 aux[NUM_OF_MOTORS] = {0,0};
+    
+    for (int i=0; i < NUM_OF_MOTORS; i++){
+        if (g_mem.motor[i].motor_driver_type == DRIVER_MC33887){
+            aux[i] = 0;
+        }
+        else {      // Valid for both DRIVER_VNH5019 and DRIVER_BRUSHLESS
+            aux[i] = 1;
+        }
+    }
+    
+    MOTOR_DRIVER_TYPE_Write((aux[1] << 1) | aux[0]);    // Note: leave numeric indices (not parameteric)        
+    
+    // Change CLOCK_PWM divider in case a Maxon ESC for Brushless motor is used and restart the timer
+    // NOTE: if at least one Brushless is used, the PWM frequency will change for all motors
+    if (g_mem.motor[0].motor_driver_type == DRIVER_BRUSHLESS  || 
+       (g_mem.dev.use_2nd_motor_flag == TRUE && g_mem.motor[1].motor_driver_type == DRIVER_BRUSHLESS)){
+        //CLOCK_PWM_SetDividerValue(90);      // 48 Mhz / 90 = 533.333 KHz (nearest value to 536 Khz desired frequency for Maxon ESC)
+        CLOCK_PWM_SetDividerValue(3);                   // 48 Mhz / 3 = 16 MHz
+        PWM_MOTORS_WritePeriod(PWM_MAX_VALUE_ESC);      // 16 MHz / 2985 = 5.36 KHz (5.36 Khz desired frequency for Maxon ESC)
+        dev_pwm_sat[0] = PWM_MAX_VALUE_ESC;
+        dev_pwm_sat[1] = PWM_MAX_VALUE_ESC;
+    }
+    else {
+        CLOCK_PWM_SetDividerValue(24);       // 48 MHz / 24 = 2 MHz
+        PWM_MOTORS_WritePeriod(PWM_MAX_VALUE_DC);
+        dev_pwm_sat[0] = PWM_MAX_VALUE_DC;
+        dev_pwm_sat[1] = PWM_MAX_VALUE_DC;
+    }   
+}
 /* [] END OF FILE */

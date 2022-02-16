@@ -119,7 +119,8 @@ enum SH_command
     CMD_GET_ENCODER_RAW         = 164,  // Get all encoder raw values
     CMD_GET_ADC_CONF            = 165,  // Get ADC configuration
     CMD_GET_ADC_RAW             = 166,  // Get ADC raw values 
-    CMD_GET_SD_SINGLE_FILE      = 167   // Get a single file of the SD card given the path
+    CMD_GET_SD_SINGLE_FILE      = 167,  // Get a single file of the SD card given the path
+    CMD_REMOVE_SD_SINGLE_FILE   = 168   // Remove a single file of the SD card given the path
 };
 
 //===================================================     resolution definitions
@@ -210,6 +211,7 @@ enum data_types {
 #define GET_SD_DATA     3           ///< Read Usage Data from SD file
 #define GET_SD_FS_TREE  4           ///< Get info on SD card filesystem tree
 #define GET_SD_EMG_HIST 5           ///< Read recent EMG history from SD file
+#define GET_SD_R01_SUMM 6           ///< Get R01 project summary statistics
 
 /** \} */
 

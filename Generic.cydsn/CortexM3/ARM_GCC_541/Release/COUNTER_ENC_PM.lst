@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccLf4Ago.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 1
   24:Generated_Source\PSoC5/COUNTER_ENC_PM.c **** /*******************************************************************************
   25:Generated_Source\PSoC5/COUNTER_ENC_PM.c **** * Function Name: COUNTER_ENC_SaveConfig
   26:Generated_Source\PSoC5/COUNTER_ENC_PM.c **** ********************************************************************************
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccLf4Ago.s 			page 2
 
 
   27:Generated_Source\PSoC5/COUNTER_ENC_PM.c **** * Summary:
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 1
   59              	.L2:
   60 0020 00000000 		.word	COUNTER_ENC_backup
   61              		.cfi_endproc
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccLf4Ago.s 			page 3
 
 
   62              	.LFE0:
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 1
   88 000e 034B     		ldr	r3, .L5
   89 0010 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
   90 0012 1846     		mov	r0, r3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccLf4Ago.s 			page 4
 
 
   91 0014 FFF7FEFF 		bl	COUNTER_ENC_WriteControlRegister
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 1
  107:Generated_Source\PSoC5/COUNTER_ENC_PM.c ****     #if(!COUNTER_ENC_ControlRegRemoved)
  108:Generated_Source\PSoC5/COUNTER_ENC_PM.c ****         /* Save Counter's enable state */
  109:Generated_Source\PSoC5/COUNTER_ENC_PM.c ****         if(COUNTER_ENC_CTRL_ENABLE == (COUNTER_ENC_CONTROL & COUNTER_ENC_CTRL_ENABLE))
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccLf4Ago.s 			page 5
 
 
  120              		.loc 1 109 0
@@ -289,7 +289,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 1
  145              	.L11:
  146 002a 00BF     		.align	2
  147              	.L10:
- 148 002c 76640040 		.word	1073767542
+ 148 002c 7F640040 		.word	1073767551
  149 0030 00000000 		.word	COUNTER_ENC_backup
  150              		.cfi_endproc
  151              	.LFE2:
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 1
  154              		.align	2
  155              		.global	COUNTER_ENC_Wakeup
  156              		.thumb
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 6
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccLf4Ago.s 			page 6
 
 
  157              		.thumb_func
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 1
  160:Generated_Source\PSoC5/COUNTER_ENC_PM.c ****     
  161:Generated_Source\PSoC5/COUNTER_ENC_PM.c **** }
  181              		.loc 1 161 0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 7
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccLf4Ago.s 			page 7
 
 
  182 0014 00BF     		nop
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 1
  236 0052 00000000 		.4byte	.LASF6
  237 0056 02       		.uleb128 0x2
  238 0057 08       		.byte	0x8
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 8
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccLf4Ago.s 			page 8
 
 
  239 0058 07       		.byte	0x7
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 1
  293 00c0 5F020000 		.4byte	.LASF17
  294 00c4 03       		.byte	0x3
  295 00c5 43       		.byte	0x43
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 9
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccLf4Ago.s 			page 9
 
 
  296 00c6 6B000000 		.4byte	0x6b
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 1
  350 0138 00       		.byte	0
  351              		.section	.debug_abbrev,"",%progbits
  352              	.Ldebug_abbrev0:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 10
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccLf4Ago.s 			page 10
 
 
  353 0000 01       		.uleb128 0x1
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 1
  407 0036 05       		.uleb128 0x5
  408 0037 35       		.uleb128 0x35
  409 0038 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccLf4Ago.s 			page 11
 
 
  410 0039 49       		.uleb128 0x49
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 1
  464 006f 3B       		.uleb128 0x3b
  465 0070 0B       		.uleb128 0xb
  466 0071 27       		.uleb128 0x27
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 12
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccLf4Ago.s 			page 12
 
 
  467 0072 19       		.uleb128 0x19
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 1
  521 001c 1C000000 		.4byte	.LFE3
  522 0020 00000000 		.4byte	0
  523 0024 00000000 		.4byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccLf4Ago.s 			page 13
 
 
  524              		.section	.debug_line,"",%progbits
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 1
  546 009d 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GitHub\\SoftHandPRO-a"
  546      73657273 
  546      5C4D6174 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 14
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccLf4Ago.s 			page 14
 
 
  546      7469615C 
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 1
  564              	.LASF10:
  565 01dd 646F7562 		.ascii	"double\000"
  565      6C6500
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccGRow3g.s 			page 15
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccLf4Ago.s 			page 15
 
 
  566              	.LASF14:

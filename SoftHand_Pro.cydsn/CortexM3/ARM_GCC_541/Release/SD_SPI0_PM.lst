@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc6Cg29j.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 1
   21:Generated_Source\PSoC5/SD_SPI0_PM.c **** {
   22:Generated_Source\PSoC5/SD_SPI0_PM.c ****     SD_SPI0_DISABLED,
   23:Generated_Source\PSoC5/SD_SPI0_PM.c ****     SD_SPI0_BITCTR_INIT,
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc6Cg29j.s 			page 2
 
 
   24:Generated_Source\PSoC5/SD_SPI0_PM.c ****     #if(CY_UDB_V0)
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 1
   53 000a 7047     		bx	lr
   54              		.cfi_endproc
   55              	.LFE0:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc6Cg29j.s 			page 3
 
 
   56              		.size	SD_SPI0_SaveConfig, .-SD_SPI0_SaveConfig
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 1
   77 0006 BD46     		mov	sp, r7
   78              		.cfi_def_cfa_register 13
   79              		@ sp needed
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc6Cg29j.s 			page 4
 
 
   80 0008 80BC     		pop	{r7}
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 1
  108 0008 DBB2     		uxtb	r3, r3
  109 000a 03F01003 		and	r3, r3, #16
  110 000e 002B     		cmp	r3, #0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc6Cg29j.s 			page 5
 
 
  111 0010 14BF     		ite	ne
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 1
  143:Generated_Source\PSoC5/SD_SPI0_PM.c **** *  zero.
  144:Generated_Source\PSoC5/SD_SPI0_PM.c **** *  SD_SPI0_rxBufferWrite - modified every function call - resets to
  145:Generated_Source\PSoC5/SD_SPI0_PM.c **** *  zero.
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 6
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc6Cg29j.s 			page 6
 
 
  146:Generated_Source\PSoC5/SD_SPI0_PM.c **** *  SD_SPI0_rxBufferRead - modified every function call - resets to
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 1
  163              		.loc 1 177 0
  164 0018 00BF     		nop
  165 001a 80BD     		pop	{r7, pc}
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 7
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc6Cg29j.s 			page 7
 
 
  166              	.L10:
@@ -379,10 +379,10 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 1
  181 0006 00000000 		.4byte	.Ldebug_abbrev0
  182 000a 04       		.byte	0x4
  183 000b 01       		.uleb128 0x1
- 184 000c 25010000 		.4byte	.LASF23
+ 184 000c D0000000 		.4byte	.LASF23
  185 0010 0C       		.byte	0xc
- 186 0011 A7000000 		.4byte	.LASF24
- 187 0015 3C000000 		.4byte	.LASF25
+ 186 0011 52000000 		.4byte	.LASF24
+ 187 0015 71010000 		.4byte	.LASF25
  188 0019 00000000 		.4byte	.Ldebug_ranges0+0
  189 001d 00000000 		.4byte	0
  190 0021 00000000 		.4byte	.Ldebug_line0
@@ -393,7 +393,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 1
  195 002c 02       		.uleb128 0x2
  196 002d 01       		.byte	0x1
  197 002e 08       		.byte	0x8
- 198 002f B3010000 		.4byte	.LASF1
+ 198 002f 5E010000 		.4byte	.LASF1
  199 0033 02       		.uleb128 0x2
  200 0034 02       		.byte	0x2
  201 0035 05       		.byte	0x5
@@ -409,7 +409,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 1
  211 0048 02       		.uleb128 0x2
  212 0049 04       		.byte	0x4
  213 004a 07       		.byte	0x7
- 214 004b D1000000 		.4byte	.LASF5
+ 214 004b 7C000000 		.4byte	.LASF5
  215 004f 02       		.uleb128 0x2
  216 0050 08       		.byte	0x8
  217 0051 05       		.byte	0x5
@@ -417,8 +417,8 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 1
  219 0056 02       		.uleb128 0x2
  220 0057 08       		.byte	0x8
  221 0058 07       		.byte	0x7
- 222 0059 E3000000 		.4byte	.LASF7
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 8
+ 222 0059 8E000000 		.4byte	.LASF7
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc6Cg29j.s 			page 8
 
 
  223 005d 03       		.uleb128 0x3
@@ -430,14 +430,14 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 1
  229 0066 07       		.byte	0x7
  230 0067 21000000 		.4byte	.LASF8
  231 006b 04       		.uleb128 0x4
- 232 006c CB000000 		.4byte	.LASF12
+ 232 006c 76000000 		.4byte	.LASF12
  233 0070 02       		.byte	0x2
  234 0071 E401     		.2byte	0x1e4
  235 0073 2C000000 		.4byte	0x2c
  236 0077 02       		.uleb128 0x2
  237 0078 04       		.byte	0x4
  238 0079 04       		.byte	0x4
- 239 007a 10010000 		.4byte	.LASF9
+ 239 007a BB000000 		.4byte	.LASF9
  240 007e 02       		.uleb128 0x2
  241 007f 08       		.byte	0x8
  242 0080 04       		.byte	0x4
@@ -445,7 +445,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 1
  244 0085 02       		.uleb128 0x2
  245 0086 01       		.byte	0x1
  246 0087 08       		.byte	0x8
- 247 0088 C1010000 		.4byte	.LASF11
+ 247 0088 6C010000 		.4byte	.LASF11
  248 008c 04       		.uleb128 0x4
  249 008d 31020000 		.4byte	.LASF13
  250 0091 02       		.byte	0x2
@@ -478,12 +478,12 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 1
  277 00c5 49       		.byte	0x49
  278 00c6 6B000000 		.4byte	0x6b
  279 00ca 01       		.byte	0x1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 9
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc6Cg29j.s 			page 9
 
 
  280 00cb 00       		.byte	0
  281 00cc 08       		.uleb128 0x8
- 282 00cd FA000000 		.4byte	.LASF18
+ 282 00cd A5000000 		.4byte	.LASF18
  283 00d1 03       		.byte	0x3
  284 00d2 4F       		.byte	0x4f
  285 00d3 AB000000 		.4byte	0xab
@@ -496,7 +496,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 1
  292 00e6 01       		.uleb128 0x1
  293 00e7 9C       		.byte	0x9c
  294 00e8 09       		.uleb128 0x9
- 295 00e9 91000000 		.4byte	.LASF20
+ 295 00e9 3C000000 		.4byte	.LASF20
  296 00ed 01       		.byte	0x1
  297 00ee 54       		.byte	0x54
  298 00ef 00000000 		.4byte	.LFB1
@@ -512,7 +512,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 1
  308 0108 01       		.uleb128 0x1
  309 0109 9C       		.byte	0x9c
  310 010a 0A       		.uleb128 0xa
- 311 010b 16010000 		.4byte	.LASF22
+ 311 010b C1000000 		.4byte	.LASF22
  312 010f 01       		.byte	0x1
  313 0110 99       		.byte	0x99
  314 0111 00000000 		.4byte	.LFB3
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 1
  334 0005 13       		.uleb128 0x13
  335 0006 0B       		.uleb128 0xb
  336 0007 03       		.uleb128 0x3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 10
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc6Cg29j.s 			page 10
 
 
  337 0008 0E       		.uleb128 0xe
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 1
  391 003e 13       		.uleb128 0x13
  392 003f 01       		.byte	0x1
  393 0040 0B       		.uleb128 0xb
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc6Cg29j.s 			page 11
 
 
  394 0041 0B       		.uleb128 0xb
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 1
  448 0077 40       		.uleb128 0x40
  449 0078 18       		.uleb128 0x18
  450 0079 9742     		.uleb128 0x2117
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 12
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc6Cg29j.s 			page 12
 
 
  451 007b 19       		.uleb128 0x19
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 1
  505 0020 00000000 		.4byte	.LFB2
  506 0024 34000000 		.4byte	.LFE2-.LFB2
  507 0028 00000000 		.4byte	.LFB3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc6Cg29j.s 			page 13
 
 
  508 002c 20000000 		.4byte	.LFE3-.LFB3
@@ -764,88 +764,88 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 1
  533      5049305F 
  533      536C6565 
  533      7000
- 534              	.LASF25:
- 535 003c 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GITHUB\\SoftHandPRO-a"
- 535      73657273 
- 535      5C4D6174 
- 535      7469615C 
- 535      446F6375 
- 536 006a 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\SoftHand_Pro.cydsn\000"
- 536      656E6572 
- 536      69632D46 
- 536      572D5053 
- 536      6F43355C 
- 537              	.LASF20:
- 538 0091 53445F53 		.ascii	"SD_SPI0_RestoreConfig\000"
- 538      5049305F 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 14
+ 534              	.LASF20:
+ 535 003c 53445F53 		.ascii	"SD_SPI0_RestoreConfig\000"
+ 535      5049305F 
+ 535      52657374 
+ 535      6F726543 
+ 535      6F6E6669 
+ 536              	.LASF24:
+ 537 0052 47656E65 		.ascii	"Generated_Source\\PSoC5\\SD_SPI0_PM.c\000"
+ 537      72617465 
+ 537      645F536F 
+ 537      75726365 
+ 537      5C50536F 
+ 538              	.LASF12:
+ 539 0076 75696E74 		.ascii	"uint8\000"
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc6Cg29j.s 			page 14
 
 
- 538      52657374 
- 538      6F726543 
- 538      6F6E6669 
- 539              	.LASF24:
- 540 00a7 47656E65 		.ascii	"Generated_Source\\PSoC5\\SD_SPI0_PM.c\000"
- 540      72617465 
- 540      645F536F 
- 540      75726365 
- 540      5C50536F 
- 541              	.LASF12:
- 542 00cb 75696E74 		.ascii	"uint8\000"
- 542      3800
- 543              	.LASF5:
- 544 00d1 6C6F6E67 		.ascii	"long unsigned int\000"
- 544      20756E73 
- 544      69676E65 
- 544      6420696E 
- 544      7400
- 545              	.LASF7:
- 546 00e3 6C6F6E67 		.ascii	"long long unsigned int\000"
- 546      206C6F6E 
- 546      6720756E 
- 546      7369676E 
- 546      65642069 
- 547              	.LASF18:
- 548 00fa 53445F53 		.ascii	"SD_SPI0_BACKUP_STRUCT\000"
- 548      5049305F 
- 548      4241434B 
- 548      55505F53 
- 548      54525543 
- 549              	.LASF9:
- 550 0110 666C6F61 		.ascii	"float\000"
- 550      7400
- 551              	.LASF22:
- 552 0116 53445F53 		.ascii	"SD_SPI0_Wakeup\000"
- 552      5049305F 
- 552      57616B65 
- 552      757000
- 553              	.LASF23:
- 554 0125 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 554      43313120 
- 554      352E342E 
- 554      31203230 
- 554      31363036 
- 555 0158 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 555      20726576 
- 555      6973696F 
- 555      6E203233 
- 555      37373135 
- 556 018b 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
- 556      66756E63 
- 556      74696F6E 
- 556      2D736563 
- 556      74696F6E 
- 557              	.LASF1:
- 558 01b3 756E7369 		.ascii	"unsigned char\000"
- 558      676E6564 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccSExWUb.s 			page 15
+ 539      3800
+ 540              	.LASF5:
+ 541 007c 6C6F6E67 		.ascii	"long unsigned int\000"
+ 541      20756E73 
+ 541      69676E65 
+ 541      6420696E 
+ 541      7400
+ 542              	.LASF7:
+ 543 008e 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 543      206C6F6E 
+ 543      6720756E 
+ 543      7369676E 
+ 543      65642069 
+ 544              	.LASF18:
+ 545 00a5 53445F53 		.ascii	"SD_SPI0_BACKUP_STRUCT\000"
+ 545      5049305F 
+ 545      4241434B 
+ 545      55505F53 
+ 545      54525543 
+ 546              	.LASF9:
+ 547 00bb 666C6F61 		.ascii	"float\000"
+ 547      7400
+ 548              	.LASF22:
+ 549 00c1 53445F53 		.ascii	"SD_SPI0_Wakeup\000"
+ 549      5049305F 
+ 549      57616B65 
+ 549      757000
+ 550              	.LASF23:
+ 551 00d0 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 551      43313120 
+ 551      352E342E 
+ 551      31203230 
+ 551      31363036 
+ 552 0103 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 552      20726576 
+ 552      6973696F 
+ 552      6E203233 
+ 552      37373135 
+ 553 0136 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 553      66756E63 
+ 553      74696F6E 
+ 553      2D736563 
+ 553      74696F6E 
+ 554              	.LASF1:
+ 555 015e 756E7369 		.ascii	"unsigned char\000"
+ 555      676E6564 
+ 555      20636861 
+ 555      7200
+ 556              	.LASF11:
+ 557 016c 63686172 		.ascii	"char\000"
+ 557      00
+ 558              	.LASF25:
+ 559 0171 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GitHub\\SoftHandPRO-a"
+ 559      73657273 
+ 559      5C4D6174 
+ 559      7469615C 
+ 559      446F6375 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc6Cg29j.s 			page 15
 
 
- 558      20636861 
- 558      7200
- 559              	.LASF11:
- 560 01c1 63686172 		.ascii	"char\000"
- 560      00
+ 560 019f 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\SoftHand_Pro.cydsn\000"
+ 560      656E6572 
+ 560      69632D46 
+ 560      572D5053 
+ 560      6F43355C 
  561              	.LASF4:
  562 01c6 6C6F6E67 		.ascii	"long int\000"
  562      20696E74 

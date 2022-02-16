@@ -62,16 +62,16 @@
     
 // Macro related to different firmware configurations
 #ifdef SOFTHAND_FW
-    #define VERSION                 "SoftHand PRO firmware v. 1.9.4 (PSoC5)"
+    #define VERSION                 "SoftHand PRO firmware v. 1.10 (PSoC5)"
 #else
     #ifdef GENERIC_FW
-        #define VERSION                 "Generic firmware v. 1.9.4 (PSoC5)"
+        #define VERSION                 "Generic firmware v. 1.10 (PSoC5)"
     #else   
         #define MASTER_FW
         #ifdef AIR_CHAMBERS_FB_FW
-            #define VERSION                 "Air Chambers Haptic Feedback firmware v. 1.9.4 (PSoC5) - Master configuration"
+            #define VERSION                 "Air Chambers Haptic Feedback firmware v. 1.10 (PSoC5) - Master configuration"
         #else //OTBK_ACT_WRIST_MS_FW
-            #define VERSION                 "Ottobock Active Wrist firmware v. 1.9.4 (PSoC5) - Master configuration"
+            #define VERSION                 "Ottobock Active Wrist firmware v. 1.10 (PSoC5) - Master configuration"
         #endif
     #endif
 #endif      
@@ -80,7 +80,7 @@
 // Default number of parameters configuration
 // Handle multiple configuration with mutually exclusive macro preprocessor defines
 // Note: an if..else structure is preferred, but with a large number of exclusive configuration this is also good
-#ifdef SOFTHAND_FW
+#ifdef SOFTHAND_FW          
     #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - 39 - NUM_OF_WR_PARAMS - NUM_OF_MS_PARAMS - NUM_OF_FB_PARAMS)  // Number of parameters saved in the EEPROM for SOFTHAND FIRMWARE
                                                               // All parameters except: additional first motor parameters (6), second motor configuration and parameters (23),
                                                               // Encoder configuration (2), ADC configuration (2), Joystick configuration (3), Read additional ADC port, 

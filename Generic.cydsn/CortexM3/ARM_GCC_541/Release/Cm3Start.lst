@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
   11:Generated_Source\PSoC5/Cm3Start.c **** * You may use this file only in accordance with the license, terms, conditions,
   12:Generated_Source\PSoC5/Cm3Start.c **** * disclaimers, and limitations in the end user license agreement accompanying
   13:Generated_Source\PSoC5/Cm3Start.c **** * the software package with which this file was provided.
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 2
 
 
   14:Generated_Source\PSoC5/Cm3Start.c **** *******************************************************************************/
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
   68:Generated_Source\PSoC5/Cm3Start.c **** *******************************************************************************/
   69:Generated_Source\PSoC5/Cm3Start.c **** #if defined (__ICCARM__)
   70:Generated_Source\PSoC5/Cm3Start.c ****     #pragma location=".ramvectors"
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 3
 
 
   71:Generated_Source\PSoC5/Cm3Start.c ****     #pragma data_alignment=256
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  108:Generated_Source\PSoC5/Cm3Start.c ****                  */
  109:Generated_Source\PSoC5/Cm3Start.c ****             }
   58              		.loc 1 109 0 discriminator 1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 4
 
 
   59 0010 FEE7     		b	.L3
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  149:Generated_Source\PSoC5/Cm3Start.c **** void Reset(void)
  150:Generated_Source\PSoC5/Cm3Start.c **** {
  151:Generated_Source\PSoC5/Cm3Start.c ****     #if(CYDEV_PROJ_TYPE != CYDEV_PROJ_TYPE_LOADABLE && CYDEV_PROJ_TYPE != CYDEV_PROJ_TYPE_LOADABLEA
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 5
 
 
  152:Generated_Source\PSoC5/Cm3Start.c **** 
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  206:Generated_Source\PSoC5/Cm3Start.c **** typedef unsigned char __cy_byte_align8 __attribute ((aligned (8)));
  207:Generated_Source\PSoC5/Cm3Start.c **** 
  208:Generated_Source\PSoC5/Cm3Start.c **** struct __cy_region
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 6
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 6
 
 
  209:Generated_Source\PSoC5/Cm3Start.c **** {
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  244:Generated_Source\PSoC5/Cm3Start.c ****     }
   93              		.loc 1 244 0 discriminator 1
   94 0012 FEE7     		b	.L5
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 7
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 7
 
 
   95              		.cfi_endproc
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  122 000c 7B68     		ldr	r3, [r7, #4]
  123 000e 1344     		add	r3, r3, r2
  124 0010 1A46     		mov	r2, r3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 8
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 8
 
 
  125 0012 0F4B     		ldr	r3, .L10+4
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  167              	.LFE2:
  168              		.size	_sbrk, .-_sbrk
  169              		.section	.text.Reset,"ax",%progbits
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 9
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 9
 
 
  170              		.align	2
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  193              		.align	2
  194              		.global	Start_c
  195              		.thumb
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 10
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 10
 
 
  196              		.thumb_func
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  337:Generated_Source\PSoC5/Cm3Start.c ****         uint32 *dst = (uint32 *)rptr->data;
  228              		.loc 1 337 0
  229 001a 3B69     		ldr	r3, [r7, #16]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 11
 
 
  230 001c 5B68     		ldr	r3, [r3, #4]
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  271 0058 08E0     		b	.L17
  272              	.L18:
  349:Generated_Source\PSoC5/Cm3Start.c ****         {
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 12
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 12
 
 
  350:Generated_Source\PSoC5/Cm3Start.c ****             *dst = 0u;
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  363:Generated_Source\PSoC5/Cm3Start.c ****         /* If main returns, make sure we don't return. */
  364:Generated_Source\PSoC5/Cm3Start.c ****     }
  310              		.loc 1 364 0 discriminator 1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 13
 
 
  311 008e FEE7     		b	.L20
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  392:Generated_Source\PSoC5/Cm3Start.c ****         #endif /* (CYDEV_DEBUGGING_ENABLE) */
  393:Generated_Source\PSoC5/Cm3Start.c **** 
  394:Generated_Source\PSoC5/Cm3Start.c ****         /* Reset Status Register has Read-to-clear SW access mode.
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 14
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 14
 
 
  395:Generated_Source\PSoC5/Cm3Start.c ****         * Preserve current RESET_SR0 state to make it available for next reading.
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  449:Generated_Source\PSoC5/Cm3Start.c **** /*******************************************************************************
  450:Generated_Source\PSoC5/Cm3Start.c **** * Function Name: initialize_psoc
  451:Generated_Source\PSoC5/Cm3Start.c **** ****************************************************************************//**
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 15
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 15
 
 
  452:Generated_Source\PSoC5/Cm3Start.c **** *
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  368 0022 04D8     		bhi	.L25
  369              		.loc 1 475 0 is_stmt 0 discriminator 1
  370 0024 144A     		ldr	r2, .L28+12
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 16
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 16
 
 
  371 0026 7B68     		ldr	r3, [r7, #4]
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  494:Generated_Source\PSoC5/Cm3Start.c **** 
  495:Generated_Source\PSoC5/Cm3Start.c ****     #if !defined (__ICCARM__)
  496:Generated_Source\PSoC5/Cm3Start.c ****         /* Actually, no need to clean this variable, just to make compiler happy. */
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 17
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 17
 
 
  497:Generated_Source\PSoC5/Cm3Start.c ****         cySysNoInitDataValid = 0u;
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  456 0010 0C       		.byte	0xc
  457 0011 77010000 		.4byte	.LASF45
  458 0015 2B020000 		.4byte	.LASF46
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 18
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 18
 
 
  459 0019 00000000 		.4byte	.Ldebug_ranges0+0
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  513 0082 03       		.byte	0x3
  514 0083 E401     		.2byte	0x1e4
  515 0085 2C000000 		.4byte	0x2c
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 19
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 19
 
 
  516 0089 05       		.uleb128 0x5
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  570 00f9 D9020000 		.4byte	.LASF47
  571 00fd 10       		.byte	0x10
  572 00fe 01       		.byte	0x1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 20
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 20
 
 
  573 00ff D0       		.byte	0xd0
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  627 016e 74       		.sleb128 -12
  628 016f 00       		.byte	0
  629 0170 10       		.uleb128 0x10
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 21
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 21
 
 
  630 0171 99010000 		.4byte	.LASF26
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  684 01e7 00000000 		.4byte	.LFB4
  685 01eb 98000000 		.4byte	.LFE4-.LFB4
  686 01ef 01       		.uleb128 0x1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 22
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 22
 
 
  687 01f0 9C       		.byte	0x9c
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  741 0259 00       		.byte	0
  742 025a 07       		.uleb128 0x7
  743 025b 04       		.byte	0x4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 23
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 23
 
 
  744 025c 60020000 		.4byte	0x260
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  798 02d2 05       		.uleb128 0x5
  799 02d3 03       		.byte	0x3
  800 02d4 00000000 		.4byte	CyRamVectors
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 24
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 24
 
 
  801 02d8 1B       		.uleb128 0x1b
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  855 000f 10       		.uleb128 0x10
  856 0010 17       		.uleb128 0x17
  857 0011 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 25
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 25
 
 
  858 0012 00       		.byte	0
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  912 0048 00       		.byte	0
  913 0049 00       		.byte	0
  914 004a 07       		.uleb128 0x7
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 26
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 26
 
 
  915 004b 0F       		.uleb128 0xf
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  969 0081 13       		.uleb128 0x13
  970 0082 38       		.uleb128 0x38
  971 0083 0B       		.uleb128 0xb
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 27
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 27
 
 
  972 0084 00       		.byte	0
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  1026 00bd 00       		.byte	0
  1027 00be 03       		.uleb128 0x3
  1028 00bf 0E       		.uleb128 0xe
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 28
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 28
 
 
  1029 00c0 3A       		.uleb128 0x3a
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  1083 00f7 00       		.byte	0
  1084 00f8 03       		.uleb128 0x3
  1085 00f9 08       		.uleb128 0x8
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 29
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 29
 
 
  1086 00fa 3A       		.uleb128 0x3a
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  1140 0131 19       		.uleb128 0x19
  1141 0132 03       		.uleb128 0x3
  1142 0133 0E       		.uleb128 0xe
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 30
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 30
 
 
  1143 0134 3A       		.uleb128 0x3a
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  1197 016c 05       		.uleb128 0x5
  1198 016d 27       		.uleb128 0x27
  1199 016e 19       		.uleb128 0x19
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 31
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 31
 
 
  1200 016f 11       		.uleb128 0x11
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  1254 01a6 21       		.uleb128 0x21
  1255 01a7 00       		.byte	0
  1256 01a8 49       		.uleb128 0x49
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 32
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 32
 
 
  1257 01a9 13       		.uleb128 0x13
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  1311 0014 14000000 		.4byte	.LFE0-.LFB0
  1312 0018 00000000 		.4byte	.LFB1
  1313 001c 14000000 		.4byte	.LFE1-.LFB1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 33
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 33
 
 
  1314 0020 00000000 		.4byte	.LFB2
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  1350      74696F6E 
  1351              	.LASF40:
  1352 009b 43795261 		.ascii	"CyRamVectors\000"
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 34
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 34
 
 
  1352      6D566563 
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  1380 0127 72657475 		.ascii	"returnValue\000"
  1380      726E5661 
  1380      6C756500 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 35
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 35
 
 
  1381              	.LASF43:
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  1406      7369676E 
  1406      65642069 
  1407              	.LASF36:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 36
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 36
 
 
  1408 01e1 6C696D69 		.ascii	"limit\000"
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 1
  1431      626C6500 
  1432              	.LASF0:
  1433 029f 7369676E 		.ascii	"signed char\000"
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccY6qCxu.s 			page 37
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cc2nUS7T.s 			page 37
 
 
  1433      65642063 
