@@ -2733,7 +2733,7 @@ void cycles_counter_update() {
                     if (timer_exc_s[i] < timer_exc_e[i]) {
                         timer_exc_s[i] = timer_exc_s[i] + (uint32)6000;
                     }
-                    if (((float)(timer_exc_s[i] - timer_exc_e[i])/50.0) > 4.0){      //50 timers ticks per second
+                    if (((float)(timer_exc_s[i] - timer_exc_e[i])/50.0) > 3.0){      //50 timers ticks per second
                         emg_excess_status[i] = COUNTER_INC;
                     }
                     else {
