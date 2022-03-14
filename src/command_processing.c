@@ -2429,7 +2429,7 @@ void prepare_counter_info(char *info_string)
     }
     strcat(info_string, "\r\n");
             
-    sprintf(str, "EMG activations counter: %lu, %lu", MEM_P->cnt.emg_act_counter[0], MEM_P->cnt.emg_act_counter[1]);
+    sprintf(str, "Motions through EMG counter: %lu, %lu", MEM_P->cnt.motion_counter[0], MEM_P->cnt.motion_counter[1]);
     strcat(info_string, str);
     strcat(info_string, "\r\n");
     
@@ -2463,7 +2463,7 @@ void prepare_counter_info(char *info_string)
 
 void prepare_R01_info(char *info_string)
 {
-    char str[100];  
+    char str[150];  
 
     struct st_eeprom* MEM_P = &g_mem;    
 
@@ -2476,7 +2476,11 @@ void prepare_R01_info(char *info_string)
     strcat(info_string, str);
     strcat(info_string, "\r\n");
     
-    sprintf(str, "Number of motions (close/open): %lu, %lu", MEM_P->cnt.emg_act_counter[0], MEM_P->cnt.emg_act_counter[1]);
+    sprintf(str, "EMG activations counter: %lu, %lu", MEM_P->cnt.emg_act_counter[0], MEM_P->cnt.emg_act_counter[1]);
+    strcat(info_string, str);
+    strcat(info_string, "\r\n");
+    
+    sprintf(str, "Number of motions (close/open): %lu, %lu", MEM_P->cnt.motion_counter[0], MEM_P->cnt.motion_counter[1]);
     strcat(info_string, str);
     strcat(info_string, "\r\n");
     
@@ -2768,7 +2772,7 @@ void prepare_SD_param_info(char *info_string)
 //==============================================================================
 void prepare_SD_legend(char *info_string)
 {
-    char str[120];  
+    char str[140];  
     int i;
         
     // Legend
@@ -2781,7 +2785,7 @@ void prepare_SD_legend(char *info_string)
         sprintf(str, "Bin_%d_Curr,", i); 
         strcat(info_string, str);
     }
-    sprintf(str, "Rest_times,Wire_disp,Total_rest_time,Power_cycles,EMG_1_act,EMG_2_act,EMG_1_excess,EMG_2_excess,Total_runtime");
+    sprintf(str, "Rest_times,Wire_disp,Total_rest_time,Power_cycles,EMG_1_act,EMG_2_act,EMG_1_excess,EMG_2_excess,Motion_1,Motion_2,Total_runtime");
     strcat(info_string, str);
     strcat(info_string, "\r\n");
 }
@@ -2792,7 +2796,7 @@ void prepare_SD_legend(char *info_string)
 //==============================================================================
 void prepare_SD_info(char *info_string)
 {
-    char str[100];  
+    char str[120];  
     int i;
             
     strcpy(info_string, "");
@@ -2818,9 +2822,10 @@ void prepare_SD_info(char *info_string)
     sprintf(str, "%lu,%lu,%lu,%lu,", g_mem.cnt.rest_counter, g_mem.cnt.wire_disp, g_mem.cnt.total_time_rest, g_mem.cnt.power_cycles);
     strcat(info_string, str);
     
-    // EMG_1_act, EMG_2_act, EMG_1_excess, EMG_2_excess
-    sprintf(str, "%lu,%lu,%lu,%lu,", g_mem.cnt.emg_act_counter[0], g_mem.cnt.emg_act_counter[1], 
-                                    g_mem.cnt.excessive_signal_activity[0], g_mem.cnt.excessive_signal_activity[1]);
+    // EMG_1_act, EMG_2_act, EMG_1_excess, EMG_2_excess, Motion_1, Motion_2
+    sprintf(str, "%lu,%lu,%lu,%lu,%lu,%lu,", g_mem.cnt.emg_act_counter[0], g_mem.cnt.emg_act_counter[1], 
+                                    g_mem.cnt.excessive_signal_activity[0], g_mem.cnt.excessive_signal_activity[1],
+                                    g_mem.cnt.motion_counter[0], g_mem.cnt.motion_counter[1]);
     strcat(info_string, str);
     
     // Total_runtime

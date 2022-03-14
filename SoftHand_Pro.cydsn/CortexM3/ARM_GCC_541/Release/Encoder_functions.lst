@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
   28:..\src/Encoder_functions.c **** // SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
   29:..\src/Encoder_functions.c **** // CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
   30:..\src/Encoder_functions.c **** // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 2
 
 
   31:..\src/Encoder_functions.c **** // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
   56 0024 DBB2     		uxtb	r3, r3
   57 0026 1846     		mov	r0, r3
   58 0028 FFF7FEFF 		bl	Chip_Select_ENCODER_LINE_Write
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 3
 
 
   57:..\src/Encoder_functions.c ****         RESET_COUNTERS_Write(0x00);    // Activate encoder counters. Must be made before initializi
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  100              		.loc 1 69 0
  101 000e 0A20     		movs	r0, #10
  102 0010 FFF7FEFF 		bl	CyDelay
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 4
 
 
   70:..\src/Encoder_functions.c **** }
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  143 001a FFF7FEFF 		bl	Chip_Select_ENCODER_LINE_Write
   84:..\src/Encoder_functions.c ****         RESET_COUNTERS_Write(0x00);     // Activate encoder counters. Must be made before initializ
  144              		.loc 1 84 0 discriminator 3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 5
 
 
  145 001e 0020     		movs	r0, #0
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
   94:..\src/Encoder_functions.c **** * Function Name: Encoder Initialization
   95:..\src/Encoder_functions.c **** *********************************************************************************/
   96:..\src/Encoder_functions.c **** void InitEncoderLine(uint8 n){
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 6
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 6
 
 
  188              		.loc 1 96 0
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  235 0046 0B44     		add	r3, r3, r1
  236 0048 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  237 004a 0F2B     		cmp	r3, #15
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 7
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 7
 
 
  238 004c 0CD9     		bls	.L12
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  112:..\src/Encoder_functions.c **** /*******************************************************************************
  113:..\src/Encoder_functions.c **** * Function Name: Read Encoder
  114:..\src/Encoder_functions.c **** *********************************************************************************/
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 8
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 8
 
 
  115:..\src/Encoder_functions.c **** void ReadEncoderLine(int n_encoders, int n_line)
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  323              		.loc 1 127 0
  324 0038 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
  325 003a 042B     		cmp	r3, #4
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 9
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 9
 
 
  326 003c 00F2C280 		bhi	.L26
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  374 00a0 98B2     		uxth	r0, r3
  375 00a2 4F49     		ldr	r1, .L27
  376 00a4 3A68     		ldr	r2, [r7]
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 10
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 10
 
 
  377 00a6 1346     		mov	r3, r2
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  426 0102 9B00     		lsls	r3, r3, #2
  427 0104 1344     		add	r3, r3, r2
  428 0106 0B44     		add	r3, r3, r1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 11
 
 
  429 0108 0233     		adds	r3, r3, #2
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  478              		.loc 1 143 0
  479 0164 3B69     		ldr	r3, [r7, #16]
  480 0166 5B0D     		lsrs	r3, r3, #21
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 12
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 12
 
 
  481 0168 DBB2     		uxtb	r3, r3
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  149:..\src/Encoder_functions.c ****             default:
  150:..\src/Encoder_functions.c ****             break;
  530              		.loc 1 150 0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 13
 
 
  531 01c4 00BF     		nop
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  580 0025 02       		.uleb128 0x2
  581 0026 01       		.byte	0x1
  582 0027 06       		.byte	0x6
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 14
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 14
 
 
  583 0028 73020000 		.4byte	.LASF0
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  637 0092 04       		.byte	0x4
  638 0093 E501     		.2byte	0x1e5
  639 0095 3A000000 		.4byte	0x3a
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 15
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 15
 
 
  640 0099 05       		.uleb128 0x5
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  694 0101 00000000 		.4byte	.LFB65
  695 0105 18000000 		.4byte	.LFE65-.LFB65
  696 0109 01       		.uleb128 0x1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 16
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 16
 
 
  697 010a 9C       		.byte	0x9c
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  751 0172 0E       		.uleb128 0xe
  752 0173 E3000000 		.4byte	.LASF23
  753 0177 01       		.byte	0x1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 17
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 17
 
 
  754 0178 73       		.byte	0x73
@@ -1008,7 +1008,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  798 01ca 0F       		.uleb128 0xf
  799 01cb 8E000000 		.4byte	.LASF27
  800 01cf 06       		.byte	0x6
- 801 01d0 5402     		.2byte	0x254
+ 801 01d0 5502     		.2byte	0x255
  802 01d2 C8000000 		.4byte	0xc8
  803 01d6 06       		.uleb128 0x6
  804 01d7 8D000000 		.4byte	0x8d
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  808 01e4 01       		.byte	0x1
  809 01e5 07       		.uleb128 0x7
  810 01e6 C1000000 		.4byte	0xc1
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 18
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 18
 
 
  811 01ea 04       		.byte	0x4
@@ -1026,7 +1026,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  813 01ec 0F       		.uleb128 0xf
  814 01ed 29010000 		.4byte	.LASF28
  815 01f1 06       		.byte	0x6
- 816 01f2 5502     		.2byte	0x255
+ 816 01f2 5602     		.2byte	0x256
  817 01f4 D6010000 		.4byte	0x1d6
  818 01f8 06       		.uleb128 0x6
  819 01f9 81000000 		.4byte	0x81
@@ -1041,7 +1041,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  828 020e 0F       		.uleb128 0xf
  829 020f 1B010000 		.4byte	.LASF29
  830 0213 06       		.byte	0x6
- 831 0214 5602     		.2byte	0x256
+ 831 0214 5702     		.2byte	0x257
  832 0216 F8010000 		.4byte	0x1f8
  833 021a 00       		.byte	0
  834              		.section	.debug_abbrev,"",%progbits
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  865 001d 00       		.byte	0
  866 001e 03       		.uleb128 0x3
  867 001f 16       		.uleb128 0x16
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 19
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 19
 
 
  868 0020 00       		.byte	0
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  922 0056 2E       		.uleb128 0x2e
  923 0057 01       		.byte	0x1
  924 0058 3F       		.uleb128 0x3f
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 20
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 20
 
 
  925 0059 19       		.uleb128 0x19
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  979 0091 19       		.uleb128 0x19
  980 0092 00       		.byte	0
  981 0093 00       		.byte	0
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 21
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 21
 
 
  982 0094 0B       		.uleb128 0xb
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  1036 00cb 05       		.uleb128 0x5
  1037 00cc 00       		.byte	0
  1038 00cd 03       		.uleb128 0x3
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 22
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 22
 
 
  1039 00ce 0E       		.uleb128 0xe
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  1093 0038 00000000 		.4byte	0
  1094 003c 00000000 		.4byte	0
  1095              		.section	.debug_ranges,"",%progbits
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 23
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 23
 
 
  1096              	.Ldebug_ranges0:
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  1123      7369676E 
  1123      65642069 
  1123      6E7400
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 24
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 24
 
 
  1124              	.LASF21:
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  1149 016d 75696E74 		.ascii	"uint32\000"
  1149      333200
  1150              	.LASF8:
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 25
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 25
 
 
  1151 0174 756E7369 		.ascii	"unsigned int\000"
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 1
  1172      456E636F 
  1172      6465724C 
  1172      696E6500 
-ARM GAS  C:\Users\Mattia\AppData\Local\Temp\cckIjkFj.s 			page 26
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccTLfkjb.s 			page 26
 
 
  1173              	.LASF2:

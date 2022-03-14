@@ -198,8 +198,8 @@
 #define TRUE                    1
 #define DEFAULT_EEPROM_DISPLACEMENT 50  /*!< Number of pages occupied by the EEPROM.*/
 #define EEPROM_BYTES_ROW        16      /*!< EEPROM number of bytes per row.*/
-#define EEPROM_COUNTERS_ROWS    6       /*!< EEPROM number of rows dedicated to store counters.*/
-#define EEPROM_AFTER_CNT_FREE_ROWS 3    /*!< EEPROM number of rows free after counters.*/   
+#define EEPROM_COUNTERS_ROWS    7       /*!< EEPROM number of rows dedicated to store counters.*/
+#define EEPROM_AFTER_CNT_FREE_ROWS 2    /*!< EEPROM number of rows free after counters.*/   
 #define PWM_MAX_VALUE_DC        100     /*!< Maximum value of the PWM signal.*/
 #define PWM_MAX_VALUE_ESC       2985    /*!< Maximum value of the PWM signal for ESC driver module.*/
 #define ANTI_WINDUP             1000    /*!< Anti windup saturation.*/ 
@@ -284,8 +284,9 @@ struct st_counters{
     uint32  total_time_rest;            /*!< Total time of system while rest position is maintained.*/      //4    
     uint32  power_cycles;               /*!< Number of times the board has benne switched on since reset.*/ //4
     uint32  excessive_signal_activity[2];  /*!< Number of times the EMG signals saturate for a long time.*/ //8
-    uint8   unused_bytes[4];            /*!< Unused bytes to fill row.*/                                    //4
-};                                                                                                          // TOTAL: 96 bytes
+    uint32  motion_counter[2];          /*!< Counter for close/open motion.*/                               //8
+    uint8   unused_bytes[12];           /*!< Unused bytes to fill row.*/                                    //12
+};                                                                                                          // TOTAL: 112 bytes
 
 //=================================================     Device
 /** \brief Device related parameters structure

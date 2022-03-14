@@ -513,7 +513,7 @@ void reset_counters() {
     g_mem.cnt.total_time_rest = 0; 
     g_mem.cnt.power_cycles = 0;
     g_mem.cnt.excessive_signal_activity[0] = g_mem.cnt.excessive_signal_activity[1] = 0;
-    
+    g_mem.cnt.motion_counter[0] = g_mem.cnt.motion_counter[1] = 0;
 }
 
 

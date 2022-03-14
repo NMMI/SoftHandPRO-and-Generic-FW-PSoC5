@@ -581,6 +581,22 @@ void function_scheduler(void) {
                 }
             }
         }
+        
+        // Deactivate the motor just for the time data are written in the EEPROM
+        if (cycles_status == WRITE_CYCLES || cycles_status == WAIT_QUERY){
+            // Deactivate motors
+            enable_motor(0, 0x00); 
+            if (g_mem.dev.use_2nd_motor_flag == TRUE) {
+                enable_motor(1, 0x00); 
+            }
+        }
+        else {
+            // Activate/Deactivate motors
+            enable_motor(0, g_ref[0].onoff); 
+            if (g_mem.dev.use_2nd_motor_flag == TRUE) {
+                enable_motor(1, g_ref[1].onoff); 
+            }
+        }
     }
     
     // Check Interrupt 
@@ -2618,6 +2634,7 @@ void pwm_limit_search(uint8 mot_idx) {
 void cycles_counter_update() {
 	static uint8 pos_cycle_status = STATE_INACTIVE;
     static uint8 emg_cycle_status[2] = {STATE_INACTIVE, STATE_INACTIVE};
+    static uint8 motion_status[2] = {STATE_INACTIVE, STATE_INACTIVE};
     static uint8 emg_excess_status[2] = {STATE_INACTIVE, STATE_INACTIVE};
     static uint8 rest_cycle_status = STATE_INACTIVE;
     static int32 bin_threshold = 250;
@@ -2697,23 +2714,43 @@ void cycles_counter_update() {
         switch (emg_cycle_status[i]){
             case STATE_INACTIVE:
                 if (g_adc_meas.emg[i] > g_mem.emg.emg_threshold[i]){
-                    start_emg_pos[i] = curr_pos;
                     emg_cycle_status[i] = STATE_ACTIVE;
                 }
                 break;
             case STATE_ACTIVE:
                 if (g_adc_meas.emg[i] < g_mem.emg.emg_threshold[i]-10){                    
-                    if (abs(start_emg_pos[i] - curr_pos) > 200){     // it has to be a sensible movement to update counter (only if produces motor movement)
-                        emg_cycle_status[i] = COUNTER_INC;
-                    }
-                    else {
-                        emg_cycle_status[i] = STATE_INACTIVE;
-                    }
+                    emg_cycle_status[i] = COUNTER_INC;
                 }
                 break;
             case COUNTER_INC:
                 g_mem.cnt.emg_act_counter[i] = g_mem.cnt.emg_act_counter[i] + 1;
                 emg_cycle_status[i] = STATE_INACTIVE;
+                break;
+        }
+    }
+    
+    // State machine - Evaluate Motion counter update
+    for (i=0; i<2 && emg_1_status == NORMAL && emg_2_status == NORMAL; i++){
+        switch (motion_status[i]){
+            case STATE_INACTIVE:
+                if (g_adc_meas.emg[i] > g_mem.emg.emg_threshold[i]){
+                    start_emg_pos[i] = curr_pos;
+                    motion_status[i] = STATE_ACTIVE;
+                }
+                break;
+            case STATE_ACTIVE:
+                if (g_adc_meas.emg[i] < g_mem.emg.emg_threshold[i]-10){                    
+                    if (abs(start_emg_pos[i] - curr_pos) > 200){     // it has to be a sensible movement to update counter (only if produces motor movement)
+                        motion_status[i] = COUNTER_INC;
+                    }
+                    else {
+                        motion_status[i] = STATE_INACTIVE;
+                    }
+                }
+                break;
+            case COUNTER_INC:
+                g_mem.cnt.motion_counter[i] = g_mem.cnt.motion_counter[i] + 1;
+                motion_status[i] = STATE_INACTIVE;
                 break;
         }
     }
@@ -2733,7 +2770,7 @@ void cycles_counter_update() {
                     if (timer_exc_s[i] < timer_exc_e[i]) {
                         timer_exc_s[i] = timer_exc_s[i] + (uint32)6000;
                     }
-                    if (((float)(timer_exc_s[i] - timer_exc_e[i])/50.0) > 3.0){      //50 timers ticks per second
+                    if (((float)(timer_exc_s[i] - timer_exc_e[i])/50.0) > 4.0){      //50 timers ticks per second
                         emg_excess_status[i] = COUNTER_INC;
                     }
                     else {
