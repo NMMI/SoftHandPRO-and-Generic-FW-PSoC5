@@ -234,6 +234,33 @@
 <dep name=".\Generated_Source\PSoC5\cytypes.h" />
 </file>
 <file name=".\Generated_Source\PSoC5\BLINK_CTRL_EN_PM.c" />
+<file name=".\CortexM3\ARM_GCC_541\Release\BT_RX.o">
+<dep name=".\Generated_Source\PSoC5\BT_RX.c" />
+<dep name=".\Generated_Source\PSoC5\BT_RX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_RX_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC5\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC5\cypins.h" />
+<dep name=".\Generated_Source\PSoC5\cytypes.h" />
+</file>
+<file name=".\Generated_Source\PSoC5\BT_RX.c" />
+<file name=".\Generated_Source\PSoC5\BT_RX.h" />
+<file name=".\Generated_Source\PSoC5\BT_RX_aliases.h" />
+<file name=".\Generated_Source\PSoC5\cypins.h" />
+<file name=".\CortexM3\ARM_GCC_541\Release\BT_TX.o">
+<dep name=".\Generated_Source\PSoC5\BT_TX.c" />
+<dep name=".\Generated_Source\PSoC5\BT_TX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_TX_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC5\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC5\cypins.h" />
+<dep name=".\Generated_Source\PSoC5\cytypes.h" />
+</file>
+<file name=".\Generated_Source\PSoC5\BT_TX.c" />
+<file name=".\Generated_Source\PSoC5\BT_TX.h" />
+<file name=".\Generated_Source\PSoC5\BT_TX_aliases.h" />
 <file name=".\CortexM3\ARM_GCC_541\Release\Bootloadable.o">
 <dep name=".\Generated_Source\PSoC5\Bootloadable.c" />
 <dep name=".\Generated_Source\PSoC5\Bootloadable.h" />
@@ -261,7 +288,6 @@
 <file name=".\Generated_Source\PSoC5\CLK_ENCODER.c" />
 <file name=".\Generated_Source\PSoC5\CLK_ENCODER.h" />
 <file name=".\Generated_Source\PSoC5\CLK_ENCODER_aliases.h" />
-<file name=".\Generated_Source\PSoC5\cypins.h" />
 <file name=".\CortexM3\ARM_GCC_541\Release\CLK_RTC.o">
 <dep name=".\Generated_Source\PSoC5\CLK_RTC.c" />
 <dep name=".\Generated_Source\PSoC5\CLK_RTC.h" />
@@ -684,32 +710,6 @@
 <file name=".\Generated_Source\PSoC5\EMG_4.c" />
 <file name=".\Generated_Source\PSoC5\EMG_4.h" />
 <file name=".\Generated_Source\PSoC5\EMG_4_aliases.h" />
-<file name=".\CortexM3\ARM_GCC_541\Release\EMG_5.o">
-<dep name=".\Generated_Source\PSoC5\EMG_5.c" />
-<dep name=".\Generated_Source\PSoC5\EMG_5.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_5_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\cydevice.h" />
-<dep name=".\Generated_Source\PSoC5\cydevice_trm.h" />
-<dep name=".\Generated_Source\PSoC5\cyfitter.h" />
-<dep name=".\Generated_Source\PSoC5\cypins.h" />
-<dep name=".\Generated_Source\PSoC5\cytypes.h" />
-</file>
-<file name=".\Generated_Source\PSoC5\EMG_5.c" />
-<file name=".\Generated_Source\PSoC5\EMG_5.h" />
-<file name=".\Generated_Source\PSoC5\EMG_5_aliases.h" />
-<file name=".\CortexM3\ARM_GCC_541\Release\EMG_6.o">
-<dep name=".\Generated_Source\PSoC5\EMG_6.c" />
-<dep name=".\Generated_Source\PSoC5\EMG_6.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_6_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\cydevice.h" />
-<dep name=".\Generated_Source\PSoC5\cydevice_trm.h" />
-<dep name=".\Generated_Source\PSoC5\cyfitter.h" />
-<dep name=".\Generated_Source\PSoC5\cypins.h" />
-<dep name=".\Generated_Source\PSoC5\cytypes.h" />
-</file>
-<file name=".\Generated_Source\PSoC5\EMG_6.c" />
-<file name=".\Generated_Source\PSoC5\EMG_6.h" />
-<file name=".\Generated_Source\PSoC5\EMG_6_aliases.h" />
 <file name=".\CortexM3\ARM_GCC_541\Release\EMG_A.o">
 <dep name=".\Generated_Source\PSoC5\EMG_A.c" />
 <dep name=".\Generated_Source\PSoC5\EMG_A.h" />
@@ -763,6 +763,20 @@
 <file name=".\Generated_Source\PSoC5\FTDI_ENABLE.c" />
 <file name=".\Generated_Source\PSoC5\FTDI_ENABLE.h" />
 <file name=".\Generated_Source\PSoC5\FTDI_ENABLE_aliases.h" />
+<file name=".\CortexM3\ARM_GCC_541\Release\ISR_BT_RX.o">
+<dep name=".\Generated_Source\PSoC5\CyFlash.h" />
+<dep name=".\Generated_Source\PSoC5\CyLib.h" />
+<dep name=".\Generated_Source\PSoC5\CySpc.h" />
+<dep name=".\Generated_Source\PSoC5\ISR_BT_RX.c" />
+<dep name=".\Generated_Source\PSoC5\ISR_BT_RX.h" />
+<dep name=".\Generated_Source\PSoC5\cyPm.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC5\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC5\cytypes.h" />
+</file>
+<file name=".\Generated_Source\PSoC5\ISR_BT_RX.c" />
+<file name=".\Generated_Source\PSoC5\ISR_BT_RX.h" />
 <file name=".\CortexM3\ARM_GCC_541\Release\ISR_CYCLES.o">
 <dep name=".\Generated_Source\PSoC5\CyFlash.h" />
 <dep name=".\Generated_Source\PSoC5\CyLib.h" />
@@ -1075,25 +1089,6 @@
 <dep name=".\Generated_Source\PSoC5\cytypes.h" />
 </file>
 <file name=".\Generated_Source\PSoC5\MY_TIMER_PM.c" />
-<file name=".\CortexM3\ARM_GCC_541\Release\MY_TIMER_REG.o">
-<dep name=".\Generated_Source\PSoC5\MY_TIMER_REG.c" />
-<dep name=".\Generated_Source\PSoC5\MY_TIMER_REG.h" />
-<dep name=".\Generated_Source\PSoC5\cydevice.h" />
-<dep name=".\Generated_Source\PSoC5\cydevice_trm.h" />
-<dep name=".\Generated_Source\PSoC5\cyfitter.h" />
-<dep name=".\Generated_Source\PSoC5\cytypes.h" />
-</file>
-<file name=".\Generated_Source\PSoC5\MY_TIMER_REG.c" />
-<file name=".\Generated_Source\PSoC5\MY_TIMER_REG.h" />
-<file name=".\CortexM3\ARM_GCC_541\Release\MY_TIMER_REG_PM.o">
-<dep name=".\Generated_Source\PSoC5\MY_TIMER_REG.h" />
-<dep name=".\Generated_Source\PSoC5\MY_TIMER_REG_PM.c" />
-<dep name=".\Generated_Source\PSoC5\cydevice.h" />
-<dep name=".\Generated_Source\PSoC5\cydevice_trm.h" />
-<dep name=".\Generated_Source\PSoC5\cyfitter.h" />
-<dep name=".\Generated_Source\PSoC5\cytypes.h" />
-</file>
-<file name=".\Generated_Source\PSoC5\MY_TIMER_REG_PM.c" />
 <file name=".\CortexM3\ARM_GCC_541\Release\PACER_TIMER.o">
 <dep name=".\Generated_Source\PSoC5\CyFlash.h" />
 <dep name=".\Generated_Source\PSoC5\CyLib.h" />
@@ -1310,6 +1305,10 @@
 <dep name=".\Generated_Source\PSoC5\BLINK_05HZ.h" />
 <dep name=".\Generated_Source\PSoC5\BLINK_25HZ.h" />
 <dep name=".\Generated_Source\PSoC5\BLINK_CTRL_EN.h" />
+<dep name=".\Generated_Source\PSoC5\BT_RX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_RX_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\BT_TX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_TX_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\Bootloadable.h" />
 <dep name=".\Generated_Source\PSoC5\CLK_ENCODER.h" />
 <dep name=".\Generated_Source\PSoC5\CLK_ENCODER_aliases.h" />
@@ -1359,10 +1358,6 @@
 <dep name=".\Generated_Source\PSoC5\EMG_3_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_4.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_4_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_5.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_5_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_6.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_6_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_A.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_A_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_B.h" />
@@ -1370,6 +1365,7 @@
 <dep name=".\Generated_Source\PSoC5\FF_STATUS.h" />
 <dep name=".\Generated_Source\PSoC5\FTDI_ENABLE.h" />
 <dep name=".\Generated_Source\PSoC5\FTDI_ENABLE_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\ISR_BT_RX.h" />
 <dep name=".\Generated_Source\PSoC5\ISR_CYCLES.h" />
 <dep name=".\Generated_Source\PSoC5\ISR_RS485_RX.h" />
 <dep name=".\Generated_Source\PSoC5\LED_CTRL.h" />
@@ -1401,7 +1397,6 @@
 <dep name=".\Generated_Source\PSoC5\MOTOR_ON_OFF_1.h" />
 <dep name=".\Generated_Source\PSoC5\MOTOR_ON_OFF_2.h" />
 <dep name=".\Generated_Source\PSoC5\MY_TIMER.h" />
-<dep name=".\Generated_Source\PSoC5\MY_TIMER_REG.h" />
 <dep name=".\Generated_Source\PSoC5\PACER_TIMER.h" />
 <dep name=".\Generated_Source\PSoC5\PRESSURE_SENSOR.h" />
 <dep name=".\Generated_Source\PSoC5\PRESSURE_SENSOR_aliases.h" />
@@ -1434,6 +1429,7 @@
 <dep name=".\Generated_Source\PSoC5\SHIFTREG_ENC_3.h" />
 <dep name=".\Generated_Source\PSoC5\SPI_IMU.h" />
 <dep name=".\Generated_Source\PSoC5\SPI_IMU_PVT.h" />
+<dep name=".\Generated_Source\PSoC5\UART_BT.h" />
 <dep name=".\Generated_Source\PSoC5\UART_RS485.h" />
 <dep name=".\Generated_Source\PSoC5\VALVE.h" />
 <dep name=".\Generated_Source\PSoC5\VALVE_aliases.h" />
@@ -1473,6 +1469,7 @@
 <file name=".\Generated_Source\PSoC5\SHIFTREG_ENC_3.h" />
 <file name=".\Generated_Source\PSoC5\SPI_IMU.h" />
 <file name=".\Generated_Source\PSoC5\SPI_IMU_PVT.h" />
+<file name=".\Generated_Source\PSoC5\UART_BT.h" />
 <file name=".\Generated_Source\PSoC5\UART_RS485.h" />
 <file name=".\Generated_Source\PSoC5\VALVE.h" />
 <file name=".\Generated_Source\PSoC5\VALVE_aliases.h" />
@@ -1502,6 +1499,10 @@
 <dep name=".\Generated_Source\PSoC5\BLINK_05HZ.h" />
 <dep name=".\Generated_Source\PSoC5\BLINK_25HZ.h" />
 <dep name=".\Generated_Source\PSoC5\BLINK_CTRL_EN.h" />
+<dep name=".\Generated_Source\PSoC5\BT_RX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_RX_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\BT_TX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_TX_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\Bootloadable.h" />
 <dep name=".\Generated_Source\PSoC5\CLK_ENCODER.h" />
 <dep name=".\Generated_Source\PSoC5\CLK_ENCODER_aliases.h" />
@@ -1551,10 +1552,6 @@
 <dep name=".\Generated_Source\PSoC5\EMG_3_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_4.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_4_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_5.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_5_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_6.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_6_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_A.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_A_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_B.h" />
@@ -1562,6 +1559,7 @@
 <dep name=".\Generated_Source\PSoC5\FF_STATUS.h" />
 <dep name=".\Generated_Source\PSoC5\FTDI_ENABLE.h" />
 <dep name=".\Generated_Source\PSoC5\FTDI_ENABLE_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\ISR_BT_RX.h" />
 <dep name=".\Generated_Source\PSoC5\ISR_CYCLES.h" />
 <dep name=".\Generated_Source\PSoC5\ISR_RS485_RX.h" />
 <dep name=".\Generated_Source\PSoC5\LED_CTRL.h" />
@@ -1593,7 +1591,6 @@
 <dep name=".\Generated_Source\PSoC5\MOTOR_ON_OFF_1.h" />
 <dep name=".\Generated_Source\PSoC5\MOTOR_ON_OFF_2.h" />
 <dep name=".\Generated_Source\PSoC5\MY_TIMER.h" />
-<dep name=".\Generated_Source\PSoC5\MY_TIMER_REG.h" />
 <dep name=".\Generated_Source\PSoC5\PACER_TIMER.h" />
 <dep name=".\Generated_Source\PSoC5\PRESSURE_SENSOR.h" />
 <dep name=".\Generated_Source\PSoC5\PRESSURE_SENSOR_aliases.h" />
@@ -1626,6 +1623,7 @@
 <dep name=".\Generated_Source\PSoC5\SHIFTREG_ENC_3.h" />
 <dep name=".\Generated_Source\PSoC5\SPI_IMU.h" />
 <dep name=".\Generated_Source\PSoC5\SPI_IMU_PVT.h" />
+<dep name=".\Generated_Source\PSoC5\UART_BT.h" />
 <dep name=".\Generated_Source\PSoC5\UART_RS485.h" />
 <dep name=".\Generated_Source\PSoC5\VALVE.h" />
 <dep name=".\Generated_Source\PSoC5\VALVE_aliases.h" />
@@ -1856,6 +1854,58 @@
 <dep name=".\Generated_Source\PSoC5\cytypes.h" />
 </file>
 <file name=".\Generated_Source\PSoC5\SPI_IMU_PM.c" />
+<file name=".\CortexM3\ARM_GCC_541\Release\UART_BT.o">
+<dep name=".\Generated_Source\PSoC5\CyFlash.h" />
+<dep name=".\Generated_Source\PSoC5\CyLib.h" />
+<dep name=".\Generated_Source\PSoC5\CySpc.h" />
+<dep name=".\Generated_Source\PSoC5\UART_BT.c" />
+<dep name=".\Generated_Source\PSoC5\UART_BT.h" />
+<dep name=".\Generated_Source\PSoC5\cyPm.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC5\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC5\cytypes.h" />
+</file>
+<file name=".\Generated_Source\PSoC5\UART_BT.c" />
+<file name=".\CortexM3\ARM_GCC_541\Release\UART_BT_BOOT.o">
+<dep name=".\Generated_Source\PSoC5\CyFlash.h" />
+<dep name=".\Generated_Source\PSoC5\CyLib.h" />
+<dep name=".\Generated_Source\PSoC5\CySpc.h" />
+<dep name=".\Generated_Source\PSoC5\UART_BT.h" />
+<dep name=".\Generated_Source\PSoC5\UART_BT_BOOT.c" />
+<dep name=".\Generated_Source\PSoC5\cyPm.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC5\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC5\cytypes.h" />
+</file>
+<file name=".\Generated_Source\PSoC5\UART_BT_BOOT.c" />
+<file name=".\CortexM3\ARM_GCC_541\Release\UART_BT_INT.o">
+<dep name=".\Generated_Source\PSoC5\CyFlash.h" />
+<dep name=".\Generated_Source\PSoC5\CyLib.h" />
+<dep name=".\Generated_Source\PSoC5\CySpc.h" />
+<dep name=".\Generated_Source\PSoC5\UART_BT.h" />
+<dep name=".\Generated_Source\PSoC5\UART_BT_INT.c" />
+<dep name=".\Generated_Source\PSoC5\cyPm.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC5\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC5\cytypes.h" />
+</file>
+<file name=".\Generated_Source\PSoC5\UART_BT_INT.c" />
+<file name=".\CortexM3\ARM_GCC_541\Release\UART_BT_PM.o">
+<dep name=".\Generated_Source\PSoC5\CyFlash.h" />
+<dep name=".\Generated_Source\PSoC5\CyLib.h" />
+<dep name=".\Generated_Source\PSoC5\CySpc.h" />
+<dep name=".\Generated_Source\PSoC5\UART_BT.h" />
+<dep name=".\Generated_Source\PSoC5\UART_BT_PM.c" />
+<dep name=".\Generated_Source\PSoC5\cyPm.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC5\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC5\cytypes.h" />
+</file>
+<file name=".\Generated_Source\PSoC5\UART_BT_PM.c" />
 <file name=".\CortexM3\ARM_GCC_541\Release\UART_RS485.o">
 <dep name=".\Generated_Source\PSoC5\CyFlash.h" />
 <dep name=".\Generated_Source\PSoC5\CyLib.h" />
@@ -2027,6 +2077,10 @@
 <dep name=".\Generated_Source\PSoC5\BLINK_05HZ.h" />
 <dep name=".\Generated_Source\PSoC5\BLINK_25HZ.h" />
 <dep name=".\Generated_Source\PSoC5\BLINK_CTRL_EN.h" />
+<dep name=".\Generated_Source\PSoC5\BT_RX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_RX_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\BT_TX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_TX_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\Bootloadable.h" />
 <dep name=".\Generated_Source\PSoC5\CLK_ENCODER.h" />
 <dep name=".\Generated_Source\PSoC5\CLK_ENCODER_aliases.h" />
@@ -2076,10 +2130,6 @@
 <dep name=".\Generated_Source\PSoC5\EMG_3_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_4.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_4_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_5.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_5_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_6.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_6_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_A.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_A_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_B.h" />
@@ -2087,6 +2137,7 @@
 <dep name=".\Generated_Source\PSoC5\FF_STATUS.h" />
 <dep name=".\Generated_Source\PSoC5\FTDI_ENABLE.h" />
 <dep name=".\Generated_Source\PSoC5\FTDI_ENABLE_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\ISR_BT_RX.h" />
 <dep name=".\Generated_Source\PSoC5\ISR_CYCLES.h" />
 <dep name=".\Generated_Source\PSoC5\ISR_RS485_RX.h" />
 <dep name=".\Generated_Source\PSoC5\LED_CTRL.h" />
@@ -2118,7 +2169,6 @@
 <dep name=".\Generated_Source\PSoC5\MOTOR_ON_OFF_1.h" />
 <dep name=".\Generated_Source\PSoC5\MOTOR_ON_OFF_2.h" />
 <dep name=".\Generated_Source\PSoC5\MY_TIMER.h" />
-<dep name=".\Generated_Source\PSoC5\MY_TIMER_REG.h" />
 <dep name=".\Generated_Source\PSoC5\PACER_TIMER.h" />
 <dep name=".\Generated_Source\PSoC5\PRESSURE_SENSOR.h" />
 <dep name=".\Generated_Source\PSoC5\PRESSURE_SENSOR_aliases.h" />
@@ -2150,6 +2200,7 @@
 <dep name=".\Generated_Source\PSoC5\SHIFTREG_ENC_3.h" />
 <dep name=".\Generated_Source\PSoC5\SPI_IMU.h" />
 <dep name=".\Generated_Source\PSoC5\SPI_IMU_PVT.h" />
+<dep name=".\Generated_Source\PSoC5\UART_BT.h" />
 <dep name=".\Generated_Source\PSoC5\UART_RS485.h" />
 <dep name=".\Generated_Source\PSoC5\VALVE.h" />
 <dep name=".\Generated_Source\PSoC5\VALVE_aliases.h" />
@@ -2206,6 +2257,10 @@
 <dep name=".\Generated_Source\PSoC5\BLINK_05HZ.h" />
 <dep name=".\Generated_Source\PSoC5\BLINK_25HZ.h" />
 <dep name=".\Generated_Source\PSoC5\BLINK_CTRL_EN.h" />
+<dep name=".\Generated_Source\PSoC5\BT_RX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_RX_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\BT_TX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_TX_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\Bootloadable.h" />
 <dep name=".\Generated_Source\PSoC5\CLK_ENCODER.h" />
 <dep name=".\Generated_Source\PSoC5\CLK_ENCODER_aliases.h" />
@@ -2255,10 +2310,6 @@
 <dep name=".\Generated_Source\PSoC5\EMG_3_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_4.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_4_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_5.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_5_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_6.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_6_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_A.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_A_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_B.h" />
@@ -2266,6 +2317,7 @@
 <dep name=".\Generated_Source\PSoC5\FF_STATUS.h" />
 <dep name=".\Generated_Source\PSoC5\FTDI_ENABLE.h" />
 <dep name=".\Generated_Source\PSoC5\FTDI_ENABLE_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\ISR_BT_RX.h" />
 <dep name=".\Generated_Source\PSoC5\ISR_CYCLES.h" />
 <dep name=".\Generated_Source\PSoC5\ISR_RS485_RX.h" />
 <dep name=".\Generated_Source\PSoC5\LED_CTRL.h" />
@@ -2297,7 +2349,6 @@
 <dep name=".\Generated_Source\PSoC5\MOTOR_ON_OFF_1.h" />
 <dep name=".\Generated_Source\PSoC5\MOTOR_ON_OFF_2.h" />
 <dep name=".\Generated_Source\PSoC5\MY_TIMER.h" />
-<dep name=".\Generated_Source\PSoC5\MY_TIMER_REG.h" />
 <dep name=".\Generated_Source\PSoC5\PACER_TIMER.h" />
 <dep name=".\Generated_Source\PSoC5\PRESSURE_SENSOR.h" />
 <dep name=".\Generated_Source\PSoC5\PRESSURE_SENSOR_aliases.h" />
@@ -2329,6 +2380,7 @@
 <dep name=".\Generated_Source\PSoC5\SHIFTREG_ENC_3.h" />
 <dep name=".\Generated_Source\PSoC5\SPI_IMU.h" />
 <dep name=".\Generated_Source\PSoC5\SPI_IMU_PVT.h" />
+<dep name=".\Generated_Source\PSoC5\UART_BT.h" />
 <dep name=".\Generated_Source\PSoC5\UART_RS485.h" />
 <dep name=".\Generated_Source\PSoC5\VALVE.h" />
 <dep name=".\Generated_Source\PSoC5\VALVE_aliases.h" />
@@ -2383,6 +2435,10 @@
 <dep name=".\Generated_Source\PSoC5\BLINK_05HZ.h" />
 <dep name=".\Generated_Source\PSoC5\BLINK_25HZ.h" />
 <dep name=".\Generated_Source\PSoC5\BLINK_CTRL_EN.h" />
+<dep name=".\Generated_Source\PSoC5\BT_RX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_RX_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\BT_TX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_TX_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\Bootloadable.h" />
 <dep name=".\Generated_Source\PSoC5\CLK_ENCODER.h" />
 <dep name=".\Generated_Source\PSoC5\CLK_ENCODER_aliases.h" />
@@ -2432,10 +2488,6 @@
 <dep name=".\Generated_Source\PSoC5\EMG_3_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_4.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_4_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_5.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_5_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_6.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_6_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_A.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_A_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_B.h" />
@@ -2443,6 +2495,7 @@
 <dep name=".\Generated_Source\PSoC5\FF_STATUS.h" />
 <dep name=".\Generated_Source\PSoC5\FTDI_ENABLE.h" />
 <dep name=".\Generated_Source\PSoC5\FTDI_ENABLE_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\ISR_BT_RX.h" />
 <dep name=".\Generated_Source\PSoC5\ISR_CYCLES.h" />
 <dep name=".\Generated_Source\PSoC5\ISR_RS485_RX.h" />
 <dep name=".\Generated_Source\PSoC5\LED_CTRL.h" />
@@ -2474,7 +2527,6 @@
 <dep name=".\Generated_Source\PSoC5\MOTOR_ON_OFF_1.h" />
 <dep name=".\Generated_Source\PSoC5\MOTOR_ON_OFF_2.h" />
 <dep name=".\Generated_Source\PSoC5\MY_TIMER.h" />
-<dep name=".\Generated_Source\PSoC5\MY_TIMER_REG.h" />
 <dep name=".\Generated_Source\PSoC5\PACER_TIMER.h" />
 <dep name=".\Generated_Source\PSoC5\PRESSURE_SENSOR.h" />
 <dep name=".\Generated_Source\PSoC5\PRESSURE_SENSOR_aliases.h" />
@@ -2506,6 +2558,7 @@
 <dep name=".\Generated_Source\PSoC5\SHIFTREG_ENC_3.h" />
 <dep name=".\Generated_Source\PSoC5\SPI_IMU.h" />
 <dep name=".\Generated_Source\PSoC5\SPI_IMU_PVT.h" />
+<dep name=".\Generated_Source\PSoC5\UART_BT.h" />
 <dep name=".\Generated_Source\PSoC5\UART_RS485.h" />
 <dep name=".\Generated_Source\PSoC5\VALVE.h" />
 <dep name=".\Generated_Source\PSoC5\VALVE_aliases.h" />
@@ -2565,6 +2618,10 @@
 <dep name=".\Generated_Source\PSoC5\BLINK_05HZ.h" />
 <dep name=".\Generated_Source\PSoC5\BLINK_25HZ.h" />
 <dep name=".\Generated_Source\PSoC5\BLINK_CTRL_EN.h" />
+<dep name=".\Generated_Source\PSoC5\BT_RX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_RX_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\BT_TX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_TX_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\Bootloadable.h" />
 <dep name=".\Generated_Source\PSoC5\CLK_ENCODER.h" />
 <dep name=".\Generated_Source\PSoC5\CLK_ENCODER_aliases.h" />
@@ -2614,10 +2671,6 @@
 <dep name=".\Generated_Source\PSoC5\EMG_3_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_4.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_4_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_5.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_5_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_6.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_6_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_A.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_A_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_B.h" />
@@ -2625,6 +2678,7 @@
 <dep name=".\Generated_Source\PSoC5\FF_STATUS.h" />
 <dep name=".\Generated_Source\PSoC5\FTDI_ENABLE.h" />
 <dep name=".\Generated_Source\PSoC5\FTDI_ENABLE_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\ISR_BT_RX.h" />
 <dep name=".\Generated_Source\PSoC5\ISR_CYCLES.h" />
 <dep name=".\Generated_Source\PSoC5\ISR_RS485_RX.h" />
 <dep name=".\Generated_Source\PSoC5\LED_CTRL.h" />
@@ -2656,7 +2710,6 @@
 <dep name=".\Generated_Source\PSoC5\MOTOR_ON_OFF_1.h" />
 <dep name=".\Generated_Source\PSoC5\MOTOR_ON_OFF_2.h" />
 <dep name=".\Generated_Source\PSoC5\MY_TIMER.h" />
-<dep name=".\Generated_Source\PSoC5\MY_TIMER_REG.h" />
 <dep name=".\Generated_Source\PSoC5\PACER_TIMER.h" />
 <dep name=".\Generated_Source\PSoC5\PRESSURE_SENSOR.h" />
 <dep name=".\Generated_Source\PSoC5\PRESSURE_SENSOR_aliases.h" />
@@ -2688,6 +2741,7 @@
 <dep name=".\Generated_Source\PSoC5\SHIFTREG_ENC_3.h" />
 <dep name=".\Generated_Source\PSoC5\SPI_IMU.h" />
 <dep name=".\Generated_Source\PSoC5\SPI_IMU_PVT.h" />
+<dep name=".\Generated_Source\PSoC5\UART_BT.h" />
 <dep name=".\Generated_Source\PSoC5\UART_RS485.h" />
 <dep name=".\Generated_Source\PSoC5\VALVE.h" />
 <dep name=".\Generated_Source\PSoC5\VALVE_aliases.h" />
@@ -2744,6 +2798,10 @@
 <dep name=".\Generated_Source\PSoC5\BLINK_05HZ.h" />
 <dep name=".\Generated_Source\PSoC5\BLINK_25HZ.h" />
 <dep name=".\Generated_Source\PSoC5\BLINK_CTRL_EN.h" />
+<dep name=".\Generated_Source\PSoC5\BT_RX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_RX_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\BT_TX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_TX_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\Bootloadable.h" />
 <dep name=".\Generated_Source\PSoC5\CLK_ENCODER.h" />
 <dep name=".\Generated_Source\PSoC5\CLK_ENCODER_aliases.h" />
@@ -2793,10 +2851,6 @@
 <dep name=".\Generated_Source\PSoC5\EMG_3_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_4.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_4_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_5.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_5_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_6.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_6_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_A.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_A_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_B.h" />
@@ -2804,6 +2858,7 @@
 <dep name=".\Generated_Source\PSoC5\FF_STATUS.h" />
 <dep name=".\Generated_Source\PSoC5\FTDI_ENABLE.h" />
 <dep name=".\Generated_Source\PSoC5\FTDI_ENABLE_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\ISR_BT_RX.h" />
 <dep name=".\Generated_Source\PSoC5\ISR_CYCLES.h" />
 <dep name=".\Generated_Source\PSoC5\ISR_RS485_RX.h" />
 <dep name=".\Generated_Source\PSoC5\LED_CTRL.h" />
@@ -2835,7 +2890,6 @@
 <dep name=".\Generated_Source\PSoC5\MOTOR_ON_OFF_1.h" />
 <dep name=".\Generated_Source\PSoC5\MOTOR_ON_OFF_2.h" />
 <dep name=".\Generated_Source\PSoC5\MY_TIMER.h" />
-<dep name=".\Generated_Source\PSoC5\MY_TIMER_REG.h" />
 <dep name=".\Generated_Source\PSoC5\PACER_TIMER.h" />
 <dep name=".\Generated_Source\PSoC5\PRESSURE_SENSOR.h" />
 <dep name=".\Generated_Source\PSoC5\PRESSURE_SENSOR_aliases.h" />
@@ -2867,6 +2921,7 @@
 <dep name=".\Generated_Source\PSoC5\SHIFTREG_ENC_3.h" />
 <dep name=".\Generated_Source\PSoC5\SPI_IMU.h" />
 <dep name=".\Generated_Source\PSoC5\SPI_IMU_PVT.h" />
+<dep name=".\Generated_Source\PSoC5\UART_BT.h" />
 <dep name=".\Generated_Source\PSoC5\UART_RS485.h" />
 <dep name=".\Generated_Source\PSoC5\VALVE.h" />
 <dep name=".\Generated_Source\PSoC5\VALVE_aliases.h" />
@@ -2917,6 +2972,10 @@
 <dep name=".\Generated_Source\PSoC5\BLINK_05HZ.h" />
 <dep name=".\Generated_Source\PSoC5\BLINK_25HZ.h" />
 <dep name=".\Generated_Source\PSoC5\BLINK_CTRL_EN.h" />
+<dep name=".\Generated_Source\PSoC5\BT_RX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_RX_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\BT_TX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_TX_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\Bootloadable.h" />
 <dep name=".\Generated_Source\PSoC5\CLK_ENCODER.h" />
 <dep name=".\Generated_Source\PSoC5\CLK_ENCODER_aliases.h" />
@@ -2966,10 +3025,6 @@
 <dep name=".\Generated_Source\PSoC5\EMG_3_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_4.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_4_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_5.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_5_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_6.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_6_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_A.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_A_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_B.h" />
@@ -2977,6 +3032,7 @@
 <dep name=".\Generated_Source\PSoC5\FF_STATUS.h" />
 <dep name=".\Generated_Source\PSoC5\FTDI_ENABLE.h" />
 <dep name=".\Generated_Source\PSoC5\FTDI_ENABLE_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\ISR_BT_RX.h" />
 <dep name=".\Generated_Source\PSoC5\ISR_CYCLES.h" />
 <dep name=".\Generated_Source\PSoC5\ISR_RS485_RX.h" />
 <dep name=".\Generated_Source\PSoC5\LED_CTRL.h" />
@@ -3008,7 +3064,6 @@
 <dep name=".\Generated_Source\PSoC5\MOTOR_ON_OFF_1.h" />
 <dep name=".\Generated_Source\PSoC5\MOTOR_ON_OFF_2.h" />
 <dep name=".\Generated_Source\PSoC5\MY_TIMER.h" />
-<dep name=".\Generated_Source\PSoC5\MY_TIMER_REG.h" />
 <dep name=".\Generated_Source\PSoC5\PACER_TIMER.h" />
 <dep name=".\Generated_Source\PSoC5\PRESSURE_SENSOR.h" />
 <dep name=".\Generated_Source\PSoC5\PRESSURE_SENSOR_aliases.h" />
@@ -3040,6 +3095,7 @@
 <dep name=".\Generated_Source\PSoC5\SHIFTREG_ENC_3.h" />
 <dep name=".\Generated_Source\PSoC5\SPI_IMU.h" />
 <dep name=".\Generated_Source\PSoC5\SPI_IMU_PVT.h" />
+<dep name=".\Generated_Source\PSoC5\UART_BT.h" />
 <dep name=".\Generated_Source\PSoC5\UART_RS485.h" />
 <dep name=".\Generated_Source\PSoC5\VALVE.h" />
 <dep name=".\Generated_Source\PSoC5\VALVE_aliases.h" />
@@ -3096,6 +3152,10 @@
 <dep name=".\Generated_Source\PSoC5\BLINK_05HZ.h" />
 <dep name=".\Generated_Source\PSoC5\BLINK_25HZ.h" />
 <dep name=".\Generated_Source\PSoC5\BLINK_CTRL_EN.h" />
+<dep name=".\Generated_Source\PSoC5\BT_RX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_RX_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\BT_TX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_TX_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\Bootloadable.h" />
 <dep name=".\Generated_Source\PSoC5\CLK_ENCODER.h" />
 <dep name=".\Generated_Source\PSoC5\CLK_ENCODER_aliases.h" />
@@ -3145,10 +3205,6 @@
 <dep name=".\Generated_Source\PSoC5\EMG_3_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_4.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_4_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_5.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_5_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_6.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_6_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_A.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_A_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_B.h" />
@@ -3156,6 +3212,7 @@
 <dep name=".\Generated_Source\PSoC5\FF_STATUS.h" />
 <dep name=".\Generated_Source\PSoC5\FTDI_ENABLE.h" />
 <dep name=".\Generated_Source\PSoC5\FTDI_ENABLE_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\ISR_BT_RX.h" />
 <dep name=".\Generated_Source\PSoC5\ISR_CYCLES.h" />
 <dep name=".\Generated_Source\PSoC5\ISR_RS485_RX.h" />
 <dep name=".\Generated_Source\PSoC5\LED_CTRL.h" />
@@ -3187,7 +3244,6 @@
 <dep name=".\Generated_Source\PSoC5\MOTOR_ON_OFF_1.h" />
 <dep name=".\Generated_Source\PSoC5\MOTOR_ON_OFF_2.h" />
 <dep name=".\Generated_Source\PSoC5\MY_TIMER.h" />
-<dep name=".\Generated_Source\PSoC5\MY_TIMER_REG.h" />
 <dep name=".\Generated_Source\PSoC5\PACER_TIMER.h" />
 <dep name=".\Generated_Source\PSoC5\PRESSURE_SENSOR.h" />
 <dep name=".\Generated_Source\PSoC5\PRESSURE_SENSOR_aliases.h" />
@@ -3219,6 +3275,7 @@
 <dep name=".\Generated_Source\PSoC5\SHIFTREG_ENC_3.h" />
 <dep name=".\Generated_Source\PSoC5\SPI_IMU.h" />
 <dep name=".\Generated_Source\PSoC5\SPI_IMU_PVT.h" />
+<dep name=".\Generated_Source\PSoC5\UART_BT.h" />
 <dep name=".\Generated_Source\PSoC5\UART_RS485.h" />
 <dep name=".\Generated_Source\PSoC5\VALVE.h" />
 <dep name=".\Generated_Source\PSoC5\VALVE_aliases.h" />
@@ -3275,6 +3332,10 @@
 <dep name=".\Generated_Source\PSoC5\BLINK_05HZ.h" />
 <dep name=".\Generated_Source\PSoC5\BLINK_25HZ.h" />
 <dep name=".\Generated_Source\PSoC5\BLINK_CTRL_EN.h" />
+<dep name=".\Generated_Source\PSoC5\BT_RX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_RX_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\BT_TX.h" />
+<dep name=".\Generated_Source\PSoC5\BT_TX_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\Bootloadable.h" />
 <dep name=".\Generated_Source\PSoC5\CLK_ENCODER.h" />
 <dep name=".\Generated_Source\PSoC5\CLK_ENCODER_aliases.h" />
@@ -3324,10 +3385,6 @@
 <dep name=".\Generated_Source\PSoC5\EMG_3_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_4.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_4_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_5.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_5_aliases.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_6.h" />
-<dep name=".\Generated_Source\PSoC5\EMG_6_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_A.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_A_aliases.h" />
 <dep name=".\Generated_Source\PSoC5\EMG_B.h" />
@@ -3335,6 +3392,7 @@
 <dep name=".\Generated_Source\PSoC5\FF_STATUS.h" />
 <dep name=".\Generated_Source\PSoC5\FTDI_ENABLE.h" />
 <dep name=".\Generated_Source\PSoC5\FTDI_ENABLE_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\ISR_BT_RX.h" />
 <dep name=".\Generated_Source\PSoC5\ISR_CYCLES.h" />
 <dep name=".\Generated_Source\PSoC5\ISR_RS485_RX.h" />
 <dep name=".\Generated_Source\PSoC5\LED_CTRL.h" />
@@ -3366,7 +3424,6 @@
 <dep name=".\Generated_Source\PSoC5\MOTOR_ON_OFF_1.h" />
 <dep name=".\Generated_Source\PSoC5\MOTOR_ON_OFF_2.h" />
 <dep name=".\Generated_Source\PSoC5\MY_TIMER.h" />
-<dep name=".\Generated_Source\PSoC5\MY_TIMER_REG.h" />
 <dep name=".\Generated_Source\PSoC5\PACER_TIMER.h" />
 <dep name=".\Generated_Source\PSoC5\PRESSURE_SENSOR.h" />
 <dep name=".\Generated_Source\PSoC5\PRESSURE_SENSOR_aliases.h" />
@@ -3398,6 +3455,7 @@
 <dep name=".\Generated_Source\PSoC5\SHIFTREG_ENC_3.h" />
 <dep name=".\Generated_Source\PSoC5\SPI_IMU.h" />
 <dep name=".\Generated_Source\PSoC5\SPI_IMU_PVT.h" />
+<dep name=".\Generated_Source\PSoC5\UART_BT.h" />
 <dep name=".\Generated_Source\PSoC5\UART_RS485.h" />
 <dep name=".\Generated_Source\PSoC5\VALVE.h" />
 <dep name=".\Generated_Source\PSoC5\VALVE_aliases.h" />
@@ -3438,6 +3496,51 @@
 <file name=".\Generated_Source\PSoC5\cydevicegnu.inc" />
 <file name=".\Generated_Source\PSoC5\cydevicegnu_trm.inc" />
 <file name=".\Generated_Source\PSoC5\cyfittergnu.inc" />
+<file name=".\CortexM3\ARM_GCC_541\Release\EMG_5.o">
+<dep name=".\Generated_Source\PSoC5\EMG_5.c" />
+<dep name=".\Generated_Source\PSoC5\EMG_5.h" />
+<dep name=".\Generated_Source\PSoC5\EMG_5_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC5\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC5\cypins.h" />
+<dep name=".\Generated_Source\PSoC5\cytypes.h" />
+</file>
+<file name=".\Generated_Source\PSoC5\EMG_5.c" />
+<file name=".\Generated_Source\PSoC5\EMG_5.h" />
+<file name=".\Generated_Source\PSoC5\EMG_5_aliases.h" />
+<file name=".\CortexM3\ARM_GCC_541\Release\EMG_6.o">
+<dep name=".\Generated_Source\PSoC5\EMG_6.c" />
+<dep name=".\Generated_Source\PSoC5\EMG_6.h" />
+<dep name=".\Generated_Source\PSoC5\EMG_6_aliases.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC5\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC5\cypins.h" />
+<dep name=".\Generated_Source\PSoC5\cytypes.h" />
+</file>
+<file name=".\Generated_Source\PSoC5\EMG_6.c" />
+<file name=".\Generated_Source\PSoC5\EMG_6.h" />
+<file name=".\Generated_Source\PSoC5\EMG_6_aliases.h" />
+<file name=".\CortexM3\ARM_GCC_541\Release\MY_TIMER_REG.o">
+<dep name=".\Generated_Source\PSoC5\MY_TIMER_REG.c" />
+<dep name=".\Generated_Source\PSoC5\MY_TIMER_REG.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC5\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC5\cytypes.h" />
+</file>
+<file name=".\Generated_Source\PSoC5\MY_TIMER_REG.c" />
+<file name=".\Generated_Source\PSoC5\MY_TIMER_REG.h" />
+<file name=".\CortexM3\ARM_GCC_541\Release\MY_TIMER_REG_PM.o">
+<dep name=".\Generated_Source\PSoC5\MY_TIMER_REG.h" />
+<dep name=".\Generated_Source\PSoC5\MY_TIMER_REG_PM.c" />
+<dep name=".\Generated_Source\PSoC5\cydevice.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC5\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC5\cytypes.h" />
+</file>
+<file name=".\Generated_Source\PSoC5\MY_TIMER_REG_PM.c" />
 </CyGuid_1173175f-1b9b-4ad4-a065-754a48a27021>
 </dependency_info>
 </CyGuid_f44455c5-3770-4452-b988-0a7a7ff46256>
@@ -3460,15 +3563,14 @@
 <dep name=".\CortexM3\ARM_GCC_541\Release\cymetadata.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\CURRENT_SENSE_2.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\VOLTAGE_SENSE_2.o" />
-<dep name=".\CortexM3\ARM_GCC_541\Release\EMG_6.o" />
-<dep name=".\CortexM3\ARM_GCC_541\Release\EMG_5.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\EMG_4.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\EMG_3.o" />
-<dep name=".\CortexM3\ARM_GCC_541\Release\EMG_2.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\EMG_1.o" />
+<dep name=".\CortexM3\ARM_GCC_541\Release\EMG_2.o" />
+<dep name=".\CortexM3\ARM_GCC_541\Release\PRESSURE_SENSOR.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\CURRENT_SENSE_1.o" />
-<dep name=".\CortexM3\ARM_GCC_541\Release\EMG_A.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\EMG_B.o" />
+<dep name=".\CortexM3\ARM_GCC_541\Release\EMG_A.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\MOSI.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\SCLK.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\Chip_Select_IMU.o" />
@@ -3562,12 +3664,12 @@
 <dep name=".\CortexM3\ARM_GCC_541\Release\RESET_COUNTERS_PM.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\Chip_Select_ENCODER_LINE.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\Chip_Select_ENCODER_LINE_PM.o" />
-<dep name=".\CortexM3\ARM_GCC_541\Release\MY_TIMER_REG.o" />
-<dep name=".\CortexM3\ARM_GCC_541\Release\MY_TIMER_REG_PM.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\MOTOR_DRIVER_TYPE.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\MOTOR_DRIVER_TYPE_PM.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\MOTOR_ON_OFF_2.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\MOTOR_ON_OFF_2_PM.o" />
+<dep name=".\CortexM3\ARM_GCC_541\Release\VALVE.o" />
+<dep name=".\CortexM3\ARM_GCC_541\Release\PUMP.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\SD_SPI0.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\SD_SPI0_PM.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\SD_SPI0_INT.o" />
@@ -3580,7 +3682,6 @@
 <dep name=".\CortexM3\ARM_GCC_541\Release\ADC_Ext_CP_Clk.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\ADC_IRQ.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\ADC_theACLK.o" />
-<dep name=".\CortexM3\ARM_GCC_541\Release\cy_em_eeprom.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\Cm3Start.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\CyBootAsmGnu.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\CyDmac.o" />
@@ -3589,9 +3690,14 @@
 <dep name=".\CortexM3\ARM_GCC_541\Release\cyPm.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\CySpc.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\cyutils.o" />
-<dep name=".\CortexM3\ARM_GCC_541\Release\PRESSURE_SENSOR.o" />
-<dep name=".\CortexM3\ARM_GCC_541\Release\VALVE.o" />
-<dep name=".\CortexM3\ARM_GCC_541\Release\PUMP.o" />
+<dep name=".\CortexM3\ARM_GCC_541\Release\cy_em_eeprom.o" />
+<dep name=".\CortexM3\ARM_GCC_541\Release\ISR_BT_RX.o" />
+<dep name=".\CortexM3\ARM_GCC_541\Release\UART_BT.o" />
+<dep name=".\CortexM3\ARM_GCC_541\Release\UART_BT_PM.o" />
+<dep name=".\CortexM3\ARM_GCC_541\Release\UART_BT_INT.o" />
+<dep name=".\CortexM3\ARM_GCC_541\Release\UART_BT_BOOT.o" />
+<dep name=".\CortexM3\ARM_GCC_541\Release\BT_TX.o" />
+<dep name=".\CortexM3\ARM_GCC_541\Release\BT_RX.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Release\Air_Chambers_Haptic_Feedback.a" />
 <dep name="${CyRoot}\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CortexM3\ARM_GCC_541\Release\CyComponentLibrary.a" />
 </file>
@@ -3751,9 +3857,17 @@
 <name_val_pair name="Generated_Source\PSoC5\VALVE.c" v="-mcpu=cortex-m3 -mthumb -I..\src\emFile_V322c\Code\Include\PSoC5\emf16nOS -I..\src\emFile_V322c\Code\Include\PSoC5 -I. -IGenerated_Source\PSoC5 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -D AIR_CHAMBERS_FB_FW" />
 <name_val_pair name="Generated_Source\PSoC5\PUMP.c" v="-mcpu=cortex-m3 -mthumb -I..\src\emFile_V322c\Code\Include\PSoC5\emf16nOS -I..\src\emFile_V322c\Code\Include\PSoC5 -I. -IGenerated_Source\PSoC5 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -D AIR_CHAMBERS_FB_FW" />
 <name_val_pair name="C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\Air_Chambers_Haptic_Feedback.cydsn\CortexM3\ARM_GCC_541\Release\Air_Chambers_Haptic_Feedback.hex" v="-mcpu=cortex-m3 -mthumb -L Generated_Source\PSoC5 ..\src\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf16noslfn.a -Wl,-Map,${OutputDir}/${ProjectShortName}.map -T Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -u _printf_float -Wl,--gc-sections -Wl,-u,vfprintf -lm -g -ffunction-sections -O0 -ffat-lto-objects" />
+<name_val_pair name="Generated_Source\PSoC5\ISR_BT_RX.c" v="-mcpu=cortex-m3 -mthumb -I..\src\emFile_V322c\Code\Include\PSoC5\emf16nOS -I..\src\emFile_V322c\Code\Include\PSoC5 -I. -IGenerated_Source\PSoC5 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -D AIR_CHAMBERS_FB_FW" />
+<name_val_pair name="Generated_Source\PSoC5\UART_BT.c" v="-mcpu=cortex-m3 -mthumb -I..\src\emFile_V322c\Code\Include\PSoC5\emf16nOS -I..\src\emFile_V322c\Code\Include\PSoC5 -I. -IGenerated_Source\PSoC5 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -D AIR_CHAMBERS_FB_FW" />
+<name_val_pair name="Generated_Source\PSoC5\UART_BT_PM.c" v="-mcpu=cortex-m3 -mthumb -I..\src\emFile_V322c\Code\Include\PSoC5\emf16nOS -I..\src\emFile_V322c\Code\Include\PSoC5 -I. -IGenerated_Source\PSoC5 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -D AIR_CHAMBERS_FB_FW" />
+<name_val_pair name="Generated_Source\PSoC5\UART_BT_INT.c" v="-mcpu=cortex-m3 -mthumb -I..\src\emFile_V322c\Code\Include\PSoC5\emf16nOS -I..\src\emFile_V322c\Code\Include\PSoC5 -I. -IGenerated_Source\PSoC5 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -D AIR_CHAMBERS_FB_FW" />
+<name_val_pair name="Generated_Source\PSoC5\UART_BT_BOOT.c" v="-mcpu=cortex-m3 -mthumb -I..\src\emFile_V322c\Code\Include\PSoC5\emf16nOS -I..\src\emFile_V322c\Code\Include\PSoC5 -I. -IGenerated_Source\PSoC5 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -D AIR_CHAMBERS_FB_FW" />
+<name_val_pair name="Generated_Source\PSoC5\BT_TX.c" v="-mcpu=cortex-m3 -mthumb -I..\src\emFile_V322c\Code\Include\PSoC5\emf16nOS -I..\src\emFile_V322c\Code\Include\PSoC5 -I. -IGenerated_Source\PSoC5 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -D AIR_CHAMBERS_FB_FW" />
+<name_val_pair name="Generated_Source\PSoC5\BT_RX.c" v="-mcpu=cortex-m3 -mthumb -I..\src\emFile_V322c\Code\Include\PSoC5\emf16nOS -I..\src\emFile_V322c\Code\Include\PSoC5 -I. -IGenerated_Source\PSoC5 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -D AIR_CHAMBERS_FB_FW" />
+<name_val_pair name="C:\Users\Mattia\Documents\GitHub\SoftHandPRO-and-Generic-FW-PSoC5\Air_Chambers_Haptic_Feedback.cydsn\CortexM3\ARM_GCC_541\Release\Air_Chambers_Haptic_Feedback.hex" v="-mcpu=cortex-m3 -mthumb -L Generated_Source\PSoC5 ..\src\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf16noslfn.a -Wl,-Map,${OutputDir}/${ProjectShortName}.map -T Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -u _printf_float -Wl,--gc-sections -Wl,-u,vfprintf -lm -g -ffunction-sections -O0 -ffat-lto-objects" />
 </name>
 </genericCmdLineData>
-<codeGenCmdLineTag v="-.appdatapath &quot;C:\Users\Mattia\AppData\Local\Cypress Semiconductor\PSoC Creator\4.2&quot; -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\Air_Chambers_Haptic_Feedback.cydsn\Air_Chambers_Haptic_Feedback.cyprj -d CY8C5888LTI-LP097 -s C:\Users\Mattia\Documents\GITHUB\SoftHandPRO-and-Generic-FW-PSoC5\Air_Chambers_Haptic_Feedback.cydsn\Generated_Source\PSoC5 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE" />
+<codeGenCmdLineTag v="-.appdatapath &quot;C:\Users\Mattia\AppData\Local\Cypress Semiconductor\PSoC Creator\4.4&quot; -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p C:\Users\Mattia\Documents\GitHub\SoftHandPRO-and-Generic-FW-PSoC5\Air_Chambers_Haptic_Feedback.cydsn\Air_Chambers_Haptic_Feedback.cyprj -d CY8C5888LTI-LP097 -s C:\Users\Mattia\Documents\GitHub\SoftHandPRO-and-Generic-FW-PSoC5\Air_Chambers_Haptic_Feedback.cydsn\Generated_Source\PSoC5 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE" />
 </CyGuid_b0374e30-ce3a-47f2-ad85-821643292c68>
 </dataGuid>
 <dataGuid v="925cc1e1-309e-4e08-b0a1-09a83c35b157">
@@ -3863,16 +3977,6 @@
 <v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\not_v1_0\not_v1_0.v</v>
 <v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\not_v1_0\version.cypatch</v>
 <v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\not_v1_0\Custom\custom.cs</v>
-<v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\EEPROM_v3_0\EEPROM_v3_0.cysym</v>
-<v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\EEPROM_v3_0\EEPROM_v3_0.pdf</v>
-<v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\EEPROM_v3_0\EEPROM_v3_0.cystate</v>
-<v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\EEPROM_v3_0\version.cypatch</v>
-<v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\EEPROM_v3_0\API\eeprom.c</v>
-<v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\EEPROM_v3_0\API\eeprom.h</v>
-<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\ZeroTerminal\ZeroTerminal.cysym</v>
-<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\ZeroTerminal\ZeroTerminal.pdf</v>
-<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\ZeroTerminal\ZeroTerminal.v</v>
-<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\ZeroTerminal\version.cypatch</v>
 <v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_clock_v2_20\cy_clock_v2_20.cyprimitive</v>
 <v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_clock_v2_20\cy_clock_v2_20.cysym</v>
 <v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
@@ -3881,6 +3985,18 @@
 <v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_clock_v2_20\API\clk.c</v>
 <v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_clock_v2_20\API\clk.h</v>
 <v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_clock_v2_20\Custom\custom.cs</v>
+<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_isr_v1_70\cy_isr_v1_70.cysym</v>
+<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
+<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_isr_v1_70\cy_isr_v1_70.primitive</v>
+<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_isr_v1_70\cy_isr_v1_70.cystate</v>
+<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_isr_v1_70\version.cypatch</v>
+<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_isr_v1_70\Custom\custom.cs</v>
+<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_isr_v1_70\PSoC5\API\intc.c</v>
+<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_isr_v1_70\PSoC5\API\intc.h</v>
+<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\ZeroTerminal\ZeroTerminal.cysym</v>
+<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\ZeroTerminal\ZeroTerminal.pdf</v>
+<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\ZeroTerminal\ZeroTerminal.v</v>
+<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\ZeroTerminal\version.cypatch</v>
 <v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\PWM_v3_30\PWM_v3_30.cysym</v>
 <v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\PWM_v3_30\PWM_v3_30.pdf</v>
 <v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\PWM_v3_30\PWM_v3_30.cystate</v>
@@ -3970,16 +4086,14 @@
 <v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\UART_v2_50\Custom\cyuartadvancedcontrol.resx</v>
 <v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\UART_v2_50\Custom\cyuartcontrol.resx</v>
 <v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\UART_v2_50\Custom\Resources.resx</v>
-<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_isr_v1_70\cy_isr_v1_70.cysym</v>
-<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
-<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_isr_v1_70\cy_isr_v1_70.primitive</v>
-<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_isr_v1_70\cy_isr_v1_70.cystate</v>
-<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_isr_v1_70\version.cypatch</v>
-<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_isr_v1_70\Custom\custom.cs</v>
-<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_isr_v1_70\PSoC5\API\intc.c</v>
-<v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\cy_isr_v1_70\PSoC5\API\intc.h</v>
 <v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\B_UART_v2_50\B_UART_v2_50.cysym</v>
 <v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\B_UART_v2_50\B_UART_v2_50.v</v>
+<v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\EEPROM_v3_0\EEPROM_v3_0.cysym</v>
+<v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\EEPROM_v3_0\EEPROM_v3_0.pdf</v>
+<v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\EEPROM_v3_0\EEPROM_v3_0.cystate</v>
+<v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\EEPROM_v3_0\version.cypatch</v>
+<v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\EEPROM_v3_0\API\eeprom.c</v>
+<v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\EEPROM_v3_0\API\eeprom.h</v>
 <v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\Bootloadable_v1_60\Bootloadable_v1_60.cysym</v>
 <v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\Bootloadable_v1_60\Bootloadable_v1_60.cystate</v>
 <v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\Bootloadable_v1_60\Bootloadable_v1_60.pdf</v>
@@ -4278,8 +4392,6 @@
 <v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\mux_v1_10\version.cypatch</v>
 <v>${CyRoot}\psoc\content\CyPrimitives\cyprimitives.cylib\mux_v1_10\Custom\custom.cs</v>
 <v>.\Air_Chambers_Haptic_Feedback.cydwr</v>
-<v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\Em_EEPROM_Dynamic_v2_0\API\cy_em_eeprom.c</v>
-<v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\Em_EEPROM_Dynamic_v2_0\API\cy_em_eeprom.h</v>
 <v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\cy_boot_v5_70\PSoC5\API\cm3gcc.ld</v>
 <v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\cy_boot_v5_70\PSoC5\API\Cm3RealView.scat</v>
 <v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\cy_boot_v5_70\PSoC5\API\Cm3Start.c</v>
@@ -4307,6 +4419,8 @@
 <v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\cy_boot_v5_70\PSoC5\API\cmsis_armcc.h</v>
 <v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\cy_boot_v5_70\PSoC5\API\cmsis_gcc.h</v>
 <v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\cy_boot_v5_70\PSoC5\API\cmsis_compiler.h</v>
+<v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\Em_EEPROM_Dynamic_v2_0\API\cy_em_eeprom.c</v>
+<v>${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\Em_EEPROM_Dynamic_v2_0\API\cy_em_eeprom.h</v>
 </deps_list>
 <gen_list>
 <v>Generated_Source\PSoC5\cyfitter_cfg.h</v>
@@ -4346,24 +4460,24 @@
 <v>Generated_Source\PSoC5\EMG_3_aliases.h</v>
 <v>Generated_Source\PSoC5\EMG_3.c</v>
 <v>Generated_Source\PSoC5\EMG_3.h</v>
-<v>Generated_Source\PSoC5\EMG_2_aliases.h</v>
-<v>Generated_Source\PSoC5\EMG_2.c</v>
-<v>Generated_Source\PSoC5\EMG_2.h</v>
 <v>Generated_Source\PSoC5\EMG_1_aliases.h</v>
 <v>Generated_Source\PSoC5\EMG_1.c</v>
 <v>Generated_Source\PSoC5\EMG_1.h</v>
-<v>Generated_Source\PSoC5\VOLTAGE_SENSE_1_aliases.h</v>
-<v>Generated_Source\PSoC5\VOLTAGE_SENSE_1.c</v>
-<v>Generated_Source\PSoC5\VOLTAGE_SENSE_1.h</v>
+<v>Generated_Source\PSoC5\EMG_2_aliases.h</v>
+<v>Generated_Source\PSoC5\EMG_2.c</v>
+<v>Generated_Source\PSoC5\EMG_2.h</v>
+<v>Generated_Source\PSoC5\PRESSURE_SENSOR_aliases.h</v>
+<v>Generated_Source\PSoC5\PRESSURE_SENSOR.c</v>
+<v>Generated_Source\PSoC5\PRESSURE_SENSOR.h</v>
 <v>Generated_Source\PSoC5\CURRENT_SENSE_1_aliases.h</v>
 <v>Generated_Source\PSoC5\CURRENT_SENSE_1.c</v>
 <v>Generated_Source\PSoC5\CURRENT_SENSE_1.h</v>
-<v>Generated_Source\PSoC5\EMG_A_aliases.h</v>
-<v>Generated_Source\PSoC5\EMG_A.c</v>
-<v>Generated_Source\PSoC5\EMG_A.h</v>
 <v>Generated_Source\PSoC5\EMG_B_aliases.h</v>
 <v>Generated_Source\PSoC5\EMG_B.c</v>
 <v>Generated_Source\PSoC5\EMG_B.h</v>
+<v>Generated_Source\PSoC5\EMG_A_aliases.h</v>
+<v>Generated_Source\PSoC5\EMG_A.c</v>
+<v>Generated_Source\PSoC5\EMG_A.h</v>
 <v>Generated_Source\PSoC5\MOSI_aliases.h</v>
 <v>Generated_Source\PSoC5\MOSI.c</v>
 <v>Generated_Source\PSoC5\MOSI.h</v>
@@ -4376,9 +4490,6 @@
 <v>Generated_Source\PSoC5\MOTOR_DIR_1.h</v>
 <v>Generated_Source\PSoC5\MOTOR_DIR_1.c</v>
 <v>Generated_Source\PSoC5\MOTOR_DIR_1_PM.c</v>
-<v>Generated_Source\PSoC5\MOTOR_1B_aliases.h</v>
-<v>Generated_Source\PSoC5\MOTOR_1B.c</v>
-<v>Generated_Source\PSoC5\MOTOR_1B.h</v>
 <v>Generated_Source\PSoC5\EEPROM.c</v>
 <v>Generated_Source\PSoC5\EEPROM.h</v>
 <v>Generated_Source\PSoC5\FTDI_ENABLE_aliases.h</v>
@@ -4395,9 +4506,6 @@
 <v>Generated_Source\PSoC5\CS3_aliases.h</v>
 <v>Generated_Source\PSoC5\CS3.c</v>
 <v>Generated_Source\PSoC5\CS3.h</v>
-<v>Generated_Source\PSoC5\MOTOR_1A_aliases.h</v>
-<v>Generated_Source\PSoC5\MOTOR_1A.c</v>
-<v>Generated_Source\PSoC5\MOTOR_1A.h</v>
 <v>Generated_Source\PSoC5\PACER_TIMER.c</v>
 <v>Generated_Source\PSoC5\PACER_TIMER.h</v>
 <v>Generated_Source\PSoC5\PACER_TIMER_PM.c</v>
@@ -4561,6 +4669,12 @@
 <v>Generated_Source\PSoC5\MOTOR_ON_OFF_2.h</v>
 <v>Generated_Source\PSoC5\MOTOR_ON_OFF_2.c</v>
 <v>Generated_Source\PSoC5\MOTOR_ON_OFF_2_PM.c</v>
+<v>Generated_Source\PSoC5\VALVE_aliases.h</v>
+<v>Generated_Source\PSoC5\VALVE.c</v>
+<v>Generated_Source\PSoC5\VALVE.h</v>
+<v>Generated_Source\PSoC5\PUMP_aliases.h</v>
+<v>Generated_Source\PSoC5\PUMP.c</v>
+<v>Generated_Source\PSoC5\PUMP.h</v>
 <v>Generated_Source\PSoC5\SD_SPI0.c</v>
 <v>Generated_Source\PSoC5\SD_SPI0.h</v>
 <v>Generated_Source\PSoC5\SD_SPI0_PM.c</v>
@@ -4588,8 +4702,6 @@
 <v>Generated_Source\PSoC5\ADC_IRQ.h</v>
 <v>Generated_Source\PSoC5\ADC_theACLK.c</v>
 <v>Generated_Source\PSoC5\ADC_theACLK.h</v>
-<v>Generated_Source\PSoC5\cy_em_eeprom.c</v>
-<v>Generated_Source\PSoC5\cy_em_eeprom.h</v>
 <v>Generated_Source\PSoC5\cm3gcc.ld</v>
 <v>Generated_Source\PSoC5\Cm3RealView.scat</v>
 <v>Generated_Source\PSoC5\Cm3Start.c</v>
@@ -4617,29 +4729,35 @@
 <v>Generated_Source\PSoC5\cmsis_armcc.h</v>
 <v>Generated_Source\PSoC5\cmsis_gcc.h</v>
 <v>Generated_Source\PSoC5\cmsis_compiler.h</v>
+<v>Generated_Source\PSoC5\cy_em_eeprom.c</v>
+<v>Generated_Source\PSoC5\cy_em_eeprom.h</v>
 <v>Generated_Source\PSoC5\project.h</v>
 <v>Generated_Source\PSoC5\cycodeshareimport.ld</v>
 <v>Generated_Source\PSoC5\cycodeshareexport.ld</v>
 <v>Generated_Source\PSoC5\cycodeshareimport.scat</v>
-<v>Generated_Source\PSoC5\PRESSURE_SENSOR_aliases.h</v>
-<v>Generated_Source\PSoC5\PRESSURE_SENSOR.c</v>
-<v>Generated_Source\PSoC5\PRESSURE_SENSOR.h</v>
-<v>Generated_Source\PSoC5\VALVE_aliases.h</v>
-<v>Generated_Source\PSoC5\VALVE.c</v>
-<v>Generated_Source\PSoC5\VALVE.h</v>
-<v>Generated_Source\PSoC5\PUMP_aliases.h</v>
-<v>Generated_Source\PSoC5\PUMP.c</v>
-<v>Generated_Source\PSoC5\PUMP.h</v>
+<v>Generated_Source\PSoC5\ISR_BT_RX.c</v>
+<v>Generated_Source\PSoC5\ISR_BT_RX.h</v>
+<v>Generated_Source\PSoC5\UART_BT.c</v>
+<v>Generated_Source\PSoC5\UART_BT.h</v>
+<v>Generated_Source\PSoC5\UART_BT_PM.c</v>
+<v>Generated_Source\PSoC5\UART_BT_INT.c</v>
+<v>Generated_Source\PSoC5\UART_BT_BOOT.c</v>
+<v>Generated_Source\PSoC5\BT_TX_aliases.h</v>
+<v>Generated_Source\PSoC5\BT_TX.c</v>
+<v>Generated_Source\PSoC5\BT_TX.h</v>
+<v>Generated_Source\PSoC5\BT_RX_aliases.h</v>
+<v>Generated_Source\PSoC5\BT_RX.c</v>
+<v>Generated_Source\PSoC5\BT_RX.h</v>
 </gen_list>
 <warp_dep>
-<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\ieee\work\stdlogic.vif</v>
-<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\stdlogic\mod_genv.vif</v>
-<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\cypress.v</v>
-<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\cy_psoc3_inc.v</v>
-<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\stdlogic\rtlpkg.vif</v>
-<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\stdlogic\cy_psoc3.vif</v>
+<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\ieee\work\stdlogic.vif</v>
+<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\mod_genv.vif</v>
+<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\cypress.v</v>
+<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\cy_psoc3_inc.v</v>
+<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\rtlpkg.vif</v>
+<v>C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\cy_psoc3.vif</v>
 </warp_dep>
-<deps_time v="132291719253776566" />
+<deps_time v="132980493375766422" />
 <top_block v="TopDesign" />
 <last_generation v="4" />
 <pdl_path v="" />
@@ -4649,7 +4767,7 @@
 <dataGuid v="769d31ea-68b1-4f0c-b90a-7c10a43ee563">
 <CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563 type_name="CyDesigner.Common.ProjMgmt.Model.CyLinkCustomData" version="1">
 <link_deps_times>
-<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Release@CortexM3" v="132291719602910137" />
+<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Release@CortexM3" v="132980493543906814" />
 </link_deps_times>
 </CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563>
 </dataGuid>

@@ -304,18 +304,6 @@ void commProcess(void){
 }  
 
 //==============================================================================
-//                                                                     INFO SEND
-//==============================================================================
-
-void infoSend(void){
-    char packet_string[1500];
-    
-    prepare_generic_info(packet_string);
-    UART_RS485_PutString(packet_string);
-}
-
-
-//==============================================================================
 //                                                              COMMAND GET INFO
 //==============================================================================
 
@@ -327,28 +315,63 @@ void infoGet(uint16 info_type) {
     switch (info_type) {
         case INFO_ALL:
             prepare_generic_info(packet_string);
-            UART_RS485_ClearTxBuffer(); 
-            UART_RS485_PutString(packet_string);
+            if (bt_src){
+                UART_BT_ClearTxBuffer();
+                UART_BT_PutString(packet_string);
+                bt_src = FALSE;
+            }
+            else{
+                UART_RS485_ClearTxBuffer();
+                UART_RS485_PutString(packet_string);
+            }
             break;
         case CYCLES_INFO:
             prepare_counter_info(packet_string);
-            UART_RS485_ClearTxBuffer();
-            UART_RS485_PutString(packet_string);
+            if (bt_src){
+                UART_BT_ClearTxBuffer();
+                UART_BT_PutString(packet_string);
+                bt_src = FALSE;
+            }
+            else{
+                UART_RS485_ClearTxBuffer();
+                UART_RS485_PutString(packet_string);
+            }
             break;
         case GET_SD_PARAM:
             Read_SD_Closed_File(sdParam, packet_string, sizeof(packet_string));
-            UART_RS485_ClearTxBuffer();
-            UART_RS485_PutString(packet_string);
+            if (bt_src){
+                UART_BT_ClearTxBuffer();
+                UART_BT_PutString(packet_string);
+                bt_src = FALSE;
+            }
+            else{
+                UART_RS485_ClearTxBuffer();
+                UART_RS485_PutString(packet_string);
+            }
             break;
         case GET_SD_DATA:
             Read_SD_Current_Data(str_sd_data, sizeof(str_sd_data));
-            UART_RS485_ClearTxBuffer();
-            UART_RS485_PutString(str_sd_data);
+            if (bt_src){
+                UART_BT_ClearTxBuffer();
+                UART_BT_PutString(str_sd_data);
+                bt_src = FALSE;
+            }
+            else{
+                UART_RS485_ClearTxBuffer();
+                UART_RS485_PutString(str_sd_data);
+            }
             break;
         case GET_SD_FS_TREE:
             Get_SD_FS(str_sd_data);
-            UART_RS485_ClearTxBuffer();
-            UART_RS485_PutString(str_sd_data);
+            if (bt_src){
+                UART_BT_ClearTxBuffer();
+                UART_BT_PutString(str_sd_data);
+                bt_src = FALSE;
+            }
+            else{
+                UART_RS485_ClearTxBuffer();
+                UART_RS485_PutString(str_sd_data);
+            }
             break;
         case GET_SD_EMG_HIST:
             // Send every single byte inside the function, since it could be a large file to send
@@ -356,8 +379,15 @@ void infoGet(uint16 info_type) {
             break;
         case GET_SD_R01_SUMM:
             Read_SD_Closed_File(sdR01File, packet_string, sizeof(packet_string));
-            UART_RS485_ClearTxBuffer();
-            UART_RS485_PutString(packet_string);
+            if (bt_src){
+                UART_BT_ClearTxBuffer();
+                UART_BT_PutString(packet_string);
+                bt_src = FALSE;
+            }
+            else{
+                UART_RS485_ClearTxBuffer();
+                UART_RS485_PutString(packet_string);
+            }
             break;            
         default:
             break;
@@ -749,14 +779,14 @@ void get_param_list (uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS],
                         case EXP_NONE:
                             strcat(aux_str, " None\0");
                             break;
-                        case EXP_SD_RTC:
-                            strcat(aux_str, " SD/RTC board\0");
+                        case EXP_SD_RTC_ONLY:
+                            strcat(aux_str, " Only SD/RTC\0");
                             break;
-                        case EXP_WIFI:
-        					strcat(aux_str, " WiFi board [N/A]\0");
+                        case EXP_BT_ONLY:
+        					strcat(aux_str, " Only BT\0");
         					break;
-                        case EXP_OTHER:
-        					strcat(aux_str, " Other [N/A]\0");
+                        case EXP_SD_RTC_BT:
+        					strcat(aux_str, " SD/RTC + BT\0");
         					break;
                     }
                     break;
@@ -1136,7 +1166,7 @@ void manage_param_list(uint16 index) {
         "0 -> Deactivate [NO]\n1 -> Activate [YES]\n",                                                                      //3 yes_no_menu
         "0 -> Right\n1 -> Left\n",                                                                                          //4 right_left_menu
         "0 -> OFF\n1 -> ON\nThe board will reset\n",                                                                        //5 on_off_menu
-        "0 -> None\n1 -> SD/RTC board\n2 -> WiFi board [N/A]\n3 -> Other [N/A]\nThe board will reset\n",                    //6 exp_port_menu
+        "0 -> None\n1 -> Only SD/RTC\n2 -> Only BT\n3 -> SD/RTC + BT\nThe board will reset\n",                              //6 exp_port_menu
         spi_delay_menu,                                                                                                     //7 spi_delay_menu
         "0 -> Generic user\n1 -> Maria\n2 -> R01\nThe board will reset\n",                                                  //8 user_id_menu
         "0 -> MC33887 (Standard)\n1 -> VNH5019 (High power)\n2 -> ESC (Brushless)\nThe board will reset\n",                                       //9 motor_driver_type_menu
@@ -1452,7 +1482,7 @@ void set_custom_param(uint16 index) {
                 g_mem.dev.reset_counters = FALSE;
             }
             
-            if (c_mem.exp.read_exp_port_flag == EXP_SD_RTC) {
+            if (sdEnabled) {
                 // Set date of maintenance from RTC
                 aux_uchar = DS1302_read(DS1302_DATE_RD);
                 g_mem.dev.stats_period_begin_date[0] = (aux_uchar/16) * 10 + aux_uchar%16;    //day
@@ -1468,7 +1498,7 @@ void set_custom_param(uint16 index) {
                 g_mem.exp.curr_time[i] = g_rx.buffer[3 + i];
             }
             
-            if (g_mem.exp.read_exp_port_flag == EXP_SD_RTC) {
+            if (sdEnabled) {
                 set_RTC_time();
             }
             break;
@@ -2376,7 +2406,7 @@ void prepare_generic_info(char *info_string)
         strcat(info_string, str);
 #endif
 
-        sprintf(str, "Last FW cycle time: %u us\r\n", (uint16)timer_value0 - (uint16)timer_value);
+        sprintf(str, "Last FW cycle time: %u us\r\n", (uint16)(cycle_time*1000000.0));
         strcat(info_string, str);
   
         strcat(info_string, "\r\n\0");      // End of info_string
@@ -2929,52 +2959,97 @@ void commWrite_old_id(uint8 *packet_data, uint16 packet_lenght, uint8 old_id)
 {
     uint16 CYDATA index;    // iterator
 
-    // frame - start
-    UART_RS485_PutChar(':');
-    UART_RS485_PutChar(':');
-    // frame - ID
-    //if(old_id)
-        UART_RS485_PutChar(old_id);
-    //else
-        //UART_RS485_PutChar(g_mem.id);
-        
-    // frame - length
-    UART_RS485_PutChar((uint8)packet_lenght);
-    // frame - packet data
-    for(index = 0; index < packet_lenght; ++index) {
-        UART_RS485_PutChar(packet_data[index]);
+    if (bt_src){
+                 // frame - start
+        UART_BT_PutChar(':');
+        UART_BT_PutChar(':');
+        // frame - ID
+        //if(old_id)
+            UART_BT_PutChar(old_id);
+        //else
+            //UART_RS485_PutChar(g_mem.id);
+            
+        // frame - length
+        UART_BT_PutChar((uint8)packet_lenght);
+        // frame - packet data
+        for(index = 0; index < packet_lenght; ++index) {
+            UART_BT_PutChar(packet_data[index]);
+        }
+
+        index = 0;
+
+        while(!(UART_BT_ReadTxStatus() & UART_BT_TX_STS_COMPLETE) && index++ <= 1000){} 
+        bt_src = FALSE;
     }
+    else {
+        // frame - start
+        UART_RS485_PutChar(':');
+        UART_RS485_PutChar(':');
+        // frame - ID
+        //if(old_id)
+            UART_RS485_PutChar(old_id);
+        //else
+            //UART_RS485_PutChar(g_mem.id);
+            
+        // frame - length
+        UART_RS485_PutChar((uint8)packet_lenght);
+        // frame - packet data
+        for(index = 0; index < packet_lenght; ++index) {
+            UART_RS485_PutChar(packet_data[index]);
+        }
 
-    index = 0;
+        index = 0;
 
-    while(!(UART_RS485_ReadTxStatus() & UART_RS485_TX_STS_COMPLETE) && index++ <= 1000){}
+        while(!(UART_RS485_ReadTxStatus() & UART_RS485_TX_STS_COMPLETE) && index++ <= 1000){}
 
-    RS485_CTS_Write(1);
-    RS485_CTS_Write(0);
+        RS485_CTS_Write(1);
+        RS485_CTS_Write(0);
+    }
 }
 
 void commWrite(uint8 *packet_data, uint16 packet_lenght)
 {
     uint16 CYDATA index;    // iterator
 
-    // frame - start
-    UART_RS485_PutChar(':');
-    UART_RS485_PutChar(':');
-    // frame - ID
-    UART_RS485_PutChar(g_mem.dev.id);
-    // frame - length
-    UART_RS485_PutChar((uint8)packet_lenght);
-    // frame - packet data
-    for(index = 0; index < packet_lenght; ++index) {
-        UART_RS485_PutChar(packet_data[index]);
+    if (bt_src) {
+        // frame - start
+        UART_BT_PutChar(':');
+        UART_BT_PutChar(':');
+        // frame - ID
+        UART_BT_PutChar(g_mem.dev.id);
+        // frame - length
+        UART_BT_PutChar((uint8)packet_lenght);
+        // frame - packet data
+        for(index = 0; index < packet_lenght; ++index) {
+            UART_BT_PutChar(packet_data[index]);
+        }
+
+        index = 0;
+
+        while(!(UART_BT_ReadTxStatus() & UART_BT_TX_STS_COMPLETE) && index++ <= 1000){}
+
+        bt_src = FALSE;
     }
+    else {
+        // frame - start
+        UART_RS485_PutChar(':');
+        UART_RS485_PutChar(':');
+        // frame - ID
+        UART_RS485_PutChar(g_mem.dev.id);
+        // frame - length
+        UART_RS485_PutChar((uint8)packet_lenght);
+        // frame - packet data
+        for(index = 0; index < packet_lenght; ++index) {
+            UART_RS485_PutChar(packet_data[index]);
+        }
 
-    index = 0;
+        index = 0;
 
-    while(!(UART_RS485_ReadTxStatus() & UART_RS485_TX_STS_COMPLETE) && index++ <= 1000){}
+        while(!(UART_RS485_ReadTxStatus() & UART_RS485_TX_STS_COMPLETE) && index++ <= 1000){}
 
-    RS485_CTS_Write(1);
-    RS485_CTS_Write(0);
+        RS485_CTS_Write(1);
+        RS485_CTS_Write(0);
+    }
 }
 
 //==============================================================================
@@ -2985,24 +3060,45 @@ void commWriteID(uint8 *packet_data, uint16 packet_lenght, uint8 id)
 {
     static uint16 CYDATA i;    // iterator
 
-    // frame - start
-    UART_RS485_PutChar(':');
-    UART_RS485_PutChar(':');
-    // frame - ID
-    UART_RS485_PutChar(id);
-    // frame - length
-    UART_RS485_PutChar((uint8)packet_lenght);
-    // frame - packet data
-    for(i = 0; i < packet_lenght; ++i) {
-        UART_RS485_PutChar(packet_data[i]);
+    if (bt_src){
+        // frame - start
+        UART_BT_PutChar(':');
+        UART_BT_PutChar(':');
+        // frame - ID
+        UART_BT_PutChar(id);
+        // frame - length
+        UART_BT_PutChar((uint8)packet_lenght);
+        // frame - packet data
+        for(i = 0; i < packet_lenght; ++i) {
+            UART_BT_PutChar(packet_data[i]);
+        }
+
+        i = 0;
+
+        while(!(UART_BT_ReadTxStatus() & UART_BT_TX_STS_COMPLETE) && i++ <= 1000){}
+        
+        bt_src = FALSE;
     }
+    else {
+        // frame - start
+        UART_RS485_PutChar(':');
+        UART_RS485_PutChar(':');
+        // frame - ID
+        UART_RS485_PutChar(id);
+        // frame - length
+        UART_RS485_PutChar((uint8)packet_lenght);
+        // frame - packet data
+        for(i = 0; i < packet_lenght; ++i) {
+            UART_RS485_PutChar(packet_data[i]);
+        }
 
-    i = 0;
+        i = 0;
 
-    while(!(UART_RS485_ReadTxStatus() & UART_RS485_TX_STS_COMPLETE) && i++ <= 1000){}
-    
-    RS485_CTS_Write(1);
-    RS485_CTS_Write(0);
+        while(!(UART_RS485_ReadTxStatus() & UART_RS485_TX_STS_COMPLETE) && i++ <= 1000){}
+        
+        RS485_CTS_Write(1);
+        RS485_CTS_Write(0);
+    }
 }
 
 //==============================================================================
@@ -3051,6 +3147,7 @@ uint8 memStore(int displacement)
 
     // Disable Interrupt
     ISR_RS485_RX_Disable();
+    ISR_BT_RX_Disable();
 
     // Stop motor
     PWM_MOTORS_WriteCompare1(0);
@@ -3074,6 +3171,7 @@ uint8 memStore(int displacement)
 
     // Re-Enable Interrupt
     ISR_RS485_RX_Enable();
+    ISR_BT_RX_Enable();
 
     return ret_val;
 }
@@ -3231,7 +3329,7 @@ uint8 memInit(void)
     // EXP STRUCT
     g_mem.exp.read_exp_port_flag = EXP_NONE;       // 0 - None
     strcpy(g_mem.user[g_mem.dev.user_id].user_code_string, "GEN001");
-    if (g_mem.exp.read_exp_port_flag == EXP_SD_RTC) {
+    if (g_mem.exp.read_exp_port_flag && 0x01){      // EXP_SD_RTC_ONLY,EXP_SD_RTC_BT)
         // Set date of maintenance from RTC
         store_RTC_current_time();
         
@@ -3337,6 +3435,17 @@ void memInit_SoftHandPro(void)
     g_mem.exp.read_exp_port_flag = EXP_NONE;       // 0 - None
     g_mem.exp.record_EMG_history_on_SD = FALSE;
     strcpy(g_mem.user[g_mem.dev.user_id].user_code_string, "USR001");
+    
+#ifdef SH_XPRIZE
+    g_mem.imu.read_imu_flag = TRUE;
+    g_mem.exp.read_ADC_sensors_port_flag = TRUE;
+    
+    //Activate ADC1 and ADC2 channels by default
+    g_mem.exp.ADC_conf[2] = 0;
+    g_mem.exp.ADC_conf[3] = 0;
+    g_mem.exp.ADC_conf[6] = 1;
+    g_mem.exp.ADC_conf[7] = 1;
+#endif
 }
 
 //==============================================================================
@@ -3740,14 +3849,14 @@ int16 commReadResCurrFromSH()
     packet_data[1] = CMD_GET_CURR_DIFF;
     commWriteID(packet_data, packet_lenght, c_mem.MS.slave_ID);
 
-    t_start = (uint32) MY_TIMER_ReadCounter();
+    t_start = (uint16) MY_TIMER_ReadCounter();
     while(g_rx.buffer[0] != CMD_SET_CUFF_INPUTS) {
         if (interrupt_flag){
             interrupt_flag = FALSE;
             interrupt_manager();
         }
 
-        t_end = (uint32) MY_TIMER_ReadCounter();
+        t_end = (uint16) MY_TIMER_ReadCounter();
         if((t_start - t_end) > 4500000){            // 4.5 s timeout
             read_flag = FALSE;
             master_mode = 0;                // Exit from master mode
@@ -3846,7 +3955,7 @@ void cmd_store_params(){
     }
     
     // If SD is used, create new param and data file
-    if (c_mem.exp.read_exp_port_flag == EXP_SD_RTC) {
+    if (sdEnabled) {
         FS_FClose(pFile);
         
         InitSD_FS();
@@ -4142,8 +4251,15 @@ void cmd_get_SD_file( uint16 filename_length ){
 
     //itoa(filename_length, filename, 10);
     // Send the file to API that receives packet as a ping string
-    UART_RS485_ClearTxBuffer();
-    UART_RS485_PutString(str_sd_data);
+    if (bt_src){
+        UART_BT_ClearTxBuffer();
+        UART_BT_PutString(str_sd_data);
+        bt_src = FALSE;
+    }
+    else {
+        UART_RS485_ClearTxBuffer();
+        UART_RS485_PutString(str_sd_data);
+    }
 }
 
 void cmd_remove_SD_file( uint16 filename_length ){

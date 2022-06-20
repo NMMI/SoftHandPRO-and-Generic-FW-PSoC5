@@ -1,33 +1,33 @@
-\section{I\+M\+U\+\_\+functions.\+c File Reference}
-\label{_i_m_u__functions_8c}\index{I\+M\+U\+\_\+functions.\+c@{I\+M\+U\+\_\+functions.\+c}}
+\doxysection{IMU\+\_\+functions.\+c File Reference}
+\label{_i_m_u__functions_8c}\index{IMU\_functions.c@{IMU\_functions.c}}
 
 
-Implementation of I\+MU module functions.  
+Implementation of IMU module functions.  
 
 
-{\ttfamily \#include \char`\"{}I\+M\+U\+\_\+functions.\+h\char`\"{}}\newline
-Include dependency graph for I\+M\+U\+\_\+functions.\+c\+:
+{\ttfamily \#include \char`\"{}IMU\+\_\+functions.\+h\char`\"{}}\newline
+Include dependency graph for IMU\+\_\+functions.\+c\+:
 % FIG 0
-\subsection*{Functions}
+\doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\label{_i_m_u__functions_8c_a950a5a57e4188823c580d054ed2db16a}} 
 void {\bfseries Imus\+Reset} ()
 \item 
 \mbox{\label{_i_m_u__functions_8c_ac4f81f61837e6a132dfceb5bb93b06fa}} 
-void {\bfseries Init\+I\+MU} ()
+void {\bfseries Init\+IMU} ()
 \item 
 \mbox{\label{_i_m_u__functions_8c_ac95975151b543b5265bc1e470aabf465}} 
-void {\bfseries Init\+I\+M\+U\+Mag\+Cal} ()
+void {\bfseries Init\+IMUMag\+Cal} ()
 \item 
 \mbox{\label{_i_m_u__functions_8c_afae3632c7d21d6a41f6999eaabf7de07}} 
-void {\bfseries Chip\+Selector\+I\+MU} (int n)
+void {\bfseries Chip\+Selector\+IMU} (int n)
 \item 
 \mbox{\label{_i_m_u__functions_8c_a83f0630cb5ff556322c8cf56b6c6afc0}} 
-void {\bfseries Init\+I\+M\+Ugeneral} ()
+void {\bfseries Init\+IMUgeneral} ()
 \item 
 \mbox{\label{_i_m_u__functions_8c_a45df9ddb73de250cebfa02bf1d72bd97}} 
-void {\bfseries Read\+I\+MU} (int n)
+void {\bfseries Read\+IMU} (int n)
 \item 
 \mbox{\label{_i_m_u__functions_8c_a0290185f5b71ddb96ea13ce0a1ff48e7}} 
 void {\bfseries Read\+Acc} (int n)
@@ -45,39 +45,39 @@ void {\bfseries Read\+Mag\+Cal} (int n)
 void {\bfseries Read\+Quat} (int n)
 \item 
 \mbox{\label{_i_m_u__functions_8c_a27bf3026dfe4cb0d6d255decc9944d71}} 
-void {\bfseries Read\+All\+I\+M\+Us} ()
+void {\bfseries Read\+All\+IMUs} ()
 \item 
 \mbox{\label{_i_m_u__functions_8c_ab0883cd12ebf2937fd6da478ac3ab976}} 
 void {\bfseries Read\+Temp} (int n)
 \item 
 \mbox{\label{_i_m_u__functions_8c_aa907fcabe23515e5a6fb4187dd652ec3}} 
-void {\bfseries Write\+Control\+Register\+I\+MU} (uint8 address, uint8 dta)
+void {\bfseries Write\+Control\+Register\+IMU} (uint8 address, uint8 dta)
 \item 
 \mbox{\label{_i_m_u__functions_8c_ac1f1dc30233302bf8c1955c56ae837ae}} 
-uint8 {\bfseries Read\+Control\+Register\+I\+MU} (uint8 address)
+uint8 {\bfseries Read\+Control\+Register\+IMU} (uint8 address)
 \item 
 \mbox{\label{_i_m_u__functions_8c_a26f85d9c393e73879461861d2ac87379}} 
-void {\bfseries S\+P\+I\+\_\+delay} ()
+void {\bfseries SPI\+\_\+delay} ()
 \end{DoxyCompactItemize}
-\subsection*{Variables}
+\doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\label{_i_m_u__functions_8c_a187c605f3898cf11e09f6f469c265920}} 
-uint8 {\bfseries Accel} [N\+\_\+\+I\+M\+U\+\_\+\+M\+AX][6]
+uint8 {\bfseries Accel} [N\+\_\+\+IMU\+\_\+\+MAX][6]
 \item 
 \mbox{\label{_i_m_u__functions_8c_a49dba88a31d1b3b4190065b9ef1649fe}} 
-uint8 {\bfseries Gyro} [N\+\_\+\+I\+M\+U\+\_\+\+M\+AX][6]
+uint8 {\bfseries Gyro} [N\+\_\+\+IMU\+\_\+\+MAX][6]
 \item 
 \mbox{\label{_i_m_u__functions_8c_a5d88408ccb73729f049a52b4d1daaadf}} 
-uint8 {\bfseries Mag} [N\+\_\+\+I\+M\+U\+\_\+\+M\+AX][6]
+uint8 {\bfseries Mag} [N\+\_\+\+IMU\+\_\+\+MAX][6]
 \item 
 \mbox{\label{_i_m_u__functions_8c_a1e598e1bdae5fe927fbd1f396161f3a6}} 
-uint8 {\bfseries Mag\+Cal} [N\+\_\+\+I\+M\+U\+\_\+\+M\+AX][3]
+uint8 {\bfseries Mag\+Cal} [N\+\_\+\+IMU\+\_\+\+MAX][3]
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-Implementation of I\+MU module functions. 
+\doxysubsection{Detailed Description}
+Implementation of IMU module functions. 
 
 \begin{DoxyDate}{Date}
 March 20th, 2020 

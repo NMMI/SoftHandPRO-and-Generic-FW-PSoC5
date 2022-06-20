@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2020, Centro "E.Piaggio"
+// Copyright (c) 2017-2022, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -36,10 +36,10 @@
  * \file        command_processing.h
  *
  * \brief       Received commands processing functions             
- * \date        March 20th, 2020
+ * \date        May 26th, 2022
  * \author      _Centro "E.Piaggio"_
  * \copyright   (C) 2012-2016 qbrobotics. All rights reserved.
- * \copyright   (C) 2017-2020 Centro "E.Piaggio". All rights reserved.
+ * \copyright   (C) 2017-2022 Centro "E.Piaggio". All rights reserved.
  * \details
  *
  *  This file contains all the definitions of the functions used to 

@@ -1,5 +1,5 @@
-\section{st\+\_\+encoder Struct Reference}
-\label{structst__encoder}\index{st\+\_\+encoder@{st\+\_\+encoder}}
+\doxysection{st\+\_\+encoder Struct Reference}
+\label{structst__encoder}\index{st\_encoder@{st\_encoder}}
 
 
 Encoder related parameters structure.  
@@ -9,20 +9,20 @@ Encoder related parameters structure.
 
 {\ttfamily \#include $<$globals.\+h$>$}
 
-\subsection*{Data Fields}
+\doxysubsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
-uint8 \textbf{ Enc\+\_\+raw\+\_\+read\+\_\+conf} [\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+P\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}]
+uint8 \textbf{ Enc\+\_\+raw\+\_\+read\+\_\+conf} [\textbf{ N\+\_\+\+ENCODERS\+\_\+\+PER\+\_\+\+LINE\+\_\+\+MAX}]
 \item 
-uint8 \textbf{ res} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS}]
+uint8 \textbf{ res} [\textbf{ NUM\+\_\+\+OF\+\_\+\+SENSORS}]
 \item 
-int32 \textbf{ m\+\_\+off} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS}]
+int32 \textbf{ m\+\_\+off} [\textbf{ NUM\+\_\+\+OF\+\_\+\+SENSORS}]
 \item 
-float32 \textbf{ m\+\_\+mult} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS}]
+float32 \textbf{ m\+\_\+mult} [\textbf{ NUM\+\_\+\+OF\+\_\+\+SENSORS}]
 \item 
 uint8 \textbf{ double\+\_\+encoder\+\_\+on\+\_\+off}
 \item 
-uint8 \textbf{ Enc\+\_\+idx\+\_\+use\+\_\+for\+\_\+control} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS}]
+uint8 \textbf{ Enc\+\_\+idx\+\_\+use\+\_\+for\+\_\+control} [\textbf{ NUM\+\_\+\+OF\+\_\+\+SENSORS}]
 \item 
 int8 \textbf{ motor\+\_\+handle\+\_\+ratio}
 \item 
@@ -32,64 +32,62 @@ uint8 \textbf{ unused\+\_\+bytes} [8]
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
+\doxysubsection{Detailed Description}
 Encoder related parameters structure. 
 
-
-
-\subsection{Field Documentation}
+\doxysubsection{Field Documentation}
 \mbox{\label{structst__encoder_a3d5832272cab9dc9f831471a9634b43e}} 
-\index{st\+\_\+encoder@{st\+\_\+encoder}!double\+\_\+encoder\+\_\+on\+\_\+off@{double\+\_\+encoder\+\_\+on\+\_\+off}}
-\index{double\+\_\+encoder\+\_\+on\+\_\+off@{double\+\_\+encoder\+\_\+on\+\_\+off}!st\+\_\+encoder@{st\+\_\+encoder}}
-\subsubsection{double\+\_\+encoder\+\_\+on\+\_\+off}
+\index{st\_encoder@{st\_encoder}!double\_encoder\_on\_off@{double\_encoder\_on\_off}}
+\index{double\_encoder\_on\_off@{double\_encoder\_on\_off}!st\_encoder@{st\_encoder}}
+\doxysubsubsection{double\_encoder\_on\_off}
 {\footnotesize\ttfamily uint8 double\+\_\+encoder\+\_\+on\+\_\+off}
 
-Double encoder O\+N/\+O\+FF. \mbox{\label{structst__encoder_a300729112e37ceb3cddb32fa494d3465}} 
-\index{st\+\_\+encoder@{st\+\_\+encoder}!Enc\+\_\+idx\+\_\+use\+\_\+for\+\_\+control@{Enc\+\_\+idx\+\_\+use\+\_\+for\+\_\+control}}
-\index{Enc\+\_\+idx\+\_\+use\+\_\+for\+\_\+control@{Enc\+\_\+idx\+\_\+use\+\_\+for\+\_\+control}!st\+\_\+encoder@{st\+\_\+encoder}}
-\subsubsection{Enc\+\_\+idx\+\_\+use\+\_\+for\+\_\+control}
-{\footnotesize\ttfamily uint8 Enc\+\_\+idx\+\_\+use\+\_\+for\+\_\+control[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS}]}
+Double encoder ON/\+OFF. \mbox{\label{structst__encoder_a300729112e37ceb3cddb32fa494d3465}} 
+\index{st\_encoder@{st\_encoder}!Enc\_idx\_use\_for\_control@{Enc\_idx\_use\_for\_control}}
+\index{Enc\_idx\_use\_for\_control@{Enc\_idx\_use\_for\_control}!st\_encoder@{st\_encoder}}
+\doxysubsubsection{Enc\_idx\_use\_for\_control}
+{\footnotesize\ttfamily uint8 Enc\+\_\+idx\+\_\+use\+\_\+for\+\_\+control[\textbf{ NUM\+\_\+\+OF\+\_\+\+SENSORS}]}
 
 Indices of encoder used for motor control. \mbox{\label{structst__encoder_a2542097cdf0fa6d56f5636fddf0f1d61}} 
-\index{st\+\_\+encoder@{st\+\_\+encoder}!Enc\+\_\+raw\+\_\+read\+\_\+conf@{Enc\+\_\+raw\+\_\+read\+\_\+conf}}
-\index{Enc\+\_\+raw\+\_\+read\+\_\+conf@{Enc\+\_\+raw\+\_\+read\+\_\+conf}!st\+\_\+encoder@{st\+\_\+encoder}}
-\subsubsection{Enc\+\_\+raw\+\_\+read\+\_\+conf}
-{\footnotesize\ttfamily uint8 Enc\+\_\+raw\+\_\+read\+\_\+conf[\textbf{ N\+\_\+\+E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+P\+E\+R\+\_\+\+L\+I\+N\+E\+\_\+\+M\+AX}]}
+\index{st\_encoder@{st\_encoder}!Enc\_raw\_read\_conf@{Enc\_raw\_read\_conf}}
+\index{Enc\_raw\_read\_conf@{Enc\_raw\_read\_conf}!st\_encoder@{st\_encoder}}
+\doxysubsubsection{Enc\_raw\_read\_conf}
+{\footnotesize\ttfamily uint8 Enc\+\_\+raw\+\_\+read\+\_\+conf[\textbf{ N\+\_\+\+ENCODERS\+\_\+\+PER\+\_\+\+LINE\+\_\+\+MAX}]}
 
 Encoder configuration flags for raw reading. \mbox{\label{structst__encoder_ae23966f44fc93a65dd541ea5378c8d10}} 
-\index{st\+\_\+encoder@{st\+\_\+encoder}!gears\+\_\+params@{gears\+\_\+params}}
-\index{gears\+\_\+params@{gears\+\_\+params}!st\+\_\+encoder@{st\+\_\+encoder}}
-\subsubsection{gears\+\_\+params}
+\index{st\_encoder@{st\_encoder}!gears\_params@{gears\_params}}
+\index{gears\_params@{gears\_params}!st\_encoder@{st\_encoder}}
+\doxysubsubsection{gears\_params}
 {\footnotesize\ttfamily int8 gears\+\_\+params[3]}
 
 Number of teeth of first and second gear and related invariant. \mbox{\label{structst__encoder_a72a3f4edd175c9d8981a2595bcde938c}} 
-\index{st\+\_\+encoder@{st\+\_\+encoder}!m\+\_\+mult@{m\+\_\+mult}}
-\index{m\+\_\+mult@{m\+\_\+mult}!st\+\_\+encoder@{st\+\_\+encoder}}
-\subsubsection{m\+\_\+mult}
-{\footnotesize\ttfamily float32 m\+\_\+mult[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS}]}
+\index{st\_encoder@{st\_encoder}!m\_mult@{m\_mult}}
+\index{m\_mult@{m\_mult}!st\_encoder@{st\_encoder}}
+\doxysubsubsection{m\_mult}
+{\footnotesize\ttfamily float32 m\+\_\+mult[\textbf{ NUM\+\_\+\+OF\+\_\+\+SENSORS}]}
 
 Measurement multiplier. \mbox{\label{structst__encoder_ab544f035124be893918bafb611fe88d9}} 
-\index{st\+\_\+encoder@{st\+\_\+encoder}!m\+\_\+off@{m\+\_\+off}}
-\index{m\+\_\+off@{m\+\_\+off}!st\+\_\+encoder@{st\+\_\+encoder}}
-\subsubsection{m\+\_\+off}
-{\footnotesize\ttfamily int32 m\+\_\+off[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS}]}
+\index{st\_encoder@{st\_encoder}!m\_off@{m\_off}}
+\index{m\_off@{m\_off}!st\_encoder@{st\_encoder}}
+\doxysubsubsection{m\_off}
+{\footnotesize\ttfamily int32 m\+\_\+off[\textbf{ NUM\+\_\+\+OF\+\_\+\+SENSORS}]}
 
 Measurement offset. \mbox{\label{structst__encoder_a098badbb74d31ea6257e57f6d66823cc}} 
-\index{st\+\_\+encoder@{st\+\_\+encoder}!motor\+\_\+handle\+\_\+ratio@{motor\+\_\+handle\+\_\+ratio}}
-\index{motor\+\_\+handle\+\_\+ratio@{motor\+\_\+handle\+\_\+ratio}!st\+\_\+encoder@{st\+\_\+encoder}}
-\subsubsection{motor\+\_\+handle\+\_\+ratio}
+\index{st\_encoder@{st\_encoder}!motor\_handle\_ratio@{motor\_handle\_ratio}}
+\index{motor\_handle\_ratio@{motor\_handle\_ratio}!st\_encoder@{st\_encoder}}
+\doxysubsubsection{motor\_handle\_ratio}
 {\footnotesize\ttfamily int8 motor\+\_\+handle\+\_\+ratio}
 
 Discrete multiplier for handle device. \mbox{\label{structst__encoder_ac2e19d167eac4c8ca9ce97c646e78595}} 
-\index{st\+\_\+encoder@{st\+\_\+encoder}!res@{res}}
-\index{res@{res}!st\+\_\+encoder@{st\+\_\+encoder}}
-\subsubsection{res}
-{\footnotesize\ttfamily uint8 res[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+S\+E\+N\+S\+O\+RS}]}
+\index{st\_encoder@{st\_encoder}!res@{res}}
+\index{res@{res}!st\_encoder@{st\_encoder}}
+\doxysubsubsection{res}
+{\footnotesize\ttfamily uint8 res[\textbf{ NUM\+\_\+\+OF\+\_\+\+SENSORS}]}
 
 Angle resolution. \mbox{\label{structst__encoder_ab2479545d632531da12aab41325a8d8f}} 
-\index{st\+\_\+encoder@{st\+\_\+encoder}!unused\+\_\+bytes@{unused\+\_\+bytes}}
-\index{unused\+\_\+bytes@{unused\+\_\+bytes}!st\+\_\+encoder@{st\+\_\+encoder}}
-\subsubsection{unused\+\_\+bytes}
+\index{st\_encoder@{st\_encoder}!unused\_bytes@{unused\_bytes}}
+\index{unused\_bytes@{unused\_bytes}!st\_encoder@{st\_encoder}}
+\doxysubsubsection{unused\_bytes}
 {\footnotesize\ttfamily uint8 unused\+\_\+bytes[8]}
 
 Unused bytes to fill row. 

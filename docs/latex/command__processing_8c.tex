@@ -1,5 +1,5 @@
-\section{command\+\_\+processing.\+c File Reference}
-\label{command__processing_8c}\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
+\doxysection{command\+\_\+processing.\+c File Reference}
+\label{command__processing_8c}\index{command\_processing.c@{command\_processing.c}}
 
 
 Command processing functions.  
@@ -8,22 +8,20 @@ Command processing functions.
 {\ttfamily \#include \char`\"{}command\+\_\+processing.\+h\char`\"{}}\newline
 Include dependency graph for command\+\_\+processing.\+c\+:
 % FIG 0
-\subsection*{Functions}
+\doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \textbf{ comm\+Process} (void)
 \item 
-void \textbf{ info\+Send} (void)
-\item 
 void \textbf{ info\+Get} (uint16 info\+\_\+type)
 \item 
-void \textbf{ get\+\_\+param\+\_\+list} (uint8 $\ast$V\+A\+R\+\_\+P[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS}], uint8 T\+Y\+P\+ES[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS}], uint8 N\+U\+M\+\_\+\+I\+T\+E\+MS[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS}], uint8 N\+U\+M\+\_\+\+S\+T\+R\+U\+CT[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS}], uint8 $\ast$N\+U\+M\+\_\+\+M\+E\+NU, const char $\ast$P\+A\+R\+A\+M\+S\+\_\+\+S\+TR[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS}], uint8 C\+U\+S\+T\+O\+M\+\_\+\+P\+A\+R\+A\+M\+\_\+\+G\+ET[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+MS}], const char $\ast$M\+E\+N\+U\+\_\+\+S\+TR[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+M\+E\+NU}])
+void \textbf{ get\+\_\+param\+\_\+list} (uint8 $\ast$VAR\+\_\+P[\textbf{ NUM\+\_\+\+OF\+\_\+\+PARAMS}], uint8 TYPES[\textbf{ NUM\+\_\+\+OF\+\_\+\+PARAMS}], uint8 NUM\+\_\+\+ITEMS[\textbf{ NUM\+\_\+\+OF\+\_\+\+PARAMS}], uint8 NUM\+\_\+\+STRUCT[\textbf{ NUM\+\_\+\+OF\+\_\+\+PARAMS}], uint8 $\ast$NUM\+\_\+\+MENU, const char $\ast$PARAMS\+\_\+\+STR[\textbf{ NUM\+\_\+\+OF\+\_\+\+PARAMS}], uint8 CUSTOM\+\_\+\+PARAM\+\_\+\+GET[\textbf{ NUM\+\_\+\+OF\+\_\+\+PARAMS}], const char $\ast$MENU\+\_\+\+STR[\textbf{ NUM\+\_\+\+OF\+\_\+\+PARAMS\+\_\+\+MENU}])
 \item 
 void \textbf{ manage\+\_\+param\+\_\+list} (uint16 index)
 \item 
 void \textbf{ set\+\_\+custom\+\_\+param} (uint16 index)
 \item 
-void \textbf{ get\+\_\+\+I\+M\+U\+\_\+param\+\_\+list} (uint16 index)
+void \textbf{ get\+\_\+\+IMU\+\_\+param\+\_\+list} (uint16 index)
 \item 
 void \textbf{ set\+Zeros} ()
 \item 
@@ -31,13 +29,19 @@ void \textbf{ prepare\+\_\+generic\+\_\+info} (char $\ast$info\+\_\+string)
 \item 
 void \textbf{ prepare\+\_\+counter\+\_\+info} (char $\ast$info\+\_\+string)
 \item 
-void \textbf{ prepare\+\_\+\+S\+D\+\_\+param\+\_\+info} (char $\ast$info\+\_\+string)
+void \textbf{ prepare\+\_\+\+R01\+\_\+info} (char $\ast$info\+\_\+string)
 \item 
-void \textbf{ prepare\+\_\+\+S\+D\+\_\+legend} (char $\ast$info\+\_\+string)
+void \textbf{ prepare\+\_\+\+SD\+\_\+param\+\_\+info} (char $\ast$info\+\_\+string)
 \item 
-void \textbf{ prepare\+\_\+\+S\+D\+\_\+info} (char $\ast$info\+\_\+string)
+void \textbf{ prepare\+\_\+\+SD\+\_\+legend} (char $\ast$info\+\_\+string)
 \item 
-void \textbf{ I\+M\+U\+\_\+reading\+\_\+info} (char $\ast$info\+\_\+string)
+void \textbf{ prepare\+\_\+\+SD\+\_\+info} (char $\ast$info\+\_\+string)
+\item 
+void \textbf{ prepare\+\_\+\+SD\+\_\+\+EMG\+\_\+\+History\+\_\+legend} (char $\ast$info\+\_\+string)
+\item 
+void \textbf{ prepare\+\_\+\+SD\+\_\+\+EMG\+\_\+history} (char $\ast$info\+\_\+string)
+\item 
+void \textbf{ IMU\+\_\+reading\+\_\+info} (char $\ast$info\+\_\+string)
 \item 
 void \textbf{ comm\+Write\+\_\+old\+\_\+id} (uint8 $\ast$packet\+\_\+data, uint16 packet\+\_\+lenght, uint8 old\+\_\+id)
 \item 
@@ -45,7 +49,7 @@ void \textbf{ comm\+Write} (uint8 $\ast$packet\+\_\+data, uint16 packet\+\_\+len
 \item 
 void \textbf{ comm\+Write\+ID} (uint8 $\ast$packet\+\_\+data, uint16 packet\+\_\+lenght, uint8 id)
 \item 
-uint8 \textbf{ L\+C\+R\+Checksum} (uint8 $\ast$data\+\_\+array, uint8 data\+\_\+length)
+uint8 \textbf{ LCRChecksum} (uint8 $\ast$data\+\_\+array, uint8 data\+\_\+length)
 \item 
 void \textbf{ send\+Acknowledgment} (uint8 value)
 \item 
@@ -103,11 +107,13 @@ void \textbf{ cmd\+\_\+get\+\_\+encoder\+\_\+map} ()
 \item 
 void \textbf{ cmd\+\_\+get\+\_\+encoder\+\_\+raw} ()
 \item 
-void \textbf{ cmd\+\_\+get\+\_\+\+A\+D\+C\+\_\+map} ()
+void \textbf{ cmd\+\_\+get\+\_\+\+ADC\+\_\+map} ()
 \item 
-void \textbf{ cmd\+\_\+get\+\_\+\+A\+D\+C\+\_\+raw} ()
+void \textbf{ cmd\+\_\+get\+\_\+\+ADC\+\_\+raw} ()
 \item 
-void \textbf{ cmd\+\_\+get\+\_\+\+S\+D\+\_\+file} (uint16 filename\+\_\+length)
+void \textbf{ cmd\+\_\+get\+\_\+\+SD\+\_\+file} (uint16 filename\+\_\+length)
+\item 
+void \textbf{ cmd\+\_\+remove\+\_\+\+SD\+\_\+file} (uint16 filename\+\_\+length)
 \item 
 \mbox{\label{command__processing_8c_a308022a04c9da94099b233c05942f9d9}} 
 void {\bfseries air\+\_\+chambers\+\_\+control} (int slave\+\_\+motor\+\_\+idx)
@@ -124,15 +130,15 @@ void \textbf{ stop\+\_\+master\+\_\+device} ()
 \item 
 void \textbf{ deactivate\+\_\+slaves} ()
 \end{DoxyCompactItemize}
-\subsection*{Variables}
+\doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\label{command__processing_8c_aba5b9353e6d38cc61eb2bd363df61248}} 
-reg8 $\ast$ {\bfseries E\+E\+P\+R\+O\+M\+\_\+\+A\+D\+DR} = (reg8 $\ast$) C\+Y\+D\+E\+V\+\_\+\+E\+E\+\_\+\+B\+A\+SE
+reg8 $\ast$ {\bfseries EEPROM\+\_\+\+ADDR} = (reg8 $\ast$) CYDEV\+\_\+\+EE\+\_\+\+BASE
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
+\doxysubsection{Detailed Description}
 Command processing functions. 
 
 \begin{DoxyDate}{Date}
@@ -148,149 +154,156 @@ March 20th, 2020
 \end{DoxyCopyright}
 
 
-\subsection{Function Documentation}
+\doxysubsection{Function Documentation}
 \mbox{\label{command__processing_8c_a107fc9f2982f9a953bdd82aa07279499}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+activate@{cmd\+\_\+activate}}
-\index{cmd\+\_\+activate@{cmd\+\_\+activate}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{cmd\+\_\+activate()}
+\index{command\_processing.c@{command\_processing.c}!cmd\_activate@{cmd\_activate}}
+\index{cmd\_activate@{cmd\_activate}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_activate()}
 {\footnotesize\ttfamily void cmd\+\_\+activate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function activates the board \mbox{\label{command__processing_8c_a0da9d76da2e4332137635f18e1d0004b}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+get\+\_\+accelerations@{cmd\+\_\+get\+\_\+accelerations}}
-\index{cmd\+\_\+get\+\_\+accelerations@{cmd\+\_\+get\+\_\+accelerations}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{cmd\+\_\+get\+\_\+accelerations()}
+\index{command\_processing.c@{command\_processing.c}!cmd\_get\_accelerations@{cmd\_get\_accelerations}}
+\index{cmd\_get\_accelerations@{cmd\_get\_accelerations}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_get\_accelerations()}
 {\footnotesize\ttfamily void cmd\+\_\+get\+\_\+accelerations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function gets the encoders accelerations and puts them in the package to be sent. \mbox{\label{command__processing_8c_a554d563001517bfbc44400a1e999b393}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+get\+\_\+activate@{cmd\+\_\+get\+\_\+activate}}
-\index{cmd\+\_\+get\+\_\+activate@{cmd\+\_\+get\+\_\+activate}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{cmd\+\_\+get\+\_\+activate()}
+\index{command\_processing.c@{command\_processing.c}!cmd\_get\_activate@{cmd\_get\_activate}}
+\index{cmd\_get\_activate@{cmd\_get\_activate}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_get\_activate()}
 {\footnotesize\ttfamily void cmd\+\_\+get\+\_\+activate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function gets the board activation status and puts it in the package to be sent. \mbox{\label{command__processing_8c_aed52a69c50e11b3db2feaebe65bacdc9}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+get\+\_\+\+A\+D\+C\+\_\+map@{cmd\+\_\+get\+\_\+\+A\+D\+C\+\_\+map}}
-\index{cmd\+\_\+get\+\_\+\+A\+D\+C\+\_\+map@{cmd\+\_\+get\+\_\+\+A\+D\+C\+\_\+map}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{cmd\+\_\+get\+\_\+\+A\+D\+C\+\_\+map()}
-{\footnotesize\ttfamily void cmd\+\_\+get\+\_\+\+A\+D\+C\+\_\+map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\index{command\_processing.c@{command\_processing.c}!cmd\_get\_ADC\_map@{cmd\_get\_ADC\_map}}
+\index{cmd\_get\_ADC\_map@{cmd\_get\_ADC\_map}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_get\_ADC\_map()}
+{\footnotesize\ttfamily void cmd\+\_\+get\+\_\+\+ADC\+\_\+map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-This function gets A\+DC map \mbox{\label{command__processing_8c_afc8c1d4f31f68fc267fdfb6f9ce27f9b}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+get\+\_\+\+A\+D\+C\+\_\+raw@{cmd\+\_\+get\+\_\+\+A\+D\+C\+\_\+raw}}
-\index{cmd\+\_\+get\+\_\+\+A\+D\+C\+\_\+raw@{cmd\+\_\+get\+\_\+\+A\+D\+C\+\_\+raw}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{cmd\+\_\+get\+\_\+\+A\+D\+C\+\_\+raw()}
-{\footnotesize\ttfamily void cmd\+\_\+get\+\_\+\+A\+D\+C\+\_\+raw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+This function gets ADC map \mbox{\label{command__processing_8c_afc8c1d4f31f68fc267fdfb6f9ce27f9b}} 
+\index{command\_processing.c@{command\_processing.c}!cmd\_get\_ADC\_raw@{cmd\_get\_ADC\_raw}}
+\index{cmd\_get\_ADC\_raw@{cmd\_get\_ADC\_raw}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_get\_ADC\_raw()}
+{\footnotesize\ttfamily void cmd\+\_\+get\+\_\+\+ADC\+\_\+raw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function gets Additional emg raw values \mbox{\label{command__processing_8c_a45a90a8455bfdb6a7f0e118da2c6f0a6}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+get\+\_\+curr\+\_\+and\+\_\+meas@{cmd\+\_\+get\+\_\+curr\+\_\+and\+\_\+meas}}
-\index{cmd\+\_\+get\+\_\+curr\+\_\+and\+\_\+meas@{cmd\+\_\+get\+\_\+curr\+\_\+and\+\_\+meas}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{cmd\+\_\+get\+\_\+curr\+\_\+and\+\_\+meas()}
+\index{command\_processing.c@{command\_processing.c}!cmd\_get\_curr\_and\_meas@{cmd\_get\_curr\_and\_meas}}
+\index{cmd\_get\_curr\_and\_meas@{cmd\_get\_curr\_and\_meas}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_get\_curr\_and\_meas()}
 {\footnotesize\ttfamily void cmd\+\_\+get\+\_\+curr\+\_\+and\+\_\+meas (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function gets the currents and encoders measurements and puts them in the package to be sent. \mbox{\label{command__processing_8c_aaf613e251c1e14fe4fffe3e9e033f9f7}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+get\+\_\+currents@{cmd\+\_\+get\+\_\+currents}}
-\index{cmd\+\_\+get\+\_\+currents@{cmd\+\_\+get\+\_\+currents}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{cmd\+\_\+get\+\_\+currents()}
+\index{command\_processing.c@{command\_processing.c}!cmd\_get\_currents@{cmd\_get\_currents}}
+\index{cmd\_get\_currents@{cmd\_get\_currents}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_get\_currents()}
 {\footnotesize\ttfamily void cmd\+\_\+get\+\_\+currents (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function gets the motor current and puts it in the package to be sent to the user. \mbox{\label{command__processing_8c_accac7b4a0a0e43618bbb983c73106229}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+get\+\_\+currents\+\_\+for\+\_\+cuff@{cmd\+\_\+get\+\_\+currents\+\_\+for\+\_\+cuff}}
-\index{cmd\+\_\+get\+\_\+currents\+\_\+for\+\_\+cuff@{cmd\+\_\+get\+\_\+currents\+\_\+for\+\_\+cuff}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{cmd\+\_\+get\+\_\+currents\+\_\+for\+\_\+cuff()}
+\index{command\_processing.c@{command\_processing.c}!cmd\_get\_currents\_for\_cuff@{cmd\_get\_currents\_for\_cuff}}
+\index{cmd\_get\_currents\_for\_cuff@{cmd\_get\_currents\_for\_cuff}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_get\_currents\_for\_cuff()}
 {\footnotesize\ttfamily void cmd\+\_\+get\+\_\+currents\+\_\+for\+\_\+cuff (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function gets the motor current and puts it in the package to be sent to the Cuff device, using the comm\+Write\+\_\+to\+\_\+cuff function. \mbox{\label{command__processing_8c_ae579c6ac56fef33632f9c9f2c42b90a0}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+get\+\_\+emg@{cmd\+\_\+get\+\_\+emg}}
-\index{cmd\+\_\+get\+\_\+emg@{cmd\+\_\+get\+\_\+emg}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{cmd\+\_\+get\+\_\+emg()}
+\index{command\_processing.c@{command\_processing.c}!cmd\_get\_emg@{cmd\_get\_emg}}
+\index{cmd\_get\_emg@{cmd\_get\_emg}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_get\_emg()}
 {\footnotesize\ttfamily void cmd\+\_\+get\+\_\+emg (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function gets the electromyographic sensors measurements and puts them in the package to be sent. \mbox{\label{command__processing_8c_a8abc9b37221e3003a9132a698d450851}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+get\+\_\+encoder\+\_\+map@{cmd\+\_\+get\+\_\+encoder\+\_\+map}}
-\index{cmd\+\_\+get\+\_\+encoder\+\_\+map@{cmd\+\_\+get\+\_\+encoder\+\_\+map}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{cmd\+\_\+get\+\_\+encoder\+\_\+map()}
+\index{command\_processing.c@{command\_processing.c}!cmd\_get\_encoder\_map@{cmd\_get\_encoder\_map}}
+\index{cmd\_get\_encoder\_map@{cmd\_get\_encoder\_map}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_get\_encoder\_map()}
 {\footnotesize\ttfamily void cmd\+\_\+get\+\_\+encoder\+\_\+map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function gets Encoder map \mbox{\label{command__processing_8c_aa84daad5d8efc2a01c63f6124c92fb5b}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+get\+\_\+encoder\+\_\+raw@{cmd\+\_\+get\+\_\+encoder\+\_\+raw}}
-\index{cmd\+\_\+get\+\_\+encoder\+\_\+raw@{cmd\+\_\+get\+\_\+encoder\+\_\+raw}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{cmd\+\_\+get\+\_\+encoder\+\_\+raw()}
+\index{command\_processing.c@{command\_processing.c}!cmd\_get\_encoder\_raw@{cmd\_get\_encoder\_raw}}
+\index{cmd\_get\_encoder\_raw@{cmd\_get\_encoder\_raw}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_get\_encoder\_raw()}
 {\footnotesize\ttfamily void cmd\+\_\+get\+\_\+encoder\+\_\+raw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function gets Encoder raw values \mbox{\label{command__processing_8c_a40f7c67690279132ab72019b76165cb8}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+get\+\_\+imu\+\_\+readings@{cmd\+\_\+get\+\_\+imu\+\_\+readings}}
-\index{cmd\+\_\+get\+\_\+imu\+\_\+readings@{cmd\+\_\+get\+\_\+imu\+\_\+readings}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{cmd\+\_\+get\+\_\+imu\+\_\+readings()}
+\index{command\_processing.c@{command\_processing.c}!cmd\_get\_imu\_readings@{cmd\_get\_imu\_readings}}
+\index{cmd\_get\_imu\_readings@{cmd\_get\_imu\_readings}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_get\_imu\_readings()}
 {\footnotesize\ttfamily void cmd\+\_\+get\+\_\+imu\+\_\+readings (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-This function gets I\+MU readings \mbox{\label{command__processing_8c_a20db4694e8caa572ec479f73ce8b3b02}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+get\+\_\+inputs@{cmd\+\_\+get\+\_\+inputs}}
-\index{cmd\+\_\+get\+\_\+inputs@{cmd\+\_\+get\+\_\+inputs}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{cmd\+\_\+get\+\_\+inputs()}
+This function gets IMU readings \mbox{\label{command__processing_8c_a20db4694e8caa572ec479f73ce8b3b02}} 
+\index{command\_processing.c@{command\_processing.c}!cmd\_get\_inputs@{cmd\_get\_inputs}}
+\index{cmd\_get\_inputs@{cmd\_get\_inputs}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_get\_inputs()}
 {\footnotesize\ttfamily void cmd\+\_\+get\+\_\+inputs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function gets the current motor reference inputs and puts them in the package to be sent. \mbox{\label{command__processing_8c_a09b189bd1592a8f95769a1907f44b555}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+get\+\_\+joystick@{cmd\+\_\+get\+\_\+joystick}}
-\index{cmd\+\_\+get\+\_\+joystick@{cmd\+\_\+get\+\_\+joystick}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{cmd\+\_\+get\+\_\+joystick()}
+\index{command\_processing.c@{command\_processing.c}!cmd\_get\_joystick@{cmd\_get\_joystick}}
+\index{cmd\_get\_joystick@{cmd\_get\_joystick}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_get\_joystick()}
 {\footnotesize\ttfamily void cmd\+\_\+get\+\_\+joystick (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function gets the joystick analog values and puts them in the package to be sent. \mbox{\label{command__processing_8c_af5ccd403f1d3e49c97bafd6e7713cff3}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+get\+\_\+measurements@{cmd\+\_\+get\+\_\+measurements}}
-\index{cmd\+\_\+get\+\_\+measurements@{cmd\+\_\+get\+\_\+measurements}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{cmd\+\_\+get\+\_\+measurements()}
+\index{command\_processing.c@{command\_processing.c}!cmd\_get\_measurements@{cmd\_get\_measurements}}
+\index{cmd\_get\_measurements@{cmd\_get\_measurements}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_get\_measurements()}
 {\footnotesize\ttfamily void cmd\+\_\+get\+\_\+measurements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Bunch of functions used on request from U\+A\+RT communication \mbox{\label{command__processing_8c_a90d37f64d1eac91112e56a3724e57e0a}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+get\+\_\+\+S\+D\+\_\+file@{cmd\+\_\+get\+\_\+\+S\+D\+\_\+file}}
-\index{cmd\+\_\+get\+\_\+\+S\+D\+\_\+file@{cmd\+\_\+get\+\_\+\+S\+D\+\_\+file}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{cmd\+\_\+get\+\_\+\+S\+D\+\_\+file()}
-{\footnotesize\ttfamily void cmd\+\_\+get\+\_\+\+S\+D\+\_\+file (\begin{DoxyParamCaption}\item[{uint16}]{filename\+\_\+length }\end{DoxyParamCaption})}
+Bunch of functions used on request from UART communication \mbox{\label{command__processing_8c_a90d37f64d1eac91112e56a3724e57e0a}} 
+\index{command\_processing.c@{command\_processing.c}!cmd\_get\_SD\_file@{cmd\_get\_SD\_file}}
+\index{cmd\_get\_SD\_file@{cmd\_get\_SD\_file}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_get\_SD\_file()}
+{\footnotesize\ttfamily void cmd\+\_\+get\+\_\+\+SD\+\_\+file (\begin{DoxyParamCaption}\item[{uint16}]{filename\+\_\+length }\end{DoxyParamCaption})}
 
 This function gets a file on the SD \mbox{\label{command__processing_8c_a212883283bd7a8f32846615271cad8ce}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+get\+\_\+velocities@{cmd\+\_\+get\+\_\+velocities}}
-\index{cmd\+\_\+get\+\_\+velocities@{cmd\+\_\+get\+\_\+velocities}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{cmd\+\_\+get\+\_\+velocities()}
+\index{command\_processing.c@{command\_processing.c}!cmd\_get\_velocities@{cmd\_get\_velocities}}
+\index{cmd\_get\_velocities@{cmd\_get\_velocities}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_get\_velocities()}
 {\footnotesize\ttfamily void cmd\+\_\+get\+\_\+velocities (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function gets the encoders velocities and puts them in the package to be sent. \mbox{\label{command__processing_8c_a704f8c8cb0f4d75f243fc2b79bc34188}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+ping@{cmd\+\_\+ping}}
-\index{cmd\+\_\+ping@{cmd\+\_\+ping}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{cmd\+\_\+ping()}
+\index{command\_processing.c@{command\_processing.c}!cmd\_ping@{cmd\_ping}}
+\index{cmd\_ping@{cmd\_ping}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_ping()}
 {\footnotesize\ttfamily void cmd\+\_\+ping (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-This function is used to ping the device and see if is connected. \mbox{\label{command__processing_8c_aa86bf1f2fa69ab5927f7e4e40eb40581}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+set\+\_\+baudrate@{cmd\+\_\+set\+\_\+baudrate}}
-\index{cmd\+\_\+set\+\_\+baudrate@{cmd\+\_\+set\+\_\+baudrate}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{cmd\+\_\+set\+\_\+baudrate()}
+This function is used to ping the device and see if is connected. \mbox{\label{command__processing_8c_ae4ff78ea00367bc472df80011c0ebc86}} 
+\index{command\_processing.c@{command\_processing.c}!cmd\_remove\_SD\_file@{cmd\_remove\_SD\_file}}
+\index{cmd\_remove\_SD\_file@{cmd\_remove\_SD\_file}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_remove\_SD\_file()}
+{\footnotesize\ttfamily void cmd\+\_\+remove\+\_\+\+SD\+\_\+file (\begin{DoxyParamCaption}\item[{uint16}]{filename\+\_\+length }\end{DoxyParamCaption})}
+
+This function removes a file on the SD \mbox{\label{command__processing_8c_aa86bf1f2fa69ab5927f7e4e40eb40581}} 
+\index{command\_processing.c@{command\_processing.c}!cmd\_set\_baudrate@{cmd\_set\_baudrate}}
+\index{cmd\_set\_baudrate@{cmd\_set\_baudrate}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_set\_baudrate()}
 {\footnotesize\ttfamily void cmd\+\_\+set\+\_\+baudrate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function sets the desired communication baudrate. It is possible to select a value equal to 460800 or 2000000. \mbox{\label{command__processing_8c_a2d8a4542f55af960a27f875b00aad6a1}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+set\+\_\+inputs@{cmd\+\_\+set\+\_\+inputs}}
-\index{cmd\+\_\+set\+\_\+inputs@{cmd\+\_\+set\+\_\+inputs}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{cmd\+\_\+set\+\_\+inputs()}
+\index{command\_processing.c@{command\_processing.c}!cmd\_set\_inputs@{cmd\_set\_inputs}}
+\index{cmd\_set\_inputs@{cmd\_set\_inputs}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_set\_inputs()}
 {\footnotesize\ttfamily void cmd\+\_\+set\+\_\+inputs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function gets the inputs from the received package and sets them as motor reference. \mbox{\label{command__processing_8c_a1a2493bfc2f30171d7e7a3bd5aebab14}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!cmd\+\_\+store\+\_\+params@{cmd\+\_\+store\+\_\+params}}
-\index{cmd\+\_\+store\+\_\+params@{cmd\+\_\+store\+\_\+params}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{cmd\+\_\+store\+\_\+params()}
+\index{command\_processing.c@{command\_processing.c}!cmd\_store\_params@{cmd\_store\_params}}
+\index{cmd\_store\_params@{cmd\_store\_params}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{cmd\_store\_params()}
 {\footnotesize\ttfamily void cmd\+\_\+store\+\_\+params (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-This function stores the parameters to the E\+E\+P\+R\+OM memory \mbox{\label{command__processing_8c_a0c97206a61d782ebd9aa24bbb96f8aea}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!comm\+Process@{comm\+Process}}
-\index{comm\+Process@{comm\+Process}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{comm\+Process()}
+This function stores the parameters to the EEPROM memory \mbox{\label{command__processing_8c_a0c97206a61d782ebd9aa24bbb96f8aea}} 
+\index{command\_processing.c@{command\_processing.c}!commProcess@{commProcess}}
+\index{commProcess@{commProcess}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{commProcess()}
 {\footnotesize\ttfamily void comm\+Process (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-This function unpacks the received package, depending on the command received. \mbox{\label{command__processing_8c_af37abb7623deb4ea3af0da3801ab3788}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!comm\+Read\+Res\+Curr\+From\+SH@{comm\+Read\+Res\+Curr\+From\+SH}}
-\index{comm\+Read\+Res\+Curr\+From\+SH@{comm\+Read\+Res\+Curr\+From\+SH}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{comm\+Read\+Res\+Curr\+From\+S\+H()}
+This function unpacks the received package, depending on the command received. ~\newline
+ \mbox{\label{command__processing_8c_af37abb7623deb4ea3af0da3801ab3788}} 
+\index{command\_processing.c@{command\_processing.c}!commReadResCurrFromSH@{commReadResCurrFromSH}}
+\index{commReadResCurrFromSH@{commReadResCurrFromSH}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{commReadResCurrFromSH()}
 {\footnotesize\ttfamily int16 comm\+Read\+Res\+Curr\+From\+SH (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function reads on the serial port the residual current from SH. \mbox{\label{command__processing_8c_af92ab4f3c1e0c0e8f5966bf2e2edeaba}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!comm\+Write@{comm\+Write}}
-\index{comm\+Write@{comm\+Write}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{comm\+Write()}
+\index{command\_processing.c@{command\_processing.c}!commWrite@{commWrite}}
+\index{commWrite@{commWrite}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{commWrite()}
 {\footnotesize\ttfamily void comm\+Write (\begin{DoxyParamCaption}\item[{uint8 $\ast$}]{packet\+\_\+data,  }\item[{uint16}]{packet\+\_\+lenght }\end{DoxyParamCaption})}
 
 This function writes on the serial port the package that needs to be sent to the user.
@@ -303,12 +316,12 @@ This function writes on the serial port the package that needs to be sent to the
 \hline
 \end{DoxyParams}
 \mbox{\label{command__processing_8c_a517f4c61166381d40767fce9011e3c96}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!comm\+Write\+\_\+old\+\_\+id@{comm\+Write\+\_\+old\+\_\+id}}
-\index{comm\+Write\+\_\+old\+\_\+id@{comm\+Write\+\_\+old\+\_\+id}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{comm\+Write\+\_\+old\+\_\+id()}
+\index{command\_processing.c@{command\_processing.c}!commWrite\_old\_id@{commWrite\_old\_id}}
+\index{commWrite\_old\_id@{commWrite\_old\_id}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{commWrite\_old\_id()}
 {\footnotesize\ttfamily void comm\+Write\+\_\+old\+\_\+id (\begin{DoxyParamCaption}\item[{uint8 $\ast$}]{packet\+\_\+data,  }\item[{uint16}]{packet\+\_\+lenght,  }\item[{uint8}]{old\+\_\+id }\end{DoxyParamCaption})}
 
-This function writes on the serial port the package that needs to be sent to the user. Is used only when a new is set, to communicate back to the A\+P\+Is that the new ID setting went fine or there was an error.
+This function writes on the serial port the package that needs to be sent to the user. Is used only when a new is set, to communicate back to the APIs that the new ID setting went fine or there was an error.
 
 
 \begin{DoxyParams}{Parameters}
@@ -320,9 +333,9 @@ This function writes on the serial port the package that needs to be sent to the
 \hline
 \end{DoxyParams}
 \mbox{\label{command__processing_8c_aed6a94cc62768fbec790b25a22eb3424}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!comm\+Write\+ID@{comm\+Write\+ID}}
-\index{comm\+Write\+ID@{comm\+Write\+ID}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{comm\+Write\+I\+D()}
+\index{command\_processing.c@{command\_processing.c}!commWriteID@{commWriteID}}
+\index{commWriteID@{commWriteID}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{commWriteID()}
 {\footnotesize\ttfamily void comm\+Write\+ID (\begin{DoxyParamCaption}\item[{uint8 $\ast$}]{packet\+\_\+data,  }\item[{uint16}]{packet\+\_\+lenght,  }\item[{uint8}]{id }\end{DoxyParamCaption})}
 
 This function writes on the serial port the package that needs to be sent to another board.
@@ -335,36 +348,36 @@ This function writes on the serial port the package that needs to be sent to ano
 \hline
 \end{DoxyParams}
 \mbox{\label{command__processing_8c_a22eb92c869daf62079d72a328c54aec7}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!deactivate\+\_\+slaves@{deactivate\+\_\+slaves}}
-\index{deactivate\+\_\+slaves@{deactivate\+\_\+slaves}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{deactivate\+\_\+slaves()}
+\index{command\_processing.c@{command\_processing.c}!deactivate\_slaves@{deactivate\_slaves}}
+\index{deactivate\_slaves@{deactivate\_slaves}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{deactivate\_slaves()}
 {\footnotesize\ttfamily void deactivate\+\_\+slaves (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function is used to create a package to deactivate motors on all the other devices. \mbox{\label{command__processing_8c_ab7088642f851a8375e8b8edf673b91a4}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!drive\+\_\+slave@{drive\+\_\+slave}}
-\index{drive\+\_\+slave@{drive\+\_\+slave}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{drive\+\_\+slave()}
+\index{command\_processing.c@{command\_processing.c}!drive\_slave@{drive\_slave}}
+\index{drive\_slave@{drive\_slave}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{drive\_slave()}
 {\footnotesize\ttfamily void drive\+\_\+slave (\begin{DoxyParamCaption}\item[{uint8}]{motor\+\_\+idx,  }\item[{uint8}]{slave\+\_\+\+ID }\end{DoxyParamCaption})}
 
 This function is used to create a package and send it to another device, only if the actual board is in master mode. \mbox{\label{command__processing_8c_a85586060c313547d3baf0ae2178665dd}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!get\+\_\+\+I\+M\+U\+\_\+param\+\_\+list@{get\+\_\+\+I\+M\+U\+\_\+param\+\_\+list}}
-\index{get\+\_\+\+I\+M\+U\+\_\+param\+\_\+list@{get\+\_\+\+I\+M\+U\+\_\+param\+\_\+list}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{get\+\_\+\+I\+M\+U\+\_\+param\+\_\+list()}
-{\footnotesize\ttfamily void get\+\_\+\+I\+M\+U\+\_\+param\+\_\+list (\begin{DoxyParamCaption}\item[{uint16}]{index }\end{DoxyParamCaption})}
+\index{command\_processing.c@{command\_processing.c}!get\_IMU\_param\_list@{get\_IMU\_param\_list}}
+\index{get\_IMU\_param\_list@{get\_IMU\_param\_list}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{get\_IMU\_param\_list()}
+{\footnotesize\ttfamily void get\+\_\+\+IMU\+\_\+param\+\_\+list (\begin{DoxyParamCaption}\item[{uint16}]{index }\end{DoxyParamCaption})}
 
 This function, depending on the \doxyref{Firmware}{p.}{index} received, gets the list of parameters with their values. \mbox{\label{command__processing_8c_af3f586a12ed6bf58eaf21417c1d3fd92}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!get\+\_\+param\+\_\+list@{get\+\_\+param\+\_\+list}}
-\index{get\+\_\+param\+\_\+list@{get\+\_\+param\+\_\+list}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{get\+\_\+param\+\_\+list()}
-{\footnotesize\ttfamily void get\+\_\+param\+\_\+list (\begin{DoxyParamCaption}\item[{uint8 $\ast$}]{V\+A\+R\+\_\+P[\+N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S],  }\item[{uint8}]{T\+Y\+P\+ES[\+N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S],  }\item[{uint8}]{N\+U\+M\+\_\+\+I\+T\+E\+MS[\+N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S],  }\item[{uint8}]{N\+U\+M\+\_\+\+S\+T\+R\+U\+CT[\+N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S],  }\item[{uint8 $\ast$}]{N\+U\+M\+\_\+\+M\+E\+NU,  }\item[{const char $\ast$}]{P\+A\+R\+A\+M\+S\+\_\+\+S\+TR[\+N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S],  }\item[{uint8}]{C\+U\+S\+T\+O\+M\+\_\+\+P\+A\+R\+A\+M\+\_\+\+S\+ET[\+N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S],  }\item[{const char $\ast$}]{M\+E\+N\+U\+\_\+\+S\+TR[\+N\+U\+M\+\_\+\+O\+F\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+M\+E\+N\+U] }\end{DoxyParamCaption})}
+\index{command\_processing.c@{command\_processing.c}!get\_param\_list@{get\_param\_list}}
+\index{get\_param\_list@{get\_param\_list}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{get\_param\_list()}
+{\footnotesize\ttfamily void get\+\_\+param\+\_\+list (\begin{DoxyParamCaption}\item[{uint8 $\ast$}]{VAR\+\_\+P[\+NUM\+\_\+\+OF\+\_\+\+PARAMS],  }\item[{uint8}]{TYPES[\+NUM\+\_\+\+OF\+\_\+\+PARAMS],  }\item[{uint8}]{NUM\+\_\+\+ITEMS[\+NUM\+\_\+\+OF\+\_\+\+PARAMS],  }\item[{uint8}]{NUM\+\_\+\+STRUCT[\+NUM\+\_\+\+OF\+\_\+\+PARAMS],  }\item[{uint8 $\ast$}]{NUM\+\_\+\+MENU,  }\item[{const char $\ast$}]{PARAMS\+\_\+\+STR[\+NUM\+\_\+\+OF\+\_\+\+PARAMS],  }\item[{uint8}]{CUSTOM\+\_\+\+PARAM\+\_\+\+SET[\+NUM\+\_\+\+OF\+\_\+\+PARAMS],  }\item[{const char $\ast$}]{MENU\+\_\+\+STR[\+NUM\+\_\+\+OF\+\_\+\+PARAMS\+\_\+\+MENU] }\end{DoxyParamCaption})}
 
 This function, depending on the \doxyref{Firmware}{p.}{index} received, gets the list of parameters with their values. \mbox{\label{command__processing_8c_a8cea8956330cefb9796dcc589defab47}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!I\+M\+U\+\_\+reading\+\_\+info@{I\+M\+U\+\_\+reading\+\_\+info}}
-\index{I\+M\+U\+\_\+reading\+\_\+info@{I\+M\+U\+\_\+reading\+\_\+info}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{I\+M\+U\+\_\+reading\+\_\+info()}
-{\footnotesize\ttfamily void I\+M\+U\+\_\+reading\+\_\+info (\begin{DoxyParamCaption}\item[{char $\ast$}]{info\+\_\+string }\end{DoxyParamCaption})}
+\index{command\_processing.c@{command\_processing.c}!IMU\_reading\_info@{IMU\_reading\_info}}
+\index{IMU\_reading\_info@{IMU\_reading\_info}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{IMU\_reading\_info()}
+{\footnotesize\ttfamily void IMU\+\_\+reading\+\_\+info (\begin{DoxyParamCaption}\item[{char $\ast$}]{info\+\_\+string }\end{DoxyParamCaption})}
 
-This function is used to prepare an information string about the I\+MU sensors last reading.
+This function is used to prepare an information string about the IMU sensors last reading.
 
 
 \begin{DoxyParams}{Parameters}
@@ -372,9 +385,9 @@ This function is used to prepare an information string about the I\+MU sensors l
 \hline
 \end{DoxyParams}
 \mbox{\label{command__processing_8c_a525ccbc7ac3901d938dc352172ee2531}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!info\+Get@{info\+Get}}
-\index{info\+Get@{info\+Get}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{info\+Get()}
+\index{command\_processing.c@{command\_processing.c}!infoGet@{infoGet}}
+\index{infoGet@{infoGet}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{infoGet()}
 {\footnotesize\ttfamily void info\+Get (\begin{DoxyParamCaption}\item[{uint16}]{info\+\_\+type }\end{DoxyParamCaption})}
 
 This function sends the firmware information prepared with prepare\+\_\+general\+\_\+info or \doxyref{prepare\+\_\+counter\+\_\+info}{p.}{command__processing_8h_a36e3659e6603634b76ed735aa81bb97b} through the serial port to the user interface. Is used when the ID is specified.
@@ -384,17 +397,11 @@ This function sends the firmware information prepared with prepare\+\_\+general\
 {\em info\+\_\+type} & The type of the information needed. \\
 \hline
 \end{DoxyParams}
-\mbox{\label{command__processing_8c_a0f8a936c0c43abd1e7ba5add8cbcbf70}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!info\+Send@{info\+Send}}
-\index{info\+Send@{info\+Send}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{info\+Send()}
-{\footnotesize\ttfamily void info\+Send (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-This function sends the firmware information prepared with info\+Prepare through the serial port to the user interface. Is used when no ID is specified. \mbox{\label{command__processing_8c_a6205a6e88f72f4cc321a7d8abca23e26}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!L\+C\+R\+Checksum@{L\+C\+R\+Checksum}}
-\index{L\+C\+R\+Checksum@{L\+C\+R\+Checksum}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{L\+C\+R\+Checksum()}
-{\footnotesize\ttfamily uint8 L\+C\+R\+Checksum (\begin{DoxyParamCaption}\item[{uint8 $\ast$}]{data\+\_\+array,  }\item[{uint8}]{data\+\_\+length }\end{DoxyParamCaption})}
+\mbox{\label{command__processing_8c_a6205a6e88f72f4cc321a7d8abca23e26}} 
+\index{command\_processing.c@{command\_processing.c}!LCRChecksum@{LCRChecksum}}
+\index{LCRChecksum@{LCRChecksum}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{LCRChecksum()}
+{\footnotesize\ttfamily uint8 LCRChecksum (\begin{DoxyParamCaption}\item[{uint8 $\ast$}]{data\+\_\+array,  }\item[{uint8}]{data\+\_\+length }\end{DoxyParamCaption})}
 
 This function calculates a checksum of the array to see if the received data is consistent.
 
@@ -409,9 +416,9 @@ This function calculates a checksum of the array to see if the received data is 
 The calculated checksum for the relative data\+\_\+array. 
 \end{DoxyReturn}
 \mbox{\label{command__processing_8c_a3495e73c73a56de8ec81a4a5defabf1b}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!manage\+\_\+param\+\_\+list@{manage\+\_\+param\+\_\+list}}
-\index{manage\+\_\+param\+\_\+list@{manage\+\_\+param\+\_\+list}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{manage\+\_\+param\+\_\+list()}
+\index{command\_processing.c@{command\_processing.c}!manage\_param\_list@{manage\_param\_list}}
+\index{manage\_param\_list@{manage\_param\_list}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{manage\_param\_list()}
 {\footnotesize\ttfamily void manage\+\_\+param\+\_\+list (\begin{DoxyParamCaption}\item[{uint16}]{index }\end{DoxyParamCaption})}
 
 This function, depending on the \doxyref{Firmware}{p.}{index} received, gets the list of parameters with their values and sends them to user or sets a parameter from all the parameters of the device.
@@ -422,9 +429,9 @@ This function, depending on the \doxyref{Firmware}{p.}{index} received, gets the
 \hline
 \end{DoxyParams}
 \mbox{\label{command__processing_8c_a48f1d2aa212e255d0a3322e576fc8574}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!mem\+Init@{mem\+Init}}
-\index{mem\+Init@{mem\+Init}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{mem\+Init()}
+\index{command\_processing.c@{command\_processing.c}!memInit@{memInit}}
+\index{memInit@{memInit}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{memInit()}
 {\footnotesize\ttfamily uint8 mem\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This functions initializes the memory. It is used also to restore the the parameters to their default values.
@@ -433,53 +440,53 @@ This functions initializes the memory. It is used also to restore the the parame
 A true value if the memory is correctly initialized, false otherwise. 
 \end{DoxyReturn}
 \mbox{\label{command__processing_8c_a3dd6f5b24ace363132fc9b1883e7cd88}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!mem\+Init\+\_\+\+Air\+Chambers\+Fb@{mem\+Init\+\_\+\+Air\+Chambers\+Fb}}
-\index{mem\+Init\+\_\+\+Air\+Chambers\+Fb@{mem\+Init\+\_\+\+Air\+Chambers\+Fb}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{mem\+Init\+\_\+\+Air\+Chambers\+Fb()}
+\index{command\_processing.c@{command\_processing.c}!memInit\_AirChambersFb@{memInit\_AirChambersFb}}
+\index{memInit\_AirChambersFb@{memInit\_AirChambersFb}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{memInit\_AirChambersFb()}
 {\footnotesize\ttfamily void mem\+Init\+\_\+\+Air\+Chambers\+Fb (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This functions initializes the memory. It is used also to restore the the parameters to their default values. Specific for Air Chambers firmware \mbox{\label{command__processing_8c_a9a269059a30ccb92e4d493baa0e7c509}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!mem\+Init\+\_\+\+Master@{mem\+Init\+\_\+\+Master}}
-\index{mem\+Init\+\_\+\+Master@{mem\+Init\+\_\+\+Master}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{mem\+Init\+\_\+\+Master()}
+\index{command\_processing.c@{command\_processing.c}!memInit\_Master@{memInit\_Master}}
+\index{memInit\_Master@{memInit\_Master}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{memInit\_Master()}
 {\footnotesize\ttfamily void mem\+Init\+\_\+\+Master (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This functions initializes the memory. It is used also to restore the the parameters to their default values. Specific for Master firmware \mbox{\label{command__processing_8c_a365625dbe7bb68797bed3abb1c492d42}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!mem\+Init\+\_\+\+Otbk\+Act\+Wrist\+Ms@{mem\+Init\+\_\+\+Otbk\+Act\+Wrist\+Ms}}
-\index{mem\+Init\+\_\+\+Otbk\+Act\+Wrist\+Ms@{mem\+Init\+\_\+\+Otbk\+Act\+Wrist\+Ms}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{mem\+Init\+\_\+\+Otbk\+Act\+Wrist\+Ms()}
+\index{command\_processing.c@{command\_processing.c}!memInit\_OtbkActWristMs@{memInit\_OtbkActWristMs}}
+\index{memInit\_OtbkActWristMs@{memInit\_OtbkActWristMs}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{memInit\_OtbkActWristMs()}
 {\footnotesize\ttfamily void mem\+Init\+\_\+\+Otbk\+Act\+Wrist\+Ms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This functions initializes the memory. It is used also to restore the the parameters to their default values. Specific for Ottobock Active Wrist Master firmware \mbox{\label{command__processing_8c_aa93addc878e4efa2b8681a7116c1a07b}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!mem\+Init\+\_\+\+Soft\+Hand\+Pro@{mem\+Init\+\_\+\+Soft\+Hand\+Pro}}
-\index{mem\+Init\+\_\+\+Soft\+Hand\+Pro@{mem\+Init\+\_\+\+Soft\+Hand\+Pro}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{mem\+Init\+\_\+\+Soft\+Hand\+Pro()}
+\index{command\_processing.c@{command\_processing.c}!memInit\_SoftHandPro@{memInit\_SoftHandPro}}
+\index{memInit\_SoftHandPro@{memInit\_SoftHandPro}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{memInit\_SoftHandPro()}
 {\footnotesize\ttfamily void mem\+Init\+\_\+\+Soft\+Hand\+Pro (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This functions initializes the memory. It is used also to restore the the parameters to their default values. Specific for Soft\+Hand firmware \mbox{\label{command__processing_8c_a494f1f72ae370f0057e5aa3db73ef6fb}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!mem\+Recall@{mem\+Recall}}
-\index{mem\+Recall@{mem\+Recall}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{mem\+Recall()}
+\index{command\_processing.c@{command\_processing.c}!memRecall@{memRecall}}
+\index{memRecall@{memRecall}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{memRecall()}
 {\footnotesize\ttfamily void mem\+Recall (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-This function loads user\textquotesingle{}s settings from the E\+E\+P\+R\+OM. \mbox{\label{command__processing_8c_af67845c368ea7fefb79a1f0baa12134c}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!mem\+Restore@{mem\+Restore}}
-\index{mem\+Restore@{mem\+Restore}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{mem\+Restore()}
+This function loads user\textquotesingle{}s settings from the EEPROM. \mbox{\label{command__processing_8c_af67845c368ea7fefb79a1f0baa12134c}} 
+\index{command\_processing.c@{command\_processing.c}!memRestore@{memRestore}}
+\index{memRestore@{memRestore}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{memRestore()}
 {\footnotesize\ttfamily uint8 mem\+Restore (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-This function loads default settings from the E\+E\+P\+R\+OM.
+This function loads default settings from the EEPROM.
 
 \begin{DoxyReturn}{Returns}
 A true value if the memory is correctly restored, false otherwise. 
 \end{DoxyReturn}
 \mbox{\label{command__processing_8c_a81e6b73c0ee52661736a97c08bdb262b}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!mem\+Store@{mem\+Store}}
-\index{mem\+Store@{mem\+Store}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{mem\+Store()}
+\index{command\_processing.c@{command\_processing.c}!memStore@{memStore}}
+\index{memStore@{memStore}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{memStore()}
 {\footnotesize\ttfamily uint8 mem\+Store (\begin{DoxyParamCaption}\item[{int}]{displacement }\end{DoxyParamCaption})}
 
-This function stores the setted parameters to the internal E\+E\+P\+R\+OM memory. It is usually called, by the user, after a parameter is set.
+This function stores the setted parameters to the internal EEPROM memory. It is usually called, by the user, after a parameter is set.
 
 
 \begin{DoxyParams}{Parameters}
@@ -490,9 +497,9 @@ This function stores the setted parameters to the internal E\+E\+P\+R\+OM memory
 A true value if the memory is correctly stored, false otherwise. 
 \end{DoxyReturn}
 \mbox{\label{command__processing_8c_a36e3659e6603634b76ed735aa81bb97b}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!prepare\+\_\+counter\+\_\+info@{prepare\+\_\+counter\+\_\+info}}
-\index{prepare\+\_\+counter\+\_\+info@{prepare\+\_\+counter\+\_\+info}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{prepare\+\_\+counter\+\_\+info()}
+\index{command\_processing.c@{command\_processing.c}!prepare\_counter\_info@{prepare\_counter\_info}}
+\index{prepare\_counter\_info@{prepare\_counter\_info}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{prepare\_counter\_info()}
 {\footnotesize\ttfamily void prepare\+\_\+counter\+\_\+info (\begin{DoxyParamCaption}\item[{char $\ast$}]{info\+\_\+string }\end{DoxyParamCaption})}
 
 This function is used to prepare an information string about the cycles counter of the hand.
@@ -503,9 +510,9 @@ This function is used to prepare an information string about the cycles counter 
 \hline
 \end{DoxyParams}
 \mbox{\label{command__processing_8c_aad29b664ceb06efa22239c86183081d5}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!prepare\+\_\+generic\+\_\+info@{prepare\+\_\+generic\+\_\+info}}
-\index{prepare\+\_\+generic\+\_\+info@{prepare\+\_\+generic\+\_\+info}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{prepare\+\_\+generic\+\_\+info()}
+\index{command\_processing.c@{command\_processing.c}!prepare\_generic\_info@{prepare\_generic\_info}}
+\index{prepare\_generic\_info@{prepare\_generic\_info}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{prepare\_generic\_info()}
 {\footnotesize\ttfamily void prepare\+\_\+generic\+\_\+info (\begin{DoxyParamCaption}\item[{char $\ast$}]{info\+\_\+string }\end{DoxyParamCaption})}
 
 This function is used to prepare a generic information string on the device parameters and measurements.
@@ -515,11 +522,50 @@ This function is used to prepare a generic information string on the device para
 {\em info\+\_\+string} & An array of chars containing the requested information. \\
 \hline
 \end{DoxyParams}
+\mbox{\label{command__processing_8c_a74d6f442041befd738882c98d65ade5d}} 
+\index{command\_processing.c@{command\_processing.c}!prepare\_R01\_info@{prepare\_R01\_info}}
+\index{prepare\_R01\_info@{prepare\_R01\_info}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{prepare\_R01\_info()}
+{\footnotesize\ttfamily void prepare\+\_\+\+R01\+\_\+info (\begin{DoxyParamCaption}\item[{char $\ast$}]{info\+\_\+string }\end{DoxyParamCaption})}
+
+This function is used to prepare an information string about the cycles counter of the hand used in R01 project.
+
+
+\begin{DoxyParams}{Parameters}
+{\em info\+\_\+string} & An array of chars containing the requested information. \\
+\hline
+\end{DoxyParams}
+\mbox{\label{command__processing_8c_a86c2459c9ec8defe82ccdbffc61a5ad6}} 
+\index{command\_processing.c@{command\_processing.c}!prepare\_SD\_EMG\_history@{prepare\_SD\_EMG\_history}}
+\index{prepare\_SD\_EMG\_history@{prepare\_SD\_EMG\_history}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{prepare\_SD\_EMG\_history()}
+{\footnotesize\ttfamily void prepare\+\_\+\+SD\+\_\+\+EMG\+\_\+history (\begin{DoxyParamCaption}\item[{char $\ast$}]{info\+\_\+string }\end{DoxyParamCaption})}
+
+This function is used to prepare an information string to be on a SD card
+
+
+\begin{DoxyParams}{Parameters}
+{\em info\+\_\+string} & An array of chars containing the requested information. \\
+\hline
+\end{DoxyParams}
+\mbox{\label{command__processing_8c_ae9d781117092e15465382f57c05f956b}} 
+\index{command\_processing.c@{command\_processing.c}!prepare\_SD\_EMG\_History\_legend@{prepare\_SD\_EMG\_History\_legend}}
+\index{prepare\_SD\_EMG\_History\_legend@{prepare\_SD\_EMG\_History\_legend}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{prepare\_SD\_EMG\_History\_legend()}
+{\footnotesize\ttfamily void prepare\+\_\+\+SD\+\_\+\+EMG\+\_\+\+History\+\_\+legend (\begin{DoxyParamCaption}\item[{char $\ast$}]{info\+\_\+string }\end{DoxyParamCaption})}
+
+This function is used to prepare an information string to be on a SD card
+
+
+\begin{DoxyParams}{Parameters}
+{\em info\+\_\+string} & An array of chars containing the requested information. \\
+\hline
+\end{DoxyParams}
 \mbox{\label{command__processing_8c_ad46b1279d0552010c63ec48aac9a0068}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!prepare\+\_\+\+S\+D\+\_\+info@{prepare\+\_\+\+S\+D\+\_\+info}}
-\index{prepare\+\_\+\+S\+D\+\_\+info@{prepare\+\_\+\+S\+D\+\_\+info}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{prepare\+\_\+\+S\+D\+\_\+info()}
-{\footnotesize\ttfamily void prepare\+\_\+\+S\+D\+\_\+info (\begin{DoxyParamCaption}\item[{char $\ast$}]{info\+\_\+string }\end{DoxyParamCaption})}
+\index{command\_processing.c@{command\_processing.c}!prepare\_SD\_info@{prepare\_SD\_info}}
+\index{prepare\_SD\_info@{prepare\_SD\_info}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{prepare\_SD\_info()}
+{\footnotesize\ttfamily void prepare\+\_\+\+SD\+\_\+info (\begin{DoxyParamCaption}\item[{char $\ast$}]{info\+\_\+string }\end{DoxyParamCaption})}
 
 This function is used to prepare an information string to be on a SD card
 
@@ -529,10 +575,10 @@ This function is used to prepare an information string to be on a SD card
 \hline
 \end{DoxyParams}
 \mbox{\label{command__processing_8c_a2bb1121744976bb9d61699edac3fc573}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!prepare\+\_\+\+S\+D\+\_\+legend@{prepare\+\_\+\+S\+D\+\_\+legend}}
-\index{prepare\+\_\+\+S\+D\+\_\+legend@{prepare\+\_\+\+S\+D\+\_\+legend}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{prepare\+\_\+\+S\+D\+\_\+legend()}
-{\footnotesize\ttfamily void prepare\+\_\+\+S\+D\+\_\+legend (\begin{DoxyParamCaption}\item[{char $\ast$}]{info\+\_\+string }\end{DoxyParamCaption})}
+\index{command\_processing.c@{command\_processing.c}!prepare\_SD\_legend@{prepare\_SD\_legend}}
+\index{prepare\_SD\_legend@{prepare\_SD\_legend}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{prepare\_SD\_legend()}
+{\footnotesize\ttfamily void prepare\+\_\+\+SD\+\_\+legend (\begin{DoxyParamCaption}\item[{char $\ast$}]{info\+\_\+string }\end{DoxyParamCaption})}
 
 This function is used to prepare an information string to be on a SD card
 
@@ -542,10 +588,10 @@ This function is used to prepare an information string to be on a SD card
 \hline
 \end{DoxyParams}
 \mbox{\label{command__processing_8c_ae7f46f75d43b833b5807542e772bc71f}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!prepare\+\_\+\+S\+D\+\_\+param\+\_\+info@{prepare\+\_\+\+S\+D\+\_\+param\+\_\+info}}
-\index{prepare\+\_\+\+S\+D\+\_\+param\+\_\+info@{prepare\+\_\+\+S\+D\+\_\+param\+\_\+info}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{prepare\+\_\+\+S\+D\+\_\+param\+\_\+info()}
-{\footnotesize\ttfamily void prepare\+\_\+\+S\+D\+\_\+param\+\_\+info (\begin{DoxyParamCaption}\item[{char $\ast$}]{info\+\_\+string }\end{DoxyParamCaption})}
+\index{command\_processing.c@{command\_processing.c}!prepare\_SD\_param\_info@{prepare\_SD\_param\_info}}
+\index{prepare\_SD\_param\_info@{prepare\_SD\_param\_info}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{prepare\_SD\_param\_info()}
+{\footnotesize\ttfamily void prepare\+\_\+\+SD\+\_\+param\+\_\+info (\begin{DoxyParamCaption}\item[{char $\ast$}]{info\+\_\+string }\end{DoxyParamCaption})}
 
 This function is used to prepare an information string to be on a SD card
 
@@ -555,22 +601,22 @@ This function is used to prepare an information string to be on a SD card
 \hline
 \end{DoxyParams}
 \mbox{\label{command__processing_8c_a1a2eafee01079c42ca1fb14aa7331933}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!send\+Acknowledgment@{send\+Acknowledgment}}
-\index{send\+Acknowledgment@{send\+Acknowledgment}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{send\+Acknowledgment()}
+\index{command\_processing.c@{command\_processing.c}!sendAcknowledgment@{sendAcknowledgment}}
+\index{sendAcknowledgment@{sendAcknowledgment}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{sendAcknowledgment()}
 {\footnotesize\ttfamily void send\+Acknowledgment (\begin{DoxyParamCaption}\item[{uint8}]{value }\end{DoxyParamCaption})}
 
 This functions sends an acknowledgment to see if a command has been executed properly or not.
 
 
 \begin{DoxyParams}{Parameters}
-{\em value} & An A\+C\+K\+\_\+\+O\+K(1) or A\+C\+K\+\_\+\+E\+R\+R\+O\+R(0) value. \\
+{\em value} & An ACK\+\_\+\+OK(1) or ACK\+\_\+\+ERROR(0) value. \\
 \hline
 \end{DoxyParams}
 \mbox{\label{command__processing_8c_a14ae6b482b3c76d271ea73a2b744d608}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!set\+\_\+custom\+\_\+param@{set\+\_\+custom\+\_\+param}}
-\index{set\+\_\+custom\+\_\+param@{set\+\_\+custom\+\_\+param}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{set\+\_\+custom\+\_\+param()}
+\index{command\_processing.c@{command\_processing.c}!set\_custom\_param@{set\_custom\_param}}
+\index{set\_custom\_param@{set\_custom\_param}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{set\_custom\_param()}
 {\footnotesize\ttfamily void set\+\_\+custom\+\_\+param (\begin{DoxyParamCaption}\item[{uint16}]{index }\end{DoxyParamCaption})}
 
 This function, depending on the \doxyref{Firmware}{p.}{index} received, sets the specific parameters with their values and sends them to user or sets a parameter from all the parameters of the device.
@@ -581,15 +627,15 @@ This function, depending on the \doxyref{Firmware}{p.}{index} received, sets the
 \hline
 \end{DoxyParams}
 \mbox{\label{command__processing_8c_ac8969cb5fdb4916f259075029741e727}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!set\+Zeros@{set\+Zeros}}
-\index{set\+Zeros@{set\+Zeros}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{set\+Zeros()}
+\index{command\_processing.c@{command\_processing.c}!setZeros@{setZeros}}
+\index{setZeros@{setZeros}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{setZeros()}
 {\footnotesize\ttfamily void set\+Zeros (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function sets the encoders zero position. \mbox{\label{command__processing_8c_a4dbcb914c7348f441f7dd56b3400f434}} 
-\index{command\+\_\+processing.\+c@{command\+\_\+processing.\+c}!stop\+\_\+master\+\_\+device@{stop\+\_\+master\+\_\+device}}
-\index{stop\+\_\+master\+\_\+device@{stop\+\_\+master\+\_\+device}!command\+\_\+processing.\+c@{command\+\_\+processing.\+c}}
-\subsubsection{stop\+\_\+master\+\_\+device()}
+\index{command\_processing.c@{command\_processing.c}!stop\_master\_device@{stop\_master\_device}}
+\index{stop\_master\_device@{stop\_master\_device}!command\_processing.c@{command\_processing.c}}
+\doxysubsubsection{stop\_master\_device()}
 {\footnotesize\ttfamily void stop\+\_\+master\+\_\+device (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function is used to deactivate master device motors when occurred. 

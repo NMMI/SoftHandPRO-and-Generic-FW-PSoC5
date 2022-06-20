@@ -1,7 +1,7 @@
 // ----------------------------------------------------------------------------
 // BSD 3-Clause License
 
-// Copyright (c) 2019-2020, Centro "E.Piaggio"
+// Copyright (c) 2019-2022, Centro "E.Piaggio"
 // All rights reserved.
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -35,9 +35,9 @@
  *
  *  \brief      Definitions for SoftHand and Other Devices commands, parameters and packages.
  *
- *  \date       March 20th, 2020
+ *  \date       May 26th, 2022
  *  \author     _Centro "E.Piaggio"_
- *  \copyright  (C) 2019-2020 Centro "E.Piaggio". All rights reserved.
+ *  \copyright  (C) 2019-2022 Centro "E.Piaggio". All rights reserved.
  *  \details
  *  This file is included in the firmware, in its libraries and
  *  applications. It contains all definitions that are necessary to discriminate the right firmware.
@@ -59,19 +59,22 @@
 //====================================================================================
 //====================================================================================
     
-    
 // Macro related to different firmware configurations
 #ifdef SOFTHAND_FW
-    #define VERSION                 "SoftHand PRO firmware v. 1.10.1 (PSoC5)"
+    #define VERSION                 "SoftHand PRO firmware v. 1.11 (PSoC5)"    
+    
+    #ifdef SH_XPRIZE            // SoftHand for AlterEgo XPRIZE version
+        #define VERSION             "SoftHand AlterEgo XPRIZE v. 1.11 (PSoC5)"
+    #endif
 #else
     #ifdef GENERIC_FW
-        #define VERSION                 "Generic firmware v. 1.10.1 (PSoC5)"
+        #define VERSION                 "Generic firmware v. 1.11 (PSoC5)"
     #else   
         #define MASTER_FW
         #ifdef AIR_CHAMBERS_FB_FW
-            #define VERSION                 "Air Chambers Haptic Feedback firmware v. 1.10.1 (PSoC5) - Master configuration"
+            #define VERSION                 "Air Chambers Haptic Feedback firmware v. 1.11 (PSoC5) - Master configuration"
         #else //OTBK_ACT_WRIST_MS_FW
-            #define VERSION                 "Ottobock Active Wrist firmware v. 1.10.1 (PSoC5) - Master configuration"
+            #define VERSION                 "Ottobock Active Wrist firmware v. 1.11 (PSoC5) - Master configuration"
         #endif
     #endif
 #endif      
@@ -112,7 +115,7 @@
 
 
 // Default number of IMUs configuration
-#ifdef SOFTHAND_FW
+#if defined(SOFTHAND_FW) && !defined(SH_XPRIZE)
     #define NUM_DEV_IMU         1       /*!< Number of device IMU for SOFTHAND FIRMWARE.*/
 #else
     #define NUM_DEV_IMU         N_IMU_MAX

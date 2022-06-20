@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2020, Centro "E.Piaggio"
+// Copyright (c) 2017-2022, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -36,10 +36,10 @@
 * \file         globals.h
 *
 * \brief        Global definitions and macros are set in this file.
-* \date         March 20th, 2020
+* \date         May 26th, 2022
 * \author       _Centro "E.Piaggio"_
 * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
-* \copyright    (C) 2017-2020 Centro "E.Piaggio". All rights reserved.
+* \copyright    (C) 2017-2022 Centro "E.Piaggio". All rights reserved.
 *
 */
 
@@ -119,10 +119,10 @@
 //==============================================================================
 //                                                                EXPANSION PORT
 //==============================================================================
-#define EXP_NONE       0
-#define EXP_SD_RTC     1
-#define EXP_WIFI       2
-#define EXP_OTHER      3    
+#define EXP_NONE            0x00
+#define EXP_SD_RTC_ONLY     0x01
+#define EXP_BT_ONLY         0x02
+#define EXP_SD_RTC_BT       0x03    
 
 //==============================================================================
 //                                                             MOTOR DRIVER TYPE
@@ -603,12 +603,17 @@ extern CYBIT pos_reconstruct[N_ENCODER_LINE_MAX];
 extern int32 rest_pos_curr_ref;                     /*!< Rest position current reference.*/
 
 // SD variables
+extern uint8 sdEnabled;
 extern FS_FILE * pFile;
 extern char sdFile[100];
 extern char sdParam[100];
 extern FS_FILE * pEMGHFile;
 extern char sdEMGHFile[100];
 extern char sdR01File[100];
+
+// BLUETOOTH variables
+extern uint8 btEnabled;
+extern uint8 bt_src;
 
 // IMU variables
 extern uint8 N_IMU_Connected;

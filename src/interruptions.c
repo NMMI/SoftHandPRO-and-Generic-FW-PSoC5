@@ -101,6 +101,20 @@ CY_ISR(ISR_RS485_RX_ExInterrupt) {
     
     interrupt_flag = TRUE;
      
+    bt_src = FALSE;
+}
+
+//==============================================================================
+//                                                               BT RX INTERRUPT
+//==============================================================================
+
+CY_ISR(ISR_BT_RX_ExInterrupt) {
+
+    // Set BT flag
+    
+    interrupt_flag = TRUE;
+     
+    bt_src = TRUE;
 }
 
 //==============================================================================
@@ -151,11 +165,16 @@ void interrupt_manager(){
 
     //======================================================     receive routine
     
-    while(UART_RS485_GetRxBufferSize() && (package_count < 100)){
+    while( (UART_RS485_GetRxBufferSize() || UART_BT_GetRxBufferSize()) && (package_count < 100)){
         // 100 - estimated maximum number of packets we can read without blocking firmware execution
 
         // Get next char
-        rx_data = UART_RS485_GetChar();
+        if (!bt_src){
+            rx_data = UART_RS485_GetChar();
+        }
+        else {
+            rx_data = UART_BT_GetChar();
+        }
         
         switch (state) {
             //-----     wait for frame start     -------------------------------
@@ -248,8 +267,10 @@ void interrupt_manager(){
                 if (!(--data_packet_length)) {
                     data_packet_index  = 0;
                     data_packet_length = 0;
-                    RS485_CTS_Write(1);
-                    RS485_CTS_Write(0);
+                    if (!bt_src){
+                        RS485_CTS_Write(1);
+                        RS485_CTS_Write(0);
+                    }
                     state              = WAIT_START;
                     package_count++;
                 }
@@ -274,8 +295,7 @@ void function_scheduler(void) {
     uint8 MOTOR_IDX = 0;
     uint8 SECOND_MOTOR_IDX = 1;
     
-    MY_TIMER_REG_Write(0x00);
-    timer_value0 = (uint32)MY_TIMER_ReadCounter();
+    timer_value0 = (uint16)MY_TIMER_ReadCounter();
 
     // Start ADC Conversion, SOC = 1
 
@@ -565,7 +585,7 @@ void function_scheduler(void) {
             //Update time variable
             g_mem.cnt.total_runtime = g_mem.cnt.total_runtime + 120;  // Add 120 seconds.
             
-            if (c_mem.exp.read_exp_port_flag == EXP_SD_RTC) {
+            if (sdEnabled) {
                 
                 store_RTC_current_time();
                 
@@ -651,7 +671,7 @@ void function_scheduler(void) {
 
     timer_value = (uint16)MY_TIMER_ReadCounter();
     cycle_time = ((float)(timer_value0 - timer_value)/1000000.0);
-    MY_TIMER_REG_Write(0x01);   // reset timer
+    MY_TIMER_WriteCounter(65535);  // used to reset timer
 
 }
 

@@ -67,6 +67,15 @@
 **/
 CY_ISR_PROTO(ISR_RS485_RX_ExInterrupt);
 
+//====================================================   Bluetooth interruption
+/** This interruption sets a flag to let the firmware know that a communication 
+ * interruption is pending and needs to be handled. The interruption will be
+ * handled in predefined moments during the firmware execution. 
+ *     When this interruption is handled, it unpacks the package received on the 
+ *  Bluetooth communication bus.  
+**/
+CY_ISR_PROTO(ISR_BT_RX_ExInterrupt);
+
 //====================================================      Cycles timer interruption
 /** This interruption sets a flag to let the firmware know that a cycles timer
  *	interruption is pending and needs to be handled. The interrpution will be 

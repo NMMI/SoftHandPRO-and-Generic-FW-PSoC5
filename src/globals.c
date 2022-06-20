@@ -111,12 +111,17 @@ CYBIT pos_reconstruct[N_ENCODER_LINE_MAX] = {FALSE, FALSE};
 int32 rest_pos_curr_ref;                     /*!< Rest position current reference.*/
 
 // SD variables
+uint8 sdEnabled = FALSE;
 FS_FILE * pFile;
 char sdFile[100] = "";
 char sdParam[100] = "";
 FS_FILE * pEMGHFile;
 char sdEMGHFile[100] = "\\EMG_History.csv";
 char sdR01File[100] = "\\R01_Summary.csv";
+
+// BLUETOOTH variables
+uint8 btEnabled = FALSE;
+uint8 bt_src = FALSE;
 
 // IMU variables
 uint8 N_IMU_Connected;

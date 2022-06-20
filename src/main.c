@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2020, Centro "E.Piaggio"
+// Copyright (c) 2017-2022, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -36,12 +36,12 @@
 * \file         main.c
 *
 * \brief        Firmware main file.
-* \date         March 20th, 2020
+* \date         May 26th, 2022
 * \author       _Centro "E.Piaggio"_
 * \copyright    (C) 2020 Centro "E.Piaggio". All rights reserved.
 * \mainpage     Firmware
 * \brief        This is the firmware of PSoC5 logic board.
-* \version      1.9.4
+* \version      1.11
 *
 * \details      This is the firmware of PSoC5 logic board. Depending on the configuration, 
 *               it can control up to two motors and read its encoders. Also can read and
@@ -95,10 +95,10 @@ int main()
     LED_control(1);     // Green fixed light
     BLINK_05HZ_Start();
     BLINK_25HZ_Start();
-    BLINK_05HZ_WriteCompare(499);
-    BLINK_25HZ_WriteCompare(99);
+    BLINK_05HZ_WriteCompare(99);
+    BLINK_25HZ_WriteCompare(19);
     
-    // RS485
+    // RS485 UART
     UART_RS485_Stop();
     UART_RS485_Start();
     UART_RS485_Init();
@@ -106,6 +106,20 @@ int main()
     UART_RS485_ClearTxBuffer();
     ISR_RS485_RX_StartEx(ISR_RS485_RX_ExInterrupt);
     
+    // EXPANSIONS
+    sdEnabled = (c_mem.exp.read_exp_port_flag && 0x01);      // EXP_SD_RTC_ONLY,EXP_SD_RTC_BT
+    btEnabled = (c_mem.exp.read_exp_port_flag && 0x10);      // EXP_BT_ONLY,EXP_SD_RTC_BT
+        
+    // BT UART
+    if (btEnabled) {
+        UART_BT_Stop();
+        UART_BT_Start();
+        UART_BT_Init();
+        UART_BT_ClearRxBuffer();
+        UART_BT_ClearTxBuffer();
+        ISR_BT_RX_StartEx(ISR_BT_RX_ExInterrupt);
+    }
+
     // CYCLES TIMER   
     CYCLES_TIMER_Start();
     ISR_CYCLES_StartEx(ISR_CYCLES_Handler);
@@ -277,7 +291,7 @@ int main()
     if ( (g_mem.cnt.wire_disp/(((g_mem.motor[0].pos_lim_sup>>g_mem.enc[0].res[0]) - (g_mem.motor[0].pos_lim_inf>>g_mem.enc[0].res[0]))*2)) > (uint32)(PREREVISION_CYCLES/2) )   // 50 %
         maintenance_flag = TRUE;    
 
-    if (g_mem.exp.read_exp_port_flag == EXP_SD_RTC) {
+    if (sdEnabled) {
         
         store_RTC_current_time();
         
@@ -319,6 +333,9 @@ int main()
 
         if(UART_RS485_ReadRxStatus() & UART_RS485_RX_STS_SOFT_BUFF_OVER)
             UART_RS485_ClearRxBuffer();
+
+        if(UART_BT_ReadRxStatus() & UART_BT_RX_STS_SOFT_BUFF_OVER)
+            UART_BT_ClearRxBuffer();
     }
     return 0;
 }

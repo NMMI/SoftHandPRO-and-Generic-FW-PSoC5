@@ -462,7 +462,9 @@ void ADC_Set_N_Channels() {
         NUM_OF_ANALOG_INPUTS = 6;   // Voltage_Sense_2
                                     // Current_Sense_2
     }
-    
+#endif
+
+#if defined(GENERIC_FW) || defined(SH_XPRIZE)
     if (c_mem.exp.read_ADC_sensors_port_flag == TRUE){
         // add all emg channels
         NUM_OF_ANALOG_INPUTS = 12;  // EMG_1

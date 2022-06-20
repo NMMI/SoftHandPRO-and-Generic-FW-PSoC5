@@ -1,0 +1,117 @@
+\doxysection{FIRMWARE\+\_\+\+CONFIGURATION.\+h}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{2 \textcolor{comment}{// BSD 3-\/Clause License}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{comment}{// Copyright (c) 2019-\/2022, Centro "{}E.Piaggio"{}}}
+\DoxyCodeLine{5 \textcolor{comment}{// All rights reserved.}}
+\DoxyCodeLine{6 \textcolor{comment}{// Redistribution and use in source and binary forms, with or without}}
+\DoxyCodeLine{7 \textcolor{comment}{// modification, are permitted provided that the following conditions are met:}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{comment}{// * Redistributions of source code must retain the above copyright notice, this}}
+\DoxyCodeLine{10 \textcolor{comment}{//   list of conditions and the following disclaimer.}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{comment}{// * Redistributions in binary form must reproduce the above copyright notice,}}
+\DoxyCodeLine{13 \textcolor{comment}{//   this list of conditions and the following disclaimer in the documentation}}
+\DoxyCodeLine{14 \textcolor{comment}{//   and/or other materials provided with the distribution.}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{comment}{// * Neither the name of the copyright holder nor the names of its}}
+\DoxyCodeLine{17 \textcolor{comment}{//   contributors may be used to endorse or promote products derived from}}
+\DoxyCodeLine{18 \textcolor{comment}{//   this software without specific prior written permission.}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{comment}{// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "{}AS IS"{}}}
+\DoxyCodeLine{21 \textcolor{comment}{// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE}}
+\DoxyCodeLine{22 \textcolor{comment}{// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE}}
+\DoxyCodeLine{23 \textcolor{comment}{// DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE}}
+\DoxyCodeLine{24 \textcolor{comment}{// FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL}}
+\DoxyCodeLine{25 \textcolor{comment}{// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR}}
+\DoxyCodeLine{26 \textcolor{comment}{// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER}}
+\DoxyCodeLine{27 \textcolor{comment}{// CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,}}
+\DoxyCodeLine{28 \textcolor{comment}{// OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}}
+\DoxyCodeLine{29 \textcolor{comment}{// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{30 \textcolor{comment}{// POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{31 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#ifndef FIRMWARE\_CONFIGURATION\_H\_INCLUDED}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#define FIRMWARE\_CONFIGURATION\_H\_INCLUDED}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{comment}{//====================================================================================}}
+\DoxyCodeLine{51 \textcolor{comment}{//====================================================================================}}
+\DoxyCodeLine{52 \textcolor{comment}{// SOFTHAND OR GENERIC CONFIGURATION IS HARDCODED IN BUILD OPTIONS USING }}
+\DoxyCodeLine{53 \textcolor{comment}{// PREPROCESSOR DEFINES (SOURCE AND HEADERS FILES ARE SHARED BETWEEN THE TWO PROJECTS)}}
+\DoxyCodeLine{54 \textcolor{comment}{//    }}
+\DoxyCodeLine{55 \textcolor{comment}{// SOFTHAND FW: \#define SOFTHAND\_FW}}
+\DoxyCodeLine{56 \textcolor{comment}{// GENERIC FW:  \#define GENERIC\_FW }}
+\DoxyCodeLine{57 \textcolor{comment}{// AIR\_CHAMBERS\_FB\_FW:      \#define AIR\_CHAMBERS\_FB\_FW}}
+\DoxyCodeLine{58 \textcolor{comment}{// OTBK\_ACT\_WRIST\_MS\_FW:    \#define OTBK\_ACT\_WRIST\_MS\_FW    }}
+\DoxyCodeLine{59 \textcolor{comment}{//====================================================================================}}
+\DoxyCodeLine{60 \textcolor{comment}{//====================================================================================}}
+\DoxyCodeLine{61     }
+\DoxyCodeLine{62 \textcolor{comment}{// Macro related to different firmware configurations}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#ifdef SOFTHAND\_FW}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{    \#define VERSION                 "{}SoftHand PRO firmware v. 1.11 (PSoC5)"{}}    }
+\DoxyCodeLine{65     }
+\DoxyCodeLine{66 \textcolor{preprocessor}{    \#ifdef SH\_XPRIZE            }\textcolor{comment}{// SoftHand for AlterEgo XPRIZE version}}
+\DoxyCodeLine{67 \textcolor{preprocessor}{        \#define VERSION             "{}SoftHand AlterEgo XPRIZE v. 1.11 (PSoC5)"{}}}
+\DoxyCodeLine{68 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{70 \textcolor{preprocessor}{    \#ifdef GENERIC\_FW}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{        \#define VERSION                 "{}Generic firmware v. 1.11 (PSoC5)"{}}}
+\DoxyCodeLine{72 \textcolor{preprocessor}{    \#else   }}
+\DoxyCodeLine{73 \textcolor{preprocessor}{        \#define MASTER\_FW}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{        \#ifdef AIR\_CHAMBERS\_FB\_FW}}
+\DoxyCodeLine{75 \textcolor{preprocessor}{            \#define VERSION                 "{}Air Chambers Haptic Feedback firmware v. 1.11 (PSoC5) -\/ Master configuration"{}}}
+\DoxyCodeLine{76 \textcolor{preprocessor}{        \#else }\textcolor{comment}{//OTBK\_ACT\_WRIST\_MS\_FW}}
+\DoxyCodeLine{77 \textcolor{preprocessor}{            \#define VERSION                 "{}Ottobock Active Wrist firmware v. 1.11 (PSoC5) -\/ Master configuration"{}}}
+\DoxyCodeLine{78 \textcolor{preprocessor}{        \#endif}}
+\DoxyCodeLine{79 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{80 \textcolor{preprocessor}{\#endif      }}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 \textcolor{comment}{// Default number of parameters configuration}}
+\DoxyCodeLine{84 \textcolor{comment}{// Handle multiple configuration with mutually exclusive macro preprocessor defines}}
+\DoxyCodeLine{85 \textcolor{comment}{// Note: an if..else structure is preferred, but with a large number of exclusive configuration this is also good}}
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#ifdef SOFTHAND\_FW          }}
+\DoxyCodeLine{87 \textcolor{preprocessor}{    \#define NUM\_OF\_DEV\_PARAMS           (NUM\_OF\_PARAMS -\/ 39 -\/ NUM\_OF\_WR\_PARAMS -\/ NUM\_OF\_MS\_PARAMS -\/ NUM\_OF\_FB\_PARAMS)  }\textcolor{comment}{// Number of parameters saved in the EEPROM for SOFTHAND FIRMWARE}}
+\DoxyCodeLine{88                                                               \textcolor{comment}{// All parameters except: additional first motor parameters (6), second motor configuration and parameters (23),}}
+\DoxyCodeLine{89                                                               \textcolor{comment}{// Encoder configuration (2), ADC configuration (2), Joystick configuration (3), Read additional ADC port, }}
+\DoxyCodeLine{90                                                               \textcolor{comment}{// Record EMG on SD, Device type, Wrist parameters (3), Master parameters (2), Feedback parameters (3)}}
+\DoxyCodeLine{91 \textcolor{preprocessor}{    \#define NUM\_OF\_DEV\_PARAM\_MENUS      (NUM\_OF\_PARAMS\_MENU -\/ 4) }\textcolor{comment}{// Number of parameters menu for SOFTHAND FIRMWARE}}
+\DoxyCodeLine{92                                                                  \textcolor{comment}{// All menus except: Motor driver type, Device type, Wrist mode, Wrist direction}}
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#ifdef GENERIC\_FW}}
+\DoxyCodeLine{95 \textcolor{preprocessor}{    \#define NUM\_OF\_DEV\_PARAMS           (NUM\_OF\_PARAMS -\/ 1 -\/ NUM\_OF\_MS\_PARAMS -\/ NUM\_OF\_FB\_PARAMS)  }\textcolor{comment}{// Number of parameters saved in the EEPROM for GENERIC FIRMWARE}}
+\DoxyCodeLine{96                                                              \textcolor{comment}{// All parameters except: Wrist parameters (only 1), Master parameters (2), Feedback parameters (3)}}
+\DoxyCodeLine{97 \textcolor{preprocessor}{    \#define NUM\_OF\_DEV\_PARAM\_MENUS      (NUM\_OF\_PARAMS\_MENU -\/ 1)  }\textcolor{comment}{// Number of parameters menu}}
+\DoxyCodeLine{98                                                                   \textcolor{comment}{// All menus except: Wrist direction}}
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{100 \textcolor{comment}{//\#ifdef MASTER\_FW (Not necessary statements for the moment)}}
+\DoxyCodeLine{101 \textcolor{comment}{//    \#define NUM\_OF\_DEV\_PARAMS           (NUM\_OF\_PARAMS -\/ 1 -\/ NUM\_OF\_FB\_PARAMS)  // Number of parameters saved in the EEPROM for MASTER FIRMWARE}}
+\DoxyCodeLine{102 \textcolor{comment}{//                                                             // All parameters except:  Wrist parameters (only 1), Feedback parameters (3)}}
+\DoxyCodeLine{103 \textcolor{comment}{//    \#define NUM\_OF\_DEV\_PARAM\_MENUS      NUM\_OF\_PARAMS\_MENU   // Number of parameters menu}}
+\DoxyCodeLine{104 \textcolor{comment}{//\#endif}}
+\DoxyCodeLine{105 \textcolor{preprocessor}{\#ifdef OTBK\_ACT\_WRIST\_MS\_FW}}
+\DoxyCodeLine{106 \textcolor{preprocessor}{    \#define NUM\_OF\_DEV\_PARAMS           (NUM\_OF\_PARAMS -\/ NUM\_OF\_FB\_PARAMS)  }\textcolor{comment}{// Number of parameters saved in the EEPROM for MASTER FIRMWARE}}
+\DoxyCodeLine{107                                                                             \textcolor{comment}{// All parameters except: Feedback parameters (3)}}
+\DoxyCodeLine{108 \textcolor{preprocessor}{    \#define NUM\_OF\_DEV\_PARAM\_MENUS      NUM\_OF\_PARAMS\_MENU     }\textcolor{comment}{// Number of parameters menu}}
+\DoxyCodeLine{109 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{110 \textcolor{preprocessor}{\#ifdef AIR\_CHAMBERS\_FB\_FW}}
+\DoxyCodeLine{111 \textcolor{preprocessor}{    \#define NUM\_OF\_DEV\_PARAMS           NUM\_OF\_PARAMS          }\textcolor{comment}{// Number of parameters saved in the EEPROM for AIR\_CHAMBERS\_FB\_FW FIRMWARE}}
+\DoxyCodeLine{112                                                                \textcolor{comment}{// All parameters except: Wrist parameters (3)}}
+\DoxyCodeLine{113 \textcolor{preprocessor}{    \#define NUM\_OF\_DEV\_PARAM\_MENUS      NUM\_OF\_PARAMS\_MENU     }\textcolor{comment}{// Number of parameters menu}}
+\DoxyCodeLine{114 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117 \textcolor{comment}{// Default number of IMUs configuration}}
+\DoxyCodeLine{118 \textcolor{preprocessor}{\#if defined(SOFTHAND\_FW) \&\& !defined(SH\_XPRIZE)}}
+\DoxyCodeLine{119 \textcolor{preprocessor}{    \#define NUM\_DEV\_IMU         1       }}
+\DoxyCodeLine{120 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{121 \textcolor{preprocessor}{    \#define NUM\_DEV\_IMU         N\_IMU\_MAX}}
+\DoxyCodeLine{122 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{126 \textcolor{comment}{/* [] END OF FILE */}}
+
+\end{DoxyCode}

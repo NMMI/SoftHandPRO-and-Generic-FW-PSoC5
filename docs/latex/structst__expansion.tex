@@ -1,5 +1,5 @@
-\section{st\+\_\+expansion Struct Reference}
-\label{structst__expansion}\index{st\+\_\+expansion@{st\+\_\+expansion}}
+\doxysection{st\+\_\+expansion Struct Reference}
+\label{structst__expansion}\index{st\_expansion@{st\_expansion}}
 
 
 Expansion board related parameters structure.  
@@ -9,56 +9,62 @@ Expansion board related parameters structure.
 
 {\ttfamily \#include $<$globals.\+h$>$}
 
-\subsection*{Data Fields}
+\doxysubsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
 uint8 \textbf{ curr\+\_\+time} [6]
 \item 
 uint8 \textbf{ read\+\_\+exp\+\_\+port\+\_\+flag}
 \item 
-uint8 \textbf{ read\+\_\+\+A\+D\+C\+\_\+sensors\+\_\+port\+\_\+flag}
+uint8 \textbf{ read\+\_\+\+ADC\+\_\+sensors\+\_\+port\+\_\+flag}
 \item 
-uint8 \textbf{ A\+D\+C\+\_\+conf} [N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+D\+C\+\_\+\+C\+H\+A\+N\+N\+E\+L\+S\+\_\+\+M\+AX]
+uint8 \textbf{ ADC\+\_\+conf} [NUM\+\_\+\+OF\+\_\+\+ADC\+\_\+\+CHANNELS\+\_\+\+MAX]
 \item 
-uint8 \textbf{ unused\+\_\+bytes} [12]
+uint8 \textbf{ record\+\_\+\+EMG\+\_\+history\+\_\+on\+\_\+\+SD}
+\item 
+uint8 \textbf{ unused\+\_\+bytes} [11]
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
+\doxysubsection{Detailed Description}
 Expansion board related parameters structure. 
 
-
-
-\subsection{Field Documentation}
+\doxysubsection{Field Documentation}
 \mbox{\label{structst__expansion_ae9f8f466e488103ced67140d2d14216d}} 
-\index{st\+\_\+expansion@{st\+\_\+expansion}!A\+D\+C\+\_\+conf@{A\+D\+C\+\_\+conf}}
-\index{A\+D\+C\+\_\+conf@{A\+D\+C\+\_\+conf}!st\+\_\+expansion@{st\+\_\+expansion}}
-\subsubsection{A\+D\+C\+\_\+conf}
-{\footnotesize\ttfamily uint8 A\+D\+C\+\_\+conf[N\+U\+M\+\_\+\+O\+F\+\_\+\+A\+D\+C\+\_\+\+C\+H\+A\+N\+N\+E\+L\+S\+\_\+\+M\+AX]}
+\index{st\_expansion@{st\_expansion}!ADC\_conf@{ADC\_conf}}
+\index{ADC\_conf@{ADC\_conf}!st\_expansion@{st\_expansion}}
+\doxysubsubsection{ADC\_conf}
+{\footnotesize\ttfamily uint8 ADC\+\_\+conf[NUM\+\_\+\+OF\+\_\+\+ADC\+\_\+\+CHANNELS\+\_\+\+MAX]}
 
-A\+DC configuration flags. \mbox{\label{structst__expansion_aa7a2bcba81fd34156b7cb457ef4776dc}} 
-\index{st\+\_\+expansion@{st\+\_\+expansion}!curr\+\_\+time@{curr\+\_\+time}}
-\index{curr\+\_\+time@{curr\+\_\+time}!st\+\_\+expansion@{st\+\_\+expansion}}
-\subsubsection{curr\+\_\+time}
+ADC configuration flags. \mbox{\label{structst__expansion_aa7a2bcba81fd34156b7cb457ef4776dc}} 
+\index{st\_expansion@{st\_expansion}!curr\_time@{curr\_time}}
+\index{curr\_time@{curr\_time}!st\_expansion@{st\_expansion}}
+\doxysubsubsection{curr\_time}
 {\footnotesize\ttfamily uint8 curr\+\_\+time[6]}
 
-Current time from R\+TC (D\+D/\+M\+M/\+YY H\+H\+:\+MM\+:SS). \mbox{\label{structst__expansion_a35f3f96b2d425fc3934ee6cfa8166a04}} 
-\index{st\+\_\+expansion@{st\+\_\+expansion}!read\+\_\+\+A\+D\+C\+\_\+sensors\+\_\+port\+\_\+flag@{read\+\_\+\+A\+D\+C\+\_\+sensors\+\_\+port\+\_\+flag}}
-\index{read\+\_\+\+A\+D\+C\+\_\+sensors\+\_\+port\+\_\+flag@{read\+\_\+\+A\+D\+C\+\_\+sensors\+\_\+port\+\_\+flag}!st\+\_\+expansion@{st\+\_\+expansion}}
-\subsubsection{read\+\_\+\+A\+D\+C\+\_\+sensors\+\_\+port\+\_\+flag}
-{\footnotesize\ttfamily uint8 read\+\_\+\+A\+D\+C\+\_\+sensors\+\_\+port\+\_\+flag}
+Current time from RTC (DD/\+MM/\+YY HH\+:\+MM\+:SS). \mbox{\label{structst__expansion_a35f3f96b2d425fc3934ee6cfa8166a04}} 
+\index{st\_expansion@{st\_expansion}!read\_ADC\_sensors\_port\_flag@{read\_ADC\_sensors\_port\_flag}}
+\index{read\_ADC\_sensors\_port\_flag@{read\_ADC\_sensors\_port\_flag}!st\_expansion@{st\_expansion}}
+\doxysubsubsection{read\_ADC\_sensors\_port\_flag}
+{\footnotesize\ttfamily uint8 read\+\_\+\+ADC\+\_\+sensors\+\_\+port\+\_\+flag}
 
-Enable A\+DC sensors Port. \mbox{\label{structst__expansion_aa0fa0bc36fe5fc720d757680e189f6d2}} 
-\index{st\+\_\+expansion@{st\+\_\+expansion}!read\+\_\+exp\+\_\+port\+\_\+flag@{read\+\_\+exp\+\_\+port\+\_\+flag}}
-\index{read\+\_\+exp\+\_\+port\+\_\+flag@{read\+\_\+exp\+\_\+port\+\_\+flag}!st\+\_\+expansion@{st\+\_\+expansion}}
-\subsubsection{read\+\_\+exp\+\_\+port\+\_\+flag}
+Enable ADC sensors Port. \mbox{\label{structst__expansion_aa0fa0bc36fe5fc720d757680e189f6d2}} 
+\index{st\_expansion@{st\_expansion}!read\_exp\_port\_flag@{read\_exp\_port\_flag}}
+\index{read\_exp\_port\_flag@{read\_exp\_port\_flag}!st\_expansion@{st\_expansion}}
+\doxysubsubsection{read\_exp\_port\_flag}
 {\footnotesize\ttfamily uint8 read\+\_\+exp\+\_\+port\+\_\+flag}
 
-Enable Expansion Port. \mbox{\label{structst__expansion_a8ba5c3bbdccc2457552b555caf55c1be}} 
-\index{st\+\_\+expansion@{st\+\_\+expansion}!unused\+\_\+bytes@{unused\+\_\+bytes}}
-\index{unused\+\_\+bytes@{unused\+\_\+bytes}!st\+\_\+expansion@{st\+\_\+expansion}}
-\subsubsection{unused\+\_\+bytes}
-{\footnotesize\ttfamily uint8 unused\+\_\+bytes[12]}
+Enable Expansion Port. \mbox{\label{structst__expansion_aecd1c50a8a0d4349f26095914a6f017f}} 
+\index{st\_expansion@{st\_expansion}!record\_EMG\_history\_on\_SD@{record\_EMG\_history\_on\_SD}}
+\index{record\_EMG\_history\_on\_SD@{record\_EMG\_history\_on\_SD}!st\_expansion@{st\_expansion}}
+\doxysubsubsection{record\_EMG\_history\_on\_SD}
+{\footnotesize\ttfamily uint8 record\+\_\+\+EMG\+\_\+history\+\_\+on\+\_\+\+SD}
+
+Enable EMG recording on SD Card. \mbox{\label{structst__expansion_ac1af602097c3dde4474e9fd611560e40}} 
+\index{st\_expansion@{st\_expansion}!unused\_bytes@{unused\_bytes}}
+\index{unused\_bytes@{unused\_bytes}!st\_expansion@{st\_expansion}}
+\doxysubsubsection{unused\_bytes}
+{\footnotesize\ttfamily uint8 unused\+\_\+bytes[11]}
 
 Unused bytes to fill row. 
 

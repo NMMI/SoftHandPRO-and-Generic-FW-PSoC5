@@ -1,0 +1,154 @@
+\doxysection{IMU\+\_\+functions.\+h}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{2 \textcolor{comment}{// BSD 3-\/Clause License}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{comment}{// Copyright (c) 2016, qbrobotics}}
+\DoxyCodeLine{5 \textcolor{comment}{// Copyright (c) 2017-\/2020, Centro "{}E.Piaggio"{}}}
+\DoxyCodeLine{6 \textcolor{comment}{// All rights reserved.}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{comment}{// Redistribution and use in source and binary forms, with or without}}
+\DoxyCodeLine{9 \textcolor{comment}{// modification, are permitted provided that the following conditions are met:}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{comment}{// * Redistributions of source code must retain the above copyright notice, this}}
+\DoxyCodeLine{12 \textcolor{comment}{//   list of conditions and the following disclaimer.}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{comment}{// * Redistributions in binary form must reproduce the above copyright notice,}}
+\DoxyCodeLine{15 \textcolor{comment}{//   this list of conditions and the following disclaimer in the documentation}}
+\DoxyCodeLine{16 \textcolor{comment}{//   and/or other materials provided with the distribution.}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{comment}{// * Neither the name of the copyright holder nor the names of its}}
+\DoxyCodeLine{19 \textcolor{comment}{//   contributors may be used to endorse or promote products derived from}}
+\DoxyCodeLine{20 \textcolor{comment}{//   this software without specific prior written permission.}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{comment}{// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "{}AS IS"{}}}
+\DoxyCodeLine{23 \textcolor{comment}{// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE}}
+\DoxyCodeLine{24 \textcolor{comment}{// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{// DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE}}
+\DoxyCodeLine{26 \textcolor{comment}{// FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL}}
+\DoxyCodeLine{27 \textcolor{comment}{// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR}}
+\DoxyCodeLine{28 \textcolor{comment}{// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER}}
+\DoxyCodeLine{29 \textcolor{comment}{// CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,}}
+\DoxyCodeLine{30 \textcolor{comment}{// OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}}
+\DoxyCodeLine{31 \textcolor{comment}{// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{32 \textcolor{comment}{// POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{33 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#include <project.h>}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#include "{}globals.h"{}}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#include "{}utils.h"{}}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#include <SPI\_IMU.h>}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#define MPU9250\_RCR             0x80  }\textcolor{comment}{//Flag of READ  (control register)}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#define MPU9250\_WCR             0x00  }\textcolor{comment}{//Flag of WRITE (control register)}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \textcolor{comment}{//MPU9250 Register definition}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#define MPU9250\_CONFIG              0x1A }\textcolor{comment}{//CONFIG}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#define MPU9250\_GYRO\_CONFIG         0x1B }\textcolor{comment}{//CONFIG}}
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#define MPU9250\_ACCEL\_CONFIG        0x1C}}
+\DoxyCodeLine{59 \textcolor{preprocessor}{\#define MPU9250\_ACCEL\_CONFIG2       0x1D}}
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#define MPU9250\_ACCEL\_XOUT\_H        0x3B }\textcolor{comment}{//ACCEL}}
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#define MPU9250\_ACCEL\_XOUT\_L        0x3C}}
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#define MPU9250\_ACCEL\_YOUT\_H        0x3D}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#define MPU9250\_ACCEL\_YOUT\_L        0x3E}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#define MPU9250\_ACCEL\_ZOUT\_H        0x3F}}
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#define MPU9250\_ACCEL\_ZOUT\_L        0x40}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{\#define MPU9250\_TEMP\_OUT\_H          0x41 }\textcolor{comment}{//TEMP}}
+\DoxyCodeLine{67 \textcolor{preprocessor}{\#define MPU9250\_TEMP\_OUT\_L          0x42}}
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#define MPU9250\_GYRO\_XOUT\_H         0x43 }\textcolor{comment}{//GYRO}}
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#define MPU9250\_GYRO\_XOUT\_L         0x44}}
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#define MPU9250\_GYRO\_YOUT\_H         0x45}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#define MPU9250\_GYRO\_YOUT\_L         0x46}}
+\DoxyCodeLine{72 \textcolor{preprocessor}{\#define MPU9250\_GYRO\_ZOUT\_H         0x47}}
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#define MPU9250\_GYRO\_ZOUT\_L         0x48}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#define MPU9250\_USER\_CTRL           0x6A }\textcolor{comment}{//USER CONTROL }}
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#define MPU9250\_PWR\_MGMT\_1          0x6B }\textcolor{comment}{//POWER MANAGEMENT}}
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#define MPU9250\_WHO\_AM\_I            0x75 }\textcolor{comment}{//WHO I AM}}
+\DoxyCodeLine{77 \textcolor{preprocessor}{\#define MPU9250\_FIFO\_EN             0x23 }\textcolor{comment}{//FIFO}}
+\DoxyCodeLine{78 \textcolor{preprocessor}{\#define MPU9250\_I2C\_MST\_CTRL        0x24 }}
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#define MPU9250\_I2C\_SLV0\_ADDR       0x25 }\textcolor{comment}{//SLV0 }}
+\DoxyCodeLine{80 \textcolor{preprocessor}{\#define MPU9250\_I2C\_SLV0\_REG        0x26}}
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#define MPU9250\_I2C\_SLV0\_CTRL       0x27}}
+\DoxyCodeLine{82 \textcolor{preprocessor}{\#define MPU9250\_I2C\_SLV1\_ADDR       0x28 }\textcolor{comment}{//SLV1}}
+\DoxyCodeLine{83 \textcolor{preprocessor}{\#define MPU9250\_I2C\_SLV1\_REG        0x29}}
+\DoxyCodeLine{84 \textcolor{preprocessor}{\#define MPU9250\_I2C\_SLV1\_CTRL       0x2A}}
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#define MPU9250\_EXT\_SENS\_DATA\_00    0x49 }\textcolor{comment}{//EXT DATA}}
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#define MPU9250\_EXT\_SENS\_DATA\_01    0x4A}}
+\DoxyCodeLine{87 \textcolor{preprocessor}{\#define MPU9250\_EXT\_SENS\_DATA\_02    0x4B}}
+\DoxyCodeLine{88 \textcolor{preprocessor}{\#define MPU9250\_EXT\_SENS\_DATA\_03    0x4C}}
+\DoxyCodeLine{89 \textcolor{preprocessor}{\#define MPU9250\_EXT\_SENS\_DATA\_04    0x4D}}
+\DoxyCodeLine{90 \textcolor{preprocessor}{\#define MPU9250\_EXT\_SENS\_DATA\_05    0x4E}}
+\DoxyCodeLine{91 \textcolor{preprocessor}{\#define MPU9250\_EXT\_SENS\_DATA\_06    0x4F}}
+\DoxyCodeLine{92 \textcolor{preprocessor}{\#define MPU9250\_EXT\_SENS\_DATA\_07    0x50}}
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#define MPU9250\_I2C\_SLV0\_D0         0x63}}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#define MPU9250\_I2C\_SLV1\_D0         0x64}}
+\DoxyCodeLine{95 \textcolor{preprocessor}{\#define MPU9250\_I2C\_MST\_DELAY\_CTRL  0x67}}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#define AK8936\_ADDRESS              0x0C }\textcolor{comment}{//COMPASS AK8936}}
+\DoxyCodeLine{98 \textcolor{preprocessor}{\#define AK8936\_WIA                  0x00}}
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#define AK8936\_INFO                 0x01}}
+\DoxyCodeLine{100 \textcolor{preprocessor}{\#define AK8936\_ST1                  0x02}}
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#define AK8936\_XOUT\_L               0x03 }}
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#define AK8936\_XOUT\_H               0x04}}
+\DoxyCodeLine{103 \textcolor{preprocessor}{\#define AK8936\_YOUT\_L               0x05}}
+\DoxyCodeLine{104 \textcolor{preprocessor}{\#define AK8936\_YOUT\_H               0x06}}
+\DoxyCodeLine{105 \textcolor{preprocessor}{\#define AK8936\_ZOUT\_L               0x07}}
+\DoxyCodeLine{106 \textcolor{preprocessor}{\#define AK8936\_ZOUT\_H               0x08}}
+\DoxyCodeLine{107 \textcolor{preprocessor}{\#define AK8936\_ST2                  0x09}}
+\DoxyCodeLine{108 \textcolor{preprocessor}{\#define AK8936\_CNTL                 0x0A}}
+\DoxyCodeLine{109 \textcolor{preprocessor}{\#define AK8963\_CNTL2                0x0B}}
+\DoxyCodeLine{110 \textcolor{preprocessor}{\#define AK8936\_ASTC                 0x0C}}
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#define AK8936\_I2CDIS               0x0F}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113 \textcolor{preprocessor}{\#define ACC\_SF\_2G                   0x00     }\textcolor{comment}{//+-\/2g}}
+\DoxyCodeLine{114 \textcolor{preprocessor}{\#define ACC\_SF\_4G                   0x08}}
+\DoxyCodeLine{115 \textcolor{preprocessor}{\#define ACC\_SF\_8G                   0x10}}
+\DoxyCodeLine{116 \textcolor{preprocessor}{\#define ACC\_SF\_16G                  0x18}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118 \textcolor{preprocessor}{\#define GYRO\_SF\_250                 0x00    }\textcolor{comment}{// 250 °/s}}
+\DoxyCodeLine{119 \textcolor{preprocessor}{\#define GYRO\_SF\_500                 0x80}}
+\DoxyCodeLine{120 \textcolor{preprocessor}{\#define GYRO\_SF\_2000                0x18}}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122 \textcolor{preprocessor}{\#define G\_TO\_MS2                    9.79}}
+\DoxyCodeLine{123 \textcolor{preprocessor}{\#define DEG\_TO\_RAD                  (3.14159265359 / 180.0)}}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125 \textcolor{comment}{//low pass accelerometers filter}}
+\DoxyCodeLine{126 \textcolor{preprocessor}{\#define LP\_ACC\_FREQ\_460             0x00}}
+\DoxyCodeLine{127 \textcolor{preprocessor}{\#define LP\_ACC\_FREQ\_184             0x01}}
+\DoxyCodeLine{128 \textcolor{preprocessor}{\#define LP\_ACC\_FREQ\_92              0x02}}
+\DoxyCodeLine{129 \textcolor{preprocessor}{\#define LP\_ACC\_FREQ\_41              0x03}}
+\DoxyCodeLine{130 \textcolor{preprocessor}{\#define LP\_ACC\_FREQ\_20              0x04}}
+\DoxyCodeLine{131 \textcolor{preprocessor}{\#define LP\_ACC\_FREQ\_10              0x05}}
+\DoxyCodeLine{132 \textcolor{preprocessor}{\#define LP\_ACC\_FREQ\_5               0x06}}
+\DoxyCodeLine{133 \textcolor{preprocessor}{\#define NO\_ACC\_FIL                  0x08}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135 \textcolor{comment}{// macro for quaternion estimation}}
+\DoxyCodeLine{136 \textcolor{preprocessor}{\#define TICK2GYRO                   0.000133158     }\textcolor{comment}{// rad-\/>deg conversion is included}}
+\DoxyCodeLine{137 \textcolor{preprocessor}{\#define TICK2ACC                    0.000061037}}
+\DoxyCodeLine{138 \textcolor{preprocessor}{\#define BETA                        100000.0}}
+\DoxyCodeLine{139 \textcolor{preprocessor}{\#define GYRO\_THR                    0.2618          }\textcolor{comment}{// 15 deg}}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141 \textcolor{comment}{//function declaration}}
+\DoxyCodeLine{142 \textcolor{keywordtype}{void} ImusReset(); \textcolor{comment}{// Imus Reset }}
+\DoxyCodeLine{143 \textcolor{keywordtype}{void} InitIMU(); \textcolor{comment}{//IMU setup}}
+\DoxyCodeLine{144 \textcolor{keywordtype}{void} InitIMUMagCal();}
+\DoxyCodeLine{145 \textcolor{keywordtype}{void} InitIMUgeneral();}
+\DoxyCodeLine{146 \textcolor{keywordtype}{void} ReadAcc(\textcolor{keywordtype}{int} n); \textcolor{comment}{//reads acc of IMU n}}
+\DoxyCodeLine{147 \textcolor{keywordtype}{void} ReadGyro(\textcolor{keywordtype}{int} n);\textcolor{comment}{//reads gyro of IMU n}}
+\DoxyCodeLine{148 \textcolor{keywordtype}{void} ReadMag(\textcolor{keywordtype}{int} n);\textcolor{comment}{//reads compas of IMU n}}
+\DoxyCodeLine{149 \textcolor{keywordtype}{void} ReadMagCal(\textcolor{keywordtype}{int} n);\textcolor{comment}{//reads compas cal of IMU n}}
+\DoxyCodeLine{150 \textcolor{keywordtype}{void} ReadQuat(\textcolor{keywordtype}{int} n);\textcolor{comment}{//reads quaternion of IMU n}}
+\DoxyCodeLine{151 \textcolor{keywordtype}{void} ReadTemp(\textcolor{keywordtype}{int} n);\textcolor{comment}{//reads temperature of IMU n}}
+\DoxyCodeLine{152 \textcolor{keywordtype}{void} ReadIMU(\textcolor{keywordtype}{int} n); \textcolor{comment}{//reads all of data from IMU n}}
+\DoxyCodeLine{153 \textcolor{keywordtype}{void} ReadAllIMUs(); \textcolor{comment}{//reads all data from all connected IMUs}}
+\DoxyCodeLine{154 uint8 ReadControlRegisterIMU(uint8 address);}
+\DoxyCodeLine{155 \textcolor{keywordtype}{void} WriteControlRegisterIMU(uint8 address, uint8 dta);}
+\DoxyCodeLine{156 \textcolor{keywordtype}{void} ChipSelectorIMU(\textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{157 \textcolor{keywordtype}{void} SPI\_delay();}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159 \textcolor{comment}{/* [] END OF FILE */}}
+
+\end{DoxyCode}

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['counter_5fstatus',['counter_status',['../globals_8h.html#a368077232a067805e98c61f28948abee',1,'globals.h']]]
+  ['counter_5fstatus_0',['counter_status',['../globals_8h.html#a368077232a067805e98c61f28948abee',1,'globals.h']]]
 ];

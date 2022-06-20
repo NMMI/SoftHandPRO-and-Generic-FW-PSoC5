@@ -1,22 +1,22 @@
-\section{st\+\_\+emg Struct Reference}
-\label{structst__emg}\index{st\+\_\+emg@{st\+\_\+emg}}
+\doxysection{st\+\_\+emg Struct Reference}
+\label{structst__emg}\index{st\_emg@{st\_emg}}
 
 
-E\+MG related parameters structure.  
+EMG related parameters structure.  
 
 
 
 
 {\ttfamily \#include $<$globals.\+h$>$}
 
-\subsection*{Data Fields}
+\doxysubsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
-uint16 \textbf{ emg\+\_\+threshold} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS}]
+uint16 \textbf{ emg\+\_\+threshold} [\textbf{ NUM\+\_\+\+OF\+\_\+\+INPUT\+\_\+\+EMGS}]
 \item 
-uint32 \textbf{ emg\+\_\+max\+\_\+value} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS}]
+uint32 \textbf{ emg\+\_\+max\+\_\+value} [\textbf{ NUM\+\_\+\+OF\+\_\+\+INPUT\+\_\+\+EMGS}]
 \item 
-uint8 \textbf{ emg\+\_\+speed} [\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS}]
+uint8 \textbf{ emg\+\_\+speed} [\textbf{ NUM\+\_\+\+OF\+\_\+\+INPUT\+\_\+\+EMGS}]
 \item 
 uint8 \textbf{ emg\+\_\+calibration\+\_\+flag}
 \item 
@@ -24,43 +24,41 @@ uint8 \textbf{ switch\+\_\+emg}
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-E\+MG related parameters structure. 
+\doxysubsection{Detailed Description}
+EMG related parameters structure. 
 
-
-
-\subsection{Field Documentation}
+\doxysubsection{Field Documentation}
 \mbox{\label{structst__emg_a78f0b0c6db2a7118cd15ec0aa38ccdb9}} 
-\index{st\+\_\+emg@{st\+\_\+emg}!emg\+\_\+calibration\+\_\+flag@{emg\+\_\+calibration\+\_\+flag}}
-\index{emg\+\_\+calibration\+\_\+flag@{emg\+\_\+calibration\+\_\+flag}!st\+\_\+emg@{st\+\_\+emg}}
-\subsubsection{emg\+\_\+calibration\+\_\+flag}
+\index{st\_emg@{st\_emg}!emg\_calibration\_flag@{emg\_calibration\_flag}}
+\index{emg\_calibration\_flag@{emg\_calibration\_flag}!st\_emg@{st\_emg}}
+\doxysubsubsection{emg\_calibration\_flag}
 {\footnotesize\ttfamily uint8 emg\+\_\+calibration\+\_\+flag}
 
 Enable emg calibration on startup. \mbox{\label{structst__emg_ad35fe7496b3455cdaf034ddc2c157163}} 
-\index{st\+\_\+emg@{st\+\_\+emg}!emg\+\_\+max\+\_\+value@{emg\+\_\+max\+\_\+value}}
-\index{emg\+\_\+max\+\_\+value@{emg\+\_\+max\+\_\+value}!st\+\_\+emg@{st\+\_\+emg}}
-\subsubsection{emg\+\_\+max\+\_\+value}
-{\footnotesize\ttfamily uint32 emg\+\_\+max\+\_\+value[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS}]}
+\index{st\_emg@{st\_emg}!emg\_max\_value@{emg\_max\_value}}
+\index{emg\_max\_value@{emg\_max\_value}!st\_emg@{st\_emg}}
+\doxysubsubsection{emg\_max\_value}
+{\footnotesize\ttfamily uint32 emg\+\_\+max\+\_\+value[\textbf{ NUM\+\_\+\+OF\+\_\+\+INPUT\+\_\+\+EMGS}]}
 
-Maximum value for E\+MG. \mbox{\label{structst__emg_a66c08e905054b65a7e2a25a8780eb59b}} 
-\index{st\+\_\+emg@{st\+\_\+emg}!emg\+\_\+speed@{emg\+\_\+speed}}
-\index{emg\+\_\+speed@{emg\+\_\+speed}!st\+\_\+emg@{st\+\_\+emg}}
-\subsubsection{emg\+\_\+speed}
-{\footnotesize\ttfamily uint8 emg\+\_\+speed[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS}]}
+Maximum value for EMG. \mbox{\label{structst__emg_a66c08e905054b65a7e2a25a8780eb59b}} 
+\index{st\_emg@{st\_emg}!emg\_speed@{emg\_speed}}
+\index{emg\_speed@{emg\_speed}!st\_emg@{st\_emg}}
+\doxysubsubsection{emg\_speed}
+{\footnotesize\ttfamily uint8 emg\+\_\+speed[\textbf{ NUM\+\_\+\+OF\+\_\+\+INPUT\+\_\+\+EMGS}]}
 
-Maximum closure speed when using E\+MG. \mbox{\label{structst__emg_aa406dc76b9d1c8741dc42db9ac4dab51}} 
-\index{st\+\_\+emg@{st\+\_\+emg}!emg\+\_\+threshold@{emg\+\_\+threshold}}
-\index{emg\+\_\+threshold@{emg\+\_\+threshold}!st\+\_\+emg@{st\+\_\+emg}}
-\subsubsection{emg\+\_\+threshold}
-{\footnotesize\ttfamily uint16 emg\+\_\+threshold[\textbf{ N\+U\+M\+\_\+\+O\+F\+\_\+\+I\+N\+P\+U\+T\+\_\+\+E\+M\+GS}]}
+Maximum closure speed when using EMG. \mbox{\label{structst__emg_aa406dc76b9d1c8741dc42db9ac4dab51}} 
+\index{st\_emg@{st\_emg}!emg\_threshold@{emg\_threshold}}
+\index{emg\_threshold@{emg\_threshold}!st\_emg@{st\_emg}}
+\doxysubsubsection{emg\_threshold}
+{\footnotesize\ttfamily uint16 emg\+\_\+threshold[\textbf{ NUM\+\_\+\+OF\+\_\+\+INPUT\+\_\+\+EMGS}]}
 
-Minimum value for activation of E\+MG control. \mbox{\label{structst__emg_a90c7b59f97a26bf3da8b26b145b32919}} 
-\index{st\+\_\+emg@{st\+\_\+emg}!switch\+\_\+emg@{switch\+\_\+emg}}
-\index{switch\+\_\+emg@{switch\+\_\+emg}!st\+\_\+emg@{st\+\_\+emg}}
-\subsubsection{switch\+\_\+emg}
+Minimum value for activation of EMG control. \mbox{\label{structst__emg_a90c7b59f97a26bf3da8b26b145b32919}} 
+\index{st\_emg@{st\_emg}!switch\_emg@{switch\_emg}}
+\index{switch\_emg@{switch\_emg}!st\_emg@{st\_emg}}
+\doxysubsubsection{switch\_emg}
 {\footnotesize\ttfamily uint8 switch\+\_\+emg}
 
-E\+MG opening/closure switch. 
+EMG opening/closure switch. 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

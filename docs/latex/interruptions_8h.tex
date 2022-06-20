@@ -1,5 +1,5 @@
-\section{interruptions.\+h File Reference}
-\label{interruptions_8h}\index{interruptions.\+h@{interruptions.\+h}}
+\doxysection{interruptions.\+h File Reference}
+\label{interruptions_8h}\index{interruptions.h@{interruptions.h}}
 
 
 Interruptions header file.  
@@ -7,16 +7,16 @@ Interruptions header file.
 
 {\ttfamily \#include \char`\"{}device.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}command\+\_\+processing.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}I\+M\+U\+\_\+functions.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}IMU\+\_\+functions.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}Encoder\+\_\+functions.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}S\+D\+\_\+\+R\+T\+C\+\_\+functions.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}SD\+\_\+\+RTC\+\_\+functions.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}globals.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
 Include dependency graph for interruptions.\+h\+:
 % FIG 0
 This graph shows which files directly or indirectly include this file\+:
 % FIG 1
-\subsection*{Functions}
+\doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \textbf{ motor\+\_\+control\+\_\+generic} (uint8 index)
@@ -26,9 +26,11 @@ void \textbf{ save\+\_\+cycles\+\_\+eeprom} ()
 \begin{Indent}\textbf{ Interruptions}\par
 \begin{DoxyCompactItemize}
 \item 
-\textbf{ C\+Y\+\_\+\+I\+S\+R\+\_\+\+P\+R\+O\+TO} (I\+S\+R\+\_\+\+R\+S485\+\_\+\+R\+X\+\_\+\+Ex\+Interrupt)
+\textbf{ CY\+\_\+\+ISR\+\_\+\+PROTO} (ISR\+\_\+\+RS485\+\_\+\+RX\+\_\+\+Ex\+Interrupt)
 \item 
-\textbf{ C\+Y\+\_\+\+I\+S\+R\+\_\+\+P\+R\+O\+TO} (I\+S\+R\+\_\+\+C\+Y\+C\+L\+E\+S\+\_\+\+Handler)
+\textbf{ CY\+\_\+\+ISR\+\_\+\+PROTO} (ISR\+\_\+\+BT\+\_\+\+RX\+\_\+\+Ex\+Interrupt)
+\item 
+\textbf{ CY\+\_\+\+ISR\+\_\+\+PROTO} (ISR\+\_\+\+CYCLES\+\_\+\+Handler)
 \end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ General function scheduler}\par
@@ -37,10 +39,10 @@ void \textbf{ save\+\_\+cycles\+\_\+eeprom} ()
 void \textbf{ function\+\_\+scheduler} (void)
 \end{DoxyCompactItemize}
 \end{Indent}
-\begin{Indent}\textbf{ Encoder reading S\+PI function}\par
+\begin{Indent}\textbf{ Encoder reading SPI function}\par
 \begin{DoxyCompactItemize}
 \item 
-void \textbf{ encoder\+\_\+reading\+\_\+\+S\+PI} (uint8 n\+\_\+line, uint8 assoc\+\_\+motor)
+void \textbf{ encoder\+\_\+reading\+\_\+\+SPI} (uint8 n\+\_\+line, uint8 assoc\+\_\+motor)
 \end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Motor control function}\par
@@ -79,7 +81,7 @@ void \textbf{ cycles\+\_\+counter\+\_\+update} ()
 \end{Indent}
 
 
-\subsection{Detailed Description}
+\doxysubsection{Detailed Description}
 Interruptions header file. 
 
 \begin{DoxyDate}{Date}
@@ -95,95 +97,104 @@ March 20th, 2020
 \end{DoxyCopyright}
 
 
-\subsection{Function Documentation}
+\doxysubsection{Function Documentation}
 \mbox{\label{interruptions_8h_a00a8d34962a63161405e5d7785b9625e}} 
-\index{interruptions.\+h@{interruptions.\+h}!analog\+\_\+read\+\_\+end@{analog\+\_\+read\+\_\+end}}
-\index{analog\+\_\+read\+\_\+end@{analog\+\_\+read\+\_\+end}!interruptions.\+h@{interruptions.\+h}}
-\subsubsection{analog\+\_\+read\+\_\+end()}
+\index{interruptions.h@{interruptions.h}!analog\_read\_end@{analog\_read\_end}}
+\index{analog\_read\_end@{analog\_read\_end}!interruptions.h@{interruptions.h}}
+\doxysubsubsection{analog\_read\_end()}
 {\footnotesize\ttfamily void analog\+\_\+read\+\_\+end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function executes and terminates the analog readings. \mbox{\label{interruptions_8h_ab9beadac459e017e1ed807124208d132}} 
-\index{interruptions.\+h@{interruptions.\+h}!compute\+\_\+reference@{compute\+\_\+reference}}
-\index{compute\+\_\+reference@{compute\+\_\+reference}!interruptions.\+h@{interruptions.\+h}}
-\subsubsection{compute\+\_\+reference()}
+\index{interruptions.h@{interruptions.h}!compute\_reference@{compute\_reference}}
+\index{compute\_reference@{compute\_reference}!interruptions.h@{interruptions.h}}
+\doxysubsubsection{compute\_reference()}
 {\footnotesize\ttfamily void compute\+\_\+reference (\begin{DoxyParamCaption}\item[{uint8}]{motor\+\_\+idx,  }\item[{struct \textbf{ st\+\_\+ref} $\ast$}]{st\+\_\+ref\+\_\+p,  }\item[{struct \textbf{ st\+\_\+ref} $\ast$}]{st\+\_\+ref\+Old\+\_\+p }\end{DoxyParamCaption})}
 
 This function computes the motor reference and stores it in the given \doxyref{st\+\_\+ref}{p.}{structst__ref} structure. \mbox{\label{interruptions_8h_a32d8abb2b74c69cb1cb0e21101e61f8f}} 
-\index{interruptions.\+h@{interruptions.\+h}!compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+emg\+\_\+reference@{compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+emg\+\_\+reference}}
-\index{compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+emg\+\_\+reference@{compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+emg\+\_\+reference}!interruptions.\+h@{interruptions.\+h}}
-\subsubsection{compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+emg\+\_\+reference()}
+\index{interruptions.h@{interruptions.h}!compute\_SoftHand\_2\_motors\_emg\_reference@{compute\_SoftHand\_2\_motors\_emg\_reference}}
+\index{compute\_SoftHand\_2\_motors\_emg\_reference@{compute\_SoftHand\_2\_motors\_emg\_reference}!interruptions.h@{interruptions.h}}
+\doxysubsubsection{compute\_SoftHand\_2\_motors\_emg\_reference()}
 {\footnotesize\ttfamily void compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+emg\+\_\+reference (\begin{DoxyParamCaption}\item[{uint8}]{motor\+\_\+idx,  }\item[{struct \textbf{ st\+\_\+ref} $\ast$}]{st\+\_\+ref\+\_\+p,  }\item[{struct \textbf{ st\+\_\+ref} $\ast$}]{st\+\_\+ref\+Old\+\_\+p,  }\item[{int32}]{err\+\_\+emg\+\_\+1,  }\item[{int32}]{err\+\_\+emg\+\_\+2 }\end{DoxyParamCaption})}
 
-This function computes the motor reference for Soft\+Hand\+\_\+2\+\_\+motors device with E\+MG input and stores it in the given \doxyref{st\+\_\+ref}{p.}{structst__ref} structure. \mbox{\label{interruptions_8h_aa34d2793dd85a2e5662e6f4dc8a3dfd2}} 
-\index{interruptions.\+h@{interruptions.\+h}!compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+joystick\+\_\+reference@{compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+joystick\+\_\+reference}}
-\index{compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+joystick\+\_\+reference@{compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+joystick\+\_\+reference}!interruptions.\+h@{interruptions.\+h}}
-\subsubsection{compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+joystick\+\_\+reference()}
+This function computes the motor reference for Soft\+Hand\+\_\+2\+\_\+motors device with EMG input and stores it in the given \doxyref{st\+\_\+ref}{p.}{structst__ref} structure. \mbox{\label{interruptions_8h_aa34d2793dd85a2e5662e6f4dc8a3dfd2}} 
+\index{interruptions.h@{interruptions.h}!compute\_SoftHand\_2\_motors\_joystick\_reference@{compute\_SoftHand\_2\_motors\_joystick\_reference}}
+\index{compute\_SoftHand\_2\_motors\_joystick\_reference@{compute\_SoftHand\_2\_motors\_joystick\_reference}!interruptions.h@{interruptions.h}}
+\doxysubsubsection{compute\_SoftHand\_2\_motors\_joystick\_reference()}
 {\footnotesize\ttfamily void compute\+\_\+\+Soft\+Hand\+\_\+2\+\_\+motors\+\_\+joystick\+\_\+reference (\begin{DoxyParamCaption}\item[{uint8}]{motor\+\_\+idx,  }\item[{struct \textbf{ st\+\_\+ref} $\ast$}]{st\+\_\+ref\+\_\+p,  }\item[{struct \textbf{ st\+\_\+ref} $\ast$}]{st\+\_\+ref\+Old\+\_\+p }\end{DoxyParamCaption})}
 
-This function computes the motor reference for Soft\+Hand\+\_\+2\+\_\+motors device with joystick input and stores it in the given \doxyref{st\+\_\+ref}{p.}{structst__ref} structure. \mbox{\label{interruptions_8h_a7e24af8c83537b0441877bf0f00dd30a}} 
-\index{interruptions.\+h@{interruptions.\+h}!C\+Y\+\_\+\+I\+S\+R\+\_\+\+P\+R\+O\+TO@{C\+Y\+\_\+\+I\+S\+R\+\_\+\+P\+R\+O\+TO}}
-\index{C\+Y\+\_\+\+I\+S\+R\+\_\+\+P\+R\+O\+TO@{C\+Y\+\_\+\+I\+S\+R\+\_\+\+P\+R\+O\+TO}!interruptions.\+h@{interruptions.\+h}}
-\subsubsection{C\+Y\+\_\+\+I\+S\+R\+\_\+\+P\+R\+O\+T\+O()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily C\+Y\+\_\+\+I\+S\+R\+\_\+\+P\+R\+O\+TO (\begin{DoxyParamCaption}\item[{I\+S\+R\+\_\+\+R\+S485\+\_\+\+R\+X\+\_\+\+Ex\+Interrupt}]{ }\end{DoxyParamCaption})}
+This function computes the motor reference for Soft\+Hand\+\_\+2\+\_\+motors device with joystick input and stores it in the given \doxyref{st\+\_\+ref}{p.}{structst__ref} structure. \mbox{\label{interruptions_8h_aef420ff977dab9318e2c3b1c04de874a}} 
+\index{interruptions.h@{interruptions.h}!CY\_ISR\_PROTO@{CY\_ISR\_PROTO}}
+\index{CY\_ISR\_PROTO@{CY\_ISR\_PROTO}!interruptions.h@{interruptions.h}}
+\doxysubsubsection{CY\_ISR\_PROTO()\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily CY\+\_\+\+ISR\+\_\+\+PROTO (\begin{DoxyParamCaption}\item[{ISR\+\_\+\+BT\+\_\+\+RX\+\_\+\+Ex\+Interrupt}]{ }\end{DoxyParamCaption})}
 
-This interruption sets a flag to let the firmware know that a communication interruption is pending and needs to be handled. The interruption will be handled in predefined moments during the firmware execution. When this interruption is handled, it unpacks the package received on the R\+S485 communication bus. \mbox{\label{interruptions_8h_a4b74d7d608d07d4a230aaa9cd0c1a21a}} 
-\index{interruptions.\+h@{interruptions.\+h}!C\+Y\+\_\+\+I\+S\+R\+\_\+\+P\+R\+O\+TO@{C\+Y\+\_\+\+I\+S\+R\+\_\+\+P\+R\+O\+TO}}
-\index{C\+Y\+\_\+\+I\+S\+R\+\_\+\+P\+R\+O\+TO@{C\+Y\+\_\+\+I\+S\+R\+\_\+\+P\+R\+O\+TO}!interruptions.\+h@{interruptions.\+h}}
-\subsubsection{C\+Y\+\_\+\+I\+S\+R\+\_\+\+P\+R\+O\+T\+O()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily C\+Y\+\_\+\+I\+S\+R\+\_\+\+P\+R\+O\+TO (\begin{DoxyParamCaption}\item[{I\+S\+R\+\_\+\+C\+Y\+C\+L\+E\+S\+\_\+\+Handler}]{ }\end{DoxyParamCaption})}
+This interruption sets a flag to let the firmware know that a communication interruption is pending and needs to be handled. The interruption will be handled in predefined moments during the firmware execution. When this interruption is handled, it unpacks the package received on the Bluetooth communication bus. ~\newline
+ \mbox{\label{interruptions_8h_a4b74d7d608d07d4a230aaa9cd0c1a21a}} 
+\index{interruptions.h@{interruptions.h}!CY\_ISR\_PROTO@{CY\_ISR\_PROTO}}
+\index{CY\_ISR\_PROTO@{CY\_ISR\_PROTO}!interruptions.h@{interruptions.h}}
+\doxysubsubsection{CY\_ISR\_PROTO()\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily CY\+\_\+\+ISR\+\_\+\+PROTO (\begin{DoxyParamCaption}\item[{ISR\+\_\+\+CYCLES\+\_\+\+Handler}]{ }\end{DoxyParamCaption})}
 
-This interruption sets a flag to let the firmware know that a cycles timer interruption is pending and needs to be handled. The interrpution will be handled in predefined moments during the firmware execution. When this interruption is handled, it updates cycles counters. \mbox{\label{interruptions_8h_a77877c16b42f6f384f7c80d3002aed22}} 
-\index{interruptions.\+h@{interruptions.\+h}!cycles\+\_\+counter\+\_\+update@{cycles\+\_\+counter\+\_\+update}}
-\index{cycles\+\_\+counter\+\_\+update@{cycles\+\_\+counter\+\_\+update}!interruptions.\+h@{interruptions.\+h}}
-\subsubsection{cycles\+\_\+counter\+\_\+update()}
+This interruption sets a flag to let the firmware know that a cycles timer interruption is pending and needs to be handled. The interrpution will be handled in predefined moments during the firmware execution. When this interruption is handled, it updates cycles counters. \mbox{\label{interruptions_8h_a7e24af8c83537b0441877bf0f00dd30a}} 
+\index{interruptions.h@{interruptions.h}!CY\_ISR\_PROTO@{CY\_ISR\_PROTO}}
+\index{CY\_ISR\_PROTO@{CY\_ISR\_PROTO}!interruptions.h@{interruptions.h}}
+\doxysubsubsection{CY\_ISR\_PROTO()\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily CY\+\_\+\+ISR\+\_\+\+PROTO (\begin{DoxyParamCaption}\item[{ISR\+\_\+\+RS485\+\_\+\+RX\+\_\+\+Ex\+Interrupt}]{ }\end{DoxyParamCaption})}
+
+This interruption sets a flag to let the firmware know that a communication interruption is pending and needs to be handled. The interruption will be handled in predefined moments during the firmware execution. When this interruption is handled, it unpacks the package received on the RS485 communication bus. ~\newline
+ \mbox{\label{interruptions_8h_a77877c16b42f6f384f7c80d3002aed22}} 
+\index{interruptions.h@{interruptions.h}!cycles\_counter\_update@{cycles\_counter\_update}}
+\index{cycles\_counter\_update@{cycles\_counter\_update}!interruptions.h@{interruptions.h}}
+\doxysubsubsection{cycles\_counter\_update()}
 {\footnotesize\ttfamily void cycles\+\_\+counter\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function increases the cycles counters variables, depending on Soft\+Hand position and the current absorbed by the motor. \mbox{\label{interruptions_8h_a6eeedfdf03dd87bd2922b7005fd8c691}} 
-\index{interruptions.\+h@{interruptions.\+h}!encoder\+\_\+reading\+\_\+\+S\+PI@{encoder\+\_\+reading\+\_\+\+S\+PI}}
-\index{encoder\+\_\+reading\+\_\+\+S\+PI@{encoder\+\_\+reading\+\_\+\+S\+PI}!interruptions.\+h@{interruptions.\+h}}
-\subsubsection{encoder\+\_\+reading\+\_\+\+S\+P\+I()}
-{\footnotesize\ttfamily void encoder\+\_\+reading\+\_\+\+S\+PI (\begin{DoxyParamCaption}\item[{uint8}]{n\+\_\+line,  }\item[{uint8}]{assoc\+\_\+motor }\end{DoxyParamCaption})}
+\index{interruptions.h@{interruptions.h}!encoder\_reading\_SPI@{encoder\_reading\_SPI}}
+\index{encoder\_reading\_SPI@{encoder\_reading\_SPI}!interruptions.h@{interruptions.h}}
+\doxysubsubsection{encoder\_reading\_SPI()}
+{\footnotesize\ttfamily void encoder\+\_\+reading\+\_\+\+SPI (\begin{DoxyParamCaption}\item[{uint8}]{n\+\_\+line,  }\item[{uint8}]{assoc\+\_\+motor }\end{DoxyParamCaption})}
 
 This functions reads the value from all the connected encoders. \mbox{\label{interruptions_8h_a39df971c4e9f194be50c54dfd7aeabfe}} 
-\index{interruptions.\+h@{interruptions.\+h}!function\+\_\+scheduler@{function\+\_\+scheduler}}
-\index{function\+\_\+scheduler@{function\+\_\+scheduler}!interruptions.\+h@{interruptions.\+h}}
-\subsubsection{function\+\_\+scheduler()}
+\index{interruptions.h@{interruptions.h}!function\_scheduler@{function\_scheduler}}
+\index{function\_scheduler@{function\_scheduler}!interruptions.h@{interruptions.h}}
+\doxysubsubsection{function\_scheduler()}
 {\footnotesize\ttfamily void function\+\_\+scheduler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
 
-This function schedules the other functions in an order that optimizes the controller usage. \mbox{\label{interruptions_8h_a9790811526002d99b25a814afd02cbae}} 
-\index{interruptions.\+h@{interruptions.\+h}!interrupt\+\_\+manager@{interrupt\+\_\+manager}}
-\index{interrupt\+\_\+manager@{interrupt\+\_\+manager}!interruptions.\+h@{interruptions.\+h}}
-\subsubsection{interrupt\+\_\+manager()}
+This function schedules the other functions in an order that optimizes the controller usage. ~\newline
+ \mbox{\label{interruptions_8h_a9790811526002d99b25a814afd02cbae}} 
+\index{interruptions.h@{interruptions.h}!interrupt\_manager@{interrupt\_manager}}
+\index{interrupt\_manager@{interrupt\_manager}!interruptions.h@{interruptions.h}}
+\doxysubsubsection{interrupt\_manager()}
 {\footnotesize\ttfamily void interrupt\+\_\+manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function is called in predefined moments during firmware execution in order to unpack the received package. \mbox{\label{interruptions_8h_af17859273d717ee4b7c575ec7644e308}} 
-\index{interruptions.\+h@{interruptions.\+h}!motor\+\_\+control\+\_\+generic@{motor\+\_\+control\+\_\+generic}}
-\index{motor\+\_\+control\+\_\+generic@{motor\+\_\+control\+\_\+generic}!interruptions.\+h@{interruptions.\+h}}
-\subsubsection{motor\+\_\+control\+\_\+generic()}
+\index{interruptions.h@{interruptions.h}!motor\_control\_generic@{motor\_control\_generic}}
+\index{motor\_control\_generic@{motor\_control\_generic}!interruptions.h@{interruptions.h}}
+\doxysubsubsection{motor\_control\_generic()}
 {\footnotesize\ttfamily void motor\+\_\+control\+\_\+generic (\begin{DoxyParamCaption}\item[{uint8}]{index }\end{DoxyParamCaption})}
 
 This function controls the motor direction and velocity, depending on the input and control modality set. \mbox{\label{interruptions_8h_a17436ec2a3bf0398e965c63c8e1a089d}} 
-\index{interruptions.\+h@{interruptions.\+h}!motor\+\_\+control\+\_\+\+SH@{motor\+\_\+control\+\_\+\+SH}}
-\index{motor\+\_\+control\+\_\+\+SH@{motor\+\_\+control\+\_\+\+SH}!interruptions.\+h@{interruptions.\+h}}
-\subsubsection{motor\+\_\+control\+\_\+\+S\+H()}
+\index{interruptions.h@{interruptions.h}!motor\_control\_SH@{motor\_control\_SH}}
+\index{motor\_control\_SH@{motor\_control\_SH}!interruptions.h@{interruptions.h}}
+\doxysubsubsection{motor\_control\_SH()}
 {\footnotesize\ttfamily void motor\+\_\+control\+\_\+\+SH (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function controls the motor direction and velocity, depending on the input and control modality set. \mbox{\label{interruptions_8h_a4e92908805632dc8cab2936d89bb3ba1}} 
-\index{interruptions.\+h@{interruptions.\+h}!overcurrent\+\_\+control@{overcurrent\+\_\+control}}
-\index{overcurrent\+\_\+control@{overcurrent\+\_\+control}!interruptions.\+h@{interruptions.\+h}}
-\subsubsection{overcurrent\+\_\+control()}
+\index{interruptions.h@{interruptions.h}!overcurrent\_control@{overcurrent\_control}}
+\index{overcurrent\_control@{overcurrent\_control}!interruptions.h@{interruptions.h}}
+\doxysubsubsection{overcurrent\_control()}
 {\footnotesize\ttfamily void overcurrent\+\_\+control (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 This function increases or decreases the pwm maximum value, depending on the current absorbed by the motor. \mbox{\label{interruptions_8h_ac7305eeb40ebfb2c0d67725aa2e88f78}} 
-\index{interruptions.\+h@{interruptions.\+h}!pwm\+\_\+limit\+\_\+search@{pwm\+\_\+limit\+\_\+search}}
-\index{pwm\+\_\+limit\+\_\+search@{pwm\+\_\+limit\+\_\+search}!interruptions.\+h@{interruptions.\+h}}
-\subsubsection{pwm\+\_\+limit\+\_\+search()}
+\index{interruptions.h@{interruptions.h}!pwm\_limit\_search@{pwm\_limit\_search}}
+\index{pwm\_limit\_search@{pwm\_limit\_search}!interruptions.h@{interruptions.h}}
+\doxysubsubsection{pwm\_limit\_search()}
 {\footnotesize\ttfamily void pwm\+\_\+limit\+\_\+search (\begin{DoxyParamCaption}\item[{uint8}]{mot\+\_\+idx }\end{DoxyParamCaption})}
 
 This function scales the pwm value of the motor, depending on the power supply voltage, in order to not make the motor wind too fast. \mbox{\label{interruptions_8h_ad86170580c30277d97216739e8508a13}} 
-\index{interruptions.\+h@{interruptions.\+h}!save\+\_\+cycles\+\_\+eeprom@{save\+\_\+cycles\+\_\+eeprom}}
-\index{save\+\_\+cycles\+\_\+eeprom@{save\+\_\+cycles\+\_\+eeprom}!interruptions.\+h@{interruptions.\+h}}
-\subsubsection{save\+\_\+cycles\+\_\+eeprom()}
+\index{interruptions.h@{interruptions.h}!save\_cycles\_eeprom@{save\_cycles\_eeprom}}
+\index{save\_cycles\_eeprom@{save\_cycles\_eeprom}!interruptions.h@{interruptions.h}}
+\doxysubsubsection{save\_cycles\_eeprom()}
 {\footnotesize\ttfamily void save\+\_\+cycles\+\_\+eeprom (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-This function saves cycles counters variables into E\+E\+P\+R\+OM memory. 
+This function saves cycles counters variables into EEPROM memory. 
