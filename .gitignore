@@ -2,12 +2,15 @@
 *.cydsn/CortexM3/
 *.cydsn/Export/
 *.cydsn/Generated_Source/
-*.cydsn/*_timing
-*.cydsn/BUILD
-*.cydsn/CLEAN
-*.cydsn/REBUILD
+*.cydsn/*.rpt
+*.cydsn/*_timing.html
+*.cydsn/BUILD.log
+*.cydsn/CLEAN.log
+*.cydsn/REBUILD.log
 
 Backup/
+
+cywrk.*
 
 # Catkin custom files
 CATKIN_IGNORE
