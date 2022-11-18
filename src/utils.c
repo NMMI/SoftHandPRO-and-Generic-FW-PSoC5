@@ -606,8 +606,7 @@ void set_motor_driver_type(){
     // NOTE: if at least one Brushless is used, the PWM frequency will change for all motors
     if (g_mem.motor[0].motor_driver_type == DRIVER_BRUSHLESS  || 
        (g_mem.dev.use_2nd_motor_flag == TRUE && g_mem.motor[1].motor_driver_type == DRIVER_BRUSHLESS)){
-        //CLOCK_PWM_SetDividerValue(90);      // 48 Mhz / 90 = 533.333 KHz (nearest value to 536 Khz desired frequency for Maxon ESC)
-        CLOCK_PWM_SetDividerValue(3);                   // 48 Mhz / 3 = 16 MHz
+        CLOCK_PWM_SetDividerValue(90);      // 48 Mhz / 90 = 533.333 KHz (nearest value to 536 Khz desired frequency for Maxon ESC)
         PWM_MOTORS_WritePeriod(PWM_MAX_VALUE_ESC);      // 16 MHz / 2985 = 5.36 KHz (5.36 Khz desired frequency for Maxon ESC)
         dev_pwm_sat[0] = PWM_MAX_VALUE_ESC;
         dev_pwm_sat[1] = PWM_MAX_VALUE_ESC;

@@ -152,8 +152,9 @@
 #define GENERIC_2_MOTORS    1
 #define AIR_CHAMBERS_FB     2
 #define OTBK_ACT_WRIST_MS   3  
-#define SOFTHAND_2_MOTORS   4    
-#define CUFF                5 
+#define SOFTHAND_2_MOTORS   4
+#define AE_SHOULDER_ESCON   5       // Firmware for AlterEgo Shoulder Joint with DCX26L GPX32 and ESCON driver
+#define CUFF                6 
     
 //==============================================================================
 //                                                               WRIST FSM STATE
@@ -201,7 +202,7 @@
 #define EEPROM_COUNTERS_ROWS    7       /*!< EEPROM number of rows dedicated to store counters.*/
 #define EEPROM_AFTER_CNT_FREE_ROWS 2    /*!< EEPROM number of rows free after counters.*/   
 #define PWM_MAX_VALUE_DC        100     /*!< Maximum value of the PWM signal.*/
-#define PWM_MAX_VALUE_ESC       2985    /*!< Maximum value of the PWM signal for ESC driver module.*/
+#define PWM_MAX_VALUE_ESC       100     /*!< Maximum value of the PWM signal for ESC driver module.*/   //2985
 #define ANTI_WINDUP             1000    /*!< Anti windup saturation.*/ 
 #define DEFAULT_CURRENT_LIMIT   1500    /*!< Default Current limit, 0 stands for unlimited.*/
 #define CURRENT_HYSTERESIS      10      /*!< milliAmperes of hysteresis for current control.*/
@@ -335,7 +336,7 @@ struct st_motor{
     uint8   input_mode;                 /*!< Motor Input mode.*/                                            //1 
     uint8   control_mode;               /*!< Motor Control mode.*/                                          //1
     uint8   encoder_line;               /*!< Encoder line associated to the motor control.*/                //1
-    uint8   pwm_rate_limiter;           /*!< PWM rate limiter max asscoaited to the motor.*/                //1
+    uint8   pwm_rate_limiter;           /*!< PWM rate limiter max associated to the motor.*/                //1
     uint8   not_revers_motor_flag;      /*!< Flag to know if the motor is reversible or not.*/              //1 
     uint8   unused_bytes[13];           /*!< Unused bytes to fill row.*/                                    //13
 };                                                                                                          // TOTAL: 112 BYTES

@@ -848,6 +848,9 @@ void get_param_list (uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS],
                         case 4:
                             strcat(aux_str, " SOFTHAND 2 MOTORS\0");
                         break;
+                        case 5:
+                            strcat(aux_str, " AlterEgo SHOULDER\0");
+                        break;
                     }
                     break;
                 case 11:    // fsm activation mode menu
@@ -1170,7 +1173,7 @@ void manage_param_list(uint16 index) {
         spi_delay_menu,                                                                                                     //7 spi_delay_menu
         "0 -> Generic user\n1 -> Maria\n2 -> R01\nThe board will reset\n",                                                  //8 user_id_menu
         "0 -> MC33887 (Standard)\n1 -> VNH5019 (High power)\n2 -> ESC (Brushless)\nThe board will reset\n",                                       //9 motor_driver_type_menu
-        "0 -> SOFTHAND PRO\n1 -> GENERIC 2 MOTORS\n2 -> AIR CHAMBERS\n3 -> OTTOBOCK WRIST\n4 -> SOFTHAND 2 MOTORS\nThe board will reset\n",         //10 device_type_menu
+        "0 -> SOFTHAND PRO\n1 -> GENERIC 2 MOTORS\n2 -> AIR CHAMBERS\n3 -> OTTOBOCK WRIST\n4 -> SOFTHAND 2 MOTORS\n5 -> AlterEgo Shoulder\nThe board will reset\n",         //10 device_type_menu
         fsm_activation_mode_menu,                                                                             //11 fsm_activation_mode_menu
         "0 -> Close:CW, Open:CCW\n1 -> Close:CCW, Open:CW\n"                                                  //12 wrist_direction_menu
     };   
@@ -1653,7 +1656,32 @@ void set_custom_param(uint16 index) {
                     g_mem.motor[i].k_i           =    0 * 65536;
                     g_mem.motor[i].k_d           = 0.05 * 65536;
                 }
-            }      
+            }
+            
+            
+            if (g_mem.dev.dev_type == AE_SHOULDER_ESCON){       // change driver with ESCON
+                g_mem.motor[MOTOR_IDX].motor_driver_type = DRIVER_BRUSHLESS;
+                g_mem.motor[MOTOR_IDX].pwm_rate_limiter = 100;
+                for(j = 0; j < NUM_OF_SENSORS; j++){
+                    g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[j] = 2;
+                }
+               
+                g_mem.motor[MOTOR_IDX].pos_lim_flag = TRUE;
+                if (g_mem.dev.right_left == RIGHT_HAND){
+                    g_mem.motor[MOTOR_IDX].pos_lim_inf = ((int32)(-12000)) << g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[0];
+                    g_mem.motor[MOTOR_IDX].pos_lim_sup = (int32)4000 << g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[0];
+                }
+                else {
+                    g_mem.motor[MOTOR_IDX].pos_lim_inf = ((int32)(-4000)) << g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[0];
+                    g_mem.motor[MOTOR_IDX].pos_lim_sup = (int32)12000 << g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[0];   
+                }
+                
+                // Maxon DCX26L GPX32
+                g_mem.motor[MOTOR_IDX].current_limit = 3500;               // [mA]
+                g_mem.motor[MOTOR_IDX].k_p           =  -0.018 * 65536;
+                g_mem.motor[MOTOR_IDX].k_i           =       0 * 65536;
+                g_mem.motor[MOTOR_IDX].k_d           =  -0.005 * 65536;
+            }
             
             break;
             
@@ -1957,6 +1985,9 @@ void prepare_generic_info(char *info_string)
             case SOFTHAND_2_MOTORS:
                 strcat(info_string, "Device: SOFTHAND 2 MOTORS\r\n");
                 break;
+            case AE_SHOULDER_ESCON:
+                strcat(info_string, "Device: AlterEgo Shoulder (ESCON)\r\n");
+                break;                
             default:
                 break;
         }
@@ -2053,6 +2084,10 @@ void prepare_generic_info(char *info_string)
 
             sprintf(str, "Battery %d Voltage (mV): %ld", MOTOR_IDX+1, (int32) dev_tension[MOTOR_IDX] );
             strcat(info_string, str);
+            if (c_mem.dev.dev_type == AE_SHOULDER_ESCON){
+                sprintf(str, " [Not Sensed]");
+                strcat(info_string, str);
+            }
             strcat(info_string, "\r\n");
             
             sprintf(str, "Full charge power tension %d (mV): %ld", MOTOR_IDX+1, (int32) pow_tension[MOTOR_IDX] );
@@ -3437,14 +3472,15 @@ void memInit_SoftHandPro(void)
     strcpy(g_mem.user[g_mem.dev.user_id].user_code_string, "USR001");
     
 #ifdef SH_XPRIZE
+    g_mem.motor[MOTOR_IDX].current_limit = 2500;
     g_mem.imu.read_imu_flag = TRUE;
     g_mem.exp.read_ADC_sensors_port_flag = TRUE;
     
     //Activate ADC1 and ADC2 channels by default
     g_mem.exp.ADC_conf[2] = 0;
     g_mem.exp.ADC_conf[3] = 0;
-    g_mem.exp.ADC_conf[6] = 1;
     g_mem.exp.ADC_conf[7] = 1;
+    g_mem.exp.ADC_conf[8] = 1;
 #endif
 }
 
@@ -3542,7 +3578,16 @@ void cmd_get_measurements(){
         packet_data[(index << 1) + 2] = ((char*)(&aux_int16))[0];
         packet_data[(index << 1) + 1] = ((char*)(&aux_int16))[1];
     }
-    
+ 
+
+    if (c_mem.dev.dev_type == AE_SHOULDER_ESCON){      //Mod. AlterEgo XPRIZE NEW Shoulder
+        //Overwrite third measure copying first one for the shaft
+        index = 2;
+        aux_int16 = (int16)(g_measOld[g_mem.motor[0].encoder_line].pos[0] >> g_mem.enc[g_mem.motor[0].encoder_line].res[0]);
+        packet_data[(index << 1) + 2] = ((char*)(&aux_int16))[0];
+        packet_data[(index << 1) + 1] = ((char*)(&aux_int16))[1];
+    }
+
     // Calculate Checksum and send message to UART 
 
     packet_data[7] = LCRChecksum (packet_data, 7);

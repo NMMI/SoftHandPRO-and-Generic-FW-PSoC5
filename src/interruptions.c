@@ -348,7 +348,7 @@ void function_scheduler(void) {
             }
             break;
             
-        case GENERIC_2_MOTORS: case SOFTHAND_2_MOTORS:
+        case GENERIC_2_MOTORS: case SOFTHAND_2_MOTORS: case AE_SHOULDER_ESCON:
             
             //---------------------------------- Get Encoders
             for (uint8 i = 0; i < N_ENCODER_LINE_MAX; i++) {
@@ -1083,7 +1083,12 @@ void motor_control_SH() {
 
     static CYBIT motor_dir = FALSE;
     static uint32 position_counter = 0;
-  
+    
+    uint32 position_counter_limit = 250;
+#ifdef SH_XPRIZE
+    position_counter_limit = 1000;
+#endif    
+
     // ======================= UPDATE MOTOR REFERENCE ==========================            
     compute_reference(MOTOR_IDX, &g_ref[MOTOR_IDX], &g_refOld[MOTOR_IDX]);
      
@@ -1319,13 +1324,13 @@ void motor_control_SH() {
             ((g_refOld[MOTOR_IDX].pos - g_ref[MOTOR_IDX].pos) < 100 && (g_refOld[MOTOR_IDX].pos - g_ref[MOTOR_IDX].pos) > -100) ) {     // if used with EMG input, 100 is related to an emg speed greater than 25 (<< 2)
             position_counter++;
             
-            if (position_counter >= 250) { 
+            if (position_counter >= position_counter_limit) { 
                 if (SH_MOT->input_mode == INPUT_MODE_EXTERNAL && change_ext_ref_flag == FALSE) {
                     g_refNew[MOTOR_IDX].pos = g_meas[SH_ENC_L].pos[0];       // Needed only when USB input mode is used, since g_refNew structure is used only with this input
                 }
                 g_ref[MOTOR_IDX].pos = g_meas[SH_ENC_L].pos[0];
                 
-                if (position_counter == 250){
+                if (position_counter == position_counter_limit){
                     // To do only once
                     g_meas[SH_ENC_L].hold_curr = g_meas[SH_ENC_L].curr;
                 }
@@ -1677,13 +1682,13 @@ void motor_control_generic(uint8 idx) {
     
     // Always limit PWM if using Brushless motors and ESC module
     if (MOT->motor_driver_type == DRIVER_BRUSHLESS) {           
-        // Allowed in range [-2700,-200] and [200,2700] where 200 -> 0 rpm, 2700 -> MAX no load speed rpm (90% approx.)
-        if (abs(pwm_input) > 2700){
-            pwm_input = SIGN(pwm_input) * 2700;
+        // Allowed in range [-90,-7] and [7,90] where 7 -> 0 rpm, 90 -> MAX no load speed rpm (90% approx.)
+        if (abs(pwm_input) > 90){
+            pwm_input = SIGN(pwm_input) * 90;
         }
         
-        if (abs(pwm_input) < 200){
-            pwm_input = SIGN(pwm_input) * 200;
+        if (abs(pwm_input) < 7){
+            pwm_input = SIGN(pwm_input) * 7;
         }
        
     }
@@ -2009,7 +2014,12 @@ void analog_read_end() {
         dev_tension[0] = 5000;
     }
     else {
-        dev_tension[0] =  ((int32)(ADC_buf[0] - 1621) * 1990) >> 7;
+        if (g_mem.dev.dev_type == AE_SHOULDER_ESCON){
+            dev_tension[0] = 24000;         // No voltage reading AVAGO needed
+        }
+        else {
+            dev_tension[0] =  ((int32)(ADC_buf[0] - 1621) * 1990) >> 7;
+        }
     }
     
     // Read also 2nd power tension (if necessary)
@@ -2119,7 +2129,7 @@ void analog_read_end() {
 
         for (idx = 0; idx < NUM_OF_MOTORS; idx++){
             if(g_mem.motor[idx].activate_pwm_rescaling)        //pwm rescaling is activated
-                pwm_limit_search(idx);                 //only for 12V motor
+                pwm_limit_search(idx);                         //only for 12V motor
         }
         
         // Filter and Set currents

@@ -302,9 +302,6 @@ void   memInit_AirChambersFb ();
 **/
 void   memInit_OtbkActWristMs ();
 
-/** \} */
-
-
 /** \name Utility functions */
 /** \{ */
 
