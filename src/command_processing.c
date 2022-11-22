@@ -4068,7 +4068,7 @@ void cmd_get_imu_readings(){
     
     // Packet: header + imu id(uint8) + imu flags(uint8) + crc  
     uint8 packet_data[350];
-    uint8 single_packet[32];
+    uint8 single_packet[42];
     
     //Header package 
     packet_data[0] = CMD_GET_IMU_READINGS;
