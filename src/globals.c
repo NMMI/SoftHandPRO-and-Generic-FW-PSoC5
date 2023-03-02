@@ -98,6 +98,7 @@ int16 ADC_buf[NUM_OF_ADC_CHANNELS_MAX];     /*! ADC measurements buffer.*/
 uint8 NUM_OF_ANALOG_INPUTS = 4;             /*! ADC currently configured channels.*/
 
 // PWM value
+uint16 PWM_MAX_VALUE_ESC = 100;             /*!< Maximum value of the PWM signal for ESC driver module.*/
 int8 pwm_sign[NUM_OF_MOTORS];               /*!< Sign of pwm driven. Used to obtain current sign.*/
 
 // Encoder variables

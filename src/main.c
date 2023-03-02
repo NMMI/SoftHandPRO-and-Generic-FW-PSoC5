@@ -93,10 +93,7 @@ int main()
     
 	// LED Enable   
     LED_control(1);     // Green fixed light
-    BLINK_05HZ_Start();
-    BLINK_25HZ_Start();
-    BLINK_05HZ_WriteCompare(99);
-    BLINK_25HZ_WriteCompare(19);
+
     
     // RS485 UART
     UART_RS485_Stop();
@@ -280,7 +277,9 @@ int main()
 	rest_enabled = 0;
     forced_open = 0;
     
-    LED_control(5);     // Default - red light
+    if (c_mem.motor[0].motor_driver_type != DRIVER_BRUSHLESS){
+        LED_control(5);     // Default - red light
+    }
     
 #ifdef MASTER_FW
     master_mode = 1;    // Default - activate master mode at startup

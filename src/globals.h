@@ -154,7 +154,8 @@
 #define OTBK_ACT_WRIST_MS   3  
 #define SOFTHAND_2_MOTORS   4
 #define AE_SHOULDER_ESCON   5       // Firmware for AlterEgo Shoulder Joint with DCX26L GPX32 and ESCON driver
-#define CUFF                6 
+#define AE_WHEELS_ESCON     6       // Firmware for AlterEgo Wheels with 2 x Brushless EC45 588849 and ESCON driver
+#define CUFF                7 
     
 //==============================================================================
 //                                                               WRIST FSM STATE
@@ -202,7 +203,6 @@
 #define EEPROM_COUNTERS_ROWS    7       /*!< EEPROM number of rows dedicated to store counters.*/
 #define EEPROM_AFTER_CNT_FREE_ROWS 2    /*!< EEPROM number of rows free after counters.*/   
 #define PWM_MAX_VALUE_DC        100     /*!< Maximum value of the PWM signal.*/
-#define PWM_MAX_VALUE_ESC       100     /*!< Maximum value of the PWM signal for ESC driver module.*/   //2985
 #define ANTI_WINDUP             1000    /*!< Anti windup saturation.*/ 
 #define DEFAULT_CURRENT_LIMIT   1500    /*!< Default Current limit, 0 stands for unlimited.*/
 #define CURRENT_HYSTERESIS      10      /*!< milliAmperes of hysteresis for current control.*/
@@ -591,6 +591,7 @@ extern int16 ADC_buf[NUM_OF_ADC_CHANNELS_MAX];      /*! ADC measurements buffer 
 extern uint8 NUM_OF_ANALOG_INPUTS;                  /*! ADC currently configured channels.*/
 
 // PWM value
+extern uint16 PWM_MAX_VALUE_ESC;                    /*!< Maximum value of the PWM signal for ESC driver module.*/
 extern int8 pwm_sign[NUM_OF_MOTORS];                /*!< Sign of pwm driven. Used to obtain current sign.*/
 
 // Encoder variables

@@ -348,7 +348,7 @@ void function_scheduler(void) {
             }
             break;
             
-        case GENERIC_2_MOTORS: case SOFTHAND_2_MOTORS: case AE_SHOULDER_ESCON:
+        case GENERIC_2_MOTORS: case SOFTHAND_2_MOTORS: case AE_SHOULDER_ESCON: case AE_WHEELS_ESCON:
             
             //---------------------------------- Get Encoders
             for (uint8 i = 0; i < N_ENCODER_LINE_MAX; i++) {
@@ -1683,12 +1683,12 @@ void motor_control_generic(uint8 idx) {
     // Always limit PWM if using Brushless motors and ESC module
     if (MOT->motor_driver_type == DRIVER_BRUSHLESS) {           
         // Allowed in range [-90,-7] and [7,90] where 7 -> 0 rpm, 90 -> MAX no load speed rpm (90% approx.)
-        if (abs(pwm_input) > 90){
-            pwm_input = SIGN(pwm_input) * 90;
+        if (abs(pwm_input) > 90 * (int)(PWM_MAX_VALUE_ESC/100.0)){
+          pwm_input = SIGN(pwm_input) * 90 * (int)(PWM_MAX_VALUE_ESC/100.0);
         }
         
-        if (abs(pwm_input) < 7){
-            pwm_input = SIGN(pwm_input) * 7;
+        if (abs(pwm_input) < 7 * (int)(PWM_MAX_VALUE_ESC/100.0)){
+            pwm_input = SIGN(pwm_input) * 7 * (int)(PWM_MAX_VALUE_ESC/100.0);
         }
        
     }
@@ -2024,7 +2024,12 @@ void analog_read_end() {
     
     // Read also 2nd power tension (if necessary)
     if (NUM_OF_ANALOG_INPUTS > 4) {
-        dev_tension[1] = ((int32)(ADC_buf[4] - 1621) * 1990) >> 7;
+        if (g_mem.dev.dev_type == AE_WHEELS_ESCON){
+            dev_tension[1] = dev_tension[0];         // No voltage reading AVAGO needed, take 1st motor voltage, same battery
+        }
+        else {
+            dev_tension[1] = ((int32)(ADC_buf[4] - 1621) * 1990) >> 7;
+        }
     }
     
     if (interrupt_flag){
@@ -2054,12 +2059,18 @@ void analog_read_end() {
                 if (dev_tension[idx] < 9000) {   // 8 V case
                     pow_tension[idx] = 8000;
                 }
-                else {      // 12 V - 24 V cases
+                else {      // > 12 V cases
                     if (dev_tension[idx] < 13000) {
                         pow_tension[idx] = 12000;
                     }
-                    else
-                        pow_tension[idx] = 24000;
+                    else{   // 18 V - 24 V cases
+                        if (dev_tension[idx] < 20500){
+                            pow_tension[idx] = 18000;
+                        }
+                        else {
+                            pow_tension[idx] = 24000;
+                        }
+                    }
                 }
             }
             first_tension_valid = FALSE;

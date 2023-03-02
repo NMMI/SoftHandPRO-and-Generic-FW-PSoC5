@@ -314,34 +314,37 @@ void check_rest_position(void) {     // 100 Hz frequency.
 void LED_control(uint8 mode) {
     
     switch (mode) {
+        // For each LED controller
+        // 0: OFF, 1: Fixed ON, 2: Blink 2.5Hz, 3: Blink 0.5 Hz
         
         case 0:     //All LEDs off
-            LED_CTRL_Write(0);
-            BLINK_CTRL_EN_Write(0);
-            break;
-        case 1:     // Green fixed light
-            LED_CTRL_Write(2);
-            BLINK_CTRL_EN_Write(0);
+            LED_GREEN_CTRL_Write(0);
+            LED_RED_CTRL_Write(0);
             break;
             
+        case 1:     // Green fixed light
+            LED_GREEN_CTRL_Write(1);
+            LED_RED_CTRL_Write(0);
+            break;  
+            
         case 2:     // Yellow flashing light @ 0.5 Hz
-            LED_CTRL_Write(0);
-            BLINK_CTRL_EN_Write(1);        
+            LED_GREEN_CTRL_Write(3);
+            LED_RED_CTRL_Write(3);        
             break;
             
         case 3:     // Red flashing light @ 2.5 Hz
-            LED_CTRL_Write(0);
-            BLINK_CTRL_EN_Write(2);        
+            LED_GREEN_CTRL_Write(0);
+            LED_RED_CTRL_Write(2);        
             break;
             
         case 4:     // Yellow fixed light - maintenance
-            LED_CTRL_Write(3);
-            BLINK_CTRL_EN_Write(0);        
+            LED_GREEN_CTRL_Write(1);
+            LED_RED_CTRL_Write(1);        
             break;
         
         case 5:     // Red fixed light - uUSB power
-            LED_CTRL_Write(1);
-            BLINK_CTRL_EN_Write(0);        
+            LED_GREEN_CTRL_Write(0);
+            LED_RED_CTRL_Write(1);        
             break; 
             
         default:
@@ -606,13 +609,21 @@ void set_motor_driver_type(){
     // NOTE: if at least one Brushless is used, the PWM frequency will change for all motors
     if (g_mem.motor[0].motor_driver_type == DRIVER_BRUSHLESS  || 
        (g_mem.dev.use_2nd_motor_flag == TRUE && g_mem.motor[1].motor_driver_type == DRIVER_BRUSHLESS)){
-        CLOCK_PWM_SetDividerValue(90);      // 48 Mhz / 90 = 533.333 KHz (nearest value to 536 Khz desired frequency for Maxon ESC)
-        PWM_MOTORS_WritePeriod(PWM_MAX_VALUE_ESC);      // 16 MHz / 2985 = 5.36 KHz (5.36 Khz desired frequency for Maxon ESC)
+        if (g_mem.dev.dev_type == AE_WHEELS_ESCON){
+            PWM_MAX_VALUE_ESC = 2985;
+            CLOCK_PWM_SetDividerValue(3);      // 48 Mhz / 3 = 16 MHz
+            PWM_MOTORS_WritePeriod(PWM_MAX_VALUE_ESC);      // 16 MHz / 2985 = 5.36 KHz (5.36 Khz desired frequency for Maxon ESC)
+        }
+        else {
+            PWM_MAX_VALUE_ESC = 100;
+            CLOCK_PWM_SetDividerValue(90);      // 48 Mhz / 90 = 533.333 KHz (nearest value to 536 Khz desired frequency for Maxon ESC)
+            PWM_MOTORS_WritePeriod(PWM_MAX_VALUE_ESC);      // 533.333 KHz / 100 = 5.36 KHz (5.36 Khz desired frequency for Maxon ESC)
+        }
         dev_pwm_sat[0] = PWM_MAX_VALUE_ESC;
         dev_pwm_sat[1] = PWM_MAX_VALUE_ESC;
     }
     else {
-        CLOCK_PWM_SetDividerValue(24);       // 48 MHz / 24 = 2 MHz
+        CLOCK_PWM_SetDividerValue(24);          // 48 MHz / 24 = 2 MHz
         PWM_MOTORS_WritePeriod(PWM_MAX_VALUE_DC);
         dev_pwm_sat[0] = PWM_MAX_VALUE_DC;
         dev_pwm_sat[1] = PWM_MAX_VALUE_DC;
