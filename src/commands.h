@@ -83,6 +83,13 @@ enum SH_command
                                         ///  a defined value chosen by the use.
     CMD_HAND_CALIBRATE          = 13,   ///< Starts a series of opening and closures of the SoftHand.
 
+
+//=========================================================     short packages add. commands
+    CMD_GET_LONG_PKG_LENGTH     = 20,   // Get long package length (dependent on type)
+    CMD_GET_LONG_PKG_SLICE      = 21,   // Get only part of long package (dependent on type)
+    CMD_GET_EEPROM_ROW          = 22,   // Get a row (16 bytes) directly from EEPROM
+    
+    
 //=========================================================     specific commands
 
     CMD_ACTIVATE                = 128,  ///< Command for activating/deactivating
@@ -120,7 +127,8 @@ enum SH_command
     CMD_GET_ADC_CONF            = 165,  // Get ADC configuration
     CMD_GET_ADC_RAW             = 166,  // Get ADC raw values 
     CMD_GET_SD_SINGLE_FILE      = 167,  // Get a single file of the SD card given the path
-    CMD_REMOVE_SD_SINGLE_FILE   = 168   // Remove a single file of the SD card given the path
+    CMD_REMOVE_SD_SINGLE_FILE   = 168,  // Remove a single file of the SD card given the path
+    CMD_GET_BATTERY_VOLTAGE     = 169   // Get battery voltage
 };
 
 //===================================================     resolution definitions
@@ -205,14 +213,14 @@ enum data_types {
 //==============================================================================
 /** \name SoftHand Information Strings */
 /** \{ */
-#define INFO_ALL        0           ///< Generic device information.
-#define CYCLES_INFO     1           ///< Cycles counter information.
-#define GET_SD_PARAM    2           ///< Read Firmware Parameters from SD file
-#define GET_SD_DATA     3           ///< Read Usage Data from SD file
-#define GET_SD_FS_TREE  4           ///< Get info on SD card filesystem tree
-#define GET_SD_EMG_HIST 5           ///< Read recent EMG history from SD file
-#define GET_SD_R01_SUMM 6           ///< Get R01 project summary statistics
-
+#define INFO_ALL                0   ///< Generic device information.
+#define CYCLES_INFO             1   ///< Cycles counter information.
+#define GET_SD_PARAM            2   ///< Read Firmware Parameters from SD file
+#define GET_SD_DATA             3   ///< Read Usage Data from SD file
+#define GET_SD_FS_TREE          4   ///< Get info on SD card filesystem tree
+#define GET_SD_EMG_HIST         5   ///< Read recent EMG history from SD file
+#define GET_SD_R01_SUMM         6   ///< Get R01 project summary statistics
+#define SINGLE_PARAM_READING    7   ///< Get single parameter package slot
 /** \} */
 
 // ----------------------------------------------------------------------------

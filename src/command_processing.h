@@ -168,31 +168,31 @@ void    commProcess        ();
  * the new ID setting went fine or there was an error.
  *
  *	\param packet_data 		The array of data that must be written.
- *	\param packet_lenght	The lenght of the data array.
+ *	\param packet_length	The length of the data array.
  *  \param old_id           The previous id of the board, before setting a new one.
  *
 **/
-void    commWrite_old_id   (uint8 *packet_data, uint16 packet_lenght, uint8 old_id);
+void    commWrite_old_id   (uint8 *packet_data, uint16 packet_length, uint8 old_id);
 
 //============================================================  commWrite
 /** This function writes on the serial port the package that needs to be sent
  * to the user.
  *
  *	\param packet_data 		The array of data that must be written.
- *	\param packet_lenght	The lenght of the data array.
+ *	\param packet_length	The length of the data array.
  *
 **/
-void    commWrite         (uint8 *packet_data, uint16 packet_lenght);
+void    commWrite         (uint8 *packet_data, uint16 packet_length);
 
 //============================================================  commWriteID
  /** This function writes on the serial port the package that needs to be sent
  * to another board.
  *
  *	\param packet_data 		The array of data that must be written.
- *	\param packet_lenght	The lenght of the data array.
+ *	\param packet_length	The length of the data array.
  *
 **/
-void    commWriteID  (uint8 *packet_data, uint16 packet_lenght, uint8 id);
+void    commWriteID  (uint8 *packet_data, uint16 packet_length, uint8 id);
 /** \} */
 
 
@@ -208,7 +208,7 @@ void    commWriteID  (uint8 *packet_data, uint16 packet_lenght, uint8 id);
  *							full parameters list.
  *
 **/
-void manage_param_list 		(uint16 index);
+void manage_param_list 		(uint16 index, uint8 sendToDevice);
 
 //============================================================  get_param_list
 /** This function, depending on the \ref index received, gets the list of
@@ -218,7 +218,7 @@ void manage_param_list 		(uint16 index);
 void get_param_list 		(uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS], 
                              uint8 NUM_ITEMS[NUM_OF_PARAMS], uint8 NUM_STRUCT[NUM_OF_PARAMS],
                              uint8* NUM_MENU, const char* PARAMS_STR[NUM_OF_PARAMS], 
-                             uint8 CUSTOM_PARAM_SET[NUM_OF_PARAMS], const char* MENU_STR[NUM_OF_PARAMS_MENU]);
+                             uint8 CUSTOM_PARAM_SET[NUM_OF_PARAMS], const char* MENU_STR[NUM_OF_PARAMS_MENU], uint8 sendToDevice);
 
 //============================================================  set_custom_param
 /** This function, depending on the \ref index received, sets the specific
@@ -310,7 +310,7 @@ void   memInit_OtbkActWristMs ();
  *  is consistent.
  *
  *	\param data_array		The array of data that must be checked.	
- *	\param data_lenght		Lenght of the data array that must be checked.
+ *	\param data_length		length of the data array that must be checked.
  *
  *	\return The calculated checksum for the relative data_array.
 **/
@@ -453,6 +453,26 @@ void cmd_get_SD_file(uint16 filename_length);
 /** This function removes a file on the SD
 **/
 void cmd_remove_SD_file(uint16 filename_length);
+
+//============================================================  cmd_get_long_pkg_length
+/** This function gets long package length
+**/
+void cmd_get_long_pkg_length(uint16 type);
+
+//============================================================  cmd_get_long_pkg_slice
+/** This function gets only a slice from a long package
+**/
+void cmd_get_long_pkg_slice();
+
+//============================================================  cmd_get_EEPROM_row
+/** This function gets EEPROM row values
+**/
+void cmd_get_EEPROM_row(uint16 row);
+
+//============================================================  cmd_get_battery_voltage
+/** This function gets battery voltage
+**/
+void cmd_get_battery_voltage();
 
 //============================================================  air_chamber_control
 /* This function is used to drive air chambers feedback device */

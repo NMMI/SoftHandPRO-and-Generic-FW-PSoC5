@@ -120,6 +120,10 @@ FS_FILE * pEMGHFile;
 char sdEMGHFile[100] = "\\EMG_History.csv";
 char sdR01File[100] = "\\R01_Summary.csv";
 
+// Long Packages variables
+char* longPkgP = 0;
+uint16 longPkgSize = 0;
+
 // BLUETOOTH variables
 uint8 btEnabled = FALSE;
 uint8 bt_src = FALSE;

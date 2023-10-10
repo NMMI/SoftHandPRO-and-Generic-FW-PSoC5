@@ -98,7 +98,7 @@
 
 #define    WAIT_START   0               /*!< Package start waiting status.*/
 #define    WAIT_ID      1               /*!< Package ID waiting status.*/
-#define    WAIT_LENGTH  2               /*!< Package lenght waiting status.*/
+#define    WAIT_LENGTH  2               /*!< Package length waiting status.*/
 #define    RECEIVE      3               /*!< Package data receiving status.*/
 #define    UNLOAD       4               /*!< Package data flush status.*/
 
@@ -468,8 +468,8 @@ struct st_eeprom {
     
     uint8  flag;                        /*!< If checked the device has been configured.*/                   //1 byte
     uint8  unused_bytes[15];            /*!< Leave bytes to align structures to memory rows.*/              //1 row     (End of row 1)
-    struct st_counters cnt;             /*!< Statistics Counters.*/                                         //6 rows    (End of row 7)
-    uint8  unused_bytes1[EEPROM_BYTES_ROW*EEPROM_AFTER_CNT_FREE_ROWS]; /*!< Rows free for further uses.*/   //3 rows    (End of row 10)
+    struct st_counters cnt;             /*!< Statistics Counters.*/                                         //7 rows    (End of row 8)
+    uint8  unused_bytes1[EEPROM_BYTES_ROW*EEPROM_AFTER_CNT_FREE_ROWS]; /*!< Rows free for further uses.*/   //2 rows    (End of row 10)
     struct st_device dev;               /*!< Device information.*/                                          //1 row     (End of row 11)
     struct st_motor motor[NUM_OF_MOTORS];       /*!< Motor variables.*/                                     //7*2 rows  (End of row 25)
     struct st_encoder enc[N_ENCODER_LINE_MAX];  /*!< Encoder variables (1 line).*/                          //3*2 rows  (End of row 31)
@@ -612,6 +612,10 @@ extern char sdParam[100];
 extern FS_FILE * pEMGHFile;
 extern char sdEMGHFile[100];
 extern char sdR01File[100];
+
+// Long Packages variables
+extern char* longPkgP;
+extern uint16 longPkgSize;
 
 // BLUETOOTH variables
 extern uint8 btEnabled;

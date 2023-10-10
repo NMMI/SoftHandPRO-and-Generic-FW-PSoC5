@@ -165,7 +165,7 @@ void commProcess(void){
 //============================================================     CMD_GET_PARAM
 
         case CMD_GET_PARAM_LIST:
-            manage_param_list( __REV16(*((uint16 *) &g_rx.buffer[1])) );
+            manage_param_list( __REV16(*((uint16 *) &g_rx.buffer[1])), TRUE );
             break;
 
 //=================================================================     CMD_PING
@@ -294,7 +294,32 @@ void commProcess(void){
 
         case CMD_REMOVE_SD_SINGLE_FILE:
             cmd_remove_SD_file( __REV16(*((uint16 *) &g_rx.buffer[1])) );
-            break;               
+            break;      
+
+                        
+//=====================================================     CMD_GET_LONG_PKG_LENGTH
+
+        case CMD_GET_LONG_PKG_LENGTH:
+            cmd_get_long_pkg_length( __REV16(*((uint16 *) &g_rx.buffer[1])) );
+            break; 
+            
+//=====================================================     CMD_GET_LONG_PKG_SLICE
+
+        case CMD_GET_LONG_PKG_SLICE:
+            cmd_get_long_pkg_slice();
+            break; 
+            
+//=====================================================     CMD_GET_EEPROM_ROW
+
+        case CMD_GET_EEPROM_ROW:
+            cmd_get_EEPROM_row( __REV16(*((uint16 *) &g_rx.buffer[1])) );
+            break;             
+                        
+//=====================================================     CMD_GET_EEPROM_ROW
+
+        case CMD_GET_BATTERY_VOLTAGE:
+            cmd_get_battery_voltage();
+            break;    
             
 //=========================================================== ALL OTHER COMMANDS
         default:
@@ -402,18 +427,17 @@ void infoGet(uint16 info_type) {
 void get_param_list (uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS], 
                      uint8 NUM_ITEMS[NUM_OF_PARAMS], uint8 NUM_STRUCT[NUM_OF_PARAMS],
                      uint8* NUM_MENU, const char* PARAMS_STR[NUM_OF_PARAMS], 
-                     uint8 CUSTOM_PARAM_GET[NUM_OF_PARAMS], const char* MENU_STR[NUM_OF_PARAMS_MENU]){
+                     uint8 CUSTOM_PARAM_GET[NUM_OF_PARAMS], const char* MENU_STR[NUM_OF_PARAMS_MENU], uint8 sendToDevice){
     
-    //Package to be sent variables
     uint8 packet_data[PARAM_BYTE_SLOT*NUM_OF_DEV_PARAMS + PARAM_MENU_SLOT*NUM_OF_DEV_PARAM_MENUS + PARAM_BYTE_SLOT] = "";      //50*NUM_OF_DEV_PARAMS + 150*NUM_OF_DEV_PARAM_MENUS
-    uint16 packet_lenght = PARAM_BYTE_SLOT*NUM_OF_DEV_PARAMS + PARAM_MENU_SLOT*NUM_OF_DEV_PARAM_MENUS + PARAM_BYTE_SLOT;
+    uint16 packet_length = PARAM_BYTE_SLOT*NUM_OF_DEV_PARAMS + PARAM_MENU_SLOT*NUM_OF_DEV_PARAM_MENUS + PARAM_BYTE_SLOT;
 
     //Auxiliary variables
     uint8 CYDATA i, j;
     uint8 CYDATA idx = 0;       //Parameter number
     uint8 CYDATA idx_menu = 0;
     uint8 CYDATA sod = 0;       //sizeof data
-    uint8 CYDATA string_lenght;
+    uint8 CYDATA string_length;
     char CYDATA aux_str[50] = "";
     float aux_float;
     int16 aux_int16;
@@ -697,7 +721,7 @@ void get_param_list (uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS],
         }
         
         sprintf(aux_str, (char*)PARAMS_STR[idx]);
-        string_lenght = strlen(aux_str);
+        string_length = strlen(aux_str);
         
         // Parameters with a menu
         if (TYPES[idx] == TYPE_FLAG){
@@ -887,45 +911,53 @@ void get_param_list (uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS],
                     }
                     break;
             }
-            //Recomputes string lenght
-            string_lenght = strlen(aux_str)+1;
+            //Recomputes string length
+            string_length = strlen(aux_str)+1;
         }
 
         // Add parameter string to packet
-        for(i = string_lenght; i != 0; i--)
-            packet_data[(4 + PARAM_BYTE_SLOT*idx) + (sod*NUM_ITEMS[idx]) + string_lenght - i] = aux_str[string_lenght - i];
+        for(i = string_length; i != 0; i--)
+            packet_data[(4 + PARAM_BYTE_SLOT*idx) + (sod*NUM_ITEMS[idx]) + string_length - i] = aux_str[string_length - i];
         //The following byte indicates the number of menus at the end of the packet to send
         if (TYPES[idx] == TYPE_FLAG){
-            packet_data[(4 + PARAM_BYTE_SLOT*idx) + (sod*NUM_ITEMS[idx]) + string_lenght] = NUM_MENU[idx_menu];
+            packet_data[(4 + PARAM_BYTE_SLOT*idx) + (sod*NUM_ITEMS[idx]) + string_length] = NUM_MENU[idx_menu];
             idx_menu = idx_menu + 1;
         }      
         
         // Add struct index after an empty bit
         // Note: added here at the end of packets is transparent to old parameters retrieving version
         if (TYPES[idx] == TYPE_FLAG){
-            packet_data[(4 + PARAM_BYTE_SLOT*idx) + (sod*NUM_ITEMS[idx]) + string_lenght + 2] = NUM_STRUCT[idx];
+            packet_data[(4 + PARAM_BYTE_SLOT*idx) + (sod*NUM_ITEMS[idx]) + string_length + 2] = NUM_STRUCT[idx];
         }
         else {
-            packet_data[(4 + PARAM_BYTE_SLOT*idx) + (sod*NUM_ITEMS[idx]) + string_lenght + 1] = NUM_STRUCT[idx];
+            packet_data[(4 + PARAM_BYTE_SLOT*idx) + (sod*NUM_ITEMS[idx]) + string_length + 1] = NUM_STRUCT[idx];
         }
     }
 
     // Add menu
     for (j = 0; j < NUM_OF_DEV_PARAM_MENUS; j++) {
-        string_lenght = strlen((char*)MENU_STR[j]);
-        for(i = string_lenght; i != 0; i--)
-            packet_data[PARAM_BYTE_SLOT*NUM_OF_DEV_PARAMS + 2 + j*PARAM_MENU_SLOT + string_lenght - i] = MENU_STR[j][string_lenght - i];
+        string_length = strlen((char*)MENU_STR[j]);
+        for(i = string_length; i != 0; i--)
+            packet_data[PARAM_BYTE_SLOT*NUM_OF_DEV_PARAMS + 2 + j*PARAM_MENU_SLOT + string_length - i] = MENU_STR[j][string_length - i];
     }
     
-    packet_data[packet_lenght - 1] = LCRChecksum(packet_data,packet_lenght - 1);
-    commWrite(packet_data, packet_lenght);
+    packet_data[packet_length - 1] = LCRChecksum(packet_data,packet_length - 1);
+    
+    if (sendToDevice){
+        commWrite(packet_data, packet_length);
+    }
+    else {
+        // Update pointer (Bad choice since pointing to dead variable in another function, to fix)
+       longPkgP = (char*)&packet_data[0];
+       longPkgSize = packet_length;
+    }
 }
 
 //==============================================================================
 //                                                             MANAGE PARAM LIST
 //==============================================================================
 
-void manage_param_list(uint16 index) {
+void manage_param_list(uint16 index, uint8 sendToDevice) {
     uint8 CYDATA i, j;
     uint8 CYDATA sod;
     uint8 PARAM_IDX;
@@ -1218,7 +1250,7 @@ void manage_param_list(uint16 index) {
         
     if (!index) {
         // Get parameters list with relative types
-        get_param_list(VAR_P, TYPES, NUM_ITEMS, NUM_STRUCT, NUM_MENU, PARAMS_STR, CUSTOM_PARAM_GET, MENU_STR);
+        get_param_list(VAR_P, TYPES, NUM_ITEMS, NUM_STRUCT, NUM_MENU, PARAMS_STR, CUSTOM_PARAM_GET, MENU_STR, sendToDevice);
     }
     else {
         // Set specific parameter        
@@ -1750,7 +1782,7 @@ void get_IMU_param_list(uint16 index)
     char imu_table_str[42]      = "";
     char spi_read_delay_str[26] = "";
     
-    //Strings lenghts
+    //Strings lengths
     uint8 CYDATA id_str_len = strlen(id_str);
     uint8 CYDATA n_imu_str_len = strlen(n_imu_str);
     uint8 CYDATA ids_str_len = strlen(ids_str);
@@ -3017,7 +3049,7 @@ void IMU_reading_info(char *info_string)
 //                                                     WRITE FUNCTIONS FOR RS485
 //==============================================================================
 
-void commWrite_old_id(uint8 *packet_data, uint16 packet_lenght, uint8 old_id)
+void commWrite_old_id(uint8 *packet_data, uint16 packet_length, uint8 old_id)
 {
     uint16 CYDATA index;    // iterator
 
@@ -3032,9 +3064,9 @@ void commWrite_old_id(uint8 *packet_data, uint16 packet_lenght, uint8 old_id)
             //UART_RS485_PutChar(g_mem.id);
             
         // frame - length
-        UART_BT_PutChar((uint8)packet_lenght);
+        UART_BT_PutChar((uint8)packet_length);
         // frame - packet data
-        for(index = 0; index < packet_lenght; ++index) {
+        for(index = 0; index < packet_length; ++index) {
             UART_BT_PutChar(packet_data[index]);
         }
 
@@ -3054,9 +3086,9 @@ void commWrite_old_id(uint8 *packet_data, uint16 packet_lenght, uint8 old_id)
             //UART_RS485_PutChar(g_mem.id);
             
         // frame - length
-        UART_RS485_PutChar((uint8)packet_lenght);
+        UART_RS485_PutChar((uint8)packet_length);
         // frame - packet data
-        for(index = 0; index < packet_lenght; ++index) {
+        for(index = 0; index < packet_length; ++index) {
             UART_RS485_PutChar(packet_data[index]);
         }
 
@@ -3069,7 +3101,7 @@ void commWrite_old_id(uint8 *packet_data, uint16 packet_lenght, uint8 old_id)
     }
 }
 
-void commWrite(uint8 *packet_data, uint16 packet_lenght)
+void commWrite(uint8 *packet_data, uint16 packet_length)
 {
     uint16 CYDATA index;    // iterator
 
@@ -3080,9 +3112,9 @@ void commWrite(uint8 *packet_data, uint16 packet_lenght)
         // frame - ID
         UART_BT_PutChar(g_mem.dev.id);
         // frame - length
-        UART_BT_PutChar((uint8)packet_lenght);
+        UART_BT_PutChar((uint8)packet_length);
         // frame - packet data
-        for(index = 0; index < packet_lenght; ++index) {
+        for(index = 0; index < packet_length; ++index) {
             UART_BT_PutChar(packet_data[index]);
         }
 
@@ -3099,9 +3131,9 @@ void commWrite(uint8 *packet_data, uint16 packet_lenght)
         // frame - ID
         UART_RS485_PutChar(g_mem.dev.id);
         // frame - length
-        UART_RS485_PutChar((uint8)packet_lenght);
+        UART_RS485_PutChar((uint8)packet_length);
         // frame - packet data
-        for(index = 0; index < packet_lenght; ++index) {
+        for(index = 0; index < packet_length; ++index) {
             UART_RS485_PutChar(packet_data[index]);
         }
 
@@ -3118,7 +3150,7 @@ void commWrite(uint8 *packet_data, uint16 packet_lenght)
 //                                             WRITE FUNCTION FOR ANOTHER DEVICE
 //==============================================================================
 
-void commWriteID(uint8 *packet_data, uint16 packet_lenght, uint8 id)
+void commWriteID(uint8 *packet_data, uint16 packet_length, uint8 id)
 {
     static uint16 CYDATA i;    // iterator
 
@@ -3129,9 +3161,9 @@ void commWriteID(uint8 *packet_data, uint16 packet_lenght, uint8 id)
         // frame - ID
         UART_BT_PutChar(id);
         // frame - length
-        UART_BT_PutChar((uint8)packet_lenght);
+        UART_BT_PutChar((uint8)packet_length);
         // frame - packet data
-        for(i = 0; i < packet_lenght; ++i) {
+        for(i = 0; i < packet_length; ++i) {
             UART_BT_PutChar(packet_data[i]);
         }
 
@@ -3148,9 +3180,9 @@ void commWriteID(uint8 *packet_data, uint16 packet_lenght, uint8 id)
         // frame - ID
         UART_RS485_PutChar(id);
         // frame - length
-        UART_RS485_PutChar((uint8)packet_lenght);
+        UART_RS485_PutChar((uint8)packet_length);
         // frame - packet data
-        for(i = 0; i < packet_lenght; ++i) {
+        for(i = 0; i < packet_length; ++i) {
             UART_RS485_PutChar(packet_data[i]);
         }
 
@@ -3186,13 +3218,13 @@ uint8 LCRChecksum(uint8 *data_array, uint8 data_length) {
 //==============================================================================
 
 void sendAcknowledgment(uint8 value) {
-    int packet_lenght = 2;
+    int packet_length = 2;
     uint8 packet_data[2];
 
     packet_data[0] = value;
     packet_data[1] = value;
 
-    commWrite(packet_data, packet_lenght);
+    commWrite(packet_data, packet_length);
 }
 
 //==============================================================================
@@ -3911,15 +3943,15 @@ void cmd_get_currents_for_cuff(){
 int16 commReadResCurrFromSH()
 {
     uint8 packet_data[16];
-    uint8 packet_lenght;
+    uint8 packet_length;
     int16 curr_diff = 0;
     uint32 t_start, t_end;
     uint8 read_flag = TRUE;
 
-    packet_lenght = 2;
+    packet_length = 2;
     packet_data[0] = CMD_GET_CURR_DIFF;
     packet_data[1] = CMD_GET_CURR_DIFF;
-    commWriteID(packet_data, packet_lenght, c_mem.MS.slave_ID);
+    commWriteID(packet_data, packet_length, c_mem.MS.slave_ID);
 
     t_start = (uint16) MY_TIMER_ReadCounter();
     while(g_rx.buffer[0] != CMD_SET_CUFF_INPUTS) {
@@ -4001,7 +4033,7 @@ void cmd_store_params(){
     // Check input mode enabled
     uint32 off_1;
     float mult_1;
-    uint8 CYDATA packet_lenght = 2;
+    uint8 CYDATA packet_length = 2;
     uint8 CYDATA packet_data[2];
     uint8 CYDATA old_id;
     
@@ -4040,12 +4072,12 @@ void cmd_store_params(){
         if(memStore(0)) {
             packet_data[0] = ACK_OK;
             packet_data[1] = ACK_OK;
-            commWrite_old_id(packet_data, packet_lenght, old_id);
+            commWrite_old_id(packet_data, packet_length, old_id);
         }    
         else{
             packet_data[0] = ACK_ERROR;
             packet_data[1] = ACK_ERROR;
-            commWrite_old_id(packet_data, packet_lenght, old_id);
+            commWrite_old_id(packet_data, packet_length, old_id);
         }
     }    
     else {
@@ -4362,6 +4394,148 @@ void cmd_remove_SD_file( uint16 filename_length ){
     commWrite(packet_data, 3);
 }
 
+void cmd_get_long_pkg_length(uint16 type){
+    
+    char CYDATA packet_string[4000] = "";
+    char CYDATA str_sd_data[20000] = "";
+    uint8 packet_data[5];
+    uint16 CYDATA pkgLength = 0;
+    
+    // Header        
+    packet_data[0] = CMD_GET_LONG_PKG_LENGTH;
+    
+    // Fill payload
+    packet_data[1] = (uint8)type;
+    
+    // Get long package and save it globally    
+    longPkgP = 0;
+    switch (type) {
+        case INFO_ALL:
+            prepare_generic_info(packet_string); 
+            longPkgP = &packet_string[0];
+            pkgLength = (uint16)(strlen(packet_string));
+            break;
+        case CYCLES_INFO:
+            prepare_counter_info(packet_string);    
+            longPkgP = &packet_string[0];
+            pkgLength = (uint16)(strlen(packet_string));
+            break;
+        case GET_SD_PARAM:
+            Read_SD_Closed_File(sdParam, packet_string, sizeof(packet_string));
+            longPkgP = &packet_string[0];
+            pkgLength = (uint16)(strlen(packet_string));
+            break;
+        case GET_SD_DATA:
+            Read_SD_Current_Data(str_sd_data, sizeof(str_sd_data));
+            longPkgP = &str_sd_data[0];
+            pkgLength = (uint16)(strlen(str_sd_data));
+            break;
+        case GET_SD_FS_TREE:
+            Get_SD_FS(str_sd_data);      
+            longPkgP = &str_sd_data[0];
+            pkgLength = (uint16)(strlen(str_sd_data));
+            break;
+        case GET_SD_EMG_HIST:
+            // NOT IMPLEMENTED
+            break;
+        case GET_SD_R01_SUMM:
+            Read_SD_Closed_File(sdR01File, packet_string, sizeof(packet_string));
+            longPkgP = &packet_string[0];
+            pkgLength = (uint16)(strlen(packet_string));
+            break; 
+        case SINGLE_PARAM_READING:
+            manage_param_list( 0, FALSE );      //idx = 0 to get parameters, set sendToDevice=FALSE save in longPkgP
+            pkgLength = longPkgSize;
+            break;
+        default:
+            break;
+    }
+    
+    // Send length as uint16
+    
+    packet_data[2] = ((char*)(&pkgLength))[1];
+    packet_data[3] = ((char*)(&pkgLength))[0];
+    
+    // Calculate checksum
+    packet_data[4] = LCRChecksum(packet_data, 4);
+    
+    // Send package to UART
+    commWrite(packet_data, 5);
+}
+
+void cmd_get_long_pkg_slice(){
+  
+    uint8 packet_data[2+PARAM_BYTE_SLOT];       //max length
+    uint16 CYDATA i = 0;
+    
+    uint16 startByte = (uint16)(g_rx.buffer[1]<<8 | g_rx.buffer[2]);
+    uint8 pkgLength = (uint8)(g_rx.buffer[3]);
+    
+    // Header        
+    packet_data[0] = CMD_GET_LONG_PKG_SLICE;
+    
+    // Fill payload
+    for (i = 0; i < pkgLength; i++) {       
+        packet_data[1 + i] = (uint8)(longPkgP[startByte + i]);
+    }
+
+    // Calculate checksum
+    packet_data[1+pkgLength] = LCRChecksum(packet_data, 1+pkgLength);
+    
+    // Send package to UART
+    commWrite(packet_data, 2+pkgLength);
+}
+
+void cmd_get_EEPROM_row(uint16 row){
+    
+    uint8 packet_data[3+EEPROM_BYTES_ROW];
+    uint8 CYDATA i = 0;
+    
+    // Header        
+    packet_data[0] = CMD_GET_EEPROM_ROW;
+    packet_data[1] = (uint8)row;
+    
+    uint8* p = ((uint8*)&g_mem.flag);
+    
+    // Fill payload
+    for (i = 0; i < EEPROM_BYTES_ROW; i++) {       
+        packet_data[2 + i] = (uint8)(p[row*EEPROM_BYTES_ROW + i]);
+    }
+
+    // Calculate checksum
+    packet_data[2+EEPROM_BYTES_ROW] = LCRChecksum(packet_data, 2+EEPROM_BYTES_ROW);
+    
+    // Send package to UART
+    commWrite(packet_data, 3+EEPROM_BYTES_ROW);
+}
+
+void cmd_get_battery_voltage(){
+    
+    // Packet: header + motor_measure(int16) + crc
+    
+    uint8 packet_data[6]; 
+    int16 aux_int16;
+    
+    //Header package
+
+    packet_data[0] = CMD_GET_BATTERY_VOLTAGE;
+    
+    // Voltages
+    aux_int16 = (int16) dev_tension[0]; //Voltage (in mV)
+    packet_data[2] = ((char*)(&aux_int16))[0];
+    packet_data[1] = ((char*)(&aux_int16))[1];
+    
+    aux_int16 = (int16) dev_tension[1];
+    packet_data[4] = ((char*)(&aux_int16))[0];
+    packet_data[3] = ((char*)(&aux_int16))[1];
+
+    // Calculate Checksum and send message to UART 
+
+    packet_data[5] = LCRChecksum (packet_data, 5);
+    
+    commWrite(packet_data, 6);
+}
+
 //==============================================================================
 //                                                          AIR CHAMBERS CONTROL
 //==============================================================================
@@ -4607,7 +4781,7 @@ void drive_slave(uint8 motor_idx, uint8 slave_ID) {
 
 #ifdef MASTER_FW
     uint8 packet_data[6];
-    uint8 packet_lenght;
+    uint8 packet_length;
     int16 aux_int16;
 
     // If not the use of handle or an emg input mode is set, exit from master_mode
@@ -4634,9 +4808,9 @@ void drive_slave(uint8 motor_idx, uint8 slave_ID) {
     packet_data[1] = ((char*)(&aux_int16))[1];
     *((int16 *) &packet_data[3]) = 0;
     
-    packet_lenght = 6;
-    packet_data[packet_lenght - 1] = LCRChecksum(packet_data,packet_lenght - 1);
-    commWriteID(packet_data, packet_lenght, slave_ID);
+    packet_length = 6;
+    packet_data[packet_length - 1] = LCRChecksum(packet_data,packet_length - 1);
+    commWriteID(packet_data, packet_length, slave_ID);
 
 #endif
 }
@@ -4672,7 +4846,7 @@ void deactivate_slaves() {
 #ifdef MASTER_FW
     
     uint8 packet_data[10];
-    uint8 packet_lenght;
+    uint8 packet_length;
     
     // If not a emg input mode is set, exit from master_mode
     if(c_mem.motor[0].input_mode != INPUT_MODE_EMG_PROPORTIONAL  &&
@@ -4688,10 +4862,10 @@ void deactivate_slaves() {
     packet_data[0] = CMD_ACTIVATE;
 
     *((int16 *) &packet_data[1]) = 0;   //3 to activate, 0 to deactivate
-    packet_lenght = 3;
-    packet_data[packet_lenght - 1] = LCRChecksum(packet_data,packet_lenght - 1);
+    packet_length = 3;
+    packet_data[packet_length - 1] = LCRChecksum(packet_data,packet_length - 1);
     
-    commWrite(packet_data, packet_lenght);
+    commWrite(packet_data, packet_length);
     
 #endif    
 }
