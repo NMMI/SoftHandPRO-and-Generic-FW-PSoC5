@@ -199,6 +199,12 @@ void    commWriteID  (uint8 *packet_data, uint16 packet_length, uint8 id);
 /** \name Memory management functions */
 /** \{ */
 
+//============================================================ num_of_bytes
+/** This function compute the size of data (in bytes) according to the type
+ *
+**/
+uint8 num_of_bytes          (uint8 TYPE);
+
 //============================================================  manage_param_list
 /** This function, depending on the \ref index received, gets the list of
  *  parameters with their values and sends them to user or sets a parameter
@@ -215,10 +221,7 @@ void manage_param_list 		(uint16 index, uint8 sendToDevice);
  *  parameters with their values.
  *
 **/
-void get_param_list 		(uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS], 
-                             uint8 NUM_ITEMS[NUM_OF_PARAMS], uint8 NUM_STRUCT[NUM_OF_PARAMS],
-                             uint8* NUM_MENU, const char* PARAMS_STR[NUM_OF_PARAMS], 
-                             uint8 CUSTOM_PARAM_SET[NUM_OF_PARAMS], const char* MENU_STR[NUM_OF_PARAMS_MENU], uint8 sendToDevice);
+void get_param_list 		(uint8 n_param, uint8 n_menus ,const struct parameter P[] ,const struct menu M[], uint8 SendoToDev);
 
 //============================================================  set_custom_param
 /** This function, depending on the \ref index received, sets the specific

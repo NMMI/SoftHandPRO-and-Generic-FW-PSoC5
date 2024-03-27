@@ -542,6 +542,24 @@ typedef enum {
     NONE            = 4             /*!< Cycles writing on EEPROM is disabled.*/
 } counter_status;                   /*!< Cycles counter state machine status.*/ 
 
+//=================================================     parameters structure
+
+struct parameter{
+    uint8* VAR_P;            /*!< Data buffer [CMD | DATA | CHECKSUM].*/
+    uint8 TYPES;                 /*!< Data buffer length.*/
+    uint8 NUM_ITEMS;                    /*!< Data buffer index.*/
+    const char* PARAM_STR;                  /*!< Data buffer flag to see if the data is ready.*/
+    uint8 MENU;
+    uint8 NUM_STR;
+    uint8 custom;
+};
+
+struct menu{
+    uint8 name;
+    uint8 reset;           /*!< Data buffer [CMD | DATA | CHECKSUM].*/
+    const char* choice[10];
+};
+
 //====================================      external global variables definition
 
 extern struct st_ref    g_ref[NUM_OF_MOTORS], g_refNew[NUM_OF_MOTORS], g_refOld[NUM_OF_MOTORS]; /*!< Reference variables.*/
@@ -555,6 +573,12 @@ extern struct st_filter filt_v[NUM_OF_MOTORS], filt_curr_diff[NUM_OF_MOTORS], fi
 extern struct st_filter filt_vel[NUM_OF_SENSORS];                /*!< Velocity filter variables.*/
 extern struct st_filter filt_emg[NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS]; /*!< EMG filter variables.*/
 extern struct st_filter filt_detect_pc;             /*!< Battery tension filter to detect a new power cycle.*/
+
+// -----------------------------------------------------------------------------
+extern const struct menu MENU_LIST[];
+extern struct parameter param_type;
+extern const struct parameter PARAM_LIST[];
+extern struct parameter menu_type;
 
 extern uint16 timer_value;                          /*!< End time of the firmware main loop.*/
 extern uint16 timer_value0;                         /*!< Start time of the firmware main loop.*/

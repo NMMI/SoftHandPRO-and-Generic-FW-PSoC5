@@ -204,6 +204,46 @@ enum data_types {
     TYPE_STRING  = 9            // Custom data type (uint8 but with string meaning)
 };
 
+
+//==============================================    custom parameters
+enum custom_param {    
+    POS_PID         = 1,
+    CURR_PID        = 2,
+    INPUT_MODE      = 3,  
+    MEAS_OFF        = 4,
+    POS_LIM         = 5,
+    REST_POS        = 6,
+    REST_POS_DELAY  = 7,
+    HAND_SIDE       = 4,
+    RESET_COUNT     = 8,
+    LAST_CHECKED_t  = 9,
+    MOT_DRIVER      = 10, 
+    POS_PID_2       = 11,
+    CURR_PID_2      = 12,
+    INPUT_MODE_2    = 13,  
+    MEAS_OFF_2      = 14,
+    POS_LIM_2       = 15,
+    MOT_DRIVER_2    = 16,
+    DEV_TYPE        = 17    
+};
+
+//==============================================    menu name enumeration
+enum menu_type {    
+    
+    INPUT_MENU      = 1,   
+    CTRL_MODE       = 2,
+    YES_NO          = 3,
+    RIGHT_LEFT      = 4,
+    ON_OFF          = 5,
+    EXP_MENU        = 6,  
+    SPI_MENU        = 7,
+    USER_MENU       = 8,
+    DRIVER_MENU     = 9, 
+    DEVICE_MENU     = 10,
+    FSM_ACTIVATION  = 11,
+    WRIST_DIR       = 12
+};
+
 #define PARAM_BYTE_SLOT     50      ///< Number of bytes reserved to a param information.
 
 #define PARAM_MENU_SLOT     150     ///< Number of bytes reserved to a param menu.

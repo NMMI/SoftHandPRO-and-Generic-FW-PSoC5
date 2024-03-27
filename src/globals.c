@@ -58,7 +58,8 @@ struct st_filter    filt_v[NUM_OF_MOTORS], filt_curr_diff[NUM_OF_MOTORS], filt_i
 struct st_filter    filt_vel[NUM_OF_SENSORS];                // Velocity filter variables.
 struct st_filter    filt_emg[NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS];                // EMG filter variables.
 struct st_filter    filt_detect_pc;             // Battery tension filter to detect a new power cycle.
-
+struct parameter    param_type;
+struct parameter    menu_type;
 
 // Timer value for debug field
 uint16  timer_value;
