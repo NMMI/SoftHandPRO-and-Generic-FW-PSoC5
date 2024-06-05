@@ -878,6 +878,9 @@ void get_param_list (uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS],
                         case 6:
                             strcat(aux_str, " AlterEgo EC Wheels\0");
                         break;
+                        case 7:
+                            strcat(aux_str, " SOFTHAND PRO 2 MOT.\0");
+                        break;
                     }
                     break;
                 case 11:    // fsm activation mode menu
@@ -1208,7 +1211,7 @@ void manage_param_list(uint16 index, uint8 sendToDevice) {
         spi_delay_menu,                                                                                                     //7 spi_delay_menu
         "0 -> Generic user\n1 -> Maria\n2 -> R01\nThe board will reset\n",                                                  //8 user_id_menu
         "0 -> MC33887 (Standard)\n1 -> VNH5019 (High power)\n2 -> ESC (Brushless)\nThe board will reset\n",                                       //9 motor_driver_type_menu
-        "0 ->SOFTHAND PRO\n1 ->GENERIC 2 MOT.\n2 ->AIR CHAMBERS\n3 ->OTBK WRIST\n4 ->SH 2 MOTORS\n5 ->AE Shoulder\n6 ->AE EC Wheels\nThe board will reset\n",         //10 device_type_menu
+        "0 ->SHP\n1 ->GENERIC 2 MOT.\n2 ->AIR CHAMBERS\n3 ->OTBK WRIST\n4 ->SH 2 MOTORS\n5 ->AE Shoulder\n6 ->AE EC Wheels\n7 ->SHP 2MOT.\nThe board will reset\n",         //10 device_type_menu
         fsm_activation_mode_menu,                                                                             //11 fsm_activation_mode_menu
         "0 -> Close:CW, Open:CCW\n1 -> Close:CCW, Open:CW\n"                                                  //12 wrist_direction_menu
     };   
@@ -1675,6 +1678,24 @@ void set_custom_param(uint16 index) {
                 g_mem.motor[MOTOR_IDX].pos_lim_sup = (int32)16000 << g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[0];   
             }      
             
+            if (g_mem.dev.dev_type == SOFTHAND_PRO_2MOT){    // change also gears parameters
+                g_mem.dev.use_2nd_motor_flag = TRUE;        // activate also 2nd motor
+                
+                for (uint8 i=0; i< NUM_OF_MOTORS; i++){   // configure each motor as a SHP
+                    g_mem.enc[g_mem.motor[i].encoder_line].double_encoder_on_off = TRUE;
+                    g_mem.enc[g_mem.motor[i].encoder_line].gears_params[0] = SH_N1;
+                    g_mem.enc[g_mem.motor[i].encoder_line].gears_params[1] = SH_N2;
+                    g_mem.enc[g_mem.motor[i].encoder_line].gears_params[2] = SH_I1;
+                    
+                    // Get CS0 encoder line for 1st motor and CS1 line for 2nd motor as default
+                    g_mem.motor[i].encoder_line  = i;
+                    g_mem.motor[i].pwm_rate_limiter = PWM_RATE_LIMITER_MAX;
+                    g_mem.motor[i].not_revers_motor_flag = TRUE;       // SoftHand not reversible motor
+                    g_mem.motor[i].pos_lim_inf = 0;
+                    g_mem.motor[i].pos_lim_sup = (int32)16000 << g_mem.enc[g_mem.motor[i].encoder_line].res[0]; 
+                }
+            }      
+            
             if (g_mem.dev.dev_type == SOFTHAND_2_MOTORS){    // activate also 2nd motor and double_encoder
                 g_mem.dev.use_2nd_motor_flag = TRUE;
                 g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].double_encoder_on_off = TRUE;
@@ -2047,6 +2068,9 @@ void prepare_generic_info(char *info_string)
             case AE_WHEELS_ESCON:
                 strcat(info_string, "Device: AlterEgo EC Wheels (ESCON)\r\n");
                 break;  
+            case SOFTHAND_PRO_2MOT:
+                strcat(info_string, "Device: SOFTHAND PRO 2 MOTORS\r\n");
+                break;
             default:
                 break;
         }
@@ -2499,7 +2523,6 @@ void prepare_generic_info(char *info_string)
         sprintf(str, "Slave ID: %d\r\n", (int)MEM_P->MS.slave_ID);
         strcat(info_string, str);
 #endif
-
         sprintf(str, "Last FW cycle time: %u us\r\n", (uint16)(cycle_time*1000000.0));
         strcat(info_string, str);
   
@@ -3751,6 +3774,7 @@ void cmd_set_inputs(){
     // Update g_refNew in case a new command has been received
     if (change_ext_ref_flag) {
         for (uint8 i = 0; i< NUM_OF_MOTORS; i++) {
+            
             if(g_mem.motor[i].control_mode == CONTROL_CURRENT) {
                 g_refNew[i].curr = aux_int16[i];
             }

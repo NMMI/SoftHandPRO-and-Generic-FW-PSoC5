@@ -108,7 +108,7 @@ uint32 my_mod(int32 val, int32 divisor);
  * 
  * \return Returns the number of turns of motor pulley at startup
 **/
-int calc_turns_fcn_SH(const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1);
+int calc_turns_fcn_SH(const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1, uint8 assoc_motor);
 
 /**	This function is used at startup to reconstruct the correct turn of the shaft
  *  connected to the motor. Generic. It need two encoders to work.
@@ -118,7 +118,7 @@ int calc_turns_fcn_SH(const int32 pos1, const int32 pos2, const int N1, const in
  * 
  * \return Returns the number of turns of motor pulley at startup
 **/
-int calc_turns_fcn(const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1);
+int calc_turns_fcn(const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1, uint8 assoc_motor);
 
 /** This function counts a series of hand opening and closing used to execute a 
  * calibration of the device.

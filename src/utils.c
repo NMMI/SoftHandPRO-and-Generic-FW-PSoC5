@@ -166,41 +166,64 @@ void calibration(void) {
 // Number of ticks per turn
 #define M 65536          ///< Number of encoder ticks per turn.
 
-int calc_turns_fcn_SH(const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1) { 
+int calc_turns_fcn_SH(const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1, uint8 assoc_motor) { 
     
     int32 x;
     int32 aux;
     
-    switch (c_mem.dev.right_left){
-        case RIGHT_HAND:
-            x = (my_mod( - N2*(pos2) - N1*pos1, M*N2) + M/2) / M;
-            
-            aux = my_mod(x*I1, N2);       // Module between x*I1 and N2.
-            
-            // Wrap turns
-            aux -= N2;      //N2 (teeth of the second encoder wheel)
-            if (aux == -N2){
-                aux = 0;
-            }
-            
-            break;
-        case LEFT_HAND:
-            x = (my_mod( - N2*(-pos2) - N1*pos1, M*N2) + M/2) / M;
-            
-            aux = my_mod(x*I1, N2);       // Module between x*I1 and N2.
-            
-            break;
+    if (c_mem.dev.dev_type == SOFTHAND_PRO){
+        switch (c_mem.dev.right_left){
+            case RIGHT_HAND:
+                x = (my_mod( - N2*(pos2) - N1*pos1, M*N2) + M/2) / M;
+
+                aux = my_mod(x*I1, N2);       // Module between x*I1 and N2.
+              
+                // Wrap turns
+                aux -= N2;      //N2 (teeth of the second encoder wheel)
+                if (aux == -N2){
+                    aux = 0;
+                }
+                
+                break;
+            case LEFT_HAND:
+                x = (my_mod( - N2*(-pos2) - N1*pos1, M*N2) + M/2) / M;
+                
+                aux = my_mod(x*I1, N2);       // Module between x*I1 and N2.
+                
+                break;
+        }
     }
+    else {  //dev_type == SOFTHAND_PRO_2MOT
+        switch (assoc_motor){
+            case 0:     //1st motor group is the same as a right SHP motor group but closes in the negative direction
+                x = (my_mod( - N2*(pos2) - N1*pos1, M*N2) + M/2) / M;
+                
+                aux = my_mod(x*I1, N2);       // Module between x*I1 and N2.                
+                
+                break;
+            case 1:     //2nd motor group is the same as a left SHP motor group but closes in the negative direction
+                x = (my_mod( - N2*(-pos2) - N1*pos1, M*N2) + M/2) / M;
+                
+                aux = my_mod(x*I1, N2);       // Module between x*I1 and N2.
+                
+                // Wrap turns from positives to negatives
+                aux -= N2;      //N2 (teeth of the second encoder wheel)
+                if (aux == -N2){
+                    aux = 0;
+                }
+                break;
+        }
+    }  
   
     // SoftHand Pro firmware turns computation does not have to take into account turns shift like previous SoftHand 1.2 firmware
     return aux; 
 
 }
 
-int calc_turns_fcn(const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1) { 
+int calc_turns_fcn(const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1, uint8 assoc_motor) { 
 
-    if (c_mem.dev.dev_type == SOFTHAND_PRO) {
-        return calc_turns_fcn_SH(pos1, pos2, N1, N2, I1);   
+    if (c_mem.dev.dev_type == SOFTHAND_PRO || c_mem.dev.dev_type == SOFTHAND_PRO_2MOT) {
+        return calc_turns_fcn_SH(pos1, pos2, N1, N2, I1, assoc_motor);   
     }
     else {
         // This is the same computation and formulas used in previous firmwares

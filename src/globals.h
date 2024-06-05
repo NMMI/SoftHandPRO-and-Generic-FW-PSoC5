@@ -155,7 +155,8 @@
 #define SOFTHAND_2_MOTORS   4
 #define AE_SHOULDER_ESCON   5       // Firmware for AlterEgo Shoulder Joint with DCX26L GPX32 and ESCON driver
 #define AE_WHEELS_ESCON     6       // Firmware for AlterEgo Wheels with 2 x Brushless EC45 588849 and ESCON driver
-#define CUFF                7 
+#define SOFTHAND_PRO_2MOT   7                 
+#define CUFF                8
     
 //==============================================================================
 //                                                               WRIST FSM STATE
@@ -642,7 +643,6 @@ extern uint16 emg_history[SAMPLES_FOR_EMG_HISTORY][NUM_OF_INPUT_EMGS];   /*!< EM
 extern uint32 emg_history_next_idx;    /*!< Vector index of last (newest) element.*/
 
 // -----------------------------------------------------------------------------
-
 #endif
 
 //[] END OF FILE

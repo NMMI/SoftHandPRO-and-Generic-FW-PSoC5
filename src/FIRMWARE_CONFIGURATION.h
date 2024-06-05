@@ -61,23 +61,27 @@
     
 // Macro related to different firmware configurations
 #ifdef SOFTHAND_FW
-    #define VERSION                 "SoftHand PRO firmware v. 1.14 (PSoC5)"    
+    #define VERSION                 "SoftHand PRO firmware v. 1.15 (PSoC5)"    
     
     #ifdef SH_XPRIZE            // SoftHand for AlterEgo XPRIZE version
-        #define VERSION             "SoftHand AlterEgo XPRIZE v. 1.14 (PSoC5)"
+        #define VERSION             "SoftHand AlterEgo XPRIZE v. 1.15 (PSoC5)"
     #endif
 #else
     #ifdef GENERIC_FW
-        #define VERSION                 "Generic firmware v. 1.14 (PSoC5)"
+        #define VERSION                 "Generic firmware v. 1.15 (PSoC5)"
     #else   
         #define MASTER_FW
         #ifdef AIR_CHAMBERS_FB_FW
-            #define VERSION                 "Air Chambers Haptic Feedback firmware v. 1.14 (PSoC5) - Master configuration"
+            #define VERSION                 "Air Chambers Haptic Feedback firmware v. 1.15 (PSoC5) - Master configuration"
         #else //OTBK_ACT_WRIST_MS_FW
-            #define VERSION                 "Ottobock Active Wrist firmware v. 1.14 (PSoC5) - Master configuration"
+            #define VERSION                 "Ottobock Active Wrist firmware v. 1.15 (PSoC5) - Master configuration"
         #endif
     #endif
 #endif      
+
+// TODO
+// SOFTHAND_PRO_2MOT firmware at the moment is just for USB control
+// To be implemented: rest position, usage counters and EMG behavior
 
 
 // Default number of parameters configuration

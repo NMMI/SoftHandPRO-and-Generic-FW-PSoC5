@@ -348,7 +348,7 @@ void function_scheduler(void) {
             }
             break;
             
-        case GENERIC_2_MOTORS: case SOFTHAND_2_MOTORS: case AE_SHOULDER_ESCON: case AE_WHEELS_ESCON:
+        case GENERIC_2_MOTORS: case SOFTHAND_2_MOTORS: case SOFTHAND_PRO_2MOT: case AE_SHOULDER_ESCON: case AE_WHEELS_ESCON:
             
             //---------------------------------- Get Encoders
             for (uint8 i = 0; i < N_ENCODER_LINE_MAX; i++) {
@@ -384,46 +384,32 @@ void function_scheduler(void) {
             //---------------------------------- Control Motor
             if (pos_reconstruct[c_mem.motor[MOTOR_IDX].encoder_line]){      // Once encoder line reading is ready
                 // Control MOTOR_IDX motor (always active) according to motor driver type
-                motor_control_generic(MOTOR_IDX);
-                
-                // Check external reference before processing other serial data and right after motor control
-                if (c_mem.motor[MOTOR_IDX].not_revers_motor_flag == TRUE) {
-                    if (c_mem.motor[MOTOR_IDX].input_mode == INPUT_MODE_EXTERNAL) {
+                motor_control_generic(MOTOR_IDX);   
+            }        
+            
+            // Control 2nd motor (if necessary) according to motor driver type
+            if (c_mem.dev.use_2nd_motor_flag == TRUE){
+                if (pos_reconstruct[c_mem.motor[SECOND_MOTOR_IDX].encoder_line]){      // Once encoder line reading is ready
+                    motor_control_generic(SECOND_MOTOR_IDX);
+                }
+            }
+            
+            // Check external reference before processing other serial data and right after motor control
+            for (uint8 i = 0; i < (1 + c_mem.dev.use_2nd_motor_flag); i++) {
+                if (c_mem.motor[i].not_revers_motor_flag == TRUE) {
+                    if (c_mem.motor[i].input_mode == INPUT_MODE_EXTERNAL) {
                         change_ext_ref_flag = FALSE;
                     }   
                 }
-                     
-                
             }
             
-            // Check Interrupt 
+            // Check Interrupt only at the end of both motors control
 
             if (interrupt_flag){
                 interrupt_flag = FALSE;
                 interrupt_manager();
             }
             
-            // Control 2nd motor (if necessary) according to motor driver type
-            if (c_mem.dev.use_2nd_motor_flag == TRUE){
-                if (pos_reconstruct[c_mem.motor[SECOND_MOTOR_IDX].encoder_line]){      // Once encoder line reading is ready
-                    motor_control_generic(SECOND_MOTOR_IDX);
-                    
-                    // Check external reference before processing other serial data and right after motor control
-                    if (c_mem.motor[SECOND_MOTOR_IDX].not_revers_motor_flag == TRUE) {
-                        if (c_mem.motor[SECOND_MOTOR_IDX].input_mode == INPUT_MODE_EXTERNAL) {
-                            change_ext_ref_flag = FALSE;
-                        }   
-                    }
-                    
-                  
-                }
-                // Check Interrupt 
-
-                if (interrupt_flag){
-                    interrupt_flag = FALSE;
-                    interrupt_manager();
-                }
-            }  
             break;
             
         case AIR_CHAMBERS_FB: case OTBK_ACT_WRIST_MS:
@@ -1398,7 +1384,7 @@ void motor_control_generic(uint8 idx) {
     switch(MOT->control_mode) {
         // ======================= CURRENT AND POSITION CONTROL =======================
         case CURR_AND_POS_CONTROL:
-            pos_error = g_ref[0].pos - g_meas[ENC_L].pos[0];
+            pos_error = g_ref[idx].pos - g_meas[ENC_L].pos[0];
 
             pos_error_sum[idx] += pos_error;
 
@@ -1656,8 +1642,8 @@ void motor_control_generic(uint8 idx) {
     
     if (MOT->not_revers_motor_flag == TRUE) {
         // Block motor with pwm = 0 to exploit not reversible motor behaviour 
-    	if ( MOT->control_mode != CONTROL_PWM && ((g_measOld[ENC_L].pos[idx]-g_meas[ENC_L].pos[idx]) < 50 && 
-            (g_measOld[ENC_L].pos[idx]-g_meas[ENC_L].pos[idx]) > -50) && 
+    	if ( MOT->control_mode != CONTROL_PWM && ((g_measOld[ENC_L].pos[0]-g_meas[ENC_L].pos[0]) < 50 && 
+            (g_measOld[ENC_L].pos[0]-g_meas[ENC_L].pos[0]) > -50) && 
             ((g_refOld[idx].pos - g_ref[idx].pos) < 100 && (g_refOld[idx].pos - g_ref[idx].pos) > -100) ) {
             position_counter[idx]++;
             
@@ -1692,14 +1678,22 @@ void motor_control_generic(uint8 idx) {
         }
        
     }
-    
+
     // Set motor direction and write pwm value
     switch (idx) {
-        case 0:         // Motor 1
-            if (motor_dir[idx])
-                MOTOR_DIR_1_Write(0x01);
-            else
-                MOTOR_DIR_1_Write(0x00);
+        case 0:         // Motor 1 
+            if (c_mem.dev.dev_type == SOFTHAND_PRO_2MOT){
+                if (!motor_dir[idx])
+                    MOTOR_DIR_1_Write(0x01);
+                else
+                    MOTOR_DIR_1_Write(0x00);
+            }
+            else {
+                if (motor_dir[idx])
+                    MOTOR_DIR_1_Write(0x01);
+                else
+                    MOTOR_DIR_1_Write(0x00);
+            }
             
             if (MOT->motor_driver_type == DRIVER_VNH5019) {
                 PWM_MOTORS_WriteCompare1(PWM_MAX_VALUE_DC - abs(pwm_input));
@@ -1710,12 +1704,19 @@ void motor_control_generic(uint8 idx) {
             
             break;
         case 1:         // Motor 2
-            
-            if (motor_dir[idx])
-                MOTOR_DIR_2_Write(0x01);
-            else
-                MOTOR_DIR_2_Write(0x00);
-            
+            if (c_mem.dev.dev_type == SOFTHAND_PRO_2MOT){
+                if (!motor_dir[idx])
+                    MOTOR_DIR_2_Write(0x01);
+                else
+                    MOTOR_DIR_2_Write(0x00);
+            }
+            else {
+                if (motor_dir[idx])
+                    MOTOR_DIR_2_Write(0x01);
+                else
+                    MOTOR_DIR_2_Write(0x00);
+            }
+
             if (MOT->motor_driver_type == DRIVER_VNH5019) {
                 PWM_MOTORS_WriteCompare2(PWM_MAX_VALUE_DC - abs(pwm_input));
             }
@@ -1863,6 +1864,7 @@ void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor) {
             value_encoder *= c_mem.enc[n_line].m_mult[index];
         }
 
+        // Change sign of main encoder for RIGHT SHP and 2ND motor of SHP2MOT
         if (c_mem.dev.dev_type == SOFTHAND_PRO) {
             // Right / Left hand turn
             if (index == 0) {
@@ -1870,7 +1872,14 @@ void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor) {
                     value_encoder *= -1;        
                 }
             }
-        } 
+        }         
+        if (c_mem.dev.dev_type == SOFTHAND_PRO_2MOT){
+            // Always switch motor group 2 (little finger side) encoder read
+            // This is valid for both right/left hand side
+            if (index == 0 && assoc_motor == 1){
+              value_encoder *= -1;
+            }                    
+        }
         
         g_meas[n_line].pos[index] = value_encoder;
     
@@ -1894,7 +1903,7 @@ void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor) {
                 //Double encoder translation
                 if (c_mem.enc[n_line].double_encoder_on_off){
                     init_rot = calc_turns_fcn(comp_value_encoder[n_line][0],comp_value_encoder[n_line][1], 
-                                c_mem.enc[n_line].gears_params[0], c_mem.enc[n_line].gears_params[1], c_mem.enc[n_line].gears_params[2]);
+                                c_mem.enc[n_line].gears_params[0], c_mem.enc[n_line].gears_params[1], c_mem.enc[n_line].gears_params[2], assoc_motor);
 
 
                     if (c_mem.enc[n_line].m_mult[0] < 0)
@@ -1912,11 +1921,19 @@ void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor) {
                     value_encoder *= c_mem.enc[n_line].m_mult[0];
                 }
 
+                // Change sign of main encoder for RIGHT SHP and 2ND motor of SHP2MOT
                 if (c_mem.dev.dev_type == SOFTHAND_PRO) {
                     // Right / Left hand turn
                     if (c_mem.dev.right_left == RIGHT_HAND){
                         value_encoder *= -1;        
                     }
+                }
+                if (c_mem.dev.dev_type == SOFTHAND_PRO_2MOT){
+                    // Always switch motor group 2 (little finger side) encoder read
+                    // This is valid for both right/left hand side
+                    if (assoc_motor == 1){
+                      value_encoder *= -1;
+                    }                    
                 }
          
                 g_meas[n_line].pos[0] = value_encoder;
