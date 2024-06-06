@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2020, Centro "E.Piaggio"
+// Copyright (c) 2017-2024, Centro "E.Piaggio"
 // All rights reserved.
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -36,10 +36,10 @@
  *
  *  \brief      Definitions for SoftHand commands, parameters and packages.
  *
- *  \date        March 20th, 2020
- *  \author       _Centro "E.Piaggio"_
- *  \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
- *  \copyright    (C) 2017-2020 Centro "E.Piaggio". All rights reserved.
+ *  \date       Jun 05th, 2024
+ *  \author     _Centro "E.Piaggio"_
+ *  \copyright  (C) 2012-2016 qbrobotics. All rights reserved.
+ *  \copyright  (C) 2017-2024 Centro "E.Piaggio". All rights reserved.
  *  \details
  *  This file is included in the firmware, in its libraries and
  *  applications. It contains all definitions that are necessary for the
@@ -146,6 +146,8 @@ enum SH_resolution
     RESOLUTION_92160    = 8
 };
 
+
+
 //==============================================================     input modes
 
 enum SH_input_mode
@@ -202,6 +204,46 @@ enum data_types {
     TYPE_FLOAT   = 7,
     TYPE_DOUBLE  = 8,
     TYPE_STRING  = 9            // Custom data type (uint8 but with string meaning)
+};
+
+
+//==============================================    custom parameters
+enum custom_param {    
+    POS_PID         = 1,
+    CURR_PID        = 2,
+    INPUT_MODE      = 3,  
+    MEAS_OFF        = 4,
+    POS_LIM         = 5,
+    REST_POS        = 6,
+    REST_POS_DELAY  = 7,
+    HAND_SIDE       = 8,
+    RESET_COUNT     = 9,
+    LAST_CHECKED_t  = 10,
+    MOT_DRIVER      = 11, 
+    POS_PID_2       = 12,
+    CURR_PID_2      = 13,
+    INPUT_MODE_2    = 14,  
+    MEAS_OFF_2      = 15,
+    POS_LIM_2       = 16,
+    MOT_DRIVER_2    = 17,
+    DEV_TYPE        = 18    
+};
+
+//==============================================    menu name enumeration
+
+enum menu_type {    
+    INPUT_MENU      = 1,   
+    CTRL_MODE       = 2,
+    YES_NO          = 3,
+    RIGHT_LEFT      = 4,
+    ON_OFF          = 5,
+    EXP_MENU        = 6,  
+    SPI_MENU        = 7,
+    USER_MENU       = 8,
+    DRIVER_MENU     = 9, 
+    DEVICE_MENU     = 10,
+    FSM_ACTIVATION  = 11,
+    WRIST_DIR       = 12
 };
 
 #define PARAM_BYTE_SLOT     50      ///< Number of bytes reserved to a param information.

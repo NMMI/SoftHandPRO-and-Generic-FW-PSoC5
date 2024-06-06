@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['overcurrent_5fcontrol_0',['overcurrent_control',['../interruptions_8c.html#a4e92908805632dc8cab2936d89bb3ba1',1,'overcurrent_control():&#160;interruptions.c'],['../interruptions_8h.html#a4e92908805632dc8cab2936d89bb3ba1',1,'overcurrent_control():&#160;interruptions.c']]]
+  ['num_5fof_5fbytes_0',['num_of_bytes',['../command__processing_8c.html#a8b005fb196c3a8a4d965c191692b4d72',1,'num_of_bytes(uint8 TYPE):&#160;command_processing.c'],['../command__processing_8h.html#a8b005fb196c3a8a4d965c191692b4d72',1,'num_of_bytes(uint8 TYPE):&#160;command_processing.c']]]
 ];

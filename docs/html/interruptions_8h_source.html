@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.4"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PSoC5 firmware: interruptions.h Source File</title>
+<title>Logic Board Firmware: interruptions.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,11 +20,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="logo_CP.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="fw_logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">PSoC5 firmware<span id="projectnumber">&#160;v. 1.11</span>
+   <div id="projectname">Logic Board Firmware<span id="projectnumber">&#160;v. 1.16</span>
    </div>
-   <div id="projectbrief">Centro E.Piaggio</div>
+   <div id="projectbrief">Cypress PSoC5 microcontroller</div>
   </td>
  </tr>
  </tbody>
@@ -169,21 +169,21 @@ $(function() {
 <div class="ttc" id="a_s_d___r_t_c__functions_8h_html"><div class="ttname"><a href="_s_d___r_t_c__functions_8h.html">SD_RTC_functions.h</a></div><div class="ttdoc">Definition of SD and RTC module functions.</div></div>
 <div class="ttc" id="acommand__processing_8h_html"><div class="ttname"><a href="command__processing_8h.html">command_processing.h</a></div><div class="ttdoc">Received commands processing functions</div></div>
 <div class="ttc" id="aglobals_8h_html"><div class="ttname"><a href="globals_8h.html">globals.h</a></div><div class="ttdoc">Global definitions and macros are set in this file.</div></div>
-<div class="ttc" id="ainterruptions_8h_html_a00a8d34962a63161405e5d7785b9625e"><div class="ttname"><a href="interruptions_8h.html#a00a8d34962a63161405e5d7785b9625e">analog_read_end</a></div><div class="ttdeci">void analog_read_end()</div><div class="ttdef"><b>Definition:</b> interruptions.c:1953</div></div>
-<div class="ttc" id="ainterruptions_8h_html_a17436ec2a3bf0398e965c63c8e1a089d"><div class="ttname"><a href="interruptions_8h.html#a17436ec2a3bf0398e965c63c8e1a089d">motor_control_SH</a></div><div class="ttdeci">void motor_control_SH()</div><div class="ttdef"><b>Definition:</b> interruptions.c:1047</div></div>
-<div class="ttc" id="ainterruptions_8h_html_a32d8abb2b74c69cb1cb0e21101e61f8f"><div class="ttname"><a href="interruptions_8h.html#a32d8abb2b74c69cb1cb0e21101e61f8f">compute_SoftHand_2_motors_emg_reference</a></div><div class="ttdeci">void compute_SoftHand_2_motors_emg_reference(uint8 motor_idx, struct st_ref *st_ref_p, struct st_ref *st_refOld_p, int32 err_emg_1, int32 err_emg_2)</div><div class="ttdef"><b>Definition:</b> interruptions.c:993</div></div>
+<div class="ttc" id="ainterruptions_8h_html_a00a8d34962a63161405e5d7785b9625e"><div class="ttname"><a href="interruptions_8h.html#a00a8d34962a63161405e5d7785b9625e">analog_read_end</a></div><div class="ttdeci">void analog_read_end()</div><div class="ttdef"><b>Definition:</b> interruptions.c:1975</div></div>
+<div class="ttc" id="ainterruptions_8h_html_a17436ec2a3bf0398e965c63c8e1a089d"><div class="ttname"><a href="interruptions_8h.html#a17436ec2a3bf0398e965c63c8e1a089d">motor_control_SH</a></div><div class="ttdeci">void motor_control_SH()</div><div class="ttdef"><b>Definition:</b> interruptions.c:1033</div></div>
+<div class="ttc" id="ainterruptions_8h_html_a32d8abb2b74c69cb1cb0e21101e61f8f"><div class="ttname"><a href="interruptions_8h.html#a32d8abb2b74c69cb1cb0e21101e61f8f">compute_SoftHand_2_motors_emg_reference</a></div><div class="ttdeci">void compute_SoftHand_2_motors_emg_reference(uint8 motor_idx, struct st_ref *st_ref_p, struct st_ref *st_refOld_p, int32 err_emg_1, int32 err_emg_2)</div><div class="ttdef"><b>Definition:</b> interruptions.c:979</div></div>
 <div class="ttc" id="ainterruptions_8h_html_a39df971c4e9f194be50c54dfd7aeabfe"><div class="ttname"><a href="interruptions_8h.html#a39df971c4e9f194be50c54dfd7aeabfe">function_scheduler</a></div><div class="ttdeci">void function_scheduler(void)</div><div class="ttdef"><b>Definition:</b> interruptions.c:289</div></div>
-<div class="ttc" id="ainterruptions_8h_html_a4e92908805632dc8cab2936d89bb3ba1"><div class="ttname"><a href="interruptions_8h.html#a4e92908805632dc8cab2936d89bb3ba1">overcurrent_control</a></div><div class="ttdeci">void overcurrent_control()</div><div class="ttdef"><b>Definition:</b> interruptions.c:2596</div></div>
-<div class="ttc" id="ainterruptions_8h_html_a6eeedfdf03dd87bd2922b7005fd8c691"><div class="ttname"><a href="interruptions_8h.html#a6eeedfdf03dd87bd2922b7005fd8c691">encoder_reading_SPI</a></div><div class="ttdeci">void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor)</div><div class="ttdef"><b>Definition:</b> interruptions.c:1732</div></div>
-<div class="ttc" id="ainterruptions_8h_html_a77877c16b42f6f384f7c80d3002aed22"><div class="ttname"><a href="interruptions_8h.html#a77877c16b42f6f384f7c80d3002aed22">cycles_counter_update</a></div><div class="ttdeci">void cycles_counter_update()</div><div class="ttdef"><b>Definition:</b> interruptions.c:2654</div></div>
+<div class="ttc" id="ainterruptions_8h_html_a4e92908805632dc8cab2936d89bb3ba1"><div class="ttname"><a href="interruptions_8h.html#a4e92908805632dc8cab2936d89bb3ba1">overcurrent_control</a></div><div class="ttdeci">void overcurrent_control()</div><div class="ttdef"><b>Definition:</b> interruptions.c:2634</div></div>
+<div class="ttc" id="ainterruptions_8h_html_a6eeedfdf03dd87bd2922b7005fd8c691"><div class="ttname"><a href="interruptions_8h.html#a6eeedfdf03dd87bd2922b7005fd8c691">encoder_reading_SPI</a></div><div class="ttdeci">void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor)</div><div class="ttdef"><b>Definition:</b> interruptions.c:1738</div></div>
+<div class="ttc" id="ainterruptions_8h_html_a77877c16b42f6f384f7c80d3002aed22"><div class="ttname"><a href="interruptions_8h.html#a77877c16b42f6f384f7c80d3002aed22">cycles_counter_update</a></div><div class="ttdeci">void cycles_counter_update()</div><div class="ttdef"><b>Definition:</b> interruptions.c:2692</div></div>
 <div class="ttc" id="ainterruptions_8h_html_a7e24af8c83537b0441877bf0f00dd30a"><div class="ttname"><a href="interruptions_8h.html#a7e24af8c83537b0441877bf0f00dd30a">CY_ISR_PROTO</a></div><div class="ttdeci">CY_ISR_PROTO(ISR_RS485_RX_ExInterrupt)</div></div>
 <div class="ttc" id="ainterruptions_8h_html_a9790811526002d99b25a814afd02cbae"><div class="ttname"><a href="interruptions_8h.html#a9790811526002d99b25a814afd02cbae">interrupt_manager</a></div><div class="ttdeci">void interrupt_manager()</div><div class="ttdef"><b>Definition:</b> interruptions.c:148</div></div>
-<div class="ttc" id="ainterruptions_8h_html_aa34d2793dd85a2e5662e6f4dc8a3dfd2"><div class="ttname"><a href="interruptions_8h.html#aa34d2793dd85a2e5662e6f4dc8a3dfd2">compute_SoftHand_2_motors_joystick_reference</a></div><div class="ttdeci">void compute_SoftHand_2_motors_joystick_reference(uint8 motor_idx, struct st_ref *st_ref_p, struct st_ref *st_refOld_p)</div><div class="ttdef"><b>Definition:</b> interruptions.c:904</div></div>
-<div class="ttc" id="ainterruptions_8h_html_ab9beadac459e017e1ed807124208d132"><div class="ttname"><a href="interruptions_8h.html#ab9beadac459e017e1ed807124208d132">compute_reference</a></div><div class="ttdeci">void compute_reference(uint8 motor_idx, struct st_ref *st_ref_p, struct st_ref *st_refOld_p)</div><div class="ttdef"><b>Definition:</b> interruptions.c:681</div></div>
-<div class="ttc" id="ainterruptions_8h_html_ac7305eeb40ebfb2c0d67725aa2e88f78"><div class="ttname"><a href="interruptions_8h.html#ac7305eeb40ebfb2c0d67725aa2e88f78">pwm_limit_search</a></div><div class="ttdeci">void pwm_limit_search(uint8 mot_idx)</div><div class="ttdef"><b>Definition:</b> interruptions.c:2630</div></div>
-<div class="ttc" id="ainterruptions_8h_html_ad86170580c30277d97216739e8508a13"><div class="ttname"><a href="interruptions_8h.html#ad86170580c30277d97216739e8508a13">save_cycles_eeprom</a></div><div class="ttdeci">void save_cycles_eeprom()</div><div class="ttdef"><b>Definition:</b> interruptions.c:2841</div></div>
-<div class="ttc" id="ainterruptions_8h_html_af17859273d717ee4b7c575ec7644e308"><div class="ttname"><a href="interruptions_8h.html#af17859273d717ee4b7c575ec7644e308">motor_control_generic</a></div><div class="ttdeci">void motor_control_generic(uint8 index)</div><div class="ttdef"><b>Definition:</b> interruptions.c:1351</div></div>
-<div class="ttc" id="astructst__ref_html"><div class="ttname"><a href="structst__ref.html">st_ref</a></div><div class="ttdoc">Motor Reference structure.</div><div class="ttdef"><b>Definition:</b> globals.h:229</div></div>
+<div class="ttc" id="ainterruptions_8h_html_aa34d2793dd85a2e5662e6f4dc8a3dfd2"><div class="ttname"><a href="interruptions_8h.html#aa34d2793dd85a2e5662e6f4dc8a3dfd2">compute_SoftHand_2_motors_joystick_reference</a></div><div class="ttdeci">void compute_SoftHand_2_motors_joystick_reference(uint8 motor_idx, struct st_ref *st_ref_p, struct st_ref *st_refOld_p)</div><div class="ttdef"><b>Definition:</b> interruptions.c:890</div></div>
+<div class="ttc" id="ainterruptions_8h_html_ab9beadac459e017e1ed807124208d132"><div class="ttname"><a href="interruptions_8h.html#ab9beadac459e017e1ed807124208d132">compute_reference</a></div><div class="ttdeci">void compute_reference(uint8 motor_idx, struct st_ref *st_ref_p, struct st_ref *st_refOld_p)</div><div class="ttdef"><b>Definition:</b> interruptions.c:667</div></div>
+<div class="ttc" id="ainterruptions_8h_html_ac7305eeb40ebfb2c0d67725aa2e88f78"><div class="ttname"><a href="interruptions_8h.html#ac7305eeb40ebfb2c0d67725aa2e88f78">pwm_limit_search</a></div><div class="ttdeci">void pwm_limit_search(uint8 mot_idx)</div><div class="ttdef"><b>Definition:</b> interruptions.c:2668</div></div>
+<div class="ttc" id="ainterruptions_8h_html_ad86170580c30277d97216739e8508a13"><div class="ttname"><a href="interruptions_8h.html#ad86170580c30277d97216739e8508a13">save_cycles_eeprom</a></div><div class="ttdeci">void save_cycles_eeprom()</div><div class="ttdef"><b>Definition:</b> interruptions.c:2879</div></div>
+<div class="ttc" id="ainterruptions_8h_html_af17859273d717ee4b7c575ec7644e308"><div class="ttname"><a href="interruptions_8h.html#af17859273d717ee4b7c575ec7644e308">motor_control_generic</a></div><div class="ttdeci">void motor_control_generic(uint8 index)</div><div class="ttdef"><b>Definition:</b> interruptions.c:1342</div></div>
+<div class="ttc" id="astructst__ref_html"><div class="ttname"><a href="structst__ref.html">st_ref</a></div><div class="ttdoc">Motor Reference structure.</div><div class="ttdef"><b>Definition:</b> globals.h:226</div></div>
 <div class="ttc" id="autils_8h_html"><div class="ttname"><a href="utils_8h.html">utils.h</a></div><div class="ttdoc">Utility functions declaration.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

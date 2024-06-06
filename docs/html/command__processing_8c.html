@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.4"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PSoC5 firmware: command_processing.c File Reference</title>
+<title>Logic Board Firmware: command_processing.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,11 +20,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="logo_CP.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="fw_logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">PSoC5 firmware<span id="projectnumber">&#160;v. 1.11</span>
+   <div id="projectname">Logic Board Firmware<span id="projectnumber">&#160;v. 1.16</span>
    </div>
-   <div id="projectbrief">Centro E.Piaggio</div>
+   <div id="projectbrief">Cypress PSoC5 microcontroller</div>
   </td>
  </tr>
  </tbody>
@@ -78,6 +78,26 @@ $(function() {
 Include dependency graph for command_processing.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="command__processing_8c__incl.png" border="0" usemap="#acommand__processing_8c" alt=""/></div>
+<map name="acommand__processing_8c" id="acommand__processing_8c">
+<area shape="rect" title="Command processing functions." alt="" coords="541,5,700,32"/>
+<area shape="rect" href="command__processing_8h.html" title="Received commands processing functions" alt="" coords="541,80,700,107"/>
+<area shape="rect" href="globals_8h.html" title="Global definitions and macros are set in this file." alt="" coords="384,380,457,407"/>
+<area shape="rect" title=" " alt="" coords="794,455,855,482"/>
+<area shape="rect" href="commands_8h.html" title="Definitions for SoftHand commands, parameters and packages." alt="" coords="920,455,1017,482"/>
+<area shape="rect" href="_i_m_u__functions_8h.html" title="Definition of IMU module functions." alt="" coords="321,230,437,257"/>
+<area shape="rect" href="utils_8h.html" title="Utility functions declaration." alt="" coords="204,305,261,332"/>
+<area shape="rect" href="_encoder__functions_8h.html" title="Definition of Encoder module functions." alt="" coords="597,305,737,332"/>
+<area shape="rect" href="_s_d___r_t_c__functions_8h.html" title="Definition of SD and RTC module functions." alt="" coords="813,305,956,332"/>
+<area shape="rect" href="interruptions_8h.html" title="Interruptions header file." alt="" coords="515,155,619,182"/>
+<area shape="rect" href="_f_i_r_m_w_a_r_e___c_o_n_f_i_g_u_r_a_t_i_o_n_8h.html" title="Definitions for SoftHand and Other Devices commands, parameters and packages." alt="" coords="286,455,504,482"/>
+<area shape="rect" href="device_8h_source.html" title=" " alt="" coords="528,455,598,482"/>
+<area shape="rect" title=" " alt="" coords="622,455,685,482"/>
+<area shape="rect" title=" " alt="" coords="124,455,189,482"/>
+<area shape="rect" title=" " alt="" coords="39,455,100,482"/>
+<area shape="rect" title=" " alt="" coords="213,455,262,482"/>
+<area shape="rect" title=" " alt="" coords="607,530,679,557"/>
+<area shape="rect" title=" " alt="" coords="284,305,370,332"/>
+</map>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
@@ -86,12 +106,14 @@ Functions</h2></td></tr>
 <tr class="separator:a0c97206a61d782ebd9aa24bbb96f8aea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a525ccbc7ac3901d938dc352172ee2531"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a525ccbc7ac3901d938dc352172ee2531">infoGet</a> (uint16 info_type)</td></tr>
 <tr class="separator:a525ccbc7ac3901d938dc352172ee2531"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3f586a12ed6bf58eaf21417c1d3fd92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#af3f586a12ed6bf58eaf21417c1d3fd92">get_param_list</a> (uint8 *VAR_P[<a class="el" href="globals_8h.html#aab4f4a0ece20c4bc27152bd72926d89c">NUM_OF_PARAMS</a>], uint8 TYPES[<a class="el" href="globals_8h.html#aab4f4a0ece20c4bc27152bd72926d89c">NUM_OF_PARAMS</a>], uint8 NUM_ITEMS[<a class="el" href="globals_8h.html#aab4f4a0ece20c4bc27152bd72926d89c">NUM_OF_PARAMS</a>], uint8 NUM_STRUCT[<a class="el" href="globals_8h.html#aab4f4a0ece20c4bc27152bd72926d89c">NUM_OF_PARAMS</a>], uint8 *NUM_MENU, const char *PARAMS_STR[<a class="el" href="globals_8h.html#aab4f4a0ece20c4bc27152bd72926d89c">NUM_OF_PARAMS</a>], uint8 CUSTOM_PARAM_GET[<a class="el" href="globals_8h.html#aab4f4a0ece20c4bc27152bd72926d89c">NUM_OF_PARAMS</a>], const char *MENU_STR[<a class="el" href="globals_8h.html#aa19d88ac3e94a34d9a9f1c37bea9a271">NUM_OF_PARAMS_MENU</a>])</td></tr>
-<tr class="separator:af3f586a12ed6bf58eaf21417c1d3fd92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3495e73c73a56de8ec81a4a5defabf1b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a3495e73c73a56de8ec81a4a5defabf1b">manage_param_list</a> (uint16 index)</td></tr>
-<tr class="separator:a3495e73c73a56de8ec81a4a5defabf1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14ae6b482b3c76d271ea73a2b744d608"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a14ae6b482b3c76d271ea73a2b744d608">set_custom_param</a> (uint16 index)</td></tr>
-<tr class="separator:a14ae6b482b3c76d271ea73a2b744d608"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55651d78205da6c1c27d21dcf889610f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a55651d78205da6c1c27d21dcf889610f">get_param_list</a> (uint8 num_params, uint8 num_menus, const struct <a class="el" href="structparameter.html">parameter</a> PARAM_LIST[], const struct <a class="el" href="structmenu.html">menu</a> MENU_LIST[], uint8 sendToDevice)</td></tr>
+<tr class="separator:a55651d78205da6c1c27d21dcf889610f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b005fb196c3a8a4d965c191692b4d72"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a8b005fb196c3a8a4d965c191692b4d72">num_of_bytes</a> (uint8 TYPE)</td></tr>
+<tr class="separator:a8b005fb196c3a8a4d965c191692b4d72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa384c747f9e073cae04c460385259c11"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#aa384c747f9e073cae04c460385259c11">manage_param_list</a> (uint16 index, uint8 sendToDevice)</td></tr>
+<tr class="separator:aa384c747f9e073cae04c460385259c11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad48d2cc7795eff91cc9c065911704eff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#ad48d2cc7795eff91cc9c065911704eff">set_custom_param</a> (uint16 index, const struct <a class="el" href="structparameter.html">parameter</a> PARAM_LIST[])</td></tr>
+<tr class="separator:ad48d2cc7795eff91cc9c065911704eff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85586060c313547d3baf0ae2178665dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a85586060c313547d3baf0ae2178665dd">get_IMU_param_list</a> (uint16 index)</td></tr>
 <tr class="separator:a85586060c313547d3baf0ae2178665dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8969cb5fdb4916f259075029741e727"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#ac8969cb5fdb4916f259075029741e727">setZeros</a> ()</td></tr>
@@ -114,12 +136,12 @@ Functions</h2></td></tr>
 <tr class="separator:a86c2459c9ec8defe82ccdbffc61a5ad6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cea8956330cefb9796dcc589defab47"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a8cea8956330cefb9796dcc589defab47">IMU_reading_info</a> (char *info_string)</td></tr>
 <tr class="separator:a8cea8956330cefb9796dcc589defab47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a517f4c61166381d40767fce9011e3c96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a517f4c61166381d40767fce9011e3c96">commWrite_old_id</a> (uint8 *packet_data, uint16 packet_lenght, uint8 old_id)</td></tr>
-<tr class="separator:a517f4c61166381d40767fce9011e3c96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af92ab4f3c1e0c0e8f5966bf2e2edeaba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#af92ab4f3c1e0c0e8f5966bf2e2edeaba">commWrite</a> (uint8 *packet_data, uint16 packet_lenght)</td></tr>
-<tr class="separator:af92ab4f3c1e0c0e8f5966bf2e2edeaba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed6a94cc62768fbec790b25a22eb3424"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#aed6a94cc62768fbec790b25a22eb3424">commWriteID</a> (uint8 *packet_data, uint16 packet_lenght, uint8 id)</td></tr>
-<tr class="separator:aed6a94cc62768fbec790b25a22eb3424"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97a5f0bf199011f88d1a64f4a3630e27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a97a5f0bf199011f88d1a64f4a3630e27">commWrite_old_id</a> (uint8 *packet_data, uint16 packet_length, uint8 old_id)</td></tr>
+<tr class="separator:a97a5f0bf199011f88d1a64f4a3630e27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6500e7d6bfe77b679fd6cef92c7f8773"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a6500e7d6bfe77b679fd6cef92c7f8773">commWrite</a> (uint8 *packet_data, uint16 packet_length)</td></tr>
+<tr class="separator:a6500e7d6bfe77b679fd6cef92c7f8773"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d4f8fc6e8fd3809938b2be867ee0c68"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a1d4f8fc6e8fd3809938b2be867ee0c68">commWriteID</a> (uint8 *packet_data, uint16 packet_length, uint8 id)</td></tr>
+<tr class="separator:a1d4f8fc6e8fd3809938b2be867ee0c68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6205a6e88f72f4cc321a7d8abca23e26"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a6205a6e88f72f4cc321a7d8abca23e26">LCRChecksum</a> (uint8 *data_array, uint8 data_length)</td></tr>
 <tr class="separator:a6205a6e88f72f4cc321a7d8abca23e26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a2eafee01079c42ca1fb14aa7331933"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a1a2eafee01079c42ca1fb14aa7331933">sendAcknowledgment</a> (uint8 value)</td></tr>
@@ -186,6 +208,14 @@ Functions</h2></td></tr>
 <tr class="separator:a90d37f64d1eac91112e56a3724e57e0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4ff78ea00367bc472df80011c0ebc86"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#ae4ff78ea00367bc472df80011c0ebc86">cmd_remove_SD_file</a> (uint16 filename_length)</td></tr>
 <tr class="separator:ae4ff78ea00367bc472df80011c0ebc86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a073fab63cdb963036b830d60ddc5c113"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a073fab63cdb963036b830d60ddc5c113">cmd_get_long_pkg_length</a> (uint16 type)</td></tr>
+<tr class="separator:a073fab63cdb963036b830d60ddc5c113"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8502d9f068a32f505116a8bc04478145"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a8502d9f068a32f505116a8bc04478145">cmd_get_long_pkg_slice</a> ()</td></tr>
+<tr class="separator:a8502d9f068a32f505116a8bc04478145"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e471bd6691cb5d2ca66cd2a68491b24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a6e471bd6691cb5d2ca66cd2a68491b24">cmd_get_EEPROM_row</a> (uint16 row)</td></tr>
+<tr class="separator:a6e471bd6691cb5d2ca66cd2a68491b24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8dfbb55bea6c56f4d2663d2efca79a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#aa8dfbb55bea6c56f4d2663d2efca79a5">cmd_get_battery_voltage</a> ()</td></tr>
+<tr class="separator:aa8dfbb55bea6c56f4d2663d2efca79a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a308022a04c9da94099b233c05942f9d9"><td class="memItemLeft" align="right" valign="top"><a id="a308022a04c9da94099b233c05942f9d9" name="a308022a04c9da94099b233c05942f9d9"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>air_chambers_control</b> (int slave_motor_idx)</td></tr>
 <tr class="separator:a308022a04c9da94099b233c05942f9d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -210,11 +240,11 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Command processing functions. </p>
-<dl class="section date"><dt>Date</dt><dd>March 20th, 2020 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Jun 05th, 2024 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd><em>Centro "E.Piaggio"</em> </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>(C) 2012-2016 qbrobotics. All rights reserved. </dd>
 <dd>
-(C) 2017-2020 Centro "E.Piaggio". All rights reserved. </dd></dl>
+(C) 2017-2024 Centro "E.Piaggio". All rights reserved. </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a107fc9f2982f9a953bdd82aa07279499" name="a107fc9f2982f9a953bdd82aa07279499"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a107fc9f2982f9a953bdd82aa07279499">&#9670;&nbsp;</a></span>cmd_activate()</h2>
@@ -306,6 +336,24 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
 
 </div>
 </div>
+<a id="aa8dfbb55bea6c56f4d2663d2efca79a5" name="aa8dfbb55bea6c56f4d2663d2efca79a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8dfbb55bea6c56f4d2663d2efca79a5">&#9670;&nbsp;</a></span>cmd_get_battery_voltage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cmd_get_battery_voltage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >This function gets battery voltage </p>
+
+</div>
+</div>
 <a id="a45a90a8455bfdb6a7f0e118da2c6f0a6" name="a45a90a8455bfdb6a7f0e118da2c6f0a6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a45a90a8455bfdb6a7f0e118da2c6f0a6">&#9670;&nbsp;</a></span>cmd_get_curr_and_meas()</h2>
 
@@ -357,6 +405,25 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
       </table>
 </div><div class="memdoc">
 <p >This function gets the motor current and puts it in the package to be sent to the Cuff device, using the commWrite_to_cuff function. </p>
+
+</div>
+</div>
+<a id="a6e471bd6691cb5d2ca66cd2a68491b24" name="a6e471bd6691cb5d2ca66cd2a68491b24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e471bd6691cb5d2ca66cd2a68491b24">&#9670;&nbsp;</a></span>cmd_get_EEPROM_row()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cmd_get_EEPROM_row </td>
+          <td>(</td>
+          <td class="paramtype">uint16&#160;</td>
+          <td class="paramname"><em>row</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >This function gets EEPROM row values </p>
 
 </div>
 </div>
@@ -465,6 +532,43 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
       </table>
 </div><div class="memdoc">
 <p >This function gets the joystick analog values and puts them in the package to be sent. </p>
+
+</div>
+</div>
+<a id="a073fab63cdb963036b830d60ddc5c113" name="a073fab63cdb963036b830d60ddc5c113"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a073fab63cdb963036b830d60ddc5c113">&#9670;&nbsp;</a></span>cmd_get_long_pkg_length()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cmd_get_long_pkg_length </td>
+          <td>(</td>
+          <td class="paramtype">uint16&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >This function gets long package length </p>
+
+</div>
+</div>
+<a id="a8502d9f068a32f505116a8bc04478145" name="a8502d9f068a32f505116a8bc04478145"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8502d9f068a32f505116a8bc04478145">&#9670;&nbsp;</a></span>cmd_get_long_pkg_slice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cmd_get_long_pkg_slice </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >This function gets only a slice from a long package </p>
 
 </div>
 </div>
@@ -651,8 +755,8 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
 
 </div>
 </div>
-<a id="af92ab4f3c1e0c0e8f5966bf2e2edeaba" name="af92ab4f3c1e0c0e8f5966bf2e2edeaba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af92ab4f3c1e0c0e8f5966bf2e2edeaba">&#9670;&nbsp;</a></span>commWrite()</h2>
+<a id="a6500e7d6bfe77b679fd6cef92c7f8773" name="a6500e7d6bfe77b679fd6cef92c7f8773"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6500e7d6bfe77b679fd6cef92c7f8773">&#9670;&nbsp;</a></span>commWrite()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -667,7 +771,7 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint16&#160;</td>
-          <td class="paramname"><em>packet_lenght</em>&#160;</td>
+          <td class="paramname"><em>packet_length</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -680,15 +784,15 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">packet_data</td><td>The array of data that must be written. </td></tr>
-    <tr><td class="paramname">packet_lenght</td><td>The lenght of the data array. </td></tr>
+    <tr><td class="paramname">packet_length</td><td>The length of the data array. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a517f4c61166381d40767fce9011e3c96" name="a517f4c61166381d40767fce9011e3c96"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a517f4c61166381d40767fce9011e3c96">&#9670;&nbsp;</a></span>commWrite_old_id()</h2>
+<a id="a97a5f0bf199011f88d1a64f4a3630e27" name="a97a5f0bf199011f88d1a64f4a3630e27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97a5f0bf199011f88d1a64f4a3630e27">&#9670;&nbsp;</a></span>commWrite_old_id()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -703,7 +807,7 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint16&#160;</td>
-          <td class="paramname"><em>packet_lenght</em>, </td>
+          <td class="paramname"><em>packet_length</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -722,7 +826,7 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">packet_data</td><td>The array of data that must be written. </td></tr>
-    <tr><td class="paramname">packet_lenght</td><td>The lenght of the data array. </td></tr>
+    <tr><td class="paramname">packet_length</td><td>The length of the data array. </td></tr>
     <tr><td class="paramname">old_id</td><td>The previous id of the board, before setting a new one. </td></tr>
   </table>
   </dd>
@@ -730,8 +834,8 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
 
 </div>
 </div>
-<a id="aed6a94cc62768fbec790b25a22eb3424" name="aed6a94cc62768fbec790b25a22eb3424"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed6a94cc62768fbec790b25a22eb3424">&#9670;&nbsp;</a></span>commWriteID()</h2>
+<a id="a1d4f8fc6e8fd3809938b2be867ee0c68" name="a1d4f8fc6e8fd3809938b2be867ee0c68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d4f8fc6e8fd3809938b2be867ee0c68">&#9670;&nbsp;</a></span>commWriteID()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -746,7 +850,7 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint16&#160;</td>
-          <td class="paramname"><em>packet_lenght</em>, </td>
+          <td class="paramname"><em>packet_length</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -765,7 +869,7 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">packet_data</td><td>The array of data that must be written. </td></tr>
-    <tr><td class="paramname">packet_lenght</td><td>The lenght of the data array. </td></tr>
+    <tr><td class="paramname">packet_length</td><td>The length of the data array. </td></tr>
   </table>
   </dd>
 </dl>
@@ -838,8 +942,8 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
 
 </div>
 </div>
-<a id="af3f586a12ed6bf58eaf21417c1d3fd92" name="af3f586a12ed6bf58eaf21417c1d3fd92"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3f586a12ed6bf58eaf21417c1d3fd92">&#9670;&nbsp;</a></span>get_param_list()</h2>
+<a id="a55651d78205da6c1c27d21dcf889610f" name="a55651d78205da6c1c27d21dcf889610f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55651d78205da6c1c27d21dcf889610f">&#9670;&nbsp;</a></span>get_param_list()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -847,50 +951,32 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
         <tr>
           <td class="memname">void get_param_list </td>
           <td>(</td>
-          <td class="paramtype">uint8 *&#160;</td>
-          <td class="paramname"><em>VAR_P</em>[NUM_OF_PARAMS], </td>
+          <td class="paramtype">uint8&#160;</td>
+          <td class="paramname"><em>n_param</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint8&#160;</td>
-          <td class="paramname"><em>TYPES</em>[NUM_OF_PARAMS], </td>
+          <td class="paramname"><em>n_menus</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const struct <a class="el" href="structparameter.html">parameter</a>&#160;</td>
+          <td class="paramname"><em>P</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const struct <a class="el" href="structmenu.html">menu</a>&#160;</td>
+          <td class="paramname"><em>M</em>[], </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint8&#160;</td>
-          <td class="paramname"><em>NUM_ITEMS</em>[NUM_OF_PARAMS], </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8&#160;</td>
-          <td class="paramname"><em>NUM_STRUCT</em>[NUM_OF_PARAMS], </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8 *&#160;</td>
-          <td class="paramname"><em>NUM_MENU</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>PARAMS_STR</em>[NUM_OF_PARAMS], </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8&#160;</td>
-          <td class="paramname"><em>CUSTOM_PARAM_SET</em>[NUM_OF_PARAMS], </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>MENU_STR</em>[NUM_OF_PARAMS_MENU]&#160;</td>
+          <td class="paramname"><em>sendToDevice</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -982,7 +1068,7 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">data_array</td><td>The array of data that must be checked. </td></tr>
-    <tr><td class="paramname">data_lenght</td><td>Lenght of the data array that must be checked.</td></tr>
+    <tr><td class="paramname">data_length</td><td>length of the data array that must be checked.</td></tr>
   </table>
   </dd>
 </dl>
@@ -990,8 +1076,8 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
 
 </div>
 </div>
-<a id="a3495e73c73a56de8ec81a4a5defabf1b" name="a3495e73c73a56de8ec81a4a5defabf1b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3495e73c73a56de8ec81a4a5defabf1b">&#9670;&nbsp;</a></span>manage_param_list()</h2>
+<a id="aa384c747f9e073cae04c460385259c11" name="aa384c747f9e073cae04c460385259c11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa384c747f9e073cae04c460385259c11">&#9670;&nbsp;</a></span>manage_param_list()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1000,8 +1086,18 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
           <td class="memname">void manage_param_list </td>
           <td>(</td>
           <td class="paramtype">uint16&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint8&#160;</td>
+          <td class="paramname"><em>sendToDevice</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1166,6 +1262,25 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A true value if the memory is correctly stored, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a8b005fb196c3a8a4d965c191692b4d72" name="a8b005fb196c3a8a4d965c191692b4d72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b005fb196c3a8a4d965c191692b4d72">&#9670;&nbsp;</a></span>num_of_bytes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8 num_of_bytes </td>
+          <td>(</td>
+          <td class="paramtype">uint8&#160;</td>
+          <td class="paramname"><em>TYPE</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >This function compute the size of data (in bytes) according to its type </p>
 
 </div>
 </div>
@@ -1394,8 +1509,8 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
 
 </div>
 </div>
-<a id="a14ae6b482b3c76d271ea73a2b744d608" name="a14ae6b482b3c76d271ea73a2b744d608"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14ae6b482b3c76d271ea73a2b744d608">&#9670;&nbsp;</a></span>set_custom_param()</h2>
+<a id="ad48d2cc7795eff91cc9c065911704eff" name="ad48d2cc7795eff91cc9c065911704eff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad48d2cc7795eff91cc9c065911704eff">&#9670;&nbsp;</a></span>set_custom_param()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1404,8 +1519,18 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
           <td class="memname">void set_custom_param </td>
           <td>(</td>
           <td class="paramtype">uint16&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const struct <a class="el" href="structparameter.html">parameter</a>&#160;</td>
+          <td class="paramname"><em>P</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">

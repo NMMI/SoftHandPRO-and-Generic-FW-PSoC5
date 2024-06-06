@@ -10,6 +10,7 @@ var searchData=
   ['pressure_7',['pressure',['../structst__fb__meas.html#ac870e1249bab4a2a68cc4126761d24ef',1,'st_fb_meas']]],
   ['prop_5ferr_5ffb_5fgain_8',['prop_err_fb_gain',['../structst___f_b__spec.html#af4dcbeffaf7f4bc2870dc1f093c0ce1b',1,'st_FB_spec']]],
   ['pwm_9',['pwm',['../structst__ref.html#af8587579fb553575d315bfe2e3183bc4',1,'st_ref']]],
-  ['pwm_5frate_5flimiter_10',['pwm_rate_limiter',['../structst__motor.html#a1230396f2894c516a42a418ec34a60a1',1,'st_motor']]],
-  ['pwm_5fsign_11',['pwm_sign',['../globals_8c.html#a2aaef2bd3d366a6571f3491f4fb452dd',1,'pwm_sign():&#160;globals.c'],['../globals_8h.html#a2aaef2bd3d366a6571f3491f4fb452dd',1,'pwm_sign():&#160;globals.c']]]
+  ['pwm_5fmax_5fvalue_5fesc_10',['PWM_MAX_VALUE_ESC',['../globals_8c.html#a7ac6496821c2e8b6bb2f1b7e2c5d2f25',1,'PWM_MAX_VALUE_ESC():&#160;globals.c'],['../globals_8h.html#a7ac6496821c2e8b6bb2f1b7e2c5d2f25',1,'PWM_MAX_VALUE_ESC():&#160;globals.c']]],
+  ['pwm_5frate_5flimiter_11',['pwm_rate_limiter',['../structst__motor.html#a1230396f2894c516a42a418ec34a60a1',1,'st_motor']]],
+  ['pwm_5fsign_12',['pwm_sign',['../globals_8c.html#a2aaef2bd3d366a6571f3491f4fb452dd',1,'pwm_sign():&#160;globals.c'],['../globals_8h.html#a2aaef2bd3d366a6571f3491f4fb452dd',1,'pwm_sign():&#160;globals.c']]]
 ];

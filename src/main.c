@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2022, Centro "E.Piaggio"
+// Copyright (c) 2017-2024, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -36,12 +36,12 @@
 * \file         main.c
 *
 * \brief        Firmware main file.
-* \date         May 26th, 2022
+* \date         Jun 05th, 2024
 * \author       _Centro "E.Piaggio"_
-* \copyright    (C) 2020 Centro "E.Piaggio". All rights reserved.
+* \copyright    (C) 2020-2024 Centro "E.Piaggio". All rights reserved.
 * \mainpage     Firmware
 * \brief        This is the firmware of PSoC5 logic board.
-* \version      1.11
+* \version      1.16
 *
 * \details      This is the firmware of PSoC5 logic board. Depending on the configuration, 
 *               it can control up to two motors and read its encoders. Also can read and

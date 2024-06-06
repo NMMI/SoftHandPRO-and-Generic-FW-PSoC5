@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.4"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PSoC5 firmware: globals.h File Reference</title>
+<title>Logic Board Firmware: globals.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,11 +20,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="logo_CP.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="fw_logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">PSoC5 firmware<span id="projectnumber">&#160;v. 1.11</span>
+   <div id="projectname">Logic Board Firmware<span id="projectnumber">&#160;v. 1.16</span>
    </div>
-   <div id="projectbrief">Centro E.Piaggio</div>
+   <div id="projectbrief">Cypress PSoC5 microcontroller</div>
   </td>
  </tr>
  </tbody>
@@ -87,11 +87,40 @@ $(function() {
 Include dependency graph for globals.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="globals_8h__incl.png" border="0" usemap="#aglobals_8h" alt=""/></div>
+<map name="aglobals_8h" id="aglobals_8h">
+<area shape="rect" title="Global definitions and macros are set in this file." alt="" coords="467,5,541,32"/>
+<area shape="rect" href="_f_i_r_m_w_a_r_e___c_o_n_f_i_g_u_r_a_t_i_o_n_8h.html" title="Definitions for SoftHand and Other Devices commands, parameters and packages." alt="" coords="5,80,224,107"/>
+<area shape="rect" href="device_8h_source.html" title=" " alt="" coords="247,80,318,107"/>
+<area shape="rect" title=" " alt="" coords="342,80,405,107"/>
+<area shape="rect" title=" " alt="" coords="429,80,493,107"/>
+<area shape="rect" title=" " alt="" coords="518,80,578,107"/>
+<area shape="rect" title=" " alt="" coords="603,80,664,107"/>
+<area shape="rect" href="commands_8h.html" title="Definitions for SoftHand commands, parameters and packages." alt="" coords="688,80,784,107"/>
+<area shape="rect" title=" " alt="" coords="809,80,858,107"/>
+<area shape="rect" title=" " alt="" coords="247,155,318,182"/>
+</map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="globals_8h__dep__incl.png" border="0" usemap="#aglobals_8hdep" alt=""/></div>
+<map name="aglobals_8hdep" id="aglobals_8hdep">
+<area shape="rect" title="Global definitions and macros are set in this file." alt="" coords="609,5,682,32"/>
+<area shape="rect" href="_encoder__functions_8h.html" title="Definition of Encoder module functions." alt="" coords="174,155,314,182"/>
+<area shape="rect" href="command__processing_8h.html" title="Received commands processing functions" alt="" coords="435,230,594,257"/>
+<area shape="rect" href="_s_d___r_t_c__functions_8h.html" title="Definition of SD and RTC module functions." alt="" coords="720,305,864,332"/>
+<area shape="rect" href="interruptions_8h.html" title="Interruptions header file." alt="" coords="334,380,437,407"/>
+<area shape="rect" href="main_8c.html" title="Firmware main file." alt="" coords="653,455,713,482"/>
+<area shape="rect" href="_i_m_u__functions_8h.html" title="Definition of IMU module functions." alt="" coords="633,155,749,182"/>
+<area shape="rect" href="globals_8c.html" title="Global variables." alt="" coords="927,80,1001,107"/>
+<area shape="rect" href="utils_8h.html" title="Utility functions declaration." alt="" coords="563,80,619,107"/>
+<area shape="rect" href="_encoder__functions_8c.html" title="Implementation of SPI module functions." alt="" coords="43,230,184,257"/>
+<area shape="rect" href="command__processing_8c.html" title="Command processing functions." alt="" coords="435,305,594,332"/>
+<area shape="rect" href="_s_d___r_t_c__functions_8c.html" title="Implementation of SD and RTC module functions." alt="" coords="720,380,864,407"/>
+<area shape="rect" href="interruptions_8c.html" title="Interruption handling and firmware core functions." alt="" coords="334,455,437,482"/>
+<area shape="rect" href="_i_m_u__functions_8c.html" title="Implementation of IMU module functions." alt="" coords="709,230,825,257"/>
+<area shape="rect" href="utils_8c.html" title="Definition of utility functions." alt="" coords="552,155,608,182"/>
+</map>
 </div>
 </div>
 <p><a href="globals_8h_source.html">Go to the source code of this file.</a></p>
@@ -176,16 +205,6 @@ Macros</h2></td></tr>
 <tr class="memitem:a94a49570e3bc73b67084f1a9ae90d89a"><td class="memItemLeft" align="right" valign="top"><a id="a94a49570e3bc73b67084f1a9ae90d89a" name="a94a49570e3bc73b67084f1a9ae90d89a"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>NUM_OF_ADC_CHANNELS_MAX</b>&#160;&#160;&#160;(4+<a class="el" href="globals_8h.html#a21ab5f0a6e4cb48bd320177c4f7aa078">NUM_OF_INPUT_EMGS</a>+<a class="el" href="globals_8h.html#acfef2d9600a7535f4ad258c2370dd9fa">NUM_OF_ADDITIONAL_EMGS</a>)</td></tr>
 <tr class="separator:a94a49570e3bc73b67084f1a9ae90d89a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecd556b3ea0656fe9e059814426de5f7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#aecd556b3ea0656fe9e059814426de5f7">NUM_OF_MS_PARAMS</a>&#160;&#160;&#160;2</td></tr>
-<tr class="separator:aecd556b3ea0656fe9e059814426de5f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb8ebf7cfe1d67e459ceef94dcb0e045"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#abb8ebf7cfe1d67e459ceef94dcb0e045">NUM_OF_FB_PARAMS</a>&#160;&#160;&#160;3</td></tr>
-<tr class="separator:abb8ebf7cfe1d67e459ceef94dcb0e045"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6c259a53985439ee30fc3afdc12cacb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#ab6c259a53985439ee30fc3afdc12cacb">NUM_OF_WR_PARAMS</a>&#160;&#160;&#160;3</td></tr>
-<tr class="separator:ab6c259a53985439ee30fc3afdc12cacb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab4f4a0ece20c4bc27152bd72926d89c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#aab4f4a0ece20c4bc27152bd72926d89c">NUM_OF_PARAMS</a>&#160;&#160;&#160;(75 + <a class="el" href="globals_8h.html#aecd556b3ea0656fe9e059814426de5f7">NUM_OF_MS_PARAMS</a> + <a class="el" href="globals_8h.html#abb8ebf7cfe1d67e459ceef94dcb0e045">NUM_OF_FB_PARAMS</a> + <a class="el" href="globals_8h.html#ab6c259a53985439ee30fc3afdc12cacb">NUM_OF_WR_PARAMS</a>)</td></tr>
-<tr class="separator:aab4f4a0ece20c4bc27152bd72926d89c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa19d88ac3e94a34d9a9f1c37bea9a271"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#aa19d88ac3e94a34d9a9f1c37bea9a271">NUM_OF_PARAMS_MENU</a>&#160;&#160;&#160;12</td></tr>
-<tr class="separator:aa19d88ac3e94a34d9a9f1c37bea9a271"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e4d7a571850d3268c9b780b171474e6"><td class="memItemLeft" align="right" valign="top"><a id="a8e4d7a571850d3268c9b780b171474e6" name="a8e4d7a571850d3268c9b780b171474e6"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>N_IMU_MAX</b>&#160;&#160;&#160;5</td></tr>
 <tr class="separator:a8e4d7a571850d3268c9b780b171474e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -291,8 +310,17 @@ Macros</h2></td></tr>
 <tr class="memitem:a3c105963a392309caa76708290acd589"><td class="memItemLeft" align="right" valign="top"><a id="a3c105963a392309caa76708290acd589" name="a3c105963a392309caa76708290acd589"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>SOFTHAND_2_MOTORS</b>&#160;&#160;&#160;4</td></tr>
 <tr class="separator:a3c105963a392309caa76708290acd589"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac31fd045384c90b2bf95341aac26b60c"><td class="memItemLeft" align="right" valign="top"><a id="ac31fd045384c90b2bf95341aac26b60c" name="ac31fd045384c90b2bf95341aac26b60c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>AE_SHOULDER_ESCON</b>&#160;&#160;&#160;5</td></tr>
+<tr class="separator:ac31fd045384c90b2bf95341aac26b60c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c74e02e6d4e34b08b827c57ff315f9a"><td class="memItemLeft" align="right" valign="top"><a id="a2c74e02e6d4e34b08b827c57ff315f9a" name="a2c74e02e6d4e34b08b827c57ff315f9a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>AE_WHEELS_ESCON</b>&#160;&#160;&#160;6</td></tr>
+<tr class="separator:a2c74e02e6d4e34b08b827c57ff315f9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a356600493473419dc434fae8156fd496"><td class="memItemLeft" align="right" valign="top"><a id="a356600493473419dc434fae8156fd496" name="a356600493473419dc434fae8156fd496"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SOFTHAND_PRO_2MOT</b>&#160;&#160;&#160;7</td></tr>
+<tr class="separator:a356600493473419dc434fae8156fd496"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5a0bd9be15f1dcd0ba86f27d3dbda50"><td class="memItemLeft" align="right" valign="top"><a id="ac5a0bd9be15f1dcd0ba86f27d3dbda50" name="ac5a0bd9be15f1dcd0ba86f27d3dbda50"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>CUFF</b>&#160;&#160;&#160;5</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CUFF</b>&#160;&#160;&#160;8</td></tr>
 <tr class="separator:ac5a0bd9be15f1dcd0ba86f27d3dbda50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04e38ed0acd535042d77f459ce075ad0"><td class="memItemLeft" align="right" valign="top"><a id="a04e38ed0acd535042d77f459ce075ad0" name="a04e38ed0acd535042d77f459ce075ad0"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>RELAX_STATE</b>&#160;&#160;&#160;0</td></tr>
@@ -364,8 +392,6 @@ Macros</h2></td></tr>
 <tr class="separator:a741150850111330d3643d42590d2eafe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b53fa3866980950c1c20141c101b9ff"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#a8b53fa3866980950c1c20141c101b9ff">PWM_MAX_VALUE_DC</a>&#160;&#160;&#160;100</td></tr>
 <tr class="separator:a8b53fa3866980950c1c20141c101b9ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af173143c7ad53d6f131193c77b408a20"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#af173143c7ad53d6f131193c77b408a20">PWM_MAX_VALUE_ESC</a>&#160;&#160;&#160;2985</td></tr>
-<tr class="separator:af173143c7ad53d6f131193c77b408a20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66edaed675ab232f06a4e5b3c30d101a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#a66edaed675ab232f06a4e5b3c30d101a">ANTI_WINDUP</a>&#160;&#160;&#160;1000</td></tr>
 <tr class="separator:a66edaed675ab232f06a4e5b3c30d101a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0001cc59fb1ba0290c6ef8c2c5692d7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#ae0001cc59fb1ba0290c6ef8c2c5692d7">DEFAULT_CURRENT_LIMIT</a>&#160;&#160;&#160;1500</td></tr>
@@ -518,6 +544,8 @@ int16&#160;</td><td class="memItemRight" valign="bottom"><b>ADC_buf</b> [NUM_OF_
 <tr class="separator:a2fbad668712e226379890e1debdc9ff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab302ef69391ec5a0b59dadb9c7d2a3ef"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#ab302ef69391ec5a0b59dadb9c7d2a3ef">NUM_OF_ANALOG_INPUTS</a></td></tr>
 <tr class="separator:ab302ef69391ec5a0b59dadb9c7d2a3ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ac6496821c2e8b6bb2f1b7e2c5d2f25"><td class="memItemLeft" align="right" valign="top">uint16&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#a7ac6496821c2e8b6bb2f1b7e2c5d2f25">PWM_MAX_VALUE_ESC</a></td></tr>
+<tr class="separator:a7ac6496821c2e8b6bb2f1b7e2c5d2f25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2aaef2bd3d366a6571f3491f4fb452dd"><td class="memItemLeft" align="right" valign="top">int8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8h.html#a2aaef2bd3d366a6571f3491f4fb452dd">pwm_sign</a> [<a class="el" href="globals_8h.html#a39ac50737c1ee7d5b723b2597fdf6f26">NUM_OF_MOTORS</a>]</td></tr>
 <tr class="separator:a2aaef2bd3d366a6571f3491f4fb452dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1bb506bc73f01ca200da713384fefe8"><td class="memItemLeft" align="right" valign="top"><a id="af1bb506bc73f01ca200da713384fefe8" name="af1bb506bc73f01ca200da713384fefe8"></a>
@@ -558,6 +586,12 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>sdEMGHFile</b> [100]<
 <tr class="memitem:aa1a3291d528234a8a43246186d44e375"><td class="memItemLeft" align="right" valign="top"><a id="aa1a3291d528234a8a43246186d44e375" name="aa1a3291d528234a8a43246186d44e375"></a>
 char&#160;</td><td class="memItemRight" valign="bottom"><b>sdR01File</b> [100]</td></tr>
 <tr class="separator:aa1a3291d528234a8a43246186d44e375"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a194ca44e648cdac10e9edae2c2fdba43"><td class="memItemLeft" align="right" valign="top"><a id="a194ca44e648cdac10e9edae2c2fdba43" name="a194ca44e648cdac10e9edae2c2fdba43"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><b>longPkgP</b></td></tr>
+<tr class="separator:a194ca44e648cdac10e9edae2c2fdba43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b0d76de2cb65e976d631386166fc170"><td class="memItemLeft" align="right" valign="top"><a id="a9b0d76de2cb65e976d631386166fc170" name="a9b0d76de2cb65e976d631386166fc170"></a>
+uint16&#160;</td><td class="memItemRight" valign="bottom"><b>longPkgSize</b></td></tr>
+<tr class="separator:a9b0d76de2cb65e976d631386166fc170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0141cd61d6f4215bfdfffbdbe612eb1d"><td class="memItemLeft" align="right" valign="top"><a id="a0141cd61d6f4215bfdfffbdbe612eb1d" name="a0141cd61d6f4215bfdfffbdbe612eb1d"></a>
 uint8&#160;</td><td class="memItemRight" valign="bottom"><b>btEnabled</b></td></tr>
 <tr class="separator:a0141cd61d6f4215bfdfffbdbe612eb1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -609,11 +643,11 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Global definitions and macros are set in this file. </p>
-<dl class="section date"><dt>Date</dt><dd>May 26th, 2022 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Jun 05th, 2024 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd><em>Centro "E.Piaggio"</em> </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>(C) 2012-2016 qbrobotics. All rights reserved. </dd>
 <dd>
-(C) 2017-2022 Centro "E.Piaggio". All rights reserved. </dd></dl>
+(C) 2017-2024 Centro "E.Piaggio". All rights reserved. </dd></dl>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a66edaed675ab232f06a4e5b3c30d101a" name="a66edaed675ab232f06a4e5b3c30d101a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a66edaed675ab232f06a4e5b3c30d101a">&#9670;&nbsp;</a></span>ANTI_WINDUP</h2>
@@ -870,21 +904,6 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
 
 </div>
 </div>
-<a id="abb8ebf7cfe1d67e459ceef94dcb0e045" name="abb8ebf7cfe1d67e459ceef94dcb0e045"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb8ebf7cfe1d67e459ceef94dcb0e045">&#9670;&nbsp;</a></span>NUM_OF_FB_PARAMS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define NUM_OF_FB_PARAMS&#160;&#160;&#160;3</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Number of feedback parameters saved in the EEPROM. </p>
-
-</div>
-</div>
 <a id="a21ab5f0a6e4cb48bd320177c4f7aa078" name="a21ab5f0a6e4cb48bd320177c4f7aa078"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a21ab5f0a6e4cb48bd320177c4f7aa078">&#9670;&nbsp;</a></span>NUM_OF_INPUT_EMGS</h2>
 
@@ -915,51 +934,6 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
 
 </div>
 </div>
-<a id="aecd556b3ea0656fe9e059814426de5f7" name="aecd556b3ea0656fe9e059814426de5f7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aecd556b3ea0656fe9e059814426de5f7">&#9670;&nbsp;</a></span>NUM_OF_MS_PARAMS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define NUM_OF_MS_PARAMS&#160;&#160;&#160;2</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Number of master parameters saved in the EEPROM. </p>
-
-</div>
-</div>
-<a id="aab4f4a0ece20c4bc27152bd72926d89c" name="aab4f4a0ece20c4bc27152bd72926d89c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab4f4a0ece20c4bc27152bd72926d89c">&#9670;&nbsp;</a></span>NUM_OF_PARAMS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define NUM_OF_PARAMS&#160;&#160;&#160;(75 + <a class="el" href="globals_8h.html#aecd556b3ea0656fe9e059814426de5f7">NUM_OF_MS_PARAMS</a> + <a class="el" href="globals_8h.html#abb8ebf7cfe1d67e459ceef94dcb0e045">NUM_OF_FB_PARAMS</a> + <a class="el" href="globals_8h.html#ab6c259a53985439ee30fc3afdc12cacb">NUM_OF_WR_PARAMS</a>)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Number of parameters saved in the EEPROM. </p>
-
-</div>
-</div>
-<a id="aa19d88ac3e94a34d9a9f1c37bea9a271" name="aa19d88ac3e94a34d9a9f1c37bea9a271"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa19d88ac3e94a34d9a9f1c37bea9a271">&#9670;&nbsp;</a></span>NUM_OF_PARAMS_MENU</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define NUM_OF_PARAMS_MENU&#160;&#160;&#160;12</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Number of parameters menu. </p>
-
-</div>
-</div>
 <a id="af48a6b6fcdc5f5019fb108d03b07a727" name="af48a6b6fcdc5f5019fb108d03b07a727"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af48a6b6fcdc5f5019fb108d03b07a727">&#9670;&nbsp;</a></span>NUM_OF_SENSORS</h2>
 
@@ -972,21 +946,6 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
       </table>
 </div><div class="memdoc">
 <p >Number of encoders. </p>
-
-</div>
-</div>
-<a id="ab6c259a53985439ee30fc3afdc12cacb" name="ab6c259a53985439ee30fc3afdc12cacb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab6c259a53985439ee30fc3afdc12cacb">&#9670;&nbsp;</a></span>NUM_OF_WR_PARAMS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define NUM_OF_WR_PARAMS&#160;&#160;&#160;3</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Number of wrist parameters saved in the EEPROM. </p>
 
 </div>
 </div>
@@ -1032,21 +991,6 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
       </table>
 </div><div class="memdoc">
 <p >Maximum value of the PWM signal. </p>
-
-</div>
-</div>
-<a id="af173143c7ad53d6f131193c77b408a20" name="af173143c7ad53d6f131193c77b408a20"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af173143c7ad53d6f131193c77b408a20">&#9670;&nbsp;</a></span>PWM_MAX_VALUE_ESC</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PWM_MAX_VALUE_ESC&#160;&#160;&#160;2985</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Maximum value of the PWM signal for ESC driver module. </p>
 
 </div>
 </div>
@@ -1271,7 +1215,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Package lenght waiting status. </p>
+<p >Package length waiting status. </p>
 
 </div>
 </div>
@@ -2106,6 +2050,29 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
 
 </div>
 </div>
+<a id="a7ac6496821c2e8b6bb2f1b7e2c5d2f25" name="a7ac6496821c2e8b6bb2f1b7e2c5d2f25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ac6496821c2e8b6bb2f1b7e2c5d2f25">&#9670;&nbsp;</a></span>PWM_MAX_VALUE_ESC</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16 PWM_MAX_VALUE_ESC</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >ADC currently configured channels. Maximum value of the PWM signal for ESC driver module. </p>
+
+</div>
+</div>
 <a id="a2aaef2bd3d366a6571f3491f4fb452dd" name="a2aaef2bd3d366a6571f3491f4fb452dd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2aaef2bd3d366a6571f3491f4fb452dd">&#9670;&nbsp;</a></span>pwm_sign</h2>
 
@@ -2125,7 +2092,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
   </tr>
 </table>
 </div><div class="memdoc">
-<p >ADC currently configured channels. Sign of pwm driven. Used to obtain current sign. </p>
+<p >Sign of pwm driven. Used to obtain current sign. </p>
 
 </div>
 </div>

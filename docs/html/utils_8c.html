@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.4"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PSoC5 firmware: utils.c File Reference</title>
+<title>Logic Board Firmware: utils.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,11 +20,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="logo_CP.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="fw_logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">PSoC5 firmware<span id="projectnumber">&#160;v. 1.11</span>
+   <div id="projectname">Logic Board Firmware<span id="projectnumber">&#160;v. 1.16</span>
    </div>
-   <div id="projectbrief">Centro E.Piaggio</div>
+   <div id="projectbrief">Cypress PSoC5 microcontroller</div>
   </td>
  </tr>
  </tbody>
@@ -78,6 +78,20 @@ $(function() {
 Include dependency graph for utils.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="utils_8c__incl.png" border="0" usemap="#autils_8c" alt=""/></div>
+<map name="autils_8c" id="autils_8c">
+<area shape="rect" title="Definition of utility functions." alt="" coords="557,5,613,32"/>
+<area shape="rect" href="utils_8h.html" title="Utility functions declaration." alt="" coords="557,80,613,107"/>
+<area shape="rect" href="globals_8h.html" title="Global definitions and macros are set in this file." alt="" coords="511,155,585,182"/>
+<area shape="rect" title=" " alt="" coords="797,230,859,257"/>
+<area shape="rect" href="_f_i_r_m_w_a_r_e___c_o_n_f_i_g_u_r_a_t_i_o_n_8h.html" title="Definitions for SoftHand and Other Devices commands, parameters and packages." alt="" coords="5,230,224,257"/>
+<area shape="rect" href="device_8h_source.html" title=" " alt="" coords="247,230,318,257"/>
+<area shape="rect" title=" " alt="" coords="342,230,405,257"/>
+<area shape="rect" title=" " alt="" coords="429,230,493,257"/>
+<area shape="rect" title=" " alt="" coords="518,230,578,257"/>
+<area shape="rect" href="commands_8h.html" title="Definitions for SoftHand commands, parameters and packages." alt="" coords="602,230,699,257"/>
+<area shape="rect" title=" " alt="" coords="723,230,773,257"/>
+<area shape="rect" title=" " alt="" coords="247,305,318,332"/>
+</map>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
@@ -97,10 +111,10 @@ Functions</h2></td></tr>
 <tr class="separator:a01d3bb6c1fd469a6c530fb296e4fe0fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b6a0b24c6bd8af032a6778166201f7e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8c.html#a0b6a0b24c6bd8af032a6778166201f7e">calibration</a> (void)</td></tr>
 <tr class="separator:a0b6a0b24c6bd8af032a6778166201f7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73109b827d86a6936e0ca361d82d6328"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8c.html#a73109b827d86a6936e0ca361d82d6328">calc_turns_fcn_SH</a> (const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1)</td></tr>
-<tr class="separator:a73109b827d86a6936e0ca361d82d6328"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7dc9eeaef91416fa3a148612ed75bf7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8c.html#ae7dc9eeaef91416fa3a148612ed75bf7">calc_turns_fcn</a> (const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1)</td></tr>
-<tr class="separator:ae7dc9eeaef91416fa3a148612ed75bf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad267605bf8d1b17c4664bacff049fddf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8c.html#ad267605bf8d1b17c4664bacff049fddf">calc_turns_fcn_SH</a> (const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1, uint8 assoc_motor)</td></tr>
+<tr class="separator:ad267605bf8d1b17c4664bacff049fddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfb2f703b279d4eaa799e0f9759ec30b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8c.html#acfb2f703b279d4eaa799e0f9759ec30b">calc_turns_fcn</a> (const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1, uint8 assoc_motor)</td></tr>
+<tr class="separator:acfb2f703b279d4eaa799e0f9759ec30b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13fca172b37b6f76749a864c1439b497"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8c.html#a13fca172b37b6f76749a864c1439b497">check_rest_position</a> (void)</td></tr>
 <tr class="separator:a13fca172b37b6f76749a864c1439b497"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4443e9a681f8c13d317110b8017136c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8c.html#a4443e9a681f8c13d317110b8017136c8">LED_control</a> (uint8 mode)</td></tr>
@@ -139,8 +153,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_motor_driver_type
 <dd>
 (C) 2017-2020 Centro "E.Piaggio". All rights reserved. </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ae7dc9eeaef91416fa3a148612ed75bf7" name="ae7dc9eeaef91416fa3a148612ed75bf7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7dc9eeaef91416fa3a148612ed75bf7">&#9670;&nbsp;</a></span>calc_turns_fcn()</h2>
+<a id="acfb2f703b279d4eaa799e0f9759ec30b" name="acfb2f703b279d4eaa799e0f9759ec30b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfb2f703b279d4eaa799e0f9759ec30b">&#9670;&nbsp;</a></span>calc_turns_fcn()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -173,7 +187,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_motor_driver_type
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>I1</em>&#160;</td>
+          <td class="paramname"><em>I1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8&#160;</td>
+          <td class="paramname"><em>assoc_motor</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -194,8 +214,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_motor_driver_type
 
 </div>
 </div>
-<a id="a73109b827d86a6936e0ca361d82d6328" name="a73109b827d86a6936e0ca361d82d6328"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73109b827d86a6936e0ca361d82d6328">&#9670;&nbsp;</a></span>calc_turns_fcn_SH()</h2>
+<a id="ad267605bf8d1b17c4664bacff049fddf" name="ad267605bf8d1b17c4664bacff049fddf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad267605bf8d1b17c4664bacff049fddf">&#9670;&nbsp;</a></span>calc_turns_fcn_SH()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -228,7 +248,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_motor_driver_type
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>I1</em>&#160;</td>
+          <td class="paramname"><em>I1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8&#160;</td>
+          <td class="paramname"><em>assoc_motor</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

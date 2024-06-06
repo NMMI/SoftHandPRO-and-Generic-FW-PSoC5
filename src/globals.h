@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2022, Centro "E.Piaggio"
+// Copyright (c) 2017-2024, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -36,10 +36,10 @@
 * \file         globals.h
 *
 * \brief        Global definitions and macros are set in this file.
-* \date         May 26th, 2022
+* \date         Jun 05th, 2024
 * \author       _Centro "E.Piaggio"_
 * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
-* \copyright    (C) 2017-2022 Centro "E.Piaggio". All rights reserved.
+* \copyright    (C) 2017-2024 Centro "E.Piaggio". All rights reserved.
 *
 */
 
@@ -66,11 +66,6 @@
 #define NUM_OF_INPUT_EMGS       2       /*!< Number of emg channels.*/
 #define NUM_OF_ADDITIONAL_EMGS  6       /*!< Number of additional emg channels.*/
 #define NUM_OF_ADC_CHANNELS_MAX (4+NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS)    
-#define NUM_OF_MS_PARAMS        2       /*!< Number of master parameters saved in the EEPROM.*/
-#define NUM_OF_FB_PARAMS        3       /*!< Number of feedback parameters saved in the EEPROM.*/
-#define NUM_OF_WR_PARAMS        3       /*!< Number of wrist parameters saved in the EEPROM.*/
-#define NUM_OF_PARAMS           (75 + NUM_OF_MS_PARAMS + NUM_OF_FB_PARAMS + NUM_OF_WR_PARAMS)      /*!< Number of parameters saved in the EEPROM.*/
-#define NUM_OF_PARAMS_MENU      12      /*!< Number of parameters menu.*/    
 #define N_IMU_MAX               5    
 #define NUM_OF_IMU_DATA         5       // accelerometers, gyroscopes, magnetometers, quaternion and temperature data
 #define N_ENCODER_LINE_MAX      2       /*!< Max number of CS lines which can contain encoders.*/
@@ -643,6 +638,7 @@ extern uint16 emg_history[SAMPLES_FOR_EMG_HISTORY][NUM_OF_INPUT_EMGS];   /*!< EM
 extern uint32 emg_history_next_idx;    /*!< Vector index of last (newest) element.*/
 
 // -----------------------------------------------------------------------------
+
 #endif
 
 //[] END OF FILE

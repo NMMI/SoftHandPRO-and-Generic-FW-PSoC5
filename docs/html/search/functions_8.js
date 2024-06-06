@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['manage_5fparam_5flist_0',['manage_param_list',['../command__processing_8c.html#a3495e73c73a56de8ec81a4a5defabf1b',1,'manage_param_list(uint16 index):&#160;command_processing.c'],['../command__processing_8h.html#a3495e73c73a56de8ec81a4a5defabf1b',1,'manage_param_list(uint16 index):&#160;command_processing.c']]],
+  ['manage_5fparam_5flist_0',['manage_param_list',['../command__processing_8c.html#aa384c747f9e073cae04c460385259c11',1,'manage_param_list(uint16 index, uint8 sendToDevice):&#160;command_processing.c'],['../command__processing_8h.html#aa384c747f9e073cae04c460385259c11',1,'manage_param_list(uint16 index, uint8 sendToDevice):&#160;command_processing.c']]],
   ['meminit_1',['memInit',['../command__processing_8c.html#a48f1d2aa212e255d0a3322e576fc8574',1,'memInit(void):&#160;command_processing.c'],['../command__processing_8h.html#afe52941f8bc21271e811fb0d9f265f38',1,'memInit():&#160;command_processing.c']]],
   ['meminit_5fairchambersfb_2',['memInit_AirChambersFb',['../command__processing_8c.html#a3dd6f5b24ace363132fc9b1883e7cd88',1,'memInit_AirChambersFb(void):&#160;command_processing.c'],['../command__processing_8h.html#adbae7e6ae9b20fa0fda42300e8384f90',1,'memInit_AirChambersFb():&#160;command_processing.c']]],
   ['meminit_5fmaster_3',['memInit_Master',['../command__processing_8c.html#a9a269059a30ccb92e4d493baa0e7c509',1,'memInit_Master(void):&#160;command_processing.c'],['../command__processing_8h.html#aa85c5dae44c0b81fa1a19c8eea0d5e8c',1,'memInit_Master():&#160;command_processing.c']]],

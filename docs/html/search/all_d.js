@@ -7,12 +7,8 @@ var searchData=
   ['not_5frevers_5fmotor_5fflag_4',['not_revers_motor_flag',['../structst__motor.html#a6525eb3c16595104c1d0fbcf0a8d1de4',1,'st_motor']]],
   ['num_5fof_5fadditional_5femgs_5',['NUM_OF_ADDITIONAL_EMGS',['../globals_8h.html#acfef2d9600a7535f4ad258c2370dd9fa',1,'globals.h']]],
   ['num_5fof_5fanalog_5finputs_6',['NUM_OF_ANALOG_INPUTS',['../globals_8c.html#ab302ef69391ec5a0b59dadb9c7d2a3ef',1,'NUM_OF_ANALOG_INPUTS():&#160;globals.c'],['../globals_8h.html#ab302ef69391ec5a0b59dadb9c7d2a3ef',1,'NUM_OF_ANALOG_INPUTS():&#160;globals.c']]],
-  ['num_5fof_5ffb_5fparams_7',['NUM_OF_FB_PARAMS',['../globals_8h.html#abb8ebf7cfe1d67e459ceef94dcb0e045',1,'globals.h']]],
+  ['num_5fof_5fbytes_7',['num_of_bytes',['../command__processing_8c.html#a8b005fb196c3a8a4d965c191692b4d72',1,'num_of_bytes(uint8 TYPE):&#160;command_processing.c'],['../command__processing_8h.html#a8b005fb196c3a8a4d965c191692b4d72',1,'num_of_bytes(uint8 TYPE):&#160;command_processing.c']]],
   ['num_5fof_5finput_5femgs_8',['NUM_OF_INPUT_EMGS',['../globals_8h.html#a21ab5f0a6e4cb48bd320177c4f7aa078',1,'globals.h']]],
   ['num_5fof_5fmotors_9',['NUM_OF_MOTORS',['../globals_8h.html#a39ac50737c1ee7d5b723b2597fdf6f26',1,'globals.h']]],
-  ['num_5fof_5fms_5fparams_10',['NUM_OF_MS_PARAMS',['../globals_8h.html#aecd556b3ea0656fe9e059814426de5f7',1,'globals.h']]],
-  ['num_5fof_5fparams_11',['NUM_OF_PARAMS',['../globals_8h.html#aab4f4a0ece20c4bc27152bd72926d89c',1,'globals.h']]],
-  ['num_5fof_5fparams_5fmenu_12',['NUM_OF_PARAMS_MENU',['../globals_8h.html#aa19d88ac3e94a34d9a9f1c37bea9a271',1,'globals.h']]],
-  ['num_5fof_5fsensors_13',['NUM_OF_SENSORS',['../globals_8h.html#af48a6b6fcdc5f5019fb108d03b07a727',1,'globals.h']]],
-  ['num_5fof_5fwr_5fparams_14',['NUM_OF_WR_PARAMS',['../globals_8h.html#ab6c259a53985439ee30fc3afdc12cacb',1,'globals.h']]]
+  ['num_5fof_5fsensors_10',['NUM_OF_SENSORS',['../globals_8h.html#af48a6b6fcdc5f5019fb108d03b07a727',1,'globals.h']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.4"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PSoC5 firmware: utils.h File Reference</title>
+<title>Logic Board Firmware: utils.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,11 +20,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="logo_CP.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="fw_logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">PSoC5 firmware<span id="projectnumber">&#160;v. 1.11</span>
+   <div id="projectname">Logic Board Firmware<span id="projectnumber">&#160;v. 1.16</span>
    </div>
-   <div id="projectbrief">Centro E.Piaggio</div>
+   <div id="projectbrief">Cypress PSoC5 microcontroller</div>
   </td>
  </tr>
  </tbody>
@@ -78,11 +78,37 @@ $(function() {
 Include dependency graph for utils.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="utils_8h__incl.png" border="0" usemap="#autils_8h" alt=""/></div>
+<map name="autils_8h" id="autils_8h">
+<area shape="rect" title="Utility functions declaration." alt="" coords="557,5,613,32"/>
+<area shape="rect" href="globals_8h.html" title="Global definitions and macros are set in this file." alt="" coords="511,80,585,107"/>
+<area shape="rect" title=" " alt="" coords="797,155,859,182"/>
+<area shape="rect" href="_f_i_r_m_w_a_r_e___c_o_n_f_i_g_u_r_a_t_i_o_n_8h.html" title="Definitions for SoftHand and Other Devices commands, parameters and packages." alt="" coords="5,155,224,182"/>
+<area shape="rect" href="device_8h_source.html" title=" " alt="" coords="247,155,318,182"/>
+<area shape="rect" title=" " alt="" coords="342,155,405,182"/>
+<area shape="rect" title=" " alt="" coords="429,155,493,182"/>
+<area shape="rect" title=" " alt="" coords="518,155,578,182"/>
+<area shape="rect" href="commands_8h.html" title="Definitions for SoftHand commands, parameters and packages." alt="" coords="602,155,699,182"/>
+<area shape="rect" title=" " alt="" coords="723,155,773,182"/>
+<area shape="rect" title=" " alt="" coords="247,230,318,257"/>
+</map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="utils_8h__dep__incl.png" border="0" usemap="#autils_8hdep" alt=""/></div>
+<map name="autils_8hdep" id="autils_8hdep">
+<area shape="rect" title="Utility functions declaration." alt="" coords="382,5,439,32"/>
+<area shape="rect" href="_i_m_u__functions_8h.html" title="Definition of IMU module functions." alt="" coords="256,80,373,107"/>
+<area shape="rect" href="command__processing_8h.html" title="Received commands processing functions" alt="" coords="283,155,442,182"/>
+<area shape="rect" href="interruptions_8h.html" title="Interruptions header file." alt="" coords="5,305,109,332"/>
+<area shape="rect" href="main_8c.html" title="Firmware main file." alt="" coords="442,380,502,407"/>
+<area shape="rect" href="utils_8c.html" title="Definition of utility functions." alt="" coords="610,80,667,107"/>
+<area shape="rect" href="_i_m_u__functions_8c.html" title="Implementation of IMU module functions." alt="" coords="143,155,259,182"/>
+<area shape="rect" href="_s_d___r_t_c__functions_8h.html" title="Definition of SD and RTC module functions." alt="" coords="291,230,434,257"/>
+<area shape="rect" href="command__processing_8c.html" title="Command processing functions." alt="" coords="107,230,266,257"/>
+<area shape="rect" href="_s_d___r_t_c__functions_8c.html" title="Implementation of SD and RTC module functions." alt="" coords="240,305,383,332"/>
+<area shape="rect" href="interruptions_8c.html" title="Interruption handling and firmware core functions." alt="" coords="5,380,109,407"/>
+</map>
 </div>
 </div>
 <p><a href="utils_8h_source.html">Go to the source code of this file.</a></p>
@@ -109,10 +135,10 @@ Functions</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Utility functions</div></td></tr>
 <tr class="memitem:a01d3bb6c1fd469a6c530fb296e4fe0fe"><td class="memItemLeft" align="right" valign="top">uint32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a01d3bb6c1fd469a6c530fb296e4fe0fe">my_mod</a> (int32 val, int32 divisor)</td></tr>
 <tr class="separator:a01d3bb6c1fd469a6c530fb296e4fe0fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73109b827d86a6936e0ca361d82d6328"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a73109b827d86a6936e0ca361d82d6328">calc_turns_fcn_SH</a> (const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1)</td></tr>
-<tr class="separator:a73109b827d86a6936e0ca361d82d6328"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7dc9eeaef91416fa3a148612ed75bf7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#ae7dc9eeaef91416fa3a148612ed75bf7">calc_turns_fcn</a> (const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1)</td></tr>
-<tr class="separator:ae7dc9eeaef91416fa3a148612ed75bf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad267605bf8d1b17c4664bacff049fddf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#ad267605bf8d1b17c4664bacff049fddf">calc_turns_fcn_SH</a> (const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1, uint8 assoc_motor)</td></tr>
+<tr class="separator:ad267605bf8d1b17c4664bacff049fddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfb2f703b279d4eaa799e0f9759ec30b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#acfb2f703b279d4eaa799e0f9759ec30b">calc_turns_fcn</a> (const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1, uint8 assoc_motor)</td></tr>
+<tr class="separator:acfb2f703b279d4eaa799e0f9759ec30b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d9dc88d64cd1f74a30fd0e404a3bb31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a6d9dc88d64cd1f74a30fd0e404a3bb31">calibration</a> ()</td></tr>
 <tr class="separator:a6d9dc88d64cd1f74a30fd0e404a3bb31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cb024aea0170c085d18670f5a851df8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a2cb024aea0170c085d18670f5a851df8">check_rest_position</a> ()</td></tr>
@@ -218,8 +244,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_motor_driver_type
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ae7dc9eeaef91416fa3a148612ed75bf7" name="ae7dc9eeaef91416fa3a148612ed75bf7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7dc9eeaef91416fa3a148612ed75bf7">&#9670;&nbsp;</a></span>calc_turns_fcn()</h2>
+<a id="acfb2f703b279d4eaa799e0f9759ec30b" name="acfb2f703b279d4eaa799e0f9759ec30b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfb2f703b279d4eaa799e0f9759ec30b">&#9670;&nbsp;</a></span>calc_turns_fcn()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -252,7 +278,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_motor_driver_type
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>I1</em>&#160;</td>
+          <td class="paramname"><em>I1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8&#160;</td>
+          <td class="paramname"><em>assoc_motor</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -273,8 +305,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_motor_driver_type
 
 </div>
 </div>
-<a id="a73109b827d86a6936e0ca361d82d6328" name="a73109b827d86a6936e0ca361d82d6328"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73109b827d86a6936e0ca361d82d6328">&#9670;&nbsp;</a></span>calc_turns_fcn_SH()</h2>
+<a id="ad267605bf8d1b17c4664bacff049fddf" name="ad267605bf8d1b17c4664bacff049fddf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad267605bf8d1b17c4664bacff049fddf">&#9670;&nbsp;</a></span>calc_turns_fcn_SH()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -307,7 +339,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_motor_driver_type
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>I1</em>&#160;</td>
+          <td class="paramname"><em>I1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8&#160;</td>
+          <td class="paramname"><em>assoc_motor</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

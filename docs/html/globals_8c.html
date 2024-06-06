@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.4"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PSoC5 firmware: globals.c File Reference</title>
+<title>Logic Board Firmware: globals.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,11 +20,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="logo_CP.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="fw_logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">PSoC5 firmware<span id="projectnumber">&#160;v. 1.11</span>
+   <div id="projectname">Logic Board Firmware<span id="projectnumber">&#160;v. 1.16</span>
    </div>
-   <div id="projectbrief">Centro E.Piaggio</div>
+   <div id="projectbrief">Cypress PSoC5 microcontroller</div>
   </td>
  </tr>
  </tbody>
@@ -77,6 +77,19 @@ $(function() {
 Include dependency graph for globals.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="globals_8c__incl.png" border="0" usemap="#aglobals_8c" alt=""/></div>
+<map name="aglobals_8c" id="aglobals_8c">
+<area shape="rect" title="Global variables." alt="" coords="467,5,541,32"/>
+<area shape="rect" href="globals_8h.html" title="Global definitions and macros are set in this file." alt="" coords="467,80,541,107"/>
+<area shape="rect" href="_f_i_r_m_w_a_r_e___c_o_n_f_i_g_u_r_a_t_i_o_n_8h.html" title="Definitions for SoftHand and Other Devices commands, parameters and packages." alt="" coords="5,155,224,182"/>
+<area shape="rect" href="device_8h_source.html" title=" " alt="" coords="247,155,318,182"/>
+<area shape="rect" title=" " alt="" coords="342,155,405,182"/>
+<area shape="rect" title=" " alt="" coords="429,155,493,182"/>
+<area shape="rect" title=" " alt="" coords="518,155,578,182"/>
+<area shape="rect" title=" " alt="" coords="603,155,664,182"/>
+<area shape="rect" href="commands_8h.html" title="Definitions for SoftHand commands, parameters and packages." alt="" coords="688,155,784,182"/>
+<area shape="rect" title=" " alt="" coords="809,155,858,182"/>
+<area shape="rect" title=" " alt="" coords="247,230,318,257"/>
+</map>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -176,6 +189,8 @@ int16&#160;</td><td class="memItemRight" valign="bottom"><b>ADC_buf</b> [NUM_OF_
 <tr class="separator:a2fbad668712e226379890e1debdc9ff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab302ef69391ec5a0b59dadb9c7d2a3ef"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#ab302ef69391ec5a0b59dadb9c7d2a3ef">NUM_OF_ANALOG_INPUTS</a> = 4</td></tr>
 <tr class="separator:ab302ef69391ec5a0b59dadb9c7d2a3ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ac6496821c2e8b6bb2f1b7e2c5d2f25"><td class="memItemLeft" align="right" valign="top">uint16&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#a7ac6496821c2e8b6bb2f1b7e2c5d2f25">PWM_MAX_VALUE_ESC</a> = 100</td></tr>
+<tr class="separator:a7ac6496821c2e8b6bb2f1b7e2c5d2f25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2aaef2bd3d366a6571f3491f4fb452dd"><td class="memItemLeft" align="right" valign="top">int8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#a2aaef2bd3d366a6571f3491f4fb452dd">pwm_sign</a> [<a class="el" href="globals_8h.html#a39ac50737c1ee7d5b723b2597fdf6f26">NUM_OF_MOTORS</a>]</td></tr>
 <tr class="separator:a2aaef2bd3d366a6571f3491f4fb452dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1bb506bc73f01ca200da713384fefe8"><td class="memItemLeft" align="right" valign="top"><a id="af1bb506bc73f01ca200da713384fefe8" name="af1bb506bc73f01ca200da713384fefe8"></a>
@@ -216,6 +231,12 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>sdEMGHFile</b> [100] 
 <tr class="memitem:aa1a3291d528234a8a43246186d44e375"><td class="memItemLeft" align="right" valign="top"><a id="aa1a3291d528234a8a43246186d44e375" name="aa1a3291d528234a8a43246186d44e375"></a>
 char&#160;</td><td class="memItemRight" valign="bottom"><b>sdR01File</b> [100] = &quot;\\R01_Summary.csv&quot;</td></tr>
 <tr class="separator:aa1a3291d528234a8a43246186d44e375"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a194ca44e648cdac10e9edae2c2fdba43"><td class="memItemLeft" align="right" valign="top"><a id="a194ca44e648cdac10e9edae2c2fdba43" name="a194ca44e648cdac10e9edae2c2fdba43"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><b>longPkgP</b> = 0</td></tr>
+<tr class="separator:a194ca44e648cdac10e9edae2c2fdba43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b0d76de2cb65e976d631386166fc170"><td class="memItemLeft" align="right" valign="top"><a id="a9b0d76de2cb65e976d631386166fc170" name="a9b0d76de2cb65e976d631386166fc170"></a>
+uint16&#160;</td><td class="memItemRight" valign="bottom"><b>longPkgSize</b> = 0</td></tr>
+<tr class="separator:a9b0d76de2cb65e976d631386166fc170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0141cd61d6f4215bfdfffbdbe612eb1d"><td class="memItemLeft" align="right" valign="top"><a id="a0141cd61d6f4215bfdfffbdbe612eb1d" name="a0141cd61d6f4215bfdfffbdbe612eb1d"></a>
 uint8&#160;</td><td class="memItemRight" valign="bottom"><b>btEnabled</b> = FALSE</td></tr>
 <tr class="separator:a0141cd61d6f4215bfdfffbdbe612eb1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -267,11 +288,11 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Global variables. </p>
-<dl class="section date"><dt>Date</dt><dd>March 20th, 2020 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Jun 05th, 2024 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd><em>Centro "E.Piaggio"</em> </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>(C) 2012-2016 qbrobotics. All rights reserved. </dd>
 <dd>
-(C) 2017-2020 Centro "E.Piaggio". All rights reserved. </dd></dl>
+(C) 2017-2024 Centro "E.Piaggio". All rights reserved. </dd></dl>
 </div><h2 class="groupheader">Variable Documentation</h2>
 <a id="ab4765549a3f6990d35f3d0740263b254" name="ab4765549a3f6990d35f3d0740263b254"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab4765549a3f6990d35f3d0740263b254">&#9670;&nbsp;</a></span>battery_low_SoC</h2>
@@ -738,6 +759,21 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
 
 </div>
 </div>
+<a id="a7ac6496821c2e8b6bb2f1b7e2c5d2f25" name="a7ac6496821c2e8b6bb2f1b7e2c5d2f25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ac6496821c2e8b6bb2f1b7e2c5d2f25">&#9670;&nbsp;</a></span>PWM_MAX_VALUE_ESC</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16 PWM_MAX_VALUE_ESC = 100</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >ADC currently configured channels. Maximum value of the PWM signal for ESC driver module. </p>
+
+</div>
+</div>
 <a id="a2aaef2bd3d366a6571f3491f4fb452dd" name="a2aaef2bd3d366a6571f3491f4fb452dd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2aaef2bd3d366a6571f3491f4fb452dd">&#9670;&nbsp;</a></span>pwm_sign</h2>
 
@@ -749,7 +785,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
         </tr>
       </table>
 </div><div class="memdoc">
-<p >ADC currently configured channels. Sign of pwm driven. Used to obtain current sign. </p>
+<p >Sign of pwm driven. Used to obtain current sign. </p>
 
 </div>
 </div>

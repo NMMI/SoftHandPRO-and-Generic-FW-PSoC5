@@ -9,6 +9,7 @@ var searchData=
   ['sh_5fn1_6',['SH_N1',['../globals_8h.html#af550b25a7e09356fe9fac2773725fa53',1,'globals.h']]],
   ['sh_5fn2_7',['SH_N2',['../globals_8h.html#a20594cbd96a48f93b6b3e0bb8590d15e',1,'globals.h']]],
   ['sign_8',['SIGN',['../utils_8h.html#a8c7db0cde6d591a5abad279ba92ef021',1,'utils.h']]],
-  ['state_5factive_9',['STATE_ACTIVE',['../globals_8h.html#a695dd637b37252af2a517ba8bae8d2c4',1,'globals.h']]],
-  ['state_5finactive_10',['STATE_INACTIVE',['../globals_8h.html#a5dcbfcad8d6ba73bbf6fe2d08f3e3ae4',1,'globals.h']]]
+  ['single_5fparam_5freading_9',['SINGLE_PARAM_READING',['../commands_8h.html#a925136b42122931eb075a850e25a5e60',1,'commands.h']]],
+  ['state_5factive_10',['STATE_ACTIVE',['../globals_8h.html#a695dd637b37252af2a517ba8bae8d2c4',1,'globals.h']]],
+  ['state_5finactive_11',['STATE_INACTIVE',['../globals_8h.html#a5dcbfcad8d6ba73bbf6fe2d08f3e3ae4',1,'globals.h']]]
 ];

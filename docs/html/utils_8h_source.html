@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.4"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PSoC5 firmware: utils.h Source File</title>
+<title>Logic Board Firmware: utils.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,11 +20,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="logo_CP.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="fw_logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">PSoC5 firmware<span id="projectnumber">&#160;v. 1.11</span>
+   <div id="projectname">Logic Board Firmware<span id="projectnumber">&#160;v. 1.16</span>
    </div>
-   <div id="projectbrief">Centro E.Piaggio</div>
+   <div id="projectbrief">Cypress PSoC5 microcontroller</div>
   </td>
  </tr>
  </tbody>
@@ -122,9 +122,9 @@ $(function() {
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>uint32 <a class="code hl_function" href="utils_8h.html#a01d3bb6c1fd469a6c530fb296e4fe0fe">my_mod</a>(int32 val, int32 divisor);</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="keywordtype">int</span> <a class="code hl_function" href="utils_8h.html#a73109b827d86a6936e0ca361d82d6328">calc_turns_fcn_SH</a>(<span class="keyword">const</span> int32 pos1, <span class="keyword">const</span> int32 pos2, <span class="keyword">const</span> <span class="keywordtype">int</span> N1, <span class="keyword">const</span> <span class="keywordtype">int</span> N2, <span class="keyword">const</span> <span class="keywordtype">int</span> I1);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="keywordtype">int</span> <a class="code hl_function" href="utils_8h.html#ad267605bf8d1b17c4664bacff049fddf">calc_turns_fcn_SH</a>(<span class="keyword">const</span> int32 pos1, <span class="keyword">const</span> int32 pos2, <span class="keyword">const</span> <span class="keywordtype">int</span> N1, <span class="keyword">const</span> <span class="keywordtype">int</span> N2, <span class="keyword">const</span> <span class="keywordtype">int</span> I1, uint8 assoc_motor);</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="keywordtype">int</span> <a class="code hl_function" href="utils_8h.html#ae7dc9eeaef91416fa3a148612ed75bf7">calc_turns_fcn</a>(<span class="keyword">const</span> int32 pos1, <span class="keyword">const</span> int32 pos2, <span class="keyword">const</span> <span class="keywordtype">int</span> N1, <span class="keyword">const</span> <span class="keywordtype">int</span> N2, <span class="keyword">const</span> <span class="keywordtype">int</span> I1);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="keywordtype">int</span> <a class="code hl_function" href="utils_8h.html#acfb2f703b279d4eaa799e0f9759ec30b">calc_turns_fcn</a>(<span class="keyword">const</span> int32 pos1, <span class="keyword">const</span> int32 pos2, <span class="keyword">const</span> <span class="keywordtype">int</span> N1, <span class="keyword">const</span> <span class="keywordtype">int</span> N2, <span class="keyword">const</span> <span class="keywordtype">int</span> I1, uint8 assoc_motor);</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="keywordtype">void</span> <a class="code hl_function" href="utils_8h.html#a6d9dc88d64cd1f74a30fd0e404a3bb31">calibration</a>();</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
@@ -152,17 +152,17 @@ $(function() {
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="comment">/* [] END OF FILE */</span></div>
 <div class="ttc" id="aglobals_8h_html"><div class="ttname"><a href="globals_8h.html">globals.h</a></div><div class="ttdoc">Global definitions and macros are set in this file.</div></div>
-<div class="ttc" id="astructst__filter_html"><div class="ttname"><a href="structst__filter.html">st_filter</a></div><div class="ttdoc">Filter structure.</div><div class="ttdef"><b>Definition:</b> globals.h:508</div></div>
+<div class="ttc" id="astructst__filter_html"><div class="ttname"><a href="structst__filter.html">st_filter</a></div><div class="ttdoc">Filter structure.</div><div class="ttdef"><b>Definition:</b> globals.h:505</div></div>
 <div class="ttc" id="autils_8h_html_a01d3bb6c1fd469a6c530fb296e4fe0fe"><div class="ttname"><a href="utils_8h.html#a01d3bb6c1fd469a6c530fb296e4fe0fe">my_mod</a></div><div class="ttdeci">uint32 my_mod(int32 val, int32 divisor)</div><div class="ttdef"><b>Definition:</b> utils.c:102</div></div>
-<div class="ttc" id="autils_8h_html_a2640efff1e7b6f9c11615048ba43b0fd"><div class="ttname"><a href="utils_8h.html#a2640efff1e7b6f9c11615048ba43b0fd">reset_counters</a></div><div class="ttdeci">void reset_counters()</div><div class="ttdef"><b>Definition:</b> utils.c:501</div></div>
+<div class="ttc" id="autils_8h_html_a2640efff1e7b6f9c11615048ba43b0fd"><div class="ttname"><a href="utils_8h.html#a2640efff1e7b6f9c11615048ba43b0fd">reset_counters</a></div><div class="ttdeci">void reset_counters()</div><div class="ttdef"><b>Definition:</b> utils.c:527</div></div>
 <div class="ttc" id="autils_8h_html_a284a90898751a15b0303f688f19948b9"><div class="ttname"><a href="utils_8h.html#a284a90898751a15b0303f688f19948b9">curr_estim</a></div><div class="ttdeci">int32 curr_estim(uint8 idx, int32 pos, int32 vel, int32 acc)</div><div class="ttdef"><b>Definition:</b> utils.c:51</div></div>
-<div class="ttc" id="autils_8h_html_a2cb024aea0170c085d18670f5a851df8"><div class="ttname"><a href="utils_8h.html#a2cb024aea0170c085d18670f5a851df8">check_rest_position</a></div><div class="ttdeci">void check_rest_position()</div><div class="ttdef"><b>Definition:</b> utils.c:218</div></div>
-<div class="ttc" id="autils_8h_html_a4443e9a681f8c13d317110b8017136c8"><div class="ttname"><a href="utils_8h.html#a4443e9a681f8c13d317110b8017136c8">LED_control</a></div><div class="ttdeci">void LED_control(uint8 mode)</div><div class="ttdef"><b>Definition:</b> utils.c:314</div></div>
+<div class="ttc" id="autils_8h_html_a2cb024aea0170c085d18670f5a851df8"><div class="ttname"><a href="utils_8h.html#a2cb024aea0170c085d18670f5a851df8">check_rest_position</a></div><div class="ttdeci">void check_rest_position()</div><div class="ttdef"><b>Definition:</b> utils.c:241</div></div>
+<div class="ttc" id="autils_8h_html_a4443e9a681f8c13d317110b8017136c8"><div class="ttname"><a href="utils_8h.html#a4443e9a681f8c13d317110b8017136c8">LED_control</a></div><div class="ttdeci">void LED_control(uint8 mode)</div><div class="ttdef"><b>Definition:</b> utils.c:337</div></div>
 <div class="ttc" id="autils_8h_html_a6d9dc88d64cd1f74a30fd0e404a3bb31"><div class="ttname"><a href="utils_8h.html#a6d9dc88d64cd1f74a30fd0e404a3bb31">calibration</a></div><div class="ttdeci">void calibration()</div><div class="ttdef"><b>Definition:</b> utils.c:116</div></div>
-<div class="ttc" id="autils_8h_html_a73109b827d86a6936e0ca361d82d6328"><div class="ttname"><a href="utils_8h.html#a73109b827d86a6936e0ca361d82d6328">calc_turns_fcn_SH</a></div><div class="ttdeci">int calc_turns_fcn_SH(const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1)</div><div class="ttdef"><b>Definition:</b> utils.c:169</div></div>
 <div class="ttc" id="autils_8h_html_aa404d0e01f2ab2318d323c7ef8fa6c5a"><div class="ttname"><a href="utils_8h.html#aa404d0e01f2ab2318d323c7ef8fa6c5a">filter</a></div><div class="ttdeci">int32 filter(int32 value, struct st_filter *f)</div><div class="ttdef"><b>Definition:</b> utils.c:87</div></div>
-<div class="ttc" id="autils_8h_html_aadf16dc795c83780e5b9eb5c2c5680b0"><div class="ttname"><a href="utils_8h.html#aadf16dc795c83780e5b9eb5c2c5680b0">update_EMG_history</a></div><div class="ttdeci">void update_EMG_history()</div><div class="ttdef"><b>Definition:</b> utils.c:563</div></div>
-<div class="ttc" id="autils_8h_html_ae7dc9eeaef91416fa3a148612ed75bf7"><div class="ttname"><a href="utils_8h.html#ae7dc9eeaef91416fa3a148612ed75bf7">calc_turns_fcn</a></div><div class="ttdeci">int calc_turns_fcn(const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1)</div><div class="ttdef"><b>Definition:</b> utils.c:200</div></div>
+<div class="ttc" id="autils_8h_html_aadf16dc795c83780e5b9eb5c2c5680b0"><div class="ttname"><a href="utils_8h.html#aadf16dc795c83780e5b9eb5c2c5680b0">update_EMG_history</a></div><div class="ttdeci">void update_EMG_history()</div><div class="ttdef"><b>Definition:</b> utils.c:589</div></div>
+<div class="ttc" id="autils_8h_html_acfb2f703b279d4eaa799e0f9759ec30b"><div class="ttname"><a href="utils_8h.html#acfb2f703b279d4eaa799e0f9759ec30b">calc_turns_fcn</a></div><div class="ttdeci">int calc_turns_fcn(const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1, uint8 assoc_motor)</div><div class="ttdef"><b>Definition:</b> utils.c:223</div></div>
+<div class="ttc" id="autils_8h_html_ad267605bf8d1b17c4664bacff049fddf"><div class="ttname"><a href="utils_8h.html#ad267605bf8d1b17c4664bacff049fddf">calc_turns_fcn_SH</a></div><div class="ttdeci">int calc_turns_fcn_SH(const int32 pos1, const int32 pos2, const int N1, const int N2, const int I1, uint8 assoc_motor)</div><div class="ttdef"><b>Definition:</b> utils.c:169</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

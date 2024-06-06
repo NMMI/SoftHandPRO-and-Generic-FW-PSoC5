@@ -1,7 +1,7 @@
 // ----------------------------------------------------------------------------
 // BSD 3-Clause License
 
-// Copyright (c) 2019-2022, Centro "E.Piaggio"
+// Copyright (c) 2019-2024, Centro "E.Piaggio"
 // All rights reserved.
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -35,9 +35,9 @@
  *
  *  \brief      Definitions for SoftHand and Other Devices commands, parameters and packages.
  *
- *  \date       May 26th, 2022
+ *  \date       Jun 05th, 2024
  *  \author     _Centro "E.Piaggio"_
- *  \copyright  (C) 2019-2022 Centro "E.Piaggio". All rights reserved.
+ *  \copyright  (C) 2019-2024 Centro "E.Piaggio". All rights reserved.
  *  \details
  *  This file is included in the firmware, in its libraries and
  *  applications. It contains all definitions that are necessary to discriminate the right firmware.
@@ -59,22 +59,24 @@
 //====================================================================================
 //====================================================================================
     
+#define VERSION         "v. 1.16"    
+    
 // Macro related to different firmware configurations
 #ifdef SOFTHAND_FW
-    #define VERSION                 "SoftHand PRO firmware v. 1.15 (PSoC5)"    
+    #define FW_NAME                 "SoftHand PRO firmware"    
     
     #ifdef SH_XPRIZE            // SoftHand for AlterEgo XPRIZE version
-        #define VERSION             "SoftHand AlterEgo XPRIZE v. 1.15 (PSoC5)"
+        #define FW_NAME             "SoftHand AlterEgo XPRIZE"
     #endif
 #else
     #ifdef GENERIC_FW
-        #define VERSION                 "Generic firmware v. 1.15 (PSoC5)"
+        #define FW_NAME                 "Generic firmware (PSoC5)"
     #else   
         #define MASTER_FW
         #ifdef AIR_CHAMBERS_FB_FW
-            #define VERSION                 "Air Chambers Haptic Feedback firmware v. 1.15 (PSoC5) - Master configuration"
+            #define FW_NAME                 "Air Chambers Haptic Feedback firmware - Master configuration"
         #else //OTBK_ACT_WRIST_MS_FW
-            #define VERSION                 "Ottobock Active Wrist firmware v. 1.15 (PSoC5) - Master configuration"
+            #define FW_NAME                 "Ottobock Active Wrist firmware - Master configuration"
         #endif
     #endif
 #endif      
@@ -82,48 +84,6 @@
 // TODO
 // SOFTHAND_PRO_2MOT firmware at the moment is just for USB control
 // To be implemented: rest position, usage counters and EMG behavior
-
-
-// Default number of parameters configuration
-// Handle multiple configuration with mutually exclusive macro preprocessor defines
-// Note: an if..else structure is preferred, but with a large number of exclusive configuration this is also good
-#ifdef SOFTHAND_FW          
-    #ifdef SH_XPRIZE
-        #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - 35 - NUM_OF_WR_PARAMS - NUM_OF_MS_PARAMS - NUM_OF_FB_PARAMS)  // Number of parameters saved in the EEPROM for SOFTHAND FIRMWARE
-                                                              // All parameters except: additional first motor parameters (2), second motor configuration and parameters (23),
-                                                              // Encoder configuration (2), ADC configuration (2), Joystick configuration (3), Read additional ADC port, 
-                                                              // Record EMG on SD, Device type, Wrist parameters (3), Master parameters (2), Feedback parameters (3)
-    #else
-        #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - 39 - NUM_OF_WR_PARAMS - NUM_OF_MS_PARAMS - NUM_OF_FB_PARAMS)  // Number of parameters saved in the EEPROM for SOFTHAND FIRMWARE
-                                                              // All parameters except: additional first motor parameters (6), second motor configuration and parameters (23),
-                                                              // Encoder configuration (2), ADC configuration (2), Joystick configuration (3), Read additional ADC port, 
-                                                              // Record EMG on SD, Device type, Wrist parameters (3), Master parameters (2), Feedback parameters (3)
-    #endif
-    #define NUM_OF_DEV_PARAM_MENUS      (NUM_OF_PARAMS_MENU - 4) // Number of parameters menu for SOFTHAND FIRMWARE
-                                                                 // All menus except: Motor driver type, Device type, Wrist mode, Wrist direction
-#endif
-#ifdef GENERIC_FW
-    #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - 1 - NUM_OF_MS_PARAMS - NUM_OF_FB_PARAMS)  // Number of parameters saved in the EEPROM for GENERIC FIRMWARE
-                                                             // All parameters except: Wrist parameters (only 1), Master parameters (2), Feedback parameters (3)
-    #define NUM_OF_DEV_PARAM_MENUS      (NUM_OF_PARAMS_MENU - 1)  // Number of parameters menu
-                                                                  // All menus except: Wrist direction
-#endif
-//#ifdef MASTER_FW (Not necessary statements for the moment)
-//    #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - 1 - NUM_OF_FB_PARAMS)  // Number of parameters saved in the EEPROM for MASTER FIRMWARE
-//                                                             // All parameters except:  Wrist parameters (only 1), Feedback parameters (3)
-//    #define NUM_OF_DEV_PARAM_MENUS      NUM_OF_PARAMS_MENU   // Number of parameters menu
-//#endif
-#ifdef OTBK_ACT_WRIST_MS_FW
-    #define NUM_OF_DEV_PARAMS           (NUM_OF_PARAMS - NUM_OF_FB_PARAMS)  // Number of parameters saved in the EEPROM for MASTER FIRMWARE
-                                                                            // All parameters except: Feedback parameters (3)
-    #define NUM_OF_DEV_PARAM_MENUS      NUM_OF_PARAMS_MENU     // Number of parameters menu
-#endif
-#ifdef AIR_CHAMBERS_FB_FW
-    #define NUM_OF_DEV_PARAMS           NUM_OF_PARAMS          // Number of parameters saved in the EEPROM for AIR_CHAMBERS_FB_FW FIRMWARE
-                                                               // All parameters except: Wrist parameters (3)
-    #define NUM_OF_DEV_PARAM_MENUS      NUM_OF_PARAMS_MENU     // Number of parameters menu
-#endif
-
 
 // Default number of IMUs configuration
 #if defined(SOFTHAND_FW) && !defined(SH_XPRIZE)

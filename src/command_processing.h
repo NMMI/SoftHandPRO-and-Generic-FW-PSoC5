@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2022, Centro "E.Piaggio"
+// Copyright (c) 2017-2024, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -36,10 +36,10 @@
  * \file        command_processing.h
  *
  * \brief       Received commands processing functions             
- * \date        May 26th, 2022
- * \author      _Centro "E.Piaggio"_
- * \copyright   (C) 2012-2016 qbrobotics. All rights reserved.
- * \copyright   (C) 2017-2022 Centro "E.Piaggio". All rights reserved.
+ * \date         Jun 05th, 2024
+ * \author       _Centro "E.Piaggio"_
+ * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
+ * \copyright    (C) 2017-2024 Centro "E.Piaggio". All rights reserved.
  * \details
  *
  *  This file contains all the definitions of the functions used to 
@@ -60,6 +60,26 @@
 #include "utils.h"
 #include "commands.h"
 #include <stdio.h>
+
+#define N_CHOICES   10
+    
+//=================================================     parameters structure
+
+struct parameter{
+    uint8* VAR_P;           
+    uint8 TYPES;            
+    uint8 NUM_ITEMS;                    
+    const char* PARAM_STR;   
+    uint8 MENU;
+    uint8 NUM_STR;
+    uint8 custom;
+};
+
+struct menu{
+    uint8 name;
+    uint8 reset;           
+    const char* choice[N_CHOICES];
+};
 
 //==============================================================================
 //                                                          function definitions
@@ -199,6 +219,12 @@ void    commWriteID  (uint8 *packet_data, uint16 packet_length, uint8 id);
 /** \name Memory management functions */
 /** \{ */
 
+//============================================================ num_of_bytes
+/** This function compute the size of data (in bytes) according to its type
+ *
+**/
+uint8 num_of_bytes          (uint8 TYPE);
+
 //============================================================  manage_param_list
 /** This function, depending on the \ref index received, gets the list of
  *  parameters with their values and sends them to user or sets a parameter
@@ -215,10 +241,7 @@ void manage_param_list 		(uint16 index, uint8 sendToDevice);
  *  parameters with their values.
  *
 **/
-void get_param_list 		(uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS], 
-                             uint8 NUM_ITEMS[NUM_OF_PARAMS], uint8 NUM_STRUCT[NUM_OF_PARAMS],
-                             uint8* NUM_MENU, const char* PARAMS_STR[NUM_OF_PARAMS], 
-                             uint8 CUSTOM_PARAM_SET[NUM_OF_PARAMS], const char* MENU_STR[NUM_OF_PARAMS_MENU], uint8 sendToDevice);
+void get_param_list 		(uint8 n_param, uint8 n_menus, const struct parameter P[], const struct menu M[], uint8 sendToDevice);
 
 //============================================================  set_custom_param
 /** This function, depending on the \ref index received, sets the specific
@@ -228,7 +251,7 @@ void get_param_list 		(uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS],
  *	\param index 			The index of the parameters to be setted.
  *
 **/
-void set_custom_param 		(uint16 index);
+void set_custom_param 		(uint16 index, const struct parameter P[]);
 
 //============================================================  get_IMU_param_list
 /** This function, depending on the \ref index received, gets the list of

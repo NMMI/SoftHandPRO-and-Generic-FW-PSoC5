@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2020, Centro "E.Piaggio"
+// Copyright (c) 2017-2024, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -38,10 +38,10 @@
 *
 
 * \brief        Command processing functions.
-* \date         March 20th, 2020
+* \date         Jun 05th, 2024
 * \author       _Centro "E.Piaggio"_
 * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
-* \copyright    (C) 2017-2020 Centro "E.Piaggio". All rights reserved.
+* \copyright    (C) 2017-2024 Centro "E.Piaggio". All rights reserved.
 */
 //=================================================================     includes
 #include "command_processing.h"
@@ -423,538 +423,318 @@ void infoGet(uint16 info_type) {
 //==============================================================================
 //                                                                GET PARAM LIST
 //==============================================================================
-
-void get_param_list (uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS], 
-                     uint8 NUM_ITEMS[NUM_OF_PARAMS], uint8 NUM_STRUCT[NUM_OF_PARAMS],
-                     uint8* NUM_MENU, const char* PARAMS_STR[NUM_OF_PARAMS], 
-                     uint8 CUSTOM_PARAM_GET[NUM_OF_PARAMS], const char* MENU_STR[NUM_OF_PARAMS_MENU], uint8 sendToDevice){
-    
-    uint8 packet_data[PARAM_BYTE_SLOT*NUM_OF_DEV_PARAMS + PARAM_MENU_SLOT*NUM_OF_DEV_PARAM_MENUS + PARAM_BYTE_SLOT] = "";      //50*NUM_OF_DEV_PARAMS + 150*NUM_OF_DEV_PARAM_MENUS
-    uint16 packet_length = PARAM_BYTE_SLOT*NUM_OF_DEV_PARAMS + PARAM_MENU_SLOT*NUM_OF_DEV_PARAM_MENUS + PARAM_BYTE_SLOT;
-
+void get_param_list (uint8 num_params, uint8 num_menus, const struct parameter PARAM_LIST[], const struct menu MENU_LIST[], uint8 sendToDevice){
     //Auxiliary variables
-    uint8 CYDATA i, j;
     uint8 CYDATA idx = 0;       //Parameter number
-    uint8 CYDATA idx_menu = 0;
-    uint8 CYDATA sod = 0;       //sizeof data
+    uint8* m_addr = (uint8*)PARAM_LIST[0].VAR_P;
     uint8 CYDATA string_length;
-    char CYDATA aux_str[50] = "";
+    char CYDATA aux_str[250] = "";
+    char CYDATA aux_str1[250] = ""; 
     float aux_float;
     int16 aux_int16;
-    uint16 aux_uint16;
     int32 aux_int32;
-    uint32 aux_uint32;
-
+    uint8 i, j;
+    uint8 u;
+    char c[50];
+    
     uint8 MOTOR_IDX = 0;
     uint8 SECOND_MOTOR_IDX = 1;
-  
-    uint8* m_addr = (uint8*)VAR_P[0];
-    uint8* m_tmp = m_addr;
-        
+
+    uint16 packet_length = PARAM_BYTE_SLOT*num_params + PARAM_MENU_SLOT*num_menus + PARAM_BYTE_SLOT;
+    uint8 packet_data[packet_length];
+    for (int ii = 0; ii < packet_length; ii++) packet_data[ii] = 0;
+
     packet_data[0] = CMD_GET_PARAM_LIST;
-    packet_data[1] = NUM_OF_DEV_PARAMS;
+    packet_data[1] = num_params;
     
-    for (idx = 0; idx < NUM_OF_DEV_PARAMS; idx++) {
-        
-        // Assign m_addr memory address
-        m_addr = (uint8*)VAR_P[idx];
-        
-        // Add parameter type and size to packet
-        packet_data[2 + PARAM_BYTE_SLOT*idx] = TYPES[idx];
-        packet_data[3 + PARAM_BYTE_SLOT*idx] = NUM_ITEMS[idx];
-        
-        // Find size of data
-        switch (TYPES[idx]) {
-            case TYPE_FLAG: case TYPE_INT8: case TYPE_UINT8: case TYPE_STRING:
-                sod = 1; break;
-            case TYPE_INT16: case TYPE_UINT16:
-                sod = 2; break;
-            case TYPE_INT32: case TYPE_UINT32: case TYPE_FLOAT:
-                sod = 4; break;
-        }
-            
-        if (!CUSTOM_PARAM_GET[idx]) {       // Default param get
-            
-            // Add parameter data to packet
-            switch (TYPES[idx]) {
-                case TYPE_FLAG: case TYPE_UINT8: case TYPE_STRING:
-                    for (i=0; i<NUM_ITEMS[idx]; i++){
-                        m_tmp = m_addr + i*sod;
-                        packet_data[4 + PARAM_BYTE_SLOT*idx + i*sod] = *m_tmp;
-                    }
-                    break;                
-                case TYPE_INT8:
-                    for (i=0; i<NUM_ITEMS[idx]; i++){
-                        m_tmp = m_addr + i*sod;
-                        packet_data[4 + PARAM_BYTE_SLOT*idx + i*sod] = *m_tmp;
-                    }
-                    break;
-                case TYPE_INT16:
-                    for (i=0; i<NUM_ITEMS[idx]; i++){
-                        m_tmp = m_addr + i*sod;
-                        aux_int16 = *((int16*)m_tmp);
-                        for(j = 0; j < sod; j++) {
-                            packet_data[(4 + PARAM_BYTE_SLOT*idx + i*sod) + sod - j -1] = ((char*)(&aux_int16))[j];
-                        }
-                    }
-                    break;
-                case TYPE_UINT16:
-                    for (i=0; i<NUM_ITEMS[idx]; i++){
-                        m_tmp = m_addr + i*sod;
-                        aux_uint16 = *((uint16*)m_tmp);
-                        for(j = 0; j < sod; j++) {
-                            packet_data[(4 + PARAM_BYTE_SLOT*idx + i*sod) + sod - j -1] = ((char*)(&aux_uint16))[j];
-                        }
-                    }
-                    break;
-                case TYPE_INT32: 
-                    for (i=0; i<NUM_ITEMS[idx]; i++){
-                        m_tmp = m_addr + i*sod;
-                        aux_int32 = *((int32*)m_tmp);
-                        for(j = 0; j < sod; j++) {
-                            packet_data[(4 + PARAM_BYTE_SLOT*idx + i*sod) + sod - j -1] = ((char*)(&aux_int32))[j];
-                        }
-                    }
-                    break;
-                case TYPE_UINT32: 
-                    for (i=0; i<NUM_ITEMS[idx]; i++){
-                        m_tmp = m_addr + i*sod;
-                        aux_uint32 = *((uint32*)m_tmp);
-                        for(j = 0; j < sod; j++) {
-                            packet_data[(4 + PARAM_BYTE_SLOT*idx + i*sod) + sod - j -1] = ((char*)(&aux_uint32))[j];
-                        }
-                    }
-                    break;
-                    
-                case TYPE_FLOAT:
-                    for (i=0; i<NUM_ITEMS[idx]; i++){
-                        m_tmp = m_addr + i*sod;
-                        aux_float = *((float*)m_tmp);
-                        for(j = 0; j < sod; j++) {
-                            packet_data[(4 + PARAM_BYTE_SLOT*idx + i*sod) + sod - j -1] = ((char*)(&aux_float))[j];
-                        }
-                    }
-                    break;   
-            }
-        }
-        else {
+    for (idx = 0; idx < num_params; idx ++) {
+        m_addr = (uint8*)PARAM_LIST[idx].VAR_P;
+        uint8 sod = num_of_bytes(PARAM_LIST[idx].TYPES);
+        packet_data[2 + PARAM_BYTE_SLOT*idx] = PARAM_LIST[idx].TYPES;
+        packet_data[3 + PARAM_BYTE_SLOT*idx] = PARAM_LIST[idx].NUM_ITEMS;        
+
             
 // DO NOT MODIFY THE FUNCTION BEFORE THIS LINE
             
 // MODIFY CUSTOM PARAM            
-                switch(idx+1){
-                    case 2:         // Position PID
-                        if(c_mem.motor[MOTOR_IDX].control_mode != CURR_AND_POS_CONTROL) {
-                            aux_float = (float) c_mem.motor[MOTOR_IDX].k_p / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                            aux_float = (float) c_mem.motor[MOTOR_IDX].k_i / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx + sod) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                            aux_float = (float) c_mem.motor[MOTOR_IDX].k_d / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx + 2*sod) + sod - i -1] = ((char*)(&aux_float))[i];
-                            } 
-                        }
-                        else {
-                            aux_float = (float) c_mem.motor[MOTOR_IDX].k_p_dl / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                            aux_float = (float) c_mem.motor[MOTOR_IDX].k_i_dl / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx + sod) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                            aux_float = (float) c_mem.motor[MOTOR_IDX].k_d_dl / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx + 2*sod) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                        }
-                        break;
-                        
-                    case 3:         //Current PID
-                        if(c_mem.motor[MOTOR_IDX].control_mode != CURR_AND_POS_CONTROL) {
-                            aux_float = (float) c_mem.motor[MOTOR_IDX].k_p_c / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                            aux_float = (float) c_mem.motor[MOTOR_IDX].k_i_c / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx + sod) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                            aux_float = (float) c_mem.motor[MOTOR_IDX].k_d_c / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx + 2*sod) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                        }
-                        else {
-                            aux_float = (float) c_mem.motor[MOTOR_IDX].k_p_c_dl / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                            aux_float = (float) c_mem.motor[MOTOR_IDX].k_i_c_dl / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx + sod) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                            aux_float = (float) c_mem.motor[MOTOR_IDX].k_d_c_dl / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx + 2*sod) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                        }            
-                        break;  
 
-                    case 8:         //Measurement Offset
-                        for (i=0; i<NUM_ITEMS[idx]; i++){
-                            aux_int16 = (c_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].m_off[i] >> c_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[i]);
-                            for(j = 0; j < sod; j++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx + i*sod) + sod - j -1] = ((char*)(&aux_int16))[j];
-                            }
-                        }
-                        break;
-                
-                    case 11:        //Position limits
-                        aux_int32 = (c_mem.motor[MOTOR_IDX].pos_lim_inf >> c_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[0]);
-                        for(j = 0; j < sod; j++) {
-                            packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - j -1] = ((char*)(&aux_int32))[j];
-                        }
-                        aux_int32 = (c_mem.motor[MOTOR_IDX].pos_lim_sup >> c_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[0]);
-                        for(j = 0; j < sod; j++) {
-                            packet_data[(4 + PARAM_BYTE_SLOT*idx + sod) + sod - j -1] = ((char*)(&aux_int32))[j];
-                        }
-                        break;            
-
-                    case 23:        //Rest Position
-                        aux_int32 = (c_mem.SH.rest_pos >> c_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[0]);
-                        for(j = 0; j < sod; j++) {
-                            packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - j -1] = ((char*)(&aux_int32))[j];
-                        }
-                        break; 
-                        
-                    case 44:         // Second Motor Position PID
-                        if(c_mem.motor[SECOND_MOTOR_IDX].control_mode != CURR_AND_POS_CONTROL) {
-                            aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_p / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                            aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_i / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx + sod) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                            aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_d / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx + 2*sod) + sod - i -1] = ((char*)(&aux_float))[i];
-                            } 
-                        }
-                        else {
-                            aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_p_dl / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                            aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_i_dl / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx + sod) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                            aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_d_dl / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx + 2*sod) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                        }
-                        break;
-                        
-                    case 45:         // Second Motor Current PID
-                        if(c_mem.motor[SECOND_MOTOR_IDX].control_mode != CURR_AND_POS_CONTROL) {
-                            aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_p_c / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                            aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_i_c / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx + sod) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                            aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_d_c / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx + 2*sod) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                        }
-                        else {
-                            aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_p_c_dl / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                            aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_i_c_dl / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx + sod) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                            aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_d_c_dl / 65536;
-                            for(i = 0; i < sod; i++) {
-                                packet_data[(4 + PARAM_BYTE_SLOT*idx + 2*sod) + sod - i -1] = ((char*)(&aux_float))[i];
-                            }
-                        }            
-                        break;  
-
-                    case 50:         // Second Motor Measurement Offset
-                        aux_int16 = (c_mem.enc[g_mem.motor[SECOND_MOTOR_IDX].encoder_line].m_off[i] >> c_mem.enc[g_mem.motor[SECOND_MOTOR_IDX].encoder_line].res[i]);
-                        for(j = 0; j < sod; j++) {
-                            packet_data[(4 + PARAM_BYTE_SLOT*idx + i*sod) + sod - j -1] = ((char*)(&aux_int16))[j];
-                        }
-                        break;
-                
-                    case 53:        // Second Motor Position limits
-                        aux_int32 = (c_mem.motor[SECOND_MOTOR_IDX].pos_lim_inf >> c_mem.enc[g_mem.motor[SECOND_MOTOR_IDX].encoder_line].res[0]);
-                        for(j = 0; j < sod; j++) {
-                            packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - j -1] = ((char*)(&aux_int32))[j];
-                        }
-                        aux_int32 = (c_mem.motor[SECOND_MOTOR_IDX].pos_lim_sup >> c_mem.enc[g_mem.motor[SECOND_MOTOR_IDX].encoder_line].res[0]);
-                        for(j = 0; j < sod; j++) {
-                            packet_data[(4 + PARAM_BYTE_SLOT*idx + sod) + sod - j -1] = ((char*)(&aux_int32))[j];
-                        }
-                        break;
-                        
-                    default:
-                        break;
+        switch(PARAM_LIST[idx].custom){
+        case POS_PID:         // Position PID
+            if(c_mem.motor[MOTOR_IDX].control_mode != CURR_AND_POS_CONTROL) {
+                aux_float = (float) c_mem.motor[MOTOR_IDX].k_p / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - i -1] = ((char*)(&aux_float))[i];
                 }
-// END OF MODIFY CUSTOM PARAM  
-                        
-// DO NOT MODIFY THE FUNCTION UNDER THIS LINE
-        }
-        
-        sprintf(aux_str, (char*)PARAMS_STR[idx]);
+                aux_float = (float) c_mem.motor[MOTOR_IDX].k_i / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx + sod) + sod - i -1] = ((char*)(&aux_float))[i];
+                }
+                aux_float = (float) c_mem.motor[MOTOR_IDX].k_d / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx + 2*sod) + sod - i -1] = ((char*)(&aux_float))[i];
+                } 
+            }
+            else {
+                aux_float = (float) c_mem.motor[MOTOR_IDX].k_p_dl / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - i -1] = ((char*)(&aux_float))[i];
+                }
+                aux_float = (float) c_mem.motor[MOTOR_IDX].k_i_dl / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx + sod) + sod - i -1] = ((char*)(&aux_float))[i];
+                }
+                aux_float = (float) c_mem.motor[MOTOR_IDX].k_d_dl / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx + 2*sod) + sod - i -1] = ((char*)(&aux_float))[i];
+                }
+            }
+            break;
+            
+        case CURR_PID:         //Current PID
+            if(c_mem.motor[MOTOR_IDX].control_mode != CURR_AND_POS_CONTROL) {
+                aux_float = (float) c_mem.motor[MOTOR_IDX].k_p_c / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - i -1] = ((char*)(&aux_float))[i];
+                }
+                aux_float = (float) c_mem.motor[MOTOR_IDX].k_i_c / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx + sod) + sod - i -1] = ((char*)(&aux_float))[i];
+                }
+                aux_float = (float) c_mem.motor[MOTOR_IDX].k_d_c / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx + 2*sod) + sod - i -1] = ((char*)(&aux_float))[i];
+                }
+            }
+            else {
+                aux_float = (float) c_mem.motor[MOTOR_IDX].k_p_c_dl / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - i -1] = ((char*)(&aux_float))[i];
+                }
+                aux_float = (float) c_mem.motor[MOTOR_IDX].k_i_c_dl / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx + sod) + sod - i -1] = ((char*)(&aux_float))[i];
+                }
+                aux_float = (float) c_mem.motor[MOTOR_IDX].k_d_c_dl / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx + 2*sod) + sod - i -1] = ((char*)(&aux_float))[i];
+                }
+            }            
+            break;  
+
+        case MEAS_OFF:         //Measurement Offset
+            for (i=0; i<PARAM_LIST[idx].NUM_ITEMS; i++){
+                aux_int16 = (c_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].m_off[i] >> c_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[i]);
+                for(j = 0; j < sod; j++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx + i*sod) + sod - j -1] = ((char*)(&aux_int16))[j];
+                }
+            }
+            break;
+
+        case POS_LIM:        //Position limits
+            aux_int32 = (c_mem.motor[MOTOR_IDX].pos_lim_inf >> c_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[0]);
+            for(j = 0; j < sod; j++) {
+                packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - j -1] = ((char*)(&aux_int32))[j];
+            }
+            aux_int32 = (c_mem.motor[MOTOR_IDX].pos_lim_sup >> c_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[0]);
+            for(j = 0; j < sod; j++) {
+                packet_data[(4 + PARAM_BYTE_SLOT*idx + sod) + sod - j -1] = ((char*)(&aux_int32))[j];
+            }
+            break;            
+            
+        case REST_POS:        //Rest Position
+            aux_int32 = (c_mem.SH.rest_pos >> c_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[0]);
+            for(j = 0; j < sod; j++) {
+                packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - j -1] = ((char*)(&aux_int32))[j];
+            }
+            break; 
+            
+        case POS_PID_2:         // Second Motor Position PID
+            if(c_mem.motor[SECOND_MOTOR_IDX].control_mode != CURR_AND_POS_CONTROL) {
+                aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_p / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - i -1] = ((char*)(&aux_float))[i];
+                }
+                aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_i / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx + sod) + sod - i -1] = ((char*)(&aux_float))[i];
+                }
+                aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_d / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx + 2*sod) + sod - i -1] = ((char*)(&aux_float))[i];
+                } 
+            }
+            else {
+                aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_p_dl / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - i -1] = ((char*)(&aux_float))[i];
+                }
+                aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_i_dl / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx + sod) + sod - i -1] = ((char*)(&aux_float))[i];
+                }
+                aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_d_dl / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx + 2*sod) + sod - i -1] = ((char*)(&aux_float))[i];
+                }
+            }
+            break;
+            
+        case CURR_PID_2:         // Second Motor Current PID
+            if(c_mem.motor[SECOND_MOTOR_IDX].control_mode != CURR_AND_POS_CONTROL) {
+                aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_p_c / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - i -1] = ((char*)(&aux_float))[i];
+                }
+                aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_i_c / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx + sod) + sod - i -1] = ((char*)(&aux_float))[i];
+                }
+                aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_d_c / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx + 2*sod) + sod - i -1] = ((char*)(&aux_float))[i];
+                }
+            }
+            else {
+                aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_p_c_dl / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - i -1] = ((char*)(&aux_float))[i];
+                }
+                aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_i_c_dl / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx + sod) + sod - i -1] = ((char*)(&aux_float))[i];
+                }
+                aux_float = (float) c_mem.motor[SECOND_MOTOR_IDX].k_d_c_dl / 65536;
+                for(i = 0; i < sod; i++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx + 2*sod) + sod - i -1] = ((char*)(&aux_float))[i];
+                }
+            }            
+            break;  
+
+        case MEAS_OFF_2:         // Second Motor Measurement Offset
+            aux_int16 = (c_mem.enc[g_mem.motor[SECOND_MOTOR_IDX].encoder_line].m_off[i] >> c_mem.enc[g_mem.motor[SECOND_MOTOR_IDX].encoder_line].res[i]);
+            for(j = 0; j < sod; j++) {
+                packet_data[(4 + PARAM_BYTE_SLOT*idx + i*sod) + sod - j -1] = ((char*)(&aux_int16))[j];
+            }
+            break;
+
+        case POS_LIM_2:        // Second Motor Position limits
+            aux_int32 = (c_mem.motor[SECOND_MOTOR_IDX].pos_lim_inf >> c_mem.enc[g_mem.motor[SECOND_MOTOR_IDX].encoder_line].res[0]);
+            for(j = 0; j < sod; j++) {
+                packet_data[(4 + PARAM_BYTE_SLOT*idx) + sod - j -1] = ((char*)(&aux_int32))[j];
+            }
+            aux_int32 = (c_mem.motor[SECOND_MOTOR_IDX].pos_lim_sup >> c_mem.enc[g_mem.motor[SECOND_MOTOR_IDX].encoder_line].res[0]);
+            for(j = 0; j < sod; j++) {
+                packet_data[(4 + PARAM_BYTE_SLOT*idx + sod) + sod - j -1] = ((char*)(&aux_int32))[j];
+            }
+            break;
+        case 0:  // Not custom parameter
+        default: // Parameters that are only custom for SET
+            for (i = 0; i < PARAM_LIST[idx].NUM_ITEMS * sod; i+=sod){
+                for(j = 0; j < sod; j++) {
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx + i) + sod - j -1] = m_addr[i+j];
+                }
+            }
+            break;
+    }
+       
+        strcpy(aux_str,"");
+        itoa(idx + 1, c, 10);
+        strcat(aux_str ,c);
+        strcat(aux_str," - ");
+        strcat(aux_str,(char*)PARAM_LIST[idx].PARAM_STR);                
         string_length = strlen(aux_str);
         
         // Parameters with a menu
-        if (TYPES[idx] == TYPE_FLAG){
-            switch(NUM_MENU[idx_menu]){
-                case 1:     // input mode menu
-                    switch(*m_addr) {
-                        case INPUT_MODE_EXTERNAL:
-                            strcat(aux_str, " Usb");
-                        break;
-                        case INPUT_MODE_ENCODER3:
-                            strcat(aux_str, " Handle");
-                        break;
-                        case INPUT_MODE_EMG_PROPORTIONAL:
-                            strcat(aux_str, " EMG proportional");
-                        break;
-                        case INPUT_MODE_EMG_INTEGRAL:
-                            strcat(aux_str, " EMG integral");
-                        break;
-                        case INPUT_MODE_EMG_FCFS:
-                            strcat(aux_str, " EMG FCFS");
-                        break;
-                        case INPUT_MODE_EMG_FCFS_ADV:
-                            strcat(aux_str, " EMG FCFS Advanced");
-                        break;
-                        case INPUT_MODE_JOYSTICK:
-                            strcat(aux_str, " Joystick");
-                        break;
-                        case INPUT_MODE_EMG_PROPORTIONAL_NC:
-                            strcat(aux_str, " EMG proportional Normally Closed");
-                        break;
-                    }
-                    break;
-                case 2:     // control mode menu
-                    switch(*m_addr){
-                        case CONTROL_ANGLE:
-                            strcat(aux_str, " Position");
-                        break;
-                        case CONTROL_PWM:
-                            strcat(aux_str, " PWM");
-                        break;
-                        case CONTROL_CURRENT:
-                            strcat(aux_str, " Current");
-                        break;
-                        case CURR_AND_POS_CONTROL:
-                            strcat(aux_str, " Position and Current");
-                        break;
-                    }
-                    break;
-                case 3:     // yes/no menu
-                    if(*m_addr){
-                        strcat(aux_str, " YES\0");
-                    }
-                    else {
-                        strcat(aux_str, " NO\0");
-                    }
-                    break;    
-                case 4:     // right/lef menu
-                    switch(*m_addr){
-                        case RIGHT_HAND:
-                            strcat(aux_str, " Right\0");
-                        break;
-                        case LEFT_HAND:
-                            strcat(aux_str, " Left\0");
-                        break;
-                    }
-                    break;
-                case 5:     // on/off menu
-                    switch(*m_addr){
-                        case 0:
-                            strcat(aux_str, " OFF\0");
-                        break;
-                        case 1:
-                            strcat(aux_str, " ON\0");
-                        break;
-                    }
-                    break;
-                case 6:     // expansion port menu
-                    switch(*m_addr){
-                        case EXP_NONE:
-                            strcat(aux_str, " None\0");
-                            break;
-                        case EXP_SD_RTC_ONLY:
-                            strcat(aux_str, " Only SD/RTC\0");
-                            break;
-                        case EXP_BT_ONLY:
-        					strcat(aux_str, " Only BT\0");
-        					break;
-                        case EXP_SD_RTC_BT:
-        					strcat(aux_str, " SD/RTC + BT\0");
-        					break;
-                    }
-                    break;
-                case 7:     // spi read delay menu
-                    switch(*m_addr){
-                        case 0: 
-                            strcat(aux_str, " None\0"); 
-                            break;
-                        case 1: 
-                            strcat(aux_str, " Low\0"); 
-                            break;
-                        case 2: 
-                            strcat(aux_str, " High\0");
-                            break;
-                        default:
-                            break;
-                    } 
-                    break;
-                case 8:     // user menu          
-                    switch(*m_addr){
-                        case GENERIC_USER:
-                            strcat(aux_str, " GENERIC USER\0");
-                        break;
-                        case MARIA:
-                            strcat(aux_str, " MARIA\0");
-                        break;
-                        case R01:
-                            strcat(aux_str, " R01\0");
-                        break;
-                    }   
-                    break;                    
-                case 9:     // driver type menu
-                    switch(*m_addr){
-                        case 0:
-                            strcat(aux_str, " MC33887 (Standard)\0");
-                        break;
-                        case 1:
-                            strcat(aux_str, " VNH5019 (High power)\0");
-                        break;
-                        case 2:
-                            strcat(aux_str, " ESC (Brushless)\0");
-                        break;
-                    }
-                    break;
-                case 10:    // device type menu
-                    switch(*m_addr){
-                        case 0:
-                            strcat(aux_str, " SOFTHAND PRO\0");
-                        break;
-                        case 1:
-                            strcat(aux_str, " GENERIC 2 MOTORS\0");
-                        break;
-                        case 2:
-                            strcat(aux_str, " AIR CHAMBERS\0");
-                        break;
-                        case 3:
-                            strcat(aux_str, " OTTOBOCK WRIST\0");
-                        break;
-                        case 4:
-                            strcat(aux_str, " SOFTHAND 2 MOTORS\0");
-                        break;
-                        case 5:
-                            strcat(aux_str, " AlterEgo SHOULDER\0");
-                        break;
-                        case 6:
-                            strcat(aux_str, " AlterEgo EC Wheels\0");
-                        break;
-                        case 7:
-                            strcat(aux_str, " SOFTHAND PRO 2 MOT.\0");
-                        break;
-                    }
-                    break;
-                case 11:    // fsm activation mode menu
-                    switch(*m_addr){
-                        case 0:
-                            if (c_mem.dev.dev_type == SOFTHAND_2_MOTORS){
-                                strcat(aux_str, " Fast:syn2, Slow:syn1\0");
-                            }
-                            else {
-                                strcat(aux_str, " Fast:wrist,Slow:hand\0");
-                            }                            
-                        break;
-                        case 1:
-                            if (c_mem.dev.dev_type == SOFTHAND_2_MOTORS){
-                                strcat(aux_str, " Slow:syn2, Fast:syn1\0");
-                            }
-                            else {
-                                strcat(aux_str, " Slow:wrist,Fast:hand\0");
-                            }
-                        break;
-                    }
-                    break;
-                case 12:    // wrist direction association menu
-                    switch(*m_addr){
-                        case 0:
-                            strcat(aux_str, " Close:CW, Open:CCW\0");
-                        break;
-                        case 1:
-                            strcat(aux_str, " Close:CCW, Open:CW\0");
-                        break;
-                    }
-                    break;
-            }
-            //Recomputes string length
+        if (PARAM_LIST[idx].MENU != 0){
+            for (i = 0; i < num_menus ; i++){
+                if (MENU_LIST[i].name == PARAM_LIST[idx].MENU){
+                strcat(aux_str, MENU_LIST[i].choice[*m_addr]);
+                }              
+                //Recomputes string length
             string_length = strlen(aux_str)+1;
+            }
         }
 
         // Add parameter string to packet
         for(i = string_length; i != 0; i--)
-            packet_data[(4 + PARAM_BYTE_SLOT*idx) + (sod*NUM_ITEMS[idx]) + string_length - i] = aux_str[string_length - i];
-        //The following byte indicates the number of menus at the end of the packet to send
-        if (TYPES[idx] == TYPE_FLAG){
-            packet_data[(4 + PARAM_BYTE_SLOT*idx) + (sod*NUM_ITEMS[idx]) + string_length] = NUM_MENU[idx_menu];
-            idx_menu = idx_menu + 1;
-        }      
+            packet_data[(4 + PARAM_BYTE_SLOT*idx) + (sod*PARAM_LIST[idx].NUM_ITEMS) + string_length - i] = aux_str[string_length - i];
         
-        // Add struct index after an empty bit
+        
+        if (PARAM_LIST[idx].TYPES == TYPE_FLAG){
+            //Send the number of menus at the end of the packet to send
+            
+            for (i = 0; i < num_menus ; i++){
+                if (MENU_LIST[i].name == PARAM_LIST[idx].MENU){
+                    packet_data[(4 + PARAM_BYTE_SLOT*idx) + (sod*PARAM_LIST[idx].NUM_ITEMS) + string_length] = i + 1;
+                    i = num_menus;
+                }              
+            }
+
+        // Add empty bit + struct number
         // Note: added here at the end of packets is transparent to old parameters retrieving version
-        if (TYPES[idx] == TYPE_FLAG){
-            packet_data[(4 + PARAM_BYTE_SLOT*idx) + (sod*NUM_ITEMS[idx]) + string_length + 2] = NUM_STRUCT[idx];
+        
+            packet_data[(4 + PARAM_BYTE_SLOT*idx) + (sod*PARAM_LIST[idx].NUM_ITEMS) + string_length + 2] = PARAM_LIST[idx].NUM_STR;
         }
         else {
-            packet_data[(4 + PARAM_BYTE_SLOT*idx) + (sod*NUM_ITEMS[idx]) + string_length + 1] = NUM_STRUCT[idx];
+            packet_data[(4 + PARAM_BYTE_SLOT*idx) + (sod*PARAM_LIST[idx].NUM_ITEMS) + string_length + 1] = PARAM_LIST[idx].NUM_STR;
         }
     }
-
-    // Add menu
-    for (j = 0; j < NUM_OF_DEV_PARAM_MENUS; j++) {
-        string_length = strlen((char*)MENU_STR[j]);
-        for(i = string_length; i != 0; i--)
-            packet_data[PARAM_BYTE_SLOT*NUM_OF_DEV_PARAMS + 2 + j*PARAM_MENU_SLOT + string_length - i] = MENU_STR[j][string_length - i];
-    }
     
+    // Add menu
+    for (j = 0; j < num_menus; j++) {
+        strcpy(aux_str1,"");
+        for (u = 0; u < N_CHOICES; u++){            
+            if (!strcmp(MENU_LIST[j].choice[u],"")){
+                if (MENU_LIST[j].reset == TRUE){
+                    strcat(aux_str1,"The board will reset\n");
+                }
+                u = N_CHOICES;
+            }            
+            else {
+                itoa(u, c, 10);
+                strcat(aux_str1,c);
+                strcat(aux_str1," ->");
+                strcat(aux_str1,(char*)MENU_LIST[j].choice[u]);
+                strcat(aux_str1,"\n");
+            }    
+        }
+        string_length = strlen(aux_str1);
+        
+        for(i = string_length; i != 0; i--)
+            packet_data[PARAM_BYTE_SLOT*num_params + 2 + j*PARAM_MENU_SLOT + string_length - i] = aux_str1[string_length - i];           
+    }
+        
     packet_data[packet_length - 1] = LCRChecksum(packet_data,packet_length - 1);
     
-    if (sendToDevice){
-        commWrite(packet_data, packet_length);
+    if (sendToDevice) {
+        commWrite(packet_data, packet_length);  
     }
     else {
-        // Update pointer (Bad choice since pointing to dead variable in another function, to fix)
+       // Update pointer (Bad choice since pointing to dead variable in another function, to fix)
        longPkgP = (char*)&packet_data[0];
        longPkgSize = packet_length;
     }
 }
+
+         
+//==============================================================================
+//                                                                  NUM_OF_BYTES
+//==============================================================================
+                    
+uint8 num_of_bytes (uint8 TYPE){
+    uint8 sod;
+    switch (TYPE) {
+        case TYPE_FLAG: case TYPE_INT8: case TYPE_UINT8: case TYPE_STRING:
+            sod = 1; break;
+        case TYPE_INT16: case TYPE_UINT16:
+            sod = 2; break;
+        case TYPE_INT32: case TYPE_UINT32: case TYPE_FLOAT:
+            sod = 4; break;
+    }  
+    return sod;
+}
+         
+
 
 //==============================================================================
 //                                                             MANAGE PARAM LIST
@@ -962,396 +742,202 @@ void get_param_list (uint8* VAR_P[NUM_OF_PARAMS], uint8 TYPES[NUM_OF_PARAMS],
 
 void manage_param_list(uint16 index, uint8 sendToDevice) {
     uint8 CYDATA i, j;
-    uint8 CYDATA sod;
-    uint8 PARAM_IDX;
-    int16 aux_int16;
-    uint16 aux_uint16;
-    int32 aux_int32;
-    uint32 aux_uint32;
-    float aux_float;
- 
-    uint8 MOTOR_IDX = 0;
-    uint8 SECOND_MOTOR_IDX = 1;
     
+    uint8 PARAM_IDX;
+    uint8 MOTOR_IDX = 0;
+    
+#ifndef SOFTHAND_FW    
+    uint8 SECOND_MOTOR_IDX = 1;
+#endif
+
     // Arrays
     struct st_eeprom* MEM_P = &c_mem;   // c_mem is used for param reading
     
     if (index){                         // Switch from c_mem to g_mem
         MEM_P = &g_mem;                 // g_mem is used for param setting
     }
- 
     
-//------------------ BEGIN OF PARAMETERS VARIABLES --------------------//    
-    uint8* VAR_P[NUM_OF_PARAMS] = { 
-    	(uint8*)&(MEM_P->dev.id),                                                   
-    	(uint8*)&(MEM_P->motor[MOTOR_IDX].k_p),
-    	(uint8*)&(MEM_P->motor[MOTOR_IDX].k_p_c), 
-    	(uint8*)&(MEM_P->motor[MOTOR_IDX].activ),
-    	(uint8*)&(MEM_P->motor[MOTOR_IDX].input_mode),
-    	(uint8*)&(MEM_P->motor[MOTOR_IDX].control_mode), 
-    	(uint8*)&(MEM_P->enc[MEM_P->motor[MOTOR_IDX].encoder_line].res),
-    	(uint8*)&(MEM_P->enc[MEM_P->motor[MOTOR_IDX].encoder_line].m_off[0]),
-    	(uint8*)&(MEM_P->enc[MEM_P->motor[MOTOR_IDX].encoder_line].m_mult[0]),
-    	(uint8*)&(MEM_P->motor[MOTOR_IDX].pos_lim_flag),                                    //10
-    	(uint8*)&(MEM_P->motor[MOTOR_IDX].pos_lim_inf), 
-    	(uint8*)&(MEM_P->motor[MOTOR_IDX].max_step_neg),
-    	(uint8*)&(MEM_P->motor[MOTOR_IDX].current_limit),
-    	(uint8*)&(MEM_P->emg.emg_threshold[0]),
-    	(uint8*)&(MEM_P->emg.emg_calibration_flag),
-    	(uint8*)&(MEM_P->emg.emg_max_value[0]),
-    	(uint8*)&(MEM_P->emg.emg_speed[0]), 
-    	(uint8*)&(MEM_P->enc[MEM_P->motor[MOTOR_IDX].encoder_line].double_encoder_on_off),
-    	(uint8*)&(MEM_P->enc[MEM_P->motor[MOTOR_IDX].encoder_line].motor_handle_ratio),
-    	(uint8*)&(MEM_P->motor[MOTOR_IDX].activate_pwm_rescaling),                          //20
-    	(uint8*)&(MEM_P->motor[MOTOR_IDX].curr_lookup[0]),
-    	(uint8*)&(MEM_P->dev.hw_maint_date),
-    	(uint8*)&(MEM_P->SH.rest_pos), 
-    	(uint8*)&(MEM_P->SH.rest_delay),
-    	(uint8*)&(MEM_P->SH.rest_vel),
-    	(uint8*)&(MEM_P->SH.rest_position_flag),
-    	(uint8*)&(MEM_P->emg.switch_emg), 
-    	(uint8*)&(MEM_P->dev.right_left),
-    	(uint8*)&(MEM_P->imu.read_imu_flag),
-    	(uint8*)&(MEM_P->exp.read_exp_port_flag),                                   //30
-    	(uint8*)&(MEM_P->dev.reset_counters),
-    	(uint8*)&(MEM_P->exp.curr_time[0]),
-    	(uint8*)&(MEM_P->imu.SPI_read_delay),
-    	(uint8*)&(MEM_P->imu.IMU_conf[0][0]),
-        (uint8*)&(MEM_P->dev.user_id),
-        (uint8*)&(MEM_P->user[MEM_P->dev.user_id].user_code_string),
-        
-        // GENERIC PARAMS
-		(uint8*)&(MEM_P->motor[MOTOR_IDX].encoder_line),			// other params of 1st motor
-    	(uint8*)&(MEM_P->motor[MOTOR_IDX].motor_driver_type),
-        (uint8*)&(MEM_P->motor[MOTOR_IDX].pwm_rate_limiter),
-        (uint8*)&(MEM_P->motor[MOTOR_IDX].not_revers_motor_flag), 	//40 
-        (uint8*)&(MEM_P->enc[MEM_P->motor[MOTOR_IDX].encoder_line].Enc_idx_use_for_control),
-        (uint8*)&(MEM_P->enc[MEM_P->motor[MOTOR_IDX].encoder_line].gears_params),        
-    	(uint8*)&(MEM_P->dev.use_2nd_motor_flag),					// second motor config and params
-        (uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].k_p),
-    	(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].k_p_c), 
-    	(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].activ),
-    	(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].input_mode),
-    	(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].control_mode), 
-    	(uint8*)&(MEM_P->enc[MEM_P->motor[SECOND_MOTOR_IDX].encoder_line].res),
-    	(uint8*)&(MEM_P->enc[MEM_P->motor[SECOND_MOTOR_IDX].encoder_line].m_off[0]),    //50
-    	(uint8*)&(MEM_P->enc[MEM_P->motor[SECOND_MOTOR_IDX].encoder_line].m_mult[0]),
-    	(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].pos_lim_flag),
-    	(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].pos_lim_inf), 
-    	(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].max_step_neg),
-    	(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].current_limit),
-    	(uint8*)&(MEM_P->enc[MEM_P->motor[SECOND_MOTOR_IDX].encoder_line].double_encoder_on_off),
-    	(uint8*)&(MEM_P->enc[MEM_P->motor[SECOND_MOTOR_IDX].encoder_line].motor_handle_ratio),
-    	(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].activate_pwm_rescaling),
-    	(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].curr_lookup[0]),
-		(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line),         //60
-		(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].motor_driver_type),
-        (uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].pwm_rate_limiter),
-        (uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].not_revers_motor_flag),
-        (uint8*)&(MEM_P->enc[MEM_P->motor[SECOND_MOTOR_IDX].encoder_line].Enc_idx_use_for_control),
-        (uint8*)&(MEM_P->enc[MEM_P->motor[SECOND_MOTOR_IDX].encoder_line].gears_params),
-        
-		(uint8*)&(MEM_P->enc[0].Enc_raw_read_conf[0]),					// additional generic params
-    	(uint8*)&(MEM_P->enc[1].Enc_raw_read_conf[0]),
-        (uint8*)&(MEM_P->exp.read_ADC_sensors_port_flag),		
-    	(uint8*)&(MEM_P->exp.ADC_conf[0]),
-    	(uint8*)&(MEM_P->exp.ADC_conf[6]),                          //70  
-        (uint8*)&(MEM_P->exp.record_EMG_history_on_SD),
-        (uint8*)&(MEM_P->JOY_spec.joystick_closure_speed),
-        (uint8*)&(MEM_P->JOY_spec.joystick_threshold),
-        (uint8*)&(MEM_P->JOY_spec.joystick_gains[0]),
-        (uint8*)&(MEM_P->dev.dev_type),
-        (uint8*)&(MEM_P->WR.activation_mode),                           
-        (uint8*)&(MEM_P->WR.fast_act_threshold[0]),
-        
-        (uint8*)&(MEM_P->WR.wrist_direction_association),              // additional wrist params
-        
-        (uint8*)&(MEM_P->MS.slave_comm_active),                        // additional master params
-        (uint8*)&(MEM_P->MS.slave_ID),
-        
-        (uint8*)&(MEM_P->FB.max_residual_current),                     // additional feedback params
-        (uint8*)&(MEM_P->FB.maximum_pressure_kPa),
-        (uint8*)&(MEM_P->FB.prop_err_fb_gain)
-        
-
-    };
+    // Choice for SPI_MENU
+    char SPI_Speed_L[150] = "";
+    char SPI_Speed_H[150] = "";
+    sprintf(SPI_Speed_L, " Low (%u us delay for each 8-bit register read)", (int)SPI_DELAY_LOW);
+    sprintf(SPI_Speed_H, " High (%u us delay for each 8-bit register read)", (int)SPI_DELAY_HIGH);
     
-    uint8 TYPES[NUM_OF_PARAMS] = {
-        TYPE_UINT8, TYPE_FLOAT, TYPE_FLOAT, TYPE_FLAG, 
-        TYPE_FLAG, TYPE_FLAG, TYPE_UINT8, TYPE_INT16, 
-        TYPE_FLOAT, TYPE_FLAG, TYPE_INT32, TYPE_INT32, 
-        TYPE_INT16, TYPE_UINT16, TYPE_FLAG, TYPE_UINT32, 
-        TYPE_UINT8, TYPE_FLAG, TYPE_INT8, TYPE_FLAG, 
-        TYPE_FLOAT, TYPE_UINT8, TYPE_INT32, TYPE_INT32,
-        TYPE_INT32, TYPE_FLAG, TYPE_FLAG, TYPE_FLAG, 
-        TYPE_FLAG, TYPE_FLAG, TYPE_FLAG, TYPE_UINT8, 
-        TYPE_FLAG, TYPE_UINT8, TYPE_FLAG, TYPE_STRING,
-        
-        // GENERIC PARAMS
-        TYPE_UINT8, TYPE_FLAG, TYPE_UINT8, TYPE_FLAG,
-        TYPE_UINT8, TYPE_INT8, TYPE_FLAG, TYPE_FLOAT, 
-        TYPE_FLOAT, TYPE_FLAG, TYPE_FLAG, TYPE_FLAG,
-        TYPE_UINT8, TYPE_INT16, TYPE_FLOAT, TYPE_FLAG, 
-        TYPE_INT32, TYPE_INT32, TYPE_INT16, TYPE_FLAG,
-        TYPE_INT8,  TYPE_FLAG, TYPE_FLOAT, TYPE_UINT8,
-        TYPE_FLAG,  TYPE_UINT8, TYPE_FLAG, TYPE_UINT8,
-        TYPE_INT8, TYPE_UINT8, TYPE_UINT8, TYPE_FLAG,
-        TYPE_UINT8, TYPE_UINT8, TYPE_FLAG, TYPE_UINT16, 
-        TYPE_INT16, TYPE_UINT16, TYPE_FLAG, TYPE_FLAG,
-        TYPE_UINT16,
-        
-                    TYPE_FLAG, TYPE_FLAG, TYPE_UINT8,
-        TYPE_INT32, TYPE_FLOAT, TYPE_FLOAT
-    };
-
-    uint8 NUM_ITEMS[NUM_OF_PARAMS] = {
-        1, 3, 3, 1, 
-        1, 1, 3, 3,
-        3, 1, 2, 2, 
-        1, 2, 1, 2,
-        2, 1, 1, 1, 
-        6, 3, 1, 1,
-        1, 1, 1, 1, 
-        1, 1, 1, 6,
-        1, 5, 1, 6,
-        
-        // GENERIC PARAMS
-        1, 1, 1, 1,
-        3, 3, 1, 3,
-        3, 1, 1, 1,
-        3, 3, 3, 1,
-        2, 2, 1, 1,
-        1, 1, 6, 1,
-        1, 1, 1, 3, 
-        3, N_Encoder_Line_Connected[0], N_Encoder_Line_Connected[1], 1,
-        6, 6, 1, 1,
-        1, 2, 1, 1,
-        2,
-        
-           1, 1, 1, 
-        1, 1, 1
-    };
-    
-    uint8 NUM_STRUCT[NUM_OF_PARAMS] = {     // see STRUCTURES INDEX in globals.h
-        ST_DEVICE, ST_MOTOR+MOTOR_IDX, ST_MOTOR+MOTOR_IDX, ST_MOTOR+MOTOR_IDX, 
-        ST_MOTOR+MOTOR_IDX, ST_MOTOR+MOTOR_IDX, ST_ENCODER+(MEM_P->motor[MOTOR_IDX].encoder_line), ST_ENCODER+(MEM_P->motor[MOTOR_IDX].encoder_line),
-        ST_ENCODER+(MEM_P->motor[MOTOR_IDX].encoder_line), ST_MOTOR+MOTOR_IDX, ST_MOTOR+MOTOR_IDX, ST_MOTOR+MOTOR_IDX,
-        ST_MOTOR+MOTOR_IDX, ST_EMG, ST_EMG, ST_EMG, 
-        ST_EMG, ST_ENCODER+(MEM_P->motor[MOTOR_IDX].encoder_line), ST_ENCODER+(MEM_P->motor[MOTOR_IDX].encoder_line), ST_MOTOR+MOTOR_IDX,
-        ST_MOTOR+MOTOR_IDX, ST_DEVICE, ST_SH_SPEC, ST_SH_SPEC,
-        ST_SH_SPEC, ST_SH_SPEC, ST_EMG, ST_DEVICE,
-        ST_IMU, ST_EXPANSION, ST_DEVICE, ST_EXPANSION,
-        ST_IMU, ST_IMU, ST_DEVICE, ST_USER+(MEM_P->dev.user_id),
-        
-        // GENERIC PARAMS
-        ST_MOTOR+MOTOR_IDX, ST_MOTOR+MOTOR_IDX, ST_MOTOR+MOTOR_IDX, ST_MOTOR+MOTOR_IDX,
-        ST_ENCODER+(MEM_P->motor[MOTOR_IDX].encoder_line), ST_ENCODER+(MEM_P->motor[MOTOR_IDX].encoder_line), ST_DEVICE, ST_MOTOR+SECOND_MOTOR_IDX,
-        ST_MOTOR+SECOND_MOTOR_IDX, ST_MOTOR+SECOND_MOTOR_IDX, ST_MOTOR+SECOND_MOTOR_IDX, ST_MOTOR+SECOND_MOTOR_IDX, 
-        ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line), ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line), ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line), ST_MOTOR+SECOND_MOTOR_IDX, 
-        ST_MOTOR+SECOND_MOTOR_IDX, ST_MOTOR+SECOND_MOTOR_IDX, ST_MOTOR+SECOND_MOTOR_IDX, ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line),
-        ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line), ST_MOTOR+SECOND_MOTOR_IDX, ST_MOTOR+SECOND_MOTOR_IDX, ST_MOTOR+SECOND_MOTOR_IDX, 
-        ST_MOTOR+SECOND_MOTOR_IDX, ST_MOTOR+SECOND_MOTOR_IDX, ST_MOTOR+SECOND_MOTOR_IDX, ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line),
-        ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line), ST_ENCODER+0, ST_ENCODER+1, ST_EXPANSION,
-        ST_EXPANSION, ST_EXPANSION, ST_EXPANSION, ST_JOY_SPEC,
-        ST_JOY_SPEC, ST_JOY_SPEC, ST_DEVICE, ST_WR_SPEC, 
-        ST_WR_SPEC,
-        
-                    ST_WR_SPEC, ST_MS_SPEC, ST_MS_SPEC,
-        ST_FB_SPEC, ST_FB_SPEC, ST_FB_SPEC
-        
-    };
-    
-    const char* PARAMS_STR[NUM_OF_PARAMS] = {
-        "1 - Device ID:", "2 - Position PID [P, I, D]:", "3 - Current PID [P, I, D]:", "4 - Startup Activation:",
-        "5 - Input mode:", "6 - Control mode:", "7 - Resolutions:", "8 - Measurement Offsets:", 
-        "9 - Multipliers:", "10 - Pos. limit active:", "11 - Pos. limits [inf, sup]:", "12 - Max steps [neg, pos]:",
-        "13 - Current limit:", "14 - EMG thresholds:", "15 - EMG calibration on startup:", "16 - EMG max values:",
-        "17 - EMG max speeds:", "18 - Absolute encoder position:", "19 - Motor handle ratio:", "20 - PWM rescaling:",
-        "21 - Current lookup:", "22 - Date of maintenance [D/M/Y]:", "23 - Rest position:", "24 - Rest position time delay (ms):", 
-        "25 - Rest vel closure (ticks/sec):", "26 - Rest position enabled:", "27 - EMG inversion:",  "28 - Hand side:",
-        "29 - Enable IMUs:", "30 - Read Expansion port:", "31 - Reset counters:", "32 - Last checked Time [D/M/Y H:M:S]:", 
-        "33 - SPI read delay (IMU):", "34 - On board IMU conf. [a,g,m,q,t]:", "35 - User ID:", "36 - User code:",
-        
-        // GENERIC PARAMS
-        "37 - Associated encoder line:", "38 - Driver type:", "39 - PWM rate limiter:", "40 - Not reversible:",
-        "41 - Enc idx used for control:", "42 - Gear params[N1, N2, I1]:", "43 - Use second motor:", "44 - Position PID [P, I, D]:",
-        "45 - Current PID [P, I, D]:", "46 - Startup Activation:", "47 - Input mode:", "48 - Control mode:", 
-        "49 - Resolutions:", "50 - Measurement Offsets:", "51 - Multipliers:", "52 - Pos. limit active:",
-        "53 - Pos. limits [inf, sup]:", "54 - Max steps [neg, pos]:", "55 - Current limit:", "56 - Absolute encoder position:",
-        "57 - Motor handle ratio:", "58 - PWM rescaling:", "59 - Current lookup:", "60 - Associated encoder line:", 
-        "61 - Driver type:", "62 - PWM rate limiter:", "63 - Not reversible:", "64 - Enc idx used for control:",
-        "65 - Gear params[N1, N2, I1]:", "66 - Read enc raw line 0:", "67 - Read enc raw line 1:", "68 - Read additional ADC port:",
-        "69 - ADC channel [1-6]:", "70 - ADC channel [7-12]:", "71 - Record EMG on SD card:", "72 - Joystick closure speed:", 
-        "73 - Joystick threshold:", "74 - Joystick gains:", "75 - Device type:", "76 - EMG FSM act.mode:",
-        "77 - Fast act.thresholds:",
-        
-                                     "78 - Wrist direction:", "79 - Slave communication active:", "80 - Slave ID:", 
-        "81 - Maximum slave residual current:", "82 - Maximum pressure feedback (kPa):", "83 - Proportional pressure error gain:", 
-    };
-
-    //Parameters menu
-    char spi_delay_menu[118]    = ""; 
-    sprintf(spi_delay_menu, "0 -> None\n1 -> Low (%u us delay for each 8-bit register read)\n2 -> High (%u us delay for each 8-bit register read)\n", (int)SPI_DELAY_LOW, (int)SPI_DELAY_HIGH);
-
-    char fsm_activation_mode_menu[56] = "";
+    // Choice for FSM_ACTIVATION_MENU
+    char fsm_menu_0[50] = "";
+    char fsm_menu_1[50] = "";
     if (MEM_P->dev.dev_type == SOFTHAND_2_MOTORS){
-        sprintf(fsm_activation_mode_menu, "0 -> Fast:syn2, Slow:syn1\n1 -> Slow:syn2, Fast:syn1\n");
+        strcpy(fsm_menu_0, " Fast:syn2, Slow:syn1");
+        strcpy(fsm_menu_1, " Slow:syn2, Fast:syn1");
     }
     else {
-        sprintf(fsm_activation_mode_menu, "0 -> Fast:wrist,Slow:hand\n1 -> Slow:wrist,Fast:hand\n");
+        strcpy(fsm_menu_0, " Fast:wrist, Slow:hand");
+        strcpy(fsm_menu_1, " Slow:wrist, Fast:hand");
     }
+           
+    struct menu menu_type;
     
-    const char* MENU_STR[NUM_OF_PARAMS_MENU] = {
-        "0 -> Usb\n1 -> Handle\n2 -> EMG proportional\n3 -> EMG Integral\n4 -> EMG FCFS\n5 -> EMG FCFS Advanced\n6 -> Joystick\n7 -> EMG proportional NC\n",         //1 input_mode_menu
-        "0 -> Position\n1 -> PWM\n2 -> Current\n3 -> Position and Current\n",                                               //2 control_mode_menu
-        "0 -> Deactivate [NO]\n1 -> Activate [YES]\n",                                                                      //3 yes_no_menu
-        "0 -> Right\n1 -> Left\n",                                                                                          //4 right_left_menu
-        "0 -> OFF\n1 -> ON\nThe board will reset\n",                                                                        //5 on_off_menu
-        "0 -> None\n1 -> Only SD/RTC\n2 -> Only BT\n3 -> SD/RTC + BT\nThe board will reset\n",                              //6 exp_port_menu
-        spi_delay_menu,                                                                                                     //7 spi_delay_menu
-        "0 -> Generic user\n1 -> Maria\n2 -> R01\nThe board will reset\n",                                                  //8 user_id_menu
-        "0 -> MC33887 (Standard)\n1 -> VNH5019 (High power)\n2 -> ESC (Brushless)\nThe board will reset\n",                                       //9 motor_driver_type_menu
-        "0 ->SHP\n1 ->GENERIC 2 MOT.\n2 ->AIR CHAMBERS\n3 ->OTBK WRIST\n4 ->SH 2 MOTORS\n5 ->AE Shoulder\n6 ->AE EC Wheels\n7 ->SHP 2MOT.\nThe board will reset\n",         //10 device_type_menu
-        fsm_activation_mode_menu,                                                                             //11 fsm_activation_mode_menu
-        "0 -> Close:CW, Open:CCW\n1 -> Close:CCW, Open:CW\n"                                                  //12 wrist_direction_menu
-    };   
-    
-    uint8 NUM_MENU[32] = {3, 1, 2, 3, 3, 3, 3, 3, 3, 4, 5, 6, 3, 7, 8, 9, 3, 5, 3, 1, 2, 3, 3, 3, 9, 3, 5, 3, 10, 11, 12, 3};
-    uint8 CUSTOM_PARAM_GET_LIST[9]  = {2, 3, 8, 11, 23, 44, 45, 50, 53};
-    uint8 CUSTOM_PARAM_SET_LIST[18] = {2, 3, 5, 8, 11, 23, 24, 28, 31, 32, 38, 44, 45, 47, 50, 53, 61, 75};
-    uint8 USER_ID_PARAM = 35;
+    //------------------ BEGIN OF MENU LIST --------------------//  
+        const struct menu MENU_LIST[] = {
+    //  {num            , RESET     , { choice_0                  , choice_1                , choice_2                ,  choice_3                 , choice_4          , choice_5                  , choice_6              ,choice_7                  ,choice_8                  , choice_9                   }},
+        {INPUT_MENU     , FALSE     , { " Usb"                    , " Handle"               , " EMG proportional"     , " EMG Integral"           , " EMG FCFS"       , " EMG FCFS Advanced"      , " Joystick"           , " EMG proportional NC"   , ""                       , ""                         }},  
+        {CTRL_MODE      , FALSE     , { " Position"               , " PWM"                  , " Current"              , " Position and Current"   , ""                , ""                        , ""                    , ""                       , ""                       , ""                         }},                                       
+        {YES_NO         , FALSE     , { " NO"                     , " YES"                  , ""                      , ""                        , ""                , ""                        , ""                    , ""                       , ""                       , ""                         }},                              
+        {RIGHT_LEFT     , FALSE     , { " Right"                  , " Left"                 , ""                      , ""                        , ""                , ""                        , ""                    , ""                       , ""                       , ""                         }},            
+        {ON_OFF         , TRUE      , { " OFF"                    , " ON"                   , ""                      , ""                        , ""                , ""                        , ""                    , ""                       , ""                       , ""                         }},                                                                                
+        {EXP_MENU       , TRUE      , { " None"                   , " Only SD/RTC"          , " Only BT"              , " SD/RTC + BT"            , ""                , ""                        , ""                    , ""                       , ""                       , ""                         }},   
+        {SPI_MENU       , FALSE     , { " None"                   , SPI_Speed_L             , SPI_Speed_H             , ""                        , ""                , ""                        , ""                    , ""                       , ""                       , ""                         }},                                                              
+        {USER_MENU      , TRUE      , { " GENERIC USER"           , " Maria"                , " R01"                  , ""                        , ""                , ""                        , ""                    , ""                       , ""                       , ""                         }},                     
+#ifndef SOFTHAND_FW     // All other type of firmwares different from SOFTHAND_FW
+        {DRIVER_MENU    , TRUE      , { " MC33887 (Standard)"     , " VNH5019 (High power)" , " ESC (Brushless)"      , ""                        , ""                , ""                        , ""                    , ""                       , ""                       , ""                         }},            
+        {DEVICE_MENU    , TRUE      , { "SHP"                     , "GENERIC 2 MOT."        , "AIR CHAMBERS"          , "OTBK WRIST"              , "SH 2 MOTORS"     , "AE Shoulder"             , "AE EC Wheels"        , "SHP 2MOT"               , ""                       , ""                         }},                  
+        {FSM_ACTIVATION , FALSE     , { fsm_menu_0                , fsm_menu_1              , ""                      , ""                        , ""                , ""                        , ""                    , ""                       , ""                       , ""                         }}, 
+        {WRIST_DIR      , FALSE     , { " Close:CW, Open:CCW"     , " Close:CCW, Open:CW"   , ""                      , ""                        , ""                , ""                        , ""                    , ""                       , ""                       , ""                         }}
+#endif
+    };
 
-// Note: If a custom parameter change is needed, add to CUSTOM_PARAM_LIST, then change it
-// in the dedicated function set_custom_param()    
-    
-//------------------ END OF PARAMETERS VARIABLES --------------------//        
-
-// DO NOT MODIFY THE FUNCTION UNDER THIS LINE
-    
-    uint8 CUSTOM_PARAM_GET[NUM_OF_PARAMS];
-    j = 0;
-    for (i=0; i<NUM_OF_PARAMS; i++) {
-        if (sizeof(CUSTOM_PARAM_GET_LIST) && CUSTOM_PARAM_GET_LIST[j] == i+1) {
-            CUSTOM_PARAM_GET[i] = TRUE;
-            j++;
-        }
-        else {
-            CUSTOM_PARAM_GET[i] = FALSE;
-        }
-    }   // All parameters can be get with default settings, except the following ones
-    uint8 CUSTOM_PARAM_SET[NUM_OF_PARAMS];
-    j = 0;
-    for (i=0; i<NUM_OF_PARAMS; i++) {
-        if (sizeof(CUSTOM_PARAM_SET_LIST) && CUSTOM_PARAM_SET_LIST[j] == i+1) {
-            CUSTOM_PARAM_SET[i] = TRUE;
-            j++;
-        }
-        else {
-            CUSTOM_PARAM_SET[i] = FALSE;
-        }
-    }   // All parameters can be setted with default settings, except the following ones
+    // Note: remember to stay within PARAM_MENU_SLOT chars total, e.g. DEVICE_MENU when assembled is like
+    //"0 ->SHP\n1 ->GENERIC 2 MOT.\n2 ->AIR CHAMBERS\n3 ->OTBK WRIST\n4 ->SH 2 MOTORS\n5 ->AE Shoulder\n6 ->AE EC Wheels\n7 ->SHP 2MOT.\nThe board will reset\n
         
+//------------------ END  OF MENU LIST --------------------//  
+        
+    uint8 NUM_MENUs = sizeof(MENU_LIST)/sizeof(menu_type);  
+    
+    struct parameter param_type;
+    
+    //------------------ BEGIN OF PARAMETER LIST--------------------//    
+    const struct parameter PARAM_LIST[] = {
+    //  { VAR_P                                                                                     , TYPE          , N_ITEMS                       , PARAM_STRING                              , MENU              , STRUCT                                                        , CUSTOM            }           
+        {(uint8*)&(MEM_P->dev.id)                                                                   ,   TYPE_UINT8	,	1	                        ,	"Device ID:"	                        ,	0	            ,   ST_DEVICE	                                                ,	0	            },
+        {(uint8*)&(MEM_P->motor[MOTOR_IDX].k_p)                                                     ,   TYPE_FLOAT	,	3	                        ,   "Position PID [P, I, D]:"	            ,	0	            ,   ST_MOTOR+MOTOR_IDX	                                        ,	POS_PID	        },
+        {(uint8*)&(MEM_P->motor[MOTOR_IDX].k_p_c)                                                   ,   TYPE_FLOAT	,	3	                        ,   "Current PID [P, I, D]:"	            ,	0	            ,   ST_MOTOR+MOTOR_IDX	                                        ,	CURR_PID	    },
+        {(uint8*)&(MEM_P->motor[MOTOR_IDX].activ)                                                   ,   TYPE_FLAG	,	1	                        ,   "Startup Activation:"	                ,	YES_NO  	    ,   ST_MOTOR+MOTOR_IDX	                                        ,	0	            },
+        {(uint8*)&(MEM_P->motor[MOTOR_IDX].input_mode)                                              ,   TYPE_FLAG	,	1	                        ,   "Input mode:"	                        ,	INPUT_MENU  	,   ST_MOTOR+MOTOR_IDX	                                        ,	INPUT_MODE	    },
+        {(uint8*)&(MEM_P->motor[MOTOR_IDX].control_mode)                                            ,   TYPE_FLAG	,	1	                        ,   "Control mode:"	                        ,	CTRL_MODE   	,   ST_MOTOR+MOTOR_IDX	                                        ,	0	            },
+        {(uint8*)&(MEM_P->enc[MEM_P->motor[MOTOR_IDX].encoder_line].res)                            ,   TYPE_UINT8	,	3	                        ,   "Resolutions:"	                        ,	0	            ,   ST_ENCODER+(MEM_P->motor[MOTOR_IDX].encoder_line)	        ,	0	            },
+        {(uint8*)&(MEM_P->enc[MEM_P->motor[MOTOR_IDX].encoder_line].m_off[0])                       ,   TYPE_INT16	,	3	                        ,   "Measurement Offsets:"	                ,	0	            ,   ST_ENCODER+(MEM_P->motor[MOTOR_IDX].encoder_line)	        ,	MEAS_OFF	    },
+        {(uint8*)&(MEM_P->enc[MEM_P->motor[MOTOR_IDX].encoder_line].m_mult[0])                      ,   TYPE_FLOAT	,	3	                        ,   "Multipliers:"	                        ,	0	            ,	ST_ENCODER+(MEM_P->motor[MOTOR_IDX].encoder_line)	        ,	0	            },
+        {(uint8*)&(MEM_P->motor[MOTOR_IDX].pos_lim_flag)                                            ,   TYPE_FLAG	,	1	                        ,   "Pos. limit active:"	                ,	YES_NO	        ,   ST_MOTOR+MOTOR_IDX	                                        ,	0	            },
+        {(uint8*)&(MEM_P->motor[MOTOR_IDX].pos_lim_inf)                                             ,   TYPE_INT32  ,	2	                        ,   "Pos. limits [inf, sup]:"	            ,	0	            ,   ST_MOTOR+MOTOR_IDX	                                        ,	POS_LIM	        },
+        {(uint8*)&(MEM_P->motor[MOTOR_IDX].max_step_neg)                                            ,   TYPE_INT32	,	2	                        ,   "Max steps [neg, pos]:"	                ,	0	            ,   ST_MOTOR+MOTOR_IDX	                                        ,	0	            },
+        {(uint8*)&(MEM_P->motor[MOTOR_IDX].current_limit)                                           ,   TYPE_INT16	,	1	                        ,	"Current limit:"	                    ,	0	            ,	ST_MOTOR+MOTOR_IDX	                                        ,	0	            },
+        {(uint8*)&(MEM_P->emg.emg_threshold[0])                                                     ,   TYPE_UINT16	,	2	                        ,   "EMG thresholds:"	                    ,	0	            ,   ST_EMG	                                                    ,	0	            },
+        {(uint8*)&(MEM_P->emg.emg_calibration_flag)                                                 ,   TYPE_FLAG	,	1	                        ,   "EMG calibration on startup:"	        ,	YES_NO	        ,   ST_EMG	                                                    ,	0	            },
+        {(uint8*)&(MEM_P->emg.emg_max_value[0])                                                     ,   TYPE_UINT32	,	2	                        ,   "EMG max values:"	                    ,	0	            ,   ST_EMG	                                                    ,	0	            },
+        {(uint8*)&(MEM_P->emg.emg_speed[0])                                                         ,   TYPE_UINT8	,	2	                        ,   "EMG max speeds:"	                    ,	0	            ,   ST_EMG	                                                    ,	0	            },
+        {(uint8*)&(MEM_P->enc[MEM_P->motor[MOTOR_IDX].encoder_line].double_encoder_on_off)          ,   TYPE_FLAG	,	1	                        ,   "Absolute encoder position:"	        ,	YES_NO	        ,   ST_ENCODER+(MEM_P->motor[MOTOR_IDX].encoder_line)	        ,	0	            },
+        {(uint8*)&(MEM_P->enc[MEM_P->motor[MOTOR_IDX].encoder_line].motor_handle_ratio)             ,   TYPE_INT8	,	1	                        ,   "Motor handle ratio:"	                ,	0	            ,   ST_ENCODER+(MEM_P->motor[MOTOR_IDX].encoder_line)	        ,	0	            },
+        {(uint8*)&(MEM_P->motor[MOTOR_IDX].activate_pwm_rescaling)                                  ,   TYPE_FLAG	,	1	                        ,   "PWM rescaling:"	                    ,	YES_NO	        ,   ST_MOTOR+MOTOR_IDX	                                        ,	0	            },
+        {(uint8*)&(MEM_P->motor[MOTOR_IDX].curr_lookup[0])                                          ,   TYPE_FLOAT	,	6	                        ,   "Current lookup:"	                    ,	0	            ,	ST_MOTOR+MOTOR_IDX	                                        ,	0	            },
+        {(uint8*)&(MEM_P->dev.hw_maint_date)                                                        ,   TYPE_UINT8	,	3	                        ,   "Date of maintenance [D/M/Y]:"	        ,	0	            ,   ST_DEVICE	                                                ,	0	            },
+        {(uint8*)&(MEM_P->SH.rest_pos)                                                              ,   TYPE_INT32	,	1	                        ,   "Rest position:"	                    ,	0	            ,   ST_SH_SPEC	                                                ,	REST_POS	    },
+        {(uint8*)&(MEM_P->SH.rest_delay)                                                            ,   TYPE_INT32	,	1	                        ,   "Rest position time delay (ms):"	    ,	0	            ,   ST_SH_SPEC	                                                ,	REST_POS_DELAY	},
+        {(uint8*)&(MEM_P->SH.rest_vel)                                                              ,   TYPE_INT32	,	1	                        ,   "Rest vel closure (ticks/sec):"	        ,	0	            ,	ST_SH_SPEC	                                                ,	0	            },
+        {(uint8*)&(MEM_P->SH.rest_position_flag)                                                    ,   TYPE_FLAG	,	1	                        ,   "Rest position enabled:"	            ,	YES_NO	        ,   ST_SH_SPEC	                                                ,	0	            },
+        {(uint8*)&(MEM_P->emg.switch_emg)                                                           ,   TYPE_FLAG   ,	1	                        ,   "EMG inversion:"	                    ,	YES_NO	        ,   ST_EMG	                                                    ,	0	            },
+        {(uint8*)&(MEM_P->dev.right_left)                                                           ,   TYPE_FLAG	,	1	                        ,   "Hand side:"	                        ,	RIGHT_LEFT  	,   ST_DEVICE	                                                ,	HAND_SIDE	    },
+        {(uint8*)&(MEM_P->imu.read_imu_flag)                                                        ,   TYPE_FLAG	,	1	                        ,   "Enable IMUs:"	                        ,	ON_OFF  	    ,	ST_IMU	                                                    ,	0	            },
+        {(uint8*)&(MEM_P->exp.read_exp_port_flag)                                                   ,   TYPE_FLAG	,	1	                        ,   "Read Expansion port:"	                ,	EXP_MENU        ,   ST_EXPANSION	                                            ,	0	            },
+        {(uint8*)&(MEM_P->dev.reset_counters)                                                       ,   TYPE_FLAG	,	1	                        ,   "Reset counters:"	                    ,	YES_NO	        ,   ST_DEVICE	                                                ,	RESET_COUNT	    },
+        {(uint8*)&(MEM_P->exp.curr_time[0])                                                         ,   TYPE_UINT8	,	6	                        ,   "Last checked Time [D/M/Y H:M:S]:"	    ,	0	            ,   ST_EXPANSION	                                            ,	LAST_CHECKED_t	},
+        {(uint8*)&(MEM_P->imu.SPI_read_delay)                                                       ,   TYPE_FLAG	,	1	                        ,   "SPI read delay (IMU):"	                ,	SPI_MENU   	    ,	ST_IMU	                                                    ,	0	            },
+        {(uint8*)&(MEM_P->imu.IMU_conf[0][0])                                                       ,   TYPE_UINT8	,	5	                        ,   "On board IMU conf. [a, g, m, q, t]:"	,	0	            ,   ST_IMU	                                                    ,	0	            },
+        {(uint8*)&(MEM_P->dev.user_id)                                                              ,   TYPE_FLAG	,	1	                        ,   "User ID:"	                            ,	USER_MENU     	,   ST_DEVICE	                                                ,	0	            },
+        {(uint8*)&(MEM_P->user[MEM_P->dev.user_id].user_code_string)                                ,   TYPE_STRING	,	6	                        ,   "User code:"	                        ,	0	            ,   ST_USER+(MEM_P->dev.user_id)	                            ,	0	            },
+#ifndef SOFTHAND_FW     // All other type of firmwares different from SOFTHAND_FW
+        {(uint8*)&(MEM_P->motor[MOTOR_IDX].encoder_line)                                            ,	TYPE_UINT8	,	1	                        ,   "Associated encoder line:"	            ,	0	            ,	ST_MOTOR+MOTOR_IDX	                                        ,	0	            },
+        {(uint8*)&(MEM_P->motor[MOTOR_IDX].motor_driver_type)                                       ,   TYPE_FLAG	,	1	                        ,   "Driver type:"	                        ,	DRIVER_MENU 	,   ST_MOTOR+MOTOR_IDX	                                        ,	MOT_DRIVER	    },
+        {(uint8*)&(MEM_P->motor[MOTOR_IDX].pwm_rate_limiter)                                        ,   TYPE_UINT8	,	1	                        ,   "PWM rate limiter:"	                    ,	0	            ,   ST_MOTOR+MOTOR_IDX	                                        ,	0	            },
+        {(uint8*)&(MEM_P->motor[MOTOR_IDX].not_revers_motor_flag)                                   ,   TYPE_FLAG	,	1	                        ,   "Not reversible:"	                    ,	YES_NO	        ,   ST_MOTOR+MOTOR_IDX	                                        ,	0	            },
+        {(uint8*)&(MEM_P->enc[MEM_P->motor[MOTOR_IDX].encoder_line].Enc_idx_use_for_control)        ,	TYPE_UINT8	,	3	                        ,   "Enc idx used for control:"	            ,	0	            ,	ST_ENCODER+(MEM_P->motor[MOTOR_IDX].encoder_line)	        ,	0	            },
+        {(uint8*)&(MEM_P->enc[MEM_P->motor[MOTOR_IDX].encoder_line].gears_params)                   ,   TYPE_INT8	,	3	                        ,   "Gear params[N1, N2, I1]:"	            ,	0	            ,   ST_ENCODER+(MEM_P->motor[MOTOR_IDX].encoder_line)	        ,	0	            },
+        {(uint8*)&(MEM_P->dev.use_2nd_motor_flag)                                                   ,   TYPE_FLAG	,	1	                        ,   "Use second motor:"	                    ,	ON_OFF          ,   ST_DEVICE	                                                ,	0	            },
+        {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].k_p)                                              ,   TYPE_FLOAT	,	3	                        ,   "Position PID [P, I, D]:"	            ,	0	            ,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	POS_PID_2	    },
+        {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].k_p_c)                                            ,   TYPE_FLOAT	,	3	                        ,   "Current PID [P, I, D]:"	            ,	0	            ,	ST_MOTOR+SECOND_MOTOR_IDX	                                ,	CURR_PID_2	    },
+        {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].activ)                                            ,   TYPE_FLAG	,	1	                        ,   "Startup Activation:"	                ,	YES_NO	        ,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	0	            },
+        {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].input_mode)                                       ,   TYPE_FLAG	,	1	                        ,   "Input mode:"	                        ,	INPUT_MENU   	,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	INPUT_MODE_2	},
+        {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].control_mode)                                     ,   TYPE_FLAG	,	1	                        ,   "Control mode:"	                        ,	CTRL_MODE   	,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	0	            },
+        {(uint8*)&(MEM_P->enc[MEM_P->motor[SECOND_MOTOR_IDX].encoder_line].res)                     ,	TYPE_UINT8	,	3	                        ,   "Resolutions:"	                        ,	0	            ,   ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line)	,	0	            },
+        {(uint8*)&(MEM_P->enc[MEM_P->motor[SECOND_MOTOR_IDX].encoder_line].m_off[0])                ,   TYPE_INT16	,	3	                        ,   "Measurement Offsets:"	                ,	0	            ,   ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line)	,	MEAS_OFF_2	    },
+        {(uint8*)&(MEM_P->enc[MEM_P->motor[SECOND_MOTOR_IDX].encoder_line].m_mult[0])               ,   TYPE_FLOAT	,	3	                        ,   "Multipliers:"	                        ,	0	            ,   ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line)	,	0	            },
+        {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].pos_lim_flag)                                     ,   TYPE_FLAG	,	1	                        ,   "Pos. limit active:"	                ,	YES_NO	        ,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	0	            },
+        {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].pos_lim_inf)                                      ,   TYPE_INT32	,	2	                        ,	"Pos. limits [inf, sup]:"	            ,	0	            ,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	POS_LIM_2	    },
+        {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].max_step_neg)                                     ,   TYPE_INT32	,	2	                        ,   "Max steps [neg, pos]:"	                ,	0	            ,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	0	            },
+        {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].current_limit)                                    ,   TYPE_INT16	,	1	                        ,   "Current limit:"	                    ,	0	            ,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	0	            },
+        {(uint8*)&(MEM_P->enc[MEM_P->motor[SECOND_MOTOR_IDX].encoder_line].double_encoder_on_off)   ,   TYPE_FLAG	,	1	                        ,   "Absolute encoder position:"	        ,	YES_NO	        ,   ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line)	,	0	            },
+        {(uint8*)&(MEM_P->enc[MEM_P->motor[SECOND_MOTOR_IDX].encoder_line].motor_handle_ratio)      ,   TYPE_INT8	,	1	                        ,	"Motor handle ratio:"	                ,	0	            ,	ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line)	,	0	            },
+        {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].activate_pwm_rescaling)                           ,   TYPE_FLAG	,	1	                        ,   "PWM rescaling:"	                    ,	YES_NO	        ,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	0	            },
+        {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].curr_lookup[0])                                   ,   TYPE_FLOAT	,	6	                        ,   "Current lookup:"	                    ,	0	            ,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	0	            },
+        {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line)                                     ,   TYPE_UINT8	,	1	                        ,   "Associated encoder line:"	            ,	0	            ,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	0	            },
+        {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].motor_driver_type)                                ,	TYPE_FLAG	,	1	                        ,   "Driver type:"	                        ,	DRIVER_MENU  	,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	MOT_DRIVER_2	},
+        {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].pwm_rate_limiter)                                 ,   TYPE_UINT8	,	1	                        ,   "PWM rate limiter:"	                    ,	0	            ,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	0	            },
+        {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].not_revers_motor_flag)                            ,   TYPE_FLAG	,	1	                        ,   "Not reversible:"	                    ,	YES_NO	        ,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	0	            },
+        {(uint8*)&(MEM_P->enc[MEM_P->motor[SECOND_MOTOR_IDX].encoder_line].Enc_idx_use_for_control) ,   TYPE_UINT8	,	3	                        ,   "Enc idx used for control:"	            ,	0	            ,   ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line)	,	0	            },
+        {(uint8*)&(MEM_P->enc[MEM_P->motor[SECOND_MOTOR_IDX].encoder_line].gears_params)            ,	TYPE_INT8	,	3	                        ,	"Gear params[N1, N2, I1]:"	            ,	0	            ,	ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line)	,	0	            },
+        {(uint8*)&(MEM_P->enc[0].Enc_raw_read_conf[0])                                              ,   TYPE_UINT8	,   N_Encoder_Line_Connected[0]	,	"Read enc raw line 0:"	                ,	0	            ,   ST_ENCODER+0	                                            ,	0	            },
+        {(uint8*)&(MEM_P->enc[1].Enc_raw_read_conf[0])                                              ,   TYPE_UINT8	,   N_Encoder_Line_Connected[1]	,	"Read enc raw line 1:"	                ,	0	            ,   ST_ENCODER+1	                                            ,	0	            },
+        {(uint8*)&(MEM_P->exp.read_ADC_sensors_port_flag)                                           ,   TYPE_FLAG	,	1	                        ,   "Read additional ADC port:"	            ,	ON_OFF  	    ,   ST_EXPANSION	                                            ,	0	            },
+        {(uint8*)&(MEM_P->exp.ADC_conf[0])                                                          ,   TYPE_UINT8  ,	6	                        ,	"ADC channel [1-6]:"	                ,	0	            ,	ST_EXPANSION	                                            ,	0	            },
+        {(uint8*)&(MEM_P->exp.ADC_conf[6])                                                          ,   TYPE_UINT8	,	6	                        ,   "ADC channel [7-12]:"	                ,	0	            ,   ST_EXPANSION	                                            ,	0	            },
+        {(uint8*)&(MEM_P->exp.record_EMG_history_on_SD)                                             ,   TYPE_FLAG	,	1	                        ,   "Record EMG on SD card:"	            ,	YES_NO	        ,   ST_EXPANSION	                                            ,	0	            },
+        {(uint8*)&(MEM_P->JOY_spec.joystick_closure_speed)                                          ,   TYPE_UINT16	,	1	                        ,   "Joystick closure speed:"	            ,	0	            ,   ST_JOY_SPEC	                                                ,	0	            },
+        {(uint8*)&(MEM_P->JOY_spec.joystick_threshold)                                              ,   TYPE_INT16	,	1	                        ,   "Joystick threshold:"	                ,	0	            ,	ST_JOY_SPEC	                                                ,	0	            },
+        {(uint8*)&(MEM_P->JOY_spec.joystick_gains[0])                                               ,   TYPE_UINT16	,	2	                        ,   "Joystick gains:"	                    ,	0	            ,   ST_JOY_SPEC	                                                ,	0	            },
+        {(uint8*)&(MEM_P->dev.dev_type)                                                             ,   TYPE_FLAG	,	1	                        ,   "Device type:"	                        ,	DEVICE_MENU    	,   ST_DEVICE	                                                ,   DEV_TYPE	    },
+        {(uint8*)&(MEM_P->WR.activation_mode)                                                       ,   TYPE_FLAG	,	1	                        ,   "EMG FSM act.mode:"	                    ,	FSM_ACTIVATION	,   ST_WR_SPEC	                                                ,	0	            },
+        {(uint8*)&(MEM_P->WR.fast_act_threshold[0])                                                 ,	TYPE_UINT16	,	2	                        ,	"Fast act.thresholds:"	                ,	0	            ,   ST_WR_SPEC	                                                ,	0	            },
+#ifdef MASTER_FW        
+        {(uint8*)&(MEM_P->WR.wrist_direction_association)                                           ,	TYPE_FLAG	,	1	                        ,	"Wrist direction:"	                    ,	WRIST_DIR   	,	ST_WR_SPEC	                                                ,	0	            },
+        {(uint8*)&(MEM_P->MS.slave_comm_active)                                                     ,   TYPE_FLAG	,	1	                        ,   "Slave communication active:"	        ,	YES_NO  	    ,   ST_MS_SPEC	                                                ,	0	            },
+        {(uint8*)&(MEM_P->MS.slave_ID)                                                              ,   TYPE_UINT8	,	1	                        ,   "Slave ID:"	                            ,	0	            ,   ST_MS_SPEC	                                                ,	0	            },
+#endif
+#ifdef AIR_CHAMBERS_FB_FW        
+        {(uint8*)&(MEM_P->FB.max_residual_current)                                                  ,   TYPE_INT32	,	1	                        ,   "Maximum slave residual current:"	    ,	0	            ,	ST_FB_SPEC	                                                ,	0	            },
+        {(uint8*)&(MEM_P->FB.maximum_pressure_kPa)                                                  ,   TYPE_FLOAT	,	1	                        ,   "Maximum pressure feedback (kPa):"	    ,	0	            ,   ST_FB_SPEC	                                                ,	0	            },
+        {(uint8*)&(MEM_P->FB.prop_err_fb_gain)                                                      ,   TYPE_FLOAT	,	1		                    ,   "Proportional pressure error gain:"	    ,	0	            ,   ST_FB_SPEC	                                                ,	0	            }
+#endif    
+#endif
+    };
+//------------------ END OF PARAMETERS VARIABLES --------------------//        
+    
+    uint8 NUM_PARAMs = sizeof(PARAM_LIST)/sizeof(param_type);    
+
     if (!index) {
         // Get parameters list with relative types
-        get_param_list(VAR_P, TYPES, NUM_ITEMS, NUM_STRUCT, NUM_MENU, PARAMS_STR, CUSTOM_PARAM_GET, MENU_STR, sendToDevice);
+        get_param_list(NUM_PARAMs, NUM_MENUs, PARAM_LIST, MENU_LIST, sendToDevice);
     }
     else {
-        // Set specific parameter        
+         // Set specific parameter        
         PARAM_IDX = index -1;       // Get right vector param index
         
         // Find size of data
-        switch (TYPES[PARAM_IDX]) {
-            case TYPE_FLAG: case TYPE_INT8: case TYPE_UINT8: case TYPE_STRING:
-                sod = 1; break;
-            case TYPE_INT16: case TYPE_UINT16:
-                sod = 2; break;
-            case TYPE_INT32: case TYPE_UINT32: case TYPE_FLOAT:
-                sod = 4; break;
-        }   
-            
-        if (!CUSTOM_PARAM_SET[PARAM_IDX]) {
+        uint8 sod = num_of_bytes(PARAM_LIST[PARAM_IDX].TYPES);
+   
+        if (PARAM_LIST[PARAM_IDX].custom == 0) {
             // Use default specifications for param setting
-            switch(TYPES[PARAM_IDX]) {
-                case TYPE_FLAG: case TYPE_UINT8:
-                    for (i=0; i<NUM_ITEMS[PARAM_IDX]; i++){
-                        *(VAR_P[PARAM_IDX] + i*sod) = g_rx.buffer[3+i];
-                    }
-                    break;                
-                case TYPE_STRING:
-                    for (i=0; i<NUM_ITEMS[PARAM_IDX]; i++){
-                        *(VAR_P[PARAM_IDX] + i*sod) = g_rx.buffer[3+i];
-                    }
-                    *(VAR_P[PARAM_IDX] + i*sod) = '\0';
-                break; 
-                case TYPE_INT8:
-                    for (i=0; i<NUM_ITEMS[PARAM_IDX]; i++){
-                        *(VAR_P[PARAM_IDX] + i*sod) = *((int8*) &g_rx.buffer[3 + i]);
-                    }
-                    break;                    
-                case TYPE_INT16:
-                    for (i=0; i<NUM_ITEMS[PARAM_IDX]; i++){
-                        aux_int16 = *((int16 *) &g_rx.buffer[3 + i*sod]);
-                        for(j = 0; j < sod; j++) {
-                            ((char*)(VAR_P[PARAM_IDX] + i*sod))[sod - j -1] = ((char*)(&aux_int16))[j];
-                        }
-                    }                   
-                    break;
-                case TYPE_UINT16:
-                    for (i=0; i<NUM_ITEMS[PARAM_IDX]; i++){
-                        aux_uint16 = *((uint16 *) &g_rx.buffer[3 + i*sod]);
-                        for(j = 0; j < sod; j++) {
-                            ((char*)(VAR_P[PARAM_IDX] + i*sod))[sod - j -1] = ((char*)(&aux_uint16))[j];
-                        }
-                    }
-                    break;
-                case TYPE_INT32:
-                    for (i=0; i<NUM_ITEMS[PARAM_IDX]; i++){
-                        aux_int32 = *((int32 *) &g_rx.buffer[3 + i*sod]);
-                        for(j = 0; j < sod; j++) {
-                            ((char*)(VAR_P[PARAM_IDX] + i*sod))[sod - j -1] = ((char*)(&aux_int32))[j];
-                        }
-                    }
-                    break;
-                case TYPE_UINT32:
-                    for (i=0; i<NUM_ITEMS[PARAM_IDX]; i++){
-                        aux_uint32 = *((uint32 *) &g_rx.buffer[3 + i*sod]);
-                        for(j = 0; j < sod; j++) {
-                            ((char*)(VAR_P[PARAM_IDX] + i*sod))[sod - j -1] = ((char*)(&aux_uint32))[j];
-                        }
-                    }
-                    break;
-                case TYPE_FLOAT:
-                    for (i=0; i<NUM_ITEMS[PARAM_IDX]; i++){
-                        aux_float = *((float *) &g_rx.buffer[3 + i*sod]);
-                        for(j = 0; j < sod; j++) {
-                            ((char*)(VAR_P[PARAM_IDX] + i*sod))[sod - j -1] = ((char*)(&aux_float))[j];
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
+            for (i = 0; i < PARAM_LIST[PARAM_IDX].NUM_ITEMS * sod; i += sod){
+                for(j = 0; j < sod; j++) {
+                    ((char*)(PARAM_LIST[PARAM_IDX].VAR_P + i))[sod - j -1] = g_rx.buffer[3+i+j];                   
+                }
+            } 
+            if( PARAM_LIST[PARAM_IDX].TYPES == TYPE_STRING)                   
+               *(PARAM_LIST[PARAM_IDX].VAR_P + i) = '\0';        
         }
+        
         else {  
             // Use custom specifications for param setting
-            set_custom_param(index);
+            set_custom_param(PARAM_IDX, PARAM_LIST);
         }
         
         // Store param also in user_emg structure
-        if (index != USER_ID_PARAM) {        // Not when changing user id
+        if (PARAM_LIST[index].MENU != USER_MENU) {        // Not when changing user id
             memcpy( &(MEM_P->user[MEM_P->dev.user_id].user_emg), &(MEM_P->emg), sizeof(MEM_P->emg) );
         }
         
         // Perform chip reset if needed
-        if (TYPES[PARAM_IDX] == TYPE_FLAG){
-            uint8 idx = 0, menu_idx = -1;
-            do {
-                if (TYPES[idx] == TYPE_FLAG) menu_idx++;    // Increment idx to find the right NUM_MENU entry
-                idx++;
-            } while (idx <= PARAM_IDX);
-            
-            if (NUM_MENU[menu_idx] == 5 || NUM_MENU[menu_idx] == 6 || NUM_MENU[menu_idx] == 8 || NUM_MENU[menu_idx] == 9 || NUM_MENU[menu_idx] == 10) {
-                reset_PSoC_flag = TRUE;
+        for (i=0; i< NUM_MENUs;i++){
+            if ((MENU_LIST[i].name == PARAM_LIST[PARAM_IDX].MENU) & (MENU_LIST[i].reset == TRUE)){
+             reset_PSoC_flag = TRUE;
             }   
         }
     }
@@ -1361,7 +947,8 @@ void manage_param_list(uint16 index, uint8 sendToDevice) {
 //                                                              SET CUSTOM PARAM
 //==============================================================================
 
-void set_custom_param(uint16 index) {
+void set_custom_param(uint16 index, const struct parameter PARAM_LIST[]) {
+    uint8 sod =   num_of_bytes(PARAM_LIST[index].TYPES);
 
     uint8 CYDATA i, j;
     uint8 aux_uchar;
@@ -1370,8 +957,9 @@ void set_custom_param(uint16 index) {
     uint8 MOTOR_IDX = 0;
     uint8 SECOND_MOTOR_IDX = 1;
     
-    switch(index){
-        case 2:         // Position PID
+      
+    switch(PARAM_LIST[index].custom){
+        case  POS_PID:      // Position PID
             if(c_mem.motor[MOTOR_IDX].control_mode != CURR_AND_POS_CONTROL) {
                 aux_float = *((float *) &g_rx.buffer[3]);
                 for(j = 0; j < 4; j++) {
@@ -1412,7 +1000,7 @@ void set_custom_param(uint16 index) {
             }
             break;
             
-        case 3:         //Current PID
+        case CURR_PID:         //Current PID
             if(c_mem.motor[MOTOR_IDX].control_mode != CURR_AND_POS_CONTROL) {
                 aux_float = *((float *) &g_rx.buffer[3]);
                 for(j = 0; j < 4; j++) {
@@ -1453,14 +1041,14 @@ void set_custom_param(uint16 index) {
             }            
             break;  
             
-        case 5:         //Input mode
+        case INPUT_MODE:         //Input mode
             g_mem.motor[MOTOR_IDX].input_mode = g_rx.buffer[3];
             
             // Hold the actual position
             g_refNew[MOTOR_IDX].pos = g_meas[g_mem.motor[MOTOR_IDX].encoder_line].pos[0];
             break;   
 
-        case 8:         //Measurement Offset
+        case MEAS_OFF:         //Measurement Offset
             for(i = 0; i < NUM_OF_SENSORS; i++) {
                 g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].m_off[i] = (int16)(g_rx.buffer[3 + i*2]<<8 | g_rx.buffer[4 + i*2]);
                 g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].m_off[i] = g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].m_off[i] << g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[i];
@@ -1470,7 +1058,7 @@ void set_custom_param(uint16 index) {
             reset_last_value_flag[MOTOR_IDX] = 1;
             break;
     
-        case 11:        //Position limits
+        case POS_LIM:        //Position limits
             g_mem.motor[MOTOR_IDX].pos_lim_inf = (int32)(g_rx.buffer[3]<<24 | g_rx.buffer[4]<<16 | g_rx.buffer[5]<<8 | g_rx.buffer[6]);
             g_mem.motor[MOTOR_IDX].pos_lim_sup = (int32)(g_rx.buffer[7]<<24 | g_rx.buffer[8]<<16 | g_rx.buffer[9]<<8 | g_rx.buffer[10]);
 
@@ -1478,17 +1066,17 @@ void set_custom_param(uint16 index) {
             g_mem.motor[MOTOR_IDX].pos_lim_sup = g_mem.motor[MOTOR_IDX].pos_lim_sup << g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[0];
             break;            
 
-        case 23:        //Rest Position
+        case REST_POS:        //Rest Position
             g_mem.SH.rest_pos = (int32)(g_rx.buffer[3]<<24 | g_rx.buffer[4]<<16 | g_rx.buffer[5]<<8 | g_rx.buffer[6]);
             g_mem.SH.rest_pos = g_mem.SH.rest_pos << g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[0];
             break; 
             
-        case 24:        //Rest Position Time Delay
+        case REST_POS_DELAY:        //Rest Position Time Delay
            g_mem.SH.rest_delay = (int32)(g_rx.buffer[3]<<24 | g_rx.buffer[4]<<16 | g_rx.buffer[5]<<8 | g_rx.buffer[6]);
 		   if (g_mem.SH.rest_delay < 10) g_mem.SH.rest_delay = 10;
            break; 
             
-        case 28:        //Right/Left hand flag
+        case HAND_SIDE:        //Right/Left hand flag
             aux_uchar = *((uint8*) &g_rx.buffer[3]);
             if (aux_uchar) {    // 1
                 g_mem.dev.right_left = LEFT_HAND;
@@ -1516,7 +1104,7 @@ void set_custom_param(uint16 index) {
 
             break; 
 
-        case 31:        //Reset counters - uint8
+        case RESET_COUNT:        //Reset counters - uint8
             aux_uchar = *((uint8*) &g_rx.buffer[3]);
             if (aux_uchar) {
                 reset_counters();
@@ -1534,7 +1122,7 @@ void set_custom_param(uint16 index) {
             }
             break;             
             
-        case 32:         //Current Time
+        case LAST_CHECKED_t:         //Current Time
             for (uint8 i=0; i<6; i++){
                 g_mem.exp.curr_time[i] = g_rx.buffer[3 + i];
             }
@@ -1544,12 +1132,13 @@ void set_custom_param(uint16 index) {
             }
             break;
            
-        case 38:        // First Motor Driver Type
+
+        case MOT_DRIVER:        // First Motor Driver Type
             g_mem.motor[MOTOR_IDX].motor_driver_type = g_rx.buffer[3];
             set_motor_driver_type();            
             break;
             
-        case 44:         // Second Motor Position PID
+        case POS_PID_2:         // Second Motor Position PID
             if(c_mem.motor[SECOND_MOTOR_IDX].control_mode != CURR_AND_POS_CONTROL) {
                 aux_float = *((float *) &g_rx.buffer[3]);
                 for(j = 0; j < 4; j++) {
@@ -1590,7 +1179,7 @@ void set_custom_param(uint16 index) {
             }
             break;
             
-        case 45:         // Second Motor Current PID
+        case CURR_PID_2:         // Second Motor Current PID
             if(c_mem.motor[SECOND_MOTOR_IDX].control_mode != CURR_AND_POS_CONTROL) {
                 aux_float = *((float *) &g_rx.buffer[3]);
                 for(j = 0; j < 4; j++) {
@@ -1630,15 +1219,15 @@ void set_custom_param(uint16 index) {
                 g_mem.motor[SECOND_MOTOR_IDX].k_d_c_dl = aux_float2 * 65536;
             }            
             break;  
-            
-        case 47:         // Second Motor Input mode
+           
+        case INPUT_MODE_2:         // Second Motor Input mode
             g_mem.motor[SECOND_MOTOR_IDX].input_mode = g_rx.buffer[3];
             
             // Hold the actual position
             g_refNew[SECOND_MOTOR_IDX].pos = g_meas[g_mem.motor[SECOND_MOTOR_IDX].encoder_line].pos[0];
             break;   
 
-        case 50:         // Second Motor Measurement Offset
+        case MEAS_OFF_2:         // Second Motor Measurement Offset
             for(i = 0; i < NUM_OF_SENSORS; i++) {
                 g_mem.enc[g_mem.motor[SECOND_MOTOR_IDX].encoder_line].m_off[i] = (int16)(g_rx.buffer[3 + i*2]<<8 | g_rx.buffer[4 + i*2]);
                 g_mem.enc[g_mem.motor[SECOND_MOTOR_IDX].encoder_line].m_off[i] = g_mem.enc[g_mem.motor[SECOND_MOTOR_IDX].encoder_line].m_off[i] << g_mem.enc[g_mem.motor[SECOND_MOTOR_IDX].encoder_line].res[i];
@@ -1648,7 +1237,7 @@ void set_custom_param(uint16 index) {
             reset_last_value_flag[SECOND_MOTOR_IDX] = 1;
             break;
     
-        case 53:        // Second Motor Position limits
+        case POS_LIM_2:        // Second Motor Position limits
             g_mem.motor[SECOND_MOTOR_IDX].pos_lim_inf = (int32)(g_rx.buffer[3]<<24 | g_rx.buffer[4]<<16 | g_rx.buffer[5]<<8 | g_rx.buffer[6]);
             g_mem.motor[SECOND_MOTOR_IDX].pos_lim_sup = (int32)(g_rx.buffer[7]<<24 | g_rx.buffer[8]<<16 | g_rx.buffer[9]<<8 | g_rx.buffer[10]);
 
@@ -1656,12 +1245,12 @@ void set_custom_param(uint16 index) {
             g_mem.motor[SECOND_MOTOR_IDX].pos_lim_sup = g_mem.motor[SECOND_MOTOR_IDX].pos_lim_sup << g_mem.enc[g_mem.motor[SECOND_MOTOR_IDX].encoder_line].res[0];
             break;
             
-        case 61:        // Second Motor Driver Type
+        case MOT_DRIVER_2:        // Second Motor Driver Type
             g_mem.motor[SECOND_MOTOR_IDX].motor_driver_type = g_rx.buffer[3];
             set_motor_driver_type();
             break;
 
-        case 75:        // Device type
+        case DEV_TYPE:        // Device type
             g_mem.dev.dev_type = g_rx.buffer[3];
             
             if (g_mem.dev.dev_type == SOFTHAND_PRO){    // change also gears parameters
@@ -1763,6 +1352,14 @@ void set_custom_param(uint16 index) {
             break;
             
         default:
+
+                for (i = 0; i < PARAM_LIST[index].NUM_ITEMS * sod; i += sod){
+                    for(j = 0; j < sod; j++) {
+                        ((char*)(PARAM_LIST[index].VAR_P + i))[sod - j -1] = g_rx.buffer[3+i+j];                   
+                    }
+                } 
+                if( PARAM_LIST[index].TYPES == TYPE_STRING)                   
+                   *(PARAM_LIST[index].VAR_P + i) = '\0';   
             break;
     }
 }
@@ -2039,9 +1636,9 @@ void prepare_generic_info(char *info_string)
         char str[100];
         strcpy(info_string, "");
         strcat(info_string, "\r\n");
-        strcat(info_string, "Firmware version: ");
-        strcat(info_string, VERSION);
-        strcat(info_string, ".\r\n\r\n");      
+        sprintf(str, "Firmware version: %s %s\r\n", FW_NAME, VERSION);
+        strcat(info_string, str);
+        strcat(info_string, "\r\n");      
 
         strcat(info_string, "DEVICE INFO\r\n");
         sprintf(str, "ID: %d\r\n", (int) MEM_P->dev.id);
@@ -2523,6 +2120,7 @@ void prepare_generic_info(char *info_string)
         sprintf(str, "Slave ID: %d\r\n", (int)MEM_P->MS.slave_ID);
         strcat(info_string, str);
 #endif
+
         sprintf(str, "Last FW cycle time: %u us\r\n", (uint16)(cycle_time*1000000.0));
         strcat(info_string, str);
   
@@ -2662,7 +2260,7 @@ void prepare_SD_param_info(char *info_string)
     
     struct st_eeprom* MEM_P = &g_mem;    
         
-    sprintf(info_string, "Firmware version: %s\r\n", VERSION);
+    sprintf(info_string, "Firmware version: %s %s\r\n", FW_NAME, VERSION);
     
     sprintf(str, "ID: %d\r\n", (int) MEM_P->dev.id);
     strcat(info_string, str);
@@ -3774,7 +3372,6 @@ void cmd_set_inputs(){
     // Update g_refNew in case a new command has been received
     if (change_ext_ref_flag) {
         for (uint8 i = 0; i< NUM_OF_MOTORS; i++) {
-            
             if(g_mem.motor[i].control_mode == CONTROL_CURRENT) {
                 g_refNew[i].curr = aux_int16[i];
             }
