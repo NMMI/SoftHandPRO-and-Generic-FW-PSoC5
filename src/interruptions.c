@@ -1387,96 +1387,129 @@ void motor_control_generic(uint8 idx) {
             pos_error = g_ref[idx].pos - g_meas[ENC_L].pos[0];
 
             pos_error_sum[idx] += pos_error;
-
-            // error_sum saturation
-            if (pos_error_sum[idx] > POS_INTEGRAL_SAT_LIMIT)
-                pos_error_sum[idx] = POS_INTEGRAL_SAT_LIMIT;
-            else {
-                if (pos_error_sum[idx] < -POS_INTEGRAL_SAT_LIMIT) 
-                    pos_error_sum[idx] = -POS_INTEGRAL_SAT_LIMIT;
-            }
             
-            // ------ position PID control ------
-
-            i_ref = 0;
-            
-            // Proportional
-            if (k_p_dl != 0)
-                i_ref += (int32)(k_p_dl * pos_error) >> 16;
-
-            // Integral
-            if (k_i_dl != 0)
-                i_ref += (int32)(k_i_dl * pos_error_sum[idx]) >> 16;
-
-            // Derivative
-            if (k_d_dl != 0)
-                i_ref += (int32)(k_d_dl * (pos_error - prev_pos_err[idx])) >> 16;
-                        
-            // Update previous position
-            prev_pos_err[idx] = pos_error;
-
-            // motor direction depends on i_ref
-            if (i_ref >= 0)
-                motor_dir[idx] = TRUE;
-            else
-                motor_dir[idx] = FALSE;
-
-            // saturate max current
-            if (i_ref > MOT->current_limit)
-                i_ref = MOT->current_limit;
-            else {
-                if (i_ref < -MOT->current_limit)
-                    i_ref = -MOT->current_limit;
-        	}
-
-            // current error and curr error sum
-            curr_error = i_ref - g_meas[ENC_L].curr;
-            curr_error_sum[idx] += curr_error;
-            
-            if (curr_error_sum[idx] > CURR_INTEGRAL_SAT_LIMIT)
-                curr_error_sum[idx] = CURR_INTEGRAL_SAT_LIMIT;
-            else {
-                if (curr_error_sum[idx] < -CURR_INTEGRAL_SAT_LIMIT)
-                    curr_error_sum[idx] = -CURR_INTEGRAL_SAT_LIMIT;
-            }
-
-            // ----- current PID control -----
-
-            pwm_input = 0;
-
-            // Proportional
-            if (k_p_c_dl != 0)
-                pwm_input += (int32)(k_p_c_dl * curr_error) >> 16;
-
-            // Integral
-            if (k_i_c_dl != 0)
-                pwm_input += (int32)(k_i_c_dl * curr_error_sum[idx]) >> 16;
-
-            // Derivative
-            if (k_d_c_dl != 0)
-                pwm_input += (int32)(k_d_c_dl * (curr_error - prev_curr_err[idx])) >> 16;
+            // ESCON driver must be configured as Current Regulator from ESCON Studio program,
+            // and it automatically implement the internal current feedback. 
+            // From FW we just have to close the position feedback using position PID parameters 
              
-            // Limit PWM in range (specific per motor driver)
             if (MOT->motor_driver_type == DRIVER_BRUSHLESS) {
-                if(pwm_input > PWM_MAX_VALUE_ESC) 
-                    pwm_input =  PWM_MAX_VALUE_ESC;
-                if(pwm_input < -PWM_MAX_VALUE_ESC) 
-                    pwm_input = -PWM_MAX_VALUE_ESC;
-            }
-            else {
-                if(pwm_input > PWM_MAX_VALUE_DC) 
-                    pwm_input =  PWM_MAX_VALUE_DC;
-                if(pwm_input < -PWM_MAX_VALUE_DC) 
-                    pwm_input = -PWM_MAX_VALUE_DC;
-            }
+                    // anti-windup (for integral control)
+                if (pos_error_sum[idx] > ANTI_WINDUP)
+                    pos_error_sum[idx] = ANTI_WINDUP;
+                else {
+    				if (pos_error_sum[idx] < -ANTI_WINDUP)
+                    	pos_error_sum[idx] = -ANTI_WINDUP;
+                }
 
-            // Update previous current
-            prev_curr_err[idx] = curr_error;
+                // Proportional
+                if (k_p != 0) 
+                    pwm_input = (int32)(k_p_dl * pos_error) >> 16;
+                
+
+                // Integral
+                if (k_i != 0) 
+                    pwm_input += (int32)(k_i_dl * pos_error_sum[idx]) >> 16;
+                
+
+                // Derivative
+                if (k_d != 0) 
+                    pwm_input += (int32)(k_d_dl * (pos_error - prev_pos_err[idx])) >> 16;
+                
+
+                // Update measure
+                prev_pos_err[idx] = pos_error;
+
+                if (pwm_input > 0)
+                    motor_dir[idx] = TRUE;
+                else
+                    motor_dir[idx] = FALSE;
+            }
+            
+            else {
+                // error_sum saturation
+                if (pos_error_sum[idx] > POS_INTEGRAL_SAT_LIMIT)
+                    pos_error_sum[idx] = POS_INTEGRAL_SAT_LIMIT;
+                else {
+                    if (pos_error_sum[idx] < -POS_INTEGRAL_SAT_LIMIT) 
+                        pos_error_sum[idx] = -POS_INTEGRAL_SAT_LIMIT;
+                }
+                
+                // ------ position PID control ------
+
+                i_ref = 0;
+                
+                // Proportional
+                if (k_p_dl != 0)
+                    i_ref += (int32)(k_p_dl * pos_error) >> 16;
+
+                // Integral
+                if (k_i_dl != 0)
+                    i_ref += (int32)(k_i_dl * pos_error_sum[idx]) >> 16;
+
+                // Derivative
+                if (k_d_dl != 0)
+                    i_ref += (int32)(k_d_dl * (pos_error - prev_pos_err[idx])) >> 16;
+                            
+                // Update previous position
+                prev_pos_err[idx] = pos_error;
+
+                // motor direction depends on i_ref
+                if (i_ref >= 0)
+                    motor_dir[idx] = TRUE;
+                else
+                    motor_dir[idx] = FALSE;
+
+                // saturate max current
+                if (i_ref > MOT->current_limit)
+                    i_ref = MOT->current_limit;
+                else {
+                    if (i_ref < -MOT->current_limit)
+                        i_ref = -MOT->current_limit;
+            	}
+
+                // current error and curr error sum
+                curr_error = i_ref - g_meas[ENC_L].curr;
+                curr_error_sum[idx] += curr_error;
+                
+                if (curr_error_sum[idx] > CURR_INTEGRAL_SAT_LIMIT)
+                    curr_error_sum[idx] = CURR_INTEGRAL_SAT_LIMIT;
+                else {
+                    if (curr_error_sum[idx] < -CURR_INTEGRAL_SAT_LIMIT)
+                        curr_error_sum[idx] = -CURR_INTEGRAL_SAT_LIMIT;
+                }
+
+                // ----- current PID control -----
+
+                pwm_input = 0;
+
+                // Proportional
+                if (k_p_c_dl != 0)
+                    pwm_input += (int32)(k_p_c_dl * curr_error) >> 16;
+
+                // Integral
+                if (k_i_c_dl != 0)
+                    pwm_input += (int32)(k_i_c_dl * curr_error_sum[idx]) >> 16;
+
+                // Derivative
+                if (k_d_c_dl != 0)
+                    pwm_input += (int32)(k_d_c_dl * (curr_error - prev_curr_err[idx])) >> 16;
+                 
+                    if(pwm_input > PWM_MAX_VALUE_DC) 
+                        pwm_input =  PWM_MAX_VALUE_DC;
+                    if(pwm_input < -PWM_MAX_VALUE_DC) 
+                        pwm_input = -PWM_MAX_VALUE_DC;
+                
+                // Update previous current
+                prev_curr_err[idx] = curr_error;
+            }
 
         break;
 
         // ============================== POSITION CONTROL =====================
         case CONTROL_ANGLE:
+            
+            // if ESCON driver is used. It must be configured as Speed Regulator from ESCON Studio program,
+             
             pos_error = g_ref[idx].pos - g_meas[ENC_L].pos[0];
 
             pos_error_sum[idx] += pos_error;
@@ -1527,39 +1560,58 @@ void motor_control_generic(uint8 idx) {
                         i_ref = -MOT->current_limit;
                 }
                 
-                // current error
-                curr_error = i_ref - g_meas[ENC_L].curr;            
-                curr_error_sum[idx] += curr_error;
-                
-                if (curr_error_sum[idx] > CURR_INTEGRAL_SAT_LIMIT)
-                    curr_error_sum[idx] = CURR_INTEGRAL_SAT_LIMIT;
-                else {
-                    if (curr_error_sum[idx] < -CURR_INTEGRAL_SAT_LIMIT) 
-                        curr_error_sum[idx] = -CURR_INTEGRAL_SAT_LIMIT;
+                // ESCON driver must be configured as Current Regulator from ESCON Studio program,
+                // and it automatically implement the internal current feedback.   
+                 
+                if (MOT->motor_driver_type == DRIVER_BRUSHLESS) {
+                    if (i_ref == 0 ) 
+                        pwm_input = 0;             
+                    else{
+                        pwm_input = (i_ref * 80/5000) + SIGN(i_ref)*10;
+                    }
+                    // Limit PWM in range (specific per motor driver)
+                    if(pwm_input > PWM_MAX_VALUE_ESC) 
+                        pwm_input =  PWM_MAX_VALUE_ESC;
+                    if(pwm_input < -PWM_MAX_VALUE_ESC) 
+                        pwm_input = -PWM_MAX_VALUE_ESC;
                 }
-
-                pwm_input = 0;
-
-                // Proportional
-                if (k_p_c != 0)
-                    pwm_input += (int32)(k_p_c * curr_error) >> 16;
-
-                // Integral
-                if (k_i_c != 0)
-                    pwm_input += (int32)(k_i_c * curr_error_sum[idx]) >> 16;
-
-                // Derivative
-                if (k_d_c != 0)
-                    pwm_input += (int32)(k_d_c * (curr_error - prev_curr_err[idx])) >> 16;
                 
-                prev_curr_err[idx] = curr_error;
+                else {
+                    
+                    // current error
+                    curr_error = i_ref - g_meas[ENC_L].curr;            
+                    curr_error_sum[idx] += curr_error;
+                    
+                    if (curr_error_sum[idx] > CURR_INTEGRAL_SAT_LIMIT)
+                        curr_error_sum[idx] = CURR_INTEGRAL_SAT_LIMIT;
+                    else {
+                        if (curr_error_sum[idx] < -CURR_INTEGRAL_SAT_LIMIT) 
+                            curr_error_sum[idx] = -CURR_INTEGRAL_SAT_LIMIT;
+                    }
+
+                    pwm_input = 0;
+
+                    // Proportional
+                    if (k_p_c != 0)
+                        pwm_input += (int32)(k_p_c * curr_error) >> 16;
+
+                    // Integral
+                    if (k_i_c != 0)
+                        pwm_input += (int32)(k_i_c * curr_error_sum[idx]) >> 16;
+
+                    // Derivative
+                    if (k_d_c != 0)
+                        pwm_input += (int32)(k_d_c * (curr_error - prev_curr_err[idx])) >> 16;
+                    
+                    prev_curr_err[idx] = curr_error;
+                }
                 
                 if (pwm_input >= 0) 
                     motor_dir[idx] = TRUE;
                 else
                     motor_dir[idx] = FALSE;
-            }
-        break;
+                }
+            break;
         
         // ================= DIRECT PWM CONTROL ================================
         case CONTROL_PWM:
@@ -1571,7 +1623,6 @@ void motor_control_generic(uint8 idx) {
             else 
                 motor_dir[idx] = FALSE;
             
-          
             // Limit PWM in range (specific per motor driver)
             if (MOT->motor_driver_type == DRIVER_BRUSHLESS) {
                 if(pwm_input > PWM_MAX_VALUE_ESC) 
@@ -2166,8 +2217,11 @@ void analog_read_end() {
         } 
         else {
             if (g_mem.motor[0].motor_driver_type == DRIVER_BRUSHLESS) {
-                // Direct measure in range [2V, 4V] referenced to 4.88V meas supply and up to 5A current
-                g_meas[g_mem.motor[0].encoder_line].curr = filter((int16) (((int32)(ADC_buf[1] - 1679) * 24400) >> 13) * (int32)pwm_sign[0], &filt_i[0]);
+                // Direct measure in range [0V, 4V] referenced to 4.88V meas supply and up to 5A current
+                // 0V = -5A
+                // 2V =  0A
+                // 4V =  5A
+                g_meas[g_mem.motor[0].encoder_line].curr = filter((int16) (((int32)(ADC_buf[1] - 1654) * 5000/1654)), &filt_i[0]);
             } else { // [GS]
                 g_meas[g_mem.motor[0].encoder_line].curr = ((int16) ((int32)((ADC_buf[1] - 1635) * 480) >> 4) * (int32)pwm_sign[0]);
             }
@@ -2175,7 +2229,7 @@ void analog_read_end() {
         
 
         // Calculate current estimation and put it in the second part of the current measurement array;
-		g_meas[g_mem.motor[0].encoder_line].estim_curr = (int16) filter(((int32) g_meas[g_mem.motor[0].encoder_line].curr) - curr_estim(0, g_meas[g_mem.motor[0].encoder_line].pos[0] >> g_mem.enc[g_mem.motor[0].encoder_line].res[0], g_meas[g_mem.motor[0].encoder_line].vel[0] >> g_mem.enc[g_mem.motor[0].encoder_line].res[0], g_ref[0].pos >> g_mem.enc[g_mem.motor[0].encoder_line].res[0]), &filt_curr_diff[0]);
+        g_meas[g_mem.motor[0].encoder_line].estim_curr = (int16) filter(((int32) g_meas[g_mem.motor[0].encoder_line].curr) - curr_estim(0, g_meas[g_mem.motor[0].encoder_line].pos[0] >> g_mem.enc[g_mem.motor[0].encoder_line].res[0], g_meas[g_mem.motor[0].encoder_line].vel[0] >> g_mem.enc[g_mem.motor[0].encoder_line].res[0], g_ref[0].pos >> g_mem.enc[g_mem.motor[0].encoder_line].res[0]), &filt_curr_diff[0]);
         
         // Read also 2nd power current (if necessary)
         if (NUM_OF_ANALOG_INPUTS > 4) {
@@ -2185,8 +2239,11 @@ void analog_read_end() {
             } 
             else {
                 if (g_mem.motor[1].motor_driver_type == DRIVER_BRUSHLESS) {
-                    // Direct measure in range [2V, 4V] referenced to 4.88V meas supply and up to 5A current
-                    g_meas[g_mem.motor[1].encoder_line].curr = filter((int16) (((int32)(ADC_buf[5] - 1679) * 24400) >> 13) * (int32)pwm_sign[1], &filt_i[1]);
+                    // Direct measure in range [0V, 4V] referenced to 4.88V meas supply and up to 5A current
+                    // 0V = -5A
+                    // 2V =  0A
+                    // 4V =  5A
+                    g_meas[g_mem.motor[1].encoder_line].curr = filter((int16) ((int32)(ADC_buf[5] - 1654) * 5000/1654), &filt_i[1]);
                 } else { // [GS]
                     g_meas[g_mem.motor[1].encoder_line].curr = ((int16) ((int32)((ADC_buf[5] - 1635) * 480) >> 4) * (int32)pwm_sign[1]);
                 }

@@ -1806,22 +1806,27 @@ void prepare_generic_info(char *info_string)
             }
 
             strcat(info_string, "Current PID Controller: ");
-            if(MOT->control_mode != CURR_AND_POS_CONTROL) {
-                sprintf(str, "P -> %f  ", ((double) MOT->k_p_c / 65536));
-                strcat(info_string, str);
-                sprintf(str, "I -> %f  ", ((double) MOT->k_i_c / 65536));
-                strcat(info_string, str);
-                sprintf(str, "D -> %f\r\n", ((double) MOT->k_d_c / 65536));
-                strcat(info_string, str);
-
-            }
+            if (MOT->motor_driver_type == DRIVER_BRUSHLESS)
+                strcat(info_string, "Not used, internally set by ESCON driver \r\n");
             else {
-                sprintf(str, "P -> %f  ", ((double) MOT->k_p_c_dl / 65536));
-                strcat(info_string, str);
-                sprintf(str, "I -> %f  ", ((double) MOT->k_i_c_dl / 65536));
-                strcat(info_string, str);
-                sprintf(str, "D -> %f\r\n", ((double) MOT->k_d_c_dl / 65536));
-                strcat(info_string, str);
+                
+                if(MOT->control_mode != CURR_AND_POS_CONTROL) {
+                    sprintf(str, "P -> %f  ", ((double) MOT->k_p_c / 65536));
+                    strcat(info_string, str);
+                    sprintf(str, "I -> %f  ", ((double) MOT->k_i_c / 65536));
+                    strcat(info_string, str);
+                    sprintf(str, "D -> %f\r\n", ((double) MOT->k_d_c / 65536));
+                    strcat(info_string, str);
+
+                }
+                else {
+                    sprintf(str, "P -> %f  ", ((double) MOT->k_p_c_dl / 65536));
+                    strcat(info_string, str);
+                    sprintf(str, "I -> %f  ", ((double) MOT->k_i_c_dl / 65536));
+                    strcat(info_string, str);
+                    sprintf(str, "D -> %f\r\n", ((double) MOT->k_d_c_dl / 65536));
+                    strcat(info_string, str);
+                }
             }
             if (MOT->activ == 0x01)
                 strcat(info_string, "Startup activation: YES\r\n");
@@ -1857,20 +1862,25 @@ void prepare_generic_info(char *info_string)
 
             switch(MOT->control_mode) {
                 case CONTROL_ANGLE:
-                    strcat(info_string, "Control mode: Position\r\n");
+                    strcat(info_string, "Control mode: Position");
                     break;
                 case CONTROL_PWM:
-                    strcat(info_string, "Control mode: PWM\r\n");
+                    strcat(info_string, "Control mode: PWM");
                     break;
                 case CONTROL_CURRENT:
-                    strcat(info_string, "Control mode: Current\r\n");
+                    strcat(info_string, "Control mode: Current");
                     break;
                 case CURR_AND_POS_CONTROL:
-                    strcat(info_string, "Control mode: Position and Current\r\n");
+                    strcat(info_string, "Control mode: Position and Current");
                     break;
                 default:
                     break;
             }
+            
+            if (MOT->motor_driver_type == DRIVER_BRUSHLESS)
+                strcat(info_string, " -> ESCON driver must be configured coherently\r\n");
+            
+            strcat(info_string, "\r\n");    
 
             if (MEM_P->enc[ENC_L].double_encoder_on_off)
                 strcat(info_string, "Absolute encoder position: YES\r\n");
