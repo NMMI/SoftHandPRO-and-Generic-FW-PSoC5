@@ -489,6 +489,8 @@ struct st_eeprom {
 /** \brief IMU data structure
  *
 **/ 
+
+
 struct st_imu_data {
     uint8 flags;        // Flags to know what we are reading (0/1) from each imu [ accel | gyro | magn | quat | temp ]
     int16 accel_value[3];
