@@ -125,8 +125,8 @@ void InitIMU(uint8 n){
             break;
             
             case LSM6DSRX:
-                WriteControlRegisterIMU(LSM6DSRX_CTRL1_XL,0x40); //104 Hz (normal mode)
-                WriteControlRegisterIMU(LSM6DSRX_CTRL3_C,0x40); //BDU
+                WriteControlRegisterIMU(LSM6DSRX_CTRL1_XL,0x90); //104 Hz (normal mode)
+                WriteControlRegisterIMU(LSM6DSRX_CTRL3_C,0x00); //BDU
                 WriteControlRegisterIMU(LSM6DSRX_CTRL2_G,0x40); //104 Hz (normal mode)   
              /*   OneShot_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_WHO_AM_I); //LIS2MDL -->valore WHO_AM_I = 64
                 OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_A,0x00); //10Hz, continuous mode
@@ -334,11 +334,10 @@ void ReadAcc(int n)
 	int row = n;
 	AccStartAddress = g_imu[n].dev_type ? LSM6DSRX_OUTX_L_A : MPU9250_ACCEL_XOUT_H;
     WHO_AM_I = g_imu[n].dev_type ? LSM6DSRX_WHO_AM_I : MPU9250_WHO_AM_I;
-    WHO_AM_I =  ReadControlRegisterIMU(WHO_AM_I);
+    ReadControlRegisterIMU(WHO_AM_I);
     for (i = 0; i < 6; i++){
-       // Accel[row][ i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))] = ReadControlRegisterIMU(AccStartAddress + i);
-         Accel[row][ 0] = 0;
-        Accel[row][1] = WHO_AM_I;
+        Accel[row][ i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))] = ReadControlRegisterIMU(AccStartAddress + i);
+        CyDelayUs(10);
     }
     
   /*
