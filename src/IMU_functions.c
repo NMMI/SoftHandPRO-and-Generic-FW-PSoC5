@@ -126,7 +126,7 @@ void InitIMU(uint8 n){
             
             case LSM6DSRX:
                 WriteControlRegisterIMU(LSM6DSRX_CTRL1_XL,0x90); //104 Hz (normal mode)
-                WriteControlRegisterIMU(LSM6DSRX_CTRL3_C,0x00); //BDU
+                WriteControlRegisterIMU(LSM6DSRX_CTRL3_C,0x40); //BDU
                 WriteControlRegisterIMU(LSM6DSRX_CTRL2_G,0x40); //104 Hz (normal mode)   
              /*   OneShot_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_WHO_AM_I); //LIS2MDL -->valore WHO_AM_I = 64
                 OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_A,0x00); //10Hz, continuous mode
@@ -329,47 +329,15 @@ void ReadIMU(int n)
 *********************************************************************************/
 void ReadAcc(int n)
 {   uint8 i;
-	uint8 low = 0, high=0;
 	uint8 AccStartAddress;
-	int row = n;
-	AccStartAddress = g_imu[n].dev_type ? LSM6DSRX_OUTX_L_A : MPU9250_ACCEL_XOUT_H;
-    WHO_AM_I = g_imu[n].dev_type ? LSM6DSRX_WHO_AM_I : MPU9250_WHO_AM_I;
-    ReadControlRegisterIMU(WHO_AM_I);
+    AccStartAddress = g_imu[n].dev_type ? LSM6DSRX_OUTX_L_A : MPU9250_ACCEL_XOUT_H;
     for (i = 0; i < 6; i++){
-        Accel[row][ i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))] = ReadControlRegisterIMU(AccStartAddress + i);
-        CyDelayUs(10);
+        //	Accel[row][0] = high; 
+	    //  Accel[row][1] = low; 
+        //  Order of LSM6DSRX register are inverted to be compatible with the ones of  MPU9250
+        Accel[n][ i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))] = ReadControlRegisterIMU(AccStartAddress + i);  
     }
     
-  /*
-	//read X
-    low=ReadControlRegisterIMU(MPU9250_ACCEL_XOUT_L);
-    SPI_delay();
-    high=ReadControlRegisterIMU(MPU9250_ACCEL_XOUT_H);
-    SPI_delay();
-    
-	Accel[row][0] = high; 
-	Accel[row][1] = low; 
-	low=0, high=0;
-			
-	//read Y
-    low=ReadControlRegisterIMU(MPU9250_ACCEL_YOUT_L);
-    SPI_delay();
-	high=ReadControlRegisterIMU(MPU9250_ACCEL_YOUT_H);
-    SPI_delay();
-
-	Accel[row][2] = high; 
-	Accel[row][3] = low; 
-	low=0, high=0;
-		
-	//read Z
-    low=ReadControlRegisterIMU(MPU9250_ACCEL_ZOUT_L);
-    SPI_delay();
-    high=ReadControlRegisterIMU(MPU9250_ACCEL_ZOUT_H);
-    SPI_delay();
-    
-	Accel[row][4] = high; 
-	Accel[row][5] = low;
-	low=0, high=0;*/
 }
 
 /*******************************************************************************
