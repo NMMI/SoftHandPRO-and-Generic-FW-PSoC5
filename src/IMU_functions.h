@@ -251,5 +251,8 @@ uint8 ReadControlRegisterIMU(uint8 address);
 void WriteControlRegisterIMU(uint8 address, uint8 dta);
 void ChipSelectorIMU(int n);
 void SPI_delay();
+void OneShot_WriteRoutine (uint8 address, uint8 subaddress, uint8 data);
+uint8 OneShot_ReadRoutine(uint8 address, uint8 subaddress);
+void Continuous_ReadRoutine(uint8 address, uint8 subaddress, uint8 slave_config);
 void UpdateIMUDefine();
 /* [] END OF FILE */

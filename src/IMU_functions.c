@@ -125,7 +125,14 @@ void InitIMU(uint8 n){
             break;
             
             case LSM6DSRX:
-            
+                WriteControlRegisterIMU(LSM6DSRX_CTRL1_XL,0x40); //104 Hz (normal mode)
+                WriteControlRegisterIMU(LSM6DSRX_CTRL3_C,0x40); //BDU
+                WriteControlRegisterIMU(LSM6DSRX_CTRL2_G,0x40); //104 Hz (normal mode)   
+                OneShot_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_WHO_AM_I); //LIS2MDL -->valore WHO_AM_I = 64
+                OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_A,0x00); //10Hz, continuous mode
+                OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_B,0x02); //Offset canc
+                OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_C,0x10); //BDU
+                Continuous_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_OUTX_L_REG,0x06); //Read 6 bytes
             break;
             default:
             break;
@@ -218,8 +225,7 @@ void InitIMUgeneral()
 	    ChipSelectorIMU(k_imu);
 	    CyDelay(10);
         WHO_AM_I = g_imu[k_imu].dev_type ? LSM6DSRX_WHO_AM_I : MPU9250_WHO_AM_I;
-        //WHO_AM_I = MPU9250_WHO_AM_I;
-	    ReadControlRegisterIMU(WHO_AM_I);
+        ReadControlRegisterIMU(WHO_AM_I);
     }
     IMU_ack = 0;
     N_IMU_Connected = 0;    
@@ -645,3 +651,95 @@ void SPI_delay(){
             break;
     }
 }
+
+
+
+void OneShot_WriteRoutine (uint8 address, uint8 subaddress, uint8 data){
+    uint8 WR_ONCE_DONE;
+    WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x40);
+    CyDelay(1);
+    WriteControlRegisterIMU(LSM6DSRX_SLV0_ADD, address | 0x00);
+    CyDelay(1);    
+    WriteControlRegisterIMU(LSM6DSRX_SLV0_SUBADD, subaddress); 
+    CyDelay(1);
+    WriteControlRegisterIMU(LSM6DSRX_SLV0_CONFIG, 0x00); //ODR = 288Hz, FSR=+/-2g, LPF2 disabled
+    CyDelay(1);
+     
+    WriteControlRegisterIMU(LSM6DSRX_DATAWRITE_SLV0, data); //ODR = 288Hz, FSR=+/-2g, LPF2 disabled
+    CyDelay(1);
+    WriteControlRegisterIMU(LSM6DSRX_MASTER_CONFIG, 0x4C); //ODR = 288Hz, FSR=+/-2g, LPF2 disabled
+    CyDelay(1);
+        do 
+    {
+        WR_ONCE_DONE = ReadControlRegisterIMU(LSM6DSRX_STATUS_MASTER);
+    }
+    while ((WR_ONCE_DONE & 0b10000000) == 0);
+    
+    WriteControlRegisterIMU(LSM6DSRX_MASTER_CONFIG, 0x08); 
+    CyDelayUs(300);   
+    WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x00); 
+    
+}
+
+uint8 OneShot_ReadRoutine(uint8 address, uint8 subaddress){
+    uint8 XLDA;
+    uint8 SENS_HUB_ENDOP;
+    uint8 Data;
+    WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x40); 
+    CyDelay(1);
+    WriteControlRegisterIMU(LSM6DSRX_SLV0_ADD, address | 0x01); 
+    CyDelay(1);   
+    WriteControlRegisterIMU(LSM6DSRX_SLV0_SUBADD, subaddress); 
+    CyDelay(1);
+    WriteControlRegisterIMU(LSM6DSRX_SLV0_CONFIG, 0x01); //ODR = 288Hz, FSR=+/-2g, LPF2 disabled
+    CyDelay(1);
+    WriteControlRegisterIMU(LSM6DSRX_MASTER_CONFIG, 0x4C); //ODR = 288Hz, FSR=+/-2g, LPF2 disabled
+    CyDelay(1);
+    WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x00); 
+    ReadControlRegisterIMU(LSM6DSRX_OUTX_H_A); 
+    
+    do 
+    {
+        XLDA = ReadControlRegisterIMU(LSM6DSRX_STATUS_REG);  
+        
+    }
+    while ((XLDA & 0b00000001) == 0); 
+    
+    
+    do 
+    {
+        SENS_HUB_ENDOP = ReadControlRegisterIMU(LSM6DSRX_STATUS_MASTER_MAINPAGE);
+        
+    }
+    while ((SENS_HUB_ENDOP & 0b00000001) == 0);
+
+    WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x40); 
+    CyDelay(1);
+    WriteControlRegisterIMU(LSM6DSRX_MASTER_CONFIG, 0x08); 
+    CyDelay(1);
+    CyDelayUs(300);  
+    
+    ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I);  
+    
+    Data = ReadControlRegisterIMU(LSM6DSRX_SENSOR_HUB_1);  
+    WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x00); 
+   // UART_PutChar(Data);
+    return Data;
+}
+
+void Continuous_ReadRoutine(uint8 address, uint8 subaddress, uint8 slave_config){
+ 
+    WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x40);
+    CyDelay(1);
+    WriteControlRegisterIMU(LSM6DSRX_SLV0_ADD, address | 0x01);  
+    CyDelay(1);  
+    WriteControlRegisterIMU(LSM6DSRX_SLV0_SUBADD, subaddress); 
+    CyDelay(1);
+    WriteControlRegisterIMU(LSM6DSRX_SLV0_CONFIG, slave_config); //ODR = 288Hz, FSR=+/-2g, LPF2 disabled
+    CyDelay(1);
+    WriteControlRegisterIMU(LSM6DSRX_MASTER_CONFIG, 0x4C); //ODR = 288Hz, FSR=+/-2g, LPF2 disabled
+    CyDelay(1);
+    WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x00); 
+    CyDelay(1);
+ }
+
