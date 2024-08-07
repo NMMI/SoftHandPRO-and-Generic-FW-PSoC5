@@ -492,6 +492,7 @@ struct st_eeprom {
 
 
 struct st_imu_data {
+    uint8 dev_type;
     uint8 flags;        // Flags to know what we are reading (0/1) from each imu [ accel | gyro | magn | quat | temp ]
     int16 accel_value[3];
     int16 gyro_value[3];
@@ -620,6 +621,9 @@ extern uint8 btEnabled;
 extern uint8 bt_src;
 
 // IMU variables
+extern uint8 WHO_AM_I      ; 
+  extern   uint8 WHO_AM_I_VALUE ;
+extern uint8 IMU_device;
 extern uint8 N_IMU_Connected;
 extern uint8 IMU_connected[N_IMU_MAX];
 extern int imus_data_size;

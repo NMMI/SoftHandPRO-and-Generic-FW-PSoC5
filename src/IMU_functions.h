@@ -49,14 +49,14 @@
 #include "utils.h"
 #include <SPI_IMU.h>
 
-#define MPU9250 0;
-#define LSM6DSRX 1;
+#define MPU9250 0
+
+#define LSM6DSRX 1
 
 #define READBIT 			0x80  //Flag of READ  (control register)
 #define WRITEBIT 			0x00  //Flag of WRITE (control register)
 
-#define WHO_AM_I
-#define WHO_AM_I_VALUE 
+          
 //LSM6DSRX Register definition
 #define EXT_SENS_ADDR 0b00111100
 
@@ -188,6 +188,8 @@
 #define MPU9250_I2C_SLV1_D0		 	0x64
 #define MPU9250_I2C_MST_DELAY_CTRL  0x67
 
+
+
 #define AK8936_ADDRESS				0x0C //COMPASS AK8936
 #define AK8936_WIA					0x00
 #define AK8936_INFO					0x01
@@ -234,8 +236,8 @@
 
 //function declaration
 void ImusReset(); // Imus Reset 
-void InitIMU(); //IMU setup
-void InitIMUMagCal();
+void InitIMU(uint8 n); //IMU setup
+void InitIMUMagCal(uint8 n_imu);
 void InitIMUgeneral();
 void ReadAcc(int n); //reads acc of IMU n
 void ReadGyro(int n);//reads gyro of IMU n

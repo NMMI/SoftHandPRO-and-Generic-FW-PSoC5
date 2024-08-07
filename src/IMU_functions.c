@@ -73,101 +73,117 @@ void ImusReset() {
 * Function Name: UpdateIMUDefine
 *********************************************************************************/
 void UpdateIMUDefine(){
-    #undef  WHO_AM_I
-    #undef  WHO_AM_I_VALUE
-    #define WHO_AM_I        LSM6DSRX_WHO_AM_I
-    #define WHO_AM_I_VALUE  LSM6DSRX_WHO_AM_I_VALUE
+    
+    
+    
+    
     
 }
 /*******************************************************************************
 * Function Name: IMU Initialization
 *********************************************************************************/
-void InitIMU(){	
-    
-	WriteControlRegisterIMU(MPU9250_PWR_MGMT_1, 0x10); 
-	CyDelay(10);	
-	WriteControlRegisterIMU(MPU9250_USER_CTRL, 0x20);  //I2C master enable - disable I2C (prima 0x30)
-	CyDelay(10);
-    WriteControlRegisterIMU(MPU9250_CONFIG, 0x06); //Gyro & Temp Low Pass Filter 0x01 = 184Hz, 0x02 = 92Hz, 0x04 = 20Hz, 0x05 = 10Hz
-    CyDelay(10);	
-	WriteControlRegisterIMU(MPU9250_GYRO_CONFIG , GYRO_SF_2000); //Gyro full scale select 0x00=250°/s 0x80=500°/s 0x18=2000°/s 
-	CyDelay(10);
-    WriteControlRegisterIMU(MPU9250_ACCEL_CONFIG, ACC_SF_2G); // Acc full scale select 0x00 = 2g 0x08 = 4g 0x10 = 8g 0x18 = 16g
-    CyDelay(10);
-   // WriteControlRegisterIMU(MPU9250_ACCEL_CONFIG2, LP_ACC_FREQ_10);   
-    WriteControlRegisterIMU(MPU9250_ACCEL_CONFIG2, NO_ACC_FIL);   
-    CyDelay(10);
-	//mag register
-	WriteControlRegisterIMU(MPU9250_I2C_MST_CTRL, 0x0D); //set slave I2C speed
-	CyDelay(10);
-	//SLV0 (use to write)
-	WriteControlRegisterIMU(MPU9250_I2C_SLV0_ADDR, 0x0C); //set compass address
-	CyDelay(10);			
-	WriteControlRegisterIMU(MPU9250_I2C_SLV0_REG, AK8936_CNTL); //compass mode register
-	CyDelay(10);	
-	// Istruction used to read Compass
-	WriteControlRegisterIMU(MPU9250_I2C_SLV0_D0, 0x16); //0x12 continuous mode1  0x16 continuous mode2
-	CyDelay(10);
-	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0x81); //enable data from register + 1 bit to write
-	CyDelay(10);
-	//SLV0 (use to read)
-	WriteControlRegisterIMU(MPU9250_I2C_SLV0_ADDR, 0x8C); // RCR  | AK8963_address (0x0C) 
-	CyDelay(10);
-	// Istruction used to read Compass
-	WriteControlRegisterIMU(MPU9250_I2C_SLV0_REG, 0x03); // 0x03:start from Xout Low in case of calibration 0x10:start from ASAX
-	CyDelay(10);
-	// Istruction used to read Compass
-	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0x8D); //How many bits read  SEMPRE DISPARI 0x8D era quella che funzionava
-	CyDelay(10);
-	WriteControlRegisterIMU(MPU9250_PWR_MGMT_1, 0x00); 
-	CyDelay(20);
-}	
+void InitIMU(uint8 n){	
+    switch (g_imu[n].dev_type) {
+        case MPU9250:
+        	WriteControlRegisterIMU(MPU9250_PWR_MGMT_1, 0x10); 
+        	CyDelay(10);	
+        	WriteControlRegisterIMU(MPU9250_USER_CTRL, 0x20);  //I2C master enable - disable I2C (prima 0x30)
+        	CyDelay(10);
+            WriteControlRegisterIMU(MPU9250_CONFIG, 0x06); //Gyro & Temp Low Pass Filter 0x01 = 184Hz, 0x02 = 92Hz, 0x04 = 20Hz, 0x05 = 10Hz
+            CyDelay(10);	
+        	WriteControlRegisterIMU(MPU9250_GYRO_CONFIG , GYRO_SF_2000); //Gyro full scale select 0x00=250°/s 0x80=500°/s 0x18=2000°/s 
+        	CyDelay(10);
+            WriteControlRegisterIMU(MPU9250_ACCEL_CONFIG, ACC_SF_2G); // Acc full scale select 0x00 = 2g 0x08 = 4g 0x10 = 8g 0x18 = 16g
+            CyDelay(10);
+           // WriteControlRegisterIMU(MPU9250_ACCEL_CONFIG2, LP_ACC_FREQ_10);   
+            WriteControlRegisterIMU(MPU9250_ACCEL_CONFIG2, NO_ACC_FIL);   
+            CyDelay(10);
+        	//mag register
+        	WriteControlRegisterIMU(MPU9250_I2C_MST_CTRL, 0x0D); //set slave I2C speed
+        	CyDelay(10);
+        	//SLV0 (use to write)
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_ADDR, 0x0C); //set compass address
+        	CyDelay(10);			
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_REG, AK8936_CNTL); //compass mode register
+        	CyDelay(10);	
+        	// Istruction used to read Compass
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_D0, 0x16); //0x12 continuous mode1  0x16 continuous mode2
+        	CyDelay(10);
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0x81); //enable data from register + 1 bit to write
+        	CyDelay(10);
+        	//SLV0 (use to read)
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_ADDR, 0x8C); // RCR  | AK8963_address (0x0C) 
+        	CyDelay(10);
+        	// Istruction used to read Compass
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_REG, 0x03); // 0x03:start from Xout Low in case of calibration 0x10:start from ASAX
+        	CyDelay(10);
+        	// Istruction used to read Compass
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0x8D); //How many bits read  SEMPRE DISPARI 0x8D era quella che funzionava
+        	CyDelay(10);
+        	WriteControlRegisterIMU(MPU9250_PWR_MGMT_1, 0x00); 
+        	CyDelay(20);
+            break;
+            
+            case LSM6DSRX:
+            
+            break;
+            default:
+            break;
+    }
+}
 
 /*******************************************************************************
 * Function Name: IMU Mag Cal Initialization
 *********************************************************************************/
-void InitIMUMagCal(){	
-    
-	WriteControlRegisterIMU(MPU9250_PWR_MGMT_1, 0x10); 
-    //gyro drive and pll circuitry enabled, sense paths are disabled. This is a low power mode that allows quick enabling of the gyros.
-	CyDelay(10);	
-	WriteControlRegisterIMU(MPU9250_USER_CTRL, 0x20);  
-    //Enable the I2C Master I/F module; pins ES_DA and ES_SCL are isolated from pins SDA/SDI and SCL/ SCLK.
-    CyDelay(10);
-    WriteControlRegisterIMU(MPU9250_CONFIG, 0x06); 
-    //Gyro & Temp Low Pass Filter 0x01 = 184Hz, 0x02 = 92Hz, 0x04 = 20Hz, 0x05 = 10Hz, 0x06 = 5Hz
-    CyDelay(10);	
-	WriteControlRegisterIMU(MPU9250_GYRO_CONFIG , GYRO_SF_2000); //Gyro full scale select 0x00=250°/s 0x80=500°/s 0x18=2000°/s 
-	CyDelay(10);
-    WriteControlRegisterIMU(MPU9250_ACCEL_CONFIG, ACC_SF_2G); // Acc full scale select 0x00 = 2g 0x08 = 4g 0x10 = 8g 0x18 = 16g
-    CyDelay(10);
-    WriteControlRegisterIMU(MPU9250_ACCEL_CONFIG2, 0x05); // 10Hz LPF
-    CyDelay(10);
-	//mag register
-	WriteControlRegisterIMU(MPU9250_I2C_MST_CTRL, 0x0D); //set slave I2C speed to 400KHz
-	CyDelay(10);
-	WriteControlRegisterIMU(MPU9250_I2C_SLV0_ADDR, 0x0C); //set compass address + WriteBit
-	CyDelay(10);			
-	WriteControlRegisterIMU(MPU9250_I2C_SLV0_REG, AK8936_CNTL); //compass address for register CTRL1
-	CyDelay(10);	
-	WriteControlRegisterIMU(MPU9250_I2C_SLV0_D0, 0x1F); 
-    ////Value to write in register CTRL1 (0x1F Fuse ROM access + select 16 bit output)
-	//Values of addresses from 10H to 12H can be read only in Fuse access mode.
-    CyDelay(10);
-	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0x81); 
-    ///Enable reading data from this slave at the sample rate and storing data at the first available EXT_SENS_DATA register, 
-    //which is always EXT_SENS_DATA_00 for I2C slave 0. + 1 byte to read
-    CyDelay(10);
-	WriteControlRegisterIMU(MPU9250_I2C_SLV0_ADDR, 0x8C); // ReadBit  | AK8963_address (0x0C) 
-	CyDelay(10);
-	WriteControlRegisterIMU(MPU9250_I2C_SLV0_REG, 0x10); // 0x10:start from ASAX
-    CyDelay(10);
-	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0x83);
-	//Enable reading data from this slave at the sample rate and storing data at the first available EXT_SENS_DATA register, 
-    //which is always EXT_SENS_DATA_00 for I2C slave 0. + 3 byte to read
-    CyDelay(10);
-	WriteControlRegisterIMU(MPU9250_PWR_MGMT_1, 0x00); 
-	CyDelay(20);
+void InitIMUMagCal(uint8 k_imu){	
+    switch (g_imu[k_imu].dev_type){
+        case MPU9250:
+        	WriteControlRegisterIMU(MPU9250_PWR_MGMT_1, 0x10); 
+            //gyro drive and pll circuitry enabled, sense paths are disabled. This is a low power mode that allows quick enabling of the gyros.
+        	CyDelay(10);	
+        	WriteControlRegisterIMU(MPU9250_USER_CTRL, 0x20);  
+            //Enable the I2C Master I/F module; pins ES_DA and ES_SCL are isolated from pins SDA/SDI and SCL/ SCLK.
+            CyDelay(10);
+            WriteControlRegisterIMU(MPU9250_CONFIG, 0x06); 
+            //Gyro & Temp Low Pass Filter 0x01 = 184Hz, 0x02 = 92Hz, 0x04 = 20Hz, 0x05 = 10Hz, 0x06 = 5Hz
+            CyDelay(10);	
+        	WriteControlRegisterIMU(MPU9250_GYRO_CONFIG , GYRO_SF_2000); //Gyro full scale select 0x00=250°/s 0x80=500°/s 0x18=2000°/s 
+        	CyDelay(10);
+            WriteControlRegisterIMU(MPU9250_ACCEL_CONFIG, ACC_SF_2G); // Acc full scale select 0x00 = 2g 0x08 = 4g 0x10 = 8g 0x18 = 16g
+            CyDelay(10);
+            WriteControlRegisterIMU(MPU9250_ACCEL_CONFIG2, 0x05); // 10Hz LPF
+            CyDelay(10);
+        	//mag register
+        	WriteControlRegisterIMU(MPU9250_I2C_MST_CTRL, 0x0D); //set slave I2C speed to 400KHz
+        	CyDelay(10);
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_ADDR, 0x0C); //set compass address + WriteBit
+        	CyDelay(10);			
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_REG, AK8936_CNTL); //compass address for register CTRL1
+        	CyDelay(10);	
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_D0, 0x1F); 
+            ////Value to write in register CTRL1 (0x1F Fuse ROM access + select 16 bit output)
+        	//Values of addresses from 10H to 12H can be read only in Fuse access mode.
+            CyDelay(10);
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0x81); 
+            ///Enable reading data from this slave at the sample rate and storing data at the first available EXT_SENS_DATA register, 
+            //which is always EXT_SENS_DATA_00 for I2C slave 0. + 1 byte to read
+            CyDelay(10);
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_ADDR, 0x8C); // ReadBit  | AK8963_address (0x0C) 
+        	CyDelay(10);
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_REG, 0x10); // 0x10:start from ASAX
+            CyDelay(10);
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0x83);
+        	//Enable reading data from this slave at the sample rate and storing data at the first available EXT_SENS_DATA register, 
+            //which is always EXT_SENS_DATA_00 for I2C slave 0. + 3 byte to read
+            CyDelay(10);
+        	WriteControlRegisterIMU(MPU9250_PWR_MGMT_1, 0x00); 
+        	CyDelay(20);
+        break;
+        case LSM6DSRX:
+            break;
+              default:
+            break;
+        }
 }
 
 /********************************************************************************
@@ -189,33 +205,64 @@ void InitIMUgeneral()
     uint8 count = 0;
     int IMU_ack;
     int tmp[N_IMU_MAX];
-    uint8 WhoAmI_MPU;
-    uint8 WhoAmI_LSM;
-    uint8 IMU_device;
+    uint8 WhoAmI_MPU = 0;
+    uint8 WhoAmI_LSM = 0;
     // Initialize Memory Structure 
     memset(&g_imu, 0, sizeof(struct st_imu));
     memset(&IMU_connected, 0, sizeof(IMU_connected));
+        
     
-    ChipSelectorIMU(0);
-	CyDelay(10);
-	WhoAmI_MPU = ReadControlRegisterIMU(MPU9250_WHO_AM_I);
-    WhoAmI_LSM = ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I);
-    if (WhoAmI_MPU == MPU9250_WHO_AM_I_VALUE && WhoAmI_LSM != LSM6DSRX_WHO_AM_I_VALUE){
-         IMU_device = MPU9250;
-    }
-    else if (WhoAmI_LSM == LSM6DSRX_WHO_AM_I_VALUE && WhoAmI_MPU != MPU9250_WHO_AM_I_VALUE){
-        IMU_device = LSM6DSRX;
-        UpdateIMUDefine();
-    }
-    
-    
-
-    // Initialize IMU to Read MagCal Parameters
+    // First ping to be sure to wakeup IMUs
     for (k_imu=0; k_imu < N_IMU_MAX; k_imu++) 
     {	
 	    ChipSelectorIMU(k_imu);
 	    CyDelay(10);
-	    InitIMUMagCal();
+        WHO_AM_I = g_imu[k_imu].dev_type ? LSM6DSRX_WHO_AM_I : MPU9250_WHO_AM_I;
+        //WHO_AM_I = MPU9250_WHO_AM_I;
+	    ReadControlRegisterIMU(WHO_AM_I);
+    }
+    IMU_ack = 0;
+    N_IMU_Connected = 0;    
+    for (k_imu = 0; k_imu < NUM_DEV_IMU; k_imu++) 
+    {      
+    	ChipSelectorIMU(k_imu);
+        CyDelay(10);
+    	WhoAmI_MPU = ReadControlRegisterIMU(MPU9250_WHO_AM_I);
+        WhoAmI_LSM = ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I);
+        if (WhoAmI_MPU == MPU9250_WHO_AM_I_VALUE && WhoAmI_LSM != LSM6DSRX_WHO_AM_I_VALUE){
+            g_imu[k_imu].dev_type = MPU9250;
+            N_IMU_Connected++;
+            IMU_ack = 0;
+            tmp[k_imu] = 1;
+        }
+        else if (WhoAmI_LSM == LSM6DSRX_WHO_AM_I_VALUE && WhoAmI_MPU != MPU9250_WHO_AM_I_VALUE){
+            g_imu[k_imu].dev_type = LSM6DSRX;
+            N_IMU_Connected++;
+            IMU_ack = 0;
+            tmp[k_imu] = 1;
+        }
+        else{
+            tmp[k_imu] = 0;
+            g_imu[k_imu].dev_type = 3;
+        }
+    }
+        
+            
+    for(k_imu = 0; k_imu < N_IMU_MAX; k_imu++)
+    {
+        if(tmp[k_imu] == 1)
+        {
+            IMU_connected[count] = k_imu;
+            count++;
+        }
+    }            
+
+    // Initialize IMU to Read MagCal Parameters
+    for (k_imu = 0; k_imu < N_IMU_MAX; k_imu++) 
+    {	
+	    ChipSelectorIMU(k_imu);
+	    CyDelay(10);
+	    InitIMUMagCal(k_imu);
 	    CyDelay(10); 
     }
     
@@ -233,51 +280,15 @@ void InitIMUgeneral()
     ReadMagCal(0);  
     CyDelay(10);
         
-    // First ping to be sure to wakeup IMUs
-    for (k_imu=0; k_imu < N_IMU_MAX; k_imu++) 
-    {	
-	    ChipSelectorIMU(k_imu);
-	    CyDelay(10);
-	    ReadControlRegisterIMU(WHO_AM_I);
-    }
-    
-    // Identify IMU connected
-    ChipSelectorIMU(0);
-    CyDelay(10);
-    IMU_ack = ReadControlRegisterIMU(WHO_AM_I);
-    IMU_ack = 0;
-    N_IMU_Connected = 0;    
-    for (k_imu = 0; k_imu < NUM_DEV_IMU; k_imu++) 
-    {      
-    	ChipSelectorIMU(k_imu);
-        CyDelay(10);
-        IMU_ack = ReadControlRegisterIMU(WHO_AM_I);
-        if (IMU_ack == WHO_AM_I_VALUE) 
-        {
-            N_IMU_Connected++;
-            IMU_ack = 0;
-            tmp[k_imu] = 1;
-        }
-        else
-            tmp[k_imu] = 0;
-    }
 
-    for(k_imu = 0; k_imu < N_IMU_MAX; k_imu++)
-    {
-        if(tmp[k_imu] == 1)
-        {
-            IMU_connected[count] = k_imu;
-            count++;
-        }
-    }
-            
+               
     // Standard Initialization of the IMU
     CyDelay(10);
     for (k_imu=0; k_imu < N_IMU_MAX; k_imu++) 
     {	
 	    ChipSelectorIMU(k_imu);
 	    CyDelay(10);
-	    InitIMU();
+	    InitIMU(k_imu);
 	    CyDelay(10); 
     }
     CyDelay(50);
@@ -426,25 +437,36 @@ void ReadMag(int n){
 /********************************************************************************
 * Function Name: ReadMagCal
 *********************************************************************************/
-void ReadMagCal(int n){
-	
+void ReadMagCal(int n){ 
     uint8 read = 0; 
 	int row = n;	
-	//read X
-	read = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_00);
-    MagCal[row][0] = read; 
-    read = 0;
-    
-	//read Y
-	read = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_01);			
-	MagCal[row][1] = read; 
-	read = 0;
-    
-	//read Z
-	read = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_02);			
-	MagCal[row][2] = read; 
-	read = 0;
-    
+	switch (g_imu[n].dev_type){
+        case MPU9250:
+        	//read X
+        	read = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_00);
+            MagCal[row][0] = read; 
+            read = 0;
+            
+        	//read Y
+        	read = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_01);			
+        	MagCal[row][1] = read; 
+        	read = 0;
+            
+        	//read Z
+        	read = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_02);			
+        	MagCal[row][2] = read; 
+        	read = 0;
+            break;
+
+        case LSM6DSRX:
+            MagCal[row][0] = 0; 
+            MagCal[row][1] = 0; 
+            MagCal[row][2] = 0; 
+            break;
+              default:
+            break;
+    }
+
 }
     
 /*******************************************************************************

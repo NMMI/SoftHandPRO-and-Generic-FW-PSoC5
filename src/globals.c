@@ -129,6 +129,9 @@ uint8 btEnabled = FALSE;
 uint8 bt_src = FALSE;
 
 // IMU variables
+ uint8 WHO_AM_I ; 
+     uint8 WHO_AM_I_VALUE ;
+uint8 IMU_device;
 uint8 N_IMU_Connected;
 uint8 IMU_connected[N_IMU_MAX];
 int imus_data_size;
