@@ -128,11 +128,11 @@ void InitIMU(uint8 n){
                 WriteControlRegisterIMU(LSM6DSRX_CTRL1_XL,0x40); //104 Hz (normal mode)
                 WriteControlRegisterIMU(LSM6DSRX_CTRL3_C,0x40); //BDU
                 WriteControlRegisterIMU(LSM6DSRX_CTRL2_G,0x40); //104 Hz (normal mode)   
-                OneShot_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_WHO_AM_I); //LIS2MDL -->valore WHO_AM_I = 64
+             /*   OneShot_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_WHO_AM_I); //LIS2MDL -->valore WHO_AM_I = 64
                 OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_A,0x00); //10Hz, continuous mode
                 OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_B,0x02); //Offset canc
                 OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_C,0x10); //BDU
-                Continuous_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_OUTX_L_REG,0x06); //Read 6 bytes
+                Continuous_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_OUTX_L_REG,0x06); //Read 6 bytes*/
             break;
             default:
             break;
@@ -237,12 +237,14 @@ void InitIMUgeneral()
         WhoAmI_LSM = ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I);
         if (WhoAmI_MPU == MPU9250_WHO_AM_I_VALUE && WhoAmI_LSM != LSM6DSRX_WHO_AM_I_VALUE){
             g_imu[k_imu].dev_type = MPU9250;
+            g_imuNew[k_imu].dev_type = MPU9250;
             N_IMU_Connected++;
             IMU_ack = 0;
             tmp[k_imu] = 1;
         }
         else if (WhoAmI_LSM == LSM6DSRX_WHO_AM_I_VALUE && WhoAmI_MPU != MPU9250_WHO_AM_I_VALUE){
             g_imu[k_imu].dev_type = LSM6DSRX;
+            g_imuNew[k_imu].dev_type = LSM6DSRX;
             N_IMU_Connected++;
             IMU_ack = 0;
             tmp[k_imu] = 1;
@@ -326,11 +328,20 @@ void ReadIMU(int n)
 * Function Name: Read Acc's Data of IMU n
 *********************************************************************************/
 void ReadAcc(int n)
-{
-	uint8 low=0, high=0;
-	
+{   uint8 i;
+	uint8 low = 0, high=0;
+	uint8 AccStartAddress;
 	int row = n;
-	
+	AccStartAddress = g_imu[n].dev_type ? LSM6DSRX_OUTX_L_A : MPU9250_ACCEL_XOUT_H;
+    WHO_AM_I = g_imu[n].dev_type ? LSM6DSRX_WHO_AM_I : MPU9250_WHO_AM_I;
+    WHO_AM_I =  ReadControlRegisterIMU(WHO_AM_I);
+    for (i = 0; i < 6; i++){
+       // Accel[row][ i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))] = ReadControlRegisterIMU(AccStartAddress + i);
+         Accel[row][ 0] = 0;
+        Accel[row][1] = WHO_AM_I;
+    }
+    
+  /*
 	//read X
     low=ReadControlRegisterIMU(MPU9250_ACCEL_XOUT_L);
     SPI_delay();
@@ -359,7 +370,7 @@ void ReadAcc(int n)
     
 	Accel[row][4] = high; 
 	Accel[row][5] = low;
-	low=0, high=0;
+	low=0, high=0;*/
 }
 
 /*******************************************************************************
