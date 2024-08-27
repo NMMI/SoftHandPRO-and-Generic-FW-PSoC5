@@ -269,7 +269,7 @@ void InitIMUgeneral()
             count++;
         }
     }            
-/*
+
     // Initialize IMU to Read MagCal Parameters
     for (k_imu = 0; k_imu < N_IMU_MAX; k_imu++) 
     {	
@@ -293,7 +293,6 @@ void InitIMUgeneral()
     ReadMagCal(0);  
     CyDelay(10);
         
-*/
                
     // Standard Initialization of the IMU
     CyDelay(10);
