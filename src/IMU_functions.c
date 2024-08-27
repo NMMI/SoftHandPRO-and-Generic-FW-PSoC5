@@ -598,19 +598,22 @@ void ReadAllIMUs(){
 * Function Name: Read Temperature Data of IMU n
 *********************************************************************************/
 void ReadTemp(int n)
-{
-	uint8 low=0, high=0;	
-	int row = n;
-	
-	//read X
-    low=ReadControlRegisterIMU(MPU9250_TEMP_OUT_L);
-    SPI_delay();
-	high=ReadControlRegisterIMU(MPU9250_TEMP_OUT_H);
-    SPI_delay();
-
-	Temp[row][0] = high; 
-	Temp[row][1] = low; 
-	low=0, high=0;
+{   // MPU9250:
+    // sensitivity  333.87 LSB/°C, ADC resolution = 16
+    // ODR = 52 Hz
+    
+    //LSM6DSRX:
+    // sensitivity  256 LSB/°C, ADC resolution = 16
+    // ODR = 52 Hz
+    static uint8 i;
+	static uint8 TempStartAddress;
+    TempStartAddress = g_imu[n].dev_type ? LSM6DSRX_OUT_TEMP_L : MPU9250_TEMP_OUT_H;
+    for (i = 0; i < 2; i++){
+        //	Accel[row][0] = high; 
+	    //  Accel[row][1] = low; 
+        //  Order of LSM6DSRX register are inverted to be compatible with the ones of  MPU9250
+        Temp[n][ i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))] = ReadControlRegisterIMU(TempStartAddress + i);  
+    }
 }
 
 /********************************** *********************************************
