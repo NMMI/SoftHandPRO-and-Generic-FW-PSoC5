@@ -83,6 +83,17 @@ void UpdateIMUDefine(){
 * Function Name: IMU Initialization
 *********************************************************************************/
 void InitIMU(uint8 n){	
+    
+    // ################################# IMPORTANTE #######################################
+    // ####################################################################################
+    // ####################################################################################
+    
+    // Rendere compatibili performance di MPU9250 e LSM6DSRX in termini di ODR, FSR, LPF...
+    
+    // ####################################################################################
+    // ####################################################################################
+    // ####################################################################################
+    
     switch (g_imu[n].dev_type) {
         case MPU9250:
         	WriteControlRegisterIMU(MPU9250_PWR_MGMT_1, 0x10); 
@@ -125,13 +136,13 @@ void InitIMU(uint8 n){
             break;
             
             case LSM6DSRX:
-                WriteControlRegisterIMU(LSM6DSRX_CTRL1_XL,0x90); //104 Hz (normal mode)
+                WriteControlRegisterIMU(LSM6DSRX_CTRL1_XL,0x90);    //ODR = 3.3 kHz,    FSR = +- 2g
                 CyDelay(20);
-                WriteControlRegisterIMU(LSM6DSRX_CTRL3_C,0x40); //BDU
+                WriteControlRegisterIMU(LSM6DSRX_CTRL3_C,0x40);     //BDU
                 CyDelay(20);
-                WriteControlRegisterIMU(LSM6DSRX_CTRL2_G,0x40); //104 Hz (normal mode)   
+                WriteControlRegisterIMU(LSM6DSRX_CTRL2_G,0x4C);     //ODR = 104 Hz,     FSR = +- 2000dps
                 CyDelay(20);
-             /*   OneShot_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_WHO_AM_I); //LIS2MDL -->valore WHO_AM_I = 64
+             /* OneShot_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_WHO_AM_I); //LIS2MDL -->valore WHO_AM_I = 64
                 OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_A,0x00); //10Hz, continuous mode
                 OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_B,0x02); //Offset canc
                 OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_C,0x10); //BDU
