@@ -126,8 +126,11 @@ void InitIMU(uint8 n){
             
             case LSM6DSRX:
                 WriteControlRegisterIMU(LSM6DSRX_CTRL1_XL,0x90); //104 Hz (normal mode)
+                CyDelay(20);
                 WriteControlRegisterIMU(LSM6DSRX_CTRL3_C,0x40); //BDU
+                CyDelay(20);
                 WriteControlRegisterIMU(LSM6DSRX_CTRL2_G,0x40); //104 Hz (normal mode)   
+                CyDelay(20);
              /*   OneShot_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_WHO_AM_I); //LIS2MDL -->valore WHO_AM_I = 64
                 OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_A,0x00); //10Hz, continuous mode
                 OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_B,0x02); //Offset canc
@@ -210,7 +213,6 @@ void InitIMUgeneral()
 {
     uint8 k_imu ;
     uint8 count = 0;
-    int IMU_ack;
     int tmp[N_IMU_MAX];
     uint8 WhoAmI_MPU = 0;
     uint8 WhoAmI_LSM = 0;
@@ -224,29 +226,32 @@ void InitIMUgeneral()
     {	
 	    ChipSelectorIMU(k_imu);
 	    CyDelay(10);
-        WHO_AM_I = g_imu[k_imu].dev_type ? LSM6DSRX_WHO_AM_I : MPU9250_WHO_AM_I;
-        ReadControlRegisterIMU(WHO_AM_I);
+        //WHO_AM_I = g_imu[k_imu].dev_type ? LSM6DSRX_WHO_AM_I : MPU9250_WHO_AM_I;
+        ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I);
+        ReadControlRegisterIMU(MPU9250_WHO_AM_I);
     }
-    IMU_ack = 0;
+    
+    
     N_IMU_Connected = 0;    
     for (k_imu = 0; k_imu < NUM_DEV_IMU; k_imu++) 
     {      
     	ChipSelectorIMU(k_imu);
         CyDelay(10);
     	WhoAmI_MPU = ReadControlRegisterIMU(MPU9250_WHO_AM_I);
+        CyDelay(10);
         WhoAmI_LSM = ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I);
+        CyDelay(10);
         if (WhoAmI_MPU == MPU9250_WHO_AM_I_VALUE && WhoAmI_LSM != LSM6DSRX_WHO_AM_I_VALUE){
             g_imu[k_imu].dev_type = MPU9250;
             g_imuNew[k_imu].dev_type = MPU9250;
             N_IMU_Connected++;
-            IMU_ack = 0;
+            
             tmp[k_imu] = 1;
         }
         else if (WhoAmI_LSM == LSM6DSRX_WHO_AM_I_VALUE && WhoAmI_MPU != MPU9250_WHO_AM_I_VALUE){
             g_imu[k_imu].dev_type = LSM6DSRX;
             g_imuNew[k_imu].dev_type = LSM6DSRX;
             N_IMU_Connected++;
-            IMU_ack = 0;
             tmp[k_imu] = 1;
         }
         else{
@@ -264,7 +269,7 @@ void InitIMUgeneral()
             count++;
         }
     }            
-
+/*
     // Initialize IMU to Read MagCal Parameters
     for (k_imu = 0; k_imu < N_IMU_MAX; k_imu++) 
     {	
@@ -288,7 +293,7 @@ void InitIMUgeneral()
     ReadMagCal(0);  
     CyDelay(10);
         
-
+*/
                
     // Standard Initialization of the IMU
     CyDelay(10);

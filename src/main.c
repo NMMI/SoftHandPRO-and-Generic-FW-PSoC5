@@ -73,7 +73,9 @@
 //==============================================================================
 
 int main()
-{    WHO_AM_I       =                 MPU9250_WHO_AM_I;
+{   
+    
+    WHO_AM_I       =                 MPU9250_WHO_AM_I;
      WHO_AM_I_VALUE =                 MPU9250_WHO_AM_I_VALUE    ;
     
     // Iterator    
@@ -175,7 +177,6 @@ int main()
     	SPI_IMU_ClearTxBuffer();
     	SPI_IMU_ClearFIFO();							
         CyDelay(10);
-        
         // Init MPU9250 devices
         InitIMUgeneral();
         
