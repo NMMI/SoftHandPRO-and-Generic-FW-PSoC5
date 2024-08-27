@@ -332,8 +332,8 @@ void ReadIMU(int n)
 * Function Name: Read Acc's Data of IMU n
 *********************************************************************************/
 void ReadAcc(int n)
-{   uint8 i;
-	uint8 AccStartAddress;
+{   static uint8 i;
+	static uint8 AccStartAddress;
     AccStartAddress = g_imu[n].dev_type ? LSM6DSRX_OUTX_L_A : MPU9250_ACCEL_XOUT_H;
     for (i = 0; i < 6; i++){
         //	Accel[row][0] = high; 
@@ -348,6 +348,17 @@ void ReadAcc(int n)
 * Function Name: Read Gyro's Data of IMU n
 *********************************************************************************/
 void ReadGyro(int n){
+    static uint8 i;
+	static uint8 GyroStartAddress;
+    GyroStartAddress = g_imu[n].dev_type ? LSM6DSRX_OUTX_L_G : MPU9250_GYRO_XOUT_H;
+    for (i = 0; i < 6; i++){
+        //	Accel[row][0] = high; 
+	    //  Accel[row][1] = low; 
+        //  Order of LSM6DSRX register are inverted to be compatible with the ones of  MPU9250
+        Gyro[n][ i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))] = ReadControlRegisterIMU(GyroStartAddress + i);  
+    }
+    /*
+    
 	uint8 low=0, high=0;
  
 	int row = n;
@@ -382,6 +393,7 @@ void ReadGyro(int n){
 	Gyro[row][5] = low;        
 
 	low=0, high=0;
+    */
 }
 
 /*******************************************************************************
