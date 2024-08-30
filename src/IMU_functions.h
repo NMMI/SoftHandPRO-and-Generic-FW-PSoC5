@@ -63,7 +63,7 @@
 #define LSM6DSRX_INT1_CTRL              0x0D
 #define LSM6DSRX_INT2_CTRL              0x0E
 #define LSM6DSRX_WHO_AM_I               0x0F
-#define LSM6DSRX_WHO_AM_I_VALUE         0x6B
+#define LSM6DSRX_WHO_AM_I_VALUE         0x6B    // valore decimale = 107
 #define LSM6DSRX_CTRL1_XL               0x10
 #define LSM6DSRX_CTRL2_G                0x11      
 #define LSM6DSRX_CTRL3_C                0x12
@@ -125,7 +125,7 @@
 //LIS2MDL Register definition
 
 #define LIS2MDL_WHO_AM_I               0x4F
-#define LIS2MDL_WHO_AM_I_VALUE      
+#define LIS2MDL_WHO_AM_I_VALUE         0x40 // valore decimale = 64
 #define LIS2MDL_CFG_REG_A              0x60
 #define LIS2MDL_CFG_REG_B              0x61
 #define LIS2MDL_CFG_REG_C              0x62

@@ -1727,7 +1727,6 @@ void motor_control_generic(uint8 idx) {
         if (abs(pwm_input) < 7 * (int)(PWM_MAX_VALUE_ESC/100.0)){
             pwm_input = SIGN(pwm_input) * 7 * (int)(PWM_MAX_VALUE_ESC/100.0);
         }
-       
     }
 
     // Set motor direction and write pwm value

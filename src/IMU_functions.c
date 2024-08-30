@@ -73,11 +73,6 @@ void ImusReset() {
 * Function Name: UpdateIMUDefine
 *********************************************************************************/
 void UpdateIMUDefine(){
-    
-    
-    
-    
-    
 }
 /*******************************************************************************
 * Function Name: IMU Initialization
@@ -142,11 +137,18 @@ void InitIMU(uint8 n){
                 CyDelay(20);
                 WriteControlRegisterIMU(LSM6DSRX_CTRL2_G,0x4C);     //ODR = 104 Hz,     FSR = +- 2000dps
                 CyDelay(20);
-             /* OneShot_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_WHO_AM_I); //LIS2MDL -->valore WHO_AM_I = 64
-                OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_A,0x00); //10Hz, continuous mode
+                Temp[0][0] =0;
+                Temp[0][1] = OneShot_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_WHO_AM_I); //LIS2MDL -->valore WHO_AM_I = 64;
+                CyDelay(20);
+                 OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_A,0x00); //10Hz, continuous mode
+               CyDelay(20);
                 OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_B,0x02); //Offset canc
+                CyDelay(20);
                 OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_C,0x10); //BDU
-                Continuous_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_OUTX_L_REG,0x06); //Read 6 bytes*/
+                CyDelay(20);
+                Continuous_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_OUTX_L_REG,0x06); //Read 6 bytes
+                CyDelay(20);
+                
             break;
             default:
             break;
@@ -213,7 +215,6 @@ void InitIMUMagCal(uint8 k_imu){
 void ChipSelectorIMU(int n)
 {
     Chip_Select_IMU_Write(7);
-    
     Chip_Select_IMU_Write(n);
 }
 
@@ -410,10 +411,15 @@ void ReadGyro(int n){
 /*******************************************************************************
 * Function Name: Read Compas' Data of IMU n
 *********************************************************************************/
-void ReadMag(int n){
-	
-	uint8 low, high;
-	int row = n;	
+void ReadMag(int n){	
+    uint8 low, high;
+    uint8 i;
+	int row = n;
+        uint8 XLDA;
+    uint8 SENS_HUB_ENDOP;
+    uint8 Data;
+	switch (g_imu[n].dev_type){
+        case MPU9250:
 	//read X
 	low = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_00);
     SPI_delay();
@@ -443,6 +449,34 @@ void ReadMag(int n){
 	Mag[row][4] = high; 
 	Mag[row][5] = low;
 	low=0, high=0;
+    break;
+    case LSM6DSRX:
+                do 
+            {
+                XLDA = ReadControlRegisterIMU(LSM6DSRX_STATUS_REG);          
+            }
+            while ((XLDA & 0b00000001) == 0);   
+        
+            do 
+            {
+                SENS_HUB_ENDOP = ReadControlRegisterIMU(LSM6DSRX_STATUS_MASTER_MAINPAGE);   
+            }
+            while ((SENS_HUB_ENDOP & 0b00000001) == 0);
+
+            WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x40);   
+            CyDelayUs(100);  
+            ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I); 
+               
+            for (i = 0; i < 6; i++){
+                
+                Mag[n][i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))]= ReadControlRegisterIMU(LSM6DSRX_SENSOR_HUB_1 + i);  
+            }
+           
+            WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x00);   
+            CyDelayUs(100);
+    
+    break;}
+    
 }
 
 /********************************************************************************
@@ -470,9 +504,9 @@ void ReadMagCal(int n){
             break;
 
         case LSM6DSRX:
-            MagCal[row][0] = 0; 
-            MagCal[row][1] = 0; 
-            MagCal[row][2] = 0; 
+            MagCal[row][0] = 1; 
+            MagCal[row][1] = 1; 
+            MagCal[row][2] = 1; 
             break;
               default:
             break;
@@ -605,7 +639,9 @@ void ReadTemp(int n)
     //LSM6DSRX:
     // sensitivity  256 LSB/°C, ADC resolution = 16
     // ODR = 52 Hz
-    static uint8 i;
+    
+    
+    /*static uint8 i;
 	static uint8 TempStartAddress;
     TempStartAddress = g_imu[n].dev_type ? LSM6DSRX_OUT_TEMP_L : MPU9250_TEMP_OUT_H;
     for (i = 0; i < 2; i++){
@@ -614,6 +650,7 @@ void ReadTemp(int n)
         //  Order of LSM6DSRX register are inverted to be compatible with the ones of  MPU9250
         Temp[n][ i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))] = ReadControlRegisterIMU(TempStartAddress + i);  
     }
+    */
 }
 
 /********************************** *********************************************
@@ -694,18 +731,19 @@ uint8 OneShot_ReadRoutine(uint8 address, uint8 subaddress){
     uint8 SENS_HUB_ENDOP;
     uint8 Data;
     WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x40); 
-    CyDelay(1);
+    CyDelay(20);
     WriteControlRegisterIMU(LSM6DSRX_SLV0_ADD, address | 0x01); 
-    CyDelay(1);   
+    CyDelay(20);   
     WriteControlRegisterIMU(LSM6DSRX_SLV0_SUBADD, subaddress); 
-    CyDelay(1);
+    CyDelay(20);
     WriteControlRegisterIMU(LSM6DSRX_SLV0_CONFIG, 0x01); //ODR = 288Hz, FSR=+/-2g, LPF2 disabled
-    CyDelay(1);
+    CyDelay(20);
     WriteControlRegisterIMU(LSM6DSRX_MASTER_CONFIG, 0x4C); //ODR = 288Hz, FSR=+/-2g, LPF2 disabled
-    CyDelay(1);
+    CyDelay(20);
     WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x00); 
+    CyDelay(20);
     ReadControlRegisterIMU(LSM6DSRX_OUTX_H_A); 
-    
+   
     do 
     {
         XLDA = ReadControlRegisterIMU(LSM6DSRX_STATUS_REG);  
@@ -713,7 +751,7 @@ uint8 OneShot_ReadRoutine(uint8 address, uint8 subaddress){
     }
     while ((XLDA & 0b00000001) == 0); 
     
-    
+     
     do 
     {
         SENS_HUB_ENDOP = ReadControlRegisterIMU(LSM6DSRX_STATUS_MASTER_MAINPAGE);
@@ -722,9 +760,9 @@ uint8 OneShot_ReadRoutine(uint8 address, uint8 subaddress){
     while ((SENS_HUB_ENDOP & 0b00000001) == 0);
 
     WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x40); 
-    CyDelay(1);
+    CyDelay(10);
     WriteControlRegisterIMU(LSM6DSRX_MASTER_CONFIG, 0x08); 
-    CyDelay(1);
+    CyDelay(10);
     CyDelayUs(300);  
     
     ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I);  
