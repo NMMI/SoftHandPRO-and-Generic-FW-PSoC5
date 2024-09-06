@@ -77,6 +77,13 @@
 #include <math.h>
 #include <signal.h>
 #include <assert.h>
+#include "iostream"
+#include <fstream>
+#include <chrono>
+#include <ctime>
+#include <fstream>
+#include <vector>
+#include <sstream>
 
 #if defined(_WIN32) || defined(_WIN64)
     #include <windows.h>
@@ -87,6 +94,8 @@
 #endif
 
 //===============================================================     structures
+
+using namespace std;
 
 
 static const struct option longOpts[] = {
@@ -242,7 +251,19 @@ int baudrate_reader();
 int baudrate_writer(const int);
 
 
-
+// -------------------------------------------------------------------------------- sleep_us
+//function waits for the specified number of number of microseconds
+void sleep_us(uint32_t microseconds)
+{using namespace std::chrono;
+  high_resolution_clock::time_point t0 = high_resolution_clock::now();
+  high_resolution_clock::time_point t1 = high_resolution_clock::now();
+  duration<double> time_span = duration_cast<duration<double>>(t1 - t0);
+  do{ 
+    high_resolution_clock::time_point t1 = high_resolution_clock::now();
+    time_span = duration_cast<duration<double>>(t1 - t0);
+    }
+  while(time_span.count()*1000000 < microseconds);
+}
 
 //==============================================================================
 //                                                                     main loop
@@ -1485,26 +1506,42 @@ int main (int argc, char **argv)
 			}
 		}
 
-		while(1){
+		//while(1)
+        
+        
+	using namespace std::chrono;
+	auto start = std::chrono::system_clock::now();
+	auto end = start;
+	std::chrono::duration<double> elapsed_mseconds_t = (end -start)*1000;
+    i=0;
+
+    int conto =0;
+    cout<<"------------------------- Start cycling ------------------------- \n";
+
+	while(elapsed_mseconds_t.count() < 1000 ) // Loop for 10 seconds
+  
+    {
 			
 			commGetImuReadings(&comm_settings_1, global_args.device_id, global_args.imu_table, global_args.mag_cal, global_args.n_imu, imu_values);
 
 			for (i = 0; i < global_args.n_imu; i++) {
 		
 				//printf("IMU: %d\n", global_args.ids[i]);
-				usleep(10000);
+				
 				
 				if (global_args.imu_table[5*i + 0]){
-					printf("Accelerometer\n");
-					printf("%f, %f, %f\n", imu_values[(3*3+4+1)*i], imu_values[(3*3+4+1)*i+1], imu_values[(3*3+4+1)*i+2]);
+					//printf("Accelerometer\n");
+					//printf("%f, %f, %f", imu_values[(3*3+4+1)*i], imu_values[(3*3+4+1)*i+1], imu_values[(3*3+4+1)*i+2]);
+                    fprintf(global_args.emg_file, "%f,%f,%f,", imu_values[(3*3+4+1)*i+0], imu_values[(3*3+4+1)*i+1], imu_values[(3*3+4+1)*i+2]);
+
 				}
 				if (global_args.imu_table[5*i + 1]){
 					printf("Gyroscope\n");
 					printf("%f, %f, %f\n", imu_values[(3*3+4+1)*i+3], imu_values[(3*3+4+1)*i+4], imu_values[(3*3+4+1)*i+5]);
 				}
 				if (global_args.imu_table[5*i + 2] ){
-				//	printf("Magnetometer\n");
-					printf("%f, %f, %f,", imu_values[(3*3+4+1)*i+6], imu_values[(3*3+4+1)*i+7], imu_values[(3*3+4+1)*i+8]);				
+				//	printf("Magnetometer");
+					//printf("%f, %f, %f,", imu_values[(3*3+4+1)*i+6], imu_values[(3*3+4+1)*i+7], imu_values[(3*3+4+1)*i+8]);				
                     fprintf(global_args.emg_file, "%f,%f,%f,", imu_values[(3*3+4+1)*i+6], imu_values[(3*3+4+1)*i+7], imu_values[(3*3+4+1)*i+8]);
 
 				}
@@ -1520,10 +1557,15 @@ int main (int argc, char **argv)
 			}
             
 				
-				printf("\n");
+				//printf("\n");
                 fprintf(global_args.emg_file, "\n");
+                end = std::chrono::system_clock::now();
+        elapsed_mseconds_t = (end - start) * 1000;
+              sleep_us(1000); // Delay to maintain timing
+                conto++;
 		}
-		
+        printf("%d", conto);
+	
 	}
 	
 //=========================================================     get emg raw

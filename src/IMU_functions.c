@@ -93,38 +93,39 @@ void InitIMU(uint8 n){
         case MPU9250:
         	WriteControlRegisterIMU(MPU9250_PWR_MGMT_1, 0x10); 
         	CyDelay(10);	
-        	WriteControlRegisterIMU(MPU9250_USER_CTRL, 0x20);  //I2C master enable - disable I2C (prima 0x30)
-        	CyDelay(10);
-            WriteControlRegisterIMU(MPU9250_CONFIG, 0x06); //Gyro & Temp Low Pass Filter 0x01 = 184Hz, 0x02 = 92Hz, 0x04 = 20Hz, 0x05 = 10Hz
+            WriteControlRegisterIMU(MPU9250_CONFIG, 0x05); //Gyro & Temp Low Pass Filter 0x01 = 184Hz, 0x02 = 92Hz, 0x04 = 20Hz, 0x05 = 10Hz ...
             CyDelay(10);	
         	WriteControlRegisterIMU(MPU9250_GYRO_CONFIG , GYRO_SF_2000); //Gyro full scale select 0x00=250°/s 0x80=500°/s 0x18=2000°/s 
         	CyDelay(10);
             WriteControlRegisterIMU(MPU9250_ACCEL_CONFIG, ACC_SF_2G); // Acc full scale select 0x00 = 2g 0x08 = 4g 0x10 = 8g 0x18 = 16g
             CyDelay(10);
-           // WriteControlRegisterIMU(MPU9250_ACCEL_CONFIG2, LP_ACC_FREQ_10);   
-            WriteControlRegisterIMU(MPU9250_ACCEL_CONFIG2, NO_ACC_FIL);   
+            WriteControlRegisterIMU(MPU9250_ACCEL_CONFIG2, LP_ACC_FREQ_10); // Acc LPF BW: 0x00 = no LPF, 0x05 = 10 Hz 
             CyDelay(10);
-        	//mag register
-        	WriteControlRegisterIMU(MPU9250_I2C_MST_CTRL, 0x0D); //set slave I2C speed
+            //WriteControlRegisterIMU(MPU9250_PWR_MGMT_2, 0x07); //0x00 = Gyro enabled, 0x07 = Gyro disabled.
+            //To set axel ODR = 4KHZ: (MPU9250_PWR_MGMT_2, 0x07) + (MPU9250_ACCEL_CONFIG2, 0x00) ;
+            WriteControlRegisterIMU(MPU9250_USER_CTRL, 0x20);  //Enable I2C master
         	CyDelay(10);
-        	//SLV0 (use to write)
-        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_ADDR, 0x0C); //set compass address
+        	WriteControlRegisterIMU(MPU9250_I2C_MST_CTRL, 0x0D); //set slave I2C speed, 0x4D = DRDY interrupt when ext sensor register are loaded , 0x0D = DRDY @axelODR
+            CyDelay(10);
+            
+        	//WRITE slave
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_ADDR, 0x0C); // WCR  | AK8963_address (0x0C) - compass
         	CyDelay(10);			
-        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_REG, AK8936_CNTL); //compass mode register
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_REG, AK8936_CNTL); //select slave register to write
         	CyDelay(10);	
-        	// Istruction used to read Compass
-        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_D0, 0x16); //0x12 continuous mode1  0x16 continuous mode2
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_D0, 0x12); //value to be written: Compass mode = 0x12 continuous mode1(8Hz ODR), 0x16 continuous mode2(100Hz ODR)
         	CyDelay(10);
-        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0x81); //enable data from register + 1 bit to write
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0x81); //1 bit to write + enable this slave
         	CyDelay(10);
-        	//SLV0 (use to read)
+            
+        	//READ slave
         	WriteControlRegisterIMU(MPU9250_I2C_SLV0_ADDR, 0x8C); // RCR  | AK8963_address (0x0C) 
         	CyDelay(10);
-        	// Istruction used to read Compass
-        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_REG, 0x03); // 0x03:start from Xout Low in case of calibration 0x10:start from ASAX
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_REG, 0x03); // Address to start reading: 0x03 = Xout Low, 0x02 = STATUS_REG_1-->DRDY
         	CyDelay(10);
-        	// Istruction used to read Compass
-        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0x8D); //How many bits read  SEMPRE DISPARI 0x8D era quella che funzionava
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0x87);   //0x87 = Read 7 bytes, 0x03 to 0x09(STATUS_REG_2, needed to complete the reading). (Xout from EXT_SENS_DATA_00)
+                                                                    //0x88 = Read 8 bytes, 0x02(STATUS_REG_1 = DRDY) to 0x09. (Xout from EXT_SENS_DATA_01)
+            
         	CyDelay(10);
         	WriteControlRegisterIMU(MPU9250_PWR_MGMT_1, 0x00); 
         	CyDelay(20);
@@ -140,7 +141,7 @@ void InitIMU(uint8 n){
                 Temp[0][0] =0;
                 Temp[0][1] = OneShot_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_WHO_AM_I); //LIS2MDL -->valore WHO_AM_I = 64;
                 CyDelay(20);
-                 OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_A,0x00); //10Hz, continuous mode
+                 OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_A,0x0C); //100Hz, continuous mode
                CyDelay(20);
                 OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_B,0x02); //Offset canc
                 CyDelay(20);
@@ -333,11 +334,15 @@ void InitIMUgeneral()
 *********************************************************************************/	
 void ReadIMU(int n)
 {
-    if (c_mem.imu.IMU_conf[n][0]) ReadAcc(n);
-    if (c_mem.imu.IMU_conf[n][1]) ReadGyro(n);
-    if (c_mem.imu.IMU_conf[n][2]) ReadMag(n);
-    if (c_mem.imu.IMU_conf[n][3]) ReadQuat(n);
-    if (c_mem.imu.IMU_conf[n][4]) ReadTemp(n);
+    uint8  DRDY = ReadControlRegisterIMU(0x3A);
+    if (DRDY & 0x01){
+        if (c_mem.imu.IMU_conf[n][0]) ReadAcc(n);
+        if (c_mem.imu.IMU_conf[n][1]) ReadGyro(n);
+        if (c_mem.imu.IMU_conf[n][2]) ReadMag(n);
+        if (c_mem.imu.IMU_conf[n][3]) ReadQuat(n);
+        if (c_mem.imu.IMU_conf[n][4]) ReadTemp(n);
+    }
+        
 }
 
 /*******************************************************************************
@@ -346,6 +351,7 @@ void ReadIMU(int n)
 void ReadAcc(int n)
 {   static uint8 i;
 	static uint8 AccStartAddress;
+
     AccStartAddress = g_imu[n].dev_type ? LSM6DSRX_OUTX_L_A : MPU9250_ACCEL_XOUT_H;
     for (i = 0; i < 6; i++){
         //	Accel[row][0] = high; 
@@ -364,48 +370,12 @@ void ReadGyro(int n){
 	static uint8 GyroStartAddress;
     GyroStartAddress = g_imu[n].dev_type ? LSM6DSRX_OUTX_L_G : MPU9250_GYRO_XOUT_H;
     for (i = 0; i < 6; i++){
-        //	Accel[row][0] = high; 
-	    //  Accel[row][1] = low; 
+        //	Gyro[row][0] = high; 
+	    //  Gyro[row][1] = low; 
         //  Order of LSM6DSRX register are inverted to be compatible with the ones of  MPU9250
         Gyro[n][ i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))] = ReadControlRegisterIMU(GyroStartAddress + i);  
     }
-    /*
     
-	uint8 low=0, high=0;
- 
-	int row = n;
-	
-	//read X
-	low=ReadControlRegisterIMU(MPU9250_GYRO_XOUT_L);
-    SPI_delay();
-	high=ReadControlRegisterIMU(MPU9250_GYRO_XOUT_H);
-    SPI_delay();
-    
-	Gyro[row][0] = high; 
-	Gyro[row][1] = low;
-	low=0, high=0;
-    
-	//read Y
-	low=ReadControlRegisterIMU(MPU9250_GYRO_YOUT_L);
-    SPI_delay();
-	high=ReadControlRegisterIMU(MPU9250_GYRO_YOUT_H);
-    SPI_delay();
-    
-	Gyro[row][2] = high; 
-	Gyro[row][3] = low;
-	low=0, high=0;
-
-	//read Z
-    low=ReadControlRegisterIMU(MPU9250_GYRO_ZOUT_L);
-    SPI_delay();
-	high=ReadControlRegisterIMU(MPU9250_GYRO_ZOUT_H);
-    SPI_delay();
-    
-	Gyro[row][4] = high; 
-	Gyro[row][5] = low;        
-
-	low=0, high=0;
-    */
 }
 
 /*******************************************************************************
@@ -415,41 +385,42 @@ void ReadMag(int n){
     uint8 low, high;
     uint8 i;
 	int row = n;
-        uint8 XLDA;
+    uint8 XLDA;
     uint8 SENS_HUB_ENDOP;
     uint8 Data;
 	switch (g_imu[n].dev_type){
         case MPU9250:
-	//read X
-	low = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_00);
-    SPI_delay();
-	high = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_01);		
-    SPI_delay();
-    
-	Mag[row][0] = high; 
-	Mag[row][1] = low;
-	low=0, high=0;
-    
-	//read Y
-	low = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_02);
-    SPI_delay();
-	high = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_03);		
-    SPI_delay();
-    
-	Mag[row][2] = high; 
-	Mag[row][3] = low;
-	low=0, high=0;
-    
-	//read Z
-	low = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_04);
-    SPI_delay();
-	high = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_05);
-    SPI_delay();
-		
-	Mag[row][4] = high; 
-	Mag[row][5] = low;
-	low=0, high=0;
+    	low = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_00);
+        SPI_delay();
+    	high = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_01);		
+        SPI_delay();
+        
+    	Mag[row][0] = high; 
+    	Mag[row][1] = low;
+    	low=0, high=0;
+        
+    	//read Y
+    	low = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_02);
+        SPI_delay();
+    	high = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_03);		
+        SPI_delay();
+        
+    	Mag[row][2] = high; 
+    	Mag[row][3] = low;
+    	low=0, high=0;
+        
+    	//read Z
+    	low = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_04);
+        //low = 0;
+        SPI_delay();
+    	high = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_05);
+        SPI_delay();
+    		
+    	Mag[row][4] = high; 
+    	Mag[row][5] = low;
+    	low=0, high=0;
     break;
+    
     case LSM6DSRX:
                 do 
             {

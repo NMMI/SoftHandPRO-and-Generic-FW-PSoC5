@@ -131,8 +131,9 @@ int commGetImuReadings(comm_settings *comm_settings_t, int id, uint8_t* imu_tabl
     if (package_in_size < 0){
         return package_in_size;
     }
-	
-	acc_sf 	= 0.000061037;			// Ticks to G
+		acc_sf 	= 1;			// Ticks to G
+
+	//acc_sf 	= 0.000061037;			// Ticks to G
 	gyro_sf = 0.007629627 * 8;		// Ticks to deg/s with FS +/- 2000 °/s
 	//mag_sf 	= 0.1465;				// Ticks to uT
 	
