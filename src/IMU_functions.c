@@ -99,7 +99,7 @@ void InitIMU(uint8 n){
         	CyDelay(10);
             WriteControlRegisterIMU(MPU9250_ACCEL_CONFIG, ACC_SF_2G); // Acc full scale select 0x00 = 2g 0x08 = 4g 0x10 = 8g 0x18 = 16g
             CyDelay(10);
-            WriteControlRegisterIMU(MPU9250_ACCEL_CONFIG2, LP_ACC_FREQ_10); // Acc LPF BW: 0x00 = no LPF, 0x05 = 10 Hz 
+            WriteControlRegisterIMU(MPU9250_ACCEL_CONFIG2, NO_ACC_FIL); // Acc LPF BW: 0x00 = no LPF, 0x05 = 10 Hz 
             CyDelay(10);
             //WriteControlRegisterIMU(MPU9250_PWR_MGMT_2, 0x07); //0x00 = Gyro enabled, 0x07 = Gyro disabled.
             //To set axel ODR = 4KHZ: (MPU9250_PWR_MGMT_2, 0x07) + (MPU9250_ACCEL_CONFIG2, 0x00) ;
@@ -334,9 +334,9 @@ void InitIMUgeneral()
 *********************************************************************************/	
 void ReadIMU(int n)
 {
-    uint8  DRDY = ReadControlRegisterIMU(0x3A);
-    if (DRDY & 0x01){
-        if (c_mem.imu.IMU_conf[n][0]) ReadAcc(n);
+ // uint8  DRDY = ReadControlRegisterIMU(0x3A);
+   // if (DRDY & 0x01){
+     {   if (c_mem.imu.IMU_conf[n][0]) ReadAcc(n);
         if (c_mem.imu.IMU_conf[n][1]) ReadGyro(n);
         if (c_mem.imu.IMU_conf[n][2]) ReadMag(n);
         if (c_mem.imu.IMU_conf[n][3]) ReadQuat(n);
@@ -624,6 +624,8 @@ void ReadTemp(int n)
     */
 }
 
+
+
 /********************************** *********************************************
 * Function Name: Write Control Register
 *********************************************************************************/
@@ -633,9 +635,10 @@ void WriteControlRegisterIMU(uint8 address, uint8 dta){
 	SPI_IMU_ClearTxBuffer();
 	SPI_IMU_ClearFIFO();
 	SPI_IMU_WriteByte(WRITEBIT | address);
-	while(!( SPI_IMU_ReadStatus() & SPI_IMU_STS_TX_FIFO_EMPTY));		
-	SPI_IMU_WriteByte(dta);
-	while(!( SPI_IMU_ReadStatus() & SPI_IMU_STS_TX_FIFO_EMPTY));
+    SPI_IMU_WriteByte(dta);
+	while(!( SPI_IMU_ReadTxStatus() & SPI_IMU_STS_SPI_DONE));
+    //while(!( SPI_IMU_ReadTxStatus() & SPI_IMU_STS_TX_FIFO_EMPTY));
+    //CyDelayUs(2);
 }
 
 /*******************************************************************************
@@ -643,14 +646,13 @@ void WriteControlRegisterIMU(uint8 address, uint8 dta){
 *********************************************************************************/
 uint8 ReadControlRegisterIMU(uint8 address){
 	uint8 controlreg = 0;
-	
-	SPI_IMU_WriteByte(READBIT | address);
-    while(!( SPI_IMU_ReadStatus() & SPI_IMU_STS_TX_FIFO_EMPTY));
+	SPI_IMU_WriteByte(READBIT | address);  
     SPI_IMU_WriteByte(0x00);
-	while(!( SPI_IMU_ReadStatus() & SPI_IMU_STS_SPI_DONE));
+    while(!( SPI_IMU_ReadTxStatus() & SPI_IMU_STS_SPI_DONE));
 	controlreg = SPI_IMU_ReadByte();        //real data
-	return controlreg;
+    return controlreg;
 }
+
 
 /*******************************************************************************
 * Function Name: SPI delay

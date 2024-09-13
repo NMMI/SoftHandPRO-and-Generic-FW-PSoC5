@@ -1518,7 +1518,7 @@ int main (int argc, char **argv)
     int conto =0;
     cout<<"------------------------- Start cycling ------------------------- \n";
 
-	while(elapsed_mseconds_t.count() < 1000 ) // Loop for 10 seconds
+	while(elapsed_mseconds_t.count() < 10000 ) // Loop for 10 seconds
   
     {
 			
@@ -1536,8 +1536,10 @@ int main (int argc, char **argv)
 
 				}
 				if (global_args.imu_table[5*i + 1]){
-					printf("Gyroscope\n");
-					printf("%f, %f, %f\n", imu_values[(3*3+4+1)*i+3], imu_values[(3*3+4+1)*i+4], imu_values[(3*3+4+1)*i+5]);
+					//printf("Gyroscope\n");
+					//printf("%f, %f, %f\n", imu_values[(3*3+4+1)*i+3], imu_values[(3*3+4+1)*i+4], imu_values[(3*3+4+1)*i+5]);
+                     fprintf(global_args.emg_file, "%f,%f,%f,", imu_values[(3*3+4+1)*i+3], imu_values[(3*3+4+1)*i+4], imu_values[(3*3+4+1)*i+5]);
+
 				}
 				if (global_args.imu_table[5*i + 2] ){
 				//	printf("Magnetometer");

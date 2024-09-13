@@ -72,11 +72,32 @@
 //                                                                 MAIN FUNCTION
 //==============================================================================
 
+
+uint16 InterruptCnt;
+
+
+/*******************************************************************************
+* Define Interrupt service routine and allocate an vector to the Interrupt
+********************************************************************************/
+CY_ISR(InterruptHandler)
+{
+	/* Read Status register in order to clear the sticky Terminal Count (TC) bit 
+	 * in the status register. Note that the function is not called, but rather 
+	 * the status is read directly.
+	 */
+   	MY_TIMER_STATUS;
+    
+	/* Increment the Counter to indicate the keep track of the number of 
+     * interrupts received */
+    MOTOR_EN_1_Write(1);
+    InterruptCnt++;    
+}
+
 int main()
 {   
     
     WHO_AM_I       =                 MPU9250_WHO_AM_I;
-     WHO_AM_I_VALUE =                 MPU9250_WHO_AM_I_VALUE    ;
+    WHO_AM_I_VALUE =                 MPU9250_WHO_AM_I_VALUE    ;
     
     // Iterator    
     uint8 i, j;
@@ -96,7 +117,7 @@ int main()
     FTDI_ENABLE_Write(0x01);
     
 	// LED Enable   
-    LED_control(1);     // Green fixed light
+   // LED_control(1);     // Green fixed light
 
     
     // RS485 UART
@@ -163,7 +184,7 @@ int main()
     PACER_TIMER_Start();    
     
     CYGlobalIntEnable;              // Enable interrupts.
-
+TimerISR_StartEx(InterruptHandler);
     // Init AS5045 devices
     InitEncoderGeneral();
 
@@ -281,7 +302,7 @@ int main()
     forced_open = 0;
     
     if (c_mem.motor[0].motor_driver_type != DRIVER_BRUSHLESS){
-        LED_control(5);     // Default - red light
+      //  LED_control(5);     // Default - red light
     }
     
 #ifdef MASTER_FW
@@ -305,7 +326,11 @@ int main()
     
     // All peripherals has started, now it is ok to start communication
     RS485_CTS_Write(0);             // Clear To Send on RS485.
-
+    
+      while(InterruptCnt<50000)
+    MOTOR_EN_1_Write(0);
+    MY_TIMER_Stop();
+        
     for(;;)
 
     {             
