@@ -73,6 +73,7 @@ int32   dev_tension_f[NUM_OF_MOTORS];       /*!< Filtered power supply tension.*
 int32   pow_tension[NUM_OF_MOTORS];         /*!< Computed power supply tension.*/
 int32   detect_power_cycle = 0;             /*!< Variable used to detect a new power cycle.*/
 
+uint16 MY_TIMER_OVF_Cnt = 0;                        /*!< MY_TIMER interrutp overflow counter*/
 counter_status CYDATA cycles_status = NONE;     /*!< Cycles counter state machine status.*/
 adc_status CYDATA emg_1_status = RESET;         /*!< First EMG sensor status.*/
 adc_status CYDATA emg_2_status = RESET;         /*!< Second EMG sensor status.*/   
@@ -144,6 +145,10 @@ uint8 Mag[N_IMU_MAX][6];
 uint8 MagCal[N_IMU_MAX][3];
 uint8 Temp[N_IMU_MAX][2];
 float Quat[N_IMU_MAX][4];
+int16 Mag_maxval[N_IMU_MAX][3];
+int16 Mag_minval[N_IMU_MAX][3];
+float offset[N_IMU_MAX][3];
+float scale[N_IMU_MAX][3];
 
 // MASTER variables
 uint8 master_mode;               /*!< Flag used to set/unset master mode to send messages to other boards.*/

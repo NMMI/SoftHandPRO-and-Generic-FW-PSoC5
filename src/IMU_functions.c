@@ -588,6 +588,8 @@ void ReadAllIMUs(){
         for (j = 0; j < 3; j++) {
             tmp = Mag[IMU_connected[k_imu]][2*j];
             g_imuNew[k_imu].mag_value[j] = (int16)(tmp<<8 | Mag[IMU_connected[k_imu]][2*j + 1]);
+              g_imuNew[k_imu].mag_value[j] = (int16)(( g_imuNew[k_imu].mag_value[j] - offset[k_imu][j])*scale[k_imu][j]);
+            // g_imuNew[k_imu].mag_value[j] = Mag_maxval[k_imu][j];
         }  
 
         for (j = 0; j < 4; j++) {
@@ -624,18 +626,18 @@ void ReadTemp(int n)
     */
 }
 
+
+
 /********************************** *********************************************
 * Function Name: Write Control Register
 *********************************************************************************/
 void WriteControlRegisterIMU(uint8 address, uint8 dta){
-	
 	SPI_IMU_ClearRxBuffer();
 	SPI_IMU_ClearTxBuffer();
 	SPI_IMU_ClearFIFO();
 	SPI_IMU_WriteByte(WRITEBIT | address);
-	while(!( SPI_IMU_ReadStatus() & SPI_IMU_STS_TX_FIFO_EMPTY));		
-	SPI_IMU_WriteByte(dta);
-	while(!( SPI_IMU_ReadStatus() & SPI_IMU_STS_TX_FIFO_EMPTY));
+    SPI_IMU_WriteByte(dta);
+	while(!( SPI_IMU_ReadTxStatus() & SPI_IMU_STS_TX_FIFO_EMPTY));
 }
 
 /*******************************************************************************
@@ -643,13 +645,11 @@ void WriteControlRegisterIMU(uint8 address, uint8 dta){
 *********************************************************************************/
 uint8 ReadControlRegisterIMU(uint8 address){
 	uint8 controlreg = 0;
-	
-	SPI_IMU_WriteByte(READBIT | address);
-    while(!( SPI_IMU_ReadStatus() & SPI_IMU_STS_TX_FIFO_EMPTY));
+	SPI_IMU_WriteByte(READBIT | address);  
     SPI_IMU_WriteByte(0x00);
-	while(!( SPI_IMU_ReadStatus() & SPI_IMU_STS_SPI_DONE));
+    while(!( SPI_IMU_ReadTxStatus() & SPI_IMU_STS_SPI_DONE));
 	controlreg = SPI_IMU_ReadByte();        //real data
-	return controlreg;
+    return controlreg;
 }
 
 /*******************************************************************************

@@ -131,6 +131,17 @@ CY_ISR(ISR_CYCLES_Handler){
 }
 
 //==============================================================================
+//                                                   MY_TIMER OVERFLOW INTERRUPT
+//==============================================================================
+CY_ISR(ISR_MY_TIMER_Handler){
+
+    MY_TIMER_STATUS;        // clear interrupt
+    MOTOR_EN_1_Write(1);
+    CyDelay(1);
+    MY_TIMER_OVF_Cnt ++;    // Update n. of interrupt occurred
+    
+}
+//==============================================================================
 //                                                             INTERRUPT MANAGER
 //==============================================================================
 // Manage interrupt from RS485 

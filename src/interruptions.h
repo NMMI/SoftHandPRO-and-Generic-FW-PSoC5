@@ -87,6 +87,14 @@ CY_ISR_PROTO(ISR_CYCLES_Handler);
 /** \} */
 
 
+//====================================================     MY_TIMER overflow interrupt
+/** This interruption update a counter to track the n. of timer overflow occured and measure time
+**/
+CY_ISR_PROTO(ISR_MY_TIMER_Handler);
+
+/** \} */
+
+
 //=====================================================     Functions Declarations
 
 /** \name General function scheduler */
