@@ -636,8 +636,8 @@ extern uint8 Mag[N_IMU_MAX][6];
 extern uint8 MagCal[N_IMU_MAX][3];
 extern uint8 Temp[N_IMU_MAX][2];
 extern float Quat[N_IMU_MAX][4];
-extern int16 Mag_maxval[N_IMU_MAX][3];
-extern int16 Mag_minval[N_IMU_MAX][3];
+extern float Mag_maxval[N_IMU_MAX][3];
+extern float Mag_minval[N_IMU_MAX][3];
 extern float offset[N_IMU_MAX][3];
 extern float scale[N_IMU_MAX][3];
 
