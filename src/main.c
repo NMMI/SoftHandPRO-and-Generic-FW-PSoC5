@@ -315,7 +315,7 @@ int main()
     
     // All peripherals has started, now it is ok to start communication
     RS485_CTS_Write(0);             // Clear To Send on RS485.
-          float factor = (((float)MagCal[0][0]+128)*1.0)/256 ; 
+          
         int16 max;
         int16 min;
  MOTOR_EN_1_Write(0);
@@ -355,8 +355,8 @@ int main()
     
     for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++){ 
         for (j = 0; j < 3; j++) {
-            offset[k_imu][j] = (float)((Mag_maxval[k_imu][j] + Mag_minval[k_imu][j])/2 );
-            scale[k_imu][j] = 2.0/((Mag_maxval[k_imu][j] - Mag_minval[k_imu][j]));
+            offset[k_imu][j] = ((Mag_maxval[k_imu][j] + Mag_minval[k_imu][j])/2 );
+            scale[k_imu][j] = ((Mag_maxval[k_imu][j] - Mag_minval[k_imu][j]))/2;
           min = (int16)offset[k_imu][j];
             max =  (int16)scale[k_imu][j];
             UART_RS485_PutChar(((char*)(&max))[1]);

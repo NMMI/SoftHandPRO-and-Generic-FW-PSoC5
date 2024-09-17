@@ -569,14 +569,19 @@ void ReadQuat(int n)
 void ReadAllIMUs(){
     static uint8 k_imu = 0;
     uint16 tmp = 0, j = 0;
-float avg[5];
-    float factor = (((float)MagCal[0][0]+128)*1.0)/256 ; 
+    float avg[5];
+    float factor[5][3]; 
     
     for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++){ 
         // Read k_imu IMU
         ChipSelectorIMU(IMU_connected[k_imu]);
         ReadIMU(IMU_connected[k_imu]);
         avg[k_imu] = (scale[k_imu][0]+scale[k_imu][1]+scale[k_imu][2])/3;
+        
+        for (j = 0; j < 3; j++) {
+            factor[k_imu][j] = (((float)MagCal[k_imu][j]+128)*1.0)/256 ; 
+        }
+        
         for (j = 0; j < 3; j++) {
             tmp = Accel[IMU_connected[k_imu]][2*j];
             g_imuNew[k_imu].accel_value[j] = (int16)(tmp<<8 | Accel[IMU_connected[k_imu]][2*j + 1]);
@@ -590,7 +595,7 @@ float avg[5];
         for (j = 0; j < 3; j++) {
             tmp = Mag[IMU_connected[k_imu]][2*j];
             g_imuNew[k_imu].mag_value[j] = (int16)(tmp<<8 | Mag[IMU_connected[k_imu]][2*j + 1]);
-            g_imuNew[k_imu].mag_value[j] = (int16)((float)((( g_imuNew[k_imu].mag_value[j] - offset[k_imu][j])*scale[k_imu][j]))*0.15*factor*avg[k_imu]);
+            g_imuNew[k_imu].mag_value[j] = (int16)((float)((( g_imuNew[k_imu].mag_value[j] - offset[k_imu][j])/scale[k_imu][j]))*0.15*factor[k_imu][j]*avg[k_imu]);
             // g_imuNew[k_imu].mag_value[j] = Mag_maxval[k_imu][j];
         }  
 
