@@ -334,8 +334,8 @@ void InitIMUgeneral()
 *********************************************************************************/	
 void ReadIMU(int n)
 {
-    uint8  DRDY = ReadControlRegisterIMU(0x3A);
-    if (DRDY & 0x01){
+   // uint8  DRDY = ReadControlRegisterIMU(0x3A);
+    //if (DRDY & 0x01){
         if (c_mem.imu.IMU_conf[n][0]) ReadAcc(n);
         if (c_mem.imu.IMU_conf[n][1]) ReadGyro(n);
         if (c_mem.imu.IMU_conf[n][2]) ReadMag(n);
@@ -343,7 +343,7 @@ void ReadIMU(int n)
         if (c_mem.imu.IMU_conf[n][4]) ReadTemp(n);
     }
         
-}
+//}
 
 /*******************************************************************************
 * Function Name: Read Acc's Data of IMU n
@@ -419,36 +419,104 @@ void ReadMag(int n){
     	Mag[row][4] = high; 
     	Mag[row][5] = low;
     	low=0, high=0;
+        
     break;
     
     case LSM6DSRX:
-                do 
-            {
-                XLDA = ReadControlRegisterIMU(LSM6DSRX_STATUS_REG);          
-            }
-            while ((XLDA & 0b00000001) == 0);   
-        
             do 
-            {
-                SENS_HUB_ENDOP = ReadControlRegisterIMU(LSM6DSRX_STATUS_MASTER_MAINPAGE);   
-            }
-            while ((SENS_HUB_ENDOP & 0b00000001) == 0);
+        {
+            XLDA = ReadControlRegisterIMU(LSM6DSRX_STATUS_REG);          
+        }
+        while ((XLDA & 0b00000001) == 0);   
+    
+        do 
+        {
+            SENS_HUB_ENDOP = ReadControlRegisterIMU(LSM6DSRX_STATUS_MASTER_MAINPAGE);   
+        }
+        while ((SENS_HUB_ENDOP & 0b00000001) == 0);
 
-            WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x40);   
-            CyDelayUs(100);  
-            ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I); 
-               
-            for (i = 0; i < 6; i++){
-                
-                Mag[n][i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))]= ReadControlRegisterIMU(LSM6DSRX_SENSOR_HUB_1 + i);  
-            }
+        WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x40);   
+        CyDelayUs(100);  
+        ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I); 
            
-            WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x00);   
-            CyDelayUs(100);
+        for (i = 0; i < 6; i++){
+            
+            Mag[n][i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))]= ReadControlRegisterIMU(LSM6DSRX_SENSOR_HUB_1 + i);  
+        }
+       
+        WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x00);   
+        CyDelayUs(100);
     
     break;}
     
 }
+
+
+/********************************************************************************
+* Function Name: MagCalibration
+*********************************************************************************/
+void MagCalibration(){
+    uint8 k_imu, j;
+    int16 max, min;
+    
+    for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++){ 
+        for (j = 0; j < 3; j++) {
+            Mag_maxval[k_imu][j]= -32000;
+            Mag_minval[k_imu][j]= 32000;
+        }
+    }
+    
+    MY_TIMER_OVF_Cnt = 0;
+    MY_TIMER_WriteCounter(65535);   // Reset counter
+    while (MY_TIMER_OVF_Cnt < 500){ //65,536 ms *1000 = 60s
+    uint8 k_imu, j, tmp ;
+            for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++){ 
+            // Read k_imu IMU
+            ChipSelectorIMU(IMU_connected[k_imu]);
+            ReadMag(k_imu);
+            for (j = 0; j < 3; j++) {
+                tmp = Mag[IMU_connected[k_imu]][2*j];
+                g_imuNew[k_imu].mag_value[j] = (int16)(tmp<<8 | Mag[IMU_connected[k_imu]][2*j + 1]);
+
+                if (g_imuNew[k_imu].mag_value[j] < Mag_minval[k_imu][j]){
+                    Mag_minval[k_imu][j] = (float)(g_imuNew[k_imu].mag_value[j]);
+                }
+                
+                if (g_imuNew[k_imu].mag_value[j] > Mag_maxval[k_imu][j]){   
+                    Mag_maxval[k_imu][j] = (float)(g_imuNew[k_imu].mag_value[j]);
+                }
+                max = (int16)(Mag_maxval[k_imu][j]);
+                min = (int16)(Mag_minval[k_imu][j]);
+                UART_RS485_PutChar(((char*)(&max))[1]);
+                UART_RS485_PutChar(((char*)(&max))[0]);
+                UART_RS485_PutChar(((char*)(&min))[1]);
+                UART_RS485_PutChar(((char*)(&min))[0]);
+                CyDelay(10);
+            }
+        }
+         UART_RS485_PutChar('a');
+         UART_RS485_PutChar('a');
+    }
+    
+    
+    for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++){ 
+        for (j = 0; j < 3; j++) {
+            offset[k_imu][j] = ((Mag_maxval[k_imu][j] + Mag_minval[k_imu][j])/2 );
+            scale[k_imu][j] = ((Mag_maxval[k_imu][j] - Mag_minval[k_imu][j]))/2;
+            min = (int16)offset[k_imu][j];
+            max = (int16)scale[k_imu][j];
+            UART_RS485_PutChar(((char*)(&max))[1]);
+            UART_RS485_PutChar(((char*)(&max))[0]);
+            UART_RS485_PutChar(((char*)(&min))[1]);
+            UART_RS485_PutChar(((char*)(&min))[0]);
+            CyDelay(10);
+        }
+        UART_RS485_PutChar('a');
+        UART_RS485_PutChar('a');
+        avg[k_imu] = (scale[k_imu][0]+scale[k_imu][1]+scale[k_imu][2])/3;
+    }
+}
+
 
 /********************************************************************************
 * Function Name: ReadMagCal
@@ -461,23 +529,31 @@ void ReadMagCal(int n){
         	//read X
         	read = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_00);
             MagCal[row][0] = read; 
+            factor[row][0] = (((float)MagCal[row][0]+128)*1.0)/256 ;
             read = 0;
             
         	//read Y
         	read = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_01);			
         	MagCal[row][1] = read; 
+            factor[row][1] = (((float)MagCal[row][1]+128)*1.0)/256 ; 
         	read = 0;
             
         	//read Z
         	read = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_02);			
         	MagCal[row][2] = read; 
+            factor[row][2] = (((float)MagCal[row][2]+128)*1.0)/256 ; 
         	read = 0;
             break;
 
         case LSM6DSRX:
-            MagCal[row][0] = 1; 
-            MagCal[row][1] = 1; 
-            MagCal[row][2] = 1; 
+            MagCal[row][0] = 128; 
+            factor[row][0] = 1;
+            
+            MagCal[row][1] = 128; 
+            factor[row][1] = 1;
+            
+            MagCal[row][2] = 128; 
+            factor[row][2] = 1;
             break;
               default:
             break;
@@ -569,18 +645,12 @@ void ReadQuat(int n)
 void ReadAllIMUs(){
     static uint8 k_imu = 0;
     uint16 tmp = 0, j = 0;
-    float avg[5];
-    float factor[5][3]; 
+ 
     
     for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++){ 
         // Read k_imu IMU
         ChipSelectorIMU(IMU_connected[k_imu]);
         ReadIMU(IMU_connected[k_imu]);
-        avg[k_imu] = (scale[k_imu][0]+scale[k_imu][1]+scale[k_imu][2])/3;
-        
-        for (j = 0; j < 3; j++) {
-            factor[k_imu][j] = (((float)MagCal[k_imu][j]+128)*1.0)/256 ; 
-        }
         
         for (j = 0; j < 3; j++) {
             tmp = Accel[IMU_connected[k_imu]][2*j];

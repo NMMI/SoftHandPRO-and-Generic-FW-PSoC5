@@ -136,9 +136,9 @@ CY_ISR(ISR_CYCLES_Handler){
 CY_ISR(ISR_MY_TIMER_Handler){
 
     MY_TIMER_STATUS;        // clear interrupt
-    MOTOR_EN_1_Write(1);
     CyDelay(1);
-    MY_TIMER_OVF_Cnt ++;    // Update n. of interrupt occurred
+    MY_TIMER_OVF_Cnt ++;
+    if (MY_TIMER_OVF_Cnt > 32000) MY_TIMER_OVF_Cnt = 0;// Update n. of interrupt occurred
     
 }
 //==============================================================================

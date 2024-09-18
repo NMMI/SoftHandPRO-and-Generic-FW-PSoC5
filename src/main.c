@@ -179,6 +179,16 @@ int main()
     	SPI_IMU_ClearTxBuffer();
     	SPI_IMU_ClearFIFO();							
         CyDelay(10);
+        
+                // Initialize magnetometer
+        for (i = 0; i < N_IMU_MAX; i++) {
+            for(j = 0; j < 3; j++){
+                offset[i][j] = 0;
+                scale[i][j] = 1;
+            }
+            avg[i]=1;
+        }
+        
         // Init MPU9250 devices
         InitIMUgeneral();
         
@@ -190,7 +200,8 @@ int main()
             Quat[i][3] = 0.01;
         }
     }
-    
+
+            
     //========================================     initializations - clean variables
     
     //---------------------------------------------------  Initialize filters structure 
@@ -303,94 +314,18 @@ int main()
         InitSD_FS();
     }
     
-    uint8 k_imu = 0;
-    for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++){ 
-        for (j = 0; j < 3; j++) {
-            Mag_maxval[k_imu][j]= -32000;
-            Mag_minval[k_imu][j]= 32000;
-        }
-    }
+
     
     //============================================================     main loop
     
     // All peripherals has started, now it is ok to start communication
     RS485_CTS_Write(0);             // Clear To Send on RS485.
-          
-        int16 max;
-        int16 min;
- MOTOR_EN_1_Write(0);
-          uint16 tmp = 0; 
-    MY_TIMER_WriteCounter(65535);   // Reset counter
-    while (MY_TIMER_OVF_Cnt < 500){ //65,536 ms *1000 = 60s
-      
-        for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++){ 
-            // Read k_imu IMU
-            ChipSelectorIMU(IMU_connected[k_imu]);
-            ReadMag(k_imu);
-            for (j = 0; j < 3; j++) {
-                tmp = Mag[IMU_connected[k_imu]][2*j];
-                g_imuNew[k_imu].mag_value[j] = (int16)(tmp<<8 | Mag[IMU_connected[k_imu]][2*j + 1]);
 
-                if (g_imuNew[k_imu].mag_value[j] < Mag_minval[k_imu][j]) {
-                    Mag_minval[k_imu][j] = (float)(g_imuNew[k_imu].mag_value[j]);}   
-                
-                
-                if (g_imuNew[k_imu].mag_value[j] > Mag_maxval[k_imu][j])
-                { Mag_maxval[k_imu][j] = (float)(g_imuNew[k_imu].mag_value[j]);}
-             //  Mag_maxval[k_imu][j]=51.356*0.1;
-         //7   Mag_minval[k_imu][j]=-7.5*3.2;
-                max = (int16)( Mag_maxval[k_imu][j]);
-                min = (int16)(Mag_minval[k_imu][j]);
-                UART_RS485_PutChar(((char*)(&max))[1]);
-                UART_RS485_PutChar(((char*)(&max))[0]);
-                UART_RS485_PutChar(((char*)(&min))[1]);
-                UART_RS485_PutChar(((char*)(&min))[0]);
-                CyDelay(10);
-            }
-        }
-       UART_RS485_PutChar('a');
-       UART_RS485_PutChar('a');
-    }
+   // MagCalibration();
+  
     
-    
-    for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++){ 
-        for (j = 0; j < 3; j++) {
-            offset[k_imu][j] = ((Mag_maxval[k_imu][j] + Mag_minval[k_imu][j])/2 );
-            scale[k_imu][j] = ((Mag_maxval[k_imu][j] - Mag_minval[k_imu][j]))/2;
-          min = (int16)offset[k_imu][j];
-            max =  (int16)scale[k_imu][j];
-            UART_RS485_PutChar(((char*)(&max))[1]);
-            UART_RS485_PutChar(((char*)(&max))[0]);
-            UART_RS485_PutChar(((char*)(&min))[1]);
-            UART_RS485_PutChar(((char*)(&min))[0]);
-            CyDelay(10);
-        }
-       UART_RS485_PutChar('a');
-       UART_RS485_PutChar('a');
-    }
-    CyDelay(3000);
-    
-    
-    /*
-    for(;;){
-        for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++){ 
-            for (j = 0; j < 3; j++) {
-               UART_RS485_PutChar(((char*)(&Mag_minval[k_imu][j]))[0]);
-               UART_RS485_PutChar(((char*)(&Mag_minval[k_imu][j]))[1]);
-            
-               UART_RS485_PutChar(((char*)(&Mag_maxval[k_imu][j]))[0]);
-               UART_RS485_PutChar(((char*)(&Mag_maxval[k_imu][j]))[1]);
-               CyDelay(10);
-            }
-        }
-        UART_RS485_PutChar('a');
-        UART_RS485_PutChar('a'); 
-    }*/
-    
-
- //   MY_TIMER_Stop();
+  
     for(;;)
-
     {             
         // Put the FF reset pin to LOW
         RESET_FF_Write(0x00);

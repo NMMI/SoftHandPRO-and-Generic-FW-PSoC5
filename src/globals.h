@@ -640,6 +640,8 @@ extern float Mag_maxval[N_IMU_MAX][3];
 extern float Mag_minval[N_IMU_MAX][3];
 extern float offset[N_IMU_MAX][3];
 extern float scale[N_IMU_MAX][3];
+extern float avg[N_IMU_MAX];
+extern float factor[N_IMU_MAX][3]; 
 
 // MASTER variables
 extern uint8 master_mode;               /*!< Flag used to set/unset master mode to send messages to other boards.*/

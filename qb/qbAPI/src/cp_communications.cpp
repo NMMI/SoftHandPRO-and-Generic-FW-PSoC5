@@ -207,8 +207,8 @@ int commGetImuReadings(comm_settings *comm_settings_t, int id, uint8_t* imu_tabl
                 			//	aux_float[2] = (float) imus_magcal[3*i+0];
 				//aux_float[2] = (float) (aux_si * mag_sf * (float)imus_magcal[3*i+2]);
 				
-				imu_values[(3*3+4+1)*i+6] = -aux_float[1];
-				imu_values[(3*3+4+1)*i+7] = -aux_float[0];
+				imu_values[(3*3+4+1)*i+6] = aux_float[0];
+				imu_values[(3*3+4+1)*i+7] = aux_float[1];
 				imu_values[(3*3+4+1)*i+8] = aux_float[2];
 				c += 6;
 			}

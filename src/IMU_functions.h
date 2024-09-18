@@ -240,6 +240,7 @@ void ImusReset(); // Imus Reset
 void InitIMU(uint8 n); //IMU setup
 void InitIMUMagCal(uint8 n_imu);
 void InitIMUgeneral();
+void MagCalibration();
 void ReadAcc(int n); //reads acc of IMU n
 void ReadGyro(int n);//reads gyro of IMU n
 void ReadMag(int n);//reads compas of IMU n
