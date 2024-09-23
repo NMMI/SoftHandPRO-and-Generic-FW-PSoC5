@@ -310,7 +310,7 @@ int main()
     // All peripherals has started, now it is ok to start communication
     RS485_CTS_Write(0);             // Clear To Send on RS485.
 
-   // MagCalibration();
+    MagCalibration();
   
     
   
