@@ -76,9 +76,7 @@
 
 int main()
 {   
-    
-    WHO_AM_I       =                 MPU9250_WHO_AM_I;
-     WHO_AM_I_VALUE =                 MPU9250_WHO_AM_I_VALUE    ;
+
     
     // Iterator    
     uint8 i, j;
@@ -179,15 +177,6 @@ int main()
     	SPI_IMU_ClearTxBuffer();
     	SPI_IMU_ClearFIFO();							
         CyDelay(10);
-        
-                // Initialize magnetometer
-        for (i = 0; i < N_IMU_MAX; i++) {
-            for(j = 0; j < 3; j++){
-                offset[i][j] = 0;
-                scale[i][j] = 1;
-            }
-            avg[i]=1;
-        }
         
         // Init MPU9250 devices
         InitIMUgeneral();

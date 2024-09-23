@@ -1,4 +1,13 @@
 T = readtable('emg_values.csv');
+plot(T.Var1);
+hold on
+plot(T.Var2);
+plot(T.Var3);
+plot(T.Var4);
+plot(T.Var5);
+plot(T.Var6);
+
+figure
 plot(T.Var1,T.Var2);
 hold on
 plot(T.Var1,T.Var3);

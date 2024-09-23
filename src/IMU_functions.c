@@ -113,7 +113,7 @@ void InitIMU(uint8 n){
         	CyDelay(10);			
         	WriteControlRegisterIMU(MPU9250_I2C_SLV0_REG, AK8936_CNTL); //select slave register to write
         	CyDelay(10);	
-        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_D0, 0x12); //value to be written: Compass mode = 0x12 continuous mode1(8Hz ODR), 0x16 continuous mode2(100Hz ODR)
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_D0, 0x16); //value to be written: Compass mode = 0x12 continuous mode1(8Hz ODR), 0x16 continuous mode2(100Hz ODR)
         	CyDelay(10);
         	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0x81); //1 bit to write + enable this slave
         	CyDelay(10);
@@ -223,23 +223,33 @@ void ChipSelectorIMU(int n)
 * Function Name: InitIMUGeneral                                                 *
 *********************************************************************************/
 void InitIMUgeneral()
-{
-    uint8 k_imu ;
+{       
+    uint8 k_imu, j;
     uint8 count = 0;
     int tmp[N_IMU_MAX];
     uint8 WhoAmI_MPU = 0;
     uint8 WhoAmI_LSM = 0;
+    
     // Initialize Memory Structure 
     memset(&g_imu, 0, sizeof(struct st_imu));
     memset(&IMU_connected, 0, sizeof(IMU_connected));
-        
+               
+    // Initialize magnetometer
+    for (k_imu = 0; k_imu < N_IMU_MAX; k_imu++) 
+    {
+        for(j = 0; j < 3; j++)
+        {
+            offset[k_imu][j] = 0;
+            scale[k_imu][j] = 1;
+        }
+        avg[k_imu] = 1;
+    }
     
     // First ping to be sure to wakeup IMUs
     for (k_imu=0; k_imu < N_IMU_MAX; k_imu++) 
     {	
 	    ChipSelectorIMU(k_imu);
 	    CyDelay(10);
-        //WHO_AM_I = g_imu[k_imu].dev_type ? LSM6DSRX_WHO_AM_I : MPU9250_WHO_AM_I;
         ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I);
         ReadControlRegisterIMU(MPU9250_WHO_AM_I);
     }
@@ -258,7 +268,6 @@ void InitIMUgeneral()
             g_imu[k_imu].dev_type = MPU9250;
             g_imuNew[k_imu].dev_type = MPU9250;
             N_IMU_Connected++;
-            
             tmp[k_imu] = 1;
         }
         else if (WhoAmI_LSM == LSM6DSRX_WHO_AM_I_VALUE && WhoAmI_MPU != MPU9250_WHO_AM_I_VALUE){
@@ -270,10 +279,10 @@ void InitIMUgeneral()
         else{
             tmp[k_imu] = 0;
             g_imu[k_imu].dev_type = 3;
+            g_imuNew[k_imu].dev_type = 3;
         }
     }
-        
-            
+           
     for(k_imu = 0; k_imu < N_IMU_MAX; k_imu++)
     {
         if(tmp[k_imu] == 1)
@@ -305,11 +314,10 @@ void InitIMUgeneral()
     CyDelay(10);
     ReadMagCal(0);  
     CyDelay(10);
-        
                
     // Standard Initialization of the IMU
     CyDelay(10);
-    for (k_imu=0; k_imu < N_IMU_MAX; k_imu++) 
+    for (k_imu = 0; k_imu < N_IMU_MAX; k_imu++) 
     {	
 	    ChipSelectorIMU(k_imu);
 	    CyDelay(10);
@@ -334,8 +342,7 @@ void InitIMUgeneral()
 *********************************************************************************/	
 void ReadIMU(int n)
 {
-   // uint8  DRDY = ReadControlRegisterIMU(0x3A);
-    //if (DRDY & 0x01){
+
         if (c_mem.imu.IMU_conf[n][0]) ReadAcc(n);
         if (c_mem.imu.IMU_conf[n][1]) ReadGyro(n);
         if (c_mem.imu.IMU_conf[n][2]) ReadMag(n);
@@ -358,8 +365,7 @@ void ReadAcc(int n)
 	    //  Accel[row][1] = low; 
         //  Order of LSM6DSRX register are inverted to be compatible with the ones of  MPU9250
         Accel[n][ i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))] = ReadControlRegisterIMU(AccStartAddress + i);  
-    }
-    
+    }  
 }
 
 /*******************************************************************************
@@ -386,69 +392,72 @@ void ReadMag(int n){
     uint8 i;
 	int row = n;
     uint8 XLDA;
+    uint8  DRDY;
     uint8 SENS_HUB_ENDOP;
     uint8 Data;
 	switch (g_imu[n].dev_type){
         case MPU9250:
-    	low = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_00);
-        SPI_delay();
-    	high = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_01);		
-        SPI_delay();
-        
-    	Mag[row][0] = high; 
-    	Mag[row][1] = low;
-    	low=0, high=0;
-        
-    	//read Y
-    	low = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_02);
-        SPI_delay();
-    	high = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_03);		
-        SPI_delay();
-        
-    	Mag[row][2] = high; 
-    	Mag[row][3] = low;
-    	low=0, high=0;
-        
-    	//read Z
-    	low = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_04);
-        //low = 0;
-        SPI_delay();
-    	high = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_05);
-        SPI_delay();
-    		
-    	Mag[row][4] = high; 
-    	Mag[row][5] = low;
-    	low=0, high=0;
-        
-    break;
-    
-    case LSM6DSRX:
-            do 
-        {
-            XLDA = ReadControlRegisterIMU(LSM6DSRX_STATUS_REG);          
-        }
-        while ((XLDA & 0b00000001) == 0);   
-    
-        do 
-        {
-            SENS_HUB_ENDOP = ReadControlRegisterIMU(LSM6DSRX_STATUS_MASTER_MAINPAGE);   
-        }
-        while ((SENS_HUB_ENDOP & 0b00000001) == 0);
-
-        WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x40);   
-        CyDelayUs(100);  
-        ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I); 
-           
-        for (i = 0; i < 6; i++){
+        DRDY = ReadControlRegisterIMU(0x3A);
+        if (DRDY & 0x01){
+        	low = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_00);
+            SPI_delay();
+        	high = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_01);		
+            SPI_delay();
             
-            Mag[n][i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))]= ReadControlRegisterIMU(LSM6DSRX_SENSOR_HUB_1 + i);  
+        	Mag[row][0] = high; 
+        	Mag[row][1] = low;
+        	low=0, high=0;
+            
+        	//read Y
+        	low = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_02);
+            SPI_delay();
+        	high = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_03);		
+            SPI_delay();
+            
+        	Mag[row][2] = high; 
+        	Mag[row][3] = low;
+        	low=0, high=0;
+            
+        	//read Z
+        	low = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_04);
+            //low = 0;
+            SPI_delay();
+        	high = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_05);
+            SPI_delay();
+        		
+        	Mag[row][4] = high; 
+        	Mag[row][5] = low;
+        	low=0, high=0;
         }
-       
-        WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x00);   
-        CyDelayUs(100);
+        break;
     
-    break;}
-    
+        case LSM6DSRX:
+            do 
+            {
+                XLDA = ReadControlRegisterIMU(LSM6DSRX_STATUS_REG);          
+            }
+            while ((XLDA & 0b00000001) == 0);   
+        
+            do 
+            {
+                SENS_HUB_ENDOP = ReadControlRegisterIMU(LSM6DSRX_STATUS_MASTER_MAINPAGE);   
+            }
+            while ((SENS_HUB_ENDOP & 0b00000001) == 0);
+
+            WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x40);   
+            CyDelayUs(100);  
+            ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I); 
+               
+            for (i = 0; i < 6; i++){
+                
+                Mag[n][i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))]= ReadControlRegisterIMU(LSM6DSRX_SENSOR_HUB_1 + i);  
+            }
+           
+            WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x00);   
+            CyDelayUs(100);
+        
+        break;
+    }
 }
 
 
@@ -665,7 +674,7 @@ void ReadAllIMUs(){
         for (j = 0; j < 3; j++) {
             tmp = Mag[IMU_connected[k_imu]][2*j];
             g_imuNew[k_imu].mag_value[j] = (int16)(tmp<<8 | Mag[IMU_connected[k_imu]][2*j + 1]);
-            g_imuNew[k_imu].mag_value[j] = (int16)((float)((( g_imuNew[k_imu].mag_value[j] - offset[k_imu][j])/scale[k_imu][j]))*0.15*factor[k_imu][j]*avg[k_imu]);
+          //  g_imuNew[k_imu].mag_value[j] = (int16)(((( (float)g_imuNew[k_imu].mag_value[j] - offset[k_imu][j])/scale[k_imu][j]))*0.15*factor[k_imu][j]*avg[k_imu]);
             // g_imuNew[k_imu].mag_value[j] = Mag_maxval[k_imu][j];
         }  
 
