@@ -510,6 +510,8 @@ void MagCalibration(){
     
     for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++){ 
         for (j = 0; j < 3; j++) {
+        //if (g_imu[k_imu].dev_type == LSM6DSRX ) offset[k_imu][j] = 0;
+       // else 
             offset[k_imu][j] = ((Mag_maxval[k_imu][j] + Mag_minval[k_imu][j])/2 );
             scale[k_imu][j] = ((Mag_maxval[k_imu][j] - Mag_minval[k_imu][j]))/2;
             min = (int16)offset[k_imu][j];
