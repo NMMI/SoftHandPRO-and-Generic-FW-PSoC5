@@ -717,7 +717,233 @@ void get_param_list (uint8 num_params, uint8 num_menus, const struct parameter P
     }
 }
 
-         
+       
+
+//==============================================================================
+//                                                            Start Peripherals
+//==============================================================================
+
+void start_peripherals(){
+       
+    // Variable declarations for DMA     
+    uint8 DMA_Chan;
+    uint8 DMA_TD[1];
+    
+    // EEPROM
+    EEPROM_Start();
+    memRecall();                                        // Recall configuration.  
+    
+    // FTDI chip enable
+    CyDelay(100);
+    FTDI_ENABLE_Write(0x01);
+        
+    // RS485 UART
+    UART_RS485_Start();
+    UART_RS485_ClearRxBuffer();
+    UART_RS485_ClearTxBuffer();
+    ISR_RS485_RX_StartEx(ISR_RS485_RX_ExInterrupt);
+    
+    // EXPANSIONS
+    sdEnabled = (c_mem.exp.read_exp_port_flag & 0x01);      // EXP_SD_RTC_ONLY,EXP_SD_RTC_BT
+    btEnabled = (c_mem.exp.read_exp_port_flag & 0x10);      // EXP_BT_ONLY,EXP_SD_RTC_BT
+        
+    // BT UART
+    if (btEnabled) {
+        UART_BT_Start();
+        UART_BT_ClearRxBuffer();
+        UART_BT_ClearTxBuffer();
+        ISR_BT_RX_StartEx(ISR_BT_RX_ExInterrupt);
+    }
+
+    // CYCLES TIMER   
+    CYCLES_TIMER_Start();
+    ISR_CYCLES_StartEx(ISR_CYCLES_Handler);
+    
+    // PWM
+    PWM_MOTORS_Start();
+    PWM_MOTORS_WriteCompare1(0);
+    PWM_MOTORS_WriteCompare2(0);
+    enable_motor(0, 0x00);
+    enable_motor(1, 0x00);
+
+    // Init AS5045 devices  
+    COUNTER_ENC_Start();
+    SHIFTREG_ENC_1_Start();
+    SHIFTREG_ENC_2_Start();
+    SHIFTREG_ENC_3_Start();
+
+    // ADC
+    ADC_Set_N_Channels();           // Set right number of ADC channels to sample
+    ADC_Start();
+    ADC_SOC_Write(0x01);            // Force first read cycle.
+
+    // ADC DMA    
+    DMA_Chan = DMA_DmaInitialize(DMA_BYTES_PER_BURST, DMA_REQUEST_PER_BURST, HI16(DMA_SRC_BASE), HI16(DMA_DST_BASE));
+    DMA_TD[0] = CyDmaTdAllocate();                                                                          // Allocate TD.
+    CyDmaTdSetConfiguration(DMA_TD[0], 2 * NUM_OF_ANALOG_INPUTS, DMA_TD[0], DMA__TD_TERMOUT_EN | TD_INC_DST_ADR); // DMA Configurations.
+    CyDmaTdSetAddress(DMA_TD[0], LO16((uint32)ADC_DEC_SAMP_PTR), LO16((uint32)ADC_buf));                    // Set Register Address.
+    CyDmaChSetInitialTd(DMA_Chan, DMA_TD[0]);                                                               // Initialize Channel.
+    CyDmaChEnable(DMA_Chan, 1);                                                                             // Enable DMA.
+    
+    // TIMER
+    MY_TIMER_Start();           
+    PACER_TIMER_Start();    
+    
+    CYGlobalIntEnable;              // Enable interrupts.
+    Timer_ISR_StartEx(ISR_MY_TIMER_Handler);
+    // Init AS5045 devices
+    InitEncoderGeneral();
+
+    //SPI IMU module
+    if (c_mem.imu.read_imu_flag) {
+    	SPI_IMU_Start();
+    	SPI_IMU_ClearRxBuffer();
+    	SPI_IMU_ClearTxBuffer();
+    	SPI_IMU_ClearFIFO();							
+        CyDelay(10);
+    }
+}
+  
+void init_variables(){
+    
+    int i, j;
+    
+    // Init MPU9250 devices
+    InitIMUgeneral();
+    
+     // Initialize quaternion
+    for (i = 0; i < N_IMU_MAX; i++) {
+        Quat[i][0] = 0.999;
+        Quat[i][1] = 0.01;
+        Quat[i][2] = 0.01;
+        Quat[i][3] = 0.01;
+    }
+    
+    // Initialize magnetometer
+    for (i = 0; i < N_IMU_MAX; i++) {
+        for(j = 0; j < 3; j++){
+            offset[i][j] = 0;
+            scale[i][j] = 1;
+        }
+        avg[i] = 1;
+    }
+     
+    //---------------------------------------------------  Initialize filters structure 
+    for(i = 0; i < NUM_OF_MOTORS; i++) {
+        filt_i[i].gain = 32;    // Current filter constant.
+        filt_curr_diff[i].gain = 16;   // Current residual filter constant.       
+        filt_v[i].old_value    = 12000;// Initial voltage filter value.
+        filt_v[i].gain         = 2;    // Voltage filter constant.
+    }
+    
+    for(i = 0; i < NUM_OF_SENSORS; i++) {
+        filt_vel[i].gain = 128; // Velocity filters constant.
+    }
+    
+    for(i = 0; i < NUM_OF_INPUT_EMGS + NUM_OF_ADDITIONAL_EMGS; i++) {
+        filt_emg[i].gain      = 50;   // Emg channels filter constant.
+    }
+    filt_detect_pc.gain = 500;    
+    
+    //---------------------------------------------------  Initialize reference structure 
+    for (i = 0; i< NUM_OF_MOTORS; i++) {
+        g_ref[i].pos = 0;
+    }
+    
+    //---------------------------------------------------  Initialize measurement structure
+    for (j = 0; j< N_ENCODER_LINE_MAX; j++) { 
+        for (i = 0; i < NUM_OF_SENSORS; i++) { 
+            g_meas[j].pos[i] = 0;
+            g_meas[j].rot[i] = (int8)0;
+        }
+    }
+
+    for (i = 0; i< NUM_OF_MOTORS; i++) {
+        g_refNew[i] = g_ref[i];                         // Initialize k+1 reference structure.
+    }
+    
+    //---------------------------------------------------  Initialize emg structure
+    g_adc_meas.emg[0] = 0;
+    g_adc_meas.emg[1] = 0;
+    g_adc_meas.joystick[0] = 0;
+    g_adc_meas.joystick[1] = 0;
+    
+    for (uint16 k = 0; k<SAMPLES_FOR_EMG_HISTORY; k++){
+        for (j = 0; j<NUM_OF_INPUT_EMGS; j++){
+            emg_history[k][j] = (uint16)0;
+        }
+    }
+    emg_history_next_idx = 0;
+    
+    set_motor_driver_type();
+    
+    for (i = 0; i< NUM_OF_MOTORS; i++) {
+        if (c_mem.emg.emg_calibration_flag) {
+            if ((c_mem.motor[i].input_mode == INPUT_MODE_EMG_PROPORTIONAL) ||
+                (c_mem.motor[i].input_mode == INPUT_MODE_EMG_INTEGRAL) ||
+                (c_mem.motor[i].input_mode == INPUT_MODE_EMG_FCFS) ||
+                (c_mem.motor[i].input_mode == INPUT_MODE_EMG_FCFS_ADV) ||
+                (c_mem.motor[i].input_mode == INPUT_MODE_EMG_PROPORTIONAL_NC))
+                g_ref[i].onoff = 0x00;
+            else
+                g_ref[i].onoff = c_mem.motor[i].active;
+        } 
+        else
+            g_ref[i].onoff = c_mem.motor[i].active;
+
+        if (!g_mem.enc[g_mem.motor[i].encoder_line].double_encoder_on_off) {
+            g_ref[i].onoff = c_mem.motor[i].active;                          // Initialize Activation.
+        } 
+        else {
+            // Do not activate motor until position reconstruction has finished
+            g_ref[i].onoff = 0x00;
+        }
+        enable_motor(i, g_ref[i].onoff); 
+        
+        dev_pwm_limit[i] = dev_pwm_sat[i];              // Init PWM limit.
+	
+        pow_tension[i] = 12000;                         // 12000 mV (12 V)
+    }
+    
+    tension_valid = FALSE;                              // Init tension_valid BIT.
+
+    for (j = 0; j< N_ENCODER_LINE_MAX; j++) { 
+        reset_last_value_flag[j] = 0;                   // Do not reset encoder last value.
+    }
+
+    //------------------------------------------------- Initialize package on receive from RS485
+    g_rx.length = 0;
+    g_rx.ready  = 0;
+    
+    //------------------------------------------------- Initialize rest position variables    
+	rest_enabled = 0;
+    forced_open = 0;
+    
+    if (c_mem.motor[0].motor_driver_type != DRIVER_BRUSHLESS){
+        LED_control(5);     // Default - red light
+    }
+    
+#ifdef MASTER_FW
+    master_mode = 1;    // Default - activate master mode at startup
+#endif
+
+    //============================================================    check if maintenance is due
+
+    if ( (g_mem.cnt.wire_disp/(((g_mem.motor[0].pos_lim_sup>>g_mem.enc[0].res[0]) - (g_mem.motor[0].pos_lim_inf>>g_mem.enc[0].res[0]))*2)) > (uint32)(PREREVISION_CYCLES/2) )   // 50 %
+        maintenance_flag = TRUE;    
+
+    if (sdEnabled) {
+        
+        store_RTC_current_time();
+        
+        // SD file
+        InitSD_FS();
+    }
+    
+
+    
+    
+}
 //==============================================================================
 //                                                                  NUM_OF_BYTES
 //==============================================================================
@@ -812,7 +1038,7 @@ void manage_param_list(uint16 index, uint8 sendToDevice) {
         {(uint8*)&(MEM_P->dev.id)                                                                   ,   TYPE_UINT8	,	1	                        ,	"Device ID:"	                        ,	0	            ,   ST_DEVICE	                                                ,	0	            },
         {(uint8*)&(MEM_P->motor[MOTOR_IDX].k_p)                                                     ,   TYPE_FLOAT	,	3	                        ,   "Position PID [P, I, D]:"	            ,	0	            ,   ST_MOTOR+MOTOR_IDX	                                        ,	POS_PID	        },
         {(uint8*)&(MEM_P->motor[MOTOR_IDX].k_p_c)                                                   ,   TYPE_FLOAT	,	3	                        ,   "Current PID [P, I, D]:"	            ,	0	            ,   ST_MOTOR+MOTOR_IDX	                                        ,	CURR_PID	    },
-        {(uint8*)&(MEM_P->motor[MOTOR_IDX].activ)                                                   ,   TYPE_FLAG	,	1	                        ,   "Startup Activation:"	                ,	YES_NO  	    ,   ST_MOTOR+MOTOR_IDX	                                        ,	0	            },
+        {(uint8*)&(MEM_P->motor[MOTOR_IDX].active)                                                   ,   TYPE_FLAG	,	1	                        ,   "Startup Activation:"	                ,	YES_NO  	    ,   ST_MOTOR+MOTOR_IDX	                                        ,	0	            },
         {(uint8*)&(MEM_P->motor[MOTOR_IDX].input_mode)                                              ,   TYPE_FLAG	,	1	                        ,   "Input mode:"	                        ,	INPUT_MENU  	,   ST_MOTOR+MOTOR_IDX	                                        ,	INPUT_MODE	    },
         {(uint8*)&(MEM_P->motor[MOTOR_IDX].control_mode)                                            ,   TYPE_FLAG	,	1	                        ,   "Control mode:"	                        ,	CTRL_MODE   	,   ST_MOTOR+MOTOR_IDX	                                        ,	0	            },
         {(uint8*)&(MEM_P->enc[MEM_P->motor[MOTOR_IDX].encoder_line].res)                            ,   TYPE_UINT8	,	3	                        ,   "Resolutions:"	                        ,	0	            ,   ST_ENCODER+(MEM_P->motor[MOTOR_IDX].encoder_line)	        ,	0	            },
@@ -855,7 +1081,7 @@ void manage_param_list(uint16 index, uint8 sendToDevice) {
         {(uint8*)&(MEM_P->dev.use_2nd_motor_flag)                                                   ,   TYPE_FLAG	,	1	                        ,   "Use second motor:"	                    ,	ON_OFF          ,   ST_DEVICE	                                                ,	0	            },
         {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].k_p)                                              ,   TYPE_FLOAT	,	3	                        ,   "Position PID [P, I, D]:"	            ,	0	            ,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	POS_PID_2	    },
         {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].k_p_c)                                            ,   TYPE_FLOAT	,	3	                        ,   "Current PID [P, I, D]:"	            ,	0	            ,	ST_MOTOR+SECOND_MOTOR_IDX	                                ,	CURR_PID_2	    },
-        {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].activ)                                            ,   TYPE_FLAG	,	1	                        ,   "Startup Activation:"	                ,	YES_NO	        ,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	0	            },
+        {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].active)                                            ,   TYPE_FLAG	,	1	                        ,   "Startup Activation:"	                ,	YES_NO	        ,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	0	            },
         {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].input_mode)                                       ,   TYPE_FLAG	,	1	                        ,   "Input mode:"	                        ,	INPUT_MENU   	,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	INPUT_MODE_2	},
         {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].control_mode)                                     ,   TYPE_FLAG	,	1	                        ,   "Control mode:"	                        ,	CTRL_MODE   	,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	0	            },
         {(uint8*)&(MEM_P->enc[MEM_P->motor[SECOND_MOTOR_IDX].encoder_line].res)                     ,	TYPE_UINT8	,	3	                        ,   "Resolutions:"	                        ,	0	            ,   ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line)	,	0	            },
@@ -1829,7 +2055,7 @@ void prepare_generic_info(char *info_string)
                     strcat(info_string, str);
                 }
             }
-            if (MOT->activ == 0x01)
+            if (MOT->active == 0x01)
                 strcat(info_string, "Startup activation: YES\r\n");
             else
                 strcat(info_string, "Startup activation: NO\r\n");
@@ -2344,7 +2570,7 @@ void prepare_SD_param_info(char *info_string)
             sprintf(str, "D -> %f\r\n", ((double) MOT->k_d_c_dl / 65536));
             strcat(info_string, str);
         }
-        if (MOT->activ == 0x01)
+        if (MOT->active == 0x01)
             strcat(info_string, "Startup activation: YES\r\n");
         else
             strcat(info_string, "Startup activation: NO\r\n");
@@ -2988,7 +3214,7 @@ uint8 memInit(void)
         g_mem.motor[i].k_i_c_dl      =0.0002 * 65536;
         g_mem.motor[i].k_d_c_dl      =     0 * 65536;
 
-        g_mem.motor[i].activ         = 1;
+        g_mem.motor[i].active        = 1;
         g_mem.motor[i].activate_pwm_rescaling = MAXON_24V;      //rescaling active for 12V motor
         g_mem.motor[i].motor_driver_type = DRIVER_MC33887;      //SoftHand standard driver
         g_mem.motor[i].input_mode    = INPUT_MODE_EXTERNAL;
@@ -3123,7 +3349,7 @@ void memInit_SoftHandPro(void)
     g_mem.dev.right_left = LEFT_HAND;
     g_mem.dev.dev_type = SOFTHAND_PRO;
     
-    g_mem.motor[MOTOR_IDX].activ         = 1;
+    g_mem.motor[MOTOR_IDX].active        = 1;
     g_mem.motor[MOTOR_IDX].input_mode    = INPUT_MODE_EXTERNAL;
     g_mem.motor[MOTOR_IDX].control_mode  = CONTROL_ANGLE;
     

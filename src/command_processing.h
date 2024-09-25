@@ -85,8 +85,15 @@ struct menu{
 //                                                          function definitions
 //==============================================================================
 
-/** \name Firmware information functions */
-/** \{ */
+//============================================================  start_peripherals
+/** This function set up and start all peripherals
+**/
+void start_peripherals();
+
+//============================================================  init_variables
+/** This function initialises variables at startup
+**/
+void init_variables();
 
 //============================================================  prepare_generic_info
 /** This function is used to prepare a generic information string on the device parameters

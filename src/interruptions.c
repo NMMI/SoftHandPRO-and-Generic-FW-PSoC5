@@ -2004,7 +2004,7 @@ void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor) {
                 // If necessary activate motor
     			safe_startup_motor_activation[n_line] = TRUE;
                 // Activate the motor associated to this encoder line
-                g_refNew[assoc_motor].onoff = c_mem.motor[assoc_motor].activ;
+                g_refNew[assoc_motor].onoff = c_mem.motor[assoc_motor].active;
                 enable_motor(assoc_motor, g_refNew[assoc_motor].onoff);                
                 
                 pos_reconstruct[n_line] = TRUE;
@@ -2020,7 +2020,7 @@ void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor) {
             g_refNew[assoc_motor].pos = 0;
             
             // Activate the motor associated to this encoder line
-            g_refNew[assoc_motor].onoff = c_mem.motor[assoc_motor].activ;
+            g_refNew[assoc_motor].onoff = c_mem.motor[assoc_motor].active;
             enable_motor(assoc_motor, g_refNew[assoc_motor].onoff); 
                         
             safe_startup_motor_activation[n_line] = FALSE;
@@ -2482,7 +2482,7 @@ void analog_read_end() {
                         if (c_mem.motor[idx].control_mode == CONTROL_ANGLE) {
                             g_ref[idx].pos = g_meas[g_mem.motor[idx].encoder_line].pos[0];
                         }
-                        g_ref[idx].onoff = c_mem.motor[idx].activ;
+                        g_ref[idx].onoff = c_mem.motor[idx].active;
                         enable_motor(idx, g_ref[idx].onoff); 
                     }
                 }

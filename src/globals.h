@@ -192,29 +192,37 @@
 //                                                                         OTHER
 //==============================================================================
 
-#define FALSE                   0
-#define TRUE                    1
-#define DEFAULT_EEPROM_DISPLACEMENT 50  /*!< Number of pages occupied by the EEPROM.*/
-#define EEPROM_BYTES_ROW        16      /*!< EEPROM number of bytes per row.*/
-#define EEPROM_COUNTERS_ROWS    7       /*!< EEPROM number of rows dedicated to store counters.*/
-#define EEPROM_AFTER_CNT_FREE_ROWS 2    /*!< EEPROM number of rows free after counters.*/   
-#define PWM_MAX_VALUE_DC        100     /*!< Maximum value of the PWM signal.*/
-#define ANTI_WINDUP             1000    /*!< Anti windup saturation.*/ 
-#define DEFAULT_CURRENT_LIMIT   1500    /*!< Default Current limit, 0 stands for unlimited.*/
-#define CURRENT_HYSTERESIS      10      /*!< milliAmperes of hysteresis for current control.*/
-#define EMG_SAMPLE_TO_DISCARD   500     /*!< Number of sample to discard before calibration.*/
-#define SAMPLES_FOR_MEAN        100     /*!< Number of samples used to mean current values.*/
-#define SAMPLES_FOR_EMG_MEAN    1000    /*!< Number of samples used to mean emg values.*/
-#define SAMPLES_FOR_JOYSTICK_MEAN   200 /*!< Number of samples used to mean joystick values.*/
-#define JOYSTICK_SAMPLE_TO_DISCARD  100 /*!< Number of samples to discard before having joystick stable values.*/
-#define REST_POS_ERR_THR_GAIN   10      /*!< Gain related to stop condition threshold in rest position routine.*/
-#define POS_INTEGRAL_SAT_LIMIT  50000000    /*!< Anti windup on position control.*/
-#define CURR_INTEGRAL_SAT_LIMIT 100000      /*!< Anti windup on current control.*/
-#define PWM_RATE_LIMITER_MAX	1
-#define SAFE_STARTUP_MOTOR_READINGS 8000    /*!< Number of encoder readings after position reconstruction before activating motor.*/
-#define LOOKUP_DIM              6           /*!< Dimension of the current lookup table.*/
-#define PREREVISION_CYCLES      400000      /*!< Number of SoftHand Pro cycles before maintenance.*/    
-#define SAMPLES_FOR_EMG_HISTORY 600 /*!< Number of EMG history values ( 5 smpls/sec. x 120 secs = 600 smpls / channel ).*/
+#define FALSE                           0
+#define TRUE                            1
+#define DEFAULT_EEPROM_DISPLACEMENT     50          /*!< Number of pages occupied by the EEPROM.*/
+#define EEPROM_BYTES_ROW                16          /*!< EEPROM number of bytes per row.*/
+#define EEPROM_COUNTERS_ROWS            7           /*!< EEPROM number of rows dedicated to store counters.*/
+#define EEPROM_AFTER_CNT_FREE_ROWS      2           /*!< EEPROM number of rows free after counters.*/   
+#define PWM_MAX_VALUE_DC                100         /*!< Maximum value of the PWM signal.*/
+#define ANTI_WINDUP                     1000        /*!< Anti windup saturation.*/ 
+#define DEFAULT_CURRENT_LIMIT           1500        /*!< Default Current limit, 0 stands for unlimited.*/
+#define CURRENT_HYSTERESIS              10          /*!< milliAmperes of hysteresis for current control.*/
+#define EMG_SAMPLE_TO_DISCARD           500         /*!< Number of sample to discard before calibration.*/
+#define SAMPLES_FOR_MEAN                100         /*!< Number of samples used to mean current values.*/
+#define SAMPLES_FOR_EMG_MEAN            1000        /*!< Number of samples used to mean emg values.*/
+#define SAMPLES_FOR_JOYSTICK_MEAN       200         /*!< Number of samples used to mean joystick values.*/
+#define JOYSTICK_SAMPLE_TO_DISCARD      100         /*!< Number of samples to discard before having joystick stable values.*/
+#define REST_POS_ERR_THR_GAIN           10          /*!< Gain related to stop condition threshold in rest position routine.*/
+#define POS_INTEGRAL_SAT_LIMIT          50000000    /*!< Anti windup on position control.*/
+#define CURR_INTEGRAL_SAT_LIMIT         100000      /*!< Anti windup on current control.*/
+#define PWM_RATE_LIMITER_MAX	        1
+#define SAFE_STARTUP_MOTOR_READINGS     8000        /*!< Number of encoder readings after position reconstruction before activating motor.*/
+#define LOOKUP_DIM                      6           /*!< Dimension of the current lookup table.*/
+#define PREREVISION_CYCLES              400000      /*!< Number of SoftHand Pro cycles before maintenance.*/    
+#define SAMPLES_FOR_EMG_HISTORY         600         /*!< Number of EMG history values ( 5 smpls/sec. x 120 secs = 600 smpls / channel ).*/
+#define GREEN_FIXED                     1
+#define RED_FIXED                       5
+#define RED_BLINKING                    3
+#define YELLOW_FIXED                    4
+#define YELLOW_BLINKING                 2
+#define OFF                             0
+
+           
 //==============================================================================
 //                                                        structures definitions
 //==============================================================================
@@ -319,7 +327,7 @@ struct st_motor{
     int32   k_p_c_dl;                   /*!< Double loop current controller prop. constant.*/               //4
     int32   k_i_c_dl;                   /*!< Double loop current controller integr. constant.*/             //4
     int32   k_d_c_dl;                   /*!< Double loop current controller deriv. constant.*/              //4     
-    uint8   activ;                      /*!< Startup activation.*/                                          //1
+    uint8   active;                      /*!< Startup activation.*/                                          //1
     uint8   activate_pwm_rescaling;     /*!< Activation of PWM rescaling for 12V motor.*/                   //1
     uint8   motor_driver_type;          /*!< Specify motor type.*/                                          //1
     uint8   pos_lim_flag;               /*!< Position limit active/inactive.*/                              //1
@@ -623,7 +631,7 @@ extern uint8 bt_src;
 
 // IMU variables
 extern uint8 WHO_AM_I      ; 
-  extern   uint8 WHO_AM_I_VALUE ;
+extern   uint8 WHO_AM_I_VALUE ;
 extern uint8 IMU_device;
 extern uint8 N_IMU_Connected;
 extern uint8 IMU_connected[N_IMU_MAX];
