@@ -76,6 +76,7 @@
 
 int main()
 {   
+    // CyDelay(5000);
 
     
     // Iterator    
@@ -171,8 +172,6 @@ int main()
     if (c_mem.imu.read_imu_flag) {
 
     	SPI_IMU_Start();
-    	SPI_IMU_Init();
-    	SPI_IMU_Enable();
     	SPI_IMU_ClearRxBuffer();
     	SPI_IMU_ClearTxBuffer();
     	SPI_IMU_ClearFIFO();							
@@ -310,7 +309,7 @@ int main()
     // All peripherals has started, now it is ok to start communication
     RS485_CTS_Write(0);             // Clear To Send on RS485.
 
-   MagCalibration();
+   
   
     
   

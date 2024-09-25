@@ -75,7 +75,8 @@ void commProcess(void){
 
 //=============================================================     CMD_ACTIVATE
         case CMD_ACTIVATE:
-            cmd_activate();
+            MagCalibration();
+           // cmd_activate();
             break;
 
 //===========================================================     CMD_SET_INPUTS
