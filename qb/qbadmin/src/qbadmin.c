@@ -1541,7 +1541,7 @@ int main (int argc, char **argv)
 				}
 				if (global_args.imu_table[5*i + 2] ){
 				//	printf("Magnetometer");
-					printf("%f, %f, %f, ", imu_values[(3*3+4+1)*i+6], imu_values[(3*3+4+1)*i+7], imu_values[(3*3+4+1)*i+8]);				
+					//printf("%f, %f, %f, ", imu_values[(3*3+4+1)*i+6], imu_values[(3*3+4+1)*i+7], imu_values[(3*3+4+1)*i+8]);				
                     fprintf(global_args.emg_file, "%f,%f,%f,", imu_values[(3*3+4+1)*i+6], imu_values[(3*3+4+1)*i+7], imu_values[(3*3+4+1)*i+8]);
 
 				}
@@ -1557,11 +1557,11 @@ int main (int argc, char **argv)
 			}
             
 				
-				printf("\n");
+			//	printf("\n");
                 fprintf(global_args.emg_file, "\n");
                 end = std::chrono::system_clock::now();
         elapsed_mseconds_t = (end - start) * 1000;
-              sleep_us(1000); // Delay to maintain timing
+              sleep_us(50000); // Delay to maintain timing
                 conto++;
 		}
         printf("%d", conto);

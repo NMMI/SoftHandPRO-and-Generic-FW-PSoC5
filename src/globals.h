@@ -634,7 +634,7 @@ extern uint8 WHO_AM_I      ;
 extern   uint8 WHO_AM_I_VALUE ;
 extern uint8 IMU_device;
 extern uint8 N_IMU_Connected;
-extern uint8 IMU_connected[N_IMU_MAX];
+extern uint8 IMU_IDs[N_IMU_MAX];
 extern int imus_data_size;
 extern int single_imu_size[N_IMU_MAX];
 extern struct st_imu_data g_imu[N_IMU_MAX], g_imuNew[N_IMU_MAX];

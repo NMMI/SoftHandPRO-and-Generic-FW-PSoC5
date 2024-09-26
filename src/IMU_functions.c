@@ -215,7 +215,7 @@ void InitIMUMagCal(uint8 k_imu){
 *********************************************************************************/
 void ChipSelectorIMU(int n)
 {
-    Chip_Select_IMU_Write(n);
+    Chip_Select_IMU_Write(IMU_IDs[n]);
 }
 
 /********************************************************************************
@@ -233,7 +233,7 @@ void InitIMUgeneral()
     
     // Initialize Memory Structure 
     memset(&g_imu, 0, sizeof(struct st_imu));
-    memset(&IMU_connected, 0, sizeof(IMU_connected));
+    memset(&IMU_IDs, 0, sizeof(IMU_IDs));
                
     // Initialize magnetometer
     for (k_imu = 0; k_imu < N_IMU_MAX; k_imu++) {
@@ -246,31 +246,33 @@ void InitIMUgeneral()
     
     // First ping to be sure to wakeup IMUs
     for (k_imu = 0; k_imu < N_IMU_MAX; k_imu++) {	
-	    ChipSelectorIMU(k_imu);
+	    Chip_Select_IMU_Write(k_imu);
 	    CyDelay(10);
         ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I);
         ReadControlRegisterIMU(MPU9250_WHO_AM_I);
         Chip_Select_IMU_Write(7);
     }
-    
+    count = 0;
  
     for (k_imu = 0; k_imu < NUM_DEV_IMU; k_imu++) {      
-    	ChipSelectorIMU(k_imu);
+    	Chip_Select_IMU_Write(k_imu);
         CyDelay(10);
     	WhoAmI_MPU = ReadControlRegisterIMU(MPU9250_WHO_AM_I);
         CyDelay(10);
         WhoAmI_LSM = ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I);
         CyDelay(10);
         if (WhoAmI_MPU == MPU9250_WHO_AM_I_VALUE && WhoAmI_LSM != LSM6DSRX_WHO_AM_I_VALUE){
-            g_imu[k_imu].dev_type = MPU9250;
-            g_imuNew[k_imu].dev_type = MPU9250;
+            g_imu[count].dev_type = MPU9250;
+            g_imuNew[count].dev_type = MPU9250;
             N_IMU_Connected++;
+            count++;
             tmp[k_imu] = 1;
         }
         else if (WhoAmI_LSM == LSM6DSRX_WHO_AM_I_VALUE && WhoAmI_MPU != MPU9250_WHO_AM_I_VALUE){
-            g_imu[k_imu].dev_type = LSM6DSRX;
-            g_imuNew[k_imu].dev_type = LSM6DSRX;
+            g_imu[count].dev_type = LSM6DSRX;
+            g_imuNew[count].dev_type = LSM6DSRX;
             N_IMU_Connected++;
+            count++;
             tmp[k_imu] = 1;
         }
         else{
@@ -278,18 +280,20 @@ void InitIMUgeneral()
         }
         Chip_Select_IMU_Write(7);
     }
-           
+           count =0;
+    
+    
     for(k_imu = 0; k_imu < N_IMU_MAX; k_imu++)
     {
         if(tmp[k_imu] == 1)
         {
-            IMU_connected[count] = k_imu;
+            IMU_IDs[count] = k_imu;
             count++;
         }
     }            
 
     // Initialize IMU to Read MagCal Parameters
-    for (k_imu = 0; k_imu < N_IMU_MAX; k_imu++) 
+    for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++) 
     {	
 	    ChipSelectorIMU(k_imu);
 	    InitIMUMagCal(k_imu);
@@ -298,7 +302,7 @@ void InitIMUgeneral()
     
     // Reading of MagCal Parameters
     CyDelay(50);
-    for (k_imu = 0; k_imu < N_IMU_MAX; k_imu++){
+    for (k_imu = 0; k_imu <  N_IMU_Connected; k_imu++){
         ChipSelectorIMU(k_imu);
         ReadMagCal(k_imu);  
         Chip_Select_IMU_Write(7);
@@ -306,7 +310,7 @@ void InitIMUgeneral()
     
     // Standard Initialization of the IMU
     CyDelay(10);
-    for (k_imu = 0; k_imu < N_IMU_MAX; k_imu++) 
+    for (k_imu = 0; k_imu <  N_IMU_Connected; k_imu++) 
     {	
 	    ChipSelectorIMU(k_imu);
 	    InitIMU(k_imu);
@@ -320,8 +324,8 @@ void InitIMUgeneral()
     imus_data_size = 1; //header    
     for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++)
     {
-        single_imu_size[IMU_connected[k_imu]] = 1 + 6*c_mem.imu.IMU_conf[IMU_connected[k_imu]][0] + 6*c_mem.imu.IMU_conf[IMU_connected[k_imu]][1] + 6*c_mem.imu.IMU_conf[IMU_connected[k_imu]][2]+ 16*c_mem.imu.IMU_conf[IMU_connected[k_imu]][3] + 2*c_mem.imu.IMU_conf[IMU_connected[k_imu]][4]+ 1;
-        imus_data_size = imus_data_size + single_imu_size[IMU_connected[k_imu]];
+        single_imu_size[k_imu] = 1 + 6*c_mem.imu.IMU_conf[k_imu][0] + 6*c_mem.imu.IMU_conf[k_imu][1] + 6*c_mem.imu.IMU_conf[k_imu][2]+ 16*c_mem.imu.IMU_conf[k_imu][3] + 2*c_mem.imu.IMU_conf[k_imu][4]+ 1;
+        imus_data_size = imus_data_size + single_imu_size[k_imu];
     }
     imus_data_size = imus_data_size + 1;    //checksum*/
 }
@@ -351,9 +355,10 @@ void ReadAcc(int n)
         Accel[n][ i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))] = ReadControlRegisterIMU(AccStartAddress + i);  
     }  
     for (i = 0; i < 3; i++) {
-        tmp = Accel[IMU_connected[n]][2*i];
+        tmp = Accel[n][2*i];
         //  Order of LSM6DSRX register are inverted to be compatible with the ones of  MPU9250
-        g_imuNew[n].accel_value[i] = (int16)(tmp <<8 | Accel[IMU_connected[n]][2*i + 1]);
+        g_imuNew[n].accel_value[i] = (int16)(tmp <<8 | Accel[n][2*i + 1]);
+        
     }
 }
 
@@ -372,8 +377,8 @@ void ReadGyro(int n){
     }
             
     for (i = 0; i < 3; i++) {
-        tmp = Gyro[IMU_connected[n]][2*i];
-        g_imuNew[n].gyro_value[i] = (int16)(tmp<<8 | Gyro[IMU_connected[n]][2*i + 1]);
+        tmp = Gyro[n][2*i];
+        g_imuNew[n].gyro_value[i] = (int16)(tmp<<8 | Gyro[n][2*i + 1]);
     }
 }
         
@@ -422,8 +427,8 @@ void ReadMag(int n){
     }
            
     for (i = 0; i < 3; i++) {
-        tmp = Mag[IMU_connected[n]][2*i];
-        g_imuNew[n].mag_value[i] = (int16)(tmp <<8 | Mag[IMU_connected[n]][2*i + 1]);
+        tmp = Mag[n][2*i];
+        g_imuNew[n].mag_value[i] = (int16)(tmp <<8 | Mag[n][2*i + 1]);
         g_imuNew[n].mag_value[i] = (int16)(((( (float)g_imuNew[n].mag_value[i] - offset[n][i])/scale[n][i]))*0.15*factor[n][i]*avg[n]);
     }  
 }
@@ -449,11 +454,11 @@ void MagCalibration(){
     uint8 k_imu, j, tmp ;
             for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++){ 
             // Read k_imu IMU
-            ChipSelectorIMU(IMU_connected[k_imu]);
+            ChipSelectorIMU(k_imu);
             ReadMag(k_imu);
             for (j = 0; j < 3; j++) {
-                tmp = Mag[IMU_connected[k_imu]][2*j];
-                g_imuNew[k_imu].mag_value[j] = (int16)(tmp<<8 | Mag[IMU_connected[k_imu]][2*j + 1]);
+                tmp = Mag[k_imu][2*j];
+                g_imuNew[k_imu].mag_value[j] = (int16)(tmp<<8 | Mag[k_imu][2*j + 1]);
 
                 if (g_imuNew[k_imu].mag_value[j] < Mag_minval[k_imu][j]){
                     Mag_minval[k_imu][j] = (float)(g_imuNew[k_imu].mag_value[j]);
@@ -604,7 +609,7 @@ void ReadQuat(int n)
     Quat[n][3] = qL[3];
     
     for (i = 0; i < 4; i++) {
-    g_imuNew[n].quat_value[i] = (float)(Quat[IMU_connected[n]][i]);
+    g_imuNew[n].quat_value[i] = (float)(Quat[n][i]);
     }
 }
 
@@ -616,8 +621,8 @@ void ReadAllIMUs(){
     
      
     for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++){ 
-        ChipSelectorIMU(IMU_connected[k_imu]);
-        ReadIMU(IMU_connected[k_imu]);
+        ChipSelectorIMU(k_imu);
+        ReadIMU(k_imu);
         Chip_Select_IMU_Write(7);
     }
 }
@@ -647,8 +652,8 @@ void ReadTemp(int n)
     }
     */
 
-        tmp = Temp[IMU_connected[n]][0];
-        g_imuNew[n].temp_value = (int16)(tmp<<8 | Temp[IMU_connected[n]][1]);
+        tmp = Temp[n][0];
+        g_imuNew[n].temp_value = (int16)(tmp<<8 | Temp[n][1]);
 }
 
 

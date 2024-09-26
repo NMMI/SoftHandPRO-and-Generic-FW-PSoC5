@@ -134,7 +134,7 @@ uint8 bt_src = FALSE;
      uint8 WHO_AM_I_VALUE ;
 uint8 IMU_device;
 uint8 N_IMU_Connected;
-uint8 IMU_connected[N_IMU_MAX];
+uint8 IMU_IDs[N_IMU_MAX];
 int imus_data_size;
 int single_imu_size[N_IMU_MAX];
 struct st_imu_data g_imu[N_IMU_MAX];

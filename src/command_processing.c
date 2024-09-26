@@ -1678,8 +1678,8 @@ void get_IMU_param_list(uint16 index)
                 packet_data[3+start_byte + PARAM_BYTE_SLOT*k] = 3;
                 
                 for (j = 3*k; j <= 3*k+2; j++) {  // for each possible imu on port k
-                    if (IMU_connected[i] == j) {
-                        packet_data[h+start_byte + PARAM_BYTE_SLOT*k] = (uint8)IMU_connected[i];               
+                    if (IMU_IDs[i] == j) {
+                        packet_data[h+start_byte + PARAM_BYTE_SLOT*k] = (uint8)IMU_IDs[i];               
                         i++;
                     } 
                     else {
@@ -1699,9 +1699,9 @@ void get_IMU_param_list(uint16 index)
                 packet_data[2+start_byte + PARAM_BYTE_SLOT*k] = TYPE_UINT8;
                 
                 packet_data[3+start_byte + PARAM_BYTE_SLOT*k] = 3;
-                packet_data[4+start_byte + PARAM_BYTE_SLOT*k] = (uint8) MagCal[IMU_connected[2*k]][0];
-                packet_data[5+start_byte + PARAM_BYTE_SLOT*k] = (uint8) MagCal[IMU_connected[2*k]][1];
-                packet_data[6+start_byte + PARAM_BYTE_SLOT*k] = (uint8) MagCal[IMU_connected[2*k]][2];
+                packet_data[4+start_byte + PARAM_BYTE_SLOT*k] = (uint8) MagCal[2*k][0];
+                packet_data[5+start_byte + PARAM_BYTE_SLOT*k] = (uint8) MagCal[2*k][1];
+                packet_data[6+start_byte + PARAM_BYTE_SLOT*k] = (uint8) MagCal[2*k][2];
                 
                 // check if there is a second value
                 if ( N_IMU_Connected < 2*(k+1) ) {
@@ -1712,9 +1712,9 @@ void get_IMU_param_list(uint16 index)
                 else {
                     // fill the second value
                     packet_data[3+start_byte + PARAM_BYTE_SLOT*k] = 6;
-                    packet_data[7+start_byte + PARAM_BYTE_SLOT*k] = (uint8) MagCal[IMU_connected[2*k+1]][0];
-                    packet_data[8+start_byte + PARAM_BYTE_SLOT*k] = (uint8) MagCal[IMU_connected[2*k+1]][1];
-                    packet_data[9+start_byte + PARAM_BYTE_SLOT*k] = (uint8) MagCal[IMU_connected[2*k+1]][2];
+                    packet_data[7+start_byte + PARAM_BYTE_SLOT*k] = (uint8) MagCal[2*k+1][0];
+                    packet_data[8+start_byte + PARAM_BYTE_SLOT*k] = (uint8) MagCal[2*k+1][1];
+                    packet_data[9+start_byte + PARAM_BYTE_SLOT*k] = (uint8) MagCal[2*k+1][2];
                 
                     for(j = mag_param_str_len; j != 0; j--)
                         packet_data[10+start_byte + PARAM_BYTE_SLOT*k + mag_param_str_len - j] = mag_param_str[mag_param_str_len - j];
@@ -1736,17 +1736,17 @@ void get_IMU_param_list(uint16 index)
             
             start_byte = start_byte + PARAM_BYTE_SLOT;
             for (i = 0; i < (uint8)N_IMU_Connected; i++){
-                sprintf(imu_table_str, "%u - IMU %d configuration:", first_imu_parameter + i, (int) IMU_connected[i]);
+                sprintf(imu_table_str, "%u - IMU %d configuration:", first_imu_parameter + i, (int) i);
                 imu_table_str_len = strlen(imu_table_str);
             
                 packet_data[(uint16)(2 + start_byte + PARAM_BYTE_SLOT*i)] = TYPE_UINT8;
                 packet_data[(uint16)(3 + start_byte + PARAM_BYTE_SLOT*i)] = 5;
                 
-                packet_data[(uint16)(4 + start_byte + PARAM_BYTE_SLOT*i)] = (uint8)(c_mem.imu.IMU_conf[IMU_connected[i]][0]);
-                packet_data[(uint16)(5 + start_byte + PARAM_BYTE_SLOT*i)] = (uint8)(c_mem.imu.IMU_conf[IMU_connected[i]][1]);
-                packet_data[(uint16)(6 + start_byte + PARAM_BYTE_SLOT*i)] = (uint8)(c_mem.imu.IMU_conf[IMU_connected[i]][2]);
-                packet_data[(uint16)(7 + start_byte + PARAM_BYTE_SLOT*i)] = (uint8)(c_mem.imu.IMU_conf[IMU_connected[i]][3]);
-                packet_data[(uint16)(8 + start_byte + PARAM_BYTE_SLOT*i)] = (uint8)(c_mem.imu.IMU_conf[IMU_connected[i]][4]);
+                packet_data[(uint16)(4 + start_byte + PARAM_BYTE_SLOT*i)] = (uint8)(c_mem.imu.IMU_conf[i][0]);
+                packet_data[(uint16)(5 + start_byte + PARAM_BYTE_SLOT*i)] = (uint8)(c_mem.imu.IMU_conf[i][1]);
+                packet_data[(uint16)(6 + start_byte + PARAM_BYTE_SLOT*i)] = (uint8)(c_mem.imu.IMU_conf[i][2]);
+                packet_data[(uint16)(7 + start_byte + PARAM_BYTE_SLOT*i)] = (uint8)(c_mem.imu.IMU_conf[i][3]);
+                packet_data[(uint16)(8 + start_byte + PARAM_BYTE_SLOT*i)] = (uint8)(c_mem.imu.IMU_conf[i][4]);
 
                 for(j = imu_table_str_len; j != 0; j--)
                     packet_data[(uint16)(9 + start_byte + PARAM_BYTE_SLOT*i + imu_table_str_len - j)] = imu_table_str[imu_table_str_len - j];
@@ -1809,18 +1809,18 @@ void get_IMU_param_list(uint16 index)
             else {
             
                 //Set Imu table (index > = first_imu_parameter)
-                g_mem.imu.IMU_conf[IMU_connected[index-first_imu_parameter]][0] = g_rx.buffer[3];
-                g_mem.imu.IMU_conf[IMU_connected[index-first_imu_parameter]][1] = g_rx.buffer[4];
-                g_mem.imu.IMU_conf[IMU_connected[index-first_imu_parameter]][2] = g_rx.buffer[5];
-                g_mem.imu.IMU_conf[IMU_connected[index-first_imu_parameter]][3] = g_rx.buffer[6];
-                g_mem.imu.IMU_conf[IMU_connected[index-first_imu_parameter]][4] = g_rx.buffer[7];
+                g_mem.imu.IMU_conf[index-first_imu_parameter][0] = g_rx.buffer[3];
+                g_mem.imu.IMU_conf[index-first_imu_parameter][1] = g_rx.buffer[4];
+                g_mem.imu.IMU_conf[index-first_imu_parameter][2] = g_rx.buffer[5];
+                g_mem.imu.IMU_conf[index-first_imu_parameter][3] = g_rx.buffer[6];
+                g_mem.imu.IMU_conf[index-first_imu_parameter][4] = g_rx.buffer[7];
                 
                 // Recompute IMU packets dimension
                 imus_data_size = 1; //header    
                 for (i = 0; i < N_IMU_Connected; i++)
                 {
-                    single_imu_size[IMU_connected[i]] = 1 + 6*g_mem.imu.IMU_conf[IMU_connected[i]][0] + 6*g_mem.imu.IMU_conf[IMU_connected[i]][1] + 6*g_mem.imu.IMU_conf[IMU_connected[i]][2] + 16*g_mem.imu.IMU_conf[IMU_connected[i]][3] + 2*g_mem.imu.IMU_conf[IMU_connected[i]][4]+ 1;
-                    imus_data_size = imus_data_size + single_imu_size[IMU_connected[i]];
+                    single_imu_size[i] = 1 + 6*g_mem.imu.IMU_conf[i][0] + 6*g_mem.imu.IMU_conf[i][1] + 6*g_mem.imu.IMU_conf[i][2] + 16*g_mem.imu.IMU_conf[i][3] + 2*g_mem.imu.IMU_conf[i][4]+ 1;
+                    imus_data_size = imus_data_size + single_imu_size[i];
                 }
                 imus_data_size = imus_data_size + 1;    //checksum
             
@@ -2287,31 +2287,31 @@ void prepare_generic_info(char *info_string)
             
             strcat(info_string, "IMUs CONFIGURATION\r\n");
             for (i=0; i<N_IMU_Connected; i++){
-                sprintf(str, "Imu %d \r\n\tID: %d\r\n", i, (int) IMU_connected[i]);
+                sprintf(str, "Imu %d \r\n\tID: %d\r\n", i, (int) IMU_IDs[i]);
                 strcat(info_string, str);
                 
                 sprintf(str, "\tAccelerometers: ");
-                if ((MEM_P->imu.IMU_conf[IMU_connected[i]][0]))
+                if ((MEM_P->imu.IMU_conf[i][0]))
                     strcat(str, "YES\r\n");
                 else
                     strcat(str, "NO\r\n"); 
                 strcat(str, "\tGyroscopes: ");
-                if ((MEM_P->imu.IMU_conf[IMU_connected[i]][1]))
+                if ((MEM_P->imu.IMU_conf[i][1]))
                     strcat(str, "YES\r\n");
                 else
                     strcat(str, "NO\r\n"); 
                 strcat(str, "\tMagnetometers: ");
-                if ((MEM_P->imu.IMU_conf[IMU_connected[i]][2]))
+                if ((MEM_P->imu.IMU_conf[i][2]))
                     strcat(str, "YES\r\n");
                 else
                     strcat(str, "NO\r\n");
                 strcat(str, "\tQuaternion: ");                
-                if ((MEM_P->imu.IMU_conf[IMU_connected[i]][3]))
+                if ((MEM_P->imu.IMU_conf[i][3]))
                     strcat(str, "YES\r\n");
                 else
                     strcat(str, "NO\r\n");
                 strcat(str, "\tTemperature: ");
-                if ((MEM_P->imu.IMU_conf[IMU_connected[i]][4]))
+                if ((MEM_P->imu.IMU_conf[i][4]))
                     strcat(str, "YES\r\n");
                 else
                     strcat(str, "NO\r\n");
@@ -2712,31 +2712,31 @@ void prepare_SD_param_info(char *info_string)
 		
 		strcat(info_string, "IMUs CONFIGURATION\r\n");
 		for (i=0; i<N_IMU_Connected; i++){
-			sprintf(str, "Imu %d \r\n\tID: %d\r\n", i, (int) IMU_connected[i]);
+			sprintf(str, "Imu %d \r\n\tID: %d\r\n", i, (int)IMU_IDs[i]);
 			strcat(info_string, str);
 			
 			sprintf(str, "\tAccelerometers: ");
-			if ((MEM_P->imu.IMU_conf[IMU_connected[i]][0]))
+			if ((MEM_P->imu.IMU_conf[i][0]))
 				strcat(str, "YES\r\n");
 			else
 				strcat(str, "NO\r\n"); 
 			strcat(str, "\tGyroscopes: ");
-			if ((MEM_P->imu.IMU_conf[IMU_connected[i]][1]))
+			if ((MEM_P->imu.IMU_conf[i][1]))
 				strcat(str, "YES\r\n");
 			else
 				strcat(str, "NO\r\n"); 
 			strcat(str, "\tMagnetometers: ");
-			if ((MEM_P->imu.IMU_conf[IMU_connected[i]][2]))
+			if ((MEM_P->imu.IMU_conf[i][2]))
 				strcat(str, "YES\r\n");
 			else
 				strcat(str, "NO\r\n");
 			strcat(str, "\tQuaternion: ");                
-			if ((MEM_P->imu.IMU_conf[IMU_connected[i]][3]))
+			if ((MEM_P->imu.IMU_conf[i][3]))
 				strcat(str, "YES\r\n");
 			else
 				strcat(str, "NO\r\n");
 			strcat(str, "\tTemperature: ");
-			if ((MEM_P->imu.IMU_conf[IMU_connected[i]][4]))
+			if ((MEM_P->imu.IMU_conf[i][4]))
 				strcat(str, "YES\r\n");
 			else
 				strcat(str, "NO\r\n");
@@ -2871,30 +2871,30 @@ void IMU_reading_info(char *info_string)
                  
     strcat(info_string, "SENSORS INFO\r\n");
     for (i=0; i<N_IMU_Connected; i++){
-        sprintf(str, "Imu %d \r\n\tID: %d\r\n", i, (int) IMU_connected[i]);
+        sprintf(str, "Imu %d \r\n\tID: %d\r\n", i, (int) IMU_IDs[i]);
         strcat(info_string, str);
         
-        if ((c_mem.imu.IMU_conf[IMU_connected[i]][0])){
+        if ((c_mem.imu.IMU_conf[i][0])){
             sprintf(str, "\tAcc: %d\t%d\t%d\r\n", (int16) g_imu[i].accel_value[0], (int16) g_imu[i].accel_value[1],(int16) g_imu[i].accel_value[2]);
             strcat(info_string, str);
         }
 
-        if ((c_mem.imu.IMU_conf[IMU_connected[i]][1])){
+        if ((c_mem.imu.IMU_conf[i][1])){
             sprintf(str, "\tGyro: %d\t%d\t%d\r\n", (int16) g_imu[i].gyro_value[0], (int16) g_imu[i].gyro_value[1],(int16) g_imu[i].gyro_value[2]);
             strcat(info_string, str);
         }
 
-        if ((c_mem.imu.IMU_conf[IMU_connected[i]][2])){
+        if ((c_mem.imu.IMU_conf[i][2])){
             sprintf(str, "\tMag: %d\t%d\t%d\r\n", (int16) g_imu[i].mag_value[0], (int16) g_imu[i].mag_value[1],(int16) g_imu[i].mag_value[2]);
             strcat(info_string, str);
         }
         
-        if ((c_mem.imu.IMU_conf[IMU_connected[i]][3])){
+        if ((c_mem.imu.IMU_conf[i][3])){
             sprintf(str, "\tQuat: %.3f\t%.3f\t%.3f\t%.3f\r\n", (float) g_imu[i].quat_value[0], (float) g_imu[i].quat_value[1],(float) g_imu[i].quat_value[2], (float) g_imu[i].quat_value[3]);
             strcat(info_string, str);
         }
         
-        if ((c_mem.imu.IMU_conf[IMU_connected[i]][4])){
+        if ((c_mem.imu.IMU_conf[i][4])){
             sprintf(str, "\tTemperature: %d\r\n", (int16) g_imu[i].temp_value);
             strcat(info_string, str);
         }
@@ -3270,7 +3270,7 @@ uint8 memInit(void)
     // IMU STRUCT
     g_mem.imu.read_imu_flag = FALSE;
     g_mem.imu.SPI_read_delay = 0;       // 0 - No delay
-    for (i = 0; i< N_IMU_MAX; i++){
+    for (i = 0; i< N_IMU_Connected; i++){
         g_mem.imu.IMU_conf[i][0] = 1;   // Accelerometers
         g_mem.imu.IMU_conf[i][1] = 1;   // Gyroscopes
         g_mem.imu.IMU_conf[i][2] = 0;   // Magnetometers
@@ -3994,7 +3994,7 @@ void cmd_get_imu_readings(){
     {	
             
         single_packet[0] = (uint8) 0x3A; //':';
-        if (c_mem.imu.IMU_conf[IMU_connected[k_imu]][0]){
+        if (c_mem.imu.IMU_conf[k_imu][0]){
             aux_int16 = (int16) g_imu[k_imu].accel_value[0];
             single_packet[c + 1] = ((char*)(&aux_int16))[0];
             single_packet[c] = ((char*)(&aux_int16))[1];
@@ -4009,7 +4009,7 @@ void cmd_get_imu_readings(){
 
             c = c + 6;
         }
-        if (c_mem.imu.IMU_conf[IMU_connected[k_imu]][1]){
+        if (c_mem.imu.IMU_conf[k_imu][1]){
             aux_int16 = (int16) g_imu[k_imu].gyro_value[0];
             single_packet[c + 1] = ((char*)(&aux_int16))[0];
             single_packet[c] = ((char*)(&aux_int16))[1];
@@ -4024,7 +4024,7 @@ void cmd_get_imu_readings(){
 
             c = c + 6;
         }
-        if (c_mem.imu.IMU_conf[IMU_connected[k_imu]][2]){
+        if (c_mem.imu.IMU_conf[k_imu][2]){
             aux_int16 = (int16) g_imu[k_imu].mag_value[0];
             single_packet[c + 1] = ((char*)(&aux_int16))[0];
             single_packet[c] = ((char*)(&aux_int16))[1];
@@ -4039,7 +4039,7 @@ void cmd_get_imu_readings(){
 
             c = c + 6;
         }
-        if (c_mem.imu.IMU_conf[IMU_connected[k_imu]][3]){
+        if (c_mem.imu.IMU_conf[k_imu][3]){
             aux_float = (float) g_imu[k_imu].quat_value[0];
             for(k = 0; k < 4; k++) {
                 single_packet[c + 4 - k -1] = ((char*)(&aux_float))[k];
@@ -4061,19 +4061,19 @@ void cmd_get_imu_readings(){
             }
             c = c + 16;
         }
-        if (c_mem.imu.IMU_conf[IMU_connected[k_imu]][4]){
+        if (c_mem.imu.IMU_conf[k_imu][4]){
             aux_int16 = (int16) g_imu[k_imu].temp_value;
             single_packet[c + 1] = ((char*)(&aux_int16))[0];
             single_packet[c] = ((char*)(&aux_int16))[1];
             c = c + 2;
         }
-        single_packet[single_imu_size[IMU_connected[k_imu]] - 1] = (uint8) 0x3A; //':';
+        single_packet[single_imu_size[k_imu] - 1] = (uint8) 0x3A; //':';
         c = 1;
                
-        for(k=0; k < single_imu_size[IMU_connected[k_imu]]; k++) {
+        for(k=0; k < single_imu_size[k_imu]; k++) {
             packet_data[gl_c + k] = (uint8) single_packet[k]; 
         }
-        gl_c = gl_c + single_imu_size[IMU_connected[k_imu]];  
+        gl_c = gl_c + single_imu_size[k_imu];  
         
         memset(&single_packet, 0, sizeof(single_packet));     
         
