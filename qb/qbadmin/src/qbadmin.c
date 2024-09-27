@@ -1561,7 +1561,7 @@ int main (int argc, char **argv)
                 fprintf(global_args.emg_file, "\n");
                 end = std::chrono::system_clock::now();
         elapsed_mseconds_t = (end - start) * 1000;
-              sleep_us(1000); // Delay to maintain timing
+              sleep_us(100000); // Delay to maintain timing
                 conto++;
 		}
         printf("%d", conto);

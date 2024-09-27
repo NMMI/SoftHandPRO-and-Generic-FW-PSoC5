@@ -115,7 +115,7 @@ void InitIMU(uint8 n){
         	CyDelay(10);	
         	WriteControlRegisterIMU(MPU9250_I2C_SLV0_D0, 0x16); //value to be written: Compass mode = 0x12 continuous mode1(8Hz ODR), 0x16 continuous mode2(100Hz ODR)
         	CyDelay(10);
-        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0x81); //1 bit to write + enable this slave
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0xD1); //1 bit to write + enable this slave
         	CyDelay(10);
             
         	//READ slave
@@ -123,7 +123,7 @@ void InitIMU(uint8 n){
         	CyDelay(10);
         	WriteControlRegisterIMU(MPU9250_I2C_SLV0_REG, 0x03); // Address to start reading: 0x03 = Xout Low, 0x02 = STATUS_REG_1-->DRDY
         	CyDelay(10);
-        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0x87);   //0x87 = Read 7 bytes, 0x03 to 0x09(STATUS_REG_2, needed to complete the reading). (Xout from EXT_SENS_DATA_00)
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0xD7);   //0x87 = Read 7 bytes, 0x03 to 0x09(STATUS_REG_2, needed to complete the reading). (Xout from EXT_SENS_DATA_00)
                                                                     //0x88 = Read 8 bytes, 0x02(STATUS_REG_1 = DRDY) to 0x09. (Xout from EXT_SENS_DATA_01)
             
         	CyDelay(10);
@@ -188,7 +188,7 @@ void InitIMUMagCal(uint8 k_imu){
             ////Value to write in register CTRL1 (0x1F Fuse ROM access + select 16 bit output)
         	//Values of addresses from 10H to 12H can be read only in Fuse access mode.
             CyDelay(10);
-        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0x81); 
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0xD1); 
             ///Enable reading data from this slave at the sample rate and storing data at the first available EXT_SENS_DATA register, 
             //which is always EXT_SENS_DATA_00 for I2C slave 0. + 1 byte to read
             CyDelay(10);
@@ -196,7 +196,7 @@ void InitIMUMagCal(uint8 k_imu){
         	CyDelay(10);
         	WriteControlRegisterIMU(MPU9250_I2C_SLV0_REG, 0x10); // 0x10:start from ASAX
             CyDelay(10);
-        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0x83);
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0xD3);
         	//Enable reading data from this slave at the sample rate and storing data at the first available EXT_SENS_DATA register, 
             //which is always EXT_SENS_DATA_00 for I2C slave 0. + 3 byte to read
             CyDelay(10);
@@ -429,7 +429,7 @@ void ReadMag(int n){
     for (i = 0; i < 3; i++) {
         tmp = Mag[n][2*i];
         g_imuNew[n].mag_value[i] = (int16)((uint16)tmp <<8 | Mag[n][2*i + 1]);
-       // g_imuNew[n].mag_value[i] = (int16)(((( (float)g_imuNew[n].mag_value[i] - offset[n][i])/scale[n][i]))*0.15*factor[n][i]*avg[n]);
+        g_imuNew[n].mag_value[i] = (int16)(((( (float)g_imuNew[n].mag_value[i] - offset[n][i])/scale[n][i]))*0.15*factor[n][i]*avg[n]);
     }  
 }
 
