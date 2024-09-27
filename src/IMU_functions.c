@@ -357,7 +357,7 @@ void ReadAcc(int n)
     for (i = 0; i < 3; i++) {
         tmp = Accel[n][2*i];
         //  Order of LSM6DSRX register are inverted to be compatible with the ones of  MPU9250
-        g_imuNew[n].accel_value[i] = (int16)(tmp <<8 | Accel[n][2*i + 1]);
+        g_imuNew[n].accel_value[i] = (int16)((uint16)tmp <<8 | Accel[n][2*i + 1]);
         
     }
 }
@@ -378,7 +378,7 @@ void ReadGyro(int n){
             
     for (i = 0; i < 3; i++) {
         tmp = Gyro[n][2*i];
-        g_imuNew[n].gyro_value[i] = (int16)(tmp<<8 | Gyro[n][2*i + 1]);
+        g_imuNew[n].gyro_value[i] = (int16)((uint16)tmp<<8 | Gyro[n][2*i + 1]);
     }
 }
         
@@ -428,8 +428,8 @@ void ReadMag(int n){
            
     for (i = 0; i < 3; i++) {
         tmp = Mag[n][2*i];
-        g_imuNew[n].mag_value[i] = (int16)(tmp <<8 | Mag[n][2*i + 1]);
-        g_imuNew[n].mag_value[i] = (int16)(((( (float)g_imuNew[n].mag_value[i] - offset[n][i])/scale[n][i]))*0.15*factor[n][i]*avg[n]);
+        g_imuNew[n].mag_value[i] = (int16)((uint16)tmp <<8 | Mag[n][2*i + 1]);
+       // g_imuNew[n].mag_value[i] = (int16)(((( (float)g_imuNew[n].mag_value[i] - offset[n][i])/scale[n][i]))*0.15*factor[n][i]*avg[n]);
     }  
 }
 
