@@ -78,7 +78,7 @@ int main()
     
     init_variables();    
 	
-    LED_control(GREEN_FIXED);      
+    LED_control(OFF);      
     
     RS485_CTS_Write(0);             // Clear To Send on RS485.
     

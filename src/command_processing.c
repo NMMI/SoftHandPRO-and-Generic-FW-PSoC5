@@ -920,7 +920,7 @@ void init_variables(){
     forced_open = 0;
     
     if (c_mem.motor[0].motor_driver_type != DRIVER_BRUSHLESS){
-        LED_control(5);     // Default - red light
+        LED_control(RED_FIXED);     // Default - red light
     }
     
 #ifdef MASTER_FW

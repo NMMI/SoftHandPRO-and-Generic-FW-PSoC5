@@ -339,37 +339,39 @@ void LED_control(uint8 mode) {
     switch (mode) {
         // For each LED controller
         // 0: OFF, 1: Fixed ON, 2: Blink 2.5Hz, 3: Blink 0.5 Hz
-        
-        case 0:     //All LEDs off
-            LED_GREEN_CTRL_Write(0);
-            LED_RED_CTRL_Write(0);
-            break;
-            
-        case 1:     // Green fixed light
+       
+        case GREEN_FIXED:     // Green fixed light
             LED_GREEN_CTRL_Write(1);
             LED_RED_CTRL_Write(0);
             break;  
+
             
-        case 2:     // Yellow flashing light @ 0.5 Hz
+           
+        case OFF:     //All LEDs off
+            LED_GREEN_CTRL_Write(0);
+            LED_RED_CTRL_Write(0);
+            break;
+             /*     
+        case YELLOW_BLINKING:     // Yellow flashing light @ 0.5 Hz
             LED_GREEN_CTRL_Write(3);
             LED_RED_CTRL_Write(3);        
             break;
             
-        case 3:     // Red flashing light @ 2.5 Hz
+        case RED_BLINKING:     // Red flashing light @ 2.5 Hz
             LED_GREEN_CTRL_Write(0);
             LED_RED_CTRL_Write(2);        
             break;
             
-        case 4:     // Yellow fixed light - maintenance
+        case YELLOW_FIXED:     // Yellow fixed light - maintenance
             LED_GREEN_CTRL_Write(1);
             LED_RED_CTRL_Write(1);        
             break;
         
-        case 5:     // Red fixed light - uUSB power
+        case RED_FIXED:     // Red fixed light - uUSB power
             LED_GREEN_CTRL_Write(0);
             LED_RED_CTRL_Write(1);        
             break; 
-            
+            */
         default:
             break;
     }   
@@ -388,7 +390,7 @@ void battery_management() {
     if (battery_low_SoC) {
         
         //red light - blink @ 2.5 Hz
-        LED_control(3);
+        LED_control(RED_BLINKING);
                 
         rest_enabled = 0;
         if (v_count_lb >= 11000){
@@ -421,9 +423,9 @@ void battery_management() {
             if (dev_tension_f[0] > 0.95 * pow_tension[0] && (c_mem.dev.use_2nd_motor_flag == FALSE || dev_tension_f[1] > 0.95 * pow_tension[1])){
                 //fixed
                 if (!maintenance_flag)
-                    LED_control(0);     // NO LIGHT - all leds off
+                    LED_control(OFF);     // NO LIGHT - all leds off
                 else
-                    LED_control(4);     // yellow light - fixed
+                    LED_control(YELLOW_FIXED);     // yellow light - fixed
             }
             
             else {
@@ -432,9 +434,9 @@ void battery_management() {
                     //LED_control(2);   
                     
                     if (!maintenance_flag)
-                        LED_control(0);     // NO LIGHT - all leds off
+                        LED_control(OFF);     // NO LIGHT - all leds off
                     else
-                        LED_control(4);     // yellow light - fixed
+                        LED_control(YELLOW_FIXED);     // yellow light - fixed
                     
                     v_count_lb = 0;    // Reset counter whenever battery is not totally out of charge
                 }
@@ -450,7 +452,7 @@ void battery_management() {
                         }
                         
                         //red light - blink @ 2.5 Hz
-                        LED_control(3);
+                        LED_control(RED_BLINKING);
                         
                         rest_enabled = 0;
                     }
@@ -465,7 +467,7 @@ void battery_management() {
             if ((c_mem.motor[0].input_mode == INPUT_MODE_EXTERNAL || c_mem.motor[0].input_mode == INPUT_MODE_ENCODER3 || c_mem.motor[0].input_mode == INPUT_MODE_JOYSTICK) || 
                 ((c_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL || c_mem.motor[0].input_mode == INPUT_MODE_EMG_INTEGRAL || c_mem.motor[0].input_mode == INPUT_MODE_EMG_FCFS ||
                   c_mem.motor[0].input_mode == INPUT_MODE_EMG_FCFS_ADV || c_mem.motor[0].input_mode == INPUT_MODE_EMG_PROPORTIONAL_NC) && emg_1_status == NORMAL && emg_2_status == NORMAL)){
-                LED_control(5);     // Default - red light
+                LED_control(RED_FIXED);     // Default - red light
             }
         }
     }  

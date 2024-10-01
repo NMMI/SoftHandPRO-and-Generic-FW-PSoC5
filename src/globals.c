@@ -151,6 +151,7 @@ float offset[N_IMU_MAX][3];
 float scale[N_IMU_MAX][3];
 float avg[N_IMU_MAX];
 float factor[N_IMU_MAX][3]; 
+uint8 MAGcal = 0;
 // MASTER variables
 uint8 master_mode;               /*!< Flag used to set/unset master mode to send messages to other boards.*/
 

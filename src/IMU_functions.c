@@ -115,7 +115,7 @@ void InitIMU(uint8 n){
         	CyDelay(10);	
         	WriteControlRegisterIMU(MPU9250_I2C_SLV0_D0, 0x16); //value to be written: Compass mode = 0x12 continuous mode1(8Hz ODR), 0x16 continuous mode2(100Hz ODR)
         	CyDelay(10);
-        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0xD1); //1 bit to write + enable this slave
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0x81); //1 bit to write + enable this slave
         	CyDelay(10);
             
         	//READ slave
@@ -123,9 +123,9 @@ void InitIMU(uint8 n){
         	CyDelay(10);
         	WriteControlRegisterIMU(MPU9250_I2C_SLV0_REG, 0x03); // Address to start reading: 0x03 = Xout Low, 0x02 = STATUS_REG_1-->DRDY
         	CyDelay(10);
-        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0xD7);   //0x87 = Read 7 bytes, 0x03 to 0x09(STATUS_REG_2, needed to complete the reading). (Xout from EXT_SENS_DATA_00)
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0x87);   //0x87 = Read 7 bytes, 0x03 to 0x09(STATUS_REG_2, needed to complete the reading). (Xout from EXT_SENS_DATA_00)
                                                                     //0x88 = Read 8 bytes, 0x02(STATUS_REG_1 = DRDY) to 0x09. (Xout from EXT_SENS_DATA_01)
-            
+                                                                    //0xD should be needed to swap the value acquired by the magnetometer (which are L to H), but it works also otherwise, so boh
         	CyDelay(10);
         	WriteControlRegisterIMU(MPU9250_PWR_MGMT_1, 0x00); 
         	CyDelay(20);
@@ -141,9 +141,10 @@ void InitIMU(uint8 n){
                 Temp[0][0] =0;
                 Temp[0][1] = OneShot_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_WHO_AM_I); //LIS2MDL -->valore WHO_AM_I = 64;
                 CyDelay(20);
-                 OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_A,0x0C); //100Hz, continuous mode
-               CyDelay(20);
-                OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_B,0x02); //Offset canc
+                OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_A,0x0C); //100Hz, continuous mode
+                CyDelay(20);
+                OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_B,0x00); //0x02 = offset canc enabled (need to store value in dedicated register),  
+                                                                            //0x00 = offset canc disabled
                 CyDelay(20);
                 OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_C,0x10); //BDU
                 CyDelay(20);
@@ -188,7 +189,7 @@ void InitIMUMagCal(uint8 k_imu){
             ////Value to write in register CTRL1 (0x1F Fuse ROM access + select 16 bit output)
         	//Values of addresses from 10H to 12H can be read only in Fuse access mode.
             CyDelay(10);
-        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0xD1); 
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0x81); 
             ///Enable reading data from this slave at the sample rate and storing data at the first available EXT_SENS_DATA register, 
             //which is always EXT_SENS_DATA_00 for I2C slave 0. + 1 byte to read
             CyDelay(10);
@@ -196,8 +197,9 @@ void InitIMUMagCal(uint8 k_imu){
         	CyDelay(10);
         	WriteControlRegisterIMU(MPU9250_I2C_SLV0_REG, 0x10); // 0x10:start from ASAX
             CyDelay(10);
-        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0xD3);
+        	WriteControlRegisterIMU(MPU9250_I2C_SLV0_CTRL, 0x83);
         	//Enable reading data from this slave at the sample rate and storing data at the first available EXT_SENS_DATA register, 
+            //Switch byte order from EXT_SENS_DATA and couples registers
             //which is always EXT_SENS_DATA_00 for I2C slave 0. + 3 byte to read
             CyDelay(10);
         	WriteControlRegisterIMU(MPU9250_PWR_MGMT_1, 0x00); 
@@ -396,7 +398,7 @@ void ReadMag(int n){
             DRDY = ReadControlRegisterIMU(0x3A);
             if (DRDY & 0x01){
                 for (i = 0; i < 6; i++){
-                    Mag[n][i] = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_00 + i);  
+                    Mag[n][ i + (1 - 2 *( i % 2 ))] = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_00 + i);
             	}
             }
         break;
@@ -429,6 +431,7 @@ void ReadMag(int n){
     for (i = 0; i < 3; i++) {
         tmp = Mag[n][2*i];
         g_imuNew[n].mag_value[i] = (int16)((uint16)tmp <<8 | Mag[n][2*i + 1]);
+        if (!MAGcal)
         g_imuNew[n].mag_value[i] = (int16)(((( (float)g_imuNew[n].mag_value[i] - offset[n][i])/scale[n][i]))*0.15*factor[n][i]*avg[n]);
     }  
 }
@@ -438,6 +441,8 @@ void ReadMag(int n){
 * Function Name: MagCalibration
 *********************************************************************************/
 void MagCalibration(){
+    LED_control(OFF);
+    MAGcal = 1;
     uint8 k_imu, j;
     int16 max, min;
     
@@ -450,15 +455,13 @@ void MagCalibration(){
     
     MY_TIMER_OVF_Cnt = 0;
     MY_TIMER_WriteCounter(65535);   // Reset counter
-    while (MY_TIMER_OVF_Cnt < 500){ //65,536 ms *1000 = 60s
+    while (MY_TIMER_OVF_Cnt < 200){ //65,536 ms *1000 = 60s
     uint8 k_imu, j, tmp ;
             for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++){ 
             // Read k_imu IMU
             ChipSelectorIMU(k_imu);
             ReadMag(k_imu);
             for (j = 0; j < 3; j++) {
-                tmp = Mag[k_imu][2*j];
-                g_imuNew[k_imu].mag_value[j] = (int16)(tmp<<8 | Mag[k_imu][2*j + 1]);
 
                 if (g_imuNew[k_imu].mag_value[j] < Mag_minval[k_imu][j]){
                     Mag_minval[k_imu][j] = (float)(g_imuNew[k_imu].mag_value[j]);
@@ -469,37 +472,40 @@ void MagCalibration(){
                 }
                 max = (int16)(Mag_maxval[k_imu][j]);
                 min = (int16)(Mag_minval[k_imu][j]);
-                UART_RS485_PutChar(((char*)(&max))[1]);
+             /*   UART_RS485_PutChar(((char*)(&max))[1]);
                 UART_RS485_PutChar(((char*)(&max))[0]);
                 UART_RS485_PutChar(((char*)(&min))[1]);
                 UART_RS485_PutChar(((char*)(&min))[0]);
-                CyDelay(10);
+                CyDelay(10);*/
             }
             Chip_Select_IMU_Write(7);
         }
-         UART_RS485_PutChar('a');
-         UART_RS485_PutChar('a');
+     //   UART_RS485_PutChar('a');
+     //    UART_RS485_PutChar('a');
     }
     
     
     for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++){ 
         for (j = 0; j < 3; j++) {
-        //if (g_imu[k_imu].dev_type == LSM6DSRX ) offset[k_imu][j] = 0;
-       // else 
-            offset[k_imu][j] = ((Mag_maxval[k_imu][j] + Mag_minval[k_imu][j])/2 );
+            //if (g_imu[k_imu].dev_type == LSM6DSRX ) 
+             //   offset[k_imu][j] = 0;
+           // else 
+                offset[k_imu][j] = ((Mag_maxval[k_imu][j] + Mag_minval[k_imu][j])/2 );
             scale[k_imu][j] = ((Mag_maxval[k_imu][j] - Mag_minval[k_imu][j]))/2;
             min = (int16)offset[k_imu][j];
             max = (int16)scale[k_imu][j];
-            UART_RS485_PutChar(((char*)(&max))[1]);
+       /*     UART_RS485_PutChar(((char*)(&max))[1]);
             UART_RS485_PutChar(((char*)(&max))[0]);
             UART_RS485_PutChar(((char*)(&min))[1]);
             UART_RS485_PutChar(((char*)(&min))[0]);
-            CyDelay(10);
+          CyDelay(10); */
         }
-        UART_RS485_PutChar('a');
-        UART_RS485_PutChar('a');
+       //UART_RS485_PutChar('a');
+        //UART_RS485_PutChar('a');
         avg[k_imu] = (scale[k_imu][0]+scale[k_imu][1]+scale[k_imu][2])/3;
     }
+    LED_control(GREEN_FIXED);
+    MAGcal = 0;
 }
 
 
