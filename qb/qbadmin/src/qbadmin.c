@@ -1512,15 +1512,21 @@ int main (int argc, char **argv)
 	using namespace std::chrono;
 	auto start = std::chrono::system_clock::now();
 	auto end = start;
+   	auto inizio = start;
+    inizio = std::chrono::system_clock::now();
+
+
 	std::chrono::duration<double> elapsed_mseconds_t = (end -start)*1000;
+    	std::chrono::duration<double> elapsed_mseconds1_t = (end -start)*1000;
+
     i=0;
 
     int conto =0;
     cout<<"------------------------- Start cycling ------------------------- \n";
 
-	while(elapsed_mseconds_t.count() < 50000 ) // Loop for 10 seconds
-  
-    {
+	while(elapsed_mseconds_t.count() < 10000 ) // Loop for 10 seconds
+  {
+
 			
 			commGetImuReadings(&comm_settings_1, global_args.device_id, global_args.imu_table, global_args.mag_cal, global_args.n_imu, imu_values);
 
@@ -1531,40 +1537,53 @@ int main (int argc, char **argv)
 				
 				if (global_args.imu_table[5*i + 0]){
 					//printf("Accelerometer\n");
-					printf("%f, %f, %f, ", imu_values[(3*3+4+1)*i], imu_values[(3*3+4+1)*i+1], imu_values[(3*3+4+1)*i+2]);
+					//printf("%f, %f, %f, ", imu_values[(3*3+4+1)*i], imu_values[(3*3+4+1)*i+1], imu_values[(3*3+4+1)*i+2]);
                     fprintf(global_args.emg_file, "%f,%f,%f,", imu_values[(3*3+4+1)*i+0], imu_values[(3*3+4+1)*i+1], imu_values[(3*3+4+1)*i+2]);
 
 				}
 				if (global_args.imu_table[5*i + 1]){
 					//printf("Gyroscope\n");
-					printf("%f, %f, %f, \n", imu_values[(3*3+4+1)*i+3], imu_values[(3*3+4+1)*i+4], imu_values[(3*3+4+1)*i+5]);
+				//	printf("%f, %f, %f, \n", imu_values[(3*3+4+1)*i+3], imu_values[(3*3+4+1)*i+4], imu_values[(3*3+4+1)*i+5]);
+                	fprintf(global_args.emg_file, "%f, %f, %f,", imu_values[(3*3+4+1)*i+3], imu_values[(3*3+4+1)*i+4], imu_values[(3*3+4+1)*i+5]);
+
 				}
 				if (global_args.imu_table[5*i + 2] ){
 				//	printf("Magnetometer");
-					printf("%f, %f, %f, ", imu_values[(3*3+4+1)*i+6], imu_values[(3*3+4+1)*i+7], imu_values[(3*3+4+1)*i+8]);				
-                    fprintf(global_args.emg_file, "%f,%f,%f,", imu_values[(3*3+4+1)*i+6], imu_values[(3*3+4+1)*i+7], imu_values[(3*3+4+1)*i+8]);
+				//	printf("%f, %f, %f, ", imu_values[(3*3+4+1)*i+6], imu_values[(3*3+4+1)*i+7], imu_values[(3*3+4+1)*i+8]);				
+                  //  fprintf(global_args.emg_file, "%f,%f,%f,", imu_values[(3*3+4+1)*i+6], imu_values[(3*3+4+1)*i+7], imu_values[(3*3+4+1)*i+8]);
 
 				}
 				if (global_args.imu_table[5*i + 3] ){
-					printf("Quaternion\n");
-					printf("%f, %f, %f, %f\n", imu_values[(3*3+4+1)*i+9], imu_values[(3*3+4+1)*i+10], imu_values[(3*3+4+1)*i+11], imu_values[(3*3+4+1)*i+12]);
+				//	printf("Quaternion\n");
+				//	printf("%f, %f, %f, %f\n", imu_values[(3*3+4+1)*i+9], imu_values[(3*3+4+1)*i+10], imu_values[(3*3+4+1)*i+11], imu_values[(3*3+4+1)*i+12]);
 				}
 				if (global_args.imu_table[5*i + 4] ){
-					printf("Temperature\n");
-					printf("%f\n", imu_values[(3*3+4+1)*i+13]);
+				//	printf("Temperature\n");
+				//	printf("%f\n", imu_values[(3*3+4+1)*i+13]);
 				}
 				
 			}
             
 				
-				printf("\n");
-                fprintf(global_args.emg_file, "\n");
-                end = std::chrono::system_clock::now();
-        elapsed_mseconds_t = (end - start) * 1000;
-              sleep_us(100000); // Delay to maintain timing
+				//printf("\n");
+
+                //elapsed_mseconds_t = (end - start) * 1000;     
+
                 conto++;
+
+               do{
+                end = std::chrono::system_clock::now();
+                elapsed_mseconds1_t = (end - inizio) * 1000;     
+                } while (elapsed_mseconds1_t.count() < 1);
+                   inizio = std::chrono::system_clock::now();
+
+                                elapsed_mseconds_t = (end - start) * 1000;     
+               // fprintf(global_args.emg_file, " %f", elapsed_mseconds_t.count());
+                fprintf(global_args.emg_file, "\n");
+
+              //sleep_us(10000); // Delay to maintain timing
 		}
-        printf("%d", conto);
+     //   printf("%d", conto);
 	
 	}
 	

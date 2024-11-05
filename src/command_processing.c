@@ -59,7 +59,6 @@ reg8 * EEPROM_ADDR = (reg8 *) CYDEV_EE_BASE;
 //==============================================================================
 
 void commProcess(void){
-
     uint8 CYDATA rx_cmd;
     rx_cmd = g_rx.buffer[0];
 
@@ -3991,8 +3990,7 @@ void cmd_get_imu_readings(){
     packet_data[0] = CMD_GET_IMU_READINGS;
  
     for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++) 
-    {	
-            
+    {
         single_packet[0] = (uint8) 0x3A; //':';
         if (c_mem.imu.IMU_conf[k_imu][0]){
             aux_int16 = (int16) g_imu[k_imu].accel_value[0];
@@ -4013,7 +4011,7 @@ void cmd_get_imu_readings(){
             aux_int16 = (int16) g_imu[k_imu].gyro_value[0];
             single_packet[c + 1] = ((char*)(&aux_int16))[0];
             single_packet[c] = ((char*)(&aux_int16))[1];
-
+            
             aux_int16 = (int16) g_imu[k_imu].gyro_value[1];
             single_packet[c + 3] = ((char*)(&aux_int16))[0];
             single_packet[c + 2] = ((char*)(&aux_int16))[1];
@@ -4082,6 +4080,9 @@ void cmd_get_imu_readings(){
     // Calculate Checksum and send message to UART 
     packet_data[imus_data_size-1] = LCRChecksum (packet_data, imus_data_size-1);
     commWrite(packet_data, imus_data_size);
+     
+    
+    
 }
 
 void cmd_get_encoder_map(){

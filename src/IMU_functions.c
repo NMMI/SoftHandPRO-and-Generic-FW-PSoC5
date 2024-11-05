@@ -99,7 +99,7 @@ void InitIMU(uint8 n){
         	CyDelay(10);
             WriteControlRegisterIMU(MPU9250_ACCEL_CONFIG, ACC_SF_2G); // Acc full scale select 0x00 = 2g 0x08 = 4g 0x10 = 8g 0x18 = 16g
             CyDelay(10);
-            WriteControlRegisterIMU(MPU9250_ACCEL_CONFIG2, LP_ACC_FREQ_10); // Acc LPF BW: 0x00 = no LPF, 0x05 = 10 Hz 
+            WriteControlRegisterIMU(MPU9250_ACCEL_CONFIG2, NO_ACC_FIL); // Acc LPF BW: 0x00 = no LPF, 0x05 = 10 Hz 
             CyDelay(10);
             //WriteControlRegisterIMU(MPU9250_PWR_MGMT_2, 0x07); //0x00 = Gyro enabled, 0x07 = Gyro disabled.
             //To set axel ODR = 4KHZ: (MPU9250_PWR_MGMT_2, 0x07) + (MPU9250_ACCEL_CONFIG2, 0x00) ;
@@ -349,10 +349,12 @@ void ReadIMU(int n)
 *********************************************************************************/
 void ReadAcc(int n)
 {   static uint8 i;
-    uint8 tmp = 0;
+    uint8 tmp = 0,DRDY ;
 	static uint8 AccStartAddress;
 
     AccStartAddress = g_imu[n].dev_type ? LSM6DSRX_OUTX_L_A : MPU9250_ACCEL_XOUT_H;
+     // DRDY = ReadControlRegisterIMU(0x3A);
+         //  if (DRDY & 0x01){
     for (i = 0; i < 6; i++){
         Accel[n][ i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))] = ReadControlRegisterIMU(AccStartAddress + i);  
     }  
@@ -362,6 +364,7 @@ void ReadAcc(int n)
         g_imuNew[n].accel_value[i] = (int16)((uint16)tmp <<8 | Accel[n][2*i + 1]);
         
     }
+   // }
 }
 
 /*******************************************************************************

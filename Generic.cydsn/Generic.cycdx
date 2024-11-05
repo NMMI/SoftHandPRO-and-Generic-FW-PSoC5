@@ -18,15 +18,15 @@
     <block name="ZeroTerminal_2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="CounterUDB" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="int_vm" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-    <register name="COUNTER_ENC_COUNTER" address="0x4000640D" bitWidth="8" desc="UDB.A0 - Current Counter Value" hidden="false" />
-    <register name="COUNTER_ENC_PERIOD" address="0x4000642D" bitWidth="8" desc="UDB.D0 - Assigned Period" hidden="false" />
-    <register name="COUNTER_ENC_COMPARE" address="0x4000643D" bitWidth="8" desc="UDB.D1 - Assigned Compare Value" hidden="false" />
-    <register name="COUNTER_ENC_Control_Reg" address="0x40006479" bitWidth="8" desc="UDB Control Register - Assigned Control Register Value" hidden="false">
+    <register name="COUNTER_ENC_COUNTER" address="0x4000640E" bitWidth="8" desc="UDB.A0 - Current Counter Value" hidden="false" />
+    <register name="COUNTER_ENC_PERIOD" address="0x4000642E" bitWidth="8" desc="UDB.D0 - Assigned Period" hidden="false" />
+    <register name="COUNTER_ENC_COMPARE" address="0x4000643E" bitWidth="8" desc="UDB.D1 - Assigned Compare Value" hidden="false" />
+    <register name="COUNTER_ENC_Control_Reg" address="0x4000647E" bitWidth="8" desc="UDB Control Register - Assigned Control Register Value" hidden="false">
       <field name="CTRL_ENABLE" from="7" to="7" access="RW" resetVal="" desc="Enable Counter" hidden="false" />
       <field name="CTRL_CAPMODE" from="4" to="3" access="RW" resetVal="" desc="Capture mode" hidden="false" />
       <field name="CTRL_CMPMODE" from="2" to="0" access="RW" resetVal="" desc="Compare mode" hidden="false" />
     </register>
-    <register name="COUNTER_ENC_STATUS_MASK" address="0x40006489" bitWidth="8" desc="UDB Status bits Interrupt Mask Enable Register" hidden="false">
+    <register name="COUNTER_ENC_STATUS_MASK" address="0x4000648E" bitWidth="8" desc="UDB Status bits Interrupt Mask Enable Register" hidden="false">
       <field name="COUNTER_STS_CMP" from="0" to="0" access="RW" resetVal="" desc="Compare output status" hidden="false" />
       <field name="COUNTER_STS_A0ZERO" from="1" to="1" access="RW" resetVal="" desc="A0 Zero ouput status" hidden="false" />
       <field name="COUNTER_STS_OVERFLOW" from="2" to="2" access="RW" resetVal="" desc="Overflow status " hidden="false" />
@@ -35,7 +35,7 @@
       <field name="COUNTER_STS_FIFO_FULL" from="5" to="5" access="RW" resetVal="" desc="FIFO Full Status " hidden="false" />
       <field name="COUNTER_STS_FIFO_NEMPTY" from="6" to="6" access="RW" resetVal="" desc="FIFO Not Empty Status " hidden="false" />
     </register>
-    <register name="COUNTER_ENC_STATUS_AUX_CTRL" address="0x40006499" bitWidth="8" desc="UDB Auxilliary Control Register" hidden="false">
+    <register name="COUNTER_ENC_STATUS_AUX_CTRL" address="0x4000649E" bitWidth="8" desc="UDB Auxilliary Control Register" hidden="false">
       <field name="FIFO0_CLR" from="0" to="0" access="RW" resetVal="" desc="FIFO0 clear" hidden="false">
         <value name="E_FIFO_CLR_0" value="0" desc="Normal FIFO operation" />
         <value name="E_FIFO_CLR_1" value="1" desc="Clear FIFO state" />
@@ -906,7 +906,7 @@
   <block name="MOTOR_2A" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="LED_RED" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="ADC_N_CHANNELS_USED" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
-    <register name="ADC_N_CHANNELS_USED_CONTROL_REG" address="0x4000647D" bitWidth="8" desc="" hidden="false" />
+    <register name="ADC_N_CHANNELS_USED_CONTROL_REG" address="0x40006577" bitWidth="8" desc="" hidden="false" />
   </block>
   <block name="CLOCK_PWM_BLINK" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="cy_constant_3" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
@@ -917,7 +917,7 @@
   <block name="not_8" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="MOTOR_EN_2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="MOTOR_ON_OFF_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
-    <register name="MOTOR_ON_OFF_1_CONTROL_REG" address="0x40006476" bitWidth="8" desc="" hidden="false" />
+    <register name="MOTOR_ON_OFF_1_CONTROL_REG" address="0x4000647C" bitWidth="8" desc="" hidden="false" />
   </block>
   <block name="MOTOR_EN_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="not_12" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
@@ -927,8 +927,7 @@
     <block name="RXInternalInterrupt" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="VirtualMux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="BUART" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-    <register name="TX_UART_BT_TX_DATA" address="0x4000644F" bitWidth="8" desc="TX Data Register" hidden="false" />
-    <register name="TX_UART_BT_TX_STATUS" address="0x4000646F" bitWidth="8" desc="TX status register" hidden="false">
+    <register name="TX_UART_BT_TX_STATUS" address="0x40006464" bitWidth="8" desc="TX status register" hidden="false">
       <field name="UART_BT_TX_STS_COMPLETE" from="0" to="0" access="R" resetVal="" desc="" hidden="false" />
       <field name="UART_BT_TX_STS_FIFO_EMPTY" from="1" to="1" access="R" resetVal="" desc="" hidden="false" />
       <field name="UART_BT_TX_STS_FIFO_FULL" from="2" to="2" access="R" resetVal="" desc="" hidden="false" />
@@ -937,7 +936,8 @@
     <register name="RX_UART_BT_RX_ADDRESS1" address="0x40006524" bitWidth="8" desc="RX Address1 Register" hidden="false" />
     <register name="RX_UART_BT_RX_ADDRESS2" address="0x40006534" bitWidth="8" desc="RX Address2 Register" hidden="false" />
     <register name="RX_UART_BT_RX_DATA" address="0x40006544" bitWidth="8" desc="RX Data Register" hidden="false" />
-    <register name="RX_UART_BT_RX_STATUS" address="0x40006564" bitWidth="8" desc="RX status register" hidden="false">
+    <register name="TX_UART_BT_TX_DATA" address="0x40006547" bitWidth="8" desc="TX Data Register" hidden="false" />
+    <register name="RX_UART_BT_RX_STATUS" address="0x40006568" bitWidth="8" desc="RX status register" hidden="false">
       <field name="UART_BT_RX_STS_MRKSPC" from="0" to="0" access="R" resetVal="" desc="" hidden="false" />
       <field name="UART_BT_RX_STS_BREAK" from="1" to="1" access="R" resetVal="" desc="" hidden="false" />
       <field name="UART_BT_RX_STS_PAR_ERROR" from="2" to="2" access="R" resetVal="" desc="" hidden="false" />
@@ -951,9 +951,9 @@
   <block name="ZeroTerminal_8" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="BT_TX" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="ADC_STATUS" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
-    <register name="ADC_STATUS_STATUS_REG" address="0x40006465" bitWidth="8" desc="" hidden="false" />
-    <register name="ADC_STATUS_MASK_REG" address="0x40006485" bitWidth="8" desc="" hidden="false" />
-    <register name="ADC_STATUS_STATUS_AUX_CTL_REG" address="0x40006495" bitWidth="8" desc="" hidden="false">
+    <register name="ADC_STATUS_STATUS_REG" address="0x40006461" bitWidth="8" desc="" hidden="false" />
+    <register name="ADC_STATUS_MASK_REG" address="0x40006481" bitWidth="8" desc="" hidden="false" />
+    <register name="ADC_STATUS_STATUS_AUX_CTL_REG" address="0x40006491" bitWidth="8" desc="" hidden="false">
       <field name="FIFO0" from="5" to="5" access="RW" resetVal="" desc="FIFO0 clear" hidden="false">
         <value name="ENABLED" value="1" desc="Enable counter" />
         <value name="DISABLED" value="0" desc="Disable counter" />
@@ -983,11 +983,11 @@
   <block name="DMA" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="EMG_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="ADC_SOC" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
-    <register name="ADC_SOC_CONTROL_REG" address="0x40006579" bitWidth="8" desc="" hidden="false" />
+    <register name="ADC_SOC_CONTROL_REG" address="0x40006578" bitWidth="8" desc="" hidden="false" />
   </block>
   <block name="Timer_ISR" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="LED_RED_CTRL" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
-    <register name="LED_RED_CTRL_CONTROL_REG" address="0x40006574" bitWidth="8" desc="" hidden="false" />
+    <register name="LED_RED_CTRL_CONTROL_REG" address="0x40006474" bitWidth="8" desc="" hidden="false" />
   </block>
   <block name="Em_EEPROM_Dynamic" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="cy_boot" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
@@ -997,7 +997,7 @@
   <block name="mux_5" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="mux_6" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Chip_Select_ENCODER_LINE" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
-    <register name="Chip_Select_ENCODER_LINE_CONTROL_REG" address="0x4000657A" bitWidth="8" desc="" hidden="false" />
+    <register name="Chip_Select_ENCODER_LINE_CONTROL_REG" address="0x4000647D" bitWidth="8" desc="" hidden="false" />
   </block>
   <block name="not_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="not_3" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
@@ -1015,7 +1015,7 @@
     <register name="RESET_COUNTERS_CONTROL_REG" address="0x4000647A" bitWidth="8" desc="" hidden="false" />
   </block>
   <block name="MOTOR_ON_OFF_2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
-    <register name="MOTOR_ON_OFF_2_CONTROL_REG" address="0x40006577" bitWidth="8" desc="" hidden="false" />
+    <register name="MOTOR_ON_OFF_2_CONTROL_REG" address="0x40006574" bitWidth="8" desc="" hidden="false" />
   </block>
   <block name="mux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="cy_srff_2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
@@ -1025,17 +1025,17 @@
   <block name="ZeroTerminal_11" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="mux_2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="MOTOR_DRIVER_TYPE" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
-    <register name="MOTOR_DRIVER_TYPE_CONTROL_REG" address="0x40006473" bitWidth="8" desc="" hidden="false" />
+    <register name="MOTOR_DRIVER_TYPE_CONTROL_REG" address="0x40006472" bitWidth="8" desc="" hidden="false" />
   </block>
   <block name="MOTOR_DIR_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
-    <register name="MOTOR_DIR_1_CONTROL_REG" address="0x40006475" bitWidth="8" desc="" hidden="false" />
+    <register name="MOTOR_DIR_1_CONTROL_REG" address="0x40006473" bitWidth="8" desc="" hidden="false" />
   </block>
   <block name="and_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="EEPROM" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="MOTOR_1B" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="and_2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Chip_Select_IMU" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
-    <register name="Chip_Select_IMU_CONTROL_REG" address="0x40006477" bitWidth="8" desc="" hidden="false" />
+    <register name="Chip_Select_IMU_CONTROL_REG" address="0x40006479" bitWidth="8" desc="" hidden="false" />
   </block>
   <block name="SCLK" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="not_6" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
@@ -1108,14 +1108,14 @@
     <block name="OneTerminal_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="ZeroTerminal_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="PWMUDB" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-    <register name="PWM_MOTORS_COMPARE_1" address="0x40006426" bitWidth="16" desc="UDB.D0 - Assigned Compare1 Value" hidden="false" />
-    <register name="PWM_MOTORS_COMPARE_2" address="0x40006436" bitWidth="16" desc="UDB.D1 - Assigned Compare2 Value" hidden="false" />
-    <register name="PWM_MOTORS_Control_Reg" address="0x4000647E" bitWidth="8" desc="UDB Control Register - Assigned Control Register Value" hidden="false">
+    <register name="PWM_MOTORS_COMPARE_1" address="0x40006424" bitWidth="16" desc="UDB.D0 - Assigned Compare1 Value" hidden="false" />
+    <register name="PWM_MOTORS_COMPARE_2" address="0x40006434" bitWidth="16" desc="UDB.D1 - Assigned Compare2 Value" hidden="false" />
+    <register name="PWM_MOTORS_Control_Reg" address="0x40006476" bitWidth="8" desc="UDB Control Register - Assigned Control Register Value" hidden="false">
       <field name="CTRL_ENABLE" from="7" to="7" access="RW" resetVal="" desc="Enable the PWM" hidden="false" />
       <field name="CTRL_CMPMODE2" from="5" to="3" access="RW" resetVal="" desc="Compare mode 2" hidden="false" />
       <field name="CTRL_CMPMODE1" from="2" to="0" access="RW" resetVal="" desc="Compare mode 1" hidden="false" />
     </register>
-    <register name="PWM_MOTORS_STATUS_AUX_CTRLDP0" address="0x40006496" bitWidth="8" desc="UDB Auxilliary Control Register" hidden="false">
+    <register name="PWM_MOTORS_STATUS_AUX_CTRLDP0" address="0x40006494" bitWidth="8" desc="UDB Auxilliary Control Register" hidden="false">
       <field name="FIFO0_CLR" from="0" to="0" access="RW" resetVal="" desc="FIFO0 clear" hidden="false">
         <value name="E_FIFO_CLR_0" value="0" desc="Normal FIFO operation" />
         <value name="E_FIFO_CLR_1" value="1" desc="Clear FIFO state" />
@@ -1141,7 +1141,7 @@
         <value name="E_CNT_START1" value="1" desc="Enable counter" />
       </field>
     </register>
-    <register name="PWM_MOTORS_STATUS_AUX_CTRLDP1" address="0x40006497" bitWidth="8" desc="UDB Auxilliary Control Register" hidden="false">
+    <register name="PWM_MOTORS_STATUS_AUX_CTRLDP1" address="0x40006495" bitWidth="8" desc="UDB Auxilliary Control Register" hidden="false">
       <field name="FIFO0_CLR" from="0" to="0" access="RW" resetVal="" desc="FIFO0 clear" hidden="false">
         <value name="E_FIFO_CLR_0" value="0" desc="Normal FIFO operation" />
         <value name="E_FIFO_CLR_1" value="1" desc="Clear FIFO state" />
@@ -1220,7 +1220,7 @@
   <block name="MISO" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="CS_on_board_IMU" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="LED_GREEN_CTRL" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
-    <register name="LED_GREEN_CTRL_CONTROL_REG" address="0x40006575" bitWidth="8" desc="" hidden="false" />
+    <register name="LED_GREEN_CTRL_CONTROL_REG" address="0x40006576" bitWidth="8" desc="" hidden="false" />
   </block>
   <block name="not_4" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="LED_GREEN" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
@@ -1230,7 +1230,7 @@
   <block name="and_4" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="demux_2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="MOTOR_DIR_2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
-    <register name="MOTOR_DIR_2_CONTROL_REG" address="0x40006471" bitWidth="8" desc="" hidden="false" />
+    <register name="MOTOR_DIR_2_CONTROL_REG" address="0x40006575" bitWidth="8" desc="" hidden="false" />
   </block>
   <block name="Sync_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="CLOCK_IMU" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
@@ -1239,17 +1239,11 @@
     <block name="RXInternalInterrupt" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="VirtualMux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="BUART" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-    <register name="RX_UART_RS485_RX_ADDRESS1" address="0x4000642C" bitWidth="8" desc="RX Address1 Register" hidden="false" />
-    <register name="RX_UART_RS485_RX_ADDRESS2" address="0x4000643C" bitWidth="8" desc="RX Address2 Register" hidden="false" />
-    <register name="TX_UART_RS485_TX_DATA" address="0x40006441" bitWidth="8" desc="TX Data Register" hidden="false" />
-    <register name="RX_UART_RS485_RX_DATA" address="0x4000644C" bitWidth="8" desc="RX Data Register" hidden="false" />
-    <register name="TX_UART_RS485_TX_STATUS" address="0x40006461" bitWidth="8" desc="TX status register" hidden="false">
-      <field name="UART_RS485_TX_STS_COMPLETE" from="0" to="0" access="R" resetVal="" desc="" hidden="false" />
-      <field name="UART_RS485_TX_STS_FIFO_EMPTY" from="1" to="1" access="R" resetVal="" desc="" hidden="false" />
-      <field name="UART_RS485_TX_STS_FIFO_FULL" from="2" to="2" access="R" resetVal="" desc="" hidden="false" />
-      <field name="UART_RS485_TX_STS_FIFO_NOT_FULL" from="3" to="3" access="R" resetVal="" desc="" hidden="false" />
-    </register>
-    <register name="RX_UART_RS485_RX_STATUS" address="0x40006569" bitWidth="8" desc="RX status register" hidden="false">
+    <register name="RX_UART_RS485_RX_ADDRESS1" address="0x4000642F" bitWidth="8" desc="RX Address1 Register" hidden="false" />
+    <register name="RX_UART_RS485_RX_ADDRESS2" address="0x4000643F" bitWidth="8" desc="RX Address2 Register" hidden="false" />
+    <register name="TX_UART_RS485_TX_DATA" address="0x40006443" bitWidth="8" desc="TX Data Register" hidden="false" />
+    <register name="RX_UART_RS485_RX_DATA" address="0x4000644F" bitWidth="8" desc="RX Data Register" hidden="false" />
+    <register name="RX_UART_RS485_RX_STATUS" address="0x4000646A" bitWidth="8" desc="RX status register" hidden="false">
       <field name="UART_RS485_RX_STS_MRKSPC" from="0" to="0" access="R" resetVal="" desc="" hidden="false" />
       <field name="UART_RS485_RX_STS_BREAK" from="1" to="1" access="R" resetVal="" desc="" hidden="false" />
       <field name="UART_RS485_RX_STS_PAR_ERROR" from="2" to="2" access="R" resetVal="" desc="" hidden="false" />
@@ -1257,6 +1251,12 @@
       <field name="UART_RS485_RX_STS_OVERRUN" from="4" to="4" access="R" resetVal="" desc="" hidden="false" />
       <field name="UART_RS485_RX_STS_FIFO_NOTEMPTY" from="5" to="5" access="R" resetVal="" desc="" hidden="false" />
       <field name="UART_RS485_RX_STS_ADDR_MATCH" from="6" to="6" access="R" resetVal="" desc="" hidden="false" />
+    </register>
+    <register name="TX_UART_RS485_TX_STATUS" address="0x4000646C" bitWidth="8" desc="TX status register" hidden="false">
+      <field name="UART_RS485_TX_STS_COMPLETE" from="0" to="0" access="R" resetVal="" desc="" hidden="false" />
+      <field name="UART_RS485_TX_STS_FIFO_EMPTY" from="1" to="1" access="R" resetVal="" desc="" hidden="false" />
+      <field name="UART_RS485_TX_STS_FIFO_FULL" from="2" to="2" access="R" resetVal="" desc="" hidden="false" />
+      <field name="UART_RS485_TX_STS_FIFO_NOT_FULL" from="3" to="3" access="R" resetVal="" desc="" hidden="false" />
     </register>
   </block>
   <block name="MY_TIMER" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
@@ -1319,9 +1319,9 @@
   <block name="cy_srff_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="ZeroTerminal_9" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="FF_STATUS" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
-    <register name="FF_STATUS_STATUS_REG" address="0x40006468" bitWidth="8" desc="" hidden="false" />
-    <register name="FF_STATUS_MASK_REG" address="0x40006488" bitWidth="8" desc="" hidden="false" />
-    <register name="FF_STATUS_STATUS_AUX_CTL_REG" address="0x40006498" bitWidth="8" desc="" hidden="false">
+    <register name="FF_STATUS_STATUS_REG" address="0x40006567" bitWidth="8" desc="" hidden="false" />
+    <register name="FF_STATUS_MASK_REG" address="0x40006587" bitWidth="8" desc="" hidden="false" />
+    <register name="FF_STATUS_STATUS_AUX_CTL_REG" address="0x40006597" bitWidth="8" desc="" hidden="false">
       <field name="FIFO0" from="5" to="5" access="RW" resetVal="" desc="FIFO0 clear" hidden="false">
         <value name="ENABLED" value="1" desc="Enable counter" />
         <value name="DISABLED" value="0" desc="Disable counter" />
@@ -1349,7 +1349,7 @@
     </register>
   </block>
   <block name="RESET_FF" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
-    <register name="RESET_FF_CONTROL_REG" address="0x4000647B" bitWidth="8" desc="" hidden="false" />
+    <register name="RESET_FF_CONTROL_REG" address="0x40006579" bitWidth="8" desc="" hidden="false" />
   </block>
   <block name="counter_cyc_clk" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="CYCLES_TIMER" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
