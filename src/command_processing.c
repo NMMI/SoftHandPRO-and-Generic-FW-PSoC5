@@ -745,7 +745,7 @@ void start_peripherals(){
     FTDI_ENABLE_Write(0x01);
     
 	// LED Enable   
-    LED_control(1);     // Green fixed light
+    LED_control(GREEN_FIXED);     // Green fixed light
 
     
     // RS485 UART
@@ -933,7 +933,7 @@ void init_variables(){
     forced_open = 0;
     
     if (c_mem.motor[0].motor_driver_type != DRIVER_BRUSHLESS){
-        LED_control(5);     // Default - red light
+        LED_control(RED_FIXED);     // Default - red light
     }
     
 #ifdef MASTER_FW

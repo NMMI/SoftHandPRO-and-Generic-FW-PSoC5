@@ -444,10 +444,11 @@ void ReadMag(int n){
 * Function Name: MagCalibration
 *********************************************************************************/
 void MagCalibration(){
-    LED_control(OFF);
     MAGcal = 1;
     uint8 k_imu, j;
     int16 max, min;
+    
+    LED_control(YELLOW_BLINKING);
     
     for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++){ 
         for (j = 0; j < 3; j++) {
@@ -507,7 +508,7 @@ void MagCalibration(){
         //UART_RS485_PutChar('a');
         avg[k_imu] = (scale[k_imu][0]+scale[k_imu][1]+scale[k_imu][2])/3;
     }
-    LED_control(GREEN_FIXED);
+    LED_control(OFF);
     MAGcal = 0;
 }
 

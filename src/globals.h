@@ -215,11 +215,12 @@
 #define LOOKUP_DIM                      6           /*!< Dimension of the current lookup table.*/
 #define PREREVISION_CYCLES              400000      /*!< Number of SoftHand Pro cycles before maintenance.*/    
 #define SAMPLES_FOR_EMG_HISTORY         600         /*!< Number of EMG history values ( 5 smpls/sec. x 120 secs = 600 smpls / channel ).*/
+
 #define GREEN_FIXED                     1
-#define RED_FIXED                       5
+#define YELLOW_BLINKING                 2
 #define RED_BLINKING                    3
 #define YELLOW_FIXED                    4
-#define YELLOW_BLINKING                 2
+#define RED_FIXED                       5
 #define OFF                             0
 
            

@@ -343,20 +343,18 @@ void LED_control(uint8 mode) {
         case GREEN_FIXED:     // Green fixed light
             LED_GREEN_CTRL_Write(1);
             LED_RED_CTRL_Write(0);
-            break;  
-
-            
+            break;
            
         case OFF:     //All LEDs off
             LED_GREEN_CTRL_Write(0);
             LED_RED_CTRL_Write(0);
             break;
-             /*     
+                 
         case YELLOW_BLINKING:     // Yellow flashing light @ 0.5 Hz
             LED_GREEN_CTRL_Write(3);
             LED_RED_CTRL_Write(3);        
             break;
-            
+          
         case RED_BLINKING:     // Red flashing light @ 2.5 Hz
             LED_GREEN_CTRL_Write(0);
             LED_RED_CTRL_Write(2);        
@@ -366,12 +364,12 @@ void LED_control(uint8 mode) {
             LED_GREEN_CTRL_Write(1);
             LED_RED_CTRL_Write(1);        
             break;
-        
+           
         case RED_FIXED:     // Red fixed light - uUSB power
             LED_GREEN_CTRL_Write(0);
             LED_RED_CTRL_Write(1);        
             break; 
-            */
+            
         default:
             break;
     }   
@@ -431,7 +429,7 @@ void battery_management() {
             else {
                 if (dev_tension_f[0] > 0.9 * pow_tension[0] && (c_mem.dev.use_2nd_motor_flag == FALSE || dev_tension_f[1] > 0.9 * pow_tension[1])) {
                     //yellow light - blink @ 0.5 Hz
-                    //LED_control(2);   
+                    //LED_control(YELLOW_BLINKING);   
                     
                     if (!maintenance_flag)
                         LED_control(OFF);     // NO LIGHT - all leds off
@@ -442,7 +440,7 @@ void battery_management() {
                 }
                 else {
                     //red light - blink @ 2.5 Hz
-                    //LED_control(3);
+                    //LED_control(RED_BLINKING);
                 
                     if (v_count_lb >= 10000){                    
                         

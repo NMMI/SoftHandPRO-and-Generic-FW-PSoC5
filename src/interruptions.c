@@ -2327,7 +2327,7 @@ void analog_read_end() {
             emg_counter_1++;
             if (emg_counter_1 == EMG_SAMPLE_TO_DISCARD) {
                 emg_counter_1 = 0;          // reset counter
-                LED_control(1);
+                LED_control(GREEN_FIXED);
 				
                 if (interrupt_flag){
                     interrupt_flag = FALSE;
@@ -2358,7 +2358,7 @@ void analog_read_end() {
                     interrupt_manager();
                 }                    
                 
-                LED_control(0);
+                LED_control(OFF);
 				
                 emg_counter_1 = 0;          // reset counter
 
@@ -2421,7 +2421,7 @@ void analog_read_end() {
             emg_counter_2++;
             if (emg_counter_2 == EMG_SAMPLE_TO_DISCARD) {
                 emg_counter_2 = 0;          // reset counter
-                LED_control(1);
+                LED_control(GREEN_FIXED);
 
                 if (interrupt_flag){
                     interrupt_flag = FALSE;
@@ -2446,7 +2446,7 @@ void analog_read_end() {
             
             if (emg_counter_2 == SAMPLES_FOR_EMG_MEAN) {
                 g_mem.emg.emg_max_value[1] = g_mem.emg.emg_max_value[1] / SAMPLES_FOR_EMG_MEAN; // calc mean
-                LED_control(0);
+                LED_control(OFF);
                 emg_counter_2 = 0;          // reset counter
             
                 if (interrupt_flag){
