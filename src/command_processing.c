@@ -722,12 +722,20 @@ void get_param_list (uint8 num_params, uint8 num_menus, const struct parameter P
 //                                                            Start Peripherals
 //==============================================================================
 
+
 void start_peripherals(){
+// CyDelay(5000);
+
+    
+    // Iterator    
+    uint8 i, j;
        
     // Variable declarations for DMA     
     uint8 DMA_Chan;
     uint8 DMA_TD[1];
     
+    //================================     initializations - psoc and components
+
     // EEPROM
     EEPROM_Start();
     memRecall();                                        // Recall configuration.  
@@ -735,20 +743,28 @@ void start_peripherals(){
     // FTDI chip enable
     CyDelay(100);
     FTDI_ENABLE_Write(0x01);
-        
+    
+	// LED Enable   
+    LED_control(1);     // Green fixed light
+
+    
     // RS485 UART
+    UART_RS485_Stop();
     UART_RS485_Start();
+    UART_RS485_Init();
     UART_RS485_ClearRxBuffer();
     UART_RS485_ClearTxBuffer();
     ISR_RS485_RX_StartEx(ISR_RS485_RX_ExInterrupt);
     
     // EXPANSIONS
-    sdEnabled = (c_mem.exp.read_exp_port_flag & 0x01);      // EXP_SD_RTC_ONLY,EXP_SD_RTC_BT
-    btEnabled = (c_mem.exp.read_exp_port_flag & 0x10);      // EXP_BT_ONLY,EXP_SD_RTC_BT
+    sdEnabled = (c_mem.exp.read_exp_port_flag && 0x01);      // EXP_SD_RTC_ONLY,EXP_SD_RTC_BT
+    btEnabled = (c_mem.exp.read_exp_port_flag && 0x10);      // EXP_BT_ONLY,EXP_SD_RTC_BT
         
     // BT UART
     if (btEnabled) {
+        UART_BT_Stop();
         UART_BT_Start();
+        UART_BT_Init();
         UART_BT_ClearRxBuffer();
         UART_BT_ClearTxBuffer();
         ISR_BT_RX_StartEx(ISR_BT_RX_ExInterrupt);
@@ -761,9 +777,16 @@ void start_peripherals(){
     // PWM
     PWM_MOTORS_Start();
     PWM_MOTORS_WriteCompare1(0);
-    PWM_MOTORS_WriteCompare2(0);
+    MOTOR_DIR_1_Write(0);
     enable_motor(0, 0x00);
+    MOTOR_DIR_2_Write(0);
     enable_motor(1, 0x00);
+
+#ifdef AIR_CHAMBERS_FB_FW
+    if (c_mem.dev.dev_type == AIR_CHAMBERS_FB){
+        VALVE_Write(0);
+    }
+#endif
 
     // Init AS5045 devices  
     COUNTER_ENC_Start();
@@ -795,51 +818,43 @@ void start_peripherals(){
 
     //SPI IMU module
     if (c_mem.imu.read_imu_flag) {
+
     	SPI_IMU_Start();
     	SPI_IMU_ClearRxBuffer();
     	SPI_IMU_ClearTxBuffer();
     	SPI_IMU_ClearFIFO();							
         CyDelay(10);
+        
+        // Init MPU9250 devices
+        InitIMUgeneral();
+        
+        // Initialize quaternion
+        for (i = 0; i<N_IMU_MAX; i++) {
+            Quat[i][0] = 0.999;
+            Quat[i][1] = 0.01;
+            Quat[i][2] = 0.01;
+            Quat[i][3] = 0.01;
+        }
     }
+
+            
 }
   
-void init_variables(){
-    
-    int i, j;
-    
-    // Init MPU9250 devices
-    InitIMUgeneral();
-    
-     // Initialize quaternion
-    for (i = 0; i < N_IMU_MAX; i++) {
-        Quat[i][0] = 0.999;
-        Quat[i][1] = 0.01;
-        Quat[i][2] = 0.01;
-        Quat[i][3] = 0.01;
-    }
-    
-    // Initialize magnetometer
-    for (i = 0; i < N_IMU_MAX; i++) {
-        for(j = 0; j < 3; j++){
-            offset[i][j] = 0;
-            scale[i][j] = 1;
-        }
-        avg[i] = 1;
-    }
-     
+void init_variables(){ 
+        // Iterator    
+    uint8 i, j;
     //---------------------------------------------------  Initialize filters structure 
-    for(i = 0; i < NUM_OF_MOTORS; i++) {
+    for(i=0;i<NUM_OF_MOTORS;i++) {
         filt_i[i].gain = 32;    // Current filter constant.
         filt_curr_diff[i].gain = 16;   // Current residual filter constant.       
         filt_v[i].old_value    = 12000;// Initial voltage filter value.
         filt_v[i].gain         = 2;    // Voltage filter constant.
     }
-    
-    for(i = 0; i < NUM_OF_SENSORS; i++) {
+    for(i=0;i<NUM_OF_SENSORS;i++) {
         filt_vel[i].gain = 128; // Velocity filters constant.
     }
     
-    for(i = 0; i < NUM_OF_INPUT_EMGS + NUM_OF_ADDITIONAL_EMGS; i++) {
+    for(i=0;i<NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS;i++) {
         filt_emg[i].gain      = 50;   // Emg channels filter constant.
     }
     filt_detect_pc.gain = 500;    
@@ -866,7 +881,6 @@ void init_variables(){
     g_adc_meas.emg[1] = 0;
     g_adc_meas.joystick[0] = 0;
     g_adc_meas.joystick[1] = 0;
-    
     for (uint16 k = 0; k<SAMPLES_FOR_EMG_HISTORY; k++){
         for (j = 0; j<NUM_OF_INPUT_EMGS; j++){
             emg_history[k][j] = (uint16)0;
@@ -919,7 +933,7 @@ void init_variables(){
     forced_open = 0;
     
     if (c_mem.motor[0].motor_driver_type != DRIVER_BRUSHLESS){
-        LED_control(RED_FIXED);     // Default - red light
+        LED_control(5);     // Default - red light
     }
     
 #ifdef MASTER_FW
@@ -938,7 +952,6 @@ void init_variables(){
         // SD file
         InitSD_FS();
     }
-    
 
     
     
