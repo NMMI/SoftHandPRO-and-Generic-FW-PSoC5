@@ -407,11 +407,10 @@ void ReadMag(int n){
         break;
   
        case LSM6DSRX:
-    DRDY = ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I);
+  /*  DRDY = ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I);
         Mag[n][0]=0;
-    Mag[n][1]=DRDY;
-            /*
-                            XLDA = ReadControlRegisterIMU(LSM6DSRX_STATUS_REG);          
+    Mag[n][1]=DRDY;*/
+            XLDA = ReadControlRegisterIMU(LSM6DSRX_STATUS_REG);          
           
             if (XLDA & 0b00000001) { 
         do{
@@ -432,7 +431,7 @@ void ReadMag(int n){
             CyDelayUs(100);
             }
     
-    */
+    
            /* do {
                 XLDA = ReadControlRegisterIMU(LSM6DSRX_STATUS_REG);          
             }
