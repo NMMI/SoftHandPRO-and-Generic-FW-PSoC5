@@ -74,14 +74,14 @@ void commProcess(void){
 
 //=============================================================     CMD_ACTIVATE
         case CMD_ACTIVATE:
-            MagCalibration();
-           // cmd_activate();
+            cmd_activate();
             break;
 
 //===========================================================     CMD_SET_INPUTS
 
         case CMD_SET_INPUTS:
-            cmd_set_inputs();
+            MagCalibration();
+            //cmd_set_inputs();
             break;
 
 //=====================================================     CMD_GET_MEASUREMENTS
@@ -99,6 +99,7 @@ void commProcess(void){
 //=========================================================     CMD_GET_CURRENTS
 
         case CMD_GET_CURRENTS:
+            
             cmd_get_currents();
             break;
 
@@ -807,11 +808,13 @@ void start_peripherals(){
     CyDmaChSetInitialTd(DMA_Chan, DMA_TD[0]);                                                               // Initialize Channel.
     CyDmaChEnable(DMA_Chan, 1);                                                                             // Enable DMA.
     
+    CYGlobalIntEnable;              // Enable interrupts.
+    
     // TIMER
     MY_TIMER_Start();           
     PACER_TIMER_Start();    
     
-    CYGlobalIntEnable;              // Enable interrupts.
+    
     Timer_ISR_StartEx(ISR_MY_TIMER_Handler);
     // Init AS5045 devices
     InitEncoderGeneral();
@@ -3758,8 +3761,9 @@ void cmd_get_currents(){
     packet_data[0] = CMD_GET_CURRENTS;
 
     if (c_mem.dev.dev_type != AIR_CHAMBERS_FB){
-        // Currents
-        aux_int16 = (int16) g_measOld[g_mem.motor[0].encoder_line].curr; //Real current
+       // Currents
+       // aux_int16 = (int16) g_measOld[g_mem.motor[0].encoder_line].curr; //Real current
+        aux_int16 = (int16) MY_TIMER_OVF_Cnt; //Real current
     }
     else {
         // Send pressure times 100 here instead of current (Simulink use)

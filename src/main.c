@@ -78,7 +78,7 @@ int main()
     start_peripherals(); 
     
     init_variables();    
-	    
+	MAGcal = 0;   
     RS485_CTS_Write(0);             // Clear To Send on RS485.
     
 //============================================================     main loop
