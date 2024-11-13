@@ -398,16 +398,12 @@ void ReadMag(int n){
        
 	switch (g_imu[n].dev_type){
         case MPU9250:
-          /*  DRDY = ReadControlRegisterIMU(0x3A);
+            DRDY = ReadControlRegisterIMU(0x3A);
             if (DRDY & 0x01){
                 for (i = 0; i < 6; i++){
                     Mag[n][ i + (1 - 2 *( i % 2 ))] = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_00 + i);
-            	}
-            }*/
-       DRDY = ReadControlRegisterIMU(MPU9250_WHO_AM_I);
-    
-    Mag[n][0]=0;
-    Mag[n][1]=DRDY;
+            	}}
+
         break;
   
        case LSM6DSRX:
@@ -465,8 +461,8 @@ void ReadMag(int n){
     for (i = 0; i < 3; i++) {
         tmp = Mag[n][2*i];
         g_imuNew[n].mag_value[i] = (int16)((uint16)tmp <<8 | Mag[n][2*i + 1]);
-      //  if (!MAGcal)
-      //  g_imuNew[n].mag_value[i] = (int16)(((( (float)g_imuNew[n].mag_value[i] - offset[n][i])/scale[n][i]))*factor[n][i]*avg[n]);
+       if (!MAGcal)
+        g_imuNew[n].mag_value[i] = (int16)(((( (float)g_imuNew[n].mag_value[i] - offset[n][i])/scale[n][i]))*factor[n][i]*avg[n]);
     }  
 }
 

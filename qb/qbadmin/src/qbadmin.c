@@ -1574,7 +1574,7 @@ int main (int argc, char **argv)
                do {
                     end = std::chrono::system_clock::now();
                     elapsed_mseconds1_t = (end - inizio) * 1000;     
-                } while (elapsed_mseconds1_t.count() < 10 );
+                } while (elapsed_mseconds1_t.count() < 1 );
                 inizio = std::chrono::system_clock::now();
 
                 elapsed_mseconds_t = (end - start) * 1000;     
