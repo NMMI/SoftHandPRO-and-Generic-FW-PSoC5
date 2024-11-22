@@ -1551,6 +1551,7 @@ void set_custom_param(uint16 index, const struct parameter PARAM_LIST[]) {
                 g_mem.motor[MOTOR_IDX].pwm_rate_limiter = 100;
                 for(j = 0; j < NUM_OF_SENSORS; j++){
                     g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].res[j] = 2;
+                    g_mem.enc[g_mem.motor[MOTOR_IDX].encoder_line].m_mult[j] = -1;
                 }
                
                 g_mem.motor[MOTOR_IDX].pos_lim_flag = TRUE;
@@ -1565,9 +1566,12 @@ void set_custom_param(uint16 index, const struct parameter PARAM_LIST[]) {
                 
                 // Maxon DCX26L GPX32
                 g_mem.motor[MOTOR_IDX].current_limit = 3500;               // [mA]
-                g_mem.motor[MOTOR_IDX].k_p           =  -0.018 * 65536;
-                g_mem.motor[MOTOR_IDX].k_i           =       0 * 65536;
-                g_mem.motor[MOTOR_IDX].k_d           =  -0.005 * 65536;
+                g_mem.motor[MOTOR_IDX].k_p           =  0.018 * 65536;
+                g_mem.motor[MOTOR_IDX].k_i           =      0 * 65536;
+                g_mem.motor[MOTOR_IDX].k_d           =  0.005 * 65536;
+                g_mem.motor[MOTOR_IDX].k_p_dl        =  0.002991 * 65536;
+                g_mem.motor[MOTOR_IDX].k_i_dl        =  0.007996 * 65536;
+                g_mem.motor[MOTOR_IDX].k_d_dl        =  0.007996 * 65536;
             }
             
             if (g_mem.dev.dev_type == AE_WHEELS_ESCON){       // change driver with ESCON for both 2 motors
