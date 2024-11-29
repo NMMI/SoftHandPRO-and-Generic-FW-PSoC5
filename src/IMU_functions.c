@@ -139,7 +139,7 @@ void InitIMU(uint8 n){
                 WriteControlRegisterIMU(LSM6DSRX_CTRL2_G,0x4C);     //ODR = 104 Hz,     FSR = +- 2000dps
                 CyDelay(20);
                 Temp[0][0] =0;
-                Temp[0][1] = OneShot_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_WHO_AM_I); //LIS2MDL -->valore WHO_AM_I = 64;
+                Temp[0][1] = OneShot_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_WHO_AM_I); //LIS2MDL --> WHO_AM_I = 64;
                 CyDelay(20);
                 OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_A,0x0C); //100Hz, continuous mode
                 CyDelay(20);
@@ -255,13 +255,16 @@ void InitIMUgeneral()
         Chip_Select_IMU_Write(7);
     }
     count = 0;
+    
+    // To identify which of the two IMUs is connected, I read both register 0x75 and register 0x0F for each one
+    // And compare them with the known WHO_AM_I values
  
     for (k_imu = 0; k_imu < NUM_DEV_IMU; k_imu++) {      
     	Chip_Select_IMU_Write(k_imu);
         CyDelay(10);
     	WhoAmI_MPU = ReadControlRegisterIMU(MPU9250_WHO_AM_I);
         CyDelay(10);
-        WhoAmI_LSM = ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I);
+        WhoAmI_LSM = ReadControlRegisterIMU(MPU9250_WHO_AM_I);
         CyDelay(10);
         if (WhoAmI_MPU == MPU9250_WHO_AM_I_VALUE && WhoAmI_LSM != LSM6DSRX_WHO_AM_I_VALUE){
             g_imu[count].dev_type = MPU9250;
@@ -364,7 +367,6 @@ void ReadAcc(int n)
         g_imuNew[n].accel_value[i] = (int16)((uint16)tmp <<8 | Accel[n][2*i + 1]);
         
     }
-   // }
 }
 
 /*******************************************************************************
@@ -407,61 +409,33 @@ void ReadMag(int n){
         break;
   
        case LSM6DSRX:
-  /*  DRDY = ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I);
-        Mag[n][0]=0;
-    Mag[n][1]=DRDY;*/
             XLDA = ReadControlRegisterIMU(LSM6DSRX_STATUS_REG);          
           
             if (XLDA & 0b00000001) { 
-        do{
-            
-                SENS_HUB_ENDOP = ReadControlRegisterIMU(LSM6DSRX_STATUS_MASTER_MAINPAGE);   }
-            
-            while( (SENS_HUB_ENDOP & 0b00000001) ==0);
+                do{
+                    SENS_HUB_ENDOP = ReadControlRegisterIMU(LSM6DSRX_STATUS_MASTER_MAINPAGE);   
+                }
+                while( (SENS_HUB_ENDOP & 0b00000001) == 0);
 
-            WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x40);   
-            CyDelayUs(100);  
-            ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I); 
+                WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x40);   
+                CyDelayUs(100);  
+                ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I); 
+                   
+                for (i = 0; i < 6; i++){
+                    Mag[n][i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))]= ReadControlRegisterIMU(LSM6DSRX_SENSOR_HUB_1 + i);  
+                }
                
-            for (i = 0; i < 6; i++){
-                Mag[n][i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))]= ReadControlRegisterIMU(LSM6DSRX_SENSOR_HUB_1 + i);  
+                WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x00);   
+                CyDelayUs(100);
             }
-           
-            WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x00);   
-            CyDelayUs(100);
-            }
-    
-    
-           /* do {
-                XLDA = ReadControlRegisterIMU(LSM6DSRX_STATUS_REG);          
-            }
-            while ((XLDA & 0b00000001) == 0);   
-        
-            do {
-                SENS_HUB_ENDOP = ReadControlRegisterIMU(LSM6DSRX_STATUS_MASTER_MAINPAGE);   
-            }
-            while ((SENS_HUB_ENDOP & 0b00000001) == 0);
-
-            WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x40);   
-            CyDelayUs(100);  
-            ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I); 
-               
-            for (i = 0; i < 6; i++){
-                Mag[n][i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))]= ReadControlRegisterIMU(LSM6DSRX_SENSOR_HUB_1 + i);  
-            }
-           
-            WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x00);   
-            CyDelayUs(100);
-        */
-        break;
-            
+            break;      
     }
            
     for (i = 0; i < 3; i++) {
         tmp = Mag[n][2*i];
         g_imuNew[n].mag_value[i] = (int16)((uint16)tmp <<8 | Mag[n][2*i + 1]);
-       if (!MAGcal)
-        g_imuNew[n].mag_value[i] = (int16)(((( (float)g_imuNew[n].mag_value[i] - offset[n][i])/scale[n][i]))*factor[n][i]*avg[n]);
+        if (!MAGcal)
+            g_imuNew[n].mag_value[i] = (int16)(((( (float)g_imuNew[n].mag_value[i] - offset[n][i])/scale[n][i]))*factor[n][i]*avg[n]);
     }  
 }
 
@@ -469,7 +443,10 @@ void ReadMag(int n){
 /********************************************************************************
 * Function Name: MagCalibration
 *********************************************************************************/
-// 
+// It is needed a new command that calls MagCalibration from APIs. 
+// After the call, it starts a 30s cycle (enough?) in which the device must be rotated in 
+// all the directions. FW will compute values needed to compensate for hard and soft iron distortion.
+// This corrections will be then directly applied to mag data in ReadMag
 
 void MagCalibration(){
     MAGcal = 1;
@@ -487,16 +464,15 @@ void MagCalibration(){
     }
     
     MY_TIMER_OVF_Cnt = 0;
-    while (MY_TIMER_OVF_Cnt < 200){ //65,536 ms *1000 = 60s
+    while (MY_TIMER_OVF_Cnt < 500){     // cycle for (65,536 ms * 500 =) 30 s
  
          if (interrupt_flag){
-                // Reset flags
-                interrupt_flag = FALSE;
-                // Manage Interrupt on rs485
-                interrupt_manager();
-            }
+            // Reset flags
+            interrupt_flag = FALSE;
+            // Manage Interrupt on rs485
+            interrupt_manager();
+        }
         for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++){ 
-            // Read k_imu IMU
             ChipSelectorIMU(k_imu);
             ReadMag(k_imu);
             for (j = 0; j < 3; j++) {
@@ -510,37 +486,29 @@ void MagCalibration(){
                 }
                 max = (int16)(Mag_maxval[k_imu][j]);
                 min = (int16)(Mag_minval[k_imu][j]);
-             /* UART_RS485_PutChar(((char*)(&max))[1]);
-                UART_RS485_PutChar(((char*)(&max))[0]);
-                UART_RS485_PutChar(((char*)(&min))[1]);
-                UART_RS485_PutChar(((char*)(&min))[0]);
-                CyDelay(10);*/
+             
             }
             Chip_Select_IMU_Write(7);
         }
-    //   UART_RS485_PutChar('a');
-    //    UART_RS485_PutChar('a');
+  
     }
     
     
     for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++){ 
         for (j = 0; j < 3; j++) {
+            // According to the Datasheet, LIS2MDL (connected to LSM6DSRX) should compensate automatically for magnetic offsets, by configuring 
+            // LIS2MDL_CFG_REG_B register (0x61) = 0x02.  That's why I had written the three lines of code that follows . However, commenting them out 
+            //(i.e. subtracting the offset also to this devices, th calibrations seems to work better...check)
+            
             //  if (g_imu[k_imu].dev_type == LSM6DSRX ) 
-            //    offset[k_imu][j] = 0;
+            //    offset[k_imu][j] = 0;   
             //  else 
             offset[k_imu][j] = ((Mag_maxval[k_imu][j] + Mag_minval[k_imu][j])/2 );
             scale[k_imu][j] = ((Mag_maxval[k_imu][j] - Mag_minval[k_imu][j]))/2;
             min = (int16)offset[k_imu][j];
             max = (int16)scale[k_imu][j];
-            /*UART_RS485_PutChar(((char*)(&max))[1]);
-            UART_RS485_PutChar(((char*)(&max))[0]);
-            UART_RS485_PutChar(((char*)(&min))[1]);
-            UART_RS485_PutChar(((char*)(&min))[0]);
-            CyDelay(10); */
         }
-        //UART_RS485_PutChar('a');
-        //UART_RS485_PutChar('a');
-        avg[k_imu] = (scale[k_imu][0]+scale[k_imu][1]+scale[k_imu][2])/3;
+        avg[k_imu] = (scale[k_imu][0] + scale[k_imu][1] + scale[k_imu][2])/3; // compute the medium radius of the magnetic field along the 3 axis
     }
     LED_control(OFF);
     MAGcal = 0;
@@ -555,7 +523,10 @@ void ReadMagCal(int n){
     uint8 i;
 	
 	switch (g_imu[n].dev_type){
-        case MPU9250:
+        case MPU9250: 
+            // This values are stored in the memory of the Mag chip and are different for each one.
+            // They need to be used to align the sensitivity of the chip to the specifications in the datasheet,
+            // compensating for fabrications tolerances
             for ( i = 0; i < 3; i++){
             	MagCal[n][i] = ReadControlRegisterIMU(MPU9250_EXT_SENS_DATA_00 + i);
                 factor[n][i] = (((float)MagCal[n][i]+128)*1.0)/256 ;
@@ -563,6 +534,7 @@ void ReadMagCal(int n){
             break;
 
         case LSM6DSRX:
+            // For this Mag chip, the sensitivity adjustment is already performed, so factor[][] = 1
             for ( i = 0; i < 3; i++){
                 MagCal[n][i] = 128; 
                 factor[n][i] = 1;

@@ -133,6 +133,8 @@ CY_ISR(ISR_CYCLES_Handler){
 //==============================================================================
 //                                                   MY_TIMER OVERFLOW INTERRUPT
 //==============================================================================
+// Used to implement a time interval for the calibration of Magnetometers
+
 CY_ISR(ISR_MY_TIMER_Handler){
 
     MY_TIMER_STATUS;        // clear interrupt

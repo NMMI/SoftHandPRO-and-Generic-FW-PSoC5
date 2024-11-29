@@ -80,8 +80,8 @@ void commProcess(void){
 //===========================================================     CMD_SET_INPUTS
 
         case CMD_SET_INPUTS:
-            MagCalibration();
-            //cmd_set_inputs();
+            //MagCalibration();  // I used to call set_inputs() from APIs for debuggin MagCalibration
+            cmd_set_inputs();
             break;
 
 //=====================================================     CMD_GET_MEASUREMENTS
