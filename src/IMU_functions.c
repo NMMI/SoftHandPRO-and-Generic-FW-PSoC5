@@ -352,7 +352,7 @@ void ReadIMU(int n)
 *********************************************************************************/
 void ReadAcc(int n)
 {   static uint8 i;
-    uint8 tmp = 0,DRDY ;
+    uint8 tmp = 0;
 	static uint8 AccStartAddress;
 
     AccStartAddress = g_imu[n].dev_type ? LSM6DSRX_OUTX_L_A : MPU9250_ACCEL_XOUT_H;
@@ -434,7 +434,7 @@ void ReadMag(int n){
     for (i = 0; i < 3; i++) {
         tmp = Mag[n][2*i];
         g_imuNew[n].mag_value[i] = (int16)((uint16)tmp <<8 | Mag[n][2*i + 1]);
-        if (!MAGcal)
+        if (!MAGcalProc)
             g_imuNew[n].mag_value[i] = (int16)(((( (float)g_imuNew[n].mag_value[i] - offset[n][i])/scale[n][i]))*factor[n][i]*avg[n]);
     }  
 }
@@ -449,10 +449,9 @@ void ReadMag(int n){
 // This corrections will be then directly applied to mag data in ReadMag
 
 void MagCalibration(){
-    MAGcal = 1;
+    MAGcalProc = 1;
     uint8 k_imu, j;
     int16 max, min;
-    uint8 tmp ;
     
     LED_control(YELLOW_BLINKING);
     
@@ -511,7 +510,7 @@ void MagCalibration(){
         avg[k_imu] = (scale[k_imu][0] + scale[k_imu][1] + scale[k_imu][2])/3; // compute the medium radius of the magnetic field along the 3 axis
     }
     LED_control(OFF);
-    MAGcal = 0;
+    MAGcalProc = 0;
 }
 
 

@@ -651,7 +651,7 @@ extern float offset[N_IMU_MAX][3];
 extern float scale[N_IMU_MAX][3];
 extern float avg[N_IMU_MAX];
 extern float factor[N_IMU_MAX][3]; 
-extern uint8 MAGcal;
+extern uint8 MAGcalProc;
 
 // MASTER variables
 extern uint8 master_mode;               /*!< Flag used to set/unset master mode to send messages to other boards.*/
