@@ -78,17 +78,7 @@ void UpdateIMUDefine(){
 * Function Name: IMU Initialization
 *********************************************************************************/
 void InitIMU(uint8 n){	
-    
-    // ################################# IMPORTANTE #######################################
-    // ####################################################################################
-    // ####################################################################################
-    
-    // Rendere compatibili performance di MPU9250 e LSM6DSRX in termini di ODR, FSR, LPF...
-    
-    // ####################################################################################
-    // ####################################################################################
-    // ####################################################################################
-    
+ 
     switch (g_imu[n].dev_type) {
         case MPU9250:
         	WriteControlRegisterIMU(MPU9250_PWR_MGMT_1, 0x10); 
@@ -131,28 +121,28 @@ void InitIMU(uint8 n){
         	CyDelay(20);
             break;
             
-            case LSM6DSRX:
-                WriteControlRegisterIMU(LSM6DSRX_CTRL1_XL,0x90);    //ODR = 3.3 kHz,    FSR = +- 2g
-                CyDelay(20);
-                WriteControlRegisterIMU(LSM6DSRX_CTRL3_C,0x40);     //BDU
-                CyDelay(20);
-                WriteControlRegisterIMU(LSM6DSRX_CTRL2_G,0x4C);     //ODR = 104 Hz,     FSR = +- 2000dps
-                CyDelay(20);
-                Temp[0][0] =0;
-                Temp[0][1] = OneShot_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_WHO_AM_I); //LIS2MDL --> WHO_AM_I = 64;
-                CyDelay(20);
-                OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_A,0x0C); //100Hz, continuous mode
-                CyDelay(20);
-                OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_B,0x02); //0x02 = offset canc enabled (need to store value in dedicated register),  
-                                                                            //0x00 = offset canc disabled
-                CyDelay(20);
-                OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_C,0x10); //BDU
-                CyDelay(20);
-                Continuous_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_OUTX_L_REG,0x06); //Read 6 bytes
-                CyDelay(20);
-                
+        case LSM6DSRX:
+            WriteControlRegisterIMU(LSM6DSRX_CTRL1_XL,0x90);    //ODR = 3.3 kHz,    FSR = +- 2g
+            CyDelay(20);
+            WriteControlRegisterIMU(LSM6DSRX_CTRL3_C,0x40);     //BDU
+            CyDelay(20);
+            WriteControlRegisterIMU(LSM6DSRX_CTRL2_G,0x4C);     //ODR = 104 Hz,     FSR = +- 2000dps
+            CyDelay(20);
+            Temp[0][0] =0;
+            Temp[0][1] = OneShot_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_WHO_AM_I); //LIS2MDL --> WHO_AM_I = 64;
+            CyDelay(20);
+            OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_A,0x0C); //100Hz, continuous mode
+            CyDelay(20);
+            OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_B,0x02); //0x02 = offset canc enabled (need to store value in dedicated register),  
+                                                                        //0x00 = offset canc disabled
+            CyDelay(20);
+            OneShot_WriteRoutine(EXT_SENS_ADDR,LIS2MDL_CFG_REG_C,0x10); //BDU
+            CyDelay(20);
+            Continuous_ReadRoutine(EXT_SENS_ADDR,LIS2MDL_OUTX_L_REG,0x06); //Read 6 bytes
+            CyDelay(20);
+            
             break;
-            default:
+        default:
             break;
     }
 }
@@ -264,7 +254,7 @@ void InitIMUgeneral()
         CyDelay(10);
     	WhoAmI_MPU = ReadControlRegisterIMU(MPU9250_WHO_AM_I);
         CyDelay(10);
-        WhoAmI_LSM = ReadControlRegisterIMU(MPU9250_WHO_AM_I);
+        WhoAmI_LSM = ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I);
         CyDelay(10);
         if (WhoAmI_MPU == MPU9250_WHO_AM_I_VALUE && WhoAmI_LSM != LSM6DSRX_WHO_AM_I_VALUE){
             g_imu[count].dev_type = MPU9250;
@@ -444,14 +434,13 @@ void ReadMag(int n){
 * Function Name: MagCalibration
 *********************************************************************************/
 // It is needed a new command that calls MagCalibration from APIs. 
-// After the call, it starts a 30s cycle (enough?) in which the device must be rotated in 
-// all the directions. FW will compute values needed to compensate for hard and soft iron distortion.
-// This corrections will be then directly applied to mag data in ReadMag
+// After the call, it starts a 30s cycle in which the device must be rotated in 
+// all the directions. The firmware will compute values needed to compensate for hard and soft iron distortion.
+// These corrections will be then directly applied to mag data in ReadMag
 
 void MagCalibration(){
     MAGcalProc = 1;
     uint8 k_imu, j;
-    int16 max, min;
     
     LED_control(YELLOW_BLINKING);
     
@@ -483,8 +472,6 @@ void MagCalibration(){
                 if (g_imuNew[k_imu].mag_value[j] > Mag_maxval[k_imu][j]){   
                     Mag_maxval[k_imu][j] = (float)(g_imuNew[k_imu].mag_value[j]);
                 }
-                max = (int16)(Mag_maxval[k_imu][j]);
-                min = (int16)(Mag_minval[k_imu][j]);
              
             }
             Chip_Select_IMU_Write(7);
@@ -497,15 +484,13 @@ void MagCalibration(){
         for (j = 0; j < 3; j++) {
             // According to the Datasheet, LIS2MDL (connected to LSM6DSRX) should compensate automatically for magnetic offsets, by configuring 
             // LIS2MDL_CFG_REG_B register (0x61) = 0x02.  That's why I had written the three lines of code that follows . However, commenting them out 
-            //(i.e. subtracting the offset also to this devices, th calibrations seems to work better...check)
+            //(i.e. subtracting the offset also to this devices, the calibrations seems to work better...check)
             
             //  if (g_imu[k_imu].dev_type == LSM6DSRX ) 
             //    offset[k_imu][j] = 0;   
             //  else 
             offset[k_imu][j] = ((Mag_maxval[k_imu][j] + Mag_minval[k_imu][j])/2 );
             scale[k_imu][j] = ((Mag_maxval[k_imu][j] - Mag_minval[k_imu][j]))/2;
-            min = (int16)offset[k_imu][j];
-            max = (int16)scale[k_imu][j];
         }
         avg[k_imu] = (scale[k_imu][0] + scale[k_imu][1] + scale[k_imu][2])/3; // compute the medium radius of the magnetic field along the 3 axis
     }

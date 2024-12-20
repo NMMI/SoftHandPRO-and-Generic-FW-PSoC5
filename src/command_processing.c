@@ -80,7 +80,6 @@ void commProcess(void){
 //===========================================================     CMD_SET_INPUTS
 
         case CMD_SET_INPUTS:
-            //MagCalibration();  // I used to call set_inputs() from APIs for debuggin MagCalibration   [MP]
             cmd_set_inputs();
             break;
 
@@ -246,6 +245,14 @@ void commProcess(void){
             g_refNew[0].pos = 0;                    // SoftHand is on motor 1
             calib.enabled = TRUE;
          
+            sendAcknowledgment(ACK_OK);
+            break;
+         
+
+//=====================================================     CMD_CALIB_IMU_MAGNETOMETER
+
+        case CMD_CALIB_IMU_MAGNETOMETER:
+            MagCalibration();
             sendAcknowledgment(ACK_OK);
             break;
             
@@ -1718,9 +1725,9 @@ void get_IMU_param_list(uint16 index)
                 packet_data[2+start_byte + PARAM_BYTE_SLOT*k] = TYPE_UINT8;
                 
                 packet_data[3+start_byte + PARAM_BYTE_SLOT*k] = 3;
-                packet_data[4+start_byte + PARAM_BYTE_SLOT*k] = (uint8) MagCal[2*k][0];
-                packet_data[5+start_byte + PARAM_BYTE_SLOT*k] = (uint8) MagCal[2*k][1];
-                packet_data[6+start_byte + PARAM_BYTE_SLOT*k] = (uint8) MagCal[2*k][2];
+                packet_data[4+start_byte + PARAM_BYTE_SLOT*k] = (uint8) 1; // Unitary value to make APIs compatible with older FW (uint8) MagCal[2*k][0];
+                packet_data[5+start_byte + PARAM_BYTE_SLOT*k] = (uint8) 1; // Unitary value to make APIs compatible with older FW MagCal[2*k][1];
+                packet_data[6+start_byte + PARAM_BYTE_SLOT*k] = (uint8) 1; // Unitary value to make APIs compatible with older FW MagCal[2*k][2];
                 
                 // check if there is a second value
                 if ( N_IMU_Connected < 2*(k+1) ) {
@@ -1731,9 +1738,9 @@ void get_IMU_param_list(uint16 index)
                 else {
                     // fill the second value
                     packet_data[3+start_byte + PARAM_BYTE_SLOT*k] = 6;
-                    packet_data[7+start_byte + PARAM_BYTE_SLOT*k] = (uint8) MagCal[2*k+1][0];
-                    packet_data[8+start_byte + PARAM_BYTE_SLOT*k] = (uint8) MagCal[2*k+1][1];
-                    packet_data[9+start_byte + PARAM_BYTE_SLOT*k] = (uint8) MagCal[2*k+1][2];
+                    packet_data[7+start_byte + PARAM_BYTE_SLOT*k] = (uint8) 1; // Unitary value to make APIs compatible with older FW MagCal[2*k+1][0];
+                    packet_data[8+start_byte + PARAM_BYTE_SLOT*k] = (uint8) 1; // Unitary value to make APIs compatible with older FW MagCal[2*k+1][1];
+                    packet_data[9+start_byte + PARAM_BYTE_SLOT*k] = (uint8) 1; // Unitary value to make APIs compatible with older FW MagCal[2*k+1][2];
                 
                     for(j = mag_param_str_len; j != 0; j--)
                         packet_data[10+start_byte + PARAM_BYTE_SLOT*k + mag_param_str_len - j] = mag_param_str[mag_param_str_len - j];
@@ -2306,7 +2313,7 @@ void prepare_generic_info(char *info_string)
             
             strcat(info_string, "IMUs CONFIGURATION\r\n");
             for (i=0; i<N_IMU_Connected; i++){
-                sprintf(str, "Imu %d \r\n\tID: %d\r\n", i, (int) IMU_IDs[i]);
+                sprintf(str, "Imu %d \r\n\tID: %d\tType: %s\r\n", i, (int) IMU_IDs[i],  (g_imu[i].dev_type == MPU9250)?"MPU9250":"LSM6DSRX");
                 strcat(info_string, str);
                 
                 sprintf(str, "\tAccelerometers: ");
@@ -2334,7 +2341,18 @@ void prepare_generic_info(char *info_string)
                     strcat(str, "YES\r\n");
                 else
                     strcat(str, "NO\r\n");
-                     
+                
+                strcat(info_string, str);
+                
+                sprintf(str, "\tMag Sensitivity Params: %d %d %d\r\n", (uint8) MagCal[i][0], (uint8) MagCal[i][1], (uint8) MagCal[i][2]);
+                strcat(info_string, str);
+                
+                strcat(info_string, "\tMag Calibration Params: \r\n");
+                sprintf(str, "\t\tOffset: %f %f %f\r\n", offset[i][0], offset[i][1], offset[i][2]);
+                strcat(info_string, str);
+                sprintf(str, "\t\tScale: %f %f %f\r\n", scale[i][0], scale[i][1], scale[i][2]);
+                strcat(info_string, str);
+                sprintf(str, "\t\tAvg: %f\r\n", avg[i]);
                 strcat(info_string, str);
             }       
             
