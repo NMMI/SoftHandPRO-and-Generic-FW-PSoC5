@@ -145,13 +145,12 @@ uint8 Mag[N_IMU_MAX][6];
 uint8 MagCal[N_IMU_MAX][3];
 uint8 Temp[N_IMU_MAX][2];
 float Quat[N_IMU_MAX][4];
-float Mag_maxval[N_IMU_MAX][3];
-float Mag_minval[N_IMU_MAX][3];
 float offset[N_IMU_MAX][3];
 float scale[N_IMU_MAX][3];
 float avg[N_IMU_MAX];
 float factor[N_IMU_MAX][3]; 
 uint8 MAGcalProc = 0;
+
 // MASTER variables
 uint8 master_mode;               /*!< Flag used to set/unset master mode to send messages to other boards.*/
 

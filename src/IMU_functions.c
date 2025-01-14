@@ -229,11 +229,20 @@ void InitIMUgeneral()
                
     // Initialize magnetometer
     for (k_imu = 0; k_imu < N_IMU_MAX; k_imu++) {
-        for(j = 0; j < 3; j++){
-            offset[k_imu][j] = 0;
-            scale[k_imu][j] = 1;
+        if (c_mem.imu.MagIsCalibrated) {    // if they are already calibrated fill variables with values from previous calibration
+            for(j = 0; j < 3; j++){
+                offset[k_imu][j] = ( ((float)c_mem.imu.MagCalibMinMax[k_imu][2*j + 1] + (float)c_mem.imu.MagCalibMinMax[k_imu][2*j])/2 );
+                scale[k_imu][j]  = ( ((float)c_mem.imu.MagCalibMinMax[k_imu][2*j + 1] - (float)c_mem.imu.MagCalibMinMax[k_imu][2*j])/2 );
+            }
+            avg[k_imu] = (scale[k_imu][0] + scale[k_imu][1] + scale[k_imu][2])/3;
         }
-        avg[k_imu] = 1;
+        else {
+            for(j = 0; j < 3; j++){         // default values
+                offset[k_imu][j] = 0;
+                scale[k_imu][j] = 1;
+            }
+            avg[k_imu] = 1;
+        }            
     }
     
     // First ping to be sure to wakeup IMUs
@@ -387,7 +396,7 @@ void ReadMag(int n){
     uint8 XLDA;
     uint8 DRDY;
     uint8 SENS_HUB_ENDOP;
-       
+     
 	switch (g_imu[n].dev_type){
         case MPU9250:
             DRDY = ReadControlRegisterIMU(0x3A);
@@ -446,8 +455,8 @@ void MagCalibration(){
     
     for (k_imu = 0; k_imu < N_IMU_Connected; k_imu++){ 
         for (j = 0; j < 3; j++) {
-            Mag_maxval[k_imu][j]= -32000;
-            Mag_minval[k_imu][j]= 32000;
+            g_mem.imu.MagCalibMinMax[k_imu][2*j]    =  32000;  //Min value of Mag[k_imu][j]
+            g_mem.imu.MagCalibMinMax[k_imu][2*j + 1]= -32000;  //Max value of Mag[k_imu][j]
         }
     }
     
@@ -465,12 +474,12 @@ void MagCalibration(){
             ReadMag(k_imu);
             for (j = 0; j < 3; j++) {
 
-                if (g_imuNew[k_imu].mag_value[j] < Mag_minval[k_imu][j]){
-                    Mag_minval[k_imu][j] = (float)(g_imuNew[k_imu].mag_value[j]);
+                if (g_imuNew[k_imu].mag_value[j] < g_mem.imu.MagCalibMinMax[k_imu][2*j]){
+                    g_mem.imu.MagCalibMinMax[k_imu][2*j] = g_imuNew[k_imu].mag_value[j];
                 }
                 
-                if (g_imuNew[k_imu].mag_value[j] > Mag_maxval[k_imu][j]){   
-                    Mag_maxval[k_imu][j] = (float)(g_imuNew[k_imu].mag_value[j]);
+                if (g_imuNew[k_imu].mag_value[j] > g_mem.imu.MagCalibMinMax[k_imu][2*j + 1]){   
+                    g_mem.imu.MagCalibMinMax[k_imu][2*j + 1] = g_imuNew[k_imu].mag_value[j];
                 }
              
             }
@@ -489,13 +498,16 @@ void MagCalibration(){
             //  if (g_imu[k_imu].dev_type == LSM6DSRX ) 
             //    offset[k_imu][j] = 0;   
             //  else 
-            offset[k_imu][j] = ((Mag_maxval[k_imu][j] + Mag_minval[k_imu][j])/2 );
-            scale[k_imu][j] = ((Mag_maxval[k_imu][j] - Mag_minval[k_imu][j]))/2;
+            offset[k_imu][j] = (((float)g_mem.imu.MagCalibMinMax[k_imu][2*j + 1] + (float)g_mem.imu.MagCalibMinMax[k_imu][2*j])/2 );
+            scale[k_imu][j] = (((float)g_mem.imu.MagCalibMinMax[k_imu][2*j + 1] - (float)g_mem.imu.MagCalibMinMax[k_imu][2*j]))/2;
         }
         avg[k_imu] = (scale[k_imu][0] + scale[k_imu][1] + scale[k_imu][2])/3; // compute the medium radius of the magnetic field along the 3 axis
+   
     }
     LED_control(OFF);
     MAGcalProc = 0;
+    
+    g_mem.imu.MagIsCalibrated = TRUE;
 }
 
 

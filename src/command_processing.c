@@ -253,7 +253,10 @@ void commProcess(void){
 
         case CMD_CALIB_IMU_MAGNETOMETER:
             MagCalibration();
-            sendAcknowledgment(ACK_OK);
+            if(memStore(0))                     //store min/max mag values in eeprom
+                sendAcknowledgment(ACK_OK);
+            else
+                sendAcknowledgment(ACK_ERROR);
             break;
             
 //=====================================================     CMD_GET_IMU_READINGS
@@ -2344,20 +2347,28 @@ void prepare_generic_info(char *info_string)
                 
                 strcat(info_string, str);
                 
-                sprintf(str, "\tMag Sensitivity Params: %d %d %d\r\n", (uint8) MagCal[i][0], (uint8) MagCal[i][1], (uint8) MagCal[i][2]);
-                strcat(info_string, str);
-                
-                strcat(info_string, "\tMag Calibration Params: \r\n");
-                sprintf(str, "\t\tOffset: %f %f %f\r\n", offset[i][0], offset[i][1], offset[i][2]);
-                strcat(info_string, str);
-                sprintf(str, "\t\tScale: %f %f %f\r\n", scale[i][0], scale[i][1], scale[i][2]);
-                strcat(info_string, str);
-                sprintf(str, "\t\tAvg: %f\r\n", avg[i]);
-                strcat(info_string, str);
+                if ((MEM_P->imu.IMU_conf[i][2])){                    
+                    sprintf(str, "\tMag Sensitivity Params: %d %d %d\r\n", (uint8) MagCal[i][0], (uint8) MagCal[i][1], (uint8) MagCal[i][2]);
+                    strcat(info_string, str);
+                    
+                    if (MEM_P->imu.MagIsCalibrated){
+                        strcat(info_string, "\tMag Calibration Params: \r\n");
+                        sprintf(str, "\t\tOffset: %.2f %.2f %.2f\r\n", offset[i][0], offset[i][1], offset[i][2]);
+                        strcat(info_string, str);
+                        sprintf(str, "\t\tScale: %.2f %.2f %.2f\r\n", scale[i][0], scale[i][1], scale[i][2]);
+                        strcat(info_string, str);                              
+                    }
+                    else {
+                        strcat(info_string, "\tRun Mag Calibration to show params\r\n");
+                    }
+                }
             }       
             
             strcat(info_string, "\r\n");
-          
+            
+            sprintf(str, "Are Magnetometers Calibrated: %s\r\n\r\n", (MEM_P->imu.MagIsCalibrated)?"YES":"NO");
+            strcat(info_string, str);
+                    
             IMU_reading_info(info_string);
         }
         
@@ -3307,12 +3318,16 @@ uint8 memInit(void)
     // IMU STRUCT
     g_mem.imu.read_imu_flag = FALSE;
     g_mem.imu.SPI_read_delay = 0;       // 0 - No delay
-    for (i = 0; i< N_IMU_Connected; i++){
+    for (i = 0; i< N_IMU_MAX; i++){
         g_mem.imu.IMU_conf[i][0] = 1;   // Accelerometers
         g_mem.imu.IMU_conf[i][1] = 1;   // Gyroscopes
         g_mem.imu.IMU_conf[i][2] = 0;   // Magnetometers
         g_mem.imu.IMU_conf[i][3] = 0;   // Quaternions
         g_mem.imu.IMU_conf[i][4] = 0;   // Temperatures
+        g_mem.imu.MagIsCalibrated  = FALSE;
+        for (j=0; j < 6; j++){
+            g_mem.imu.MagCalibMinMax[i][j] = 0;
+        }
     }
      
     // EXP STRUCT
