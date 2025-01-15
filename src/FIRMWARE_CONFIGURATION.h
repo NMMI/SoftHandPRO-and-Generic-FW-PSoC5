@@ -1,7 +1,7 @@
 // ----------------------------------------------------------------------------
 // BSD 3-Clause License
 
-// Copyright (c) 2019-2024, Centro "E.Piaggio"
+// Copyright (c) 2019-2025, Centro "E.Piaggio"
 // All rights reserved.
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -35,9 +35,9 @@
  *
  *  \brief      Definitions for SoftHand and Other Devices commands, parameters and packages.
  *
- *  \date       Jun 05th, 2024
+ *  \date       Jan 15th, 2025
  *  \author     _Centro "E.Piaggio"_
- *  \copyright  (C) 2019-2024 Centro "E.Piaggio". All rights reserved.
+ *  \copyright  (C) 2019-2025 Centro "E.Piaggio". All rights reserved.
  *  \details
  *  This file is included in the firmware, in its libraries and
  *  applications. It contains all definitions that are necessary to discriminate the right firmware.
@@ -59,7 +59,7 @@
 //====================================================================================
 //====================================================================================
     
-#define VERSION         "v. 1.16.2"    
+#define VERSION         "v. 2.0"    
     
 // Macro related to different firmware configurations
 #ifdef SOFTHAND_FW

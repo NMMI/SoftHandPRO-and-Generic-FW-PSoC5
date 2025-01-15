@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2024, Centro "E.Piaggio"
+// Copyright (c) 2017-2025, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -36,10 +36,10 @@
 * \file         globals.c
 *
 * \brief        Global variables.
-* \date         Jun 05th, 2024
+* \date         Jan 15th, 2025
 * \author       _Centro "E.Piaggio"_
 * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
-* \copyright    (C) 2017-2024 Centro "E.Piaggio". All rights reserved.
+* \copyright    (C) 2017-2025 Centro "E.Piaggio". All rights reserved.
 */
 
 //=================================================================     includes
@@ -73,6 +73,7 @@ int32   dev_tension_f[NUM_OF_MOTORS];       /*!< Filtered power supply tension.*
 int32   pow_tension[NUM_OF_MOTORS];         /*!< Computed power supply tension.*/
 int32   detect_power_cycle = 0;             /*!< Variable used to detect a new power cycle.*/
 
+uint16 MY_TIMER_OVF_Cnt = 0;                        /*!< MY_TIMER interrutp overflow counter*/
 counter_status CYDATA cycles_status = NONE;     /*!< Cycles counter state machine status.*/
 adc_status CYDATA emg_1_status = RESET;         /*!< First EMG sensor status.*/
 adc_status CYDATA emg_2_status = RESET;         /*!< Second EMG sensor status.*/   
@@ -129,8 +130,11 @@ uint8 btEnabled = FALSE;
 uint8 bt_src = FALSE;
 
 // IMU variables
+ uint8 WHO_AM_I ; 
+     uint8 WHO_AM_I_VALUE ;
+uint8 IMU_device;
 uint8 N_IMU_Connected;
-uint8 IMU_connected[N_IMU_MAX];
+uint8 IMU_IDs[N_IMU_MAX];
 int imus_data_size;
 int single_imu_size[N_IMU_MAX];
 struct st_imu_data g_imu[N_IMU_MAX];
@@ -141,6 +145,11 @@ uint8 Mag[N_IMU_MAX][6];
 uint8 MagCal[N_IMU_MAX][3];
 uint8 Temp[N_IMU_MAX][2];
 float Quat[N_IMU_MAX][4];
+float offset[N_IMU_MAX][3];
+float scale[N_IMU_MAX][3];
+float avg[N_IMU_MAX];
+float factor[N_IMU_MAX][3]; 
+uint8 MAGcalProc = 0;
 
 // MASTER variables
 uint8 master_mode;               /*!< Flag used to set/unset master mode to send messages to other boards.*/

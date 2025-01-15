@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2020, Centro "E.Piaggio"
+// Copyright (c) 2017-2025, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -36,10 +36,10 @@
 * \file         interruptions.c
 *
 * \brief        Interruption handling and firmware core functions
-* \date         March 20th, 2020
+* \date         Jan 15th, 2025
 * \author       _Centro "E.Piaggio"_
 * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
-* \copyright    (C) 2017-2020 Centro "E.Piaggio". All rights reserved.
+* \copyright    (C) 2017-2025 Centro "E.Piaggio". All rights reserved.
 */
 
 
@@ -130,6 +130,17 @@ CY_ISR(ISR_CYCLES_Handler){
 
 }
 
+//==============================================================================
+//                                                   MY_TIMER OVERFLOW INTERRUPT
+//==============================================================================
+// Used to implement a time interval for the calibration of Magnetometers
+
+CY_ISR(ISR_MY_TIMER_Handler){
+
+    MY_TIMER_STATUS;        // clear interrupt
+    MY_TIMER_OVF_Cnt ++;
+        
+}
 //==============================================================================
 //                                                             INTERRUPT MANAGER
 //==============================================================================
@@ -1727,7 +1738,6 @@ void motor_control_generic(uint8 idx) {
         if (abs(pwm_input) < 7 * (int)(PWM_MAX_VALUE_ESC/100.0)){
             pwm_input = SIGN(pwm_input) * 7 * (int)(PWM_MAX_VALUE_ESC/100.0);
         }
-       
     }
 
     // Set motor direction and write pwm value
@@ -1994,7 +2004,7 @@ void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor) {
                 // If necessary activate motor
     			safe_startup_motor_activation[n_line] = TRUE;
                 // Activate the motor associated to this encoder line
-                g_refNew[assoc_motor].onoff = c_mem.motor[assoc_motor].activ;
+                g_refNew[assoc_motor].onoff = c_mem.motor[assoc_motor].active;
                 enable_motor(assoc_motor, g_refNew[assoc_motor].onoff);                
                 
                 pos_reconstruct[n_line] = TRUE;
@@ -2010,7 +2020,7 @@ void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor) {
             g_refNew[assoc_motor].pos = 0;
             
             // Activate the motor associated to this encoder line
-            g_refNew[assoc_motor].onoff = c_mem.motor[assoc_motor].activ;
+            g_refNew[assoc_motor].onoff = c_mem.motor[assoc_motor].active;
             enable_motor(assoc_motor, g_refNew[assoc_motor].onoff); 
                         
             safe_startup_motor_activation[n_line] = FALSE;
@@ -2317,7 +2327,7 @@ void analog_read_end() {
             emg_counter_1++;
             if (emg_counter_1 == EMG_SAMPLE_TO_DISCARD) {
                 emg_counter_1 = 0;          // reset counter
-                LED_control(1);
+                LED_control(GREEN_FIXED);
 				
                 if (interrupt_flag){
                     interrupt_flag = FALSE;
@@ -2348,7 +2358,7 @@ void analog_read_end() {
                     interrupt_manager();
                 }                    
                 
-                LED_control(0);
+                LED_control(OFF);
 				
                 emg_counter_1 = 0;          // reset counter
 
@@ -2411,7 +2421,7 @@ void analog_read_end() {
             emg_counter_2++;
             if (emg_counter_2 == EMG_SAMPLE_TO_DISCARD) {
                 emg_counter_2 = 0;          // reset counter
-                LED_control(1);
+                LED_control(GREEN_FIXED);
 
                 if (interrupt_flag){
                     interrupt_flag = FALSE;
@@ -2436,7 +2446,7 @@ void analog_read_end() {
             
             if (emg_counter_2 == SAMPLES_FOR_EMG_MEAN) {
                 g_mem.emg.emg_max_value[1] = g_mem.emg.emg_max_value[1] / SAMPLES_FOR_EMG_MEAN; // calc mean
-                LED_control(0);
+                LED_control(OFF);
                 emg_counter_2 = 0;          // reset counter
             
                 if (interrupt_flag){
@@ -2472,7 +2482,7 @@ void analog_read_end() {
                         if (c_mem.motor[idx].control_mode == CONTROL_ANGLE) {
                             g_ref[idx].pos = g_meas[g_mem.motor[idx].encoder_line].pos[0];
                         }
-                        g_ref[idx].onoff = c_mem.motor[idx].activ;
+                        g_ref[idx].onoff = c_mem.motor[idx].active;
                         enable_motor(idx, g_ref[idx].onoff); 
                     }
                 }

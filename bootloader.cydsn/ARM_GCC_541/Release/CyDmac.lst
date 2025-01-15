@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
   28:Generated_Source\PSoC5/CyDmac.c **** 
   29:Generated_Source\PSoC5/CyDmac.c **** #include "CyDmac.h"
   30:Generated_Source\PSoC5/CyDmac.c **** 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 2
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 2
 
 
   31:Generated_Source\PSoC5/CyDmac.c **** 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
   46              		.loc 1 58 0
   47 000c 0870     		strb	r0, [r1]
   59:Generated_Source\PSoC5/CyDmac.c ****     CyDmaTdCurrentNumber = CY_DMA_NUMBEROF_TDS;
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 3
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 3
 
 
   48              		.loc 1 59 0
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
   78:Generated_Source\PSoC5/CyDmac.c **** * \return Errors of the last failed DMA transaction.
   79:Generated_Source\PSoC5/CyDmac.c **** *
   80:Generated_Source\PSoC5/CyDmac.c **** *  DMAC_PERIPH_ERR:
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 4
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 4
 
 
   81:Generated_Source\PSoC5/CyDmac.c **** *   Set to 1 when a peripheral responds to a bus transaction with an error
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  109:Generated_Source\PSoC5/CyDmac.c **** *   Clears the error bits in the DMAC error register.
  110:Generated_Source\PSoC5/CyDmac.c **** *
  111:Generated_Source\PSoC5/CyDmac.c **** *  \param DMAC_PERIPH_ERR:
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 5
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 5
 
 
  112:Generated_Source\PSoC5/CyDmac.c **** *   Set to 1 when a peripheral responds to a bus transaction with an error
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  139:Generated_Source\PSoC5/CyDmac.c **** *  with this function.
  140:Generated_Source\PSoC5/CyDmac.c **** *
  141:Generated_Source\PSoC5/CyDmac.c **** *  If there are multiple errors, only the address of the first is saved.
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 6
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 6
 
 
  142:Generated_Source\PSoC5/CyDmac.c **** *
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  170              		.cfi_def_cfa_offset 16
  171              		.cfi_offset 3, -16
  172              		.cfi_offset 4, -12
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 7
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 7
 
 
  173              		.cfi_offset 5, -8
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  204 0024 2A60     		str	r2, [r5]
  184:Generated_Source\PSoC5/CyDmac.c ****     }
  185:Generated_Source\PSoC5/CyDmac.c **** 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 8
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 8
 
 
  186:Generated_Source\PSoC5/CyDmac.c ****     if(dmaIndex >= CY_DMA_NUMBEROF_CHANNELS)
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  205:Generated_Source\PSoC5/CyDmac.c **** * DMA_DmaInitalize().
  206:Generated_Source\PSoC5/CyDmac.c **** *
  207:Generated_Source\PSoC5/CyDmac.c **** * \return CYRET_SUCCESS if successful.
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 9
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 9
 
 
  208:Generated_Source\PSoC5/CyDmac.c **** * \return CYRET_BAD_PARAM if chHandle is invalid.
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  271              		.loc 1 226 0
  272 0024 0020     		movs	r0, #0
  273 0026 10BD     		pop	{r4, pc}
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 10
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 10
 
 
  274              	.L33:
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  266:Generated_Source\PSoC5/CyDmac.c **** * \return CYRET_BAD_PARAM if chHandle is invalid.
  267:Generated_Source\PSoC5/CyDmac.c **** *
  268:Generated_Source\PSoC5/CyDmac.c **** *******************************************************************************/
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 11
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 11
 
 
  269:Generated_Source\PSoC5/CyDmac.c **** cystatus CyDmaChEnable(uint8 chHandle, uint8 preserveTds) 
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  319 0020 7047     		bx	lr
  320              	.LVL26:
  321              	.L39:
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 12
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 12
 
 
  280:Generated_Source\PSoC5/CyDmac.c ****         }
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  311:Generated_Source\PSoC5/CyDmac.c **** *
  312:Generated_Source\PSoC5/CyDmac.c **** * \return CYRET_SUCCESS if successful.
  313:Generated_Source\PSoC5/CyDmac.c **** * \return CYRET_BAD_PARAM if chHandle is invalid.
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 13
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 13
 
 
  314:Generated_Source\PSoC5/CyDmac.c **** *
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  335:Generated_Source\PSoC5/CyDmac.c ****     return(status);
  336:Generated_Source\PSoC5/CyDmac.c **** }
  385              		.loc 1 336 0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 14
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 14
 
 
  386 001e 7047     		bx	lr
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  418 000a 1A44     		add	r2, r2, r3
  419 000c 1179     		ldrb	r1, [r2, #4]	@ zero_extendqisi2
  420 000e 064C     		ldr	r4, .L52
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 15
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 15
 
 
  421 0010 41F00401 		orr	r1, r1, #4
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  373:Generated_Source\PSoC5/CyDmac.c **** *
  374:Generated_Source\PSoC5/CyDmac.c **** *  \param chHandle A handle previously returned by \ref CyDmaChAlloc() or \ref
  375:Generated_Source\PSoC5/CyDmac.c **** *  DMA_DmaInitalize().
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 16
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 16
 
 
  376:Generated_Source\PSoC5/CyDmac.c **** *
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  397:Generated_Source\PSoC5/CyDmac.c ****     return(status);
  398:Generated_Source\PSoC5/CyDmac.c **** }
  490              		.loc 1 398 0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 17
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 17
 
 
  491 001e 7047     		bx	lr
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  429:Generated_Source\PSoC5/CyDmac.c ****         {
  430:Generated_Source\PSoC5/CyDmac.c ****             source = 0x2000u;
  515              		.loc 1 430 0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 18
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 18
 
 
  516 0004 9942     		cmp	r1, r3
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  451:Generated_Source\PSoC5/CyDmac.c ****     }
  452:Generated_Source\PSoC5/CyDmac.c **** 
  453:Generated_Source\PSoC5/CyDmac.c ****     return(status);
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 19
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 19
 
 
  454:Generated_Source\PSoC5/CyDmac.c **** }
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  575 000a 5972     		strb	r1, [r3, #9]
  576              	.LVL60:
  481:Generated_Source\PSoC5/CyDmac.c ****         status = CYRET_SUCCESS;
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 20
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 20
 
 
  577              		.loc 1 481 0
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  602              		.loc 1 509 0
  603              		.cfi_startproc
  604              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 21
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 21
 
 
  605              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  521:Generated_Source\PSoC5/CyDmac.c **** 
  522:Generated_Source\PSoC5/CyDmac.c **** /*******************************************************************************
  523:Generated_Source\PSoC5/CyDmac.c **** * Function Name: CyDmaChGetRequest
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 22
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 22
 
 
  524:Generated_Source\PSoC5/CyDmac.c **** ****************************************************************************//**
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  673 0016 00BF     		.align	2
  674              	.L78:
  675 0018 10700040 		.word	1073770512
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 23
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 23
 
 
  676              		.cfi_endproc
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  587:Generated_Source\PSoC5/CyDmac.c ****     if(chHandle < CY_DMA_NUMBEROF_CHANNELS)
  693              		.loc 1 587 0
  694 0000 1728     		cmp	r0, #23
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 24
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 24
 
 
  695 0002 11D8     		bhi	.L83
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  585:Generated_Source\PSoC5/CyDmac.c **** 
  731              		.loc 1 585 0
  732 0028 0120     		movs	r0, #1
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 25
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 25
 
 
  733              	.LVL78:
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  631:Generated_Source\PSoC5/CyDmac.c **** *
  632:Generated_Source\PSoC5/CyDmac.c **** *  \param uint8 tdDone1:
  633:Generated_Source\PSoC5/CyDmac.c **** *   Selects one of the TERMOUT1 interrupt lines to signal completion. The line
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 26
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 26
 
 
  634:Generated_Source\PSoC5/CyDmac.c **** *   connected to the nrq terminal will determine the TERMOUT1_SEL definition and
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  789 0020 43EA0613 		orr	r3, r3, r6, lsl #4
  654:Generated_Source\PSoC5/CyDmac.c ****         CY_DMA_CFGMEM_STRUCT_PTR[chHandle].CFG0[1] = ((uint8)((tdDone1 & 0xFu) << 4u)) | (tdDone0 &
  790              		.loc 1 654 0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 27
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 27
 
 
  791 0024 04F5EC44 		add	r4, r4, #30208
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  831              		.cfi_restore 5
  832              		.cfi_restore 6
  833              		.cfi_def_cfa_offset 0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 28
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 28
 
 
  834              	.LVL91:
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  682:Generated_Source\PSoC5/CyDmac.c **** 
  864              		.loc 1 682 0
  865 000e FF24     		movs	r4, #255
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 29
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 29
 
 
  866              	.LVL94:
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  898              	.L100:
  899 0034 00000000 		.word	.LANCHOR0
  900              		.cfi_endproc
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 30
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 30
 
 
  901              	.LFE16:
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  933 000e E300     		lsls	r3, r4, #3
  725:Generated_Source\PSoC5/CyDmac.c **** 
  726:Generated_Source\PSoC5/CyDmac.c ****         /* Set new Next Available. */
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 31
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 31
 
 
  727:Generated_Source\PSoC5/CyDmac.c ****         CyDmaTdFreeIndex = tdHandle;
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  975              		.type	CyDmaTdFreeCount, %function
  976              	CyDmaTdFreeCount:
  977              	.LFB18:
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 32
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 32
 
 
  736:Generated_Source\PSoC5/CyDmac.c **** 
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  763:Generated_Source\PSoC5/CyDmac.c **** *  \param uint16 transferCount:
  764:Generated_Source\PSoC5/CyDmac.c **** *   The size of the data transfer (in bytes) for this TD. A size of zero will
  765:Generated_Source\PSoC5/CyDmac.c **** *   cause the transfer to continue indefinitely. This parameter is limited to
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 33
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 33
 
 
  766:Generated_Source\PSoC5/CyDmac.c **** *   4095 bytes; the TD is not initialized at all when a higher value is passed.
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1012 0000 10F0800F 		tst	r0, #128
  1013 0004 11D1     		bne	.L113
  809:Generated_Source\PSoC5/CyDmac.c ****     cystatus status = CYRET_BAD_PARAM;
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 34
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 34
 
 
  1014              		.loc 1 809 0 discriminator 1
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1051 0024 0120     		movs	r0, #1
  1052              	.LVL109:
  1053              		.loc 1 828 0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 35
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 35
 
 
  1054 0026 30BC     		pop	{r4, r5}
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  859:Generated_Source\PSoC5/CyDmac.c **** *  If TD has a transfer count of N and is executed, the transfer count becomes
  860:Generated_Source\PSoC5/CyDmac.c **** *  0. If it is reexecuted, the Transfer count of zero will be interpreted as a
  861:Generated_Source\PSoC5/CyDmac.c **** *  request for indefinite transfer. Be careful when requesting TD with a
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 36
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 36
 
 
  862:Generated_Source\PSoC5/CyDmac.c **** *  transfer count of zero.
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  884:Generated_Source\PSoC5/CyDmac.c ****             *nextTd = CY_DMA_TDMEM_STRUCT_PTR[tdHandle].TD0[2u];
  1108              		.loc 1 884 0
  1109 001e C100     		lsls	r1, r0, #3
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 37
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 37
 
 
  1110              	.LVL116:
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1147              		.loc 1 894 0
  1148 0046 1846     		mov	r0, r3
  1149              	.LVL123:
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 38
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 38
 
 
  1150 0048 F9E7     		b	.L117
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1172 0004 C000     		lsls	r0, r0, #3
  1173              	.LVL125:
  1174 0006 00F18043 		add	r3, r0, #1073741824
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 39
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 39
 
 
  1175 000a 03F5F043 		add	r3, r3, #30720
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  954:Generated_Source\PSoC5/CyDmac.c **** *
  955:Generated_Source\PSoC5/CyDmac.c **** *  \param uint16 * source:
  956:Generated_Source\PSoC5/CyDmac.c **** *   The address to store the lower 16 address bits of the source of the data
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 40
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 40
 
 
  957:Generated_Source\PSoC5/CyDmac.c **** *   transfer.
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  987:Generated_Source\PSoC5/CyDmac.c ****             convert = (reg16 *) &CY_DMA_TDMEM_STRUCT_PTR[tdHandle].TD1[2u];
  1228              		.loc 1 987 0
  1229 0016 C000     		lsls	r0, r0, #3
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 41
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 41
 
 
  1230              	.LVL135:
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
 1004:Generated_Source\PSoC5/CyDmac.c **** *
 1005:Generated_Source\PSoC5/CyDmac.c **** * \param uint8 chHandle:
 1006:Generated_Source\PSoC5/CyDmac.c **** *  A handle previously returned by CyDmaChAlloc() or Dma_DmaInitialize().
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 42
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 42
 
 
 1007:Generated_Source\PSoC5/CyDmac.c **** *
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
 1033:Generated_Source\PSoC5/CyDmac.c ****     }
 1034:Generated_Source\PSoC5/CyDmac.c **** 
 1035:Generated_Source\PSoC5/CyDmac.c ****     return(status);
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 43
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 43
 
 
 1036:Generated_Source\PSoC5/CyDmac.c **** }
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1341              		.text
  1342              	.Letext0:
  1343              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 44
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 44
 
 
  1344              		.file 3 "Generated_Source\\PSoC5\\CyDmac.h"
@@ -2590,10 +2590,10 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1350 0006 00000000 		.4byte	.Ldebug_abbrev0
  1351 000a 04       		.byte	0x4
  1352 000b 01       		.uleb128 0x1
- 1353 000c CC030000 		.4byte	.LASF88
+ 1353 000c DB030000 		.4byte	.LASF88
  1354 0010 0C       		.byte	0xc
  1355 0011 2B020000 		.4byte	.LASF89
- 1356 0015 E4020000 		.4byte	.LASF90
+ 1356 0015 15030000 		.4byte	.LASF90
  1357 0019 18000000 		.4byte	.Ldebug_ranges0+0x18
  1358 001d 00000000 		.4byte	0
  1359 0021 00000000 		.4byte	.Ldebug_line0
@@ -2608,7 +2608,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1368 0033 02       		.uleb128 0x2
  1369 0034 02       		.byte	0x2
  1370 0035 05       		.byte	0x5
- 1371 0036 76030000 		.4byte	.LASF2
+ 1371 0036 85030000 		.4byte	.LASF2
  1372 003a 02       		.uleb128 0x2
  1373 003b 02       		.byte	0x2
  1374 003c 07       		.byte	0x7
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1398 0066 07       		.byte	0x7
  1399 0067 7C010000 		.4byte	.LASF8
  1400 006b 04       		.uleb128 0x4
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 45
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 45
 
 
  1401 006c 28010000 		.4byte	.LASF9
@@ -2666,9 +2666,9 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1423 009d 02       		.uleb128 0x2
  1424 009e 01       		.byte	0x1
  1425 009f 08       		.byte	0x8
- 1426 00a0 5A040000 		.4byte	.LASF14
+ 1426 00a0 69040000 		.4byte	.LASF14
  1427 00a4 04       		.uleb128 0x4
- 1428 00a5 17050000 		.4byte	.LASF15
+ 1428 00a5 26050000 		.4byte	.LASF15
  1429 00a9 02       		.byte	0x2
  1430 00aa 8602     		.2byte	0x286
  1431 00ac 48000000 		.4byte	0x48
@@ -2697,8 +2697,8 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1454 00e0 07       		.byte	0x7
  1455 00e1 76020000 		.4byte	.LASF19
  1456 00e5 06       		.uleb128 0x6
- 1457 00e6 59030000 		.4byte	.LASF25
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 46
+ 1457 00e6 76030000 		.4byte	.LASF25
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 46
 
 
  1458 00ea 10       		.byte	0x10
@@ -2746,7 +2746,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1500 0141 05       		.uleb128 0x5
  1501 0142 22010000 		.4byte	0x122
  1502 0146 0A       		.uleb128 0xa
- 1503 0147 7A040000 		.4byte	.LASF24
+ 1503 0147 89040000 		.4byte	.LASF24
  1504 014b 03       		.byte	0x3
  1505 014c 4E       		.byte	0x4e
  1506 014d E5000000 		.4byte	0xe5
@@ -2757,8 +2757,8 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1511 0158 51       		.byte	0x51
  1512 0159 76010000 		.4byte	0x176
  1513 015d 07       		.uleb128 0x7
- 1514 015e D8040000 		.4byte	.LASF27
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 47
+ 1514 015e E7040000 		.4byte	.LASF27
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 47
 
 
  1515 0162 03       		.byte	0x3
@@ -2766,7 +2766,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1517 0164 76010000 		.4byte	0x176
  1518 0168 00       		.byte	0
  1519 0169 07       		.uleb128 0x7
- 1520 016a DD040000 		.4byte	.LASF28
+ 1520 016a EC040000 		.4byte	.LASF28
  1521 016e 03       		.byte	0x3
  1522 016f 54       		.byte	0x54
  1523 0170 7B010000 		.4byte	0x17b
@@ -2805,7 +2805,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1556 01b5 05       		.uleb128 0x5
  1557 01b6 22010000 		.4byte	0x122
  1558 01ba 0A       		.uleb128 0xa
- 1559 01bb A6040000 		.4byte	.LASF31
+ 1559 01bb B5040000 		.4byte	.LASF31
  1560 01bf 03       		.byte	0x3
  1561 01c0 5E       		.byte	0x5e
  1562 01c1 8B010000 		.4byte	0x18b
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1569 01d4 01       		.uleb128 0x1
  1570 01d5 9C       		.byte	0x9c
  1571 01d6 EA010000 		.4byte	0x1ea
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 48
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 48
 
 
  1572 01da 0D       		.uleb128 0xd
@@ -2863,7 +2863,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1611 0237 01       		.uleb128 0x1
  1612 0238 9C       		.byte	0x9c
  1613 0239 10       		.uleb128 0x10
- 1614 023a B5030000 		.4byte	.LASF39
+ 1614 023a C4030000 		.4byte	.LASF39
  1615 023e 01       		.byte	0x1
  1616 023f A3       		.byte	0xa3
  1617 0240 6B000000 		.4byte	0x6b
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1626 0258 A5       		.byte	0xa5
  1627 0259 6B000000 		.4byte	0x6b
  1628 025d 3F000000 		.4byte	.LLST2
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 49
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 49
 
 
  1629 0261 0D       		.uleb128 0xd
@@ -2888,7 +2888,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1633 0268 6B000000 		.4byte	0x6b
  1634 026c 5D000000 		.4byte	.LLST3
  1635 0270 0D       		.uleb128 0xd
- 1636 0271 90030000 		.4byte	.LASF38
+ 1636 0271 9F030000 		.4byte	.LASF38
  1637 0275 01       		.byte	0x1
  1638 0276 A7       		.byte	0xa7
  1639 0277 83000000 		.4byte	0x83
@@ -2904,7 +2904,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1649 0296 52090000 		.4byte	0x952
  1650 029a 00       		.byte	0
  1651 029b 10       		.uleb128 0x10
- 1652 029c 40050000 		.4byte	.LASF40
+ 1652 029c 4F050000 		.4byte	.LASF40
  1653 02a0 01       		.byte	0x1
  1654 02a1 D3       		.byte	0xd3
  1655 02a2 A4000000 		.4byte	0xa4
@@ -2914,13 +2914,13 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1659 02af 9C       		.byte	0x9c
  1660 02b0 F4020000 		.4byte	0x2f4
  1661 02b4 0F       		.uleb128 0xf
- 1662 02b5 87030000 		.4byte	.LASF42
+ 1662 02b5 96030000 		.4byte	.LASF42
  1663 02b9 01       		.byte	0x1
  1664 02ba D3       		.byte	0xd3
  1665 02bb 6B000000 		.4byte	0x6b
  1666 02bf D2000000 		.4byte	.LLST5
  1667 02c3 0D       		.uleb128 0xd
- 1668 02c4 E2040000 		.4byte	.LASF43
+ 1668 02c4 F1040000 		.4byte	.LASF43
  1669 02c8 01       		.byte	0x1
  1670 02c9 D5       		.byte	0xd5
  1671 02ca A4000000 		.4byte	0xa4
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1683 02eb 24000000 		.4byte	.LVL21
  1684 02ef 52090000 		.4byte	0x952
  1685 02f3 00       		.byte	0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 50
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 50
 
 
  1686 02f4 12       		.uleb128 0x12
@@ -2952,26 +2952,26 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1694 0309 9C       		.byte	0x9c
  1695 030a 3F030000 		.4byte	0x33f
  1696 030e 13       		.uleb128 0x13
- 1697 030f 87030000 		.4byte	.LASF42
+ 1697 030f 96030000 		.4byte	.LASF42
  1698 0313 01       		.byte	0x1
  1699 0314 0D01     		.2byte	0x10d
  1700 0316 6B000000 		.4byte	0x6b
  1701 031a 3F010000 		.4byte	.LLST8
  1702 031e 13       		.uleb128 0x13
- 1703 031f 92040000 		.4byte	.LASF45
+ 1703 031f A1040000 		.4byte	.LASF45
  1704 0323 01       		.byte	0x1
  1705 0324 0D01     		.2byte	0x10d
  1706 0326 6B000000 		.4byte	0x6b
  1707 032a 92010000 		.4byte	.LLST9
  1708 032e 14       		.uleb128 0x14
- 1709 032f E2040000 		.4byte	.LASF43
+ 1709 032f F1040000 		.4byte	.LASF43
  1710 0333 01       		.byte	0x1
  1711 0334 0F01     		.2byte	0x10f
  1712 0336 A4000000 		.4byte	0xa4
  1713 033a D7010000 		.4byte	.LLST10
  1714 033e 00       		.byte	0
  1715 033f 12       		.uleb128 0x12
- 1716 0340 A6030000 		.4byte	.LASF46
+ 1716 0340 B5030000 		.4byte	.LASF46
  1717 0344 01       		.byte	0x1
  1718 0345 3C01     		.2byte	0x13c
  1719 0347 A4000000 		.4byte	0xa4
@@ -2981,13 +2981,13 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1723 0354 9C       		.byte	0x9c
  1724 0355 7A030000 		.4byte	0x37a
  1725 0359 13       		.uleb128 0x13
- 1726 035a 87030000 		.4byte	.LASF42
+ 1726 035a 96030000 		.4byte	.LASF42
  1727 035e 01       		.byte	0x1
  1728 035f 3C01     		.2byte	0x13c
  1729 0361 6B000000 		.4byte	0x6b
  1730 0365 0E020000 		.4byte	.LLST11
  1731 0369 14       		.uleb128 0x14
- 1732 036a E2040000 		.4byte	.LASF43
+ 1732 036a F1040000 		.4byte	.LASF43
  1733 036e 01       		.byte	0x1
  1734 036f 3E01     		.2byte	0x13e
  1735 0371 A4000000 		.4byte	0xa4
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1740 037f 01       		.byte	0x1
  1741 0380 5F01     		.2byte	0x15f
  1742 0382 A4000000 		.4byte	0xa4
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 51
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 51
 
 
  1743 0386 00000000 		.4byte	.LFB8
@@ -3007,13 +3007,13 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1746 038f 9C       		.byte	0x9c
  1747 0390 B5030000 		.4byte	0x3b5
  1748 0394 13       		.uleb128 0x13
- 1749 0395 87030000 		.4byte	.LASF42
+ 1749 0395 96030000 		.4byte	.LASF42
  1750 0399 01       		.byte	0x1
  1751 039a 5F01     		.2byte	0x15f
  1752 039c 6B000000 		.4byte	0x6b
  1753 03a0 7F020000 		.4byte	.LLST13
  1754 03a4 14       		.uleb128 0x14
- 1755 03a5 E2040000 		.4byte	.LASF43
+ 1755 03a5 F1040000 		.4byte	.LASF43
  1756 03a9 01       		.byte	0x1
  1757 03aa 6101     		.2byte	0x161
  1758 03ac A4000000 		.4byte	0xa4
@@ -3030,13 +3030,13 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1769 03ca 9C       		.byte	0x9c
  1770 03cb 10040000 		.4byte	0x410
  1771 03cf 13       		.uleb128 0x13
- 1772 03d0 87030000 		.4byte	.LASF42
+ 1772 03d0 96030000 		.4byte	.LASF42
  1773 03d4 01       		.byte	0x1
  1774 03d5 7F01     		.2byte	0x17f
  1775 03d7 6B000000 		.4byte	0x6b
  1776 03db E4020000 		.4byte	.LLST15
  1777 03df 13       		.uleb128 0x13
- 1778 03e0 5F040000 		.4byte	.LASF49
+ 1778 03e0 6E040000 		.4byte	.LASF49
  1779 03e4 01       		.byte	0x1
  1780 03e5 7F01     		.2byte	0x17f
  1781 03e7 6B000000 		.4byte	0x6b
@@ -3048,7 +3048,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1787 03f7 6B000000 		.4byte	0x6b
  1788 03fb 4A030000 		.4byte	.LLST17
  1789 03ff 14       		.uleb128 0x14
- 1790 0400 E2040000 		.4byte	.LASF43
+ 1790 0400 F1040000 		.4byte	.LASF43
  1791 0404 01       		.byte	0x1
  1792 0405 8201     		.2byte	0x182
  1793 0407 A4000000 		.4byte	0xa4
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1797 0411 C5010000 		.4byte	.LASF51
  1798 0415 01       		.byte	0x1
  1799 0416 A301     		.2byte	0x1a3
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 52
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 52
 
 
  1800 0418 A4000000 		.4byte	0xa4
@@ -3068,7 +3068,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1804 0425 9C       		.byte	0x9c
  1805 0426 7B040000 		.4byte	0x47b
  1806 042a 13       		.uleb128 0x13
- 1807 042b 87030000 		.4byte	.LASF42
+ 1807 042b 96030000 		.4byte	.LASF42
  1808 042f 01       		.byte	0x1
  1809 0430 A301     		.2byte	0x1a3
  1810 0432 6B000000 		.4byte	0x6b
@@ -3086,13 +3086,13 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1822 0452 77000000 		.4byte	0x77
  1823 0456 F1030000 		.4byte	.LLST21
  1824 045a 14       		.uleb128 0x14
- 1825 045b E2040000 		.4byte	.LASF43
+ 1825 045b F1040000 		.4byte	.LASF43
  1826 045f 01       		.byte	0x1
  1827 0460 A601     		.2byte	0x1a6
  1828 0462 A4000000 		.4byte	0xa4
  1829 0466 0F040000 		.4byte	.LLST22
  1830 046a 14       		.uleb128 0x14
- 1831 046b 9E040000 		.4byte	.LASF54
+ 1831 046b AD040000 		.4byte	.LASF54
  1832 046f 01       		.byte	0x1
  1833 0470 A701     		.2byte	0x1a7
  1834 0472 7B040000 		.4byte	0x47b
@@ -3102,7 +3102,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1838 047c 04       		.byte	0x4
  1839 047d B5000000 		.4byte	0xb5
  1840 0481 12       		.uleb128 0x12
- 1841 0482 03050000 		.4byte	.LASF55
+ 1841 0482 12050000 		.4byte	.LASF55
  1842 0486 01       		.byte	0x1
  1843 0487 DA01     		.2byte	0x1da
  1844 0489 A4000000 		.4byte	0xa4
@@ -3112,30 +3112,30 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1848 0496 9C       		.byte	0x9c
  1849 0497 CA040000 		.4byte	0x4ca
  1850 049b 13       		.uleb128 0x13
- 1851 049c 87030000 		.4byte	.LASF42
+ 1851 049c 96030000 		.4byte	.LASF42
  1852 04a0 01       		.byte	0x1
  1853 04a1 DA01     		.2byte	0x1da
  1854 04a3 6B000000 		.4byte	0x6b
  1855 04a7 68040000 		.4byte	.LLST24
  1856 04ab 16       		.uleb128 0x16
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 53
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 53
 
 
- 1857 04ac B1040000 		.4byte	.LASF56
+ 1857 04ac C0040000 		.4byte	.LASF56
  1858 04b0 01       		.byte	0x1
  1859 04b1 DA01     		.2byte	0x1da
  1860 04b3 6B000000 		.4byte	0x6b
  1861 04b7 01       		.uleb128 0x1
  1862 04b8 51       		.byte	0x51
  1863 04b9 14       		.uleb128 0x14
- 1864 04ba E2040000 		.4byte	.LASF43
+ 1864 04ba F1040000 		.4byte	.LASF43
  1865 04be 01       		.byte	0x1
  1866 04bf DC01     		.2byte	0x1dc
  1867 04c1 A4000000 		.4byte	0xa4
  1868 04c5 A2040000 		.4byte	.LLST25
  1869 04c9 00       		.byte	0
  1870 04ca 12       		.uleb128 0x12
- 1871 04cb 47030000 		.4byte	.LASF57
+ 1871 04cb 03030000 		.4byte	.LASF57
  1872 04cf 01       		.byte	0x1
  1873 04d0 FC01     		.2byte	0x1fc
  1874 04d2 A4000000 		.4byte	0xa4
@@ -3145,26 +3145,26 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1878 04df 9C       		.byte	0x9c
  1879 04e0 15050000 		.4byte	0x515
  1880 04e4 13       		.uleb128 0x13
- 1881 04e5 87030000 		.4byte	.LASF42
+ 1881 04e5 96030000 		.4byte	.LASF42
  1882 04e9 01       		.byte	0x1
  1883 04ea FC01     		.2byte	0x1fc
  1884 04ec 6B000000 		.4byte	0x6b
  1885 04f0 D9040000 		.4byte	.LLST26
  1886 04f4 13       		.uleb128 0x13
- 1887 04f5 FB040000 		.4byte	.LASF58
+ 1887 04f5 0A050000 		.4byte	.LASF58
  1888 04f9 01       		.byte	0x1
  1889 04fa FC01     		.2byte	0x1fc
  1890 04fc 6B000000 		.4byte	0x6b
  1891 0500 13050000 		.4byte	.LLST27
  1892 0504 14       		.uleb128 0x14
- 1893 0505 E2040000 		.4byte	.LASF43
+ 1893 0505 F1040000 		.4byte	.LASF43
  1894 0509 01       		.byte	0x1
  1895 050a FE01     		.2byte	0x1fe
  1896 050c A4000000 		.4byte	0xa4
  1897 0510 3F050000 		.4byte	.LLST28
  1898 0514 00       		.byte	0
  1899 0515 12       		.uleb128 0x12
- 1900 0516 E9040000 		.4byte	.LASF59
+ 1900 0516 F8040000 		.4byte	.LASF59
  1901 051a 01       		.byte	0x1
  1902 051b 1A02     		.2byte	0x21a
  1903 051d A4000000 		.4byte	0xa4
@@ -3174,23 +3174,23 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1907 052a 9C       		.byte	0x9c
  1908 052b 50050000 		.4byte	0x550
  1909 052f 13       		.uleb128 0x13
- 1910 0530 87030000 		.4byte	.LASF42
+ 1910 0530 96030000 		.4byte	.LASF42
  1911 0534 01       		.byte	0x1
  1912 0535 1A02     		.2byte	0x21a
  1913 0537 6B000000 		.4byte	0x6b
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 54
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 54
 
 
  1914 053b 76050000 		.4byte	.LLST29
  1915 053f 14       		.uleb128 0x14
- 1916 0540 E2040000 		.4byte	.LASF43
+ 1916 0540 F1040000 		.4byte	.LASF43
  1917 0544 01       		.byte	0x1
  1918 0545 1C02     		.2byte	0x21c
  1919 0547 A4000000 		.4byte	0xa4
  1920 054b B0050000 		.4byte	.LLST30
  1921 054f 00       		.byte	0
  1922 0550 12       		.uleb128 0x12
- 1923 0551 98030000 		.4byte	.LASF60
+ 1923 0551 A7030000 		.4byte	.LASF60
  1924 0555 01       		.byte	0x1
  1925 0556 4702     		.2byte	0x247
  1926 0558 A4000000 		.4byte	0xa4
@@ -3200,13 +3200,13 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1930 0565 9C       		.byte	0x9c
  1931 0566 A7050000 		.4byte	0x5a7
  1932 056a 13       		.uleb128 0x13
- 1933 056b 87030000 		.4byte	.LASF42
+ 1933 056b 96030000 		.4byte	.LASF42
  1934 056f 01       		.byte	0x1
  1935 0570 4702     		.2byte	0x247
  1936 0572 6B000000 		.4byte	0x6b
  1937 0576 E8050000 		.4byte	.LLST31
  1938 057a 16       		.uleb128 0x16
- 1939 057b C2030000 		.4byte	.LASF61
+ 1939 057b D1030000 		.4byte	.LASF61
  1940 057f 01       		.byte	0x1
  1941 0580 4702     		.2byte	0x247
  1942 0582 A7050000 		.4byte	0x5a7
@@ -3220,7 +3220,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1950 0594 01       		.uleb128 0x1
  1951 0595 52       		.byte	0x52
  1952 0596 14       		.uleb128 0x14
- 1953 0597 E2040000 		.4byte	.LASF43
+ 1953 0597 F1040000 		.4byte	.LASF43
  1954 059b 01       		.byte	0x1
  1955 059c 4902     		.2byte	0x249
  1956 059e A4000000 		.4byte	0xa4
@@ -3230,7 +3230,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1960 05a8 04       		.byte	0x4
  1961 05a9 6B000000 		.4byte	0x6b
  1962 05ad 12       		.uleb128 0x12
- 1963 05ae 20050000 		.4byte	.LASF63
+ 1963 05ae 2F050000 		.4byte	.LASF63
  1964 05b2 01       		.byte	0x1
  1965 05b3 8702     		.2byte	0x287
  1966 05b5 A4000000 		.4byte	0xa4
@@ -3238,12 +3238,12 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1968 05bd 46000000 		.4byte	.LFE15-.LFB15
  1969 05c1 01       		.uleb128 0x1
  1970 05c2 9C       		.byte	0x9c
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 55
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 55
 
 
  1971 05c3 38060000 		.4byte	0x638
  1972 05c7 13       		.uleb128 0x13
- 1973 05c8 87030000 		.4byte	.LASF42
+ 1973 05c8 96030000 		.4byte	.LASF42
  1974 05cc 01       		.byte	0x1
  1975 05cd 8702     		.2byte	0x287
  1976 05cf 6B000000 		.4byte	0x6b
@@ -3255,7 +3255,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  1982 05df 6B000000 		.4byte	0x6b
  1983 05e3 B7060000 		.4byte	.LLST34
  1984 05e7 13       		.uleb128 0x13
- 1985 05e8 82040000 		.4byte	.LASF65
+ 1985 05e8 91040000 		.4byte	.LASF65
  1986 05ec 01       		.byte	0x1
  1987 05ed 8702     		.2byte	0x287
  1988 05ef 6B000000 		.4byte	0x6b
@@ -3273,13 +3273,13 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2000 060f 6B000000 		.4byte	0x6b
  2001 0613 3B070000 		.4byte	.LLST37
  2002 0617 13       		.uleb128 0x13
- 2003 0618 80030000 		.4byte	.LASF68
+ 2003 0618 8F030000 		.4byte	.LASF68
  2004 061c 01       		.byte	0x1
  2005 061d 8802     		.2byte	0x288
  2006 061f 6B000000 		.4byte	0x6b
  2007 0623 73070000 		.4byte	.LLST38
  2008 0627 14       		.uleb128 0x14
- 2009 0628 E2040000 		.4byte	.LASF43
+ 2009 0628 F1040000 		.4byte	.LASF43
  2010 062c 01       		.byte	0x1
  2011 062d 8A02     		.2byte	0x28a
  2012 062f A4000000 		.4byte	0xa4
@@ -3298,14 +3298,14 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2025 0652 14       		.uleb128 0x14
  2026 0653 D9000000 		.4byte	.LASF37
  2027 0657 01       		.byte	0x1
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 56
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 56
 
 
  2028 0658 A902     		.2byte	0x2a9
  2029 065a 6B000000 		.4byte	0x6b
  2030 065e ED070000 		.4byte	.LLST40
  2031 0662 14       		.uleb128 0x14
- 2032 0663 38050000 		.4byte	.LASF70
+ 2032 0663 47050000 		.4byte	.LASF70
  2033 0667 01       		.byte	0x1
  2034 0668 AA02     		.2byte	0x2aa
  2035 066a 6B000000 		.4byte	0x6b
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2082 06e5 6B000000 		.4byte	0x6b
  2083 06e9 00000000 		.4byte	.LFB18
  2084 06ed 10000000 		.4byte	.LFE18-.LFB18
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 57
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 57
 
 
  2085 06f1 01       		.uleb128 0x1
@@ -3380,14 +3380,14 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2101 0715 6B000000 		.4byte	0x6b
  2102 0719 8D080000 		.4byte	.LLST44
  2103 071d 16       		.uleb128 0x16
- 2104 071e CA040000 		.4byte	.LASF75
+ 2104 071e D9040000 		.4byte	.LASF75
  2105 0722 01       		.byte	0x1
  2106 0723 2703     		.2byte	0x327
  2107 0725 77000000 		.4byte	0x77
  2108 0729 01       		.uleb128 0x1
  2109 072a 51       		.byte	0x51
  2110 072b 16       		.uleb128 0x16
- 2111 072c 40030000 		.4byte	.LASF76
+ 2111 072c FC020000 		.4byte	.LASF76
  2112 0730 01       		.byte	0x1
  2113 0731 2703     		.2byte	0x327
  2114 0733 6B000000 		.4byte	0x6b
@@ -3401,7 +3401,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2122 0745 01       		.uleb128 0x1
  2123 0746 53       		.byte	0x53
  2124 0747 14       		.uleb128 0x14
- 2125 0748 E2040000 		.4byte	.LASF43
+ 2125 0748 F1040000 		.4byte	.LASF43
  2126 074c 01       		.byte	0x1
  2127 074d 2A03     		.2byte	0x32a
  2128 074f A4000000 		.4byte	0xa4
@@ -3410,7 +3410,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2131 0758 0E000000 		.4byte	.LBB4
  2132 075c 12000000 		.4byte	.LBE4-.LBB4
  2133 0760 14       		.uleb128 0x14
- 2134 0761 9E040000 		.4byte	.LASF54
+ 2134 0761 AD040000 		.4byte	.LASF54
  2135 0765 01       		.byte	0x1
  2136 0766 2F03     		.2byte	0x32f
  2137 0768 7B040000 		.4byte	0x47b
@@ -3418,10 +3418,10 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2139 0770 00       		.byte	0
  2140 0771 00       		.byte	0
  2141 0772 12       		.uleb128 0x12
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 58
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 58
 
 
- 2142 0773 28030000 		.4byte	.LASF78
+ 2142 0773 E4020000 		.4byte	.LASF78
  2143 0777 01       		.byte	0x1
  2144 0778 6103     		.2byte	0x361
  2145 077a A4000000 		.4byte	0xa4
@@ -3437,13 +3437,13 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2155 0794 6B000000 		.4byte	0x6b
  2156 0798 4C090000 		.4byte	.LLST47
  2157 079c 13       		.uleb128 0x13
- 2158 079d CA040000 		.4byte	.LASF75
+ 2158 079d D9040000 		.4byte	.LASF75
  2159 07a1 01       		.byte	0x1
  2160 07a2 6103     		.2byte	0x361
  2161 07a4 F5070000 		.4byte	0x7f5
  2162 07a8 9F090000 		.4byte	.LLST48
  2163 07ac 13       		.uleb128 0x13
- 2164 07ad 40030000 		.4byte	.LASF76
+ 2164 07ad FC020000 		.4byte	.LASF76
  2165 07b1 01       		.byte	0x1
  2166 07b2 6103     		.2byte	0x361
  2167 07b4 A7050000 		.4byte	0x5a7
@@ -3456,7 +3456,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2174 07c8 01       		.uleb128 0x1
  2175 07c9 53       		.byte	0x53
  2176 07ca 14       		.uleb128 0x14
- 2177 07cb E2040000 		.4byte	.LASF43
+ 2177 07cb F1040000 		.4byte	.LASF43
  2178 07cf 01       		.byte	0x1
  2179 07d0 6403     		.2byte	0x364
  2180 07d2 A4000000 		.4byte	0xa4
@@ -3465,7 +3465,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2183 07db 0A000000 		.4byte	.LBB5
  2184 07df 12000000 		.4byte	.LBE5-.LBB5
  2185 07e3 14       		.uleb128 0x14
- 2186 07e4 9E040000 		.4byte	.LASF54
+ 2186 07e4 AD040000 		.4byte	.LASF54
  2187 07e8 01       		.byte	0x1
  2188 07e9 6C03     		.2byte	0x36c
  2189 07eb 7B040000 		.4byte	0x47b
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2196 07fb 12       		.uleb128 0x12
  2197 07fc 9D020000 		.4byte	.LASF79
  2198 0800 01       		.byte	0x1
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 59
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 59
 
 
  2199 0801 9A03     		.2byte	0x39a
@@ -3509,20 +3509,20 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2224 083f 01       		.uleb128 0x1
  2225 0840 52       		.byte	0x52
  2226 0841 14       		.uleb128 0x14
- 2227 0842 E2040000 		.4byte	.LASF43
+ 2227 0842 F1040000 		.4byte	.LASF43
  2228 0846 01       		.byte	0x1
  2229 0847 9C03     		.2byte	0x39c
  2230 0849 A4000000 		.4byte	0xa4
  2231 084d A90A0000 		.4byte	.LLST53
  2232 0851 14       		.uleb128 0x14
- 2233 0852 9E040000 		.4byte	.LASF54
+ 2233 0852 AD040000 		.4byte	.LASF54
  2234 0856 01       		.byte	0x1
  2235 0857 9D03     		.2byte	0x39d
  2236 0859 7B040000 		.4byte	0x47b
  2237 085d E00A0000 		.4byte	.LLST54
  2238 0861 00       		.byte	0
  2239 0862 12       		.uleb128 0x12
- 2240 0863 68040000 		.4byte	.LASF80
+ 2240 0863 77040000 		.4byte	.LASF80
  2241 0867 01       		.byte	0x1
  2242 0868 C803     		.2byte	0x3c8
  2243 086a A4000000 		.4byte	0xa4
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2253 0884 6B000000 		.4byte	0x6b
  2254 0888 020B0000 		.4byte	.LLST55
  2255 088c 16       		.uleb128 0x16
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 60
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 60
 
 
  2256 088d 62020000 		.4byte	.LASF52
@@ -3555,13 +3555,13 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2267 08a6 01       		.uleb128 0x1
  2268 08a7 52       		.byte	0x52
  2269 08a8 14       		.uleb128 0x14
- 2270 08a9 E2040000 		.4byte	.LASF43
+ 2270 08a9 F1040000 		.4byte	.LASF43
  2271 08ad 01       		.byte	0x1
  2272 08ae CA03     		.2byte	0x3ca
  2273 08b0 A4000000 		.4byte	0xa4
  2274 08b4 550B0000 		.4byte	.LLST56
  2275 08b8 14       		.uleb128 0x14
- 2276 08b9 9E040000 		.4byte	.LASF54
+ 2276 08b9 AD040000 		.4byte	.LASF54
  2277 08bd 01       		.byte	0x1
  2278 08be CB03     		.2byte	0x3cb
  2279 08c0 7B040000 		.4byte	0x47b
@@ -3578,7 +3578,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2290 08de 9C       		.byte	0x9c
  2291 08df 14090000 		.4byte	0x914
  2292 08e3 13       		.uleb128 0x13
- 2293 08e4 87030000 		.4byte	.LASF42
+ 2293 08e4 96030000 		.4byte	.LASF42
  2294 08e8 01       		.byte	0x1
  2295 08e9 F903     		.2byte	0x3f9
  2296 08eb 6B000000 		.4byte	0x6b
@@ -3590,7 +3590,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2302 08fb 6B000000 		.4byte	0x6b
  2303 08ff FE0B0000 		.4byte	.LLST59
  2304 0903 14       		.uleb128 0x14
- 2305 0904 E2040000 		.4byte	.LASF43
+ 2305 0904 F1040000 		.4byte	.LASF43
  2306 0908 01       		.byte	0x1
  2307 0909 FB03     		.2byte	0x3fb
  2308 090b A4000000 		.4byte	0xa4
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2310 0913 00       		.byte	0
  2311 0914 1C       		.uleb128 0x1c
  2312 0915 DF010000 		.4byte	.LASF83
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 61
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 61
 
 
  2313 0919 01       		.byte	0x1
@@ -3608,7 +3608,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2317 0920 03       		.byte	0x3
  2318 0921 01000000 		.4byte	CyDmaTdCurrentNumber
  2319 0925 1C       		.uleb128 0x1c
- 2320 0926 B9040000 		.4byte	.LASF84
+ 2320 0926 C8040000 		.4byte	.LASF84
  2321 092a 01       		.byte	0x1
  2322 092b 28       		.byte	0x28
  2323 092c 6B000000 		.4byte	0x6b
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2367 0013 02       		.uleb128 0x2
  2368 0014 24       		.uleb128 0x24
  2369 0015 00       		.byte	0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 62
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 62
 
 
  2370 0016 0B       		.uleb128 0xb
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2424 004c 07       		.uleb128 0x7
  2425 004d 0D       		.uleb128 0xd
  2426 004e 00       		.byte	0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 63
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 63
 
 
  2427 004f 03       		.uleb128 0x3
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2481 0085 38       		.uleb128 0x38
  2482 0086 0B       		.uleb128 0xb
  2483 0087 00       		.byte	0
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 64
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 64
 
 
  2484 0088 00       		.byte	0
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2538 00bf 49       		.uleb128 0x49
  2539 00c0 13       		.uleb128 0x13
  2540 00c1 11       		.uleb128 0x11
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 65
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 65
 
 
  2541 00c2 01       		.uleb128 0x1
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2595 00fc 11       		.uleb128 0x11
  2596 00fd 01       		.uleb128 0x1
  2597 00fe 31       		.uleb128 0x31
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 66
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 66
 
 
  2598 00ff 13       		.uleb128 0x13
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2652 0136 49       		.uleb128 0x49
  2653 0137 13       		.uleb128 0x13
  2654 0138 02       		.uleb128 0x2
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 67
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 67
 
 
  2655 0139 17       		.uleb128 0x17
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2709 0170 01       		.byte	0x1
  2710 0171 55       		.uleb128 0x55
  2711 0172 17       		.uleb128 0x17
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 68
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 68
 
 
  2712 0173 00       		.byte	0
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2766 01ad 3B       		.uleb128 0x3b
  2767 01ae 0B       		.uleb128 0xb
  2768 01af 49       		.uleb128 0x49
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 69
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 69
 
 
  2769 01b0 13       		.uleb128 0x13
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2823 0049 50       		.byte	0x50
  2824 004a 2E000000 		.4byte	.LVL13
  2825 004e 33000000 		.4byte	.LVL15-1
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 70
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 70
 
 
  2826 0052 0100     		.2byte	0x1
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2880 00e1 08000000 		.4byte	.LVL19
  2881 00e5 0400     		.2byte	0x4
  2882 00e7 F3       		.byte	0xf3
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 71
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 71
 
 
  2883 00e8 01       		.uleb128 0x1
@@ -4258,7 +4258,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2937 016b 0400     		.2byte	0x4
  2938 016d F3       		.byte	0xf3
  2939 016e 01       		.uleb128 0x1
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 72
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 72
 
 
  2940 016f 50       		.byte	0x50
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  2994 01ee 9F       		.byte	0x9f
  2995 01ef 22000000 		.4byte	.LVL26
  2996 01f3 36000000 		.4byte	.LVL30
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 73
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 73
 
 
  2997 01f7 0200     		.2byte	0x2
@@ -4378,7 +4378,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  3051 0277 00000000 		.4byte	0
  3052 027b 00000000 		.4byte	0
  3053              	.LLST13:
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 74
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 74
 
 
  3054 027f 00000000 		.4byte	.LVL36
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  3108 0301 1E000000 		.4byte	.LVL48
  3109 0305 0100     		.2byte	0x1
  3110 0307 50       		.byte	0x50
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 75
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 75
 
 
  3111 0308 1E000000 		.4byte	.LVL48
@@ -4498,7 +4498,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  3165 0385 9F       		.byte	0x9f
  3166 0386 1E000000 		.4byte	.LVL48
  3167 038a 24000000 		.4byte	.LFE9
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 76
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 76
 
 
  3168 038e 0100     		.2byte	0x1
@@ -4558,7 +4558,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  3222 0417 0200     		.2byte	0x2
  3223 0419 31       		.byte	0x31
  3224 041a 9F       		.byte	0x9f
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 77
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 77
 
 
  3225 041b 28000000 		.4byte	.LVL55
@@ -4618,7 +4618,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  3279 049a 00000000 		.4byte	0
  3280 049e 00000000 		.4byte	0
  3281              	.LLST25:
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 78
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 78
 
 
  3282 04a2 00000000 		.4byte	.LVL58
@@ -4678,7 +4678,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  3336 0528 F3       		.byte	0xf3
  3337 0529 01       		.uleb128 0x1
  3338 052a 51       		.byte	0x51
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 79
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 79
 
 
  3339 052b 9F       		.byte	0x9f
@@ -4738,7 +4738,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  3393              	.LLST30:
  3394 05b0 00000000 		.4byte	.LVL69
  3395 05b4 06000000 		.4byte	.LVL70
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 80
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 80
 
 
  3396 05b8 0300     		.2byte	0x3
@@ -4798,7 +4798,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  3450 0633 00000000 		.4byte	0
  3451 0637 00000000 		.4byte	0
  3452              	.LLST32:
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 81
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 81
 
 
  3453 063b 00000000 		.4byte	.LVL74
@@ -4858,7 +4858,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  3507 06c1 51       		.byte	0x51
  3508 06c2 14000000 		.4byte	.LVL83
  3509 06c6 40000000 		.4byte	.LVL89
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 82
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 82
 
 
  3510 06ca 0400     		.2byte	0x4
@@ -4918,7 +4918,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  3564 074b 40000000 		.4byte	.LVL89
  3565 074f 0200     		.2byte	0x2
  3566 0751 7D       		.byte	0x7d
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 83
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 83
 
 
  3567 0752 00       		.sleb128 0
@@ -4978,7 +4978,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  3621 07d8 31       		.byte	0x31
  3622 07d9 9F       		.byte	0x9f
  3623 07da 42000000 		.4byte	.LVL90
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 84
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 84
 
 
  3624 07de 46000000 		.4byte	.LFE15
@@ -5038,7 +5038,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  3678 0866 9F       		.byte	0x9f
  3679 0867 2C000000 		.4byte	.LVL102
  3680 086b 34000000 		.4byte	.LFE17
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 85
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 85
 
 
  3681 086f 0100     		.2byte	0x1
@@ -5098,7 +5098,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  3735 08f0 20000000 		.4byte	.LVL106
  3736 08f4 0200     		.2byte	0x2
  3737 08f6 30       		.byte	0x30
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 86
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 86
 
 
  3738 08f7 9F       		.byte	0x9f
@@ -5158,7 +5158,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  3792 097d 9F       		.byte	0x9f
  3793 097e 46000000 		.4byte	.LVL122
  3794 0982 48000000 		.4byte	.LVL123
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 87
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 87
 
 
  3795 0986 0100     		.2byte	0x1
@@ -5218,7 +5218,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  3849              	.LLST50:
  3850 0a05 00000000 		.4byte	.LVL112
  3851 0a09 3E000000 		.4byte	.LVL119
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 88
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 88
 
 
  3852 0a0d 0200     		.2byte	0x2
@@ -5278,7 +5278,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  3905 0a8c 18000000 		.4byte	.LVL130
  3906 0a90 0100     		.2byte	0x1
  3907 0a92 50       		.byte	0x50
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 89
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 89
 
 
  3908 0a93 18000000 		.4byte	.LVL130
@@ -5338,7 +5338,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  3962 0b17 F3       		.byte	0xf3
  3963 0b18 01       		.uleb128 0x1
  3964 0b19 50       		.byte	0x50
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 90
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 90
 
 
  3965 0b1a 9F       		.byte	0x9f
@@ -5398,7 +5398,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  4018 0b95 9F       		.byte	0x9f
  4019 0b96 20000000 		.4byte	.LVL136
  4020 0b9a 24000000 		.4byte	.LVL137
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 91
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 91
 
 
  4021 0b9e 0300     		.2byte	0x3
@@ -5458,7 +5458,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  4075 0c17 2A000000 		.4byte	.LVL148
  4076 0c1b 34000000 		.4byte	.LFE23
  4077 0c1f 0100     		.2byte	0x1
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 92
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 92
 
 
  4078 0c21 51       		.byte	0x51
@@ -5518,7 +5518,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  4132 0078 00000000 		.4byte	.LFB13
  4133 007c 1C000000 		.4byte	.LFE13-.LFB13
  4134 0080 00000000 		.4byte	.LFB14
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 93
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 93
 
 
  4135 0084 34000000 		.4byte	.LFE14-.LFB14
@@ -5578,7 +5578,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  4189 007c 20000000 		.4byte	.LFE12
  4190 0080 00000000 		.4byte	.LFB13
  4191 0084 1C000000 		.4byte	.LFE13
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 94
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 94
 
 
  4192 0088 00000000 		.4byte	.LFB14
@@ -5638,7 +5638,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  4228 004c 4379446D 		.ascii	"CyDmaTdFree\000"
  4228      61546446 
  4228      72656500 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 95
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 95
 
 
  4229              	.LASF44:
@@ -5698,7 +5698,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  4250      74727563 
  4250      7400
  4251              	.LASF62:
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 96
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 96
 
 
  4252 0103 73746174 		.ascii	"state\000"
@@ -5758,7 +5758,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  4282 0189 6C6F6E67 		.ascii	"long unsigned int\000"
  4282      20756E73 
  4282      69676E65 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 97
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 97
 
 
  4282      6420696E 
@@ -5818,7 +5818,7 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  4302      65617245 
  4302      72726F72 
  4302      00
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 98
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 98
 
 
  4303              	.LASF17:
@@ -5872,185 +5872,185 @@ ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 1
  4325              	.LASF41:
  4326 02de 6572726F 		.ascii	"error\000"
  4326      7200
- 4327              	.LASF90:
- 4328 02e4 433A5C55 		.ascii	"C:\\Users\\MattiaCP\\Desktop\\SoftPro firmware (PSo"
- 4328      73657273 
- 4328      5C4D6174 
- 4328      74696143 
- 4328      505C4465 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 99
+ 4327              	.LASF78:
+ 4328 02e4 4379446D 		.ascii	"CyDmaTdGetConfiguration\000"
+ 4328      61546447 
+ 4328      6574436F 
+ 4328      6E666967 
+ 4328      75726174 
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 99
 
 
- 4329 0313 4335295C 		.ascii	"C5)\\bootloader.cydsn\000"
- 4329      626F6F74 
- 4329      6C6F6164 
- 4329      65722E63 
- 4329      7964736E 
- 4330              	.LASF78:
- 4331 0328 4379446D 		.ascii	"CyDmaTdGetConfiguration\000"
- 4331      61546447 
- 4331      6574436F 
- 4331      6E666967 
- 4331      75726174 
- 4332              	.LASF76:
- 4333 0340 6E657874 		.ascii	"nextTd\000"
- 4333      546400
- 4334              	.LASF57:
- 4335 0347 4379446D 		.ascii	"CyDmaChSetRequest\000"
- 4335      61436853 
- 4335      65745265 
- 4335      71756573 
- 4335      7400
- 4336              	.LASF25:
- 4337 0359 646D6163 		.ascii	"dmac_ch_struct\000"
- 4337      5F63685F 
- 4337      73747275 
- 4337      637400
- 4338              	.LASF1:
- 4339 0368 756E7369 		.ascii	"unsigned char\000"
- 4339      676E6564 
- 4339      20636861 
- 4339      7200
+ 4329              	.LASF76:
+ 4330 02fc 6E657874 		.ascii	"nextTd\000"
+ 4330      546400
+ 4331              	.LASF57:
+ 4332 0303 4379446D 		.ascii	"CyDmaChSetRequest\000"
+ 4332      61436853 
+ 4332      65745265 
+ 4332      71756573 
+ 4332      7400
+ 4333              	.LASF90:
+ 4334 0315 433A5C55 		.ascii	"C:\\Users\\Mattia\\Documents\\GitHub\\SoftHandPRO-a"
+ 4334      73657273 
+ 4334      5C4D6174 
+ 4334      7469615C 
+ 4334      446F6375 
+ 4335 0343 6E642D47 		.ascii	"nd-Generic-FW-PSoC5\\bootloader.cydsn\000"
+ 4335      656E6572 
+ 4335      69632D46 
+ 4335      572D5053 
+ 4335      6F43355C 
+ 4336              	.LASF1:
+ 4337 0368 756E7369 		.ascii	"unsigned char\000"
+ 4337      676E6564 
+ 4337      20636861 
+ 4337      7200
+ 4338              	.LASF25:
+ 4339 0376 646D6163 		.ascii	"dmac_ch_struct\000"
+ 4339      5F63685F 
+ 4339      73747275 
+ 4339      637400
  4340              	.LASF2:
- 4341 0376 73686F72 		.ascii	"short int\000"
+ 4341 0385 73686F72 		.ascii	"short int\000"
  4341      7420696E 
  4341      7400
  4342              	.LASF68:
- 4343 0380 74645374 		.ascii	"tdStop\000"
+ 4343 038f 74645374 		.ascii	"tdStop\000"
  4343      6F7000
  4344              	.LASF42:
- 4345 0387 63684861 		.ascii	"chHandle\000"
+ 4345 0396 63684861 		.ascii	"chHandle\000"
  4345      6E646C65 
  4345      00
  4346              	.LASF38:
- 4347 0390 6368616E 		.ascii	"channel\000"
+ 4347 039f 6368616E 		.ascii	"channel\000"
  4347      6E656C00 
  4348              	.LASF60:
- 4349 0398 4379446D 		.ascii	"CyDmaChStatus\000"
+ 4349 03a7 4379446D 		.ascii	"CyDmaChStatus\000"
  4349      61436853 
  4349      74617475 
  4349      7300
  4350              	.LASF46:
- 4351 03a6 4379446D 		.ascii	"CyDmaChDisable\000"
+ 4351 03b5 4379446D 		.ascii	"CyDmaChDisable\000"
  4351      61436844 
  4351      69736162 
  4351      6C6500
  4352              	.LASF39:
- 4353 03b5 4379446D 		.ascii	"CyDmaChAlloc\000"
+ 4353 03c4 4379446D 		.ascii	"CyDmaChAlloc\000"
  4353      61436841 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 100
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 100
 
 
  4353      6C6C6F63 
  4353      00
  4354              	.LASF61:
- 4355 03c2 63757272 		.ascii	"currentTd\000"
+ 4355 03d1 63757272 		.ascii	"currentTd\000"
  4355      656E7454 
  4355      6400
  4356              	.LASF88:
- 4357 03cc 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 4357 03db 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
  4357      43313120 
  4357      352E342E 
  4357      31203230 
  4357      31363036 
- 4358 03ff 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 4358 040e 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
  4358      20726576 
  4358      6973696F 
  4358      6E203233 
  4358      37373135 
- 4359 0432 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects\000"
+ 4359 0441 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects\000"
  4359      66756E63 
  4359      74696F6E 
  4359      2D736563 
  4359      74696F6E 
  4360              	.LASF14:
- 4361 045a 63686172 		.ascii	"char\000"
+ 4361 0469 63686172 		.ascii	"char\000"
  4361      00
  4362              	.LASF49:
- 4363 045f 7072696F 		.ascii	"priority\000"
+ 4363 046e 7072696F 		.ascii	"priority\000"
  4363      72697479 
  4363      00
  4364              	.LASF80:
- 4365 0468 4379446D 		.ascii	"CyDmaTdGetAddress\000"
+ 4365 0477 4379446D 		.ascii	"CyDmaTdGetAddress\000"
  4365      61546447 
  4365      65744164 
  4365      64726573 
  4365      7300
  4366              	.LASF24:
- 4367 047a 646D6163 		.ascii	"dmac_ch\000"
+ 4367 0489 646D6163 		.ascii	"dmac_ch\000"
  4367      5F636800 
  4368              	.LASF65:
- 4369 0482 72657175 		.ascii	"requestPerBurst\000"
+ 4369 0491 72657175 		.ascii	"requestPerBurst\000"
  4369      65737450 
  4369      65724275 
  4369      72737400 
  4370              	.LASF45:
- 4371 0492 70726573 		.ascii	"preserveTds\000"
+ 4371 04a1 70726573 		.ascii	"preserveTds\000"
  4371      65727665 
  4371      54647300 
  4372              	.LASF54:
- 4373 049e 636F6E76 		.ascii	"convert\000"
+ 4373 04ad 636F6E76 		.ascii	"convert\000"
  4373      65727400 
  4374              	.LASF31:
- 4375 04a6 646D6163 		.ascii	"dmac_tdmem\000"
+ 4375 04b5 646D6163 		.ascii	"dmac_tdmem\000"
  4375      5F74646D 
  4375      656D00
  4376              	.LASF56:
- 4377 04b1 73746172 		.ascii	"startTd\000"
+ 4377 04c0 73746172 		.ascii	"startTd\000"
  4377      74546400 
-ARM GAS  C:\Users\MattiaCP\AppData\Local\Temp\ccVxxXNJ.s 			page 101
+ARM GAS  C:\Users\Mattia\AppData\Local\Temp\ccgHCtBQ.s 			page 101
 
 
  4378              	.LASF84:
- 4379 04b9 4379446D 		.ascii	"CyDmaTdFreeIndex\000"
+ 4379 04c8 4379446D 		.ascii	"CyDmaTdFreeIndex\000"
  4379      61546446 
  4379      72656549 
  4379      6E646578 
  4379      00
  4380              	.LASF75:
- 4381 04ca 7472616E 		.ascii	"transferCount\000"
+ 4381 04d9 7472616E 		.ascii	"transferCount\000"
  4381      73666572 
  4381      436F756E 
  4381      7400
  4382              	.LASF27:
- 4383 04d8 43464730 		.ascii	"CFG0\000"
+ 4383 04e7 43464730 		.ascii	"CFG0\000"
  4383      00
  4384              	.LASF28:
- 4385 04dd 43464731 		.ascii	"CFG1\000"
+ 4385 04ec 43464731 		.ascii	"CFG1\000"
  4385      00
  4386              	.LASF43:
- 4387 04e2 73746174 		.ascii	"status\000"
+ 4387 04f1 73746174 		.ascii	"status\000"
  4387      757300
  4388              	.LASF59:
- 4389 04e9 4379446D 		.ascii	"CyDmaChGetRequest\000"
+ 4389 04f8 4379446D 		.ascii	"CyDmaChGetRequest\000"
  4389      61436847 
  4389      65745265 
  4389      71756573 
  4389      7400
  4390              	.LASF58:
- 4391 04fb 72657175 		.ascii	"request\000"
+ 4391 050a 72657175 		.ascii	"request\000"
  4391      65737400 
  4392              	.LASF55:
- 4393 0503 4379446D 		.ascii	"CyDmaChSetInitialTd\000"
+ 4393 0512 4379446D 		.ascii	"CyDmaChSetInitialTd\000"
  4393      61436853 
  4393      6574496E 
  4393      69746961 
  4393      6C546400 
  4394              	.LASF15:
- 4395 0517 63797374 		.ascii	"cystatus\000"
+ 4395 0526 63797374 		.ascii	"cystatus\000"
  4395      61747573 
  4395      00
  4396              	.LASF63:
- 4397 0520 4379446D 		.ascii	"CyDmaChSetConfiguration\000"
+ 4397 052f 4379446D 		.ascii	"CyDmaChSetConfiguration\000"
  4397      61436853 
  4397      6574436F 
  4397      6E666967 
  4397      75726174 
  4398              	.LASF70:
- 4399 0538 656C656D 		.ascii	"element\000"
+ 4399 0547 656C656D 		.ascii	"element\000"
  4399      656E7400 
  4400              	.LASF40:
- 4401 0540 4379446D 		.ascii	"CyDmaChFree\000"
+ 4401 054f 4379446D 		.ascii	"CyDmaChFree\000"
  4401      61436846 
  4401      72656500 
  4402              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

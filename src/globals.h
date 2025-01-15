@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2024, Centro "E.Piaggio"
+// Copyright (c) 2017-2025, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -36,10 +36,10 @@
 * \file         globals.h
 *
 * \brief        Global definitions and macros are set in this file.
-* \date         Jun 05th, 2024
+* \date         Jan 15th, 2025
 * \author       _Centro "E.Piaggio"_
 * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
-* \copyright    (C) 2017-2024 Centro "E.Piaggio". All rights reserved.
+* \copyright    (C) 2017-2025 Centro "E.Piaggio". All rights reserved.
 *
 */
 
@@ -192,29 +192,38 @@
 //                                                                         OTHER
 //==============================================================================
 
-#define FALSE                   0
-#define TRUE                    1
-#define DEFAULT_EEPROM_DISPLACEMENT 50  /*!< Number of pages occupied by the EEPROM.*/
-#define EEPROM_BYTES_ROW        16      /*!< EEPROM number of bytes per row.*/
-#define EEPROM_COUNTERS_ROWS    7       /*!< EEPROM number of rows dedicated to store counters.*/
-#define EEPROM_AFTER_CNT_FREE_ROWS 2    /*!< EEPROM number of rows free after counters.*/   
-#define PWM_MAX_VALUE_DC        100     /*!< Maximum value of the PWM signal.*/
-#define ANTI_WINDUP             1000    /*!< Anti windup saturation.*/ 
-#define DEFAULT_CURRENT_LIMIT   1500    /*!< Default Current limit, 0 stands for unlimited.*/
-#define CURRENT_HYSTERESIS      10      /*!< milliAmperes of hysteresis for current control.*/
-#define EMG_SAMPLE_TO_DISCARD   500     /*!< Number of sample to discard before calibration.*/
-#define SAMPLES_FOR_MEAN        100     /*!< Number of samples used to mean current values.*/
-#define SAMPLES_FOR_EMG_MEAN    1000    /*!< Number of samples used to mean emg values.*/
-#define SAMPLES_FOR_JOYSTICK_MEAN   200 /*!< Number of samples used to mean joystick values.*/
-#define JOYSTICK_SAMPLE_TO_DISCARD  100 /*!< Number of samples to discard before having joystick stable values.*/
-#define REST_POS_ERR_THR_GAIN   10      /*!< Gain related to stop condition threshold in rest position routine.*/
-#define POS_INTEGRAL_SAT_LIMIT  50000000    /*!< Anti windup on position control.*/
-#define CURR_INTEGRAL_SAT_LIMIT 100000      /*!< Anti windup on current control.*/
-#define PWM_RATE_LIMITER_MAX	1
-#define SAFE_STARTUP_MOTOR_READINGS 8000    /*!< Number of encoder readings after position reconstruction before activating motor.*/
-#define LOOKUP_DIM              6           /*!< Dimension of the current lookup table.*/
-#define PREREVISION_CYCLES      400000      /*!< Number of SoftHand Pro cycles before maintenance.*/    
-#define SAMPLES_FOR_EMG_HISTORY 600 /*!< Number of EMG history values ( 5 smpls/sec. x 120 secs = 600 smpls / channel ).*/
+#define FALSE                           0
+#define TRUE                            1
+#define DEFAULT_EEPROM_DISPLACEMENT     70          /*!< Number of pages occupied by the EEPROM.*/
+#define EEPROM_BYTES_ROW                16          /*!< EEPROM number of bytes per row.*/
+#define EEPROM_COUNTERS_ROWS            7           /*!< EEPROM number of rows dedicated to store counters.*/
+#define EEPROM_AFTER_CNT_FREE_ROWS      2           /*!< EEPROM number of rows free after counters.*/   
+#define PWM_MAX_VALUE_DC                100         /*!< Maximum value of the PWM signal.*/
+#define ANTI_WINDUP                     1000        /*!< Anti windup saturation.*/ 
+#define DEFAULT_CURRENT_LIMIT           1500        /*!< Default Current limit, 0 stands for unlimited.*/
+#define CURRENT_HYSTERESIS              10          /*!< milliAmperes of hysteresis for current control.*/
+#define EMG_SAMPLE_TO_DISCARD           500         /*!< Number of sample to discard before calibration.*/
+#define SAMPLES_FOR_MEAN                100         /*!< Number of samples used to mean current values.*/
+#define SAMPLES_FOR_EMG_MEAN            1000        /*!< Number of samples used to mean emg values.*/
+#define SAMPLES_FOR_JOYSTICK_MEAN       200         /*!< Number of samples used to mean joystick values.*/
+#define JOYSTICK_SAMPLE_TO_DISCARD      100         /*!< Number of samples to discard before having joystick stable values.*/
+#define REST_POS_ERR_THR_GAIN           10          /*!< Gain related to stop condition threshold in rest position routine.*/
+#define POS_INTEGRAL_SAT_LIMIT          50000000    /*!< Anti windup on position control.*/
+#define CURR_INTEGRAL_SAT_LIMIT         100000      /*!< Anti windup on current control.*/
+#define PWM_RATE_LIMITER_MAX	        1
+#define SAFE_STARTUP_MOTOR_READINGS     8000        /*!< Number of encoder readings after position reconstruction before activating motor.*/
+#define LOOKUP_DIM                      6           /*!< Dimension of the current lookup table.*/
+#define PREREVISION_CYCLES              400000      /*!< Number of SoftHand Pro cycles before maintenance.*/    
+#define SAMPLES_FOR_EMG_HISTORY         600         /*!< Number of EMG history values ( 5 smpls/sec. x 120 secs = 600 smpls / channel ).*/
+
+#define GREEN_FIXED                     1
+#define YELLOW_BLINKING                 2
+#define RED_BLINKING                    3
+#define YELLOW_FIXED                    4
+#define RED_FIXED                       5
+#define OFF                             0
+
+           
 //==============================================================================
 //                                                        structures definitions
 //==============================================================================
@@ -319,7 +328,7 @@ struct st_motor{
     int32   k_p_c_dl;                   /*!< Double loop current controller prop. constant.*/               //4
     int32   k_i_c_dl;                   /*!< Double loop current controller integr. constant.*/             //4
     int32   k_d_c_dl;                   /*!< Double loop current controller deriv. constant.*/              //4     
-    uint8   activ;                      /*!< Startup activation.*/                                          //1
+    uint8   active;                      /*!< Startup activation.*/                                          //1
     uint8   activate_pwm_rescaling;     /*!< Activation of PWM rescaling for 12V motor.*/                   //1
     uint8   motor_driver_type;          /*!< Specify motor type.*/                                          //1
     uint8   pos_lim_flag;               /*!< Position limit active/inactive.*/                              //1
@@ -370,11 +379,13 @@ struct st_emg{
  *
 **/ 
 struct st_imu{
-    uint8   read_imu_flag;              /*!< Enable IMU reading feature.*/                                  //1
-    uint8   SPI_read_delay;             /*!< Delay on SPI reading.*/                                        //1
+    uint8   read_imu_flag;                  /*!< Enable IMU reading feature.*/                              //1
+    uint8   SPI_read_delay;                 /*!< Delay on SPI reading.*/                                    //1
     uint8   IMU_conf[N_IMU_MAX][NUM_OF_IMU_DATA];   /*!< IMUs configuration flags.*/                        //25
-    uint8   unused_bytes[5];            /*!< Unused bytes to fill row.*/                                    //5
-};                                                                                                          // TOTAL: 32 BYTES
+    uint8   MagIsCalibrated;                /*!< Flag to know if magnetometers are calibrated or not.*/     //1
+    int16   MagCalibMinMax[N_IMU_MAX][6];   /*!< Mag Calibration Min/Max couples for all IMUs on every Axis.*/  //60
+    uint8   unused_bytes[8];                /*!< Unused bytes to fill row.*/                                //8
+};                                                                                                          // TOTAL: 96 BYTES
 
 //=================================================     Expansion
 /** \brief Expansion board related parameters structure
@@ -470,15 +481,15 @@ struct st_eeprom {
     struct st_motor motor[NUM_OF_MOTORS];       /*!< Motor variables.*/                                     //7*2 rows  (End of row 25)
     struct st_encoder enc[N_ENCODER_LINE_MAX];  /*!< Encoder variables (1 line).*/                          //3*2 rows  (End of row 31)
     struct st_emg emg;                  /*!< EMG variables.*/                                               //1 row     (End of row 32)
-    struct st_imu imu;                  /*!< IMU general variables.*/                                       //2 rows    (End of row 34)
-    struct st_expansion exp;            /*!< SD and ADC variables.*/                                        //2 rows    (End of row 36)  
-    struct st_user user[NUM_OF_USERS];  /*!< User variables.*/                                              //2*3 rows  (End of row 42)
+    struct st_imu imu;                  /*!< IMU general variables.*/                                       //6 rows    (End of row 38)
+    struct st_expansion exp;            /*!< SD and ADC variables.*/                                        //2 rows    (End of row 40)  
+    struct st_user user[NUM_OF_USERS];  /*!< User variables.*/                                              //2*3 rows  (End of row 44)
     
-    struct st_SH_spec SH;               /*!< SoftHand specific variables.*/                                 //1 row     (End of row 43)
-    struct st_JOY_spec JOY_spec;        /*!< Joystick specific variables.*/                                 //1 row     (End of row 44)
-    struct st_MASTER_spec MS;           /*!< Master specific variables.*/                                   //1 row     (End of row 45)
-    struct st_FB_spec FB;               /*!< Feedback specific variables.*/                                 //1 row     (End of row 46)
-    struct st_WR_spec WR;               /*!< Wrist specific variables.*/                                    //1 row     (End of row 47)
+    struct st_SH_spec SH;               /*!< SoftHand specific variables.*/                                 //1 row     (End of row 47)
+    struct st_JOY_spec JOY_spec;        /*!< Joystick specific variables.*/                                 //1 row     (End of row 48)
+    struct st_MASTER_spec MS;           /*!< Master specific variables.*/                                   //1 row     (End of row 49)
+    struct st_FB_spec FB;               /*!< Feedback specific variables.*/                                 //1 row     (End of row 50)
+    struct st_WR_spec WR;               /*!< Wrist specific variables.*/                                    //1 row     (End of row 51)
 
     #ifdef GENERIC_FW
     //struct st_CUFF_spec CUFF_spec;
@@ -489,7 +500,10 @@ struct st_eeprom {
 /** \brief IMU data structure
  *
 **/ 
+
+
 struct st_imu_data {
+    uint8 dev_type;
     uint8 flags;        // Flags to know what we are reading (0/1) from each imu [ accel | gyro | magn | quat | temp ]
     int16 accel_value[3];
     int16 gyro_value[3];
@@ -563,6 +577,7 @@ extern int32    dev_tension_f[NUM_OF_MOTORS];       /*!< Filtered power supply t
 extern int32    pow_tension[NUM_OF_MOTORS];         /*!< Computed power supply tension.*/
 extern int32    detect_power_cycle;                 /*!< Variable used to detect a new power cycle.*/
 
+extern uint16 MY_TIMER_OVF_Cnt;                     /*!< MY_TIMER interrutp overflow counter*/
 extern counter_status CYDATA cycles_status;         /*!< Cycles counter state machine status.*/
 extern adc_status CYDATA emg_1_status;              /*!< First EMG sensor status.*/
 extern adc_status CYDATA emg_2_status;              /*!< Second EMG sensor status.*/      
@@ -618,8 +633,11 @@ extern uint8 btEnabled;
 extern uint8 bt_src;
 
 // IMU variables
+extern uint8 WHO_AM_I      ; 
+extern   uint8 WHO_AM_I_VALUE ;
+extern uint8 IMU_device;
 extern uint8 N_IMU_Connected;
-extern uint8 IMU_connected[N_IMU_MAX];
+extern uint8 IMU_IDs[N_IMU_MAX];
 extern int imus_data_size;
 extern int single_imu_size[N_IMU_MAX];
 extern struct st_imu_data g_imu[N_IMU_MAX], g_imuNew[N_IMU_MAX];
@@ -629,6 +647,11 @@ extern uint8 Mag[N_IMU_MAX][6];
 extern uint8 MagCal[N_IMU_MAX][3];
 extern uint8 Temp[N_IMU_MAX][2];
 extern float Quat[N_IMU_MAX][4];
+extern float offset[N_IMU_MAX][3];
+extern float scale[N_IMU_MAX][3];
+extern float avg[N_IMU_MAX];
+extern float factor[N_IMU_MAX][3]; 
+extern uint8 MAGcalProc;
 
 // MASTER variables
 extern uint8 master_mode;               /*!< Flag used to set/unset master mode to send messages to other boards.*/
