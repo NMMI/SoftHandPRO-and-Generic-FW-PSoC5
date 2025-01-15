@@ -2943,7 +2943,7 @@ void IMU_reading_info(char *info_string)
         }
         
         if ((c_mem.imu.IMU_conf[i][4])){
-            sprintf(str, "\tTemperature: %d\r\n", (int16) g_imu[i].temp_value);
+            sprintf(str, "\tTemperature: %.2f C\r\n", (float)g_imu[i].temp_value / 100.0);
             strcat(info_string, str);
         }
         
@@ -3800,7 +3800,6 @@ void cmd_get_currents(){
     if (c_mem.dev.dev_type != AIR_CHAMBERS_FB){
        // Currents
         aux_int16 = (int16) g_measOld[g_mem.motor[0].encoder_line].curr; //Real current
-        //aux_int16 = (int16) MY_TIMER_OVF_Cnt; //Real current [MP] Debug
     }
     else {
         // Send pressure times 100 here instead of current (Simulink use)

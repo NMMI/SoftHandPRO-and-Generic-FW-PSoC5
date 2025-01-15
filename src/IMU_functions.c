@@ -355,8 +355,6 @@ void ReadAcc(int n)
 	static uint8 AccStartAddress;
 
     AccStartAddress = g_imu[n].dev_type ? LSM6DSRX_OUTX_L_A : MPU9250_ACCEL_XOUT_H;
-     // DRDY = ReadControlRegisterIMU(0x3A);
-         //  if (DRDY & 0x01){
     for (i = 0; i < 6; i++){
         Accel[n][ i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))] = ReadControlRegisterIMU(AccStartAddress + i);  
     }  
@@ -395,7 +393,7 @@ void ReadMag(int n){
     uint8 i, tmp;
     uint8 XLDA;
     uint8 DRDY;
-    uint8 SENS_HUB_ENDOP;
+    uint8 SENS_HUB_ENDOP = 0x00;
      
 	switch (g_imu[n].dev_type){
         case MPU9250:
@@ -411,21 +409,21 @@ void ReadMag(int n){
             XLDA = ReadControlRegisterIMU(LSM6DSRX_STATUS_REG);          
           
             if (XLDA & 0b00000001) { 
-                do{
-                    SENS_HUB_ENDOP = ReadControlRegisterIMU(LSM6DSRX_STATUS_MASTER_MAINPAGE);   
-                }
-                while( (SENS_HUB_ENDOP & 0b00000001) == 0);
-
-                WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x40);   
-                CyDelayUs(100);  
-                ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I); 
+                
+                SENS_HUB_ENDOP = ReadControlRegisterIMU(LSM6DSRX_STATUS_MASTER_MAINPAGE);                   
+                
+                if (!(SENS_HUB_ENDOP & 0x01) ){     // Wait until communication with slave device is concluded
+                    WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x40);   
+                    CyDelayUs(10);  
+                    ReadControlRegisterIMU(LSM6DSRX_WHO_AM_I); 
+                       
+                    for (i = 0; i < 6; i++){
+                        Mag[n][i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))]= ReadControlRegisterIMU(LSM6DSRX_SENSOR_HUB_1 + i);  
+                    }
                    
-                for (i = 0; i < 6; i++){
-                    Mag[n][i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))]= ReadControlRegisterIMU(LSM6DSRX_SENSOR_HUB_1 + i);  
+                    WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x00);   
+                    CyDelayUs(10);
                 }
-               
-                WriteControlRegisterIMU(LSM6DSRX_FUNC_CFG_ACCESS, 0x00);   
-                CyDelayUs(100);
             }
             break;      
     }
@@ -643,7 +641,7 @@ void ReadAllIMUs(){
 * Function Name: Read Temperature Data of IMU n
 *********************************************************************************/
 void ReadTemp(int n)
-{   uint8 tmp;
+{   uint8 tmp = 0;
     // MPU9250:
     // sensitivity  333.87 LSB/°C, ADC resolution = 16
     // ODR = 52 Hz
@@ -653,22 +651,33 @@ void ReadTemp(int n)
     // ODR = 52 Hz
     
     
-    /*static uint8 i;
+    static uint8 i;
 	static uint8 TempStartAddress;
     TempStartAddress = g_imu[n].dev_type ? LSM6DSRX_OUT_TEMP_L : MPU9250_TEMP_OUT_H;
     for (i = 0; i < 2; i++){
-        //	Accel[row][0] = high; 
-	    //  Accel[row][1] = low; 
+        //	Temp[row][0] = high; 
+	    //  Temp[row][1] = low; 
         //  Order of LSM6DSRX register are inverted to be compatible with the ones of  MPU9250
         Temp[n][ i + g_imu[n].dev_type*(1 - 2 *( i % 2 ))] = ReadControlRegisterIMU(TempStartAddress + i);  
     }
-    */
+    
+    tmp = Temp[n][0];
+    g_imuNew[n].temp_value = (int16)((uint16)tmp<<8 | Temp[n][1]);
+    
+    switch (g_imu[n].dev_type){
+        case MPU9250: 
+            g_imuNew[n].temp_value = (int16)((( (float)g_imuNew[n].temp_value / 333.87 ) + 17.0 )* 100.0);
+            break;
 
-        tmp = Temp[n][0];
-        g_imuNew[n].temp_value = (int16)(tmp<<8 | Temp[n][1]);
+        case LSM6DSRX:
+            g_imuNew[n].temp_value = (int16)((( (float)g_imuNew[n].temp_value / 256.0 ) + 25.0 )* 100.0);
+            break;
+            
+        default:
+            break;
+    }
+    
 }
-
-
 
 /********************************** *********************************************
 * Function Name: Write Control Register
