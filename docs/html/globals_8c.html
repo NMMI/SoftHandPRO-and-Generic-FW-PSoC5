@@ -22,7 +22,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="fw_logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Logic Board Firmware<span id="projectnumber">&#160;v. 1.16</span>
+   <div id="projectname">Logic Board Firmware<span id="projectnumber">&#160;v. 2.0</span>
    </div>
    <div id="projectbrief">Cypress PSoC5 microcontroller</div>
   </td>
@@ -152,6 +152,8 @@ struct <a class="el" href="structst__filter.html">st_filter</a>&#160;</td><td cl
 <tr class="separator:a1c717f431f1d1ea4a500f6027102d001"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d45d2d5a2d751c99471673a50a68d3e"><td class="memItemLeft" align="right" valign="top">int32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#a6d45d2d5a2d751c99471673a50a68d3e">detect_power_cycle</a> = 0</td></tr>
 <tr class="separator:a6d45d2d5a2d751c99471673a50a68d3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a721dcb9e933ecb6da655150f34bcbc7a"><td class="memItemLeft" align="right" valign="top">uint16&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#a721dcb9e933ecb6da655150f34bcbc7a">MY_TIMER_OVF_Cnt</a> = 0</td></tr>
+<tr class="separator:a721dcb9e933ecb6da655150f34bcbc7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9087b28d15f17c6475922ba6943b14f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="globals_8h.html#a368077232a067805e98c61f28948abee">counter_status</a> CYDATA&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#a9087b28d15f17c6475922ba6943b14f3">cycles_status</a> = <a class="el" href="globals_8h.html#a368077232a067805e98c61f28948abeeac157bdf0b85a40d2619cbc8bc1ae5fe2">NONE</a></td></tr>
 <tr class="separator:a9087b28d15f17c6475922ba6943b14f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af909e8281823c106dd4191858f995b32"><td class="memItemLeft" align="right" valign="top"><a class="el" href="globals_8h.html#a66f719d83f18dc6d1369b0776f25b1ef">adc_status</a> CYDATA&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#af909e8281823c106dd4191858f995b32">emg_1_status</a> = <a class="el" href="globals_8h.html#a66f719d83f18dc6d1369b0776f25b1efa589b7d94a3d91d145720e2fed0eb3a05">RESET</a></td></tr>
@@ -243,12 +245,21 @@ uint8&#160;</td><td class="memItemRight" valign="bottom"><b>btEnabled</b> = FALS
 <tr class="memitem:ac13233cc4863e732187c55cf7f86bef6"><td class="memItemLeft" align="right" valign="top"><a id="ac13233cc4863e732187c55cf7f86bef6" name="ac13233cc4863e732187c55cf7f86bef6"></a>
 uint8&#160;</td><td class="memItemRight" valign="bottom"><b>bt_src</b> = FALSE</td></tr>
 <tr class="separator:ac13233cc4863e732187c55cf7f86bef6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ce6dc73a96de3b577715a8df33e7321"><td class="memItemLeft" align="right" valign="top"><a id="a3ce6dc73a96de3b577715a8df33e7321" name="a3ce6dc73a96de3b577715a8df33e7321"></a>
+uint8&#160;</td><td class="memItemRight" valign="bottom"><b>WHO_AM_I</b></td></tr>
+<tr class="separator:a3ce6dc73a96de3b577715a8df33e7321"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adff0cf9182d3d1ffc0ac7e9170fe4592"><td class="memItemLeft" align="right" valign="top"><a id="adff0cf9182d3d1ffc0ac7e9170fe4592" name="adff0cf9182d3d1ffc0ac7e9170fe4592"></a>
+uint8&#160;</td><td class="memItemRight" valign="bottom"><b>WHO_AM_I_VALUE</b></td></tr>
+<tr class="separator:adff0cf9182d3d1ffc0ac7e9170fe4592"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2be876a1d33170aacddbb4e859cfb5c4"><td class="memItemLeft" align="right" valign="top"><a id="a2be876a1d33170aacddbb4e859cfb5c4" name="a2be876a1d33170aacddbb4e859cfb5c4"></a>
+uint8&#160;</td><td class="memItemRight" valign="bottom"><b>IMU_device</b></td></tr>
+<tr class="separator:a2be876a1d33170aacddbb4e859cfb5c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47118db87acd24ae6dac18b036f360ec"><td class="memItemLeft" align="right" valign="top"><a id="a47118db87acd24ae6dac18b036f360ec" name="a47118db87acd24ae6dac18b036f360ec"></a>
 uint8&#160;</td><td class="memItemRight" valign="bottom"><b>N_IMU_Connected</b></td></tr>
 <tr class="separator:a47118db87acd24ae6dac18b036f360ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99668f3210aba0be3baec19486621bce"><td class="memItemLeft" align="right" valign="top"><a id="a99668f3210aba0be3baec19486621bce" name="a99668f3210aba0be3baec19486621bce"></a>
-uint8&#160;</td><td class="memItemRight" valign="bottom"><b>IMU_connected</b> [N_IMU_MAX]</td></tr>
-<tr class="separator:a99668f3210aba0be3baec19486621bce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1245ca0125af340214a06427e766ea01"><td class="memItemLeft" align="right" valign="top"><a id="a1245ca0125af340214a06427e766ea01" name="a1245ca0125af340214a06427e766ea01"></a>
+uint8&#160;</td><td class="memItemRight" valign="bottom"><b>IMU_IDs</b> [N_IMU_MAX]</td></tr>
+<tr class="separator:a1245ca0125af340214a06427e766ea01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86272fcfcab512d38a11824196df4bbc"><td class="memItemLeft" align="right" valign="top"><a id="a86272fcfcab512d38a11824196df4bbc" name="a86272fcfcab512d38a11824196df4bbc"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>imus_data_size</b></td></tr>
 <tr class="separator:a86272fcfcab512d38a11824196df4bbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -279,6 +290,21 @@ uint8&#160;</td><td class="memItemRight" valign="bottom"><b>Temp</b> [N_IMU_MAX]
 <tr class="memitem:a79179edea7394e7176f8768b1b0f6f92"><td class="memItemLeft" align="right" valign="top"><a id="a79179edea7394e7176f8768b1b0f6f92" name="a79179edea7394e7176f8768b1b0f6f92"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX][4]</td></tr>
 <tr class="separator:a79179edea7394e7176f8768b1b0f6f92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe9bd49cc516a94cb316a1b63bbe7975"><td class="memItemLeft" align="right" valign="top"><a id="afe9bd49cc516a94cb316a1b63bbe7975" name="afe9bd49cc516a94cb316a1b63bbe7975"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>offset</b> [N_IMU_MAX][3]</td></tr>
+<tr class="separator:afe9bd49cc516a94cb316a1b63bbe7975"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeacc3b9cadcbd02190bf5a341564182b"><td class="memItemLeft" align="right" valign="top"><a id="aeacc3b9cadcbd02190bf5a341564182b" name="aeacc3b9cadcbd02190bf5a341564182b"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>scale</b> [N_IMU_MAX][3]</td></tr>
+<tr class="separator:aeacc3b9cadcbd02190bf5a341564182b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7feb33b696c707928c870f2b27f3b60"><td class="memItemLeft" align="right" valign="top"><a id="aa7feb33b696c707928c870f2b27f3b60" name="aa7feb33b696c707928c870f2b27f3b60"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>avg</b> [N_IMU_MAX]</td></tr>
+<tr class="separator:aa7feb33b696c707928c870f2b27f3b60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7eb8c25f59868a824f7e62315ce17220"><td class="memItemLeft" align="right" valign="top"><a id="a7eb8c25f59868a824f7e62315ce17220" name="a7eb8c25f59868a824f7e62315ce17220"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>factor</b> [N_IMU_MAX][3]</td></tr>
+<tr class="separator:a7eb8c25f59868a824f7e62315ce17220"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82d876cf070303bbb6e61b1b0f2b0dae"><td class="memItemLeft" align="right" valign="top"><a id="a82d876cf070303bbb6e61b1b0f2b0dae" name="a82d876cf070303bbb6e61b1b0f2b0dae"></a>
+uint8&#160;</td><td class="memItemRight" valign="bottom"><b>MAGcalProc</b> = 0</td></tr>
+<tr class="separator:a82d876cf070303bbb6e61b1b0f2b0dae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf0e2a5d5954714103e295ac35513215"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#acf0e2a5d5954714103e295ac35513215">master_mode</a></td></tr>
 <tr class="separator:acf0e2a5d5954714103e295ac35513215"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3b345f33ea0ba6cadb98f1d26bef07e"><td class="memItemLeft" align="right" valign="top">uint16&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="globals_8c.html#aa3b345f33ea0ba6cadb98f1d26bef07e">emg_history</a> [<a class="el" href="globals_8h.html#aaa935f4832327359eed0842e1d3a4f11">SAMPLES_FOR_EMG_HISTORY</a>][<a class="el" href="globals_8h.html#a21ab5f0a6e4cb48bd320177c4f7aa078">NUM_OF_INPUT_EMGS</a>]</td></tr>
@@ -288,11 +314,11 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Global variables. </p>
-<dl class="section date"><dt>Date</dt><dd>Jun 05th, 2024 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Jan 15th, 2025 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd><em>Centro "E.Piaggio"</em> </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>(C) 2012-2016 qbrobotics. All rights reserved. </dd>
 <dd>
-(C) 2017-2024 Centro "E.Piaggio". All rights reserved. </dd></dl>
+(C) 2017-2025 Centro "E.Piaggio". All rights reserved. </dd></dl>
 </div><h2 class="groupheader">Variable Documentation</h2>
 <a id="ab4765549a3f6990d35f3d0740263b254" name="ab4765549a3f6990d35f3d0740263b254"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab4765549a3f6990d35f3d0740263b254">&#9670;&nbsp;</a></span>battery_low_SoC</h2>
@@ -726,6 +752,21 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>Quat</b> [N_IMU_MAX]
       </table>
 </div><div class="memdoc">
 <p >Flag used to set/unset master mode to send messages to other boards. </p>
+
+</div>
+</div>
+<a id="a721dcb9e933ecb6da655150f34bcbc7a" name="a721dcb9e933ecb6da655150f34bcbc7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a721dcb9e933ecb6da655150f34bcbc7a">&#9670;&nbsp;</a></span>MY_TIMER_OVF_Cnt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16 MY_TIMER_OVF_Cnt = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >MY_TIMER interrutp overflow counter </p>
 
 </div>
 </div>

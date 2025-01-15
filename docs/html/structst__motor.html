@@ -22,7 +22,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="fw_logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Logic Board Firmware<span id="projectnumber">&#160;v. 1.16</span>
+   <div id="projectname">Logic Board Firmware<span id="projectnumber">&#160;v. 2.0</span>
    </div>
    <div id="projectbrief">Cypress PSoC5 microcontroller</div>
   </td>
@@ -101,8 +101,8 @@ Data Fields</h2></td></tr>
 <tr class="separator:afc912f90d6ba2f39046a0daf0207f116"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8bfba55a00d54c9c2a9e4bb11484158"><td class="memItemLeft" align="right" valign="top">int32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst__motor.html#af8bfba55a00d54c9c2a9e4bb11484158">k_d_c_dl</a></td></tr>
 <tr class="separator:af8bfba55a00d54c9c2a9e4bb11484158"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63bbebc1db55f43e0571006597a3488b"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst__motor.html#a63bbebc1db55f43e0571006597a3488b">activ</a></td></tr>
-<tr class="separator:a63bbebc1db55f43e0571006597a3488b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1ed761bb9c571ba8dec7e0a399e2917"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst__motor.html#ae1ed761bb9c571ba8dec7e0a399e2917">active</a></td></tr>
+<tr class="separator:ae1ed761bb9c571ba8dec7e0a399e2917"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53d9d645351f4020826ab8c56c91b244"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst__motor.html#a53d9d645351f4020826ab8c56c91b244">activate_pwm_rescaling</a></td></tr>
 <tr class="separator:a53d9d645351f4020826ab8c56c91b244"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7083e21e3e766d7e9cc5858b2e659cf"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst__motor.html#ad7083e21e3e766d7e9cc5858b2e659cf">motor_driver_type</a></td></tr>
@@ -137,21 +137,6 @@ Data Fields</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Motor related parameters structure. </p>
 </div><h2 class="groupheader">Field Documentation</h2>
-<a id="a63bbebc1db55f43e0571006597a3488b" name="a63bbebc1db55f43e0571006597a3488b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a63bbebc1db55f43e0571006597a3488b">&#9670;&nbsp;</a></span>activ</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8 activ</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Startup activation. </p>
-
-</div>
-</div>
 <a id="a53d9d645351f4020826ab8c56c91b244" name="a53d9d645351f4020826ab8c56c91b244"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a53d9d645351f4020826ab8c56c91b244">&#9670;&nbsp;</a></span>activate_pwm_rescaling</h2>
 
@@ -164,6 +149,21 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p >Activation of PWM rescaling for 12V motor. </p>
+
+</div>
+</div>
+<a id="ae1ed761bb9c571ba8dec7e0a399e2917" name="ae1ed761bb9c571ba8dec7e0a399e2917"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1ed761bb9c571ba8dec7e0a399e2917">&#9670;&nbsp;</a></span>active</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8 active</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Startup activation. </p>
 
 </div>
 </div>

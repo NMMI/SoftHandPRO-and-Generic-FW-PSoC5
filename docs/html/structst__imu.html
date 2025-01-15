@@ -22,7 +22,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="fw_logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Logic Board Firmware<span id="projectnumber">&#160;v. 1.16</span>
+   <div id="projectname">Logic Board Firmware<span id="projectnumber">&#160;v. 2.0</span>
    </div>
    <div id="projectbrief">Cypress PSoC5 microcontroller</div>
   </td>
@@ -83,8 +83,12 @@ Data Fields</h2></td></tr>
 <tr class="separator:aa5b15dee0878926cf86de9d3a70d3b30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada640cf3ec631c3b1cba76c486ea6b04"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst__imu.html#ada640cf3ec631c3b1cba76c486ea6b04">IMU_conf</a> [N_IMU_MAX][NUM_OF_IMU_DATA]</td></tr>
 <tr class="separator:ada640cf3ec631c3b1cba76c486ea6b04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13769793684b23af8c0cdf6ccf3bd696"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst__imu.html#a13769793684b23af8c0cdf6ccf3bd696">unused_bytes</a> [5]</td></tr>
-<tr class="separator:a13769793684b23af8c0cdf6ccf3bd696"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ce2b5bf46c48ef1906a6cdef2958637"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst__imu.html#a9ce2b5bf46c48ef1906a6cdef2958637">MagIsCalibrated</a></td></tr>
+<tr class="separator:a9ce2b5bf46c48ef1906a6cdef2958637"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab85810b262b0bf649d0cd01f0fb62408"><td class="memItemLeft" align="right" valign="top">int16&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst__imu.html#ab85810b262b0bf649d0cd01f0fb62408">MagCalibMinMax</a> [N_IMU_MAX][6]</td></tr>
+<tr class="separator:ab85810b262b0bf649d0cd01f0fb62408"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2479545d632531da12aab41325a8d8f"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structst__imu.html#ab2479545d632531da12aab41325a8d8f">unused_bytes</a> [8]</td></tr>
+<tr class="separator:ab2479545d632531da12aab41325a8d8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >IMU related parameters structure. </p>
@@ -101,6 +105,36 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p >IMUs configuration flags. </p>
+
+</div>
+</div>
+<a id="ab85810b262b0bf649d0cd01f0fb62408" name="ab85810b262b0bf649d0cd01f0fb62408"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab85810b262b0bf649d0cd01f0fb62408">&#9670;&nbsp;</a></span>MagCalibMinMax</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16 MagCalibMinMax[N_IMU_MAX][6]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Mag Calibration Min/Max couples for all IMUs on every Axis. </p>
+
+</div>
+</div>
+<a id="a9ce2b5bf46c48ef1906a6cdef2958637" name="a9ce2b5bf46c48ef1906a6cdef2958637"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ce2b5bf46c48ef1906a6cdef2958637">&#9670;&nbsp;</a></span>MagIsCalibrated</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8 MagIsCalibrated</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Flag to know if magnetometers are calibrated or not. </p>
 
 </div>
 </div>
@@ -134,14 +168,14 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a13769793684b23af8c0cdf6ccf3bd696" name="a13769793684b23af8c0cdf6ccf3bd696"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a13769793684b23af8c0cdf6ccf3bd696">&#9670;&nbsp;</a></span>unused_bytes</h2>
+<a id="ab2479545d632531da12aab41325a8d8f" name="ab2479545d632531da12aab41325a8d8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2479545d632531da12aab41325a8d8f">&#9670;&nbsp;</a></span>unused_bytes</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8 unused_bytes[5]</td>
+          <td class="memname">uint8 unused_bytes[8]</td>
         </tr>
       </table>
 </div><div class="memdoc">

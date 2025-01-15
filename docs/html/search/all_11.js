@@ -46,10 +46,11 @@ var searchData=
   ['st_5fsh_5fspec_43',['st_SH_spec',['../structst___s_h__spec.html',1,'']]],
   ['st_5fuser_44',['st_user',['../structst__user.html',1,'']]],
   ['st_5fwr_5fspec_45',['st_WR_spec',['../structst___w_r__spec.html',1,'']]],
-  ['state_5factive_46',['STATE_ACTIVE',['../globals_8h.html#a695dd637b37252af2a517ba8bae8d2c4',1,'globals.h']]],
-  ['state_5finactive_47',['STATE_INACTIVE',['../globals_8h.html#a5dcbfcad8d6ba73bbf6fe2d08f3e3ae4',1,'globals.h']]],
-  ['stats_5fperiod_5fbegin_5fdate_48',['stats_period_begin_date',['../structst__device.html#a116eb9d6e180571155caabeebcb8ffb8',1,'st_device']]],
-  ['stop_5fmaster_5fdevice_49',['stop_master_device',['../command__processing_8c.html#a4dbcb914c7348f441f7dd56b3400f434',1,'stop_master_device():&#160;command_processing.c'],['../command__processing_8h.html#a4dbcb914c7348f441f7dd56b3400f434',1,'stop_master_device():&#160;command_processing.c']]],
-  ['sum_5fand_5fmean_50',['SUM_AND_MEAN',['../globals_8h.html#a66f719d83f18dc6d1369b0776f25b1efa5bd42edcea28ad65a046391d8af6dfd8',1,'globals.h']]],
-  ['switch_5femg_51',['switch_emg',['../structst__emg.html#a90c7b59f97a26bf3da8b26b145b32919',1,'st_emg']]]
+  ['start_5fperipherals_46',['start_peripherals',['../command__processing_8c.html#a9b78561777164017e16e4d099ac365fe',1,'start_peripherals():&#160;command_processing.c'],['../command__processing_8h.html#a9b78561777164017e16e4d099ac365fe',1,'start_peripherals():&#160;command_processing.c']]],
+  ['state_5factive_47',['STATE_ACTIVE',['../globals_8h.html#a695dd637b37252af2a517ba8bae8d2c4',1,'globals.h']]],
+  ['state_5finactive_48',['STATE_INACTIVE',['../globals_8h.html#a5dcbfcad8d6ba73bbf6fe2d08f3e3ae4',1,'globals.h']]],
+  ['stats_5fperiod_5fbegin_5fdate_49',['stats_period_begin_date',['../structst__device.html#a116eb9d6e180571155caabeebcb8ffb8',1,'st_device']]],
+  ['stop_5fmaster_5fdevice_50',['stop_master_device',['../command__processing_8c.html#a4dbcb914c7348f441f7dd56b3400f434',1,'stop_master_device():&#160;command_processing.c'],['../command__processing_8h.html#a4dbcb914c7348f441f7dd56b3400f434',1,'stop_master_device():&#160;command_processing.c']]],
+  ['sum_5fand_5fmean_51',['SUM_AND_MEAN',['../globals_8h.html#a66f719d83f18dc6d1369b0776f25b1efa5bd42edcea28ad65a046391d8af6dfd8',1,'globals.h']]],
+  ['switch_5femg_52',['switch_emg',['../structst__emg.html#a90c7b59f97a26bf3da8b26b145b32919',1,'st_emg']]]
 ];

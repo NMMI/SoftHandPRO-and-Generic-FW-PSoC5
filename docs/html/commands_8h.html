@@ -22,7 +22,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="fw_logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Logic Board Firmware<span id="projectnumber">&#160;v. 1.16</span>
+   <div id="projectname">Logic Board Firmware<span id="projectnumber">&#160;v. 2.0</span>
    </div>
    <div id="projectbrief">Cypress PSoC5 microcontroller</div>
   </td>
@@ -75,22 +75,22 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="commands_8h__dep__incl.png" border="0" usemap="#acommands_8hdep" alt=""/></div>
 <map name="acommands_8hdep" id="acommands_8hdep">
-<area shape="rect" title="Definitions for SoftHand commands, parameters and packages." alt="" coords="439,5,535,32"/>
-<area shape="rect" href="command__processing_8h.html" title="Received commands processing functions" alt="" coords="491,305,650,332"/>
-<area shape="rect" href="globals_8h.html" title="Global definitions and macros are set in this file." alt="" coords="534,80,607,107"/>
-<area shape="rect" href="_s_d___r_t_c__functions_8h.html" title="Definition of SD and RTC module functions." alt="" coords="310,380,453,407"/>
-<area shape="rect" href="interruptions_8h.html" title="Interruptions header file." alt="" coords="478,455,581,482"/>
-<area shape="rect" href="main_8c.html" title="Firmware main file." alt="" coords="821,530,881,557"/>
-<area shape="rect" href="command__processing_8c.html" title="Command processing functions." alt="" coords="552,380,712,407"/>
-<area shape="rect" href="_s_d___r_t_c__functions_8c.html" title="Implementation of SD and RTC module functions." alt="" coords="259,455,402,482"/>
-<area shape="rect" href="interruptions_8c.html" title="Interruption handling and firmware core functions." alt="" coords="478,530,581,557"/>
-<area shape="rect" href="_encoder__functions_8h.html" title="Definition of Encoder module functions." alt="" coords="202,230,342,257"/>
-<area shape="rect" href="_i_m_u__functions_8h.html" title="Definition of IMU module functions." alt="" coords="889,230,1005,257"/>
-<area shape="rect" href="globals_8c.html" title="Global variables." alt="" coords="773,155,846,182"/>
-<area shape="rect" href="utils_8h.html" title="Utility functions declaration." alt="" coords="692,155,748,182"/>
-<area shape="rect" href="_encoder__functions_8c.html" title="Implementation of SPI module functions." alt="" coords="43,305,184,332"/>
-<area shape="rect" href="_i_m_u__functions_8c.html" title="Implementation of IMU module functions." alt="" coords="990,305,1106,332"/>
-<area shape="rect" href="utils_8c.html" title="Definition of utility functions." alt="" coords="757,230,814,257"/>
+<area shape="rect" title="Definitions for SoftHand commands, parameters and packages." alt="" coords="364,5,461,32"/>
+<area shape="rect" href="command__processing_8h.html" title="Received commands processing functions" alt="" coords="241,305,400,332"/>
+<area shape="rect" href="globals_8h.html" title="Global definitions and macros are set in this file." alt="" coords="503,80,576,107"/>
+<area shape="rect" href="_s_d___r_t_c__functions_8h.html" title="Definition of SD and RTC module functions." alt="" coords="284,380,427,407"/>
+<area shape="rect" href="interruptions_8h.html" title="Interruptions header file." alt="" coords="502,455,606,482"/>
+<area shape="rect" href="main_8c.html" title="Firmware main file." alt="" coords="478,530,539,557"/>
+<area shape="rect" href="command__processing_8c.html" title="Command processing functions." alt="" coords="49,380,208,407"/>
+<area shape="rect" href="_s_d___r_t_c__functions_8c.html" title="Implementation of SD and RTC module functions." alt="" coords="284,455,427,482"/>
+<area shape="rect" href="_i_m_u__functions_8c.html" title="Implementation of IMU module functions." alt="" coords="752,530,868,557"/>
+<area shape="rect" href="interruptions_8c.html" title="Interruption handling and firmware core functions." alt="" coords="562,530,666,557"/>
+<area shape="rect" href="_encoder__functions_8h.html" title="Definition of Encoder module functions." alt="" coords="108,230,248,257"/>
+<area shape="rect" href="_i_m_u__functions_8h.html" title="Definition of IMU module functions." alt="" coords="758,230,875,257"/>
+<area shape="rect" href="globals_8c.html" title="Global variables." alt="" coords="577,155,651,182"/>
+<area shape="rect" href="utils_8h.html" title="Utility functions declaration." alt="" coords="675,155,731,182"/>
+<area shape="rect" href="_encoder__functions_8c.html" title="Implementation of SPI module functions." alt="" coords="25,305,165,332"/>
+<area shape="rect" href="utils_8c.html" title="Definition of utility functions." alt="" coords="627,230,683,257"/>
 </map>
 </div>
 </div>
@@ -175,17 +175,19 @@ Macros</h2></td></tr>
 &#160;&#160;<a class="el" href="commands_8h.html#a4aaf0abc6fbbed856a4a9538ae886e61a78d9d45e499f848da1c4d03a1ba534a4">CMD_SET_CUFF_INPUTS</a> = 142
 , <a class="el" href="commands_8h.html#a4aaf0abc6fbbed856a4a9538ae886e61a2ddc0e8c5f0a28ad470e881d1e196c47">CMD_SET_BAUDRATE</a> = 144
 , <a class="el" href="commands_8h.html#a4aaf0abc6fbbed856a4a9538ae886e61a51f92ae4cb4dffafda985f714433039a">CMD_GET_JOYSTICK</a> = 146
-, <a class="el" href="commands_8h.html#a4aaf0abc6fbbed856a4a9538ae886e61a172dacbbb78cf7088b6706718082d54f">CMD_GET_IMU_READINGS</a> = 161
+, <a class="el" href="commands_8h.html#a4aaf0abc6fbbed856a4a9538ae886e61a0804ee1ad5abc4afbe95574b94b63205">CMD_CALIB_IMU_MAGNETOMETER</a> = 160
 , <br />
-&#160;&#160;<b>CMD_GET_IMU_PARAM</b> = 162
+&#160;&#160;<b>CMD_GET_IMU_READINGS</b> = 161
+, <b>CMD_GET_IMU_PARAM</b> = 162
 , <b>CMD_GET_ENCODER_CONF</b> = 163
 , <b>CMD_GET_ENCODER_RAW</b> = 164
-, <b>CMD_GET_ADC_CONF</b> = 165
 , <br />
-&#160;&#160;<b>CMD_GET_ADC_RAW</b> = 166
+&#160;&#160;<b>CMD_GET_ADC_CONF</b> = 165
+, <b>CMD_GET_ADC_RAW</b> = 166
 , <b>CMD_GET_SD_SINGLE_FILE</b> = 167
 , <b>CMD_REMOVE_SD_SINGLE_FILE</b> = 168
-, <b>CMD_GET_BATTERY_VOLTAGE</b> = 169
+, <br />
+&#160;&#160;<b>CMD_GET_BATTERY_VOLTAGE</b> = 169
 <br />
  }</td></tr>
 <tr class="separator:a4aaf0abc6fbbed856a4a9538ae886e61"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -294,11 +296,11 @@ Macros</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Definitions for SoftHand commands, parameters and packages. </p>
-<dl class="section date"><dt>Date</dt><dd>Jun 05th, 2024 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Jan 15th, 2025 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd><em>Centro "E.Piaggio"</em> </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>(C) 2012-2016 qbrobotics. All rights reserved. </dd>
 <dd>
-(C) 2017-2024 Centro "E.Piaggio". All rights reserved.</dd></dl>
+(C) 2017-2025 Centro "E.Piaggio". All rights reserved.</dd></dl>
 <p>This file is included in the firmware, in its libraries and applications. It contains all definitions that are necessary for the contruction of communication packages.</p>
 <p >It includes definitions for all of the device commands, parameters and also the size of answer packages. </p>
 </div><h2 class="groupheader">Enumeration Type Documentation</h2>
@@ -363,7 +365,7 @@ Macros</h2></td></tr>
 <tr><td class="fieldname"><a id="a4aaf0abc6fbbed856a4a9538ae886e61a51f92ae4cb4dffafda985f714433039a" name="a4aaf0abc6fbbed856a4a9538ae886e61a51f92ae4cb4dffafda985f714433039a"></a>CMD_GET_JOYSTICK&#160;</td><td class="fielddoc"><p >Command to get the joystick measurements (Only <br  />
  </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a4aaf0abc6fbbed856a4a9538ae886e61a172dacbbb78cf7088b6706718082d54f" name="a4aaf0abc6fbbed856a4a9538ae886e61a172dacbbb78cf7088b6706718082d54f"></a>CMD_GET_IMU_READINGS&#160;</td><td class="fielddoc"><p >for devices driven by a joystick) </p>
+<tr><td class="fieldname"><a id="a4aaf0abc6fbbed856a4a9538ae886e61a0804ee1ad5abc4afbe95574b94b63205" name="a4aaf0abc6fbbed856a4a9538ae886e61a0804ee1ad5abc4afbe95574b94b63205"></a>CMD_CALIB_IMU_MAGNETOMETER&#160;</td><td class="fielddoc"><p >for devices driven by a joystick) </p>
 </td></tr>
 </table>
 

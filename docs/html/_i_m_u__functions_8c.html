@@ -22,7 +22,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="fw_logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Logic Board Firmware<span id="projectnumber">&#160;v. 1.16</span>
+   <div id="projectname">Logic Board Firmware<span id="projectnumber">&#160;v. 2.0</span>
    </div>
    <div id="projectbrief">Cypress PSoC5 microcontroller</div>
   </td>
@@ -74,25 +74,30 @@ $(function() {
 <p>Implementation of IMU module functions.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="_i_m_u__functions_8h_source.html">IMU_functions.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="interruptions_8h_source.html">interruptions.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for IMU_functions.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="_i_m_u__functions_8c__incl.png" border="0" usemap="#a_i_m_u__functions_8c" alt=""/></div>
 <map name="a_i_m_u__functions_8c" id="a_i_m_u__functions_8c">
-<area shape="rect" title="Implementation of IMU module functions." alt="" coords="361,5,477,32"/>
-<area shape="rect" href="_i_m_u__functions_8h.html" title="Definition of IMU module functions." alt="" coords="361,80,477,107"/>
-<area shape="rect" title=" " alt="" coords="29,380,100,407"/>
-<area shape="rect" href="globals_8h.html" title="Global definitions and macros are set in this file." alt="" coords="352,230,425,257"/>
-<area shape="rect" title=" " alt="" coords="22,305,86,332"/>
-<area shape="rect" title=" " alt="" coords="814,305,875,332"/>
-<area shape="rect" href="utils_8h.html" title="Utility functions declaration." alt="" coords="424,155,481,182"/>
-<area shape="rect" title=" " alt="" coords="555,155,641,182"/>
-<area shape="rect" href="_f_i_r_m_w_a_r_e___c_o_n_f_i_g_u_r_a_t_i_o_n_8h.html" title="Definitions for SoftHand and Other Devices commands, parameters and packages." alt="" coords="486,305,704,332"/>
-<area shape="rect" href="device_8h_source.html" title=" " alt="" coords="109,305,180,332"/>
-<area shape="rect" title=" " alt="" coords="204,305,269,332"/>
-<area shape="rect" title=" " alt="" coords="729,305,790,332"/>
-<area shape="rect" href="commands_8h.html" title="Definitions for SoftHand commands, parameters and packages." alt="" coords="292,305,389,332"/>
-<area shape="rect" title=" " alt="" coords="413,305,463,332"/>
+<area shape="rect" title="Implementation of IMU module functions." alt="" coords="678,5,795,32"/>
+<area shape="rect" href="_i_m_u__functions_8h.html" title="Definition of IMU module functions." alt="" coords="881,230,997,257"/>
+<area shape="rect" href="interruptions_8h.html" title="Interruptions header file." alt="" coords="498,80,602,107"/>
+<area shape="rect" title=" " alt="" coords="493,530,564,557"/>
+<area shape="rect" href="globals_8h.html" title="Global definitions and macros are set in this file." alt="" coords="431,380,504,407"/>
+<area shape="rect" title=" " alt="" coords="760,455,823,482"/>
+<area shape="rect" title=" " alt="" coords="846,455,907,482"/>
+<area shape="rect" href="utils_8h.html" title="Utility functions declaration." alt="" coords="314,305,370,332"/>
+<area shape="rect" title=" " alt="" coords="981,305,1066,332"/>
+<area shape="rect" href="_f_i_r_m_w_a_r_e___c_o_n_f_i_g_u_r_a_t_i_o_n_8h.html" title="Definitions for SoftHand and Other Devices commands, parameters and packages." alt="" coords="309,455,527,482"/>
+<area shape="rect" href="device_8h_source.html" title=" " alt="" coords="5,455,76,482"/>
+<area shape="rect" title=" " alt="" coords="551,455,615,482"/>
+<area shape="rect" title=" " alt="" coords="150,455,211,482"/>
+<area shape="rect" href="commands_8h.html" title="Definitions for SoftHand commands, parameters and packages." alt="" coords="639,455,735,482"/>
+<area shape="rect" title=" " alt="" coords="236,455,285,482"/>
+<area shape="rect" href="command__processing_8h.html" title="Received commands processing functions" alt="" coords="470,155,630,182"/>
+<area shape="rect" href="_encoder__functions_8h.html" title="Definition of Encoder module functions." alt="" coords="714,305,855,332"/>
+<area shape="rect" href="_s_d___r_t_c__functions_8h.html" title="Definition of SD and RTC module functions." alt="" coords="445,305,588,332"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -101,12 +106,14 @@ Functions</h2></td></tr>
 <tr class="memitem:a950a5a57e4188823c580d054ed2db16a"><td class="memItemLeft" align="right" valign="top"><a id="a950a5a57e4188823c580d054ed2db16a" name="a950a5a57e4188823c580d054ed2db16a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ImusReset</b> ()</td></tr>
 <tr class="separator:a950a5a57e4188823c580d054ed2db16a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac4f81f61837e6a132dfceb5bb93b06fa"><td class="memItemLeft" align="right" valign="top"><a id="ac4f81f61837e6a132dfceb5bb93b06fa" name="ac4f81f61837e6a132dfceb5bb93b06fa"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>InitIMU</b> ()</td></tr>
-<tr class="separator:ac4f81f61837e6a132dfceb5bb93b06fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac95975151b543b5265bc1e470aabf465"><td class="memItemLeft" align="right" valign="top"><a id="ac95975151b543b5265bc1e470aabf465" name="ac95975151b543b5265bc1e470aabf465"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>InitIMUMagCal</b> ()</td></tr>
-<tr class="separator:ac95975151b543b5265bc1e470aabf465"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08ff30696507be39a78e64e7f4d9de48"><td class="memItemLeft" align="right" valign="top"><a id="a08ff30696507be39a78e64e7f4d9de48" name="a08ff30696507be39a78e64e7f4d9de48"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateIMUDefine</b> ()</td></tr>
+<tr class="separator:a08ff30696507be39a78e64e7f4d9de48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6087d01d67131bb5ccda23d190a8e3ab"><td class="memItemLeft" align="right" valign="top"><a id="a6087d01d67131bb5ccda23d190a8e3ab" name="a6087d01d67131bb5ccda23d190a8e3ab"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>InitIMU</b> (uint8 n)</td></tr>
+<tr class="separator:a6087d01d67131bb5ccda23d190a8e3ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e726331c27a34c4f7783b55f12d92f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i_m_u__functions_8c.html#a4e726331c27a34c4f7783b55f12d92f6">InitIMUMagCal</a> (uint8 k_imu)</td></tr>
+<tr class="separator:a4e726331c27a34c4f7783b55f12d92f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afae3632c7d21d6a41f6999eaabf7de07"><td class="memItemLeft" align="right" valign="top"><a id="afae3632c7d21d6a41f6999eaabf7de07" name="afae3632c7d21d6a41f6999eaabf7de07"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ChipSelectorIMU</b> (int n)</td></tr>
 <tr class="separator:afae3632c7d21d6a41f6999eaabf7de07"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,6 +132,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>ReadGyro</b> (int n)<
 <tr class="memitem:a2ee29250f51422fa3d76df77335cce26"><td class="memItemLeft" align="right" valign="top"><a id="a2ee29250f51422fa3d76df77335cce26" name="a2ee29250f51422fa3d76df77335cce26"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ReadMag</b> (int n)</td></tr>
 <tr class="separator:a2ee29250f51422fa3d76df77335cce26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4742d872c924c1ad04964d9993f62e3e"><td class="memItemLeft" align="right" valign="top"><a id="a4742d872c924c1ad04964d9993f62e3e" name="a4742d872c924c1ad04964d9993f62e3e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>MagCalibration</b> ()</td></tr>
+<tr class="separator:a4742d872c924c1ad04964d9993f62e3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad3b4856a76c623025484fe5b931bdd4"><td class="memItemLeft" align="right" valign="top"><a id="aad3b4856a76c623025484fe5b931bdd4" name="aad3b4856a76c623025484fe5b931bdd4"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ReadMagCal</b> (int n)</td></tr>
 <tr class="separator:aad3b4856a76c623025484fe5b931bdd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,6 +156,15 @@ uint8&#160;</td><td class="memItemRight" valign="bottom"><b>ReadControlRegisterI
 <tr class="memitem:a26f85d9c393e73879461861d2ac87379"><td class="memItemLeft" align="right" valign="top"><a id="a26f85d9c393e73879461861d2ac87379" name="a26f85d9c393e73879461861d2ac87379"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SPI_delay</b> ()</td></tr>
 <tr class="separator:a26f85d9c393e73879461861d2ac87379"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aace541284ee387367357f3affada37"><td class="memItemLeft" align="right" valign="top"><a id="a2aace541284ee387367357f3affada37" name="a2aace541284ee387367357f3affada37"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>OneShot_WriteRoutine</b> (uint8 address, uint8 subaddress, uint8 data)</td></tr>
+<tr class="separator:a2aace541284ee387367357f3affada37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29a93e779e13d02a911a17d4a9e64e0f"><td class="memItemLeft" align="right" valign="top"><a id="a29a93e779e13d02a911a17d4a9e64e0f" name="a29a93e779e13d02a911a17d4a9e64e0f"></a>
+uint8&#160;</td><td class="memItemRight" valign="bottom"><b>OneShot_ReadRoutine</b> (uint8 address, uint8 subaddress)</td></tr>
+<tr class="separator:a29a93e779e13d02a911a17d4a9e64e0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad284c464df9073623f7a76626efcb953"><td class="memItemLeft" align="right" valign="top"><a id="ad284c464df9073623f7a76626efcb953" name="ad284c464df9073623f7a76626efcb953"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Continuous_ReadRoutine</b> (uint8 address, uint8 subaddress, uint8 slave_config)</td></tr>
+<tr class="separator:ad284c464df9073623f7a76626efcb953"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -164,12 +183,32 @@ uint8&#160;</td><td class="memItemRight" valign="bottom"><b>MagCal</b> [N_IMU_MA
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Implementation of IMU module functions. </p>
-<dl class="section date"><dt>Date</dt><dd>March 20th, 2020 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Jan 15th, 2025 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd><em>Centro "E.Piaggio"</em> </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>(C) 2012-2016 qbrobotics. All rights reserved. </dd>
 <dd>
-(C) 2017-2020 Centro "E.Piaggio". All rights reserved. </dd></dl>
-</div></div><!-- contents -->
+(C) 2017-2025 Centro "E.Piaggio". All rights reserved. </dd></dl>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a4e726331c27a34c4f7783b55f12d92f6" name="a4e726331c27a34c4f7783b55f12d92f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e726331c27a34c4f7783b55f12d92f6">&#9670;&nbsp;</a></span>InitIMUMagCal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void InitIMUMagCal </td>
+          <td>(</td>
+          <td class="paramtype">uint8&#160;</td>
+          <td class="paramname"><em>k_imu</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Enable reading data from this slave at the sample rate and storing data at the first available EXT_SENS_DATA register,</p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4

@@ -22,7 +22,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="fw_logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Logic Board Firmware<span id="projectnumber">&#160;v. 1.16</span>
+   <div id="projectname">Logic Board Firmware<span id="projectnumber">&#160;v. 2.0</span>
    </div>
    <div id="projectbrief">Cypress PSoC5 microcontroller</div>
   </td>
@@ -108,13 +108,14 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="interruptions_8h__dep__incl.png" border="0" usemap="#ainterruptions_8hdep" alt=""/></div>
 <map name="ainterruptions_8hdep" id="ainterruptions_8hdep">
-<area shape="rect" title="Interruptions header file." alt="" coords="115,5,219,32"/>
-<area shape="rect" href="command__processing_8h.html" title="Received commands processing functions" alt="" coords="87,80,247,107"/>
-<area shape="rect" href="main_8c.html" title="Firmware main file." alt="" coords="187,230,248,257"/>
-<area shape="rect" href="interruptions_8c.html" title="Interruption handling and firmware core functions." alt="" coords="271,80,375,107"/>
-<area shape="rect" href="_s_d___r_t_c__functions_8h.html" title="Definition of SD and RTC module functions." alt="" coords="263,155,407,182"/>
-<area shape="rect" href="command__processing_8c.html" title="Command processing functions." alt="" coords="29,155,188,182"/>
-<area shape="rect" href="_s_d___r_t_c__functions_8c.html" title="Implementation of SD and RTC module functions." alt="" coords="271,230,415,257"/>
+<area shape="rect" title="Interruptions header file." alt="" coords="225,5,329,32"/>
+<area shape="rect" href="_i_m_u__functions_8c.html" title="Implementation of IMU module functions." alt="" coords="5,80,122,107"/>
+<area shape="rect" href="command__processing_8h.html" title="Received commands processing functions" alt="" coords="197,80,357,107"/>
+<area shape="rect" href="main_8c.html" title="Firmware main file." alt="" coords="356,230,416,257"/>
+<area shape="rect" href="interruptions_8c.html" title="Interruption handling and firmware core functions." alt="" coords="381,80,485,107"/>
+<area shape="rect" href="_s_d___r_t_c__functions_8h.html" title="Definition of SD and RTC module functions." alt="" coords="432,155,575,182"/>
+<area shape="rect" href="command__processing_8c.html" title="Command processing functions." alt="" coords="197,155,357,182"/>
+<area shape="rect" href="_s_d___r_t_c__functions_8c.html" title="Implementation of SD and RTC module functions." alt="" coords="440,230,583,257"/>
 </map>
 </div>
 </div>
@@ -122,6 +123,8 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a08ca3748924b78da3d4d7b84a710ad8a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interruptions_8h.html#a08ca3748924b78da3d4d7b84a710ad8a">CY_ISR_PROTO</a> (ISR_MY_TIMER_Handler)</td></tr>
+<tr class="separator:a08ca3748924b78da3d4d7b84a710ad8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af17859273d717ee4b7c575ec7644e308"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interruptions_8h.html#af17859273d717ee4b7c575ec7644e308">motor_control_generic</a> (uint8 index)</td></tr>
 <tr class="separator:af17859273d717ee4b7c575ec7644e308"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad86170580c30277d97216739e8508a13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interruptions_8h.html#ad86170580c30277d97216739e8508a13">save_cycles_eeprom</a> ()</td></tr>
@@ -164,11 +167,11 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Interruptions header file. </p>
-<dl class="section date"><dt>Date</dt><dd>March 20th, 2020 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Jan 15th, 2025 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd><em>Centro "E.Piaggio"</em> </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>(C) 2012-2016 qbrobotics. All rights reserved. </dd>
 <dd>
-(C) 2017-2020 Centro "E.Piaggio". All rights reserved. </dd></dl>
+(C) 2017-2025 Centro "E.Piaggio". All rights reserved. </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a00a8d34962a63161405e5d7785b9625e" name="a00a8d34962a63161405e5d7785b9625e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a00a8d34962a63161405e5d7785b9625e">&#9670;&nbsp;</a></span>analog_read_end()</h2>
@@ -306,7 +309,7 @@ Functions</h2></td></tr>
 </div>
 </div>
 <a id="aef420ff977dab9318e2c3b1c04de874a" name="aef420ff977dab9318e2c3b1c04de874a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef420ff977dab9318e2c3b1c04de874a">&#9670;&nbsp;</a></span>CY_ISR_PROTO() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aef420ff977dab9318e2c3b1c04de874a">&#9670;&nbsp;</a></span>CY_ISR_PROTO() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -326,7 +329,7 @@ Functions</h2></td></tr>
 </div>
 </div>
 <a id="a4b74d7d608d07d4a230aaa9cd0c1a21a" name="a4b74d7d608d07d4a230aaa9cd0c1a21a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4b74d7d608d07d4a230aaa9cd0c1a21a">&#9670;&nbsp;</a></span>CY_ISR_PROTO() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b74d7d608d07d4a230aaa9cd0c1a21a">&#9670;&nbsp;</a></span>CY_ISR_PROTO() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -344,8 +347,27 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a08ca3748924b78da3d4d7b84a710ad8a" name="a08ca3748924b78da3d4d7b84a710ad8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08ca3748924b78da3d4d7b84a710ad8a">&#9670;&nbsp;</a></span>CY_ISR_PROTO() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CY_ISR_PROTO </td>
+          <td>(</td>
+          <td class="paramtype">ISR_MY_TIMER_Handler&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >This interruption update a counter to track the n. of timer overflow occured and measure time </p>
+
+</div>
+</div>
 <a id="a7e24af8c83537b0441877bf0f00dd30a" name="a7e24af8c83537b0441877bf0f00dd30a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e24af8c83537b0441877bf0f00dd30a">&#9670;&nbsp;</a></span>CY_ISR_PROTO() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e24af8c83537b0441877bf0f00dd30a">&#9670;&nbsp;</a></span>CY_ISR_PROTO() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">

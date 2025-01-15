@@ -22,7 +22,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="fw_logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Logic Board Firmware<span id="projectnumber">&#160;v. 1.16</span>
+   <div id="projectname">Logic Board Firmware<span id="projectnumber">&#160;v. 2.0</span>
    </div>
    <div id="projectbrief">Cypress PSoC5 microcontroller</div>
   </td>
@@ -108,6 +108,10 @@ Functions</h2></td></tr>
 <tr class="separator:a525ccbc7ac3901d938dc352172ee2531"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55651d78205da6c1c27d21dcf889610f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a55651d78205da6c1c27d21dcf889610f">get_param_list</a> (uint8 num_params, uint8 num_menus, const struct <a class="el" href="structparameter.html">parameter</a> PARAM_LIST[], const struct <a class="el" href="structmenu.html">menu</a> MENU_LIST[], uint8 sendToDevice)</td></tr>
 <tr class="separator:a55651d78205da6c1c27d21dcf889610f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b78561777164017e16e4d099ac365fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a9b78561777164017e16e4d099ac365fe">start_peripherals</a> ()</td></tr>
+<tr class="separator:a9b78561777164017e16e4d099ac365fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9249da0285497dd291f2ea6a9ad37a64"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a9249da0285497dd291f2ea6a9ad37a64">init_variables</a> ()</td></tr>
+<tr class="separator:a9249da0285497dd291f2ea6a9ad37a64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b005fb196c3a8a4d965c191692b4d72"><td class="memItemLeft" align="right" valign="top">uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#a8b005fb196c3a8a4d965c191692b4d72">num_of_bytes</a> (uint8 TYPE)</td></tr>
 <tr class="separator:a8b005fb196c3a8a4d965c191692b4d72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa384c747f9e073cae04c460385259c11"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command__processing_8c.html#aa384c747f9e073cae04c460385259c11">manage_param_list</a> (uint16 index, uint8 sendToDevice)</td></tr>
@@ -240,11 +244,11 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Command processing functions. </p>
-<dl class="section date"><dt>Date</dt><dd>Jun 05th, 2024 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Jan 15th, 2025 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd><em>Centro "E.Piaggio"</em> </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>(C) 2012-2016 qbrobotics. All rights reserved. </dd>
 <dd>
-(C) 2017-2024 Centro "E.Piaggio". All rights reserved. </dd></dl>
+(C) 2017-2025 Centro "E.Piaggio". All rights reserved. </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a107fc9f2982f9a953bdd82aa07279499" name="a107fc9f2982f9a953bdd82aa07279499"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a107fc9f2982f9a953bdd82aa07279499">&#9670;&nbsp;</a></span>cmd_activate()</h2>
@@ -1039,6 +1043,24 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
 
 </div>
 </div>
+<a id="a9249da0285497dd291f2ea6a9ad37a64" name="a9249da0285497dd291f2ea6a9ad37a64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9249da0285497dd291f2ea6a9ad37a64">&#9670;&nbsp;</a></span>init_variables()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void init_variables </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >This function initialises variables at startup </p>
+
+</div>
+</div>
 <a id="a6205a6e88f72f4cc321a7d8abca23e26" name="a6205a6e88f72f4cc321a7d8abca23e26"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6205a6e88f72f4cc321a7d8abca23e26">&#9670;&nbsp;</a></span>LCRChecksum()</h2>
 
@@ -1559,6 +1581,24 @@ reg8 *&#160;</td><td class="memItemRight" valign="bottom"><b>EEPROM_ADDR</b> = (
       </table>
 </div><div class="memdoc">
 <p >This function sets the encoders zero position. </p>
+
+</div>
+</div>
+<a id="a9b78561777164017e16e4d099ac365fe" name="a9b78561777164017e16e4d099ac365fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b78561777164017e16e4d099ac365fe">&#9670;&nbsp;</a></span>start_peripherals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void start_peripherals </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >This function set up and start all peripherals </p>
 
 </div>
 </div>
