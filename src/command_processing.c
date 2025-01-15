@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2024, Centro "E.Piaggio"
+// Copyright (c) 2017-2025, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -38,10 +38,10 @@
 *
 
 * \brief        Command processing functions.
-* \date         Jun 05th, 2024
+* \date         Jan 15th, 2025
 * \author       _Centro "E.Piaggio"_
 * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
-* \copyright    (C) 2017-2024 Centro "E.Piaggio". All rights reserved.
+* \copyright    (C) 2017-2025 Centro "E.Piaggio". All rights reserved.
 */
 //=================================================================     includes
 #include "command_processing.h"
@@ -848,6 +848,8 @@ void start_peripherals(){
             Quat[i][2] = 0.01;
             Quat[i][3] = 0.01;
         }
+                  
+	    MAGcalProc = 0;   
     }
 
             
