@@ -351,63 +351,23 @@ void infoGet(uint16 info_type) {
     switch (info_type) {
         case INFO_ALL:
             prepare_generic_info(packet_string);
-            if (bt_src){
-                UART_BT_ClearTxBuffer();
-                UART_BT_PutString(packet_string);
-                bt_src = FALSE;
-            }
-            else{
-                UART_RS485_ClearTxBuffer();
-                UART_RS485_PutString(packet_string);
-            }
+            putString(packet_string);
             break;
         case CYCLES_INFO:
             prepare_counter_info(packet_string);
-            if (bt_src){
-                UART_BT_ClearTxBuffer();
-                UART_BT_PutString(packet_string);
-                bt_src = FALSE;
-            }
-            else{
-                UART_RS485_ClearTxBuffer();
-                UART_RS485_PutString(packet_string);
-            }
+            putString(packet_string);
             break;
         case GET_SD_PARAM:
             Read_SD_Closed_File(sdParam, packet_string, sizeof(packet_string));
-            if (bt_src){
-                UART_BT_ClearTxBuffer();
-                UART_BT_PutString(packet_string);
-                bt_src = FALSE;
-            }
-            else{
-                UART_RS485_ClearTxBuffer();
-                UART_RS485_PutString(packet_string);
-            }
+            putString(packet_string);
             break;
         case GET_SD_DATA:
             Read_SD_Current_Data(str_sd_data, sizeof(str_sd_data));
-            if (bt_src){
-                UART_BT_ClearTxBuffer();
-                UART_BT_PutString(str_sd_data);
-                bt_src = FALSE;
-            }
-            else{
-                UART_RS485_ClearTxBuffer();
-                UART_RS485_PutString(str_sd_data);
-            }
+            putString(str_sd_data);
             break;
         case GET_SD_FS_TREE:
             Get_SD_FS(str_sd_data);
-            if (bt_src){
-                UART_BT_ClearTxBuffer();
-                UART_BT_PutString(str_sd_data);
-                bt_src = FALSE;
-            }
-            else{
-                UART_RS485_ClearTxBuffer();
-                UART_RS485_PutString(str_sd_data);
-            }
+            putString(str_sd_data);
             break;
         case GET_SD_EMG_HIST:
             // Send every single byte inside the function, since it could be a large file to send
@@ -415,21 +375,26 @@ void infoGet(uint16 info_type) {
             break;
         case GET_SD_R01_SUMM:
             Read_SD_Closed_File(sdR01File, packet_string, sizeof(packet_string));
-            if (bt_src){
-                UART_BT_ClearTxBuffer();
-                UART_BT_PutString(packet_string);
-                bt_src = FALSE;
-            }
-            else{
-                UART_RS485_ClearTxBuffer();
-                UART_RS485_PutString(packet_string);
-            }
+            putString(packet_string);
             break;            
         default:
             break;
     }
 }
-
+//==============================================================================
+//                                                                    PUT STRING
+//==============================================================================
+void putString (const char8 string[]){
+    if (bt_src){
+        UART_BT_ClearTxBuffer();
+        UART_BT_PutString(string);
+        bt_src = FALSE;
+    }
+    else{
+        UART_RS485_ClearTxBuffer();
+        UART_RS485_PutString(string);
+    }
+}
 
 //==============================================================================
 //                                                                GET PARAM LIST
@@ -1037,7 +1002,7 @@ void manage_param_list(uint16 index, uint8 sendToDevice) {
         {INPUT_MENU     , FALSE     , { " Usb"                    , " Handle"               , " EMG proportional"     , " EMG Integral"           , " EMG FCFS"       , " EMG FCFS Advanced"      , " Joystick"           , " EMG proportional NC"   , ""                       , ""                         }},  
         {CTRL_MODE      , FALSE     , { " Position"               , " PWM"                  , " Current"              , " Position and Current"   , ""                , ""                        , ""                    , ""                       , ""                       , ""                         }},                                       
         {YES_NO         , FALSE     , { " NO"                     , " YES"                  , ""                      , ""                        , ""                , ""                        , ""                    , ""                       , ""                       , ""                         }},                              
-        {RIGHT_LEFT     , FALSE     , { " Right"                  , " Left"                 , ""                      , ""                        , ""                , ""                        , ""                    , ""                       , ""                       , ""                         }},            
+        {RIGHT_LEFT     , TRUE      , { " Right"                  , " Left"                 , ""                      , ""                        , ""                , ""                        , ""                    , ""                       , ""                       , ""                         }},            
         {ON_OFF         , TRUE      , { " OFF"                    , " ON"                   , ""                      , ""                        , ""                , ""                        , ""                    , ""                       , ""                       , ""                         }},                                                                                
         {EXP_MENU       , TRUE      , { " None"                   , " Only SD/RTC"          , " Only BT"              , " SD/RTC + BT"            , ""                , ""                        , ""                    , ""                       , ""                       , ""                         }},   
         {SPI_MENU       , FALSE     , { " None"                   , SPI_Speed_L             , SPI_Speed_H             , ""                        , ""                , ""                        , ""                    , ""                       , ""                       , ""                         }},                                                              
@@ -1065,7 +1030,7 @@ void manage_param_list(uint16 index, uint8 sendToDevice) {
         {(uint8*)&(MEM_P->dev.id)                                                                   ,   TYPE_UINT8	,	1	                        ,	"Device ID:"	                        ,	0	            ,   ST_DEVICE	                                                ,	0	            },
         {(uint8*)&(MEM_P->motor[MOTOR_IDX].k_p)                                                     ,   TYPE_FLOAT	,	3	                        ,   "Position PID [P, I, D]:"	            ,	0	            ,   ST_MOTOR+MOTOR_IDX	                                        ,	POS_PID	        },
         {(uint8*)&(MEM_P->motor[MOTOR_IDX].k_p_c)                                                   ,   TYPE_FLOAT	,	3	                        ,   "Current PID [P, I, D]:"	            ,	0	            ,   ST_MOTOR+MOTOR_IDX	                                        ,	CURR_PID	    },
-        {(uint8*)&(MEM_P->motor[MOTOR_IDX].active)                                                   ,   TYPE_FLAG	,	1	                        ,   "Startup Activation:"	                ,	YES_NO  	    ,   ST_MOTOR+MOTOR_IDX	                                        ,	0	            },
+        {(uint8*)&(MEM_P->motor[MOTOR_IDX].active)                                                  ,   TYPE_FLAG	,	1	                        ,   "Startup Activation:"	                ,	YES_NO  	    ,   ST_MOTOR+MOTOR_IDX	                                        ,	0	            },
         {(uint8*)&(MEM_P->motor[MOTOR_IDX].input_mode)                                              ,   TYPE_FLAG	,	1	                        ,   "Input mode:"	                        ,	INPUT_MENU  	,   ST_MOTOR+MOTOR_IDX	                                        ,	INPUT_MODE	    },
         {(uint8*)&(MEM_P->motor[MOTOR_IDX].control_mode)                                            ,   TYPE_FLAG	,	1	                        ,   "Control mode:"	                        ,	CTRL_MODE   	,   ST_MOTOR+MOTOR_IDX	                                        ,	0	            },
         {(uint8*)&(MEM_P->enc[MEM_P->motor[MOTOR_IDX].encoder_line].res)                            ,   TYPE_UINT8	,	3	                        ,   "Resolutions:"	                        ,	0	            ,   ST_ENCODER+(MEM_P->motor[MOTOR_IDX].encoder_line)	        ,	0	            },
@@ -1132,7 +1097,7 @@ void manage_param_list(uint16 index, uint8 sendToDevice) {
         {(uint8*)&(MEM_P->enc[1].Enc_raw_read_conf[0])                                              ,   TYPE_UINT8	,   N_Encoder_Line_Connected[1]	,	"Read enc raw line 1:"	                ,	0	            ,   ST_ENCODER+1	                                            ,	0	            },
         {(uint8*)&(MEM_P->exp.read_ADC_sensors_port_flag)                                           ,   TYPE_FLAG	,	1	                        ,   "Read additional ADC port:"	            ,	ON_OFF  	    ,   ST_EXPANSION	                                            ,	0	            },
         {(uint8*)&(MEM_P->exp.ADC_conf[0])                                                          ,   TYPE_UINT8  ,	6	                        ,	"ADC channel [1-6]:"	                ,	0	            ,	ST_EXPANSION	                                            ,	0	            },
-        {(uint8*)&(MEM_P->exp.ADC_conf[6])                                                          ,   TYPE_UINT8	,	6	                        ,   "ADC channel [7-12]:"	                ,	0	            ,   ST_EXPANSION	                                            ,	0	            },
+        {(uint8*)&(MEM_P->exp.ADC_conf[6])                                                          ,   TYPE_UINT8	,	5	                        ,   "ADC channel [7-11]:"	                ,	0	            ,   ST_EXPANSION	                                            ,	0	            },
         {(uint8*)&(MEM_P->exp.record_EMG_history_on_SD)                                             ,   TYPE_FLAG	,	1	                        ,   "Record EMG on SD card:"	            ,	YES_NO	        ,   ST_EXPANSION	                                            ,	0	            },
         {(uint8*)&(MEM_P->JOY_spec.joystick_closure_speed)                                          ,   TYPE_UINT16	,	1	                        ,   "Joystick closure speed:"	            ,	0	            ,   ST_JOY_SPEC	                                                ,	0	            },
         {(uint8*)&(MEM_P->JOY_spec.joystick_threshold)                                              ,   TYPE_INT16	,	1	                        ,   "Joystick threshold:"	                ,	0	            ,	ST_JOY_SPEC	                                                ,	0	            },
@@ -4269,15 +4234,7 @@ void cmd_get_SD_file( uint16 filename_length ){
 
     //itoa(filename_length, filename, 10);
     // Send the file to API that receives packet as a ping string
-    if (bt_src){
-        UART_BT_ClearTxBuffer();
-        UART_BT_PutString(str_sd_data);
-        bt_src = FALSE;
-    }
-    else {
-        UART_RS485_ClearTxBuffer();
-        UART_RS485_PutString(str_sd_data);
-    }
+    putString(str_sd_data);
 }
 
 void cmd_remove_SD_file( uint16 filename_length ){

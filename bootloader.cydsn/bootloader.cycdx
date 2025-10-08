@@ -5,10 +5,10 @@
     <register name="RS485_CTS_CONTROL_REG" address="0x4000657A" bitWidth="8" desc="" hidden="false" />
   </block>
   <block name="OneTerminal_5" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="MOTOR_PORT" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Em_EEPROM_Dynamic" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="cy_boot" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="MOTOR_PORT" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="FTDI_ENABLE" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="MOTOR_DRIVER_EN_2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="RS485_TX" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="RS485_RX" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="UART_RS485" BASE="0x0" SIZE="0x0" desc="UART" visible="true" hidden="false">
@@ -37,7 +37,8 @@
       <field name="UART_RS485_TX_STS_FIFO_NOT_FULL" from="3" to="3" access="R" resetVal="" desc="" hidden="false" />
     </register>
   </block>
+  <block name="RS_485_EN" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="FTDI_ENABLE" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Bootloader" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="ZeroTerminal_2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="RS_485_EN" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
 </blockRegMap>

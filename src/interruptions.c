@@ -155,19 +155,22 @@ CY_ISR(ISR_MY_TIMER_Handler){
 // - UNLOAD:        Wait for another device end of transmission;
 //
 //==============================================================================
-
 void interrupt_manager(){
 
     
     //===========================================     local variables definition
 
-    static uint8 CYDATA state = WAIT_START;                      // state
+    static rx_int_state CYDATA rs485_state = WAIT_START;    // rs485 state
+    static rx_int_state CYDATA bt_state = WAIT_START;       // bt state
     
     //------------------------------------------------- local data packet
     static uint8 CYDATA data_packet_index;
     static uint8 CYDATA data_packet_length;
     static uint8 data_packet_buffer[128];                     
     static uint8 CYDATA rx_queue[3];                    // last 2 bytes received
+    static uint8 CYDATA rx_b_id = 0, last_bt_id = 255;
+    static uint8 CYDATA fw_packet_index = 0;
+    static char  CYDATA fw_packet_string[4000] = "";
     //-------------------------------------------------
 
     uint8 CYDATA    rx_data;                            // RS485 UART rx data
@@ -176,81 +179,74 @@ void interrupt_manager(){
 
     //======================================================     receive routine
     
-    while( (UART_RS485_GetRxBufferSize() || UART_BT_GetRxBufferSize()) && (package_count < 100)){
-        // 100 - estimated maximum number of packets we can read without blocking firmware execution
-
-        // Get next char
-        if (!bt_src){
-            rx_data = UART_RS485_GetChar();
-        }
-        else {
-            rx_data = UART_BT_GetChar();
-        }
+    // 100 - estimated maximum number of packets we can read without blocking firmware execution
+    while( UART_BT_GetRxBufferSize() && package_count < 100){
+        // Something arrived from BT
+        rx_data = UART_BT_GetChar();
         
-        switch (state) {
-            //-----     wait for frame start     -------------------------------
-            case WAIT_START:
-            
+        switch(bt_state){
+            case WAIT_START:        // Package start waiting status
                 rx_queue[0] = rx_queue[1];
                 rx_queue[1] = rx_queue[2];
-                rx_queue[2] = rx_data;
+                rx_queue[2] = rx_data;                
                 
                 // Check for header configuration package
                 if ((rx_queue[1] == 58) && (rx_queue[2] == 58)) {
                     rx_queue[0] = 0;
                     rx_queue[1] = 0;
                     rx_queue[2] = 0;
-                    state       = WAIT_ID;                    
+                    bt_state       = WAIT_ID; 
                 }else
                     if ((rx_queue[0] == 63) &&      //ASCII - ?
                         (rx_queue[1] == 13) &&      //ASCII - CR
-                        (rx_queue[2] == 10))        //ASCII - LF)
+                        (rx_queue[2] == 10)){       //ASCII - LF)
+                        rx_queue[0] = 0;
+                        rx_queue[1] = 0;
+                        rx_queue[2] = 0;
                         infoGet(INFO_ALL);
+                    }
                 break;
-
-            //-----     wait for id     ----------------------------------------
-            case  WAIT_ID:
-
+            case WAIT_ID:           // Package ID waiting status.
+                rx_b_id = rx_data;  
                 // packet is for my ID or is broadcast
 #ifdef MASTER_FW
-                if (rx_data == c_mem.dev.id || rx_data == 0 || (c_mem.MS.slave_comm_active && rx_data == c_mem.MS.slave_ID))
+                if (rx_b_id == c_mem.dev.id || rx_b_id == 0 || (c_mem.MS.slave_comm_active && rx_b_id == c_mem.MS.slave_ID))
                    rx_data_type = FALSE;
-                else                //packet is for others
+                else                 //packet is for others
                     rx_data_type = TRUE;
 #else
-                if (rx_data == c_mem.dev.id || rx_data == 0)
+                if (rx_b_id == c_mem.dev.id || rx_b_id == 0)
                     rx_data_type = FALSE;
                 else                //packet is for others
                     rx_data_type = TRUE;
 #endif                
+                if (rx_data_type == TRUE){                    
+                    last_bt_id = rx_b_id;
+                }
                 data_packet_length = 0;
-                state = WAIT_LENGTH;
+                bt_state = WAIT_LENGTH;                
                 break;
-
-            //-----     wait for length     ------------------------------------
-            case  WAIT_LENGTH:
-
+            case WAIT_LENGTH:       // Package length waiting status.
                 data_packet_length = rx_data;
                 // check validity of pack length
                 if (data_packet_length <= 1) {
                     data_packet_length = 0;
-                    state = WAIT_START;
+                    bt_state = WAIT_START;
                 } else if (data_packet_length > 128) {
                     data_packet_length = 0;
-                    state = WAIT_START;
+                    bt_state = WAIT_START;
                 } else {
                     data_packet_index = 0;
                     
-                    if(rx_data_type == FALSE)
-                        state = RECEIVE;          // packet for me or broadcast
-                    else
-                        state = UNLOAD;           // packet for others
+                    if(rx_data_type == FALSE){
+                        bt_state = RECEIVE;       // packet for me or broadcast
+                    }
+                    else{                         // packet for others
+                        bt_state = BT_FORWARD;                           
+                    }
                 }
                 break;
-
-            //-----     receiving     -------------------------------------------
-            case RECEIVE:
-
+            case RECEIVE:           // Package data receiving status.
                 data_packet_buffer[data_packet_index] = rx_data;
                 data_packet_index++;
                 
@@ -267,26 +263,207 @@ void interrupt_manager(){
                     
                     data_packet_index  = 0;
                     data_packet_length = 0;
-                    state              = WAIT_START;
+                    bt_state           = WAIT_START;
+                    package_count++;                
+                }
+                break;
+            case UNLOAD:            // Package data flush status.
+                //empty - never unload packet
+                break;
+            case BT_FORWARD:        // Package from BT chip to be forwarded to RS485 bus.
+                data_packet_buffer[data_packet_index] = rx_data;
+                data_packet_index++;
+                
+                // check end of transmission
+                if (data_packet_index >= data_packet_length) {
+                    // verify if frame ID corresponded to the device ID
+                    if (rx_data_type == TRUE) {
+                        // copying data from buffer to global packet
+                        memcpy(g_rx_fw.buffer, data_packet_buffer, data_packet_length);
+                        g_rx_fw.length = data_packet_length;
+                        g_rx_fw.ready  = 1;
+                        //Forward to the other board
+                        bt_src = FALSE;     // bt_src is set to False to forward through RS485 bus
+                        commWriteID(g_rx_fw.buffer, g_rx_fw.length, rx_b_id);
+                    }
+                    
+                    data_packet_index  = 0;
+                    data_packet_length = 0;
+                    bt_state           = WAIT_START;    
+                    package_count++;                
+                }
+                break;
+            case BT_FORWARD_STR:    // Package from RS485 bus to be forwarded to BT chip.
+                //empty - only in rs485 bus case
+                break;
+            default:
+                break;
+        }
+    }
+    
+    while( UART_RS485_GetRxBufferSize() && package_count < 100){
+        // Something arrived from RS485 bus
+        rx_data = UART_RS485_GetChar();
+        
+        switch(rs485_state){
+            case WAIT_START:        // Package start waiting status
+                rx_queue[0] = rx_queue[1];
+                rx_queue[1] = rx_queue[2];
+                rx_queue[2] = rx_data;                
+                
+                // Check for header configuration package
+                if ((rx_queue[1] == 58) && (rx_queue[2] == 58)) {
+                    rx_queue[0] = 0;
+                    rx_queue[1] = 0;
+                    rx_queue[2] = 0;
+                    rs485_state = WAIT_ID; 
+                }
+                else {
+                    if ((rx_queue[0] == 63) &&      //ASCII - ?
+                        (rx_queue[1] == 13) &&      //ASCII - CR
+                        (rx_queue[2] == 10)){       //ASCII - LF)
+                        rx_queue[0] = 0;
+                        rx_queue[1] = 0;
+                        rx_queue[2] = 0;
+                        infoGet(INFO_ALL);
+                    }
+                    else {
+                        
+                        if (btEnabled && last_bt_id != 255 && 
+                            (rx_queue[0] != 0) &&      //ASCII - ?
+                            (rx_queue[1] != 0) &&      //ASCII - CR
+                            (rx_queue[2] != 0)){      // handle the string packet and forward it to BT chip
+                            fw_packet_string[0] = rx_queue[0];
+                            fw_packet_string[1] = rx_queue[1];
+                            fw_packet_string[2] = rx_queue[2];
+                            fw_packet_index     = 3;
+                            rs485_state         = BT_FORWARD_STR; 
+                        }
+                    }
+                }
+                break;
+            case WAIT_ID:           // Package ID waiting status.
+                rx_b_id = rx_data;                  
+                // packet is for my ID or is broadcast
+#ifdef MASTER_FW
+                if (rx_b_id == c_mem.dev.id || rx_b_id == 0 || (c_mem.MS.slave_comm_active && rx_b_id == c_mem.MS.slave_ID))
+                   rx_data_type = FALSE;
+                else                //packet is for others
+                    rx_data_type = TRUE;
+#else
+                if (rx_b_id == c_mem.dev.id || rx_b_id == 0)
+                    rx_data_type = FALSE;
+                else                //packet is for others
+                    rx_data_type = TRUE;
+#endif                
+                data_packet_length = 0;
+                rs485_state = WAIT_LENGTH;
+                break;
+            case WAIT_LENGTH:       // Package length waiting status.
+                data_packet_length = rx_data;
+                // check validity of pack length
+                if (data_packet_length <= 1) {
+                    data_packet_length = 0;
+                    rs485_state = WAIT_START;
+                } else if (data_packet_length > 128) {
+                    data_packet_length = 0;
+                    rs485_state = WAIT_START;
+                } else {
+                    data_packet_index = 0;
+                    
+                    if(rx_data_type == FALSE){
+                        rs485_state = RECEIVE;       // packet for me or broadcast
+                    }
+                    else{                         // packet for others
+                        if (btEnabled && rx_b_id == last_bt_id){
+                            rs485_state = BT_FORWARD;   //forward to BT chip                             
+                        }
+                        else {
+                            rs485_state = UNLOAD;
+                        }
+                    }
+                }
+                break;
+            case RECEIVE:           // Package data receiving status.
+                data_packet_buffer[data_packet_index] = rx_data;
+                data_packet_index++;
+                
+                // check end of transmission
+                if (data_packet_index >= data_packet_length) {
+                    // verify if frame ID corresponded to the device ID
+                    if (rx_data_type == FALSE) {
+                        // copying data from buffer to global packet
+                        memcpy(g_rx.buffer, data_packet_buffer, data_packet_length);
+                        g_rx.length = data_packet_length;
+                        g_rx.ready  = 1;
+                        commProcess();
+                    }
+                    
+                    data_packet_index  = 0;
+                    data_packet_length = 0;
+                    rs485_state        = WAIT_START;
                     package_count++;
                 
                 }
                 break;
-
-            //-----     other device is receving     ---------------------------
-            case UNLOAD:
+            case UNLOAD:            // Package data flush status.
                 if (!(--data_packet_length)) {
                     data_packet_index  = 0;
                     data_packet_length = 0;
-                    if (!bt_src){
-                        RS485_CTS_Write(1);
-                        RS485_CTS_Write(0);
-                    }
-                    state              = WAIT_START;
+                    RS485_CTS_Write(1);
+                    RS485_CTS_Write(0);
+                    rs485_state      = WAIT_START;
                     package_count++;
                 }
                 break;
+            case BT_FORWARD:        // Package to be forwarded to BT chip.
+                data_packet_buffer[data_packet_index] = rx_data;
+                data_packet_index++;
+                
+                // check end of transmission
+                if (data_packet_index >= data_packet_length) {
+                    // verify if frame ID corresponded to the device ID
+                    if (rx_data_type == TRUE) {
+                        // copying data from buffer to global packet
+                        memcpy(g_rx_fw.buffer, data_packet_buffer, data_packet_length);
+                        g_rx_fw.length = data_packet_length;
+                        g_rx_fw.ready  = 1;
+                        
+                        //Forward to the other board
+                        bt_src = TRUE;  // Send through BT
+                        commWriteID(g_rx_fw.buffer, g_rx_fw.length, rx_b_id);   // bt_src is set to False after function call                     
+                    }
+                    
+                    data_packet_index  = 0;
+                    data_packet_length = 0;
+                    rs485_state        = WAIT_START;   
+                    last_bt_id         = 255;    // Reset
+                    package_count++;                
+                }
+                break;
+            case BT_FORWARD_STR:    // Package from RS485 bus to be forwarded to BT chip.
+                LED_control(YELLOW_BLINKING);
+                
+                fw_packet_string[fw_packet_index] = rx_data;
+                fw_packet_index++;                
+                break;
+            default:
+                break;
         }
+    } 
+    
+    if (!UART_RS485_GetRxBufferSize() && btEnabled && rs485_state == BT_FORWARD_STR){  
+        // Package has finished arriving and has to be forwarded to BT chip
+        
+        fw_packet_string[fw_packet_index] = '\0';
+        
+        //Forward to the other board
+        bt_src = TRUE;
+        putString(fw_packet_string);                    
+        strcpy(fw_packet_string, "");
+        fw_packet_index    = 0;                
+        rs485_state        = WAIT_START;
+        last_bt_id         = 255;    // Reset
     }
 }
 //==============================================================================
@@ -1331,7 +1508,7 @@ void motor_control_SH() {
                     // To do only once
                     g_meas[SH_ENC_L].hold_curr = g_meas[SH_ENC_L].curr;
                 }
-                pwm_input = 0;            
+                pwm_input = 0;
             }
         }
         else {
@@ -1344,6 +1521,13 @@ void motor_control_SH() {
     else
         MOTOR_DIR_1_Write(0x00);
 
+    if (SH_MOT->not_revers_motor_flag == TRUE && pwm_input == 0){
+        MOTOR_DRIVER_ENABLE_1_Write(0x00);        
+    }
+    else {      // Driver is always enabled in all other cases
+        MOTOR_DRIVER_ENABLE_1_Write(0x01);        
+    }
+    
     PWM_MOTORS_WriteCompare1(abs(pwm_input));
 }
 
@@ -1739,7 +1923,7 @@ void motor_control_generic(uint8 idx) {
             pwm_input = SIGN(pwm_input) * 7 * (int)(PWM_MAX_VALUE_ESC/100.0);
         }
     }
-
+    
     // Set motor direction and write pwm value
     switch (idx) {
         case 0:         // Motor 1 
@@ -1754,6 +1938,13 @@ void motor_control_generic(uint8 idx) {
                     MOTOR_DIR_1_Write(0x01);
                 else
                     MOTOR_DIR_1_Write(0x00);
+            }
+            
+            if (MOT->not_revers_motor_flag == TRUE && pwm_input == 0){
+                MOTOR_DRIVER_ENABLE_1_Write(0x00);        
+            }
+            else {      // Driver is always enabled in all other cases
+                MOTOR_DRIVER_ENABLE_1_Write(0x01);        
             }
             
             if (MOT->motor_driver_type == DRIVER_VNH5019) {
@@ -1777,7 +1968,14 @@ void motor_control_generic(uint8 idx) {
                 else
                     MOTOR_DIR_2_Write(0x00);
             }
-
+            
+            if (MOT->not_revers_motor_flag == TRUE && pwm_input == 0){
+                MOTOR_DRIVER_ENABLE_2_Write(0x00);       
+            }
+            else {          // Driver is always enabled in all other cases
+                MOTOR_DRIVER_ENABLE_2_Write(0x01);        
+            }
+            
             if (MOT->motor_driver_type == DRIVER_VNH5019) {
                 PWM_MOTORS_WriteCompare2(PWM_MAX_VALUE_DC - abs(pwm_input));
             }
@@ -2047,9 +2245,9 @@ void analog_read_end() {
     /   gain = 8.086 -> amplifier gain
     /   resistor = 18 -> resistor of voltage divider in KOhm 
     /
-    /   Real formulation: tradeoff in good performance and accurancy, ADC_buf[] 
+    /   Real formulation: tradeoff in good performance and accuracy, ADC_buf[] 
     /   and offset unit of measurement is counts, instead dev_tension and
-    /   g_meas.curr[] are converted in properly unit.
+    /   g_meas.curr[] are converted in proper unit.
     /  =========================================================================
     */
 
@@ -2126,8 +2324,8 @@ void analog_read_end() {
     // VOLTAGE READING
     // Once firmware starts, first_tension_valid flag is set to TRUE while tension_valid status is FALSE
     // Step 1) Wait for battery voltage stabilization and filter convergence for 1000 cycles (v_count counter), after that tension_valid flag is set to TRUE
-    // Step 2) Wait for another 1000 cycles (count counter) to decide which is full charge power tension, than set first_tension_valid to FALSE
-    // Low voltage condition) Whenever dev_tension ADC value is under 7000 mV, tension_valid flag is set to FALSE and dev_tension assigned to 5000 mV, then Step 1 has to be repeated
+    // Step 2) Wait for another 1000 cycles (count counter) to decide which is full charge power tension, then set first_tension_valid to FALSE
+    // Low voltage condition) Whenever dev_tension ADC value is under 5500 mV, tension_valid flag is set to FALSE and dev_tension assigned to 5000 mV, then Step 1 has to be repeated
     
 	if (first_tension_valid && tension_valid) {     // Voltage reading (Step 2)
         count = count + 1;
@@ -2157,7 +2355,7 @@ void analog_read_end() {
 
     // Until there is no valid input tension repeat this measurement
 
-    if (dev_tension[0] < 6500 && (NUM_OF_ANALOG_INPUTS<=4 || dev_tension[1] < 6500)) {       // Voltage reading (Low voltage condition)
+    if (dev_tension[0] < 5500 && (NUM_OF_ANALOG_INPUTS<=4 || dev_tension[1] < 5500)) {       // Voltage reading (Low voltage condition)
         // PSoC is powered through uUSB
         
         tension_valid = FALSE;
@@ -2196,7 +2394,7 @@ void analog_read_end() {
     }
     else {
         // PSoC is powered through battery or power source
-        // (at least > 6.88 V (86% of 8 V) that is minimum charge of smallest battery (2 cells @ 2000 mAh Ossur))
+        // (at least > 5.50 V that is more than 5V from USB
         
         // Read ADC sampled value of power source tension and motor current
         

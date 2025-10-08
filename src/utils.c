@@ -381,11 +381,21 @@ void LED_control(uint8 mode) {
 //==============================================================================
 void battery_management() {
     static uint32 v_count_lb = 0;
+    CYDATA float first_tension_thr = 0.95;
+    CYDATA float second_tension_thr = 0.9;
     
     // LED handling procedure
     // The board LED blinks if attached battery is not fully charged
+    
+    // Note: Sometimes pow_tension is not well computed when using power supply
+    // Override default thresholds if using 2S batteries instead of 3S, 6S or power supply
+    // Parrot/Renata/(2 cells @ 2000 mAh Ossur): 0.9, 0.87    
+    if (pow_tension[0] == 8000 || pow_tension[1] == 8000 ){
+        first_tension_thr = 0.9;       // 0.90*8000 = 7200 mV
+        second_tension_thr = 0.87;     // 0.87*8000 = 6960 mV
+    }
 
-    if (battery_low_SoC) {
+    if (battery_low_SoC == TRUE) {
         
         //red light - blink @ 2.5 Hz
         LED_control(RED_BLINKING);
@@ -414,11 +424,8 @@ void battery_management() {
             if (c_mem.dev.use_2nd_motor_flag == TRUE) {
                 dev_tension_f[1] = filter(dev_tension[1], &filt_v[1]);
             }
-            
-            // Note: Sometimes pow_tension is not well computed when using power supply
-            // Parrot/Renata/(2 cells @ 2000 mAh Ossur): 0.9, 0.87
-            // ARTS: 0.87, 0.8
-            if (dev_tension_f[0] > 0.95 * pow_tension[0] && (c_mem.dev.use_2nd_motor_flag == FALSE || dev_tension_f[1] > 0.95 * pow_tension[1])){
+                        
+            if (dev_tension_f[0] > first_tension_thr * pow_tension[0] && (c_mem.dev.use_2nd_motor_flag == FALSE || dev_tension_f[1] > first_tension_thr * pow_tension[1])){
                 //fixed
                 if (!maintenance_flag)
                     LED_control(OFF);     // NO LIGHT - all leds off
@@ -427,7 +434,7 @@ void battery_management() {
             }
             
             else {
-                if (dev_tension_f[0] > 0.9 * pow_tension[0] && (c_mem.dev.use_2nd_motor_flag == FALSE || dev_tension_f[1] > 0.9 * pow_tension[1])) {
+                if (dev_tension_f[0] > second_tension_thr * pow_tension[0] && (c_mem.dev.use_2nd_motor_flag == FALSE || dev_tension_f[1] > second_tension_thr * pow_tension[1])) {
                     //yellow light - blink @ 0.5 Hz
                     //LED_control(YELLOW_BLINKING);   
                     
@@ -493,10 +500,9 @@ void ADC_Set_N_Channels() {
 #if defined(GENERIC_FW) || defined(SH_XPRIZE)
     if (c_mem.exp.read_ADC_sensors_port_flag == TRUE){
         // add all emg channels
-        NUM_OF_ANALOG_INPUTS = 12;  // EMG_1
+        NUM_OF_ANALOG_INPUTS = 11;  // EMG_1
                                     // EMG_2
                                     // EMG_3
-                                    // EMG_4
                                     // EMG_5
                                     // EMG_6
     }

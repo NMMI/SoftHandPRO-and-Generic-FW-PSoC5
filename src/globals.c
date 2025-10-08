@@ -51,7 +51,7 @@ struct st_ref       g_ref[NUM_OF_MOTORS], g_refNew[NUM_OF_MOTORS], g_refOld[NUM_
 struct st_meas      g_meas[N_ENCODER_LINE_MAX], g_measOld[N_ENCODER_LINE_MAX];          // Measurements.
 struct st_adc_meas  g_adc_meas, g_adc_measOld;  // EMG Measurements.
 struct st_fb_meas   g_fb_meas;                  // Haptic Feedback Measurements.
-struct st_data      g_rx;                       // Income data.
+struct st_data      g_rx, g_rx_fw;              // Income data.
 struct st_eeprom    g_mem, c_mem;               // Memory variables.
 struct st_calib     calib;                      // Calibration variables.
 struct st_filter    filt_v[NUM_OF_MOTORS], filt_curr_diff[NUM_OF_MOTORS], filt_i[NUM_OF_MOTORS];     // Voltage and current filter variables.

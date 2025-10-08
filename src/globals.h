@@ -64,7 +64,7 @@
 #define NUM_OF_MOTORS           2       /*!< Number of motors.*/
 #define NUM_OF_SENSORS          3       /*!< Number of encoders.*/
 #define NUM_OF_INPUT_EMGS       2       /*!< Number of emg channels.*/
-#define NUM_OF_ADDITIONAL_EMGS  6       /*!< Number of additional emg channels.*/
+#define NUM_OF_ADDITIONAL_EMGS  5       /*!< Number of additional emg channels.*/
 #define NUM_OF_ADC_CHANNELS_MAX (4+NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS)    
 #define N_IMU_MAX               5    
 #define NUM_OF_IMU_DATA         5       // accelerometers, gyroscopes, magnetometers, quaternion and temperature data
@@ -87,15 +87,6 @@
 #define DMA_REQUEST_PER_BURST 1
 #define DMA_SRC_BASE (CYDEV_PERIPH_BASE)
 #define DMA_DST_BASE (CYDEV_SRAM_BASE)  
-//==============================================================================
-//                                                                     INTERRUPT
-//==============================================================================
-
-#define    WAIT_START   0               /*!< Package start waiting status.*/
-#define    WAIT_ID      1               /*!< Package ID waiting status.*/
-#define    WAIT_LENGTH  2               /*!< Package length waiting status.*/
-#define    RECEIVE      3               /*!< Package data receiving status.*/
-#define    UNLOAD       4               /*!< Package data flush status.*/
 
 //==============================================================================
 //                                                                 CYCLE COUNTER
@@ -395,9 +386,9 @@ struct st_expansion{
     uint8   curr_time[6];               /*!< Current time from RTC (DD/MM/YY HH:MM:SS).*/                   //6 
     uint8   read_exp_port_flag;         /*!< Enable Expansion Port.*/                                       //1
     uint8   read_ADC_sensors_port_flag; /*!< Enable ADC sensors Port.*/                                     //1
-    uint8   ADC_conf[NUM_OF_ADC_CHANNELS_MAX];  /*!< ADC configuration flags.*/                             //12
+    uint8   ADC_conf[NUM_OF_ADC_CHANNELS_MAX];  /*!< ADC configuration flags.*/                             //11
     uint8   record_EMG_history_on_SD;   /*!< Enable EMG recording on SD Card.*/                             //1
-    uint8   unused_bytes[11];           /*!< Unused bytes to fill row.*/                                    //11
+    uint8   unused_bytes[12];           /*!< Unused bytes to fill row.*/                                    //12
 };                                                                                                          // TOTAL: 32 BYTES
 
 //=================================================     User
@@ -532,6 +523,17 @@ struct st_calib {
     int16   repetitions;            /*!< Number of cycles of hand closing/opening.*/
 };
 
+//=================================================     rx interrupt status
+typedef enum {
+    WAIT_START      = 0,          /*!< Package start waiting status.*/
+    WAIT_ID         = 1,          /*!< Package ID waiting status.*/
+    WAIT_LENGTH     = 2,          /*!< Package length waiting status.*/
+    RECEIVE         = 3,          /*!< Package data receiving status.*/
+    UNLOAD          = 4,          /*!< Package data flush status.*/
+    BT_FORWARD      = 5,          /*!< Package from or to BT chip to be forwarded.*/
+    BT_FORWARD_STR  = 6,          /*!< Package from RS485 bus to be forwarded to BT chip.*/
+} rx_int_state; 
+
 //=================================================     emg status
 typedef enum {
 
@@ -543,6 +545,7 @@ typedef enum {
     WAIT_EoC      = 5               /*!< The second emg waits for end of calibration.*/
 } adc_status;                       /*!< ADC status enumeration.*/
 
+//=================================================     counter status
 typedef enum {
     
     PREPARE_DATA    = 0,            /*!< Prepare data to be written on EEPROM.*/
@@ -558,7 +561,7 @@ extern struct st_ref    g_ref[NUM_OF_MOTORS], g_refNew[NUM_OF_MOTORS], g_refOld[
 extern struct st_meas   g_meas[N_ENCODER_LINE_MAX], g_measOld[N_ENCODER_LINE_MAX];              /*!< Measurements.*/
 extern struct st_adc_meas g_adc_meas, g_adc_measOld;/*!< EMG Measurements.*/
 extern struct st_fb_meas g_fb_meas;                 /*!< Haptic Feedback Measurements.*/
-extern struct st_data   g_rx;                       /*!< Incoming/Outcoming data.*/
+extern struct st_data   g_rx, g_rx_fw;              /*!< Incoming/Outcoming data.*/
 extern struct st_eeprom g_mem, c_mem;               /*!< Memory parameters.*/
 extern struct st_calib  calib;                      /*!< Calibration variables.*/
 extern struct st_filter filt_v[NUM_OF_MOTORS], filt_curr_diff[NUM_OF_MOTORS], filt_i[NUM_OF_MOTORS];     /*!< Voltage and current filter variables.*/

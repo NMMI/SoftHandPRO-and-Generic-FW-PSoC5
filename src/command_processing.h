@@ -178,6 +178,12 @@ void    infoSend           ();
 **/
 void    infoGet            (uint16 info_type);
 
+//============================================================  putString
+/** This function sends strings through appropriate the serial channel.
+ *
+ * 	\param string	The string of the information to send.
+**/
+void    putString          (const char8 string[]);
 /** \} */
 
 
