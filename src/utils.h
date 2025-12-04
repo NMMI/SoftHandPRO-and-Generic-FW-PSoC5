@@ -54,10 +54,28 @@
 								 due to the fact that the friction model has errors when the
 								 position is near to zero.*/
 #define REFSPEED 20			/*!< Constant depending on PID values.*/
+    
+// Parameters for default filter (EWMA)    
+#define SMOOTH_05HZ     0.003   ///< Smoothing factor which leads near to 0.5Hz cutoff frequency filter at 1kHz control cycle
+#define SMOOTH_5HZ      0.030   ///< Smoothing factor which leads near to 5Hz cutoff frequency filter at 1kHz control cycle
+#define SMOOTH_20HZ     0.118   ///< Smoothing factor which leads near to 20Hz cutoff frequency filter at 1kHz control cycle    
+#define SMOOTH_50HZ     0.267   ///< Smoothing factor which leads near to 50Hz cutoff frequency filter at 1kHz control cycle
+#define SMOOTH_100HZ    0.455   ///< Smoothing factor which leads near to 100Hz cutoff frequency filter at 1kHz control cycle    
+
+#define EWMA_ALPHA(x) ( (uint16)(x * 65535) )    // Alpha parameter for EWMA Filter       
 
 #define SIGN(A) (((A) >=0) ? (1) : (-1))	/*!< Sign calculation function.*/
 
-//-------------------------------------------------------------     DECLARATIONS
+//-------------------------------------------------------------     DECLARATIONS    
+/**
+ *  Filter data with a weighted average filter: y[k] = (1-a)*y[k-1] + a*x[k].
+ * 	
+ *	\param value	New value of the filter.
+ *  \param f        Pointer to specific struct of type st_filter.    
+ *
+ * 	\return Returns the filtered current value
+**/
+int32 filter_EWMA(int32 CYDATA value, struct st_filter *f); // EWMA Filter    
 
 /** \name Filters */
 /** \{ */

@@ -58,7 +58,7 @@ struct st_filter    filt_v[NUM_OF_MOTORS], filt_curr_diff[NUM_OF_MOTORS], filt_i
 struct st_filter    filt_vel[NUM_OF_SENSORS];                // Velocity filter variables.
 struct st_filter    filt_emg[NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS];                // EMG filter variables.
 struct st_filter    filt_detect_pc;             // Battery tension filter to detect a new power cycle.
-
+struct st_filter    filt_v_EWMA[NUM_OF_MOTORS], filt_i_EWMA_1st[NUM_OF_MOTORS], filt_i_EWMA_2nd[NUM_OF_MOTORS]; // Voltage and current filter variables.
 
 // Timer value for debug field
 uint16  timer_value;
@@ -97,6 +97,7 @@ CYBIT reset_PSoC_flag = FALSE;              /*!< This flag is set when a board f
 // ADC Buffer
 int16 ADC_buf[NUM_OF_ADC_CHANNELS_MAX];     /*! ADC measurements buffer.*/
 uint8 NUM_OF_ANALOG_INPUTS = 4;             /*! ADC currently configured channels.*/
+uint32 adc_i_offset[NUM_OF_MOTORS];         /*! ADC offset for current readings.*/
 
 // PWM value
 uint16 PWM_MAX_VALUE_ESC = 100;             /*!< Maximum value of the PWM signal for ESC driver module.*/

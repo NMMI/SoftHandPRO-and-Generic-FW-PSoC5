@@ -59,7 +59,9 @@
 //====================================================================================
 //====================================================================================
     
-#define VERSION         "v. 2.0.1"    
+#define VERSION         "v. 2.1"    
+
+#define SN_PREFIX       "012001"                // 6 characters serial number fixed prefix (QB)        
     
 // Macro related to different firmware configurations
 #ifdef SOFTHAND_FW

@@ -141,7 +141,6 @@ void commProcess(void){
 //=========================================================     CMD_SET_BAUDRATE
             
         case CMD_SET_BAUDRATE:
-            cmd_set_baudrate();
             break;  
             
 //============================================================     CMD_GET_INPUT
@@ -803,7 +802,7 @@ void start_peripherals(){
     	SPI_IMU_ClearFIFO();							
         CyDelay(10);
         
-        // Init MPU9250 devices
+        // Init MPU9250 or LSM6DSRX devices
         InitIMUgeneral();
         
         // Initialize quaternion
@@ -822,13 +821,20 @@ void start_peripherals(){
   
 void init_variables(){ 
         // Iterator    
-    uint8 i, j;
+    uint8 i = 0;
+    uint8 j = 0;
     //---------------------------------------------------  Initialize filters structure 
     for(i=0;i<NUM_OF_MOTORS;i++) {
         filt_i[i].gain = 32;    // Current filter constant.
         filt_curr_diff[i].gain = 16;   // Current residual filter constant.       
         filt_v[i].old_value    = 12000;// Initial voltage filter value.
         filt_v[i].gain         = 2;    // Voltage filter constant.
+        filt_v_EWMA[i].old_value = 12000; // Initial voltage filter value.
+        filt_v_EWMA[i].gain    = EWMA_ALPHA(SMOOTH_100HZ);  // Voltage LP filter constant (from raw measures)
+        filt_i_EWMA_1st[i].gain= EWMA_ALPHA(SMOOTH_100HZ);  // Current LP filter constant (1st step).
+        filt_i_EWMA_2nd[i].gain= EWMA_ALPHA(SMOOTH_5HZ);    // Current LP filter constant (2nd step).
+        
+        adc_i_offset[i]        = 1638;  // ADC initial raw value @2V
     }
     for(i=0;i<NUM_OF_SENSORS;i++) {
         filt_vel[i].gain = 128; // Velocity filters constant.
@@ -994,6 +1000,9 @@ void manage_param_list(uint16 index, uint8 sendToDevice) {
         strcpy(fsm_menu_1, " Slow:wrist, Fast:hand");
     }
            
+    char SN_STR[100];
+    sprintf(SN_STR, "Serial number [%sxxxx]:", SN_PREFIX);
+    
     struct menu menu_type;
     
     //------------------ BEGIN OF MENU LIST --------------------//  
@@ -1063,6 +1072,7 @@ void manage_param_list(uint16 index, uint8 sendToDevice) {
         {(uint8*)&(MEM_P->imu.IMU_conf[0][0])                                                       ,   TYPE_UINT8	,	5	                        ,   "On board IMU conf. [a, g, m, q, t]:"	,	0	            ,   ST_IMU	                                                    ,	0	            },
         {(uint8*)&(MEM_P->dev.user_id)                                                              ,   TYPE_FLAG	,	1	                        ,   "User ID:"	                            ,	USER_MENU     	,   ST_DEVICE	                                                ,	0	            },
         {(uint8*)&(MEM_P->user[MEM_P->dev.user_id].user_code_string)                                ,   TYPE_STRING	,	6	                        ,   "User code:"	                        ,	0	            ,   ST_USER+(MEM_P->dev.user_id)	                            ,	0	            },
+        
 #ifndef SOFTHAND_FW     // All other type of firmwares different from SOFTHAND_FW
         {(uint8*)&(MEM_P->motor[MOTOR_IDX].encoder_line)                                            ,	TYPE_UINT8	,	1	                        ,   "Associated encoder line:"	            ,	0	            ,	ST_MOTOR+MOTOR_IDX	                                        ,	0	            },
         {(uint8*)&(MEM_P->motor[MOTOR_IDX].motor_driver_type)                                       ,   TYPE_FLAG	,	1	                        ,   "Driver type:"	                        ,	DRIVER_MENU 	,   ST_MOTOR+MOTOR_IDX	                                        ,	MOT_DRIVER	    },
@@ -1073,7 +1083,7 @@ void manage_param_list(uint16 index, uint8 sendToDevice) {
         {(uint8*)&(MEM_P->dev.use_2nd_motor_flag)                                                   ,   TYPE_FLAG	,	1	                        ,   "Use second motor:"	                    ,	ON_OFF          ,   ST_DEVICE	                                                ,	0	            },
         {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].k_p)                                              ,   TYPE_FLOAT	,	3	                        ,   "Position PID [P, I, D]:"	            ,	0	            ,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	POS_PID_2	    },
         {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].k_p_c)                                            ,   TYPE_FLOAT	,	3	                        ,   "Current PID [P, I, D]:"	            ,	0	            ,	ST_MOTOR+SECOND_MOTOR_IDX	                                ,	CURR_PID_2	    },
-        {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].active)                                            ,   TYPE_FLAG	,	1	                        ,   "Startup Activation:"	                ,	YES_NO	        ,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	0	            },
+        {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].active)                                           ,   TYPE_FLAG	,	1	                        ,   "Startup Activation:"	                ,	YES_NO	        ,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	0	            },
         {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].input_mode)                                       ,   TYPE_FLAG	,	1	                        ,   "Input mode:"	                        ,	INPUT_MENU   	,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	INPUT_MODE_2	},
         {(uint8*)&(MEM_P->motor[SECOND_MOTOR_IDX].control_mode)                                     ,   TYPE_FLAG	,	1	                        ,   "Control mode:"	                        ,	CTRL_MODE   	,   ST_MOTOR+SECOND_MOTOR_IDX	                                ,	0	            },
         {(uint8*)&(MEM_P->enc[MEM_P->motor[SECOND_MOTOR_IDX].encoder_line].res)                     ,	TYPE_UINT8	,	3	                        ,   "Resolutions:"	                        ,	0	            ,   ST_ENCODER+(MEM_P->motor[SECOND_MOTOR_IDX].encoder_line)	,	0	            },
@@ -1113,8 +1123,9 @@ void manage_param_list(uint16 index, uint8 sendToDevice) {
 #ifdef AIR_CHAMBERS_FB_FW        
         {(uint8*)&(MEM_P->FB.max_residual_current)                                                  ,   TYPE_INT32	,	1	                        ,   "Maximum slave residual current:"	    ,	0	            ,	ST_FB_SPEC	                                                ,	0	            },
         {(uint8*)&(MEM_P->FB.maximum_pressure_kPa)                                                  ,   TYPE_FLOAT	,	1	                        ,   "Maximum pressure feedback (kPa):"	    ,	0	            ,   ST_FB_SPEC	                                                ,	0	            },
-        {(uint8*)&(MEM_P->FB.prop_err_fb_gain)                                                      ,   TYPE_FLOAT	,	1		                    ,   "Proportional pressure error gain:"	    ,	0	            ,   ST_FB_SPEC	                                                ,	0	            }
+        {(uint8*)&(MEM_P->FB.prop_err_fb_gain)                                                      ,   TYPE_FLOAT	,	1		                    ,   "Proportional pressure error gain:"	    ,	0	            ,   ST_FB_SPEC	                                                ,	0	            },
 #endif    
+        {(uint8*)&(MEM_P->dev.serial_number)                                                        ,   TYPE_STRING	,	4	                        ,   SN_STR	                                ,	0	            ,   ST_DEVICE	                                                ,	0	            },
 #endif
     };
 //------------------ END OF PARAMETERS VARIABLES --------------------//        
@@ -1904,6 +1915,9 @@ void prepare_generic_info(char *info_string)
                 break;
         }
 
+        sprintf(str, "Serial Number: %s%s\r\n", SN_PREFIX, MEM_P->dev.serial_number);
+        strcat(info_string, str);
+        
         switch(MEM_P->dev.user_id) {
             case MARIA:
                 strcat(info_string, "User: MARIA\r\n");
@@ -1931,7 +1945,7 @@ void prepare_generic_info(char *info_string)
                 strcat(info_string," - Currents: ");
             else {
                 if (MOT->control_mode == CONTROL_PWM)
-                    strcat(info_string," - Pwm: ");
+                    strcat(info_string," - PWM: ");
                 else
                     strcat(info_string," - Position: ");
             }
@@ -2283,7 +2297,7 @@ void prepare_generic_info(char *info_string)
             
             strcat(info_string, "IMUs CONFIGURATION\r\n");
             for (i=0; i<N_IMU_Connected; i++){
-                sprintf(str, "Imu %d \r\n\tID: %d\tType: %s\r\n", i, (int) IMU_IDs[i],  (g_imu[i].dev_type == MPU9250)?"MPU9250":"LSM6DSRX");
+                sprintf(str, "IMU %d \r\n\tID: %d\tType: %s\r\n", i, (int) IMU_IDs[i],  (g_imu[i].dev_type == MPU9250)?"MPU9250":"LSM6DSRX");
                 strcat(info_string, str);
                 
                 sprintf(str, "\tAccelerometers: ");
@@ -2513,6 +2527,7 @@ void prepare_SD_param_info(char *info_string)
     struct st_eeprom* MEM_P = &g_mem;    
         
     sprintf(info_string, "Firmware version: %s %s\r\n", FW_NAME, VERSION);
+    sprintf(info_string, "Serial number: %s%s\r\n", SN_PREFIX, MEM_P->dev.serial_number);
     
     sprintf(str, "ID: %d\r\n", (int) MEM_P->dev.id);
     strcat(info_string, str);
@@ -2886,7 +2901,7 @@ void IMU_reading_info(char *info_string)
                  
     strcat(info_string, "SENSORS INFO\r\n");
     for (i=0; i<N_IMU_Connected; i++){
-        sprintf(str, "Imu %d \r\n\tID: %d\r\n", i, (int) IMU_IDs[i]);
+        sprintf(str, "IMU %d \r\n\tID: %d\r\n", i, (int) IMU_IDs[i]);
         strcat(info_string, str);
         
         if ((c_mem.imu.IMU_conf[i][0])){
@@ -3139,6 +3154,11 @@ uint8 memStore(int displacement)
     // Re-Enable Interrupt
     ISR_RS485_RX_Enable();
     ISR_BT_RX_Enable();
+    
+    for (uint8 j = 0; j < N_ENCODER_LINE_MAX; j++) {
+        reset_last_value_flag[j] = 1;
+    }
+    sendAcknowledgment(ACK_OK);
 
     return ret_val;
 }
@@ -3215,19 +3235,19 @@ uint8 memInit(void)
 
     // MOTOR STRUCT
     for (i=0; i< NUM_OF_MOTORS; i++) {
-        g_mem.motor[i].k_p           =0.0165 * 65536;
-        g_mem.motor[i].k_i           =     0 * 65536;
-        g_mem.motor[i].k_d           = 0.007 * 65536;  // changed in order to avoid metallic clatter, previous value 0.2
-        g_mem.motor[i].k_p_c         =     1 * 65536;
-        g_mem.motor[i].k_i_c         = 0.001 * 65536;
-        g_mem.motor[i].k_d_c         =     0 * 65536;
+        g_mem.motor[i].k_p           = 0.0165 * 65536;
+        g_mem.motor[i].k_i           =      0 * 65536;
+        g_mem.motor[i].k_d           =  0.007 * 65536;  // changed in order to avoid metallic clatter, previous value 0.2
+        g_mem.motor[i].k_p_c         =      1 * 65536;
+        g_mem.motor[i].k_i_c         =  0.001 * 65536;
+        g_mem.motor[i].k_d_c         =      0 * 65536;
 
-        g_mem.motor[i].k_p_dl        =   0.1 * 65536;
-        g_mem.motor[i].k_i_dl        =     0 * 65536;
-        g_mem.motor[i].k_d_dl        =     0 * 65536;
-        g_mem.motor[i].k_p_c_dl      =   0.3 * 65536;
-        g_mem.motor[i].k_i_c_dl      =0.0002 * 65536;
-        g_mem.motor[i].k_d_c_dl      =     0 * 65536;
+        g_mem.motor[i].k_p_dl        =  0.085 * 65536;
+        g_mem.motor[i].k_i_dl        =      0 * 65536;
+        g_mem.motor[i].k_d_dl        =      0 * 65536;
+        g_mem.motor[i].k_p_c_dl      =    0.1 * 65536;
+        g_mem.motor[i].k_i_c_dl      = 0.0002 * 65536;
+        g_mem.motor[i].k_d_c_dl      =      0 * 65536;
 
         g_mem.motor[i].active        = 1;
         g_mem.motor[i].activate_pwm_rescaling = MAXON_24V;      //rescaling active for 12V motor
@@ -3850,20 +3870,6 @@ int16 commReadResCurrFromSH()
     }
     
     return curr_diff;
-}
-
-void cmd_set_baudrate(){
-    
-    // Set BaudRate
-    c_mem.dev.baud_rate = g_rx.buffer[1];
-    
-    switch(g_rx.buffer[1]){
-        case 13:
-            CLOCK_UART_SetDividerValue(13);
-            break;
-        default:
-            CLOCK_UART_SetDividerValue(3);
-    }
 }
 
 void cmd_ping(){

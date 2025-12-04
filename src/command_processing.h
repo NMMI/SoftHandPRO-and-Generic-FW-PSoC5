@@ -433,12 +433,6 @@ void cmd_get_emg();
 **/
 void cmd_get_activate();
 
-//============================================================  cmd_set_baudrate
-/** This function sets the desired communication baudrate. It is possible to
-	select a value equal to 460800 or 2000000.
-**/
-void cmd_set_baudrate();
-
 //============================================================  cmd_get_inputs
 /** This function gets the current motor reference inputs and puts them in the
 	package to be sent.

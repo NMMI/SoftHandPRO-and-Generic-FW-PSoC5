@@ -81,6 +81,21 @@ int32 curr_estim ( uint8 idx, int32 pos, int32 vel, int32 ref ) {
     
 }
 
+
+//==============================================================================
+//                                                               EWMA FILTERS
+//==============================================================================
+int32 filter_EWMA(int32 CYDATA new_value, struct st_filter *f) {
+
+    int32 aux;
+
+    aux = (f->old_value * f->gain) + (new_value * (65536 - f->gain));
+    aux = (int32)((aux + 32768) / 65536); //scale back to 32-bit (with rounding)
+    
+    f->old_value = aux;
+
+    return aux;
+}
 //==============================================================================
 //                                                                General filter
 //==============================================================================

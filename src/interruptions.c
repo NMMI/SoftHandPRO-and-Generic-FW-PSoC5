@@ -1837,7 +1837,14 @@ void motor_control_generic(uint8 idx) {
     }
 
     ////////////////////////////////////////////////////////////////////////////
-     ////////////////////////////////////////////////////////////////////////////
+    
+    // If motor is not active, reset computed pwm_input and integral errors to avoid
+    // current spike in motor activation
+    if(g_ref[idx].onoff & 0x00){ 
+        pwm_input = 0;
+        pos_error_sum[idx] = 0; // Position integral error
+        curr_error_sum[idx] = 0; // Current integral error
+    }
 
     // Limit PWM in range (specific per motor driver)
     if (MOT->motor_driver_type == DRIVER_BRUSHLESS) {
@@ -2234,24 +2241,49 @@ void encoder_reading_SPI(uint8 n_line, uint8 assoc_motor) {
 void analog_read_end() {
 
     /* =========================================================================
-    /   Ideal formulation to calculate tension and current
-    /
-    /   tension = ((read_value_mV - offset) * 101) / gain -> [mV]
-    /   current = ((read_value_mV - offset) * 375) / (gain * resistor) -> [mA]
-    /
-    /   Definition:
-    /   read_value_mV = counts_read / 0.819 -> conversion from counts to mV
-    /   offset = 2000 -> hardware amplifier bias in mV
-    /   gain = 8.086 -> amplifier gain
-    /   resistor = 18 -> resistor of voltage divider in KOhm 
-    /
-    /   Real formulation: tradeoff in good performance and accuracy, ADC_buf[] 
-    /   and offset unit of measurement is counts, instead dev_tension and
-    /   g_meas.curr[] are converted in proper unit.
-    /  =========================================================================
-    */
+    *   Ideal formulation to calculate tension and current
+    *
+    *   tension = ((read_value_mV - offset) * 101) / gain -> [mV]
+    *   current = ((read_value_mV - offset) * 375) / (gain * resistor) -> [mA]
+    *
+    *   Definition:
+    *   read_value_mV = counts_read / 0.819 -> conversion from counts to mV
+    *   offset = 2000 -> hardware amplifier bias in mV
+    *   gain = 8.086 -> amplifier gain
+    *   resistor = 18 -> resistor of voltage divider in KOhm 
+    *
+    *   ADC_buf[] and offset unit of measurement are in counts, instead dev_tension and
+    *   g_meas.curr[] must be converted in proper unit.
+    *
+    *
+    *   Digression on motor current computation (in mA) from the ADC raw reading for MC33887 standard driver.
+    *
+    *   The current sensor is composed of:
+    *   - MC33887 driver: provides a voltage proportional to the current, with a scale of 1V every 375mA (1/375 A/V)
+    *   - 18Ω resistive divider (equivalent)
+    *   - HCPL-7510 isolated amplifier with gain G ≈ 8 and hardware offset of 2.0V
+    *   - 12-bit ADC (4096 values), with Vref = 5V -> 1 LSB ≈ 1.221 mV
+    *
+    *   The theoretical formula for converting the ADC reading to current is:
+    *       current_mA  = ((ADC_value * 1.221 - 2000) * 375) / (gain * resistor)
+    *                   = ((ADC_value * 1.221 - 2000) * 375) / (8 * 18)
+    *                   ≈ (ADC_value * 3.182) - 5208
+    *
+    *   To implement this formula efficiently with only integers and bitwise operations:
+    *   - We use a scaled integer multiplier: 3.182 * 8192 ≈ 26079
+    *   - We use a 13-bit right shift (>> 13) to scale the value.
+    *
+    *   The result is:
+    *       current_mA = ((ADC_no_offset * 26079) >> 13)
+    *
+    *   Where:
+    *   - ADC_no_offset = ADC_buf - adc_i_offset
+    *   - 26079 is the equivalent gain (3.182 scaled by 2^13)
+    *   - adc_i_offset is the initial average of the ADC reading with the engine off (≈ 2.0V)
+    *
+    *  ========================================================================= */
 
-    int32 CYDATA i_aux;
+    int32 CYDATA i_aux = 0;
 
     static uint16 emg_counter_1 = 0;
     static uint16 emg_counter_2 = 0;
@@ -2264,6 +2296,9 @@ void analog_read_end() {
     static uint16 count = 0;
     static uint32 v_count = 0;
     static uint8 idx = 0;
+    static uint8 adc_i_calibrated = FALSE;
+    static uint32 adc_i_calib_sum[NUM_OF_MOTORS];
+    static int32 adc_filtered_curr[NUM_OF_MOTORS];  /*! Filtered value of currents from ADC.*/
     
     
     // Wait for conversion end
@@ -2294,7 +2329,8 @@ void analog_read_end() {
             dev_tension[0] = 24000;         // No voltage reading AVAGO needed
         }
         else {
-            dev_tension[0] =  ((int32)(ADC_buf[0] - 1621) * 1990) >> 7;
+            dev_tension[0] = filter_EWMA(((int32)(ADC_buf[0] - 1621) * 1990) >> 7, &filt_v_EWMA[0]);
+            
         }
     }
     
@@ -2304,7 +2340,7 @@ void analog_read_end() {
             dev_tension[1] = dev_tension[0];         // No voltage reading AVAGO needed, take 1st motor voltage, same battery
         }
         else {
-            dev_tension[1] = ((int32)(ADC_buf[4] - 1621) * 1990) >> 7;
+            dev_tension[1] = filter_EWMA(((int32)(ADC_buf[4] - 1621) * 1990) >> 7, &filt_v_EWMA[1]);
         }
     }
     
@@ -2402,7 +2438,16 @@ void analog_read_end() {
             // After 1000 v_count cycles, dev_tension_f is stable
             tension_valid = TRUE;   
             count = 0;
-            v_count = 0;            
+            v_count = 0;  
+            
+            // Initialization when stable voltage is reached (only first time)
+            for(idx = 0; idx < NUM_OF_MOTORS; idx++) {
+                if (!adc_i_calibrated) {
+                    adc_i_offset[idx] = (adc_i_calib_sum[idx] / ((uint32)1000)); //  calculate the average as the sum divided by the number of samples    
+                    filt_i_EWMA_1st[idx].old_value = ADC_buf[(idx == 0)?1:5];   // Motor 1 Current (ADC_buf[1]), Motor 2 Current (ADC_buf[5])
+                    adc_i_calibrated = TRUE;
+                }
+            }
         }
         else {  
             // wait for battery voltage stabilization
@@ -2411,7 +2456,16 @@ void analog_read_end() {
             }
             for(idx = 0; idx < NUM_OF_MOTORS; idx++) {
                 dev_tension_f[idx] = filter(dev_tension[idx], &filt_v[idx]);
-            }
+                
+                if (v_count == 0){      // Reset sum for further calibration
+                    adc_i_calib_sum[idx] = 0;
+                }
+                
+                // Executed only on first 1000 firmware cycles
+                if (!adc_i_calibrated) {                    
+                    adc_i_calib_sum[idx] += (uint32) ADC_buf[(idx == 0)?1:5]; // Motor 1 Current (ADC_buf[1]), Motor 2 Current (ADC_buf[5])
+                }
+            }                      
         }
 
         for (idx = 0; idx < NUM_OF_MOTORS; idx++){
@@ -2420,20 +2474,27 @@ void analog_read_end() {
         }
         
         // Filter and Set currents
-        if (g_mem.motor[0].motor_driver_type == DRIVER_MC33887) {
-            g_meas[g_mem.motor[0].encoder_line].curr = filter((int16) (((int32)(ADC_buf[1] - 1648) * 22634) >> 13) * (int32)pwm_sign[0], &filt_i[0]);
-        } 
-        else {
-            if (g_mem.motor[0].motor_driver_type == DRIVER_BRUSHLESS) {
-                // Direct measure in range [0V, 4V] referenced to 4.88V meas supply and up to 5A current
-                // 0V = -5A
-                // 2V =  0A
-                // 4V =  5A
-                g_meas[g_mem.motor[0].encoder_line].curr = filter((int16) (((int32)(ADC_buf[1] - 1654) * 5000/1654)), &filt_i[0]);
-            } else { // [GS]
-                g_meas[g_mem.motor[0].encoder_line].curr = ((int16) ((int32)((ADC_buf[1] - 1635) * 480) >> 4) * (int32)pwm_sign[0]);
+        if (adc_i_calibrated) {
+            if (g_mem.motor[0].motor_driver_type == DRIVER_MC33887) {
+
+                // Double LP filtering
+                adc_filtered_curr[0] = filter_EWMA((int32)ADC_buf[1], &filt_i_EWMA_1st[0]);
+                
+                i_aux = ((((int32)(adc_filtered_curr[0] - adc_i_offset[0]) * 26079) >> 13) * (int32)pwm_sign[0]); // Raw Current
+                g_meas[g_mem.motor[0].encoder_line].curr = filter_EWMA(i_aux, &filt_i_EWMA_2nd[0]);
+            } 
+            else {
+                if (g_mem.motor[0].motor_driver_type == DRIVER_BRUSHLESS) {
+                    // Direct measure in range [0V, 4V] referenced to 4.88V meas supply and up to 5A current
+                    // 0V = -5A
+                    // 2V =  0A
+                    // 4V =  5A
+                    g_meas[g_mem.motor[0].encoder_line].curr = filter((int16) (((int32)(ADC_buf[1] - 1654) * 5000/1654)), &filt_i[0]);
+                } else { // [GS]
+                    g_meas[g_mem.motor[0].encoder_line].curr = ((int16) ((int32)((ADC_buf[1] - 1635) * 480) >> 4) * (int32)pwm_sign[0]);
+                }
             }
-        }
+        } // Otherwise curr measure is not updated and stays to 0
         
 
         // Calculate current estimation and put it in the second part of the current measurement array;
@@ -2441,19 +2502,26 @@ void analog_read_end() {
         
         // Read also 2nd power current (if necessary)
         if (NUM_OF_ANALOG_INPUTS > 4) {
-            // Filter and Set currents
-            if (g_mem.motor[1].motor_driver_type == DRIVER_MC33887) {
-                g_meas[g_mem.motor[1].encoder_line].curr = filter((int16) (((int32)(ADC_buf[5] - 1648) * 22634) >> 13) * (int32)pwm_sign[1], &filt_i[1]);
-            } 
-            else {
-                if (g_mem.motor[1].motor_driver_type == DRIVER_BRUSHLESS) {
-                    // Direct measure in range [0V, 4V] referenced to 4.88V meas supply and up to 5A current
-                    // 0V = -5A
-                    // 2V =  0A
-                    // 4V =  5A
-                    g_meas[g_mem.motor[1].encoder_line].curr = filter((int16) ((int32)(ADC_buf[5] - 1654) * 5000/1654), &filt_i[1]);
-                } else { // [GS]
-                    g_meas[g_mem.motor[1].encoder_line].curr = ((int16) ((int32)((ADC_buf[5] - 1635) * 480) >> 4) * (int32)pwm_sign[1]);
+            if (adc_i_calibrated) {
+                // Filter and Set currents
+                if (g_mem.motor[1].motor_driver_type == DRIVER_MC33887) {
+
+                     // Double LP filtering
+                    adc_filtered_curr[1] = filter_EWMA((int32)ADC_buf[5], &filt_i_EWMA_1st[1]);
+                    
+                    i_aux = ((((int32)(adc_filtered_curr[1] - adc_i_offset[1]) * 26079) >> 13) * (int32)pwm_sign[1]); // Raw Current
+                    g_meas[g_mem.motor[1].encoder_line].curr = filter_EWMA(i_aux, &filt_i_EWMA_2nd[1]);                    
+                } 
+                else {
+                    if (g_mem.motor[1].motor_driver_type == DRIVER_BRUSHLESS) {
+                        // Direct measure in range [0V, 4V] referenced to 4.88V meas supply and up to 5A current
+                        // 0V = -5A
+                        // 2V =  0A
+                        // 4V =  5A
+                        g_meas[g_mem.motor[1].encoder_line].curr = filter((int16) ((int32)(ADC_buf[5] - 1654) * 5000/1654), &filt_i[1]);
+                    } else { // [GS]
+                        g_meas[g_mem.motor[1].encoder_line].curr = ((int16) ((int32)((ADC_buf[5] - 1635) * 480) >> 4) * (int32)pwm_sign[1]);
+                    }
                 }
             }
             

@@ -191,7 +191,7 @@
 #define EEPROM_AFTER_CNT_FREE_ROWS      2           /*!< EEPROM number of rows free after counters.*/   
 #define PWM_MAX_VALUE_DC                100         /*!< Maximum value of the PWM signal.*/
 #define ANTI_WINDUP                     1000        /*!< Anti windup saturation.*/ 
-#define DEFAULT_CURRENT_LIMIT           1500        /*!< Default Current limit, 0 stands for unlimited.*/
+#define DEFAULT_CURRENT_LIMIT           1500        /*!< Default Current limit, 0 stands for unlimited, can be set to 750 for CURR_AND_POS_CONTROL.*/
 #define CURRENT_HYSTERESIS              10          /*!< milliAmperes of hysteresis for current control.*/
 #define EMG_SAMPLE_TO_DISCARD           500         /*!< Number of sample to discard before calibration.*/
 #define SAMPLES_FOR_MEAN                100         /*!< Number of samples used to mean current values.*/
@@ -296,10 +296,9 @@ struct st_device{
     uint8   right_left;                 /*!< Right/Left hand.*/   	                                        //1
     uint8   reset_counters;             /*!< Reset counters flag.*/                                         //1
     uint8   use_2nd_motor_flag;         /*!< Use 2nd motor (2 powers).*/                                    //1
-    uint8   baud_rate;                  /*!< Baud Rate setted.*/                                            //1
     uint8   user_id;                    /*!< User identificator (if usual user).*/                          //1
     uint8   dev_type;                   /*!< Device type identificator.*/                                   //1
-    uint8   unused_bytes[3];            /*!< Unused bytes to fill row.*/                                    //3
+    char    serial_number[4];           /*!< Serial Number string.*/                                        //4
 };                                                                                                          // TOTAL: 16 BYTES
 
 //=================================================     Motor
@@ -568,6 +567,7 @@ extern struct st_filter filt_v[NUM_OF_MOTORS], filt_curr_diff[NUM_OF_MOTORS], fi
 extern struct st_filter filt_vel[NUM_OF_SENSORS];                /*!< Velocity filter variables.*/
 extern struct st_filter filt_emg[NUM_OF_INPUT_EMGS+NUM_OF_ADDITIONAL_EMGS]; /*!< EMG filter variables.*/
 extern struct st_filter filt_detect_pc;             /*!< Battery tension filter to detect a new power cycle.*/
+extern struct st_filter filt_v_EWMA[NUM_OF_MOTORS], filt_i_EWMA_1st[NUM_OF_MOTORS], filt_i_EWMA_2nd[NUM_OF_MOTORS]; /*!< Voltage and current filter variables.*/
 
 extern uint16 timer_value;                          /*!< End time of the firmware main loop.*/
 extern uint16 timer_value0;                         /*!< Start time of the firmware main loop.*/
@@ -603,6 +603,7 @@ extern CYBIT reset_PSoC_flag;                       /*!< This flag is set when a
 // ADC Buffer
 extern int16 ADC_buf[NUM_OF_ADC_CHANNELS_MAX];      /*! ADC measurements buffer (sizeof buffer equal to maximum number of ADC channels).*/
 extern uint8 NUM_OF_ANALOG_INPUTS;                  /*! ADC currently configured channels.*/
+extern uint32 adc_i_offset[NUM_OF_MOTORS];          /*! ADC offset for current readings.*/
 
 // PWM value
 extern uint16 PWM_MAX_VALUE_ESC;                    /*!< Maximum value of the PWM signal for ESC driver module.*/
